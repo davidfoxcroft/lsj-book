@@ -815,7 +815,7 @@ attend     1    648     648  21.600 0.0055943 **
 reading    1   1568    1568  52.267 0.0007899 ***
 Residuals  5    150      30                      
 ---
-Signif. codes:  0 Ô***Õ 0.001 Ô**Õ 0.01 Ô*Õ 0.05 Ô.Õ 0.1 Ô Õ 1 
+Signif. codes:  0 ï¿½***ï¿½ 0.001 ï¿½**ï¿½ 0.01 ï¿½*ï¿½ 0.05 ï¿½.ï¿½ 0.1 ï¿½ ï¿½ 1 
 \end{rblock1}
 
 
@@ -1319,7 +1319,7 @@ milk        1 0.9561 0.95611  3.6279 0.081061 .
 sugar:milk  2 5.9439 2.97193 11.2769 0.001754 **
 Residuals  12 3.1625 0.26354                    
 ---
-Signif. codes:  0 Ô***Õ 0.001 Ô**Õ 0.01 Ô*Õ 0.05 Ô.Õ 0.1 Ô Õ 1 
+Signif. codes:  0 ï¿½***ï¿½ 0.001 ï¿½**ï¿½ 0.01 ï¿½*ï¿½ 0.05 ï¿½.ï¿½ 0.1 ï¿½ ï¿½ 1 
 \end{rblock1}
 Leaving aside for one moment the question of how this result should be interpreted, let's take note of the fact that our three $p$-values are $.0109$, $.0811$ and $.0018$ respectively. Next, let's see if we can replicate the analysis using tools that we're a little more familiar with. First, let's fit all four models:
 \begin{rblock1}
@@ -1343,7 +1343,7 @@ Model 4: babble ~ sugar + milk + sugar:milk
 3     14  9.1064  1    0.9561  3.6279 0.081061 . 
 4     12  3.1625  2    5.9439 11.2769 0.001754 **
 ---
-Signif. codes:  0 Ô***Õ 0.001 Ô**Õ 0.01 Ô*Õ 0.05 Ô.Õ 0.1 Ô Õ 1 
+Signif. codes:  0 ï¿½***ï¿½ 0.001 ï¿½**ï¿½ 0.01 ï¿½*ï¿½ 0.05 ï¿½.ï¿½ 0.1 ï¿½ ï¿½ 1 
 \end{rblock1}
 This output is rather more verbose than the last one, but it's telling essentially  the same story.\FOOTNOTE{The one thing that might seem a little opaque to some people is why the residual degrees of freedom in this output look different from one another (i.e., ranging from 12 to 17) whereas in the original one the residual degrees of freedom is fixed at 12. It's actually the case that \R\ uses a residual df of 12 in all cases (that's why the $p$ values are the same in the two outputs, and it's enough to verify that \rtextsmall{pf(6.7495, 2,12, lower.tail=FALSE))} gives the correct answer of $p=.010863$, for instance, whereas \rtextsmall{pf(6.7495, 2,15, lower.tail=FALSE))} would have given a $p$-value of about $.00812$. It's the residual degrees of freedom in the full model (i.e., the last one) that matters here.}
 
@@ -1360,7 +1360,7 @@ sugar       2 3.0696 1.53482  5.8238 0.017075 *
 milk:sugar  2 5.9439 2.97193 11.2769 0.001754 **
 Residuals  12 3.1625 0.26354                    
 ---
-Signif. codes:  0 Ô***Õ 0.001 Ô**Õ 0.01 Ô*Õ 0.05 Ô.Õ 0.1 Ô Õ 1 
+Signif. codes:  0 ï¿½***ï¿½ 0.001 ï¿½**ï¿½ 0.01 ï¿½*ï¿½ 0.05 ï¿½.ï¿½ 0.1 ï¿½ ï¿½ 1 
 \end{rblock1}
 The $p$-values for both main effect terms have changed, and fairly dramatically. Among other things, the effect of \rtext{milk} has become significant (though one should avoid drawing any strong conclusions about this, as I've mentioned previously). Which of these two ANOVAs should one report? It's not immediately obvious. 
 
@@ -1437,7 +1437,7 @@ milk         4.107  1  15.584 0.001936 **
 sugar:milk   5.944  2  11.277 0.001754 ** 
 Residuals    3.162 12                     
 ---
-Signif. codes:  0 Ô***Õ 0.001 Ô**Õ 0.01 Ô*Õ 0.05 Ô.Õ 0.1 Ô Õ 1 
+Signif. codes:  0 ï¿½***ï¿½ 0.001 ï¿½**ï¿½ 0.01 ï¿½*ï¿½ 0.05 ï¿½.ï¿½ 0.1 ï¿½ ï¿½ 1 
 \end{rblock1}
 As you can see, I got lazy this time and used \rtext{sugar * milk} as a shorthand way of referring to \rtext{sugar + milk + sugar:milk}. The important point here is that this is just a regular ANOVA table, and we can see that our Type III tests are significant for all terms, even the intercept.
 
@@ -1456,7 +1456,7 @@ milk          1.00  1    3.8102  0.074672 .
 sugar:milk    5.94  2   11.2769  0.001754 ** 
 Residuals     3.16 12                        
 ---
-Signif. codes:  0 Ô***Õ 0.001 Ô**Õ 0.01 Ô*Õ 0.05 Ô.Õ 0.1 Ô Õ 1 
+Signif. codes:  0 ï¿½***ï¿½ 0.001 ï¿½**ï¿½ 0.01 ï¿½*ï¿½ 0.05 ï¿½.ï¿½ 0.1 ï¿½ ï¿½ 1 
 \end{rblock1}
 Oh, that's not good at all. In the case of \rtext{milk} in particular, the $p$-value has changed from .002 to .07. This is a pretty substantial difference, and hopefully it gives you a sense of how important it is that you take care when using Type III tests. 
 
@@ -1488,7 +1488,7 @@ milk          1.00  1    3.8102  0.074672 .
 sugar:milk    5.94  2   11.2769  0.001754 ** 
 Residuals     3.16 12                        
 ---
-Signif. codes:  0 Ô***Õ 0.001 Ô**Õ 0.01 Ô*Õ 0.05 Ô.Õ 0.1 Ô Õ 1 
+Signif. codes:  0 ï¿½***ï¿½ 0.001 ï¿½**ï¿½ 0.01 ï¿½*ï¿½ 0.05 ï¿½.ï¿½ 0.1 ï¿½ ï¿½ 1 
 \end{rblock1}
 Yep, same answers. 
 
@@ -1564,7 +1564,7 @@ milk       0.9561  1  3.6279 0.081061 .
 sugar:milk 5.9439  2 11.2769 0.001754 **
 Residuals  3.1625 12                    
 ---
-Signif. codes:  0 Ô***Õ 0.001 Ô**Õ 0.01 Ô*Õ 0.05 Ô.Õ 0.1 Ô Õ 1
+Signif. codes:  0 ï¿½***ï¿½ 0.001 ï¿½**ï¿½ 0.01 ï¿½*ï¿½ 0.05 ï¿½.ï¿½ 0.1 ï¿½ ï¿½ 1
 \end{rblock1}
 
 Type II tests have some clear advantages over Type I and Type III tests. They don't depend on the order in which you specify factors (unlike Type I), and they don't depend on the contrasts that you use to specify your factors (unlike Type III). And although opinions may differ on this last point, and it will definitely depend on what you're trying to do with your data, I do think that the hypothesis tests that they specify are more likely to correspond to something that you actually care about. As a consequence, I find that it's usually easier to interpret the results of a Type II test than the results of a Type I or Type III test. For this reason, my tentative advice is that, if you can't think of any obvious model comparisons that directly map onto your research questions but you still want to run an ANOVA in an unbalanced design, Type II tests are probably a better choice than Type I or Type III.\FOOTNOTE{I find it amusing to note that the default in \R\ is Type I and the default in SPSS is Type III (with Helmert contrasts). Neither of these appeals to me all that much. Relatedly, I find it depressing that almost nobody in the psychological literature ever bothers to report which Type of tests they ran, much less the order of variables (for Type I) or the contrasts used (for Type III). Often they don't report what software they used either. The only way I can ever make any sense of what people typically report is to try to guess from auxiliary cues which software they were using, and to assume that they never changed the default settings. Please don't do this... now that you know about these issues, make sure you indicate what software you used, and if you're reporting ANOVA results for unbalanced data, then specify what Type of tests you ran, specify order information if you've done Type I tests and specify contrasts if you've done Type III tests. Or, even better, do hypotheses tests that correspond to things you really care about, and then report those!}
