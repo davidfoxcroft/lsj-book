@@ -1,8 +1,8 @@
-# Learning statistics with Jamovi
+# Learning statistics with jamovi
 
 Contains LaTeX source for:
 
-DJ Navarro and DR Foxcroft (2018). *Learning statistics with Jamovi: A tutorial for psychology students and other beginners.* (Version 0.65). This is a fork and adaptation of the original book:
+DJ Navarro and DR Foxcroft (2018). *Learning statistics with jamovi: a tutorial for psychology students and other beginners.* (Version 0.65). This is a fork and adaptation of the original book:
 
 DJ Navarro (2018). *Learning statistics with R: A tutorial for psychology students and other beginners.* (Version 0.6). [https://compcogscisydney.org/learning-statistics-with-r](http://compcogscisydney.org/learning-statistics-with-r)
 
