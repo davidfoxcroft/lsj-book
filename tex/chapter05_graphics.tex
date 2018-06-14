@@ -159,11 +159,12 @@ For less extreme values, even if they are flagged in a a boxplot as outliers, th
 
 Another form of graph that you often want to plot is the \keyterm{bar graph}. Let's use the \rtest{afl.finalists} data set with the \rtext{afl.finalists} variable that I introduced in Section~\ref{sec:mode}. What I want to do is draw a bar graph that displays the number of finals that each team has played in over the time spanned by the \rtext{afl} data set. There are lots of teams, but I am particularly interested in just four: Brisbane, Carlton, Fremantle and Richmond. So the first step is to set up a filter so just those four teams are included in the bar graph. This is straightforward in jamovi, and you can do it by using the `Filters' function that we used previously. Open up the `Filters' screen and type in the following: \\
 
-\rtext{afl.finalists == 'Brisbane' or afl.finalists == 'Carlton' or afl.finalists == 'Fremantle' or afl.finalists == 'Richmond'} \\
+\noindent
+\rtext{afl.finalists == 'Brisbane' or afl.finalists == 'Carlton' or afl.finalists == 'Fremantle' \\ or afl.finalists == 'Richmond'} \\
 
 When you have done this you will see, in the `Data' view, that jamovi has filtered out all values apart from those we have specified. Next, open up the `Exploration' - `Descriptives' window and click on the `Bar plot' check box (remember to move the `afl.finalists' variable across into the `Variables' box so that jamovi knows which variable to use). You should then get a bar graph, something like that shown in Figure~\ref{fig:bar1}.
 
-\begin{figure}[h]
+\begin{figure}[h!!]
 \begin{center}
 \epsfig{file = ../img/graphics/bar1.png, clip=true,width =13cm} 
 \caption{Filtering to include just four AFL teams, and drawing a bar plot in jamovi}
@@ -173,192 +174,53 @@ When you have done this you will see, in the `Data' view, that jamovi has filter
 \end{figure}. 
 
 
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\iffalse % don't compile next parts - until ready! Move this code down as you revise....
-%%%%%%%%%  when finished remove  /fi from the bottom of the tex filehttps://v2.overleaf.com/project/5b1c284b61f63b18810821bb
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \section{Scatterplots\label{sec:scatterplots}}
 
-\keyterm{Scatterplots} are a simple but effective tool for visualising data. We've already seen scatterplots in this chapter, when using the \rtext{plot()} function to draw the \rtext{Fibonacci} variable as a collection of dots (Section~\ref{sec:introplotting}). However, for the purposes of this section I have a slightly different notion in mind. Instead of just plotting one variable, what I want to do with my scatterplot is display the relationship between {\it two} variables, like we saw with the figures in the section on correlation (Section~\ref{sec:correl}). It's this latter application that we usually have in mind when we use the term ``scatterplot''. In this kind of plot, each observation corresponds to one dot: the horizontal location of the dot plots the value of the observation on one variable, and the vertical location displays its value on the other variable. In many situations you don't really have a clear opinions about what the {\it causal} relationship is (e.g., does A cause B, or does B cause A, or does some other variable C control both A and B). If that's the case, it doesn't really matter which variable you plot on the x-axis and which one you plot on the y-axis. However, in many situations you do have a pretty strong idea which variable you think is most likely to be causal, or at least you have some suspicions in that direction. If so, then it's conventional to plot the cause variable on the x-axis, and the effect variable on the y-axis. With that in mind, let's look at how to draw scatterplots in \R, using the same \rtext{parenthood} data set (i.e. \filename{parenthood.Rdata}) that I used when introducing the idea of correlations.
+\keyterm{Scatterplots} are a simple but effective tool for visualising the relationship between {\it two} variables, like we saw with the figures in the section on correlation (Section~\ref{sec:correl}). It's this latter application that we usually have in mind when we use the term ``scatterplot''. In this kind of plot, each observation corresponds to one dot: the horizontal location of the dot plots the value of the observation on one variable, and the vertical location displays its value on the other variable. In many situations you don't really have a clear opinions about what the {\it causal} relationship is (e.g., does A cause B, or does B cause A, or does some other variable C control both A and B). If that's the case, it doesn't really matter which variable you plot on the x-axis and which one you plot on the y-axis. However, in many situations you do have a pretty strong idea which variable you think is most likely to be causal, or at least you have some suspicions in that direction. If so, then it's conventional to plot the cause variable on the x-axis, and the effect variable on the y-axis. With that in mind, let's look at how to draw scatterplots in jamovi, using the same \rtext{parenthood} data set (i.e. \filename{parenthood.csv)} that I used when introducing the idea of correlations.
 
-\begin{figure}[t]
+Suppose my goal is to draw a scatterplot displaying the relationship between the amount of sleep that I get (\rtext{dan.sleep}) and how grumpy I am the next day (\rtext{dan.grump}). There are two different ways in which we can use jamovi to get the plot that we're after. The first way is to use the `Plot' option under the `Regression' - `Correlation Matrix' button, giving us the output shown in Figure \ref{fig:scatterplot1}.
+
+\begin{figure}[t!!]
 \begin{center}
-\begin{tabular}{cc}
-\epsfig{file = ../img/graphics2/scatter1b.eps, clip=true,width = 7cm} &
-\epsfig{file = ../img/graphics2/scatter2b.eps, clip=true,width = 7cm} \\ (a) & (b) \\
-\end{tabular}
-\caption{Two different scatterplots: (a) the default scatterplot that \R\ produces, (b) one that makes use of several options for fancier display.}
+\epsfig{file = ../img/graphics/scatterplot1.png, clip=true,width =12cm} 
+\caption{Scatterplot via the `Correlation Matrix' command in jamovi}
+\label{fig:scatterplot1}
 \HR
-\label{fig:scatter}
 \end{center}
-\end{figure}
-
-Suppose my goal is to draw a scatterplot displaying the relationship between the amount of sleep that I get (\rtext{dan.sleep}) and how grumpy I am the next day (\rtext{dan.grump}). As you might expect given our earlier use of \rtext{plot()} to display the \rtext{Fibonacci} data, the function that we use is the \rtext{plot()} function, but because it's a generic function all the hard work is still being done by the \rtext{plot.default()} function. In any case, there are two different ways in which we can get the plot that we're after. The first way is to specify the name of the variable to be plotted on the \rtext{x} axis and the variable to be plotted on the \rtext{y} axis. When we do it this way, the command looks like this:
-\begin{rblock1} 
-> @usr{plot( x = parenthood$dan.sleep,}   # data on the x-axis
-+ @usr{      y = parenthood$dan.grump}    # data on the y-axis
-+ @usr{)}  
-\end{rblock1}
-The second way do to it is to use a ``formula and data frame'' format, but I'm going to avoid using it.\FOOTNOTE{The reason is that there's an annoying design flaw in the way the \rtextsmall{plot()} function handles this situation. The problem is that the \rtextsmall{plot.formula()} function uses different names to for the arguments than the \rtextsmall{plot()} function expects. As a consequence, you can't specify the formula argument by name. If you just specify a formula as the first argument without using the name it works fine, because the \rtextsmall{plot()} function thinks the formula corresponds to the \rtextsmall{x} argument, and the \rtextsmall{plot.formula()} function thinks it corresponds to the \rtextsmall{formula} argument; and surprisingly, everything works nicely. But the moment that you, the user, tries to be unambiguous about the name, one of those two functions is going to cry.} For now, let's just stick with the \rtext{x} and \rtext{y} version. If we do this, the result is the very basic scatterplot shown in Figure~\ref{fig:scatter}a. This serves fairly well, but there's a few customisations that we probably want to make in order to have this work properly. As usual, we want to add some labels, but there's a few other things we might want to do as well. Firstly, it's sometimes useful to rescale the plots. In Figure~\ref{fig:scatter}a \R\ has selected the scales so that the data fall neatly in the middle. But, in this case, we happen to know that the grumpiness measure falls on a scale from 0 to 100, and the hours slept falls on a natural scale between 0 hours and about 12 or so hours (the longest I can sleep in real life). So the command I might use to draw this is:
-\begin{rblock1}
-> @usr{plot( x = parenthood$dan.sleep,}         # data on the x-axis
-+ @usr{      y = parenthood$dan.grump,}         # data on the y-axis
-+ @usr{      xlab = "My sleep (hours)",}        # x-axis label
-+ @usr{      ylab = "My grumpiness (0-100)",}   # y-axis label
-+ @usr{      xlim = c(0,12),}                   # scale the x-axis
-+ @usr{      ylim = c(0,100),}                  # scale the y-axis
-+ @usr{      pch = 20,}                         # change the plot type
-+ @usr{      col = "gray50",}                   # dim the dots slightly
-+ @usr{      frame.plot = FALSE}                # don't draw a box
-+ @usr{)}
-\end{rblock1}
-This command produces the scatterplot in Figure~\ref{fig:scatter}b, or at least very nearly. What it doesn't do is draw the line through the middle of the points. Sometimes it can be very useful to do this, and I can do so using \rtext{lines()}, which is a low level plotting function. Better yet, the arguments that I need to specify are pretty much the exact same ones that I use when calling the \rtext{plot()} function. That is, suppose that I want to draw a line that goes from the point (4,93) to the point (9.5,37). Then the \rtext{x} locations can be specified by the vector \rtext{c(4,9.5)} and the \rtext{y} locations correspond to the vector \rtext{c(93,37)}. In other words, I use this command:
-\begin{rblock1}
-> @usr{lines( x = c(4,9.5),}   # the horizontal locations
-+ @usr{       y = c(93,37),}   # the vertical locations
-+ @usr{       lwd = 2}         # line width
-+ @usr{)}
-\end{rblock1}
-And when I do so, \R\ plots the line over the top of the plot that I drew using the previous command. In most realistic data analysis situations you absolutely don't want to just guess where the line through the points goes, since there's about a billion different ways in which you can get \R\ to do a better job. However, it does at least illustrate the basic idea. 
+\end{figure}. 
 
 
-\begin{figure}[t]
+The second way do to it is to use one of the jamovi add-on modules. This module is called `scatr' and you can install it by clinckling on the large `+' icon in the top right of the jamovi screen, opening the jamovi library, scrolling down until you find `scatr' and clicking `install'. When you have done this, you will find a new `Scatterplot' command available under the `Exploration' button. This plot is a bit neater than the first way, see Figure \ref{fig:scatterplot2}.
+
+\begin{figure}[h!!]
 \begin{center}
-\epsfig{file = ../img/graphics2/fancyscatter.eps, clip=true,width = 10cm}
-\caption{A fancy scatterplot drawn using the \rtext{scatterplot()} function in the \rtext{car} package.}
+\epsfig{file = ../img/graphics/scatterplot2.pdf, clip=true,width =9cm} 
+\caption{Scatterplot via the `scatr' add-on module in jamovi}
+\label{fig:scatterplot2}
 \HR
-\label{fig:fancyscatter}
 \end{center}
-\end{figure}
+\end{figure}. 
 
-One possibility, if you do want to get \R\ to draw nice clean lines through the data for you, is to use the \rtext{scatterplot()} function in the \rtext{car} package. Before we can use \rtext{scatterplot()} we need to load the package:
-\begin{rblock1}
-> @usr{library( car )}
-\end{rblock1}
-Having done so, we can now use the function. The command we need is this one:
-\begin{rblock1}
-> @usr{scatterplot( dan.grump ~ dan.sleep,}
-+ @usr{             data = parenthood, }
-+ @usr{             smooth = FALSE}
-+ @usr{)}
-\end{rblock1}
-The first two arguments should be familiar: the first input is a formula (\rtextverb#dan.grump ~ dan.sleep#) telling \R\ what variables to plot,\FOOTNOTE{You might be wondering why I haven't specified the argument name for the formula. The reason is that there's a bug in how the \rtextsmall{scatterplot()} function is written: under the hood there's one function that expects the argument to be named \rtextsmall{x} and another one that expects it to be called \rtextsmall{formula}. I don't know why the function was written this way, but it's not an isolated problem: this particular kind of bug repeats itself in a couple of other functions (you'll see it again in Chapter~\ref{ch:ttest}). The solution in such cases is to omit the argument name: that way, one function ``thinks'' that you've specified \rtextsmall{x} and the other one ``thinks'' you've specified \rtextsmall{formula} and everything works the way it's supposed to. It's not a great state of affairs, I'll admit, but it sort of works.} and the second specifies a \rtext{data} frame. The third argument \rtext{smooth} I've set to \rtext{FALSE} to stop the \rtext{scatterplot()} function from drawing a fancy ``smoothed'' trendline (since it's a bit confusing to beginners). The scatterplot itself is shown in Figure~\ref{fig:fancyscatter}. As you can see, it's not only drawn the scatterplot, but its also drawn boxplots for each of the two variables, as well as a simple line of best fit showing the relationship between the two variables. 
-
-
-
-
-
-
-
- 
+As you can see, both these methods for plotting a scatterplot also allow you to specify `Densities' for each of the two variables, and this option adds a density curve, showing how the data in each variable is distributed. A simple line of best fit showing the relationship between the two variables can also be shown. 
 
 \SUBSECTION{More elaborate options}
 
-
-Often you find yourself wanting to look at the relationships between several variables at once. One useful tool for doing so is to produce a \keyterm{scatterplot matrix}, analogous to the correlation matrix. 
-\begin{rblock1}
-> @usr{cor( x = parenthood )} # calculate correlation matrix
-             dan.sleep  baby.sleep   dan.grump         day
-dan.sleep   1.00000000  0.62794934 -0.90338404 -0.09840768
-baby.sleep  0.62794934  1.00000000 -0.56596373 -0.01043394
-dan.grump  -0.90338404 -0.56596373  1.00000000  0.07647926
-day        -0.09840768 -0.01043394  0.07647926  1.00000000
-\end{rblock1}
-We can get a the corresponding scatterplot matrix by using the \rtext{pairs()} function:\FOOTNOTE{Yet again, we could have produced this output using the \rtextsmall{plot()} function: when the \rtextsmall{x} argument is a data frame containing numeric variables only, then the output is a scatterplot matrix. So, once again, what I could have done is just type \rtextsmall{plot( parenthood )}.}
-\begin{rblock1}
-> @usr{pairs( x = parenthood )} # draw corresponding scatterplot matrix  
-\end{rblock1}
-The output of the \rtext{pairs()} command is shown in Figure~\ref{fig:pairs}.  An alternative way of calling the \rtext{pairs()} function, which can be useful in some situations, is to specify the variables to include using a one-sided formula. For instance, this
-\begin{rblock1}
-> @usr{pairs( formula = ~ dan.sleep + baby.sleep + dan.grump,}
-+ @usr{       data = parenthood}
-+ @usr{)}
-\end{rblock1}
-would produce a $3 \times 3$ scatterplot matrix that only compare \rtext{dan.sleep}, \rtext{dan.grump} and \rtext{baby.sleep}. Obviously, the first version is much easier, but there are cases where you really only want to look at a few of the variables, so it's nice to use the formula interface.
+Often you find yourself wanting to look at the relationships between several variables at once. One useful tool for doing so is to produce a \keyterm{scatterplot matrix}, analogous to the correlation matrix. We can get a the corresponding scatterplot matrix in jamovi using the `Correlation Matrix' - `Plot' command. Just add another variable, for example \rtext{baby.sleep} to the list of variables to be correlated, and jamovi will create a scatterplot matrix for you, just like the one in Figure \ref{fig:scatterplot3}
 
 
-\begin{figure}
+\begin{figure}[h]
 \begin{center}
-\epsfig{file = ../img/graphics2/pairs3.eps,clip=true, width = 14cm}
-\caption{A matrix of scatterplots produced using \rtext{pairs()}.}
+\epsfig{file = ../img/graphics/scatterplot3.pdf,clip=true, width = 14cm}
+\caption{A matrix of scatterplots produced using jamovi.}
 \HR
-\label{fig:pairs}
+\label{fig:scatterplot3}
 \end{center}
 \end{figure}
 
 
+\section{Saving image files using jamovi~\label{sec:saveimage}}
 
-
-\SUBSECTION{Changing global settings using \rtext{par()}\label{sec:par}}
-
-Altering the margins to the plot is actually a somewhat more complicated exercise than you might think. In principle it's a very simple thing to do: the size of the margins is governed by a graphical parameter called \rtext{mar}, so all we need to do is alter this parameter. First, let's look at what the \rtext{mar} argument specifies. The \rtext{mar} argument is a vector containing four numbers: specifying the amount of space at the bottom, the left, the top and then the right. The units are ``number of `lines'". The default value for \rtext{mar} is \rtext{c(5.1, 4.1, 4.1, 2.1)}, meaning that \R\ leaves 5.1 ``lines'' empty at the bottom, 4.1 lines on the left and the bottom, and only 2.1 lines on the right. In order to make more room at the bottom, what I need to do is change the first of these numbers. A value of 10.1 should do the trick. 
-
-So far this doesn't seem any different to the other graphical parameters that we've talked about. However, because of the way that the traditional graphics system in \R\ works, you need to specify what the margins will be {\it before} calling your high-level plotting function. Unlike the other cases we've see, you can't treat \rtext{mar} as if it were just another argument in your plotting function. Instead, you have to use the \rtext{par()} function to change the graphical parameters beforehand, and only then try to draw your figure. In other words, the first thing I would do is this:
-\begin{rblock1} 
-> @usr{par( mar = c( 10.1, 4.1, 4.1, 2.1) )}
-\end{rblock1}
-There's no visible output here, but behind the scenes \R\ has changed the graphical parameters associated with the current device (remember, in \R\ terminology all graphics are drawn onto a ``device''). Now that this is done, we could use the exact same command as before, but this time you'd see that the labels all fit, because \R\ now leaves twice as much room for the labels at the bottom. However, since I've now figured out how to get the labels to display properly, I might as well play around with some of the other options, all of which are things you've seen before:
-\begin{rblock1}
-> @usr{barplot( height = freq,}                      # the data to plot 
-+ @usr{         names.arg = teams,}                  # label the plots
-+ @usr{         las = 2, }                           # rotate the labels
-+ @usr{         ylab = "Number of Finals", }         # y axis label
-+ @usr{         main = "Finals Played, 1987-2010",}  # figure title
-+ @usr{         density = 10, }                      # shade the bars
-+ @usr{         angle = 20}                          # shading lines angle
-+ @usr{)}
-\end{rblock1}
-However, one thing to remember about the \rtext{par()} function is that it doesn't just change the graphical parameters for the current {\it plot}. Rather, the changes pertain to any subsequent plot that you draw onto the same {\it device}. This might be exactly what you want, in which case there's no problem. But if not, you need to reset the graphical parameters to their original settings. To do this, you can either close the device (e.g., close the window, or click the ``Clear All'' button in the Plots panel in Rstudio) or you can reset the graphical parameters to their original values, using a command like this:
-\begin{rblock1}
-> @usr{par( mar = c(5.1, 4.1, 4.1, 2.1) )}
-\end{rblock1}
-
-
-\section{Saving image files using \R\ and Rstudio~\label{sec:saveimage}}
-
-Hold on, you might be thinking. What's the good of being able to draw pretty pictures in \R\ if I can't save them and send them to friends to brag about how awesome my data is? How do I save the picture? This is another one of those situations where the easiest thing to do is to use the Rstudio tools.
-
-If you're running \R\ through Rstudio, then the easiest way to save your image is to click on the ``Export'' button in the Plot panel (i.e., the area in Rstudio where all the plots have been appearing). When you do that you'll see a menu that contains the options ``Save Plot as PDF'' and ``Save Plot as Image''. Either version works. Both will bring up dialog boxes that give you a few options that you can play with, but besides that it's pretty simple. 
-
-This works pretty nicely for most situations. So, unless you're filled with a burning desire to learn the low level details, feel free to skip the rest of this section.
-
-\SUBSECTION{The ugly details \advanced} 
-
-As I say, the menu-based options should be good enough for most people most of the time. However, one day you might want to be a bit more sophisticated, and make use of \R's image writing capabilities at a lower level. In this section I'll give you a very basic introduction to this. In all honesty, this barely scratches the surface, but it will help a little bit in getting you started if you want to learn the details. 
-
-Okay, as I hinted earlier, whenever you're drawing pictures in \R\ you're deemed to be drawing {\it to} a device of some kind.  There are devices that correspond to a figure drawn on screen, and there are devices that correspond to graphics files that \R\ will produce for you. For the purposes of this section I'll assume that you're using the default application in either Windows or Mac OS, not Rstudio. The reason for this is that my experience with the graphical device provided by Rstudio has led me to suspect that it still has a bunch on non-standard (or possibly just undocumented) features, and so I don't quite trust that it always does what I expect. I've no doubt they'll smooth it out later, but I can honestly say that I don't quite get what's going on with the \rtext{RStudioGD} device.  In any case, we can ask \R\ to list all of the graphics devices that currently exist, simply by using the command \rtext{dev.list()}. If there are no figure windows open, then you'll see this:
-\begin{rblock1}
-> @usr{dev.list()}
-NULL
-\end{rblock1}
-which just means that \R\ doesn't have any graphics devices open. However, suppose if you've just drawn a histogram and you type the same command, \R\ will now give you a different answer. For instance, if you're using Windows:
-\begin{rblock1}
-> @usr{hist( afl.margins )}
-> @usr{dev.list()}
-windows 
-      2
-\end{rblock1}
-What this means is that there is one graphics device (device 2) that is currently open, and it's a figure window. If you did the same thing on a Mac, you get basically the same answer, except that the name of the device would be \rtextoutput{quartz} rather than \rtextoutput{windows}. If you had several graphics windows open (which, incidentally, you can do by using the \rtext{dev.new()} command) then you'd see something like this:
-\begin{rblock1}
-> @usr{dev.list()}
-windows windows windows  
-      2       3       4 
-\end{rblock1}
-Okay, so that's the basic idea behind graphics devices. The key idea here is that graphics files (like JPEG images etc) are {\it also} graphics devices as far as \R\ is concerned. So what you want to do is to {\it copy} the contents of one graphics device to another one. There's a command called \rtext{dev.copy()} that does this, but what I'll explain to you is a simpler one called \rtext{dev.print()}. It's pretty simple:
-
-\begin{rblock1}
-> @usr{dev.print( device = jpeg, }             # what are we printing to?
-+ @usr{           filename = "thisfile.jpg",}  # name of the image file
-+ @usr{           width = 480, }               # how many pixels wide should it be
-+ @usr{           height = 300}                # how many pixels high should it be
-+ @usr{)}
-\end{rblock1}
-This takes the ``active'' figure window, copies it to a jpeg file (which \R\ treats as a device) and then closes that device. The \rtext{filename = "thisfile.jpg"} part tells \R\ what to name the graphics file, and the \rtext{width = 480} and \rtext{height = 300} arguments tell \R\ to draw an image that is 300 pixels high and 480 pixels wide. If you want a different kind of file, just change the device argument from \rtext{jpeg} to something else. \R\ has devices for \rtext{png}, \rtext{tiff} and \rtext{bmp} that all work in exactly the same way as the \rtext{jpeg} command, but produce different kinds of files. Actually, for simple cartoonish graphics like this histogram, you'd be better advised to use PNG or TIFF over JPEG. The JPEG format is very good for natural images, but is wasteful for simple line drawings. The information above probably covers most things you might want to. However, if you want more information about what kinds of options you can specify using \R, have a look at the help documentation by typing \rtext{?jpeg} or \rtext{?tiff} or whatever.
+Hold on, you might be thinking. What's the good of being able to draw pretty pictures in jamovi if I can't save them and send them to friends to brag about how awesome my data is? How do I save the picture? Simples. Just right click on the plot image and save it to a file, either as `eps', `svg' or `pdf' - these formats all produce nice images that you can the send to your friends, or include in your assignments or papers.
 
 
 \section{Summary}
@@ -366,16 +228,15 @@ This takes the ``active'' figure window, copies it to a jpeg file (which \R\ tre
 Perhaps I'm a simple minded person, but I love pictures. Every time I write a new scientific paper, one of the first things I do is sit down and think about what the pictures will be. In my head, an article is really just a sequence of pictures, linked together by a story. All the rest of it is just window dressing. What I'm really trying to say here is that the human visual system is a very powerful data analysis tool. Give it the right kind of information and it will supply a human reader with a massive amount of knowledge very quickly. Not for nothing do we have the saying ``a picture is worth a thousand words''. With that in mind, I think that this is one of the most important chapters in the book. The topics covered were:
 
 \begin{itemize}
-\item {\it Basic overview to \R\ graphics}. In Section~\ref{sec:rgraphics} we talked about how graphics in \R\ are organised, and then moved on to the basics of how they're drawn in Section~\ref{sec:introplotting}.
-\item {\it Common plots}. Much of the chapter was focused on standard graphs that statisticians like to produce: histograms (Section~\ref{sec:hist}), stem and leaf plots (Section~\ref{sec:stem}), boxplots (Section~\ref{sec:boxplots}), scatterplots (Section~\ref{sec:scatterplots}) and bar graphs (Section~\ref{sec:bargraph}).
+\item {\it Basic overview to jamovi graphics}. In Section~\ref{sec:rgraphics} we talked about how graphics in jamovi are organised, and then moved on to the basics of how they're drawn in Section~\ref{sec:introplotting}.
+\item {\it Common plots}. Much of the chapter was focused on standard graphs that statisticians like to produce: histograms (Section~\ref{sec:hist}), boxplots (Section~\ref{sec:boxplots}), bar graphs (Section~\ref{sec:bargraph}) and scatterplots (Section~\ref{sec:scatterplots}). 
 \item {\it Saving image files}. The last part of the chapter talked about how to export your pictures (Section~\ref{sec:saveimage})
 \end{itemize} 
 
 \noindent
-One final thing to point out. At the start of the chapter I mentioned that \R\ has several completely distinct systems for drawing figures. In this chapter I've focused on the {\it traditional} graphics system. It's the easiest one to get started with: you can draw a histogram with a command as simple as \rtext{hist(x)}. However, it's not the most powerful tool for the job, and after a while most \R\ users start looking to shift to fancier systems. One of the most popular graphics systems is provided by the \rtext{ggplot2} package (see \url{http://ggplot2.org/}), which is loosely based on ``The grammar of graphics'' \cite{Wilkinson2006}. It's not for novices: you need to have a pretty good grasp of \R\ before you can start using it, and even then it takes a while to really get the hang of it. But when you're finally at that stage, it's worth taking the time to teach yourself, because it's a much cleaner system.
+One final thing to point out. Whilst jamovi produces some really neat default graphics, editing the plots is currently not possible. For more advanced graphics and plotting capability the packages available in \R\ are ,much more powerful. One of the most popular graphics systems is provided by the \rtext{ggplot2} package (see \url{http://ggplot2.org/}), which is loosely based on ``The grammar of graphics'' \cite{Wilkinson2006}. It's not for novices: you need to have a pretty good grasp of \R\ before you can start using it, and even then it takes a while to really get the hang of it. But when you're finally at that stage, it's worth taking the time to teach yourself, because it's a much cleaner system.
 
 
 
 
-/fi %remove when finished revising chapter
 

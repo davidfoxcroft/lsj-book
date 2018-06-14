@@ -1,5 +1,5 @@
-% !TEX root = ../pdf/lsr.tex
-% [There are multiple lsr.tex files, but the one in ../pdf is the usual one]
+% !TEX root = ../pdf/lsj.tex
+% [There are multiple lsj.tex files, but the one in ../pdf is the usual one]
 
 \chapter{Estimating unknown quantities from a sample\label{ch:estimation}}
 
@@ -86,7 +86,7 @@ As you can see from looking at the list of possible populations that I showed ab
 \begin{itemize} 
 \item {\it Stratified sampling}. Suppose your population is (or can be) divided into several different subpopulations, or {\it strata}. Perhaps you're running a study at several different sites, for example. Instead of trying to sample randomly from the population as a whole, you instead try to collect a separate random sample from each of the strata. Stratified sampling is sometimes easier to do than simple random sampling, especially when the population is already divided into the distinct strata. It can also be more efficient that simple random sampling, especially when some of the subpopulations are rare. For instance, when studying schizophrenia it would be much better to divide the population into two\FOOTNOTE{Nothing in life is that simple: there's not an obvious division of people into binary categories like ``schizophrenic'' and ``not schizophrenic''. But this isn't a clinical psychology text, so please forgive me a few simplifications here and there.}  strata (schizophrenic and not-schizophrenic), and then sample an equal number of people from each group. If you selected people randomly, you would get so few schizophrenic people in the sample that your study would be useless. This specific kind of of stratified sampling is referred to as {\it oversampling} because it makes a deliberate attempt to over-represent rare groups. 
 \item {\it Snowball sampling} is a technique that is especially useful when sampling from a ``hidden'' or hard to access population, and is especially common in social sciences. For instance, suppose the researchers want to conduct an opinion poll among transgender people. The research team might only have contact details for a few trans folks, so the survey starts by asking them to participate (stage 1). At the end of the survey, the participants are asked to provide contact details for other people who might want to participate. In stage 2, those new contacts are surveyed. The process continues until the researchers have sufficient data. The big advantage to snowball sampling is that it gets you data in situations that might otherwise be impossible to get any. On the statistical side, the main disadvantage is that the sample is highly non-random, and non-random in ways that are difficult to address. On the real life side, the disadvantage is that the procedure can be unethical if not handled well, because hidden populations are often hidden for a reason. I chose transgender people as an example here to highlight this: if you weren't careful you might end up outing people who don't want to be outed (very, very bad form), and even if you don't make that mistake it can still be intrusive to use people's social networks to study them. It's certainly very hard to get people's informed consent {\it before} contacting them, yet in many cases the simple act of contacting them and saying ``hey we want to study you'' can be hurtful. Social networks are complex things, and just because you can use them to get data doesn't always mean you should.
-\item {\it Convenience sampling} is more or less what it sounds like. The samples are chosen in a way that is convenient to the researcher, and not selected at random from the population of interest. Snowball sampling is one type of convenience sampling, but there are many others. A common example in psychology are studies that rely on undergraduate psychology students. These samples are generally non-random in two respects: firstly, reliance on undergraduate psychology students automatically means that your data are restricted to a single subpopulation. Secondly, the students usually get to pick which studies they participate in, so the sample is a self selected subset of psychology students not a randomly selected subset. In real life, most studies are convenience samples of one form or another. This is sometimes a severe limitation, but not always.
+\item {\it Convenience sampling} is more or less what it sounds like. The samples are chosen in a way that is convenient to the researcher, and not selected at random from the population of interest. Snowball sampling is one type of convenience sampling, but there are many others. A common example in psychology are studies that rely on undergraduate psychology students. These samples are generally non-random in two respects: firstly, reliance on undergraduate psychology students automatically means that your data are restricted to a single sub-population. Secondly, the students usually get to pick which studies they participate in, so the sample is a self selected subset of psychology students not a randomly selected subset. In real life, most studies are convenience samples of one form or another. This is sometimes a severe limitation, but not always.
 \end{itemize}
 
 \SUBSECTION{How much does it matter if you don't have a simple random sample?}
@@ -131,23 +131,17 @@ Each of these IQ scores is sampled from a normal distribution with mean 100 and 
 
 In the previous section I showed you the results of one fictitious IQ experiment with a sample size of $N=100$. The results were somewhat encouraging: the true population mean is 100, and the sample mean of 98.5 is a pretty reasonable approximation to it. In many scientific studies that level of precision is perfectly acceptable, but in other situations you need to be a lot more precise. If we want our sample statistics to be much closer to the population parameters, what can we do about it?
 
-The obvious answer is to collect more data. Suppose that we ran a much larger experiment, this time measuring the IQs of 10,000 people. We can simulate the results of this experiment using \R. In Section~\ref{sec:normal} I introduced the \rtext{rnorm()} function, which generates random numbers sampled from a normal distribution. For an experiment with a sample size of \rtext{n = 10000}, and a population with \rtext{mean = 100} and \rtext{sd = 15}, \R\ produces our fake IQ data using these commands:
-\begin{rblock1}
-> @usr{IQ <- rnorm(n = 10000, mean = 100, sd = 15)} # generate IQ scores
-> @usr{IQ <- round(IQ)} # IQs are whole numbers!
-> @usr{print(IQ)}
-    [1]  74 104 100 104 102 106 122  87  92 101 104 119 109  92 114 121 133
-   [18] 111 108 104 117 118 121  90  86  79 102 122  86  68  95 108  91  88
-   [35]  89  81  89  76 124  79  76 100 135  94  91  88  84  92 104 113 108
-   [52] 103  94 123 102 120  95 112 137  96  75 105 109  81 117 110 112 106
- 
-BLAH BLAH BLAH
+The obvious answer is to collect more data. Suppose that we ran a much larger experiment, this time measuring the IQs of 10,000 people. We can simulate the results of this experiment using jamovi. The \rtext{IQsim.omv} file is a jamovi data file. In this file I have generated 10,000 random numbers sampled from a normal distribution for a population with \rtext{mean = 100} and \rtext{sd = 15}. This was done by computing a new variable using the \rtext{ = NORM(100/15)} function. A histogram and density plot shows that this larger sample is a much better approximation to the true population distribution than the smaller one. This is reflected in the sample statistics: the mean IQ for the larger sample turns out to be 100.06, and the standard deviation is 14.79. These values are now very close to the true population. See Figure \ref{fig:iqsim}
 
- [9963] 106 124 108 108 117 121  94 114 106  98 103  84  93 102 104 121 106
- [9980]  87 106  95  92 100 104  94  98  95 124 114  86  83  94  95 116  89
- [9997]  49 126 112  97
-\end{rblock1}
-I can compute the mean IQ using the command \rtext{mean(IQ)} and the standard deviation using the command \rtext{sd(IQ)}, and I can draw a histgram using \rtext{hist()}. The histogram of this much larger sample is shown in Figure~\ref{fig:IQdist}c. Even a moment's inspections makes clear that the larger sample is a much better approximation to the true population distribution than the smaller one. This is reflected in the sample statistics: the mean IQ for the larger sample turns out to be 99.9, and the standard deviation is 15.1. These values are now very close to the true population.
+\begin{figure}[h]
+\begin{center}
+\epsfig{file=../img/estimation/IQsim.png,clip=true,width=12cm}
+\end{center}
+\caption{A random sample drawn from a normal distribution using jamovi}
+\label{fig:iqsim}
+\HR
+\end{figure}
+
 
 I feel a bit silly saying this, but the thing I want you to take away from this is that large samples generally give you better information. I feel silly saying it because it's so bloody obvious that it shouldn't need to be said. In fact, it's such an obvious point that when Jacob Bernoulli -- one of the founders of probability theory -- formalised this idea back in 1713, he was kind of a jerk about it. Here's how he described the fact that we all share this intuition:
 \begin{quote}
@@ -168,18 +162,18 @@ As in economics, so too in psychology and statistics. It is not enough to know t
 
 \SUBSECTION{Sampling distribution of the mean~\label{sec:samplingdists}}
 
-With this in mind, let's abandon the idea that our studies will have sample sizes of 10000, and consider a very modest experiment indeed. This time around we'll sample $N=5$ people and measure their IQ scores. As before, I can simulate this experiment in \R\ using the \rtext{rnorm()} function:
+With this in mind, let's abandon the idea that our studies will have sample sizes of 10000, and consider a very modest experiment indeed. This time around we'll sample $N=5$ people and measure their IQ scores. As before, I can simulate this experiment in jamovi \rtext{= NORM(100,15)} function, but I only need 5 participant IDs this time, not 10,000. These are the five numbers that jamovi generated:
+
 \begin{rblock1}
-> @usr{IQ.1 <- round( rnorm(n=5, mean=100, sd=15 ))}
-> @usr{IQ.1}
-[1]  90  82  94  99 110
+90 82 94 99 110
 \end{rblock1}
-The mean IQ in this sample turns out to be exactly 95. Not surprisingly, this is much less accurate than the previous experiment. Now imagine that I decided to \keyterm{replicate} the experiment. That is, I repeat the procedure as closely as possible: I randomly sample 5 new people and measure their IQ. Again, \R\ allows me to simulate the results of this procedure:
+
+The mean IQ in this sample turns out to be exactly 95. Not surprisingly, this is much less accurate than the previous experiment. Now imagine that I decided to \keyterm{replicate} the experiment. That is, I repeat the procedure as closely as possible: I randomly sample 5 new people and measure their IQ. Again, jamovi allows me to simulate the results of this procedure, and generates these five numbers:
+
 \begin{rblock1}
-> @usr{IQ.2 <- round( rnorm(n=5, mean=100, sd=15 ))}
-> @usr{IQ.2}
-[1]  78  88 111 111 117
+78 88 111 111 117
 \end{rblock1}
+
 This time around, the mean IQ in my sample is 101. If I repeat the experiment 10 times I obtain the results shown in Table~\ref{tab:replications}, and as you can see the sample mean varies from one replication to the next. 
 
 \begin{table}[t]
@@ -209,7 +203,7 @@ Now suppose that I decided to keep going in this fashion, replicating this ``fiv
 \begin{verbatim}
                       95.0 101.0 101.6 103.8 104.4 ...
 \end{verbatim}
-What if I continued like this for 10,000 replications, and then drew a histogram Using the magical powers of \R\ that's exactly what I did, and you can see the results in Figure~\ref{fig:sampdistmean}. As this picture illustrates, the average of 5 IQ scores is usually between 90 and 110. But more importantly, what it highlights is that if we replicate an experiment over and over again, what we end up with is a {\it distribution} of sample means! This distribution has a special name in statistics: it's called the \keyterm{sampling distribution of the mean}. 
+What if I continued like this for 10,000 replications, and then drew a histogram. Well that's exactly what I did, and you can see the results in Figure~\ref{fig:sampdistmean}. As this picture illustrates, the average of 5 IQ scores is usually between 90 and 110. But more importantly, what it highlights is that if we replicate an experiment over and over again, what we end up with is a {\it distribution} of sample means! This distribution has a special name in statistics: it's called the \keyterm{sampling distribution of the mean}. 
 
 Sampling distributions are another important theoretical idea in statistics, and they're crucial for understanding the behaviour of small samples. For instance, when I ran the very first ``five IQ scores'' experiment, the sample mean turned out to be 95. What the sampling distribution in Figure~\ref{fig:sampdistmean} tells us, though, is that the ``five IQ scores'' experiment is not very accurate. If I repeat the experiment, the sampling distribution tells me that I can expect to see a sample mean anywhere between 80 and 120. 
 
@@ -263,7 +257,7 @@ Doing this over and over again would give me a very different sampling distribut
 
 At this point I hope you have a pretty good sense of what sampling distributions are, and in particular what the sampling distribution of the mean is. In this section I want to talk about how the sampling distribution of the mean changes as a function of sample size. Intuitively, you already know part of the answer: if you only have a few observations, the sample mean is likely to be quite inaccurate: if you replicate a small experiment and recalculate the mean you'll get a very different answer. In other words, the sampling distribution is quite wide. If you replicate a large experiment and recalculate the sample mean you'll probably get the same answer you got last time, so the sampling distribution will be very narrow. You can see this visually in Figure~\ref{fig:IQsamp}: the bigger the sample size, the narrower the sampling distribution gets. We can quantify this effect by calculating the standard deviation of the sampling distribution, which is referred to as the \keyterm{standard error}. The standard error of a statistic is often denoted SE, and since we're usually interested in the standard error of the sample {\it mean}, we often use the acronym SEM. As you can see just by looking at the picture, as the sample size $N$ increases, the SEM decreases.  
 
-Okay, so that's one part of the story. However, there's something I've been glossing over so far. All my examples up to this point have been based on the ``IQ scores'' experiments, and because IQ scores are roughly normally distributed, I've assumed that the population distribution is normal. What if it isn't normal? What happens to the sampling distribution of the mean? The remarkable thing is this: no matter what shape your population distribution is, as $N$ increases the sampling distribution of the mean starts to look more like a normal distribution. To give you a sense of this, I ran some simulations using \R. To do this, I started with the ``ramped'' distribution shown in the histogram in Figure~\ref{fig:cltdemo}. As you can see by comparing the triangular shaped histogram to the bell curve plotted by the black line, the population distribution doesn't look very much like a normal distribution at all. Next, I used \R\ to simulate the results of a large number of experiments. In each experiment I took $N=2$ samples from this distribution, and then calculated the sample mean. Figure~\ref{fig:cltdemo}b plots the histogram of these sample means (i.e., the sampling distribution of the mean for $N=2$). This time, the histogram produces a $\cap$-shaped distribution: it's still not normal, but it's a lot closer to the black line than the population distribution in Figure~\ref{fig:cltdemo}a. When I increase the sample size to $N=4$, the sampling distribution of the mean is very close to normal (Figure~\ref{fig:cltdemo}c), and by the time we reach a sample size of $N=8$ it's almost perfectly normal. In other words, as long as your sample size isn't tiny, the sampling distribution of the mean will be approximately normal no matter what your population distribution looks like!
+Okay, so that's one part of the story. However, there's something I've been glossing over so far. All my examples up to this point have been based on the ``IQ scores'' experiments, and because IQ scores are roughly normally distributed, I've assumed that the population distribution is normal. What if it isn't normal? What happens to the sampling distribution of the mean? The remarkable thing is this: no matter what shape your population distribution is, as $N$ increases the sampling distribution of the mean starts to look more like a normal distribution. To give you a sense of this, I ran some simulations. To do this, I started with the ``ramped'' distribution shown in the histogram in Figure~\ref{fig:cltdemo}. As you can see by comparing the triangular shaped histogram to the bell curve plotted by the black line, the population distribution doesn't look very much like a normal distribution at all. Next, I simulated the results of a large number of experiments. In each experiment I took $N=2$ samples from this distribution, and then calculated the sample mean. Figure~\ref{fig:cltdemo}b plots the histogram of these sample means (i.e., the sampling distribution of the mean for $N=2$). This time, the histogram produces a $\cap$-shaped distribution: it's still not normal, but it's a lot closer to the black line than the population distribution in Figure~\ref{fig:cltdemo}a. When I increase the sample size to $N=4$, the sampling distribution of the mean is very close to normal (Figure~\ref{fig:cltdemo}c), and by the time we reach a sample size of $N=8$ it's almost perfectly normal. In other words, as long as your sample size isn't tiny, the sampling distribution of the mean will be approximately normal no matter what your population distribution looks like!
 
 \begin{figure}[p]
 \begin{center}
@@ -327,7 +321,7 @@ $\hat{\mu}$ & Estimate of the population mean & Yes, identical to the sample mea
 
 So far, estimation seems pretty simple, and you might be wondering why I forced you to read through all that stuff about sampling theory. In the case of the mean, our estimate of the population parameter (i.e. $\hat\mu$) turned out to identical to the corresponding sample statistic (i.e. $\bar{X}$). However, that's not always true. To see this, let's have a think about how to construct an \keyterm{estimate of the population standard deviation}, which we'll denote  $\hat\sigma$. What shall we use as our estimate in this case? Your first thought might be that we could do the same thing we did when estimating the mean, and just use the sample statistic as our estimate. That's almost the right thing to do, but not quite. 
 
-Here's why. Suppose I have a sample that contains a single observation. For this example, it helps to consider a sample where you have no intutions at all about what the true population values might be, so let's use something completely fictitious. Suppose the observation in question measures the {\it cromulence} of my shoes. It turns out that my shoes have a cromulence of 20. So here's my sample:
+Here's why. Suppose I have a sample that contains a single observation. For this example, it helps to consider a sample where you have no intuitions at all about what the true population values might be, so let's use something completely fictitious. Suppose the observation in question measures the {\it cromulence} of my shoes. It turns out that my shoes have a cromulence of 20. So here's my sample:
 \begin{center}
 \texttt{20}
 \end{center}
@@ -421,12 +415,9 @@ $\hat{\sigma}^2$ & Estimate of the population  & Yes, but not the same as the  \
 
 Up to this point in this chapter, I've outlined the basics of sampling theory which statisticians rely on to make guesses about population parameters on the basis of a sample of data. As this discussion illustrates, one of the reasons we need all this sampling theory is that every data set leaves us with a some of uncertainty, so our estimates are never going to be perfectly accurate. The thing that has been missing from this discussion is an attempt to {\it quantify} the amount of uncertainty that attaches to our estimate. It's not enough to be able guess that, say, the mean IQ of undergraduate psychology students is 115 (yes, I just made that number up). We also want to be able to say something that expresses the degree of certainty that we have in our guess. For example, it would be nice to be able to say that there is a 95\% chance that the true mean lies between 109 and 121. The name for this is a \keyterm{confidence interval} for the mean.
 
-Armed with an understanding of sampling distributions, constructing a confidence interval for the mean is actually pretty easy. Here's how it works. Suppose the true population mean is $\mu$ and the standard deviation is $\sigma$. I've just finished running my study that has $N$ participants, and the mean IQ among those participants is $\bar{X}$. We know from our discussion of the central limit theorem (Section~\ref{sec:clt}) that the sampling distribution of the mean is approximately normal. We also know from our discussion of the normal distribution Section~\ref{sec:normal} that there is a 95\% chance that a normally-distributed quantity will fall within two standard deviations of the true mean. To be more precise, we can use the \rtext{qnorm()} function to compute the 2.5th and 97.5th percentiles of the normal distribution
-\begin{rblock1}
-> @usr{qnorm( p = c(.025, .975) )}
-[1] -1.959964  1.959964
-\end{rblock1} 
-Okay, so I lied earlier on. The more correct answer is that 95\% chance that a normally-distributed quantity will fall within 1.96 standard deviations of the true mean. Next, recall that the standard deviation of the sampling distribution is referred to as the standard error, and the standard error of the mean is written as SEM. When we put all these pieces together, we learn that there is a 95\% probability that the sample mean $\bar{X}$ that we have actually observed lies within 1.96 standard errors of the population mean. Mathematically, we write this as:
+Armed with an understanding of sampling distributions, constructing a confidence interval for the mean is actually pretty easy. Here's how it works. Suppose the true population mean is $\mu$ and the standard deviation is $\sigma$. I've just finished running my study that has $N$ participants, and the mean IQ among those participants is $\bar{X}$. We know from our discussion of the central limit theorem (Section~\ref{sec:clt}) that the sampling distribution of the mean is approximately normal. We also know from our discussion of the normal distribution Section~\ref{sec:normal} that there is a 95\% chance that a normally-distributed quantity will fall within about two standard deviations of the true mean. 
+
+To be more precise, the more correct answer is that 95\% chance that a normally-distributed quantity will fall within 1.96 standard deviations of the true mean. Next, recall that the standard deviation of the sampling distribution is referred to as the standard error, and the standard error of the mean is written as SEM. When we put all these pieces together, we learn that there is a 95\% probability that the sample mean $\bar{X}$ that we have actually observed lies within 1.96 standard errors of the population mean. Mathematically, we write this as:
 $$
 \mu - \left( 1.96 \times \mbox{SEM} \right) \ \leq \  \bar{X}\  \leq \  \mu + \left( 1.96 \times \mbox{SEM} \right) 
 $$
@@ -438,33 +429,18 @@ What this is telling is is that the range of values has a 95\% probability of co
 $$
 \mbox{CI}_{95} = \bar{X} \pm \left( 1.96 \times \frac{\sigma}{\sqrt{N}} \right)
 $$
-Of course, there's nothing special about the number 1.96: it just happens to be the multiplier you need to use if you want a 95\% confidence interval. If I'd wanted a 70\% confidence interval, I could have used the \rtext{qnorm()} function to calculate the 15th and 85th quantiles:
-\begin{rblock1}
-> @usr{qnorm( p = c(.15, .85) )}
-[1] -1.036433  1.036433
-\end{rblock1}
-and so the formula for $\mbox{CI}_{70}$ would be the same as the formula for $\mbox{CI}_{95}$ except that we'd use 1.04 as our magic number rather than 1.96.
+Of course, there's nothing special about the number 1.96: it just happens to be the multiplier you need to use if you want a 95\% confidence interval. If I'd wanted a 70\% confidence interval, I would have used 1.04 as the magic number rather than 1.96.
 
 \SUBSECTION{A slight mistake in the formula}
 
-As usual, I lied. The formula that I've given above for the 95\% confidence interval is approximately correct, but I glossed over an important detail in the discussion. Notice my formula requires you to use the standard error of the mean, SEM, which in turn requires you to use the true population standard deviation $\sigma$. Yet, in Section~\ref{sec:pointestimates} I stressed the fact that we don't actually {\it know} the true population parameters. Because we don't know the true value of $\sigma$, we have to use an estimate of the population standard deviation $\hat{\sigma}$ instead. This is pretty straightforward to do, but this has the consequence that we need to use the quantiles of the $t$-distribution rather than the normal distribution to calculate our magic number; and the answer depends on the sample size. When $N$ is very large, we get pretty much the same value using \rtext{qt()} that we would if we used \rtext{qnorm()}...
-\begin{rblock1}
-> @usr{N <- 10000}   # suppose our sample size is 10,000
-> @usr{qt( p = .975, df = N-1)}   # calculate the 97.5th quantile of the t-dist
-[1] 1.960201
-\end{rblock1}
-But when $N$ is small, we get a much bigger number when we use the $t$ distribution:
-\begin{rblock1}
-> @usr{N <- 10}   # suppose our sample size is 10
-> @usr{qt( p = .975, df = N-1)}   # calculate the 97.5th quantile of the t-dist
-[1] 2.262157
-\end{rblock1}
+As usual, I lied. The formula that I've given above for the 95\% confidence interval is approximately correct, but I glossed over an important detail in the discussion. Notice my formula requires you to use the standard error of the mean, SEM, which in turn requires you to use the true population standard deviation $\sigma$. Yet, in Section~\ref{sec:pointestimates} I stressed the fact that we don't actually {\it know} the true population parameters. Because we don't know the true value of $\sigma$, we have to use an estimate of the population standard deviation $\hat{\sigma}$ instead. This is pretty straightforward to do, but this has the consequence that we need to use the percentiles of the $t$-distribution rather than the normal distribution to calculate our magic number; and the answer depends on the sample size. When $N$ is very large, we get pretty much the same value using the $t$-distribution or the normal distribution: 1.96. But when $N$ is small, we get a much bigger number when we use the $t$ distribution: 2.26.
+
 There's nothing too mysterious about what's happening here. Bigger values mean that the confidence interval is wider, indicating that we're more uncertain about what the true value of $\mu$ actually is. When we use the $t$ distribution instead of the normal distribution, we get bigger numbers, indicating that we have more uncertainty. And why do we have that extra uncertainty? Well, because our estimate of the population standard deviation $\hat\sigma$ might be wrong! If it's wrong, it implies that we're a bit less sure about what our sampling distribution of the mean actually looks like... and this uncertainty ends up getting reflected in a wider confidence interval.  
 
 
 \SUBSECTION{Interpreting a confidence interval}
 
-The hardest thing about confidence intervals is understanding what they {\it mean}. Whenever people first encounter confidence intervals, the first instinct is almost always to say that ``there is a 95\% probabaility that the true mean lies inside the confidence interval''. It's simple, and it seems to capture the common sense idea of what it means to say that I am ``95\% confident''. Unfortunately, it's not quite right. The intuitive definition relies very heavily on your own personal {\it beliefs} about the value of the population mean. I say that I am 95\% confident because those are my beliefs. In everyday life that's perfectly okay, but if you remember back to Section~\ref{sec:probmeaning}, you'll notice that talking about personal belief and confidence is a Bayesian idea. Personally (speaking as a Bayesian) I have no problem with the idea that the phrase ``95\% probability'' is allowed to refer to a personal belief. However, confidence intervals are {\it not} Bayesian tools. Like everything else in this chapter, confidence intervals are {\it frequentist} tools, and if you are going to use frequentist methods then it's not appropriate to attach a Bayesian interpretation to them. If you use frequentist methods, you must adopt frequentist interpretations!
+The hardest thing about confidence intervals is understanding what they {\it mean}. Whenever people first encounter confidence intervals, the first instinct is almost always to say that ``there is a 95\% probability that the true mean lies inside the confidence interval''. It's simple, and it seems to capture the common sense idea of what it means to say that I am ``95\% confident''. Unfortunately, it's not quite right. The intuitive definition relies very heavily on your own personal {\it beliefs} about the value of the population mean. I say that I am 95\% confident because those are my beliefs. In everyday life that's perfectly okay, but if you remember back to Section~\ref{sec:probmeaning}, you'll notice that talking about personal belief and confidence is a Bayesian idea. Personally (speaking as a Bayesian) I have no problem with the idea that the phrase ``95\% probability'' is allowed to refer to a personal belief. However, confidence intervals are {\it not} Bayesian tools. Like everything else in this chapter, confidence intervals are {\it frequentist} tools, and if you are going to use frequentist methods then it's not appropriate to attach a Bayesian interpretation to them. If you use frequentist methods, you must adopt frequentist interpretations!
 
 Okay, so if that's not the right answer, what is? Remember what we said about frequentist probability: the only way we are allowed to make ``probability statements'' is to talk about a sequence of events, and to count up the frequencies of different kinds of events. From that perspective, the interpretation of a 95\% confidence interval must have something to do with replication. Specifically: if we replicated the experiment over and over again and computed a 95\% confidence interval for each replication, then 95\% of those {\it intervals} would contain the true mean. More generally, 95\% of all confidence intervals constructed using this procedure should contain the true population mean. This idea is illustrated in Figure~\ref{fig:cirep}, which shows 50 confidence intervals constructed for a ``measure 10 IQ scores'' experiment (top panel) and another 50 confidence intervals for a ``measure 25 IQ scores'' experiment (bottom panel). A bit fortuitously, across the 100 replications that I simulated, it turned out that exactly 95 of them contained the true mean. 
 
@@ -487,88 +463,23 @@ The critical difference here is that the Bayesian claim makes a probability stat
 I know that this seems a little pedantic, but it does matter. It matters because the difference in interpretation leads to a difference in the mathematics. There is a Bayesian alternative to confidence intervals, known as {\it credible intervals}. In most situations credible intervals are quite similar to confidence intervals, but in other cases they are drastically different. As promised, though, I'll talk more about the Bayesian perspective in Chapter~\ref{ch:bayes}.
 
 
-\SUBSECTION{Calculating confidence intervals in \R}
+\SUBSECTION{Calculating confidence intervals in jamovi}
 
-As far as I can tell, the core packages in \R\ don't include a simple function for calculating confidence intervals for the mean. They {\it do} include a lot of complicated, extremely powerful functions that can be used to calculate confidence intervals associated with lots of different things, such as the \rtext{confint()} function that we'll use in Chapter~\ref{ch:regression}. But I figure that when you're first learning statistics, it might be useful to start with something simpler. As a consequence, the \rtext{lsr} package includes a function called \rtext{ciMean()} which you can use to calculate your confidence intervals. There are two arguments that you might want to specify:\FOOTNOTE{As of the current writing, these are the only arguments to the function. However, I am planning to add a bit more functionality to \rtextsmall{ciMean()}. However, regardless of what those future changes might look like, the \rtextsmall{x} and \rtextsmall{conf} arguments will remain the same, and the commands used in this book will still work.}
-\begin{itemize} \itemsep -2pt
-\item \rtext{x}. This should be a numeric vector containing the data. 
-\item \rtext{conf}. This should be a number, specifying the confidence level. By default, \rtext{conf = .95}, since 95\% confidence intervals are the de facto standard in psychology.
-\end{itemize}
-So, for example, if I load the \filename{afl24.Rdata} file, calculate the confidence interval associated with the mean attendance:
-\begin{rblock1}
-> @usr{ciMean( x = afl$attendance )}
-    2.5%    97.5% 
-31597.32 32593.12 
-\end{rblock1}
-Hopefully that's fairly clear. 
+As far as I can tell, jamovi does not (yet) include a simple way to  calculate confidence intervals for the mean as part of the `Descriptives' functionality. But the `Descriptives' do have a check box for the S.E. Mean, so you can use this to calculate the lower 95\% confidence interval as:\\
 
-\SUBSECTION{Plotting confidence intervals in \R \label{sec:ciplots}}
+\rtext{Mean - (1.96 * S.E. Mean)} , and the upper 95\% confidence interval as:
 
+\rtext{Mean + (1.96 * S.E. Mean)} \\
 
-\begin{figure}
-\begin{center}
-\epsfig{file = ../img/estimation2/CI_bargraph.eps, clip=true,width = 13cm}
-\caption{Means and 95\% confidence intervals for AFL \rtext{attendance}, plotted separately for each \rtext{year} from 1987 to 2010. This graph was drawn using the \rtext{bargraph.CI()} function.}
-\label{fig:bargraph.CI}
-\HR
-\end{center}
-\end{figure}
+95\% confidence intervals are the de facto standard in psychology. So, for example, if I load the \filename{IQsim.omv} file, check mean and S.E mean under `Descriptives, I can work out the confidence interval associated with the simulated mean IQ: 
 
-\begin{figure}
-\begin{center}
-\epsfig{file = ../img/estimation2/CI_lineplot.eps, clip=true,width = 13cm}
-\caption{Means and 95\% confidence intervals for AFL \rtext{attendance}, plotted separately for each \rtext{year} from 1987 to 2010. This graph was drawn using the \rtext{lineplot.CI()} function.}
-\label{fig:lineplot.CI}
-\HR
-\end{center}
-\end{figure}
+Lower 95\% CI = 100.06 - (1.96 * 0.15) = 99.77
 
+Upper 95\% CI = 100.06 + (1.96 * 0.15) = 100.35 
 
-\begin{figure}
-\begin{center}
-\epsfig{file = ./../img/estimation2/CI_plotmeans.eps, clip=true,width = 13cm}
-\caption{Means and 95\% confidence intervals for AFL \rtext{attendance}, plotted separately for each \rtext{year} from 1987 to 2010. This graph was drawn using the \rtext{plotmeans()} function.}
-\label{fig:plotmeans}
-\HR
-\end{center}
-\end{figure}
+So, in our simulated large sample data, with N=10,000, the mean IQ score is 100.06 with a 95\% CI from 99.77 to 100.35. Hopefully that's fairly clear. So, although there currently is not a straightforward way to get jamovi to calculate the confidence interval as part of the variable `Descriptives' options, if we wanted to we could pretty easily work it out by hand. 
 
-
-There's several different ways you can draw graphs that show confidence intervals as error bars. I'll show three versions here, but this certainly doesn't exhaust the possibilities. In doing so, what I'm assuming is that you want to draw is a plot showing the means and confidence intervals for one variable, broken down by different levels of a second variable. For instance, in our \rtext{afl} data that we discussed earlier, we might be interested in plotting the average \rtext{attendance} by \rtext{year}. I'll do this using three different functions, \rtext{bargraph.CI()}, \rtext{lineplot.CI()} (both of which are in the \rtext{sciplot} package), and \rtext{plotmeans()} (which is in the \rtext{gplots}) package. Assuming that you've installed these packages on your system (see Section~\ref{sec:packageinstall} if you've forgotten how to do this), you'll need to load them. You'll also need to load the \rtext{lsr} package, because we'll make use of the \rtext{ciMean()} function to actually calculate the confidence intervals
-%> @usr{load( "afl24.Rdata" )}  # contains the "afl" data frame
-\begin{rblock1}
-> @usr{library( sciplot )}     # bargraph.CI() and lineplot.CI() functions
-> @usr{library( gplots )}      # plotmeans() function
-> @usr{library( lsr )}         # ciMean() function
-\end{rblock1}
-Here's how to plot the means and confidence intervals drawn using \rtext{bargraph.CI()}.
-\begin{rblock1}
-> @usr{bargraph.CI( x.factor = year,}            # grouping variable 
-+ @usr{             response = attendance, }     # outcome variable
-+ @usr{             data = afl, }                # data frame with the variables
-+ @usr{             ci.fun= ciMean,}             # name of the function to calculate CIs
-+ @usr{             xlab = "Year", }             # x-axis label
-+ @usr{             ylab = "Average Attendance"} # y-axis label
-+ @usr{)}
-\end{rblock1}
-This produces the output shown in Figure~\ref{fig:bargraph.CI}. We can use the same arguments when calling the \rtext{lineplot.CI()} function:
-\begin{rblock1}
-> @usr{lineplot.CI( x.factor = year,}            # grouping variable 
-+ @usr{             response = attendance, }     # outcome variable
-+ @usr{             data = afl, }                # data frame with the variables
-+ @usr{             ci.fun= ciMean,}             # name of the function to calculate CIs
-+ @usr{             xlab = "Year", }             # x-axis label
-+ @usr{             ylab = "Average Attendance"} # y-axis label
-+ @usr{)}
-\end{rblock1}
-And the output for this command is shown in Figure~\ref{fig:lineplot.CI}.  Finally, here's how you would do it using \rtext{plotmeans()}:
-\begin{rblock1}
-> @usr{plotmeans( formula = attendance ~ year,}  # outcome ~ group 
-+ @usr{           data = afl,     }              # data frame with the variables
-+ @usr{           n.label = FALSE}               # don't show the sample sizes
-+ @usr{)}
-\end{rblock1}
-This is shown in Figure~\ref{fig:plotmeans}.
+Similarly, when it comes to plotting confidence intervals in jamovi, this is not (yet) available as part of the `Descriptives' options. However, when we get onto learning about specific statistical test, for example in  \ref{ch:anova}, we will see that we can plot confidence intervals as part of the data analysis. That's pretty cool, so we'll show you how to do that later on.
 
 
 \section{Summary}
