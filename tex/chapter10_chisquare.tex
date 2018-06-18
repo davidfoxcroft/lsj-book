@@ -177,7 +177,7 @@ The basic idea behind degrees of freedom is quite simple: you calculate it by co
 \end{center}
 \end{figure}
 
-The final step in the process of constructing our hypothesis test is to figure out what the rejection region is. That is, what values of $\chi^2$$ would lead is to reject the null hypothesis. As we saw earlier, large values of $\chi^2$ imply that the null hypothesis has done a poor job of predicting the data from our experiment, whereas small values of $\chi^2$ imply that it's actually done pretty well. Therefore, a pretty sensible strategy would be to say there is some critical value, such that if $\chi^2$ is bigger than the critical value we reject the null; but if $\chi^2$ is smaller than this value we retain the null. In other words, to use the language we introduced in Chapter~\ref{ch:hypothesistesting} the chi-squared goodness of fit test is always a \keyterm{one-sided test}. Right, so all we have to do is figure out what this critical value is. And it's pretty straightforward. If we want our test to have significance level of $\alpha = .05$ (that is, we are willing to tolerate a Type I error rate of 5\%), then we have to choose our critical value so that there is only a 5\% chance that $\chi^2$ could get to be that big if the null hypothesis is true. This is illustrated in Figure~\ref{fig:goftest}.
+The final step in the process of constructing our hypothesis test is to figure out what the rejection region is. That is, what values of $\chi^2$ would lead is to reject the null hypothesis. As we saw earlier, large values of $\chi^2$ imply that the null hypothesis has done a poor job of predicting the data from our experiment, whereas small values of $\chi^2$ imply that it's actually done pretty well. Therefore, a pretty sensible strategy would be to say there is some critical value, such that if $\chi^2$ is bigger than the critical value we reject the null; but if $\chi^2$ is smaller than this value we retain the null. In other words, to use the language we introduced in Chapter~\ref{ch:hypothesistesting} the chi-squared goodness of fit test is always a \keyterm{one-sided test}. Right, so all we have to do is figure out what this critical value is. And it's pretty straightforward. If we want our test to have significance level of $\alpha = .05$ (that is, we are willing to tolerate a Type I error rate of 5\%), then we have to choose our critical value so that there is only a 5\% chance that $\chi^2$ could get to be that big if the null hypothesis is true. This is illustrated in Figure~\ref{fig:goftest}.
 
 Ah, but -- I hear you ask -- how do I find the critical value of a chi-squared distribution with $k-1$ degrees of freedom? Many many years ago when I first took a psychology statistics class, we used to look up these critical values in a book of critical value tables, like the one in Figure \ref{fig:chisquare.critvalues}. Looking at this Figure, we can see that the critical value for a $\chi^2$ distribution with 3 degrees of freedom, and p=0.05 is 7.82. 
 
@@ -195,7 +195,7 @@ So if our calculated $\chi^2$ statistic is bigger than the critical value of 7.8
 
 \SUBSECTION{Doing the test in jamovi\label{sec:gofTestInjamovi}}
 
-Not surprisingly, jamovi provides an analysis that will do these calculations for you. From the main `Analyses' toolbar select `Frequencies' - `One Sample Proportion Tests' - `N Outcomes'. Then in the analysis window that appears move the variable you want to analyse (\rtext{choice\_1} across into the `Variable' box. Also, click on the `Expected counts' check box so that these are shown on the results table. When you have done all this, you should see the the analysis results in jamovi as in Figure \ref{fig:chisquare.analysis1}. No surprise then that jamovi provides the same expected counts and statistics that we calculated by hand above, with a $\chi^2$$ value of 8.44 with 3 d.f. and $p$=0.038. Note that we don't need to look up a critical p-value threshold value any more, as jamovi gives us the actual $p$-value of the calculated $\chi^2$$ for 3 d.f.  
+Not surprisingly, jamovi provides an analysis that will do these calculations for you. From the main `Analyses' toolbar select `Frequencies' - `One Sample Proportion Tests' - `N Outcomes'. Then in the analysis window that appears move the variable you want to analyse (\rtext{choice\_1} across into the `Variable' box. Also, click on the `Expected counts' check box so that these are shown on the results table. When you have done all this, you should see the the analysis results in jamovi as in Figure \ref{fig:chisquare.analysis1}. No surprise then that jamovi provides the same expected counts and statistics that we calculated by hand above, with a $\chi^2$ value of 8.44 with 3 d.f. and $p$=0.038. Note that we don't need to look up a critical p-value threshold value any more, as jamovi gives us the actual $p$-value of the calculated $\chi^2$ for 3 d.f.  
 
 \begin{figure}
 \begin{center}
@@ -214,7 +214,7 @@ At this point you might be wondering what to do if you want to run a goodness of
 \begin{figure}
 \begin{center}
 \epsfig{file=../img/chisquare/chisquared_analysis2.png,clip=true,width=12cm}
-\caption{Changing the expected proportions in the $\chi^2 One Sample Proportion Test in jamovi}
+\caption{Changing the expected proportions in the $\chi^2$ One Sample Proportion Test in jamovi}
 \label{fig:chisquare.analysis2}
 \HR
 \end{center}
@@ -229,7 +229,7 @@ expected frequency &$E_i$ & 40 & 60 & 60 & 40 \\
 \end{tabular}
 \end{center}
 
-and the $\chi^2$ statistic is 4.74, 3 d.f., $p$=0.182. So, our null hypothesis and the expected frequencies are different to what they were last time. As a consequence our $X^2$ test statistic is different, and our $p$-value is different too. Annoyingly, the $p$-value is .192, so we can't reject the null hypothesis. Sadly, despite the fact that the null hypothesis corresponds to a very silly theory, these data don't provide enough evidence against it.
+and the $\chi^2$ statistic is 4.74, 3 d.f., $p$=0.182. So, our null hypothesis and the expected frequencies are different to what they were last time. As a consequence our $\chi^2$ test statistic is different, and our $p$-value is different too. Annoyingly, the $p$-value is .192, so we can't reject the null hypothesis. Sadly, despite the fact that the null hypothesis corresponds to a very silly theory, these data don't provide enough evidence against it.
 
 
 \SUBSECTION{How to report the results of the test~\label{sec:chisqreport}}
