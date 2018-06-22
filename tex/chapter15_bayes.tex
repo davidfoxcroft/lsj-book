@@ -30,7 +30,7 @@
 
 The ideas I've presented to you in this book describe inferential statistics from the frequentist perspective. I'm not alone in doing this. In fact, almost every textbook given to undergraduate psychology students presents the opinions of the frequentist statistician as {\it the} theory of inferential statistics, the one true way to do things. I have taught this way for practical reasons. The frequentist view of statistics dominated the academic field of statistics for most of the 20th century, and this dominance is even more extreme among applied scientists. It was and is current practice among psychologists to use frequentist methods. Because frequentist methods are ubiquitous in scientific papers, every student of statistics needs to understand those methods, otherwise they will be unable to make sense of what those papers are saying! Unfortunately -- in my opinion at least -- the current practice in psychology is often misguided, and the reliance on frequentist methods is partly to blame. In this chapter I explain why I think this, and provide an introduction to Bayesian statistics, an approach that I think is generally superior to the orthodox approach.
 
-This chapter comes in two parts. In Sections~\ref{sec:basicbayes} through \ref{sec:whybayes} I talk about what Bayesian statistics are all about, covering the basic mathematical rules for how it works as well as an explanation for why I think the Bayesian approach is so useful. Afterwards, I provide a brief overview of how you can do Bayesian versions of chi-square tests (Section~\ref{sec:bayescontingency}), $t$-tests (Section~\ref{sec:ttestbf}), regression (Section~\ref{sec:bayesregression}) and ANOVA (Section~\ref{sec:bayesanova}).
+This chapter comes in two parts. In Sections~\ref{sec:basicbayes} through \ref{sec:whybayes} I talk about what Bayesian statistics are all about, covering the basic mathematical rules for how it works as well as an explanation for why I think the Bayesian approach is so useful. Afterwards, I provide a brief overview of how you can do Bayesian versions of $t$-tests (Section~\ref{sec:ttestbf}).
 
 
 \section{Probabilistic reasoning by rational agents\label{sec:basicbayes}}
@@ -413,7 +413,7 @@ Given all of the above, what is the take home message? It's not that Bayesian me
 Good rules for statistical testing have to acknowledge human frailty. None of us are without sin. None of us are beyond temptation. A good system for statistical inference should still work even when it is used by actual humans. Orthodox null hypothesis testing does not.\FOOTNOTE{Okay, I just {\it know} that some knowledgeable frequentists will read this and start complaining about this section. Look, I'm not dumb. I absolutely know that if you adopt a sequential analysis perspective you can avoid these errors within the orthodox framework. I also know that you can explictly design studies with interim analyses in mind. So yes, in one sense I'm attacking a ``straw man'' version of orthodox methods. However, the straw man that I'm attacking is the one that {\it is used by almost every single practitioner}. If it ever reaches the point where sequential methods become the norm among experimental psychologists and I'm no longer forced to read 20 extremely dubious ANOVAs a day, I promise I'll rewrite this section and dial down the vitriol. But until that day arrives, I stand by my claim that {\it default} Bayes factor methods are much more robust in the face of data analysis practices as they exist in the real world. {\it Default} orthodox methods suck, and we all know it.} 
 
 
-
+\begin{comment} % leave out as not implemented in jamovi
 
 \section{Bayesian analysis of contingency tables~\label{sec:bayescontingency}}
 
@@ -600,106 +600,58 @@ The Bayes factor of 8:1 provides modest evidence that the labels were being assi
 
 
 
+\end{comment}
+
 
 \section{Bayesian $t$-tests\label{sec:ttestbf}}
 
-The second type of statistical inference problem discussed in this book is the comparison between two means, discussed in some detail in the chapter on $t$-tests (Chapter~\ref{ch:ttest}). If you can remember back that far, you'll recall that there are several versions of the $t$-test. The \rtext{BayesFactor} package contains a function called \rtext{ttestBF()} that is flexible enough to run several different versions of the $t$-test. I'll talk a little about Bayesian versions of the independent samples $t$-tests and the paired samples $t$-test in this section. 
+An important type of statistical inference problem discussed in this book is the comparison between two means, discussed in some detail in the chapter on $t$-tests (Chapter~\ref{ch:ttest}). If you can remember back that far, you'll recall that there are several versions of the $t$-test. I'll talk a little about Bayesian versions of the independent samples $t$-tests and the paired samples $t$-test in this section. 
 
 \SUBSECTION{Independent samples $t$-test}
 
-The most common type of $t$-test is the independent samples $t$-test, and it arises when you have data that look something like this:
-
-\begin{rblock1}
-> @usr{load( "harpo.Rdata" )}
-> @usr{head(harpo)}
-  grade      tutor
-1    65  Anastasia
-2    72 Bernadette
-3    66 Bernadette
-4    74  Anastasia
-5    73  Anastasia
-6    71 Bernadette
-\end{rblock1}
-
-\noindent
-In this data set, we have two groups of students, those who received lessons from Anastasia and those who took their classes with Bernadette. The question we want to answer is whether there's any difference in the grades received by these two groups of student. Back in Chapter~\ref{ch:ttest} I suggested you could analyse this kind of data using the \rtext{independentSamplesTTest()} function in the \rtext{lsr} package. For example, if you want to run a Student's $t$-test, you'd use a command like this:
-\begin{rblock1}
-> @usr{independentSamplesTTest(}
-    @usr{formula = grade ~ tutor,} 
-    @usr{data = harpo,} 
-    @usr{var.equal = TRUE} 
-@usr{ )}
-\end{rblock1}
-Like most of the functions that I wrote for this book, the \rtext{independentSamplesTTest()} is very wordy. It prints out a bunch of descriptive statistics and a reminder of what the null and alternative hypotheses are, before finally getting to the test results. I wrote it that way deliberately, in order to help make things a little clearer for people who are new to statistics. This time around, though, I'll just jump straight to the test results:
-\begin{rblock1}
-Test results: 
-   t-statistic:  2.115 
-   degrees of freedom:  31 
-   p-value:  0.043 
-\end{rblock1}
-Again, we obtain a $p$-value less than 0.05, so we reject the null hypothesis. 
-
-What does the Bayesian version of the $t$-test look like? Using the \rtext{ttestBF()} function, we can obtain a Bayesian analog of Student's independent samples $t$-test using the following command:
-\begin{rblock1}
-> @usr{ttestBF( formula = grade ~ tutor, data = harpo )}
-\end{rblock1}
-Notice that format of this command is pretty standard. As usual we have a \rtext{formula} argument in which we specify the outcome variable on the left hand side and the grouping variable on the right. The \rtext{data} argument is used to specify the data frame containing the variables. However, notice that there's no analog of the \rtext{var.equal} argument. This is because the \rtext{BayesFactor} package does not include an analog of the Welch test, only the Student test.\FOOTNOTE{Apparently this omission is deliberate. I have this vague recollection that I spoke to Jeff Rouder about this once, and his opinion was that when homogeneity of variance is violated the results of a $t$-test are uninterpretable. I can see the argument for this, but I've never really held a strong opinion myself. (Jeff, if you never said that, I'm sorry)} In any case, when you run this command you get this as the output:
-
-\begin{rblock1}
-Bayes factor analysis
---------------
-[1] Alt., r=0.707 : 1.754927 @plusorminus0%
-
-Against denominator:
-  Null, mu1-mu2 = 0 
----
-Bayes factor type: BFindepSample, JZS
-\end{rblock1}
+The most common type of $t$-test is the independent samples $t$-test, and it arises when you have data as in the \rtext{harpo.csv} data set that we used in the earlier chapter on $t$-tests (Chapter~\ref{ch:ttest}). In this data set, we have two groups of students, those who received lessons from Anastasia and those who took their classes with Bernadette. The question we want to answer is whether there's any difference in the grades received by these two groups of student. Back in Chapter~\ref{ch:ttest} I suggested you could analyse this kind of data using the Independent Samples T Test in jamovi, which gave us the results in Figure \ref{fig:bayes1}. As we obtain a $p$-value less than 0.05, so we reject the null hypothesis. 
 
 
-So what does all this mean? Just as we saw with the \rtext{contingencyTableBF()} function, the output is pretty dense. But, just like last time, there's not a lot of information here that you actually need to process. Firstly, let's examine the bottom line. The \rtext{BFindepSample} part just tells you that you ran an independent samples $t$-test, and the \rtext{JZS} part is technical information that is a little beyond the scope of this book.\FOOTNOTE{Just in case you're interested: the ``JZS'' part of the output relates to how the Bayesian test expresses the prior uncertainty about the variance $\sigma^2$, and it's short for the names of three people: ``Jeffreys Zellner Siow''. See \citeA{Rouder2009} for details.} Clearly, there's nothing to worry about in that part. In the line above, the text \rtext{Null, mu1-mu2 = 0} is just telling you that the null hypothesis is that there are no differences between means. But you already knew that. So the only part that really matters is this line here:
-\begin{rblock1}
-[1] Alt., r=0.707 : 1.754927 @plusorminus0%
-\end{rblock1}
-Ignore the \rtext{r=0.707} part: it refers to a technical detail that we won't worry about in this chapter.\FOOTNOTE{Again, in case you care \ldots the null hypothesis here specifies an effect size of 0, since the two means are identical. The alternative hypothesis states that there {\it is} an effect, but it doesn't specify exactly how big the effect will be. The $r$ value here relates to how big the effect is expected to be according to the alternative. You can type \rtextsmall{?ttestBF} to get more details.} Instead, you should focus on the part that reads \rtext{1.754927}. This is the Bayes factor: the evidence provided by these data are about 1.8:1 in favour of the alternative. 
+\begin{figure}[h!!]
+\begin{center}
+\epsfig{file = ../img/factorialanova/bayes1.pdf,clip=true, width = 14cm} 
+\caption{Independent Samples T-Test result in jamovi}
+\label{fig:bayes1}
+\HR
+\end{center}
+\end{figure}
+
+What does the Bayesian version of the $t$-test look like? We can get the Bayes factor analysis by selecting the `Bayes factor' checkbox under the `Tests' option, and accepting the suggested default value for the `Prior'. This gives the results shown in the table in Figure \ref{fig:bayes2}. What we get in this table is a Bayes factor statistic of 1.75, meaning that the evidence provided by these data are about 1.8:1 in favour of the alternative hypothesis. 
+
+\begin{figure}[h!!]
+\begin{center}
+\epsfig{file = ../img/factorialanova/bayes2.pdf,clip=true, width = 14cm} 
+\caption{Bayes factors analysis alongside Independent Samples T-Test}
+\label{fig:bayes2}
+\HR
+\end{center}
+\end{figure}
+
 
 Before moving on, it's worth highlighting the difference between the orthodox test results and the Bayesian one. According to the orthodox test, we obtained a significant result, though only barely. Nevertheless, many people would happily accept $p=.043$ as reasonably strong evidence for an effect. In contrast, notice that the Bayesian test doesn't even reach 2:1 odds in favour of an effect, and would be considered very weak evidence at best. In my experience that's a pretty typical outcome. Bayesian methods usually require more evidence before rejecting the null.
 
 \SUBSECTION{Paired samples $t$-test}
 
-Back in Section~\ref{sec:pairedsamplesttest} I discussed the \rtext{chico} data frame in which students grades were measured on two tests, and we were interested in finding out whether grades went up from test 1 to test 2. Because every student did both tests, the tool we used to analyse the data was a paired samples $t$-test. To remind you of what the data look like, here's the first few cases:
-\begin{rblock1}
-> @usr{load(chico)}
-> @usr{head(chico)}
-        id grade_test1 grade_test2
-1 student1        42.9        44.6
-2 student2        51.8        54.0
-3 student3        71.7        72.3
-4 student4        51.6        53.4
-5 student5        63.5        63.8
-6 student6        58.0        59.3
-\end{rblock1}
-We originally analysed the data using the \rtext{pairedSamplesTTest()} function in the \rtext{lsr} package, but this time we'll use the \rtext{ttestBF()} function from the \rtext{BayesFactor} package to do the same thing. The easiest way to do it with this data set is to use the \rtext{x} argument to specify one variable and the \rtext{y} argument to specify the other. All we need to do then is specify \rtext{paired=TRUE} to tell \R\ that this is a paired samples test. So here's our command:
-\begin{rblock1}
-> @usr{ttestBF(}
-+ @usr{   x = chico$grade_test1,}
-+ @usr{   y = chico$grade_test2,}
-+ @usr{   paired = TRUE}
-+ @usr{)}
-\end{rblock1}
-and here's the output:
-\begin{rblock1}
-Bayes factor analysis
---------------
-[1] Alt., r=0.707 : 5992.05 @plusorminus0%
+Back in Section~\ref{sec:pairedsamplesttest} I discussed the \rtext{chico.csv} data set in which students grades were measured on two tests, and we were interested in finding out whether grades went up from test 1 to test 2. Because every student did both tests, the tool we used to analyse the data was a paired samples $t$-test. Figure \ref{fig:bayes3} shows the jamovi results table for the conventional paired $t$-test alongside the Bayes factor analysis. At this point, I hope you can read this output without any difficulty. The data provide evidence of about 6000:1 in favour of the alternative. We could probably reject the null with some confidence!
 
-Against denominator:
-  Null, mu = 0 
----
-Bayes factor type: BFoneSample, JZS
-\end{rblock1}
-At this point, I hope you can read this output without any difficulty. The data provide evidence of about 6000:1 in favour of the alternative. We could probably reject the null with some confidence!
 
+\begin{figure}[h!!]
+\begin{center}
+\epsfig{file = ../img/factorialanova/bayes3.pdf,clip=true, width = 14cm} 
+\caption{Paired samples T-Test and Bayes Factor result in jamovi}
+\label{fig:bayes3}
+\HR
+\end{center}
+\end{figure}
+
+
+
+\begin{comment}
 
 
 \section{Bayesian regression~\label{sec:bayesregression}}
@@ -1021,13 +973,15 @@ A Bayesian Type II ANOVA found evidence for main effects of drug (Bayes factor: 
 \end{quote}
 
 
+
+\end{comment}
+
+
 \section{Summary}
 
 The first half of this chapter was focused primarily on the theoretical underpinnings of Bayesian statistics. I introduced the mathematics for how Bayesian inference works (Section~\ref{sec:basicbayes}), and gave a very basic overview of how Bayesian hypothesis testing is typically done (Section~\ref{sec:bayesianhypothesistests}). Finally, I devoted some space to talking about why I think Bayesian methods are worth using (Section \ref{sec:whybayes}).
 
-The second half of the chapter was a lot more practical, and focused on tools provided by the \rtext{BayesFactor} package. Specifically, I talked about using the \rtext{contingencyTableBF()} function to do Bayesian analogs of chi-square tests (Section~\ref{sec:bayescontingency}), the \rtext{ttestBF()} function to do Bayesian $t$-tests, (Section~\ref{sec:ttestbf}), the \rtext{regressionBF()} function to do Bayesian regressions, and finally the \rtext{anovaBF()} function for Bayesian ANOVA. 
-
-If you're interested in learning more about the Bayesian approach, there are many good books you could look into. John Kruschke's book {\it Doing Bayesian Data Analysis} is a pretty good place to start \cite{Kruschke2011}, and is a nice mix of theory and practice. His approach is a little different to the ``Bayes factor'' approach that I've discussed here, so you won't be covering the same ground. If you're a cognitive psychologist, you might want to check out Michael Lee and E.J. Wagenmakers' book {\it Bayesian Cognitive Modeling} \cite{Lee2014}. I picked these two because I think they're especially useful for people in my discipline, but there's a lot of good books out there, so look around!
+Then I gave a prctical example, a Bayesian $t$-tests, (Section~\ref{sec:ttestbf}). If you're interested in learning more about the Bayesian approach, there are many good books you could look into. John Kruschke's book {\it Doing Bayesian Data Analysis} is a pretty good place to start \cite{Kruschke2011}, and is a nice mix of theory and practice. His approach is a little different to the ``Bayes factor'' approach that I've discussed here, so you won't be covering the same ground. If you're a cognitive psychologist, you might want to check out Michael Lee and E.J. Wagenmakers' book {\it Bayesian Cognitive Modeling} \cite{Lee2014}. I picked these two because I think they're especially useful for people in my discipline, but there's a lot of good books out there, so look around!
 
 
 
