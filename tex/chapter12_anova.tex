@@ -260,7 +260,7 @@ $$
 \end{array}
 $$
 \noindent
-Of course, if we actually wanted to get the {\it right} answer, we'd need to do this for all 18 observations in the data set, not just the first five. We could continue with the pencil and paper calculations if we wanted to, but it's pretty tedious. Alternatively, it's not too hard to get jamovi to do it (apart from the group means which you probably have to type in) but in fact this sort of thing is often better done in a dedicated spreadsheet programme such as OpenOffice or Excel, or in \R. However you do it, you should end up with a within-group sum of squares value of 1.39. 
+Of course, if we actually wanted to get the {\it right} answer, we'd need to do this for all 18 observations in the data set, not just the first five. We could continue with the pencil and paper calculations if we wanted to, but it's pretty tedious. Alternatively, it's not too hard to get jamovi to do it (apart from the group means which you probably have to type in) but in fact this sort of thing is often better done in a dedicated spreadsheet programme such as OpenOffice or Excel, or in \R. Try and do it yourself, probably in a spreadsheet programme. The one that I did, in Excel, is in the file \rtext{clinicaltrial\_anova.xls}. However you do it, you should end up with a within-group sum of squares value of 1.39. 
 
 Okay. Now that we've calculated the within groups variation, $\mbox{SS}_w$, it's time to turn our attention to the between-group sum of squares, $\mbox{SS}_b$. The calculations for this case are very similar. The main difference is that, instead of calculating the differences between an observation $Y_{ik}$ and a group mean $\bar{Y}_k$ for all of the observations, we calculate the differences between the group means $\bar{Y}_k$ and the grand mean $\bar{Y}$ (in this case 0.88) for all of the groups. 
 
@@ -303,9 +303,7 @@ $$
 &=& 3.45
 \end{array}
 $$
-As you can see, the between group calculations are a lot shorter, so you probably wouldn't usually want to bother using jamovi or another programme as your calculator. 
-
-Now that we've calculated our sums of squares values, $\mbox{SS}_b$ and $\mbox{SS}_w$, the rest of the ANOVA is pretty painless. The next step is to calculate the degrees of freedom. Since we have $G = 3$ groups and $N = 18$ observations in total, our degrees of freedom can be calculated by simple subtraction:
+As you can see, the between group calculations are a lot shorter. Now that we've calculated our sums of squares values, $\mbox{SS}_b$ and $\mbox{SS}_w$, the rest of the ANOVA is pretty painless. The next step is to calculate the degrees of freedom. Since we have $G = 3$ groups and $N = 18$ observations in total, our degrees of freedom can be calculated by simple subtraction:
 $$
 \begin{array}{lclcl}
 \mbox{df}_b &=& G - 1 &=& 2 \\
