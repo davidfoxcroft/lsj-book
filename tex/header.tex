@@ -1,7 +1,8 @@
 % !TEX root = ../pdf/lsj.tex
 % [There are multiple lsj.tex files, but the one in ../pdf is the usual one]
 
-\documentclass[a4paper,twoside,10pt,openright]{book}
+\documentclass[a4paper,twoside,11pt,openright]{book}
+
 
 % packages...
 \usepackage{epsfig}
@@ -20,6 +21,17 @@
 \usepackage{multirow} 
 \usepackage{morefloats}
 \usepackage{dialogue}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+ 
+\usepackage[
+backend=biber,
+style=authoryear
+]{biblatex}
+  
+
+
+
 
 % indexing package
 %\usepackage{makeidx}
@@ -45,7 +57,7 @@
 % ... cengage: 276mm x 210mm
 % ... need extra: 1cm either side from the top and bottom?
 
-\usepackage[left=2.5cm, right=2.5cm,top=4cm, bottom=4cm]{geometry}
+\usepackage[left=2.5cm, right=2.5cm, top=4cm, bottom=4cm]{geometry}
 %\usepackage[left=2.5cm, right=2.5cm,top=3cm, bottom=3cm]{geometry}
 
 %\usepackage{fancybox}
@@ -61,7 +73,7 @@
 
 
 
-\usepackage{mathabx} % provides the \bigoasterisk symbol
+\usepackage{mathabx} % provides the \big asterisk symbol
 
 
 % -- comment out for the HARDCOPY version ---
@@ -78,8 +90,6 @@
 %% http://health.webdev.adelaide.edu.au/psychology/ccs/docs/lsr/lsr.pdf#nameddest=chapter.17
 
 
-% referencing
-\usepackage{apacite}
 
 %%%%%%%%%%%%%%%% define commands etc %%%%%%%%%%%%
 
@@ -92,6 +102,12 @@
 
 \usepackage{manfnt}
 %\newcommand{\advanced}{\protect\raisebox{9pt}{\small\dbend}}
+
+
+% referencing
+%\usepackage{apacite}
+
+
 
 % handy shortcuts
 \newcommand{\given}{\,|\,} 
@@ -313,3 +329,6 @@
 
 % suppress footnote breakgin
 \interfootnotelinepenalty=10000
+
+
+\addbibresource{../tex/refs.bib} %Imports bibliography file

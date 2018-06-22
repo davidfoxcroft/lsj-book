@@ -232,7 +232,7 @@ And not surprisingly, in Figure \ref{fig:aflsmall_margins_iqr} the 50th percenti
 
 The two measures we've looked at so far, the range and the interquartile range, both rely on the idea that we can measure the spread of the data by looking at the percentiles of the data. However, this isn't the only way to think about the problem. A different approach is to select a meaningful reference point (usually the mean or the median) and then report the ``typical'' deviations from that reference point. What do we mean by ``typical'' deviation? Usually, the mean or median value of these deviations! In practice, this leads to two different measures, the ``mean absolute deviation (from the mean)'' and the ``median absolute deviation (from the median)''. From what I've read, the measure based on the median seems to be used in statistics, and does seem to be the better of the two, but to be honest I don't think I've seen it used much in psychology. The measure based on the mean does occasionally show up in psychology though. In this section I'll talk about the first one, and I'll come back to talk about the second one later.
 
-Since the previous paragraph might sound a little abstract, let's go through the \keyterm{mean absolute deviation} from the mean a little more slowly. One useful thing about this measure is that the name actually tells you exactly how to calculate it. Let's think about our AFL winning margins data, and once again we'll start by pretending that there's only 5 games in total, with winning margins of 56, 31, 56, 8 and 32. Since our calculations rely on an examination of the deviation from some reference point (in this case the mean), the first thing we need to calculate is the mean, $\bar{X}$. For these five observations, our mean is $\bar{X} = 36.6$. The next step is to convert each of our observations $X_i$ into a deviation score. We do this by calculating the difference between the observation $X_i$ and the mean $\bar{X}$. That is, the deviation score is defined to be $X_i - \bar{X}$. For the first observation in our sample, this is equal to $56 - 36.6 = 19.4$. Okay, that's simple enough. The next step in the process is to convert these deviations to absolute deviations, and we do this by converting any negative values to positive ones. Mathematically, we would denote the absolute value of $-3$ as $|-3|$, and so we say that $|-3| = 3$. We use the absolute value here because we don't really care whether the value is higher than the mean or lower than the mean, we're just interested in how {\it close} it is to the mean. To help make this process as obvious as possible, the table below shows these calculations for all five observations:\\
+Since the previous paragraph might sound a little abstract, let's go through the \keyterm{mean absolute deviation} from the mean a little more slowly. One useful thing about this measure is that the name actually tells you exactly how to calculate it. Let's think about our AFL winning margins data, and once again we'll start by pretending that there's only 5 games in total, with winning margins of 56, 31, 56, 8 and 32. Since our calculations rely on an examination of the deviation from some reference point (in this case the mean), the first thing we need to calculate is the mean, $\bar{X}$. For these five observations, our mean is $\bar{X} = 36.6$. The next step is to convert each of our observations $X_i$ into a deviation score. We do this by calculating the difference between the observation $X_i$ and the mean $\bar{X}$. That is, the deviation score is defined to be $X_i - \bar{X}$. For the first observation in our sample, this is equal to $56 - 36.6 = 19.4$. Okay, that's simple enough. The next step in the process is to convert these deviations to absolute deviations, and we do this by converting any negative values to positive ones. Mathematically, we would denote the absolute value of $-3$ as $|-3|$, and so we say that $|-3| = 3$. We use the absolute value here because we don't really care whether the value is higher than the mean or lower than the mean, we're just interested in how {\it close} it is to the mean. To help make this process as obvious as possible, the table below shows these calculations for all five observations:
 
 \begin{center}
 \begin{tabular}{ccccc} 
@@ -247,13 +247,13 @@ notation: & $i$ & $X_i$ & $X_i - \bar{X}$ &  $|X_i - \bar{X}|$ \\ \hline
 \end{center}
 
 \noindent
-Now that we have calculated the absolute deviation score for every observation in the data set, all that we have to do to calculate the mean of these scores. Let's do that:\\
+Now that we have calculated the absolute deviation score for every observation in the data set, all that we have to do to calculate the mean of these scores. Let's do that:
 $$
 \frac{19.4 + 5.6 + 19.4 + 28.6 + 4.6}{5} = 15.52
 $$
 And we're done. The mean absolute deviation for these five scores is 15.52. 
 
-However, while our calculations for this little example are at an end, we do have a couple of things left to talk about. Firstly, we should really try to write down a proper mathematical formula. But in order do to this I need some mathematical notation to refer to the mean absolute deviation. Irritatingly, ``mean absolute deviation'' and ``median absolute deviation'' have the same acronym (MAD), which leads to a certain amount of ambiguity, so I'd better come up with something different for the mean absolute deviation. Sigh. What I'll do is use AAD instead, short for {\it average} absolute deviation. Now that we have some unambiguous notation, here's the formula that describes what we just calculated:\\
+However, while our calculations for this little example are at an end, we do have a couple of things left to talk about. Firstly, we should really try to write down a proper mathematical formula. But in order do to this I need some mathematical notation to refer to the mean absolute deviation. Irritatingly, ``mean absolute deviation'' and ``median absolute deviation'' have the same acronym (MAD), which leads to a certain amount of ambiguity, so I'd better come up with something different for the mean absolute deviation. Sigh. What I'll do is use AAD instead, short for {\it average} absolute deviation. Now that we have some unambiguous notation, here's the formula that describes what we just calculated:
 $$
 \mbox{\textsc{aad}}(X) = \frac{1}{N} \sum_{i = 1}^N |X_i - \bar{X}|
 $$
@@ -268,7 +268,7 @@ $$
 %\mbox{Var}(X) = \frac{\sum_{i=1}^N \left( X_i - \bar{X} \right)^2}{N}
 As you can see, it's basically the same formula that we used to calculate the average absolute deviation, except that instead of using ``absolute deviations'' we use ``squared deviations''. It is for this reason that the variance is sometimes referred to as the ``mean square deviation''.
 
-Now that we've got the basic idea, let's have a look at a concrete example. Once again, let's use the first five AFL games as our data. If we follow the same approach that we took last time, we end up with the following table:\\
+Now that we've got the basic idea, let's have a look at a concrete example. Once again, let's use the first five AFL games as our data. If we follow the same approach that we took last time, we end up with the following table:
 \begin{center}
 \begin{tabular}{ccccc} 
 English: & which game & value & deviation from mean & squared deviation \\
@@ -292,7 +292,7 @@ That last column contains all of our squared deviations, so all we have to do is
 \end{center}
 \end{figure}
 
-As it happens, the answer is no.\FOOTNOTE{With the possible exception of the third question.} It's not a typo, and jamovi is not making a mistake. In fact, it's very simple to explain what jamovi is doing here, but slightly trickier to explain {\it why} jamovi is doing it. So let's start with the ``what''. What jamovi is doing is evaluating a slightly different formula to the one I showed you above. Instead of averaging the squared deviations, which requires you to divide by the number of data points $N$, jamovi has chosen to divide by $N-1$. In other words, the formula that jamovi is using is this one  
+As it happens, the answer is no.\FOOTNOTE{With the possible exception of the third question.} It's not a typo, and jamovi is not making a mistake. In fact, it's very simple to explain what jamovi is doing here, but slightly trickier to explain {\it why} jamovi is doing it. So let's start with the ``what''. What jamovi is doing is evaluating a slightly different formula to the one I showed you above. Instead of averaging the squared deviations, which requires you to divide by the number of data points $N$, jamovi has chosen to divide by $N-1$. In other words, the formula that jamovi is using is this one:
 $$
 \frac{1}{N-1} \sum_{i=1}^N \left( X_i - \bar{X} \right)^2
 $$
@@ -471,9 +471,9 @@ Next, I'll take a look at some basic descriptive statistics and also, to give a 
 \begin{figure}[h]
 \begin{center}
 \begin{tabular}{ccc}
-\hspace*{-5mm}\epsfig{file = ../img/descriptives/grumpHist1.eps, clip=true, width=5.2cm} &
-\epsfig{file = ../img/descriptives/grumpHist2.eps, clip=true, width=5.2cm} &
-\epsfig{file = ../img/descriptives/grumpHist3.eps, clip=true, width=5.2cm}
+\hspace*{-5mm}\epsfig{file = ../img/descriptives/grumpHist1.eps, clip=true, width=5.1cm} &
+\epsfig{file = ../img/descriptives/grumpHist2.eps, clip=true, width=5.1cm} &
+\epsfig{file = ../img/descriptives/grumpHist3.eps, clip=true, width=5.1cm}
 \\ (a) & (b) & (c)
 \end{tabular}
 \caption{Histograms for the three interesting variables in the \rtext{parenthood} data set.}
