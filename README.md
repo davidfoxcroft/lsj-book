@@ -1,4 +1,4 @@
-# Learning statistics with jamovi
+# learning statistics with jamovi
 
 Contains LaTeX source for:
 
