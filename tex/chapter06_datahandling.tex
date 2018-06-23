@@ -19,15 +19,9 @@ This is a somewhat strange chapter, even by my standards. My goal in this chapte
 \item Section~\ref{sec:freqtables}. Tabulating data.
 \item Section~\ref{sec:transform}. Transforming or recoding a variable.
 \item Section~\ref{sec:mathfunc}. Some useful mathematical functions.
-\item Section~\ref{sec:subset}. Extracting a subset of a vector.
-\item Section~\ref{sec:subsetdataframe}. Extracting a subset of a data frame.
-\item Section~\ref{sec:sort}. Sorting, flipping or merging data sets.
-\item Section~\ref{sec:reshape}. Reshaping a data frame.
-\item Section~\ref{sec:textprocessing}. Manipulating text.
+\item Section~\ref{sec:subset}. Extracting a subset of a data set.
 \item Section~\ref{sec:importing}. Opening data from different file types.
 \item Section~\ref{sec:coercion}. Coercing data from one type to another.
-\item Section~\ref{sec:datastructures}. Other important data types.
-\item Section~\ref{sec:miscdatahandling}. Miscellaneous topics.
 \end{itemize}
 As you can see, the list of topics that the chapter covers is pretty broad, and there's a {\it lot} of content there. Even though this is one of the longest and hardest chapters in the book, I'm really only scratching the surface of several fairly different and important topics. My advice, as usual, is to read through the chapter once and try to follow as much of it as you can. Don't worry too much if you can't grasp it all at once, especially the later sections. The rest of the book is only lightly reliant on this chapter, so you can get away with just understanding the basics. However, what you'll probably find is that later on you'll need to flick back to this chapter in order to understand some of the concepts that I refer to here.
 
@@ -52,7 +46,7 @@ Let's start with a simple example. As the father of a small child, I naturally s
 and looking at this it becomes very clear what happened to my sanity! With these as my data, one task I might find myself needing to do is construct a frequency count of the number of words each character speaks during the show. The jamovi `Descriptives' screen has a check box called `Frequency tables' which does just this, see Figure \ref{fig:freqtable}. \\
 
 
-\begin{figure}[h!!]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file = ../img/mechanics/freqtable.png, clip=true,width =12cm} 
 \caption{Frequency table for the \rtext{speaker} variable}
@@ -66,7 +60,7 @@ The output here tells us on the first line that what we're looking at is a tabul
 In jamovi, the `Frequency tables' check box will only produce a table for single variables. For a table of two variables, for example combining \rtext{speaker} and \rtext{utterance}, so that we can see how many times each speaker said a particular utterance, we need a cross-tabulation or contingency table. In jamovi you can do this by selecting the `Frequencies' - `Contingency Tables' - `Independent Samples' analysis, and moving the \rtext{speaker} variable into the `Rows' box, and the \rtext{utterances} variable into the `Columns' box. You then should have a contingency table like the one shown in Figure \ref{fig:contingencytable}. \\
 
 
-\begin{figure}[h!!]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file = ../img/mechanics/contingencytable.png, clip=true,width =12cm} 
 \caption{Contingency table for the \rtext{speaker} and \rtext{utterances} variables}
@@ -82,7 +76,7 @@ Don't worry about the ``$\chi^2$ Tests'' table that is produced, we are going to
 
 The contingency table shown in Figure \ref{fig:contingencytable} shows a table of raw frequencies: that is, a count of the total number of cases for different combinations of levels of the specified variables. However, often you want your data to be organised in terms of percentages as well as counts. You can find the check boxes for different percentages under the `Cells' options in the `Contingency Tables' window. First, click on the `Row' check box and the Contingency Table in the output window will change to the one in Figure \ref{fig:contingencyrow}. 
 
-\begin{figure}[h!!]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file = ../img/mechanics/contingencyrow.png, clip=true,width =12cm} 
 \caption{Contingency table for the \rtext{speaker} and \rtext{utterances} variables, with row percentages}
@@ -93,7 +87,7 @@ The contingency table shown in Figure \ref{fig:contingencytable} shows a table o
 
 What we're looking at here is the percentage of utterances made by each character. In other words, 50\% of Makka-Pakka's utterances are ``pip'', and the other 50\% are ``onk''. Let's contrast this with the table we get when we calculate column percentages (uncheck `Row' and check `Column' in the Cells options window), see Figure \ref{fig:contingencycol}. In this version, what we're seeing is the percentage of characters associated with each utterance. For instance, whenever the utterance ``ee'' is made (in this data set), 100\% of the time it's a Tombliboo saying it. 
 
-\begin{figure}[h!!]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file = ../img/mechanics/contingencycol.png, clip=true,width =12cm} 
 \caption{Contingency table for the \rtext{speaker} and \rtext{utterances} variables, with column percentages}
@@ -213,10 +207,9 @@ Of course, in our $2+2 = 5$ example, we didn't really need to use ``not'' \rtext
 
 \SUBSECTION{Applying logical operation to text~\label{sec:logictext}}
 
-I also want to briefly point out that you can apply these logical operators to text as well as to logical data. It's just that we need to be a bit more careful in understanding how jamovi interprets the different operations. In this section I'll talk about how the equal to operator \rtext{==} applies to text, since this is the most important one. Obviously, the not equal to operator \rtext{!=} gives the exact opposite answers to \rtext{==} so I'm implicitly talking about that one too, but I won't give specific commands showing the use of \rtext{!=}. As for the other operators, I'll defer a more detailed discussion of this topic to Section~\ref{sec:logictext2}. 
+I also want to briefly point out that you can apply these logical operators to text as well as to logical data. It's just that we need to be a bit more careful in understanding how jamovi interprets the different operations. In this section I'll talk about how the equal to operator \rtext{==} applies to text, since this is the most important one. Obviously, the not equal to operator \rtext{!=} gives the exact opposite answers to \rtext{==} so I'm implicitly talking about that one too, but I won't give specific commands showing the use of \rtext{!=}. 
 
-Okay, let's see how it works. In one sense, it's very simple. For instance, I can ask jamovi if the word \rtext{"cat"} is the same as the word 
-\rtext{"dog"}, like this:
+Okay, let's see how it works. In one sense, it's very simple. For instance, I can ask jamovi if the word \rtext{"cat"} is the same as the word \rtext{"dog"}, like this:
 
 \begin{rblock1}
 "cat" == "dog"
@@ -287,7 +280,7 @@ Now let's load and look at the data. The data file \filename{likert.omv} contain
 
 \rtext{likert.raw - 4} \\
 
-\begin{figure}[h!!]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file = ../img/mechanics/likertraw.png, clip=true,width =12cm} 
 \caption{Creating a new computed variable in jamovi}
@@ -298,7 +291,7 @@ Now let's load and look at the data. The data file \filename{likert.omv} contain
 
 One reason why it might be useful to have the data in this format is that there are a lot of situations where you might prefer to analyse the {\it strength} of the opinion separately from the {\it direction} of the opinion. We can do two different transformations on this \rtext{likert.centered} variable in order to distinguish between these two different concepts. Firstly, to compute an \rtext{opinion.strength} variable, we want to take the absolute value of the centered data (using the `ABS' function). In jamovi, create another new variable using the `Compute' button. Name the variable \rtext{opinion.strength} and this time click on the {\it f\textsubscript{x}} button next to the function box. This shows the different `Functions' and `Variables' that you can add to the function box, so double click on `ABS' and then double click on ``likert.centered' and you will see that the function box is populated with ABS(likert.centered) and a new variable has been created in the spreadsheet view, as in Figure \ref{fig:opinionstrength}
 
-\begin{figure}[h!!]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file = ../img/mechanics/opinionstrength.png, clip=true,width =12cm} 
 \caption{Using the {\it f\textsubscript{x}} button to select functions and variables}
@@ -345,7 +338,7 @@ Note that there are three left parentheses used during the nesting, so the whole
 
 
 
-\begin{figure}[h!!]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file = ../img/mechanics/agecats.png, clip=true,width =12cm} 
 \caption{Collapsing a variable into a smaller number of discrete levels using the jamovi `IF' function}
@@ -429,7 +422,7 @@ speaker == 'makka-pakka'
 
 When you have done this, you will see that a new column has been added to the spreadsheet window (see Figure \ref{fig:subset1}), labelled `Filter 1', with the cases where \rtext{speaker} \underline{is not} `makka-pakka' greyed-out (ie filtered out) and, conversely, the cases where \rtext{speaker} \underline{is} `makka-pakka'have a green check mark, indicating they are filtered in. You can test this by running `Exploration' - `Descriptives' - `Frequency tables' for the \rtext{speaker} variable and seeing what that shows - go on, try it!
 
-\begin{figure}[h!!]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file = ../img/mechanics/subset1.png, clip=true,width =12cm} 
 \caption{Creating a subset of the \rtext{nightgarden} data using the jamovi `Filters' option}
@@ -621,7 +614,7 @@ and this produces a wide form data set containing the same variables as the orig
 
 \SUBSECTION{What other options are there?}
 
-The advantage to the approach described in the previous section is that it solves a quite specific problem (but a commonly encountered one) with a minimum of fuss. The disadvantage is that the tools are quite limited in scope. They allow you to switch your data back and forth between two different formats that are very common in everyday data analysis. However, there a number of other tools that you can use if need be. Just within the core packages distributed with \R\ there is the \rtext{reshape()} function, as well as  the \rtext{stack()} and \rtext{unstack()} functions, all of which can be useful under certain circumstances. And there are of course thousands of packages on CRAN that you can use to help you with different tasks. One popular package for this purpose is the \rtext{reshape} package, written by Hadley Wickham \cite<see>[for details]{Wickham2007}. There are two key functions in this package, called \rtext{melt()} and \rtext{cast()} that are pretty useful for solving a lot of reshaping problems. In a future version of this book I intend to discuss \rtext{melt()} and \rtext{cast()} in a fair amount of detail.
+The advantage to the approach described in the previous section is that it solves a quite specific problem (but a commonly encountered one) with a minimum of fuss. The disadvantage is that the tools are quite limited in scope. They allow you to switch your data back and forth between two different formats that are very common in everyday data analysis. However, there a number of other tools that you can use if need be. Just within the core packages distributed with \R\ there is the \rtext{reshape()} function, as well as  the \rtext{stack()} and \rtext{unstack()} functions, all of which can be useful under certain circumstances. And there are of course thousands of packages on CRAN that you can use to help you with different tasks. One popular package for this purpose is the \rtext{reshape} package, written by Hadley Wickham \parencite<see>[for details]{Wickham2007}. There are two key functions in this package, called \rtext{melt()} and \rtext{cast()} that are pretty useful for solving a lot of reshaping problems. In a future version of this book I intend to discuss \rtext{melt()} and \rtext{cast()} in a fair amount of detail.
 
 
 \end{comment}
@@ -659,7 +652,7 @@ It's easy to open csv files in jamovi. From the top left menu (the button with t
 
 
 
-Click on that, and it will give you a couple of options: select the ``From Text File...'' option, and it will open up a very familiar dialog box asking you to select a file: if you're on a Mac, it'll look like the usual Finder window that you use to choose a file; on Windows it looks like an Explorer window. An example of what it looks like on a Mac is shown in Figure~\ref{fig:fileopen}. I'm assuming that you're familiar with your own computer, so you should have no problem finding the CSV file that you want to import! Find the one you want, then click on the ``Open'' button. When you do this, you'll see a window that looks like the one in Figure~\ref{fig:import}.
+Click on that, and it will give you a couple of options: select the ``From Text File...'' option, and it will open up a very familiar dialog box asking you to select a file: if you're on a Mac, it'll look like the usual Finder window that you use to choose a file; on Windows it looks like an Explorer window. An example of what it looks like on a Mac is shown in Figure~\ref{fig:fileopen}. I'm assuming that you're familiar with your own computer, so you should have no problem finding the CSV file that you want to import! Find the one you want, then click on the ``Open'' button. When you do this, you'll see a window that looks like the one in Figure~\ref{fig:fileopen}.
 
 \begin{figure}[t]
 \begin{center}
@@ -724,12 +717,9 @@ Obviously, there's no real coherence to this chapter. It's just a grab bag of to
 \item Section~\ref{sec:freqtables}. Tabulating data.
 \item Section~\ref{sec:transform}. Transforming or recoding a variable.
 \item Section~\ref{sec:mathfunc}. Some useful mathematical functions.
-\item Section~\ref{sec:subset}. Extracting a subset of a vector.
-\item Section~\ref{sec:textprocessing}. Manipulating text.
+\item Section~\ref{sec:subset}. Extracting a subset of a data set.
 \item Section~\ref{sec:importing}. Opening data from different file types.
 \item Section~\ref{sec:coercion}. Coercing data from one type to another.
-\item Section~\ref{sec:datastructures}. Other important data types.
-\item Section~\ref{sec:miscdatahandling}. Miscellaneous topics.
 \end{itemize}
 
 

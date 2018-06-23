@@ -18,7 +18,7 @@ Suppose you've become involved in a clinical trial in which you are testing a ne
 For the purposes of this chapter, what we're really interested in is the effect of \rtext{drug} on \rtext{mood.gain}. The first thing to do is calculate some descriptive statistics and draw some graphs. In Chapter~\ref{ch:descriptives} we showed you how to do this, and some of the descriptive statistics we can calculate in jamovi are shown in Figure \ref{fig:anova1}.
 
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file = ../img/anova/anova1.png, clip=true,width = 12cm}
 \caption{Descriptives for mood gain, and box plots by drug administered}
@@ -186,7 +186,7 @@ Okay, now that we've described the statistical models underpinning $H_0$ and $H_
 $$
 F = \frac{\hat{Q} + \hat\sigma^2}{\hat\sigma^2}
 $$
-where the true value $Q=0$ if the null hypothesis is true, and $Q > 0$ if the alternative hypothesis is true \cite<e.g.>[ch.\ 10]{Hays1994}. Therefore, at a bare minimum {\it the $F$ value must be larger than 1} to have any chance of rejecting the null hypothesis. Note that this {\it doesn't} mean that it's impossible to get an $F$-value less than 1. What it means is that, if the null hypothesis is true the sampling distribution of the $F$ ratio has a mean of 1,\FOOTNOTE{Or, if we want to be sticklers for accuracy, $1 + \frac{2}{df_2 - 2}$.} and so we need to see $F$-values larger than 1 in order to safely reject the null.
+where the true value $Q=0$ if the null hypothesis is true, and $Q > 0$ if the alternative hypothesis is true \parencite<e.g.>[ch.\ 10]{Hays1994}. Therefore, at a bare minimum {\it the $F$ value must be larger than 1} to have any chance of rejecting the null hypothesis. Note that this {\it doesn't} mean that it's impossible to get an $F$-value less than 1. What it means is that, if the null hypothesis is true the sampling distribution of the $F$ ratio has a mean of 1,\FOOTNOTE{Or, if we want to be sticklers for accuracy, $1 + \frac{2}{df_2 - 2}$.} and so we need to see $F$-values larger than 1 in order to safely reject the null.
 
 To be a bit more precise about the sampling distribution, notice that if the null hypothesis is true, both MS$_b$ and MS$_w$ are estimators of the variance of the residuals $\epsilon_{ik}$. If those residuals are normally distributed, then you might suspect that the estimate of the variance of $\epsilon_{ik}$ is chi-square distributed... because (as discussed in Section~\ref{sec:otherdists}) that's what a chi-square distribution {\it is}: it's what you get when you square a bunch of normally-distributed things and add them up. And since the $F$ distribution is (again, by definition) what you get when you take the ratio between two things that are $\chi^2$ distributed... we have our sampling distribution. Obviously, I'm glossing over a whole lot of stuff when I say this, but in broad terms, this really is where our sampling distribution comes from. %\TODO {\bf [CITE]}
 
@@ -352,7 +352,7 @@ I'm pretty sure I know what you're thinking after reading the last section, {\it
 
 To make life easier for you, jamovi can do ANOVA..hurrah! Go to the `ANOVA' - `ANOVA' analysis, and move the \rtext{mood.gain} variable across so it is in the `Dependent Variable' box, and then move the \rtext{drug} variable across so it is in the `Fixed Factors' box. This should give the results as shown in Figure \ref{fig:anova2} (note I have also checked the $\eta^2$ checkbox\FOOTNOTE{pronounced ``eta'' squared)} under the `Effect Size' option, and this is also shown on the results table - we will come back to effect sizes a bit later.
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file = ../img/anova/anova2.png, clip=true,width = 12cm}
 \caption{jamovi results table for ANOVA of mood gain by drug administered}
@@ -436,7 +436,7 @@ By rejecting the null hypothesis, we've decided that we {\it don't} believe that
 
 How might we go about solving our problem? Given that we've got three separate pairs of means (placebo versus Anxifree, placebo versus Joyzepam, and Anxifree versus Joyzepam) to compare, what we could do is run three separate $t$-tests and see what happens. This is easy to do in jamovi: go to the ANOVA `Post Hoc Tests' options, move the `drug' variable across into the active box on the right, and then clinck on the `No correction' checkbox. This will produce a neat table showing all the pairwise $t$-test comparisons  amongst the three levels of the \rtext{drug} variable, as in Figure \ref{fig:anova3}.
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file = ../img/anova/anova3.png, clip=true,width = 12cm}
 \caption{Uncorrected pairwise $t$-tests as post hoc comparisons in jamovi}
@@ -453,23 +453,23 @@ In the previous section I hinted that there's a problem with just running lots a
 
 It's okay to run post hoc analyses, but a lot of care is required. For instance, the analysis that I ran in the previous section is actually pretty dangerous: each {\it individual} $t$-test is designed to have a 5\% Type I error rate (i.e., $\alpha = .05$), and I ran three of these tests. Imagine what would have happened if my ANOVA involved 10 different groups, and I had decided to run 45 ``post hoc'' $t$-tests to try to find out which ones were significantly different from each other, you'd expect 2 or 3 of them to come up significant {\it by chance alone}. As we saw in Chapter~\ref{ch:hypothesistesting}, the central organising principle behind null hypothesis testing is that we seek to control our Type I error rate, but now that I'm running lots of $t$-tests at once, in order to determine the source of my ANOVA results, my actual Type I error rate across this whole {\it family} of tests has gotten completely out of control. 
 
-The usual solution to this problem is to introduce an adjustment to the $p$-value, which aims to control the total error rate across the family of tests \cite<see>{Shaffer1995}. An adjustment of this form, which is usually (but not always) applied because one is doing post hoc analysis, is often referred to as a \keyterm{correction for multiple comparisons}, though it is sometimes referred to as ``simultaneous inference''. In any case, there are quite a few different ways of doing this adjustment. I'll discuss a few of them in this section and in Section~\ref{sec:posthoc2}, but you should be aware that there are many other methods out there \cite<see, e.g.,>{Hsu1996}. 
+The usual solution to this problem is to introduce an adjustment to the $p$-value, which aims to control the total error rate across the family of tests \parencite<see>{Shaffer1995}. An adjustment of this form, which is usually (but not always) applied because one is doing post hoc analysis, is often referred to as a \keyterm{correction for multiple comparisons}, though it is sometimes referred to as ``simultaneous inference''. In any case, there are quite a few different ways of doing this adjustment. I'll discuss a few of them in this section and in Section~\ref{sec:posthoc2}, but you should be aware that there are many other methods out there \parencite<see, e.g.,>{Hsu1996}. 
 
 \SUBSECTION{Bonferroni corrections}
 
-The simplest of these adjustments is called the \keyterm{Bonferroni correction} \cite{Dunn1961}, and it's very very simple indeed. Suppose that my post hoc analysis consists of $m$ separate tests, and I want to ensure that the total probability of making {\it any} Type I errors at all is at most $\alpha$.\FOOTNOTE{It's worth noting in passing that not all adjustment methods try to do this. What I've described here is an approach for controlling ``family wise Type I error rate''. However, there are other post hoc tests seek to control the ``false discovery rate'', which is a somewhat different thing.} If so, then the Bonferroni correction just says ``multiply all your raw $p$-values by $m$''. If we let $p$ denote the original $p$-value, and let $p^\prime_j$ be the corrected value, then the Bonferroni correction tells that:
+The simplest of these adjustments is called the \keyterm{Bonferroni correction} \parencite{Dunn1961}, and it's very very simple indeed. Suppose that my post hoc analysis consists of $m$ separate tests, and I want to ensure that the total probability of making {\it any} Type I errors at all is at most $\alpha$.\FOOTNOTE{It's worth noting in passing that not all adjustment methods try to do this. What I've described here is an approach for controlling ``family wise Type I error rate''. However, there are other post hoc tests seek to control the ``false discovery rate'', which is a somewhat different thing.} If so, then the Bonferroni correction just says ``multiply all your raw $p$-values by $m$''. If we let $p$ denote the original $p$-value, and let $p^\prime_j$ be the corrected value, then the Bonferroni correction tells that:
 $$
 p^\prime = m \times p
 $$
 And therefore, if you're using the Bonferroni correction, you would reject the null hypothesis if $p^\prime < \alpha$. The logic behind this correction is very straightforward. We're doing $m$ different tests; so if we arrange it so that each test has a Type I error rate of at most $\alpha / m$, then the {\it total} Type I error rate across these tests cannot be larger than $\alpha$. That's pretty simple, so much so that in the original paper, the author writes:
 \begin{quote}
-The method given here is so simple and so general that I am sure it must have been used before this. I do not find it, however, so can only conclude that perhaps its very simplicity has kept statisticians from realizing that it is a very good method in some situations \cite[pp 52-53]{Dunn1961}
+The method given here is so simple and so general that I am sure it must have been used before this. I do not find it, however, so can only conclude that perhaps its very simplicity has kept statisticians from realizing that it is a very good method in some situations \parencite[pp 52-53]{Dunn1961}
 \end{quote}
 To use the Bonferroni correction in jamovi, just click on the `Bonferroni' checkbox in the `Correction' options, and you will see another column added to the ANOVA results table showing the adjusted $p$-values for the Bonferroni correction (\ref{fig:anova3}). If we compare these three $p$-values to those for the uncorrected, pairwise $t$-tests, it is clear that the only thing that jamovi has done is multiply them by 3. 
 
 \SUBSECTION{Holm corrections}
 
-Although the Bonferroni correction is the simplest adjustment out there, it's not usually the best one to use. One method that is often used instead is the \keyterm{Holm correction} \cite{Holm1979}. The idea behind the Holm correction is to pretend that you're doing the tests sequentially; starting with the smallest (raw) $p$-value and moving onto the largest one. For the $j$-th largest of the $p$-values, the adjustment is {\it either}
+Although the Bonferroni correction is the simplest adjustment out there, it's not usually the best one to use. One method that is often used instead is the \keyterm{Holm correction} \parencite{Holm1979}. The idea behind the Holm correction is to pretend that you're doing the tests sequentially; starting with the smallest (raw) $p$-value and moving onto the largest one. For the $j$-th largest of the $p$-values, the adjustment is {\it either}
 $$
 p^\prime_j = j \times p_j 
 $$
@@ -531,7 +531,7 @@ One question that people often want to know the answer to is the extent to which
 
 \section{Checking the homogeneity of variance assumption~\label{sec:levene}}
 
-There's more than one way to skin a cat, as the saying goes, and more than one way to test the homogeneity of variance assumption, too (though for some reason no-one made a saying out of that). The most commonly used test for this that I've seen in the literature is the \keyterm{Levene test} \cite{Levene1960} which is implemented in jamovi, and the closely related \keyterm{Brown-Forsythe test} \cite{BrownForsythe1974} which is not currently available in jamovi. Howver, I'll describe both of them here.
+There's more than one way to skin a cat, as the saying goes, and more than one way to test the homogeneity of variance assumption, too (though for some reason no-one made a saying out of that). The most commonly used test for this that I've seen in the literature is the \keyterm{Levene test} \parencite{Levene1960} which is implemented in jamovi, and the closely related \keyterm{Brown-Forsythe test} \parencite{BrownForsythe1974} which is not currently available in jamovi. Howver, I'll describe both of them here.
 
 Levene's test is shockingly simple. Suppose we have our outcome variable $Y_{ik}$. All we do is define a new variable, which I'll call $Z_{ik}$, corresponding to the absolute deviation from the group mean:
 $$
@@ -550,7 +550,7 @@ where $\mbox{median}_k(Y)$ is the median for group $k$. Regardless of whether yo
 
 Okay, so how do we run the Levene test? Simple really - under the ANOVA `Assumption Checks' option, just click on the `Homogeneity tests' checkbox. If we look at the output, shown in Figure \ref{fig:anova4}, we see that the test is non-significant $(F_{2,15} = 1.45, p = .266)$, so it looks like the homogeneity of variance assumption is fine.\FOOTNOTE{In fact, technically the Levene test should give an $F$-value of 1.45, whereas the Brown-Forsythe test gives and $F$-value of 1.47. So it looks like jamovi defaults to the Brown-Forsythe calculation for the Levene test. That makes sense, because the Brown-Forsythe test is a bit more robust than the original Levene test.} 
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file = ../img/anova/anova4.png, clip=true,width = 12cm}
 \caption{Levene's test output for one-way ANOVA in jamovi}
@@ -569,7 +569,7 @@ Okay, so how do we run the Levene test? Simple really - under the ANOVA `Assumpt
 
 \section{Removing the homogeneity of variance assumption~\label{sec:welchoneway}}
 
-In our example, the homogeneity of variance assumption turned out to be a pretty safe one: the Levene test came back non-significant, so we probably don't need to worry. However, in real life we aren't always that lucky. How do we save our ANOVA when the homogeneity of variance assumption is violated? If you recall from our discussion of $t$-tests, we've seen this problem before. The Student $t$-test assumes equal variances, so the solution was to use the Welch $t$-test, which does not. In fact, \citeA{Welch1951} also showed how we can solve this problem for ANOVA too (the \keyterm{Welch one-way test}). It's implemented in jamovi using the \rtext{oneway.test()} function. The arguments that we'll need for our example are:
+In our example, the homogeneity of variance assumption turned out to be a pretty safe one: the Levene test came back non-significant, so we probably don't need to worry. However, in real life we aren't always that lucky. How do we save our ANOVA when the homogeneity of variance assumption is violated? If you recall from our discussion of $t$-tests, we've seen this problem before. The Student $t$-test assumes equal variances, so the solution was to use the Welch $t$-test, which does not. In fact, \textcite{Welch1951} also showed how we can solve this problem for ANOVA too (the \keyterm{Welch one-way test}). It's implemented in jamovi using the \rtext{oneway.test()} function. The arguments that we'll need for our example are:
 \begin{itemize}
 \item \rtext{formula}. This is the model formula, which (as usual) needs to specify the outcome variable on the left hand side and the grouping variable on the right hand side: i.e., something like \rtextverb#outcome ~ group#.
 \item \rtext{data}. Specifies the data frame containing the variables. 
@@ -609,7 +609,9 @@ Okay, so originally our ANOVA gave us the result $F(2,15) = 18.6$, whereas the W
 
 Testing the normality assumption is relatively straightforward. We covered most of what you need to know in Section~\ref{sec:shapiro}. The only thing we really need to know how to do draw a QQ plot and, in addition if it is available (currently not in jamovi), run the Shapiro-Wilk test. The QQ plot is shown in Figure~\ref{fig:anova5}, and looks pretty normal to me.
 
-\begin{comment} use once shapiro-wilk added to jamovi
+\begin{comment} 
+
+use once shapiro-wilk added to jamovi
 
 > @usr{shapiro.test( x = my.anova.residuals )}   # run Shapiro-Wilk test
 
@@ -617,7 +619,7 @@ Testing the normality assumption is relatively straightforward. We covered most 
 
 data:  my.anova.residuals 
 W = 0.9602, p-value = 0.6053
-\end{rblock1}
+%\end{rblock1}
 
 
 
@@ -628,7 +630,7 @@ W = 0.9602, p-value = 0.6053
 
 
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file = ../img/anova/anova5.pdf, clip=true,width = 12cm}
 \caption{QQ plot produced from jamovi one way ANOVA options}
@@ -641,7 +643,7 @@ W = 0.9602, p-value = 0.6053
 
 \section{Removing the normality assumption~\label{sec:kruskalwallis}}
 
-Now that we've seen how to check for normality, we are led naturally to ask what we can do to address violations of normality. In the context of a one-way ANOVA, the easiest solution is probably to switch to a non-parametric test (i.e., one that doesn't rely on any particular assumption about the kind of distribution involved). We've seen non-parametric tests before, in Chapter~\ref{ch:ttest}: when you only have two groups, the Mann-Whitney or the Wilcoxon test provides the non-parametric alternative that you need. When you've got three or more groups, you can use the \keyterm{Kruskal-Wallis rank sum test} \cite{KruskalWallis1952}. So that's the test we'll talk about next.
+Now that we've seen how to check for normality, we are led naturally to ask what we can do to address violations of normality. In the context of a one-way ANOVA, the easiest solution is probably to switch to a non-parametric test (i.e., one that doesn't rely on any particular assumption about the kind of distribution involved). We've seen non-parametric tests before, in Chapter~\ref{ch:ttest}: when you only have two groups, the Mann-Whitney or the Wilcoxon test provides the non-parametric alternative that you need. When you've got three or more groups, you can use the \keyterm{Kruskal-Wallis rank sum test} \parencite{KruskalWallis1952}. So that's the test we'll talk about next.
 
 \SUBSECTION{The logic behind the Kruskal-Wallis test}
 
@@ -697,7 +699,7 @@ The tie-corrected value of the Kruskal-Wallis statistic obtained by dividing the
 
 Despite the horror that we've gone through in trying to understand what the Kruskal-Wallis test actually does, it turns out that running the test is pretty painless, since jamovi has an analysis as part of the ANOVA analysis set called `Non-Parametric' - `One Way ANOVA (Kruskall-Wallis)' Most of the time you'll have data like the \rtext{clinicaltrial.csv} data set, in which you have your outcome variable \rtext{mood.gain}, and a grouping variable \rtext{drug}. If so, you can just go ahead and run the analysis in jamovi. What this gives us is a Kruskal-Wallis $\chi^2$ = 12.076, df = 2, $p$-value = 0.00239, as in Figure \ref{fig:anova6}
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file = ../img/anova/anova6.png, clip=true,width = 12cm}
 \caption{Kruskall-Wallis one way non-parametric ANOVA in jamovi}
@@ -729,6 +731,6 @@ There's a fair bit covered in this chapter, but there's still a lot missing. Mos
 \item How to check the normality assumption (Section~\ref{sec:anovanormality}) and what to do if it is violated (Section~\ref{sec:kruskalwallis}).
 \end{itemize}
 
-As with all of the chapters in this book, there are quite a few different sources that I've relied upon, but the one stand-out text that I've been most heavily influenced by is \citeA{Sahai2000}. It's not a good book for beginners, but it's an excellent book for more advanced readers who are interested in understanding the mathematics behind ANOVA. 
+As with all of the chapters in this book, there are quite a few different sources that I've relied upon, but the one stand-out text that I've been most heavily influenced by is \textcite{Sahai2000}. It's not a good book for beginners, but it's an excellent book for more advanced readers who are interested in understanding the mathematics behind ANOVA. 
 
 

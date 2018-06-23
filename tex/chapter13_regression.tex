@@ -89,7 +89,7 @@ $$
 \hat{Y}_i = -8.94 \ X_i + 125.96
 $$ 
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file = ../img/regression/reg1,clip=true, width = 12cm} 
 \caption{A jamovi screenshot showing a simple linear regression analysis.}
@@ -274,7 +274,7 @@ In any case, this $t$-statistic can be interpreted in the same way as the $t$-st
 
 To compute all of the statistics that we have talked about so far, all you need to do is make sure the relevant options are checked in jamovi and then run the regression. If we do that, as in Figure \ref{fig:reg2}, we get a whole bunch of useful output.
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file = ../img/regression/reg2,clip=true, width = 12cm} 
 \caption{A jamovi screenshot showing a multiple linear regression analysis, with some useful options checked.}
@@ -398,7 +398,7 @@ $$
 $$
 where $\sigma_X$ is the standard deviation of the predictor, and $\sigma_Y$ is the standard deviation of the outcome variable $Y$. This makes matters a lot simpler. To make things even simpler, jamovi has an option that computes the $\beta$ coefficients for you, see Figure \ref{fig:reg3}. 
 
-\begin{figure}[h!!]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file = ../img/regression/reg3.pdf,clip=true, width = 12cm} 
 \caption{Standardised coefficients, with 95\% confidence intervals, for multiple linear regression}
@@ -418,8 +418,8 @@ The linear regression model that I've been discussing relies on several assumpti
 
 \begin{itemize}
 \item {\it Normality}. Like half the models in statistics, standard linear regression relies on an assumption of normality. Specifically, it assumes that the {\it residuals} are normally distributed. It's actually okay if the predictors $X$ and the outcome $Y$ are non-normal, so long as the residuals $\epsilon$ are normal. See Section~\ref{sec:regressionnormality}.
-\item {\it Linearity}. A pretty fundamental assumption of the linear regression model is that relationship between $X$ and $Y$ actually be linear! Regardless of whether it's a simple regression or a multiple regression, we assume that the relationships involved are linear. See Section~\ref{sec:regressionlinearity}.
-\item {\it Homogeneity of variance}. Strictly speaking, the regression model assumes that each residual $\epsilon_i$ is generated from a normal distribution with mean 0, and (more importantly for the current purposes) with a standard deviation $\sigma$ that is the same for every single residual. In practice, it's impossible to test the assumption that every residual is identically distributed. Instead, what we care about is that the standard deviation of the residual is the same for all values of $\hat{Y}$, and (if we're being especially paranoid) all values of every predictor $X$ in the model. See Section~\ref{sec:regressionhomogeneity}.
+\item {\it Linearity}. A pretty fundamental assumption of the linear regression model is that relationship between $X$ and $Y$ actually be linear! Regardless of whether it's a simple regression or a multiple regression, we assume that the relationships involved are linear. 
+\item {\it Homogeneity of variance}. Strictly speaking, the regression model assumes that each residual $\epsilon_i$ is generated from a normal distribution with mean 0, and (more importantly for the current purposes) with a standard deviation $\sigma$ that is the same for every single residual. In practice, it's impossible to test the assumption that every residual is identically distributed. Instead, what we care about is that the standard deviation of the residual is the same for all values of $\hat{Y}$, and (if we're being especially paranoid) all values of every predictor $X$ in the model. 
 \item {\it Uncorrelated predictors}. The idea here is that, is a multiple regression model, you don't want your predictors to be too strongly correlated with each other. This isn't  ``technically'' an assumption of the regression model, but in practice it's required. Predictors that are too strongly correlated with each other (referred to as ``collinearity'') can cause problems when evaluating the model. See Section~\ref{sec:regressioncollinearity}
 \item {\it Residuals are independent of each other}. This is really just a ``catch all'' assumption, to the effect that ``there's nothing else funny going on in the residuals''. If there is something weird (e.g., the residuals all depend heavily on some other unmeasured variable) going on, it might screw things up.
 \item {\it No ``bad'' outliers}. Again, not actually a technical assumption of the model (or rather, it's sort of implied by all the others), but there is an implicit assumption that your regression model isn't being too strongly influenced by one or two anomalous data points; since this raises questions about the adequacy of the model, and the trustworthiness of the data in some cases. See Section~\ref{sec:regressionoutliers}.
@@ -429,7 +429,7 @@ The linear regression model that I've been discussing relies on several assumpti
 
 The main focus of this section is \keyterm{regression diagnostics}, a term that refers to the art of checking that the assumptions of your regression model have been met, figuring out how to fix the model if the assumptions are violated, and generally to check that nothing ``funny'' is going on. I refer to this as the ``art'' of model checking with good reason: it's not easy, and while there are a lot of fairly standardised tools that you can use to diagnose and maybe even cure the problems that ail your model (if there are any, that is!), you really do need to exercise a certain amount of judgment when doing this. It's easy to get lost in all the details of checking this thing or that thing, and it's quite exhausting to try to remember what all the different things are. This has the very nasty side effect that a lot of people get frustrated when trying to learn {\it all} the tools, so instead they decide not to do {\it any} model checking. This is a bit of a worry! 
 
-In this section, I describe several different things you can do to check that your regression model is doing what it's supposed to. It doesn't cover the full space of things you could do, but it's still much more detailed than what I see a lot of people doing in practice; and I don't usually cover all of this in my intro stats class myself. However, I do think it's important that you get a sense of what tools are at your disposal, so I'll try to introduce a bunch of them here. Finally, I should note that this section draws quite heavily from the \citeA{Fox2011} text, the book associated with the \rtext{car} package that is used to conduct refression analysis in \R. The \rtext{car} package is notable for providing some excellent tools for regression diagnostics, and the book itself talks about them in an admirably clear fashion. I don't want to sound too gushy about it, but I do think that \citeA{Fox2011} is well worth reading.
+In this section, I describe several different things you can do to check that your regression model is doing what it's supposed to. It doesn't cover the full space of things you could do, but it's still much more detailed than what I see a lot of people doing in practice; and I don't usually cover all of this in my intro stats class myself. However, I do think it's important that you get a sense of what tools are at your disposal, so I'll try to introduce a bunch of them here. Finally, I should note that this section draws quite heavily from the \textcite{Fox2011} text, the book associated with the \rtext{car} package that is used to conduct refression analysis in \R. The \rtext{car} package is notable for providing some excellent tools for regression diagnostics, and the book itself talks about them in an admirably clear fashion. I don't want to sound too gushy about it, but I do think that \textcite{Fox2011} is well worth reading.
 
 
 \SUBSECTION{Three kinds of residuals}
@@ -508,7 +508,7 @@ Notice that this is a multiplication of something that measures the outlier-ness
 
 In jamovi, information about Cook's distance can be calculated by clicking on the `Cook's Distance' checkbox in the `Assumption Checks' - `Data Summary' options. When you do this, for the multiple regression model we have been using as an example in this chapter, you get the results as shown in Figure \ref{fig:reg4}. 
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file  = ../img/regression/reg4.png,clip=true, width = 9cm}
 \caption{jamovi output showing the table for the Cook's distance statistics}
@@ -526,9 +526,9 @@ An obvious question to ask next is, if you do have large values of Cook's distan
 
 Like many of the statistical tools we've discussed in this book, regression models rely on a normality assumption. In this case, we assume that the residuals are normally distributed. The first thing we can do is draw a QQ-plot `Assumption Checks' - `Assumption Checks' - `Q-Q plot of residuals' option. 
 
-The output is shown in Figure~\ref{fig:reg5}, showing the standardised residuals plotted as a function of their theoretical quantiles according to the regression model. The fact that the output appends the model specification to the picture is nice. 
+The output is shown in Figure~\ref{fig:reg5}, showing the standardised residuals plotted as a function of their theoretical quantiles according to the regression model. 
 
-\begin{figure}[h!!]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file = ../img/regression/reg5.pdf, clip=true,width = 12cm}
 \caption{Plot of the theoretical quantiles according to the model, against the quantiles of the standardised residuals, produced in jamovi }
@@ -539,6 +539,24 @@ The output is shown in Figure~\ref{fig:reg5}, showing the standardised residuals
 
 
 Another thing we should check is the relationship between the fitted values and the residuals themselves. We can get jamovi to do this using the `Residuals Plots' option, which provides a scatterplot for each predictor variable, the outcome variable, and the fitted values against residuals, see Figure \ref{fig:reg6}. In these plots we are looking for a fairly uniform distribution of `dots', with no clear bunching or patterning of the `dots'. Looking at these plots, there is nothing particularly worrying - the dots are fairly evenly spread across the whole plot. There may be a little bit of non-uniformity in plot (b), but it is not a strong deviation and probably not worth worrying about. 
+
+\begin{figure}[t!!]
+\begin{center}
+\begin{tabular}{cc}
+\epsfig{file = ../img/regression/reg6a.pdf, clip=true,width = 7.5cm} & 
+\epsfig{file = ../img/regression/reg6b.pdf, clip=true,width = 7.5cm} \\
+(a) & (b) \\
+\epsfig{file = ../img/regression/reg6c.pdf, clip=true,width = 7.5cm} & 
+\epsfig{file = ../img/regression/reg6d.pdf, clip=true,width = 7.5cm} \\
+(c) & (d)
+\end{tabular}
+\caption{Residuals plots produced in jamovi}
+\HR
+\label{fig:reg6}
+\end{center}
+\end{figure}
+
+
 
 If we were worried, then in a lot of cases the solution to this problem (and many others) is to transform one or more of the variables. We discussed the basics of variable transformation in Sections~\ref{sec:transform} and \ref{sec:mathfunc}, but I do want to make special note of one additional possibility that I didn't mention earlier: the Box-Cox transform. The Box-Cox function is a fairly simple one, but it's very widely used 
 $$
@@ -567,7 +585,7 @@ day        -0.09840768 -0.01043394  0.07647926  1.00000000
 
 We have some fairly large correlations between some of our predictor variables! When we run the regression model and look at the VIF values, we see that the collinearity is causing a lot of uncertainty about the coefficients. First, run the regression, as in Figure \ref{fig:reg7}  and you can see from the VIF values that, yep, that's some mighty fine collinearity there.
 
-\begin{figure}[h!!]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file = ../img/regression/reg7.png, clip=true,width = 12cm}
 \caption{Collinearity statistics for multiple regression, produced in jamovi }
@@ -587,7 +605,7 @@ One fairly major problem that remains is the problem of ``model selection''. Tha
 \end{itemize}
 This latter principle is often referred to as \keyterm{Ockham's razor}, and is often summarised in terms of the following pithy saying: {\it do not multiply entities beyond necessity}. In this context, it means: don't chuck in a bunch of largely irrelevant predictors just to boost your $R^2$. Hm. Yeah, the original was better. 
 
-In any case, what we need is an actual mathematical criterion that will implement the qualitative principle behind Ockham's razor in the context of selecting a regression model. As it turns out there are several possibilities. The one that I'll talk about is the \keyterm{Akaike information criterion} \cite<AIC; >{Akaike1974} simply because it's available as an option in jamovi. In the context of a linear regression model (and ignoring terms that don't depend on the model in any way!), the AIC for a model that has $K$ predictor variables plus an intercept is:
+In any case, what we need is an actual mathematical criterion that will implement the qualitative principle behind Ockham's razor in the context of selecting a regression model. As it turns out there are several possibilities. The one that I'll talk about is the \keyterm{Akaike information criterion} \parencite<AIC; >{Akaike1974} simply because it's available as an option in jamovi. In the context of a linear regression model (and ignoring terms that don't depend on the model in any way!), the AIC for a model that has $K$ predictor variables plus an intercept is:
 $$
 \mbox{AIC} = \displaystyle\frac{\mbox{SS}_{res}}{\hat{\sigma}^2} + 2K
 $$
@@ -636,7 +654,7 @@ where $\hat{y}_i^{(1)}$ is the fitted value for $y_i$ according to model $M_1$ a
 
 Okay, so that's the hypothesis test that we use to compare two regression models to one another. Now, how do we do it in jamovi? The answer is to use the `Model Builder' option and specify the Model 1 predictors \rtext{dan.sleep} and \rtext{day} in `Block 1' and then add the additional predictor from Model 2 (\rtext{baby.sleep}) in `Block'2, as in Figure \ref{fig:reg8}. This shows, in the `Model Comparisons' Table, that for the comparions between Model 1 and Model 2, $F$(1,96) = 0.00, $p$ = 0.954. Since we have $p>.05$ we retain the null hypothesis (\rtext{M1}).  This approach to regression, in which we add all of our covariates into a null model, and then {\it add} the variables of interest into an alternative model, and then compare the two models in hypothesis testing framework, is often referred to as \keyterm{hierarchical regression}.
 
-\begin{figure}[h!!]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file = ../img/regression/reg8.png, clip=true,width = 12cm}
 \caption{Model comparison in jamovi using the `Model Builder' option}

@@ -178,7 +178,7 @@ Okay, cool. The obvious thing that you might think to do is run a $z$-test, but 
 
 \SUBSECTION{Introducing the $t$-test}
 
-This ambiguity is annoying, and it was resolved in 1908 by a guy called William Sealy Gosset \cite{Student1908}, who was working as a chemist for the Guinness brewery at the time \cite<see>{Box1987}. Because Guinness took a dim view of its employees publishing statistical analysis (apparently they felt it was a trade secret), he published the work under the pseudonym ``A Student'', and to this day, the full name of the $t$-test is actually \keyterm{Student's $t$-test}. The key thing that Gosset figured out is how we should accommodate the fact that we aren't completely sure what the true standard deviation is.\FOOTNOTE{Well, sort of. As I understand the history, Gosset only provided a partial solution: the general solution to the problem was provided by Sir Ronald Fisher.} The answer is that it subtly changes the sampling distribution. In the $t$-test, our test statistic (now called a $t$-statistic) is calculated in exactly the same way I mentioned above. If our null hypothesis is that the true mean is $\mu$, but our sample has mean $\bar{X}$ and our estimate of the population standard deviation is $\hat{\sigma}$, then our $t$ statistic is:
+This ambiguity is annoying, and it was resolved in 1908 by a guy called William Sealy Gosset \parencite{Student1908}, who was working as a chemist for the Guinness brewery at the time \parencite<see>{Box1987}. Because Guinness took a dim view of its employees publishing statistical analysis (apparently they felt it was a trade secret), he published the work under the pseudonym ``A Student'', and to this day, the full name of the $t$-test is actually \keyterm{Student's $t$-test}. The key thing that Gosset figured out is how we should accommodate the fact that we aren't completely sure what the true standard deviation is.\FOOTNOTE{Well, sort of. As I understand the history, Gosset only provided a partial solution: the general solution to the problem was provided by Sir Ronald Fisher.} The answer is that it subtly changes the sampling distribution. In the $t$-test, our test statistic (now called a $t$-statistic) is calculated in exactly the same way I mentioned above. If our null hypothesis is that the true mean is $\mu$, but our sample has mean $\bar{X}$ and our estimate of the population standard deviation is $\hat{\sigma}$, then our $t$ statistic is:
 $$
 t = \frac{\bar{X} - \mu}{\hat{\sigma}/\sqrt{N} }
 $$
@@ -198,7 +198,7 @@ The only thing that has changed in the equation is that instead of using the kno
 
 As you might expect, the mechanics of the $t$-test are almost identical to the mechanics of the $z$-test. So there's not much point in going through the tedious exercise of showing you how to do the calculations using low level commands: it's pretty much identical to the calculations that we did earlier, except that we use the estimated standard deviation (i.e., something like \rtext{se.est = sd(grades)}), and then we test our hypothesis using the $t$ distribution rather than the normal distribution. And so instead of going through the calculations in tedious detail for a second time, I'll jump straight to showing you how $t$-tests are actually done: jamovi comes with a dedicated analysis for $t$-tests that is very flexible (it can run lots of different kinds of $t$-tests). It's pretty straightforward to use, all you need to do is specify `Analyses' - `T-Tests' - `One Sample T-Test', move the variable you are interested in (\rtext{X}) across into the `Variables' box, and type in the mean value for the null hypothesis (`67.5') in the `Hypothesis' - `Test value' box. Easy enough, see Figure \ref{fig:ttest_one}, which (amongst other things, which we will get to in a moment) gives you a $t$-test statistic = 2.25, with 19 degrees of freedom, and an associated $p-$value of 0.036.
 
-\begin{figure}[h!!]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file = ../img/ttest/ttest_one.png, clip=true,width = 12cm}
 \caption{jamovi does the one-sample t-test...}
@@ -359,7 +359,7 @@ Just as we saw with our one-sample test, the sampling distribution of this $t$-s
 
 Not surprisingly, you can run an independent samples $t$-test easily in jamovi. The outcome variable for our test is the student \rtext{grade}, and the groups are defined in terms of the \rtext{tutor} for each class. So you probably won't be too surprised that all you have to do in jamovi is go to the relevant analysis (`Analyses' - `T-Tests' - `Independent Samples T-Test') and move the \rtext{grade} variable across to the `Dependent Variables' box, and the \rtext{tutor} variable across into the `Grouping Variable' box, as shown in Figure \ref{fig:ttest_ind}.
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file = ../img/ttest/ttest_ind.png,clip=true, width = 12cm}
 \caption{Independent t-test in jamovi, with options checked for useful results}
@@ -416,7 +416,7 @@ As always, our hypothesis test relies on some assumptions. So what are they? For
 
 \section{The independent samples $t$-test (Welch test)~\label{sec:welchttest}}
 
-The biggest problem with using the Student test in practice is the third assumption listed in the previous section: it assumes that both groups have the same standard deviation. This is rarely true in real life: if two samples don't have the same means, why should we expect them to have the same standard deviation? There's really no reason to expect this assumption to be true. We'll talk a little bit about how you can check this assumption later on because it does crop up in a few different places, not just the $t$-test. But right now I'll talk about a different form of the $t$-test \cite{Welch1947} that does not rely on this assumption. A graphical illustration of what the \keyterm{Welch $t$ test} assumes about the data is shown in Figure~\ref{fig:ttesthyp2}, to provide a contrast with the Student test version in Figure~\ref{fig:ttesthyp}. I'll admit it's a bit odd to talk about the cure before talking about the diagnosis, but as it happens the Welch test can be specified as one of the `Independent Samples T-Test' options in jamovi, so this is probably the best place to discuss it. 
+The biggest problem with using the Student test in practice is the third assumption listed in the previous section: it assumes that both groups have the same standard deviation. This is rarely true in real life: if two samples don't have the same means, why should we expect them to have the same standard deviation? There's really no reason to expect this assumption to be true. We'll talk a little bit about how you can check this assumption later on because it does crop up in a few different places, not just the $t$-test. But right now I'll talk about a different form of the $t$-test \parencite{Welch1947} that does not rely on this assumption. A graphical illustration of what the \keyterm{Welch $t$ test} assumes about the data is shown in Figure~\ref{fig:ttesthyp2}, to provide a contrast with the Student test version in Figure~\ref{fig:ttesthyp}. I'll admit it's a bit odd to talk about the cure before talking about the diagnosis, but as it happens the Welch test can be specified as one of the `Independent Samples T-Test' options in jamovi, so this is probably the best place to discuss it. 
 
 The Welch test is very similar to the Student test. For example, the $t$-statistic that we use in the Welch test is calculated in much the same way as it is for the Student test. That is, we take the difference between the sample means, and then divide it by some estimate of the standard error of that difference:
 $$
@@ -449,7 +449,7 @@ $$
 
 If you tick the check box for the Welch test in the analysis we did above, then this is what it gives you (Figure \ref{fig:ttest_welch}:
 
-\begin{figure}[h!!]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file = ../img/ttest/ttest_welch.png,clip=true, width = 10cm}
 \caption{Results showing the Welch test alongside the default Student's t-test in jamovi}
@@ -480,7 +480,7 @@ The data set that we'll use this time comes from Dr Chico's class.\FOOTNOTE{At t
 
 If we look at the jamovi spreadsheet, it does seem like the class is a hard one (most grades are between 50\% and 60\%), but it does look like there's an improvement from the first test to the second one. 
 
-\begin{figure}[h!!]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file = ../img/ttest/ttest_paired1.png,clip=true, width = 12cm}
 \caption{Descriptives for the two grade\_test variables in the \rtext{chico} data set}
@@ -541,7 +541,7 @@ where $\hat\sigma_D$ is the standard deviation of the difference scores. Since t
 
 How do you do a paired samples $t$-test in jamovi. One possibility is to follow the process I outlined above: create a ``difference'' variable and then run a one sample $t$-test on that. Since we've already created a variable called \rtext{improvement}, let's do that and see what we get, Figure \ref{fig:ttest_paired2}.
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file = ../img/ttest/ttest_paired2.png,clip=true, width = 12cm}
 \caption{Results showing a one sample t-test on paired difference scores}
@@ -553,7 +553,7 @@ The output here is (obviously) formatted exactly the same was as it was the last
 
 However, suppose you're lazy and you don't want to go to all the effort of creating a new variable. Or perhaps you just want to keep the difference between one-sample and paired-samples tests clear in your head. If so, you can use the jamovi `Paired Samples T-Test' analysis, getting the results shown in Figure \ref{fig:ttest_paired3}.
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file = ../img/ttest/ttest_paired3.png,clip=true, width = 12cm}
 \caption{Results showing a paired sample t-test. Compare with Figure \ref{fig:ttest_paired2}}
@@ -568,7 +568,7 @@ The numbers are identical to those that come from the one sample test, which of 
 
 When introducing the theory of null hypothesis tests, I mentioned that there are some situations when it's appropriate to specify a {\it one-sided} test (see Section~\ref{sec:onesidedtests}). So far, all of the $t$-tests have been two-sided tests. For instance, when we specified a one sample $t$-test for the grades in Dr Zeppo's class, the null hypothesis was that the true mean was 67.5\%. The alternative hypothesis was that the true mean was greater than {\it or} less than 67.5\%. Suppose we were only interested in finding out if the true mean is greater than 67.5\%, and have no interest whatsoever in testing to find out if the true mean is lower than 67.5\%. If so, our null hypothesis would be that the true mean is 67.5\% or less, and the alternative hypothesis would be that the true mean is greater than 67.5\%. In jamovi, for the `One Sample T-Test' analysis, you can specify this by clicking on the `$>$ Test Value' option, under `Hypothesis'. When you have done this, you will get the results as shown in \ref{fig:ttest_onesided1}.
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file = ../img/ttest/ttest_onesided1.png,clip=true, width = 12cm}
 \caption{jamovi results showing a `One Sample T-Test' where the actual hypothesis is one sided, i.e. that the true mean is greater than 67.5\%}
@@ -580,7 +580,7 @@ Notice that there are a few changes from the output that we saw last time. Most 
 
 So that's how to do a one-sided one sample $t$-test. However, all versions of the $t$-test can be one-sided. For an independent samples $t$ test, you could have a one-sided test if you're only interestd in testing to see if group A has {\it higher} scores than group B, but have no interest in finding out if group B has higher scores than group A. Let's suppose that, for Dr Harpo's class, you wanted to see if Anastasia's students had higher grades than Bernadette's. For this analysis, in the `Hypothesis' options, specify that `Group 1 $>$ Group2'. You should get the results shown in Figure \ref{fig:ttest_onesided2}.
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file = ../img/ttest/ttest_onesided2.png,clip=true, width = 12cm}
 \caption{jamovi results showing an `Independent Samples T-Test' where the actual hypothesis is one sided, i.e. that Anastasia's students had higher grades than Bernadette's}
@@ -592,7 +592,7 @@ Again, the output changes in a predictable way. The definition of the alternativ
 
 What about the paired samples $t$-test? Suppose we wanted to test the hypothesis that grades go {\it up} from test 1 to test 2 in Dr Zeppo's class, and are not prepared to consider the idea that the grades go down. In jamovi you would do this by specifying, under the `Hypotheses' option, that \rtext{grade\_test2} (`Measure 1' in jamovi, because we copied this first into the paired variables box) $>$ \rtext{grade\_test1} (`Measure 2' in jamovi). You should get the results shown in Figure \ref{fig:ttest_onesided3}.
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file = ../img/ttest/ttest_onesided3.png,clip=true, width = 12cm}
 \caption{jamovi results showing a `Paired Samples T-Test' where the actual hypothesis is one sided, i.e. that \rtext{grade\_test2} (`Measure 1') $>$ \rtext{grade\_test1} (`Measure 2')}
@@ -606,11 +606,11 @@ Yet again, the output changes in a predictable way. The hypothesis has changed, 
 
 \section{Effect size~\label{sec:cohensd}}
 
-The most commonly used measure of effect size for a $t$-test is \keyterm{Cohen's $d$} \cite{Cohen1988}. It's a very simple measure in principle, with quite a few wrinkles when you start digging into the details. Cohen himself defined it primarily in the context of an independent samples $t$-test, specifically the Student test. In that context, a natural way of defining the effect size is to divide the difference between the means by an estimate of the standard deviation. In other words, we're looking to calculate {\it something} along the lines of this:
+The most commonly used measure of effect size for a $t$-test is \keyterm{Cohen's $d$} \parencite{Cohen1988}. It's a very simple measure in principle, with quite a few wrinkles when you start digging into the details. Cohen himself defined it primarily in the context of an independent samples $t$-test, specifically the Student test. In that context, a natural way of defining the effect size is to divide the difference between the means by an estimate of the standard deviation. In other words, we're looking to calculate {\it something} along the lines of this:
 $$
 d = \frac{\mbox{(mean 1)} - \mbox{(mean 2)}}{\mbox{std dev}}
 $$
-and he suggested a rough guide for interpreting $d$ in Table~\ref{tab:cohensdinterpretation}. You'd think that this would be pretty unambiguous, but it's not; largely because Cohen wasn't too specific on what he thought should be used as the measure of the standard deviation (in his defence, he was trying to make a broader point in his book, not nitpick about tiny details). As discussed by \citeA{McGrath2006}, there are several different version in common usage, and each author tends to adopt slightly different notation. For the sake of simplicity (as opposed to accuracy) I'll use $d$ to refer to any statistic that you calculate from the sample, and  use $\delta$ to refer to a theoretical population effect. Obviously, that does mean that there are several different things all called $d$. 
+and he suggested a rough guide for interpreting $d$ in Table~\ref{tab:cohensdinterpretation}. You'd think that this would be pretty unambiguous, but it's not; largely because Cohen wasn't too specific on what he thought should be used as the measure of the standard deviation (in his defence, he was trying to make a broader point in his book, not nitpick about tiny details). As discussed by \textcite{McGrath2006}, there are several different version in common usage, and each author tends to adopt slightly different notation. For the sake of simplicity (as opposed to accuracy) I'll use $d$ to refer to any statistic that you calculate from the sample, and  use $\delta$ to refer to a theoretical population effect. Obviously, that does mean that there are several different things all called $d$. 
 
 My suspicion is that the only time that you would want Cohen's $d$ is when you're running a $t$-test, and jamovi has an option to calculate the effect size for all the different flavours of $t$-test it provides. 
 
@@ -650,9 +650,9 @@ where, as usual, $\mu_1$ and $\mu_2$ are the population means corresponding to g
 $$
 d = \frac{\bar{X}_1 - \bar{X}_2}{\hat{\sigma}_p}
 $$
-where $\hat\sigma_p$ is the exact same pooled standard deviation measure that appears in the $t$-test. This is the most commonly used version of Cohen's $d$ when applied to the outcome of a Student $t$-test, and is the one provided in jamovi. It is sometimes referred to as Hedges' $g$ statistic \cite{Hedges1981}. 
+where $\hat\sigma_p$ is the exact same pooled standard deviation measure that appears in the $t$-test. This is the most commonly used version of Cohen's $d$ when applied to the outcome of a Student $t$-test, and is the one provided in jamovi. It is sometimes referred to as Hedges' $g$ statistic \parencite{Hedges1981}. 
 
-However, there are other possibilities, which I'll briefly describe. Firstly, you may have reason to want to use only one of the two groups as the basis for calculating the standard deviation. This approach (often called Glass' $\Delta$) only makes most sense when you have good reason to treat one of the two groups as a purer reflection of ``natural variation'' than the other. This can happen if, for instance, one of the two groups is a control group. If that's what you want, then use \rtext{method = "x.sd"} or \rtext{method = "y.sd"} when using \rtext{cohensD()}. Secondly, recall that in the usual calculation of the pooled standard deviation we divide by $N-2$ to correct for the bias in the sample variance; in one version of Cohen's $d$ this correction is omitted. Instead, we divide by $N$. This version (\rtext{method = "raw"}) makes sense primarily when you're trying to calculate the effect size in the sample; rather than estimating an effect size in the population. Finally, there is a version based on \citeA{Hedges1985}, who point out there is a small bias in the usual (pooled) estimation for Cohen's $d$. Thus they introduce a small correction (\rtext{method = "corrected"}), by multiplying the usual value of $d$ by $(N-3)/(N-2.25)$. 
+However, there are other possibilities, which I'll briefly describe. Firstly, you may have reason to want to use only one of the two groups as the basis for calculating the standard deviation. This approach (often called Glass' $\Delta$) only makes most sense when you have good reason to treat one of the two groups as a purer reflection of ``natural variation'' than the other. This can happen if, for instance, one of the two groups is a control group. If that's what you want, then use \rtext{method = "x.sd"} or \rtext{method = "y.sd"} when using \rtext{cohensD()}. Secondly, recall that in the usual calculation of the pooled standard deviation we divide by $N-2$ to correct for the bias in the sample variance; in one version of Cohen's $d$ this correction is omitted. Instead, we divide by $N$. This version (\rtext{method = "raw"}) makes sense primarily when you're trying to calculate the effect size in the sample; rather than estimating an effect size in the population. Finally, there is a version based on \textcite{Hedges1985}, who point out there is a small bias in the usual (pooled) estimation for Cohen's $d$. Thus they introduce a small correction (\rtext{method = "corrected"}), by multiplying the usual value of $d$ by $(N-3)/(N-2.25)$. 
 
 In any case, ignoring all those variations that you could make use of if you wanted, let's have a look at the default version in jamovi. In Figure \ref{fig:ttest_ind} Cohen's d = 0.74, indicating that the grade scores for students in Anastasia's class are, on average, 0.74 standard deviations higher than the grade scores for students in Bernadette's class. For a Welch test, the estimated effect size is the same (Figure \ref{fig:ttest_welch}).
 
@@ -713,7 +713,7 @@ One way to check whether a sample violates the normality assumption is to draw a
 
 \SUBSECTION{Shapiro-Wilk tests}
 
-Although QQ plots provide a nice way to informally check the normality of your data, they are not currently available for $t$-tests in jamovi. In any case, sometimes you'll want to do something a bit more formal and the \keyterm{Shapiro-Wilk test} \cite{Shapiro1965} is probably what you're looking for.\FOOTNOTE{Either that, or the Kolmogorov-Smirnov test, which is probably more traditional than the Shapiro-Wilk, though most things I've read seem to suggest Shapiro-Wilk is the better test of normality; although Kolomogorov-Smirnov is a general purpose test of distributional equivalence, so it can be adapted to handle other kinds of distribution tests; in jamovi the Shapiro-Wilk test is preferred.} As you'd expect, the null hypothesis being tested is that a set of $N$ observations is normally distributed. The test statistic that it calculates is conventionally denoted as $W$, and it's calculated as follows. First, we sort the observations in order of increasing size, and let $X_1$ be the smallest value in the sample, $X_2$ be the second smallest and so on. Then the value of $W$ is given by
+Although QQ plots provide a nice way to informally check the normality of your data, they are not currently available for $t$-tests in jamovi. In any case, sometimes you'll want to do something a bit more formal and the \keyterm{Shapiro-Wilk test} \parencite{Shapiro1965} is probably what you're looking for.\FOOTNOTE{Either that, or the Kolmogorov-Smirnov test, which is probably more traditional than the Shapiro-Wilk, though most things I've read seem to suggest Shapiro-Wilk is the better test of normality; although Kolomogorov-Smirnov is a general purpose test of distributional equivalence, so it can be adapted to handle other kinds of distribution tests; in jamovi the Shapiro-Wilk test is preferred.} As you'd expect, the null hypothesis being tested is that a set of $N$ observations is normally distributed. The test statistic that it calculates is conventionally denoted as $W$, and it's calculated as follows. First, we sort the observations in order of increasing size, and let $X_1$ be the smallest value in the sample, $X_2$ be the second smallest and so on. Then the value of $W$ is given by
 $$
 W = \frac{ \left( \sum_{i = 1}^N a_i X_i \right)^2 }{ \sum_{i = 1}^N (X_i - \bar{X})^2}
 $$
@@ -791,7 +791,7 @@ positive differences&2&  . &  .  & .  & . & . &  . & \checkmark & . & . & . \\
 \end{center}
 Counting up the tick marks this time, we get a test statistic of $W = 7$. As before, if our test is two sided, then we reject the null hypothesis when $W$ is very large or very small. As far as running it in jamovi goes, it's pretty much what you'd expect. For the one-sample version, you specify the `Wilcoxon rank' option under `Tests' in the `One Sample T-Test' analysis window. This gives you Wilcoxon W = 7, $p$-value = 0.03711. As this shows, we have a significant effect. Evidently, taking a statistics class does have an effect on your happiness. Switching to a paired samples version of the test won't give us a different answer, of course; see Figure \ref{fig:ttest_nonparametric}.
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file = ../img/ttest/ttest_nonparametric.png, clip=true,width = 10cm}
 \caption{jamovi screen showing results for one sample and paired sample Wilcoxon non-parametric tests}

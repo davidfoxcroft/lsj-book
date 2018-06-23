@@ -12,7 +12,7 @@ When we discussed analysis of variance in Chapter~\ref{ch:anova}, we assumed a f
 
 If we cross-tabulate \rtext{drug} by \rtext{therapy}, using the `Frequencies' - `Contingency Tables' analysis in jamovi (see Section~\ref{sec:freqtables}), we get the table shown in Figure \ref{fig:factorialanova1}
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file = ../img/factorialanova/factorialanova1.png, clip=true,width = 7.5cm} 
 \caption{jamovi contingency table of \rtext{drug} by \rtext{therapy}}
@@ -103,7 +103,7 @@ The null and alternative hypotheses that I described in the last section should 
 If the data you're trying to analyse correspond to a balanced factorial design, then running your analysis of variance is easy. To see how easy it is, let's start by reproducing the original analysis from Chapter~\ref{ch:anova}. In case you've forgotten, for that analysis we were using only a single factor (i.e., \rtext{drug}) to predict our outcome variable (i.e., \rtext{mood.gain}), and we got the results shown in Figure \ref{fig:factorialanova2}:
 
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file = ../img/factorialanova/factorialanova2.pdf, clip=true,width = 7.5cm} 
 \caption{jamovi one way anova of \rtext{mood.gain} by \rtext{drug}}
@@ -114,7 +114,7 @@ If the data you're trying to analyse correspond to a balanced factorial design, 
 
 Now, suppose I'm also curious to find out if \rtext{therapy} has a relationship to \rtext{mood.gain}. In light of what we've seen from our discussion of multiple regression in Chapter~\ref{ch:regression}, you probably won't be surprised that all we have to do is add \rtext{therapy} as a second `Fixed Factor' in the analysis, see Figure \ref{fig:factorialanova3}.
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file = ../img/factorialanova/factorialanova3.pdf, clip=true,width = 12cm} 
 \caption{jamovi two way anova of \rtext{mood.gain} by \rtext{drug} and \rtext{therapy}}
@@ -272,7 +272,7 @@ $$\mu_{rc} = \mu_{..} + \alpha_r + \beta_c + (\alpha\beta)_{rc}$$
 where $(\alpha\beta)_{rc}$ is non-zero for at least one group. This notation is kind of ugly to look at, but it is handy as we'll see in the next section when discussing how to calculate the sum of squares.
 
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file = ../img/factorialanova/interaction.png,clip=true, width = 14cm} 
 \caption{jamovi screen showing how to generate a descriptive plot in ANOVA using the clinical trial data}
@@ -333,7 +333,7 @@ What about the residual degrees of freedom? Because we've added interaction term
 
 Adding interaction terms to the ANOVA model in jamovi is straightforward. In fact it is more than straightforward because it is the default option for ANOVA. This means that when you specify an ANOVA with two factors, e.g. \rtext{drug} and \rtext{therapy} then the interaction component - \rtext{drug*therapy} - is added automatically to the model\FOOTNOTE{You may have spotted this already when looking at the main effects analysis in jamovi that we described earlier...for the purpose of the explanation in this book I removed the interaction component from the earlier model to keep things clean and simple}. When we run the ANOVA with the interaction term included, then we get the results shown in Figure \ref{fig:factorialanova4}. 
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file = ../img/factorialanova/factorialanova4.pdf,clip=true, width = 14cm} 
 \caption{Results for the full factorial model, including the interaction component \rtext{drug*therapy}}
@@ -480,7 +480,7 @@ To test whether the groups have the same variance, we can use the Levene test. T
 
 As with one-way ANOVA, we can test for the normality of residuals in a straightforward fashion (see Section~\ref{sec:anovanormality}). It's generally a good idea to examine the residuals graphically using a QQ plot. See Figure \ref{fig:factorialanova5}. 
 
-\begin{figure}[h!!]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file = ../img/factorialanova/factorialanova5.pdf,clip=true, width = 14cm} 
 \caption{Checking assumptions in an ANOVA model}
@@ -639,7 +639,7 @@ Y_{p} = b_1 X_{1p} + b_2 X_{2p} + b_0 + \epsilon_p
 $$
 This is, of course, the exact same equation that I used earlier to describe a two-predictor regression model! The only difference is that $X_1$ and $X_2$ are now {\it binary} variables (i.e., values can only be 0 or 1), whereas in a regression analysis we expect that $X_1$ and $X_2$ will be continuous.  There's a couple of ways I could try to convince you of this. One possibility would be to do a lengthy mathematical exercise, proving that the two are identical. However, I'm going to go out on a limb and guess that most of the readership of this book will find that to be annoying rather than helpful. Instead, I'll explain the basic ideas, and then rely on jamovi to show that ANOVA analyses and regression analyses aren't just similar, they're identical for all intents and purposes. Let's start by running this as an ANOVA. To do this, we'll use the \rtext{rtfm.csv} data set, and Figure ref{fig:factorialanova6} shows what we get when we run the analysis in jamovi.
 
-\begin{figure}[h!!]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file = ../img/factorialanova/factorialanova6.pdf,clip=true, width = 14cm} 
 \caption{ANOVA of the \rtext{rtfm.csv} data set in jamovi, without the interaction term}
@@ -686,7 +686,7 @@ As you can see, the intercept term $b_0$ acts like a kind of ``baseline'' grade 
 
 Okay, now that we're really starting to see why ANOVA and regression are basically the same thing, let's actually run our regression using the \rtext{rtfm.csv} data and the jamovi regression analysis to convince ourselves that this is really true. Running the regression in the usual way gives the results shown in Figure \ref{fig:factorialanova7}.
 
-\begin{figure}[h!!]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file = ../img/factorialanova/factorialanova7.pdf,clip=true, width = 14cm} 
 \caption{Regression analysis of the \rtext{rtfm.csv} data set in jamovi, without the interaction term}
@@ -702,7 +702,7 @@ Actually, we can push a little further in establishing the equivalence of our AN
 
 Finally, one last thing you should know. Because jamovi understands the fact that ANOVA and regression are both examples of linear models, it lets you extract the classic ANOVA table from your regression model using the `Linear Regression' - `Model Coefficients' - `Omnibus Test' - `ANOVA Test', and this will give you the table shown in Figure \ref{fig:factorialanova8}.
 
-\begin{figure}[h!!]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file = ../img/factorialanova/factorialanova8.pdf,clip=true, width = 14cm} 
 \caption{Omnibus ANOVA Test results from the jamovi regression analysis}
@@ -738,7 +738,7 @@ It's not as pretty as the original \rtext{clinicaltrial.csv} data, but it's defi
 Now we have two different versions of the same data set: our original data \rtext{clinicaltrial.csv} in which the \rtext{drug} variable is expressed as a single three-level factor, and the expanded data \rtext{clinicaltrial2.omv} in which it is expanded into two binary contrasts. Once again, the thing that we want to demonstrate is that our original $3 \times 2$ factorial ANOVA is equivalent to a regression model applied to the contrast variables. Let's start by re-running the ANOVA, with results shown in Figure \ref{fig:factorialanova9}.
 
 
-\begin{figure}[h!!]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file = ../img/factorialanova/factorialanova9.pdf,clip=true, width = 14cm} 
 \caption{jamovi ANOVA results, without interaction component}
@@ -751,7 +751,7 @@ Now we have two different versions of the same data set: our original data \rtex
 Obviously, there's no surprises here. That's the exact same ANOVA that we ran earlier. Next, let's run a regression, using \rtext{druganxifree}, \rtext{drugjoyzepam} and \rtext{CBTtherapy} as the predictors. The results are shown in Figure \ref{fig:factorialanova10}.
 
 
-\begin{figure}[h!!]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file = ../img/factorialanova/factorialanova10.pdf,clip=true, width = 14cm} 
 \caption{jamovi regression results, with contrast variables \rtext{druganxifree} and \rtext{drugjoyzepam}}
@@ -761,10 +761,10 @@ Obviously, there's no surprises here. That's the exact same ANOVA that we ran ea
 \end{figure}
 
 
-Hm. This isn't the same output that we got last time. Not surprisingly, the regression output prints out the results for each of the three predictors separately, just like it did every other time we conducted a regression analysis. On the one hand, we can see that the $p$-value for the \rtext{CBTtherapy} variable is exactly the same as the one for the \rtext{therapy} factor in our original ANOVA, so we can be reassured that the regression model is doing the same thing as the ANOVA did. On the other hand, this regression model is testing the \rtext{druganxifree} contrast and the \rtext{drugjoyzepam} contrast {\it separately}, as if they were two completely unrelated variables. It's not surprising of course, because the poor regression analysis has no way of knowing that \rtext{drugjoyzepam} and \rtext{druganxifree} are actually the two different contrasts that we used to encode our three-level \rtext{drug} factor. As far as it knows, \rtext{drugjoyzepam} and \rtext{druganxifree} are no more related to one another than \rtext{drugjoyzepam} and \rtext{therapyCBT}. However, you and I know better. At this stage we're not at all interested in determining whether these two contrasts are individually significant. We just want to know if there's an ``overall'' effect of drug. That is, what {\it we} want jamovi to do is to run some kind of ``model comparison'' test, one in which the two ``drug-related'' contrasts are lumped together for the purpose of the test. Sound familiar? This is {\it exactly} the situation that we discussed in Section~\ref{sec:omnibusF}, and it is precisely this situation that the $F$-test is built to handle. All we need to do is specify our null model, which in this case would include the \rtext{CBTtherapy} predictor, and omit both of the drug-related variables, as in Figure \ref{fig:factorialanova11}. 
+Hm. This isn't the same output that we got last time. Not surprisingly, the regression output prints out the results for each of the three predictors separately, just like it did every other time we conducted a regression analysis. On the one hand, we can see that the $p$-value for the \rtext{CBTtherapy} variable is exactly the same as the one for the \rtext{therapy} factor in our original ANOVA, so we can be reassured that the regression model is doing the same thing as the ANOVA did. On the other hand, this regression model is testing the \rtext{druganxifree} contrast and the \rtext{drugjoyzepam} contrast {\it separately}, as if they were two completely unrelated variables. It's not surprising of course, because the poor regression analysis has no way of knowing that \rtext{drugjoyzepam} and \rtext{druganxifree} are actually the two different contrasts that we used to encode our three-level \rtext{drug} factor. As far as it knows, \rtext{drugjoyzepam} and \rtext{druganxifree} are no more related to one another than \rtext{drugjoyzepam} and \rtext{therapyCBT}. However, you and I know better. At this stage we're not at all interested in determining whether these two contrasts are individually significant. We just want to know if there's an ``overall'' effect of drug. That is, what {\it we} want jamovi to do is to run some kind of ``model comparison'' test, one in which the two ``drug-related'' contrasts are lumped together for the purpose of the test. Sound familiar? All we need to do is specify our null model, which in this case would include the \rtext{CBTtherapy} predictor, and omit both of the drug-related variables, as in Figure \ref{fig:factorialanova11}. 
 
 
-\begin{figure}[h!!]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file = ../img/factorialanova/factorialanova11.png,clip=true, width = 14cm} 
 \caption{Model comparison in jamovi regression, null model 1 vs. contrasts model 2}
@@ -792,7 +792,7 @@ There's one last thing I want to mention in this section. In the previous exampl
 
 
 
-\begin{figure}[h!!]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file = ../img/factorialanova/factorialanova12.png,clip=true, width = 14cm} 
 \caption{Specifying factors as predictors in jamovi linear regression, with omnibus ANOVA test results}
@@ -880,7 +880,7 @@ Polynomial & Compares the linear effect and quadratic effect. The first degree o
 
 \section{Post hoc tests\label{sec:posthoc2}}
 
-Time to switch to a different topic. Let's suppose you've done your ANOVA, and it turns out that you obtained some significant effects. Because of the fact that the $F$-tests are ``omnibus'' tests that only really test the null hypothesis that there are no differences among groups, obtaining a significant effect doesn't tell you which groups are different to which other ones. We discussed this issue back in Chapter~\ref{ch:anova}, and in that chapter our solution was to run $t$-tests for all possible pairs of groups, making  corrections for multiple comparisons (e.g., Bonferroni, Holm) to control the Type I error rate across all comparisons. The methods that we used back in Chapter~\ref{ch:anova} have the advantage of being relatively simple, and being the kind of tools that you can use in a lot of different situations where you're testing multiple hypotheses, but they're not necessarily the best choices if you're interested in doing efficient post hoc testing in an ANOVA context. There are actually quite a lot of different methods for performing multiple comparisons in the statistics literature \cite{Hsu1996}, and it would be beyond the scope of an introductory text like this one to discuss all of them in any detail. 
+Time to switch to a different topic. Let's suppose you've done your ANOVA, and it turns out that you obtained some significant effects. Because of the fact that the $F$-tests are ``omnibus'' tests that only really test the null hypothesis that there are no differences among groups, obtaining a significant effect doesn't tell you which groups are different to which other ones. We discussed this issue back in Chapter~\ref{ch:anova}, and in that chapter our solution was to run $t$-tests for all possible pairs of groups, making  corrections for multiple comparisons (e.g., Bonferroni, Holm) to control the Type I error rate across all comparisons. The methods that we used back in Chapter~\ref{ch:anova} have the advantage of being relatively simple, and being the kind of tools that you can use in a lot of different situations where you're testing multiple hypotheses, but they're not necessarily the best choices if you're interested in doing efficient post hoc testing in an ANOVA context. There are actually quite a lot of different methods for performing multiple comparisons in the statistics literature \parencite{Hsu1996}, and it would be beyond the scope of an introductory text like this one to discuss all of them in any detail. 
 
 That being said, there's one tool that I do want to draw your attention to, namely Tukey's ``Honestly Significant Difference'', or \keyterm{Tukey's HSD} for short. For once, I'll spare you the formulas, and just stick to the qualitative ideas. The basic idea in Tukey's HSD is to examine all relevant pairwise comparisons between groups, and it's only really appropriate to use Tukey's HSD if it is {\it pairwise} differences that you're interested in.\FOOTNOTE{If, for instance, you actually would find yourself interested to know if Group A is significantly different from the mean of Group B and Group C, then you need to use a different tool (e.g., Scheffe's method, which is more conservative, and beyond the scope of this book). However, in most cases you probably are interested in pairwise group differences, so Tukey's HSD is a pretty useful thing to know about.} For instance, in the factorial ANOVA we conducted earlier, using the \rtext{clinicaltrial.csv} data set, and where we specified a main effect for drug and a main effect of therapy, we would be interested in the following four comparisons:
 \begin{itemize}
@@ -896,7 +896,7 @@ The \rtext{TukeyHSD()} function in jamovi is pretty easy to use: you simply spec
 
 
 
-\begin{figure}[h!!]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file = ../img/factorialanova/factorialanova13.png,clip=true, width = 14cm} 
 \caption{Tukey HSD post hoc test in jamovi factorial ANOVA, without an interaction term}
@@ -920,7 +920,7 @@ So far, so good. What about the situation where your model includes interaction 
 
 There are quite a lot of these comparisons that you need to consider. So, when we run the Tukey post hoc analysis for this ANOVA model, we see that it has made a {\it lot} of pairwise comparisons (19 in total), as shown in Figure \ref{fig:factorialanova14}. You can see that it looks pretty similar to before, but with a lot more comparisons made.
 
-\begin{figure}[h!!]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file = ../img/factorialanova/factorialanova14.pdf,clip=true, width = 14cm} 
 \caption{Tukey HSD post hoc test in jamovi factorial ANOVA with an interaction term}
@@ -948,7 +948,7 @@ Unbalanced designs need to be treated with a lot more care than balanced designs
 As usual, it will help us to work with some data. The \rtext{coffee.csv} file contains a hypothetical data set that produces an unbalanced $3 \times 2$ ANOVA. Suppose we were interested in finding out whether or not the tendency of people to \rtext{babble} when they have too much coffee is purely an effect of the coffee itself, or whether there's some effect of the \rtext{milk} and \rtext{sugar} that people add to the coffee. Suppose we took 18 people, and gave them some coffee to drink. The amount of coffee / caffeine was held constant, and we varied whether or not milk was added: so \rtext{milk} is a binary factor with two levels, \rtext{"yes"} and \rtext{"no"}. We also varied the kind of sugar involved. The coffee might contain \rtext{"real"} sugar, or it might contain \rtext{"fake"} sugar (i.e., artificial sweetener), or it might contain \rtext{"none"} at all, so the \rtext{sugar} variable is a three level factor. Our outcome variable is a continuous variable that presumably refers to some psychologically sensible measure of the extent to which someone is ``babbling''. The details don't really matter for our purpose. Take a look at the data in the jamovi spreadsheet view, as in Figure \ref{fig:factorialanova15}.
 
 
-\begin{figure}[h!!]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file = ../img/factorialanova/factorialanova15.png,clip=true, width = 14cm} 
 \caption{The \rtext{coffee.csv} data set in jamovi, with descriptive information aggregated by factor levels}
@@ -965,7 +965,7 @@ This is especially true when we compare these means to the standard deviations f
 
 Unbalanced designs lead us to the somewhat unsettling discovery that there isn't really any one thing that we might refer to as a standard ANOVA. In fact, it turns out that there are {\it three} fundamentally different ways\FOOTNOTE{Actually, this is a bit of a lie. ANOVAs can vary in other ways besides the ones I've discussed in this book. For instance, I've completely ignored the difference between fixed-effect models, in which the levels of a factor are ``fixed'' by the experimenter or the world, and random-effect models, in which the levels are random samples from a larger population of possible levels (this book only covers fixed-effect models). Don't make the mistake of thinking that this book -- or any other one -- will tell you ``everything you need to know'' about statistics, any more than a single book could possibly tell you everything you need to know about psychology, physics or philosophy. Life is too complicated for that to {\it ever} be true. This isn't a cause for despair, though. Most researchers get by with a basic working knowledge of ANOVA that doesn't go any further than this book does. I just want you to keep in mind that this book is only the beginning of a very long story, not the whole story.} in which you might want to run an ANOVA in an unbalanced design. If you have a balanced design, all three versions produce identical results, with the sums of squares, $F$-values etc all conforming to the formulas that I gave at the start of the chapter. However, when your design is unbalanced they don't give the same answers. Furthermore, they are not all equally appropriate to every situation: some methods will be more appropriate to your situation than others. Given all this, it's important to understand what the different types of ANOVA are and how they differ from one another. 
 
-The first kind of ANOVA is conventionally referred to as \keyterm{Type I sum of squares}. I'm sure you can guess what the other two are called. The ``sum of squares'' part of the name was introduced by the SAS statistical software package, and has become standard nomenclature, but it's a bit misleading in some ways. I think the logic for referring to them as different types of sum of squares is that, when you look at the ANOVA tables that they produce, the key difference in the numbers is the SS values. The degrees of freedom don't change, the MS values are still defined as SS divided by df, etc. However, what the terminology gets wrong is that it hides the reason {\it why} the SS values are different from one another. To that end, it's a lot more helpful to think of the three different kinds of ANOVA as three different {\it hypothesis testing strategies}. These different strategies lead to different SS values, to be sure, but it's the strategy that is the important thing here, not the SS values themselves. Recall from Section~\ref{sec:omnibusF} and~\ref{sec:anovalm} that any particular $F$-test is best thought of as a comparison between two linear models. So when you're looking at an ANOVA table, it helps to remember that each of those $F$-tests corresponds to a {\it pair} of models that are being compared. Of course, this leads naturally to the question of {\it which} pair of models is being compared. This is the fundamental difference between ANOVA Types I, II and III: each one corresponds to a different way of choosing the model pairs for the tests. 
+The first kind of ANOVA is conventionally referred to as \keyterm{Type I sum of squares}. I'm sure you can guess what the other two are called. The ``sum of squares'' part of the name was introduced by the SAS statistical software package, and has become standard nomenclature, but it's a bit misleading in some ways. I think the logic for referring to them as different types of sum of squares is that, when you look at the ANOVA tables that they produce, the key difference in the numbers is the SS values. The degrees of freedom don't change, the MS values are still defined as SS divided by df, etc. However, what the terminology gets wrong is that it hides the reason {\it why} the SS values are different from one another. To that end, it's a lot more helpful to think of the three different kinds of ANOVA as three different {\it hypothesis testing strategies}. These different strategies lead to different SS values, to be sure, but it's the strategy that is the important thing here, not the SS values themselves. Recall from Section~\ref{sec:anovalm} that any particular $F$-test is best thought of as a comparison between two linear models. So when you're looking at an ANOVA table, it helps to remember that each of those $F$-tests corresponds to a {\it pair} of models that are being compared. Of course, this leads naturally to the question of {\it which} pair of models is being compared. This is the fundamental difference between ANOVA Types I, II and III: each one corresponds to a different way of choosing the model pairs for the tests. 
 
 
 \SUBSECTION{Type I sum of squares}
@@ -998,7 +998,7 @@ Alternative model: & \rtextverb#babble ~ sugar + milk + sugar*milk#
 Type III sum of squares is the default hypothesis testing method used by jamovi ANOVA, so to run a Type I sum of squares analysis we have to select `Type 1' in the `Sum of squares' selection box in the jamovi `ANOVA' - `Model' options, This gives us the ANOVA table shown in Figure \ref{fig:factorialanova16}.
 
 
-\begin{figure}[h!!]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file = ../img/factorialanova/factorialanova16.pdf,clip=true, width = 14cm} 
 \caption{ANOVA results table using Type I sum of squares in jamovi}
@@ -1010,7 +1010,7 @@ Type III sum of squares is the default hypothesis testing method used by jamovi 
 The big problem with using Type I sum of squares is the fact that it really does depend on the order in which you enter the variables. Yet, in many situations the researcher has no reason to prefer one ordering over another. This is presumably the case for our milk and sugar problem. Should we add milk first, or sugar first? It feels exactly as arbitrary as a data analysis question as it does as a coffee-making question. There may in fact be some people with firm opinions about ordering, but it's hard to imagine a principled answer to the question. Yet, look what happens when we change the ordering, as in Figure \ref{fig:factorialanova17}.
 
 
-\begin{figure}[h!!]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file = ../img/factorialanova/factorialanova17.pdf,clip=true, width = 14cm} 
 \caption{ANOVA results table using Type I sum of squares in jamovi, but with factors entered in a different order (\rtext{milk} first)}
@@ -1075,7 +1075,7 @@ At first pass, Type III tests seem like a nice idea. Firstly, we've removed the 
 Later on, we'll see that Type III tests can be redeemed in some contexts, but first let's take a look at the ANOVA results table using Type III sum of squares, see Figure \ref{fig:factorialanova18}.
 
 
-\begin{figure}[h!!]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file = ../img/factorialanova/factorialanova18.pdf,clip=true, width = 14cm} 
 \caption{ANOVA results table using Type III sum of squares in jamovi}
@@ -1152,7 +1152,7 @@ Alternative model: & \rtextverb#babble ~ sugar + milk + sugar*milk#
 Running the tests are again straightforward, just select `Type 2 in the `Sum of squares' selection box in the jamovi `ANOVA' - `Model' options, This gives us the ANOVA table shown in Figure \ref{fig:factorialanova19}.
 
 
-\begin{figure}[h!!]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file = ../img/factorialanova/factorialanova19.pdf,clip=true, width = 14cm} 
 \caption{ANOVA results table using Type II sum of squares in jamovi}
@@ -1198,7 +1198,7 @@ This uncertainty is the reason for the missing variance. The ``missing'' varianc
 \begin{itemize} \itemsep -2pt
 \item Factorial ANOVA with balanced designs, without interactions (Section~\ref{sec:factorialanovasimple}) and with interactions included (Section~\ref{sec:interactions})
 \item Effect size, estimated means, and confidence intervals in a factorial ANOVA (Section~\ref{sec:effectsizefactorialanova})
-\item Understanding the linear model underling ANOVA  (Sections~\ref{sec:omnibusF}, \ref{sec:anovalm} and \ref{sec:contrasts})
+\item Understanding the linear model underling ANOVA  (Sections~\ref{sec:anovalm} and \ref{sec:contrasts})
 \item Post hoc testing using Tukey's HSD (Section~\ref{sec:posthoc2}), and a brief commentary on planned comparisons (Section~\ref{sec:plannedcomparisons})
 \item Factorial ANOVA with unbalanced designs (Section~\ref{sec:unbalancedanova})
 \end{itemize}

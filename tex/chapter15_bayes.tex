@@ -12,7 +12,7 @@
 
 %\begin{quote}
 %{\it In God we trust; all others must bring data} \\
-%\hspace*{2cm} -- William Edwards Deming (probably)\footnote{The preface to the Second Edition of the very excellent book ``The Elements of Statistical Learning'' \cite{Hastie2009} mentions that ``on the Web, this quote has been widely attributed to both Deming and Robert W.
+%\hspace*{2cm} -- William Edwards Deming (probably)\footnote{The preface to the Second Edition of the very excellent book ``The Elements of Statistical Learning'' \parencite{Hastie2009} mentions that ``on the Web, this quote has been widely attributed to both Deming and Robert W.
 %Hayden; however Professor Hayden told us that he can claim no credit for this quote,
 %and ironically we could find no ``data'' confirming that Deming actually said this.''}
 %\end{quote}
@@ -22,7 +22,7 @@
 
 %\begin{quote}
 %{\it For many years, there has been controversy over `frequentist' versus `Bayesian' methods of inference, in which the writer has been an outspoken partisan on the Bayesian side. The record of this up to 1981 is given in an earlier book (Jaynes, 1983). In these old works there was a strong tendency, on both sides, to argue on the level of philosophy or ideology. We can now hold ourselves somewhat aloof from this because, thanks to recent work, there is no longer any need to appeal to such arguments. We are now in possession of proven theorems and masses of worked-out numerical examples. As a result, the superiority of Bayesian methods is now a thoroughly documented fact in a hundred different areas. One can argue with a philosophy; it is not so easy to argue with a computer printout.}\\
-%\hspace*{2cm} -- E. T. Jaynes \citeyear{Jaynes2003}
+%\hspace*{2cm} -- E. T. Jaynes \parenciteyear{Jaynes2003}
 %\end{quote}
 
 
@@ -234,7 +234,7 @@ The Bayes factor (sometimes abbreviated as \keyterm{BF}) has a special place in 
 
 \subsection{Interpreting Bayes factors}
 
-One of the really nice things about the Bayes factor is the numbers are inherently meaningful. If you run an experiment and you compute a Bayes factor of 4, it means that the evidence provided by your data corresponds to betting odds of 4:1 in favour of the alternative. However, there have been some attempts to quantify the standards of evidence that would be considered meaningful in a scientific context. The two most widely used are from \citeA{Jeffreys1961} and \citeA{Kass1995}. Of the two, I tend to prefer the \citeA{Kass1995} table because it's a bit more conservative. So here it is:
+One of the really nice things about the Bayes factor is the numbers are inherently meaningful. If you run an experiment and you compute a Bayes factor of 4, it means that the evidence provided by your data corresponds to betting odds of 4:1 in favour of the alternative. However, there have been some attempts to quantify the standards of evidence that would be considered meaningful in a scientific context. The two most widely used are from \textcite{Jeffreys1961} and \textcite{Kass1995}. Of the two, I tend to prefer the \textcite{Kass1995} table because it's a bit more conservative. So here it is:
 
 \begin{center}
 \begin{tabular}{r|r}
@@ -299,13 +299,13 @@ Speaking for myself, I found this to be a the most liberating thing about switch
 
 \begin{quote}
 {\it If [$p$] is below .02 it is strongly indicated that the [null] hypothesis fails to account for the whole of the facts. We shall not often be astray if we draw a conventional line at .05 and consider that [smaller values of $p$] indicate a real discrepancy.}\\
-\hspace*{2cm} -- Sir Ronald \citeA{Fisher1925}
+\hspace*{2cm} -- Sir Ronald \textcite{Fisher1925}
 \end{quote}
 
 
 Consider the quote above by Sir Ronald Fisher, one of the founders of what has become the orthodox approach to statistics. If anyone has ever been entitled to express an opinion about the intended function of $p$-values, it's Fisher. In this passage, taken from his classic guide {\it Statistical Methods for Research Workers}, he's pretty clear about what it means to reject a null hypothesis at $p<.05$. In his opinion, if we take $p<.05$ to mean there is ``a real effect'', then ``we shall not often be astray''. This view is hardly unusual: in my experience, most practitioners express views very similar to Fisher's. In essence, the $p<.05$ convention is assumed to represent a fairly stringent evidentiary standard.
 
-Well, how true is that? One way to approach this question is to try to convert $p$-values to Bayes factors, and see how the two compare. It's not an easy thing to do because a $p$-value is a fundamentally different kind of calculation to a Bayes factor, and they don't measure the same thing. However, there have been some attempts to work out the relationship between the two, and it's somewhat surprising. For example, \citeA{Johnson2013} presents a pretty compelling case that (for $t$-tests at least) the  $p<.05$ threshold corresponds roughly to a Bayes factor of somewhere between 3:1 and 5:1 in favour of the alternative. If that's right, then Fisher's claim is a bit of a stretch. Let's suppose that the null hypothesis is true about half the time (i.e., the prior probability of $H_0$ is 0.5), and we use those numbers to work out the posterior probability of the null hypothesis given that it has been rejected at $p<.05$. Using the data from \citeA{Johnson2013}, we see that if you reject the null at $p<.05$, you'll be correct about 80\% of the time. I don't know about you, but in my opinion an evidentiary standard that ensures you'll be wrong on 20\% of your decisions isn't good enough. The fact remains that, quite contrary to Fisher's claim, if you reject at $p<.05$ you shall quite often go astray. It's not a very stringent evidentiary threshold at all. 
+Well, how true is that? One way to approach this question is to try to convert $p$-values to Bayes factors, and see how the two compare. It's not an easy thing to do because a $p$-value is a fundamentally different kind of calculation to a Bayes factor, and they don't measure the same thing. However, there have been some attempts to work out the relationship between the two, and it's somewhat surprising. For example, \textcite{Johnson2013} presents a pretty compelling case that (for $t$-tests at least) the  $p<.05$ threshold corresponds roughly to a Bayes factor of somewhere between 3:1 and 5:1 in favour of the alternative. If that's right, then Fisher's claim is a bit of a stretch. Let's suppose that the null hypothesis is true about half the time (i.e., the prior probability of $H_0$ is 0.5), and we use those numbers to work out the posterior probability of the null hypothesis given that it has been rejected at $p<.05$. Using the data from \textcite{Johnson2013}, we see that if you reject the null at $p<.05$, you'll be correct about 80\% of the time. I don't know about you, but in my opinion an evidentiary standard that ensures you'll be wrong on 20\% of your decisions isn't good enough. The fact remains that, quite contrary to Fisher's claim, if you reject at $p<.05$ you shall quite often go astray. It's not a very stringent evidentiary threshold at all. 
 
 
 \subsection{The $p$-value is a lie.}
@@ -318,7 +318,7 @@ Well, how true is that? One way to approach this question is to try to convert $
 \hspace*{1cm} -- Portal\FOOTNOTE{\url{http://knowyourmeme.com/memes/the-cake-is-a-lie}}
 \end{quote}
 
-Okay, at this point you might be thinking that the real problem is not with orthodox statistics, just the $p<.05$ standard. In one sense, that's true. The recommendation that \citeA{Johnson2013} gives is not that ``everyone must be a Bayesian now''. Instead, the suggestion is that it would be wiser to shift the conventional standard to something like a $p<.01$ level. That's not an unreasonable view to take, but in my view the problem is a little more severe than that. In my opinion, there's a fairly big problem built into the way most (but not all) orthodox hypothesis tests are constructed. They are grossly naive about how humans actually do research, and because of this most $p$-values are wrong. 
+Okay, at this point you might be thinking that the real problem is not with orthodox statistics, just the $p<.05$ standard. In one sense, that's true. The recommendation that \textcite{Johnson2013} gives is not that ``everyone must be a Bayesian now''. Instead, the suggestion is that it would be wiser to shift the conventional standard to something like a $p<.01$ level. That's not an unreasonable view to take, but in my view the problem is a little more severe than that. In my opinion, there's a fairly big problem built into the way most (but not all) orthodox hypothesis tests are constructed. They are grossly naive about how humans actually do research, and because of this most $p$-values are wrong. 
 
 Sounds like an absurd claim, right? Well, consider the following scenario. You've come up with a really exciting research hypothesis and you design a study to test it. You're very diligent, so you run a power analysis to work out what your sample size should be, and you run the study. You run your hypothesis test and out pops a $p$-value of 0.072. Really bloody annoying, right? 
 
@@ -387,7 +387,7 @@ Worse yet, they're a lie in a dangerous way, because they're all {\it too small}
 \end{center}
 \end{figure}
 
-So how bad is it? The answer is shown as the solid black line in Figure~\ref{fig:type1}, and it's {\it astoundingly} bad. If you peek at your data after every single observation, there is a 49\% chance that you will make a Type I error. That's, um, quite a bit bigger than the 5\% that it's supposed to be. By way of comparison, imagine that you had used the following strategy. Start collecting data. Every single time an observation arrives, run a {\it Bayesian} $t$-test (Section~\ref{sec:ttestbf}) and look at the Bayes factor. I'll assume that \citeA{Johnson2013} is right, and I'll treat a Bayes factor of 3:1 as roughly equivalent to a $p$-value of .05.\FOOTNOTE{Some readers might wonder why I picked 3:1 rather than 5:1, given that \citeA{Johnson2013} suggests that $p=.05$ lies somewhere in that range. I did so in order to be charitable to the $p$-value. If I'd chosen a 5:1 Bayes factor instead, the results would look even better for the Bayesian approach.} This time around, our trigger happy researcher uses the following procedure: if the Bayes factor is 3:1 or more in favour of the null, stop the experiment and retain the null. If it is 3:1 or more in favour of the alternative, stop the experiment and reject the null. Otherwise continue testing. Now, just like last time, let's assume that the null hypothesis is true. What happens? As it happens, I ran the simulations for this scenario too, and the results are shown as the dashed line in Figure~\ref{fig:type1}. It turns out that the Type I error rate is much much lower than the 49\% rate that we were getting by using the orthodox $t$-test.
+So how bad is it? The answer is shown as the solid black line in Figure~\ref{fig:type1}, and it's {\it astoundingly} bad. If you peek at your data after every single observation, there is a 49\% chance that you will make a Type I error. That's, um, quite a bit bigger than the 5\% that it's supposed to be. By way of comparison, imagine that you had used the following strategy. Start collecting data. Every single time an observation arrives, run a {\it Bayesian} $t$-test (Section~\ref{sec:ttestbf}) and look at the Bayes factor. I'll assume that \textcite{Johnson2013} is right, and I'll treat a Bayes factor of 3:1 as roughly equivalent to a $p$-value of .05.\FOOTNOTE{Some readers might wonder why I picked 3:1 rather than 5:1, given that \textcite{Johnson2013} suggests that $p=.05$ lies somewhere in that range. I did so in order to be charitable to the $p$-value. If I'd chosen a 5:1 Bayes factor instead, the results would look even better for the Bayesian approach.} This time around, our trigger happy researcher uses the following procedure: if the Bayes factor is 3:1 or more in favour of the null, stop the experiment and retain the null. If it is 3:1 or more in favour of the alternative, stop the experiment and reject the null. Otherwise continue testing. Now, just like last time, let's assume that the null hypothesis is true. What happens? As it happens, I ran the simulations for this scenario too, and the results are shown as the dashed line in Figure~\ref{fig:type1}. It turns out that the Type I error rate is much much lower than the 49\% rate that we were getting by using the orthodox $t$-test.
 
 In some ways, this is remarkable. The entire {\it point} of orthodox null hypothesis testing is to control the Type I error rate. Bayesian methods aren't actually designed to do this at all. Yet, as it turns out, when faced with a ``trigger happy'' researcher who keeps running hypothesis tests as the data come in, the Bayesian approach is much more effective. Even the 3:1 standard, which most Bayesians would consider unacceptably lax, is much safer than the $p<.05$ rule. 
 
@@ -523,13 +523,13 @@ To my mind, this write up is unclear. Even assuming that you've already reported
 
 On the other hand, unless precision is {\it extremely} important, I think that this is taking things a step too far:
 \begin{quote}
-We ran a Bayesian test of association \cite<see>{Gunel1974} using version 0.9.10-1 of the BayesFactor package \cite{Morey2015} using default priors and a joint multinomial sampling plan. The resulting Bayes factor of 15.92 to 1 in favour of the alternative hypothesis indicates that there is moderately strong evidence for the non-independence of species and choice.
+We ran a Bayesian test of association \parencite<see>{Gunel1974} using version 0.9.10-1 of the BayesFactor package \parencite{Morey2015} using default priors and a joint multinomial sampling plan. The resulting Bayes factor of 15.92 to 1 in favour of the alternative hypothesis indicates that there is moderately strong evidence for the non-independence of species and choice.
 \end{quote}
-Everything about that passage is correct, of course. \citeA{Morey2015} built their Bayesian tests of association using the paper by \citeA{Gunel1974}, the specific test we used assumes that the experiment relied on a joint multinomial sampling plan, and indeed the Bayes factor of 15.92 is moderately strong evidence. It's just far too wordy.
+Everything about that passage is correct, of course. \textcite{Morey2015} built their Bayesian tests of association using the paper by \textcite{Gunel1974}, the specific test we used assumes that the experiment relied on a joint multinomial sampling plan, and indeed the Bayes factor of 15.92 is moderately strong evidence. It's just far too wordy.
 
 In most situations you just don't need that much information. My preference is usually to go for something a little briefer. First, if you're reporting multiple Bayes factor analyses in your write up, then somewhere you only need to cite the software once, at the beginning of the results section. So you might have one sentence like this:
 \begin{quote}
-All analyses were conducted using the BayesFactor package in R \cite{Morey2015}, and unless otherwise stated default parameter values were used
+All analyses were conducted using the BayesFactor package in R \parencite{Morey2015}, and unless otherwise stated default parameter values were used
 \end{quote}
 Notice that I don't bother including the version number? That's because the citation itself includes that information (go check my reference list if you don't believe me). There's no need to clutter up your results with redundant information that almost no-one will actually need. When you get to the actual test you can get away with this:
 \begin{quote}
@@ -612,7 +612,7 @@ An important type of statistical inference problem discussed in this book is the
 The most common type of $t$-test is the independent samples $t$-test, and it arises when you have data as in the \rtext{harpo.csv} data set that we used in the earlier chapter on $t$-tests (Chapter~\ref{ch:ttest}). In this data set, we have two groups of students, those who received lessons from Anastasia and those who took their classes with Bernadette. The question we want to answer is whether there's any difference in the grades received by these two groups of student. Back in Chapter~\ref{ch:ttest} I suggested you could analyse this kind of data using the Independent Samples T Test in jamovi, which gave us the results in Figure \ref{fig:bayes1}. As we obtain a $p$-value less than 0.05, so we reject the null hypothesis. 
 
 
-\begin{figure}[h!!]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file = ../img/bayes/bayes1.pdf,clip=true, width = 14cm} 
 \caption{Independent Samples T-Test result in jamovi}
@@ -623,7 +623,7 @@ The most common type of $t$-test is the independent samples $t$-test, and it ari
 
 What does the Bayesian version of the $t$-test look like? We can get the Bayes factor analysis by selecting the `Bayes factor' checkbox under the `Tests' option, and accepting the suggested default value for the `Prior'. This gives the results shown in the table in Figure \ref{fig:bayes2}. What we get in this table is a Bayes factor statistic of 1.75, meaning that the evidence provided by these data are about 1.8:1 in favour of the alternative hypothesis. 
 
-\begin{figure}[h!!]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file = ../img/bayes/bayes2.pdf,clip=true, width = 14cm} 
 \caption{Bayes factors analysis alongside Independent Samples T-Test}
@@ -640,7 +640,7 @@ Before moving on, it's worth highlighting the difference between the orthodox te
 Back in Section~\ref{sec:pairedsamplesttest} I discussed the \rtext{chico.csv} data set in which students grades were measured on two tests, and we were interested in finding out whether grades went up from test 1 to test 2. Because every student did both tests, the tool we used to analyse the data was a paired samples $t$-test. Figure \ref{fig:bayes3} shows the jamovi results table for the conventional paired $t$-test alongside the Bayes factor analysis. At this point, I hope you can read this output without any difficulty. The data provide evidence of about 6000:1 in favour of the alternative. We could probably reject the null with some confidence!
 
 
-\begin{figure}[h!!]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file = ../img/bayes/bayes3.pdf,clip=true, width = 14cm} 
 \caption{Paired samples T-Test and Bayes Factor result in jamovi}
@@ -981,7 +981,7 @@ A Bayesian Type II ANOVA found evidence for main effects of drug (Bayes factor: 
 
 The first half of this chapter was focused primarily on the theoretical underpinnings of Bayesian statistics. I introduced the mathematics for how Bayesian inference works (Section~\ref{sec:basicbayes}), and gave a very basic overview of how Bayesian hypothesis testing is typically done (Section~\ref{sec:bayesianhypothesistests}). Finally, I devoted some space to talking about why I think Bayesian methods are worth using (Section \ref{sec:whybayes}).
 
-Then I gave a prctical example, a Bayesian $t$-tests, (Section~\ref{sec:ttestbf}). If you're interested in learning more about the Bayesian approach, there are many good books you could look into. John Kruschke's book {\it Doing Bayesian Data Analysis} is a pretty good place to start \cite{Kruschke2011}, and is a nice mix of theory and practice. His approach is a little different to the ``Bayes factor'' approach that I've discussed here, so you won't be covering the same ground. If you're a cognitive psychologist, you might want to check out Michael Lee and E.J. Wagenmakers' book {\it Bayesian Cognitive Modeling} \cite{Lee2014}. I picked these two because I think they're especially useful for people in my discipline, but there's a lot of good books out there, so look around!
+Then I gave a prctical example, a Bayesian $t$-tests, (Section~\ref{sec:ttestbf}). If you're interested in learning more about the Bayesian approach, there are many good books you could look into. John Kruschke's book {\it Doing Bayesian Data Analysis} is a pretty good place to start \parencite{Kruschke2011}, and is a nice mix of theory and practice. His approach is a little different to the ``Bayes factor'' approach that I've discussed here, so you won't be covering the same ground. If you're a cognitive psychologist, you might want to check out Michael Lee and E.J. Wagenmakers' book {\it Bayesian Cognitive Modeling} \parencite{Lee2014}. I picked these two because I think they're especially useful for people in my discipline, but there's a lot of good books out there, so look around!
 
 
 

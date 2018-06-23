@@ -24,12 +24,6 @@
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
  
-\usepackage[
-backend=biber,
-style=authoryear
-]{biblatex}
-  
-
 
 
 
@@ -76,19 +70,84 @@ style=authoryear
 \usepackage{mathabx} % provides the \big asterisk symbol
 
 
+% referencing
+%\usepackage{apacite}
+\usepackage[backref=true,backend=biber,style=authoryear,citestyle=apa]{biblatex}
+
+\DefineBibliographyStrings{english}{%
+  backrefpage = {page},% originally "cited on page"
+  backrefpages = {pages},% originally "cited on pages"
+}
+
+\usepackage{csquotes}
+\DeclareCiteCommand{\cite}
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \printtext[bibhyperref]{\usebibmacro{cite}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+\DeclareCiteCommand*{\cite}
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \printtext[bibhyperref]{\usebibmacro{citeyear}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+\DeclareCiteCommand{\parencite}[\mkbibparens]
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+    \printtext[bibhyperref]{\usebibmacro{cite}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+\DeclareCiteCommand*{\parencite}[\mkbibparens]
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+    \printtext[bibhyperref]{\usebibmacro{citeyear}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+\DeclareCiteCommand{\footcite}[\mkbibfootnote]
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+  \printtext[bibhyperref]{ \usebibmacro{cite}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+\DeclareCiteCommand{\footcitetext}[\mkbibfootnotetext]
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \printtext[bibhyperref]{\usebibmacro{cite}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+\DeclareCiteCommand{\textcite}
+  {\boolfalse{cbx:parens}}
+  {\usebibmacro{citeindex}%
+   \printtext[bibhyperref]{\usebibmacro{textcite}}}
+  {\ifbool{cbx:parens}
+     {\bibcloseparen\global\boolfalse{cbx:parens}}
+     {}%
+   \multicitedelim}
+  {\usebibmacro{textcite:postnote}}
+
+\addbibresource{../tex/refs.bib} %Imports bibliography file
+
+
+
 % -- comment out for the HARDCOPY version ---
 % Need to  have everything loaded BEFORE hyperref, except for apacite,
 % which needs to be loaded afterwards. 
-\usepackage[pagebackref=true]{hyperref} % urls...
+\usepackage{hyperref} % urls...
 \hypersetup{colorlinks=true,
-    citecolor={red},
-    urlcolor={red},
-    linkcolor={red},
+    citecolor={blue},
+    urlcolor={blue},
+    linkcolor={blue},
 	pdftitle={Learning Statistics with jamovi},
-	pdfauthor={Danielle Navarro and David Foxcroft},
+	pdfauthor={Danielle J Navarro and David R Foxcroft},
 }
 %% http://health.webdev.adelaide.edu.au/psychology/ccs/docs/lsr/lsr.pdf#nameddest=chapter.17
-
 
 
 %%%%%%%%%%%%%%%% define commands etc %%%%%%%%%%%%
@@ -103,9 +162,6 @@ style=authoryear
 \usepackage{manfnt}
 %\newcommand{\advanced}{\protect\raisebox{9pt}{\small\dbend}}
 
-
-% referencing
-%\usepackage{apacite}
 
 
 
@@ -330,5 +386,3 @@ style=authoryear
 % suppress footnote breakgin
 \interfootnotelinepenalty=10000
 
-
-\addbibresource{../tex/refs.bib} %Imports bibliography file

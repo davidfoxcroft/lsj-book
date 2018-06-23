@@ -8,7 +8,7 @@
 Any time that you get a new data set to look at, one of the first tasks that you have to do is find ways of summarising the data in a compact, easily understood fashion. This is what \keyterm{descriptive statistics} (as opposed to inferential statistics) is all about. In fact, to many people the term ``statistics'' is synonymous with descriptive statistics. It is this topic that we'll consider in this chapter, but before going into any details, let's take a moment to get a sense of why we need descriptive statistics. To do this, let's open the \filename{aflsmall\_margins} file and see what variables are stored in the file.
 
 \vspace*{1cm}
-\begin{figure}[h]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file=../img/descriptives/aflsmall_margins.png,clip=true,width=12cm} 
 \caption{A screenshot of jamovi showing the variables stored in the \filename{aflsmall\_margins.csv} file}
@@ -22,7 +22,7 @@ In fact, there is just one variable here, \rtext{afl.margins}. We'll focus a bit
 This output doesn't make it easy to get a sense of what the data are actually saying. Just ``looking at the data'' isn't a terribly effective way of understanding data. In order to get some idea about what the data are actually saying, we need to calculate some descriptive statistics (this chapter) and draw some nice pictures (Chapter~\ref{ch:graphics}). Since the descriptive statistics are the easier of the two topics, I'll start with those, but nevertheless I'll show you a histogram of the \rtext{afl.margins} data, since it should help you get a sense of what the data we're trying to describe actually look like. But for what it's worth, this histogram -- which is shown in Figure~\ref{fig:histogram1} -- was generated using jamovi. We'll talk a lot more about how to draw histograms in Section~\ref{sec:hist}. For now, it's enough to look at the histogram and note that it provides a fairly interpretable representation of the \rtext{afl.margins} data.
 
 \vspace*{1cm}
-\begin{figure}[h]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file=../img/descriptives/aflMargins.eps,clip=true,width=10cm} 
 \caption{A histogram of the AFL 2010 winning margin data (the \rtext{afl.margins} variable). As you might expect, the larger the margin the less frequently you tend to see it.}
@@ -78,7 +78,7 @@ In all honesty, I can't imagine that all this mathematical notation helps clarif
 Okay that's the maths, how do we get the magic computing box to do the work for us? If you really wanted to, you could do this calculation directly in jamovi. And when the number of observations starts to become large, it's much easier to do these sorts of calculations using a computer. To calculate the mean using all the data, we now use jamovi. The first step is to click on the `Exploration' button and then click `Descriptives'. Then you can highlight the \rtext{afl.margins} variable and click the `right arrow' to move it across into the `Variables box'. As soon as you do that a Table appears on the right hand side of the screen containing default `Descriptives' information; see Figure \ref{fig:descriptives_default}. 
 
 \vspace*{1cm}
-\begin{figure}[h]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file=../img/descriptives/descriptives_default.png,clip=true,width=12cm} 
 \caption{Default descriptives for the AFL 2010 winning margin data (the \rtext{afl.margins} variable). }
@@ -108,11 +108,11 @@ Knowing how to calculate means and medians is only a part of the story. You also
 \begin{itemize} 
 \item If your data are nominal scale, you probably shouldn't be using either the mean or the median. Both the mean and the median rely on the idea that the numbers assigned to values are meaningful. If the numbering scheme is arbitrary, then it's probably best to use the mode (Section~\ref{sec:mode}) instead. 
 \item If your data are ordinal scale, you're more likely to want to use the median than the mean. The median only makes use of the order information in your data (i.e., which numbers are bigger), but doesn't depend on the precise numbers involved. That's exactly the situation that applies when your data are ordinal scale. The mean, on the other hand, makes use of the precise numeric values assigned to the observations, so it's not really appropriate for ordinal data.
-\item For interval and ratio scale data, either one is generally acceptable. Which one you pick depends a bit on what you're trying to achieve. The mean has the advantage that it uses all the information in the data (which is useful when you don't have a lot of data), but it's very sensitive to extreme values, as we'll see in Section~\ref{sec:trimmedmean}.  
+\item For interval and ratio scale data, either one is generally acceptable. Which one you pick depends a bit on what you're trying to achieve. The mean has the advantage that it uses all the information in the data (which is useful when you don't have a lot of data), but it's very sensitive to extreme values.  
 \end{itemize}
 
 \vspace*{1cm}
-\begin{figure}[h]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file = ../img/descriptives2/mean.eps,clip=true, width = 6cm}
 \raisebox{1mm}{\epsfig{file = ./../img/descriptives2/median.eps,clip=true, width = 6.4cm}}
@@ -163,7 +163,7 @@ My, my.
 
 The mode of a sample is very simple: it is the value that occurs most frequently. We can illustrate the mode using a different AFL variable, Who has played in the most finals? Open the \filename{aflsmall\_finalists} file and take a look at the \rtext{afl.finalists} variable - see Figure \ref{fig:aflsmall_finalists}. This variable contains the names of all 400 teams that played in all 200 finals matches played during the period 1987 to 2010. 
 \vspace{1cm}
-\begin{figure}[h]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file=../img/descriptives/aflsmall_finalists.png,clip=true,width=12cm} 
 \caption{A screenshot of jamovi showing the variables stored in the \filename{aflsmall\_finalists.csv} file}
@@ -175,7 +175,7 @@ The mode of a sample is very simple: it is the value that occurs most frequently
 What we {\it could} do is read through all 400 entries, and count the number of occasions on which each team name appears in our list of finalists, thereby producing a \keyterm{frequency table}. However, that would be mindless and boring: exactly the sort of task that computers are great at. So let's use jamovi to do this for us. Under `Exploration' - `Descriptives' click the small check box labelled `Frequency tables', and you should get something like Figure \ref{fig:aflsmall_finalists_mode}. 
 
 \vspace{1cm}
-\begin{figure}[h]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file=../img/descriptives/aflsmall_finalists_mode.png,clip=true,width=12cm} 
 \caption{A screenshot of jamovi showing the frequency table for the \rtext{afl.finalists} variable }
@@ -189,7 +189,7 @@ Now that we have our frequency table, we can just look at it and see that, over 
 One last point to make with respect to the mode. While it's generally true that the mode is most often calculated when you have nominal data (because means and medians are useless for those sorts of variables), there are some situations in which you really do want to know the mode of an ordinal, interval or ratio scale variable. For instance, let's go back to thinking about our \rtext{afl.margins} variable. This variable is clearly ratio scale (if it's not clear to you, it may help to re-read Section~\ref{sec:scales}), and so in most situations the mean or the median is the measure of central tendency that you want. But consider this scenario... a friend of yours is offering a bet. They pick a football game at random, and (without knowing who is playing) you have to guess the {\it exact} margin. If you guess correctly, you win \$50. If you don't, you lose \$1. There are no consolation prizes for ``almost'' getting the right answer. You have to guess exactly the right margin\FOOTNOTE{This is called a ``0-1 loss function'', meaning that you either win (1) or you lose (0), with no middle ground.} For this bet, the mean and the median are completely useless to you. It is the mode that you should bet on. To calculate the mode for the \rtext{afl.margins} variable in jamovi, go back to that data set and on the `Exploration' - `Descriptives' screen you will see you can expand the section marked `Statistics'. Click on the checkbox marked `Mode' and you will see the modal value presented in the `Descriptives' Table, as in Figure \ref{fig:aflsmall_margins_mode}. So the 2010 data suggest you should bet on a 3 point margin.
 
 \vspace{1cm}
-\begin{figure}[h]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file=../img/descriptives/aflsmall_margins_mode.png,clip=true,width=12cm} 
 \caption{A screenshot of jamovi showing the modal value for the \rtext{afl.margins} variable }
@@ -216,7 +216,7 @@ $$
 The \keyterm{interquartile range} (IQR) is like the range, but instead of the difference between the biggest and smallest value, the difference between the 25th percentile and the 75th percentile is taken. Probably you already know what a \keyterm{percentile} is, but if not: the 10th percentile of a data set is the smallest number $x$ such that 10\% of the data is less than $x$. In fact, we've already come across the idea: the median of a data set is its 50th percentile! In jamovi you can easily specify the 25th, 50th and 75th percentiles by clicking the checkbox `Quartiles' in the `Exploration' - `Descriptives' - `Statistics' screen. 
 
 \vspace{1cm}
-\begin{figure}[h]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file=../img/descriptives/aflsmall_margins_iqr.png,clip=true,width=4cm} 
 \caption{A screenshot of jamovi showing the Quartiles for the \rtext{afl.margins} variable }
@@ -283,7 +283,7 @@ maths: & $i$ & $X_i$ & $X_i - \bar{X}$ &  $(X_i - \bar{X})^2$ \\ \hline
 That last column contains all of our squared deviations, so all we have to do is average them. If we do that by hand, i.e. using a calculator, we end up with a variance of 324.64. Exciting, isn't it? For the moment, let's ignore the burning question that you're all probably thinking (i.e., what the heck does a variance of 324.64 actually mean?) and instead talk a bit more about how to do the calculations in jamovi, because this will reveal something very weird. Start a new jamovi session by clicking on the main menu button (three horizontal lines in the top left corner and selecting `New'. Now type in the first five values from the afl.margins data set in column A (\rtext{56, 31, 56, 8, 32}). Change the variable type to `Continuous' and under `Descriptives' click the `Variance' check box, and you get the same values for variance as the one we calculated by hand (\rtext{324.64})... no, wait... you get a completely {\it different} answer (\rtext{405.80}) - see Figure \ref{fig:aflsmall_margins_variance1}. That's just weird. Is jamovi broken? Is this a typo? Am I an idiot? 
 
 \vspace{1cm}
-\begin{figure}[h]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file=../img/descriptives/aflsmall_margins_variance1.png,clip=true,width=12cm} 
 \caption{A screenshot of jamovi showing the Variance for the first 5 values of the \rtext{afl.margins} variable }
@@ -315,7 +315,7 @@ $$
 
 Interpreting standard deviations is slightly more complex. Because the standard deviation is derived from the variance, and the variance is a quantity that has little to no meaning that makes sense to us humans, the standard deviation doesn't have a simple interpretation. As a consequence, most of us just rely on a simple rule of thumb: in general, you should expect 68\% of the data to fall within 1 standard deviation of the mean, 95\% of the data to fall within 2 standard deviation of the mean, and 99.7\% of the data to fall within 3 standard deviations of the mean. This rule tends to work pretty well most of the time, but it's not exact: it's actually calculated based on an {\it assumption} that the histogram is symmetric and ``bell shaped''.\FOOTNOTE{Strictly, the assumption is that the data are {\it normally} distributed, which is an important concept that we'll discuss more in Chapter~\ref{ch:probability}, and will turn up over and over again later in the book.} As you can tell from looking at the AFL winning margins histogram in Figure~\ref{fig:histogram1}, this isn't exactly true of our data! Even so, the rule is approximately correct. As it turns out, 65.3\% of the AFL margins data fall within one standard deviation of the mean. This is shown visually in Figure~\ref{fig:aflsd}.
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file = ../img/descriptives/aflSD.eps, clip=true,width = 10cm}
 \caption{An illustration of the standard deviation, applied to the AFL winning margins data. The shaded bars in the histogram show how much of the data fall within one standard deviation of the mean. In this case, 65.3\% of the data set lies within this range, which is pretty consistent with the ``approximately 68\% rule'' discussed in the main text.}
@@ -344,7 +344,7 @@ In short, the IQR and the standard deviation are easily the two most common meas
 There are two more descriptive statistics that you will sometimes see reported in the psychological literature, known as skew and kurtosis. In practice, neither one is used anywhere near as frequently as the measures of central tendency and variability that we've been talking about. Skew is pretty important, so you do see it mentioned a fair bit; but I've actually never seen kurtosis reported in a scientific article to date. 
 
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file = ../img/descriptives/skewness.eps,clip=true, width = 13cm}
 \caption{An illustration of skewness. On the left we have a negatively skewed data set (skewness $= -.93$), in the middle we have a data set with no skew (technically, skewness $= -.006$), and on the right we have a positively skewed data set (skewness $= .93$).  }
@@ -376,7 +376,7 @@ $$
 $$
 I know, it's not terribly interesting to me either. More to the point, jamovi has a check box for kurtosis just below the check box for skewness, and this gives a value for kurtosis of \rtext{0.101} with a standard error of \rtext{0.364}. This means that the AFL winning margins data are just pointy enough.
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file = ../img/descriptives/kurtosis.eps, clip=true,width = 13cm}
 \caption{An illustration of kurtosis. On the left, we have a ``platykurtic'' data set (kurtosis = $-.95$), meaning that the data set is ``too flat''. In the middle we have a ``mesokurtic'' data set (kurtosis is almost exactly 0), which means that the pointiness of the data is just about right. Finally, on the right, we have a ``leptokurtic'' data set (kurtosis $= 2.12$) indicating that the data set is ``too pointy''. Note that kurtosis is measured with respect to a normal curve (black line).}
@@ -391,7 +391,7 @@ I know, it's not terribly interesting to me either. More to the point, jamovi ha
 It is very commonly the case that you find yourself needing to look at descriptive statistics, broken down by some grouping variable. This is pretty easy to do in jamovi. For instance, let's  say, I want to look at the descriptive statistics for some \rtext{clin.trial} data, broken down separately by \rtext{therapy} type. This is a new data set, one that you've never seen before. The data is stored in the \filename{clinicaltrial.csv} file, and we'll use it a lot in Chapter~\ref{ch:anova} (you can find a complete description of the data at the start of that chapter). Let's load it, and see what we've got:
 
 \vspace{1cm}
-\begin{figure}[h]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file=../img/descriptives/clinicaltrial.png,clip=true,width=12cm} 
 \caption{A screenshot of jamovi showing the variables stored in the \filename{clinicaltrial.csv} file}
@@ -405,7 +405,7 @@ Evidently there were three drugs: a placebo, something called ``anxifree'' and s
 We can also go ahead a look at some other descriptive statistics, and this time separately for each type of therapy. In jamovi, check Std. deviation, Skewness and Kurtosis in the `Statistics' options. At the same time, transfer the \rtext{therapy} variable into the `Split by' box, and you should get something like Figure \ref{fig:clinicaltrial_grouping}
 
 \vspace{1cm}
-\begin{figure}[h]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file=../img/descriptives/clinicaltrial_grouping.png,clip=true,width=12cm} 
 \caption{A screenshot of jamovi showing Descriptives split by therapy type}
@@ -468,7 +468,7 @@ After spending so much time looking at the AFL data, I'm starting to get bored w
 
 Next, I'll take a look at some basic descriptive statistics and also, to give a graphical depiction of what each of the three interesting variables looks like, Figure~\ref{fig:parenthood} plots histograms. One thing to note: just because jamovi can calculate dozens of different statistics doesn't mean you should report all of them. If I were writing this up for a report, I'd probably pick out those statistics that are of most interest to me (and to my readership), and then put them into a nice, simple table like the one in Table~\ref{tab:parenthood}.\FOOTNOTE{Actually, even that table is more than I'd bother with. In practice most people pick {\it one} measure of central tendency, and {\it one} measure of variability only.}  Notice that when I put it into a table, I gave everything ``human readable'' names. This is always good practice. Notice also that I'm not getting enough sleep. This isn't good practice, but other parents tell me that it's standard practice.  
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \begin{center}
 \begin{tabular}{ccc}
 \hspace*{-5mm}\epsfig{file = ../img/descriptives/grumpHist1.eps, clip=true, width=5.1cm} &
@@ -485,7 +485,7 @@ Next, I'll take a look at some basic descriptive statistics and also, to give a 
 
 \SUBSECTION{The strength and direction of a relationship}
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \begin{center}
 \begin{tabular}{cc}
 \epsfig{file = ../img/descriptives/grumpCor1.eps, clip=true, width =7cm} &
@@ -506,7 +506,7 @@ We can draw scatterplots to give us a general sense of how closely related two v
 
 In contrast, let's consider the two scatterplots shown in Figure~\ref{fig:scatterparent2}. If we compare the scatterplot of ``\rtext{baby.sleep} v \rtext{dan.grump}'' (left) to the scatterplot of ```\rtext{baby.sleep} v \rtext{dan.sleep}'' (right), the overall strength of the relationship is the same, but the direction is different. That is, if my son sleeps more, I get {\it more} sleep (positive relationship, right hand side), but if he sleeps more then I get {\it less} grumpy (negative relationship, left hand side).
  
-\begin{figure}[h]
+\begin{figure}[ht]
 \begin{center}
 \begin{tabular}{cc}
 \epsfig{file = ../img/descriptives/grumpCor2.eps, clip=true, width =7cm} &
@@ -566,7 +566,7 @@ By doing this standardisation, not only do we keep all of the nice properties of
 Calculating correlations in jamovi can be done using by clicking on the `Regression' - `Correlation Matrix' button. Transfer all four continuous variables across into the box on the right, to get the output in Figure \ref{fig:correlations}
 
 \vspace{1cm}
-\begin{figure}[h]
+\begin{figure}[ht]
 \begin{center}
 \epsfig{file=../img/descriptives/correlations.png,clip=true,width=12cm} 
 \caption{A screenshot of jamovi showing correlations between variables in the \filename{parenthood.csv} file}
@@ -616,7 +616,7 @@ Correlation & Strength & Direction \\ \hline
 \end{figure}
 
 
-However, something that can never be stressed enough is that you should {\it always} look at the scatterplot before attaching any interpretation to the data. A correlation might not mean what you think it means. The classic illustration of this is ``Anscombe's Quartet'' \cite{Anscombe1973}, which is a collection of four data sets. Each data set has two variables, an $X$ and a $Y$. For all four data sets the mean value for $X$ is 9 and the mean for $Y$ is 7.5. The, standard deviations for all $X$ variables are almost identical, as are those for the the $Y$ variables. And in each case the correlation between $X$ and $Y$ is $r = 0.816$. You can verify this yourself, since I happen to have saved it in a file called \filename{anscombe.csv}. 
+However, something that can never be stressed enough is that you should {\it always} look at the scatterplot before attaching any interpretation to the data. A correlation might not mean what you think it means. The classic illustration of this is ``Anscombe's Quartet'' \parencite{Anscombe1973}, which is a collection of four data sets. Each data set has two variables, an $X$ and a $Y$. For all four data sets the mean value for $X$ is 9 and the mean for $Y$ is 7.5. The, standard deviations for all $X$ variables are almost identical, as are those for the the $Y$ variables. And in each case the correlation between $X$ and $Y$ is $r = 0.816$. You can verify this yourself, since I happen to have saved it in a file called \filename{anscombe.csv}. 
 
 You'd think that these four data setswould look pretty similar to one another. They do not. If we draw scatterplots of $X$ against $Y$ for all four variables, as shown in Figure~\ref{fig:anscombe} we see that all four of these are {\it spectacularly} different to each other. The lesson here, which so very many people seem to forget in real life is ``{\it always graph your raw data}''. This will be the focus of Chapter~\ref{ch:graphics}.
 
@@ -683,7 +683,7 @@ In the next section we'll move on to a discussion of how to draw pictures! Every
 
 \begin{quote}
 {\it 950,000 -- 1,200,000} \\
-\hspace*{2cm} -- Estimate of Soviet repression deaths, \\ \hspace*{2.3cm} 1937-1938 \cite{Ellman2002}
+\hspace*{2cm} -- Estimate of Soviet repression deaths, \\ \hspace*{2.3cm} 1937-1938 \parencite{Ellman2002}
 \end{quote}
 
 
