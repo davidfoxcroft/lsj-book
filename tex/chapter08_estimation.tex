@@ -322,9 +322,9 @@ Let's extend this example a little. Suppose I now make a second observation. My 
 \end{center}
 This time around, our sample is {\it just} large enough for us to be able to observe some variability: two observations is the bare minimum number needed for any variability to be observed! For our new data set, the sample mean is $\bar{X}=21$, and the sample standard deviation is $s=1$. What intuitions do we have about the population? Again, as far as the population mean goes, the best guess we can possibly make is the sample mean. If forced to guess we'd probably guess that the population mean cromulence is 21. What about the standard deviation? This is a little more complicated. The sample standard deviation is only based on two observations, and if you're at all like me you probably have the intuition that, with only two observations we haven't given the population ``enough of a chance'' to reveal its true variability to us. It's not just that we suspect that the estimate is {\it wrong}, after all with only two observations we expect it to be wrong to some degree. The worry is that the error is {\it systematic}. Specifically, we suspect that the sample standard deviation is likely to be smaller than the population standard deviation. 
 
-\begin{figure}[t]
+\begin{figure}[p]
 \begin{center}
-\epsfig{file=../img/estimation/samplingDistSampleSD.eps,clip=true,width=10cm} 
+\epsfig{file=../img/estimation/samplingDistSampleSD.eps,clip=true,width=12cm} 
 \caption{The sampling distribution of the sample standard deviation for a ``two IQ scores'' experiment. The true population standard deviation is 15 (dashed line), but as you can see from the histogram the vast majority of experiments will produce a much smaller sample standard deviation than this. On average, this experiment would produce a sample standard deviation of only 8.5, well below the true value! In other words, the sample standard deviation is a {\it biased} estimate of the population standard deviation.}
 \label{fig:sampdistsd}
 \HR
@@ -333,9 +333,9 @@ This time around, our sample is {\it just} large enough for us to be able to obs
 
 This intuition feels right, but it would be nice to demonstrate this somehow. There are in fact mathematical proofs that confirm this intuition, but unless you have the right mathematical background they don't help very much. Instead, what I'll do is simulate the results of some experiments. With that in mind, let's return to our IQ studies. Suppose the true population mean IQ is 100 and the standard deviation is 15. First I'll conduct an experiment in which I measure $N=2$ IQ scores and I'll calculate the sample standard deviation. If I do this over and over again, and plot a histogram of these sample standard deviations, what I have is the {\it sampling distribution of the standard deviation}. I've plotted this distribution in Figure~\ref{fig:sampdistsd}. Even though the true population standard deviation is 15 the average of the {\it sample} standard deviations is only 8.5. Notice that this is a very different result to what we found in Figure~\ref{fig:IQsamp}b when we plotted the sampling distribution of the mean, where the population mean is 100 and the average of the sample means is also 100. 
 
-Now let's extend the simulation. Instead of restricting ourselves to the situation where we have a sample size of $N=2$, let's repeat the exercise for sample sizes from 1 to 10. If we plot the average sample mean and average sample standard deviation as a function of sample size, you get the results shown in Figure~\ref{fig:estimatorbias}. On the left hand side (panel a) I've plotted the average sample mean and on the right hand side (panel b) I've plotted the average standard deviation. The two plots are quite different:{\it on average}, the average sample mean is equal to the population mean. It is an \keyterm{unbiased estimator}, which is essentially the reason why your best estimate for the population mean is the sample mean.\FOOTNOTE{I should note that I'm hiding something here. Unbiasedness is a desirable characteristic for an estimator, but there are other things that matter besides bias. However, it's beyond the scope of this book to discuss this in any detail. I just want to draw your attention to the fact that there's some hidden complexity here.} The plot on the right is quite different: on average, the sample standard deviation $s$ is {\it smaller} than the population standard deviation $\sigma$. It is a \keyterm{biased estimator}. In other words, if we want to make a ``best guess'' $\hat\sigma$ about the value of the population standard deviation $\sigma$ we should make sure our guess is a little bit larger than the sample standard deviation $s$. 
+Now let's extend the simulation. Instead of restricting ourselves to the situation where $N=2$, let's repeat the exercise for sample sizes from 1 to 10. If we plot the average sample mean and average sample standard deviation as a function of sample size, you get the results shown in Figure~\ref{fig:estimatorbias}. On the left hand side (panel a) I've plotted the average sample mean and on the right hand side (panel b) I've plotted the average standard deviation. The two plots are quite different:{\it on average}, the average sample mean is equal to the population mean. It is an \keyterm{unbiased estimator}, which is essentially the reason why your best estimate for the population mean is the sample mean.\FOOTNOTE{I should note that I'm hiding something here. Unbiasedness is a desirable characteristic for an estimator, but there are other things that matter besides bias. However, it's beyond the scope of this book to discuss this in any detail. I just want to draw your attention to the fact that there's some hidden complexity here.} The plot on the right is quite different: on average, the sample standard deviation $s$ is {\it smaller} than the population standard deviation $\sigma$. It is a \keyterm{biased estimator}. In other words, if we want to make a ``best guess'' $\hat\sigma$ about the value of the population standard deviation $\sigma$ we should make sure our guess is a little bit larger than the sample standard deviation $s$. 
 
-\begin{figure}[t]
+\begin{figure}[p]
 \begin{center}
 \begin{tabular}{cc}
 \epsfig{file=../img/estimation/biasMean.eps,clip=true,width=7cm} &
@@ -348,6 +348,8 @@ Now let's extend the simulation. Instead of restricting ourselves to the situati
 \end{center}
 \end{figure}
 
+\vspace{0.5cm}
+\begin{mdframed}[style=MyFrame,nobreak=true]
 The fix to this systematic bias turns out to be very simple. Here's how it works. Before tackling the standard deviation let's look at the variance. If you recall from Section~\ref{sec:var}, the sample variance is defined to be the average of the squared deviations from the sample mean. That is:
 $$
 s^2 = \frac{1}{N} \sum_{i=1}^N (X_i - \bar{X})^2
@@ -361,6 +363,7 @@ $$
 \hat\sigma = \sqrt{\frac{1}{N-1} \sum_{i=1}^N (X_i - \bar{X})^2} 
 $$
 and when we use jamovi's built in standard deviation function, what it's doing is calculating $\hat\sigma$, not $s$.\FOOTNOTE{Okay, I'm hiding something else here. In a bizarre and counter-intuitive twist, since $\hat\sigma^2$ is an unbiased estimator of $\sigma^2$, you'd assume that taking the square root would be fine and $\hat\sigma$ would be an unbiased estimator of $\sigma$. Right? Weirdly, it's not. There's actually a subtle, tiny bias in $\hat\sigma$. This is just bizarre: $\hat\sigma^2$ is an unbiased estimate of the population variance $\sigma^2$, but when you take the square root, it turns out that $\hat\sigma$ is a biased estimator of the population standard deviation $\sigma$. Weird, weird, weird, right? So, why is $\hat\sigma$ biased? The technical answer is ``because non-linear transformations (e.g., the square root) don't commute with expectation'', but that just sounds like gibberish to everyone who hasn't taken a course in mathematical statistics. Fortunately, it doesn't matter for practical purposes. The bias is small, and in real life everyone uses $\hat\sigma$ and it works just fine. Sometimes mathematics is just annoying.} 
+\end{mdframed}
 
 One final point. In practice, a lot of people tend to refer to $\hat{\sigma}$ (i.e., the formula where we divide by $N-1$) as the {\it sample} standard deviation. Technically, this is incorrect. The {\it sample} standard deviation should be equal to $s$ (i.e., the formula where we divide by $N$). These aren't the same thing, either conceptually or numerically. One is a property of the sample, the other is an estimated characteristic of the population. However, in almost every real life application what we actually care about is the estimate of the population parameter, and so people always report $\hat\sigma$ rather than $s$. This is the right number to report, of course. It's just that people tend to get a little bit imprecise about terminology when they write it up, because ``sample standard deviation'' is shorter than ``estimated population standard deviation''. It's no big deal, and in practice I do the same thing everyone else does. Nevertheless, I think it's important to keep the two {\it concepts} separate. It's never a good idea to confuse ``known properties of your sample'' with ``guesses about the population from which it came''. The moment you start thinking that $s$ and $\hat\sigma$ are the same thing, you start doing exactly that. 
 
@@ -402,7 +405,11 @@ Up to this point in this chapter, I've outlined the basics of sampling theory wh
 
 Armed with an understanding of sampling distributions, constructing a confidence interval for the mean is actually pretty easy. Here's how it works. Suppose the true population mean is $\mu$ and the standard deviation is $\sigma$. I've just finished running my study that has $N$ participants, and the mean IQ among those participants is $\bar{X}$. We know from our discussion of the central limit theorem (Section~\ref{sec:clt}) that the sampling distribution of the mean is approximately normal. We also know from our discussion of the normal distribution Section~\ref{sec:normal} that there is a 95\% chance that a normally-distributed quantity will fall within about two standard deviations of the true mean. 
 
-To be more precise, the more correct answer is that there is a 95\% chance that a normally-distributed quantity will fall within 1.96 standard deviations of the true mean. Next, recall that the standard deviation of the sampling distribution is referred to as the standard error, and the standard error of the mean is written as SEM. When we put all these pieces together, we learn that there is a 95\% probability that the sample mean $\bar{X}$ that we have actually observed lies within 1.96 standard errors of the population mean. Mathematically, we write this as:
+To be more precise, the more correct answer is that there is a 95\% chance that a normally-distributed quantity will fall within 1.96 standard deviations of the true mean. Next, recall that the standard deviation of the sampling distribution is referred to as the standard error, and the standard error of the mean is written as SEM. When we put all these pieces together, we learn that there is a 95\% probability that the sample mean $\bar{X}$ that we have actually observed lies within 1.96 standard errors of the population mean. 
+
+\vspace{0.5cm}
+\begin{mdframed}[style=MyFrame,nobreak=true]
+Mathematically, we write this as:
 $$
 \mu - \left( 1.96 \times \mbox{SEM} \right) \ \leq \  \bar{X}\  \leq \  \mu + \left( 1.96 \times \mbox{SEM} \right) 
 $$
@@ -414,6 +421,8 @@ What this is telling is is that the range of values has a 95\% probability of co
 $$
 \mbox{CI}_{95} = \bar{X} \pm \left( 1.96 \times \frac{\sigma}{\sqrt{N}} \right)
 $$
+\end{mdframed}
+
 Of course, there's nothing special about the number 1.96. It just happens to be the multiplier you need to use if you want a 95\% confidence interval. If I'd wanted a 70\% confidence interval, I would have used 1.04 as the magic number rather than 1.96.
 
 \SUBSECTION{A slight mistake in the formula}

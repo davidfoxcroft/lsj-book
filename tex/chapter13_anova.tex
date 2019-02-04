@@ -7,7 +7,7 @@
 
 This chapter introduces one of the most widely used tools in psychological statistics, known as ``the analysis of variance'', but usually referred to as ANOVA. The basic technique was developed by Sir Ronald Fisher in the early 20th century and it is to him that we owe the rather unfortunate terminology. The term ANOVA is a little misleading, in two respects. Firstly, although the name of the technique refers to variances, ANOVA is concerned with investigating differences in means. Secondly, there are several different things out there that are all referred to as ANOVAs, some of which have only a very tenuous connection to one another. Later on in the book we'll encounter a range of different ANOVA methods that apply in quite different situations, but for the purposes of this chapter we'll only consider the simplest form of ANOVA, in which we have several different groups of observations, and we're interested in finding out whether those groups differ in terms of some outcome variable of interest. This is the question that is addressed by a \keyterm{one-way ANOVA}. 
 
-The structure of this chapter is as follows: in Section~\ref{sec:anxifree} I'll introduce a fictitious data set that we'll use as a running example throughout the chapter. After introducing the data, I'll describe the mechanics of how a one-way ANOVA actually works (Section~\ref{sec:anovaintro}) and then focus on how you can run one in jamovi (Section~\ref{sec:introduceaov}). These two sections are the core of the chapter. The remainder of the chapter discusses a range of important topics that inevitably arise when running an ANOVA, namely how to calculate effect sizes (Section~\ref{sec:etasquared}), post hoc tests and corrections for multiple comparisons (Section~\ref{sec:posthoc}) and the assumptions that ANOVA relies upon (Section~\ref{sec:anovaassumptions}). We'll also talk about how to check those assumptions and some of the things you can do if the assumptions are violated (Sections~\ref{sec:levene} to \ref{sec:kruskalwallis}). At the end of the chapter we'll talk a little about the relationship between ANOVA and other statistical tools (Section~\ref{sec:anovaandt}). 
+The structure of this chapter is as follows: in Section~\ref{sec:anxifree} I'll introduce a fictitious data set that we'll use as a running example throughout the chapter. After introducing the data, I'll describe the mechanics of how a one-way ANOVA actually works (Section~\ref{sec:anovaintro}) and then focus on how you can run one in jamovi (Section~\ref{sec:introduceaov}). These two sections are the core of the chapter. The remainder of the chapter discusses a range of important topics that inevitably arise when running an ANOVA, namely how to calculate effect sizes (Section~\ref{sec:etasquared}), post hoc tests and corrections for multiple comparisons (Section~\ref{sec:posthoc}) and the assumptions that ANOVA relies upon (Section~\ref{sec:anovaassumptions}). We'll also talk about how to check those assumptions and some of the things you can do if the assumptions are violated (Sections~\ref{sec:levene} to \ref{sec:kruskalwallis}). Then we'll cover repeated measures ANOVA in Sections \ref{sec:RManova} and \ref{sec:Friedman}. At the end of the chapter we'll talk a little about the relationship between ANOVA and other statistical tools (Section~\ref{sec:anovaandt}). 
 
 
 \section{An illustrative data set~\label{sec:anxifree}}
@@ -50,11 +50,14 @@ This null hypothesis is a lot trickier to test than any of the ones we've seen p
 
 First, let's start by introducing some notation. We'll use $G$ to refer to the total number of groups. For our data set there are three drugs, so there are $G=3$ groups. Next, we'll use $N$ to refer to the total sample size; there are a total of $N=18$ people in our data set. Similarly, let's use $N_k$ to denote the number of people in the $k$-th group. In our fake clinical trial, the sample size is $N_k = 6$ for all three groups.\FOOTNOTE{When all groups have the same number of observations, the experimental design is said to be ``balanced''. Balance isn't such a big deal for one-way ANOVA, which is the topic of this chapter. It becomes more important when you start doing more complicated ANOVAs.} Finally, we'll use $Y$ to denote the outcome variable. In our case, $Y$ refers to mood change. Specifically, we'll use $Y_{ik}$ to refer to the mood change experienced by the $i$-th member of the $k$-th group. Similarly, we'll use $\bar{Y}$ to be the average mood change, taken across all 18 people in the experiment, and $\bar{Y}_k$ to refer to the average mood change experienced by the 6 people in group $k$.  
 
-Excellent. Now that we've got our notation sorted out we can start writing down formulas. To start with, let's recall the formula for the variance that we used in Section~\ref{sec:var}, way back in those kinder days when we were just doing descriptive statistics. The sample variance of $Y$ is defined as follows
+\vspace{0.5cm}
+\begin{mdframed}[style=MyFrame,nobreak=true]
+Now that we've got our notation sorted out we can start writing down formulas. To start with, let's recall the formula for the variance that we used in Section~\ref{sec:var}, way back in those kinder days when we were just doing descriptive statistics. The sample variance of $Y$ is defined as follows
 $$
 \mbox{Var}(Y) = \frac{1}{N} \sum_{k=1}^G \sum_{i=1}^{N_k} \left(Y_{ik} - \bar{Y} \right)^2
 $$
 This formula looks pretty much identical to the formula for the variance in Section~\ref{sec:var}. The only difference is that this time around I've got two summations here: I'm summing over groups (i.e., values for $k$) and over the people within the groups (i.e., values for $i$). This is purely a cosmetic detail. If I'd instead used the notation $Y_p$ to refer to the value of the outcome variable for person $p$ in the sample, then I'd only have a single summation. The only reason that we have a double summation here is that I've classified people into groups, and then assigned numbers to people within groups. 
+\end{mdframed}
 
 A concrete example might be useful here. Let's consider this table, in which we have a total of $N=5$ people sorted into $G=2$ groups. Arbitrarily, let's say that the ``cool'' people are group 1 and the ``uncool'' people are group 2. It turns out that we have three cool people ($N_1 = 3$) and two uncool people ($N_2 = 2$)
 
@@ -70,35 +73,56 @@ Dan & 4 & uncool &  2  &  1  & 91\\
 Egg & 5 & uncool &  2  &  2  & 22\\
 \end{tabular}
 \end{center}
-Notice that I've constructed two different labelling schemes here. We have a ``person'' variable $p$ so it would be perfectly sensible to refer to $Y_p$ as the grumpiness of the $p$-th person in the sample. For instance, the table shows that Dan is the fourth so we'd say $p = 4$. So, when talking about the grumpiness $Y$ of this ``Dan'' person, whoever he might be, we could refer to his grumpiness by saying that $Y_p = 91$, for person $p = 4$ that is.  However, that's not the only way we could refer to Dan. As an alternative we could note that Dan belongs to the ``uncool'' group ($k = 2$), and is in fact the first person listed in the uncool group ($i = 1$). So it's equally valid to refer to Dan's grumpiness by saying that $Y_{ik} = 91$, where $k = 2$ and $i = 1$. In other words, each person $p$ corresponds to a unique $ik$ combination, and so the formula that I gave above is actually identical to our original formula for the variance, which would be
+Notice that I've constructed two different labelling schemes here. We have a ``person'' variable $p$ so it would be perfectly sensible to refer to $Y_p$ as the grumpiness of the $p$-th person in the sample. For instance, the table shows that Dan is the fourth so we'd say $p = 4$. So, when talking about the grumpiness $Y$ of this ``Dan'' person, whoever he might be, we could refer to his grumpiness by saying that $Y_p = 91$, for person $p = 4$ that is.  However, that's not the only way we could refer to Dan. As an alternative we could note that Dan belongs to the ``uncool'' group ($k = 2$), and is in fact the first person listed in the uncool group ($i = 1$). So it's equally valid to refer to Dan's grumpiness by saying that $Y_{ik} = 91$, where $k = 2$ and $i = 1$. 
+
+\vspace{0.5cm}
+\begin{mdframed}[style=MyFrame,nobreak=true]
+In other words, each person $p$ corresponds to a unique $ik$ combination, and so the formula that I gave above is actually identical to our original formula for the variance, which would be
 $$
 \mbox{Var}(Y) = \frac{1}{N} \sum_{p=1}^N  \left(Y_{p} - \bar{Y} \right)^2
 $$
 In both formulas, all we're doing is summing over all of the observations in the sample. Most of the time we would just use the simpler $Y_p$ notation; the equation using $Y_p$ is clearly the simpler of the two. However, when doing an ANOVA it's important to keep track of which participants belong in which groups, and we need to use the $Y_{ik}$ notation to do this. 
+\end{mdframed}
 
 \SUBSECTION{From variances to sums of squares}
 
-Okay, now that we've got a good grasp on how the variance is calculated, let's define something called the \keyterm{total sum of squares}, which is denoted SS$_{tot}$. This is very simple. Instead of averaging the squared deviations, which is what we do when calculating the variance, we just add them up. So the formula for the total sum of squares is almost identical to the formula for the variance
+Okay, now that we've got a good grasp on how the variance is calculated, let's define something called the \keyterm{total sum of squares}, which is denoted SS$_{tot}$. This is very simple. Instead of averaging the squared deviations, which is what we do when calculating the variance, we just add them up. 
+
+\vspace{0.5cm}
+\begin{mdframed}[style=MyFrame,nobreak=true]
+So the formula for the total sum of squares is almost identical to the formula for the variance
 $$
 \mbox{SS}_{tot} = \sum_{k=1}^G \sum_{i=1}^{N_k} \left(Y_{ik} - \bar{Y} \right)^2
 $$ 
-When we talk about analysing variances in the context of ANOVA, what we're really doing is working with the total sums of squares rather than the actual variance. One very nice thing about the total sum of squares is that we can break it up into two different kinds of variation. First, we can talk about the \keyterm{within-group sum of squares}, in which we look to see how different each individual person is from their own group mean
+\end{mdframed}
+When we talk about analysing variances in the context of ANOVA, what we're really doing is working with the total sums of squares rather than the actual variance. One very nice thing about the total sum of squares is that we can break it up into two different kinds of variation. 
+
+\vspace{0.5cm}
+\begin{mdframed}[style=MyFrame,nobreak=true]
+First, we can talk about the \keyterm{within-group sum of squares}, in which we look to see how different each individual person is from their own group mean
 $$
 \mbox{SS}_w = \sum_{k=1}^G \sum_{i=1}^{N_k} \left( Y_{ik} - \bar{Y}_k \right)^2
 $$
 where $\bar{Y}_k$ is a group mean. In our example, $\bar{Y}_k$ would be the average mood change experienced by those people given  the $k$-th drug. So, instead of comparing individuals to the average of \underline{all} people in the experiment, we're only comparing them to those people in the the same group. As a consequence, you'd expect the value of $\mbox{SS}_w$ to be smaller than the total sum of squares, because it's completely ignoring any group differences, i.e., whether the drugs will have different effects on people's moods.
+\end{mdframed}
  
-Next, we can define a third notion of variation which captures {\it only} the differences between groups. We do this by looking at the differences between the group means $\bar{Y}_k$ and grand mean $\bar{Y}$. In order to quantify the extent of this variation, what we do is calculate the \keyterm{between-group sum of squares}
+Next, we can define a third notion of variation which captures {\it only} the differences between groups. We do this by looking at the differences between the group means $\bar{Y}_k$ and grand mean $\bar{Y}$. 
+
+\vspace{0.5cm}
+\begin{mdframed}[style=MyFrame,nobreak=true]
+In order to quantify the extent of this variation, what we do is calculate the \keyterm{between-group sum of squares}
 \begin{eqnarray*}
 \mbox{SS}_{b} &=& \sum_{k=1}^G \sum_{i=1}^{N_k} \left( \bar{Y}_k - \bar{Y} \right)^2 \\
 &=& \sum_{k=1}^G N_k \left( \bar{Y}_k - \bar{Y} \right)^2
 \end{eqnarray*}
+\end{mdframed}
 
 It's not too difficult to show that the total variation among people in the experiment $\mbox{SS}_{tot}$ is actually the sum of the differences between the groups $\mbox{SS}_b$ and the variation inside the groups $\mbox{SS}_w$. That is,
 $$
 \mbox{SS}_w  + \mbox{SS}_{b} = \mbox{SS}_{tot}
 $$
 Yay.
+
 
 \begin{figure}
 \begin{center}
@@ -113,7 +137,7 @@ Yay.
 \end{center}
 \end{figure}
 
-Okay, so what have we found out? We've discovered that the total variability associated with the outcome variable ($\mbox{SS}_{tot}$) can be mathematically carved up into the sum of ``the variation due to the differences in the sample means for the different groups'' ($\mbox{SS}_{b}$) plus ``all the rest of the variation'' ($\mbox{SS}_{w}$). How does that help me find out whether the groups have different population means? Um. Wait. Hold on a second. Now that I think about it, this is {\it exactly} what we were looking for. If the null hypothesis is true then you'd expect all the sample means to be pretty similar to each other, right? And that would imply that you'd expect $\mbox{SS}_{b}$ to be really small, or at least you'd expect it to be a lot smaller than ``the variation associated with everything else'', $\mbox{SS}_{w}$. Hmm. I detect a hypothesis test coming on.
+Okay, so what have we found out? We've discovered that the total variability associated with the outcome variable ($\mbox{SS}_{tot}$) can be mathematically carved up into the sum of ``the variation due to the differences in the sample means for the different groups'' ($\mbox{SS}_{b}$) plus ``all the rest of the variation'' ($\mbox{SS}_{w}$)\FOOTNOTE{$\mbox{SS}_{w}$ is also referred to in an independent ANOVA as the error variance, or $\mbox{SS}_{error}$}. How does that help me find out whether the groups have different population means? Um. Wait. Hold on a second. Now that I think about it, this is {\it exactly} what we were looking for. If the null hypothesis is true then you'd expect all the sample means to be pretty similar to each other, right? And that would imply that you'd expect $\mbox{SS}_{b}$ to be really small, or at least you'd expect it to be a lot smaller than ``the variation associated with everything else'', $\mbox{SS}_{w}$. Hmm. I detect a hypothesis test coming on.
 
 \SUBSECTION{From sums of squares to the $F$-test}
 
@@ -142,6 +166,7 @@ At a very general level, the intuition behind the $F$ statistic is straightforwa
 The next section discusses that in a bit of detail, but for readers that aren't interested in the details of what the test is actually measuring I'll cut to the chase. In order to complete our hypothesis test we need to know the sampling distribution for $F$ if the null hypothesis is true. Not surprisingly, the sampling distribution for the $F$ \underline{statistic} under the null hypothesis is an $F$ \underline{distribution}. If you recall our discussion of the $F$ distribution in Chapter~\ref{ch:probability}, the $F$ distribution has two parameters, corresponding to the two degrees of freedom involved. The first one df$_1$ is the between groups degrees of freedom df$_b$, and the second one df$_2$ is the within groups degrees of freedom df$_w$. 
 
 A summary of all the key quantities involved in a one-way ANOVA, including the formulas showing how they are calculated, is shown in Table~\ref{tab:anovatable}. 
+
 \begin{table}
 \begin{center}
 \caption{All of the key quantities involved in an ANOVA organised into a ``standard'' ANOVA table. The formulas for all quantities (except the $p$-value which has a very ugly formula and would be nightmarishly hard to calculate without a computer) are shown.} 
@@ -161,9 +186,13 @@ within groups   & $\mbox{df}_w = N-G$ & SS$_w = \displaystyle\sum_{k=1}^G \displ
 \end{center}
 \end{table}
 
+\vspace{0.5cm}
+\begin{mdframed}[style=MyFrame,nobreak=false]
 \SUBSECTION{The model for the data and the meaning of $F$ \advanced\label{sec:anovamodel}}
 
-At a fundamental level ANOVA is a competition between two different statistical models, $H_0$ and $H_1$. When I described the null and alternative hypotheses at the start of the section, I was a little imprecise about what these models actually are. I'll remedy that now, though you probably won't like me for doing so. If you recall, our null hypothesis was that all of the group means are identical to one another. If so, then a natural way to think about the outcome variable $Y_{ik}$ is to describe individual scores in terms of a single population mean $\mu$, plus the deviation from that population mean. This deviation is usually denoted $\epsilon_{ik}$ and is traditionally called the {\it error} or \keyterm{residual} associated with that observation. Be careful though. Just like we saw with the word ``significant'', the word ``error'' has a technical meaning in statistics that isn't quite the same as its everyday English definition. In everyday language, ``error'' implies a mistake of some kind, but in statistics it doesn't (or at least, not necessarily). With that in mind, the word ``residual'' is a better term than the word ``error''. In statistics both words mean ``leftover variability'', that is ``stuff'' that the model can't explain. In any case, here's what the null hypothesis looks like when we write it as a statistical model
+At a fundamental level ANOVA is a competition between two different statistical models, $H_0$ and $H_1$. When I described the null and alternative hypotheses at the start of the section, I was a little imprecise about what these models actually are. I'll remedy that now, though you probably won't like me for doing so. If you recall, our null hypothesis was that all of the group means are identical to one another. If so, then a natural way to think about the outcome variable $Y_{ik}$ is to describe individual scores in terms of a single population mean $\mu$, plus the deviation from that population mean. This deviation is usually denoted $\epsilon_{ik}$ and is traditionally called the {\it error} or \keyterm{residual} associated with that observation. Be careful though. Just like we saw with the word ``significant'', the word ``error'' has a technical meaning in statistics that isn't quite the same as its everyday English definition. In everyday language, ``error'' implies a mistake of some kind, but in statistics it doesn't (or at least, not necessarily). With that in mind, the word ``residual'' is a better term than the word ``error''. In statistics both words mean ``leftover variability'', that is ``stuff'' that the model can't explain. 
+
+In any case, here's what the null hypothesis looks like when we write it as a statistical model
 $$
 Y_{ik} = \mu + \epsilon_{ik}
 $$
@@ -188,6 +217,7 @@ $$
 where the true value $Q=0$ if the null hypothesis is true, and $Q > 0$ if the alternative hypothesis is true \parencite[e.g.,][ch.\ 10]{Hays1994}. Therefore, at a bare minimum {\it the $F$ value must be larger than 1} to have any chance of rejecting the null hypothesis. Note that this {\it doesn't} mean that it's impossible to get an $F$-value less than 1. What it means is that if the null hypothesis is true the sampling distribution of the $F$ ratio has a mean of 1,\FOOTNOTE{Or, if we want to be sticklers for accuracy, $1 + \frac{2}{df_2 - 2}$.} and so we need to see $F$-values larger than 1 in order to safely reject the null.
 
 To be a bit more precise about the sampling distribution, notice that if the null hypothesis is true, both MS$_b$ and MS$_w$ are estimators of the variance of the residuals $\epsilon_{ik}$. If those residuals are normally distributed, then you might suspect that the estimate of the variance of $\epsilon_{ik}$ is chi-square distributed, because (as discussed in Section~\ref{sec:otherdists}) that's what a chi-square distribution {\it is}: it's what you get when you square a bunch of normally-distributed things and add them up. And since the $F$ distribution is (again, by definition) what you get when you take the ratio between two things that are $\chi^2$ distributed, we have our sampling distribution. Obviously, I'm glossing over a whole lot of stuff when I say this, but in broad terms, this really is where our sampling distribution comes from. %\TODO {\bf [CITE]}
+\end{mdframed}
 
 \SUBSECTION{A worked example \label{sec:anovacalc}}
 
@@ -323,9 +353,9 @@ Woohooo! This is terribly exciting, yes? Now that we have our test statistic, th
 At this point, we're basically done. Having completed our calculations, it's traditional to organise all these numbers into an ANOVA table like the one in Table~\ref{tab:anovatable}. For our clinical trial data, the ANOVA table would look like this:
 \begin{center}
 \begin{tabular}{l|ccccc} 
-& df & sum of squares & mean squares & $F$-statistic & $p$-value \\  \hline \\ 
-between groups & 2 & 3.48 & 1.74 & 19.3 & 0.000071 \\ \\
-within groups   & 15 & 1.39 & 0.09 & - & - \\ \\ 
+& df & sum of squares & mean squares & $F$-statistic & $p$-value \\  \hline 
+between groups & 2 & 3.48 & 1.74 & 19.3 & 0.000071 \\
+within groups   & 15 & 1.39 & 0.09 & - & - \\ 
 \end{tabular}
 \end{center}
 \noindent
@@ -487,7 +517,11 @@ Or, if you don't like the idea of reporting exact $p$-values, then you'd change 
 
 \section{Assumptions of one-way ANOVA \label{sec:anovaassumptions}}
 
-Like any statistical test, analysis of variance relies on some assumptions about the data. There are three key assumptions that you need to be aware of: {\it normality}, {\it homogeneity of variance} and {\it independence}. If you remember back to Section~\ref{sec:anovamodel}, which I hope you at least skimmed even if you didn't read the whole thing, I described the statistical models underpinning ANOVA in this way:
+Like any statistical test, analysis of variance relies on some assumptions about the data, specifically the residuals. There are three key assumptions that you need to be aware of: {\it normality}, {\it homogeneity of variance} and {\it independence}. 
+
+\vspace{0.2cm}
+\begin{mdframed}[style=MyFrame,nobreak=false]
+If you remember back to Section~\ref{sec:anovamodel}, which I hope you at least skimmed even if you didn't read the whole thing, I described the statistical models underpinning ANOVA in this way:
 $$
 \begin{array}{lrcl}
 H_0: \hspace*{.5cm} & Y_{ik} &=& \mu + \epsilon_{ik} \\
@@ -499,19 +533,30 @@ $$
 \epsilon_{ik} \sim \mbox{Normal}(0, \sigma^2)
 $$
 None of the maths works properly without this bit. Or, to be precise, you can still do all the calculations and you'll end up with an $F$-statistic, but you have no guarantee that this $F$-statistic actually measures what you think it's measuring, and so any conclusions that you might draw on the basis of the $F$ test might be wrong. 
+\end{mdframed}
 
-So, how do we check whether this assumption about the residuals is accurate? Well, as I indicated above, there are three distinct claims buried in this one statement, and we'll consider them separately.
+So, how do we check whether the assumption about the residuals is accurate? Well, as I indicated above, there are three distinct claims buried in this one statement, and we'll consider them separately.
 \begin{itemize}
-\item \keyterm{Normality}. The residuals are assumed to be normally distributed. As we saw in Section~\ref{sec:shapiro}, we can assess this by looking at QQ plots (or running a Shapiro-Wilk test.\FOOTNOTE{Though this isn't available, at the time of writing, in jamovi.} I'll talk about this in an ANOVA context in Section~\ref{sec:anovanormality}. 
 \item \keyterm{Homogeneity of variance}. Notice that we've only got the one value for the population standard deviation (i.e., $\sigma$), rather than allowing each group to have it's own value (i.e., $\sigma_k$). This is referred to as the homogeneity of variance (sometimes called homoscedasticity) assumption. ANOVA assumes that the population standard deviation is the same for all groups. We'll talk about this extensively in Section~\ref{sec:levene}. 
-\item \keyterm{Independence}. The independence assumption is a little trickier. What it basically means is that, knowing one residual tells you nothing about any other residual. All of the $\epsilon_{ik}$ values are assumed to have been generated without any ``regard for'' or ``relationship to'' any of the other ones. There's not an obvious or simple way to test for this, but there are some situations that are clear violations of this. For instance, if you have a repeated-measures design, where each participant in your study appears in more than one condition, then independence doesn't hold. There's a special relationship between some observations, namely those that correspond to the same person! When that happens, you need to use something like repeated measures ANOVA. 
+\item \keyterm{Normality}. The residuals are assumed to be normally distributed. As we saw in Section~\ref{sec:shapiro}, we can assess this by looking at QQ plots (or running a Shapiro-Wilk test. I'll talk about this more in an ANOVA context in Section~\ref{sec:anovanormality}. 
+\item \keyterm{Independence}. The independence assumption is a little trickier. What it basically means is that, knowing one residual tells you nothing about any other residual. All of the $\epsilon_{ik}$ values are assumed to have been generated without any ``regard for'' or ``relationship to'' any of the other ones. There's not an obvious or simple way to test for this, but there are some situations that are clear violations of this. For instance, if you have a repeated-measures design, where each participant in your study appears in more than one condition, then independence doesn't hold. There's a special relationship between some observations, namely those that correspond to the same person! When that happens, you need to use something like repeated measures ANOVA (see Section \ref{sec:RManova}). 
 \end{itemize}
 
 
-\section{Checking the homogeneity of variance assumption~\label{sec:levene}}
+\SUBSECTION{Checking the homogeneity of variance assumption~\label{sec:levene}}
 
-There's more than one way to skin a cat, as the saying goes, and more than one way to test the homogeneity of variance assumption, too (though for some reason no-one made a saying out of that). The most commonly used test for this that I've seen in the literature is the \keyterm{Levene test} \parencite{Levene1960}, and the closely related \keyterm{Brown-Forsythe test} \parencite{BrownForsythe1974}. I'll describe both of them here.
+\begin{quote}
+{\it To make the preliminary test on variances is rather like putting to sea in a rowing boat to find out whether conditions are sufficiently calm for an ocean liner to leave port!} 
 
+\hspace*{2cm} -- George Box \parencite{Box1953}
+\end{quote}
+
+There's more than one way to skin a cat, as the saying goes, and more than one way to test the homogeneity of variance assumption, too (though for some reason no-one made a saying out of that). The most commonly used test for this that I've seen in the literature is the \keyterm{Levene test} \parencite{Levene1960}, and the closely related \keyterm{Brown-Forsythe test} \parencite{BrownForsythe1974}. 
+
+Regardless of whether you're doing the standard Levene test or the Brown-Forsythe test, the test statistic, which is sometimes denoted $F$ but also sometimes written as $W$, is  calculated in exactly the same way that the $F$-statistic for the regular ANOVA is calculated, just using a $Z_{ik}$ rather than $Y_{ik}$. With that in mind, we can go on to look at how to run the test in jamovi.
+
+\vspace{0.5cm}
+\begin{mdframed}[style=MyFrame,nobreak=false]
 The Levene test is shockingly simple. Suppose we have our outcome variable $Y_{ik}$. All we do is define a new variable, which I'll call $Z_{ik}$, corresponding to the absolute deviation from the group mean
 $$
 Z_{ik} = \left| Y_{ik} - \bar{Y}_k \right|
@@ -522,11 +567,12 @@ What about the Brown-Forsythe test? Does that do anything particularly different
 $$
 Z_{ik} = \left| Y_{ik} - \mbox{median}_k(Y) \right|
 $$
-where $\mbox{median}_k(Y)$ is the median for group $k$. Regardless of whether you're doing the standard Levene test or the Brown-Forsythe test, the test statistic, which is sometimes denoted $F$ but also sometimes written as $W$, is  calculated in exactly the same way that the $F$-statistic for the regular ANOVA is calculated, just using a $Z_{ik}$ rather than $Y_{ik}$. With that in mind, let's just move on and look at how to run the test in jamovi.
+where $\mbox{median}_k(Y)$ is the median for group $k$. 
+\end{mdframed}
 
 \SUBSECTION{Running the Levene test in jamovi}
 
-Okay, so how do we run the Levene test? Simple really - under the ANOVA `Assumption Checks' option, just click on the `Homogeneity tests' checkbox. If we look at the output, shown in Figure \ref{fig:anova4}, we see that the test is non-significant $(F_{2,15} = 1.45, p = .266)$, so it looks like the homogeneity of variance assumption is fine.
+Okay, so how do we run the Levene test? Simple really - under the ANOVA `Assumption Checks' option, just click on the `Homogeneity tests' checkbox. If we look at the output, shown in Figure \ref{fig:anova4}, we see that the test is non-significant $(F_{2,15} = 1.45, p = .266)$, so it looks like the homogeneity of variance assumption is fine. However, looks can be deceptive! If your sample size is pretty big, then the Levene test could show up a significant effect (i.e. $p<.05$) even when the homogeneity of variance assumption is not violated to an extent which troubles the robustness of ANOVA. This was the point George Box was making in the quote above. Similarly, if your sample size is quite small, then the homogeneity of variance assumption might not be satisfied and yet a Levene test could be non-significant (i.e. $p>.05$). What this means is that, alongside any statistical test of the assumption being met, you should always plot the standard deviation around the means for each group / category in the analysis...just to see if they look fairly similar (i.e. homogeneity of variance) or not.
 
 \begin{figure}[htb]
 \begin{center}
@@ -537,75 +583,33 @@ Okay, so how do we run the Levene test? Simple really - under the ANOVA `Assumpt
 \end{center}
 \end{figure}
 
+\SUBSECTION{Removing the homogeneity of variance assumption~\label{sec:welchoneway}}
 
-\begin{comment} % not currently in jamovi, so leave out for now
+In our example, the homogeneity of variance assumption turned out to be a pretty safe one: the Levene test came back non-significant (notwithstanding that we should also look at the plot of standard deviations), so we probably don't need to worry. However, in real life we aren't always that lucky. How do we save our ANOVA when the homogeneity of variance assumption is violated? If you recall from our discussion of $t$-tests, we've seen this problem before. The Student $t$-test assumes equal variances, so the solution was to use the Welch $t$-test, which does not. In fact, \textcite{Welch1951} also showed how we can solve this problem for ANOVA too (the \keyterm{Welch one-way test}). It's implemented in jamovi using the \rtext{One-Way ANOVA} analysis. This is a specific analysis approach just for one-way ANOVA, and to run the Welch one-way ANOVA for our example, we would re-run the analysis as previously, but this time use the jamovi \rtext{ANOVA - One Way ANOVA} analysis command, and check the option for Welch's test (see Figure \ref{fig:anova4a}.
 
-\section{Removing the homogeneity of variance assumption~\label{sec:welchoneway}}
-
-In our example, the homogeneity of variance assumption turned out to be a pretty safe one: the Levene test came back non-significant, so we probably don't need to worry. However, in real life we aren't always that lucky. How do we save our ANOVA when the homogeneity of variance assumption is violated? If you recall from our discussion of $t$-tests, we've seen this problem before. The Student $t$-test assumes equal variances, so the solution was to use the Welch $t$-test, which does not. In fact, \textcite{Welch1951} also showed how we can solve this problem for ANOVA too (the \keyterm{Welch one-way test}). It's implemented in jamovi using the \rtext{oneway.test()} function. The arguments that we'll need for our example are:
-\begin{itemize}
-\item \rtext{formula}. This is the model formula, which (as usual) needs to specify the outcome variable on the left hand side and the grouping variable on the right hand side: i.e., something like \rtextverb#outcome ~ group#.
-\item \rtext{data}. Specifies the data frame containing the variables. 
-\item \rtext{var.equal}. If this is \rtext{FALSE} (the default) a Welch one-way test is run. If it is \rtext{TRUE} then it just runs a regular ANOVA. 
-\end{itemize}
-The function also has a \rtext{subset} argument that lets you analyse only some of the observations and a \rtext{na.action} argument that tells it how to handle missing data, but these aren't necessary for our purposes. So, to run the Welch one-way ANOVA for our example, we would do this:
-
-\begin{rblock1}
-> @usr{oneway.test(mood.gain ~ drug, data = clin.trial)}
-
-	One-way analysis of means (not assuming equal variances)
-
-data:  mood.gain and drug 
-F = 26.322, num df = 2.000, denom df = 9.493, p-value = 0.000134
-\end{rblock1}
+\begin{figure}[htb]
+\begin{center}
+\epsfig{file = ../img/anova/anova4a.png, clip=true,width = 14cm}
+\caption{Welch's test as part of the One Way ANOVA analysis in jamovi}
+\HR
+\label{fig:anova4a}
+\end{center}
+\end{figure}
 
 \noindent
-To understand what's happening here, let's compare these numbers to what we got earlier in Section~\ref{sec:introduceaov} when we ran our original ANOVA. To save you the trouble of flicking back, here are those numbers again, this time calculated by setting \rtext{var.equal = TRUE} for the \rtext{oneway.test()} function:
-\begin{rblock1}
-> @usr{oneway.test(mood.gain ~ drug, data = clin.trial, var.equal = TRUE)}
+To understand what's happening here, let's compare these numbers to what we got earlier in Section~\ref{sec:introduceaov} when we ran our original ANOVA. To save you the trouble of flicking back, this is what we got last time: $F(2,15) = 18.611, p=.00009$, also shown as the Fisher's test in the \rtext{One-Way ANOVA} shown in Figure \ref{fig:anova4a}. 
 
-	One-way analysis of means
-
-data:  mood.gain and drug 
-F = 18.611, num df = 2, denom df = 15, p-value = 8.646e-05
-\end{rblock1}
 Okay, so originally our ANOVA gave us the result $F(2,15) = 18.6$, whereas the Welch one-way test gave us $F(2,9.49) = 26.32$. In other words, the Welch test has reduced the within-groups degrees of freedom from 15 to 9.49, and the $F$-value has increased from 18.6 to 26.32. 
 
+\SUBSECTION{Checking the normality assumption~\label{sec:anovanormality}}
 
+Testing the normality assumption is relatively straightforward. We covered most of what you need to know in Section~\ref{sec:shapiro}. The only thing we really need to do is draw a QQ plot and, in addition if it is available, run the Shapiro-Wilk test. The QQ plot is shown in Figure~\ref{fig:anova5} and it looks pretty normal to me. If the Shapiro-Wilk test is not significant (i.e. $p<.05$) then this indicates that the assumption of normality is not violated. However, as with Levene's test, if the sample size is large then a significant  Shapiro-Wilk test may in fact be a false positive, where the assumption of normality is not violated in any substantive problematic sense for the analysis. And, similarly, a very small sample can produce false negatives. That's why a visual inspection of the QQ plot is important. 
 
-\end{comment}
+Alongside inspecting the QQ plot for any deviations from normality, the Shapiro-Wilk test for our data does show a non-significant effect, with $p=0.6053$ (see Figure \ref{fig:anova4a}). This therefore supports the QQ plot assessment; both checks find no indication that normality is violated.
 
-
-
-
-\section{Checking the normality assumption~\label{sec:anovanormality}}
-
-Testing the normality assumption is relatively straightforward. We covered most of what you need to know in Section~\ref{sec:shapiro}. The only thing we really need to do is draw a QQ plot and, in addition if it is available, run the Shapiro-Wilk test. The QQ plot is shown in Figure~\ref{fig:anova5} and it looks pretty normal to me.
-
-\begin{comment} 
-
-use once shapiro-wilk added to jamovi
-
-> @usr{shapiro.test( x = my.anova.residuals )}   # run Shapiro-Wilk test
-
-	Shapiro-Wilk normality test
-
-data:  my.anova.residuals 
-W = 0.9602, p-value = 0.6053
-%\end{rblock1}
-
-
-
-
-%This is supported by the results of our Shapiro-Wilk test ($W = .96$, $p = .61$) which finds no indication that normality is violated.
-
-\end{comment}
-
-
-
-\begin{figure}[ht]
+\begin{figure}[p]
 \begin{center}
-\epsfig{file = ../img/anova/anova5.pdf, clip=true,width = 12cm}
+\epsfig{file = ../img/anova/anova5.pdf, clip=true,width = 14cm}
 \caption{QQ plot produced from jamovi one way ANOVA options}
 \HR
 \label{fig:anova5}
@@ -619,7 +623,11 @@ Now that we've seen how to check for normality, we are led naturally to ask what
 
 \SUBSECTION{The logic behind the Kruskal-Wallis test}
 
-The Kruskal-Wallis test is surprisingly similar to ANOVA, in some ways. In ANOVA we started with $Y_{ik}$, the value of the outcome variable for the $i$th person in the $k$th group. For the Kruskal-Wallis test what we'll do is rank order all of these $Y_{ik}$ values and conduct our analysis on the ranked data. So let's let $R_{ik}$ refer to the ranking given to the $i$th member of the $k$th group. Now, let's calculate $\bar{R}_k$, the average rank given to observations in the $k$th group
+The Kruskal-Wallis test is surprisingly similar to ANOVA, in some ways. In ANOVA we started with $Y_{ik}$, the value of the outcome variable for the $i$th person in the $k$th group. For the Kruskal-Wallis test what we'll do is rank order all of these $Y_{ik}$ values and conduct our analysis on the ranked data. 
+
+\vspace{0.7cm}
+\begin{mdframed}[style=MyFrame,nobreak=false]
+So let's let $R_{ik}$ refer to the ranking given to the $i$th member of the $k$th group. Now, let's calculate $\bar{R}_k$, the average rank given to observations in the $k$th group
 $$
 \bar{R}_k = \frac{1}{N_K} \sum_{i} R_{ik}
 $$
@@ -662,13 +670,15 @@ $$
 \mbox{TCF} = 1 - \frac{\sum_j {f_j}^3 - f_j}{N^3 - N} 
 $$
 The tie-corrected value of the Kruskal-Wallis statistic is obtained by dividing the value of $K$ by this quantity. It is this tie-corrected version that jamovi calculates. And at long last, we're actually finished with the theory of the Kruskal-Wallis test. I'm sure you're all terribly relieved that I've cured you of the existential anxiety that naturally arises when you realise that you {\it don't} know how to calculate the tie-correction factor for the Kruskal-Wallis test. Right?
+\end{mdframed}
+
 
 \SUBSECTION{How to run the Kruskal-Wallis test in jamovi} 
 
 Despite the horror that we've gone through in trying to understand what the Kruskal-Wallis test actually does, it turns out that running the test is pretty painless, since jamovi has an analysis as part of the ANOVA analysis set called `Non-Parametric' - `One Way ANOVA (Kruskall-Wallis)' Most of the time you'll have data like the \filename{clinicaltrial.csv} data set, in which you have your outcome variable \rtext{mood.gain} and a grouping variable \rtext{drug}. If so, you can just go ahead and run the analysis in jamovi. What this gives us is a Kruskal-Wallis $\chi^2$ = 12.076, df = 2, $p$-value = 0.00239, as in Figure \ref{fig:anova6}
 
 \vspace{0.5cm}
-\begin{figure}[ht]
+\begin{figure}[!ht]
 \begin{center}
 \epsfig{file = ../img/anova/anova6.png, clip=true,width = 14cm}
 \caption{Kruskall-Wallis one way non-parametric ANOVA in jamovi}
@@ -676,6 +686,136 @@ Despite the horror that we've gone through in trying to understand what the Krus
 \label{fig:anova6}
 \end{center}
 \end{figure}
+
+\newpage
+\section{Repeated measures one-way ANOVA}~\label{sec:RManova}
+
+The one-way repeated measures ANOVA test is a statistical method of testing for significant differences between three or more groups where the same participants are used in each group (or each participant is closely matched with participants in other experimental groups). For this reason, there should always be an equal number of scores (data points) in each experimental group. This type of design and analysis can also be called a `related ANOVA' or a `within-subjects ANOVA'. 
+
+The logic behind a repeated measures ANOVA is very similar to that of an independent ANOVA (sometimes called a `between-subjects' ANOVA). You'll remember that earlier we showed that in a between-subjects ANOVA total variability is partitioned into between-groups variability ($\mbox{SS}_b$) and within-groups variability ($\mbox{SS}_w$), and after each is divided by the respective degrees of freedom to give $\mbox{MS}_b$ and $\mbox{MS}_w$ (see Table \ref{tab:anovatable}) the $\mbox{F-ratio}$ is calculated as:
+
+\begin{center}
+$F = \displaystyle\frac{\mbox{MS}_b }{ \mbox{MS}_w }$ 
+\end{center}
+
+In a repeated measures ANOVA, the $\mbox{F-ratio}$ is calculated in a similar way, but whereas in an independent ANOVA the within-group variability ($\mbox{SS}_w$) is used as the basis for the $\mbox{MS}_w$ denominator, in a repeated measures ANOVA the $\mbox{SS}_w$ is partioned into two parts. As we are using the same subjects in each group, we can remove the variability due to the individual differences between subjects, referred to as $\mbox{SS}_{subjects}$, from the within-groups variability. We won't go into too much technical detail about how this is done, but essentially each subject becomes a level of a factor called subjects. The variability in this within-subjects factor is then calculated in the same way as any between-subjects factor. And then we can subtract $\mbox{SS}_{subjects}$ from $\mbox{SS}_w$ to provide a smaller $\mbox{SS}_{error}$ term: 
+
+\begin{center}
+Independent ANOVA: $\mbox{SS}_{error}$ = $\mbox{SS}_w$ \\ \vspace{0.3cm}
+Repeated Measures ANOVA: $\mbox{SS}_{error}$ = $\mbox{SS}_w$ - $\mbox{SS}_{subjects}$
+\end{center}
+
+This change in $\mbox{SS}_{error}$ term often leads to a more powerful statistical test, but this does depend on whether the reduction in the $\mbox{SS}_{error}$ more than compensates for the reduction in degrees of freedom for the error term (as degrees of freedom go from (n - k)\FOOTNOTE{(n - k) : (number of subjects - number of groups)} to (n - 1)(k - 1) (remembering that there are more subjects in the independent ANOVA design).
+
+\SUBSECTION{Repeated measures ANOVA in jamovi}
+
+First, we need some data. \textcite{Geschwind1972} has suggested that the exact nature of a patient’s language deficit following a stroke can be used to diagnose the specific region of the brain that has been damaged. A researcher is concerned with identifying the specific communication difficulties experienced by six patients suffering from Broca’s Aphasia (a language deficit commonly experienced following a stroke). 
+
+%\vspace{0.5cm}
+\begin{table}[!ht]
+\caption{Number of attempts successfully completed 
+on three experimental tasks.} \label{tab:RManova} \tabcapsep
+\begin{center}
+\begin{tabular}{c|ccc} 
+Participant	& Speech & 	Conceptual & Syntax \\ \hline
+1 &	8 &	7 &	6 \\
+2 &	7 &	8 &	6 \\
+3 &	9 &	5 &	3 \\
+4 &	5 &	4 &	5 \\
+5 &	6 &	6 &	2 \\
+6 &	8 &	7 &	4 \\
+\end{tabular}
+\tabcapsep \HR
+\end{center}
+\end{table}
+
+The patients were required to complete three word recognition tasks. On the first (speech production) task, patients were required to repeat single words read out aloud by the researcher. On the second (conceptual) task, designed to test word comprehension, patients were required to match a series of pictures with their correct name. On the third (syntax) task, designed to test knowledge of correct word order, patients were asked to reorder syntactically incorrect sentences. Each patient completed all three tasks. The order in which patients attempted the tasks was counterbalanced between participants. Each task consisted of a series of 10 attempts. The number of attempts successfully completed by each patient are shown in Table \ref{tab:RManova}. Enter these data into jamovi ready for analysis (or take a short-cut and load up the \filename{broca.csv} file). 
+
+To perform a one-way related ANOVA in jamovi, open the one-way related ANOVA dialogue box, as in Figure \ref{fig:RManova1}, via \rtext{ANOVA - Repeated Measures ANOVA}. Then:
+ 
+\begin{itemize} \itemsep -2pt
+\item Enter a Repeated Measures Factor Name. This should be a label that you choose to describe the conditions repeated by all participants. For example, to describe the speech, conceptual and syntax tasks completed by all participants a suitable label would be ‘Task’. Note that this new factor name represents the independent variable in the analysis. 
+\item Add a third level in the Repeated Measures Factors text box, as there are three levels representing the three tasks: speech, conceptual and syntax. Change the labels of the levels accordingly.
+\item Then move each of the levels variables across to the Repeated Measures Cells text box.
+\item Finally, under the Assumption Checks option, tick the “Sphericity checks” text box.
+\end{itemize}
+
+\begin{figure}[!htb]
+\begin{center}
+\epsfig{file = ../img/anova/RManova1.png, clip=true,width = 13cm}
+\caption{Repeated measures ANOVA dialogue box in jamovi}
+\HR
+\label{fig:RManova1}
+\end{center}
+\end{figure}
+
+jamovi output for a one-way repeated measures ANOVA is produced as shown in the Figures \ref{fig:RManova2} to \ref{fig:RManova5}. The first output we should look at is Mauchly’s Test of Sphericity, which tests the hypothesis that the variances of the differences between the conditions are equal (meaning that the spread of difference scores between the study conditions is approximately the same). In Figure \ref{fig:RManova2}, Mauchly’s test significance level is $p=.720$. If Mauchly’s test is non-significant (i.e. $p>.05$, as is the case in this analysis) then it is reasonable to conclude that the variances of the differences are not significantly different (i.e. they are roughly equal, or sphericity can be assumed.). 
+
+\begin{figure}[!ht]
+\begin{center}
+\epsfig{file = ../img/anova/RManova2.png, clip=true,width = 14cm}
+\caption{One-way repeated measures ANOVA output: Mauchly’s Test of Sphericity}
+\HR
+\label{fig:RManova2}
+\end{center}
+\end{figure}
+
+If, on the other hand, Mauchly’s test is significant ($p<.05$) then we conclude that there are significant differences between the variance of the differences, and the requirement of sphericity has not been met. In this case, we should apply a correction to the $F$-value obtained in the One-way related ANOVA analysis.
+
+If the Greenhouse-Geisser value in the “Tests of Sphericity” table is $>.75$ then you should use the Huynh-Feldt correction. If the Greenhouse-Geisser value is $<.75$ then you should use the Greenhouse-Geisser correction. Both these corrected $F$-values can be specified in the Sphericity Corrections check boxes under the Assumption Checks options, and the corrected $F$-values are then shown in the results table, as in Figure \ref{fig:RManova3}.
+
+\begin{figure}[!ht]
+\begin{center}
+\epsfig{file = ../img/anova/RManova3.png, clip=true,width = 14cm}
+\caption{One-way repeated measures ANOVA output: Tests of Within-Subjects Effects}
+\HR
+\label{fig:RManova3}
+\end{center}
+\end{figure}
+
+In our analysis, we saw that the significance of Mauchly’s Test of Sphericity was $p=.720$ (i.e. $p>0.05$). So, this means we can assume that the requirement of sphericity has been met so no correction to the $F$-value is needed. Therefore, we can use the ‘None’ Sphericity Correction output values for the repeated measure ‘Task’: $F=6.93, df=2, p=.013$, and we can conclude that the number of tests successfully completed on each language task did vary significantly depending on whether the task was speech, comprehension or syntax based ($F(2,10) = 6.93, p=.013$).
+
+\begin{figure}[!ht]
+\begin{center}
+\epsfig{file = ../img/anova/RManova4.png, clip=true,width = 14cm}
+\caption{Post-hoc tests in repeated measures ANOVA in jamovi}
+\HR
+\label{fig:RManova4}
+\end{center}
+\end{figure}
+
+Post-hoc tests can also be specified in jamovi for repeated measures ANOVA in the same way as for independent ANOVA. The results are shown in Figure \ref{fig:RManova4}. These indicate that there is a significant difference between Speech and Syntax, but not between other levels.
+
+Descriptive statistics (marginal means) can be reviewed to help interpret the results, produced in the jamovi output as in Figure \ref{fig:RManova5}. Comparison of the mean number of trials successfully completed by participants shows that Broca’s Aphasics perform reasonably well on speech production ($mean=7.17$) and language comprehension ($mean=6.17$) tasks. However, their performance was considerably worse on the syntax task ($mean=4.33$), with a significant difference in post-hoc tests between Speech and Syntax task performance. 
+
+\begin{figure}[!ht]
+\begin{center}
+\epsfig{file = ../img/anova/RManova5.png, clip=true,width = 10cm}
+\caption{One-way repeated measures ANOVA output: Descriptive Statistics}
+\HR
+\label{fig:RManova5}
+\end{center}
+\end{figure}
+
+\section{The Friedman non-parametric repeated measures ANOVA test\label{sec:Friedman}}
+
+The Friedman test is a non-parametric version of a repeated measures ANOVA and can be used instead of the Kruskall-Wallis test when testing for differences between three or more groups where the same participants are in each group, or each participant is closely matched with participants in other conditions. If the dependent variable is ordinal, or if the assumption of normality is not met, then the Friedman test can be used. 
+
+\vspace{0.5cm}
+\begin{figure}[!ht]
+\begin{center}
+\epsfig{file = ../img/anova/RManova6.png, clip=true,width = 16cm}
+\caption{The `Repeated Measures ANOVA (Non-parametric)' dialogue box in jamovi}
+\HR
+\label{fig:RManova6}
+\end{center}
+\end{figure}
+
+As with the Kruskall-Wallis test, the underlying mathematics is complicated, and won't be presented here. For the purpose of this book, it is sufficient to note that jamovi calculates the tie-corrected version of the Friedman test, and in Figure \ref{fig:RManova6} is an example using the Broca's Aphasia data we have already looked at using a parametric one-way repeated measures ANOVA. 
+
+It's pretty straightforward to run a Friedman test in jamovi. Just select \rtext{Analyses - ANOVA - Repeated Measures ANOVA (Non-parametric)}, as in Figure \ref{fig:RManova6}. Then highlight and transfer the names of the repeated measures variables you wish to compare (Speech, Conceptual, Syntax) into the `\rtext{Measures:}‘  text box. To produce descriptive statistics (means and medians) for the three repeated measures variables, click on the Descriptives button 
+
+The jamovi results show descriptive statistics, chi-square value, degrees of freedom, and the $p$-value (Figure \ref{fig:RManova6}). Since the $p$-value is less than the level conventionally used to determine significance ($p<.05$), we can conclude that Broca’s Aphasics perform reasonably well on speech production ($median=7.5$) and language comprehension ($median=6.5$) tasks. However, their performance was considerably worse on the syntax task ($median=4.5$), with a significant difference in post-hoc tests between Speech and Syntax task performance. 
 
 
 \section{On the relationship between ANOVA and the Student \texorpdfstring{\boldm{$t$}}{}-test~\label{sec:anovaandt}}
@@ -695,6 +835,7 @@ There's a fair bit covered in this chapter, but there's still a lot missing. Mos
 \item How to check the homogeneity of variance assumption (Section~\ref{sec:levene}).
 %and what to do if it is violated (Section~\ref{sec:welchoneway}).
 \item How to check the normality assumption (Section~\ref{sec:anovanormality}) and what to do if it is violated (Section~\ref{sec:kruskalwallis}).
+\item Repeated measures ANOVA (Section~\ref{sec:RManova}) and the non-parametric equivalent, the Friedman test (Section \ref{sec:Friedman}).
 \end{itemize}
 
 As with all of the chapters in this book, there are quite a few different sources that I've relied upon, but the one stand-out text that I've been most heavily influenced by is \textcite{Sahai2000}. It's not a good book for beginners, but it's an excellent book for more advanced readers who are interested in understanding the mathematics behind ANOVA. 

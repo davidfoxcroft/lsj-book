@@ -154,6 +154,9 @@ total & $\bar{Y}_{.1}$ & $\bar{Y}_{.2}$  &  $\bar{Y}_{..}$
 \end{center}
 And if we look at the sample means that I showed earlier, we have $\bar{Y}_{11} = 0.30$, $\bar{Y}_{12} = 0.60$ etc. In our clinical trial example, the \rtext{drugs} factor has 3 levels and the \rtext{therapy} factor has 2 levels, and so what we're trying to run is a $3 \times 2$ factorial ANOVA. However, we'll be a little more general and say that Factor A (the row factor) has $R$ levels and Factor B (the column factor) has $C$ levels, and so what we're runnning here is an $R \times C$ factorial ANOVA.
 
+
+\vspace{0.5cm}
+\begin{mdframed}[style=MyFrame,nobreak=false]
 Now that we've got our notation straight, we can compute the sum of squares values for each of the two factors in a relatively familiar way. For Factor A, our between group sum of squares is calculated by assessing the extent to which the (row) marginal means $\bar{Y}_{1.}$, $\bar{Y}_{2.}$ etc, are different from the grand mean $\bar{Y}_{..}$. We do this in the same way that we did for one-way ANOVA: calculate the sum of squared difference between the $\bar{Y}_{i.}$ values and the $\bar{Y}_{..}$ values. Specifically, if there are $N$ people in each group, then we calculate this
 $$
 \mbox{SS}_{A} = (N \times C)  \sum_{r=1}^R  \left( \bar{Y}_{r.} - \bar{Y}_{..} \right)^2
@@ -184,6 +187,8 @@ $$
 Of course, there is a formula that you can use to calculate the residual SS directly, but I think that it makes more conceptual sense to think of it like this. The whole point of calling it a residual is that it's the leftover variation, and the formula above makes that clear. I should also note that, in keeping with the terminology used in the regression chapter, it is commonplace to refer to $\mbox{SS}_A + \mbox{SS}_B$ as the variance attributable to the ``ANOVA model'', denoted SS$_M$, and so we often say that the total sum of squares is equal to the model sum of squares plus the residual sum of squares. Later on in this chapter we'll see that this isn't just a surface similarity: ANOVA and regression are actually the same thing under the hood. 
 
 In any case, it's probably worth taking a moment to check that we can calculate SS$_R$ using this formula and verify that we do obtain the same answer that jamovi produces in its ANOVA table. The calculations are pretty straightforward when done in a spreadsheet (see the \filename{clinicaltrial\_factorialanova.xls} file). We can calculate the total SS using the formulas above (getting an answer of total SS = 4.85) and then the residual SS ( = 0.92). Yet again, we get the same answer. 
+
+\end{mdframed}
 
 \SUBSECTION{What are our degrees of freedom?}
 
@@ -243,7 +248,12 @@ The four patterns of data shown in Figure~\ref{fig:maineffects} are all quite re
 
 \SUBSECTION{What exactly \underline{is} an interaction effect?}
 
-The key idea that we're going to introduce in this section is that of an interaction effect. In the ANOVA model we have looked at so far there are only two {\it factors} involved in our model (i.e., \rtext{drug} and \rtext{therapy}). But when we add an interaction we add a new component to the model: the combination of \rtext{drug} and \rtext{therapy}. Intuitively, the idea behind an interaction effect is fairly simple. It just means that the effect of Factor A is different, depending on which level of Factor B we're talking about. But what does that actually mean in terms of our data? The plot in Figure~\ref{fig:interaction} depicts several different patterns that, although quite different to each other, would all count as an interaction effect. So it's not entirely straightforward to translate this qualitative idea into something mathematical that a statistician can work with. As a consequence, the way that the idea of an interaction effect is formalised in terms of null and alternative hypotheses is slightly difficult, and I'm guessing that a lot of readers of this book probably won't be all that interested. Even so, I'll try to give the basic idea here.
+The key idea that we're going to introduce in this section is that of an interaction effect. In the ANOVA model we have looked at so far there are only two {\it factors} involved in our model (i.e., \rtext{drug} and \rtext{therapy}). But when we add an interaction we add a new component to the model: the combination of \rtext{drug} and \rtext{therapy}. Intuitively, the idea behind an interaction effect is fairly simple. It just means that the effect of Factor A is different, depending on which level of Factor B we're talking about. But what does that actually mean in terms of our data? The plot in Figure~\ref{fig:interaction} depicts several different patterns that, although quite different to each other, would all count as an interaction effect. So it's not entirely straightforward to translate this qualitative idea into something mathematical that a statistician can work with. 
+
+
+\vspace{0.5cm}
+\begin{mdframed}[style=MyFrame,nobreak=false]
+As a consequence, the way that the idea of an interaction effect is formalised in terms of null and alternative hypotheses is slightly difficult, and I'm guessing that a lot of readers of this book probably won't be all that interested. Even so, I'll try to give the basic idea here.
 
 To start with, we need to be a little more explicit about our main effects. Consider the main effect of Factor A (\rtext{drug} in our running example). We originally formulated this in terms of the null hypothesis that the two marginal means $\mu_{r.}$ are all equal to each other. Obviously, if all of these are equal to each other, then they must also be equal to the grand mean $\mu_{..}$ as well, right? So what we can do is define the {\it effect} of Factor A at level $r$ to be equal to the difference between the marginal mean $\mu_{r.}$ and the grand mean $\mu_{..}$.  
 Let's denote this effect by $\alpha_r$, and note that
@@ -298,6 +308,7 @@ $$
 \mbox{SS}_R = \mbox{SS}_T - (\mbox{SS}_A + \mbox{SS}_B + \mbox{SS}_{A:B})
 $$ 
 As a consequence, the residual sum of squares SS$_R$ will be smaller than in our original ANOVA that didn't include interactions.
+\end{mdframed}
 
 \SUBSECTION{Degrees of freedom for the interaction}
 
@@ -328,7 +339,7 @@ As it turns out, while we do have a significant main effect of drug ($F_{2,12} =
 
 \SUBSECTION{Interpreting the results}
 
-There's a couple of very important things to consider when interpreting the results of factorial ANOVA. First, there's the same issue that we had with one-way ANOVA, which is that if you obtain a significant main effect of (say) \rtext{drug},it doesn't tell you anything about which drugs are different to one another. To find that out, you need to run additional analyses. We'll talk about some analyses that you can run in Sections~\ref{sec:contrasts} and \ref{sec:posthoc2}. The same is true for interaction effects. Knowing that there's a significant interaction doesn't tell you anything about what kind of interaction exists. Again, you'll need to run additional analyses. 
+There's a couple of very important things to consider when interpreting the results of factorial ANOVA. First, there's the same issue that we had with one-way ANOVA, which is that if you obtain a significant main effect of (say) \rtext{drug}, it doesn't tell you anything about which drugs are different to one another. To find that out, you need to run additional analyses. We'll talk about some analyses that you can run in Sections~\ref{sec:contrasts} and \ref{sec:posthoc2}. The same is true for interaction effects. Knowing that there's a significant interaction doesn't tell you anything about what kind of interaction exists. Again, you'll need to run additional analyses. 
 
 Secondly, there's a very peculiar interpretation issue that arises when you obtain a significant interaction effect but no corresponding main effect. This happens sometimes. For instance, in the crossover interaction shown in Figure~\ref{fig:interaction}a, this is exactly what you'd find. In this case, neither of the main effects would be significant, but the interaction effect would be. This is a difficult situation to interpret, and people often get a bit confused about it. The general advice that statisticians like to give in this situation is that you shouldn't pay much attention to the main effects when an interaction is present. The reason they say this is that, although the tests of the main effects are perfectly valid from a mathematical point of view, when there is a significant interaction effect the main effects rarely test interesting hypotheses. Recall from Section~\ref{sec:factanovahyp} that the null hypothesis for a main effect is that the {\it marginal means} are equal to each other, and that a marginal mean is formed by averaging across several different groups. But if you have a significant interaction effect then you {\it know} that the groups that comprise the marginal mean aren't homogeneous, so it's not really obvious why you would even care about those marginal means. 
 
@@ -404,15 +415,15 @@ When the model doesn't contain the interaction term, then the estimated group me
 
 \section{Assumption checking~\label{sec:factorialanovaassumptions}} 
 
-As with one-way ANOVA, the key assumptions of factorial ANOVA are homogeneity of variance (all groups have the same standard deviation), normality of the residuals, and independence of the observations. The first two are things we can test for. The third is something that you need to assess yourself by asking if there are any special relationships between different observations. Additionally, if you aren't using a saturated model (e.g., if you've omitted the interaction terms) then you're also assuming that the omitted terms aren't important. Of course, you can check this last one by running an ANOVA with the omitted terms included and see if they're significant, so that's pretty easy. What about homogeneity of variance and normality of the residuals? As it turns out, these are pretty easy to check. It's no different to the checks we did for a one-way ANOVA.
+As with one-way ANOVA, the key assumptions of factorial ANOVA are homogeneity of variance (all groups have the same standard deviation), normality of the residuals, and independence of the observations. The first two are things we can check for. The third is something that you need to assess yourself by asking if there are any special relationships between different observations, for example repeated measures where the independent variable is time so there is a relationship between the observations at time one and time two: observations at different time points are from the {\it same} people. Additionally, if you aren't using a saturated model (e.g., if you've omitted the interaction terms) then you're also assuming that the omitted terms aren't important. Of course, you can check this last one by running an ANOVA with the omitted terms included and see if they're significant, so that's pretty easy. What about homogeneity of variance and normality of the residuals? As it turns out, these are pretty easy to check. It's no different to the checks we did for a one-way ANOVA.
 
-\SUBSECTION{Levene test for homogeneity of variance}
+\SUBSECTION{Homogeneity of variance}
 
-To test whether the groups have the same variance, we can use the Levene test. The theory behind the Levene test was discussed in Section~\ref{sec:levene}, so I won't discuss it again. This test expects that you have a saturated model (i.e., included all of the relevant terms), because the test is primarily concerned with the within-group variance, and it doesn't really make a lot of sense to calculate this any way other than with respect to the full model. The Levene test can be specified under the ANOVA `Assumption Checks' - `Homogeneity Tests' option in jamovi, with the result shown as in Figure \ref{fig:factorialanova5}.  The fact that the Levene test is non-significant means that we can safely assume that the homogeneity of variance assumption is not violated.
+As mentioned in Section~\ref{sec:levene} it's a good idea to visually inspect a plot of the standard deviations compared across different groups / categories, and also see if the Levene test is consistent with the visual inspection. The theory behind the Levene test was discussed in Section~\ref{sec:levene}, so I won't discuss it again. This test expects that you have a saturated model (i.e., including all of the relevant terms), because the test is primarily concerned with the within-group variance, and it doesn't really make a lot of sense to calculate this any way other than with respect to the full model. The Levene test can be specified under the ANOVA `Assumption Checks' - `Homogeneity Tests' option in jamovi, with the result shown as in Figure \ref{fig:factorialanova5}.  The fact that the Levene test is non-significant means that, providing it is consistent with a visual inspection of the plot of standard deviations, we can safely assume that the homogeneity of variance assumption is not violated.
 
 \SUBSECTION{Normality of residuals}
 
-As with one-way ANOVA we can test for the normality of residuals in a straightforward fashion (see Section~\ref{sec:anovanormality}). It's generally a good idea to examine the residuals graphically using a QQ plot. See Figure \ref{fig:factorialanova5}. 
+As with one-way ANOVA we can test for the normality of residuals in a straightforward fashion (see Section~\ref{sec:anovanormality}). Primarily though, it's generally a good idea to examine the residuals graphically using a QQ plot. See Figure \ref{fig:factorialanova5}. 
 
 \begin{figure}[!htb]
 \begin{center}
@@ -422,6 +433,78 @@ As with one-way ANOVA we can test for the normality of residuals in a straightfo
 \HR
 \end{center}
 \end{figure}
+
+
+\section{Analysis of Covariance (ANCOVA)\label{sec:ancova}}
+
+A variation in ANOVA is when you have an additional continuous variable that you think might be related to the dependent variable. This additional variable can be added to the analysis as a covariate, in the aptly named analysis of covariance (ANCOVA).
+
+In ANCOVA the values of the dependent variable are “adjusted” for the influence of the covariate, and then the “adjusted” score means are tested between groups in the usual way. This technique can increase the precision of an experiment, and therefore provide a more “powerful” test of the equality of group means in the dependent variable. How does ANCOVA do this? Well, although the covariate itself is typically not of any experimental interest, adjustment for the covariate can decrease the estimate of experimental error and thus, by reducing error variance, precision is increased. This means that an inappropriate failure to reject the null hypothesis (false negative or type II error) is less likely. 
+
+Despite this advantage, ANCOVA runs the risk of undoing real differences between groups, and this should be avoided. Look at Figure \ref{fig:ancova_groups}, for example, which shows a plot of Statistics anxiety against age and shows two distinct groups – students who have either an Arts or Science background or preference. ANCOVA with age as a covariate might lead to the conclusion that statistics anxiety does not differ in the two groups. Would this conclusion be reasonable – probably not because the ages of the two groups do not overlap and analysis of variance has essentially “extrapolated into a region with no data” \parencite[68]{Everitt1996}. 
+
+\begin{figure}[!htb]
+\begin{center}
+\epsfig{file = ../img/factorialanova/ancova_groups.png,clip=true, width = 12.5cm} 
+\caption{Plot of Statistics anxiety against age for two distinct groups}
+\label{fig:ancova_groups}
+\HR
+\end{center}
+\end{figure}
+
+Clearly, careful thought needs to be given to an analysis of covariance with distinct groups. This applies to both one-way and factorial designs, as ANCOVA can be used with both.
+
+\SUBSECTION{Running ANCOVA in jamovi}
+
+A health psychologist was interested in the effect of routine cycling and stress on happiness levels, with age as a covariate. You can find the dataset in the file \filename{ancova.csv}. Open this file in jamovi and then, to undertake an ANCOVA, select \rtext{Analyses - ANOVA - ANCOVA}   to open the ANCOVA analysis window (Figure \ref{fig:ancova1}). Highlight the dependent variable ‘happiness’ and transfer it into the ‘Dependent Variable’ text box. Highlight the independent variables  ‘stress’ and ‘commute’ and transfer them  into the ‘Fixed Factors’ text box. Highlight the covariate ‘age’ and transfer it  into the ‘Covariates’ text box. Then Click on Estimated Marginal Means... to bring up the plots and tables options. 
+
+\begin{figure}[!htb]
+\begin{center}
+\epsfig{file = ../img/factorialanova/ancova1.png,clip=true, width = 12.5cm} 
+\caption{The jamovi ANCOVA analysis window}
+\label{fig:ancova1}
+\HR
+\end{center}
+\end{figure}
+
+An ANCOVA table showing Tests of Between-Subjects Effects is produced in the jamovi results window (Figure \ref{fig:ancova2}). The F value for the covariate ‘age’ is significant at $p=.023$, suggesting that age is an important predictor of the dependent variable, happiness. When we look at the estimated marginal mean scores (Figure \ref{fig:ancova3}), adjustments have been made (compared to an analysis without the covariate) because of the inclusion of the covariate ‘age’ in this ANCOVA. A plot (Figure \ref{fig:ancova4}) is a good way of visualising and interpreting the significant effects. 
+
+The F value for the main effect ‘stress’ ($52.61$) has an associated probability of $p<.001$. The F value for the main effect ‘commute’ ($42.33$) has an associated probability of $p<.001$. Since both of these are less than the probability that is typically used to decide if a statistical result is significant ($p<.05$) we can conclude that there was a significant main effect of stress ($F(1,15)=52.61, p<.001$) and a significant main effect of commuting method ($F(1,15)=42.33, p<.001$). A significant interaction between stress and commuting method was also found ($F(1,15)=14.15, p=.002$).
+
+\begin{figure}[!htb]
+\begin{center}
+\epsfig{file = ../img/factorialanova/ancova2.png,clip=true, width = 15cm} 
+\caption{jamovi ANCOVA output for happiness as a function of stress and commuting method, with age as a covariate}
+\label{fig:ancova2}
+\HR
+\end{center}
+\end{figure}
+
+\begin{figure}[!htb]
+\begin{center}
+\epsfig{file = ../img/factorialanova/ancova3.png,clip=true, width = 12.5cm} 
+\caption{Table of mean happiness level as a function of stress and commuting method (adjusted for the covariate age) with 95\% confidence intervals}
+\label{fig:ancova3}
+\HR
+\end{center}
+\end{figure}
+
+\begin{figure}[!htb]
+\begin{center}
+\epsfig{file = ../img/factorialanova/ancova4.png,clip=true, width = 12.5cm} 
+\caption{Plot of mean happiness level as a function of stress and commuting method}
+\label{fig:ancova4}
+\HR
+\end{center}
+\end{figure}
+
+In Figure \ref{fig:ancova4} we can see the adjusted, marginal, mean happiness scores when age is a covariate in an ANCOVA. In this analysis there is a significant interaction effect, whereby people with low stress who cycle to work are happier than people with low stress who drive and people with high stress whether they cycle or drive to work. There is also a significant main effect of stress – people with low stress are happier than those with high stress. And there is also a significant main effect of commuting behaviour – people who cycle are happier, on average, than those who drive to work.  
+
+One thing to be aware of is that, if you are thinking of including a covariate in your ANOVA, there is an additional assumption: the relationship between the covariate and the dependent variable should be similar for all levels of the independent variable. This can be checked by adding an interaction term between the covariate and each independent variable in the jamovi \rtext{Model - Model terms} option. If the interaction effect is not significant it can be removed. If it is significant then a different and more advanced statistical technique might be appropriate (which is beyond the scope of this book so you might want to consult a friendly statistician).
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{comment} % this next section is not easy to do in jamovi ... therefore left out for now
 \section{The \texorpdfstring{$\B{F}$}{} test as a model comparison\label{sec:omnibusF}}
@@ -515,6 +598,8 @@ Okay, now that we have our two MS values, we can divide one by the other, and ob
 
 
 \end{comment}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
 
 \section{ANOVA as a linear model\label{sec:anovalm}}
 
@@ -734,7 +819,7 @@ Each row in the table corresponds to one of the factor levels, and each column c
 
 \SUBSECTION{Treatment contrasts}
 
-In the particular kind of contrasts that I've described above, one level of the factor is special, and acts as a kind of ``baseline'' category (i.e., \rtext{placebo} in our example), against which the other two are defined. The name for these kinds of contrasts is \keyterm{treatment contrasts}, also known as``dummy coding''. In this contrast each level of the factor is compared to a base reference level, and the base reference level is the value of the intercept. 
+In the particular kind of contrasts that I've described above, one level of the factor is special, and acts as a kind of ``baseline'' category (i.e., \rtext{placebo} in our example), against which the other two are defined. The name for these kinds of contrasts is \keyterm{treatment contrasts}, also known as ``dummy coding''. In this contrast each level of the factor is compared to a base reference level, and the base reference level is the value of the intercept. 
 
 The name reflects the fact that these contrasts are quite natural and sensible when one of the categories in your factor really is special because it actually does represent a baseline. That makes sense in our clinical trial example. The \rtext{placebo} condition corresponds to the situation where you don't give people any real drugs, and so it's special. The other two conditions are defined in relation to the placebo. In one case you replace the placebo with Anxifree, and in the other case your replace it with Joyzepam. 
 
@@ -864,7 +949,7 @@ As usual, it will help us to work with some data. The \filename{coffee.csv} file
 \end{center}
 \end{figure}
 
-Looking at the table of means in Figure \ref{fig:factorialanova15} we get a strong impression that there are differences between the groups. This is especially true when we compare these means to the standard deviations for the \rtext{babble} variable. Across groups, this standard deviation varies from .14 to .71, which is fairly small relative to the differences in group means.\FOOTNOTE{This discrepancy in standard deviations might (and should) make you wonder if we have a violation of the homogeneity of variance assumption. I'll leave it as an exercise for the reader to check this using the Levene test option.} Whilst this at first may seem like a straightforward factorial ANOVA, a problem arises when we look at how many observations we have in each group. See the different Ns for different groups shown in Figure \ref{fig:factorialanova15}. This violates one of our original assumptions, namely that the number of people in each group is the same. We haven't really discussed how to handle this situation.
+Looking at the table of means in Figure \ref{fig:factorialanova15} we get a strong impression that there are differences between the groups. This is especially true when we compare these means to the standard deviations for the \rtext{babble} variable. Across groups, this standard deviation varies from .14 to .71, which is fairly small relative to the differences in group means.\FOOTNOTE{This discrepancy in standard deviations might (and should) make you wonder if we have a violation of the homogeneity of variance assumption. I'll leave it as an exercise for the reader to double check this using the Levene test option.} Whilst this at first may seem like a straightforward factorial ANOVA, a problem arises when we look at how many observations we have in each group. See the different Ns for different groups shown in Figure \ref{fig:factorialanova15}. This violates one of our original assumptions, namely that the number of people in each group is the same. We haven't really discussed how to handle this situation.
 
 \SUBSECTION{``Standard ANOVA'' does not exist for unbalanced designs}
 
@@ -1094,6 +1179,8 @@ This uncertainty is the reason for the missing variance. The ``missing'' varianc
 \begin{itemize} \itemsep -2pt
 \item Factorial ANOVA with balanced designs, without interactions (Section~\ref{sec:factorialanovasimple}) and with interactions included (Section~\ref{sec:interactions})
 \item Effect size, estimated means, and confidence intervals in a factorial ANOVA (Section~\ref{sec:effectsizefactorialanova})
+\item Checking assumptions in ANOVA (Section~\ref{sec:factorialanovaassumptions})
+\item Analysis of Covariance (ANCOVA) (Section~\ref{sec:ancova})
 \item Understanding the linear model underlying ANOVA, including different contrasts (Section~\ref{sec:anovalm} and \ref{sec:contrasts})
 \item Post hoc testing using Tukey's HSD (Section~\ref{sec:posthoc2}) and a brief commentary on planned comparisons (Section~\ref{sec:plannedcomparisons})
 \item Factorial ANOVA with unbalanced designs (Section~\ref{sec:unbalancedanova})

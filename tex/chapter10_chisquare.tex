@@ -130,11 +130,18 @@ In effect, what we've got here are four different ``error'' scores, each one tel
 sum( (observed - expected)^2 / expected )
 \end{rblock1}
 
-This gives us a value of \rtext{8.44} - remember that, we'll come back to it soon. If we let $k$ refer to the total number of categories (i.e., $k=4$ for our cards data), then the $\chi^2$ statistic is given by:
+This gives us a value of \rtext{8.44}.
+
+\vspace{0.5cm}
+\begin{mdframed}[style=MyFrame,nobreak=true]
+If we let $k$ refer to the total number of categories (i.e., $k=4$ for our cards data), then the $\chi^2$ statistic is given by:
 $$
 \chi^2 = \sum_{i=1}^k \frac{(O_i - E_i)^2}{E_i}
 $$
-Intuitively, it's clear that if $\chi^2$ is small, then the observed data $O_i$ are very close to what the null hypothesis predicted $E_i$, so we're going to need a large $\chi^2$ statistic in order to reject the null. As we've seen from our calculations, in our cards data set we've got a value of $\chi^2 = 8.44$. So now the question becomes is this a big enough value to reject the null?
+Intuitively, it's clear that if $\chi^2$ is small, then the observed data $O_i$ are very close to what the null hypothesis predicted $E_i$, so we're going to need a large $\chi^2$ statistic in order to reject the null. 
+\end{mdframed}
+
+As we've seen from our calculations, in our cards data set we've got a value of $\chi^2 = 8.44$. So now the question becomes is this a big enough value to reject the null?
 
 \SUBSECTION{The sampling distribution of the GOF statistic \advanced}
 
@@ -146,7 +153,7 @@ O_i \sim \mbox{Binomial}(P_i, N)
 $$
 Now, if you remember from our discussion of the central limit theorem (Section~\ref{sec:clt}) the binomial distribution starts to look pretty much identical to the normal distribution, especially when $N$ is large and when $P_i$ isn't {\it too} close to 0 or 1. In other words as long as $N \times P_i$ is large enough. Or, to put it another way, when the expected frequency $E_i$ is large enough then the theoretical distribution of $O_i$ is approximately normal. Better yet, if $O_i$ is normally distributed, then so is $(O_i - E_i)/\sqrt{E_i}$. Since $E_i$ is a fixed value, subtracting off $E_i$ and dividing by $\sqrt{E_i}$ changes the mean and standard deviation of the normal distribution but that's all it does. Okay, so now let's have a look at what our goodness-of-fit statistic actually {\it is}. What we're doing is taking a bunch of things that are normally-distributed, squaring them, and adding them up. Wait. We've seen that before too! As we discussed in Section~\ref{sec:otherdists}, when you take a bunch of things that have a standard normal distribution (i.e., mean 0 and standard deviation 1), square them and then add them up, the resulting quantity has a chi-square distribution. So now we know that the null hypothesis predicts that the sampling distribution of the goodness-of-fit statistic is a chi-square distribution. Cool. 
 
-There's one last detail to talk about, namely the degrees of freedom. If you remember back to Section~\ref{sec:otherdists}, I said that if the number of things you're adding up is $k$, then the degrees of freedom for the resulting chi-square distribution is $k$. Yet, what I said at the start of this section is that the actual degrees of freedom for the chi-square goodness-of-fit test is $k-1$. What's up with that? The answer here is that what we're supposed to be looking at is the number of genuinely {\it independent} things that are getting added together. And, as I'll go on to talk about in the next section, even though there are $k$ things that we're adding only $k-1$ of them are truly independent, and so the degrees of freedom is actually only $k-1$. That's the topic of the next section.\FOOTNOTE{I should point out that this issue does complicate the story somewhat. I'm not going to cover it fully, but there's a sneaky trick that you can do to rewrite the equation for the goodness-of-fit statistic as a sum over $k-1$ independent things. When we do so we get the ``proper'' sampling distribution, which is chi-square with $k-1$ degrees of freedom. In fact, in order to get the maths to work out properly, you actually have to rewrite things that way. But it's beyond the scope of an introductory book to show the maths in that much detail. All I wanted to do is give you a sense of why the goodness-of-fit statistic is associated with the chi-square distribution.}
+There's one last detail to talk about, namely the degrees of freedom. If you remember back to Section~\ref{sec:otherdists}, I said that if the number of things you're adding up is $k$, then the degrees of freedom for the resulting chi-square distribution is $k$. Yet, what I said at the start of this section is that the actual degrees of freedom for the chi-square goodness-of-fit test is $k-1$. What's up with that? The answer here is that what we're supposed to be looking at is the number of genuinely {\it independent} things that are getting added together. And, as I'll go on to talk about in the next section, even though there are $k$ things that we're adding only $k-1$ of them are truly independent, and so the degrees of freedom is actually only $k-1$. That's the topic of the next section.\FOOTNOTE{If you rewrite the equation for the goodness-of-fit statistic as a sum over $k-1$ independent things you get the ``proper'' sampling distribution, which is chi-square with $k-1$ degrees of freedom. It's beyond the scope of an introductory book to show the maths in that much detail. All I wanted to do is give you a sense of why the goodness-of-fit statistic is associated with the chi-square distribution.}
 
 \SUBSECTION{Degrees of freedom}
 
@@ -340,11 +347,19 @@ Therefore, our expected frequency can be written as the product (i.e. multiplica
 $$
 E_{ij} = \frac{R_i \times C_j}{N}
 $$
-Now that we've figured out how to calculate the expected frequencies, it's straightforward to define a test statistic, following the exact same strategy that we used in the goodness-of-fit test. In fact, it's pretty much the {\it same} statistic. For a contingency table with $r$ rows and $c$ columns, the equation that defines our $X^2$ statistic is 
+
+\vspace{0.5cm}
+\begin{mdframed}[style=MyFrame,nobreak=true]
+Now that we've figured out how to calculate the expected frequencies, it's straightforward to define a test statistic, following the exact same strategy that we used in the goodness-of-fit test. In fact, it's pretty much the {\it same} statistic. 
+
+For a contingency table with $r$ rows and $c$ columns, the equation that defines our $X^2$ statistic is 
 $$
 X^2 = \sum_{i=1}^r\sum_{j=1}^c \frac{({E}_{ij} - O_{ij})^2}{{E}_{ij}}
 $$
-The only difference is that I have to include two summation signs (i.e., $\sum$) to indicate that we're summing over both rows and columns. As before, large values of $X^2$ indicate that the null hypothesis provides a poor description of the data, whereas small values of $X^2$ suggest that it does a good job of accounting for the data. Therefore, just like last time, we want to reject the null hypothesis if $X^2$ is too large.
+The only difference is that I have to include two summation signs (i.e., $\sum$) to indicate that we're summing over both rows and columns. 
+\end{mdframed}
+
+As before, large values of $X^2$ indicate that the null hypothesis provides a poor description of the data, whereas small values of $X^2$ suggest that it does a good job of accounting for the data. Therefore, just like last time, we want to reject the null hypothesis if $X^2$ is too large.
 
 Not surprisingly, this statistic is $\chi^2$ distributed. All we need to do is figure out how many degrees of freedom are involved, which actually isn't too hard. As I mentioned before, you can (usually) think of the degrees of freedom as being equal to the number of data points that you're analysing, minus the number of constraints. A contingency table with $r$ rows and $c$ columns contains a total of $r \times c$ observed frequencies, so that's the total number of observations. What about the constraints? Here, it's slightly trickier. The answer is always the same
 $$
@@ -395,11 +410,18 @@ I later found out the data were made up, and I'd been watching cartoons instead 
 
 \section{The continuity correction~\label{sec:yates}}
 
-Okay, time for a little bit of a digression. I've been lying to you a little bit so far. There's a tiny change that you need to make to your calculations whenever you only have 1 degree of freedom. It's called the ``continuity correction'', or sometimes the \keyterm{Yates correction}. Remember what I pointed out earlier: the $\chi^2$ test is based on an approximation, specifically on the assumption that the binomial distribution starts to look like a normal distribution for large $N$. One problem with this is that it often doesn't quite work, especially when you've only got 1 degree of freedom (e.g., when you're doing a test of independence on a $2 \times 2$ contingency table). The main reason for this is that the true sampling distribution for the $X^2$ statistic is actually discrete (because you're dealing with categorical data!) but the $\chi^2$ distribution is continuous. This can introduce systematic problems. Specifically, when $N$ is small and when $df=1$, the goodness-of-fit statistic tends to be ``too big'', meaning that you actually have a bigger $\alpha$ value than you think (or, equivalently, the $p$ values are a bit too small). \textcite{Yates1934} suggested a simple fix, in which you redefine the goodness-of-fit statistic as:
+Okay, time for a little bit of a digression. I've been lying to you a little bit so far. There's a tiny change that you need to make to your calculations whenever you only have 1 degree of freedom. It's called the ``continuity correction'', or sometimes the \keyterm{Yates correction}. Remember what I pointed out earlier: the $\chi^2$ test is based on an approximation, specifically on the assumption that the binomial distribution starts to look like a normal distribution for large $N$. One problem with this is that it often doesn't quite work, especially when you've only got 1 degree of freedom (e.g., when you're doing a test of independence on a $2 \times 2$ contingency table). The main reason for this is that the true sampling distribution for the $X^2$ statistic is actually discrete (because you're dealing with categorical data!) but the $\chi^2$ distribution is continuous. This can introduce systematic problems. Specifically, when $N$ is small and when $df=1$, the goodness-of-fit statistic tends to be ``too big'', meaning that you actually have a bigger $\alpha$ value than you think (or, equivalently, the $p$ values are a bit too small). 
+
+\vspace{0.5cm}
+\begin{mdframed}[style=MyFrame,nobreak=true]
+\textcite{Yates1934} suggested a simple fix, in which you redefine the goodness-of-fit statistic as:
 $$
 \chi^2 = \sum_{i} \frac{(|E_i - O_i| - 0.5)^2}{E_i}
 $$
-Basically, he just subtracts off 0.5 everywhere. As far as I can tell from reading Yates' paper, the correction is basically a hack. It's not derived from any principled theory. Rather, it's based on an examination of the behaviour of the test, and observing that the corrected version seems to work better. You can specify this correction in jamovi from a check box in the `Statistics' options, where it is called `$\chi^2$ continuity correction'. 
+Basically, he just subtracts off 0.5 everywhere. 
+\end{mdframed}
+
+As far as I can tell from reading Yates' paper, the correction is basically a hack. It's not derived from any principled theory. Rather, it's based on an examination of the behaviour of the test, and observing that the corrected version seems to work better. You can specify this correction in jamovi from a check box in the `Statistics' options, where it is called `$\chi^2$ continuity correction'. 
 
 
 \section{Effect size~\label{sec:chisqeffectsize}}
@@ -408,7 +430,11 @@ As we discussed earlier (Section~\ref{sec:effectsize}), it's becoming commonplac
 
 There are several different measures that you can choose to report, and several different tools that you can use to calculate them. I won't discuss all of them but will instead focus on the most commonly reported measures of effect size. 
 
-By default, the two measures that people tend to report most frequently are the $\phi$ statistic and the somewhat superior version, known as  Cram\'er's $V$. Mathematically, they're very simple. To calculate the $\phi$ statistic, you just divide your $X^2$ value by the sample size, and take the square root:
+By default, the two measures that people tend to report most frequently are the $\phi$ statistic and the somewhat superior version, known as  Cram\'er's $V$. 
+
+\vspace{0.5cm}
+\begin{mdframed}[style=MyFrame,nobreak=true]
+Mathematically, they're very simple. To calculate the $\phi$ statistic, you just divide your $X^2$ value by the sample size, and take the square root:
 $$
 \phi = \sqrt{\frac{X^2}{N}}
 $$
@@ -416,6 +442,8 @@ The idea here is that the $\phi$ statistic is supposed to range between 0 (no as
 $$
 V = \sqrt{\frac{X^2}{N(k-1)}}
 $$
+\end{mdframed}
+
 And you're done. This seems to be a fairly popular measure, presumably because it's easy to calculate, and it gives answers that aren't completely silly. With Cramer’s V, you know that the value really does range from 0 (no association at all) to 1 (perfect association). 
 
 
@@ -525,6 +553,7 @@ and this statistic has a $\chi^2$ distribution (approximately) with $df=1$. Howe
 
 Now that you know what the McNemar test is all about, lets actually run one. The \filename{agpp.csv} file contains the raw data that I discussed previously. The \rtext{agpp} data set contains three variables, an \rtext{id} variable that labels each participant in the data set (we'll see why that's useful in a moment), a \rtextverb#response_before# variable that records the person's answer when they were asked the question the first time, and a \rtextverb#response_after# variable that shows the answer that they gave when asked the same question a second time. Notice that each participant appears only once in this data set. Go to the `Analyses' - `Frequencies' - `Contingency Tables' - `Paired Samples' analysis in jamovi, and move \rtextverb#response_before# into the `Rows' box, and \rtextverb#response_after# into the `Columns' box. You will then get a contingency table in the results window, with the statistic for the McNemar test just below it, see Figure \ref{fig:McNemar}
 
+\vspace{1cm}
 \begin{figure}[htb]
 \begin{center}
 \epsfig{file=../img/chisquare/McNemar.png,clip=true,width=14cm}
@@ -536,11 +565,12 @@ Now that you know what the McNemar test is all about, lets actually run one. The
 
 And we're done. We've just run a McNemar's test to determine if people were just as likely to vote AGPP after the ads as they were before hand. The test was significant ($\chi^2(1) = 12.03, p<.001$), suggesting that they were not. And, in fact it looks like the ads had a negative effect: people were less likely to vote AGPP after seeing the ads. Which makes a lot of sense when you consider the quality of a typical political advertisement.
 
-
+\vspace{3cm}
 \section{What's the difference between McNemar and independence?}
 
 Let's go all the way back to the beginning of the chapter and look at the \rtext{cards} data set again. If you recall, the actual experimental design that I described involved people making {\it two} choices. Because we have information about the first choice and the second choice that everyone made, we can construct the following contingency table that cross-tabulates the first choice against the second choice.
 
+\vspace{1.0cm}
 \begin{rblock1}
           choice_2
 choice_1   clubs diamonds hearts spades
@@ -566,7 +596,7 @@ Notice that the results are different! These aren't the same test.
 \end{center}
 \end{figure}
 
-\vspace{0.5cm}
+\vspace{15cm}
 \section{Summary}
 
 The key ideas discussed in this chapter are:

@@ -7,7 +7,9 @@
 \usepackage{epsfig}
 \usepackage{boxedminipage}
 \usepackage{titlesec}
-\usepackage{titletoc}
+%\usepackage{titletoc}
+%\usepackage[nottoc,numbib]{tocbibind}
+\usepackage[nottoc]{tocbibind}
 \usepackage{bm}
 \usepackage{fancyhdr}
 \usepackage{multicol}
@@ -49,6 +51,20 @@
 
 %\usepackage{fancybox}
 
+\usepackage{mdframed}
+\mdfdefinestyle{MyFrame}{%
+    linecolor=black,
+    outerlinewidth=2pt,
+    roundcorner=20pt,
+    innertopmargin=4pt,
+    innerbottommargin=4pt,
+    innerrightmargin=4pt,
+    innerleftmargin=4pt,
+        leftmargin = 4pt,
+        rightmargin = 4pt
+    %backgroundcolor=gray!50!white}
+        }
+
 \usepackage{afterpage}
 \newcommand\blankpage{%
     \null
@@ -72,11 +88,12 @@
 
 \AtEveryCitekey{\ifciteseen{}{\defcounter{maxnames}{99}}}
 
-
 \DefineBibliographyStrings{english}{%
   backrefpage = {page},% originally "cited on page"
   backrefpages = {pages},% originally "cited on pages"
+  %bibliography = {References},
 }
+
 
 \usepackage{csquotes}
 \DeclareCiteCommand{\cite}

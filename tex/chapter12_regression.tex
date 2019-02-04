@@ -111,17 +111,23 @@ We can make these ideas a bit more explicit by introducing the idea of a \keyter
 
 %\SUBSECTION{The mathematical definition of a correlation}
 
+\vspace{3.5cm}
+\begin{mdframed}[style=MyFrame,nobreak=false]
 The formula for the Pearson's correlation coefficient can be written in several different ways. I think the simplest way to write down the formula is to break it into two steps. Firstly, let's introduce the idea of a \keyterm{covariance}. The covariance between two variables $X$ and $Y$ is a generalisation of the notion of the variance amd is a mathematically simple way of describing the relationship between two variables that isn't terribly informative to humans
 $$
 \mbox{Cov}(X,Y) = \frac{1}{N-1} \sum_{i=1}^N \left( X_i - \bar{X} \right) \left( Y_i - \bar{Y} \right)
 $$
-Because we're multiplying (i.e., taking the ``product'' of) a quantity that depends on $X$ by a quantity that depends on $Y$ and then averaging\FOOTNOTE{Just like we saw with the variance and the standard deviation, in practice we divide by $N-1$ rather than $N$.}, you can think of the formula for the covariance as an ``average cross product'' between $X$ and $Y$. The covariance has the nice property that, if $X$ and $Y$ are entirely unrelated, then the covariance is exactly zero. If the relationship between them is positive (in the sense shown in Figure~\ref{fig:corr}) then the covariance is also positive, and if the relationship is negative then the covariance is also negative. In other words, the covariance captures the basic qualitative idea of correlation. Unfortunately, the raw magnitude of the covariance isn't easy to interpret as it depends on the units in which $X$ and $Y$ are expressed and, worse yet, the actual units that the covariance itself is expressed in are really weird. For instance, if $X$ refers to the \rtext{dan.sleep} variable (units: hours) and $Y$ refers to the \rtext{dan.grump} variable (units: grumps), then the units for their covariance are ``hours $\times$ grumps''. And I have no freaking idea what that would even mean. 
+Because we're multiplying (i.e., taking the ``product'' of) a quantity that depends on $X$ by a quantity that depends on $Y$ and then averaging\FOOTNOTE{Just like we saw with the variance and the standard deviation, in practice we divide by $N-1$ rather than $N$.}, you can think of the formula for the covariance as an ``average cross product'' between $X$ and $Y$. 
+
+The covariance has the nice property that, if $X$ and $Y$ are entirely unrelated, then the covariance is exactly zero. If the relationship between them is positive (in the sense shown in Figure~\ref{fig:corr}) then the covariance is also positive, and if the relationship is negative then the covariance is also negative. In other words, the covariance captures the basic qualitative idea of correlation. Unfortunately, the raw magnitude of the covariance isn't easy to interpret as it depends on the units in which $X$ and $Y$ are expressed and, worse yet, the actual units that the covariance itself is expressed in are really weird. For instance, if $X$ refers to the \rtext{dan.sleep} variable (units: hours) and $Y$ refers to the \rtext{dan.grump} variable (units: grumps), then the units for their covariance are ``hours $\times$ grumps''. And I have no freaking idea what that would even mean. 
 
 The Pearson correlation coefficient $r$ fixes this interpretation problem by standardising the covariance, in pretty much the exact same way that the $z$-score standardises a raw score, by dividing by the standard deviation. However, because we have two variables that contribute to the covariance, the standardisation only works if we divide by both standard deviations.\FOOTNOTE{This is an oversimplification, but it'll do for our purposes.}  In other words, the correlation between $X$ and $Y$ can be written as follows:
 $$
 r_{XY}  = \frac{\mbox{Cov}(X,Y)}{ \hat{\sigma}_X \ \hat{\sigma}_Y}
 $$
-By doing this standardisation, not only do we keep all of the nice properties of the covariance discussed earlier, but the actual values of $r$ are on a meaningful scale: $r= 1$ implies a perfect positive relationship and $r = -1$ implies a perfect negative relationship. I'll expand a little more on this point later, in Section~\ref{sec:interpretingcorrelations}. But before I do, let's look at how to calculate correlations in jamovi.
+\end{mdframed}
+
+By standardising the covariance, not only do we keep all of the nice properties of the covariance discussed earlier, but the actual values of $r$ are on a meaningful scale: $r= 1$ implies a perfect positive relationship and $r = -1$ implies a perfect negative relationship. I'll expand a little more on this point later, in Section~\ref{sec:interpretingcorrelations}. But before I do, let's look at how to calculate correlations in jamovi.
 
 \SUBSECTION{Calculating correlations in jamovi}
 
@@ -301,7 +307,6 @@ $$
 Y_i = b_0 + b_1 X_i + \epsilon_i
 $$ 
 
-\newpage
 \section{Estimating a linear regression model~\label{sec:regressionestimation}}
 
 \begin{figure}[!htb]
@@ -375,13 +380,15 @@ Multiple regression in jamovi is no different to simple regression. All we have 
 
 The coefficient associated with \rtext{dan.sleep} is quite large, suggesting that every hour of sleep I lose makes me a lot grumpier. However, the coefficient for \rtext{baby.sleep} is very small, suggesting that it doesn't really matter how much sleep my son gets. What matters as far as my grumpiness goes is how much sleep {\it I} get. To get a sense of what this multiple regression model looks like, Figure~\ref{fig:multipleregression} shows a 3D plot that plots all three variables, along with the regression model itself. 
 
+\vspace{0.6cm}
+\begin{mdframed}[style=MyFrame,nobreak=true]
 \SUBSECTION{Formula for the general case}
 
 The equation that I gave above shows you what a multiple regression model looks like when you include two predictors. Not surprisingly, then, if you want more than two predictors all you have to do is add more $X$ terms and more $b$ coefficients. In other words, if you have $K$ predictor variables in the model then the regression equation looks like this
 $$
 Y_i = b_0 + \left( \sum_{k=1}^K b_{k} X_{ik} \right) + \epsilon_i
 $$
-
+\end{mdframed}
 
 \section{Quantifying the fit of the regression model~\label{sec:r2}}
 
@@ -442,10 +449,16 @@ At this point we can revisit my earlier claim that regression, in this very simp
 
 \SUBSECTION{The adjusted \boldm{$R^2$} value}
 
-One final thing to point out before moving on. It's quite common for people to report a slightly different measure of model performance, known as ``adjusted $R^2$''. The motivation behind calculating the adjusted $R^2$ value is the observation that adding more predictors into the model will {\it always} cause the $R^2$ value to increase (or at least not decrease). The adjusted $R^2$ value introduces a slight change to the calculation, as follows. For a regression model with $K$ predictors, fit to a data set containing $N$ observations, the adjusted $R^2$ is:
+One final thing to point out before moving on. It's quite common for people to report a slightly different measure of model performance, known as ``adjusted $R^2$''. The motivation behind calculating the adjusted $R^2$ value is the observation that adding more predictors into the model will {\it always} cause the $R^2$ value to increase (or at least not decrease). 
+
+\vspace{0.5cm}
+\begin{mdframed}[style=MyFrame,nobreak=false]
+The adjusted $R^2$ value introduces a slight change to the calculation, as follows. For a regression model with $K$ predictors, fit to a data set containing $N$ observations, the adjusted $R^2$ is:
 $$
 \mbox{adj. } R^2 = 1 - \left(\frac{\mbox{SS}_{res}}{\mbox{SS}_{tot}} \times \frac{N-1}{N-K-1} \right)
 $$
+\end{mdframed}
+
 This adjustment is an attempt to take the degrees of freedom into account. The big advantage of the adjusted $R^2$ value is that when you add more predictors to the model, the adjusted $R^2$ value will only increase if the new variables improve the model performance more than you'd expect by chance. The big disadvantage is that the adjusted $R^2$ value {\it can't} be interpreted in the elegant way that $R^2$ can. $R^2$ has a simple interpretation as the proportion of variance in the outcome variable that is explained by the regression model. To my knowledge, no equivalent interpretation exists for adjusted $R^2$. 
 
 An obvious question then is whether you should report $R^2$ or adjusted $R^2$. This is probably a matter of personal preference. If you care more about interpretability, then $R^2$ is better. If you care more about correcting for bias, then adjusted $R^2$ is probably better. Speaking just for myself, I prefer $R^2$. My feeling is that it's more important to be able to interpret your measure of model performance. Besides, as we'll see in Section~\ref{sec:regressiontests}, if you're worried that the improvement in $R^2$ that you get by adding a predictor is just due to chance and not because it's a better model, well we've got hypothesis tests for that. 
@@ -458,7 +471,11 @@ So far we've talked about what a regression model is, how the coefficients of a 
 
 \SUBSECTION{Testing the model as a whole}
 
-Okay, suppose you've estimated your regression model. The first hypothesis test you might try is the null hypothesis that there is {\it no relationship} between the predictors and the outcome, and the alternative hypothesis that {\it the data are distributed in exactly the way that the regression model predicts.} Formally, our ``null model'' corresponds to the fairly trivial ``regression'' model in which we include 0 predictors and only include the intercept term $b_0$:
+Okay, suppose you've estimated your regression model. The first hypothesis test you might try is the null hypothesis that there is {\it no relationship} between the predictors and the outcome, and the alternative hypothesis that {\it the data are distributed in exactly the way that the regression model predicts.} 
+
+\vspace{0.5cm}
+\begin{mdframed}[style=MyFrame,nobreak=false]
+Formally, our ``null model'' corresponds to the fairly trivial ``regression'' model in which we include 0 predictors and only include the intercept term $b_0$:
 $$
 H_0: Y_i = b_0 + \epsilon_i
 $$
@@ -483,7 +500,10 @@ Now that we've got our mean square values we can calculate an $F$-statistic like
 $$
 F =  \frac{\mbox{MS}_{mod}}{\mbox{MS}_{res}}
 $$
-and the degrees of freedom associated with this are $K$ and $N-K-1$. We'll see much more of the $F$ statistic in Chapter~\ref{ch:anova}, but for now just know that we can interpret large $F$ values as indicating that the null hypothesis is performing poorly in comparison to the alternative hypothesis. In a moment I'll show you how to do the test in jamovi the easy way, but first let's have a look at the tests for the individual regression coefficients.
+and the degrees of freedom associated with this are $K$ and $N-K-1$. 
+\end{mdframed}
+
+We'll see much more of the $F$ statistic in Chapter~\ref{ch:anova}, but for now just know that we can interpret large $F$ values as indicating that the null hypothesis is performing poorly in comparison to the alternative hypothesis. In a moment I'll show you how to do the test in jamovi the easy way, but first let's have a look at the tests for the individual regression coefficients.
 
 \SUBSECTION{Tests for individual coefficients}
 
@@ -618,11 +638,18 @@ Before moving on to discuss the assumptions underlying linear regression and wha
 
 \SUBSECTION{Confidence intervals for the coefficients}
 
-Like any population parameter, the regression coefficients $b$ cannot be estimated with complete precision from a sample of data; that's part of why we need hypothesis tests. Given this, it's quite useful to be able to report confidence intervals that capture our uncertainty about the true value of $b$. This is especially useful when the research question focuses heavily on an attempt to find out {\it how} strongly variable $X$ is related to variable $Y$, since in those situations the interest is primarily in the regression weight $b$. Fortunately, confidence intervals for the regression weights can be constructed in the usual fashion
+Like any population parameter, the regression coefficients $b$ cannot be estimated with complete precision from a sample of data; that's part of why we need hypothesis tests. Given this, it's quite useful to be able to report confidence intervals that capture our uncertainty about the true value of $b$. This is especially useful when the research question focuses heavily on an attempt to find out {\it how} strongly variable $X$ is related to variable $Y$, since in those situations the interest is primarily in the regression weight $b$. 
+
+\vspace{0.5cm}
+\begin{mdframed}[style=MyFrame,nobreak=false]
+Fortunately, confidence intervals for the regression weights can be constructed in the usual fashion
 $$
 \mbox{CI}(b) = \hat{b} \pm \left( t_{crit} \times \SE{\hat{b}}  \right)
 $$
-where $\SE{\hat{b}}$ is the standard error of the regression coefficient, and $t_{crit}$ is the relevant critical value of the appropriate $t$ distribution. For instance, if it's a 95\% confidence interval that we want, then the critical value is the 97.5th quantile of a $t$ distribution with $N-K-1$ degrees of freedom.  In other words, this is basically the same approach to calculating confidence intervals that we've used throughout. In jamovi we had already specified the `95\% Confidence interval' as shown if Figure \ref{fig:reg2}, although we could easily have chosen another value, say a `99\% Confidence interval' if that is what we decided on. 
+where $\SE{\hat{b}}$ is the standard error of the regression coefficient, and $t_{crit}$ is the relevant critical value of the appropriate $t$ distribution. For instance, if it's a 95\% confidence interval that we want, then the critical value is the 97.5th quantile of a $t$ distribution with $N-K-1$ degrees of freedom.  In other words, this is basically the same approach to calculating confidence intervals that we've used throughout. 
+\end{mdframed}
+
+In jamovi we had already specified the `95\% Confidence interval' as shown if Figure \ref{fig:reg2}, although we could easily have chosen another value, say a `99\% Confidence interval' if that is what we decided on. 
 
 
 \SUBSECTION{Calculating standardised regression coefficients}
@@ -631,11 +658,16 @@ One more thing that you might want to do is to calculate ``standardised'' regres
 
 The basic idea is quite simple; the standardised coefficients are the coefficients that you would have obtained if you'd converted all the variables to $z$-scores before running the regression.\FOOTNOTE{Strictly, you standardise all the {\it regressors}. That is, every ``thing'' that has a regression coefficient associated with it in the model. For the regression models that I've talked about so far, each predictor variable maps onto exactly one regressor, and vice versa. However, that's not actually true in general and we'll see some examples of this in Chapter~\ref{ch:anova2}. But, for now we don't need to care too much about this distinction.}  The idea here is that, by converting all the predictors to $z$-scores, they all go into the regression on the same scale, thereby removing the problem of having variables on different scales. Regardless of what the original variables were, a $\beta$ value of 1 means that an increase in the predictor of 1 standard deviation will produce a corresponding 1 standard deviation increase in the outcome variable. Therefore, if variable A has a larger absolute value of $\beta$ than variable B, it is deemed to have a stronger relationship with the outcome. Or at least that's the idea. It's worth being a little cautious here, since this does rely very heavily on the assumption that ``a 1 standard deviation change'' is fundamentally the same kind of thing for all variables. It's not always obvious that this is true.  
 
+\vspace{0.5cm}
+\begin{mdframed}[style=MyFrame,nobreak=false]
 Leaving aside the interpretation issues, let's look at how it's calculated. What you could do is standardise all the variables yourself and then run a regression, but there's a much simpler way to do it. As it turns out, the $\beta$ coefficient for a predictor $X$ and outcome $Y$ has a very simple formula, namely
 $$
 \beta_X = b_X \times \frac{\sigma_X}{\sigma_Y} 
 $$
-where $\sigma_X$ is the standard deviation of the predictor, and $\sigma_Y$ is the standard deviation of the outcome variable $Y$. This makes matters a lot simpler. To make things even simpler, jamovi has an option that computes the $\beta$ coefficients for you using the `Standardized estimate' checkbox in the `Model Coefficients' options, see results in Figure \ref{fig:reg3}. 
+where $\sigma_X$ is the standard deviation of the predictor, and $\sigma_Y$ is the standard deviation of the outcome variable $Y$. This makes matters a lot simpler. 
+\end{mdframed}
+
+To make things even simpler, jamovi has an option that computes the $\beta$ coefficients for you using the `Standardized estimate' checkbox in the `Model Coefficients' options, see results in Figure \ref{fig:reg3}. 
 
 \begin{figure}[!htb]
 \begin{center}
@@ -676,13 +708,22 @@ The first and simplest kind of residuals that we care about are \keyterm{ordinar
 $$
 \epsilon_i = Y_i - \hat{Y}_i
 $$
-This is of course what we saw earlier, and unless I specifically refer to some other kind of residual, this is the one I'm talking about. So there's nothing new here. I just wanted to repeat myself. One drawback to using ordinary residuals is that they're always on a different scale, depending on what the outcome variable is and how good the regression model is. That is, unless you've decided to run a regression model without an intercept term, the ordinary residuals will have mean 0 but the variance is different for every regression. In a lot of contexts, especially where you're only interested in the {\it pattern} of the residuals and not their actual values, it's convenient to estimate the \keyterm{standardised residuals}, which are normalised in such a way as to have standard deviation 1. The way we calculate these is to divide the ordinary residual by an estimate of the (population) standard deviation of these residuals. For technical reasons, mumble mumble, the formula for this is
+This is of course what we saw earlier, and unless I specifically refer to some other kind of residual, this is the one I'm talking about. So there's nothing new here. I just wanted to repeat myself. One drawback to using ordinary residuals is that they're always on a different scale, depending on what the outcome variable is and how good the regression model is. That is, unless you've decided to run a regression model without an intercept term, the ordinary residuals will have mean 0 but the variance is different for every regression. In a lot of contexts, especially where you're only interested in the {\it pattern} of the residuals and not their actual values, it's convenient to estimate the \keyterm{standardised residuals}, which are normalised in such a way as to have standard deviation 1. 
+
+\vspace{0.5cm}
+\begin{mdframed}[style=MyFrame,nobreak=false]
+The way we calculate these is to divide the ordinary residual by an estimate of the (population) standard deviation of these residuals. For technical reasons, mumble mumble, the formula for this is
 $$
 \epsilon_{i}^\prime = \frac{\epsilon_i}{\hat{\sigma} \sqrt{1-h_i}}
 $$
 where $\hat\sigma$ in this context is the estimated population standard deviation of the ordinary residuals, and $h_i$ is the ``hat value'' of the $i$th observation. I haven't explained hat values to you yet (but have no fear,\FOOTNOTE{Or have no hope, as the case may be.} it's coming shortly), so this won't make a lot of sense. For now, it's enough to interpret the standardised residuals as if we'd converted the ordinary residuals to $z$-scores. In fact, that is more or less the truth, it's just that we're being a bit fancier. 
+\end{mdframed}
 
-The third kind of residuals are \keyterm{Studentised residuals} (also called ``jackknifed residuals'') and they're even fancier than standardised residuals. Again, the idea is to take the ordinary residual and divide it by some quantity in order to estimate some standardised notion of the residual, but the formula for doing the calculations this time is subtly different
+The third kind of residuals are \keyterm{Studentised residuals} (also called ``jackknifed residuals'') and they're even fancier than standardised residuals. Again, the idea is to take the ordinary residual and divide it by some quantity in order to estimate some standardised notion of the residual. 
+
+\vspace{0.6cm}
+\begin{mdframed}[style=MyFrame,nobreak=false]
+The formula for doing the calculations this time is subtly different
 $$
 \epsilon_{i}^* = \frac{\epsilon_i}{\hat{\sigma}_{(-i)} \sqrt{1-h_i}}
 $$
@@ -690,7 +731,10 @@ Notice that our estimate of the standard deviation here is written $\hat{\sigma}
 $$
 \hat\sigma_{(-i)} = \hat{\sigma} \ \sqrt{\frac{N-K-1 - {\epsilon_{i}^\prime}^2}{N-K-2}}
 $$
-Isn't that a pip? Before moving on, I should point out that you don't often need to obtain these residuals yourself, even though they are at the heart of almost all regression diagnostics. Most of the time the various options that provide the diagnostics, or assumption checks, will take care of these calculations for you. Even so, it's always nice to know how to actually get hold of these things yourself in case you ever need to do something non-standard.
+Isn't that a pip? 
+\end{mdframed}
+
+Before moving on, I should point out that you don't often need to obtain these residuals yourself, even though they are at the heart of almost all regression diagnostics. Most of the time the various options that provide the diagnostics, or assumption checks, will take care of these calculations for you. Even so, it's always nice to know how to actually get hold of these things yourself in case you ever need to do something non-standard.
 
 
 \SUBSECTION{Three kinds of anomalous data~\label{sec:regressionoutliers}}
@@ -713,7 +757,7 @@ Isn't that a pip? Before moving on, I should point out that you don't often need
 \end{center}
 \end{figure}
 
-\begin{figure}[!htb]
+\begin{figure}[!b]
 \begin{center}
 \epsfig{file  = ../img/regression2/unusual_influence.eps,clip=true, width = 10cm}
 \caption{An illustration of high influence points. In this case, the anomalous observation is highly unusual on the predictor variable (x axis), and falls a long way from the regression line. As a consequence, the regression line is highly distorted, even though (in this case) the anomalous observation is entirely typical in terms of the outcome variable (y axis).}
@@ -730,11 +774,17 @@ The second way in which an observation can be unusual is if it has high \keyterm
 
 In general, if an observation lies far away from the other ones in terms of the predictor variables, it will have a large hat value (as a rough guide, high leverage is when the hat value is more than 2-3 times the average; and note that the sum of the hat values is constrained to be equal to $K+1$). High leverage points are also worth looking at in more detail, but they're much less likely to be a cause for concern unless they are also outliers.  % guide from Venables and Ripley.
 
-This brings us to our third measure of unusualness, the \keyterm{influence} of an observation. A high influence observation is an outlier that has high leverage. That is, it is an observation that is very different to all the other ones in some respect, and also lies a long way from the regression line. This is illustrated in Figure~\ref{fig:influence}. Notice the contrast to the previous two figures. Outliers don't move the regression line much and neither do high leverage points. But something that is both an outlier and has high leverage, well that has a big effect on the regression line. That's why we call these points high influence, and it's why they're the biggest worry. We operationalise influence in terms of a measure known as \keyterm{Cook's distance}
+This brings us to our third measure of unusualness, the \keyterm{influence} of an observation. A high influence observation is an outlier that has high leverage. That is, it is an observation that is very different to all the other ones in some respect, and also lies a long way from the regression line. This is illustrated in Figure~\ref{fig:influence}. Notice the contrast to the previous two figures. Outliers don't move the regression line much and neither do high leverage points. But something that is both an outlier and has high leverage, well that has a big effect on the regression line. That's why we call these points high influence, and it's why they're the biggest worry. We operationalise influence in terms of a measure known as \keyterm{Cook's distance}.
+\newpage
+\vspace{0.5cm}
+\begin{mdframed}[style=MyFrame,nobreak=true]
 $$
 D_i = \frac{{\epsilon_i^*}^2 }{K+1} \times \frac{h_i}{1-h_i}
 $$ 
-Notice that this is a multiplication of something that measures the outlier-ness of the observation (the bit on the left), and something that measures the leverage of the observation (the bit on the right). In other words, in order to have a large Cook's distance an observation must be a fairly substantial outlier {\it and} have high leverage. As a rough guide, Cook's distance greater than 1 is often considered large (that's what I typically use as a quick and dirty rule). 
+Notice that this is a multiplication of something that measures the outlier-ness of the observation (the bit on the left), and something that measures the leverage of the observation (the bit on the right). 
+\end{mdframed}
+
+In order to have a large Cook's distance an observation must be a fairly substantial outlier {\it and} have high leverage. As a rough guide, Cook's distance greater than 1 is often considered large (that's what I typically use as a quick and dirty rule). 
 
 In jamovi, information about Cook's distance can be calculated by clicking on the `Cook's Distance' checkbox in the `Assumption Checks' - `Data Summary' options. When you do this, for the multiple regression model we have been using as an example in this chapter, you get the results as shown in Figure \ref{fig:reg4}. 
 
@@ -785,19 +835,33 @@ Another thing we should check is the relationship between the fitted values and 
 \end{figure}
 
 If we were worried, then in a lot of cases the solution to this problem (and many others) is to transform one or more of the variables. We discussed the basics of variable transformation in Sections~\ref{sec:transform} and \ref{sec:mathfunc}, but I do want to make special note of one additional possibility that I didn't explain fully earlier: the Box-Cox transform.~\label{subsec:boxcox} The Box-Cox function is a fairly simple one and it's very widely used.
+
+\vspace{0.5cm}
+\begin{mdframed}[style=MyFrame,nobreak=true]
 $$
 f(x,\lambda) = \frac{x^\lambda - 1}{\lambda}
 $$
-for all values of $\lambda$ except $\lambda = 0$. When $\lambda = 0$ we just take the natural logarithm (i.e., $\ln(x)$). You can calculate it using the \rtext{BOXCOX} function in the `Compute' variables screen in jamovi. 
+for all values of $\lambda$ except $\lambda = 0$. When $\lambda = 0$ we just take the natural logarithm (i.e., $\ln(x)$). 
+\end{mdframed}
+
+You can calculate it using the \rtext{BOXCOX} function in the `Compute' variables screen in jamovi. 
 
 
 \SUBSECTION{Checking for collinearity~\label{sec:regressioncollinearity}}
 
-The last kind of regression diagnostic that I'm going to discuss in this chapter is the use of \keyterm{variance inflation factors} (VIFs), which are useful for determining whether or not the predictors in your regression model are too highly correlated with each other. There is a variance inflation factor associated with each predictor $X_k$ in the model, and the formula for the $k$-th VIF is:
+The last kind of regression diagnostic that I'm going to discuss in this chapter is the use of \keyterm{variance inflation factors} (VIFs), which are useful for determining whether or not the predictors in your regression model are too highly correlated with each other. There is a variance inflation factor associated with each predictor $X_k$ in the model. 
+
+\vspace{0.5cm}
+\begin{mdframed}[style=MyFrame,nobreak=true]
+The formula for the $k$-th VIF is:
 $$
 \mbox{VIF}_k = \frac{1}{1-{R^2_{(-k)}}}
 $$
-where $R^2_{(-k)}$ refers to $R$-squared value you would get if you ran a regression using $X_k$ as the outcome variable, and all the other $X$ variables as the predictors. The idea here is that $R^2_{(-k)}$ is a very good measure of the extent to which $X_k$ is correlated with all the other variables in the model. Better yet, the square root of the VIF is pretty interpretable. It tells you how much wider the confidence interval for the corresponding coefficient $b_k$ is, relative to what you would have expected if the predictors are all nice and uncorrelated with one another. If you've only got two predictors, the VIF values are always going to be the same, as we can see if we click on the `Collinearity' checkbox in the `Regression' - `Assumptions' options in jamovi. For both \rtext{dan.sleep} and \rtext{baby.sleep} the VIF is 1.65. And since the square root of 1.65 is 1.28, we see that the correlation between our two predictors isn't causing much of a problem. 
+where $R^2_{(-k)}$ refers to $R$-squared value you would get if you ran a regression using $X_k$ as the outcome variable, and all the other $X$ variables as the predictors. The idea here is that $R^2_{(-k)}$ is a very good measure of the extent to which $X_k$ is correlated with all the other variables in the model. 
+\end{mdframed}
+
+
+The square root of the VIF is pretty interpretable. It tells you how much wider the confidence interval for the corresponding coefficient $b_k$ is, relative to what you would have expected if the predictors are all nice and uncorrelated with one another. If you've only got two predictors, the VIF values are always going to be the same, as we can see if we click on the `Collinearity' checkbox in the `Regression' - `Assumptions' options in jamovi. For both \rtext{dan.sleep} and \rtext{baby.sleep} the VIF is 1.65. And since the square root of 1.65 is 1.28, we see that the correlation between our two predictors isn't causing much of a problem. 
 
 To give a sense of how we could end up with a model that has bigger collinearity problems, suppose I were to run a much less interesting regression model, in which I tried to predict the \rtext{day} on which the data were collected, as a function of all the other variables in the data set. To see why this would be a bit of a problem, let's have a look at the correlation matrix for all four variables:
 
@@ -830,11 +894,17 @@ One fairly major problem that remains is the problem of ``model selection''. Tha
 \end{itemize}
 This latter principle is often referred to as \keyterm{Ockham's razor} and is often summarised in terms of the following pithy saying: {\it do not multiply entities beyond necessity}. In this context, it means don't chuck in a bunch of largely irrelevant predictors just to boost your $R^2$. Hmm. Yeah, the original was better. 
 
-In any case, what we need is an actual mathematical criterion that will implement the qualitative principle behind Ockham's razor in the context of selecting a regression model. As it turns out there are several possibilities. The one that I'll talk about is the \keyterm{Akaike information criterion} \parencite[AIC; ][]{Akaike1974} simply because it's available as an option in jamovi. In the context of a linear regression model (and ignoring terms that don't depend on the model in any way!), the AIC for a model that has $K$ predictor variables plus an intercept is
+In any case, what we need is an actual mathematical criterion that will implement the qualitative principle behind Ockham's razor in the context of selecting a regression model. As it turns out there are several possibilities. The one that I'll talk about is the \keyterm{Akaike information criterion} \parencite[AIC; ][]{Akaike1974} simply because it's available as an option in jamovi. 
+
+\vspace{0.5cm}
+\begin{mdframed}[style=MyFrame,nobreak=true]
+In the context of a linear regression model (and ignoring terms that don't depend on the model in any way!), the AIC for a model that has $K$ predictor variables plus an intercept is
 $$
 \mbox{AIC} = \displaystyle\frac{\mbox{SS}_{res}}{\hat{\sigma}^2} + 2K
 $$
 %\TODO{\bf [check - I'm working from memory here]} 
+\end{mdframed}
+
 The smaller the AIC value, the better the model performance. If we ignore the low level details it's fairly obvious what the AIC does. On the left we have a term that increases as the model predictions get worse; on the right we have a term that increases as the model complexity increases. The best model is the one that fits the data well (low residuals, left hand side) using as few predictors as possible (low $K$, right hand side). In short, this is a simple implementation of Ockham's razor. 
 
 AIC can be added to the `Model Fit Measures' output Table when the `AIC' checkbox is clicked, and a rather clunky way of assessing different models is seeing if the `AIC' value is lower if you remove one or more of the predictors in the regression model. This is the only way currently implemented in jamovi, but there are alternatives in other more powerful programmes, such as \R. These alternative methods can automate the process of selectively removing (or adding) predictor variables to find the best AIC. Although these methods are not implemented in jamovi, I will mention them briefly below just so you know about them.
@@ -861,7 +931,11 @@ What does this mean in practice? Well, you {\it could} go and spend several year
 
 An alternative to using automated model selection procedures is for the researcher to explicitly select two or more regression models to compare to each other. You can do this in a few different ways, depending on what research question you're trying to answer. Suppose we want to know whether or not the amount of sleep that my son got has any relationship to my grumpiness, over and above what we might expect from the amount of sleep that I got. We also want to make sure that the day on which we took the measurement has no influence on the relationship. That is, we're interested in the relationship between \rtext{baby.sleep} and \rtext{dan.grump}, and from that perspective \rtext{dan.sleep} and \rtext{day} are nuisance variable or \keyterm{covariates} that we want to control for. In this situation, what we would like to know is whether \rtextverb#dan.grump ~ dan.sleep + day + baby.sleep# (which I'll call Model 2, or \rtext{M2}) is a better regression model for these data than \rtextverb#dan.grump ~ dan.sleep + day# (which I'll call Model 1, or \rtext{M1}). There are two different ways we can compare these two models, one based on a model selection criterion like AIC, and the other based on an explicit hypothesis test. I'll show you the AIC based approach first because it's simpler, and follows naturally from discussion in the last section. The first thing I need to do is actually run the two regressions, note the AIC for each one, and then select the model with the smaller AIC value as it is judged to be the better model for these data. Actually, don't do this just yet. Read on because there is an easy way in jamovi to get the AIC values for different models included in one table.\FOOTNOTE{While I'm on this topic I should point out that the empirical evidence suggests that BIC is a better criterion than AIC. In most simulation studies that I've seen, BIC does a much better job of selecting the correct model.}
 
-A somewhat different approach to the problem comes out of the hypothesis testing framework. Suppose you have two regression models, where one of them (Model 1) contains a {\it subset} of the predictors from the other one (Model 2). That is, Model 2 contains all of the predictors included in Model 1, plus one or more additional predictors. When this happens we say that Model 1 is \keyterm{nested} within Model 2, or possibly that Model 1 is a \keyterm{submodel} of Model 2. Regardless of the terminology, what this means is that we can think of Model 1 as a null hypothesis and Model 2 as an alternative hypothesis. And in fact we can construct an $F$ test for this in a fairly straightforward fashion. We can fit both models to the data and obtain a residual sum of squares for both models. I'll denote these as SS$_{res}^{(1)}$ and SS$_{res}^{(2)}$ respectively. The superscripting here just indicates which model we're talking about.  Then our $F$ statistic is
+A somewhat different approach to the problem comes out of the hypothesis testing framework. Suppose you have two regression models, where one of them (Model 1) contains a {\it subset} of the predictors from the other one (Model 2). That is, Model 2 contains all of the predictors included in Model 1, plus one or more additional predictors. When this happens we say that Model 1 is \keyterm{nested} within Model 2, or possibly that Model 1 is a \keyterm{submodel} of Model 2. Regardless of the terminology, what this means is that we can think of Model 1 as a null hypothesis and Model 2 as an alternative hypothesis. And in fact we can construct an $F$ test for this in a fairly straightforward fashion. 
+
+\vspace{1.5cm}
+\begin{mdframed}[style=MyFrame,nobreak=false]
+We can fit both models to the data and obtain a residual sum of squares for both models. I'll denote these as SS$_{res}^{(1)}$ and SS$_{res}^{(2)}$ respectively. The superscripting here just indicates which model we're talking about.  Then our $F$ statistic is
 $$
 F = \frac{(\mbox{SS}_{res}^{(1)} - \mbox{SS}_{res}^{(1)})/k}{(\mbox{SS}_{res}^{(2)})/(N-p-1)}
 $$
@@ -874,11 +948,12 @@ $$
 \mbox{SS}_\Delta  = \sum_{i} \left( \hat{y}_i^{(2)} - \hat{y}_i^{(1)} \right)^2
 $$
 where $\hat{y}_i^{(1)}$ is the fitted value for $y_i$ according to model $M_1$ and  $\hat{y}_i^{(2)}$ is the fitted value for $y_i$ according to model $M_2$. 
+\end{mdframed}
 
 \vspace{0.3cm}
 \begin{figure}[!htb]
 \begin{center}
-\epsfig{file = ../img/regression/reg8.png, clip=true,width = 13.5cm}
+\epsfig{file = ../img/regression/reg8.png, clip=true,width = 14cm}
 \caption{Model comparison in jamovi using the `Model Builder' option}
 \HR
 \label{fig:reg8}

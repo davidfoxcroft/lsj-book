@@ -274,7 +274,7 @@ $$
 
 \begin{figure}[!!htb]
 \begin{center}
-\epsfig{file = ../img/ttest/studentTestHyp.eps,clip=true, width = 12cm}
+\epsfig{file = ../img/ttest/studentTestHyp.eps,clip=true, width = 14cm}
 \caption{Graphical illustration of the null and alternative hypotheses assumed by the Student $t$-test. The null hypothesis assumes that both groups have the same mean $\mu$, whereas the alternative assumes that they have different means $\mu_1$ and $\mu_2$. Notice that it is assumed that the population distributions are normal, and that, although the alternative hypothesis allows the group to have different means, it assumes they have the same standard deviation.}
 \HR
 \label{fig:ttesthyp}
@@ -291,7 +291,11 @@ We just need to figure out what this standard error estimate actually is. This i
 
 \SUBSECTION{A ``pooled estimate'' of the standard deviation}
 
-In the original ``Student $t$-test'', we make the assumption that the two groups have the same population standard deviation. That is, regardless of whether the population means are the same, we assume that the population standard deviations are identical, $\sigma_1 = \sigma_2$. Since we're assuming that the two standard deviations are the same, we drop the subscripts and refer to both of them as $\sigma$. How should we estimate this? How should we construct a single estimate of a standard deviation when we have two samples? The answer is, basically, we average them. Well, sort of. Actually, what we do is take a {\it weighed} average of the {\it variance} estimates, which we use as our \keyterm{pooled estimate of the variance}. The weight assigned to each sample is equal to the number of observations in that sample, minus 1. Mathematically, we can write this as
+In the original ``Student $t$-test'', we make the assumption that the two groups have the same population standard deviation. That is, regardless of whether the population means are the same, we assume that the population standard deviations are identical, $\sigma_1 = \sigma_2$. Since we're assuming that the two standard deviations are the same, we drop the subscripts and refer to both of them as $\sigma$. How should we estimate this? How should we construct a single estimate of a standard deviation when we have two samples? The answer is, basically, we average them. Well, sort of. Actually, what we do is take a {\it weighed} average of the {\it variance} estimates, which we use as our \keyterm{pooled estimate of the variance}. The weight assigned to each sample is equal to the number of observations in that sample, minus 1. 
+
+\vspace{0.7cm}
+\begin{mdframed}[style=MyFrame,nobreak=false]
+Mathematically, we can write this as
 $$
 \begin{array}{rcl}
 w_1 &=& N_1 - 1\\
@@ -306,11 +310,7 @@ Finally, we convert the pooled variance estimate to a pooled standard deviation 
 $$
 \hat\sigma_p = \sqrt{\frac{w_1 {\hat\sigma_1}^2 + w_2 {\hat\sigma_2}^2}{w_1 + w_2}}
 $$
-And if you mentally substitute $w_1 = N_1 -1$ and $w_2 = N_2 -1$ into this equation you get a very ugly looking formula. A very ugly formula that actually seems to be the ``standard'' way of describing the pooled standard deviation estimate. It's not my favourite way of thinking about pooled standard deviations, however.\FOOTNOTE{Yes, I  have a ``favourite'' way of thinking about pooled standard deviation estimates. So what?} 
-
-\SUBSECTION{The same pooled estimate, described differently}
-
-I prefer to think about it like this. Our data set actually corresponds to a set of $N$ observations which are sorted into two groups. So let's use the notation $X_{ik}$ to refer to the grade received by the $i$-th student in the $k$-th tutorial group. That is, $X_{11}$ is the grade received by the first student in Anastasia's class, $X_{21}$ is her second student, and so on. And we have two separate group means $\bar{X}_1$ and $\bar{X}_2$, which we could ``generically'' refer to using the notation $\bar{X}_k$, i.e., the mean grade for the $k$-th tutorial group. So far, so good. Now, since every single student falls into one of the two tutorials, we can describe their deviation from the group mean as the difference
+And if you mentally substitute $w_1 = N_1 -1$ and $w_2 = N_2 -1$ into this equation you get a very ugly looking formula. A very ugly formula that actually seems to be the ``standard'' way of describing the pooled standard deviation estimate. It's not my favourite way of thinking about pooled standard deviations, however. I prefer to think about it like this. Our data set actually corresponds to a set of $N$ observations which are sorted into two groups. So let's use the notation $X_{ik}$ to refer to the grade received by the $i$-th student in the $k$-th tutorial group. That is, $X_{11}$ is the grade received by the first student in Anastasia's class, $X_{21}$ is her second student, and so on. And we have two separate group means $\bar{X}_1$ and $\bar{X}_2$, which we could ``generically'' refer to using the notation $\bar{X}_k$, i.e., the mean grade for the $k$-th tutorial group. So far, so good. Now, since every single student falls into one of the two tutorials, we can describe their deviation from the group mean as the difference
 $$
 X_{ik} - \bar{X}_k
 $$
@@ -323,10 +323,15 @@ $$
 \hat\sigma^2_p = \frac{\sum_{ik} \left( X_{ik} - \bar{X}_k \right)^2}{N -2}
 $$
 Oh, and if you take the square root of this then you get $\hat{\sigma}_p$, the pooled standard deviation estimate. In other words, the pooled standard deviation calculation is nothing special. It's not terribly different to the regular standard deviation calculation. 
+\end{mdframed}
 
 \SUBSECTION{Completing the test}
 
-Regardless of which way you want to think about it, we now have our pooled estimate of the standard deviation. From now on, I'll drop the silly $p$ subscript, and just refer to this estimate as $\hat\sigma$. Great. Let's now go back to thinking about the bloody hypothesis test, shall we? Our whole reason for calculating this pooled estimate was that we knew it would be helpful when calculating our {\it standard error} estimate. But standard error of {\it what}? In the one-sample $t$-test it was the standard error of the sample mean, $\SE{\bar{X}}$, and since $\SE{\bar{X}} = \sigma / \sqrt{N}$ that's what the denominator of our $t$-statistic looked like. This time around, however, we have {\it two} sample means. And what we're interested in, specifically, is the the difference between the two $\bar{X}_1 - \bar{X}_2$. As a consequence, the standard error that we need to divide by is in fact the \keyterm{standard error of the difference} between means. As long as the two variables really do have the same standard deviation, then our estimate for the standard error is
+Regardless of which way you want to think about it, we now have our pooled estimate of the standard deviation. From now on, I'll drop the silly $p$ subscript, and just refer to this estimate as $\hat\sigma$. Great. Let's now go back to thinking about the bloody hypothesis test, shall we? Our whole reason for calculating this pooled estimate was that we knew it would be helpful when calculating our {\it standard error} estimate. But standard error of {\it what}? In the one-sample $t$-test it was the standard error of the sample mean, $\SE{\bar{X}}$, and since $\SE{\bar{X}} = \sigma / \sqrt{N}$ that's what the denominator of our $t$-statistic looked like. This time around, however, we have {\it two} sample means. And what we're interested in, specifically, is the the difference between the two $\bar{X}_1 - \bar{X}_2$. As a consequence, the standard error that we need to divide by is in fact the \keyterm{standard error of the difference} between means. 
+
+\vspace{0.5cm}
+\begin{mdframed}[style=MyFrame,nobreak=true]
+As long as the two variables really do have the same standard deviation, then our estimate for the standard error is
 $$
 \SE{\bar{X}_1 - \bar{X}_2} = \hat\sigma \sqrt{\frac{1}{N_1} + \frac{1}{N_2}}
 $$
@@ -334,6 +339,8 @@ and our $t$-statistic is therefore
 $$
 t = \frac{\bar{X}_1 - \bar{X}_2}{\SE{\bar{X}_1 - \bar{X}_2}}
 $$
+\end{mdframed}
+
 Just as we saw with our one-sample test, the sampling distribution of this $t$-statistic is a $t$-distribution (shocking, isn't it?) as long as the null hypothesis is true and all of the assumptions of the test are met. The degrees of freedom, however, is slightly different. As usual, we can think of the degrees of freedom to be equal to the number of data points minus the number of constraints. In this case, we have $N$ observations ($N_1$ in sample 1, and $N_2$ in sample 2), and 2 constraints (the sample means). So the total degrees of freedom for this test are $N-2$. 
 
 \SUBSECTION{Doing the test in jamovi}
@@ -408,17 +415,27 @@ The Welch test is very similar to the Student test. For example, the $t$-statist
 $$
 t = \frac{\bar{X}_1 - \bar{X}_2}{\SE{\bar{X}_1 - \bar{X}_2}}
 $$
-The main difference is that the standard error calculations are different. If the two populations have different standard deviations, then it's a complete nonsense to try to calculate a pooled standard deviation estimate, because you're averaging apples and oranges.\FOOTNOTE{Well, I guess you can average apples and oranges, and what you end up with is a delicious fruit smoothie. But no one really thinks that a fruit smoothie is a very good way to describe the original fruits, do they?} But you can still estimate the standard error of the difference between sample means, it just ends up looking different
+The main difference is that the standard error calculations are different. If the two populations have different standard deviations, then it's a complete nonsense to try to calculate a pooled standard deviation estimate, because you're averaging apples and oranges.\FOOTNOTE{Well, I guess you can average apples and oranges, and what you end up with is a delicious fruit smoothie. But no one really thinks that a fruit smoothie is a very good way to describe the original fruits, do they?} 
+
+\vspace{0.5cm}
+\begin{mdframed}[style=MyFrame,nobreak=true]
+But you can still estimate the standard error of the difference between sample means, it just ends up looking different
 $$
 \SE{\bar{X}_1 - \bar{X}_2} = \sqrt{ \frac{{\hat{\sigma}_1}^2}{N_1} + \frac{{\hat{\sigma}_2}^2}{N_2} }
 $$
 The reason why it's calculated this way is beyond the scope of this book. What matters for our purposes is that the $t$-statistic that comes out of the Welch $t$-test is actually somewhat different to the one that comes from the Student $t$-test. 
+\end{mdframed}
 
-The second difference between Welch and Student is that the degrees of freedom are calculated in a very different way. In the Welch test, the ``degrees of freedom '' doesn't have to be a whole number any more, and it doesn't correspond all that closely to the ``number of data points minus the number of constraints'' heuristic that I've been using up to this point. The degrees of freedom are, in fact
+The second difference between Welch and Student is that the degrees of freedom are calculated in a very different way. In the Welch test, the ``degrees of freedom '' doesn't have to be a whole number any more, and it doesn't correspond all that closely to the ``number of data points minus the number of constraints'' heuristic that I've been using up to this point. 
+
+\vspace{0.5cm}
+\begin{mdframed}[style=MyFrame,nobreak=true]
+The degrees of freedom are, in fact
 $$
 \mbox{df} = \frac{ ({\hat{\sigma}_1}^2 / N_1 + {\hat{\sigma}_2}^2 / N_2)^2 }{  ({\hat{\sigma}_1}^2 / N_1)^2 / (N_1 -1 )  + ({\hat{\sigma}_2}^2 / N_2)^2 / (N_2 -1 ) } 
 $$
 which is all pretty straightforward and obvious, right? Well, perhaps not. It doesn't really matter for our purposes. What matters is that you'll see that the ``df'' value that pops out of a Welch test tends to be a little bit smaller than the one used for the Student test, and it doesn't have to be a whole number. 
+\end{mdframed}
 
 \SUBSECTION{Doing the Welch test in jamovi}
 
@@ -486,9 +503,9 @@ Once we have computed this new \rtext{improvement} variable we can draw a histog
 
 \SUBSECTION{What is the paired samples $t$-test?}
 
-In light of the previous exploration, let's think about how to construct an appropriate $t$ test. One possibility would be to try to run an independent samples $t$-test using \rtextverb#grade\_test1# and \rtextverb#grade\_test2# as the variables of interest. However, this is clearly the wrong thing to do as the independent samples $t$-test assumes that there is no particular relationship between the two samples. Yet clearly that's not true in this case because of the repeated measures structure in the data. To use the language that I introduced in the last section, if we were to try to do an independent samples $t$-test, we would be conflating the \keyterm{within subject} differences (which is what we're interested in testing) with the \keyterm{between subject} variability (which we are not). 
+In light of the previous exploration, let's think about how to construct an appropriate $t$ test. One possibility would be to try to run an independent samples $t$-test using \rtextverb#grade_test1# and \rtextverb#grade_test2# as the variables of interest. However, this is clearly the wrong thing to do as the independent samples $t$-test assumes that there is no particular relationship between the two samples. Yet clearly that's not true in this case because of the repeated measures structure in the data. To use the language that I introduced in the last section, if we were to try to do an independent samples $t$-test, we would be conflating the \keyterm{within subject} differences (which is what we're interested in testing) with the \keyterm{between subject} variability (which we are not). 
 
-The solution to the problem is obvious, I hope, since we already did all the hard work in the previous section. Instead of running an independent samples $t$-test on \rtextverb#grade\_test1# and \rtextverb#grade\_test2#, we run a {\it one-sample} $t$-test on the within-subject difference variable, \rtext{improvement}. To formalise this slightly, if $X_{i1}$ is the score that the $i$-th participant obtained on the first variable, and $X_{i2}$ is the score that the same person obtained on the second one, then the difference score is:
+The solution to the problem is obvious, I hope, since we already did all the hard work in the previous section. Instead of running an independent samples $t$-test on \rtextverb#grade_test1# and \rtextverb#grade_test2#, we run a {\it one-sample} $t$-test on the within-subject difference variable, \rtext{improvement}. To formalise this slightly, if $X_{i1}$ is the score that the $i$-th participant obtained on the first variable, and $X_{i2}$ is the score that the same person obtained on the second one, then the difference score is:
 $$
 D_{i} = X_{i1} - X_{i2} 
 $$
@@ -676,15 +693,20 @@ All of the tests that we have discussed so far in this chapter have assumed that
 \end{center}
 \end{figure}
 
-One way to check whether a sample violates the normality assumption is to draw a \keyterm{``quantile-quantile'' plot} (QQ plot). This allows you to visually check whether you're seeing any systematic violations. In a QQ plot, each observation is plotted as a single dot. The x co-ordinate is the theoretical quantile that the observation should fall in if the data were normally distributed (with mean and variance estimated from the sample), and on the y co-ordinate is the actual quantile of the data within the sample. If the data are normal, the dots should form a straight line. For instance, lets see what happens if we generate data by sampling from a normal distribution, and then drawing a QQ plot. The results are shown in Figure~\ref{fig:qq1}. As you can see, these data form a pretty straight line; which is no surprise given that we sampled them from a normal distribution! In contrast, have a look at the two data sets shown in Figure~\ref{fig:qq2}. The top panels show the histogram and a QQ plot for a data set that is highly skewed: the QQ plot curves upwards. The lower panels show the same plots for a heavy tailed (i.e., high kurtosis) data set: in this case the QQ plot flattens in the middle and curves sharply at either end.
+One way to check whether a sample violates the normality assumption is to draw a \keyterm{``QQ plot''} (Quantile-Quantile plot). This allows you to visually check whether you're seeing any systematic violations. In a QQ plot, each observation is plotted as a single dot. The x co-ordinate is the theoretical quantile that the observation should fall in if the data were normally distributed (with mean and variance estimated from the sample), and on the y co-ordinate is the actual quantile of the data within the sample. If the data are normal, the dots should form a straight line. For instance, lets see what happens if we generate data by sampling from a normal distribution, and then drawing a QQ plot. The results are shown in Figure~\ref{fig:qq1}. As you can see, these data form a pretty straight line; which is no surprise given that we sampled them from a normal distribution! In contrast, have a look at the two data sets shown in Figure~\ref{fig:qq2}. The top panels show the histogram and a QQ plot for a data set that is highly skewed: the QQ plot curves upwards. The lower panels show the same plots for a heavy tailed (i.e., high kurtosis) data set: in this case the QQ plot flattens in the middle and curves sharply at either end.
 
 \SUBSECTION{Shapiro-Wilk tests}
 
-QQ plots provide a nice way to informally check the normality of your data, but sometimes you'll want to do something a bit more formal and the \keyterm{Shapiro-Wilk test} \parencite{Shapiro1965} is probably what you're looking for.\FOOTNOTE{Either that, or the Kolmogorov-Smirnov test, which is probably more traditional than the Shapiro-Wilk. Although most things I’ve read seem to suggest Shapiro-Wilk is the better test of normality, the Kolomogorov- Smirnov is a general purpose test of distributional equivalence that can be adapted to handle other kinds of distribution tests. In jamovi the Shapiro-Wilk test is preferred.} As you'd expect, the null hypothesis being tested is that a set of $N$ observations is normally distributed. The test statistic that it calculates is conventionally denoted as $W$, and it's calculated as follows. First, we sort the observations in order of increasing size, and let $X_1$ be the smallest value in the sample, $X_2$ be the second smallest and so on. Then the value of $W$ is given by
+QQ plots provide a nice way to informally check the normality of your data, but sometimes you'll want to do something a bit more formal and the \keyterm{Shapiro-Wilk test} \parencite{Shapiro1965} is probably what you're looking for.\FOOTNOTE{Either that, or the Kolmogorov-Smirnov test, which is probably more traditional than the Shapiro-Wilk. Although most things I’ve read seem to suggest Shapiro-Wilk is the better test of normality, the Kolomogorov- Smirnov is a general purpose test of distributional equivalence that can be adapted to handle other kinds of distribution tests. In jamovi the Shapiro-Wilk test is preferred.} As you'd expect, the null hypothesis being tested is that a set of $N$ observations is normally distributed. 
+
+\vspace{0.5cm}
+\begin{mdframed}[style=MyFrame,nobreak=true]
+The test statistic that it calculates is conventionally denoted as $W$, and it's calculated as follows. First, we sort the observations in order of increasing size, and let $X_1$ be the smallest value in the sample, $X_2$ be the second smallest and so on. Then the value of $W$ is given by
 $$
 W = \frac{ \left( \sum_{i = 1}^N a_i X_i \right)^2 }{ \sum_{i = 1}^N (X_i - \bar{X})^2}
 $$
 where $\bar{X}$ is the mean of the observations, and the $a_i$ values are ... mumble, mumble ... something complicated that is a bit beyond the scope of an introductory text. 
+\end{mdframed}
 
 Because it's a little hard to explain the maths behind the $W$ statistic, a better idea is to give a broad brush description of how it behaves. Unlike most of the test statistics that we'll encounter in this book, it's actually {\it small} values of $W$ that indicate departure from normality. The $W$ statistic has a maximum value of 1, which occurs when the data look ``perfectly normal''. The smaller the value of $W$ the less normal the data are. However, the sampling distribution for $W$, which is not one of the standard ones that I discussed in Chapter~\ref{ch:probability} and is in fact a complete pain in the arse to work with, does depend on the sample size $N$. To give you a feel for what these sampling distributions look like, I've plotted three of them in Figure~\ref{fig:swdist}. Notice that, as the sample size starts to get large, the sampling distribution becomes very tightly clumped up near $W=1$, and as a consequence, for larger samples $W$ doesn't have to be very much smaller than 1 in order for the test to be significant. 
 
@@ -718,7 +740,7 @@ Like the $t$-test, the Wilcoxon test comes in two forms, one-sample and two-samp
 
 \SUBSECTION{Two sample Mann-Whitney U test}
 
-I'll start by describing the \keyterm{Mann-Whitney U test}, since it's actually simpler than the one sample version. Suppose we're looking at the scores of 10 people on some test. Since my imagination has now failed me completely, let's pretend it's a ``test of awesomeness'' and there are two groups of people, ``A'' and ``B''. I'm curious to know which group is more awesome. The data are included in the file \filename{awesome.csv}, and there are two variables apart from the usual \rtext{ID} variable: \rtext{scores} and \rtext{group}.`
+I'll start by describing the \keyterm{Mann-Whitney U test}, since it's actually simpler than the one sample version. Suppose we're looking at the scores of 10 people on some test. Since my imagination has now failed me completely, let's pretend it's a ``test of awesomeness'' and there are two groups of people, ``A'' and ``B''. I'm curious to know which group is more awesome. The data are included in the file \filename{awesome.csv}, and there are two variables apart from the usual \rtext{ID} variable: \rtext{scores} and \rtext{group}.
 
 As long as there are no ties (i.e., people with the exact same awesomeness score) then the test that we want to do is surprisingly simple. All we have to do is construct a table that compares every observation in group $A$ against every observation in group $B$. Whenever the group $A$ datum is larger, we place a check mark in the table:
 
