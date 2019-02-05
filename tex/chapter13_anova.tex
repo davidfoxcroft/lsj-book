@@ -681,24 +681,24 @@ Despite the horror that we've gone through in trying to understand what the Krus
 \begin{figure}[!ht]
 \begin{center}
 \epsfig{file = ../img/anova/anova6.png, clip=true,width = 14cm}
-\caption{Kruskall-Wallis one way non-parametric ANOVA in jamovi}
+\caption{Kruskall-Wallis one-way non-parametric ANOVA in jamovi}
 \HR
 \label{fig:anova6}
 \end{center}
 \end{figure}
 
 \newpage
-\section{Repeated measures one-way ANOVA}~\label{sec:RManova}
+\section{Repeated measures one-way ANOVA~\label{sec:RManova}}
 
 The one-way repeated measures ANOVA test is a statistical method of testing for significant differences between three or more groups where the same participants are used in each group (or each participant is closely matched with participants in other experimental groups). For this reason, there should always be an equal number of scores (data points) in each experimental group. This type of design and analysis can also be called a `related ANOVA' or a `within-subjects ANOVA'. 
 
 The logic behind a repeated measures ANOVA is very similar to that of an independent ANOVA (sometimes called a `between-subjects' ANOVA). You'll remember that earlier we showed that in a between-subjects ANOVA total variability is partitioned into between-groups variability ($\mbox{SS}_b$) and within-groups variability ($\mbox{SS}_w$), and after each is divided by the respective degrees of freedom to give $\mbox{MS}_b$ and $\mbox{MS}_w$ (see Table \ref{tab:anovatable}) the $\mbox{F-ratio}$ is calculated as:
 
 \begin{center}
-$F = \displaystyle\frac{\mbox{MS}_b }{ \mbox{MS}_w }$ 
+$F = \displaystyle\frac{ \mbox{MS}_b }{ \mbox{MS}_w }$ 
 \end{center}
 
-In a repeated measures ANOVA, the $\mbox{F-ratio}$ is calculated in a similar way, but whereas in an independent ANOVA the within-group variability ($\mbox{SS}_w$) is used as the basis for the $\mbox{MS}_w$ denominator, in a repeated measures ANOVA the $\mbox{SS}_w$ is partioned into two parts. As we are using the same subjects in each group, we can remove the variability due to the individual differences between subjects, referred to as $\mbox{SS}_{subjects}$, from the within-groups variability. We won't go into too much technical detail about how this is done, but essentially each subject becomes a level of a factor called subjects. The variability in this within-subjects factor is then calculated in the same way as any between-subjects factor. And then we can subtract $\mbox{SS}_{subjects}$ from $\mbox{SS}_w$ to provide a smaller $\mbox{SS}_{error}$ term: 
+In a repeated measures ANOVA, the $\mbox{F-ratio}$ is calculated in a similar way, but whereas in an independent ANOVA the within-group variability ($\mbox{SS}_w$) is used as the basis for the $\mbox{MS}_w$ denominator, in a repeated measures ANOVA the $\mbox{SS}_w$ is partioned into two parts. As we are using the same subjects in each group, we can remove the variability due to the individual differences between subjects (referred to as $\mbox{SS}_{subjects}$) from the within-groups variability. We won't go into too much technical detail about how this is done, but essentially each subject becomes a level of a factor called subjects. The variability in this within-subjects factor is then calculated in the same way as any between-subjects factor. And then we can subtract $\mbox{SS}_{subjects}$ from $\mbox{SS}_w$ to provide a smaller $\mbox{SS}_{error}$ term: 
 
 \begin{center}
 Independent ANOVA: $\mbox{SS}_{error}$ = $\mbox{SS}_w$ \\ \vspace{0.3cm}
@@ -731,7 +731,7 @@ Participant	& Speech & 	Conceptual & Syntax \\ \hline
 
 The patients were required to complete three word recognition tasks. On the first (speech production) task, patients were required to repeat single words read out aloud by the researcher. On the second (conceptual) task, designed to test word comprehension, patients were required to match a series of pictures with their correct name. On the third (syntax) task, designed to test knowledge of correct word order, patients were asked to reorder syntactically incorrect sentences. Each patient completed all three tasks. The order in which patients attempted the tasks was counterbalanced between participants. Each task consisted of a series of 10 attempts. The number of attempts successfully completed by each patient are shown in Table \ref{tab:RManova}. Enter these data into jamovi ready for analysis (or take a short-cut and load up the \filename{broca.csv} file). 
 
-To perform a one-way related ANOVA in jamovi, open the one-way related ANOVA dialogue box, as in Figure \ref{fig:RManova1}, via \rtext{ANOVA - Repeated Measures ANOVA}. Then:
+To perform a one-way related ANOVA in jamovi, open the one-way repeated measures ANOVA dialogue box, as in Figure \ref{fig:RManova1}, via \rtext{ANOVA - Repeated Measures ANOVA}. Then:
  
 \begin{itemize} \itemsep -2pt
 \item Enter a Repeated Measures Factor Name. This should be a label that you choose to describe the conditions repeated by all participants. For example, to describe the speech, conceptual and syntax tasks completed by all participants a suitable label would be ‘Task’. Note that this new factor name represents the independent variable in the analysis. 
@@ -749,7 +749,7 @@ To perform a one-way related ANOVA in jamovi, open the one-way related ANOVA dia
 \end{center}
 \end{figure}
 
-jamovi output for a one-way repeated measures ANOVA is produced as shown in the Figures \ref{fig:RManova2} to \ref{fig:RManova5}. The first output we should look at is Mauchly’s Test of Sphericity, which tests the hypothesis that the variances of the differences between the conditions are equal (meaning that the spread of difference scores between the study conditions is approximately the same). In Figure \ref{fig:RManova2}, Mauchly’s test significance level is $p=.720$. If Mauchly’s test is non-significant (i.e. $p>.05$, as is the case in this analysis) then it is reasonable to conclude that the variances of the differences are not significantly different (i.e. they are roughly equal, or sphericity can be assumed.). 
+jamovi output for a one-way repeated measures ANOVA is produced as shown in the Figures \ref{fig:RManova2} to \ref{fig:RManova5}. The first output we should look at is Mauchly’s Test of Sphericity, which tests the hypothesis that the variances of the differences between the conditions are equal (meaning that the spread of difference scores between the study conditions is approximately the same). In Figure \ref{fig:RManova2}, Mauchly’s test significance level is $p=.720$. If Mauchly’s test is non-significant (i.e. $p>.05$, as is the case in this analysis) then it is reasonable to conclude that the variances of the differences are not significantly different (i.e. they are roughly equal and sphericity can be assumed.). 
 
 \begin{figure}[!ht]
 \begin{center}
@@ -760,9 +760,14 @@ jamovi output for a one-way repeated measures ANOVA is produced as shown in the 
 \end{center}
 \end{figure}
 
-If, on the other hand, Mauchly’s test is significant ($p<.05$) then we conclude that there are significant differences between the variance of the differences, and the requirement of sphericity has not been met. In this case, we should apply a correction to the $F$-value obtained in the One-way related ANOVA analysis.
+If, on the other hand, Mauchly’s test had been significant ($p<.05$) then we would conclude that there are significant differences between the variance of the differences, and the requirement of sphericity has not been met. In this case, we should apply a correction to the $F$-value obtained in the one-way related ANOVA analysis: 
 
-If the Greenhouse-Geisser value in the “Tests of Sphericity” table is $>.75$ then you should use the Huynh-Feldt correction. If the Greenhouse-Geisser value is $<.75$ then you should use the Greenhouse-Geisser correction. Both these corrected $F$-values can be specified in the Sphericity Corrections check boxes under the Assumption Checks options, and the corrected $F$-values are then shown in the results table, as in Figure \ref{fig:RManova3}.
+\begin{itemize} \itemsep -2pt
+\item If the Greenhouse-Geisser value in the “Tests of Sphericity” table is $>.75$ then you should use the Huynh-Feldt correction. 
+\item But if the Greenhouse-Geisser value is $<.75$, then you should use the Greenhouse-Geisser correction. 
+\end{itemize}
+
+Both these corrected $F$-values can be specified in the Sphericity Corrections check boxes under the Assumption Checks options, and the corrected $F$-values are then shown in the results table, as in Figure \ref{fig:RManova3}.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -797,7 +802,8 @@ Descriptive statistics (marginal means) can be reviewed to help interpret the re
 \end{center}
 \end{figure}
 
-\section{The Friedman non-parametric repeated measures ANOVA test\label{sec:Friedman}}
+
+\section{The Friedman non-parametric repeated measures ANOVA test~\label{sec:Friedman}}
 
 The Friedman test is a non-parametric version of a repeated measures ANOVA and can be used instead of the Kruskall-Wallis test when testing for differences between three or more groups where the same participants are in each group, or each participant is closely matched with participants in other conditions. If the dependent variable is ordinal, or if the assumption of normality is not met, then the Friedman test can be used. 
 
@@ -811,9 +817,9 @@ The Friedman test is a non-parametric version of a repeated measures ANOVA and c
 \end{center}
 \end{figure}
 
-As with the Kruskall-Wallis test, the underlying mathematics is complicated, and won't be presented here. For the purpose of this book, it is sufficient to note that jamovi calculates the tie-corrected version of the Friedman test, and in Figure \ref{fig:RManova6} is an example using the Broca's Aphasia data we have already looked at using a parametric one-way repeated measures ANOVA. 
+As with the Kruskall-Wallis test, the underlying mathematics is complicated, and won't be presented here. For the purpose of this book, it is sufficient to note that jamovi calculates the tie-corrected version of the Friedman test, and in Figure \ref{fig:RManova6} there is an example using the Broca's Aphasia data we have already looked at. 
 
-It's pretty straightforward to run a Friedman test in jamovi. Just select \rtext{Analyses - ANOVA - Repeated Measures ANOVA (Non-parametric)}, as in Figure \ref{fig:RManova6}. Then highlight and transfer the names of the repeated measures variables you wish to compare (Speech, Conceptual, Syntax) into the `\rtext{Measures:}‘  text box. To produce descriptive statistics (means and medians) for the three repeated measures variables, click on the Descriptives button 
+It's pretty straightforward to run a Friedman test in jamovi. Just select \rtext{Analyses - ANOVA - Repeated Measures ANOVA (Non-parametric)}, as in Figure \ref{fig:RManova6}. Then highlight and transfer the names of the repeated measures variables you wish to compare (Speech, Conceptual, Syntax) into the `\rtext{Measures:}'  text box. To produce descriptive statistics (means and medians) for the three repeated measures variables, click on the Descriptives button 
 
 The jamovi results show descriptive statistics, chi-square value, degrees of freedom, and the $p$-value (Figure \ref{fig:RManova6}). Since the $p$-value is less than the level conventionally used to determine significance ($p<.05$), we can conclude that Broca’s Aphasics perform reasonably well on speech production ($median=7.5$) and language comprehension ($median=6.5$) tasks. However, their performance was considerably worse on the syntax task ($median=4.5$), with a significant difference in post-hoc tests between Speech and Syntax task performance. 
 
@@ -825,15 +831,14 @@ There's one last thing I want to point out before finishing. It's something that
 
 \section{Summary}
 
-There's a fair bit covered in this chapter, but there's still a lot missing. Most obviously, I haven't yet discussed any analog of the paired samples $t$-test for more than two groups. There is a way of doing this, known as {\it repeated measures ANOVA}, which will appear later. I also haven't discussed how to run an ANOVA when you are interested in more than one grouping variable, but that will be discussed in a lot of detail in Chapter~\ref{ch:anova2}. In terms of what we have discussed, the key topics were:
+There's a fair bit covered in this chapter, but there's still a lot missing. Most obviously, I haven't discussed how to run an ANOVA when you are interested in more than one grouping variable, but that will be discussed in a lot of detail in Chapter~\ref{ch:anova2}. In terms of what we have discussed, the key topics were:
 
 \begin{itemize} \itemsep -2pt
 \item The basic logic behind how ANOVA works (Section~\ref{sec:anovaintro}) and how to run one in jamovi (Section~\ref{sec:introduceaov}).
 \item How to compute an effect size for an ANOVA (Section~\ref{sec:etasquared})
-\item Post hoc analysis and corrections for multiple testing (Section~\ref{sec:posthoc}).
+\item Post-hoc analysis and corrections for multiple testing (Section~\ref{sec:posthoc}).
 \item The assumptions made by ANOVA (Section~\ref{sec:anovaassumptions}).
-\item How to check the homogeneity of variance assumption (Section~\ref{sec:levene}).
-%and what to do if it is violated (Section~\ref{sec:welchoneway}).
+\item How to check the homogeneity of variance assumption (Section~\ref{sec:levene}) and what to do if it is violated (Section~\ref{sec:welchoneway}).
 \item How to check the normality assumption (Section~\ref{sec:anovanormality}) and what to do if it is violated (Section~\ref{sec:kruskalwallis}).
 \item Repeated measures ANOVA (Section~\ref{sec:RManova}) and the non-parametric equivalent, the Friedman test (Section \ref{sec:Friedman}).
 \end{itemize}
