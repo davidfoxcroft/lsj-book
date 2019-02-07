@@ -46,7 +46,7 @@ H_1 &:& \mbox{it is \underline{not} true that } \mu_P = \mu_A = \mu_J
 $$
 This null hypothesis is a lot trickier to test than any of the ones we've seen previously. How shall we do it? A sensible guess would be to ``do an ANOVA'', since that's the title of the chapter, but it's not particularly clear why an ``analysis of {\it variances}'' will help us learn anything useful about the {\it means}. In fact, this is one of the biggest conceptual difficulties that people have when first encountering ANOVA. To see how this works, I find it most helpful to start by talking about variances. In fact, what I'm going to do is start by playing some mathematical games with the formula that describes the variance. That is, we'll start out by playing around with variances and it will turn out that this gives us a useful tool for investigating means.
 
-\SUBSECTION{Two formulas for the variance of $Y$}
+\SUBSECTION{Two formulas for the variance of \texorpdfstring{$Y$}{Y}}
 
 First, let's start by introducing some notation. We'll use $G$ to refer to the total number of groups. For our data set there are three drugs, so there are $G=3$ groups. Next, we'll use $N$ to refer to the total sample size; there are a total of $N=18$ people in our data set. Similarly, let's use $N_k$ to denote the number of people in the $k$-th group. In our fake clinical trial, the sample size is $N_k = 6$ for all three groups.\FOOTNOTE{When all groups have the same number of observations, the experimental design is said to be ``balanced''. Balance isn't such a big deal for one-way ANOVA, which is the topic of this chapter. It becomes more important when you start doing more complicated ANOVAs.} Finally, we'll use $Y$ to denote the outcome variable. In our case, $Y$ refers to mood change. Specifically, we'll use $Y_{ik}$ to refer to the mood change experienced by the $i$-th member of the $k$-th group. Similarly, we'll use $\bar{Y}$ to be the average mood change, taken across all 18 people in the experiment, and $\bar{Y}_k$ to refer to the average mood change experienced by the 6 people in group $k$.  
 
@@ -139,7 +139,7 @@ Yay.
 
 Okay, so what have we found out? We've discovered that the total variability associated with the outcome variable ($\mbox{SS}_{tot}$) can be mathematically carved up into the sum of ``the variation due to the differences in the sample means for the different groups'' ($\mbox{SS}_{b}$) plus ``all the rest of the variation'' ($\mbox{SS}_{w}$)\FOOTNOTE{$\mbox{SS}_{w}$ is also referred to in an independent ANOVA as the error variance, or $\mbox{SS}_{error}$}. How does that help me find out whether the groups have different population means? Um. Wait. Hold on a second. Now that I think about it, this is {\it exactly} what we were looking for. If the null hypothesis is true then you'd expect all the sample means to be pretty similar to each other, right? And that would imply that you'd expect $\mbox{SS}_{b}$ to be really small, or at least you'd expect it to be a lot smaller than ``the variation associated with everything else'', $\mbox{SS}_{w}$. Hmm. I detect a hypothesis test coming on.
 
-\SUBSECTION{From sums of squares to the $F$-test}
+\SUBSECTION{From sums of squares to the \texorpdfstring{$F$}{F}-test}
 
 As we saw in the last section, the {\it qualitative} idea behind ANOVA is to compare the two sums of squares values $\mbox{SS}_b$ and $\mbox{SS}_w$ to each other. If the between-group variation $\mbox{SS}_b$ is large relative to the within-group variation $\mbox{SS}_w$ then we have reason to suspect that the population means for the different groups aren't identical to each other. In order to convert this into a workable hypothesis test, there's a little bit of ``fiddling around'' needed. What I'll do is first show you {\it what} we do to calculate our test statistic, the \keyterm{$F$ ratio}, and then try to give you a feel for {\it why} we do it this way. 
 
@@ -188,7 +188,7 @@ within groups   & $\mbox{df}_w = N-G$ & SS$_w = \displaystyle\sum_{k=1}^G \displ
 
 \vspace{0.5cm}
 \begin{mdframed}[style=MyFrame,nobreak=false]
-\SUBSECTION{The model for the data and the meaning of $F$ \advanced\label{sec:anovamodel}}
+\SUBSECTION{The model for the data and the meaning of \texorpdfstring{$F$}{F} \advanced\label{sec:anovamodel}}
 
 At a fundamental level ANOVA is a competition between two different statistical models, $H_0$ and $H_1$. When I described the null and alternative hypotheses at the start of the section, I was a little imprecise about what these models actually are. I'll remedy that now, though you probably won't like me for doing so. If you recall, our null hypothesis was that all of the group means are identical to one another. If so, then a natural way to think about the outcome variable $Y_{ik}$ is to describe individual scores in terms of a single population mean $\mu$, plus the deviation from that population mean. This deviation is usually denoted $\epsilon_{ik}$ and is traditionally called the {\it error} or \keyterm{residual} associated with that observation. Be careful though. Just like we saw with the word ``significant'', the word ``error'' has a technical meaning in statistics that isn't quite the same as its everyday English definition. In everyday language, ``error'' implies a mistake of some kind, but in statistics it doesn't (or at least, not necessarily). With that in mind, the word ``residual'' is a better term than the word ``error''. In statistics both words mean ``leftover variability'', that is ``stuff'' that the model can't explain. 
 
@@ -448,7 +448,7 @@ possibility: & is $\mu_P = \mu_A$? & is $\mu_P = \mu_J$? & is $\mu_A = \mu_J$? &
 \end{center}
 By rejecting the null hypothesis, we've decided that we {\it don't} believe that \#1 is the true state of the world. The next question to ask is, which of the other seven possibilities {\it do} we think is right? When faced with this situation, its usually helps to look at the data. For instance, if we look at the plots in Figure~\ref{fig:anova1}, it's tempting to conclude that Joyzepam is better than the placebo and better than Anxifree, but there's no real difference between Anxifree and the placebo. However, if we want to get a clearer answer about this, it might help to run some tests. 
 
-\SUBSECTION{Running ``pairwise'' $t$-tests}
+\SUBSECTION{Running ``pairwise'' \texorpdfstring{$t$}{t}-tests}
 
 How might we go about solving our problem? Given that we've got three separate pairs of means (placebo versus Anxifree, placebo versus Joyzepam, and Anxifree versus Joyzepam) to compare, what we could do is run three separate $t$-tests and see what happens. This is easy to do in jamovi. Go to the ANOVA `Post Hoc Tests' options, move the `drug' variable across into the active box on the right, and then click on the `No correction' checkbox. This will produce a neat table showing all the pairwise $t$-test comparisons  amongst the three levels of the \rtext{drug} variable, as in Figure \ref{fig:anova3}.
 
