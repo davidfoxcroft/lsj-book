@@ -473,9 +473,9 @@ The usual solution to this problem is to introduce an adjustment to the $p$-valu
 
 The simplest of these adjustments is called the \keyterm{Bonferroni correction} \parencite{Dunn1961}, and it's very very simple indeed. Suppose that my post hoc analysis consists of $m$ separate tests, and I want to ensure that the total probability of making {\it any} Type I errors at all is at most $\alpha$.\FOOTNOTE{It's worth noting in passing that not all adjustment methods try to do this. What I've described here is an approach for controlling ``family wise Type I error rate''. However, there are other post hoc tests that seek to control the ``false discovery rate'', which is a somewhat different thing.} If so, then the Bonferroni correction just says ``multiply all your raw $p$-values by $m$''. If we let $p$ denote the original $p$-value, and let $p^\prime_j$ be the corrected value, then the Bonferroni correction tells that:
 $$
-p^\prime = m \times p
+p^\prime_j = m \times p
 $$
-And therefore, if you're using the Bonferroni correction, you would reject the null hypothesis if $p^\prime < \alpha$. The logic behind this correction is very straightforward. We're doing $m$ different tests, so if we arrange it so that each test has a Type I error rate of at most $\alpha / m$, then the {\it total} Type I error rate across these tests cannot be larger than $\alpha$. That's pretty simple, so much so that in the original paper, the author writes,
+And therefore, if you're using the Bonferroni correction, you would reject the null hypothesis if $p^\prime_j < \alpha$. The logic behind this correction is very straightforward. We're doing $m$ different tests, so if we arrange it so that each test has a Type I error rate of at most $\alpha / m$, then the {\it total} Type I error rate across these tests cannot be larger than $\alpha$. That's pretty simple, so much so that in the original paper, the author writes,
 \begin{quote}
 The method given here is so simple and so general that I am sure it must have been used before this. I do not find it, however, so can only conclude that perhaps its very simplicity has kept statisticians from realizing that it is a very good method in some situations \parencite[pp 52-53]{Dunn1961}
 \end{quote}
