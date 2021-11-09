@@ -20,9 +20,9 @@ In this section we'll talk about how to describe the relationships {\it between}
 \begin{center}
 \begin{tabular}{c|cccccc}  
 variable & min & max & mean & median & std. dev & IQR \\ \hline
-Dan's grumpiness & 41 & 91 & 63.71 & 62 & 10.05 & 14 \\
-Dan's hours slept & 4.84 & 9.00 & 6.97 & 7.03 & 1.02 & 1.45  \\
-Dan's son's hours slept & 3.25 & 12.07 & 8.05 & 7.95 & 2.07 & 3.21 \\ 
+Dani's grumpiness & 41 & 91 & 63.71 & 62 & 10.05 & 14 \\
+Dani's hours slept & 4.84 & 9.00 & 6.97 & 7.03 & 1.02 & 1.45  \\
+Dani's son's hours slept & 3.25 & 12.07 & 8.05 & 7.95 & 2.07 & 3.21 \\ 
 \end{tabular}
 \tabcapsep
 \HR
@@ -30,7 +30,7 @@ Dan's son's hours slept & 3.25 & 12.07 & 8.05 & 7.95 & 2.07 & 3.21 \\
 \end{table}
 
 
-Let's turn to a topic close to every parent's heart: sleep. The data set we'll use is fictitious, but based on real events. Suppose I'm curious to find out how much my infant son's sleeping habits affect my mood. Let's say that I can rate my grumpiness very precisely, on a scale from 0 (not at all grumpy) to 100 (grumpy as a very, very grumpy old man or woman). And lets also assume that I've been measuring my grumpiness, my sleeping patterns and my son's sleeping patterns for quite some time now. Let's say, for 100 days. And, being a nerd, I've saved the data as a file called \rtext{parenthood.csv}. If we load the data we can see that the file contains four variables \rtext{dan.sleep}, \rtext{baby.sleep}, \rtext{dan.grump} and \rtext{day}. Note that when you first load this data set jamovi may not have guessed the data type for each variable correctly, in which case you should fix it:  \rtext{dan.sleep}, \rtext{baby.sleep}, \rtext{dan.grump} and \rtext{day} can be specified as continuous variables, and \rtext{ID} is a nominal(integer) variable.\FOOTNOTE{I've noticed that in some versions of jamovi you can also specify an `ID' variable type, but for our purposes it does not matter how we specify the ID variable as we won't be including it in any analyses.}
+Let's turn to a topic close to every parent's heart: sleep. The data set we'll use is fictitious, but based on real events. Suppose I'm curious to find out how much my infant son's sleeping habits affect my mood. Let's say that I can rate my grumpiness very precisely, on a scale from 0 (not at all grumpy) to 100 (grumpy as a very, very grumpy old man or woman). And lets also assume that I've been measuring my grumpiness, my sleeping patterns and my son's sleeping patterns for quite some time now. Let's say, for 100 days. And, being a nerd, I've saved the data as a file called \rtext{parenthood.csv}. If we load the data we can see that the file contains four variables \rtext{dani.sleep}, \rtext{baby.sleep}, \rtext{dani.grump} and \rtext{day}. Note that when you first load this data set jamovi may not have guessed the data type for each variable correctly, in which case you should fix it:  \rtext{dani.sleep}, \rtext{baby.sleep}, \rtext{dani.grump} and \rtext{day} can be specified as continuous variables, and \rtext{ID} is a nominal(integer) variable.\FOOTNOTE{I've noticed that in some versions of jamovi you can also specify an `ID' variable type, but for our purposes it does not matter how we specify the ID variable as we won't be including it in any analyses.}
 
 Next, I'll take a look at some basic descriptive statistics and, to give a graphical depiction of what each of the three interesting variables looks like, Figure~\ref{fig:parenthood} plots histograms. One thing to note: just because jamovi can calculate dozens of different statistics doesn't mean you should report all of them. If I were writing this up for a report, I'd probably pick out those statistics that are of most interest to me (and to my readership), and then put them into a nice, simple table like the one in Table~\ref{tab:parenthood}.\FOOTNOTE{Actually, even that table is more than I'd bother with. In practice most people pick {\it one} measure of central tendency, and {\it one} measure of variability only.}  Notice that when I put it into a table, I gave everything ``human readable'' names. This is always good practice. Notice also that I'm not getting enough sleep. This isn't good practice, but other parents tell me that it's pretty standard.  
 
@@ -57,19 +57,19 @@ Next, I'll take a look at some basic descriptive statistics and, to give a graph
 \epsfig{file = ../img/descriptives/grumpCor2.eps, clip=true, width =7cm} \\
 (a) & (b)
 \end{tabular}
-\caption{Scatterplots showing the relationship between \rtext{dan.sleep} and \rtext{dan.grump} (left) and the relationship between \rtext{baby.sleep} and \rtext{dan.grump} (right).}
+\caption{Scatterplots showing the relationship between \rtext{dani.sleep} and \rtext{dani.grump} (left) and the relationship between \rtext{baby.sleep} and \rtext{dani.grump} (right).}
 \HR
 \label{fig:scatterparent}
 \end{center}
 \end{figure}
 
 \noindent
-We can draw scatterplots to give us a general sense of how closely related two variables are. Ideally though, we might want to say a bit more about it than that. For instance, let's compare the relationship between \rtext{dan.sleep} and \rtext{dan.grump} (Figure~\ref{fig:scatterparent}, left) with that between \rtext{baby.sleep} and \rtext{dan.grump} (Figure~\ref{fig:scatterparent}, right). When looking at these two plots side by side, it's clear that the relationship is {\it qualitatively} the same in both cases: more sleep equals less grump! However, it's also pretty obvious that the relationship between \rtext{dan.sleep} and \rtext{dan.grump} is {\it stronger} than the relationship between \rtext{baby.sleep} and \rtext{dan.grump}. The plot on the left is ``neater'' than the one on the right. What it feels like is that if you want to predict what my mood is, it'd help you a little bit to know how many hours my son slept, but it'd be \underline{more} helpful to know how many hours I slept. 
+We can draw scatterplots to give us a general sense of how closely related two variables are. Ideally though, we might want to say a bit more about it than that. For instance, let's compare the relationship between \rtext{dani.sleep} and \rtext{dani.grump} (Figure~\ref{fig:scatterparent}, left) with that between \rtext{baby.sleep} and \rtext{dani.grump} (Figure~\ref{fig:scatterparent}, right). When looking at these two plots side by side, it's clear that the relationship is {\it qualitatively} the same in both cases: more sleep equals less grump! However, it's also pretty obvious that the relationship between \rtext{dani.sleep} and \rtext{dani.grump} is {\it stronger} than the relationship between \rtext{baby.sleep} and \rtext{dani.grump}. The plot on the left is ``neater'' than the one on the right. What it feels like is that if you want to predict what my mood is, it'd help you a little bit to know how many hours my son slept, but it'd be \underline{more} helpful to know how many hours I slept. 
 
 
 %\SUBSECTION{Direction of a relationship}
 
-In contrast, let's consider the two scatterplots shown in Figure~\ref{fig:scatterparent2}. If we compare the scatterplot of ``\rtext{baby.sleep} v \rtext{dan.grump}'' (left) to the scatterplot of ```\rtext{baby.sleep} v \rtext{dan.sleep}'' (right), the overall strength of the relationship is the same, but the direction is different. That is, if my son sleeps more, I get {\it more} sleep (positive relationship, right hand side), but if he sleeps more then I get {\it less} grumpy (negative relationship, left hand side).
+In contrast, let's consider the two scatterplots shown in Figure~\ref{fig:scatterparent2}. If we compare the scatterplot of ``\rtext{baby.sleep} v \rtext{dani.grump}'' (left) to the scatterplot of ```\rtext{baby.sleep} v \rtext{dani.sleep}'' (right), the overall strength of the relationship is the same, but the direction is different. That is, if my son sleeps more, I get {\it more} sleep (positive relationship, right hand side), but if he sleeps more then I get {\it less} grumpy (negative relationship, left hand side).
  
 \begin{figure}[!htb]
 \begin{center}
@@ -78,7 +78,7 @@ In contrast, let's consider the two scatterplots shown in Figure~\ref{fig:scatte
 \epsfig{file = ../img/descriptives/grumpCor3.eps, clip=true, width =7cm} \\
 (a) & (b)
 \end{tabular}
-\caption{Scatterplots showing the relationship between \rtext{baby.sleep} and \rtext{dan.grump} (left), as compared to the relationship between \rtext{baby.sleep} and \rtext{dan.sleep} (right).}
+\caption{Scatterplots showing the relationship between \rtext{baby.sleep} and \rtext{dani.grump} (left), as compared to the relationship between \rtext{baby.sleep} and \rtext{dani.sleep} (right).}
 \HR
 \label{fig:scatterparent2}
 \end{center}
@@ -119,7 +119,7 @@ $$
 $$
 Because we're multiplying (i.e., taking the ``product'' of) a quantity that depends on $X$ by a quantity that depends on $Y$ and then averaging\FOOTNOTE{Just like we saw with the variance and the standard deviation, in practice we divide by $N-1$ rather than $N$.}, you can think of the formula for the covariance as an ``average cross product'' between $X$ and $Y$. 
 
-The covariance has the nice property that, if $X$ and $Y$ are entirely unrelated, then the covariance is exactly zero. If the relationship between them is positive (in the sense shown in Figure~\ref{fig:corr}) then the covariance is also positive, and if the relationship is negative then the covariance is also negative. In other words, the covariance captures the basic qualitative idea of correlation. Unfortunately, the raw magnitude of the covariance isn't easy to interpret as it depends on the units in which $X$ and $Y$ are expressed and, worse yet, the actual units that the covariance itself is expressed in are really weird. For instance, if $X$ refers to the \rtext{dan.sleep} variable (units: hours) and $Y$ refers to the \rtext{dan.grump} variable (units: grumps), then the units for their covariance are ``hours $\times$ grumps''. And I have no freaking idea what that would even mean. 
+The covariance has the nice property that, if $X$ and $Y$ are entirely unrelated, then the covariance is exactly zero. If the relationship between them is positive (in the sense shown in Figure~\ref{fig:corr}) then the covariance is also positive, and if the relationship is negative then the covariance is also negative. In other words, the covariance captures the basic qualitative idea of correlation. Unfortunately, the raw magnitude of the covariance isn't easy to interpret as it depends on the units in which $X$ and $Y$ are expressed and, worse yet, the actual units that the covariance itself is expressed in are really weird. For instance, if $X$ refers to the \rtext{dani.sleep} variable (units: hours) and $Y$ refers to the \rtext{dani.grump} variable (units: grumps), then the units for their covariance are ``hours $\times$ grumps''. And I have no freaking idea what that would even mean. 
 
 The Pearson correlation coefficient $r$ fixes this interpretation problem by standardising the covariance, in pretty much the exact same way that the $z$-score standardises a raw score, by dividing by the standard deviation. However, because we have two variables that contribute to the covariance, the standardisation only works if we divide by both standard deviations.\FOOTNOTE{This is an oversimplification, but it'll do for our purposes.}  In other words, the correlation between $X$ and $Y$ can be written as follows:
 $$
@@ -241,7 +241,7 @@ What we've just re-invented is \keyterm{Spearman's rank order correlation}, usua
 \end{center}
 \end{figure}
 
-Suppose my goal is to draw a scatterplot displaying the relationship between the amount of sleep that I get (\rtext{dan.sleep}) and how grumpy I am the next day (\rtext{dan.grump}). There are two different ways in which we can use jamovi to get the plot that we're after. The first way is to use the `Plot' option under the `Regression' - `Correlation Matrix' button, giving us the output shown in Figure \ref{fig:scatterplot1}. Note that jamovi draws a line through the points, we'll come onto this a bit later in Section~(\ref{sec:introregression}). Plotting a scatterplot in this way also allow you to specify `Densities for variables' and this option adds a density curve showing how the data in each variable is distributed. 
+Suppose my goal is to draw a scatterplot displaying the relationship between the amount of sleep that I get (\rtext{dani.sleep}) and how grumpy I am the next day (\rtext{dani.grump}). There are two different ways in which we can use jamovi to get the plot that we're after. The first way is to use the `Plot' option under the `Regression' - `Correlation Matrix' button, giving us the output shown in Figure \ref{fig:scatterplot1}. Note that jamovi draws a line through the points, we'll come onto this a bit later in Section~(\ref{sec:introregression}). Plotting a scatterplot in this way also allow you to specify `Densities for variables' and this option adds a density curve showing how the data in each variable is distributed. 
 
 The second way do to it is to use one of the jamovi add-on modules. This module is called `scatr' and you can install it by clicking on the large `+' icon in the top right of the jamovi screen, opening the jamovi library, scrolling down until you find `scatr' and clicking `install'. When you have done this, you will find a new `Scatterplot' command available under the `Exploration' button. This plot is a bit different than the first way, see Figure \ref{fig:scatterplot2}, but the important information is the same.
 
@@ -273,7 +273,7 @@ Often you will want to look at the relationships between several variables at on
 
 Stripped to its bare essentials, linear regression models are basically a slightly fancier version of the Pearson correlation (Section~\ref{sec:correl}), though as we'll see regression models are much more powerful tools. 
 
-Since the basic ideas in regression are closely tied to correlation, we'll return to the \\ \filename{parenthood.csv} file that we were using to illustrate how correlations work. Recall that, in this data set we were trying to find out why Dan is so very grumpy all the time and our working hypothesis was that I'm not getting enough sleep. We drew some scatterplots to help us examine the relationship between the amount of sleep I get and my grumpiness the following day, as in Figure~\ref{fig:scatterplot2}, and as we saw previously this corresponds to a correlation of $r=-.90$, but what we find ourselves secretly imagining is something that looks closer to Figure~\ref{fig:regression1}a. That is, we mentally draw a straight line through the middle of the data. In statistics, this line that we're drawing is called a \keyterm{regression line}. Notice that, since we're not idiots, the regression line goes through the middle of the data. We don't find ourselves imagining anything like the rather silly plot shown in Figure~\ref{fig:regression1}b. 
+Since the basic ideas in regression are closely tied to correlation, we'll return to the \\ \filename{parenthood.csv} file that we were using to illustrate how correlations work. Recall that, in this data set we were trying to find out why Dani is so very grumpy all the time and our working hypothesis was that I'm not getting enough sleep. We drew some scatterplots to help us examine the relationship between the amount of sleep I get and my grumpiness the following day, as in Figure~\ref{fig:scatterplot2}, and as we saw previously this corresponds to a correlation of $r=-.90$, but what we find ourselves secretly imagining is something that looks closer to Figure~\ref{fig:regression1}a. That is, we mentally draw a straight line through the middle of the data. In statistics, this line that we're drawing is called a \keyterm{regression line}. Notice that, since we're not idiots, the regression line goes through the middle of the data. We don't find ourselves imagining anything like the rather silly plot shown in Figure~\ref{fig:regression1}b. 
 
 \begin{figure}[!htb]
 \begin{center}
@@ -341,7 +341,7 @@ At this point, we now have a concrete definition for what counts as our ``best''
 \end{center}
 \end{figure}
 
-To run my linear regression, open up the `Regression' - `Linear Regression' analysis in jamovi, using the \rtext{parenthood.csv} data file. Then specify \rtext{dan.grump} as the `Dependent Variable' and \rtext{dan.sleep} as the variable entered in the `Covariates' box. This gives the results shown in Figure \ref{fig:reg1}, showing an intercept $\hat{b}_0 = 125.96$ and the slope $\hat{b}_1 = -8.94$. In other words, the best-fitting regression line that I plotted in Figure~\ref{fig:regression1} has this formula:
+To run my linear regression, open up the `Regression' - `Linear Regression' analysis in jamovi, using the \rtext{parenthood.csv} data file. Then specify \rtext{dani.grump} as the `Dependent Variable' and \rtext{dani.sleep} as the variable entered in the `Covariates' box. This gives the results shown in Figure \ref{fig:reg1}, showing an intercept $\hat{b}_0 = 125.96$ and the slope $\hat{b}_1 = -8.94$. In other words, the best-fitting regression line that I plotted in Figure~\ref{fig:regression1} has this formula:
 $$
 \hat{Y}_i = 125.96 + (-8.94 \ X_i)
 $$ 
@@ -353,9 +353,9 @@ The most important thing to be able to understand is how to interpret these coef
 
 \section{Multiple linear regression~\label{sec:multipleregression}}
 
-The simple linear regression model that we've discussed up to this point assumes that there's a single predictor variable that you're interested in, in this case \rtext{dan.sleep}. In fact, up to this point {\it every} statistical tool that we've talked about has assumed that your analysis uses one predictor variable and one outcome variable. However, in many (perhaps most) research projects you actually have multiple predictors that you want to examine. If so, it would be nice to be able to extend the linear regression framework to be able to include multiple predictors. Perhaps some kind of \keyterm{multiple regression} model would be in order?
+The simple linear regression model that we've discussed up to this point assumes that there's a single predictor variable that you're interested in, in this case \rtext{dani.sleep}. In fact, up to this point {\it every} statistical tool that we've talked about has assumed that your analysis uses one predictor variable and one outcome variable. However, in many (perhaps most) research projects you actually have multiple predictors that you want to examine. If so, it would be nice to be able to extend the linear regression framework to be able to include multiple predictors. Perhaps some kind of \keyterm{multiple regression} model would be in order?
 
-Multiple regression is conceptually very simple. All we do is add more terms to our regression equation. Let's suppose that we've got two variables that we're interested in; perhaps we want to use both \rtext{dan.sleep} and \rtext{baby.sleep} to predict the \rtext{dan.grump} variable. As before, we let $Y_i$ refer to my grumpiness on the $i$-th day. But now we have two $X$ variables: the first corresponding to the amount of sleep I got and the second corresponding to the amount of sleep my son got. So we'll let $X_{i1}$ refer to the hours I slept on the $i$-th day and $X_{i2}$ refers to the hours that the baby slept on that day. If so, then we can write our regression model like this:
+Multiple regression is conceptually very simple. All we do is add more terms to our regression equation. Let's suppose that we've got two variables that we're interested in; perhaps we want to use both \rtext{dani.sleep} and \rtext{baby.sleep} to predict the \rtext{dani.grump} variable. As before, we let $Y_i$ refer to my grumpiness on the $i$-th day. But now we have two $X$ variables: the first corresponding to the amount of sleep I got and the second corresponding to the amount of sleep my son got. So we'll let $X_{i1}$ refer to the hours I slept on the $i$-th day and $X_{i2}$ refers to the hours that the baby slept on that day. If so, then we can write our regression model like this:
 $$
 Y_i = b_0 + b_1 X_{i1} + b_2 X_{i2} + \epsilon_i
 $$
@@ -364,21 +364,21 @@ As before, $\epsilon_i$ is the residual associated with the $i$-th observation, 
 \begin{figure}[!htb]
 \begin{center}
 \epsfig{file = ../img/regression2/scatter3d_1.eps,clip=true, width = 14cm}
-\caption{A 3D visualisation of a multiple regression model. There are two predictors in the model, \rtext{dan.sleep} and \rtext{baby.sleep} and the outcome variable is \rtext{dan.grump}. Together, these three variables form a 3D space. Each observation (dot) is a point in this space. In much the same way that a simple linear regression model forms a line in 2D space, this multiple regression model forms a plane in 3D space. When we estimate the regression coefficients what we're trying to do is find a plane that is as close to all the blue dots as possible.}
+\caption{A 3D visualisation of a multiple regression model. There are two predictors in the model, \rtext{dani.sleep} and \rtext{baby.sleep} and the outcome variable is \rtext{dani.grump}. Together, these three variables form a 3D space. Each observation (dot) is a point in this space. In much the same way that a simple linear regression model forms a line in 2D space, this multiple regression model forms a plane in 3D space. When we estimate the regression coefficients what we're trying to do is find a plane that is as close to all the blue dots as possible.}
 \label{fig:multipleregression}
 \end{center}
 \end{figure}
 
 \SUBSECTION{Doing it in jamovi} 
 
-Multiple regression in jamovi is no different to simple regression. All we have to do is add additional variables to the `Covariates' box in jamovi. For example, if we want to use both \rtext{dan.sleep} and \rtext{baby.sleep} as predictors in our attempt to explain why I'm so grumpy, then move \rtext{baby.sleep} across into the `Covariates' box alongside \rtext{dan.sleep}. By default, jamovi assumes that the model should include an intercept. The coefficients we get this time are:
+Multiple regression in jamovi is no different to simple regression. All we have to do is add additional variables to the `Covariates' box in jamovi. For example, if we want to use both \rtext{dani.sleep} and \rtext{baby.sleep} as predictors in our attempt to explain why I'm so grumpy, then move \rtext{baby.sleep} across into the `Covariates' box alongside \rtext{dani.sleep}. By default, jamovi assumes that the model should include an intercept. The coefficients we get this time are:
 
 \begin{rblock1}
-(Intercept)    dan.sleep   baby.sleep  
-  125.97        -8.95        0.01  
+(Intercept)    dani.sleep   baby.sleep  
+  125.97        -8.95       0.01  
 \end{rblock1}
 
-The coefficient associated with \rtext{dan.sleep} is quite large, suggesting that every hour of sleep I lose makes me a lot grumpier. However, the coefficient for \rtext{baby.sleep} is very small, suggesting that it doesn't really matter how much sleep my son gets. What matters as far as my grumpiness goes is how much sleep {\it I} get. To get a sense of what this multiple regression model looks like, Figure~\ref{fig:multipleregression} shows a 3D plot that plots all three variables, along with the regression model itself. 
+The coefficient associated with \rtext{dani.sleep} is quite large, suggesting that every hour of sleep I lose makes me a lot grumpier. However, the coefficient for \rtext{baby.sleep} is very small, suggesting that it doesn't really matter how much sleep my son gets. What matters as far as my grumpiness goes is how much sleep {\it I} get. To get a sense of what this multiple regression model looks like, Figure~\ref{fig:multipleregression} shows a 3D plot that plots all three variables, along with the regression model itself. 
 
 \vspace{0.6cm}
 \begin{mdframed}[style=MyFrame,nobreak=true]
@@ -407,12 +407,12 @@ $$
 While we're here, let's calculate these values ourselves, not by hand though. Let's use something like Excel or another standard spreadsheet programme. I have done this by opening up the \rtext{parenthood.csv} file in Excel and saving it as \rtext{parenthood\_rsquared.xls} so that I can work on it. The first thing to do is calculate the $\hat{Y}$ values, and for the simple model that uses only a single predictor we would do the following:
 
 \noindent
-1. create a new column called `\rtext{Y.pred}' using the formula `\rtext{= 125.97 + (-8.94 * dan.sleep)}'
+1. create a new column called `\rtext{Y.pred}' using the formula `\rtext{= 125.97 + (-8.94 * dani.sleep)}'
 
 Okay, now that we've got a variable which stores the regression model predictions for how grumpy I will be on any given day, let's calculate our sum of squared residuals. We would do that using the following formula: 
 
 \noindent
-2. calculate the SS(resid) by creating a new column called '\rtext{(Y-Y.pred)\^{}2}' using the formula \\`\rtext{ = (dan.grump - Y.pred)\^{}2}'.
+2. calculate the SS(resid) by creating a new column called '\rtext{(Y-Y.pred)\^{}2}' using the formula \\`\rtext{ = (dani.grump - Y.pred)\^{}2}'.
 
 \noindent
 3. Then, at the bottom of this column calculate the sum of these values, \\i.e. `\rtext{sum( ( Y-Y.pred)\^{}2 )}. 
@@ -420,10 +420,10 @@ Okay, now that we've got a variable which stores the regression model prediction
 This should give you a value of `\rtext{1838.722}'. Wonderful. A big number that doesn't mean very much. Still, let's forge boldly onwards anyway and calculate the total sum of squares as well. That's also pretty simple. Calculate the \rtext{SS(tot)} by: 
 
 \noindent
-4. At the bottom of the dan.grump column, calculate the mean value for \rtext{dan.grump} \\(NB Excel uses the word `\rtext{AVERAGE}' rather than `mean' in its function).
+4. At the bottom of the dani.grump column, calculate the mean value for \rtext{dani.grump} \\(NB Excel uses the word `\rtext{AVERAGE}' rather than `mean' in its function).
 
 \noindent
-5. Then create a new column, called `\rtext{(Y - mean(Y))\^{}2 )}' using the formula \\`\rtext{ = (dan.grump - AVERAGE(dan.grump))\^{}2 } '.
+5. Then create a new column, called `\rtext{(Y - mean(Y))\^{}2 )}' using the formula \\`\rtext{ = (dani.grump - AVERAGE(dani.grump))\^{}2 } '.
 
 \noindent
 6. Then, at the bottom of this column calculate the sum of these values, \\i.e. `\rtext{sum( (Y - mean(Y))\^{}2 )}'.
@@ -510,11 +510,11 @@ We'll see much more of the $F$ statistic in Chapter~\ref{ch:anova}, but for now 
 The $F$-test that we've just introduced is useful for checking that the model as a whole is performing better than chance. If your regression model doesn't produce a significant result for the $F$-test then you probably don't have a very good regression model (or, quite possibly, you don't have very good data). However, while failing this test is a pretty strong indicator that the model has problems, {\it passing} the test (i.e., rejecting the null) doesn't imply that the model is good! Why is that, you might be wondering? The answer to that can be found by looking at the coefficients for the multiple regression model we have already looked at in section \ref{sec:multipleregression} above, where the coefficients we got were:
 
 \begin{rblock1}
-(Intercept)    dan.sleep   baby.sleep  
-  125.97        -8.95        0.01  
+(Intercept)    dani.sleep   baby.sleep  
+  125.97        -8.95       0.01  
 \end{rblock1}
 
-I can't help but notice that the estimated regression coefficient for the \rtext{baby.sleep} variable is tiny (0.01), relative to the value that we get for \rtext{dan.sleep} (-8.95). Given that these two variables are absolutely on the same scale (they're both measured in ``hours slept''), I find this illuminating. In fact, I'm beginning to suspect that it's really only the amount of sleep that {\it I} get that matters in order to predict my grumpiness.
+I can't help but notice that the estimated regression coefficient for the \rtext{baby.sleep} variable is tiny (0.01), relative to the value that we get for \rtext{dani.sleep} (-8.95). Given that these two variables are absolutely on the same scale (they're both measured in ``hours slept''), I find this illuminating. In fact, I'm beginning to suspect that it's really only the amount of sleep that {\it I} get that matters in order to predict my grumpiness.
 
 We can re-use a hypothesis test that we discussed earlier, the $t$-test. The test that we're interested in has a null hypothesis that the true regression coefficient is zero ($b = 0$), which is to be tested against the alternative hypothesis that it isn't ($b \neq 0$). That is:
 $$
@@ -545,9 +545,9 @@ To compute all of the statistics that we have talked about so far, all you need 
 \end{center}
 \end{figure}
 
-The `Model Coefficients' at the bottom of the jamovi analysis results shown in \ref{fig:reg2} provides the coefficients of the regression model. Each row in this table refers to one of the coefficients in the regression model. The first row is the intercept term, and the later ones look at each of the predictors. The columns give you all of the relevant information. The first column is the actual estimate of $b$ (e.g., 125.97 for the intercept, and -8.95 for the \rtext{dan.sleep} predictor). The second column is the standard error estimate $\hat\sigma_b$. The third and fourth columns provide the lower and upper values for the 95\% confidence interval around the $b$ estimate (more on this later). The fifth column gives you the $t$-statistic, and it's worth noticing that in this table $t= \hat{b}/ \SE{\hat{b}}$ every time. Finally, the last column gives you the actual $p$-value for each of these tests.\FOOTNOTE{Note that, although jamovi has done multiple tests here, it hasn't done a Bonferroni correction or anything. These are standard one-sample $t$-tests with a two-sided alternative. If you want to make corrections for multiple tests, you need to do that yourself.} 
+The `Model Coefficients' at the bottom of the jamovi analysis results shown in \ref{fig:reg2} provides the coefficients of the regression model. Each row in this table refers to one of the coefficients in the regression model. The first row is the intercept term, and the later ones look at each of the predictors. The columns give you all of the relevant information. The first column is the actual estimate of $b$ (e.g., 125.97 for the intercept, and -8.95 for the \rtext{dani.sleep} predictor). The second column is the standard error estimate $\hat\sigma_b$. The third and fourth columns provide the lower and upper values for the 95\% confidence interval around the $b$ estimate (more on this later). The fifth column gives you the $t$-statistic, and it's worth noticing that in this table $t= \hat{b}/ \SE{\hat{b}}$ every time. Finally, the last column gives you the actual $p$-value for each of these tests.\FOOTNOTE{Note that, although jamovi has done multiple tests here, it hasn't done a Bonferroni correction or anything. These are standard one-sample $t$-tests with a two-sided alternative. If you want to make corrections for multiple tests, you need to do that yourself.} 
 
-The only thing that the coefficients table itself doesn't list is the degrees of freedom used in the $t$-test, which is always $N-K-1$ and is listed in the table at the top of the output, labelled `Model Fit Measures'. We can see from this table that the model performs significantly better than you'd expect by chance ($F(2,97) = 215.24$, $p<.001$), which isn't all that surprising: the $R^2 = .81$ value indicate that the regression model accounts for 81\% of the variability in the outcome measure (and 82\% for the adjusted $R^2$). However, when we look back up at the $t$-tests for each of the individual coefficients, we have pretty strong evidence that the \rtext{baby.sleep} variable has no significant effect. All the work in this model is being done by the \rtext{dan.sleep} variable. Taken together, these results suggest that this regression model is actually the wrong model for the data. You'd probably be better off dropping the \rtext{baby.sleep} predictor entirely. In other words, the simple regression model that we started with is the better model.
+The only thing that the coefficients table itself doesn't list is the degrees of freedom used in the $t$-test, which is always $N-K-1$ and is listed in the table at the top of the output, labelled `Model Fit Measures'. We can see from this table that the model performs significantly better than you'd expect by chance ($F(2,97) = 215.24$, $p<.001$), which isn't all that surprising: the $R^2 = .81$ value indicate that the regression model accounts for 81\% of the variability in the outcome measure (and 82\% for the adjusted $R^2$). However, when we look back up at the $t$-tests for each of the individual coefficients, we have pretty strong evidence that the \rtext{baby.sleep} variable has no significant effect. All the work in this model is being done by the \rtext{dani.sleep} variable. Taken together, these results suggest that this regression model is actually the wrong model for the data. You'd probably be better off dropping the \rtext{baby.sleep} predictor entirely. In other words, the simple regression model that we started with is the better model.
 
 
 \begin{comment} % can't currently do the cor.test part in  jamovi, so leave this section out for now
@@ -561,11 +561,11 @@ I don't want to spend too much time on this, but it's worth very briefly returni
 
 Now let's compare this to the output of a different function, which goes by the name of \rtext{cor.test()}. As you might expect, this function runs a hypothesis test to see if the observed correlation between two variables is significantly different from 0. Let's have a look:
 \begin{rblock1}
-> @usr{cor.test( x = parenthood\$dan.sleep, y = parenthood\$dan.grump )}
+> @usr{cor.test( x = parenthood\$dani.sleep, y = parenthood\$dani.grump )}
 
 	Pearson's product-moment correlation
 
-data:  parenthood\$dan.sleep and parenthood\$dan.grump 
+data:  parenthood\$dani.sleep and parenthood\$dani.grump 
 t = -20.8544, df = 98, p-value < 2.2e-16
 alternative hypothesis: true correlation is not equal to 0 
 95 percent confidence interval:
@@ -593,11 +593,11 @@ CORRELATIONS
 - correlation type:  pearson 
 - correlations shown only when both variables are numeric
 
-           dan.sleep    baby.sleep    dan.grump       day   
-dan.sleep          .         0.628***    -0.903*** -0.098   
-baby.sleep     0.628***          .       -0.566*** -0.010   
-dan.grump     -0.903***     -0.566***         .     0.076   
-day           -0.098        -0.010        0.076         .   
+           dani.sleep    baby.sleep     dani.grump      day   
+dani.sleep          .         0.628***    -0.903***  -0.098   
+baby.sleep      0.628***          .       -0.566***  -0.010   
+dani.grump     -0.903***     -0.566***         .      0.076   
+day            -0.098        -0.010        0.076         .   
 
 ---
 Signif. codes: . = p < .1, * = p<.05, ** = p<.01, *** = p<.001
@@ -608,20 +608,20 @@ p-VALUES
 - total number of tests run:  6 
 - correction for multiple testing:  holm 
 
-           dan.sleep baby.sleep dan.grump   day
-dan.sleep          .      0.000     0.000 0.990
+           dani.sleep baby.sleep dani.grump   day
+dani.sleep          .      0.000     0.000 0.990
 baby.sleep     0.000          .     0.000 0.990
-dan.grump      0.000      0.000         . 0.990
+dani.grump      0.000      0.000         . 0.990
 day            0.990      0.990     0.990     .
 
 
 SAMPLE SIZES
 ============
 
-           dan.sleep baby.sleep dan.grump day
-dan.sleep        100        100       100 100
+           dani.sleep baby.sleep dani.grump day
+dani.sleep        100        100       100 100
 baby.sleep       100        100       100 100
-dan.grump        100        100       100 100
+dani.grump        100        100       100 100
 day              100        100       100 100
 \end{rblock1}
 The output here contains three matrices. First it prints out the correlation matrix. Second it prints out a matrix of $p$-values, using the Holm method\FOOTNOTE{You can change the kind of correction it applies by specifying the \rtextsmall{p.adjust.method} argument.} to correct for multiple comparisons. Finally, it prints out a matrix indicating the sample size (number of pairwise complete cases) that contributed to each correlation. 
@@ -678,7 +678,7 @@ To make things even simpler, jamovi has an option that computes the $\beta$ coef
 \end{center}
 \end{figure}
 
-This clearly shows that the \rtext{dan.sleep} variable has a much stronger effect than the \rtext{baby.sleep} variable. However, this is a perfect example of a situation where it would probably make sense to use the original coefficients $b$ rather than the standardised coefficients $\beta$. After all, my sleep and the baby's sleep are {\it already} on the same scale: number of hours slept. Why complicate matters by converting these to $z$-scores?
+This clearly shows that the \rtext{dani.sleep} variable has a much stronger effect than the \rtext{baby.sleep} variable. However, this is a perfect example of a situation where it would probably make sense to use the original coefficients $b$ rather than the standardised coefficients $\beta$. After all, my sleep and the baby's sleep are {\it already} on the same scale: number of hours slept. Why complicate matters by converting these to $z$-scores?
 
 
 \section{Assumptions of regression~\label{sec:regressionassumptions}}
@@ -861,16 +861,16 @@ where $R^2_{(-k)}$ refers to $R$-squared value you would get if you ran a regres
 \end{mdframed}
 
 
-The square root of the VIF is pretty interpretable. It tells you how much wider the confidence interval for the corresponding coefficient $b_k$ is, relative to what you would have expected if the predictors are all nice and uncorrelated with one another. If you've only got two predictors, the VIF values are always going to be the same, as we can see if we click on the `Collinearity' checkbox in the `Regression' - `Assumptions' options in jamovi. For both \rtext{dan.sleep} and \rtext{baby.sleep} the VIF is 1.65. And since the square root of 1.65 is 1.28, we see that the correlation between our two predictors isn't causing much of a problem. 
+The square root of the VIF is pretty interpretable. It tells you how much wider the confidence interval for the corresponding coefficient $b_k$ is, relative to what you would have expected if the predictors are all nice and uncorrelated with one another. If you've only got two predictors, the VIF values are always going to be the same, as we can see if we click on the `Collinearity' checkbox in the `Regression' - `Assumptions' options in jamovi. For both \rtext{dani.sleep} and \rtext{baby.sleep} the VIF is 1.65. And since the square root of 1.65 is 1.28, we see that the correlation between our two predictors isn't causing much of a problem. 
 
 To give a sense of how we could end up with a model that has bigger collinearity problems, suppose I were to run a much less interesting regression model, in which I tried to predict the \rtext{day} on which the data were collected, as a function of all the other variables in the data set. To see why this would be a bit of a problem, let's have a look at the correlation matrix for all four variables:
 
 \begin{rblock1}
-             dan.sleep  baby.sleep   dan.grump         day
-dan.sleep   1.00000000  0.62794934 -0.90338404 -0.09840768
-baby.sleep  0.62794934  1.00000000 -0.56596373 -0.01043394
-dan.grump  -0.90338404 -0.56596373  1.00000000  0.07647926
-day        -0.09840768 -0.01043394  0.07647926  1.00000000
+             dani.sleep  baby.sleep  dani.grump        day
+dani.sleep   1.00000000  0.62794934 -0.90338404 -0.09840768
+baby.sleep   0.62794934  1.00000000 -0.56596373 -0.01043394
+dani.grump  -0.90338404 -0.56596373  1.00000000  0.07647926
+day         -0.09840768 -0.01043394  0.07647926  1.00000000
 \end{rblock1}
 
 We have some fairly large correlations between some of our predictor variables! When we run the regression model and look at the VIF values, we see that the collinearity is causing a lot of uncertainty about the coefficients. First, run the regression, as in Figure \ref{fig:reg7}  and you can see from the VIF values that, yep, that's some mighty fine collinearity there.
@@ -929,7 +929,7 @@ What does this mean in practice? Well, you {\it could} go and spend several year
 
 \SUBSECTION{Comparing two regression models}
 
-An alternative to using automated model selection procedures is for the researcher to explicitly select two or more regression models to compare to each other. You can do this in a few different ways, depending on what research question you're trying to answer. Suppose we want to know whether or not the amount of sleep that my son got has any relationship to my grumpiness, over and above what we might expect from the amount of sleep that I got. We also want to make sure that the day on which we took the measurement has no influence on the relationship. That is, we're interested in the relationship between \rtext{baby.sleep} and \rtext{dan.grump}, and from that perspective \rtext{dan.sleep} and \rtext{day} are nuisance variable or \keyterm{covariates} that we want to control for. In this situation, what we would like to know is whether \rtextverb#dan.grump ~ dan.sleep + day + baby.sleep# (which I'll call Model 2, or \rtext{M2}) is a better regression model for these data than \rtextverb#dan.grump ~ dan.sleep + day# (which I'll call Model 1, or \rtext{M1}). There are two different ways we can compare these two models, one based on a model selection criterion like AIC, and the other based on an explicit hypothesis test. I'll show you the AIC based approach first because it's simpler, and follows naturally from discussion in the last section. The first thing I need to do is actually run the two regressions, note the AIC for each one, and then select the model with the smaller AIC value as it is judged to be the better model for these data. Actually, don't do this just yet. Read on because there is an easy way in jamovi to get the AIC values for different models included in one table.\FOOTNOTE{While I'm on this topic I should point out that the empirical evidence suggests that BIC is a better criterion than AIC. In most simulation studies that I've seen, BIC does a much better job of selecting the correct model.}
+An alternative to using automated model selection procedures is for the researcher to explicitly select two or more regression models to compare to each other. You can do this in a few different ways, depending on what research question you're trying to answer. Suppose we want to know whether or not the amount of sleep that my son got has any relationship to my grumpiness, over and above what we might expect from the amount of sleep that I got. We also want to make sure that the day on which we took the measurement has no influence on the relationship. That is, we're interested in the relationship between \rtext{baby.sleep} and \rtext{dani.grump}, and from that perspective \rtext{dani.sleep} and \rtext{day} are nuisance variable or \keyterm{covariates} that we want to control for. In this situation, what we would like to know is whether \rtextverb#dani.grump ~ dani.sleep + day + baby.sleep# (which I'll call Model 2, or \rtext{M2}) is a better regression model for these data than \rtextverb#dani.grump ~ dani.sleep + day# (which I'll call Model 1, or \rtext{M1}). There are two different ways we can compare these two models, one based on a model selection criterion like AIC, and the other based on an explicit hypothesis test. I'll show you the AIC based approach first because it's simpler, and follows naturally from discussion in the last section. The first thing I need to do is actually run the two regressions, note the AIC for each one, and then select the model with the smaller AIC value as it is judged to be the better model for these data. Actually, don't do this just yet. Read on because there is an easy way in jamovi to get the AIC values for different models included in one table.\FOOTNOTE{While I'm on this topic I should point out that the empirical evidence suggests that BIC is a better criterion than AIC. In most simulation studies that I've seen, BIC does a much better job of selecting the correct model.}
 
 A somewhat different approach to the problem comes out of the hypothesis testing framework. Suppose you have two regression models, where one of them (Model 1) contains a {\it subset} of the predictors from the other one (Model 2). That is, Model 2 contains all of the predictors included in Model 1, plus one or more additional predictors. When this happens we say that Model 1 is \keyterm{nested} within Model 2, or possibly that Model 1 is a \keyterm{submodel} of Model 2. Regardless of the terminology, what this means is that we can think of Model 1 as a null hypothesis and Model 2 as an alternative hypothesis. And in fact we can construct an $F$ test for this in a fairly straightforward fashion. 
 
@@ -960,7 +960,7 @@ where $\hat{y}_i^{(1)}$ is the fitted value for $y_i$ according to model $M_1$ a
 \end{center}
 \end{figure}
 
-Okay, so that's the hypothesis test that we use to compare two regression models to one another. Now, how do we do it in jamovi? The answer is to use the `Model Builder' option and specify the Model 1 predictors \rtext{dan.sleep} and \rtext{day} in `Block 1' and then add the additional predictor from Model 2 (\rtext{baby.sleep}) in `Block 2', as in Figure \ref{fig:reg8}. This shows, in the `Model Comparisons' Table, that for the comparisons between Model 1 and Model 2, $F$(1,96) = 0.00, $p$ = 0.954. Since we have $p>.05$ we retain the null hypothesis (\rtext{M1}).  This approach to regression, in which we add all of our covariates into a null model, then {\it add} the variables of interest into an alternative model, and then compare the two models in a hypothesis testing framework, is often referred to as \keyterm{hierarchical regression}.
+Okay, so that's the hypothesis test that we use to compare two regression models to one another. Now, how do we do it in jamovi? The answer is to use the `Model Builder' option and specify the Model 1 predictors \rtext{dani.sleep} and \rtext{day} in `Block 1' and then add the additional predictor from Model 2 (\rtext{baby.sleep}) in `Block 2', as in Figure \ref{fig:reg8}. This shows, in the `Model Comparisons' Table, that for the comparisons between Model 1 and Model 2, $F$(1,96) = 0.00, $p$ = 0.954. Since we have $p>.05$ we retain the null hypothesis (\rtext{M1}).  This approach to regression, in which we add all of our covariates into a null model, then {\it add} the variables of interest into an alternative model, and then compare the two models in a hypothesis testing framework, is often referred to as \keyterm{hierarchical regression}.
 
 We can also use this `Model Comparison' option to display a table that shows the AIC and BIC for each model, making it easy to compare and identify which model has the lowest value, as in Figure \ref{fig:reg8}.
 
