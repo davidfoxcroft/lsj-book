@@ -56,7 +56,7 @@ Dry day & 0.85
 
 \SUBSECTION{Likelihoods: theories about the data}
 
-To solve the reasoning problem you need a theory about my behaviour. When does Dan carry an umbrella? You might guess that I'm not a complete idiot,\FOOTNOTE{It's a leap of faith, I know, but let's run with it okay?} and I try to carry umbrellas only on rainy days. On the other hand, you also know that I have young kids, and you wouldn't be all that surprised to know that I'm pretty forgetful about this sort of thing. Let's suppose that on rainy days I remember my umbrella about 30\% of the time (I really am awful at this). But let's say that on dry days I'm only about 5\% likely to be carrying an umbrella. So you might write out a little table like this:
+To solve the reasoning problem you need a theory about my behaviour. When does Dani carry an umbrella? You might guess that I'm not a complete idiot,\FOOTNOTE{It's a leap of faith, I know, but let's run with it okay?} and I try to carry umbrellas only on rainy days. On the other hand, you also know that I have young kids, and you wouldn't be all that surprised to know that I'm pretty forgetful about this sort of thing. Let's suppose that on rainy days I remember my umbrella about 30\% of the time (I really am awful at this). But let's say that on dry days I'm only about 5\% likely to be carrying an umbrella. So you might write out a little table like this:
 
 \begin{center}
 \begin{tabular}{c|cc}
@@ -588,7 +588,7 @@ In Chapter~\ref{ch:regression} I used the \rtext{parenthood} data to illustrate 
 \begin{rblock1}
 > @usr{load("parenthood.Rdata")}
 > @usr{head(parenthood)}
-  dan.sleep baby.sleep dan.grump day
+  dani.sleep baby.sleep dani.grump day
 1      7.59      10.18        56   1
 2      7.91      11.66        60   2
 3      5.14       7.92        82   3
@@ -598,11 +598,11 @@ In Chapter~\ref{ch:regression} I used the \rtext{parenthood} data to illustrate 
 \end{rblock1}
 
 \noindent
-Back in Chapter~\ref{ch:regression} I proposed a theory in which my grumpiness (\rtext{dan.grump}) on any given day is related to the amount of sleep I got the night before (\rtext{dan.sleep}), and possibly to the amount of sleep our baby got (\rtext{baby.sleep}), though probably not to the \rtext{day} on which we took the measurement. We tested this using a regression model. In order to estimate the regression model we used the \rtext{lm()} function, like so:
+Back in Chapter~\ref{ch:regression} I proposed a theory in which my grumpiness (\rtext{dani.grump}) on any given day is related to the amount of sleep I got the night before (\rtext{dani.sleep}), and possibly to the amount of sleep our baby got (\rtext{baby.sleep}), though probably not to the \rtext{day} on which we took the measurement. We tested this using a regression model. In order to estimate the regression model we used the \rtext{lm()} function, like so:
 
 \begin{rblock1}
 > @usr{model <- lm(} 
-+ @usr{   formula = dan.grump ~ dan.sleep + day + baby.sleep,}
++ @usr{   formula = dani.grump ~ dani.sleep + day + baby.sleep,}
 + @usr{   data = parenthood}
 + @usr{)}
 \end{rblock1}
@@ -613,15 +613,15 @@ The hypothesis tests for each of the terms in the regression model were extracte
 BLAH BLAH BLAH
 
 Coefficients:
-              Estimate Std. Error t value Pr(>|t|)    
-(Intercept) 126.278707   3.242492  38.945   <2e-16 ***
-dan.sleep    -8.969319   0.560007 -16.016   <2e-16 ***
-day          -0.004403   0.015262  -0.288    0.774    
-baby.sleep    0.015747   0.272955   0.058    0.954    
+               Estimate  Std. Error  t value  Pr(>|t|)    
+(Intercept)  126.278707   3.242492  38.945   <2e-16 ***
+dani.sleep    -8.969319   0.560007 -16.016   <2e-16 ***
+day           -0.004403   0.015262  -0.288    0.774    
+baby.sleep     0.015747   0.272955   0.058    0.954    
 
 BLAH BLAH BLAH
 \end{rblock1}
-When interpreting the results, each row in this table corresponds to one of the possible predictors. The \rtext{(Intercept)} term isn't usually interesting, though it is highly significant. The important thing for our purposes is the fact that \rtext{dan.sleep} is significant at $p<.001$ and neither of the other variables are. 
+When interpreting the results, each row in this table corresponds to one of the possible predictors. The \rtext{(Intercept)} term isn't usually interesting, though it is highly significant. The important thing for our purposes is the fact that \rtext{dani.sleep} is significant at $p<.001$ and neither of the other variables are. 
 
 \subsection{The Bayesian version}
 
@@ -629,7 +629,7 @@ Okay, so how do we do the same thing using the \rtext{BayesFactor} package? The 
 
 \begin{rblock1}
 > @usr{regressionBF(}
-+ @usr{   formula = dan.grump ~ dan.sleep + day + baby.sleep,}
++ @usr{   formula = dani.grump ~ dani.sleep + day + baby.sleep,}
 + @usr{   data = parenthood}
 + @usr{)}
 \end{rblock1}
@@ -640,13 +640,13 @@ So that's pretty straightforward: it's exactly what we've been doing throughout 
 \begin{rblock1}
 Bayes factor analysis
 --------------
-[1] dan.sleep                    : 1.622545e+34 @plusorminus0%
-[2] day                          : 0.2724027    @plusorminus0%
-[3] baby.sleep                   : 10018411     @plusorminus0%
-[4] dan.sleep + day              : 1.016578e+33 @plusorminus0.01%
-[5] dan.sleep + baby.sleep       : 9.770233e+32 @plusorminus0.01%
-[6] day + baby.sleep             : 2340755      @plusorminus0%
-[7] dan.sleep + day + baby.sleep : 7.835625e+31 @plusorminus0%
+[1] dani.sleep                    : 1.622545e+34 @plusorminus0%
+[2] day                           : 0.2724027    @plusorminus0%
+[3] baby.sleep                    : 10018411     @plusorminus0%
+[4] dani.sleep + day              : 1.016578e+33 @plusorminus0.01%
+[5] dani.sleep + baby.sleep       : 9.770233e+32 @plusorminus0.01%
+[6] day + baby.sleep              : 2340755      @plusorminus0%
+[7] dani.sleep + day + baby.sleep : 7.835625e+31 @plusorminus0%
 
 Against denominator:
   Intercept only 
@@ -655,16 +655,16 @@ Bayes factor type: BFlinearModel, JZS
 \end{rblock1}
 The format of this is pretty familiar. At the bottom we have some techical rubbish, and at the top we have some information about the Bayes factors. What's new is the fact that we seem to have {\it lots} of Bayes factors here. What's all this about?
 
-The trick to understanding this output is to recognise that if we're interested in working out which of the 3 predictor variables are related to \rtext{dan.grump}, there are actually 8 possible regression models that could be considered. One possibility is the {\it intercept only model}, in which none of the three variables have an effect. At the other end of the spectrum is the {\it full model} in which all three variables matter. So what \rtext{regressionBF()} does is treat the {\it intercept only} model as the null hypothesis, and print out the Bayes factors for all other models when compared against that null. For example, if we look at line 4 in the table, we see that the evidence is about $10^{33}$ to 1 in favour of the claim that a model that includes both \rtext{dan.sleep} and \rtext{day} is better than the intercept only model. Or if we look at line 1, we can see that the odds are about $1.6 \times 10^{34}$ that a model containing the \rtext{dan.sleep} variable (but no others) is better than the intercept only model.
+The trick to understanding this output is to recognise that if we're interested in working out which of the 3 predictor variables are related to \rtext{dani.grump}, there are actually 8 possible regression models that could be considered. One possibility is the {\it intercept only model}, in which none of the three variables have an effect. At the other end of the spectrum is the {\it full model} in which all three variables matter. So what \rtext{regressionBF()} does is treat the {\it intercept only} model as the null hypothesis, and print out the Bayes factors for all other models when compared against that null. For example, if we look at line 4 in the table, we see that the evidence is about $10^{33}$ to 1 in favour of the claim that a model that includes both \rtext{dani.sleep} and \rtext{day} is better than the intercept only model. Or if we look at line 1, we can see that the odds are about $1.6 \times 10^{34}$ that a model containing the \rtext{dani.sleep} variable (but no others) is better than the intercept only model.
 
 
 \SUBSECTION{Finding the best model}
 
-In practice, this isn't super helpful. In most situations the intercept only model is one that you don't really care about at all. What I find helpful is to start out by working out which model is the {\it best} one, and then seeing how well all the alternatives compare to it. Here's how you do that. In this case, it's easy enough to see that the best model is actually the one that contains \rtext{dan.sleep} only (line 1), because it has the largest Bayes factor. However, if you've got a lot of possible models in the output, it's handy to know that you can use the \rtext{head()} function to pick out the best few models. First, we have to go back and save the Bayes factor information to a variable:
+In practice, this isn't super helpful. In most situations the intercept only model is one that you don't really care about at all. What I find helpful is to start out by working out which model is the {\it best} one, and then seeing how well all the alternatives compare to it. Here's how you do that. In this case, it's easy enough to see that the best model is actually the one that contains \rtext{dani.sleep} only (line 1), because it has the largest Bayes factor. However, if you've got a lot of possible models in the output, it's handy to know that you can use the \rtext{head()} function to pick out the best few models. First, we have to go back and save the Bayes factor information to a variable:
 
 \begin{rblock1}
 > @usr{models <- regressionBF(}
-+ @usr{   formula = dan.grump ~ dan.sleep + day + baby.sleep,}
++ @usr{   formula = dani.grump ~ dani.sleep + day + baby.sleep,}
 + @usr{   data = parenthood}
 + @usr{)}
 \end{rblock1}
@@ -676,16 +676,16 @@ Let's say I want to see the best three models. To do this, I use the \rtext{head
 
 Bayes factor analysis
 --------------
-[1] dan.sleep              : 1.622545e+34 @plusorminus0%
-[2] dan.sleep + day        : 1.016578e+33 @plusorminus0.01%
-[3] dan.sleep + baby.sleep : 9.770233e+32 @plusorminus0.01%
+[1] dani.sleep              : 1.622545e+34 @plusorminus0%
+[2] dani.sleep + day        : 1.016578e+33 @plusorminus0.01%
+[3] dani.sleep + baby.sleep : 9.770233e+32 @plusorminus0.01%
 
 Against denominator:
   Intercept only 
 ---
 Bayes factor type: BFlinearModel, JZS
 \end{rblock1}
-This is telling us that the model in line 1 (i.e., \rtextverb#dan.grump ~ dan.sleep#) is the best one. That's {\it almost} what I'm looking for, but it's still comparing all the models against the intercept only model. That seems silly. What I'd like to know is how big the difference is between the best model and the other good models. For that, there's this trick:
+This is telling us that the model in line 1 (i.e., \rtextverb#dani.grump ~ dani.sleep#) is the best one. That's {\it almost} what I'm looking for, but it's still comparing all the models against the intercept only model. That seems silly. What I'd like to know is how big the difference is between the best model and the other good models. For that, there's this trick:
 
 
 
@@ -694,28 +694,28 @@ This is telling us that the model in line 1 (i.e., \rtextverb#dan.grump ~ dan.sl
 
 Bayes factor analysis
 --------------
-[1] dan.sleep              : 1          @plusorminus0%
-[2] dan.sleep + day        : 0.06265328 @plusorminus0.01%
-[3] dan.sleep + baby.sleep : 0.06021549 @plusorminus0.01%
+[1] dani.sleep              : 1          @plusorminus0%
+[2] dani.sleep + day        : 0.06265328 @plusorminus0.01%
+[3] dani.sleep + baby.sleep : 0.06021549 @plusorminus0.01%
 
 Against denominator:
-  dan.grump ~ dan.sleep 
+  dani.grump ~ dani.sleep 
 ---
 Bayes factor type: BFlinearModel, JZS
 \end{rblock1}
-Notice the bit at the bottom showing that the ``denominator'' has changed. What that means is that the Bayes factors are now comparing each of those 3 models listed against the \rtextverb#dan.grump ~ dan.sleep# model. Obviously, the Bayes factor in the first line is exactly 1, since that's just comparing the best model to itself. More to the point, the other two Bayes factors are both less than 1, indicating that they're all worse than that model. The Bayes factors of 0.06 to 1 imply that the odds for the best model over the second best model are about 16:1. You can work this out by simple arithmetic (i.e., $0.06 / 1 \approx 16$), but the other way to do it is to directly compare the models. To see what I mean, here's the original output:
+Notice the bit at the bottom showing that the ``denominator'' has changed. What that means is that the Bayes factors are now comparing each of those 3 models listed against the \rtextverb#dani.grump ~ dani.sleep# model. Obviously, the Bayes factor in the first line is exactly 1, since that's just comparing the best model to itself. More to the point, the other two Bayes factors are both less than 1, indicating that they're all worse than that model. The Bayes factors of 0.06 to 1 imply that the odds for the best model over the second best model are about 16:1. You can work this out by simple arithmetic (i.e., $0.06 / 1 \approx 16$), but the other way to do it is to directly compare the models. To see what I mean, here's the original output:
 
 \begin{rblock1}
 > @usr{models}
 Bayes factor analysis
 --------------
-[1] dan.sleep                    : 1.622545e+34 @plusorminus0%
-[2] day                          : 0.2724027    @plusorminus0%
-[3] baby.sleep                   : 10018411     @plusorminus0%
-[4] dan.sleep + day              : 1.016578e+33 @plusorminus0.01%
-[5] dan.sleep + baby.sleep       : 9.770233e+32 @plusorminus0.01%
-[6] day + baby.sleep             : 2340755      @plusorminus0%
-[7] dan.sleep + day + baby.sleep : 7.835625e+31 @plusorminus0%
+[1] dani.sleep                    : 1.622545e+34 @plusorminus0%
+[2] day                           : 0.2724027    @plusorminus0%
+[3] baby.sleep                    : 10018411     @plusorminus0%
+[4] dani.sleep + day              : 1.016578e+33 @plusorminus0.01%
+[5] dani.sleep + baby.sleep       : 9.770233e+32 @plusorminus0.01%
+[6] day + baby.sleep              : 2340755      @plusorminus0%
+[7] dani.sleep + day + baby.sleep : 7.835625e+31 @plusorminus0%
 
 Against denominator:
   Intercept only 
@@ -729,40 +729,40 @@ The best model corresponds to row 1 in this table, and the second best model cor
 
 Bayes factor analysis
 --------------
-[1] dan.sleep : 15.96086 @plusorminus0.01%
+[1] dani.sleep : 15.96086 @plusorminus0.01%
 
 Against denominator:
-  dan.grump ~ dan.sleep + day 
+  dani.grump ~ dani.sleep + day 
 ---
 Bayes factor type: BFlinearModel, JZS
 \end{rblock1}
-And there you have it. You've found the regression model with the highest Bayes factor (i.e., \rtextverb#dan.grump ~ dan.sleep#), and you know that the evidence for that model over the next best alternative (i.e., \rtextverb#dan.grump ~ dan.sleep + day#) is about 16:1.
+And there you have it. You've found the regression model with the highest Bayes factor (i.e., \rtextverb#dani.grump ~ dani.sleep#), and you know that the evidence for that model over the next best alternative (i.e., \rtextverb#dani.grump ~ dani.sleep + day#) is about 16:1.
 
 
 \SUBSECTION{Extracting Bayes factors for all included terms}
 
-Okay, let's say you've settled on a specific regression model. What Bayes factors should you report? In this example, I'm going to pretend that you decided that \rtextverb#dan.grump ~ dan.sleep + baby.sleep# is the model you think is best. Sometimes it's sensible to do this, even when it's not the one with the highest Bayes factor. Usually this happens because you have a substantive theoretical reason to prefer one model over the other. However, in this case I'm doing it because I want to use a model with more than one predictor as my example! 
+Okay, let's say you've settled on a specific regression model. What Bayes factors should you report? In this example, I'm going to pretend that you decided that \rtextverb#dani.grump ~ dani.sleep + baby.sleep# is the model you think is best. Sometimes it's sensible to do this, even when it's not the one with the highest Bayes factor. Usually this happens because you have a substantive theoretical reason to prefer one model over the other. However, in this case I'm doing it because I want to use a model with more than one predictor as my example! 
 
 Having figured out which model you prefer, it can be really useful to call the \rtext{regressionBF()} function and specifying  \rtext{whichModels="top"}. You use your ``preferred'' model as the \rtext{formula} argument, and then the output will show you the Bayes factors that result when you try to drop predictors from this model:
 \begin{rblock1}
 > @usr{regressionBF( }
-+ @usr{  formula = dan.grump ~ dan.sleep + baby.sleep,}
++ @usr{  formula = dani.grump ~ dani.sleep + baby.sleep,}
 + @usr{  data = parenthood,}
 + @usr{  whichModels = "top"}
 + @usr{)}
 
 Bayes factor top-down analysis
 --------------
-When effect is omitted from dan.sleep + baby.sleep , BF is...
-[1] Omit baby.sleep : 16.60702     @plusorminus0.01%
-[2] Omit dan.sleep  : 1.025401e-26 @plusorminus0.01%
+When effect is omitted from dani.sleep + baby.sleep , BF is...
+[1] Omit baby.sleep  : 16.60702     @plusorminus0.01%
+[2] Omit dani.sleep  : 1.025401e-26 @plusorminus0.01%
 
 Against denominator:
-  dan.grump ~ dan.sleep + baby.sleep 
+  dani.grump ~ dani.sleep + baby.sleep 
 ---
 Bayes factor type: BFlinearModel, JZS
 \end{rblock1}
-Okay, so now you can see the results a bit more clearly. The Bayes factor when you try to drop the \rtext{dan.sleep} predictor is about $10^{-26}$, which is very strong evidence that you {\it shouldn't} drop it. On the other hand, the Bayes factor actually goes up to 17 if you drop \rtext{baby.sleep}, so you'd usually say that's pretty strong evidence for dropping that one.
+Okay, so now you can see the results a bit more clearly. The Bayes factor when you try to drop the \rtext{dani.sleep} predictor is about $10^{-26}$, which is very strong evidence that you {\it shouldn't} drop it. On the other hand, the Bayes factor actually goes up to 17 if you drop \rtext{baby.sleep}, so you'd usually say that's pretty strong evidence for dropping that one.
 
 \section{Bayesian ANOVA~\label{sec:bayesanova}}
 
