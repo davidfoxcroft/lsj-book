@@ -15,6 +15,6 @@ The book is released under a creative commons [CC BY-SA 4.0](https://creativecom
 
 This is an adaptation of the original book:
 
-DJ Navarro (2018). *Learning statistics with R: A tutorial for psychology students and other beginners.* (Version 0.6). [https://compcogscisydney.org/learning-statistics-with-r](http://compcogscisydney.org/learning-statistics-with-r)
+DJ Navarro (2018). *Learning statistics with R: A tutorial for psychology students and other beginners.* (Version 0.6). [ https://learningstatisticswithr.com/]( https://learningstatisticswithr.com/)
 
 
