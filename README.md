@@ -3,7 +3,7 @@
 Contains LaTeX source for:
 
 
-Navarro DJ and Foxcroft DR (2019). learning statistics with jamovi: a tutorial for psychology students and other beginners. (Version 0.70). [Available from url: https://learnstatswithjamovi.com/]
+Navarro DJ and Foxcroft DR (2022). learning statistics with jamovi: a tutorial for psychology students and other beginners. (Version 0.75). [Available from url: https://learnstatswithjamovi.com/]
 
 
 In principle, this repository should include everything needed to reproduce the book from scratch.
