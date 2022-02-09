@@ -134,7 +134,7 @@ The third approach is a good one according to \textcite{Fabrigar1999}, although 
 
 At the same time, we should also consider the best way to rotate the final solution. There are two main approaches to rotation: orthogonal (e.g. `varimax') rotation forces the selected factors to be uncorrelated, whereas oblique (e.g. `oblimin') rotation allows the selected factors to be correlated. Dimensions of interest to psychologists and behavioural scientists are not often dimensions we would expect to be orthogonal, so oblique solutions are arguably more sensible\FOOTNOTE{Oblique rotations provide two factor matrices, one called a structure matrix and one called a pattern matrix. In jamovi just the pattern matrix is shown in the results as this is typically the most useful for interpretation, though some experts suggest that both can be helpful. In a structure matrix coefficients show the relationship between the variable and the factors whilst ignoring the relationship of that factor with all the other factors (i.e. a zero-order correlation). Pattern matrix coefficients show the unique contribution of a factor to a variable whilst controlling for the effects of other factors on that variable (akin to standardized partial regression coefficient). Under orthogonal rotation, structure and pattern coefficients are the same.} 
 
-Practically, if in an oblique rotation the factors are found to be substantially correlated (positive or negative, and $>0.3$), as in Figure \ref{fig:fa6} where a correlation between two of the extracted factors is $-0.398$, then this would confirm our intuition to prefer oblique rotation. If the factors are, in fact, correlated, then an oblique rotation will produce a better estimate of the true factors and a better simple structure than will an orthogonal rotation. And, if the oblique rotation indicates that the factors have close to zero correlations between one another, then the researcher can go ahead and conduct an orthogonal rotation (which should then give about the same solution as the oblique rotation).
+Practically, if in an oblique rotation the factors are found to be substantially correlated (positive or negative, and $>0.3$), as in Figure \ref{fig:fa6} where a correlation between two of the extracted factors is $0.31$, then this would confirm our intuition to prefer oblique rotation. If the factors are, in fact, correlated, then an oblique rotation will produce a better estimate of the true factors and a better simple structure than will an orthogonal rotation. And, if the oblique rotation indicates that the factors have close to zero correlations between one another, then the researcher can go ahead and conduct an orthogonal rotation (which should then give about the same solution as the oblique rotation).
 
 On checking the correlation between the extracted factors at least one correlation was greater than 0.3 (Figure \ref{fig:fa6}), so an oblique (`oblimin') rotation of the five extracted factors is preferred. We can also see in Figure \ref{fig:fa6} that the proportion of overall variance in the data that is accounted for by the five factors is 46\%. Factor one accounts for around 10\% of the variance, factors two to four around 9\% each, and factor five just over 7\%. This isn’t great; it would have been better if the overall solution accounted for a more substantive proportion of the variance in our data.
 
@@ -142,7 +142,7 @@ Be aware that in every EFA you could potentially have the same number of factors
 
 Figure \ref{fig:fa7} shows the factor loadings. That is, how the 25 different personality items load onto each of the five selected factors. We have hidden loadings less than 0.3 (set in the options shown in Figure \ref{fig:fa3}).
  
-For Factors 1, 2, 3 and 4 the pattern of factor loadings closely matches the putative factors specified in Figure \ref{fig:fa2}. Phew! And factor 5 is pretty close, with four of the five observed variables that putatively measure “openness” loading pretty well onto the factor. Variable 04 doesn’t quite seem to fit though, as the factor solution in Figure \ref{fig:fa7} suggests that it loads onto factor 3 (albeit with a relatively low loading) but not substantively onto factor 5.
+For Factors 1, 2, 3 and 4 the pattern of factor loadings closely matches the putative factors specified in Figure \ref{fig:fa2}. Phew! And factor 5 is pretty close, with four of the five observed variables that putatively measure “openness” loading pretty well onto the factor. Variable 04 doesn’t quite seem to fit though, as the factor solution in Figure \ref{fig:fa7} suggests that it loads onto factor 4 (albeit with a relatively low loading) but not substantively onto factor 5.
 
 The other thing to note is that those variables that were denoted as “R: reverse coding” in Figure \ref{fig:fa2} are those that have negative factor loadings. Take a look at the items A1 (“Am indifferent to the feelings of others”) and A2 (“Inquire about others' well-being”). We can see that a high score on A1 indicates low Agreeableness, whereas a high score on A2 (and all the other “A” variables for that matter) indicates high Agreeableness. Therefore A1 will be negatively correlated with the other “A” variables, and this is why it has a negative factor loading, as shown in Figure \ref{fig:fa7}. 
 
@@ -155,7 +155,7 @@ The other thing to note is that those variables that were denoted as “R: rever
 \end{center}
 \end{figure}
 
-We can also see in Figure \ref{fig:fa7} the “uniqueness” of each variable. Uniqueness is the proportion of variance that is ‘unique’ to the variable and not explained by the factors\FOOTNOTE{Sometimes reported in factor analysis is “communality” which is the amount of variance in a variable that is accounted for by the factor solution. Uniqueness is equal to ($1-communality$)}. For example, 74\% of the variance in ‘A1’ is not explained by the factors in the five factor solution. In contrast, ‘N1’ has relatively low variance not accounted for by the factor solution (31\%). Note that the greater the ‘uniqueness’, the lower the relevance or contribution of the variable in the factor model. 
+We can also see in Figure \ref{fig:fa7} the “uniqueness” of each variable. Uniqueness is the proportion of variance that is ‘unique’ to the variable and not explained by the factors\FOOTNOTE{Sometimes reported in factor analysis is “communality” which is the amount of variance in a variable that is accounted for by the factor solution. Uniqueness is equal to ($1-communality$)}. For example, 72\% of the variance in ‘A1’ is not explained by the factors in the five factor solution. In contrast, ‘N1’ has relatively low variance not accounted for by the factor solution (35\%). Note that the greater the ‘uniqueness’, the lower the relevance or contribution of the variable in the factor model. 
 
 To be honest, it’s unusual to get such a neat solution in EFA. It’s typically quite a bit more messy than this, and often interpreting the meaning of the factors is more challenging. It’s not often that you have such a clearly delineated item pool. More often you will have a whole heap of observed variables that you think may be indicators of a few underlying latent factors, but you don’t have such a strong sense of which variables are going to go where!
 
@@ -184,7 +184,7 @@ So, we seem to have a pretty good five factor solution, albeit accounting for a 
 \end{center}
 \end{figure}
 
-Another option is to create an optimally-weighted factor score index. We can use the jamovi \rtext{Rj} editor to do this in \rtext{R}. Again, there are two steps:
+Another option is to create an optimally-weighted factor score index. We can use the jamovi \rtext{Rj} editor to do this in \rtext{R}\FOOTNOTE{In the latest versions of jamovi you can now save factor scores directly from within jamovi - it's an option. But I've left this explanation in as it's a good insight into using R directly from jamovi}. Again, there are two steps:
 
 \begin{enumerate} \itemsep -2pt
 \item Use the \rtext{Rj} editor to run the EFA in \rtext{R} to the same specification as the one in jamovi (i.e. five factors and oblimin rotation) and compute optimally weighted factor scores. Save the new dataset, with the factor scores, to a file. See Figure \ref{fig:fa10}.
@@ -319,11 +319,11 @@ Figure \ref{fig:pca5} shows the component loadings. That's is, how the 25 differ
 
 For components 1, 2, 3 and 4 the pattern of component loadings closely matches the putative factors specified in Figure \ref{fig:fa2}. And component 5 is pretty close, with four of the five observed variables that putatively measure “openness” loading pretty well onto the component. Variable \rtext{04} doesn’t quite seem to fit though, as the component solution in Figure \ref{fig:pca5} suggests that it loads onto component 4 (albeit with a relatively low loading) but not substantively onto component 5.
 
-We can also see in Figure \ref{fig:pca5} the “uniqueness” of each variable. Uniqueness is the proportion of variance that is ‘unique’ to the variable and not explained by the components. For example, 58\% of the variance in ‘A1’ is not explained by the components in the five component solution. In contrast, ‘N1’ has relatively low variance not accounted for by the component solution (30\%). Note that the greater the ‘uniqueness’, the lower the relevance or contribution of the variable in the component model. 
+We can also see in Figure \ref{fig:pca5} the “uniqueness” of each variable. Uniqueness is the proportion of variance that is ‘unique’ to the variable and not explained by the components. For example, 52\% of the variance in ‘A1’ is not explained by the components in the five component solution. In contrast, ‘N1’ has relatively low variance not accounted for by the component solution (30\%). Note that the greater the ‘uniqueness’, the lower the relevance or contribution of the variable in the component model. 
 
 Hopefully, this has given you a good first idea about how to undertake PCA in jamovi, and how it is conceptually different but practically fairly similar (given the right data) to EFA.
 
-You can go on to create component scores in much the same way as in EFA. However, if you take the option to create an optimally-weighted component score index then the commands and syntax in the jamovi \rtext{Rj} editor are a little different. See Figure \ref{fig:pca6}. 
+You can go on to create and save component scores in much the same way as in EFA. However, if you take the option to create an optimally-weighted component score index then the commands and syntax in the jamovi \rtext{Rj} editor are a little different. See Figure \ref{fig:pca6}. 
 
 \begin{figure}[!htb]
 \begin{center}
@@ -668,7 +668,7 @@ We have a third sample of personality data to use to undertake reliability analy
 \end{itemize}
 
 
-Once done, look across at the jamovi results window. You should see something like Figure \ref{fig:rel2}. This tells us that the Chronbach’s alpha coefficient for the Agreeableness scale is 0.70. This means that just under 30\% of the Agreeableness scale score is error variance. McDonald’s omega is also given, and this is 0.72, not much different from alpha.
+Once done, look across at the jamovi results window. You should see something like Figure \ref{fig:rel2}. This tells us that the Chronbach’s alpha coefficient for the Agreeableness scale is 0.72. This means that just under 30\% of the Agreeableness scale score is error variance. McDonald’s omega is also given, and this is 0.74, not much different from alpha.
 
 We can also check how alpha or omega can be improved if a specific item is dropped from the scale. For example, alpha would increase to 0.72 and omega to 0.74 if we dropped item A1. This isn’t a big increase, so probably not worth doing. 
 
@@ -681,7 +681,7 @@ We can also check how alpha or omega can be improved if a specific item is dropp
 \end{center}
 \end{figure}
 
-The process of calculating and checking scale statistics (alpha and omega) is the same for all the other scales (not shown): Conscientiousness (alpha = 0.73, omega = 0.74 ), Extraversion (alpha = 0.76, omega = 0.76), Neuroticism (alpha = 0.81, omega = 0.82) and Openness (alpha = 0.60, omega = 0.62).  For Openness then, the amount of error variance in the Scale score is 40\%, which is high and indicates that Openness is substantially less consistent as a reliable measure of a personality attribute than the other personality scales. 
+The process of calculating and checking scale statistics (alpha and omega) is the same for all the other scales, and they all had similar reliability estimates apart from Openness. For Openness, the amount of error variance in the Scale score is around 40\%, which is high and indicates that Openness is substantially less consistent as a reliable measure of a personality attribute than the other personality scales. 
 
 
 \section{Summary}

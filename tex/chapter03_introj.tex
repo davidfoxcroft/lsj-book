@@ -65,7 +65,7 @@ In jamovi data is represented in a spreadsheet with each column representing a �
 
 \SUBSECTION{Variables}
 
-The most commonly used variables in jamovi are ‘Data Variables’, these variables simply contain data either loaded from a data file, or ‘typed in’ by the user. Data variables can be one of three measurement levels:
+The most commonly used variables in jamovi are ‘Data Variables’, these variables simply contain data either loaded from a data file, or ‘typed in’ by the user. Data variables can be one of several measurement levels:
 
 \begin{figure}[ht]
 \epsfig{file=../img/introj/measurementlevels.png, width = 12cm}
@@ -108,7 +108,7 @@ In order, these are the sum of A and B, a log (base 10) transform of len, the me
 \vspace*{1cm}
 \begin{figure}[ht]
 \begin{center}
-\epsfig{file=../img/introj/computedvariable.png,clip=true,width=14cm}
+\includegraphics[clip=true,width=14cm]{../img/introj/computedvariable.png}
 \caption{A newly computed variable, the z-score of `dose'.}
 \HR
 \label{fig:computedvariable}
@@ -188,7 +188,7 @@ The first thing I should point out is that if your data are saved as a text file
 \item \rtext{sep}. As the name ``comma separated value'' indicates, the values in a row of a csv file are usually separated by commas. This isn't universal, however. In Europe the decimal point is typically written as \rtext{,} instead of \rtext{.} and as a consequence it would be somewhat awkward to use \rtext{,} as the separator. Therefore it is not unusual to use \rtext{;} instead of \rtext{,} as the separator. At other times, I've seen a TAB character used. 
 \item \rtext{quote}. It's conventional in csv files to include a quoting character for textual data. As you can see by looking at the \filename{booksales.csv} file, this is usually a double quote character, \rtext{"}. But sometimes there is no quoting character at all, or you might see a single quote mark \rtext{'} used instead. 
 \item \rtext{skip}. It's actually very common to receive CSV files in which the first few rows have nothing to do with the actual data. Instead, they provide a human readable summary of where the data came from, or maybe they include some technical info that doesn't relate to the data. 
-\item \rtext{missing values}. Often you'll get given data with missing values. For one reason or another, some entries in the table are missing. The data file needs to include a ``special'' value to indicate that the entry is missing. By default jamovi assumes that this value is \rtext{99}\FOOTNOTE{You can change the default value for missing values in jamovi from the top right menu (three vertical dots), but this only works at the time of importing data files into jamovi. The default missing value in the dataset should not be a valid number associated with any of the variables, e.g. you could use \rtext{-9999} as this is unlikely to be a valid value.}, for both numeric and text data, so you should make sure that, where necessary, all missing values in the csv file are replaced with \rtext{99} (or \rtext{-9999}; whichever you choose) before opening / importing the file into jamovi. Once you have opened / imported the file into jamovi all the missing values are converted to blank cells in the jamovi spreadsheet view.
+\item \rtext{missing values}. Often you'll get given data with missing values. For one reason or another, some entries in the table are missing. The data file needs to include a ``special'' value to indicate that the entry is missing. By default jamovi assumes that this value is \rtext{NA}\FOOTNOTE{You can change the default value for missing values in jamovi from the top right menu (three vertical dots), but this only works at the time of importing data files into jamovi. The default missing value in the dataset should not be a valid number or value associated with any of the variables, e.g. you could use \rtext{-9999} as this is unlikely to be a valid value.}, for both numeric and text data, so you should make sure that, where necessary, all missing values in the csv file are replaced with \rtext{99} (or \rtext{-9999}; whichever you choose) before opening / importing the file into jamovi. Once you have opened / imported the file into jamovi all the missing values are converted to blank or greyed out cells in the jamovi spreadsheet view. You can also change the missing value for each variable as an option in the Data - Setup view. 
 \end{itemize}
 
 \SUBSECTION{Loading data from SPSS (and other statistics packages)}

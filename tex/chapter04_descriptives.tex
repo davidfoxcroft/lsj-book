@@ -4,13 +4,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Descriptive statistics\label{ch:descriptives}}
 
-Any time that you get a new data set to look at one of the first tasks that you have to do is find ways of summarising the data in a compact, easily understood fashion. This is what \keyterm{descriptive statistics} (as opposed to inferential statistics) is all about. In fact, to many people the term ``statistics'' is synonymous with descriptive statistics. It is this topic that we'll consider in this chapter, but before going into any details, let's take a moment to get a sense of why we need descriptive statistics. To do this, let's open the \filename{aflsmall\_margins} file and see what variables are stored in the file.
+Any time that you get a new data set to look at one of the first tasks that you have to do is find ways of summarising the data in a compact, easily understood fashion. This is what \keyterm{descriptive statistics} (as opposed to inferential statistics) is all about. In fact, to many people the term ``statistics'' is synonymous with descriptive statistics. It is this topic that we'll consider in this chapter, but before going into any details, let's take a moment to get a sense of why we need descriptive statistics. To do this, let's open the \filename{aflsmall\_margins} file and see what variables are stored in the file (Figure~\ref{fig:aflsmall}).
 
 \vspace{0.5cm}
 \begin{figure}[htb]
 \begin{center}
-\epsfig{file=../img/descriptives/aflsmall_margins.png,clip=true,width=14cm} 
-\caption{A screenshot of jamovi showing the variables stored in the \filename{aflsmall\_margins.csv} file}
+\epsfig{file=../img/descriptives/aflsmall_margins.png,clip=true,width=14cm}
+\caption{A screenshot of jamovi showing the variables stored in the \filename{aflsmall\_margins.csv} file} 
 \label{fig:aflsmall}
 \HR
 \end{center}
@@ -80,7 +80,7 @@ Okay, that's the maths. So how do we get the magic computing box to do the work 
 \vspace{0.5cm}
 \begin{figure}[ht]
 \begin{center}
-\epsfig{file=../img/descriptives/descriptives_default.png,clip=true,width=12cm} 
+\epsfig{file=../img/descriptives/descriptives_default.png,clip=true,width=14cm} 
 \caption{Default descriptives for the AFL 2010 winning margin data (the \rtext{afl.margins} variable). }
 \label{fig:descriptives_default}
 \HR
@@ -109,6 +109,7 @@ Knowing how to calculate means and medians is only a part of the story. You also
 \item If your data are ordinal scale you're more likely to want to use the median than the mean. The median only makes use of the order information in your data (i.e., which numbers are bigger) but doesn't depend on the precise numbers involved. That's exactly the situation that applies when your data are ordinal scale. The mean, on the other hand, makes use of the precise numeric values assigned to the observations, so it's not really appropriate for ordinal data.
 \item For interval and ratio scale data either one is generally acceptable. Which one you pick depends a bit on what you're trying to achieve. The mean has the advantage that it uses all the information in the data (which is useful when you don't have a lot of data). But it's very sensitive to extreme, outlying  values.  
 \end{itemize}
+
 
 \vspace{0.5cm}
 \begin{figure}[htb]
@@ -164,24 +165,24 @@ The mode of a sample is very simple. It is the value that occurs most frequently
 %\vspace{0.5cm}
 \begin{figure}[!!htp]
 \begin{center}
-\epsfig{file=../img/descriptives/aflsmall_finalists.png,clip=true,width=11cm} 
+\epsfig{file=../img/descriptives/aflsmall_finalists.png,clip=true,width=11.5cm} 
 \caption{A screenshot of jamovi showing the variables stored in the \filename{aflsmall\_finalists.csv} file}
 \label{fig:aflsmall_finalists}
 \HR
 \end{center}
 \end{figure}
 
-What we {\it could} do is read through all 400 entries and count the number of occasions on which each team name appears in our list of finalists, thereby producing a \keyterm{frequency table}. However, that would be mindless and boring: exactly the sort of task that computers are great at. So let's use jamovi to do this for us. Under `Exploration' - `Descriptives' click the small check box labelled `Frequency tables' and you should get something like Figure \ref{fig:aflsmall_finalists_mode}. 
-
 %\vspace{0.5cm}
 \begin{figure}[!!htp]
 \begin{center}
-\epsfig{file=../img/descriptives/aflsmall_finalists_mode.png,clip=true,width=12cm} 
+\epsfig{file=../img/descriptives/aflsmall_finalists_mode.png,clip=true,width=11.5cm} 
 \caption{A screenshot of jamovi showing the frequency table for the \rtext{afl.finalists} variable }
 \label{fig:aflsmall_finalists_mode}
 \HR
 \end{center}
 \end{figure}
+
+What we {\it could} do is read through all 400 entries and count the number of occasions on which each team name appears in our list of finalists, thereby producing a \keyterm{frequency table}. However, that would be mindless and boring: exactly the sort of task that computers are great at. So let's use jamovi to do this for us. Under `Exploration' - `Descriptives' click the small check box labelled `Frequency tables' and you should get something like Figure \ref{fig:aflsmall_finalists_mode}. 
 
 Now that we have our frequency table we can just look at it and see that, over the 24 years for which we have data, Geelong has played in more finals than any other team. Thus, the mode of the \rtext{afl.finalists} data is \rtext{"Geelong"}. We can see that Geelong (39 finals) played in more finals than any other team during the 1987-2010 period. It's also worth noting that in the `Descriptives' Table no results are calculated for Mean, Median, Minimum or Maximum. This is because the \rtext{afl.finalists} variable is a nominal text variable so it makes no sense to calculate these values.
 
