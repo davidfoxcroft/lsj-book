@@ -209,7 +209,7 @@ Another option is to create an optimally-weighted factor score index. We can use
 \end{center}
 \end{figure}
 
-Now you can go ahead and undertake further analyses, using either the factor-based scores (a mean scale score approach) or using the optimally-weighted factor scores calculated via the \rtext{Rj} editor. Your choice! For example, one thing you might like to do is see whether there are any gender differences in each of our personality scales. We did this for the Agreeableness score that we calculated using the factor-based score approach, and although the plot (Figure \ref{fig:fa12}) showed that males were less agreeable than females, this was not a significant difference (Man-Whitney $U=5760.5, p=.073$).
+Now you can go ahead and undertake further analyses, using either the factor-based scores (a mean scale score approach) or using the optimally-weighted factor scores calculated via the \rtext{Rj} editor. Your choice! For example, one thing you might like to do is see whether there are any gender differences in each of our personality scales. We did this for the Agreeableness score that we calculated using the factor-based score approach, and although the plot (Figure \ref{fig:fa12}) showed that males were less agreeable than females, this was not a significant difference (Mann-Whitney $U=5760.5, p=.073$).
 
 \begin{figure}[!htb]
 \begin{center}
@@ -639,13 +639,13 @@ A popular statistic used to check the internal consistency of a scale is \keyter
 
 BUT, (and that’s a BIG “BUT”), Cronbach’s alpha is not a measure of unidimensionality (i.e. an indicator that a scale is measuring a single factor or construct rather than multiple related constructs). Scales that are multidimensional will cause alpha to be under-estimated if not assessed separately for each dimension, but high values for alpha are not necessarily indicators of unidimensionality. So, an alpha of 0.80 does not mean that 80\% of a single underlying construct is accounted for. It could be that the 80\% comes from more than one underlying construct. That’s why EFA and CFA are useful to do first.
 
-Further, another feature of alpha is that it tends to be sample specific: it is not a characteristic of the scale, but rather a characteristic of the sample in which the scale has been used. A biased, unrepresentative, or small sample could produce a very different alpha coefficient than a large, representative sample. Alpha can even vary from large sample to large sample. Nevertheless, despite these limitations, Chronbach’s alpha has been popular in Psychology for estimating internal consistency reliability. It’s pretty easy to calculate, understand and interpret, and therefore it can be a useful initial check on scale performance when you administer a scale with a different sample, from a different setting or population, for example. 
+Further, another feature of alpha is that it tends to be sample specific: it is not a characteristic of the scale, but rather a characteristic of the sample in which the scale has been used. A biased, unrepresentative, or small sample could produce a very different alpha coefficient than a large, representative sample. Alpha can even vary from large sample to large sample. Nevertheless, despite these limitations, Cronbach’s alpha has been popular in Psychology for estimating internal consistency reliability. It’s pretty easy to calculate, understand and interpret, and therefore it can be a useful initial check on scale performance when you administer a scale with a different sample, from a different setting or population, for example. 
 
 An alternative is \keyterm{McDonald’s omega} ($\omega$), and jamovi also provides this statistic. Whereas alpha makes the following assumptions: (a) no residual correlations, (b) items have identical loadings, and (c) the scale is unidimensional, omega does not and is therefore a more robust reliability statistic. If these assumptions are not violated then alpha and omega will be similar, but if they are then omega is to be preferred. 
 
 Sometimes a threshold for alpha or omega is provided, suggesting a “good enough” value. This might be something like alphas of 0.70 or 0.80 representing “acceptable” and “good” reliability, respectively. However, this does depend on what exactly the scale is supposed to be measuring, so thresholds like this should be used cautiously. It could be better to simply state that an alpha or omega of 0.70 is associated with 30\% error variance in a scale, and an alpha or omega of 0.80 is associated with 20\%.
 
-Can alpha be too high? Probably: if you are getting an alpha coefficient above 0.95 then this indicates high inter-correlations between the items and that there might be too much overly-redundant specificity in the measurement, with a risk that the construct being measured in perhaps overly narrow. 
+Can alpha be too high? Probably: if you are getting an alpha coefficient above 0.95 then this indicates high inter-correlations between the items and that there might be too much overly-redundant specificity in the measurement, with a risk that the construct being measured is perhaps overly narrow. 
 
 \SUBSECTION{Reliability analysis in jamovi}
 
@@ -668,7 +668,7 @@ We have a third sample of personality data to use to undertake reliability analy
 \end{itemize}
 
 
-Once done, look across at the jamovi results window. You should see something like Figure \ref{fig:rel2}. This tells us that the Chronbach’s alpha coefficient for the Agreeableness scale is 0.72. This means that just under 30\% of the Agreeableness scale score is error variance. McDonald’s omega is also given, and this is 0.74, not much different from alpha.
+Once done, look across at the jamovi results window. You should see something like Figure \ref{fig:rel2}. This tells us that the Cronbach’s alpha coefficient for the Agreeableness scale is 0.72. This means that just under 30\% of the Agreeableness scale score is error variance. McDonald’s omega is also given, and this is 0.74, not much different from alpha.
 
 We can also check how alpha or omega can be improved if a specific item is dropped from the scale. For example, alpha would increase to 0.72 and omega to 0.74 if we dropped item A1. This isn’t a big increase, so probably not worth doing. 
 
