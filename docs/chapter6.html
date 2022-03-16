@@ -24,11 +24,11 @@ out for its convenience. Maybe a few more tractors would do the trick.
 <p>
 This is a somewhat strange chapter, even by my standards. My goal in this chapter is to
 talk a bit more honestly about the realities of working with data than you’ll see anywhere else
-in the book. The problem with real world data sets is that they are messy. Very often the
+in the book. The problem with real world data sets is that they are <i>messy</i>. Very often the
 data file that you start out with doesn’t have the variables stored in the right format for the
 analysis you want to do. Sometimes there might be a lot of missing values in your data set.
 Sometimes you only want to analyse a subset of the data. Et cetera. In other words, there’s a
-lot of data manipulation that you need to do just to get the variables in your data set into
+lot of <font color="blueviolet"><b>data manipulation</b></font> that you need to do just to get the variables in your data set into
 the format that you need it. The purpose of this chapter is to provide a basic introduction to
 these pragmatic topics. Although the chapter is motivated by the kinds of practical issues that
 arise when manipulating real data, I’ll stick with the practice that I’ve adopted through most
@@ -40,19 +40,29 @@ may be useful to start with a list of topics:
 
 <ul>
 <li>
-Section 6.1. Tabulating data.
+<p>
+Section <font color="blue"><b>6.1</b></font>. Tabulating data.
+</p>
 </li>
 <li>
-Section 6.2. Using logical expressions.
+<p>
+Section <font color="blue"><b>6.2</b></font>. Using logical expressions.
+</p>
 </li>
 <li>
-Section 6.3. Transforming or recoding a variable.
+<p>
+Section <font color="blue"><b>6.3</b></font>. Transforming or recoding a variable.
+</p>
 </li>
 <li>
-Section 6.4. Some useful mathematical functions.
+<p>
+Section <font color="blue"><b>6.4</b></font>. Some useful mathematical functions.
+</p>
 </li>
 <li>
-Section 6.5. Extracting a subset of a data set.
+<p>
+Section <font color="blue"><b>6.5</b></font>. Extracting a subset of a data set.
+</p>
 </li>
 </ul>
 
@@ -85,7 +95,7 @@ you how in this section.
 
 <p>
 Let’s start with a simple example. As the father of a small child I naturally spend a lot of time
-watching TV shows like In the Night Garden. In the nightgarden.csv file, I’ve transcribed a
+watching TV shows like In the <i>Night Garden</i>. In the nightgarden.csv file, I’ve transcribed a
 short section of the dialogue. The file contains two variables of interest, speaker and utterance.
 Open up this data set in jamovi and take a look at the data in the ‘spreadsheet’ view. You will
 see that the data looks something like this:
@@ -103,7 +113,7 @@ pip pip onk onk ee oo pip pip onk onk </br>
 Looking at this it becomes very clear what happened to my sanity! With these as my data, one
 task I might find myself needing to do is construct a frequency count of the number of words
 each character speaks during the show. The jamovi ‘Descriptives’ screen has a check box called
-‘Frequency tables’ which does just this, see Figure 6.1.
+‘Frequency tables’ which does just this, see Figure <font color="blue"><b>6.1</b></font>.
 </p>
 
 <table width="50%" border="1" ><caption>Figure 6.1: Frequency table for the speaker variable</caption>
@@ -143,12 +153,12 @@ other words, it’s a frequency table.
 
 <p>
 In jamovi, the ‘Frequency tables’ check box will only produce a table for single variables.
-For a table of two variables, for example combining speaker and utterance so that we can
+For a table of two variables, for example combining <font color="blue">speaker</font> and <font color="blue">utterance</font> so that we can
 see how many times each speaker said a particular utterance, we need a cross-tabulation or
 contingency table. In jamovi you can do this by selecting the ‘Frequencies’ - ‘Contingency
-Tables’ - ‘Independent Samples’ analysis, and moving the speaker variable into the ‘Rows’ box,
-and the utterances variable into the ‘Columns’ box. You then should have a contingency table
-like the one shown in Figure 6.2.
+Tables’ - ‘Independent Samples’ analysis, and moving the <font color="blue">speaker</font> variable into the ‘Rows’ box,
+and the <font color="blue">utterances</font> variable into the ‘Columns’ box. You then should have a contingency table
+like the one shown in Figure <font color="blue"><b>6.2</b></font>.
 </p>
 
 
@@ -159,8 +169,8 @@ like the one shown in Figure 6.2.
 </figure>
 
 <p>
-Don’t worry about the “χ2 Tests” table that is produced. We are going to cover this later
-on in chapter 10. When interpreting the contingency table remember that these are counts, so
+Don’t worry about the “\(\chi^2\) Tests” table that is produced. We are going to cover this later
+on in chapter <font color="blue"><b>10</b></font>. When interpreting the contingency table remember that these are counts, so
 the fact that the first row and second column of numbers corresponds to a value of 2 indicates
 that Makka-Pakka (row 1) says “onk” (column 2) twice in this data set.
 </p>
@@ -174,12 +184,12 @@ that Makka-Pakka (row 1) says “onk” (column 2) twice in this data set.
 
 
 <p>
-The contingency table shown in Figure 6.2 shows a table of raw frequencies. That is, a
+The contingency table shown in Figure <font color="blue"><b>6.2</b></font> shows a table of raw frequencies. That is, a
 count of the total number of cases for different combinations of levels of the specified variables.
 However, often you want your data to be organised in terms of percentages as well as counts. You
 can find the check boxes for different percentages under the ‘Cells’ option in the ‘Contingency
 Tables’ window. First, click on the ‘Row’ check box and the Contingency Table in the output
-window will change to the one in Figure 6.3.
+window will change to the one in Figure <font color="blue"><b>6.3</b></font>.
 </p>
 
 
@@ -199,7 +209,7 @@ window will change to the one in Figure 6.3.
 What we’re looking at here is the percentage of utterances made by each character. In other
 words, 50% of Makka-Pakka’s utterances are “pip”, and the other 50% are “onk”. Let’s contrast
 this with the table we get when we calculate column percentages (uncheck ‘Row’ and check
-‘Column’ in the Cells options window), see Figure 6.4. In this version, what we’re seeing is the
+‘Column’ in the Cells options window), see Figure <font color="blue"><b>6.4</b></font>. In this version, what we’re seeing is the
 percentage of characters associated with each utterance. For instance, whenever the utterance
 “ee” is made (in this data set), 100% of the time it’s a Tombliboo saying it.
 </p>
@@ -209,11 +219,12 @@ percentage of characters associated with each utterance. For instance, whenever 
 </h2>
 
 <p>
-A key concept that a lot of data transformations in jamovi rely on is the idea of a logical value.
+A key concept that a lot of data transformations in jamovi rely on is the idea of a <font color="blueviolet"><b>logical value</b></font>.
 A logical value is an assertion about whether something is true or false. This is implemented in
-jamovi in a pretty straightforward way. There are two logical values, namely TRUE and FALSE.
+jamovi in a pretty straightforward way. There are two logical values, namely <font color="blue">TRUE</font> and <font color="blue">FALSE</font>.
 Despite the simplicity, logical values are very useful things. Let’s see how they work.
 </p>
+
 
 <h3>
 6.2.1	Assessing mathematical truths
@@ -238,31 +249,31 @@ command like this: 2 + 2 == 4
 </p>
 
 <p>
-What I’ve done here is use the equality operator, ==, to force jamovi to make a “true or
+What I’ve done here is use the <font color="blueviolet"><b>equality operator</b></font>, ==, to force jamovi to make a “true or
 false” judgement.<a href="#note4">[4]</a> Okay, let’s see what jamovi thinks of the Party slogan, so type this into the
 compute new variable ‘formula’ box:
 </p>
 
-2 + 2 == 5
+$$2 + 2 == 5$$
 
 
 <p>
 And what do you get? It should be a whole set of ‘false’ values in the spreadsheet column for
 your newly computed variable. Booyah! Freedom and ponies for all! Or something like that.
 Anyway, it was worth having a look at what happens if I try to force jamovi to believe that
-two plus two is five by making a statement like 2 + 2 = 5. I know that if I do this in another
+two plus two is five by making a statement like \(2 + 2 = 5\). I know that if I do this in another
 program, say R, then it throws up an error message. But wait, if you do this in jamovi you get a
 whole set of ‘false’ values. So what is going on? Well, it seems that jamovi is being pretty smart
-and realises that you are testing whether it is TRUE or FALSE that 2 + 2 = 5, regardless of
-whether you use the correct equality operator, ==, or the equals sign “=”.
+and realises that you are testing whether it is TRUE or FALSE that \(2 + 2 = 5\), regardless of
+whether you use the correct <font color="blueviolet"><b>equality operator</b></font>, ==, or the equals sign “=”.
 </p>
 
 <p>
 Anyway, it was worth having a look at what happens if I try to force jamovi to believe that
-two plus two is five by making a statement like 2 + 2 = 5. I know that if I do this in another
+two plus two is five by making a statement like \(2 + 2 = 5\). I know that if I do this in another
 program, say R, then it throws up an error message. But wait, if you do this in jamovi you get a
 whole set of ‘false’ values. So what is going on? Well, it seems that jamovi is being pretty smart
-and realises that you are testing whether it is TRUE or FALSE that 2 + 2 = 5, regardless of
+and realises that you are testing whether it is TRUE or FALSE that \(2 + 2 = 5\), regardless of
 whether you use the correct equality operator, ==, or the equals sign “=”.
 </p>
 
@@ -291,38 +302,39 @@ SQRT(25) == 5
 <p>
 Not only that, but as Table 6.1 illustrates, there are several other logical operators that you
 can use corresponding to some basic mathematical concepts. Hopefully these are all pretty selfexplanatory. For example, 
-the less than operator &lt; checks to see if the number on the left is
+the <font color="blueviolet"><b>less than</b></font> operator &lt; checks to see if the number on the left is
 less than the number on the right. If it’s less, then jamovi returns an answer of TRUE, but if the
 two numbers are equal, or if the one on the right is larger, then jamovi returns an answer of
 FALSE.
 </p>
 
 <p>
-In contrast, the less than or equal to operator &lt; = will do exactly what it says. It returns
+In contrast, the <font color="blueviolet"><b>less than or equal to</b></font> operator &lt; = will do exactly what it says. It returns
 a value of TRUE if the number of the left hand side is less than or equal to the number on the
-right hand side. At this point I hope it’s pretty obvious what the greater than operator &lt; and
-the greater than or equal to operator &lt; = do!
+right hand side. At this point I hope it’s pretty obvious what the <font color="blueviolet"><b>greater than</b></font> operator &lt; and
+the <font color="blueviolet"><b>greater than or equal to</b></font> operator &lt; = do!
 </p>
 
 
 <p>
-Next on the list of logical operators is the not equal to operator != which, as with all the
+Next on the list of logical operators is the  <font color="blueviolet"><b>not equal to</b></font> operator != which, as with all the
 others, does what it says it does. It returns a value of TRUE when things on either side are not
 identical to each other. Therefore, since 2 + 2 isn’t equal to 5, we would get ‘true’ as the value
 for our newly computed variable. Try it and see:
 </p>
 
 </ br>
-2 + 2 != 5
+$$2 + 2 \neq 5$$
 
 </ br>
 
 <p>
 We’re not quite done yet. There are three more logical operations that are worth knowing
-about, listed in Table 6.2. These are the not operator !, the and operator and, and the or
+about, listed in Table 6.2. These are the <font color="blueviolet"><b>not</b></font> operator !,
+ the <font color="blueviolet"><b>and</b></font> operator and, and the <font color="blueviolet"><b>or</b></font>
 operator or. Like the other logical operators, their behaviour is more or less exactly what you’d
-expect given their names. For instance, if I ask you to assess the claim that “either 2 + 2 = 4
-or 2 + 2 = 5” you’d say that it’s true. Since it’s an “either-or” statement, all we need is for one
+expect given their names. For instance, if I ask you to assess the claim that “either \(2 + 2 = 4\)
+or \(2 + 2 = 5\)” you’d say that it’s true. Since it’s an “either-or” statement, all we need is for one
 of the two parts to be true. That’s what the or operator does:<a href="#note5">[5]</a>
 </p>
 
@@ -405,26 +417,26 @@ operators”, but quite frankly I don’t want to. It’s my book so no-one can 
 
 </br>
 
-(2+2 == 4) or (2+2 == 5)
+$$(2+2 == 4) or (2+2 == 5)$$
 
 </br>
 
 <p>
-On the other hand, if I ask you to assess the claim that “both 2 ` 2 “ 4 and 2 ` 2 “ 5” you’d
+On the other hand, if I ask you to assess the claim that “both \(2 + 2 = 4\) and \(2 + 2 = 5\)” you’d
 say that it’s false. Since this is an and statement we need both parts to be true. And that’s
 what the and operator does:
 </p>
 
 </br>
 
-(2+2 == 4) and (2+2 == 5)
+$$(2+2 == 4) and (2+2 == 5)$$
 
 </br>
 
 <p>
 Finally, there’s the not operator, which is simple but annoying to describe in English. If I ask
-you to assess my claim that “it is not true that 2 ` 2 “ 5” then you would say that my claim is
-true, because actually my claim is that “2 ` 2 “ 5 is false”. And I’m right. If we write this in
+you to assess my claim that “it is not true that \(2 + 2 = 5\)” then you would say that my claim is
+true, because actually my claim is that “\(2 + 2 = 5\) is false”. And I’m right. If we write this in
 jamovi we use this:
 </p>
 
@@ -432,10 +444,10 @@ jamovi we use this:
 </br>
 
 
-NOT(2+2 == 5)
+$$NOT(2+2 == 5)$$
 
 <p>
-In other words, since 2+2 == 5 is a FALSE statement, it must be the case that NOT(2+2 == 5) is
+In other words, since \(2+2 == 5\) is a FALSE statement, it must be the case that \(NOT(2+2 == 5)\) is
 a TRUE one. Essentially, what we’ve really done is claim that “not false” is the same thing as
 “true”. Obviously, this isn’t really quite right in real life. But jamovi lives in a much more black
 or white world. For jamovi everything is either true or false. No shades of grey are allowed.
@@ -443,13 +455,13 @@ or white world. For jamovi everything is either true or false. No shades of grey
 
 
 <p>
-Of course, in our 2 + 2 = 5 example, we didn’t really need to use the “not” operator NOT and
+Of course, in our \(2 + 2 = 5\) example, we didn’t really need to use the “not” operator NOT and
 the “equals to” operator == as two separate operators. We could have just used the “not equals
 to” operator != like this:
 </p>
 
 
-2+2 != 5
+$$2+2 \neq 5$$
 
 
 <h3>
@@ -665,7 +677,8 @@ variable). In this section I’ll describe a few key ways you can do these thing
 </h3>
 
 <p>
-The first trick to discuss is the idea of transforming a variable. Taken literally, anything you
+The first trick to discuss is the idea of <font color="blueviolet"><b>transforming</b></font> a variable. 
+Taken literally, anything you
 do to a variable is a transformation, but in practice what it usually means is that you apply a
 relatively simple mathematical function to the original variable in order to create a new variable
 that either (a) provides a better way of describing the thing you’re actually interested in, or
@@ -716,16 +729,16 @@ opinion.strength variable, we want to take the absolute value of the centred dat
 In jamovi, create another new variable using the ‘Compute’ button. Name the
 variable opinion.strength and this time click on the fx button next to the ‘Formula’ box. This
 shows the different ‘Functions’ and ‘Variables’ that you can add to the ‘Formula’ box, so double
-click on ‘ABS’ and then double click on “likert.centred’ and you will see that the ‘Formula’ box
+click on ‘ABS’ and then double click on “<font color="blue">likert.centred</font>’ and you will see that the ‘Formula’ box
 is populated with ABS(likert.centred) and a new variable has been created in the spreadsheet
-view, as in Figure 6.6
+view, as in Figure <font color="blue">6.6</font>
 </p>
 
 
 <p>
 Second, to compute a variable that contains only the direction of the opinion and ignores the
 strength, we want to calculate the ‘sign’ of the variable. In jamovi we can use the IF function to
-do this. Create another new variable using the ‘Compute’ button, name this one opinion.sign,
+do this. Create another new variable using the ‘Compute’ button, name this one <font color="blue">opinion.sign</font>,
 and then type the following into the function box:
 </p>
 
@@ -746,14 +759,15 @@ or mathematical statement. In our example, we have specified ‘likert.centred =
 TRUE for values where likert.centred is zero. The next part, ‘value’, is the new value where the
 expression in part one is TRUE. In our example, we have said that for all those values where
 likert.centred is zero, keep them zero. In the next part, ‘else’, we can enter another logical or
-mathematical statement to be used if part one evaluates to FALSE, i.e. where likert.centred
+mathematical statement to be used if part one evaluates to FALSE, i.e. where <font color="blue">likert.centred</font>
 is not zero. In our example we have divided likert.centred by opinion.strength to give ‘-1’ or
 ‘+1’ depending of the sign of the original value in likert.centred.<a href="#note7">[7]</a>
 </p>
 
 
 <p>
-And we’re done. We now have three shiny new variables, all of which are useful transformations of the original likert.raw data.
+And we’re done. We now have three shiny new variables, all of which are useful 
+transformations of the original <font color="blue">likert.raw</font> data.
 </p>
 
 <h3>
@@ -835,18 +849,18 @@ with raw Likert-scale responses for 10 people. To create a transformation that y
 then apply across multiple variables (assuming you had more variables like this in your data
 file), first in the spreadsheet editor select (i.e., click) the variable you want to use to initially
 create the transformation. In our example this is likert.raw. Next click the ‘Transform’ button
-in the jamovi ‘Data’ ribbon, and you’ll see something like Figure 6.8.
+in the jamovi ‘Data’ ribbon, and you’ll see something like Figure <font color="blue"><b>6.8</b></font>.
 </p>
 
 <p>
-Give your new variable a name, let’s call it opinion.strength and then click on the ‘using
+Give your new variable a name, let’s call it <font color="blue">opinion.strength</font> and then click on the ‘using
 transform’ selection box and select ‘Create New Transform...’. This is where you will create,
 and name, the transformation that can be re-applied to as many variables as you like. The
 transformation is automatically named for us as ‘Transform 1’ (imaginative, huh. You can
-change this if you like). Then type the expression “ABS($source - 4)” into the function text
-box, as in Figure 6.9, press Enter or Return on your keyboard and, hey presto, you have created
+change this if you like). Then type the expression “<font color="blue">ABS($source - 4)</font>” into the function text
+box, as in Figure <font color="blue"><b>6.9</b></font>, press Enter or Return on your keyboard and, hey presto, you have created
 a new transformation and applied it to the likert.raw variable! Good, eh. Note that instead of
-using the variable label in the expression, we have instead used ‘$source’. This is so that we can
+using the variable label in the expression, we have instead used ‘<font color="blue">$source</font>’. This is so that we can
 then use the same transformation with as many different variables as we like - jamovi requires
 you to use ‘$source’ to refer to the source variable you are transforming. Your transformation
 has also been saved and can be re-used any time you like (providing you save the dataset as an
@@ -854,14 +868,16 @@ has also been saved and can be re-used any time you like (providing you save the
 </p>
 
 <p>
-You can also create a transformation with the second example we looked at, the age distribution of people at a social gathering. Go on, you know you want to! Remember that we
+You can also create a transformation with the second example we looked at, the age distribution 
+of people at a social gathering. Go on, you know you want to! Remember that we
 collapsed this variable into three groups: younger, adult and older. This time we will achieve
 the same thing, but using the jamovi ‘Transform’ - ‘Add condition’ button. With this data set
 (go back to it or create it again if you didn’t save it) set up a new variable transformation. Call
 the transformed variable AgeCats and the transformation you will create Agegroupings. Then
 click on the big “+” sign next to the function box. This is the ‘Add condition’ button and I’ve
-stuck a big red arrow onto Figure 6.10 so you can see exactly where this is. Re-create the transformation shown in Figure 6.10 and when you have done, you will see the new values appear
-in the spreadsheet window. What’s more, the Agegroupings transformation has been saved and
+stuck a big red arrow onto Figure <font color="blue"><b>6.10</b></font> so you can see exactly where this is. Re-create the 
+transformation shown in Figure <font color="blue"><b>6.10</b></font> and when you have done, you will see the new values appear
+in the spreadsheet window. What’s more, the <font color="blue">Agegroupings</font> transformation has been saved and
 can be re-applied any time you like. Ok, so I know that it’s unlikely you will have more than
 one ‘Age’ variable, but you get the idea now of how to set up transformations in jamovi, so you
 can follow this idea with other sorts of variables. A typical scenario for this is when you have a
@@ -949,11 +965,11 @@ operators”, but quite frankly I don’t want to. It’s my book so no-one can 
 </h2>
 
 <p>
-In Section 6.3 I discussed the ideas behind variable transformations and showed that a lot
+In Section <font color="blue"><b>6.3</b></font> I discussed the ideas behind variable transformations and showed that a lot
 of the transformations that you might want to apply to your data are based on fairly simple
 mathematical functions and operations. In this section I want to return to that discussion and
 mention several other mathematical functions and arithmetic operations that are actually quite
-useful for a lot of real world data analysis. Table 6.4 gives a brief overview of the various
+useful for a lot of real world data analysis. Table <font color="blue"><b>6.4</b></font> gives a brief overview of the various
 mathematical functions I want to talk about here, or later.<a href="#note9">[9]</a> Obviously this doesn’t even come
 close to cataloguing the range of possibilities available, but it does cover a range of functions
 that are used regularly in data analysis and that are available in jamovi.
@@ -966,8 +982,8 @@ As I’ve mentioned earlier, jamovi has an useful range of mathematical function
 there really wouldn’t be much point in trying to describe or even list all of them. For the most
 part, I’ve focused only on those functions that are strictly necessary for this book. However I
 do want to make an exception for logarithms and exponentials. Although they aren’t needed
-anywhere else in this book, they are everywhere in statistics more broadly. And not only that,
-there are a lot of situations in which it is convenient to analyse the logarithm of a variable (i.e.,
+anywhere else in this book, they are <i>everywhere</i> in statistics more broadly. And not only that,
+there are a <i>lot of</i> situations in which it is convenient to analyse the logarithm of a variable (i.e.,
 to take a “log-transform” of the variable). I suspect that many (maybe most) readers of this
 book will have encountered logarithms and exponentials before, but from past experience I know
 that there’s a substantial proportion of students who take a social science statistics class who
@@ -979,11 +995,12 @@ In order to understand logarithms and exponentials, the easiest thing to do is t
 calculate them and see how they relate to other simple calculations. There are three jamovi
 functions in particular that I want to talk about, namely LN(), LOG10() and EXP(). To start with,
 let’s consider LOG10(), which is known as the “logarithm in base 10”. The trick to understanding
-a logarithm is to understand that it’s basically the “opposite” of taking a power. Specifically,
+a <font color="blueviolet"><b>logarithm</b></font> is to understand that it’s basically the “opposite” 
+of taking a power. Specifically,
 the logarithm in base 10 is closely related to the powers of 10. So let’s start by noting that
 10-cubed is 1000. Mathematically, we would write this:
 </p>
-$$10^3=100$$
+$$10^3=1000$$
 
 <p>
 The trick to understanding a logarithm is to recognise that the statement that “10 to the power
@@ -1001,9 +1018,9 @@ world of mathematics scoffs at our decimal numbers. Sadly, the universe doesn’
 how we write down numbers. Anyway, the consequence of this cosmic indifference is that there’s
 nothing particularly special about calculating logarithms in base 10. You could, for instance,
 calculate your logarithms in base 2. Alternatively, a third type of logarithm, and one we see a
-lot more of in statistics than either base 10 or base 2, is called the natural logarithm, and
+lot more of in statistics than either base 10 or base 2, is called the <font color="blue"><b>natural logarithm</b></font>, and
 corresponds to the logarithm in base e. Since you might one day run into it, I’d better explain
-what e is. The number e, known as Euler’s number, is one of those annoying “irrational”
+what e is. The number e, known as <font color="blue"><b>Euler’s number</b></font>, is one of those annoying “irrational”
 numbers whose decimal expansion is infinitely long, and is considered one of the most important
 numbers in mathematics. The first few digits of e are:
 </p>
@@ -1011,14 +1028,12 @@ numbers in mathematics. The first few digits of e are:
 $$e = 2.718282 $$
 
 <p>
-There are quite a few situation in statistics that require us to calculate powers of e, though none
-of them appear in this book. Raising e to the power x is called the exponential of x, and so
-it’s very common to see e
-x written as exppxq. And so it’s no surprise that jamovi has a function
+There are quite a few situation in statistics that require us to calculate powers of \(e\), though none
+of them appear in this book. Raising e to the power \(x\) is called the <font color="blue"><b>exponential</b></font> of \(x\), and so
+it’s very common to see \(e^x\) written as exppxq. And so it’s no surprise that jamovi has a function
 that calculates exponentials, called EXP(). Because the number e crops up so often in statistics,
 the natural logarithm (i.e., logarithm in base e) also tends to turn up. Mathematicians often
-write it as loge
-pxq or lnpxq. In fact, jamovi works the same way: the LN() function corresponds
+write it as \(log_e(x)\) or \(ln(x)\). In fact, jamovi works the same way: the <font color="blue">LN()</font> function corresponds
 to the natural logarithm.
 </p>
 
@@ -1043,7 +1058,8 @@ observations that you’re interested in.
 <p>
 This section returns to the nightgarden.csv data set. If you’re reading this whole chapter
 in one sitting, then you should already have this data set loaded into a jamovi window. For
-this section, let’s focus on the two variables speaker and utterance (see Section 6.1 if you’ve
+this section, let’s focus on the two variables <font color="blue">speaker</font> and utterance 
+(see Section <font color="blue"><b>6.1</b></font> if you’ve
 forgotten what those variables look like). Suppose that what I want to do is pull out only those
 utterances that were made by Makka-Pakka. To that end, we need to specify a filter in jamovi.
 First open up a filter window by clicking on ‘Filters’ on the main jamovi ‘Data’ toolbar. Then,
@@ -1052,6 +1068,7 @@ in the ‘Filter 1’ text box, next to the ‘=’ sign, type the following:
 
 
 </br>
+
 speaker == ’makka-pakka’
 
 
@@ -1069,10 +1086,10 @@ speaker == ’makka-pakka’
 
 <p>
 When you have done this, you will see that a new column has been added to the spreadsheet
-window (see Figure 6.11), labelled ‘Filter 1’, with the cases where speaker is not ‘makka-pakka’
-greyed-out (i.e., filtered out) and, conversely, the cases where speaker is ‘makka-pakka’ have a
+window (see Figure <font color="blue"><b>6.11</b></font>), labelled ‘Filter 1’, with the cases where <font color="blue">speaker</font> is <u>not</u> ‘makka-pakka’
+greyed-out (i.e., filtered out) and, conversely, the cases where <font color="blue">speaker</font> <u>is</u> ‘makka-pakka’ have a
 green check mark indicating they are filtered in. You can test this by running ‘Exploration’ -
-‘Descriptives’ - ‘Frequency tables’ for the speaker variable and seeing what that shows. Go on,
+‘Descriptives’ - ‘Frequency tables’ for the <font color="blue">speaker</font> variable and seeing what that shows. Go on,
 try it!
 </p>
 
@@ -1103,19 +1120,29 @@ that can be handy to know about, so the best wrap up I can give here is just to 
 
 <ul>
 <li>
+<p>
 Section 6.1. Tabulating data.
+</p>
 </li>
 <li>
+<p>
 Section 6.2. Using logical expressions.
+</p>
 </li>
 <li>
+<p>
 Section 6.3. Transforming or recoding a variable.
+</p>
 </li>
 <li>
+<p>
 Section 6.4. Some useful mathematical functions.
+</p>
 </li>
 <li>
+<p>
 Section 6.5. Extracting a subset of a data set.
+</p>
 </li>
 </ul>
 
@@ -1125,8 +1152,9 @@ Section 6.5. Extracting a subset of a data set.
 <p>
 Part IV of the book is by far the most theoretical, focusing as it does on the theory of statistical
 inference. Over the next three chapters my goal is to give you an introduction to probability
-theory (Chapter 7), sampling and estimation (Chapter 8) and statistical hypothesis testing
-(Chapter 9). Before we get started though, I want to say something about the big picture.
+theory (Chapter <font color="blue"><b>7</b></font>), sampling and estimation 
+(Chapter <font color="blue"><b>8</b></font>) and statistical hypothesis testing
+(Chapter <font color="blue"><b>9</b></font>). Before we get started though, I want to say something about the big picture.
 Statistical inference is primarily about learning from data. The goal is no longer merely to
 describe our data but to use the data to draw conclusions about the world. To motivate the
 discussion I want to spend a bit of time talking about a philosophical puzzle known as the riddle
