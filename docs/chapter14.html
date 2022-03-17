@@ -18,8 +18,8 @@
 
 Over the course of the last few chapters we have done quite a lot. We have looked at statistical
 tests you can use when you have one nominal predictor variable with two groups (e.g. the t-test,
-Chapter 11) or with three or more groups (e.g. one-way ANOVA, Chapter 13). The chapter on
-regression (Chapter 12) introduced a powerful new idea, that is building statistical models with
+Chapter <font color="blue"><b>11</b></font>) or with three or more groups (e.g. one-way ANOVA, Chapter <font color="blue"><b>13</b></font>). The chapter on
+regression (Chapter <font color="blue"><b>12</b></font>) introduced a powerful new idea, that is building statistical models with
 multiple continuous predictor variables used to explain a single outcome variable. For instance,
 a regression model could be used to predict the number of errors a student makes in a reading
 comprehension test based on the number of hours they studied for the test and their score on a
@@ -34,7 +34,7 @@ average). Each student is classified in two different ways: on the basis of thei
 basis of their school. What we’d like to do is analyse the reading comprehension scores in terms
 of both of these grouping variables. The tool for doing so is generically referred to as factorial
 ANOVA. However, since we have two grouping variables, we sometimes refer to the analysis as
-a two-way ANOVA, in contrast to the one-way ANOVAs that we ran in Chapter 13.
+a two-way ANOVA, in contrast to the one-way ANOVAs that we ran in Chapter <font color="blue"><b>13</b></font>.
 
 
 
@@ -43,12 +43,12 @@ a two-way ANOVA, in contrast to the one-way ANOVAs that we ran in Chapter 13.
 
 
 
-When we discussed analysis of variance in Chapter 13, we assumed a fairly simple experimental
+When we discussed analysis of variance in Chapter <font color="blue"><b>13</b></font>, we assumed a fairly simple experimental
 design. Each person is in one of several groups and we want to know whether these groups have
 different mean scores on some outcome variable. In this section, I’ll discuss a broader class of
 experimental designs known as factorial designs, in which we have more than one grouping
 variable. I gave one example of how this kind of design might arise above. Another example
-appears in Chapter 13 in which we were looking at the effect of different drugs on the mood.gain
+appears in Chapter <font color="blue"><b>13</b></font> in which we were looking at the effect of different drugs on the mood.gain
 experienced by each person. In that chapter we did find a significant effect of drug, but at the
 end of the chapter we also ran an analysis to see if there was an effect of therapy. We didn’t
 find one, but there’s something a bit worrying about trying to run two separate analyses trying
@@ -62,7 +62,7 @@ design.
 
 
 If we cross-tabulate drug by therapy, using the ‘Frequencies’ - ‘Contingency Tables’ analysis
-in jamovi (see Section 6.1), we get the table shown in Figure 14.1
+in jamovi (see Section 6.1), we get the table shown in Figure <font color="blue"><b>14.1</b></font>
 
 
 
@@ -191,7 +191,7 @@ Here’s how the notation works. Our table is defined in terms of two factors. E
 corresponds to a different level of Factor A (in this case drug), and each column corresponds to
 a different level of Factor B (in this case therapy). If we let R denote the number of rows in the
 table, and C denote the number of columns, we can refer to this as an R ˆ C factorial ANOVA.
-In this case R “ 3 and C “ 2. We’ll use lowercase letters to refer to specific rows and columns,
+In this case R = 3 and C = 2. We’ll use lowercase letters to refer to specific rows and columns,
 so µrc refers to the population mean associated with the rth level of Factor A (i.e. row number
 r) and the cth level of Factor B (column number c).1 So the population means are now written
 like this:
@@ -298,12 +298,12 @@ Alternative hypothesis, \(H_1\): at least one row mean is different.
 </br>
 
 It’s worth noting that these are exactly the same statistical hypotheses that we formed when
-we ran a one-way ANOVA on these data back in Chapter 13. Back then I used the notation
+we ran a one-way ANOVA on these data back in Chapter <font color="blue"><b>13</b></font>. Back then I used the notation
 µP to refer to the mean mood gain for the placebo group, with µA and µJ corresponding to the
-group means for the two drugs, and the null hypothesis was µP “ µA “ µJ . So we’re actually
+group means for the two drugs, and the null hypothesis was µP = µA = µJ . So we’re actually
 talking about the same hypothesis, it’s just that the more complicated ANOVA requires more
 careful notation due to the presence of multiple grouping variables, so we’re now referring to this
-hypothesis as µ1. “ µ2. “ µ3.
+hypothesis as µ1. = µ2. = µ3.
 . However, as we’ll see shortly, although the hypothesis is identical
 the test of that hypothesis is subtly different due to the fact that we’re now acknowledging the
 existence of the second grouping variable.
@@ -324,8 +324,8 @@ Alternative hypothesis, \(H_1\):  column means are different, i.e., \( µ_{.1} \
 <h3> 14.1.2 Running the analysis in jamovi </h3>
 
 The null and alternative hypotheses that I described in the last section should seem awfully
-familiar. They’re basically the same as the hypotheses that we were testing in our simpler oneway ANOVAs in Chapter 13. So you’re probably expecting that the hypothesis tests that are used
-in factorial ANOVA will be essentially the same as the F-test from Chapter 13. You’re expecting
+familiar. They’re basically the same as the hypotheses that we were testing in our simpler oneway ANOVAs in Chapter <font color="blue"><b>13</b></font>. So you’re probably expecting that the hypothesis tests that are used
+in factorial ANOVA will be essentially the same as the F-test from Chapter <font color="blue"><b>13</b></font>. You’re expecting
 to see references to sums of squares (SS), mean squares (MS), degrees of freedom (df), and finally
 an F-statistic that we can convert into a p-value, right? Well, you’re absolutely and completely
 right. So much so that I’m going to depart from my usual approach. Throughout this book, I’ve
@@ -333,15 +333,15 @@ generally taken the approach of describing the logic (and to an extent the mathe
 underpins a particular analysis first and only then introducing the analysis in jamovi. This time
 I’m going to do it the other way around and show you how to do it in jamovi first. The reason
 for doing this is that I want to highlight the similarities between the simple one-way ANOVA
-tool that we discussed in Chapter 13, and the more complicated approach that we’re going to
+tool that we discussed in Chapter <font color="blue"><b>13</b></font>, and the more complicated approach that we’re going to
 use in this chapter.
 
 
 If the data you’re trying to analyse correspond to a balanced factorial design then running
 your analysis of variance is easy. To see how easy it is, let’s start by reproducing the original
-analysis from Chapter 13. In case you’ve forgotten, for that analysis we were using only a single
+analysis from Chapter <font color="blue"><b>13</b></font>. In case you’ve forgotten, for that analysis we were using only a single
 factor (i.e., drug) to predict our outcome variable (i.e., mood.gain), and we got the results shown
-in Figure 14.2.
+in Figure <font color="blue"><b>14.2</b></font>.
 
 
 
@@ -352,9 +352,9 @@ in Figure 14.2.
 </figure>
 
 Now, suppose I’m also curious to find out if therapy has a relationship to mood.gain. In light
-of what we’ve seen from our discussion of multiple regression in Chapter 12, you probably won’t
+of what we’ve seen from our discussion of multiple regression in Chapter <font color="blue"><b>12</b></font>, you probably won’t
 be surprised that all we have to do is add therapy as a second ‘Fixed Factor’ in the analysis, see
-Figure 14.3.
+Figure <font color="blue"><b>14.3</b></font>.
 
 
 This output is pretty simple to read too. The first row of the table reports a between-group
@@ -424,7 +424,7 @@ for the therapy factor the sampling distribution is F with 1 and 14 degrees of f
 At this point, I hope you can see that the ANOVA table for this more complicated factorial
 analysis should be read in much the same way as the ANOVA table for the simpler one way
 analysis. In short, it’s telling us that the factorial ANOVA for our 3ˆ2 design found a significant
-effect of drug (F2,14 “ 26.15, p ă .001) as well as a significant effect of therapy (F1,14 “ 7.08, p “
+effect of drug (F2,14 = 26.15, p ă .001) as well as a significant effect of therapy (F1,14 = 7.08, p =
 .02). Or, to use the more technically correct terminology, we would say that there are two main
 effects of drug and therapy. At the moment, it probably seems a bit redundant to refer to these
 as “main” effects, but it actually does make sense. Later on, we’re going to want to talk about
@@ -504,8 +504,8 @@ table looks like this:
 
 
 And if we look at the sample means that I showed earlier, we have Y¯
-11 “ 0.30, Y¯
-12 “ 0.60 etc.
+11 = 0.30, Y¯
+12 = 0.60 etc.
 In our clinical trial example, the drugs factor has 3 levels and the therapy factor has 2 levels,
 and so what we’re trying to run is a 3 ˆ 2 factorial ANOVA. However, we’ll be a little more
 general and say that Factor A (the row factor) has R levels and Factor B (the column factor)
@@ -555,27 +555,27 @@ calculations, so please have a go yourself. You can also take a look at the vers
 Excel in the file clinicaltrial factorialanova.xls.
 
 First, let’s calculate the sum of squares associated with the main effect of drug. There
-are a total of N “ 3 people in each group and C “ 2 different types of therapy. Or, to put
-it another way, there are 3 ˆ 2 “ 6 people who received any particular drug. When we do
+are a total of N = 3 people in each group and C = 2 different types of therapy. Or, to put
+it another way, there are 3 ˆ 2 = 6 people who received any particular drug. When we do
 these calculations in a spreadsheet programme, we get a value of 3.45 for the sum of squares
 associated with the main effect of drug. Not surprisingly, this is the same number that you
 get when you look up the SS value for the drugs factor in the ANOVA table that I presented
-earlier, in Figure 14.3.
+earlier, in Figure <font color="blue"><b>14.3</b></font>.
 
 We can repeat the same kind of calculation for the effect of therapy. Again there are
-N “ 3 people in each group, but since there are R “ 3 different drugs, this time around
-we note that there are 3 ˆ 3 “ 9 people who received CBT and an additional 9 people who
+N = 3 people in each group, but since there are R = 3 different drugs, this time around
+we note that there are 3 ˆ 3 = 9 people who received CBT and an additional 9 people who
 received the placebo. So our calculation in this case gives us a value of 0.47 for the sum of
 squares associated with the main effect of therapy. Once again, we are not surprised to see
-that our calculations are identical to the ANOVA output in Figure 14.3.
+that our calculations are identical to the ANOVA output in Figure <font color="blue"><b>14.3</b></font>.
 
 So that’s how you calculate the SS values for the two main effects. These SS values are
 analogous to the between-group sum of squares values that we calculated when doing one-way
-ANOVA in Chapter 13. However, it’s not a good idea to think of them as between-groups
+ANOVA in Chapter <font color="blue"><b>13</b></font>. However, it’s not a good idea to think of them as between-groups
 SS values anymore, just because we have two different grouping variables and it’s easy to get
 confused. In order to construct an F test, however, we also need to calculate the withingroups 
 sum of squares. In keeping with the terminology that we used in the regression chapter
-(Chapter 12) and the terminology that jamovi uses when printing out the ANOVA table, I’ll
+(Chapter <font color="blue"><b>12</b></font>) and the terminology that jamovi uses when printing out the ANOVA table, I’ll
 start referring to the within-groups SS value as the residual sum of squares SSR.
 
 The easiest way to think about the residual SS values in this context, I think, is to think of
@@ -638,7 +638,7 @@ again, we get the same answer.
 The degrees of freedom are calculated in much the same way as for one-way ANOVA. For
 any given factor, the degrees of freedom is equal to the number of levels minus 1 (i.e., R ´ 1 for
 the row variable Factor A, and C ´ 1 for the column variable Factor B). So, for the drugs factor
-we obtain df “ 2, and for the therapy factor we obtain df “ 1. Later on, when we discuss the
+we obtain df = 2, and for the therapy factor we obtain df = 1. Later on, when we discuss the
 interpretation of ANOVA as a regression model (see Section 14.6), I’ll give a clearer statement of
 how we arrive at this number. But for the moment we can use the simple definition of degrees of
 freedom, namely that the degrees of freedom equals the number of quantities that are observed,
@@ -657,7 +657,7 @@ which simplifies to N ´ R ´ C ` 1.
 The degrees of freedom are calculated in much the same way as for one-way ANOVA. For
 any given factor, the degrees of freedom is equal to the number of levels minus 1 (i.e., R ´ 1 for
 the row variable Factor A, and C ´ 1 for the column variable Factor B). So, for the drugs factor
-we obtain df “ 2, and for the therapy factor we obtain df “ 1. Later on, when we discuss the
+we obtain df = 2, and for the therapy factor we obtain df = 1. Later on, when we discuss the
 interpretation of ANOVA as a regression model (see Section 14.6), I’ll give a clearer statement of
 how we arrive at this number. But for the moment we can use the simple definition of degrees of
 freedom, namely that the degrees of freedom equals the number of quantities that are observed,
@@ -675,7 +675,7 @@ which simplifies to N ´ R ´ C ` 1.
 
 Now that we’ve seen how a factorial ANOVA works, it’s worth taking a moment to compare
 it to the results of the one way analyses, because this will give us a really good sense of why it’s
-a good idea to run the factorial ANOVA. In Chapter 13, I ran a one-way ANOVA that looked
+a good idea to run the factorial ANOVA. In Chapter <font color="blue"><b>13</b></font>, I ran a one-way ANOVA that looked
 to see if there are any differences between drugs, and a second one-way ANOVA to see if there
 were any differences between therapies. As we saw in Section 14.1.1, the null and alternative
 hypotheses tested by the one-way ANOVAs are in fact identical to the hypotheses tested by
@@ -685,7 +685,7 @@ drug and 0.92 for therapy), as are the degrees of freedom (2 for drug, 1 for the
 don’t give the same answers! Most notably, when we ran the one-way ANOVA for therapy in
 Section 13.10 we didn’t find a significant effect (the p-value was .21). However, when we look at
 the main effect of therapy within the context of the two-way ANOVA, we do get a significant
-effect (p “ .019). The two analyses are clearly not the same.
+effect (p = .019). The two analyses are clearly not the same.
 
 
 Why does that happen? The answer lies in understanding how the residuals are calculated.
@@ -710,13 +710,13 @@ The ANOVA model that we’ve been talking about so far covers a range of differe
 that we might observe in our data. For instance, in a two-way ANOVA design there are four
 possibilities: (a) only Factor A matters, (b) only Factor B matters, (c) both A and B matter,
 and (d) neither A nor B matters. An example of each of these four possibilities is plotted in
-Figure 14.4.
+Figure <font color="blue"><b>14.4</b></font>.
 
 <h2> 14.2 Factorial ANOVA 2: balanced designs, interactions allowed </h2>
 
 
 
-The four patterns of data shown in Figure 14.4 are all quite realistic. There are a great many
+The four patterns of data shown in Figure <font color="blue"><b>14.4</b></font> are all quite realistic. There are a great many
 data sets that produce exactly those patterns. However, they are not the whole story and the
 ANOVA model that we have been talking about up to this point is not sufficient to fully account
 for a table of group means. Why not? Well, so far we have the ability to talk about the idea
@@ -724,7 +724,7 @@ that drugs can influence mood, and therapy can influence mood, but no way of tal
 the possibility of an interaction between the two. An interaction between A and B is said to
 occur whenever the effect of Factor A is different, depending on which level of Factor B we’re
 talking about. Several examples of an interaction effect with the context of a 2ˆ2 ANOVA are
-shown in Figure 14.5. To give a more concrete example, suppose that the operation of Anxifree
+shown in Figure <font color="blue"><b>14.5</b></font>. To give a more concrete example, suppose that the operation of Anxifree
 and Joyzepam is governed by quite different physiological mechanisms. One consequence of this
 is that while Joyzepam has more or less the same effect on mood regardless of whether one
 is in therapy, Anxifree is actually much more effective when administered in conjunction with
@@ -732,7 +732,7 @@ CBT. The ANOVA that we developed in the previous section does not capture this i
 get some idea of whether an interaction is actually happening here, it helps to plot the various
 group means. In jamovi this is done via the ANOVA ‘Estimated Marginal Means’ option -
 just move drug and therapy across into the ‘Marginal Means’ box under ‘Term 1’. This should
-look something like Figure 14.6. Our main concern relates to the fact that the two lines aren’t
+look something like Figure <font color="blue"><b>14.6</b></font>. Our main concern relates to the fact that the two lines aren’t
 parallel. The effect of CBT (difference between solid line and dotted line) when the drug is
 Joyzepam (right side) appears to be near zero, even smaller than the effect of CBT when a
 placebo is used (left side). However, when Anxifree is administered, the effect of CBT is larger
@@ -777,7 +777,7 @@ drug and therapy). But when we add an interaction we add a new component to the 
 the combination of drug and therapy. Intuitively, the idea behind an interaction effect is fairly
 simple. It just means that the effect of Factor A is different, depending on which level of Factor
 B we’re talking about. But what does that actually mean in terms of our data? The plot in
-Figure 14.5 depicts several different patterns that, although quite different to each other, would
+Figure <font color="blue"><b>14.5</b></font> depicts several different patterns that, although quite different to each other, would
 all count as an interaction effect. So it’s not entirely straightforward to translate this qualitative
 idea into something mathematical that a statistician can work with.
 
@@ -955,12 +955,12 @@ more than straightforward because it is the default option for ANOVA. This means
 you specify an ANOVA with two factors, e.g. drug and therapy then the interaction component
 - drug*therapy - is added automatically to the model3
 . When we run the ANOVA with the
-interaction term included, then we get the results shown in Figure 14.7.
+interaction term included, then we get the results shown in Figure <font color="blue"><b>14.7</b></font>.
 
 
-As it turns out, while we do have a significant main effect of drug (F2,12 “ 31.7, p ă .001)
-and therapy type (F1,12 “ 8.6, p “ .013), there is no significant interaction between the two
-(F2,12 “ 2.5, p “ 0.125).
+As it turns out, while we do have a significant main effect of drug (F2,12 = 31.7, p ă .001)
+and therapy type (F1,12 = 8.6, p = .013), there is no significant interaction between the two
+(F2,12 = 2.5, p = 0.125).
 
 
 <h3> 14.2.5 Interpreting the results </h3>
@@ -986,7 +986,7 @@ drug*therapy
 
 Secondly, there’s a very peculiar interpretation issue that arises when you obtain a significant
 interaction effect but no corresponding main effect. This happens sometimes. For instance, in
-the crossover interaction shown in Figure 14.5a, this is exactly what you’d find. In this case,
+the crossover interaction shown in Figure <font color="blue"><b>14.5a</b></font>, this is exactly what you’d find. In this case,
 neither of the main effects would be significant, but the interaction effect would be. This is a
 difficult situation to interpret, and people often get a bit confused about it. The general advice
 that statisticians like to give in this situation is that you shouldn’t pay much attention to the
@@ -1097,7 +1097,7 @@ represents no effect. However, it’s slightly trickier to interpret what a larg
 2 value
 means. In particular, you can’t actually compare the partial η
 2 values across terms! Suppose,
-for instance, there is no within-groups variability at all: if so, SSR “ 0. What that means is
+for instance, there is no within-groups variability at all: if so, SSR = 0. What that means is
 that every term has a partial η
 2 value of 1. But that doesn’t mean that all terms in your model
 are equally important, or indeed that they are equally large. All it mean is that all terms in
@@ -1107,7 +1107,7 @@ across terms.
 
 
 To see what I mean by this, it’s useful to see a concrete example. First, let’s have a look at
-the effect sizes for the original ANOVA without the interaction term, from Figure 14.3:
+the effect sizes for the original ANOVA without the interaction term, from Figure <font color="blue"><b>14.3</b></font>:
 
 
 
@@ -1133,24 +1133,24 @@ the effect sizes for the original ANOVA without the interaction term, from Figur
 
 Looking at the η
 2 values first, we see that drug accounts for 71% of the variance (i.e. η
-2 “
+2 =
 0.71) in mood.gain, whereas therapy only accounts for 10%. This leaves a total of 19% of the
 variation unaccounted for (i.e., the residuals constitute 19% of the variation in the outcome).
 Overall, this implies that we have a very large effect5 of drug and a modest effect of therapy.
 
 
 Now let’s look at the partial η
-2 values, shown in Figure 14.3. Because the effect of therapy
+2 values, shown in Figure <font color="blue"><b>14.3</b></font>. Because the effect of therapy
 isn’t all that large, controlling for it doesn’t make much of a difference, so the partial η
 2
 for drug
 doesn’t increase very much, and we obtain a value of pη
-2 “ 0.79). In contrast, because the effect
+2 = 0.79). In contrast, because the effect
 of drug was very large, controlling for it makes a big difference, and so when we calculate the
 partial η
 2
 for therapy you can see that it rises to pη
-2 “ 0.34. The question that we have to ask
+2 = 0.34. The question that we have to ask
 ourselves is, what do these partial η
 2 values actually mean? The way I generally interpret the
 partial η
@@ -1168,7 +1168,7 @@ there is a large and significant interaction effect.
 
 
 Speaking of interaction effects, here’s what we get when we calculate the effect sizes for the
-model that includes the interaction term, as in Figure 14.7. As you can see, the η
+model that includes the interaction term, as in Figure <font color="blue"><b>14.7</b></font>. As you can see, the η
 2 values for
 the main effects don’t change, but the partial η
 2 values do:
@@ -1204,7 +1204,7 @@ the main effects don’t change, but the partial η
 In many situations you will find yourself wanting to report estimates of all the group means
 based on the results of your ANOVA, as well as confidence intervals associated with them. You
 can use the ‘Estimated Marginal Means’ option in the jamovi ANOVA analysis to do this, as
-in Figure 14.8. If the ANOVA that you have run is a saturated model (i.e., contains all
+in Figure <font color="blue"><b>14.8</b></font>. If the ANOVA that you have run is a saturated model (i.e., contains all
 possible main effects and all possible interaction effects) then the estimates of the group means
 are actually identical to the sample means, though the confidence intervals will use a pooled
 estimate of the standard errors rather than use a separate one for each group.
@@ -1234,7 +1234,7 @@ assuming no interaction). Using the notation we developed earlier, the estimate 
 be µ.. ` αr ` βc. If there are genuinely no interactions between the two factors, this is actually
 a better estimate of the population mean than the raw sample mean would be. Removing
 the interaction term from the model, via the ‘Model’ options in the jamovi ANOVA analysis,
-provides the marginal means for the analysis shown in Figure 14.9.
+provides the marginal means for the analysis shown in Figure <font color="blue"><b>14.9</b></font>.
 
 <figure>
 <figcaption>Figure 14.9: jamovi screenshot showing the marginal means for the unsaturated model, i.e.
@@ -1270,7 +1270,7 @@ I won’t discuss it again. This test expects that you have a saturated model (i
 the relevant terms), because the test is primarily concerned with the within-group variance, and
 it doesn’t really make a lot of sense to calculate this any way other than with respect to the full
 model. The Levene test can be specified under the ANOVA ‘Assumption Checks’ - ‘Homogeneity
-Tests’ option in jamovi, with the result shown as in Figure 14.10. The fact that the Levene test
+Tests’ option in jamovi, with the result shown as in Figure <font color="blue"><b>14.10</b></font>. The fact that the Levene test
 is non-significant means that, providing it is consistent with a visual inspection of the plot of
 standard deviations, we can safely assume that the homogeneity of variance assumption is not
 violated.
@@ -1279,7 +1279,7 @@ violated.
 
 As with one-way ANOVA we can test for the normality of residuals in a straightforward fashion
 (see Section 13.6.4). Primarily though, it’s generally a good idea to examine the residuals
-graphically using a QQ plot. See Figure 14.10.
+graphically using a QQ plot. See Figure <font color="blue"><b>14.10</b></font>.
 
 
 
@@ -1308,7 +1308,7 @@ precision is increased. This means that an inappropriate failure to reject the n
 
 
 Despite this advantage, ANCOVA runs the risk of undoing real differences between groups,
-and this should be avoided. Look at Figure 14.11, for example, which shows a plot of Statistics
+and this should be avoided. Look at Figure <font color="blue"><b>14.11</b></font>, for example, which shows a plot of Statistics
 anxiety against age and shows two distinct groups – students who have either an Arts or Science
 background or preference. ANCOVA with age as a covariate might lead to the conclusion that
 statistics anxiety does not differ in the two groups. Would this conclusion be reasonable –
@@ -1337,7 +1337,7 @@ This applies to both one-way and factorial designs, as ANCOVA can be used with b
 A health psychologist was interested in the effect of routine cycling and stress on happiness
 levels, with age as a covariate. You can find the dataset in the file ancova.csv. Open this file
 in jamovi and then, to undertake an ANCOVA, select Analyses - ANOVA - ANCOVA to open the
-ANCOVA analysis window (Figure 14.12). Highlight the dependent variable ‘happiness’ and
+ANCOVA analysis window (Figure <font color="blue"><b>14.12</b></font>). Highlight the dependent variable ‘happiness’ and
 transfer it into the ‘Dependent Variable’ text box. Highlight the independent variables ‘stress’
 and ‘commute’ and transfer them into the ‘Fixed Factors’ text box. Highlight the covariate
 ‘age’ and transfer it into the ‘Covariates’ text box. Then Click on Estimated Marginal Means
@@ -1354,11 +1354,11 @@ to bring up the plots and tables options.
 
 
 An ANCOVA table showing Tests of Between-Subjects Effects is produced in the jamovi
-results window (Figure 14.13). The F value for the covariate ‘age’ is significant at p “ .023,
+results window (Figure <font color="blue"><b>14.13</b></font>). The F value for the covariate ‘age’ is significant at p “ .023,
 suggesting that age is an important predictor of the dependent variable, happiness. When
-we look at the estimated marginal mean scores (Figure 14.14), adjustments have been made
+we look at the estimated marginal mean scores (Figure <font color="blue"><b>14.14</b></font>), adjustments have been made
 (compared to an analysis without the covariate) because of the inclusion of the covariate ‘age’ in
-this ANCOVA. A plot (Figure 14.15) is a good way of visualising and interpreting the significant
+this ANCOVA. A plot (Figure <font color="blue"><b>14.15</b></font>) is a good way of visualising and interpreting the significant
 effects.
 
 
@@ -1367,9 +1367,9 @@ The F value for the main effect ‘stress’ (52.61) has an associated probabili
 The F value for the main effect ‘commute’ (42.33) has an associated probability of p ă .001.
 Since both of these are less than the probability that is typically used to decide if a statistical
 result is significant (p ă .05) we can conclude that there was a significant main effect of stress
-(Fp1, 15q “ 52.61, p ă .001) and a significant main effect of commuting method (Fp1, 15q “
+(Fp1, 15q = 52.61, p ă .001) and a significant main effect of commuting method (Fp1, 15q =
 42.33, p ă .001). A significant interaction between stress and commuting method was also found
-(Fp1, 15q “ 14.15, p “ .002).
+(Fp1, 15q = 14.15, p = .002).
 
 
 <figure>
@@ -1387,7 +1387,7 @@ method, with age as a covariate
 </figure>
 
 
-In Figure 14.15 we can see the adjusted, marginal, mean happiness scores when age is a
+In Figure <font color="blue"><b>14.15</b></font> we can see the adjusted, marginal, mean happiness scores when age is a
 covariate in an ANCOVA. In this analysis there is a significant interaction effect, whereby
 people with low stress who cycle to work are happier than people with low stress who drive and
 people with high stress whether they cycle or drive to work. There is also a significant main
@@ -1425,7 +1425,7 @@ between variables. And, as far as it goes that’s perfectly true. But when you 
 hood, so to speak, the underlying mechanics of ANOVA and regression are awfully similar. In
 fact, if you think about it, you’ve already seen evidence of this. ANOVA and regression both
 rely heavily on sums of squares (SS), both make use of F tests, and so on. Looking back, it’s
-hard to escape the feeling that Chapters 12 and 13 were a bit repetitive.
+hard to escape the feeling that Chapters <font color="blue"><b>12</b></font> and <font color="blue"><b>13</b></font> were a bit repetitive.
 
 
 The reason for this is that ANOVA and regression are both kinds of linear models. In the
@@ -1475,13 +1475,13 @@ Previously, we’ve used the notation Yrci to refer to the i-th person in the r-
 was really handy for describing how the SS values are calculated, but it’s a pain in the current
 context, so I’ll switch notation here. Now, the Yp notation is visually simpler than Yrci, but it
 has the shortcoming that it doesn’t actually keep track of the group memberships! That is, if
-I told you that Y0,0,3 “ 35, you’d immediately know that we’re talking about a student (the
+I told you that Y0,0,3 = 35, you’d immediately know that we’re talking about a student (the
 3rd such student, in fact) who didn’t attend the lectures (i.e., attend = 0) and didn’t read the
 textbook (i.e. reading = 0), and who ended up failing the class (grade = 35). But if I tell you
-that Yp “ 35, all you know is that the p-th student didn’t get a good grade. We’ve lost some key
+that Yp = 35, all you know is that the p-th student didn’t get a good grade. We’ve lost some key
 information here. Of course, it doesn’t take a lot of thought to figure out how to fix this. What
 we’ll do instead is introduce two new variables X1p and X2p that keep track of this information.
-In the case of our hypothetical student, we know that X1p “ 0 (i.e., attend = 0) and X2p “ 0
+In the case of our hypothetical student, we know that X1p = 0 (i.e., attend = 0) and X2p = 0
 (i.e., reading = 0). So the data might look like this:
 
 
@@ -1549,7 +1549,7 @@ This isn’t anything particularly special, of course. It’s exactly the format
 to see our data! See the data file rtfm.csv. We can use the jamovi ‘Descriptives’ analysis
 to confirm that this data set corresponds to a balanced design, with 2 observations for each
 combination of attend and reading. In the same way we can also calculate the mean grade for
-each combination. This is shown in Figure 14.16. Looking at the mean scores, one gets the
+each combination. This is shown in Figure <font color="blue"><b>14.16</b></font>. Looking at the mean scores, one gets the
 strong impression that reading the text and attending the class both matter a lot.
 
 <figure>
@@ -1580,7 +1580,7 @@ out on a limb and guess that most of the readership of this book will find that 
 than helpful. Instead, I’ll explain the basic ideas and then rely on jamovi to show that ANOVA
 analyses and regression analyses aren’t just similar, they’re identical for all intents and purposes.
 Let’s start by running this as an ANOVA. To do this, we’ll use the rtfm data set, and Figure
-14.17 shows what we get when we run the analysis in jamovi.
+<font color="blue"><b>14.17</b></font> shows what we get when we run the analysis in jamovi.
 
 
 
@@ -1591,8 +1591,8 @@ Let’s start by running this as an ANOVA. To do this, we’ll use the rtfm data
 </figure>
 
 So, by reading the key numbers off the ANOVA table and the mean scores that we presented
-earlier, we can see that the students obtained a higher grade if they attended class pF1,5 “
-21.6, p “ .0056q and if they read the textbook pF1,5 “ 52.3, p “ .0008q. Let’s make a note of
+earlier, we can see that the students obtained a higher grade if they attended class pF1,5 =
+21.6, p = .0056q and if they read the textbook pF1,5 = 52.3, p = .0008q. Let’s make a note of
 those p-values and those F statistics.
 
 
@@ -1611,11 +1611,11 @@ reading variable.
 Wait a second though. Why is this true? It’s something that is intuitively obvious to everyone
 who has taken a few stats classes and is comfortable with the maths, but it isn’t clear to everyone
 else at first pass. To see why this is true, it helps to look closely at a few specific students. Let’s
-start by considering the 6th and 7th students in our data set (i.e. p “ 6 and p “ 7). Neither one
+start by considering the 6th and 7th students in our data set (i.e. p = 6 and p = 7). Neither one
 has read the textbook, so in both cases we can set reading = 0. Or, to say the same thing in
-our mathematical notation, we observe X2,6 “ 0 and X2,7 “ 0. However, student number 7 did
-turn up to lectures (i.e., attend = 1, X1,7 “ 1) whereas student number 6 did not (i.e., attend
-= 0, X1,6 “ 0). Now let’s look at what happens when we insert these numbers into the general
+our mathematical notation, we observe X2,6 = 0 and X2,7 = 0. However, student number 7 did
+turn up to lectures (i.e., attend = 1, X1,7 = 1) whereas student number 6 did not (i.e., attend
+= 0, X1,6 = 0). Now let’s look at what happens when we insert these numbers into the general
 formula for our regression line. For student number 6, the regression predicts that
 
 \begin{equation}
@@ -1646,7 +1646,7 @@ coefficient associated with the attend variable, b1. So, if b1 is greater than z
 that the students who turn up to lectures will get higher grades than those students who don’t.
 If this coefficient is negative we’re expecting the opposite: students who turn up at class end
 up performing much worse. In fact, we can push this a little bit further. What about student
-number 1, who turned up to class (X1,1 “ 1) and read the textbook (X2,1 “ 1)? If we plug these
+number 1, who turned up to class (X1,1 = 1) and read the textbook (X2,1 = 1)? If we plug these
 numbers into the regression we get
 
 \begin{equation}
@@ -1702,7 +1702,7 @@ In fact, for a simple 2 ˆ 2 ANOVA that’s exactly how it plays out.
 Okay, now that we’re really starting to see why ANOVA and regression are basically the same
 thing, let’s actually run our regression using the rtfm data and the jamovi regression analysis
 to convince ourselves that this is really true. Running the regression in the usual way gives the
-results shown in Figure 14.18.
+results shown in Figure <font color="blue"><b>14.18</b></font>.
 
 <figure>
 <figcaption> Figure 14.18: Regression analysis of the rtfm.csv data set in jamovi, without the interaction
@@ -1714,10 +1714,10 @@ term
 
 There’s a few interesting things to note here. First, notice that the intercept term is 43.5
 which is close to the “group” mean of 42.5 observed for those two students who didn’t read the
-text or attend class. Second, notice that we have the regression coefficient of b1 “ 18.0 for the
+text or attend class. Second, notice that we have the regression coefficient of b1 = 18.0 for the
 attendance variable, suggesting that those students that attended class scored 18% higher than
 those who didn’t. So our expectation would be that those students who turned up to class but
-didn’t read the textbook would obtain a grade of b0 ` b1, which is equal to 43.5 ` 18.0 “ 61.5.
+didn’t read the textbook would obtain a grade of b0 ` b1, which is equal to 43.5 ` 18.0 = 61.5.
 You can verify for yourself that the same thing happens when we look at the students that read
 the textbook.
 
@@ -1727,7 +1727,7 @@ regression. Look at the p-values associated with the attend variable and the rea
 in the regression output. They’re identical to the ones we encountered earlier when running the
 ANOVA. This might seem a little surprising, since the test used when running our regression
 model calculates a t-statistic and the ANOVA calculates an F-statistic. However, if you can
-remember all the way back to Chapter 7, I mentioned that there’s a relationship between the
+remember all the way back to Chapter <font color="blue"><b>7</b></font>, I mentioned that there’s a relationship between the
 t-distribution and the F-distribution. If you have some quantity that is distributed according
 to a t-distribution with k degrees of freedom and you square it, then this new squared quantity
 follows an F-distribution whose degrees of freedom are 1 and k. We can check this with respect
@@ -1741,7 +1741,7 @@ ANOVA.
 Finally, one last thing you should know. Because jamovi understands the fact that ANOVA
 and regression are both examples of linear models, it lets you extract the classic ANOVA table
 from your regression model using the ‘Linear Regression’ - ‘Model Coefficients’ - ‘Omnibus Test’
-- ‘ANOVA Test’, and this will give you the table shown in Figure 14.19.
+- ‘ANOVA Test’, and this will give you the table shown in Figure <font color="blue"><b>14.19</b></font>.
 
 
 <figure>
@@ -1825,7 +1825,7 @@ variable from the clinicaltrial.csv file is expressed as a single three-level fa
 expanded data clinicaltrial2.omv in which it is expanded into two binary contrasts. Once
 again, the thing that we want to demonstrate is that our original 3 ˆ 2 factorial ANOVA is
 equivalent to a regression model applied to the contrast variables. Let’s start by re-running the
-ANOVA, with results shown in Figure 14.20.
+ANOVA, with results shown in Figure <font color="blue"><b>14.20</b></font>.
 
 
 <figure>
@@ -1837,7 +1837,7 @@ ANOVA, with results shown in Figure 14.20.
 
 Obviously, there are no surprises here. That’s the exact same ANOVA that we ran earlier.
 Next, let’s run a regression using druganxifree, drugjoyzepam and CBTtherapy as the predictors.
-The results are shown in Figure 14.21.
+The results are shown in Figure <font color="blue"><b>14.21</b></font>.
 
 <figure>
 <figcaption> Figure 14.21: jamovi regression results, with contrast variables druganxifree and drugjoyzepam
@@ -1862,7 +1862,7 @@ significant. We just want to know if there’s an “overall” effect of drug. 
 jamovi to do is to run some kind of “model comparison” test, one in which the two “drugrelated” 
 contrasts are lumped together for the purpose of the test. Sound familiar? All we need
 to do is specify our null model, which in this case would include the CBTtherapy predictor, and
-omit both of the drug-related variables, as in Figure 14.22.
+omit both of the drug-related variables, as in Figure <font color="blue"><b>14.22</b></font>.
 
 
 Ah, that’s better. Our F-statistic is 26.15, the degrees of freedom are 2 and 14, and the
@@ -1877,7 +1877,7 @@ Throughout the rest of this chapter we’re going to rely heavily on this idea.
 Although we went through all the faff of computing new variables in jamovi for the contrasts
 druganxifree and drugjoyzepam, just to show that ANOVA and regression are essentially the
 same, in the jamovi linear regression analysis there is actually a nifty shortcut to get these
-contrasts, see Figure 14.23. What jamovi is doing here is allowing you to enter the predictor
+contrasts, see Figure <font color="blue"><b>14.23</b></font>. What jamovi is doing here is allowing you to enter the predictor
 variables that are factors as, wait for it...factors! Smart, eh. You can also specify which group
 to use as the reference level, via the ‘Reference Levels’ option. We’ve changed this to ‘placebo’
 and ‘no.therapy’, respectively, because this makes most sense.
@@ -1893,7 +1893,7 @@ ANOVA test results
 
 If you also click on the ‘ANOVA’ test checkbox under the ‘Model Coefficients’ - ‘Omnibus
 Test’ option, we see that the F-statistic is 26.15, the degrees of freedom are 2 and 14, and the
-p-value is 0.00002 (Figure 14.23). The numbers are identical to the ones we obtained for the
+p-value is 0.00002 (Figure <font color="blue"><b>14.23</b></font>). The numbers are identical to the ones we obtained for the
 main effect of drug in our original ANOVA. Once again, we see that ANOVA and regression are
 essentially the same. They are both linear models, and the underlying statistical machinery for
 ANOVA is identical to the machinery used in regression.
@@ -1911,7 +1911,7 @@ the null model (mood.gain ~ therapyCBT) has two parameters: there’s one regres
 for the therapyCBT variable, and a second one for the intercept. The alternative model
 (mood.gain ~ druganxifree + drugjoyzepam + therapyCBT) has four parameters: one regression
 coefficient for each of the three contrasts, and one more for the intercept. So the degrees of
-freedom associated with the difference between these two models is df1 “ 4 ´ 2 “ 2.
+freedom associated with the difference between these two models is df1 = 4 ´ 2 = 2.
 
 
 What about the case when there doesn’t seem to be a null model? For instance, you might
@@ -1920,7 +1920,7 @@ be thinking of the F-test that shows up when you select ‘F Test‘ under the �
 However, that is still a comparison between two models. The null model is the trivial model
 that only includes 1 regression coefficient, for the intercept term. The alternative model contains
 K ` 1 regression coefficients, one for each of the K predictor variables and one more for the
-intercept. So the df value that you see in this F test is equal to df1 “ K ` 1 ´ 1 “ K.
+intercept. So the df value that you see in this F test is equal to df1 = K ` 1 ´ 1 = K.
 
 What about the second df value that appears in the F-test? This always refers to the degrees
 of freedom associated with the residuals. It is possible to think of this in terms of parameters
@@ -1931,17 +1931,17 @@ what you’re really doing is specifying that some of the numbers need to perfec
 data. If your model has K predictors and an intercept, then you’ve specified K ` 1 numbers.
 So, without bothering to figure out exactly how this would be done, how many more numbers do
 you think are going to be needed to transform a K `1 parameter regression model into a perfect
-re-description of the raw data? If you found yourself thinking that pK ` 1q ` pN ´ K ´ 1q “ N,
+re-description of the raw data? If you found yourself thinking that pK ` 1q ` pN ´ K ´ 1q = N,
 and so the answer would have to be N ´ K ´ 1, well done! That’s exactly right. In principle
 you can imagine an absurdly complicated regression model that includes a parameter for every
 single data point, and it would of course provide a perfect description of the data. This model
 would contain N parameters in total, but we’re interested in the difference between the number
 of parameters required to describe this full model (i.e. N) and the number of parameters used
 by the simpler regression model that you’re actually interested in (i.e., K `1), and so the second
-degrees of freedom in the F test is df2 “ N ´ K ´ 1, where K is the number of predictors (in
+degrees of freedom in the F test is df2 = N ´ K ´ 1, where K is the number of predictors (in
 a regression model) or the number of contrasts (in an ANOVA). In the example I gave above,
-there are N “ 18 observations in the data set and K ` 1 “ 4 regression coefficients associated
-with the ANOVA model, so the degrees of freedom for the residuals is df2 “ 18 ´ 4 “ 14.
+there are N = 18 observations in the data set and K ` 1 = 4 regression coefficients associated
+with the ANOVA model, so the degrees of freedom for the residuals is df2 = 18 ´ 4 = 14.
 
 
 
@@ -2256,9 +2256,9 @@ using contrasts, let’s suppose you’ve done your ANOVA and it turns out that 
 significant effects. Because of the fact that the F-tests are “omnibus” tests that only really test
 the null hypothesis that there are no differences among groups, obtaining a significant effect
 doesn’t tell you which groups are different to which other ones. We discussed this issue back in
-Chapter 13, and in that chapter our solution was to run t-tests for all possible pairs of groups,
+Chapter <font color="blue"><b>13</b></font>, and in that chapter our solution was to run t-tests for all possible pairs of groups,
 making corrections for multiple comparisons (e.g., Bonferroni, Holm) to control the Type I error
-rate across all comparisons. The methods that we used back in Chapter 13 have the advantage
+rate across all comparisons. The methods that we used back in Chapter <font color="blue"><b>13</b></font> have the advantage
 of being relatively simple and being the kind of tools that you can use in a lot of different
 situations where you’re testing multiple hypotheses, but they’re not necessarily the best choices
 if you’re interested in doing efficient post hoc testing in an ANOVA context. There are actually
@@ -2305,7 +2305,7 @@ term that you want to run the post hoc tests for. For example, if we were lookin
 hoc tests for the main effects but not the interaction, we would open up the ‘Post Hoc Tests’
 option in the ANOVA analysis screen, move the drug and therapy variables across to the box on
 the right, and then select the ‘Tukey’ checkbox in the list of possible post hoc corrections that
-could be applied. This, along with the corresponding results table, is shown in Figure 14.24
+could be applied. This, along with the corresponding results table, is shown in Figure <font color="blue"><b>14.24</b></font>
 
 The output shown in the ‘Post Hoc Tests’ results table is (I hope) pretty straightforward.
 The first comparison, for example, is the Anxifree versus placebo difference, and the first part
@@ -2350,7 +2350,7 @@ etc
 
 There are quite a lot of these comparisons that you need to consider. So, when we run
 the Tukey post hoc analysis for this ANOVA model, we see that it has made a lot of pairwise
-comparisons (19 in total), as shown in Figure 14.25. You can see that it looks pretty similar to
+comparisons (19 in total), as shown in Figure <font color="blue"><b>14.25</b></font>. You can see that it looks pretty similar to
 before, but with a lot more comparisons made.
 
 <figure>
@@ -2366,7 +2366,7 @@ before, but with a lot more comparisons made.
 
 Following on from the previous sections on contrasts and post hoc tests in ANOVA, I think
 the method of planned comparisons is important enough to deserve a quick discussion. In our
-discussions of multiple comparisons, in the previous section and back in Chapter 13, I’ve been
+discussions of multiple comparisons, in the previous section and back in Chapter <font color="blue"><b>13</b></font>, I’ve been
 assuming that the tests you want to run are genuinely post hoc. For instance, in our drugs
 example above, maybe you thought that the drugs would all have different effects on mood (i.e.,
 you hypothesised a main effect of drug), but you didn’t have any specific hypothesis about how
@@ -2430,7 +2430,7 @@ coffee might contain "real" sugar or it might contain "fake" sugar (i.e., artifi
 it might contain "none" at all, so the sugar variable is a three level factor. Our outcome variable
 is a continuous variable that presumably refers to some psychologically sensible measure of the
 extent to which someone is “babbling”. The details don’t really matter for our purpose. Take
-a look at the data in the jamovi spreadsheet view, as in Figure 14.26.
+a look at the data in the jamovi spreadsheet view, as in Figure <font color="blue"><b>14.26</b></font>.
 
 
 
@@ -2441,13 +2441,13 @@ factor levels
 <img src="images/Figure167.PNG" alt="Figure 14.26" />
 </figure>
 
-Looking at the table of means in Figure 14.26 we get a strong impression that there are
+Looking at the table of means in Figure <font color="blue"><b>14.26</b></font> we get a strong impression that there are
 differences between the groups. This is especially true when we compare these means to the
 standard deviations for the babble variable. Across groups, this standard deviation varies from
 .14 to .71, which is fairly small relative to the differences in group means.8 Whilst this at first
 may seem like a straightforward factorial ANOVA, a problem arises when we look at how many
 observations we have in each group. See the different Ns for different groups shown in Figure
-14.26. This violates one of our original assumptions, namely that the number of people in each
+<font color="blue"><b>14.26</b></font>. This violates one of our original assumptions, namely that the number of people in each
 group is the same. We haven’t really discussed how to handle this situation.
 
 
@@ -2562,7 +2562,7 @@ babble ~ sugar + milk + sugar*milk, and the corresponding hypothesis test is:
 Type III sum of squares is the default hypothesis testing method used by jamovi ANOVA,
 so to run a Type I sum of squares analysis we have to select ‘Type 1’ in the ‘Sum of squares’
 selection box in the jamovi ‘ANOVA’ - ‘Model’ options. This gives us the ANOVA table shown
-in Figure 14.27.
+in Figure <font color="blue"><b>14.27</b></font>.
 
 
 <figure>
@@ -2579,7 +2579,7 @@ reason to prefer one ordering over another. This is presumably the case for our 
 problem. Should we add milk first or sugar first? It feels exactly as arbitrary as a data analysis
 question as it does as a coffee-making question. There may in fact be some people with firm
 opinions about ordering, but it’s hard to imagine a principled answer to the question. Yet, look
-what happens when we change the ordering, as in Figure 14.28.
+what happens when we change the ordering, as in Figure <font color="blue"><b>14.28</b></font>.
 
 
 <figure>
@@ -2745,10 +2745,10 @@ main effects that make it up. When characterised in this fashion, the null hypot
 don’t make much sense at all.
 
 Later on, we’ll see that Type III tests can be redeemed in some contexts, but first let’s take
-a look at the ANOVA results table using Type III sum of squares, see Figure 14.29.
+a look at the ANOVA results table using Type III sum of squares, see Figure <font color="blue"><b>14.29</b></font>.
 
 But be aware, one of the perverse features of the Type III testing strategy is that typically the
-results turn out to depend on the contrasts that you use to encode your factors (see Section 14.7
+results turn out to depend on the contrasts that you use to encode your factors (see Section <font color="blue"><b>14.7</b></font>
 if you’ve forgotten what the different types of contrasts are).11
 
 Okay, so if the p-values that typically come out of Type III analyses (but not in jamovi)
@@ -2927,7 +2927,7 @@ Finally, the test for the interaction sugar*milk is:
 
 Running the tests are again straightforward. Just select ‘Type 2’ in the ‘Sum of squares’ 
 selection box in the jamovi ‘ANOVA’ - ‘Model’ options, This gives us the ANOVA table  shown in
-Figure 14.30.
+Figure <font color="blue"><b>14.30</b></font>.
 
 
 <figure>
@@ -2958,7 +2958,7 @@ are probably a better choice than Type I or Type III.13
 jamovi also provides the effect sizes η
 2 and partial η
 2 when you select these options, as in
-Figure 14.30. However, when you’ve got an unbalanced design there’s a bit of extra complexity
+Figure <font color="blue"><b>14.30</b></font>. However, when you’ve got an unbalanced design there’s a bit of extra complexity
 involved.
 
 If you remember back to our very early discussions of ANOVA, one of the key ideas behind

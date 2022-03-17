@@ -16,10 +16,10 @@
 
 Now that we’ve covered the basic theory behind hypothesis testing it’s time to start looking
 at specific tests that are commonly used in psychology. So where should we start? Not every textbook agrees on where to start, 
-but I’m going to start with “χ2 tests” (this chapter,pronounced “chi-square” <a href="#note1">[1]</a>) and “t-tests” (Chapter 11). 
+but I’m going to start with “\(\chi^2\) tests” (this chapter,pronounced “chi-square” <a href="#note1">[1]</a>) and “t-tests” (Chapter <font color="blue"><b>11</b></font>). 
 Both of these tools are very frequently
-used in scientific practice, and whilst they’re not as powerful as “regression” (Chapter 12) and
-“analysis of variance” (Chapter 13) they’re much easier to understand.
+used in scientific practice, and whilst they’re not as powerful as “regression” (Chapter <font color="blue"><b>12</b></font>) and
+“analysis of variance” (Chapter <font color="blue"><b>13</b></font>) they’re much easier to understand.
 
 
 The term “categorical data” is just another name for “nominal scale data”. It’s nothing that
@@ -29,10 +29,10 @@ categorical data analysis refers to a collection of tools that you can use when 
 nominal scale. However, there are a lot of different tools that can be used for categorical data
 analysis, and this chapter covers only a few of the more common ones.
 
-<h2> 10.1 The χ2(chi-square) goodness-of-fit test </h2>
+<h2> 10.1 The \(\chi^2\)(chi-square) goodness-of-fit test </h2>
 
 
-The χ2 goodness-of-fit test is one of the oldest hypothesis tests around. It was invented by
+The \(\chi^2\) goodness-of-fit test is one of the oldest hypothesis tests around. It was invented by
 Karl Pearson around the turn of the century 
 <a href="https://link.springer.com/chapter/10.1007/978-1-4612-4380-9_2"  target="_blank"><font color="blue">(Pearson 1900)</font></a>
 , with some corrections made later
@@ -166,7 +166,7 @@ it using mathematical notation.
 As the last section indicated, our research hypothesis is that “people don’t choose cards
 randomly”. What we’re going to want to do now is translate this into some statistical hypotheses
 and then construct a statistical test of those hypotheses. The test that I’m going to describe to
-you is Pearson’s χ2
+you is Pearson’s \(\chi^2\)
 (chi-square) goodness-of-fit test, and as is so often the case we have
 to begin by carefully constructing our null hypothesis. In this case, it’s pretty easy. First, let’s
 state the null hypothesis in words:
@@ -347,7 +347,7 @@ In effect, what we’ve got here are four different “error” scores, each one
 “mistake” the null hypothesis made when we tried to use it to predict our observed frequencies.
 So, in order to convert this into a useful test statistic, one thing we could do is just add these
 numbers up. The result is called the goodness-of-fit statistic, conventionally referred to either
-as χ2
+as \(\chi^2\)
 (chi-square) or GOF. We can calculate it as follows:
 
 
@@ -362,7 +362,7 @@ This gives us a value of 8.44.
 
 <table width="100%" border="1" ><caption></caption>
 	<tr>
-		<td > If we let k refer to the total number of categories (i.e., k “ 4 for our cards data), then the χ2
+		<td > If we let k refer to the total number of categories (i.e., k = 4 for our cards data), then the \(\chi^2\)
 statistic is given by:
 $$\chi^2 = \sum_{i=1}^{k}  \frac{(O_i-E_i)^2}{E_i}$$
 Intuitively, it’s clear that if \(\chi^2\)
@@ -376,7 +376,7 @@ null.
 </table>
 
 
-As we’ve seen from our calculations, in our cards data set we’ve got a value of χ2 = 8.44. So
+As we’ve seen from our calculations, in our cards data set we’ve got a value of \(\chi^2\) = 8.44. So
 now the question becomes is this a big enough value to reject the null?
 
 
@@ -384,13 +384,13 @@ now the question becomes is this a big enough value to reject the null?
 <h3> 10.1.4 The sampling distribution of the GOF statistic </h3>
 
 
-To determine whether or not a particular value of χ2
+To determine whether or not a particular value of \(\chi^2\)
 is large enough to justify rejecting the
-null hypothesis, we’re going to need to figure out what the sampling distribution for χ2 would
+null hypothesis, we’re going to need to figure out what the sampling distribution for \(\chi^2\) would
 be if the null hypothesis were true. So that’s what I’m going to do in this section. I’ll show you
 in a fair amount of detail how this sampling distribution is constructed, and then, in the next
 section, use it to build up a hypothesis test. If you want to cut to the chase and are willing to
-take it on faith that the sampling distribution is a χ2
+take it on faith that the sampling distribution is a \(\chi^2\)
 (chi-square) distribution with k - 1
 degrees of freedom, you can skip the rest of this section. However, if you want to understand
 why the goodness-of-fit test works the way it does, read on.
@@ -450,7 +450,7 @@ next section<a href="#note3">[3]</a>.
 
 
 <figure>
-<figcaption>Figure 10.1: χ2
+<figcaption>Figure 10.1: \(\chi^2\)
 (chi-square) distributions with different values for the “degrees of freedom”.
 </figcaption>
 <img src="images/Figure75.PNG" alt="Figure 10.1" />
@@ -459,8 +459,8 @@ next section<a href="#note3">[3]</a>.
 
 
 
-When I introduced the chi-square distribution in Section 7.6, I was a bit vague about what
-“degrees of freedom” actually means. Obviously, it matters. Looking at Figure 10.1, you can
+When I introduced the chi-square distribution in Section 7.6</b></font>, I was a bit vague about what
+“degrees of freedom” actually means. Obviously, it matters. Looking at Figure <font color="blue"><b>10.1</b></font>, you can
 see that if we change the degrees of freedom then the chi-square distribution changes shape quite
 substantially. But what exactly is it? Again, when I introduced the distribution and explained
 its relationship to the normal distribution, I did offer an answer: it’s the number of “normally
@@ -485,7 +485,7 @@ A slightly different way of thinking about it is to notice that there are four p
 we’re interested in (again, corresponding to the four different categories), but these probabilities
 must sum to one, which imposes a constraint. Therefore the degrees of freedom is 4 - 1 = 3.
 Regardless of whether you want to think about it in terms of the observed frequencies or in
-terms of the probabilities, the answer is the same. In general, when running the χ2(chi-square)
+terms of the probabilities, the answer is the same. In general, when running the \(\chi^2\)(chi-square)
 goodness-of-fit test for an experiment involving k groups, then the degrees of freedom will be
 k - 1.
 
@@ -494,39 +494,39 @@ k - 1.
 
 
 The final step in the process of constructing our hypothesis test is to figure out what the
-rejection region is. That is, what values of χ2 would lead us to reject the null hypothesis. As we
-saw earlier, large values of χ2
+rejection region is. That is, what values of \(\chi^2\) would lead us to reject the null hypothesis. As we
+saw earlier, large values of \(\chi^2\)
 imply that the null hypothesis has done a poor job of predicting
-the data from our experiment, whereas small values of χ2
+the data from our experiment, whereas small values of \(\chi^2\)
 imply that it’s actually done pretty
 well. Therefore, a pretty sensible strategy would be to say there is some critical value such that
-if χ2
-is bigger than the critical value we reject the null, but if χ2
+if \(\chi^2\)
+is bigger than the critical value we reject the null, but if \(\chi^2\)
 is smaller than this value we
-retain the null. In other words, to use the language we introduced in Chapter 9 the chi-square
+retain the null. In other words, to use the language we introduced in Chapter <font color="blue"><b>9</b></font> the chi-square
 goodness-of-fit test is always a one-sided test. Right, so all we have to do is figure out what
 this critical value is. And it’s pretty straightforward. If we want our test to have significance
-level of α “ .05 (that is, we are willing to tolerate a Type I error rate of 5%), then we have to
-choose our critical value so that there is only a 5% chance that χ2
+level of α = .05 (that is, we are willing to tolerate a Type I error rate of 5%), then we have to
+choose our critical value so that there is only a 5% chance that \(\chi^2\)
 could get to be that big if
-the null hypothesis is true. This is illustrated in Figure 10.2.
+the null hypothesis is true. This is illustrated in Figure <font color="blue"><b>10.2</b></font>.
 
 
 Ah but, I hear you ask, how do I find the critical value of a chi-square distribution with k´1
 degrees of freedom? Many many years ago when I first took a psychology statistics class we
-used to look up these critical values in a book of critical value tables, like the one in Figure 10.3.
-Looking at this Figure, we can see that the critical value for a χ2 distribution with 3 degrees of freedom, and p=0.05 is 7.815.
+used to look up these critical values in a book of critical value tables, like the one in Figure <font color="blue"><b>10.3</b></font>.
+Looking at this Figure, we can see that the critical value for a \(\chi^2\) distribution with 3 degrees of freedom, and p=0.05 is 7.815.
 
-So, if our calculated χ2
+So, if our calculated \(\chi^2\)
 statistic is bigger than the critical value of 7.815, then we can reject
 the null hypothesis (remember that the null hypothesis, H0, is that all four suits are chosen
-with equal probability). Since we actually already calculated that before (i.e., χ2 = 8.44) we
-can reject the null hypothesis. And that’s it, basically. You now know “Pearson’s χ2
+with equal probability). Since we actually already calculated that before (i.e., \(\chi^2\) = 8.44) we
+can reject the null hypothesis. And that’s it, basically. You now know “Pearson’s \(\chi^2\)
 test for the goodness-of-fit”. Lucky you.
 
 
 <figure>
-<figcaption>Figure 10.2: Illustration of how the hypothesis testing works for the χ2 (chi-square) goodness of-fit test.
+<figcaption>Figure 10.2: Illustration of how the hypothesis testing works for the \(\chi^2\) (chi-square) goodness of-fit test.
 </figcaption>
 <img src="images/Figure76.PNG" alt="Figure 10.2" />
 </figure>
@@ -542,11 +542,11 @@ main ‘Analyses’ toolbar select ‘Frequencies’ - ‘One Sample Proportion 
 Then in the analysis window that appears move the variable you want to analyse (choice 1
 across into the ‘Variable’ box. Also, click on the ‘Expected counts’ check box so that these are
 shown on the results table. When you have done all this, you should see the analysis results in
-jamovi as in Figure 10.4. No surprise then that jamovi provides the same expected counts and
+jamovi as in Figure <font color="blue"><b>10.4</b></font>. No surprise then that jamovi provides the same expected counts and
 statistics that we calculated by hand above, with a χ
 2 value of 8.44 with 3 d.f. and p=0.038.
 Note that we don’t need to look up a critical p-value threshold value any more, as jamovi gives
-us the actual p-value of the calculated χ2 for 3 d.f.
+us the actual p-value of the calculated \(\chi^2\) for 3 d.f.
 
 <figure>
 <figcaption>Figure 10.3: Table of critical values for the chi-square distribution
@@ -556,7 +556,7 @@ us the actual p-value of the calculated χ2 for 3 d.f.
 
 
 <figure>
-<figcaption>Figure 10.4: A χ2 One Sample Proportion Test in jamovi, with table showing both observed
+<figcaption>Figure 10.4: A \(\chi^2\) One Sample Proportion Test in jamovi, with table showing both observed
 and expected frequencies and proportions.
 </figcaption>
 <img src="images/Figure78.PNG" alt="Figure 10.4" />
@@ -576,14 +576,14 @@ to be hearts, 30% to be diamonds, 20% to be spades and 20% to be clubs. In other
 would expect hearts and diamonds to appear 1.5 times more often than spades and clubs (the
 ratio 30% : 20% is the same as 1.5 : 1). This seems like a silly theory to me, and it’s pretty
 easy to test this explicitly specified null hypothesis with the data in our jamovi analysis. In the
-analysis window (labelled ‘Proportion Test (N Outcomes)’ in Figure 10.4 you can expand the
+analysis window (labelled ‘Proportion Test (N Outcomes)’ in Figure <font color="blue"><b>10.4</b></font> you can expand the
 options for ‘Expected Proportions’. When you do this, there are options for entering different
 ratio values for the variable you have selected, in our case this is choice 1. Change the ratio to
-reflect the new null hypothesis, as in Figure 10.5, and see how the results change.
+reflect the new null hypothesis, as in Figure <font color="blue"><b>10.5</b></font>, and see how the results change.
 
 
 <figure>
-<figcaption>Figure 10.5: Changing the expected proportions in the χ2 One Sample Proportion Test in jamovi
+<figcaption>Figure 10.5: Changing the expected proportions in the \(\chi^2\) One Sample Proportion Test in jamovi
 </figcaption>
 <img src="images/Figure79.PNG" alt="Figure 10.5" />
 </figure>
@@ -613,9 +613,9 @@ The expected counts are now:
 	</tr>
 </table>
 
-and the χ2
+and the \(\chi^2\)
 statistic is 4.74, 3 d.f., p = 0.182. Now, the results of our updated hypotheses and
-the expected frequencies are different from what they were last time. As a consequence our χ2
+the expected frequencies are different from what they were last time. As a consequence our \(\chi^2\)
 test statistic is different, and our p-value is different too. Annoyingly, the p-value is .182, so we
 can’t reject the null hypothesis (look back at section 9.5 to remind yourself why). Sadly, despite
 the fact that the null hypothesis corresponds to a very silly theory, these data don’t provide
@@ -641,7 +641,7 @@ something like this:
 Of the 200 participants in the experiment, 64 selected hearts for their first choice, 51
 selected diamonds, 50 selected spades, and 35 selected clubs. A chi-square goodnessof-fit test 
 was conducted to test whether the choice probabilities were identical for
-all four suits. The results were significant (χ2(3) = 8.44, p &lt; .05), suggesting that
+all four suits. The results were significant (\(\chi^2\)(3) = 8.44, p &lt; .05), suggesting that
 people did not select suits purely at random.
 </dd>
 </dl>
@@ -670,8 +670,8 @@ how it works (since it’s covered in most intro stats classes). However, it’s
 idea to be explicit about stating the null hypothesis (briefly!) because the null hypothesis
 can be different depending on what you’re using the test for. For instance, in the cards
 example my null hypothesis was that all the four suit probabilities were identical (i.e.,
-P1 “ P2 “ P3 “ P4 “ 0.25), but there’s nothing special about that hypothesis. I could
-just as easily have tested the null hypothesis that P1 “ 0.7 and P2 “ P3 “ P4 “ 0.1
+P1 = P2 = P3 = P4 = 0.25), but there’s nothing special about that hypothesis. I could
+just as easily have tested the null hypothesis that P1 = 0.7 and P2 = P3 = P4 = 0.1
 using a goodness-of-fit test. So it’s helpful to the reader if you explain to them what your
 null hypothesis was. Also, notice that I described the null hypothesis in words, not in
 maths. That’s perfectly acceptable. You can describe it in maths if you like, but since
@@ -684,7 +684,7 @@ that the result was significant, I included a “stat block” (i.e., the dense 
 in the parentheses) which reports all the “key” statistical information. For
 the chi-square goodness-of-fit test, the information that gets reported is the test statistic
 (that the goodness-of-fit statistic was 8.44), the information about the distribution used in
-the test (χ2 with 3 degrees of freedom which is usually shortened to χ2(3)), and then the
+the test (\(\chi^2\) with 3 degrees of freedom which is usually shortened to \(\chi^2\)(3)), and then the
 information about whether the result was significant (in this case p ă .05). The particular
 information that needs to go into the stat block is different for every test, and so each time
 I introduce a new test I’ll show you what the stat block should look like.<a href="#note6">[6]</a> However the
@@ -724,12 +724,12 @@ the human reader.
 
 If you’ve been reading very closely, and are as much of a mathematical pedant as I am, there is
 one thing about the way I wrote up the chi-square test in the last section that might be bugging
-you a little bit. There’s something that feels a bit wrong with writing “χ2(3) = 8.44”, you might
+you a little bit. There’s something that feels a bit wrong with writing “\(\chi^2\)(3) = 8.44”, you might
 be thinking. After all, it’s the goodness-of-fit statistic that is equal to 8.44, so shouldn’t I have
-written X2 = 8.44 or maybe GOF“ 8.44? This seems to be conflating the sampling distribution
-(i.e., χ2 with df = 3) with the test statistic (i.e., X2). Odds are you figured it was a typo,
-since χ and X look pretty similar. Oddly, it’s not. Writing χ2(3)= 8.44 is essentially a highly
-condensed way of writing “the sampling distribution of the test statistic is χ2(3), and the value
+written X2 = 8.44 or maybe GOF= 8.44? This seems to be conflating the sampling distribution
+(i.e., \(\chi^2\) with df = 3) with the test statistic (i.e., X2). Odds are you figured it was a typo,
+since χ and X look pretty similar. Oddly, it’s not. Writing \(\chi^2\)(3)= 8.44 is essentially a highly
+condensed way of writing “the sampling distribution of the test statistic is \(\chi^2\)(3), and the value
 of the test statistic is 8.44”
 
 
@@ -748,12 +748,12 @@ Pearson goodness-of-fit test and the G-test both test the same null hypothesis, 
 distribution is exactly the same (i.e., chi-square with k - 1 degrees of freedom). If I’d done a
 G-test for the cards data rather than a goodness-of-fit test, then I’d have ended up with a test
 statistic of G = 8.65, which is slightly different from the \(X_2 = 8.44\) value that I got earlier
-and which produces a slightly smaller p-value of p “ .034. Suppose that the convention was
+and which produces a slightly smaller p-value of p = .034. Suppose that the convention was
 to report the test statistic, then the sampling distribution, and then the p-value. If that were
 true, then these two situations would produce different stat blocks: my original result would be
-written \(X_2 = 8.44\), χ2(3), p = .038, whereas the new version using the G-test would be written
-as G = 8.65, χ2(3), p = .034. However, using the condensed reporting standard, the original
-result is written χ2(3) = 8.44, p =.038, and the new one is written χ2(3) = 8.65, p = .034, and
+written \(X_2 = 8.44\), \(\chi^2\)(3), p = .038, whereas the new version using the G-test would be written
+as G = 8.65, \(\chi^2\)(3), p = .034. However, using the condensed reporting standard, the original
+result is written \(\chi^2\)(3) = 8.44, p =.038, and the new one is written \(\chi^2\)(3) = 8.65, p = .034, and
 so it’s actually unclear which test I actually ran.
 
 
@@ -768,8 +768,8 @@ people, published as papers in academic journals, implemented, corrected and mod
 of other people, and then explained to students in textbooks by someone else. As a consequence,
 there’s a lot of test statistics that don’t even have names, and as a consequence they’re just given
 the same name as the corresponding sampling distribution. As we’ll see later, any test statistic
-that follows a χ2 distribution is commonly called a “chi-square statistic”, anything that follows
-a t-distribution is called a “t-statistic”, and so on. But, as the χ2 versus G example illustrates,
+that follows a \(\chi^2\) distribution is commonly called a “chi-square statistic”, anything that follows
+a t-distribution is called a “t-statistic”, and so on. But, as the \(\chi^2\) versus G example illustrates,
 two different things with the same sampling distribution are still, well, different.
 
 
@@ -780,7 +780,7 @@ tests are the goodness-of-fit test and the independence test (Section 10.2), mos
 stats training can probably guess. Nevertheless, it’s something to be aware of.
 
 
-<h2> 10.2 The χ2 test of independence (or association) </h2>
+<h2> 10.2 The \(\chi^2\) test of independence (or association) </h2>
 
 <blockquote>
 <dl>
@@ -955,7 +955,7 @@ $$E_{ij}=C_j \times P_i$$
 Now, this is all very well and good, but we have a problem. Unlike the situation we had with
 the goodness-of-fit test, the null hypothesis doesn’t actually specify a particular value for Pi
 .
-It’s something we have to estimate (Chapter 8) from the data! Fortunately, this is pretty easy
+It’s something we have to estimate (Chapter <font color="blue"><b>8</b></font>) from the data! Fortunately, this is pretty easy
 to do. If 28 out of 180 people selected the flowers, then a natural estimate for the probability of
 choosing flowers is 28{180, which is approximately .16. If we phrase this in mathematical terms,
 what we’re saying is that our estimate for the probability of choosing option i is just the row
@@ -1074,8 +1074,8 @@ goodness-of-fit test in the last section, and since the test of independence isn
 different, you won’t learn anything new by doing it the long way. So instead I’ll go straight to
 showing you the easy way. After you have run the test in jamovi (‘Frequencies’ - ‘Contingency
 Tables’ - ‘Independent Samples’), all you have to do is look underneath the contingency table in
-the jamovi results window and there is the χ2
-statistic for you. This shows a χ2 statistic value
+the jamovi results window and there is the \(\chi^2\)
+statistic for you. This shows a \(\chi^2\) statistic value
 of 10.72, with 2 d.f. and p-value = 0.005.
 
 
@@ -1094,8 +1094,8 @@ more in just a moment.
 This output gives us enough information to write up the result:
 </dt>
 <dd>
-Pearson’s χ2
-revealed a significant association between species and choice (χ2(2) = 10.7, p ă .01).
+Pearson’s \(\chi^2\)
+revealed a significant association between species and choice (\(\chi^2\)(2) = 10.7, p ă .01).
  Robots appeared to be more likely to say that they prefer flowers,
 but the humans were more likely to say they prefer data.
 </dd>
@@ -1135,15 +1135,15 @@ nothing of interest about our research hypothesis due to a big methodological fl
 Okay, time for a little bit of a digression. I’ve been lying to you a little bit so far. There’s a tiny
 change that you need to make to your calculations whenever you only have 1 degree of freedom.
 It’s called the “continuity correction”, or sometimes the Yates correction. Remember what
-I pointed out earlier: the χ2
+I pointed out earlier: the \(\chi^2\)
 test is based on an approximation, specifically on the assumption
 that the binomial distribution starts to look like a normal distribution for large N. One problem
 with this is that it often doesn’t quite work, especially when you’ve only got 1 degree of freedom
 (e.g., when you’re doing a test of independence on a 2 ˆ 2 contingency table). The main reason
 for this is that the true sampling distribution for the X2
 statistic is actually discrete (because
-you’re dealing with categorical data!) but the χ2 distribution is continuous. This can introduce
-systematic problems. Specifically, when N is small and when df “ 1, the goodness-of-fit statistic
+you’re dealing with categorical data!) but the \(\chi^2\) distribution is continuous. This can introduce
+systematic problems. Specifically, when N is small and when df = 1, the goodness-of-fit statistic
 tends to be “too big”, meaning that you actually have a bigger α value than you think (or,
 equivalently, the p values are a bit too small).
 
@@ -1165,7 +1165,7 @@ equivalently, the p values are a bit too small).
 As far as I can tell from reading Yates’ paper, the correction is basically a hack. It’s not
 derived from any principled theory. Rather, it’s based on an examination of the behaviour of
 the test, and observing that the corrected version seems to work better. You can specify this
-correction in jamovi from a check box in the ‘Statistics’ options, where it is called ‘χ2
+correction in jamovi from a check box in the ‘Statistics’ options, where it is called ‘\(\chi^2\)
 continuity
 correction’.
 
@@ -1224,9 +1224,9 @@ are:
 <ul>
 <li>
 Expected frequencies are sufficiently large. Remember how in the previous section we saw
-that the χ2
+that the \(\chi^2\)
 sampling distribution emerges because the binomial distribution is pretty
-similar to a normal distribution? Well, like we discussed in Chapter 7 this is only true
+similar to a normal distribution? Well, like we discussed in Chapter <font color="blue"><b>7</b></font> this is only true
 when the number of observations is sufficiently large. What that means in practice is that
 all of the expected frequencies need to be reasonably big. How big is reasonably big?
 Opinions differ, but the default assumption seems to be that you generally would like to
@@ -1358,7 +1358,7 @@ contingency table. As before, let’s have some notation:
 In order to construct the test Fisher treats both the row and column totals ( \(R_1, R_2, C_1 \text{ and} C_2\) )
 as known, fixed quantities and then calculates the probability that we would have obtained the
 observed frequencies that we did (\(O_{11}, O_{12}, O_{21} and O_{22}\)) given those totals. In the notation
-that we developed in Chapter 7 this is written:
+that we developed in Chapter <font color="blue"><b>7</b></font> this is written:
 
 
 $$P(O_{11}, O_{12}, O_{21}, O_{22} | R_1, R_2, C_1, C_2)$$
@@ -1380,8 +1380,8 @@ This then gives us the p-value.
 You can specify this test in jamovi from a check box in the ‘Statistics’ options of the ‘Contingency Tables’ analysis.
  When you do this with the data from the salem.csv file, the Fisher
 exact test statistic is shown in the results. The main thing we’re interested in here is the p-value,
-which in this case is small enough (p “ .036) to justify rejecting the null hypothesis that people
-on fire are just as happy as people not on fire. See Figure 10.6.
+which in this case is small enough (p = .036) to justify rejecting the null hypothesis that people
+on fire are just as happy as people not on fire. See Figure <font color="blue"><b>10.6</b></font>.
 
 
 
@@ -1426,13 +1426,13 @@ experiment. One way to describe your data is via the following contingency table
 </table>
 
 
-At first pass, you might think that this situation lends itself to the Pearson χ2
+At first pass, you might think that this situation lends itself to the Pearson \(\chi^2\)
 test of independence (as per Section 10.2). However, a little bit of thought reveals that we’ve got a problem.
 We have 100 participants but 200 observations. This is because each person has provided us
 with an answer in both the before column and the after column. What this means is that the
 200 observations aren’t independent of each other. If voter A says “yes” the first time and voter
 B says “no”, then you’d expect that voter A is more likely to say “yes” the second time than
-voter B! The consequence of this is that the usual χ2
+voter B! The consequence of this is that the usual \(\chi^2\)
 test won’t give trustworthy answers due to
 the violation of the independence assumption. Now, if this were a really uncommon situation, I
 wouldn’t be bothering to waste your time talking about it. But it’s not uncommon at all. This
@@ -1479,10 +1479,10 @@ way that we have rewritten the data, it means that we’re now testing the hypot
 row totals and column totals come from the same distribution. Thus, the null hypothesis in
 McNemar’s test is that we have “marginal homogeneity”. That is, the row totals and column
 totals have the same distribution: \(P_a + P_b = P_a + P_c\) and similarly that \(P_c + P_d = P_b + P_d\).
-Notice that this means that the null hypothesis actually simplifies to Pb “ Pc. In other words,
+Notice that this means that the null hypothesis actually simplifies to Pb = Pc. In other words,
 as far as the McNemar test is concerned, it’s only the off-diagonal entries in this table (i.e., b
 and c) that matter! After noticing this, the McNemar test of marginal homogeneity is no
-different to a usual χ2
+different to a usual \(\chi^2\)
 test. After applying the Yates correction, our test statistic becomes:
 
 
@@ -1501,8 +1501,8 @@ $$\chi^2=\frac{(|O_{12}-O_{21}|-0.5)^2}{O_{12}+O_{21}}$$
 
 
 
-and this statistic has a χ2 distribution (approximately) with df = 1. However, remember that
-just like the other χ2
+and this statistic has a \(\chi^2\) distribution (approximately) with df = 1. However, remember that
+just like the other \(\chi^2\)
 tests it’s only an approximation, so you need to have reasonably large
 expected cell counts for it to work.
 
@@ -1520,7 +1520,7 @@ when asked the same question a second time. Notice that each participant appears
 in this data set. Go to the ‘Analyses’ - ‘Frequencies’ - ‘Contingency Tables’ - ‘Paired Samples’
 analysis in jamovi, and move response_before into the ‘Rows’ box, and response_after into the
 ‘Columns’ box. You will then get a contingency table in the results window, with the statistic
-for the McNemar test just below it, see Figure 10.7
+for the McNemar test just below it, see Figure <font color="blue"><b>10.7</b></font>
 
 
 <figure>
@@ -1531,7 +1531,7 @@ for the McNemar test just below it, see Figure 10.7
 
 
 And we’re done. We’ve just run a McNemar’s test to determine if people were just as likely to
-vote AGPP after the ads as they were before hand. The test was significant (χ2
+vote AGPP after the ads as they were before hand. The test was significant (\(\chi^2\)
 (1)= 12.03, p &lt; .001), suggesting that they were not. And, in fact it looks like the ads had a negative effect:
 people were less likely to vote AGPP after seeing the ads. Which makes a lot of sense when you
 consider the quality of a typical political advertisement.
@@ -1600,7 +1600,7 @@ Alternatively, suppose I wanted to know if on average, the frequencies of suit c
 different the second time than the first time. In that situation, what I’m really trying to see is
 if the row totals are different from the column totals. That’s when you use the McNemar test.
 
-The different statistics produced by these different analyses are shown in Figure 10.8. Notice
+The different statistics produced by these different analyses are shown in <font color="blue"><b>Figure 10.8</b></font>. Notice
 that the results are different! These aren’t the same test.
 
 
@@ -1622,13 +1622,13 @@ The key ideas discussed in this chapter are:
 
 <ul>
 <li>
-The χ2
+The \(\chi^2\)
 (chi-square) goodness-of-fit test (Section 10.1) is used when you have a table of
 observed frequencies of different categories, and the null hypothesis gives you a set of
 “known” probabilities to compare them to.
 </li>
 <li>
-The χ2(chi-square) test of independence (Section 10.2) is used when you have a 
+The \(\chi^2\)(chi-square) test of independence (Section 10.2) is used when you have a 
 contingency table (cross-tabulation) of two categorical variables. The null hypothesis is that
 there is no relationship or association between the variables.
 </li>

@@ -61,8 +61,8 @@ the participant which side of the card is now facing upwards. It’s purely a on
 Each person sees only one card and gives only one answer, and at no stage is the participant
 actually in contact with someone who knows the right answer. My data set, therefore, is very
 simple. I have asked the question of N people and some number X of these people have given
-the correct response. To make things concrete, let’s suppose that I have tested N “ 100 people
-and X “ 62 of these got the answer right. A surprisingly large number, sure, but is it large
+the correct response. To make things concrete, let’s suppose that I have tested N = 100 people
+and X = 62 of these got the answer right. A surprisingly large number, sure, but is it large
 enough for me to feel safe in claiming I’ve found evidence for ESP? This is the situation where
 hypothesis testing comes in useful. However, before we talk about how to test hypotheses, we
 need to be clear about what we mean by hypotheses.
@@ -233,7 +233,7 @@ counter-intuitive for a lot of people. Because what I’m about to do is invent 
 hypothesis (the “null” hypothesis, \( H_0 \) ) that corresponds to the exact opposite of what I want
 to believe, and then focus exclusively on that almost to the neglect of the thing I’m actually
 interested in (which is now called the “alternative” hypothesis, H1). In our ESP example, the
-null hypothesis is that θ “ 0.5, since that’s what we’d expect if ESP didn’t exist. My hope, of
+null hypothesis is that θ = 0.5, since that’s what we’d expect if ESP didn’t exist. My hope, of
 course, is that ESP is totally real and so the alternative to this null hypothesis is θ ‰ 0.5. In
 essence, what we’re doing here is dividing up the possible values of θ into two groups: those
 values that I really hope aren’t true (the null), and those values that I’d be happy with if they
@@ -359,13 +359,13 @@ the moment, and think about the structure of the experiment. Regardless of what 
 numbers are, the form of the data is that X out of N people correctly identified the colour of
 the hidden card. Moreover, let’s suppose for the moment that the null hypothesis really is true,
 that ESP doesn’t exist and the true probability that anyone picks the correct colour is exactly
-θ “ 0.5. What would we expect the data to look like? Well, obviously we’d expect the proportion
+θ = 0.5. What would we expect the data to look like? Well, obviously we’d expect the proportion
 of people who make the correct response to be pretty close to 50%. Or, to phrase this in more
 mathematical terms, we’d say that X{N is approximately 0.5. Of course, we wouldn’t expect
-this fraction to be exactly 0.5. If, for example, we tested N “ 100 people and X “ 53 of them
+this fraction to be exactly 0.5. If, for example, we tested N = 100 people and X = 53 of them
 got the question right, we’d probably be forced to concede that the data are quite consistent
-with the null hypothesis. On the other hand, if X “ 99 of our participants got the question
-right then we’d feel pretty confident that the null hypothesis is wrong. Similarly, if only X “ 3
+with the null hypothesis. On the other hand, if X = 99 of our participants got the question
+right then we’d feel pretty confident that the null hypothesis is wrong. Similarly, if only X = 3
 people got the answer right we’d be similarly confident that the null was wrong. Let’s be a
 little more technical about this. We have a quantity X that we can calculate by looking at our
 data. After looking at the value of X we make a decision about whether to believe that the null
@@ -396,9 +396,9 @@ hypothesis predicts that X is binomially distributed, which is written
 
 $$X \sim Binomial(\theta,N)$$
 
-Since the null hypothesis states that θ “ 0.5 and our experiment has N “ 100 people, we have
-the sampling distribution we need. This sampling distribution is plotted in Figure 9.1. No
-surprises really, the null hypothesis says that X “ 50 is the most likely outcome, and it says
+Since the null hypothesis states that θ = 0.5 and our experiment has N = 100 people, we have
+the sampling distribution we need. This sampling distribution is plotted in Figure <font color="blue"><b>9.1</b></font>. No
+surprises really, the null hypothesis says that X = 50 is the most likely outcome, and it says
 that we’re almost certain to see somewhere between 40 and 60 correct responses.
 
 
@@ -407,7 +407,7 @@ that we’re almost certain to see somewhere between 40 and 60 correct responses
 <figure>
 <figcaption>Figure 9.1: The sampling distribution for our test statistic X when the null hypothesis is true.
 For our ESP scenario this is a binomial distribution. Not surprisingly, since the null hypothesis
-says that the probability of a correct response is θ “ .5, the sampling distribution says that the
+says that the probability of a correct response is θ = .5, the sampling distribution says that the
 most likely value is 50 (out of 100) correct responses. Most of the probability mass lies between
 40 and 60.
 </figcaption>
@@ -422,7 +422,7 @@ this test statistic in such a way that we’re pretty confident that if X is clo
 should retain the null, and if not we should reject it. The question that remains is this. Exactly
 which values of the test statistic should we associate with the null hypothesis, and exactly which
 values go with the alternative hypothesis? In my ESP study, for example, I’ve observed a value
-of X “ 62. What decision should I make? Should I choose to believe the null hypothesis or the
+of X = 62. What decision should I make? Should I choose to believe the null hypothesis or the
 alternative hypothesis?
 
 
@@ -443,7 +443,7 @@ X should be very big or very small in order to reject the null hypothesis
 If the null hypothesis is true, the sampling distribution of X is Binomialp0.5, Nq
 </li>
 <li>
-If α “ .05, the critical region must cover 5% of this sampling distribution.
+If α = .05, the critical region must cover 5% of this sampling distribution.
 </li>
 </ul>
 
@@ -453,12 +453,12 @@ in question describes the probability that we would obtain a particular value of
 hypothesis were actually true. Now, let’s suppose that we chose a critical region that covers
 20% of the sampling distribution, and suppose that the null hypothesis is actually true. What
 would be the probability of incorrectly rejecting the null? The answer is of course 20%. And,
-therefore, we would have built a test that had an α level of 0.2. If we want α “ .05, the critical
+therefore, we would have built a test that had an α level of 0.2. If we want α = .05, the critical
 region is only allowed to cover 5% of the sampling distribution of our test statistic.
 
 As it turns out those three things uniquely solve the problem. Our critical region consists of
-the most extreme values, known as the tails of the distribution. This is illustrated in Figure 9.2.
-If we want α “ .05 then our critical regions correspond to X ď 40 and X ě 60.<a href="#note6">[6]</a> That is, if the
+the most extreme values, known as the tails of the distribution. This is illustrated in Figure <font color="blue"><b>9.2</b></font>.
+If we want α = .05 then our critical regions correspond to X ď 40 and X ě 60.<a href="#note6">[6]</a> That is, if the
 number of people saying “true” is between 41 and 59, then we should retain the null hypothesis.
 If the number is between 0 to 40, or between 60 to 100, then we should reject the null hypothesis.
 The numbers 40 and 60 are often referred to as the critical values since they define the edges
@@ -467,8 +467,8 @@ of the critical region
 
 <figure>
 <figcaption>Figure 9.2: The critical region associated with the hypothesis test for the ESP study, for a
-hypothesis test with a significance level of α “ .05. The plot shows the sampling distribution
-of X under the null hypothesis (i.e., same as Figure 9.1). The grey bars correspond to those
+hypothesis test with a significance level of α = .05. The plot shows the sampling distribution
+of X under the null hypothesis (i.e., same as Figure <font color="blue"><b>9.1</b></font>). The grey bars correspond to those
 values of X for which we would retain the null hypothesis. The blue (darker shaded) bars show
 the critical region, those values of X for which we would reject the null. Because the alternative
 hypothesis is two sided (i.e., allows both θ ă .5 and θ ą .5), the critical region covers both tails
@@ -482,7 +482,7 @@ At this point, our hypothesis test is essentially complete:
 
 <ol>
 <li>
-(1) we choose an α level (e.g., α “ .05;
+(1) we choose an α level (e.g., α = .05;
 </li>
 <li>
 (2) come up with some test statistic (e.g., X) that does a good job (in some meaningful
@@ -499,7 +499,7 @@ null hypothesis is true (in this case, binomial); and then
 
 
 All that we have to do now is calculate the value of the test statistic for the real data (e.g.,
-X “ 62) and then compare it to the critical values to make our decision. Since 62 is greater than
+X = 62) and then compare it to the critical values to make our decision. Since 62 is greater than
 the critical value of 60 we would reject the null hypothesis. Or, to phrase it slightly differently,
 we say that the test has produced a statistically significant result.
 
@@ -545,7 +545,7 @@ or worse-than-chance performance (and there are some people who think
 that). In statistical language this is an example of a two-sided test. It’s called this because
 the alternative hypothesis covers the area on both “sides” of the null hypothesis, and as a
 consequence the critical region of the test covers both tails of the sampling distribution (2.5%
-on either side if α “ .05), as illustrated earlier in Figure 9.2.
+on either side if α = .05), as illustrated earlier in Figure <font color="blue"><b>9.2</b></font>.
 
 
 However, that’s not the only possibility. I might only be willing to believe in ESP if it
@@ -557,7 +557,7 @@ $$H_0: \theta \leq 0.5$$
 $$H_1: \theta \succ 0.5$$
 
 When this happens, we have what’s called a one-sided test and the critical region only covers
-one tail of the sampling distribution. This is illustrated in Figure 9.3.
+one tail of the sampling distribution. This is illustrated in Figure <font color="blue"><b>9.3</b></font>.
 
 
 
@@ -565,7 +565,7 @@ one tail of the sampling distribution. This is illustrated in Figure 9.3.
 <figcaption>Figure 9.3: The critical region for a one sided test. In this case, the alternative hypothesis is
 that θ ą .5 so we would only reject the null hypothesis for large values of X. As a consequence,
 the critical region only covers the upper tail of the sampling distribution, specifically the upper
-5% of the distribution. Contrast this to the two-sided version in Figure 9.2.
+5% of the distribution. Contrast this to the two-sided version in Figure <font color="blue"><b>9.2.
 </figcaption>
 <img src="images/Figure69.PNG" alt="Figure 9.3" />
 </figure>
@@ -591,10 +591,10 @@ One problem with the hypothesis testing procedure that I’ve described is that 
 all between a result that is “barely significant” and those that are “highly significant”.
 For instance, in my ESP study the data I obtained only just fell inside the critical region, so
 I did get a significant effect but it was a pretty near thing. In contrast, suppose that I’d run
-a study in which X “ 97 out of my N “ 100 participants got the answer right. This would
+a study in which X = 97 out of my N = 100 participants got the answer right. This would
 obviously be significant too but my a much larger margin, such that there’s really no ambiguity
 about this at all. The procedure that I have already described makes no distinction between
-the two. If I adopt the standard convention of allowing α “ .05 as my acceptable Type I error
+the two. If I adopt the standard convention of allowing α = .05 as my acceptable Type I error
 rate, then both of these are significant results.
 
 
@@ -626,11 +626,11 @@ When we do that for my original ESP data what we’d get is something like this
 
 <dl>
 <dt>
-When we test the ESP data (X “ 62 successes out of N “ 100 observations), using α levels of
+When we test the ESP data (X = 62 successes out of N = 100 observations), using α levels of
 .03 and above, we’d always find ourselves rejecting the null hypothesis. For α levels of .02 and
 below we always end up retaining the null hypothesis. Therefore, somewhere between .02 and
 .03 there must be a smallest value of α that would allow us to reject the null hypothesis for this
-data. This is the p value. As it turns out the ESP data has p “ .021. In short,
+data. This is the p value. As it turns out the ESP data has p = .021. In short,
 </dt>
 <dd>
 p is defined to be the smallest Type I error rate (α) that you have to be willing to
@@ -647,9 +647,9 @@ In effect, p is a summary of all the possible hypothesis tests that you could ha
 across all possible α values. And as a consequence it has the effect of “softening” our decision
 process. For those tests in which p ď α you would have rejected the null hypothesis, whereas
 for those tests in which p ą α you would have retained the null. In my ESP study I obtained
-X “ 62 and as a consequence I’ve ended up with p “ .021. So the error rate I have to tolerate
-is 2.1%. In contrast, suppose my experiment had yielded X “ 97. What happens to my p value
-now? This time it’s shrunk to p “ 1.36ˆ10´25, which is a tiny, tiny<a href="#note8">[8]</a> Type I error rate. For this
+X = 62 and as a consequence I’ve ended up with p = .021. So the error rate I have to tolerate
+is 2.1%. In contrast, suppose my experiment had yielded X = 97. What happens to my p value
+now? This time it’s shrunk to p = 1.36ˆ10´25, which is a tiny, tiny<a href="#note8">[8]</a> Type I error rate. For this
 second case I would be able to reject the null hypothesis with a lot more confidence, because I
 only have to be “willing” to tolerate a type I error rate of about 1 in 10 trillion trillion in order
 to justify my decision to reject.
@@ -709,15 +709,15 @@ p ă α for a significance level that you chose in advance (e.g., p ă .05).
 To see why this is an issue, the key thing to recognise is that p values are terribly convenient.
 In practice, the fact that we can compute a p value means that we don’t actually have to specify
 any α level at all in order to run the test. Instead, what you can do is calculate your p value and
-interpret it directly. If you get p “ .062, then it means that you’d have to be willing to tolerate
+interpret it directly. If you get p = .062, then it means that you’d have to be willing to tolerate
 a Type I error rate of 6.2% to justify rejecting the null. If you personally find 6.2% intolerable
 then you retain the null. Therefore, the argument goes, why don’t we just report the actual p
 value and let the reader make up their own minds about what an acceptable Type I error rate
 is? This approach has the big advantage of “softening” the decision making process. In fact, if
 you accept the Neyman definition of the p value, that’s the whole point of the p value. We no
-longer have a fixed significance level of α “ .05 as a bright line separating “accept” from “reject”
-decisions, and this removes the rather pathological problem of being forced to treat p “ .051 in
-a fundamentally different way to p “ .049.
+longer have a fixed significance level of α = .05 as a bright line separating “accept” from “reject”
+decisions, and this removes the rather pathological problem of being forced to treat p = .051 in
+a fundamentally different way to p = .049.
 
 This flexibility is both the advantage and the disadvantage to the p value. The reason why a
 lot of people don’t like the idea of reporting an exact p value is that it gives the researcher a bit
@@ -763,13 +763,13 @@ significant or not. It’s the only way to keep ourselves honest
 	<tr>
 		<td> p &lt; .05 </td>
 		<td> * </td>
-		<td> The test was significant at α “ .05  </br> but not at α “ .01 or α “ .001. </td>
+		<td> The test was significant at α = .05  </br> but not at α = .01 or α = .001. </td>
 		<td> Rejected </td>
 	</tr>
 	<tr>
 		<td> p &lt; .01 </td>
 		<td> ** </td>
-		<td> The test was significant at α “ .05  </br> and α “ .01 but not at α “ .001. </td>
+		<td> The test was significant at α = .05  </br> and α = .01 but not at α = .001. </td>
 		<td> Rejected </td>
 	</tr>
 	<tr>
@@ -793,11 +793,11 @@ prevent people choosing their α level after looking at the data
 
 
 Nevertheless, quite a lot of people still prefer to report exact p values. To many people, the
-advantage of allowing the reader to make up their own mind about how to interpret p “ .06
+advantage of allowing the reader to make up their own mind about how to interpret p = .06
 outweighs any disadvantages. In practice, however, even among those researchers who prefer
 exact p values it is quite common to just write p ă .001 instead of reporting an exact value for
 small p. This is in part because a lot of software doesn’t actually print out the p value when it’s
-that small (e.g., SPSS just writes p “ .000 whenever p ă .001), and in part because a very small
+that small (e.g., SPSS just writes p = .000 whenever p ă .001), and in part because a very small
 p value can be kind of misleading. The human mind sees a number like .0000000001 and it’s hard
 to suppress the gut feeling that the evidence in favour of the alternative hypothesis is a near
 certainty. In practice however, this is usually wrong. Life is a big, messy, complicated thing, and
@@ -826,7 +826,7 @@ as one of the statistical analyses available when you hit the ‘Frequencies’ 
 null hypothesis that the response probability is one-half p = .5,<a href="#note9">[9]</a>
  and using data in which x =
 62 of n = 100 people made the correct response, available in the binomialtest.omv data file, we
-get the results shown in Figure 9.4.
+get the results shown in Figure <font color="blue"><b>9.4</b></font>.
 
 
 
@@ -839,7 +839,7 @@ get the results shown in Figure 9.4.
 
 Right now, this output looks pretty unfamiliar to you, but you can see that it’s telling you
 more or less the right things. Specifically, the p-value of 0.02 is less than the usual choice of
-α “ .05, so you can reject the null. We’ll talk a lot more about how to read this sort of output
+α = .05, so you can reject the null. We’ll talk a lot more about how to read this sort of output
 as we go along, and after a while you’ll hopefully find it quite easy to read and understand.
 
 
@@ -847,7 +847,7 @@ as we go along, and after a while you’ll hopefully find it quite easy to read 
 
 
 In previous sections I’ve emphasised the fact that the major design principle behind statistical
-hypothesis testing is that we try to control our Type I error rate. When we fix α “ .05 we are
+hypothesis testing is that we try to control our Type I error rate. When we fix α = .05 we are
 attempting to ensure that only 5% of true null hypotheses are incorrectly rejected. However, this
 doesn’t mean that we don’t care about Type II errors. In fact, from the researcher’s perspective,
 the error of failing to reject the null when it is actually false is an extremely annoying one. With
@@ -862,7 +862,7 @@ about maximising the power of the test. Since power is defined as 1 ´ β, this 
 
 <figure>
 <figcaption>Figure 9.5:  Sampling distribution under the alternative hypothesis for a population parameter
-value of θ “ 0.55. A reasonable proportion of the distribution lies in the rejection region.
+value of θ = 0.55. A reasonable proportion of the distribution lies in the rejection region.
 </figcaption>
 <img src="images/Figure71.PNG" alt="Figure 9.5" />
 </figure>
@@ -871,35 +871,35 @@ value of θ “ 0.55. A reasonable proportion of the distribution lies in the re
 Let’s take a moment to think about what a Type II error actually is. A Type II error
 occurs when the alternative hypothesis is true, but we are nevertheless unable to reject the null
 hypothesis. Ideally, we’d be able to calculate a single number β that tells us the Type II error
-rate, in the same way that we can set α “ .05 for the Type I error rate. Unfortunately, this is a
+rate, in the same way that we can set α = .05 for the Type I error rate. Unfortunately, this is a
 lot trickier to do. To see this, notice that in my ESP study the alternative hypothesis actually
 corresponds to lots of possible values of θ. In fact, the alternative hypothesis corresponds to
 every value of θ except 0.5. Let’s suppose that the true probability of someone choosing the
-correct response is 55% (i.e., θ “ .55). If so, then the true sampling distribution for X is not
+correct response is 55% (i.e., θ = .55). If so, then the true sampling distribution for X is not
 the same one that the null hypothesis predicts, as the most likely value for X is now 55 out of
-100. Not only that, the whole sampling distribution has now shifted, as shown in Figure 9.5.
+100. Not only that, the whole sampling distribution has now shifted, as shown in Figure <font color="blue"><b>9.5</b></font>.
 The critical regions, of course, do not change. By definition the critical regions are based on
 what the null hypothesis predicts. What we’re seeing in this figure is the fact that when the null
 hypothesis is wrong, a much larger proportion of the sampling distribution distribution falls in
 the critical region. And of course that’s what should happen. The probability of rejecting the
-null hypothesis is larger when the null hypothesis is actually false! However θ “ .55 is not the
+null hypothesis is larger when the null hypothesis is actually false! However θ = .55 is not the
 only possibility consistent with the alternative hypothesis. Let’s instead suppose that the true
 value of θ is actually 0.7. What happens to the sampling distribution when this occurs? The
-answer, shown in Figure 9.6, is that almost the entirety of the sampling distribution has now
-moved into the critical region. Therefore, if θ “ 0.7, the probability of us correctly rejecting the
-null hypothesis (i.e., the power of the test) is much larger than if θ “ 0.55. In short, while θ “ .55
-and θ “ .70 are both part of the alternative hypothesis, the Type II error rate is different.
+answer, shown in Figure <font color="blue"><b>9.6</b></font>, is that almost the entirety of the sampling distribution has now
+moved into the critical region. Therefore, if θ = 0.7, the probability of us correctly rejecting the
+null hypothesis (i.e., the power of the test) is much larger than if θ = 0.55. In short, while θ = .55
+and θ = .70 are both part of the alternative hypothesis, the Type II error rate is different.
 
 <figure>
 <figcaption>Figure 9.6: Sampling distribution under the alternative hypothesis for a population parameter
-value of θ “ 0.70. Almost all of the distribution lies in the rejection region.
+value of θ = 0.70. Almost all of the distribution lies in the rejection region.
 </figcaption>
 <img src="images/Figure71.PNG" alt="Figure 9.6" />
 </figure>
 
 What all this means is that the power of a test (i.e., 1 ´ β) depends on the true value of θ.
 To illustrate this, I’ve calculated the expected probability of rejecting the null hypothesis for all
-values of θ, and plotted it in Figure 9.7. This plot describes what is usually called the power
+values of θ, and plotted it in Figure <font color="blue"><b>9.7</b></font>. This plot describes what is usually called the power
 function of the test. It’s a nice summary of how good the test is, because it actually tells you
 the power (1 ´ β) for all possible values of θ. As you can see, when the true value of θ is very
 close to 0.5, the power of the test drops very sharply, but when it is further away, the power is
@@ -910,7 +910,7 @@ large.
 <figure>
 <figcaption>Figure 9.7: The probability that we will reject the null hypothesis, plotted as a function of the
 true value of θ. Obviously, the test is more powerful (greater chance of correct rejection) if the
-true value of θ is very different from the value that the null hypothesis specifies (i.e., θ “ .5).
+true value of θ is very different from the value that the null hypothesis specifies (i.e., θ = .5).
 Notice that when θ actually is equal to .5 (plotted as a black dot), the null hypothesis is in fact
 true and rejecting the null hypothesis in this instance would be a Type I error.
 </figcaption>
@@ -929,7 +929,7 @@ It is inappropriate to be concerned with mice when there are tigers abroad
 (Box 1976, p. 792)</font></a>
 </blockquote>
 
-The plot shown in Figure 9.7 captures a fairly basic point about hypothesis testing. If the
+The plot shown in Figure <font color="blue"><b>9.7</b></font> captures a fairly basic point about hypothesis testing. If the
 true state of the world is very different from what the null hypothesis predicts then your power
 will be very high, but if the true state of the world is similar to the null (but not identical) then
 the power of the test is going to be very low. Therefore, it’s useful to be able to have some way
@@ -938,7 +938,7 @@ does this is called a measure of effect size (e.g., Cohen 1988; Ellis 2010). Eff
 slightly differently in different contexts (and so this section just talks in general terms) but the
 qualitative idea that it tries to capture is always the same. How big is the difference between the
 true population parameters and the parameter values that are assumed by the null hypothesis?
-In our ESP example, if we let θ0 “ 0.5 denote the value assumed by the null hypothesis and let θ
+In our ESP example, if we let θ0 = 0.5 denote the value assumed by the null hypothesis and let θ
 denote the true value, then a simple measure of effect size could be something like the difference
 between the true value and null (i.e., θ ´ θ0), or possibly just the magnitude of this difference,
 abspθ ´ θ0q.
@@ -970,7 +970,7 @@ some situations. So don’t take this table too seriously. It’s a rough guide 
 
 
 true population parameters and the parameter values that are assumed by the null hypothesis?
-In our ESP example, if we let θ0 “ 0.5 denote the value assumed by the null hypothesis and let θ
+In our ESP example, if we let θ0 = 0.5 denote the value assumed by the null hypothesis and let θ
 denote the true value, then a simple measure of effect size could be something like the difference
 between the true value and null (i.e., θ ´ θ0), or possibly just the magnitude of this difference,
 abspθ ´ θ0q.
@@ -981,9 +981,9 @@ and gotten a significant effect when you ran your hypothesis test. Isn’t it en
 that you’ve gotten a significant effect? Surely that’s the point of hypothesis testing? Well, sort
 of. Yes, the point of doing a hypothesis test is to try to demonstrate that the null hypothesis is
 wrong, but that’s hardly the only thing we’re interested in. If the null hypothesis claimed that
-θ “ .5 and we show that it’s wrong, we’ve only really told half of the story. Rejecting the null
-hypothesis implies that we believe that θ ‰ .5, but there’s a big difference between θ “ .51 and
-θ “ .8. If we find that θ “ .8, then not only have we found that the null hypothesis is wrong,
+θ = .5 and we show that it’s wrong, we’ve only really told half of the story. Rejecting the null
+hypothesis implies that we believe that θ ‰ .5, but there’s a big difference between θ = .51 and
+θ = .8. If we find that θ = .8, then not only have we found that the null hypothesis is wrong,
 it appears to be very wrong. On the other hand, suppose we’ve successfully rejected the null
 hypothesis, but it looks like the true value of θ is only .51 (this would only be possible with a
 very large study). Sure, the null hypothesis is wrong but it’s not at all clear that we actually
@@ -1024,9 +1024,9 @@ likely it is that you can discriminate between two hypotheses. If I ran my ESP e
 10 participants and 7 of them correctly guessed the colour of the hidden card you wouldn’t be
 terribly impressed. But if I ran it with 10,000 participants, and 7,000 of them got the answer
 right, you would be much more likely to think I had discovered something. In other words,
-power increases with the sample size. This is illustrated in Figure 9.8, which shows the power of
-the test for a true parameter of θ “ 0.7 for all sample sizes N from 1 to 100, where I’m assuming
-that the null hypothesis predicts that θ0 “ 0.5.
+power increases with the sample size. This is illustrated in Figure <font color="blue"><b>9.8</b></font>, which shows the power of
+the test for a true parameter of θ = 0.7 for all sample sizes N from 1 to 100, where I’m assuming
+that the null hypothesis predicts that θ0 = 0.5.
 
 Because power is important, whenever you’re contemplating running an experiment it would
 be pretty useful to know how much power you’re likely to have. It’s never possible to know
@@ -1060,7 +1060,7 @@ saying about the topic.
 
 <figure>
 <figcaption>Figure 9.8: The power of our test plotted as a function of the sample size N. In this case, the
-true value of θ is 0.7 but the null hypothesis is that θ “ 0.5. Overall, larger N means greater
+true value of θ is 0.7 but the null hypothesis is that θ = 0.5. Overall, larger N means greater
 power. (The small zig-zags in this function occur because of some odd interactions between
 θ, α and the fact that the binomial distribution is discrete, it doesn’t matter for any serious
 purpose).
@@ -1127,7 +1127,7 @@ according to some people at least, we’re not allowed to talk about accepting t
 
 Earlier on in this chapter I was quite emphatic about the fact that you cannot interpret the
 p value as the probability that the null hypothesis is true. NHST is fundamentally a frequentist
-tool (see Chapter 7) and as such it does not allow you to assign probabilities to hypotheses.
+tool (see Chapter <font color="blue"><b>7</b></font>) and as such it does not allow you to assign probabilities to hypotheses.
 The null hypothesis is either true or it is not. The Bayesian approach to statistics interprets
 probability as a degree of belief, so it’s totally okay to say that there is a 10% chance that the
 null hypothesis is true. That’s just a reflection of the degree of confidence that you have in this
@@ -1141,7 +1141,7 @@ for this statement. To talk about “the probability of the null hypothesis” i
 
 Most importantly, this isn’t a purely ideological matter. If you decide that you are a Bayesian
 and that you’re okay with making probability statements about hypotheses, you have to follow
-the Bayesian rules for calculating those probabilities. I’ll talk more about this in Chapter 16,
+the Bayesian rules for calculating those probabilities. I’ll talk more about this in Chapter <font color="blue"><b>16</b></font>,
 but for now what I want to point out to you is the p value is a terrible approximation to the
 probability that H0 is true. If what you want to know is the probability of the null, then the p
 value is not what you’re looking for!
@@ -1165,8 +1165,8 @@ interpreted it. That’s where the biggest trap lies.
 To give an example of this, consider the following example (see Gelman and Stern 2006).
 Suppose I’m running my ESP study and I’ve decided to analyse the data separately for the male
 participants and the female participants. Of the male participants, 33 out of 50 guessed the
-colour of the card correctly. This is a significant effect (p “ .03). Of the female participants,
-29 out of 50 guessed correctly. This is not a significant effect (p “ .32). Upon observing this,
+colour of the card correctly. This is a significant effect (p = .03). Of the female participants,
+29 out of 50 guessed correctly. This is not a significant effect (p = .32). Upon observing this,
 it is extremely tempting for people to start wondering why there is a difference between males
 and females in terms of their psychic abilities. However, this is wrong. If you think about it,
 we haven’t actually run a test that explicitly compares males to females. All we have done
@@ -1174,11 +1174,11 @@ is compare males to chance (binomial test was significant) and compared females 
 (binomial test was non significant). If we want to argue that there is a real difference between
 the males and the females, we should probably run a test of the null hypothesis that there
 is no difference! We can do that using a different hypothesis test,<a href="#note13">[13]</a> but when we do that it
-turns out that we have no evidence that males and females are significantly different (p “ .54).
+turns out that we have no evidence that males and females are significantly different (p = .54).
 Now do you think that there’s anything fundamentally different between the two groups? Of
 course not. What’s happened here is that the data from both groups (male and female) are
 pretty borderline. By pure chance one of them happened to end up on the magic side of the
-p “ .05 line, and the other one didn’t. That doesn’t actually imply that males and females
+p = .05 line, and the other one didn’t. That doesn’t actually imply that males and females
 are different. This mistake is so common that you should always be wary of it. The difference
 between significant and not-significant is not evidence of a real difference. If you want to say
 that there’s a difference between two groups, then you have to test for that difference!
@@ -1228,7 +1228,7 @@ A few issues to consider regarding hypothesis testing (Section 9.9)
 </li>
 </ul>
 
-Later in the book, in Chapter 16, I’ll revisit the theory of null hypothesis tests from a Bayesian
+Later in the book, in Chapter <font color="blue"><b>16</b></font>, I’ll revisit the theory of null hypothesis tests from a Bayesian
 perspective and introduce a number of new tools that you can use if you aren’t particularly fond
 of the orthodox approach. But for now, though, we’re done with the abstract statistical theory,
 and we can start discussing specific data analysis tools.
@@ -1273,17 +1273,17 @@ case of the null hypothesis), many people will disagree. And more to the point, 
 particular weirdness exists so that you’re not caught unawares by it when writing up your own results.
 <p>
 
-<p id="note6">[6] Strictly speaking, the test I just constructed has α “ .057, which is a bit too generous. However, if I’d chosen
+<p id="note6">[6] Strictly speaking, the test I just constructed has α = .057, which is a bit too generous. However, if I’d chosen
 39 and 61 to be the boundaries for the critical region then the critical region only covers 3.5% of the distribution.
 I figured that it makes more sense to use 40 and 60 as my critical values, and be willing to tolerate a 5.7% type I
-error rate, since that’s as close as I can get to a value of α “ .05.
+error rate, since that’s as close as I can get to a value of α = .05.
 <p>
 
 <p id="note7">[7] The internet seems fairly convinced that Ashley said this, though I can’t for the life of me find anyone willing
 to give a source for the claim.
 <p>
 
-<p id="note8">[8] That’s p “ .000000000000000000000000136 for folks that don’t like scientific notation!
+<p id="note8">[8] That’s p = .000000000000000000000000136 for folks that don’t like scientific notation!
 <p>
 
 <p id="note9">[9] Note that the p here has nothing to do with a p value. The p argument in the jamovi binomial test corresponds
@@ -1308,7 +1308,7 @@ treatment. In this way some information about the potential value of a new treat
 <p id="note12">[13] Although this book describes both Neyman’s and Fisher’s definition of the p value, most don’t. Most introductory textbooks will only give you the Fisher version.
 <p>
 
-<p id="note12">[14] In this case, the Pearson chi-square test of independence (Chapter 10) <p>
+<p id="note12">[14] In this case, the Pearson chi-square test of independence (Chapter <font color="blue"><b>10</b></font>) <p>
 
 
 </body>
