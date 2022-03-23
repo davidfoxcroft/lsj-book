@@ -148,7 +148,7 @@ First, let’s start by introducing some notation. We’ll use G to refer to the
 groups. For our data set there are three drugs, so there are \(G = 3\) groups. Next, we’ll use \(N\)
 to refer to the total sample size; there are a total of \(N = 18\) people in our data set. Similarly,
 let’s use \(N_k\) to denote the number of people in the k-th group. In our fake clinical trial, the
-sample size is \(N_k = 6\) for all three groups.1 Finally, we’ll use Y to denote the outcome variable.
+sample size is \(N_k = 6\) for all three groups.<a href="#note1">[1]</a> Finally, we’ll use Y to denote the outcome variable.
 In our case, Y refers to mood change. Specifically, we’ll use Yik to refer to the mood change
 experienced by the i-th member of the k-th group. Similarly, we’ll use \(\bar{Y}\) to be the average
 mood change, taken across all 18 people in the experiment, and \(\bar{Y}_k\) to refer to the average mood
@@ -576,6 +576,8 @@ the F-statistic is basically <a href="#notea">[a]</a>
 </p>
 
 $$F=\frac{\hat{Q}+\hat{\sigma}^2}{\hat{\sigma}^2}$$
+
+
 <p>
 where the true value \(Q = 0\) if the null hypothesis is true, and Q &lt; 0 if the alternative hypothesis
 is true (e.g., <a href="https://lib.hpu.edu.vn/handle/123456789/26735"  target="_blank"><font color="blue">Hays 1994</font></a>, ch. 10). 
@@ -1099,7 +1101,7 @@ $$
 
 
 <p>
-As you can see, the between group calculations are a lot shorter4
+As you can see, the between group calculations are a lot shorter<a href="#note4">[4]</a>
 . Now that we’ve calculated our
 sums of squares values, \(SS_b\) and \(SS_w\), the rest of the ANOVA is pretty painless. The next step
 is to calculate the degrees of freedom. Since we have \(G = 3\) groups and \(N = 18\) observations in
@@ -1165,7 +1167,7 @@ to a particular value of alpha (the null hypothesis rejection region), e.g. \(0.
 2 and 15 degrees of freedom. Doing it this way would give us a threshold F value for an alpha of
 \(0.001\) of \(11.34\). As this is less than our calculated \(F\) value we say that \(p &lt; 0.001\). But those were
 the old days, and nowadays fancy stats software calculates the exact p-value for you. In fact,
-the exact p-value is \(0.000071\). So, unless we’re being extremely conservative about our Type I
+the exact p-value is \(0.000071\). So, unless we’re being <i>extremely</i> conservative about our Type I
 error rate, we’re pretty much guaranteed to reject the null hypothesis.
 </p>
 <p>
@@ -1285,7 +1287,7 @@ To make life easier for you, jamovi can do ANOVA..hurrah! Go to the ‘ANOVA’ 
 analysis, and move the mood.gain variable across so it is in the ‘Dependent Variable’ box, and
 then move the drug variable across so it is in the ‘Fixed Factors’ box. This should give the
 results as shown in Figure <font color="blue"><b>13.3</b></font>.
-5 Note I have also checked the \(\eta^2\)
+<a href="#note5">[5]</a> Note I have also checked the \(\eta^2\)
 checkbox, pronounced “eta”
 squared, under the ‘Effect Size’ option and this is also shown on the results table. We will come
 back to effect sizes a bit later.
@@ -1607,7 +1609,7 @@ In the previous section I hinted that there’s a problem with just running lots
 t-tests. The concern is that, when running these analyses, what we’re doing is going on a “fishing
 expedition”. We’re running lots and lots of tests without much theoretical guidance in the hope
 that some of them come up significant. This kind of theory-free search for group differences is
-referred to as post hoc analysis (“post hoc” being Latin for “after this”).
+referred to as post hoc analysis (“post hoc” being Latin for “after this”).<a href="#note6">[6]</a>
 </p>
 <p>
 It’s okay to run post hoc analyses, but a lot of care is required. For instance, the analysis
@@ -1654,7 +1656,7 @@ $$p_j^{'}=m \times p$$
 <dt>
 And therefore, if you’re using the Bonferroni correction, you would reject the null hypothesis if
 \( p_j^{'} &lt; \alpha \). The logic behind this correction is very straightforward. We’re doing m different tests,
-so if we arrange it so that each test has a Type I error rate of at most \(\frac{\alpha}{m}\), then the total Type
+so if we arrange it so that each test has a Type I error rate of at most \(\frac{\alpha}{m}\), then the <i>total</i> Type
 I error rate across these tests cannot be larger than \( \alpha \). That’s pretty simple, so much so that in
 the original paper, the author writes,
 </dt>
@@ -2774,6 +2776,38 @@ is <a href="https://www.scientificamerican.com/article/language-and-the-brain/" 
 (2000)</font></a>. It’s not a good book for beginners, but it’s an excellent book for more advanced readers
 who are interested in understanding the mathematics behind ANOVA.
 </p>
+
+<p id="note1">[1] When all groups have the same number of observations, the experimental design is said to be “balanced”.
+Balance isn’t such a big deal for one-way ANOVA, which is the topic of this chapter. It becomes more important
+when you start doing more complicated ANOVAs.
+
+
+<p id="note2">[2] SS_w is also referred to in an independent ANOVA as the error variance, or \(SS_{error}\)
+
+<p id="note3">[3]  Or, to be precise, party like “it’s 1899 and we’ve got no friends and nothing better to do with our time than
+do some calculations that wouldn’t have made any sense in 1899 because ANOVA didn’t exist until about the
+1920s”.  </p>
+
+<p id="note4">[4] 
+In the Excel clinicaltrial anova.xls the value for SSb worked out to be very slightly different, \(3.45\), than
+that shown in the text above (rounding errors!)  </p>
+
+<p id="note5">[5] The jamovi results are more accurate than the ones in the text above, due to rounding errors.  </p>
+
+
+<p id="note6">[6] 
+If you <i>do</i> have some theoretical basis for wanting to investigate some comparisons but not others, it’s a
+different story. In those circumstances you’re not really running “post hoc” analyses at all, you’re making
+“planned comparisons”. I do talk about this situation later in the book (Section <font color="blue"><b>14.9</b></font>), 
+but for now I want to keep
+things simple.
+ </p>
+
+<p id="note7">[7] It’s worth noting in passing that not all adjustment methods try to do this. What I’ve described here is an
+approach for controlling “family wise Type I error rate”. However, there are other post hoc tests that seek to
+control the “false discovery rate”, which is a somewhat different thing.  </p>
+
+<p id="note8">[8] (n - k) : (number of subjects - number of groups) </p>
 
 
 

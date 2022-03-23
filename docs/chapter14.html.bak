@@ -3086,7 +3086,7 @@ Analysis of Covariance (ANCOVA) (Section <font color="blue">14.5</font>)
 </li>
 <li>
 <p>
-Understanding the linear model underlying ANOVA, including different contrasts (Section <font color="blue">14.6 and <font color="blue">14.7)
+Understanding the linear model underlying ANOVA, including different contrasts (Section <font color="blue">14.6</font> and <font color="blue">14.7</font>)
 </p>
 </li>
 <li>
@@ -3101,6 +3101,97 @@ Factorial ANOVA with unbalanced designs (Section <font color="blue">14.10</font>
 </li>
 </p>
 </ul>
+
+
+<p id="note1">[1] The nice thing about the subscript notation is that it generalises nicely. If our experiment had involved a
+third factor, then we could just add a third subscript. In principle, the notation extends to as many factors as
+you might care to include, but in this book we’ll rarely consider analyses involving more than two factors, and
+never more than three.
+</p>
+
+
+<p id="note2">[2]  Technically, marginalising isn’t quite identical to a regular mean. It’s a weighted average where you take into
+account the frequency of the different events that you’re averaging over. However, in a balanced design, all of
+our cell frequencies are equal by definition so the two are equivalent. We’ll discuss unbalanced designs later, and
+when we do so you’ll see that all of our calculations become a real headache. But let’s ignore this for now.
+ </p>
+
+
+<p id="note3">[3] You may have spotted this already when looking at the main effects analysis in jamovi that we described
+earlier. For the purpose of the explanation in this book I removed the interaction component from the earlier
+model to keep things clean and simple  </p>
+
+
+<p id="note4">[4]  This chapter seems to be setting a new record for the number of different things that the letter R can stand
+for. So far we have R referring to the software package, the number of rows in our table of means, the residuals
+in the model, and now the correlation coefficient in a regression. Sorry. We clearly don’t have enough letters in
+the alphabet. However, I’ve tried pretty hard to be clear on which thing R is referring to in each case </p>
+
+<p id="note5">[5]  Implausibly large, I would think. The artificiality of this data set is really starting to show!
+  </p>
+
+
+<p id="note6">[6]  What’s the difference between treatment and simple contrasts, I hear you ask? Well, as a basic example
+consider a gender main effect, with \(m=0\) and \(f=1\). The coefficient corresponding to the treatment contrast will
+measure the difference in mean between females and males, and the intercept would be the mean of the males.
+However, with a simple contrast, i.e., \(m=-1\) and \(f=1\), the intercept is the average of the means and the main effect
+is the difference of each group mean from the intercept.     </p>
+
+
+<p id="note7">[7]  
+If, for instance, you actually find yourself interested to know if Group A is significantly different from the
+mean of Group B and Group C, then you need to use a different tool (e.g., Scheffe’s method, which is more
+conservative, and beyond the scope of this book). However, in most cases you probably are interested in pairwise
+group differences, so Tukey’s HSD is a pretty useful thing to know about.   </p>
+
+
+<p id="note8">[8]         This discrepancy in standard deviations might (and should) make you wonder if we have a violation of the
+homogeneity of variance assumption. I’ll leave it as an exercise for the reader to double check this using the
+Levene test option.         </p>
+
+
+<p id="note9">[9]  Actually, this is a bit of a lie. ANOVAs can vary in other ways besides the ones I’ve discussed in this book.
+For instance, I’ve completely ignored the difference between fixed-effect models in which the levels of a factor
+are “fixed” by the experimenter or the world, and random-effect models in which the levels are random samples
+from a larger population of possible levels (this book only covers fixed-effect models). Don’t make the mistake of
+thinking that this book, or any other one, will tell you “everything you need to know” about statistics, any more
+than a single book could possibly tell you everything you need to know about psychology, physics or philosophy.
+Life is too complicated for that to ever be true. This isn’t a cause for despair, though. Most researchers get by
+with a basic working knowledge of ANOVA that doesn’t go any further than this book does. I just want you to
+keep in mind that this book is only the beginning of a very long story, not the whole story.
+ </p>
+
+
+<p id="note10">[10]  Or, at the very least, rarely of interest.
+ </p>
+
+
+<p id="note11">[11]  However, in jamovi the results for Type III sum of squares ANOVA are the same regardless of the contrast
+selected, so jamovi is obviously doing something different!
+ </p>
+
+<p id="note12">[12]  Note, of course, that this does depend on the model that the user specified. If the original ANOVA model
+doesn’t contain an interaction term for \(B \times C\), then obviously it won’t appear in either the null or the alternative.
+But that’s true for Types I, II and III. They never include any terms that you didn’t include, but they make
+different choices about how to construct tests for the ones that you did include.
+ </p>
+
+<p id="note13">[13] I find it amusing to note that the default in R is Type I and the default in SPSS and jamovi is Type III. Neither
+of these appeals to me all that much. Relatedly, I find it depressing that almost nobody in the psychological
+literature ever bothers to report which Type of tests they ran, much less the order of variables (for Type I) or
+the contrasts used (for Type III). Often they don’t report what software they used either. The only way I can
+ever make any sense of what people typically report is to try to guess from auxiliary cues which software they
+were using, and to assume that they never changed the default settings. Please don’t do this! Now that you know
+about these issues make sure you indicate what software you used, and if you’re reporting ANOVA results for
+unbalanced data, then specify what Type of tests you ran, specify order information if you’ve done Type I tests
+and specify contrasts if you’ve done Type III tests. Or, even better, do hypotheses tests that correspond to things
+you really care about and then report those! </p>
+
+
+
+
+
+
 
 
 
