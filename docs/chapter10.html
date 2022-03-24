@@ -169,8 +169,8 @@ it using mathematical notation.
 As the last section indicated, our research hypothesis is that “people don’t choose cards
 randomly”. What we’re going to want to do now is translate this into some statistical hypotheses
 and then construct a statistical test of those hypotheses. The test that I’m going to describe to
-you is Pearson’s \(\chi^2\)
-(chi-square) goodness-of-fit test, and as is so often the case we have
+you is <font color="blueviolet"><b>Pearson’s \(\chi^2\)
+(chi-square) goodness-of-fit test</b></font>, and as is so often the case we have
 to begin by carefully constructing our null hypothesis. In this case, it’s pretty easy. First, let’s
 state the null hypothesis in words:
 </p>
@@ -234,7 +234,7 @@ a test statistic. The basic trick that a goodness-of-fit test uses is to constru
 that measures how “close” the data are to the null hypothesis. If the data don’t resemble what
 you’d “expect” to see if the null hypothesis were true, then it probably isn’t true. Okay, if the
 null hypothesis were true, what would we expect to see? Or, to use the correct terminology,
-what are the expected frequencies. There are \(N = 200\) observations, and (if the null is true)
+what are the <font color="blueviolet"><b>expected frequencies</b></font>. There are \(N = 200\) observations, and (if the null is true)
 the probability of any one of them choosing a heart is \(P_3 = .25\), so I guess we’re expecting
 \(200 \times .25 = 50\) hearts, right? Or, more specifically, if we let Ei refer to “the number of category
 i responses that we’re expecting if the null is true”, then
@@ -357,7 +357,7 @@ calculation, but let’s do it anyway:
 In effect, what we’ve got here are four different “error” scores, each one telling us how big a
 “mistake” the null hypothesis made when we tried to use it to predict our observed frequencies.
 So, in order to convert this into a useful test statistic, one thing we could do is just add these
-numbers up. The result is called the goodness-of-fit statistic, conventionally referred to either
+numbers up. The result is called the <font color="blueviolet"><b>goodness-of-fit</b></font> statistic, conventionally referred to either
 as \(\chi^2\)
 (chi-square) or GOF. We can calculate it as follows:
 </p>
@@ -674,13 +674,16 @@ few things that you should note about this description:
 
 <ul>
 <li>
+<p>
 <i>The statistical test is preceded by the descriptive statistics</i>. That is, I told the reader
 something about what the data look like before going on to do the test. In general, this is
 good practice. Always remember that your reader doesn’t know your data anywhere near
 as well as you do. So, unless you describe it to them properly, the statistical tests won’t
 make any sense to them and they’ll get frustrated and cry.
+</p>
 </li>
 <li>
+<p>
 <i>The description tells you what the null hypothesis being tested is</i>. To be honest, writers
 don’t always do this but it’s often a good idea in those situations where some ambiguity
 exists, or when you can’t rely on your readership being intimately familiar with the statistical 
@@ -698,8 +701,10 @@ null hypothesis was. Also, notice that I described the null hypothesis in words,
 maths. That’s perfectly acceptable. You can describe it in maths if you like, but since
 most readers find words easier to read than symbols, most writers tend to describe the
 null using words if they can.
+</p>
 </li>
 <li>
+<p>
 <i>A “stat block” is included</i>. When reporting the results of the test itself, I didn’t just say
 that the result was significant, I included a “stat block” (i.e., the dense mathematical looking part 
 in the parentheses) which reports all the “key” statistical information. For
@@ -712,12 +717,15 @@ I introduce a new test I’ll show you what the stat block should look like.<a h
 general principle is that you should always provide enough information so that the reader
 could check the test results themselves if they really wanted to.
 </li>
+</p>
 <li>
+<p>
 <i>The results are interpreted</i>. In addition to indicating that the result was significant, I
 provided an interpretation of the result (i.e., that people didn’t choose randomly). This
 is also a kindness to the reader, because it tells them something about what they should
 believe about what’s going on in your data. If you don’t include something like this, it’s
 really hard for your reader to understand what’s going on.<a href="#note7">[7]</a>
+</p>
 </li>
 </ul>
 
@@ -1168,10 +1176,10 @@ nothing of interest about our research hypothesis due to a big methodological fl
 <p>
 Okay, time for a little bit of a digression. I’ve been lying to you a little bit so far. There’s a tiny
 change that you need to make to your calculations whenever you only have 1 degree of freedom.
-It’s called the “continuity correction”, or sometimes the Yates correction. Remember what
+It’s called the “continuity correction”, or sometimes the <font color="blue"><b>Yates correction</b></font>. Remember what
 I pointed out earlier: the \(\chi^2\)
 test is based on an approximation, specifically on the assumption
-that the binomial distribution starts to look like a normal distribution for large N. One problem
+that the binomial distribution starts to look like a normal distribution for large \(N\). One problem
 with this is that it often doesn’t quite work, especially when you’ve only got 1 degree of freedom
 (e.g., when you’re doing a test of independence on a \(2 \times 2\) contingency table). The main reason
 for this is that the true sampling distribution for the \(X^{2}\)
@@ -1231,14 +1239,14 @@ and the somewhat superior version, known as Cram´er’s V .
 
 <table width="100%" border="1" ><caption></caption>
 	<tr>
-		<td > Mathematically, they’re very simple. To calculate the φ statistic, you just divide your X2
+		<td > Mathematically, they’re very simple. To calculate the \(\phi\) statistic, you just divide your X2
 value by the sample size, and take the square root:
 
 $$\phi=\sqrt{\frac{X^2}{N}}$$
 
-The idea here is that the φ statistic is supposed to range between 0 (no association at all) and
+The idea here is that the \(\phi\) statistic is supposed to range between 0 (no association at all) and
 1 (perfect association), but it doesn’t always do this when your contingency table is bigger
-than 2ˆ2, which is a total pain. For bigger tables it’s actually possible to obtain φ ą 1, which
+than \(2 \times 2\) , which is a total pain. For bigger tables it’s actually possible to obtain \(\phi &gt; 1\), which
 is pretty unsatisfactory. So, to correct for this, people usually prefer to report the V statistic
 proposed by <a href="https://press.princeton.edu/books/paperback/9780691005478/mathematical-methods-of-statistics-pms-9-volume-9"  target="_blank"><font color="blue">Cramer (1946)</font></a>. It’s a pretty simple adjustment to φ. If you’ve got a contingency
 table with r rows and c columns, then define k “ minpr, cq to be the smaller of the two values.
@@ -1296,7 +1304,7 @@ things up”. Sometimes it causes you to falsely reject the null, as the silly h
 illustrates, but it can go the other way too. To give a slightly less stupid example, let’s
 consider what would happen if I’d done the cards experiment slightly differently Instead
 of asking 200 people to try to imagine sampling one card at random, suppose I asked 50
-people to select 4 cards. One possibility would be that everyone selects one heart, one club,
+people to select 4 cards. One possibility would be that <i>everyone</i> selects one heart, one club,
 one diamond and one spade (in keeping with the “representativeness heuristic”; <a href="https://www.jstor.org/stable/2286650"  target="_blank"><font color="blue">Tversky
 and Kahneman (1974)</font></a>. This is highly non-random behaviour from people, but in this case
 I would get an observed frequency of 50 for all four suits. For this example the fact that
@@ -1360,7 +1368,7 @@ awfully small in some cases. A contingency table of the salem.csv data illustrat
 Looking at this data, you’d be hard pressed not to suspect that people not on fire are more
 likely to be happy than people on fire. However, the chi-square test makes this very hard to test
 because of the small sample size. So, speaking as someone who doesn’t want to be set on fire,
-I’d really like to be able to get a better answer than this. This is where Fisher’s exact test
+I’d <i>really</i> like to be able to get a better answer than this. This is where <font color="blueviolet"><b>Fisher’s exact test</b></font>
 <a href="https://www.jstor.org/stable/2286650"  target="_blank"><font color="blue">(Fisher 1922a)</font></a> comes in very handy.
 </p>
 <p>
@@ -1531,7 +1539,7 @@ McNemar’s test is that we have “marginal homogeneity”. That is, the row to
 totals have the same distribution: \(P_a + P_b = P_a + P_c\) and similarly that \(P_c + P_d = P_b + P_d\).
 Notice that this means that the null hypothesis actually simplifies to Pb = Pc. In other words,
 as far as the McNemar test is concerned, it’s only the off-diagonal entries in this table (i.e., b
-and c) that matter! After noticing this, the McNemar test of marginal homogeneity is no
+and c) that matter! After noticing this, the <font color="blueviolet"><b>McNemar test of marginal homogeneity</b></font> is no
 different to a usual \(\chi^2\)
 test. After applying the Yates correction, our test statistic becomes:
 </p>
@@ -1720,28 +1728,9 @@ so it’s probably not wise to jump straight from this book to that one.
 
 
 
+</br>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<hr class="line1">
 
 
 

@@ -144,7 +144,7 @@ The true standard deviation of these scores σ is known to be 9.5.
 <p>
 For the moment, we’ll act as if these are absolutely trustworthy facts. In real life, this kind
 of absolutely trustworthy background knowledge doesn’t exist, and so if we want to rely on
-these facts we’ll just have make the assumption that these things are true. However, since these
+these facts we’ll just have make the <i>assumption</i> that these things are true. However, since these
 assumptions may or may not be warranted, we might need to check them. For now though,
 we’ll keep things simple.
 </p>
@@ -371,14 +371,14 @@ three basic assumptions. These are:
 <ul>
 <li>
 <p>
-Normality. As usually described, the z-test assumes that the true population distribution
+<i>Normality</i>. As usually described, the z-test assumes that the true population distribution
 is normal.<a href="#note3">[3]</a> This is often a pretty reasonable assumption, and it’s also an assumption that
 we can check if we feel worried about it (see Section  <font color="blue"><b>11.8</b></font>).
 </p>
 </li>
 <li>
 <p>
-Independence. The second assumption of the test is that the observations in your data set
+<i>Independence</i>. The second assumption of the test is that the observations in your data set
 are not correlated with each other, or related to each other in some funny way. This isn’t
 as easy to check statistically, it relies a bit on good experimental design. An obvious (and
 stupid) example of something that violates this assumption is a data set where you “copy”
@@ -392,7 +392,7 @@ data.
 </li>
 <li>
 <p>
-Known standard deviation. The third assumption of the z-test is that the true standard
+<i>Known standard deviation</i>. The third assumption of the z-test is that the true standard
 deviation of the population is known to the researcher. This is just stupid. In no real
 world data analysis problem do you know the standard deviation σ of some population
 but are completely ignorant about the mean \( \mu \). In other words, this assumption is always
@@ -460,7 +460,7 @@ This ambiguity is annoying, and it was resolved in 1908 by a guy called William 
 Gosset <a href="https://www.jstor.org/stable/2673673"  target="_blank"><font color="blue">(Student 1908)</font></a>, who was working as a chemist for the Guinness brewery at the time 
 <a href="https://projecteuclid.org/journals/statistical-science/volume-2/issue-1/Guinness-Gosset-Fisher-and-Small-Samples/10.1214/ss/1177013437.full"  target="_blank"><font color="blue">(see Box 1987)</font></a>. Because Guinness took a dim view of its employees publishing statistical analysis
 (apparently they felt it was a trade secret), he published the work under the pseudonym “A
-Student” and, to this day, the full name of the t-test is actually Student’s t-test. The key
+Student” and, to this day, the full name of the t-test is actually <font color="blueviolet"><b>Student’s t-test</b></font>. The key
 thing that Gosset figured out is how we should accommodate the fact that we aren’t completely
 sure what the true standard deviation is.<a href="#note4">[4]</a> The answer is that it subtly changes the sampling
 distribution. In the t-test our test statistic, now called a t-statistic, is calculated in exactly the
@@ -477,7 +477,7 @@ $$t=\frac{\bar{X}-\mu}{\frac{\hat{\sigma}}{\sqrt{N}}}$$
 (right), with a standard normal distribution (i.e., mean 0 and std dev 1) plotted as dotted
 lines for comparison purposes. Notice that the t distribution has heavier tails (leptokurtic:
 higher kurtosis) than the normal distribution; this effect is quite exaggerated when the degrees
-of freedom are very small, but negligible for larger values. In other words, for large df the t
+of freedom are very small, but negligible for larger values. In other words, for large \(df\) the t
 distribution is essentially identical to a normal distribution.
 </figcaption>
 <img src="images/Figure85.PNG" alt="Figure 11.5" />
@@ -486,7 +486,7 @@ distribution is essentially identical to a normal distribution.
 <p>
 The only thing that has changed in the equation is that instead of using the known true value
 \(\sigma\), we use the estimate \(\hat{\sigma}\). And if this estimate has been constructed from N observations, then
-the sampling distribution turns into a t-distribution with \(N-1\) degrees of freedom (df). The
+the sampling distribution turns into a t-distribution with \(N-1\) <font color="blueviolet"><b>degrees of freedom</b></font> (df). The
 t distribution is very similar to the normal distribution, but has “heavier” tails, as discussed
 earlier in Section <font color="blue"><b>7.6</b></font> and illustrated in Figure <font color="blue"><b>11.5</b></font>. Notice, though, that as df gets larger, the
 t-distribution starts to look identical to the standard normal distribution. This is as it should
@@ -664,7 +664,7 @@ students (Figure <font color="blue"><b>11.8</b></font>).
 <h3> 11.3.2 Introducing the test </h3>
 
 <p>
-The independent samples t-test comes in two different forms, Student’s and Welch’s. The
+The <font color="blueviolet"><b>independent samples t-test</b></font> comes in two different forms, Student’s and Welch’s. The
 original Student t-test, which is the one I’ll describe in this section, is the simpler of the two but
 relies on much more restrictive assumptions than the Welch t-test. Assuming for the moment
 that you want to run a two-sided test, the goal is to determine whether two “independent
@@ -704,7 +704,7 @@ and \( \mu_2 \) will be the true population mean for group 2 (e.g., Bernadette�
 we’ll let \( \bar{X_1} \)
  and \( \bar{X_2} \)
  denote the observed sample means for both of these groups. Our null
-hypothesis states that the two population means are identical (µ1 = µ2) and the alternative to
+hypothesis states that the two population means are identical (\(\mu_1 = \mu_2\)) and the alternative to
 this is that they are not (\(\mu_1 \neq \mu_2\)). Written in mathematical-ese, this is:
 </p>
 
@@ -716,14 +716,14 @@ $$H_0: \mu_1 \neq \mu_2 $$
 
 <p>
 To construct a hypothesis test that handles this scenario we start by noting that if the null
-hypothesis is true, then the difference between the population means is exactly zero, \(\mu_1-\mu_2 = 0\).
+hypothesis is true, then the difference between the population means is <i>exactly</i> zero, \(\mu_1-\mu_2 = 0\).
 As a consequence, a diagnostic test statistic will be based on the difference between the two
 sample means. Because if the null hypothesis is true, then we’d expect \(\bar{X}_1 - \bar{X}_2\) to be pretty
 close to zero. However, just like we saw with our one-sample tests (i.e., the one-sample z-test
 and the one-sample t-test) we have to be precise about exactly how close to zero this difference
 should be. And the solution to the problem is more or less the same one. We calculate a
 standard error estimate (SE), just like last time, and then divide the difference between means
-by this estimate. So our t-statistic will be of the form:
+by this estimate. So our <font color="blueviolet"><b>t-statistic</b></font> will be of the form:
 </p>
 
 
@@ -746,16 +746,16 @@ same, we assume that the population standard deviations are identical, \(\sigma_
 assuming that the two standard deviations are the same, we drop the subscripts and refer to
 both of them as \(\sigma\). How should we estimate this? How should we construct a single estimate
 of a standard deviation when we have two samples? The answer is, basically, we average them.
-Well, sort of. Actually, what we do is take a weighed average of the variance estimates, which
-we use as our pooled estimate of the variance. The weight assigned to each sample is equal
+Well, sort of. Actually, what we do is take a <i>weighed</i> average of the <i>variance</i> estimates, which
+we use as our <font color="blueviolet"><b>pooled estimate of the variance</b></font>. The weight assigned to each sample is equal
 to the number of observations in that sample, minus 1.
 </p>
 
 
 <figure>
 <figcaption>Figure 11.9: Graphical illustration of the null and alternative hypotheses assumed by the Student
-t-test. The null hypothesis assumes that both groups have the same mean µ, whereas the
-alternative assumes that they have different means µ1 and µ2. Notice that it is assumed that
+t-test. The null hypothesis assumes that both groups have the same mean \(\mu \), whereas the
+alternative assumes that they have different means \(\mu_1 \) and\(\mu_2 \). Notice that it is assumed that
 the population distributions are normal, and that, although the alternative hypothesis allows
 the group to have different means, it assumes they have the same standard deviation.
 </figcaption>
@@ -844,8 +844,8 @@ that’s what
 the denominator of our t-statistic looked like. This time around, however, we have two sample
 means. And what we’re interested in, specifically, is the the difference between the two 
 \(\bar{X}_1-\bar{X}_2\)
-As a consequence, the standard error that we need to divide by is in fact the standard error
-of the difference between means.
+As a consequence, the standard error that we need to divide by is in fact the <font color="blueviolet"><b>standard error
+of the difference</b></font> between means.
 </p>
 
 
@@ -1003,7 +1003,7 @@ I wanted to use has Bernadette’s class listed first. If so, it makes more sens
 as group 1, and if so, the write up looks like this
 </dt>
 <dd>
-Bernadette’s class had lower grades than Anastasia’s class \((t(31) = -2.1, p = .04)\).
+Bernadette’s class had <u>lower</u> grades than Anastasia’s class \((t(31) = -2.1, p = .04)\).
 </dd>
 </dl>
 <p>
@@ -1029,14 +1029,14 @@ the one sample t-test (see Section <font color="blue"><b>11.2.3</b></font>):
 <ul>
 <li>
 <p>
-Normality. Like the one-sample t-test, it is assumed that the data are normally distributed.
+<i>Normality.</i> Like the one-sample t-test, it is assumed that the data are normally distributed.
 Specifically, we assume that both groups are normally distributed. In Section <font color="blue"><b>11.8</b></font> we’ll
-discuss how to test for normality, and in Section 11.9 we’ll discuss possible solutions.
+discuss how to test for normality, and in Section <font color="blue"><b>11.9</b></font> we’ll discuss possible solutions.
 </p>
 </li>
 <li>
 <p>
-Independence. Once again, it is assumed that the observations are independently sampled.
+<i>Independence.</i> Once again, it is assumed that the observations are independently sampled.
 In the context of the Student test this has two aspects to it. Firstly, we assume that
 the observations within each sample are independent of one another (exactly the same
 as for the one-sample test). However, we also assume that there are no cross-sample
@@ -1048,7 +1048,7 @@ need to take into account.
 </li>
 <li>
 <p>
-Homogeneity of variance (also called “homoscedasticity”). The third assumption is that
+<i>Homogeneity of variance</i> (also called “homoscedasticity”). The third assumption is that
 the population standard deviation is the same in both groups. You can test this assumption
 using the Levene test, which I’ll talk about later on in the book (Section <font color="blue"><b>13.6.1</b></font>). However,
 there’s a very simple remedy for this assumption if you are worried, which I’ll talk about
@@ -1339,7 +1339,7 @@ one-sample t-test, with nothing special about it, the degrees of freedom are sti
 that’s it. The paired samples t-test really isn’t a new test at all. It’s a one-sample t-test, but
 applied to the difference between two variables. It’s actually very simple. The only reason it
 merits a discussion as long as the one we’ve just gone through is that you need to be able to
-recognise when a paired samples test is appropriate, and to understand why it’s better than an
+recognise <i>when</i> a paired samples test is appropriate, and to understand <i>why</i> it’s better than an
 independent samples t test.
 </p>
 
@@ -1454,8 +1454,8 @@ than a two-sided one.
 What about the paired samples t-test? Suppose we wanted to test the hypothesis that grades
 go up from test 1 to test 2 in Dr Zeppo’s class, and are not prepared to consider the idea that
 the grades go down. In jamovi you would do this by specifying, under the ‘Hypotheses’ option,
-that grade test2 (‘Measure 1’ in jamovi, because we copied this first into the paired variables
-box) ą grade test1 (‘Measure 2’ in jamovi). You should get the results shown in Figure <font color="blue"><b>11.19</b></font>.
+that <font color="blue">grade_test2</font> (‘Measure 1’ in jamovi, because we copied this first into the paired variables
+box) &gt; grade test1 (‘Measure 2’ in jamovi). You should get the results shown in Figure <font color="blue"><b>11.19</b></font>.
 </p>
 
 <figure>
@@ -1472,7 +1472,7 @@ has changed, and the confidence interval is now one-sided.
 </p>
 
 
-<table width="50%" border="1" ><caption>Table 11.1: A (very) rough guide to interpreting Cohen’s d. My personal recommendation is to
+<table width="50%" border="1" ><caption>Table 11.1: A (very) rough guide to interpreting Cohen’s \(d\). My personal recommendation is to
 not use these blindly. The d statistic has a natural interpretation in and of itself. It re-describes
 the difference in means as the number of standard deviations that separates those means. So
 it’s generally a good idea to think about what that means in practical terms. In some contexts
@@ -1502,7 +1502,7 @@ not be all that interesting.</caption>
 <h2> 11.7  Effect size </h2>
 
 <p>
-The most commonly used measure of effect size for a t-test is Cohen’s d 
+The most commonly used measure of effect size for a t-test is <font color="blueviolet"><b>Cohen’s d </b></font>
 <a href="https://doi.org/10.4324/9780203771587"  target="_blank"><font color="blue">(Cohen 1988)</font></a>. It’s
 a very simple measure in principle, with quite a few wrinkles when you start digging into the
 details. Cohen himself defined it primarily in the context of an independent samples t-test,
@@ -1559,11 +1559,11 @@ is a moderate effect size.
 <h3> 11.7.2  Cohen’s d from a Student’s t test </h3>
 
 <p>
-The majority of discussions of Cohen’s d focus on a situation that is analogous to Student’s
+The majority of discussions of Cohen’s \(d\) focus on a situation that is analogous to Student’s
 independent samples t test, and it’s in this context that the story becomes messier, since there
-are several different versions of d that you might want to use in this situation. To understand
-why there are multiple versions of d, it helps to take the time to write down a formula that
-corresponds to the true population effect size δ. It’s pretty straightforward,
+are several different versions of \(d\) that you might want to use in this situation. To understand
+why there are multiple versions of \(d\), it helps to take the time to write down a formula that
+corresponds to the true population effect size \( \delta \). It’s pretty straightforward,
 </p>
 
 $$\delta=\frac{\mu_1-\mu_2}{\sigma}$$
@@ -1639,7 +1639,7 @@ small when assessed on the scale of the original variables.
 All of the tests that we have discussed so far in this chapter have assumed that the data are normally 
 distributed. This assumption is often quite reasonable, because the central limit theorem
 (Section <font color="blue"><b>8.3.3</b></font>) does tend to ensure that many real world quantities are normally distributed.
-Any time that you suspect that your variable is actually an average of lots of different things,
+Any time that you suspect that your variable is <i>actually</i> an average of lots of different things,
 there’s a pretty good chance that it will be normally distributed, or at least close enough to
 normal that you can get away with using t-tests. However, life doesn’t come with guarantees,
 and besides there are lots of ways in which you can end up with variables that are highly nonnormal.
@@ -1665,8 +1665,8 @@ is W = .99, indicating that no significant departures from normality were detect
 
 
 <p>
-One way to check whether a sample violates the normality assumption is to draw a “QQ
-plot” (Quantile-Quantile plot). This allows you to visually check whether you’re seeing any
+One way to check whether a sample violates the normality assumption is to draw a <font color="blueviolet"><b>“QQ
+plot”</b></font> (Quantile-Quantile plot). This allows you to visually check whether you’re seeing any
 systematic violations. In a QQ plot, each observation is plotted as a single dot. The x coordinate is 
 the theoretical quantile that the observation should fall in if the data were normally
 distributed (with mean and variance estimated from the sample), and on the y co-ordinate is
@@ -1699,9 +1699,9 @@ significant non-normality (p ă .001).
 
 <p>
 QQ plots provide a nice way to informally check the normality of your data, but sometimes
-you’ll want to do something a bit more formal and the Shapiro-Wilk test <a href="https://www.jstor.org/stable/2333709"  target="_blank"><font color="blue">(Shapiro and Wilk
+you’ll want to do something a bit more formal and the <font color="blueviolet"><b>Shapiro-Wilk test</b></font> <a href="https://www.jstor.org/stable/2333709"  target="_blank"><font color="blue">(Shapiro and Wilk
 1965)</font></a> is probably what you’re looking for.<a href="#note14">[14]</a> As you’d expect, the null hypothesis being tested
-is that a set of N observations is normally distributed.
+is that a set of \(N\) observations is normally distributed.
 </p>
 
 <table width="100%" border="1" ><caption></caption>
@@ -1790,7 +1790,7 @@ Like the t-test, the Wilcoxon test comes in two forms, one-sample and two-sample
 they’re used in more or less the exact same situations as the corresponding t-tests. Unlike the
 t-test, the Wilcoxon test doesn’t assume normality, which is nice. In fact, they don’t make any
 assumptions about what kind of distribution is involved. In statistical jargon, this makes them
-nonparametric tests. While avoiding the normality assumption is nice, there’s a drawback:
+<font color="blueviolet"><b>nonparametric tests</b></font>. While avoiding the normality assumption is nice, there’s a drawback:
 the Wilcoxon test is usually less powerful than the t-test (i.e., higher Type II error rate). I won’t
 discuss the Wilcoxon tests in as much detail as the t-tests, but I’ll give you a brief overview.
 </p>
@@ -1799,7 +1799,7 @@ discuss the Wilcoxon tests in as much detail as the t-tests, but I’ll give you
 <h3> 11.9.1  Two sample Mann-Whitney U test </h3>
 
 <p>
-I’ll start by describing the Mann-Whitney U test, since it’s actually simpler than the
+I’ll start by describing the <font color="blueviolet"><b>Mann-Whitney U test</b></font>, since it’s actually simpler than the
 one sample version. Suppose we’re looking at the scores of 10 people on some test. Since my
 imagination has now failed me completely, let’s pretend it’s a “test of awesomeness” and there
 are two groups of people, “A” and “B”. I’m curious to know which group is more awesome. The
@@ -1891,7 +1891,7 @@ as shown above), and a \(p-value = 0.05556\).
 <h3> 11.9.2  One sample Wilcoxon test </h3>
 
 <p>
-What about the one sample Wilcoxon test (or equivalently, the paired samples Wilcoxon
+What about the <font color="blueviolet"><b>one sample Wilcoxon test</b></font> (or equivalently, the paired samples Wilcoxon
 test)? Suppose I’m interested in finding out whether taking a statistics class has any effect on
 the happiness of students. My data is in the happiness.csv file. What I’ve measured here is the
 happiness of each student before taking the class and after taking the class, and the change
@@ -2032,6 +2032,9 @@ t-tests. (Section <font color="blue"><b>11.9</b></font>)
 </ul>
 
 
+</br>
+
+<hr class="line1">
 
 
 

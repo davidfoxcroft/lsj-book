@@ -166,7 +166,7 @@ I listed it way back in Table <font color="blueviolet"><b>7.1</b></font>,
 but I didn’t make a big deal out of it at the time and you probably ignored it. The rule in
 question is the one that talks about the probability that two things are true. In our example,
 you might want to calculate the probability that today is rainy (i.e., hypothesis h is true) and
-I’m carrying an umbrella (i.e., data d is observed). The joint probability of the hypothesis
+I’m carrying an umbrella (i.e., data d is observed). The <font color="blueviolet"><b>joint probability</b></font> of the hypothesis
 and the data is written Ppd, hq, and you can calculate it by multiplying the prior Pphq by the
 likelihood \(P(d|h)\). Mathematically, we say that
 </p>
@@ -426,7 +426,7 @@ this, perhaps?
 <p>
 What this table is telling you is that, after being told that I’m carrying an umbrella, you believe
 that there’s a \(51.4\%\)) chance that today will be a rainy day, and a \(48.6\%\) chance that it won’t.
-That’s the answer to our problem! The posterior probability of rain \(P(h|d)\) given that I am
+That’s the answer to our problem! The <font color="blueviolet"><b>posterior probability</b></font> of rain \(P(h|d)\) given that I am
 carrying an umbrella is \(51.4\%\)
 </p>
 
@@ -437,8 +437,8 @@ How did I calculate these numbers? You can probably guess. To work out that ther
 divide it by the \(0.0875\) chance of “umbrella”. This produces a table that satisfies our need to have
 everything sum to 1, and our need not to interfere with the relative plausibility of the two events
 that are actually consistent with the data. To say the same thing using fancy statistical jargon,
-what I’ve done here is divide the joint probability of the hypothesis and the data Ppd, hq by the
-marginal probability of the data Ppdq, and this is what gives us the posterior probability of
+what I’ve done here is divide the joint probability of the hypothesis and the data \(P(d, h)\) by the
+<font color="blueviolet"><b>marginal probability</b></font> of the data \(P(d)\), and this is what gives us the posterior probability of
 the hypothesis given the data that have been observed. To write this as an equation <a href="#note7">[7]</a>.
 </p>
 
@@ -455,7 +455,7 @@ those back into the equation. This gives us the following formula for the poster
 $$P(h|d)=\frac{P(d|h)P(h)}{P(d)}$$
 
 <p>
-And this formula, folks, is known as Bayes’ rule. It describes how a learner starts out with
+And this formula, folks, is known as <font color="blue"><b>Bayes’ rule</b></font>. It describes how a learner starts out with
 prior beliefs about the plausibility of different hypotheses, and tells you how those beliefs should
 be revised in the face of data. In the Bayesian paradigm, all statistical inference flows from this
 one simple rule.
@@ -473,7 +473,7 @@ hypotheses that we want to compare, a null hypothesis \(h_0\) and an alternative
 Prior to running the experiment we have some beliefs \(P(h)\) about which hypotheses are true.
 We run an experiment and obtain data d. Unlike frequentist statistics, Bayesian statistics does
 allow us to talk about the probability that the null hypothesis is true. Better yet, it allows us
-to calculate the posterior probability of the null hypothesis, using Bayes’ rule
+to calculate the <font color="blueviolet"><b>posterior probability of the null hypothesis</b></font>, using Bayes’ rule
 </p>
 
 $$P(h_0|d)=\frac{P(d|h_0)P(h_0)}{P(d)}$$
@@ -497,7 +497,7 @@ I’m doing is copying Bayes rule from the previous section.<a href="#note8">[8]
 
 <p>
 In practice, most Bayesian data analysts tend not to talk in terms of the raw posterior probabilities \(P(h_0|d)\) and \(P(h_1|d)\). 
-Instead, we tend to talk in terms of the posterior odds ratio.
+Instead, we tend to talk in terms of the <font color="blueviolet"><b>posterior odds</b></font> ratio.
 Think of it like betting. Suppose, for instance, the posterior probability of the null hypothesis is
 \(25\%\), and the posterior probability of the alternative is \(75\%\). The alternative hypothesis is three
 times as probable as the null, so we say that the odds are 3:1 in favour of the alternative.
@@ -518,8 +518,8 @@ $$\frac{P(h_1|d)}{P(h_0|d)}=\frac{d|h_1}{d|h_0} \times \frac{h_1}{h_0} $$
 Actually, this equation is worth expanding on. There are three different terms here that
 you should know. On the left hand side, we have the posterior odds, which tells you what you
 believe about the relative plausibilty of the null hypothesis and the alternative hypothesis after
-seeing the data. On the right hand side, we have the prior odds, which indicates what you
-thought before seeing the data. In the middle, we have the Bayes factor, which describes the
+seeing the data. On the right hand side, we have the <font color="blueviolet"><b>prior odds</b></font>, which indicates what you
+thought before seeing the data. In the middle, we have the <font color="blueviolet"><b>Bayes factor</b></font>, which describes the
 amount of evidence provided by the data
 </p>
 
@@ -579,7 +579,7 @@ more conservative. So here it is:
 </p>
 
 
-<table width="2%" border="0" ><caption></caption>
+<table width="50%" border="1" ><caption></caption>
 	<tr>
 		<td> Bayes factor </td>
 		<td> Interpretation </td>
@@ -796,18 +796,26 @@ What should you do? Here are some possibilities:
 
 <ol>
 <li>
+<p>
 You conclude that there is no effect and try to publish it as a null result
+</p>
 </li>
 <li>
+<p>
 You guess that there might be an effect and try to publish it as a “borderline significant”
 result
+</p>
 </li>
 <li>
+<p>
 You give up and try a new study
+</p>
 </li>
 <li>
+<p>
 You collect some more data to see if the p value goes up or (preferably!) drops below the
 “magic” criterion of p &lt; .05
+</p>
 </li>
 </ol>
 
@@ -822,53 +830,60 @@ well as stories I’ve heard from others, here’s what will happen in each case
 
 <ul>
 <li>
+<p>
 Let’s start with option 1. If you try to publish it as a null result, the paper will struggle to
 be published. Some reviewers will think that p = .072 is not really a null result. They’ll
 argue it’s borderline significant. Other reviewers will agree it’s a null result but will claim
 that even though some null results are publishable, yours isn’t. One or two reviewers might
 even be on your side, but you’ll be fighting an uphill battle to get it through.
+</p>
 </li>
 <li>
+<p>
 Okay, let’s think about option number 2. Suppose you try to publish it as a borderline
 significant result. Some reviewers will claim that it’s a null result and should not be
 published. Others will claim that the evidence is ambiguous, and that you should collect
 more data until you get a clear significant result. Again, the publication process does not
 favour you.
+</p>
 </li>
 <li>
+<p>
 Given the difficulties in publishing an “ambiguous” result like p = .072, option number 3
 might seem tempting: give up and do something else. But that’s a recipe for career suicide.
 If you give up and try a new project every time you find yourself faced with ambiguity,
 your work will never be published. And if you’re in academia without a publication record
 you can lose your job. So that option is out.
+</p>
 </li>
 <li>
+<p>
 It looks like you’re stuck with option 4. You don’t have conclusive results, so you decide
 to collect some more data and re-run the analysis. Seems sensible, but unfortunately for
 you, if you do this all of your p-values are now incorrect. All of them. Not just the p-values
 that you calculated for this study. All of them. All the p-values you calculated in the past
 and all the p-values you will calculate in the future. Fortunately, no-one will notice. You’ll
 get published, and you’ll have lied.
+</p>
 </li>
 </ul>
 
-
+<p>
 Wait, what? How can that last part be true? I mean, it sounds like a perfectly reasonable
 strategy doesn’t it? You collected some data, the results weren’t conclusive, so now what you
 want to do is collect more data until the the results are conclusive. What’s wrong with that?
+</p>
 
-
-
-
+<p>
 Honestly, there’s nothing wrong with it. It’s a reasonable, sensible and rational thing to
 do. In real life, this is exactly what every researcher does. Unfortunately, the theory of null
 hypothesis testing as I described it in Chapter <font color="blue"><b>9</b></font> forbids you from doing this.<a href="#note12">[12]</a> The reason is
 that the theory assumes that the experiment is finished and all the data are in. And because
 it assumes the experiment is over, it only considers two possible decisions. If you’re using the
-conventional p ă .05 threshold, those decisions are:
+conventional p &lt; .05 threshold, those decisions are:
+</p>
 
-
-<table width="2%" border="0" ><caption></caption>
+<table width="50%" border="1" ><caption></caption>
 	<tr>
 		<th> Outcome  </th>
 		<th> Action </th>
@@ -891,7 +906,7 @@ more like this:
 </p>
 
 
-<table width="2%" border="0" ><caption></caption>
+<table width="50%" border="1" ><caption></caption>
 	<tr>
 		<th> Outcome  </th>
 		<th> Action </th>
@@ -920,19 +935,19 @@ that is causing the problem.<a href="#note13">[13]</a> Your p-values are a lie.
 </p>
 
 <p>
-Worse yet, they’re a lie in a dangerous way, because they’re all too small. To give you a sense
+Worse yet, they’re a lie in a dangerous way, because they’re all <i>too small</i>. To give you a sense
 of just how bad it can be, consider the following (worst case) scenario. Imagine you’re a really
 super-enthusiastic researcher on a tight budget who didn’t pay any attention to my warnings
 above. You design a study comparing two groups. You desperately want to see a significant
-result at the p ă .05 level, but you really don’t want to collect any more data than you have to
+result at the \(p &lt; .05\) level, but you really don’t want to collect any more data than you have to
 (because it’s expensive). In order to cut costs you start collecting data but every time a new
-observation arrives you run a t-test on your data. If the t-tests says p ă .05 then you stop the
+observation arrives you run a t-test on your data. If the t-tests says \(p &lt; .05\) then you stop the
 experiment and report a significant result. If not, you keep collecting data. You keep doing this
 until you reach your pre-defined spending limit for this experiment. Let’s say that limit kicks
-in at N = 1000 observations. As it turns out, the truth of the matter is that there is no real
+in at \(N = 1000\) observations. As it turns out, the truth of the matter is that there is no real
 effect to be found: the null hypothesis is true. So, what’s the chance that you’ll make it to the
 end of the experiment and (correctly) conclude that there is no effect? In an ideal world, the
-answer here should be 95%. After all, the whole point of the p ă .05 criterion is to control the
+answer here should be 95%. After all, the whole point of the \(p &lt; .05\) criterion is to control the
 Type I error rate at 5%, so what we’d hope is that there’s only a 5% chance of falsely rejecting
 the null hypothesis in this situation. However, there’s no guarantee that will be true. You’re
 breaking the rules. Because you’re running tests repeatedly, “peeking” at your data to see if
@@ -944,8 +959,9 @@ So how bad is it? The answer is shown as the solid black line in Figure <font co
 astoundingly bad. If you peek at your data after every single observation, there is a 49% chance
 that you will make a Type I error. That’s, um, quite a bit bigger than the 5% that it’s supposed
 to be. By way of comparison, imagine that you had used the following strategy. Start collecting
-data. Every single time an observation arrives, run a <i>Bayesian</i> t-test (Section 16.4) and look at
-the Bayes factor. I’ll assume that Johnson (2013) is right, and I’ll treat a Bayes factor of 3:1 as
+data. Every single time an observation arrives, run a <i>Bayesian</i> t-test (Section <font color="blue"><b>16.4</b></font>) and look at
+the Bayes factor. I’ll assume that <a href="https://www.pnas.org/doi/full/10.1073/pnas.1313476110"  target="_blank"><font color="blue"> Johnson (2013) </font></a>
+ is right, and I’ll treat a Bayes factor of 3:1 as
 roughly equivalent to a p-value of .05.<a href="#note14">[14]</a> This time around, our trigger happy researcher uses the
 following procedure. If the Bayes factor is 3:1 or more in favour of the null, stop the experiment
 and retain the null. If it is 3:1 or more in favour of the alternative, stop the experiment and
@@ -954,6 +970,7 @@ hypothesis is true. What happens? As it happens, I ran the simulations for this 
 and the results are shown as the dashed line in Figure <font color="blue"><b>16.1</b></font>. It turns out that the Type I error
 rate is much much lower than the 49% rate that we were getting by using the orthodox t-test.
 </p>
+
 <p>
 In some ways, this is remarkable. The entire <i>point</i> of orthodox null hypothesis testing is to
 control the Type I error rate. Bayesian methods aren’t actually designed to do this at all. Yet,
@@ -1120,16 +1137,18 @@ Finally, I devoted some space to talking about why I think Bayesian methods are 
 <p>
 Then I gave a practical example, a Bayesian t-test (Section <font color="blue"><b>16.4</b></font>). If you’re interested in
 learning more about the Bayesian approach, there are many good books you could look into.
-John Kruschke’s book Doing Bayesian Data Analysis is a pretty good place to start (Kruschke
-2011) and is a nice mix of theory and practice. His approach is a little different to the “Bayes
+John Kruschke’s book <i>Doing Bayesian Data Analysis</i> is a pretty good place to start <a href="https://www.elsevier.com/books/doing-bayesian-data-analysis/kruschke/978-0-12-405888-0"  target="_blank"><font color="blue">(Kruschke
+2011)</font></a> and is a nice mix of theory and practice. His approach is a little different to the “Bayes
 factor” approach that I’ve discussed here, so you won’t be covering the same ground. If you’re a
 cognitive psychologist, you might want to check out Michael Lee and E.J. Wagenmakers’ book
-Bayesian Cognitive Modeling (Lee and Wagenmakers 2014). I picked these two because I think
+<i>Bayesian Cognitive Modeling</i> <a href="https://doi.org/10.1017/CBO9781139087759"  target="_blank"><font color="blue"> (Lee and Wagenmakers 2014) </font></a>. I picked these two because I think
 they’re especially useful for people in my discipline, but there’s a lot of good books out there,
 so look around!
 </p>
 
+</br>
 
+<hr class="line1">
 
 <p id="note1">[1]   <a href="http://en.wikiquote.org/wiki/David Hume."   target="_blank"  ><font color="blue"> 
 http://en.wikiquote.org/wiki/David_Hume. </font></a></p>

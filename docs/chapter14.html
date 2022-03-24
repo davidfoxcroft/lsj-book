@@ -11,8 +11,6 @@
 <body>
 
 
-
-
 <h1> 14. Factorial ANOVA </h1>
 
 <p>
@@ -438,8 +436,8 @@ At this point, I hope you can see that the ANOVA table for this more complicated
 analysis should be read in much the same way as the ANOVA table for the simpler one way
 analysis. In short, it’s telling us that the factorial ANOVA for our \(3 \times 2\) design found a significant
 effect of drug (\(F_{2,14} = 26.15, p &lt; .001\)) as well as a significant effect of therapy (\(F_{1,14} = 7.08, p =
-.02\)). Or, to use the more technically correct terminology, we would say that there are two main
-effects of drug and therapy. At the moment, it probably seems a bit redundant to refer to these
+.02\)). Or, to use the more technically correct terminology, we would say that there are two <font color="blue"><b>main
+effects</b></font> of drug and therapy. At the moment, it probably seems a bit redundant to refer to these
 as “main” effects, but it actually does make sense. Later on, we’re going to want to talk about
 the possibility of “interactions” between the two factors, and so we generally make a distinction
 between main effects and interaction effects.
@@ -1416,7 +1414,7 @@ rely heavily on sums of squares (SS), both make use of F tests, and so on. Looki
 hard to escape the feeling that Chapters <font color="blue"><b>12</b></font> and <font color="blue"><b>13</b></font> were a bit repetitive.
 </p>
 <p>
-The reason for this is that ANOVA and regression are both kinds of <font color="blue"><b>linear models</b></font>. In the
+The reason for this is that ANOVA and regression are both kinds of <font color="blueviolet"><b>linear models</b></font>. In the
 case of regression, this is kind of obvious. The regression equation that we use to define the
 relationship between predictors and outcomes is the equation for a straight line, so it’s quite
 obviously a linear model, with the equation
@@ -1468,8 +1466,8 @@ textbook (i.e. reading = 0), and who ended up failing the class (grade = 35). Bu
 that \(Y_p = 35\), all you know is that the p-th student didn’t get a good grade. We’ve lost some key
 information here. Of course, it doesn’t take a lot of thought to figure out how to fix this. What
 we’ll do instead is introduce two new variables \(X_{1p}\) and \(X_{2p}\) that keep track of this information.
-In the case of our hypothetical student, we know that \(X_{1p} = 0\) (i.e., attend = 0) and \(X_{2p} = 0\)
-(i.e., reading = 0). So the data might look like this:
+In the case of our hypothetical student, we know that \(X_{1p} = 0\) (i.e., <font color="blue">attend = 0</font>) and \(X_{2p} = 0\)
+(i.e., <font color="blue">reading = 0</font>). So the data might look like this:
 </p>
 
 <table width="50%" border="1" ><caption></caption>
@@ -1599,9 +1597,9 @@ Wait a second though. Why is this true? It’s something that is intuitively obv
 who has taken a few stats classes and is comfortable with the maths, but it isn’t clear to everyone
 else at first pass. To see why this is true, it helps to look closely at a few specific students. Let’s
 start by considering the 6th and 7th students in our data set (i.e. \(p = 6\) and \(p = 7\)). Neither one
-has read the textbook, so in both cases we can set reading = 0. Or, to say the same thing in
+has read the textbook, so in both cases we can set <font color="blue">reading = 0</font>. Or, to say the same thing in
 our mathematical notation, we observe \(X_{2,6} = 0\) and \(X_{2,7} = 0\). However, student number 7 did
-turn up to lectures (i.e., attend = 1, \(X_{1,7} = 1\)) whereas student number 6 did not (i.e., attend
+turn up to lectures (i.e., <font color="blue">attend = 1</font>, \(X_{1,7} = 1\)) whereas student number 6 did not (i.e., attend
 = 0, \(X_{1,6} = 0\)). Now let’s look at what happens when we insert these numbers into the general
 formula for our regression line. For student number 6, the regression predicts that
 </p>
@@ -1755,8 +1753,8 @@ The answer to this question is pretty simple, actually. All we have to do is rea
 a three-level factor can be redescribed as two binary variables. Suppose, for instance, I were
 to create a new binary variable called druganxifree. Whenever the drug variable is equal to
 "anxifree" we set druganxifree = 1. Otherwise, we set druganxifree = 0. This variable sets
-up a contrast, in this case between anxifree and the other two drugs. By itself, of course, the
-druganxifree <font color="blueviolet">contrast</font> isn’t enough to fully capture all of the information in our drug variable.
+up a <font color="blueviolet"><b>contrast</b></font>, in this case between anxifree and the other two drugs. By itself, of course, the
+druganxifree contrast isn’t enough to fully capture all of the information in our drug variable.
 We need a second contrast, one that allows us to distinguish between joyzepam and the placebo.
 To do this, we can create a second binary contrast, called drugjoyzepam, which equals 1 if the
 drug is joyzepam and 0 if it is not. Taken together, these two contrasts allows us to perfectly
@@ -2261,7 +2259,7 @@ all of them in any detail.
 
 <p>
 That being said, there’s one tool that I do want to draw your attention to, namely Tukey’s
-“Honestly Significant Difference”, or Tukey’s HSD for short. For once, I’ll spare you the
+“Honestly Significant Difference”, or <font color="blue"><b>Tukey’s HSD</b></font> for short. For once, I’ll spare you the
 formulas and just stick to the qualitative ideas. The basic idea in Tukey’s HSD is to examine all
 relevant pairwise comparisons between groups, and it’s only really appropriate to use Tukey’s
 HSD if it is pairwise differences that you’re interested in.<a href="#note7">[7]</a> For instance, earlier we conducted a
@@ -3101,6 +3099,12 @@ Factorial ANOVA with unbalanced designs (Section <font color="blue">14.10</font>
 </li>
 </p>
 </ul>
+
+
+</br>
+
+<hr class="line1">
+
 
 
 <p id="note1">[1] The nice thing about the subscript notation is that it generalises nicely. If our experiment had involved a

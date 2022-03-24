@@ -380,13 +380,13 @@ sums of squares values \(SS_b\) and \(SS_w\) to each other. If the between-group
 relative to the within-group variation \(SS_w\) then we have reason to suspect that the population
 means for the different groups aren’t identical to each other. In order to convert this into a
 workable hypothesis test, there’s a little bit of “fiddling around” needed. What I’ll do is first
-show you what we do to calculate our test statistic, the F ratio, and then try to give you a feel
+show you what we do to calculate our test statistic, the <font color="blueviolet"><b>F ratio</b></font>, and then try to give you a feel
 for why we do it this way.
 </p>
 
 
 In order to convert our SS values into an F-ratio the first thing we need to calculate is the
-degrees of freedom associated with the \(SS_b\) and \(SS_w\) values. As usual, the degrees of freedom
+<font color="blueviolet"><b>degrees of freedom</b></font> associated with the \(SS_b\) and \(SS_w\) values. As usual, the degrees of freedom
 corresponds to the number of unique “data points” that contribute to a particular calculation,
 minus the number of “constraints” that they need to satisfy. For the within-groups variability
 what we’re calculating is the variation of the individual observations (\(N\) data points) around the
@@ -1323,7 +1323,7 @@ way.
 <p>
 There’s a few different ways you could measure the effect size in an ANOVA, but the most
 commonly used measures are \(\eta^2\)
-(<font color="blue">eta squared</font>) and partial \(\eta^2\). For a one way analysis of
+(<font color="blueviolet">eta squared</font>) and partial \(\eta^2\). For a one way analysis of
 variance they’re identical to each other, so for the moment I’ll just explain \(\eta^2\) . The definition of \(\eta^2\) 
 is actually really simple
 </p>
@@ -1609,7 +1609,7 @@ In the previous section I hinted that there’s a problem with just running lots
 t-tests. The concern is that, when running these analyses, what we’re doing is going on a “fishing
 expedition”. We’re running lots and lots of tests without much theoretical guidance in the hope
 that some of them come up significant. This kind of theory-free search for group differences is
-referred to as post hoc analysis (“post hoc” being Latin for “after this”).<a href="#note6">[6]</a>
+referred to as <font color="blueviolet"><b>post hoc analysis</b></font> (“post hoc” being Latin for “after this”).<a href="#note6">[6]</a>
 </p>
 <p>
 It’s okay to run post hoc analyses, but a lot of care is required. For instance, the analysis
@@ -1887,18 +1887,18 @@ them separately.
 
 <ul>
 <li>
-Homogeneity of variance. Notice that we’ve only got the one value for the population
+<font color="blueviolet"><b>Homogeneity of variance</b></font>. Notice that we’ve only got the one value for the population
 standard deviation (i.e., \( \sigma \)), rather than allowing each group to have it’s own value (i.e.,
 σk). This is referred to as the homogeneity of variance (sometimes called homoscedasticity)
 assumption. ANOVA assumes that the population standard deviation is the same for all
 groups. We’ll talk about this extensively in Section <font color="blue"><b>13.6.1</b></font>.
 </li>
 <li>
-Normality. The residuals are assumed to be normally distributed. As we saw in Section 11.8, we can assess this by looking at QQ plots (or running a Shapiro-Wilk test. I’ll
+<font color="blueviolet"><b>Normality</b></font>. The residuals are assumed to be normally distributed. As we saw in Section 11.8, we can assess this by looking at QQ plots (or running a Shapiro-Wilk test. I’ll
 talk about this more in an ANOVA context in Section <font color="blue"><b>13.6.4</b></font>.
 </li>
 <li>
-Independence. The independence assumption is a little trickier. What it basically means
+<font color="blueviolet"><b>Independence</b></font>. The independence assumption is a little trickier. What it basically means
 is that, knowing one residual tells you nothing about any other residual. All of the \( \epsilon_{ik} \)
 values are assumed to have been generated without any “regard for” or “relationship to”
 any of the other ones. There’s not an obvious or simple way to test for this, but there
@@ -1927,8 +1927,8 @@ port!</em> <br />
 <p>
 There’s more than one way to skin a cat, as the saying goes, and more than one way to test
 the homogeneity of variance assumption, too (though for some reason no-one made a saying out
-of that). The most commonly used test for this that I’ve seen in the literature is the Levene
-test (<a href="https://www.jstor.org/stable/2004242"  target="_blank"><font color="blue">Levene 1960</font></a>), and the closely related Brown-Forsythe test (<a href="https://www.jstor.org/stable/2285659"  target="_blank"><font color="blue">Brown and Forsythe 1974</font></a>).
+of that). The most commonly used test for this that I’ve seen in the literature is the <font color="blueviolet">Levene
+test</font> (<a href="https://www.jstor.org/stable/2004242"  target="_blank"><font color="blue">Levene 1960</font></a>), and the closely related <font color="blue">Brown-Forsythe test </font>(<a href="https://www.jstor.org/stable/2285659"  target="_blank"><font color="blue">Brown and Forsythe 1974</font></a>).
 </p>
 
 <p>
@@ -2012,7 +2012,7 @@ of standard deviations), so we probably don’t need to worry. However, in real 
 always that lucky. How do we save our ANOVA when the homogeneity of variance assumption
 is violated? If you recall from our discussion of t-tests, we’ve seen this problem before. The
 Student t-test assumes equal variances, so the solution was to use the Welch t-test, which does
-not. In fact, Welch (1951) also showed how we can solve this problem for ANOVA too (the
+not. In fact, <a href="https://www.jstor.org/stable/2332579"  target="_blank"><font color="blue"> Welch (1951) </font></a> also showed how we can solve this problem for ANOVA too (the
 <font color="blueviolet"><b>Welch one-way test</b></font>). It’s implemented in jamovi using the One-Way ANOVA analysis. This is a
 specific analysis approach just for one-way ANOVA, and to run the Welch one-way ANOVA for
 our example, we would re-run the analysis as previously, but this time use the jamovi ANOVA -
@@ -2075,9 +2075,12 @@ is probably to switch to a non-parametric test (i.e., one that doesn’t rely on
 assumption about the kind of distribution involved). We’ve seen non-parametric tests before, in
 Chapter <font color="blue"><b>11</b></font>. When you only have two groups, the Mann-Whitney or the Wilcoxon test provides
 the non-parametric alternative that you need. When you’ve got three or more groups, you can
-use the Kruskal-Wallis rank sum test (Kruskal and Wallis 1952). So that’s the test we’ll
-talk about next.
+use the <font color="blueviolet"><b>Kruskal-Wallis rank sum test 
+</b></font><a href="https://doi.org/10.1080/01621459.1952.10483441"  target="_blank"><font color="blue">(Kruskal and Wallis 1952)</font></a>. 
+So that’s the test we’ll talk about next.
 </p>
+
+
 
 <h3> 13.7.1  The logic behind the Kruskal-Wallis test</h3>
 
@@ -2776,6 +2779,13 @@ is <a href="https://www.scientificamerican.com/article/language-and-the-brain/" 
 (2000)</font></a>. It’s not a good book for beginners, but it’s an excellent book for more advanced readers
 who are interested in understanding the mathematics behind ANOVA.
 </p>
+
+
+</br>
+
+<hr class="line1">
+
+
 
 <p id="note1">[1] When all groups have the same number of observations, the experimental design is said to be “balanced”.
 Balance isn’t such a big deal for one-way ANOVA, which is the topic of this chapter. It becomes more important
