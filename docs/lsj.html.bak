@@ -5583,7 +5583,7 @@ better to just use a simple box plot.
 One last thing. What if you want to draw multiple boxplots at once? Suppose, for instance, I
 wanted separate boxplots showing the AFL margins not just for 2010 but for every year between
 1987 and 2010. To do that the first thing we’ll have to do is find the data. These are stored in
-the aflsmall2.csv file. So let’s load it into jamovi and see what is in it. You will see that it is
+the <b>aflmarginbyyear.csv</b> file. So let’s load it into jamovi and see what is in it. You will see that it is
 a pretty big data set. It contains 4296 games and the variables that we’re interested in. What
 we want to do is have jamovi draw boxplots for the margin variable, but plotted separately for
 each year. The way to do this is to move the year variable across into the ‘Split by’ box, as in
@@ -5610,6 +5610,41 @@ data set
 
 <h3> 5.2.3 Using box plots to detect outliers</h3>
 
+<p>
+Because the boxplot automatically separates out those observations that lie outside a certain
+range, depicting them with a dot in jamovi, people often use them as an informal method
+for detecting <font color="blueviolet"><b>outliers</b></font>: observations that are “suspiciously” 
+distant from the rest of the data.
+Here’s an example. Suppose that I’d drawn the boxplot for the AFL margins data and it came
+up looking like Figure <font color="blue">5.8</font>. It’s pretty clear that something funny is going on with two of the
+observations. Apparently, there were two games in which the margin was over 300 points! That
+doesn’t sound right to me. Now that I’ve become suspicious it’s time to look a bit more closely
+at the data. In jamovi you can quickly find out which of these observations are suspicious and
+then you can go back to the raw data to see if there has been a mistake in data entry. To do this
+you need to set up a filter so that only those observations with values over a certain threshold
+are included. In our example, the threshold is over 300, so that is the filter we will create. First,
+click on the ‘Filters’ button at the top of the jamovi window, and then type ‘margin &gt; 300’ into
+the filter field, as in Figure <font color="blue">5.9</font>.
+</p>
+
+<figure>
+<figcaption>Figure 5.8: A boxplot showing two very suspicious outliers!
+</figcaption>
+<img src="images/Figure29.PNG" alt="Figure 5.8" />
+</figure>
+
+
+<p>
+This filter creates a new column in the spreadsheet view where only those observations that
+pass the filter are included. One neat way to quickly identify which observations these are is to
+tell jamovi to produce a ‘Frequency table’ (in the ‘Exploration’ - ‘Descriptives’ window) for the
+ID variable (which must be a nominal variable otherwise the Frequency table is not produced).
+In Figure <font color="blue">5.10</font> you can see that the ID values for the observations where the margin was over
+300 are 14 and 134. These are suspicious cases, or observations, where you should go back to
+the original data source to find out what is going on.
+</p>
+
+
 <figure>
 <figcaption>Figure 5.9: the jamovi filter screen
 </figcaption>
@@ -5625,41 +5660,6 @@ and 134
 </figure>
 
 
-<p>
-Because the boxplot automatically separates out those observations that lie outside a certain
-range, depicting them with a dot in jamovi, people often use them as an informal method
-for detecting <font color="blueviolet"><b>outliers</b></font>: observations that are “suspiciously” 
-distant from the rest of the data.
-Here’s an example. Suppose that I’d drawn the boxplot for the AFL margins data and it came
-up looking like Figure <font color="blue">5.8</font>. It’s pretty clear that something funny is going on with two of the
-observations. Apparently, there were two games in which the margin was over 300 points! That
-doesn’t sound right to me. Now that I’ve become suspicious it’s time to look a bit more closely
-at the data. In jamovi you can quickly find out which of these observations are suspicious and
-then you can go back to the raw data to see if there has been a mistake in data entry. To do this
-you need to set up a filter so that only those observations with values over a certain threshold
-are included. In our example, the threshold is over 300, so that is the filter we will create. First,
-click on the ‘Filters’ button at the top of the jamovi window, and then type ‘margin ą 300’ into
-the filter field, as in Figure <font color="blue">5.9</font>.
-</p>
-
-
-
-
-<figure>
-<figcaption>Figure 5.8: A boxplot showing two very suspicious outliers!
-</figcaption>
-<img src="images/Figure29.PNG" alt="Figure 5.8" />
-</figure>
-
-<p>
-This filter creates a new column in the spreadsheet view where only those observations that
-pass the filter are included. One neat way to quickly identify which observations these are is to
-tell jamovi to produce a ‘Frequency table’ (in the ‘Exploration’ - ‘Descriptives’ window) for the
-ID variable (which must be a nominal variable otherwise the Frequency table is not produced).
-In Figure <font color="blue">5.10</font> you can see that the ID values for the observations where the margin was over
-300 are 14 and 134. These are suspicious cases, or observations, where you should go back to
-the original data source to find out what is going on.
-</p>
 
 <p>
 Usually you find that someone has just typed in the wrong number. Whilst this might seem
