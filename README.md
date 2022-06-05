@@ -1,6 +1,6 @@
 # learning statistics with jamovi
 
-Contains LaTeX source for:
+Contains html and epub files for:
 
 
 Navarro DJ and Foxcroft DR (2022). learning statistics with jamovi: a tutorial for psychology students and other beginners. (Version 0.75). [Available from url: https://learnstatswithjamovi.com/]
