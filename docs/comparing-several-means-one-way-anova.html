@@ -1,0 +1,1182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 13 Comparing several means (one-way ANOVA) | learning statistics with jamovi</title>
+<meta name="author" content="Danielle J. Navarro &amp; David R. Foxcroft">
+<meta name="description" content="This chapter introduces one of the most widely used tools in psychological statistics, known as “the analysis of variance”, but usually referred to as ANOVA. The basic technique was developed by...">
+<meta name="generator" content="bookdown 0.26 with bs4_book()">
+<meta property="og:title" content="Chapter 13 Comparing several means (one-way ANOVA) | learning statistics with jamovi">
+<meta property="og:type" content="book">
+<meta property="og:image" content="/images/bookcover_logo.png">
+<meta property="og:description" content="This chapter introduces one of the most widely used tools in psychological statistics, known as “the analysis of variance”, but usually referred to as ANOVA. The basic technique was developed by...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 13 Comparing several means (one-way ANOVA) | learning statistics with jamovi">
+<meta name="twitter:description" content="This chapter introduces one of the most widely used tools in psychological statistics, known as “the analysis of variance”, but usually referred to as ANOVA. The basic technique was developed by...">
+<meta name="twitter:image" content="/images/bookcover_logo.png">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><style>
+    .enlarge-image {
+        transition: transform .2s ease-out;
+        cursor: pointer;
+    }
+
+    .enlarge-image:hover {
+        transform: scale(2.0);
+        display: block;
+        background: black;
+        position:relative;
+        float:left;
+        z-index:999;
+    }
+    </style>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script type="text/x-mathjax-config"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title=""><span style="font-family:Garamond;font-weight:700;">learning statistics with jamovi</span></a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"></a></li>
+<li><a class="" href="preface.html">Preface</a></li>
+<li><a class="" href="why-do-we-learn-statistics.html"><span class="header-section-number">1</span> Why do we learn statistics</a></li>
+<li><a class="" href="a-brief-introduction-to-research-design.html"><span class="header-section-number">2</span> A brief introduction to research design</a></li>
+<li><a class="" href="getting-started-with-jamovi.html"><span class="header-section-number">3</span> Getting started with jamovi</a></li>
+<li><a class="" href="descriptive-statistics.html"><span class="header-section-number">4</span> Descriptive statistics</a></li>
+<li><a class="" href="drawing-graphs.html"><span class="header-section-number">5</span> Drawing graphs</a></li>
+<li><a class="" href="pragmatic-matters.html"><span class="header-section-number">6</span> Pragmatic matters</a></li>
+<li><a class="" href="prelude-to-part-iv.html">Prelude to Part IV</a></li>
+<li><a class="" href="introduction-to-probability.html"><span class="header-section-number">7</span> Introduction to probability</a></li>
+<li><a class="" href="estimating-unkown-quantities-from-a-sample.html"><span class="header-section-number">8</span> Estimating unkown quantities from a sample</a></li>
+<li><a class="" href="hypothesis-testing.html"><span class="header-section-number">9</span> Hypothesis testing</a></li>
+<li><a class="" href="categorical-data-analysis.html"><span class="header-section-number">10</span> Categorical data analysis</a></li>
+<li><a class="" href="comparing-two-means.html"><span class="header-section-number">11</span> Comparing two means</a></li>
+<li><a class="" href="correlation-and-linear-regression.html"><span class="header-section-number">12</span> Correlation and linear regression</a></li>
+<li><a class="active" href="comparing-several-means-one-way-anova.html"><span class="header-section-number">13</span> Comparing several means (one-way ANOVA)</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="comparing-several-means-one-way-anova" class="section level1" number="13">
+<h1>
+<span class="header-section-number">13</span> Comparing several means (one-way ANOVA)<a class="anchor" aria-label="anchor" href="#comparing-several-means-one-way-anova"><i class="fas fa-link"></i></a>
+</h1>
+<p>This chapter introduces one of the most widely used tools in psychological statistics, known as “the analysis of variance”, but usually referred to as ANOVA. The basic technique was developed by Sir Ronald Fisher in the early 20th century and it is to him that we owe the rather unfortunate terminology. The term ANOVA is a little misleading, in two respects. Firstly, although the name of the technique refers to variances, ANOVA is concerned with investigating differences in means. Secondly, there are several different things out there that are all referred to as ANOVAs, some of which have only a very tenuous connection to one another. Later on in the book we’ll encounter a range of different ANOVA methods that apply in quite different situations, but for the purposes of this chapter we’ll only consider the simplest form of ANOVA, in which we have several different groups of observations, and we’re interested in finding out whether those groups differ in terms of some outcome variable of interest. This is the question that is addressed by a one-way ANOVA.</p>
+<p>The structure of this chapter is as follows: first I’ll introduce a fictitious data set that we’ll use as a running example throughout the chapter. After introducing the data, I’ll describe the mechanics of how a one-way ANOVA actually works (<a href="comparing-several-means-one-way-anova.html#how-anova-works">How ANOVA works</a>) and then focus on how you can run one in jamovi ([Running and ANOVA in jamovi]). These two sections are the core of the chapter.</p>
+<p>The remainder of the chapter discusses a range of important topics that inevitably arise when running an ANOVA, namely how to calculate effect sizes, post hoc tests and corrections for multiple comparisons and the assumptions that ANOVA relies upon. We’ll also talk about how to check those assumptions and some of the things you can do if the assumptions are violated. Then we’ll cover repeated measures ANOVA.</p>
+<div id="an-illustrative-data-set" class="section level2" number="13.1">
+<h2>
+<span class="header-section-number">13.1</span> An illustrative data set<a class="anchor" aria-label="anchor" href="#an-illustrative-data-set"><i class="fas fa-link"></i></a>
+</h2>
+<p>Suppose you’ve become involved in a clinical trial in which you are testing a new antidepressant drug called <em>Joyzepam</em>. In order to construct a fair test of the drug’s effectiveness, the study involves three separate drugs to be administered. One is a placebo, and the other is an existing antidepressant / anti-anxiety drug called <em>Anxifree</em>. A collection of 18 participants with moderate to severe depression are recruited for your initial testing. Because the drugs are sometimes administered in conjunction with psychological therapy, your study includes 9 people undergoing cognitive behavioural therapy (CBT) and 9 who are not. Participants are randomly assigned (doubly blinded, of course) a treatment, such that there are 3 CBT people and 3 no-therapy people assigned to each of the 3 drugs. A psychologist assesses the mood of each person after a 3 month run with each drug, and the overall improvement in each person’s mood is assessed on a scale ranging from <span class="math inline">\(-5\)</span> to <span class="math inline">\(+5\)</span>. With that as the study design, let’s now load up the data file in clinicaltrial.csv. We can see that this data set contains the three variables drug, therapy and mood.gain.</p>
+<p>For the purposes of this chapter, what we’re really interested in is the effect of drug on mood.gain. The first thing to do is calculate some descriptive statistics and draw some graphs. In the <a href="descriptive-statistics.html#descriptive-statistics">Descriptive statistics</a> chapter we showed you how to do this, and some of the descriptive statistics we can calculate in jamovi are shown in Figure <a href="comparing-several-means-one-way-anova.html#fig:fig13-1">13.1</a></p>
+<div class="figure">
+<span style="display:block;" id="fig:fig13-1"></span>
+<img src="images/Figure129.PNG" alt="Descriptives for mood gain, and box plots by drug administered" width="90%"><p class="caption">
+Figure 13.1: Descriptives for mood gain, and box plots by drug administered
+</p>
+</div>
+<p>As the plot makes clear, there is a larger improvement in mood for participants in the Joyzepam group than for either the Anxifree group or the placebo group. The Anxifree group shows a larger mood gain than the control group, but the difference isn’t as large. The question that we want to answer is are these difference “real”, or are they just due to chance?</p>
+</div>
+<div id="how-anova-works" class="section level2" number="13.2">
+<h2>
+<span class="header-section-number">13.2</span> How ANOVA works<a class="anchor" aria-label="anchor" href="#how-anova-works"><i class="fas fa-link"></i></a>
+</h2>
+<p>In order to answer the question posed by our clinical trial data we’re going to run a one-way ANOVA. I’m going to start by showing you how to do it the hard way, building the statistical tool from the ground up and showing you how you could do it if you didn’t have access to any of the cool built-in ANOVA functions in jamovi. And I hope you’ll read it carefully, try to do it the long way once or twice to make sure you really understand how ANOVA works, and then once you’ve grasped the concept never ever do it this way again.</p>
+<p>The experimental design that I described in the previous section strongly suggests that we’re interested in comparing the average mood change for the three different drugs. In that sense, we’re talking about an analysis similar to the t-test (see the chapter on <a href="comparing-two-means.html#comparing-two-means">Comparing two means</a> but involving more than two groups. If we let <span class="math inline">\(\mu_P\)</span> denote the population mean for the mood change induced by the placebo, and let <span class="math inline">\(\mu_A\)</span> and <span class="math inline">\(\mu_J\)</span> denote the corresponding means for our two drugs, Anxifree and Joyzepam, then the (somewhat pessimistic) null hypothesis that we want to test is that all three population means are identical. That is, neither of the two drugs is any more effective than a placebo. We can write out this null hypothesis as:</p>
+<p><span class="math display">\[H_0: \text{ it is true that } \mu_P=\mu_A=\mu_J\]</span></p>
+<p>As a consequence, our alternative hypothesis is that at least one of the three different treatments is different from the others. It’s a bit tricky to write this mathematically, because (as we’ll discuss) there are quite a few different ways in which the null hypothesis can be false. So for now we’ll just write the alternative hypothesis like this:</p>
+<p><span class="math display">\[H_1: \text{ it } \underline{ is \text{ } not } \text{ true that }
+\mu_P=\mu_A=\mu_J\]</span></p>
+<p>This null hypothesis is a lot trickier to test than any of the ones we’ve seen previously. How shall we do it? A sensible guess would be to “do an ANOVA”, since that’s the title of the chapter, but it’s not particularly clear why an “analysis of variances” will help us learn anything useful about the means. In fact, this is one of the biggest conceptual difficulties that people have when first encountering ANOVA. To see how this works, I find it most helpful to start by talking about variances. In fact, what I’m going to do is start by playing some mathematical games with the formula that describes the variance. That is, we’ll start out by playing around with variances and it will turn out that this gives us a useful tool for investigating means.</p>
+<div id="two-formulas-for-the-variance-of-y" class="section level3" number="13.2.1">
+<h3>
+<span class="header-section-number">13.2.1</span> Two formulas for the variance of Y<a class="anchor" aria-label="anchor" href="#two-formulas-for-the-variance-of-y"><i class="fas fa-link"></i></a>
+</h3>
+<p>First, let’s start by introducing some notation. We’ll use G to refer to the total number of groups. For our data set there are three drugs, so there are <span class="math inline">\(G = 3\)</span> groups. Next, we’ll use <span class="math inline">\(N\)</span> to refer to the total sample size; there are a total of <span class="math inline">\(N = 18\)</span> people in our data set. Similarly, let’s use <span class="math inline">\(N_k\)</span> to denote the number of people in the k-th group. In our fake clinical trial, the sample size is <span class="math inline">\(N_k = 6\)</span> for all three groups.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;When all groups have the same number of observations, the experimental design is said to be “balanced”. Balance isn’t such a big deal for one-way ANOVA, which is the topic of this chapter. It becomes more important when you start doing more complicated ANOVAs.&lt;/p&gt;"><sup>139</sup></a> Finally, we’ll use Y to denote the outcome variable. In our case, Y refers to mood change. Specifically, we’ll use Yik to refer to the mood change experienced by the i-th member of the k-th group. Similarly, we’ll use <span class="math inline">\(\bar{Y}\)</span> to be the average mood change, taken across all 18 people in the experiment, and <span class="math inline">\(\bar{Y}_k\)</span> to refer to the average mood change experienced by the 6 people in group <span class="math inline">\(k\)</span>.</p>
+<p>Statistical notation <a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;Now that we’ve got our notation sorted out we can start writing down formulas. To start with, let’s recall the formula for the variance that we used in the section on &lt;a href="descriptive-statistics.html#measures-of-variability"&gt;Measures of variability&lt;/a&gt;, way back in those kinder days when we were just doing descriptive statistics. The sample variance of Y is defined as follows &lt;span class="math display"&gt;\[Var(Y)=\frac{1}{N}\sum_{k=1}^{G}\sum_{i=1}^{N_k}(Y_{ik}-\bar{Y})^2\]&lt;/span&gt; This formula looks pretty much identical to the formula for the variance in &lt;a href="descriptive-statistics.html#measures-of-variability"&gt;Measures of variability&lt;/a&gt;. The only difference is that this time around I’ve got two summations here: I’m summing over groups (i.e., values for &lt;span class="math inline"&gt;\(k\)&lt;/span&gt;) and over the people within the groups (i.e., values for &lt;span class="math inline"&gt;\(i\)&lt;/span&gt;). This is purely a cosmetic detail. If I’d instead used the notation &lt;span class="math inline"&gt;\(Y_p\)&lt;/span&gt; to refer to the value of the outcome variable for person p in the sample, then I’d only have a single summation. The only reason that we have a double summation here is that I’ve classified people into groups, and then assigned numbers to people within groups.&lt;/p&gt;'><sup>140</sup></a></p>
+<p>A concrete example might be useful here. Let’s consider this table, in which we have a total of <span class="math inline">\(N = 5\)</span> people sorted into <span class="math inline">\(G = 2\)</span> groups. Arbitrarily, let’s say that the “cool” people are group 1 and the “uncool” people are group 2. It turns out that we have three cool people (<span class="math inline">\(N_1 = 3\)</span>) and two uncool people (<span class="math inline">\(N_2 = 2\)</span>)</p>
+<div class="inline-table"><table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 101%; margin-left: auto; margin-right: auto;  " id="tab:tab13-1">
+<caption style="caption-side: bottom; text-align: left;">
+<span id="tab:tab13-1">Table 13.1: </span> Grumpiness for people in cool and uncool groups</caption>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<tr>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: bold;">name</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">person P</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">group</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">group num. k</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">index in group</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">grumpiness \( Y_{ik} \) or \( Y_p \)</th>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">Ann</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">cool</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">20</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: normal;">Ben</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">2</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">cool</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">1</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">2</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">55</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; font-weight: normal;">Cat</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">cool</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; font-weight: normal;">21</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: normal;">Tim</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">4</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">uncool</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">2</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">1</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">91</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">Egg</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">5</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">uncool</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">22</td>
+</tr>
+</table></div>
+<p>Notice that I’ve constructed two different labelling schemes here. We have a “person” variable p so it would be perfectly sensible to refer to Yp as the grumpiness of the p-th person in the sample. For instance, the table shows that Tim is the fourth so we’d say <span class="math inline">\(p = 4\)</span>. So, when talking about the grumpiness <span class="math inline">\(Y\)</span> of this “Tim” person, whoever he might be, we could refer to his grumpiness by saying that <span class="math inline">\(Y_p = 91\)</span>, for person <span class="math inline">\(p = 4\)</span> that is. However, that’s not the only way we could refer to Tim. As an alternative we could note that Tim belongs to the “uncool” group (<span class="math inline">\(k = 2\)</span>), and is in fact the first person listed in the uncool group (i = 1). So it’s equally valid to refer to Tim’s grumpiness by saying that <span class="math inline">\(Y_{ik} = 91\)</span>, where <span class="math inline">\(k = 2\)</span> and <span class="math inline">\(i = 1\)</span>.</p>
+<p>Statistical notation <a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;In other words, each person p corresponds to a unique ik combination, and so the formula that I gave above is actually identical to our original formula for the variance, which would be &lt;span class="math display"&gt;\[Var(Y)=\frac{1}{N}\sum_{p=1}^{N}(Y_p-\bar{Y})^2\]&lt;/span&gt; In both formulas, all we’re doing is summing over all of the observations in the sample. Most of the time we would just use the simpler Yp notation; the equation using &lt;span class="math inline"&gt;\(Y_p\)&lt;/span&gt; is clearly the simpler of the two. However, when doing an ANOVA it’s important to keep track of which participants belong in which groups, and we need to use the Yik notation to do this.&lt;/p&gt;'><sup>141</sup></a></p>
+</div>
+<div id="from-variances-to-sums-of-squares" class="section level3" number="13.2.2">
+<h3>
+<span class="header-section-number">13.2.2</span> From variances to sums of squares<a class="anchor" aria-label="anchor" href="#from-variances-to-sums-of-squares"><i class="fas fa-link"></i></a>
+</h3>
+<p>Okay, now that we’ve got a good grasp on how the variance is calculated, let’s define something called the <strong>total sum of squares</strong>, which is denoted SStot. This is very simple. Instead of averaging the squared deviations, which is what we do when calculating the variance, we just add them up.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;So the formula for the total sum of squares is almost identical to the formula for the variance &lt;span class="math display"&gt;\[SS_{tot}=\sum_{k=1}^{G} \sum_{i=1}^{N_k} (Y_{ik} - \bar{Y})^2\]&lt;/span&gt;&lt;/p&gt;'><sup>142</sup></a></p>
+<p>When we talk about analysing variances in the context of ANOVA, what we’re really doing is working with the total sums of squares rather than the actual variance. <a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;One very nice thing about the total sum of squares is that we can break it up into two different kinds of variation First, we can talk about the within-group sum of squares, in which we look to see how different each individual person is from their own group mean &lt;span class="math display"&gt;\[SS_{w}= \sum_{k=1}^{G} \sum_{i=1}^{N_k} (Y_{ik} - \bar{Y}_k)^2\]&lt;/span&gt; where &lt;span class="math inline"&gt;\(\bar{Y}_k\)&lt;/span&gt; is a group mean. In our example, &lt;span class="math inline"&gt;\(\bar{Y}_k\)&lt;/span&gt; would be the average mood change experienced by those people given the k-th drug. So, instead of comparing individuals to the average of all people in the experiment, we’re only comparing them to those people in the the same group. As a consequence, you’d expect the value of &lt;span class="math inline"&gt;\(SS_w\)&lt;/span&gt; to be smaller than the total sum of squares, because it’s completely ignoring any group differences, i.e., whether the drugs will have different effects on people’s moods&lt;/p&gt;'><sup>143</sup></a></p>
+<p>Next, we can define a third notion of variation which captures only the differences between groups. We do this by looking at the differences between the group means <span class="math inline">\(\bar{Y}_k\)</span> and grand mean <span class="math inline">\(\bar{Y}\)</span>. <a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;In order to quantify the extent of this variation, what we do is calculate the between-group sum of squares &lt;span class="math display"&gt;\[ \begin{aligned}
+SS_{b} &amp;amp;= \sum_{k=1}^{G} \sum_{i=1}^{N_k} ( \bar{Y}_{k} -        
+\bar{Y} )^2 \\ &amp;amp;= \sum_{k=1}^{G} N_k ( \bar{Y}_{k} -             
+\bar{Y} )^2
+\end{aligned} \]&lt;/span&gt;&lt;/p&gt;'><sup>144</sup></a></p>
+<div class="figure">
+<span style="display:block;" id="fig:fig13-2"></span>
+<img src="images/Figure130.PNG" alt="Graphical illustration of 'between groups' variation (panel a) and 'within groups' variation (panel b). On the left the arrows show the differences in the group means. On the right the arrows highlight the variability within each group" width="90%"><p class="caption">
+Figure 13.2: Graphical illustration of ‘between groups’ variation (panel a) and ‘within groups’ variation (panel b). On the left the arrows show the differences in the group means. On the right the arrows highlight the variability within each group
+</p>
+</div>
+<p>It’s not too difficult to show that the total variation among people in the experiment (<span class="math inline">\(SS_{tot}\)</span> is actually the sum of the differences between the groups <span class="math inline">\(SS_b\)</span> and the variation inside the groups <span class="math inline">\(SS_w\)</span>. That is,</p>
+<p><span class="math display">\[SS_w+SS_b=SS_{tot}\]</span> Yay.</p>
+<p>Okay, so what have we found out? We’ve discovered that the total variability associated with the outcome variable (<span class="math inline">\(SS_{tot}\)</span>) can be mathematically carved up into the sum of “the variation due to the differences in the sample means for the different groups” (<span class="math inline">\(SS_b\)</span>) plus “all the rest of the variation” (<span class="math inline">\(SS_w\)</span>) <a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;SS_w is also referred to in an independent ANOVA as the error variance, or &lt;span class="math inline"&gt;\(SS_{error}\)&lt;/span&gt;&lt;/p&gt;'><sup>145</sup></a>. How does that help me find out whether the groups have different population means? Um. Wait. Hold on a second. Now that I think about it, this is exactly what we were looking for. If the null hypothesis is true then you’d expect all the sample means to be pretty similar to each other, right? And that would imply that you’d expect <span class="math inline">\(SS_b\)</span> to be really small, or at least you’d expect it to be a lot smaller than “the variation associated with everything else”, <span class="math inline">\(SS_w\)</span>. Hmm. I detect a hypothesis test coming on.</p>
+</div>
+<div id="from-sums-of-squares-to-the-f-test" class="section level3" number="13.2.3">
+<h3>
+<span class="header-section-number">13.2.3</span> From sums of squares to the F-test<a class="anchor" aria-label="anchor" href="#from-sums-of-squares-to-the-f-test"><i class="fas fa-link"></i></a>
+</h3>
+<p>As we saw in the last section, the qualitative idea behind ANOVA is to compare the two sums of squares values <span class="math inline">\(SS_b\)</span> and <span class="math inline">\(SS_w\)</span> to each other. If the between-group variation <span class="math inline">\(SS_b\)</span> is large relative to the within-group variation <span class="math inline">\(SS_w\)</span> then we have reason to suspect that the population means for the different groups aren’t identical to each other. In order to convert this into a workable hypothesis test, there’s a little bit of “fiddling around” needed. What I’ll do is first show you what we do to calculate our test statistic, the <strong>F ratio</strong>, and then try to give you a feel for why we do it this way.</p>
+<p>In order to convert our SS values into an F-ratio the first thing we need to calculate is the <strong>degrees of freedom</strong> associated with the <span class="math inline">\(SS_b\)</span> and <span class="math inline">\(SS_w\)</span> values. As usual, the degrees of freedom corresponds to the number of unique “data points” that contribute to a particular calculation, minus the number of “constraints” that they need to satisfy. For the within-groups variability what we’re calculating is the variation of the individual observations (<span class="math inline">\(N\)</span> data points) around the group means (<span class="math inline">\(G\)</span> constraints). In contrast, for the between groups variability we’re interested in the variation of the group means (G data points) around the grand mean (1 constraint). Therefore, the degrees of freedom here are:</p>
+<p><span class="math display">\[df_b=G-1\]</span> <span class="math display">\[df_w=N-G\]</span></p>
+<p>Okay, that seems simple enough. What we do next is convert our summed squares value into a “mean squares” value, which we do by dividing by the degrees of freedom:</p>
+<p><span class="math display">\[MS_b=\frac{SS_b}{df_b}\]</span> <span class="math display">\[MS_w=\frac{SS_w}{df_w}\]</span></p>
+<p>Finally, we calculate the F-ratio by dividing the between-groups MS by the within-groups MS:</p>
+<p><span class="math display">\[F=\frac{MS_b}{MS_w}\]</span></p>
+<p>At a very general level, the intuition behind the F statistic is straightforward. Bigger values of F means that the between-groups variation is large relative to the within-groups variation. As a consequence, the larger the value of F the more evidence we have against the null hypothesis. But how large does <span class="math inline">\(F\)</span> have to be in order to actually reject <span class="math inline">\(H_0\)</span>? In order to understand this, you need a slightly deeper understanding of what ANOVA is and what the mean squares values actually are.</p>
+<p>The next section discusses that in a bit of detail, but for readers that aren’t interested in the details of what the test is actually measuring I’ll cut to the chase. In order to complete our hypothesis test we need to know the sampling distribution for F if the null hypothesis is true. Not surprisingly, the sampling distribution for the F <u>statistic</u> under the null hypothesis is an <span class="math inline">\(F\)</span> distribution. If you recall our discussion of the F distribution in the chapter <a href="introduction-to-probability.html#introduction-to-probability">Introduction to probability</a>, the <span class="math inline">\(F\)</span> <u>distribution</u> has two parameters, corresponding to the two degrees of freedom involved. The first one <span class="math inline">\(df_1\)</span> is the between groups degrees of freedom <span class="math inline">\(df_b\)</span>, and the second one <span class="math inline">\(df_2\)</span> is the within groups degrees of freedom <span class="math inline">\(df_w\)</span>.</p>
+<div class="inline-table"><table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 101%; margin-left: auto; margin-right: auto;  " id="tab:tab13-2">
+<caption style="caption-side: bottom; text-align: left;">
+<span id="tab:tab13-2">Table 13.2: </span> All of the key quantities involved in an ANOVA organised into a 'standard' ANOVA table. The formulas for all quantities (except the p-value which has a very ugly formula and would be nightmarishly hard to calculate without a computer) are shown</caption>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<tr>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: bold;"></th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">df</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">sum of squares</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">mean squares</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">F-statistic</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">p-value</th>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">between<br>groups</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">\(  df_b=G-1  \)</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">\(  SS_b=\sum_{k=1}^{G} N_k  (\bar{Y}_k-\bar{Y})^2  \)</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">\(  MS_b=\frac{SS_b}{df_b}  \)</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">\(  F=\frac{MS_b}{df_b}  \)</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">[complicated]</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: normal;">within<br>groups</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">\(  df_w=N-G  \)</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">\(  SS_w=\sum_{k=1}^{G} \sum_{i=1}^{N_k}   (Y_{ik}-\bar{Y}_k)^2  \)</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">\(  MS_w=\frac{SS_w}{df_w}  \)</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">-</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">-</td>
+</tr>
+</table></div>
+<p>A summary of all the key quantities involved in a one-way ANOVA, including the formulas showing how they are calculated, is shown in Table <strong>13.1</strong>.</p>
+<p>Statistical notation <a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;At a fundamental level ANOVA is a competition between two different statistical models, &lt;span class="math inline"&gt;\(H_0\)&lt;/span&gt; and &lt;span class="math inline"&gt;\(H_1\)&lt;/span&gt;. When I described the null and alternative hypotheses at the start of the section, I was a little imprecise about what these models actually are. I’ll remedy that now, though you probably won’t like me for doing so. If you recall, our null hypothesis was that all of the group means are identical to one another. If so, then a natural way to think about the outcome variable &lt;span class="math inline"&gt;\(Y_{ik}\)&lt;/span&gt; is to describe individual scores in terms of a single population mean µ, plus the deviation from that population mean. This deviation is usually denoted &lt;span class="math inline"&gt;\(\\epsilon_{ik}\)&lt;/span&gt; and is traditionally called the error or residual associated with that observation. Be careful though. Just like we saw with the word “significant”, the word “error” has a technical meaning in statistics that isn’t quite the same as its everyday English definition. In everyday language, “error” implies a mistake of some kind, but in statistics it doesn’t (or at least, not necessarily). With that in mind, the word “residual” is a better term than the word “error”. In statistics both words mean “leftover variability”, that is “stuff” that the model can’t explain.&lt;br&gt;
+In any case, here’s what the null hypothesis looks like when we write it as a statistical model&lt;br&gt;&lt;span class="math display"&gt;\[Y_{ik}=\mu+\epsilon_{ik}\]&lt;/span&gt; where we make the assumption (discussed later) that the residual values &lt;span class="math inline"&gt;\(\epsilon_{ik}\)&lt;/span&gt; are normally distributed, with mean &lt;span class="math inline"&gt;\(0\)&lt;/span&gt; and a standard deviation &lt;span class="math inline"&gt;\(\sigma\)&lt;/span&gt; that is the same for all groups. To use the notation that we introduced in the &lt;a href="introduction-to-probability.html#introduction-to-probability"&gt;Introduction to probability&lt;/a&gt; we would write this assumption like this&lt;br&gt;&lt;span class="math display"&gt;\[\epsilon_{ik} \sim Normal(0,\sigma^2)\]&lt;/span&gt; What about the alternative hypothesis, &lt;span class="math inline"&gt;\(H_1\)&lt;/span&gt;? The only difference between the null hypothesis and the alternative hypothesis is that we allow each group to have a different population mean. So, if we let &lt;span class="math inline"&gt;\(\mu_k\)&lt;/span&gt; denote the population mean for the k-th group in our experiment, then the statistical model corresponding to &lt;span class="math inline"&gt;\(H_1\)&lt;/span&gt; is &lt;span class="math display"&gt;\[Y_{ik}=\mu_k+\epsilon_{ik}\]&lt;/span&gt; where, once again, we assume that the error terms are normally distributed with mean 0 and standard deviation &lt;span class="math inline"&gt;\(\sigma\)&lt;/span&gt;. That is, the alternative hypothesis also assumes that $ Normal(0,^2) $ Okay, now that we’ve described the statistical models underpinning &lt;span class="math inline"&gt;\(H_0\)&lt;/span&gt; and &lt;span class="math inline"&gt;\(H_1\)&lt;/span&gt; in more detail, it’s now pretty straightforward to say what the mean square values are measuring, and what this means for the interpretation of &lt;span class="math inline"&gt;\(F\)&lt;/span&gt;. I won’t bore you with the proof of this but it turns out that the within-groups mean square, &lt;span class="math inline"&gt;\(MS_w\)&lt;/span&gt;, can be viewed as an estimator of the error variance &lt;span class="math inline"&gt;\(\sigma^2\)&lt;/span&gt; . The between-groups mean square &lt;span class="math inline"&gt;\(MS_b\)&lt;/span&gt; is also an estimator, but what it estimates is the error variance plus a quantity that depends on the true differences among the group means. If we call this quantity &lt;span class="math inline"&gt;\(Q\)&lt;/span&gt;, then we can see that the F-statistic is basically&lt;span class="math inline"&gt;\(^a\)&lt;/span&gt;&lt;br&gt;&lt;span class="math display"&gt;\[F=\frac{\hat{Q}+\hat{\sigma}^2}{\hat{\sigma}^2}\]&lt;/span&gt;&lt;br&gt;
+where the true value &lt;span class="math inline"&gt;\(Q = 0\)&lt;/span&gt; if the null hypothesis is true, and Q &amp;lt; 0 if the alternative hypothesis is true (e.g., &lt;span class="citation"&gt;Hays (&lt;a href="references.html#ref-Hays1994" role="doc-biblioref"&gt;1994&lt;/a&gt;)&lt;/span&gt;, ch. 10). Therefore, at a bare minimum the &lt;span class="math inline"&gt;\(F\)&lt;/span&gt; &lt;em&gt;value must be larger than&lt;/em&gt; 1 to have any chance of rejecting the null hypothesis. Note that this doesn’t mean that it’s impossible to get an F-value less than 1. What it means is that if the null hypothesis is true the sampling distribution of the F ratio has a mean of 1,[^b] and so we need to see F-values larger than 1 in order to safely reject the null. To be a bit more precise about the sampling distribution, notice that if the null hypothesis is true, both MSb and MSw are estimators of the variance of the residuals &lt;span class="math inline"&gt;\(\epsilon_{ik}\)&lt;/span&gt;. If those residuals are normally distributed, then you might suspect that the estimate of the variance of &lt;span class="math inline"&gt;\(\epsilon_{ik}\)&lt;/span&gt; is chisquare distributed, because (as discussed in the &lt;a href="introduction-to-probability.html#other-useful-distributions"&gt;Other useful distributions&lt;/a&gt; that’s what a chi-square distribution is: it’s what you get when you square a bunch of normally-distributed things and add them up. And since the F distribution is (again, by definition) what you get when you take the ratio between two things that are &lt;span class="math inline"&gt;\(\chi^2\)&lt;/span&gt; distributed, we have our sampling distribution. Obviously, I’m glossing over a whole lot of stuff when I say this, but in broad terms, this really is where our sampling distribution comes from. ++ &lt;span class="math inline"&gt;\(^a\)&lt;/span&gt; If you read ahead to the [Factorial ANOVA] chapter and look at how the “treatment effect” at level k of a factor is defined in terms of the &lt;span class="math inline"&gt;\(\alpha_k\)&lt;/span&gt; values (see Section &lt;strong&gt;14.2&lt;/strong&gt;), it turns out that &lt;span class="math inline"&gt;\(Q\)&lt;/span&gt; refers to a weighted mean of the squared treatment effects, &lt;span class="math inline"&gt;\(Q = \frac{(\sum_{k=1}^{G}N_k \alpha_k^2)}{(G-1)}\)&lt;/span&gt; &lt;span class="math inline"&gt;\(^b\)&lt;/span&gt; Or, if we want to be sticklers for accuracy, $ 1+ $&lt;/p&gt;'><sup>146</sup></a></p>
+</div>
+<div id="a-worked-example" class="section level3" number="13.2.4">
+<h3>
+<span class="header-section-number">13.2.4</span> A worked example<a class="anchor" aria-label="anchor" href="#a-worked-example"><i class="fas fa-link"></i></a>
+</h3>
+<p>The previous discussion was fairly abstract and a little on the technical side, so I think that at this point it might be useful to see a worked example. For that, let’s go back to the clinical trial data that I introduced at the start of the chapter. The descriptive statistics that we calculated at the beginning tell us our group means: an average mood gain of <span class="math inline">\(0.45\)</span> for the placebo, <span class="math inline">\(0.72\)</span> for Anxifree, and <span class="math inline">\(1.48\)</span> for Joyzepam. With that in mind, let’s party like it’s 1899 <a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Or, to be precise, party like “it’s 1899 and we’ve got no friends and nothing better to do with our time than do some calculations that wouldn’t have made any sense in 1899 because ANOVA didn’t exist until about the 1920s”.&lt;/p&gt;"><sup>147</sup></a> and start doing some pencil and paper calculations. I’ll only do this for the first <span class="math inline">\(5\)</span> observations because it’s not bloody <span class="math inline">\(1899\)</span> and I’m very lazy. Let’s start by calculating <span class="math inline">\(SS_w\)</span>, the within-group sums of squares. First, let’s draw up a nice table to help us with our calculations:</p>
+<div class="inline-table"><table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 101%; margin-left: auto; margin-right: auto;  " id="tab:tab13-3">
+<caption style="caption-side: bottom; text-align: left;">
+<span id="tab:tab13-3">Table 13.3: </span> A worked example...1</caption>
+<col>
+<col>
+<tr>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: bold;">group k</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">outcome \( Y_{ik} \)</th>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">placebo</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">0.5</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: normal;">placebo</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">0.3</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; font-weight: normal;">placebo</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; font-weight: normal;">0.1</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: normal;">anxifree</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">0.6</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">anxifree</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">0.4</td>
+</tr>
+</table></div>
+<p>At this stage, the only thing I’ve included in the table is the raw data itself. That is, the grouping variable (i.e., drug) and outcome variable (i.e. mood.gain) for each person. Note that the outcome variable here corresponds to the <span class="math inline">\(\bar{Y}_{ik}\)</span> value in our equation previously. The next step in the calculation is to write down, for each person in the study, the corresponding group mean, <span class="math inline">\(\bar{Y}_k\)</span>. This is slightly repetitive but not particularly difficult since we already calculated those group means when doing our descriptive statistics:</p>
+<div class="inline-table"><table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 101%; margin-left: auto; margin-right: auto;  " id="tab:tab13-4">
+<caption style="caption-side: bottom; text-align: left;">
+<span id="tab:tab13-4">Table 13.4: </span> A worked example...2</caption>
+<col>
+<col>
+<col>
+<tr>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: bold;">group k</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">outcome \( Y_{ik} \)</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">group mean \( \bar{Y}_k \)</th>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">placebo</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.5</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">0.45</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: normal;">placebo</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">0.3</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">0.45</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; font-weight: normal;">placebo</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.1</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; font-weight: normal;">0.45</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: normal;">anxifree</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">0.6</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">0.72</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">anxifree</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.4</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">0.72</td>
+</tr>
+</table></div>
+<p>Now that we’ve written those down, we need to calculate, again for every person, the deviation from the corresponding group mean. That is, we want to subtract <span class="math inline">\(Y_{ik} - \bar{Y}_k\)</span>. After we’ve done that, we need to square everything. When we do that, here’s what we get:</p>
+<div class="inline-table"><table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 101%; margin-left: auto; margin-right: auto;  " id="tab:tab13-5">
+<caption style="caption-side: bottom; text-align: left;">
+<span id="tab:tab13-5">Table 13.5: </span> A worked example...3</caption>
+<col>
+<col>
+<col>
+<col>
+<col>
+<tr>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: bold;">group k</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">outcome \( Y_{ik} \)</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">group mean  \( \bar{Y}_k \)</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">dev. from group mean  \( Y_{ik} - \bar{Y}_k \)</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">squared deviation \(  (Y_{ik}-\bar{Y}_k)^2 \)</th>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">placebo</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.5</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.45</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.05</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">0.0025</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: normal;">placebo</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">0.3</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">0.45</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">-0.15</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">0.0225</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; font-weight: normal;">placebo</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.1</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.45</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-0.35</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; font-weight: normal;">0.1225</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: normal;">anxifree</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">0.6</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">0.72</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">-0.12</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">0.0136</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">anxifree</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.4</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.72</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-0.32</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">0.1003</td>
+</tr>
+</table></div>
+<p>The last step is equally straightforward. In order to calculate the within-group sum of squares we just add up the squared deviations across all observations:</p>
+<p><span class="math display">\[ \begin{equation} \begin{split} SS_w &amp; = 0.0025 + 0.0225 + 0.1225 +
+0.0136 + 0.1003 \\ &amp; = 0.2614 \end{split} \end{equation} \]</span></p>
+<p>Of course, if we actually wanted to get the right answer we’d need to do this for all 18 observations in the data set, not just the first five. We could continue with the pencil and paper calculations if we wanted to, but it’s pretty tedious. Alternatively, it’s not too hard to do this in a dedicated spreadsheet programme such as OpenOffice or Excel. Try and do it yourself. The one that I did, in Excel, is in the file clinicaltrial_anova.xls. When you do it you should end up with a within-group sum of squares value of <span class="math inline">\(1.39\)</span>.</p>
+<p>Okay. Now that we’ve calculated the within groups variation, <span class="math inline">\(SS_w\)</span>, it’s time to turn our attention to the between-group sum of squares, <span class="math inline">\(SS_b\)</span>. The calculations for this case are very similar. The main difference is that instead of calculating the differences between an observation Yik and a group mean <span class="math inline">\(\bar{Y}_k\)</span> for all of the observations, we calculate the differences between the group means <span class="math inline">\(\bar{Y}_k\)</span> and the grand mean <span class="math inline">\(\bar{Y}\)</span> (in this case <span class="math inline">\(0.88\)</span>) for all of the groups.</p>
+<div class="inline-table"><table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 101%; margin-left: auto; margin-right: auto;  " id="tab:tab13-6">
+<caption style="caption-side: bottom; text-align: left;">
+<span id="tab:tab13-6">Table 13.6: </span> A worked example...4</caption>
+<col>
+<col>
+<col>
+<col>
+<col>
+<tr>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: bold;">group k</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">group mean \( \bar{Y}_k \)</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">grand mean  \( \bar{Y} \)</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">deviation  \( \bar{Y}_k - \bar{Y} \)</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">squared deviation \(  ( \bar{Y}_k-\bar{Y})^2 \)</th>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">placebo</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.45</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.88</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-0.43</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">0.19</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: normal;">anxifree</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">0.72</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">0.88</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">-0.16</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">0.03</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">joyzepam</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1.48</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.88</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.60</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">0.36</td>
+</tr>
+</table></div>
+<p>However, for the between group calculations we need to multiply each of these squared deviations by <span class="math inline">\(N_k\)</span>, the number of observations in the group. We do this because every observation in the group (all <span class="math inline">\(N_k\)</span> of them) is associated with a between group difference. So if there are six people in the placebo group and the placebo group mean differs from the grand mean by <span class="math inline">\(0.19\)</span>, then the total between group variation associated with these six people is <span class="math inline">\(6 \times 0.19 = 1.14\)</span>. So we have to extend our little table of calculations:</p>
+<div class="inline-table"><table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 101%; margin-left: auto; margin-right: auto;  " id="tab:tab13-7">
+<caption style="caption-side: bottom; text-align: left;">
+<span id="tab:tab13-7">Table 13.7: </span> A worked example...5</caption>
+<col>
+<col>
+<col>
+<col>
+<col>
+<tr>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: bold;">group k</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">...</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">squared deviations  \( (\bar{Y}_k-\bar{Y})^2 \)</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">sample size  \( N_k \)</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">weighted squared dev   \(  N_k (\bar{Y}_k-\bar{Y})^2 \)</th>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">placebo</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">...</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.19</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">6</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">1.14</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: normal;">anxifree</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">...</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">0.03</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">6</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">0.18</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">joyzepam</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">...</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.36</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">6</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">2.16</td>
+</tr>
+</table></div>
+<p>And so now our between group sum of squares is obtained by summing these “weighted squared deviations” over all three groups in the study:</p>
+<p><span class="math display">\[ \begin{equation} \begin{split} SS_b &amp; = 1.14 + 0.18 + 2.16 \\ &amp; =
+3.48 \end{split} \end{equation} \]</span></p>
+<p>As you can see, the between group calculations are a lot shorter<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;In the Excel clinicaltrial anova.xls the value for SSb worked out to be very slightly different, &lt;span class="math inline"&gt;\(3.45\)&lt;/span&gt;, than that shown in the text above (rounding errors!)&lt;/p&gt;'><sup>148</sup></a>. Now that we’ve calculated our sums of squares values, <span class="math inline">\(SS_b\)</span> and <span class="math inline">\(SS_w\)</span>, the rest of the ANOVA is pretty painless. The next step is to calculate the degrees of freedom. Since we have <span class="math inline">\(G = 3\)</span> groups and <span class="math inline">\(N = 18\)</span> observations in total our degrees of freedom can be calculated by simple subtraction:</p>
+<p><span class="math display">\[ \begin{equation} \begin{split} df_b &amp; = G-1 &amp; = 2 \\ df_w &amp; = N-G &amp;
+= 15 \end{split} \end{equation} \]</span></p>
+<p>Next, since we’ve now calculated the values for the sums of squares and the degrees of freedom, for both the within-groups variability and the between-groups variability, we can obtain the mean square values by dividing one by the other:</p>
+<p><span class="math display">\[ \begin{equation} \begin{split} MS_b &amp; = \frac{SS_b}{df_b} &amp; =
+\frac{3.48}{2} &amp; = 1.74 \\ MS_w &amp; = \frac{SS_w}{df_w} &amp; =
+\frac{1.39}{15} &amp; = 0.09 \end{split} \end{equation} \]</span></p>
+<p>We’re almost done. The mean square values can be used to calculate the F-value, which is the test statistic that we’re interested in. We do this by dividing the between-groups MS value by the within-groups MS value.</p>
+<p><span class="math display">\[ \begin{equation} \begin{split} F &amp; = \frac{MS_b}{MS_w} &amp; =
+\frac{1.74}{0.09} &amp; = 19.3 \end{split} \end{equation} \]</span></p>
+<p>Woohooo! This is terribly exciting, yes? Now that we have our test statistic, the last step is to find out whether the test itself gives us a significant result. As discussed in <a href="hypothesis-testing.html#hypothesis-testing">Hypothesis testing</a> back in the “old days” what we’d do is open up a statistics textbook or flick to the back section which would actually have a huge lookup table and we would find the threshold <span class="math inline">\(F\)</span> value corresponding to a particular value of alpha (the null hypothesis rejection region), e.g. <span class="math inline">\(0.05\)</span>, <span class="math inline">\(0.01\)</span> or <span class="math inline">\(0.001\)</span>, for 2 and 15 degrees of freedom. Doing it this way would give us a threshold F value for an alpha of <span class="math inline">\(0.001\)</span> of <span class="math inline">\(11.34\)</span>. As this is less than our calculated <span class="math inline">\(F\)</span> value we say that <span class="math inline">\(p &lt; 0.001\)</span>. But those were the old days, and nowadays fancy stats software calculates the exact p-value for you. In fact, the exact p-value is <span class="math inline">\(0.000071\)</span>. So, unless we’re being <em>extremely</em> conservative about our Type I error rate, we’re pretty much guaranteed to reject the null hypothesis.</p>
+<p>At this point, we’re basically done. Having completed our calculations, it’s traditional to organise all these numbers into an ANOVA table like the one in Table 13.1. For our clinical trial data, the ANOVA table would look like this:</p>
+<div class="inline-table"><table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 101%; margin-left: auto; margin-right: auto;  " id="tab:tab13-8">
+<caption style="caption-side: bottom; text-align: left;">
+<span id="tab:tab13-8">Table 13.8: </span> The ANOVA results table</caption>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<tr>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: bold;"></th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">df</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">sum of squares</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">mean squares</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">F-statistic</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">p-value</th>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">between groups</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3.48</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1.74</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">19.3</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">0.000071</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: normal;">within groups</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">15</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">1.39</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">0.09</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">-</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">-</td>
+</tr>
+</table></div>
+<p>These days, you’ll probably never have much reason to want to construct one of these tables yourself, but you will find that almost all statistical software (jamovi included) tends to organise the output of an ANOVA into a table like this, so it’s a good idea to get used to reading them. However, although the software will output a full ANOVA table, there’s almost never a good reason to include the whole table in your write up. A pretty standard way of reporting the stats block for this result would be to write something like this:</p>
+<blockquote>
+<p>One-way ANOVA showed a significant effect of drug on mood gain (F(2,15) = 19.3, p &lt; .001).</p>
+</blockquote>
+<p>Sigh. So much work for one short sentence.</p>
+</div>
+</div>
+<div id="running-an-anova-in-jamovi" class="section level2" number="13.3">
+<h2>
+<span class="header-section-number">13.3</span> Running an ANOVA in jamovi<a class="anchor" aria-label="anchor" href="#running-an-anova-in-jamovi"><i class="fas fa-link"></i></a>
+</h2>
+<p>I’m pretty sure I know what you’re thinking after reading the last section, especially if you followed my advice and did all of that by pencil and paper (i.e., in a spreadsheet) yourself. Doing the ANOVA calculations yourself sucks. There’s quite a lot of calculations that we needed to do along the way, and it would be tedious to have to do this over and over again every time you wanted to do an ANOVA.</p>
+<div id="using-jamovi-to-specify-your-anova" class="section level3" number="13.3.1">
+<h3>
+<span class="header-section-number">13.3.1</span> Using jamovi to specify your ANOVA<a class="anchor" aria-label="anchor" href="#using-jamovi-to-specify-your-anova"><i class="fas fa-link"></i></a>
+</h3>
+<p>To make life easier for you, jamovi can do ANOVA..hurrah! Go to the ‘ANOVA’ - ‘ANOVA’ analysis, and move the mood.gain variable across so it is in the ‘Dependent Variable’ box, and then move the drug variable across so it is in the ‘Fixed Factors’ box. This should give the results as shown in Figure <a href="comparing-several-means-one-way-anova.html#fig:fig13-3">13.3</a>. <a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;The jamovi results are more accurate than the ones in the text above, due to rounding errors.&lt;/p&gt;"><sup>149</sup></a> Note I have also checked the <span class="math inline">\(\eta^2\)</span> checkbox, pronounced “eta” squared, under the ‘Effect Size’ option and this is also shown on the results table. We will come back to effect sizes a bit later.</p>
+<p>The jamovi results table shows you the sums of squares values, the degrees of freedom, and a couple of other quantities that we’re not really interested in right now. Notice, however, that jamovi doesn’t use the names “between-group” and “within-group”. Instead, it tries to assign more meaningful names. In our particular example, the between groups variance corresponds to the effect that the drug has on the outcome variable, and the within groups variance corresponds to the “leftover” variability so it calls that the residuals. If we compare these numbers to the numbers that I calculated by hand in <a href="comparing-several-means-one-way-anova.html#a-worked-example">A worked example</a>, you can see that they’re more or less the same, apart from rounding errors. The between groups sums of squares is <span class="math inline">\(SS_b = 3.45\)</span>, the within groups sums of squares is <span class="math inline">\(SS_w = 1.39\)</span>, and the degrees of freedom are <span class="math inline">\(2\)</span> and <span class="math inline">\(15\)</span> respectively. We also get the F-value and the p-value and, again, these are more or less the same, give or take rounding errors, to the numbers that we calculated ourselves when doing it the long and tedious way.</p>
+<div class="figure">
+<span style="display:block;" id="fig:fig13-3"></span>
+<img src="images/Figure131.PNG" alt="jamovi results table for ANOVA of mood gain by drug administered" width="90%"><p class="caption">
+Figure 13.3: jamovi results table for ANOVA of mood gain by drug administered
+</p>
+</div>
+</div>
+</div>
+<div id="effect-size-2" class="section level2" number="13.4">
+<h2>
+<span class="header-section-number">13.4</span> Effect size<a class="anchor" aria-label="anchor" href="#effect-size-2"><i class="fas fa-link"></i></a>
+</h2>
+<p>There’s a few different ways you could measure the effect size in an ANOVA, but the most commonly used measures are <span class="math inline">\(\eta^2\)</span> (eta squared) and partial <span class="math inline">\(\eta^2\)</span>. For a one way analysis of variance they’re identical to each other, so for the moment I’ll just explain <span class="math inline">\(\eta^2\)</span> . The definition of <span class="math inline">\(\eta^2\)</span> is actually really simple</p>
+<p><span class="math display">\[\eta^2=\frac{SS_b}{SS_{tot}}\]</span></p>
+<p>That’s all it is. So when I look at the ANOVA table in Figure <a href="comparing-several-means-one-way-anova.html#fig:fig13-3">13.3</a>, I see that <span class="math inline">\(SS_b = 3.45\)</span> and <span class="math inline">\(SS_tot = 3.45 + 1.39 = 4.84\)</span>. Thus we get an <span class="math inline">\(\eta^2\)</span> value of</p>
+<p><span class="math display">\[\eta^2=\frac{3.45}{4.84}=0.71\]</span></p>
+<p>The interpretation of <span class="math inline">\(\eta^2\)</span> is equally straightforward. It refers to the proportion of the variability in the outcome variable (mood.gain) that can be explained in terms of the predictor (drug). A value of <span class="math inline">\(\eta^2=0\)</span> means that there is no relationship at all between the two, whereas a value of <span class="math inline">\(\eta^2=1\)</span> means that the relationship is perfect. Better yet, the <span class="math inline">\(\eta^2\)</span> value is very closely related to <span class="math inline">\(R^2\)</span>, as discussed previously in the <a href="correlation-and-linear-regression.html#the-r2-value">The <span class="math inline">\(R^2\)</span> value</a> section, and has an equivalent interpretation. Although many statistics text books suggest <span class="math inline">\(\eta^2\)</span> as the default effect size measure in ANOVA, there’s an interesting <a href="https://daniellakens.blogspot.com/2015/06/why-you-should-use-omega-squared.html" target="_blank">blog post</a> by Daniel Lakens suggesting that eta-squared is perhaps not the best measure of effect size in real world data analysis, because it can be a biased estimator. Usefully, there is also an option in jamovi to specify omega-squared (<span class="math inline">\(\omega^2\)</span>), which is less biased, alongside eta-squared.</p>
+</div>
+<div id="multiple-comparisons-and-post-hoc-tests" class="section level2" number="13.5">
+<h2>
+<span class="header-section-number">13.5</span> Multiple comparisons and post hoc tests<a class="anchor" aria-label="anchor" href="#multiple-comparisons-and-post-hoc-tests"><i class="fas fa-link"></i></a>
+</h2>
+<p>Any time you run an ANOVA with more than two groups and you end up with a significant effect, the first thing you’ll probably want to ask is which groups are actually different from one another. In our drugs example, our null hypothesis was that all three drugs (placebo, Anxifree and Joyzepam) have the exact same effect on mood. But if you think about it, the null hypothesis is actually claiming three different things all at once here. Specifically, it claims that:</p>
+<ul>
+<li>Your competitor’s drug (Anxifree) is no better than a placebo (i.e., <span class="math inline">\(\mu_A = \mu_P\)</span> )</li>
+<li>Your drug (Joyzepam) is no better than a placebo (i.e., <span class="math inline">\(\mu_J = \mu_P\)</span> )</li>
+<li>Anxifree and Joyzepam are equally effective (i.e., <span class="math inline">\(\mu_J = \mu_A\)</span>)</li>
+</ul>
+<p>If any one of those three claims is false, then the null hypothesis is also false. So, now that we’ve rejected our null hypothesis, we’re thinking that at least one of those things isn’t true. But which ones? All three of these propositions are of interest. Since you certainly want to know if your new drug Joyzepam is better than a placebo, it would be nice to know how well it stacks up against an existing commercial alternative (i.e., Anxifree). It would even be useful to check the performance of Anxifree against the placebo. Even if Anxifree has already been extensively tested against placebos by other researchers, it can still be very useful to check that your study is producing similar results to earlier work.</p>
+<p>When we characterise the null hypothesis in terms of these three distinct propositions, it becomes clear that there are eight possible “states of the world” that we need to distinguish between:</p>
+<div class="inline-table"><table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 101%; margin-left: auto; margin-right: auto;  " id="tab:tab13-9">
+<caption style="caption-side: bottom; text-align: left;">
+<span id="tab:tab13-9">Table 13.9: </span> The null hypothesis and eight possible 'states of the world'</caption>
+<col>
+<col>
+<col>
+<col>
+<col>
+<tr>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: bold;">possibility:</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">is \( \mu_P = \mu_A \)?</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">is \( \mu_P = \mu_J \)?</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">is \( \mu_A = \mu_J \)?</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">which hypothesis?</th>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">1</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">✓</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">✓</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">✓</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">null</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: normal;">2</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">✓</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">✓</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">alternative</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; font-weight: normal;">3</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">✓</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">✓</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; font-weight: normal;">alternative</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: normal;">4</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">✓</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">alternative</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; font-weight: normal;">5</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">✓</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">✓</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; font-weight: normal;">alternative</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: normal;">6</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">✓</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">alternative</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; font-weight: normal;">7</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">✓</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; font-weight: normal;">alternative</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: normal;">8</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">alternative</td>
+</tr>
+</table></div>
+<p>By rejecting the null hypothesis, we’ve decided that we don’t believe that #1 is the true state of the world. The next question to ask is, which of the other seven possibilities <em>do</em> we think is right? When faced with this situation, its usually helps to look at the data. For instance, if we look at the plots in Figure <a href="comparing-several-means-one-way-anova.html#fig:fig13-1">13.1</a>, it’s tempting to conclude that Joyzepam is better than the placebo and better than Anxifree, but there’s no real difference between Anxifree and the placebo. However, if we want to get a clearer answer about this, it might help to run some tests.</p>
+<div id="running-pairwise-t-tests" class="section level3" number="13.5.1">
+<h3>
+<span class="header-section-number">13.5.1</span> Running “pairwise” t-tests<a class="anchor" aria-label="anchor" href="#running-pairwise-t-tests"><i class="fas fa-link"></i></a>
+</h3>
+<p>How might we go about solving our problem? Given that we’ve got three separate pairs of means (placebo versus Anxifree, placebo versus Joyzepam, and Anxifree versus Joyzepam) to compare, what we could do is run three separate t-tests and see what happens. This is easy to do in jamovi. Go to the ANOVA ‘Post Hoc Tests’ options, move the ‘drug’ variable across into the active box on the right, and then click on the ‘No correction’ checkbox. This will produce a neat table showing all the pairwise t-test comparisons amongst the three levels of the drug variable, as in Figure <a href="comparing-several-means-one-way-anova.html#fig:fig13-4">13.4</a></p>
+<div class="figure">
+<span style="display:block;" id="fig:fig13-4"></span>
+<img src="images/Figure132.PNG" alt="Uncorrected pairwise t-tests as post hoc comparisons in jamovi" width="90%"><p class="caption">
+Figure 13.4: Uncorrected pairwise t-tests as post hoc comparisons in jamovi
+</p>
+</div>
+</div>
+<div id="corrections-for-multiple-testing" class="section level3" number="13.5.2">
+<h3>
+<span class="header-section-number">13.5.2</span> Corrections for multiple testing<a class="anchor" aria-label="anchor" href="#corrections-for-multiple-testing"><i class="fas fa-link"></i></a>
+</h3>
+<p>In the previous section I hinted that there’s a problem with just running lots and lots of t-tests. The concern is that, when running these analyses, what we’re doing is going on a “fishing expedition”. We’re running lots and lots of tests without much theoretical guidance in the hope that some of them come up significant. This kind of theory-free search for group differences is referred to as <strong>post hoc analysis</strong> (“post hoc” being Latin for “after this”).<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;If you &lt;em&gt;do&lt;/em&gt; have some theoretical basis for wanting to investigate some comparisons but not others, it’s a different story. In those circumstances you’re not really running “post hoc” analyses at all, you’re making “planned comparisons”. I do talk about this situation later in the book (Section &lt;strong&gt;14.9&lt;/strong&gt;), but for now I want to keep things simple.&lt;/p&gt;"><sup>150</sup></a></p>
+<p>It’s okay to run post hoc analyses, but a lot of care is required. For instance, the analysis that I ran in the previous section should be avoided, as each individual t-test is designed to have a 5% Type I error rate (i.e., <span class="math inline">\(\alpha = .05\)</span>) and I ran three of these tests. Imagine what would have happened if my ANOVA involved 10 different groups, and I had decided to run 45 “post hoc” t-tests to try to find out which ones were significantly different from each other, you’d expect 2 or 3 of them to come up significant by chance alone. As we saw in the chapter on <a href="hypothesis-testing.html#hypothesis-testing">Hypothesis testing</a>, the central organising principle behind null hypothesis testing is that we seek to control our Type I error rate, but now that I’m running lots of t-tests at once in order to determine the source of my ANOVA results, my actual Type I error rate across this whole family of tests has gotten completely out of control.</p>
+<p>The usual solution to this problem is to introduce an adjustment to the p-value, which aims to control the total error rate across the family of tests (see <span class="citation">Shaffer (<a href="references.html#ref-Shaffer1995" role="doc-biblioref">1995</a>)</span>). An adjustment of this form, which is usually (but not always) applied because one is doing post hoc analysis, is often referred to as a <strong>correction for multiple comparisons</strong>, though it is sometimes referred to as “simultaneous inference”. In any case, there are quite a few different ways of doing this adjustment. I’ll discuss a few of them in this section and in Section 14.8, but you should be aware that there are many other methods out there (see, e.g., <span class="citation">Hsu (<a href="references.html#ref-Hsu1996" role="doc-biblioref">1996</a>)</span>).</p>
+</div>
+<div id="bonferroni-corrections" class="section level3" number="13.5.3">
+<h3>
+<span class="header-section-number">13.5.3</span> Bonferroni corrections<a class="anchor" aria-label="anchor" href="#bonferroni-corrections"><i class="fas fa-link"></i></a>
+</h3>
+<p>The simplest of these adjustments is called the <strong>Bonferroni correction</strong> <span class="citation">(<a href="references.html#ref-Dunn1961" role="doc-biblioref">Dunn 1961</a>)</span>, and it’s very very simple indeed. Suppose that my post hoc analysis consists of m separate tests, and I want to ensure that the total probability of making <em>any</em> Type I errors at all is at most <span class="math inline">\(\alpha\)</span>.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;It’s worth noting in passing that not all adjustment methods try to do this. What I’ve described here is an approach for controlling “family wise Type I error rate”. However, there are other post hoc tests that seek to control the “false discovery rate”, which is a somewhat different thing.&lt;/p&gt;"><sup>151</sup></a> If so, then the Bonferroni correction just says “multiply all your raw p-values by m”. If we let <span class="math inline">\(p\)</span> denote the original p-value, and let <span class="math inline">\(p_j^{'}\)</span> be the corrected value, then the Bonferroni correction tells that:</p>
+<p><span class="math display">\[p_j^{'}=m \times p\]</span></p>
+<p>And therefore, if you’re using the Bonferroni correction, you would reject the null hypothesis if <span class="math inline">\(p_j^{'} &lt; \alpha\)</span>. The logic behind this correction is very straightforward. We’re doing m different tests, so if we arrange it so that each test has a Type I error rate of at most <span class="math inline">\(\frac{\alpha}{m}\)</span>, then the <em>total</em> Type I error rate across these tests cannot be larger than <span class="math inline">\(\alpha\)</span>. That’s pretty simple, so mu so that in the original paper, the author writes,<br>
+The method given here is so simple and so general that I am sure it must have been used before this. I do not find it, however, so can only conclude that perhaps its very simplicity has kept statisticians from realizing that it is a very good method in some situations <span class="citation">(<a href="references.html#ref-Dunn1961" role="doc-biblioref">Dunn 1961</a>)</span>, pp 52-53.</p>
+<p>To use the Bonferroni correction in jamovi, just click on the ‘Bonferroni’ checkbox in the ‘Correction’ options, and you will see another column added to the ANOVA results table showing the adjusted p-values for the Bonferroni correction (Table <a href="comparing-several-means-one-way-anova.html#tab:tab13-8">13.8</a>. If we compare these three p-values to those for the uncorrected, pairwise t-tests, it is clear that the only thing that jamovi has done is multiply them by <span class="math inline">\(3\)</span>.</p>
+</div>
+<div id="holm-corrections" class="section level3" number="13.5.4">
+<h3>
+<span class="header-section-number">13.5.4</span> Holm corrections<a class="anchor" aria-label="anchor" href="#holm-corrections"><i class="fas fa-link"></i></a>
+</h3>
+<p>Although the Bonferroni correction is the simplest adjustment out there, it’s not usually the best one to use. One method that is often used instead is the <strong>Holm correction</strong> <span class="citation">(<a href="references.html#ref-Holm1979" role="doc-biblioref">Holm 1979</a>)</span>. The idea behind the Holm correction is to pretend that you’re doing the tests sequentially, starting with the smallest (raw) p-value and moving onto the largest one. For the j-th largest of the p-values, the adjustment is <em>either</em></p>
+<p><span class="math display">\[p_j^{'}=j \times p_j\]</span></p>
+<p>(i.e., the biggest p-value remains unchanged, the second biggest p-value is doubled, the third biggest p-value is tripled, and so on), or</p>
+<p><span class="math display">\[p_j^{'}=p_{j+1}^{'}\]</span></p>
+<p>whichever one is <u>larger</u>. This might sound a little confusing, so let’s go through it a little more slowly. Here’s what the Holm correction does. First, you sort all of your p-values in order, from smallest to largest. For the smallest p-value all you do is multiply it by <span class="math inline">\(m\)</span>, and you’re done. However, for all the other ones it’s a two-stage process. For instance, when you move to the second smallest p value, you first multiply it by <span class="math inline">\(m - 1\)</span>. If this produces a number that is bigger than the adjusted p-value that you got last time, then you keep it. But if it’s smaller than the last one, then you copy the last p-value. To illustrate how this works, consider Table <a href="comparing-several-means-one-way-anova.html#tab:tab13-10">13.10</a> which shows the calculations of a Holm correction for a collection of five p-values.</p>
+<div class="inline-table"><table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 101%; margin-left: auto; margin-right: auto;  " id="tab:tab13-10">
+<caption style="caption-side: bottom; text-align: left;">
+<span id="tab:tab13-10">Table 13.10: </span> Holm corrected p values</caption>
+<col>
+<col>
+<col>
+<col>
+<tr>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: bold;">raw p</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">rank j</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">p \( \times \) j</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">Holm p</th>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">.001</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">5</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">.005</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">.005</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: normal;">.005</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">4</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">.020</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">.020</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; font-weight: normal;">.019</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">.057</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; font-weight: normal;">.057</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: normal;">.022</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">2</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">.044</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">.057</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">.103</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">.103</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">.103</td>
+</tr>
+</table></div>
+<p>Hopefully that makes things clear.</p>
+<p>Although it’s a little harder to calculate, the Holm correction has some very nice properties. It’s more powerful than Bonferroni (i.e., it has a lower Type II error rate) but, counter-intuitive as it might seem, it has the same Type I error rate. As a consequence, in practice there’s never any reason to use the simpler Bonferroni correction since it is always outperformed by the slightly more elaborate Holm correction. Because of this, the Holm correction should be your <em>go to</em> multiple comparison correction. Figure <a href="comparing-several-means-one-way-anova.html#fig:fig13-4">13.4</a> also shows the Holm corrected p-values and, as you can see, the biggest p-value (corresponding to the comparison between Anxifree and the placebo) is unaltered. At a value of .15, it is exactly the same as the value we got originally when we applied no correction at all. In contrast, the smallest p-value (Joyzepam versus placebo) has been multiplied by three.</p>
+</div>
+<div id="writing-up-the-post-hoc-test" class="section level3" number="13.5.5">
+<h3>
+<span class="header-section-number">13.5.5</span> Writing up the post hoc test<a class="anchor" aria-label="anchor" href="#writing-up-the-post-hoc-test"><i class="fas fa-link"></i></a>
+</h3>
+<p>Finally, having run the post hoc analysis to determine which groups are significantly different to one another, you might write up the result like this:</p>
+<blockquote>
+<p>Post hoc tests (using the Holm correction to adjust p) indicated that Joyzepam produced a significantly larger mood change than both Anxifree (p = .001) and the placebo (<span class="math inline">\((p = 9.0 \times{10^{-5}}\)</span>). We found no evidence that Anxifree performed better than the placebo (<span class="math inline">\(p = .15\)</span>).</p>
+</blockquote>
+<p>Or, if you don’t like the idea of reporting exact p-values, then you’d change those numbers to <span class="math inline">\(p &lt; .01\)</span>, <span class="math inline">\(p &lt; .001\)</span> and <span class="math inline">\(p &gt; .05\)</span> respectively. Either way, the key thing is that you indicate that you used Holm’s correction to adjust the p-values. And of course, I’m assuming that elsewhere in the write up you’ve included the relevant descriptive statistics (i.e., the group means and standard deviations), since these p-values on their own aren’t terribly informative.</p>
+</div>
+</div>
+<div id="assumptions-of-one-way-anova" class="section level2" number="13.6">
+<h2>
+<span class="header-section-number">13.6</span> Assumptions of one-way ANOVA<a class="anchor" aria-label="anchor" href="#assumptions-of-one-way-anova"><i class="fas fa-link"></i></a>
+</h2>
+<p>Like any statistical test, analysis of variance relies on some assumptions about the data, specifically the residuals. There are three key assumptions that you need to be aware of: normality, homogeneity of variance and independence.</p>
+<p>Statistical notation <a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;If you remember back to &lt;a href="comparing-several-means-one-way-anova.html#a-worked-example"&gt;A worked example&lt;/a&gt;, which I hope you at least skimmed even if you didn’t read the whole thing, I described the statistical models underpinning ANOVA in this way: &lt;span class="math display"&gt;\[H_0:Y_{ik}=\mu + \epsilon_{ik}\]&lt;/span&gt; &lt;span class="math display"&gt;\[H_1:Y_{ik}=\mu_k + \epsilon_{ik}\]&lt;/span&gt; In these equations &lt;span class="math inline"&gt;\(\mu\)&lt;/span&gt; refers to a single grand population mean which is the same for all groups, and µk is the population mean for the k-th group. Up to this point we’ve been mostly interested in whether our data are best described in terms of a single grand mean (the null hypothesis) or in terms of different group-specific means (the alternative hypothesis). This makes sense, of course, as that’s actually the important research question! However, all of our testing procedures have, implicitly, relied on a specific assumption about the residuals, &lt;span class="math inline"&gt;\(\epsilon\_{ik}\)&lt;/span&gt;, namely that &lt;span class="math display"&gt;\[\epsilon_{ik} \sim Normal(0,\sigma^2)\]&lt;/span&gt; None of the maths works properly without this bit. Or, to be precise, you can still do all the calculations and you’ll end up with an F-statistic, but you have no guarantee that this F-statistic actually measures what you think it’s measuring, and so any conclusions that you might draw on the basis of the F test might be wrong.&lt;/p&gt;'><sup>152</sup></a></p>
+<p>So, how do we check whether the assumption about the residuals is accurate? Well, as I indicated above, there are three distinct claims buried in this one statement, and we’ll consider them separately.</p>
+<ul>
+<li>
+<strong>Homogeneity of variance</strong>. Notice that we’ve only got the one value for the population standard deviation (i.e., <span class="math inline">\(\sigma\)</span>), rather than allowing each group to have it’s own value (i.e., <span class="math inline">\(\sigma_k\)</span>). This is referred to as the homogeneity of variance (sometimes called homoscedasticity) assumption. ANOVA assumes that the population standard deviation is the same for all groups. We’ll talk about this extensively in the <a href="comparing-several-means-one-way-anova.html#checking-the-homogeneity-of-variance-assumption">Checking the homogeneity of variance assumption</a> section.</li>
+<li>
+<strong>Normality</strong>. The residuals are assumed to be normally distributed. As we saw in the <a href="comparing-two-means.html#checking-the-normality-of-a-sample">Checking the normality of a sample</a> section, we can assess this by looking at QQ plots (or running a Shapiro-Wilk test. I’ll talk about this more in an ANOVA context in the <a href="comparing-several-means-one-way-anova.html#checking-the-normality-assumption">Checking the normality assumption</a> section.</li>
+<li>
+<strong>Independence</strong>. The independence assumption is a little trickier. What it basically means is that, knowing one residual tells you nothing about any other residual. All of the <span class="math inline">\(\epsilon_{ik}\)</span> values are assumed to have been generated without any “regard for” or “relationship to” any of the other ones. There’s not an obvious or simple way to test for this, but there are some situations that are clear violations of this. For instance, if you have a repeated measures design, where each participant in your study appears in more than one condition, then independence doesn’t hold. There’s a special relationship between some observations, namely those that correspond to the same person! When that happens, you need to use something like a <a href="comparing-several-means-one-way-anova.html#repeated-measures-one-way-anova">Repeated measures one-way ANOVA</a>.</li>
+</ul>
+<div id="checking-the-homogeneity-of-variance-assumption" class="section level3" number="13.6.1">
+<h3>
+<span class="header-section-number">13.6.1</span> Checking the homogeneity of variance assumption<a class="anchor" aria-label="anchor" href="#checking-the-homogeneity-of-variance-assumption"><i class="fas fa-link"></i></a>
+</h3>
+<blockquote>
+<p><em>To make the preliminary test on variances is rather like putting to<br>
+sea in a rowing boat to find out whether conditions are sufficiently<br>
+calm for an ocean liner to leave port!</em><br>
+– George Box <span class="citation">(<a href="references.html#ref-Box1953" role="doc-biblioref">G. E. P. Box 1953</a>)</span></p>
+</blockquote>
+<p>There’s more than one way to skin a cat, as the saying goes, and more than one way to test the homogeneity of variance assumption, too (though for some reason no-one made a saying out of that). The most commonly used test for this that I’ve seen in the literature is the Levene test <span class="citation">(<a href="references.html#ref-Levene1960" role="doc-biblioref">Levene 1960</a>)</span>, and the closely related Brown-Forsythe test <span class="citation">(<a href="references.html#ref-BrownForsythe1974" role="doc-biblioref">Brown and Forsythe 1974</a>)</span>.</p>
+<p>Regardless of whether you’re doing the standard Levene test or the Brown-Forsythe test, the test statistic, which is sometimes denoted <span class="math inline">\(F\)</span> but also sometimes written as <span class="math inline">\(W\)</span>, is calculated in exactly the same way that the F-statistic for the regular ANOVA is calculated, just using a <span class="math inline">\(Z_{ik}\)</span> rather than <span class="math inline">\(Y_{ik}\)</span>. With that in mind, we can go on to look at how to run the test in jamovi.</p>
+<p>Statistical notation <a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;The Levene test is shockingly simple. Suppose we have our outcome&lt;br&gt;
+variable &lt;span class="math inline"&gt;\(Y_{ik}\)&lt;/span&gt;. All we do is define a new variable, which I’ll&lt;br&gt;
+call &lt;span class="math inline"&gt;\(Z_{ik}\)&lt;/span&gt;, corresponding to the absolute deviation from the&lt;br&gt;
+group mean &lt;span class="math display"&gt;\[Z_{ik}=Y_{ik}-\bar{Y}_{k}\]&lt;/span&gt; Okay, what good does this do us? Well, let’s take a moment to think about what &lt;span class="math inline"&gt;\(Z_{ik}\)&lt;/span&gt; actually is and what we’re trying to test. The value of &lt;span class="math inline"&gt;\(Z_{ik}\)&lt;/span&gt; is a measure of how the &lt;span class="math inline"&gt;\(i\)&lt;/span&gt;-th observation in the &lt;span class="math inline"&gt;\(k\)&lt;/span&gt;-th group deviates from its group mean. And our null hypothesis is that all groups have the same variance, i.e., the same overall&lt;br&gt;
+deviations from the group means! So the null hypothesis in a Levene test is that the population means of &lt;span class="math inline"&gt;\(Z\)&lt;/span&gt; are identical for all&lt;br&gt;
+groups. Hmm. So what we need now is a statistical test of the null hypothesis that all group means are identical. Where have we seen&lt;br&gt;
+that before? Oh right, that’s what ANOVA is, and so all that the&lt;br&gt;
+Levene test does is run an ANOVA on the new variable &lt;span class="math inline"&gt;\(Z_{ik}\)&lt;/span&gt;. What about the Brown-Forsythe test? Does that do anything&lt;br&gt;
+particularly different? Nope. The only change from the Levene test is that it constructs the transformed variable Z in a slightly&lt;br&gt;
+different way, using deviations from the group medians rather than deviations from the group means. That is, for the Brown-Forsythe&lt;br&gt;
+test&lt;br&gt;&lt;span class="math display"&gt;\[Z_{ik}=Y_{ik}-median_k(Y)\]&lt;/span&gt; where &lt;span class="math inline"&gt;\(median_k(Y)\)&lt;/span&gt; is the median for group k.&lt;/p&gt;'><sup>153</sup></a></p>
+</div>
+<div id="running-the-levene-test-in-jamovi" class="section level3" number="13.6.2">
+<h3>
+<span class="header-section-number">13.6.2</span> Running the Levene test in jamovi<a class="anchor" aria-label="anchor" href="#running-the-levene-test-in-jamovi"><i class="fas fa-link"></i></a>
+</h3>
+<p>Okay, so how do we run the Levene test? Simple really - under the ANOVA ‘Assumption Checks’ option, just click on the ‘Homogeneity tests’ checkbox. If we look at the output, shown in Figure <a href="comparing-several-means-one-way-anova.html#fig:fig13-5">13.5</a>, we see that the test is non-significant (<span class="math inline">\(F_{2,15} = 1.45, p = .266\)</span>), so it looks like the homogeneity of variance assumption is fine. However, looks can be deceptive! If your sample size is pretty big, then the Levene test could show up a significant effect (i.e. p &lt; .05) even when the homogeneity of variance assumption is not violated to an extent which troubles the robustness of ANOVA. This was the point George Box was making in the quote above. Similarly, if your sample size is quite small, then the homogeneity of variance assumption might not be satisfied and yet a Levene test could be non-significant (i.e. p &gt; .05). What this means is that, alongside any statistical test of the assumption being met, you should always plot the standard deviation around the means for each group / category in the analysis…just to see if they look fairly similar (i.e. homogeneity of variance) or not.</p>
+<div class="figure">
+<span style="display:block;" id="fig:fig13-5"></span>
+<img src="images/Figure133.PNG" alt="Levene test output for one-way ANOVA in jamovi" width="60%"><p class="caption">
+Figure 13.5: Levene test output for one-way ANOVA in jamovi
+</p>
+</div>
+</div>
+<div id="removing-the-homogeneity-of-variance-assumption" class="section level3" number="13.6.3">
+<h3>
+<span class="header-section-number">13.6.3</span> Removing the homogeneity of variance assumption<a class="anchor" aria-label="anchor" href="#removing-the-homogeneity-of-variance-assumption"><i class="fas fa-link"></i></a>
+</h3>
+<p>In our example, the homogeneity of variance assumption turned out to be a pretty safe one: the Levene test came back non-significant (notwithstanding that we should also look at the plot of standard deviations), so we probably don’t need to worry. However, in real life we aren’t always that lucky. How do we save our ANOVA when the homogeneity of variance assumption is violated? If you recall from our discussion of t-tests, we’ve seen this problem before. The Student t-test assumes equal variances, so the solution was to use the Welch t-test, which does not. In fact, <span class="citation">Welch (<a href="references.html#ref-Welch1951" role="doc-biblioref">1951</a>)</span> also showed how we can solve this problem for ANOVA too (the <strong>Welch one-way test</strong>). It’s implemented in jamovi using the One-Way ANOVA analysis. This is a specific analysis approach just for one-way ANOVA, and to run the Welch one-way ANOVA for our example, we would re-run the analysis as previously, but this time use the jamovi ANOVA - One Way ANOVA analysis command, and check the option for Welch’s test (see Figure <a href="comparing-several-means-one-way-anova.html#fig:fig13-6">13.6</a>. To understand what’s happening here, let’s compare these numbers to what we got earlier when <a href="comparing-several-means-one-way-anova.html#running-an-anova-in-jamovi">Running an ANOVA in jamovi</a> originally. To save you the trouble of flicking back, this is what we got last time: <span class="math inline">\(F(2, 15) = 18.611, p = .00009\)</span>, also shown as the Fisher’s test in the One-Way ANOVA shown in Figure <a href="comparing-several-means-one-way-anova.html#fig:fig13-6">13.6</a>.</p>
+<div class="figure">
+<span style="display:block;" id="fig:fig13-6"></span>
+<img src="images/Figure134.PNG" alt="Welch's test as part of the One Way ANOVA analysis in jamovi" width="90%"><p class="caption">
+Figure 13.6: Welch’s test as part of the One Way ANOVA analysis in jamovi
+</p>
+</div>
+<p>Okay, so originally our ANOVA gave us the result <span class="math inline">\(F(2, 15) = 18.6\)</span>, whereas the Welch one way test gave us <span class="math inline">\(F(2, 9.49) = 26.32\)</span>. In other words, the Welch test has reduced the within-groups degrees of freedom from 15 to 9.49, and the F-value has increased from 18.6 to 26.32.</p>
+</div>
+<div id="checking-the-normality-assumption" class="section level3" number="13.6.4">
+<h3>
+<span class="header-section-number">13.6.4</span> Checking the normality assumption<a class="anchor" aria-label="anchor" href="#checking-the-normality-assumption"><i class="fas fa-link"></i></a>
+</h3>
+<p>Testing the normality assumption is relatively straightforward. We covered most of what you need to know in the section on <a href="comparing-two-means.html#checking-the-normality-of-a-sample">Checking the normality of a sample</a>. The only thing we really need to do is draw a QQ plot and, in addition if it is available, run the Shapiro-Wilk test. The QQ plot is shown in Figure <a href="comparing-several-means-one-way-anova.html#fig:fig13-7">13.7</a> and it looks pretty normal to me. If the Shapiro-Wilk test is not significant (i.e. <span class="math inline">\(p &gt; .05\)</span>) then this indicates that the assumption of normality is not violated. However, as with Levene’s test, if the sample size is large then a significant Shapiro-Wilk test may in fact be a false positive, where the assumption of normality is not violated in any substantive problematic sense for the analysis. And, similarly, a very small sample can produce false negatives. That’s why a visual inspection of the QQ plot is important.</p>
+<p>Alongside inspecting the QQ plot for any deviations from normality, the Shapiro-Wilk test for our data does show a non-significant effect, with p = 0.6053 (see Figure <a href="comparing-several-means-one-way-anova.html#fig:fig13-6">13.6</a>. This therefore supports the QQ plot assessment; both checks find no indication that normality is violated.</p>
+</div>
+<div id="removing-the-normality-assumption" class="section level3" number="13.6.5">
+<h3>
+<span class="header-section-number">13.6.5</span> Removing the normality assumption<a class="anchor" aria-label="anchor" href="#removing-the-normality-assumption"><i class="fas fa-link"></i></a>
+</h3>
+<p>Now that we’ve seen how to check for normality, we are led naturally to ask what we can do to address violations of normality. In the context of a one-way ANOVA, the easiest solution is probably to switch to a non-parametric test (i.e., one that doesn’t rely on any particular assumption about the kind of distribution involved). We’ve seen non-parametric tests before, in the chapter <a href="comparing-two-means.html#comparing-two-means">Comparing two means</a>. When you only have two groups, the Mann-Whitney or the Wilcoxon test provides the non-parametric alternative that you need. When you’ve got three or more groups, you can use the <strong>Kruskal-Wallis rank sum test</strong> <span class="citation">(<a href="references.html#ref-KruskalWallis1952" role="doc-biblioref">Kruskal and Wallis 1952</a>)</span>. So that’s the test we’ll talk about next.</p>
+</div>
+<div id="the-logic-behind-the-kruskal-wallis-test" class="section level3" number="13.6.6">
+<h3>
+<span class="header-section-number">13.6.6</span> The logic behind the Kruskal-Wallis test<a class="anchor" aria-label="anchor" href="#the-logic-behind-the-kruskal-wallis-test"><i class="fas fa-link"></i></a>
+</h3>
+<p>The Kruskal-Wallis test is surprisingly similar to ANOVA, in some ways. In ANOVA we started with <span class="math inline">\(Y_{ik}\)</span>, the value of the outcome variable for the ith person in the kth group. For the Kruskal Wallis test what we’ll do is rank order all of these <span class="math inline">\(Y_{ik}\)</span> values and conduct our analysis on the ranked data. <a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;So let’s let R_{ik} refer to the ranking given to the ith member of the kth group. Now, let’s calculate &lt;span class="math inline"&gt;\(\bar{R}_k\)&lt;/span&gt;, the average rank given to observations in the kth group &lt;span class="math display"&gt;\[\bar{R}_k=\frac{1}{N_k}\sum_i R_{ik}\]&lt;/span&gt; and let’s also calculate &lt;span class="math inline"&gt;\(\bar{R}\)&lt;/span&gt;, the grand mean rank &lt;span class="math display"&gt;\[\bar{R}=\frac{1}{N}\sum_i\sum_k R_{ik}\]&lt;/span&gt; Now that we’ve done this, we can calculate the squared deviations from the grand mean rank &lt;span class="math inline"&gt;\(\bar{R}\)&lt;/span&gt;. When we do this for the individual scores, i.e., if we calculate &lt;span class="math inline"&gt;\((R_{ik} - \bar{R})^2\)&lt;/span&gt; , what we have is a “nonparametric” measure of how far the ik-th observation deviates from the grand mean rank. When we calculate the squared deviation of the group means from the grand means, i.e., if we calculate &lt;span class="math inline"&gt;\((R_{ik} - \bar{R})^2\)&lt;/span&gt;, then what we have is a nonparametric measure of how much the group deviates from the grand mean rank. With this in mind, we’ll follow the same logic that we did with ANOVA and define our ranked sums of squares measures, much like we did earlier. First, we have our “total ranked sums of squares” &lt;span class="math display"&gt;\[RSS_{tot}=\sum_k\sum_i (R_{ik}-\bar{R})^2\]&lt;/span&gt; and we can define the “between groups ranked sums of squares” like this &lt;span class="math display"&gt;\[
+\begin{equation}
+\begin{aligned}
+RSS_{b}&amp;amp; =\sum{k}\sum_{i}(\bar{R}_{k}-\bar{R})^2 \\
+&amp;amp;= \sum_{k} N_k (\bar{R}_{k}-\bar{R})^2
+\end{aligned}
+\end{equation}
+\]&lt;/span&gt; So, if the null hypothesis is true and there are no true group differences at all, you’d expect the between group rank sums &lt;span class="math inline"&gt;\(RSS_b\)&lt;/span&gt; to be very small, much smaller than the total rank sums &lt;span class="math inline"&gt;\(RSS_{tot}\)&lt;/span&gt;. Qualitatively this is very much the same as what we found when we went about constructing the ANOVA F-statistic, but for technical reasons the Kruskal-Wallis test statistic, usually denoted K, is constructed in a slightly different way, &lt;span class="math display"&gt;\[K=(N-1) \times \frac{RSS_b}{RSS_{tot}}\]&lt;/span&gt; and if the null hypothesis is true, then the sampling distribution of K is approximately chi square with &lt;span class="math inline"&gt;\(G-1\)&lt;/span&gt; degrees of freedom (where &lt;span class="math inline"&gt;\(G\)&lt;/span&gt; is the number of groups). The larger the value of K, the less consistent the data are with the null hypothesis, so this is a one-sided test. We reject &lt;span class="math inline"&gt;\(H_0\)&lt;/span&gt; when K is sufficiently large.&lt;/p&gt;'><sup>154</sup></a></p>
+</div>
+<div id="additional-details" class="section level3" number="13.6.7">
+<h3>
+<span class="header-section-number">13.6.7</span> Additional details<a class="anchor" aria-label="anchor" href="#additional-details"><i class="fas fa-link"></i></a>
+</h3>
+<p>The description in the previous section illustrates the logic behind the Kruskal-Wallis test. At a conceptual level, this is the right way to think about how the test works. <a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;However, from a purely mathematical perspective it’s needlessly complicated. I won’t show you the derivation, but you can use a bit of algebraic jiggery-pokery&lt;span class="math inline"&gt;\(^b\)&lt;/span&gt; to show that the equation for K can be &lt;span class="math display"&gt;\[K=\frac{12}{N(N-1)}\sum_k N_k \bar{R}_k^2 -3(N+1)\]&lt;/span&gt; It’s this last equation that you sometimes see given for K. This is way easier to calculate than the version I described in the previous section, but it’s just that it’s totally meaningless to actual humans. It’s probably best to think of K the way I described it earlier, as an analogue of ANOVA based on ranks. But keep in mind that the test statistic that gets calculated ends up with a rather different look to it than the one we used for our original ANOVA. ++ &lt;span class="math inline"&gt;\(b\)&lt;/span&gt;A technical term&lt;/p&gt;'><sup>155</sup></a></p>
+<p>But wait, there’s more! Dear lord, why is there always more? The story I’ve told so far is only actually true when there are no ties in the raw data. That is, if there are no two observations that have exactly the same value. If there are ties, then we have to introduce a correction factor to these calculations. At this point I’m assuming that even the most diligent reader has stopped caring (or at least formed the opinion that the tie-correction factor is something that doesn’t require their immediate attention). So I’ll very quickly tell you how it’s calculated, and omit the tedious details about why it’s done this way. Suppose we construct a frequency table for the raw data, and let fj be the number of observations that have the j-th unique value. This might sound a bit abstract, so here’s a concrete example from the frequency table of mood.gain from the clinicaltrials.csv data set Table</p>
+<div class="inline-table"><table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 101%; margin-left: auto; margin-right: auto;  " id="tab:tab13-11">
+<caption style="caption-side: bottom; text-align: left;">
+<span id="tab:tab13-11">Table 13.11: </span> Frequency table of mood gain from the clinicaltrials.csv data</caption>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<tr>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: bold;">0.1</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">0.2</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">0.3</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">0.4</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">0.5</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">0.6</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">0.8</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">0.9</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">1.1</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">1.2</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">1.3</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">1.4</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">1.7</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">1.8</th>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">1</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">1</td>
+</tr>
+</table></div>
+<p>Looking at this table, notice that the third entry in the frequency table has a value of 2. Since this corresponds to a mood.gain of 0.3, this table is telling us that two people’s mood increased by 0.3. <a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;More to the point, in the mathematical notation I introduced above, this is telling us that &lt;span class="math inline"&gt;\(f_3 = 2\)&lt;/span&gt;. Yay. So, now that we know this, the tie correction factor (TCF) is: &lt;span class="math display"&gt;\[TCF=1-\frac{\sum_j f_j^3 - f_j}{N^3 - N}\]&lt;/span&gt; The tie-corrected value of the Kruskal-Wallis statistic is obtained by dividing the value of K by this quantity. It is this tie-corrected version that jamovi calculates.&lt;/p&gt;'><sup>156</sup></a></p>
+<p>And so jamovi uses a tie-correction factor to calculate the tie-corrected Kruskall-Wallis statistic. And at long last, we’re actually finished with the theory of the Kruskal-Wallis test. I’m sure you’re all terribly relieved that I’ve cured you of the existential anxiety that naturally arises when you realise that you don’t know how to calculate the tie-correction factor for the Kruskal-Wallis test. Right?</p>
+<div class="figure">
+<span style="display:block;" id="fig:fig13-7"></span>
+<img src="images/Figure13_7.PNG" alt="QQ plot produced from jamovi one way ANOVA options" width="90%"><p class="caption">
+Figure 13.7: QQ plot produced from jamovi one way ANOVA options
+</p>
+</div>
+</div>
+<div id="how-to-run-the-kruskal-wallis-test-in-jamovi" class="section level3" number="13.6.8">
+<h3>
+<span class="header-section-number">13.6.8</span> How to run the Kruskal-Wallis test in jamovi<a class="anchor" aria-label="anchor" href="#how-to-run-the-kruskal-wallis-test-in-jamovi"><i class="fas fa-link"></i></a>
+</h3>
+<p>Despite the horror that we’ve gone through in trying to understand what the Kruskal Wallis test actually does, it turns out that running the test is pretty painless, since jamovi has an analysis as part of the ANOVA analysis set called ‘Non-Parametric’ - ‘One Way ANOVA (Kruskall-Wallis)’ Most of the time you’ll have data like the clinicaltrial.csv data set, in which you have your outcome variable mood.gain and a grouping variable drug. If so, you can just go ahead and run the analysis in jamovi. What this gives us is a Kruskal-Wallis <span class="math inline">\(\chi^2 =12.076, df = 2, p = 0.00239\)</span>, as in Figure <a href="comparing-several-means-one-way-anova.html#fig:fig13-8">13.8</a></p>
+<div class="figure">
+<span style="display:block;" id="fig:fig13-8"></span>
+<img src="images/Figure135.PNG" alt="Kruskall-Wallis one-way non-parametric ANOVA in jamovi" width="90%"><p class="caption">
+Figure 13.8: Kruskall-Wallis one-way non-parametric ANOVA in jamovi
+</p>
+</div>
+</div>
+</div>
+<div id="repeated-measures-one-way-anova" class="section level2" number="13.7">
+<h2>
+<span class="header-section-number">13.7</span> Repeated measures one-way ANOVA<a class="anchor" aria-label="anchor" href="#repeated-measures-one-way-anova"><i class="fas fa-link"></i></a>
+</h2>
+<p>The one-way repeated measures ANOVA test is a statistical method of testing for significant differences between three or more groups where the same participants are used in each group (or each participant is closely matched with participants in other experimental groups). For this reason, there should always be an equal number of scores (data points) in each experimental group. This type of design and analysis can also be called a ‘related ANOVA’ or a ‘within subjects ANOVA’.</p>
+<p>The logic behind a repeated measures ANOVA is very similar to that of an independent ANOVA (sometimes called a ‘between-subjects’ ANOVA). You’ll remember that earlier we showed that in a between-subjects ANOVA total variability is partitioned into between-groups variability (<span class="math inline">\(SS_b\)</span>) and within-groups variability (<span class="math inline">\(SS_w\)</span>), and after each is divided by the respective degrees of freedom to give MSb and MSw (see Table 13.1) the F-ratio is calculated as:</p>
+<p><span class="math display">\[F=\frac{MS_b}{MS_w}\]</span></p>
+<p>In a repeated measures ANOVA, the F-ratio is calculated in a similar way, but whereas in an independent ANOVA the within-group variability (<span class="math inline">\(SS_w\)</span>) is used as the basis for the <span class="math inline">\(MS_w\)</span> denominator, in a repeated measures ANOVA the <span class="math inline">\(SS_w\)</span> is partioned into two parts. As we are using the same subjects in each group, we can remove the variability due to the individual differences between subjects (referred to as SSsubjects) from the within-groups variability. We won’t go into too much technical detail about how this is done, but essentially each subject becomes a level of a factor called subjects. The variability in this within-subjects factor is then calculated in the same way as any between-subjects factor. And then we can subtract SSsubjects from <span class="math inline">\(SS_w\)</span> to provide a smaller SSerror term:</p>
+<p><span class="math display">\[\text{Independent ANOVA: } SS_{error} = SS_w\]</span> <span class="math display">\[\text{Repeated Measures ANOVA: } SS_{error} = SS_w - SS_{subjects}\]</span>
+This change in <span class="math inline">\(SS_{error}\)</span> term often leads to a more powerful statistical test, but this does depend on whether the reduction in the <span class="math inline">\(SS_{error}\)</span> more than compensates for the reduction in degrees of freedom for the error term (as degrees of freedom go from <span class="math inline">\((n - k)\)</span><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;(n - k) : (number of subjects - number of groups)&lt;/p&gt;"><sup>157</sup></a> to <span class="math inline">\((n - 1)(k - 1)\)</span> (remembering that there are more subjects in the independent ANOVA design).</p>
+<div id="repeated-measures-anova-in-jamovi" class="section level3" number="13.7.1">
+<h3>
+<span class="header-section-number">13.7.1</span> Repeated measures ANOVA in jamovi<a class="anchor" aria-label="anchor" href="#repeated-measures-anova-in-jamovi"><i class="fas fa-link"></i></a>
+</h3>
+<p>First, we need some data. <span class="citation">Geschwind (<a href="references.html#ref-Geschwind1972" role="doc-biblioref">1972</a>)</span> has suggested that the exact nature of a patient’s language deficit following a stroke can be used to diagnose the specific region of the brain that has been damaged. A researcher is concerned with identifying the specific communication difficulties experienced by six patients suffering from Broca’s Aphasia (a language deficit commonly experienced following a stroke).</p>
+<div class="inline-table"><table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 101%; margin-left: auto; margin-right: auto;  " id="tab:tab13-12">
+<caption style="caption-side: bottom; text-align: left;">
+<span id="tab:tab13-12">Table 13.12: </span> Word recognition task scores in stroke patients</caption>
+<col>
+<col>
+<col>
+<col>
+<tr>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: bold;">Participant</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">Speech</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">Conceptual</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">Syntax</th>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">1</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">8</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">7</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">6</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: normal;">2</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">7</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">8</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">6</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; font-weight: normal;">3</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">9</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">5</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; font-weight: normal;">3</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: normal;">4</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">5</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">4</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">5</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; font-weight: normal;">5</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">6</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">6</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; font-weight: normal;">2</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: normal;">6</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">8</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">7</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">4</td>
+</tr>
+</table></div>
+<p>The patients were required to complete three word recognition tasks. On the first (speech production) task, patients were required to repeat single words read out aloud by the researcher. On the second (conceptual) task, designed to test word comprehension, patients were required to match a series of pictures with their correct name. On the third (syntax) task, designed to test knowledge of correct word order, patients were asked to reorder syntactically incorrect sentences. Each patient completed all three tasks. The order in which patients attempted the tasks was counterbalanced between participants. Each task consisted of a series of 10 attempts. The number of attempts successfully completed by each patient are shown in Table <a href="comparing-several-means-one-way-anova.html#tab:tab13-11">13.11</a>. Enter these data into jamovi ready for analysis (or take a short-cut and load up the broca.csv file).</p>
+<p>To perform a one-way related ANOVA in jamovi, open the one-way repeated measures ANOVA dialogue box, as in Figure <a href="comparing-several-means-one-way-anova.html#fig:fig13-9">13.9</a>, via ANOVA - Repeated Measures ANOVA. Then:</p>
+<ul>
+<li>Enter a Repeated Measures Factor Name. This should be a label that you choose to describe the conditions repeated by all participants. For example, to describe the speech, conceptual and syntax tasks completed by all participants a suitable label would be ‘Task’. Note that this new factor name represents the independent variable in the analysis.</li>
+<li>Add a third level in the Repeated Measures Factors text box, as there are three levels representing the three tasks: speech, conceptual and syntax. Change the labels of the levels accordingly.</li>
+<li>Then move each of the levels variables across to the Repeated Measures Cells text box.</li>
+<li>Finally, under the Assumption Checks option, tick the “Sphericity checks” text box.</li>
+</ul>
+<p>jamovi output for a one-way repeated measures ANOVA is produced as shown in the Figures <strong>13.10</strong> to <strong>13.13</strong>. The first output we should look at is Mauchly’s Test of Sphericity, which tests the hypothesis that the variances of the differences between the conditions are equal (meaning that the spread of difference scores between the study conditions is approximately the same). In Figure <a href="comparing-several-means-one-way-anova.html#fig:fig13-10">13.10</a> Mauchly’s test significance level is <span class="math inline">\(p = .720\)</span>. If Mauchly’s test is non-significant (i.e. p &lt; .05, as is the case in this analysis) then it is reasonable to conclude that the variances of the differences are not significantly different (i.e. they are roughly equal and sphericity can be assumed.).</p>
+<p>If, on the other hand, Mauchly’s test had been significant (p &lt; .05) then we would conclude that there are significant differences between the variance of the differences, and the requirement of sphericity has not been met. In this case, we should apply a correction to the F-value obtained in the one-way related ANOVA analysis:</p>
+<ul>
+<li>If the Greenhouse-Geisser value in the “Tests of Sphericity” table is &gt; .75 then you should use the Huynh-Feldt correction</li>
+<li>But if the Greenhouse-Geisser value is &lt; .75, then you should use the Greenhouse-Geisser correction.</li>
+</ul>
+<p>Both these corrected F-values can be specified in the Sphericity Corrections check boxes under the Assumption Checks options, and the corrected F-values are then shown in the results table, as in Figure <strong>13.11</strong>.</p>
+<p>In our analysis, we saw that the significance of Mauchly’s Test of Sphericity was p = .720 (i.e. p &gt; 0.05). So, this means we can assume that the requirement of sphericity has been met so no correction to the F-value is needed. Therefore, we can use the ‘None’ Sphericity Correction output values for the repeated measure ‘Task’: <span class="math inline">\(F = 6.93\)</span>, <span class="math inline">\(df = 2\)</span>, <span class="math inline">\(p = .013\)</span>, and we can conclude that the number of tests successfully completed on each language task did vary significantly depending on whether the task was speech, comprehension or syntax based (<span class="math inline">\(F(2, 10) = 6.93\)</span>, <span class="math inline">\(p = .013\)</span>).</p>
+<p>Post-hoc tests can also be specified in jamovi for repeated measures ANOVA in the same way as for independent ANOVA. The results are shown in Figure <a href="comparing-several-means-one-way-anova.html#fig:fig13-12">13.12</a>. These indicate that there is a significant difference between Speech and Syntax, but not between other levels.</p>
+<p>Descriptive statistics (marginal means) can be reviewed to help interpret the results, produced in the jamovi output as in Figure <strong>13.13</strong>. Comparison of the mean number of trials successfully completed by participants shows that Broca’s Aphasics perform reasonably well on speech production (mean = 7.17) and language comprehension (mean = 6.17) tasks. However, their performance was considerably worse on the syntax task (mean = 4.33), with a significant difference in post-hoc tests between Speech and Syntax task performance.</p>
+<div class="figure">
+<span style="display:block;" id="fig:fig13-9"></span>
+<img src="images/Figure136.PNG" alt="Repeated measures ANOVA dialogue box in jamovi]" width="90%"><p class="caption">
+Figure 13.9: Repeated measures ANOVA dialogue box in jamovi]
+</p>
+</div>
+<div class="figure">
+<span style="display:block;" id="fig:fig13-10"></span>
+<img src="images/Figure137.PNG" alt="One-way repeated measures ANOVA output: Mauchly's Test of Sphericity" width="90%"><p class="caption">
+Figure 13.10: One-way repeated measures ANOVA output: Mauchly’s Test of Sphericity
+</p>
+</div>
+<div class="figure">
+<span style="display:block;" id="fig:fig13-11"></span>
+<img src="images/Figure138.PNG" alt="One-way repeated measures ANOVA output: Tests of Within-Subjects Effects" width="90%"><p class="caption">
+Figure 13.11: One-way repeated measures ANOVA output: Tests of Within-Subjects Effects
+</p>
+</div>
+<div class="figure">
+<span style="display:block;" id="fig:fig13-12"></span>
+<img src="images/Figure139.PNG" alt="Post-hoc tests in repeated measures ANOVA in jamovi" width="90%"><p class="caption">
+Figure 13.12: Post-hoc tests in repeated measures ANOVA in jamovi
+</p>
+</div>
+</div>
+</div>
+<div id="the-friedman-non-parametric-repeated-measures-anova-test" class="section level2" number="13.8">
+<h2>
+<span class="header-section-number">13.8</span> The Friedman non-parametric repeated measures ANOVA test<a class="anchor" aria-label="anchor" href="#the-friedman-non-parametric-repeated-measures-anova-test"><i class="fas fa-link"></i></a>
+</h2>
+<p>The Friedman test is a non-parametric version of a repeated measures ANOVA and can be used instead of the Kruskall-Wallis test when testing for differences between three or more groups where the same participants are in each group, or each participant is closely matched with participants in other conditions. If the dependent variable is ordinal, or if the assumption of normality is not met, then the Friedman test can be used.</p>
+<div class="figure">
+<span style="display:block;" id="fig:fig13-13"></span>
+<img src="images/Figure140.PNG" alt="One-way repeated measures ANOVA output: Descriptive Statistics" width="90%"><p class="caption">
+Figure 13.13: One-way repeated measures ANOVA output: Descriptive Statistics
+</p>
+</div>
+<div class="figure">
+<span style="display:block;" id="fig:fig13-14"></span>
+<img src="images/Figure141.PNG" alt="The 'Repeated Measures ANOVA (Non-parametric)' dialogue box in jamovi" width="90%"><p class="caption">
+Figure 13.14: The ‘Repeated Measures ANOVA (Non-parametric)’ dialogue box in jamovi
+</p>
+</div>
+<p>As with the Kruskall-Wallis test, the underlying mathematics is complicated, and won’t be presented here. For the purpose of this book, it is sufficient to note that jamovi calculates the tie-corrected version of the Friedman test, and in Figure <a href="comparing-several-means-one-way-anova.html#fig:fig13-14">13.14</a> there is an example using the Broca’s Aphasia data we have already looked at.</p>
+<p>It’s pretty straightforward to run a Friedman test in jamovi. Just select Analyses - ANOVA - Repeated Measures ANOVA (Non-parametric), as in Figure <a href="comparing-several-means-one-way-anova.html#fig:fig13-14">13.14</a>. Then highlight and transfer the names of the repeated measures variables you wish to compare (Speech, Conceptual, Syntax) into the ‘Measures:’ text box. To produce descriptive statistics (means and medians) for the three repeated measures variables, click on the Descriptives button</p>
+<p>The jamovi results show descriptive statistics, chi-square value, degrees of freedom, and the p-value (Figure <a href="comparing-several-means-one-way-anova.html#fig:fig13-14">13.14</a>. Since the p-value is less than the level conventionally used to determine significance (p &lt; .05), we can conclude that Broca’s Aphasics perform reasonably well on speech production (median = 7.5) and language comprehension (median = 6.5) tasks. However, their performance was considerably worse on the syntax task (median = 4.5), with a significant difference in post-hoc tests between Speech and Syntax task performance.</p>
+</div>
+<div id="on-the-relationship-between-anova-and-the-student-t-test" class="section level2" number="13.9">
+<h2>
+<span class="header-section-number">13.9</span> On the relationship between ANOVA and the Student t-test<a class="anchor" aria-label="anchor" href="#on-the-relationship-between-anova-and-the-student-t-test"><i class="fas fa-link"></i></a>
+</h2>
+<p>There’s one last thing I want to point out before finishing. It’s something that a lot of people find kind of surprising, but it’s worth knowing about. An ANOVA with two groups is identical to the Student t-test. No, really. It’s not just that they are similar, but they are actually equivalent in every meaningful way. I won’t try to prove that this is always true, but I will show you a single concrete demonstration. Suppose that, instead of running an ANOVA on our mood.gain ~ drug model, let’s instead do it using therapy as the predictor. If we run this ANOVA we get an F-statistic of <span class="math inline">\(F(1,16) = 1.71\)</span>, and a p-value = <span class="math inline">\(0.21\)</span>. Since we only have two groups, I didn’t actually need to resort to an ANOVA, I could have just decided to run a Student t-test. So let’s see what happens when I do that: I get a t-statistic of <span class="math inline">\(t(16) = -1.3068\)</span> and a <span class="math inline">\(p-value = 0.21\)</span>. Curiously, the p-values are identical. Once again we obtain a value of <span class="math inline">\(p = .21\)</span>. But what about the test statistic? Having run a t-test instead of an ANOVA, we get a somewhat different answer, namely <span class="math inline">\(t(16) = -1.3068\)</span>. However, there is a fairly straightforward relationship here. If we square the t-statistic then we get the F-statistic from before: <span class="math inline">\(-1.3068^{2} = 1.7077\)</span></p>
+</div>
+<div id="summary-11" class="section level2" number="13.10">
+<h2>
+<span class="header-section-number">13.10</span> Summary<a class="anchor" aria-label="anchor" href="#summary-11"><i class="fas fa-link"></i></a>
+</h2>
+<p>There’s a fair bit covered in this chapter, but there’s still a lot missing <a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;As with all of the chapters in this book, there are quite a few different sources that I’ve relied upon, but the one stand-out text that I’ve been most heavily influenced by &lt;span class="citation"&gt;Sahai and Ageel (&lt;a href="references.html#ref-Sahai2000" role="doc-biblioref"&gt;2000&lt;/a&gt;)&lt;/span&gt;. It’s not a good book for beginners, but it’s an excellent book for more advanced readers who are interested in understanding the mathematics behind ANOVA.&lt;/p&gt;'><sup>158</sup></a>. Most obviously, I haven’t discussed how to run an ANOVA when you are interested in more than one grouping variable, but that will be discussed in a lot of detail in Chapter <strong>14</strong>. In terms of what we have discussed, the key topics were:</p>
+<ul>
+<li>The basic logic behind <a href="comparing-several-means-one-way-anova.html#how-anova-works">How ANOVA works</a> and <a href="comparing-several-means-one-way-anova.html#running-an-anova-in-jamovi">Running an ANOVA in jamovi</a>
+</li>
+<li>How to compute an <a href="comparing-several-means-one-way-anova.html#effect-size-2">Effect size</a> for an ANOVA.</li>
+<li>
+<a href="comparing-several-means-one-way-anova.html#multiple-comparisons-and-post-hoc-tests">Multiple comparisons and post hoc tests</a> for multiple testing.</li>
+<li>[The assumptions of one-way ANOVA]</li>
+<li>
+<a href="comparing-several-means-one-way-anova.html#checking-the-homogeneity-of-variance-assumption">Checking the homogeneity of variance assumption</a> and what to do if it is violated: <a href="comparing-several-means-one-way-anova.html#removing-the-homogeneity-of-variance-assumption">Removing the homogeneity of variance assumption</a>
+</li>
+<li>
+<a href="comparing-several-means-one-way-anova.html#checking-the-normality-assumption">Checking the normality assumption</a> and what to do if it is violated: [Removing the normaloity assumption]</li>
+<li>
+<a href="comparing-several-means-one-way-anova.html#repeated-measures-one-way-anova">Repeated measures one-way ANOVA</a> and the non-parametric equivalent, <a href="comparing-several-means-one-way-anova.html#the-friedman-non-parametric-repeated-measures-anova-test">The Friedman non-parametric repeated measures ANOVA test</a>
+</li>
+</ul>
+</div>
+</div>
+
+  <div class="chapter-nav">
+<div class="prev"><a href="correlation-and-linear-regression.html"><span class="header-section-number">12</span> Correlation and linear regression</a></div>
+<div class="next"><a href="references.html">References</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#comparing-several-means-one-way-anova"><span class="header-section-number">13</span> Comparing several means (one-way ANOVA)</a></li>
+<li><a class="nav-link" href="#an-illustrative-data-set"><span class="header-section-number">13.1</span> An illustrative data set</a></li>
+<li>
+<a class="nav-link" href="#how-anova-works"><span class="header-section-number">13.2</span> How ANOVA works</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#two-formulas-for-the-variance-of-y"><span class="header-section-number">13.2.1</span> Two formulas for the variance of Y</a></li>
+<li><a class="nav-link" href="#from-variances-to-sums-of-squares"><span class="header-section-number">13.2.2</span> From variances to sums of squares</a></li>
+<li><a class="nav-link" href="#from-sums-of-squares-to-the-f-test"><span class="header-section-number">13.2.3</span> From sums of squares to the F-test</a></li>
+<li><a class="nav-link" href="#a-worked-example"><span class="header-section-number">13.2.4</span> A worked example</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#running-an-anova-in-jamovi"><span class="header-section-number">13.3</span> Running an ANOVA in jamovi</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#using-jamovi-to-specify-your-anova"><span class="header-section-number">13.3.1</span> Using jamovi to specify your ANOVA</a></li></ul>
+</li>
+<li><a class="nav-link" href="#effect-size-2"><span class="header-section-number">13.4</span> Effect size</a></li>
+<li>
+<a class="nav-link" href="#multiple-comparisons-and-post-hoc-tests"><span class="header-section-number">13.5</span> Multiple comparisons and post hoc tests</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#running-pairwise-t-tests"><span class="header-section-number">13.5.1</span> Running “pairwise” t-tests</a></li>
+<li><a class="nav-link" href="#corrections-for-multiple-testing"><span class="header-section-number">13.5.2</span> Corrections for multiple testing</a></li>
+<li><a class="nav-link" href="#bonferroni-corrections"><span class="header-section-number">13.5.3</span> Bonferroni corrections</a></li>
+<li><a class="nav-link" href="#holm-corrections"><span class="header-section-number">13.5.4</span> Holm corrections</a></li>
+<li><a class="nav-link" href="#writing-up-the-post-hoc-test"><span class="header-section-number">13.5.5</span> Writing up the post hoc test</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#assumptions-of-one-way-anova"><span class="header-section-number">13.6</span> Assumptions of one-way ANOVA</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#checking-the-homogeneity-of-variance-assumption"><span class="header-section-number">13.6.1</span> Checking the homogeneity of variance assumption</a></li>
+<li><a class="nav-link" href="#running-the-levene-test-in-jamovi"><span class="header-section-number">13.6.2</span> Running the Levene test in jamovi</a></li>
+<li><a class="nav-link" href="#removing-the-homogeneity-of-variance-assumption"><span class="header-section-number">13.6.3</span> Removing the homogeneity of variance assumption</a></li>
+<li><a class="nav-link" href="#checking-the-normality-assumption"><span class="header-section-number">13.6.4</span> Checking the normality assumption</a></li>
+<li><a class="nav-link" href="#removing-the-normality-assumption"><span class="header-section-number">13.6.5</span> Removing the normality assumption</a></li>
+<li><a class="nav-link" href="#the-logic-behind-the-kruskal-wallis-test"><span class="header-section-number">13.6.6</span> The logic behind the Kruskal-Wallis test</a></li>
+<li><a class="nav-link" href="#additional-details"><span class="header-section-number">13.6.7</span> Additional details</a></li>
+<li><a class="nav-link" href="#how-to-run-the-kruskal-wallis-test-in-jamovi"><span class="header-section-number">13.6.8</span> How to run the Kruskal-Wallis test in jamovi</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#repeated-measures-one-way-anova"><span class="header-section-number">13.7</span> Repeated measures one-way ANOVA</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#repeated-measures-anova-in-jamovi"><span class="header-section-number">13.7.1</span> Repeated measures ANOVA in jamovi</a></li></ul>
+</li>
+<li><a class="nav-link" href="#the-friedman-non-parametric-repeated-measures-anova-test"><span class="header-section-number">13.8</span> The Friedman non-parametric repeated measures ANOVA test</a></li>
+<li><a class="nav-link" href="#on-the-relationship-between-anova-and-the-student-t-test"><span class="header-section-number">13.9</span> On the relationship between ANOVA and the Student t-test</a></li>
+<li><a class="nav-link" href="#summary-11"><span class="header-section-number">13.10</span> Summary</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong><span style="font-family:Garamond;font-weight:700;">learning statistics with jamovi</span></strong>" was written by Danielle J. Navarro &amp; David R. Foxcroft. It was last built on 17 June 2022 (version 0.75).</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

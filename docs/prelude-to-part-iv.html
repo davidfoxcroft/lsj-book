@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Prelude to Part IV | learning statistics with jamovi</title>
+<meta name="author" content="Danielle J. Navarro &amp; David R. Foxcroft">
+<meta name="description" content="Part IV of the book is by far the most theoretical, focusing as it does on the theory of statistical inference. Over the next three chapters my goal is to give you an Introduction to probability...">
+<meta name="generator" content="bookdown 0.26 with bs4_book()">
+<meta property="og:title" content="Prelude to Part IV | learning statistics with jamovi">
+<meta property="og:type" content="book">
+<meta property="og:image" content="/images/bookcover_logo.png">
+<meta property="og:description" content="Part IV of the book is by far the most theoretical, focusing as it does on the theory of statistical inference. Over the next three chapters my goal is to give you an Introduction to probability...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Prelude to Part IV | learning statistics with jamovi">
+<meta name="twitter:description" content="Part IV of the book is by far the most theoretical, focusing as it does on the theory of statistical inference. Over the next three chapters my goal is to give you an Introduction to probability...">
+<meta name="twitter:image" content="/images/bookcover_logo.png">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><style>
+    .enlarge-image {
+        transition: transform .2s ease-out;
+        cursor: pointer;
+    }
+
+    .enlarge-image:hover {
+        transform: scale(2.0);
+        display: block;
+        background: black;
+        position:relative;
+        float:left;
+        z-index:999;
+    }
+    </style>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script type="text/x-mathjax-config"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title=""><span style="font-family:Garamond;font-weight:700;">learning statistics with jamovi</span></a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"></a></li>
+<li><a class="" href="preface.html">Preface</a></li>
+<li><a class="" href="why-do-we-learn-statistics.html"><span class="header-section-number">1</span> Why do we learn statistics</a></li>
+<li><a class="" href="a-brief-introduction-to-research-design.html"><span class="header-section-number">2</span> A brief introduction to research design</a></li>
+<li><a class="" href="getting-started-with-jamovi.html"><span class="header-section-number">3</span> Getting started with jamovi</a></li>
+<li><a class="" href="descriptive-statistics.html"><span class="header-section-number">4</span> Descriptive statistics</a></li>
+<li><a class="" href="drawing-graphs.html"><span class="header-section-number">5</span> Drawing graphs</a></li>
+<li><a class="" href="pragmatic-matters.html"><span class="header-section-number">6</span> Pragmatic matters</a></li>
+<li><a class="active" href="prelude-to-part-iv.html">Prelude to Part IV</a></li>
+<li><a class="" href="introduction-to-probability.html"><span class="header-section-number">7</span> Introduction to probability</a></li>
+<li><a class="" href="estimating-unkown-quantities-from-a-sample.html"><span class="header-section-number">8</span> Estimating unkown quantities from a sample</a></li>
+<li><a class="" href="hypothesis-testing.html"><span class="header-section-number">9</span> Hypothesis testing</a></li>
+<li><a class="" href="categorical-data-analysis.html"><span class="header-section-number">10</span> Categorical data analysis</a></li>
+<li><a class="" href="comparing-two-means.html"><span class="header-section-number">11</span> Comparing two means</a></li>
+<li><a class="" href="correlation-and-linear-regression.html"><span class="header-section-number">12</span> Correlation and linear regression</a></li>
+<li><a class="" href="comparing-several-means-one-way-anova.html"><span class="header-section-number">13</span> Comparing several means (one-way ANOVA)</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="prelude-to-part-iv" class="section level1 unnumbered">
+<h1>Prelude to Part IV<a class="anchor" aria-label="anchor" href="#prelude-to-part-iv"><i class="fas fa-link"></i></a>
+</h1>
+<p>Part IV of the book is by far the most theoretical, focusing as it does
+on the theory of statistical inference. Over the next three chapters my
+goal is to give you an <a href="introduction-to-probability.html#introduction-to-probability">Introduction to probability</a> theory, sampling and estimation in the chapter on [Estimating unknown quantities from a sample] and statistical <a href="hypothesis-testing.html#hypothesis-testing">Hypothesis testing</a>. Before we get started though, I want
+to say something about the big picture. Statistical inference is
+primarily about learning from data. The goal is no longer merely to
+describe our data but to use the data to draw conclusions about the
+world. To motivate the discussion I want to spend a bit of time talking
+about a philosophical puzzle known as the riddle of induction, because
+it speaks to an issue that will pop up over and over again throughout
+the book: statistical inference relies on assumptions. This sounds like
+a bad thing. In everyday life people say things like “you should never
+make assumptions”, and psychology classes often talk about assumptions
+and biases as bad things that we should try to avoid. From bitter
+personal experience I have learned never to say such things around
+philosophers!</p>
+<div id="on-the-limits-of-logical-reasoning" class="section level2 unnumbered">
+<h2>On the limits of logical reasoning<a class="anchor" aria-label="anchor" href="#on-the-limits-of-logical-reasoning"><i class="fas fa-link"></i></a>
+</h2>
+<blockquote>
+<p><em>The whole art of war consists in getting at what is on the other side
+of the hill, or, in other words, in learning what we do not know from
+what we do.</em><br>
+- Arthur Wellesley, 1st Duke of Wellington</p>
+</blockquote>
+<p>I am told that quote above came about as a consequence of a carriage
+ride across the countryside.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="%0A%20http://www.bartleby.com/344/400.html"&gt;http://www.bartleby.com/344/400.html&lt;/a&gt;&lt;/p&gt;'><sup>44</sup></a> He and his companion, J.
+W. Croker, were playing a guessing game, each trying to predict what
+would be on the other side of each hill. In every case it turned out
+that Wellesley was right and Croker was wrong. Many years later when
+Wellesley was asked about the game he explained that “the whole art of
+war consists in getting at what is on the other side of the hill”.
+Indeed, war is not special in this respect. All of life is a guessing
+game of one form or another, and getting by on a day to day basis
+requires us to make good guesses. So let’s play a guessing game of our
+own.</p>
+<p>Suppose you and I are observing the Wellesley-Croker competition and
+after every three hills you and I have to predict who will win the next
+one, Wellesley or Croker. Let’s say that W refers to a Wellesley victory
+and C refers to a Croker victory. After three hills, our data set looks
+like this:</p>
+<p><span class="math inline">\(WWW\)</span></p>
+<p>Our conversation goes like this:</p>
+<blockquote>
+<p>you: Three in a row doesn’t mean much. I suppose Wellesley might be
+better at this than Croker, but it might just be luck. Still, I’m a bit
+of a gambler. I’ll bet on Wellesley.</p>
+</blockquote>
+<blockquote>
+<p>me: I agree that three in a row isn’t informative and I see no reason to prefer Wellesley’s guesses over
+Croker’s. I can’t justify betting at this stage. Sorry. No bet for me.</p>
+</blockquote>
+<p>Your gamble paid off: three more hills go by and Wellesley wins all three. Going into the next round of our game the score is 1-0 in favour of you and our data set looks like this: <span class="math inline">\(WWW\)</span> <span class="math inline">\(WWW\)</span> I’ve organised the data into blocks of three so that you can see which batch corresponds to the observations that we had available at each step in our little side game. After seeing this new batch, our conversation continues:</p>
+<blockquote>
+<p>you: Six wins in a row for Duke Wellesley. This is starting to feel a
+bit suspicious. I’m still not certain, but I reckon that he’s going to
+win the next one too.</p>
+</blockquote>
+<blockquote>
+<p>me: I guess I don’t see that. Sure, I agree that
+Wellesley has won six in a row, but I don’t see any logical reason why
+that means he’ll win the seventh one. No bet. you: Do you really think
+so? Fair enough, but my bet worked out last time and I’m okay with my
+choice.</p>
+</blockquote>
+<p>For a second time you were right, and for a second time I was wrong. Wellesley wins the next three hills, extending his winning record against Croker to 9-0. The data set available to us is now this: <span class="math inline">\(WWW\)</span> <span class="math inline">\(WWW\)</span> <span class="math inline">\(WWW\)</span> And our conversation goes like this:</p>
+<blockquote>
+<p>you: Okay, this is pretty obvious. Wellesley is way better at this game.
+We both agree he’s going to win the next hill, right?</p>
+</blockquote>
+<blockquote>
+<p>me: Is there
+really any logical evidence for that? Before we started this game, there
+were lots of possibilities for the first 10 outcomes, and I had no idea
+which one to expect. <span class="math inline">\(WWW\)</span> <span class="math inline">\(WWW\)</span> <span class="math inline">\(WWW\)</span> <span class="math inline">\(W\)</span> was one possibility, but so was <span class="math inline">\(WCC\)</span>
+<span class="math inline">\(CWC\)</span> <span class="math inline">\(WWC\)</span> <span class="math inline">\(C\)</span> and <span class="math inline">\(WWW\)</span> <span class="math inline">\(WWW\)</span> <span class="math inline">\(WWW\)</span> <span class="math inline">\(C\)</span> or even <span class="math inline">\(CCC\)</span> <span class="math inline">\(CCC\)</span> <span class="math inline">\(CCC\)</span> <span class="math inline">\(C\)</span>. Because I had no idea
+what would happen so I’d have said they were all equally likely. I
+assume you would have too, right? I mean, that’s what it means to say
+you have “no idea”, isn’t it?</p>
+</blockquote>
+<blockquote>
+<p>you: I suppose so.</p>
+</blockquote>
+<blockquote>
+<p>me: Well then, the
+observations we’ve made logically rule out all possibilities except two:
+<span class="math inline">\(WWW\)</span> <span class="math inline">\(WWW\)</span> <span class="math inline">\(WWW\)</span> <span class="math inline">\(C\)</span> or <span class="math inline">\(WWW\)</span> <span class="math inline">\(WWW\)</span> <span class="math inline">\(WWW\)</span> <span class="math inline">\(W\)</span>. Both of these are perfectly consistent
+with the evidence we’ve encountered so far, aren’t they?</p>
+</blockquote>
+<blockquote>
+<p>you: Yes, of
+course they are. Where are you going with this? me: So what’s changed
+then? At the start of our game, you’d have agreed with me that these are
+equally plausible and none of the evidence that we’ve encountered has
+discriminated between these two possibilities. Therefore, both of these
+possibilities remain equally plausible and I see no logical reason to
+prefer one over the other. So yes, while I agree with you that
+Wellesley’s run of 9 wins in a row is remarkable, I can’t think of a
+good reason to think he’ll win the 10th hill. No bet.</p>
+</blockquote>
+<blockquote>
+<p>you: I see your point, but I’m still willing to chance it. I’m betting on Wellesley.</p>
+</blockquote>
+<p>Wellesley’s winning streak continues for the next three hills. The score in the Wellesley-Croker game is now 12-0, and the score in our game is now 3-0. As we approach the fourth round of our game, our data set is this: <span class="math inline">\(WWW\)</span> <span class="math inline">\(WWW\)</span> <span class="math inline">\(WWW\)</span> <span class="math inline">\(WWW\)</span> and the conversation continues:</p>
+<blockquote>
+<p>you: Oh yeah! Three more wins for Wellesley and another victory for me.
+Admit it, I was right about him! I guess we’re both betting on Wellesley
+this time around, right?</p>
+</blockquote>
+<blockquote>
+<p>me: I don’t know what to think. I feel like
+we’re in the same situation we were in last round, and nothing much has
+changed. There are only two legitimate possibilities for a sequence of
+13 hills that haven’t already been ruled out, <span class="math inline">\(WWW\)</span> <span class="math inline">\(WWW\)</span> <span class="math inline">\(WWW\)</span> <span class="math inline">\(WWW\)</span> <span class="math inline">\(C\)</span> and <span class="math inline">\(WWW\)</span>
+<span class="math inline">\(WWW\)</span> <span class="math inline">\(WWW\)</span> <span class="math inline">\(WWW\)</span> <span class="math inline">\(W\)</span>. It’s just like I said last time. If all possible outcomes
+were equally sensible before the game started, shouldn’t these two be
+equally sensible now given that our observations don’t rule out either
+one? I agree that it feels like Wellesley is on an amazing winning
+streak, but where’s the logical evidence that the streak will continue?</p>
+</blockquote>
+<blockquote>
+<p>you: I think you’re being unreasonable. Why not take a look at our
+scorecard, if you need evidence? You’re the expert on statistics and
+you’ve been using this fancy logical analysis, but the fact is you’re
+losing. I’m just relying on common sense and I’m winning. Maybe you
+should switch strategies.</p>
+</blockquote>
+<blockquote>
+<p>me: Hmm, that is a good point and I don’t want
+to lose the game, but I’m afraid I don’t see any logical evidence that
+your strategy is better than mine. It seems to me that if there were
+someone else watching our game, what they’d have observed is a run of
+three wins to you. Their data would look like this: <span class="math inline">\(YYY\)</span>. Logically, I
+don’t see that this is any different to our first round of watching
+Wellesley and Croker. Three wins to you doesn’t seem like a lot of
+evidence, and I see no reason to think that your strategy is working out
+any better than mine. If I didn’t think that <span class="math inline">\(WWW\)</span> was good evidence then
+for Wellesley being better than Croker at their game, surely I have no
+reason now to think that YYY is good evidence that you’re better at
+ours?</p>
+</blockquote>
+<blockquote>
+<p>you: Okay, now I think you’re being a jerk.</p>
+</blockquote>
+<blockquote>
+<p>me: I don’t see the logical evidence for that.</p>
+</blockquote>
+</div>
+<div id="learning-without-making-assumptions-is-a-myth" class="section level2 unnumbered">
+<h2>Learning without making assumptions is a myth<a class="anchor" aria-label="anchor" href="#learning-without-making-assumptions-is-a-myth"><i class="fas fa-link"></i></a>
+</h2>
+<p>There are lots of different ways in which we could dissect this
+dialogue, but since this is a statistics book pitched at psychologists
+and not an introduction to the philosophy and psychology of reasoning,
+I’ll keep it brief. What I’ve described above is sometimes referred to
+as the riddle of induction. It seems entirely reasonable to think that a
+12-0 winning record by Wellesley is pretty strong evidence that he will
+win the 13th game, but it is not easy to provide a proper logical
+justification for this belief. On the contrary, despite the obviousness
+of the answer, it’s not actually possible to justify betting on
+Wellesley without relying on some assumption that you don’t have any
+logical justification for.</p>
+<p>The riddle of induction is most associated with the philosophical work
+of David Hume and more recently Nelson Goodman, but you can find
+examples of the problem popping up in fields as diverse as literature
+(Lewis Carroll) and machine learning (the “no free lunch” theorem).
+There really is something weird about trying to “learn what we do not
+know from what we do know”. The critical point is that assumptions and
+biases are unavoidable if you want to learn anything about the world.
+There is no escape from this, and it is just as true for statistical
+inference as it is for human reasoning. In the dialogue I was taking aim
+at your perfectly sensible inferences as a human being, but the common
+sense reasoning that you relied on is no different to what a
+statistician would have done. Your “common sense” half of the dialog
+relied on an implicit assumption that there exists some difference in
+skill between Wellesley and Croker, and what you were doing was trying
+to work out what that difference in skill level would be. My “logical
+analysis” rejects that assumption entirely. All I was willing to accept
+is that there are sequences of wins and losses and that I did not know
+which sequences would be observed. Throughout the dialogue I kept
+insisting that all logically possible data sets were equally plausible
+at the start of the Wellesely-Croker game, and the only way in which I
+ever revised my beliefs was to eliminate those possibilities that were
+factually inconsistent with the observations.</p>
+<p>That sounds perfectly sensible on its own terms. In fact, it even sounds
+like the hallmark of good deductive reasoning. Like Sherlock Holmes, my
+approach was to rule out that which is impossible in the hope that what
+would be left is the truth. Yet as we saw, ruling out the impossible
+never led me to make a prediction. On its own terms everything I said in
+my half of the dialogue was entirely correct. An inability to make any
+predictions is the logical consequence of making “no assumptions”. In
+the end I lost our game because you did make some assumptions and those
+assumptions turned out to be right. Skill is a real thing, and because
+you believed in the existence of skill you were able to learn that
+Wellesley had more of it than Croker. Had you relied on a less sensible
+assumption to drive your learning you might not have won the game.</p>
+<p>Ultimately there are two things you should take away from this. First,
+as I’ve said, you cannot avoid making assumptions if you want to learn
+anything from your data. But second, once you realise that assumptions
+are necessary it becomes important to make sure you make the right ones!
+A data analysis that relies on few assumptions is not necessarily better
+than one that makes many assumptions, it all depends on whether those
+assumptions are good ones for your data. As we go through the rest of
+this book I’ll often point out the assumptions that underpin a
+particular statistical technique, and how you can check whether those
+assumptions are sensible.</p>
+<hr>
+</div>
+</div>
+
+  <div class="chapter-nav">
+<div class="prev"><a href="pragmatic-matters.html"><span class="header-section-number">6</span> Pragmatic matters</a></div>
+<div class="next"><a href="introduction-to-probability.html"><span class="header-section-number">7</span> Introduction to probability</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#prelude-to-part-iv">Prelude to Part IV</a></li>
+<li><a class="nav-link" href="#on-the-limits-of-logical-reasoning">On the limits of logical reasoning</a></li>
+<li><a class="nav-link" href="#learning-without-making-assumptions-is-a-myth">Learning without making assumptions is a myth</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong><span style="font-family:Garamond;font-weight:700;">learning statistics with jamovi</span></strong>" was written by Danielle J. Navarro &amp; David R. Foxcroft. It was last built on 17 June 2022 (version 0.75).</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>
