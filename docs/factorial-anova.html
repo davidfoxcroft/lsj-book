@@ -20,19 +20,26 @@
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><style>
+
     .enlarge-image {
         transition: transform .2s ease-out;
         cursor: pointer;
     }
 
     .enlarge-image:hover {
-        transform: scale(2.0);
+        transform: scale(1.8);
         display: block;
-        background: black;
-        position:relative;
-        float:left;
-        z-index:999;
+        background: #eee;
+        border: 4px solid #27466C; 
+        position: relative;
+        float: middle;
+        z-index: 999;
     }
+    .enlarge-image:hover .inline-figure, .figure {
+      margin:  1rem 0rem 1rem 0rem; 
+      padding: 1rem 0rem 1rem 2rem;
+    }
+
     </style>
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script type="text/x-mathjax-config"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
@@ -116,11 +123,11 @@
 <h2>
 <span class="header-section-number">14.1</span> Factorial ANOVA 1: balanced designs, no interactions<a class="anchor" aria-label="anchor" href="#factorial-anova-1-balanced-designs-no-interactions"><i class="fas fa-link"></i></a>
 </h2>
-<p>When we discussed analysis of variance in <a href="comparing-several-means-one-way-anova.html#comparing-several-means-one-way-anova">Comparing several means (one-way ANOVA)</a>, we assumed a fairly simple experimental design. Each person is in one of several groups and we want to know whether these groups have different mean scores on some outcome variable. In this section, I’ll discuss a broader class of experimental designs known as <strong>factorial designs</strong>, in which we have more than one grouping variable. I gave one example of how this kind of design might arise above. Another example appears in the <a href="comparing-several-means-one-way-anova.html#comparing-several-means-one-way-anova">Comparing several means (one-way ANOVA)</a> chapter in which we were looking at the effect of different drugs on the mood.gain experienced by each person. In that chapter we did find a significant effect of drug, but at the end of the chapter we also ran an analysis to see if there was an effect of therapy. We didn’t find one, but there’s something a bit worrying about trying to run two separate analyses trying to predict the same outcome. Maybe there actually is an effect of therapy on mood gain, but we couldn’t find it because it was being “hidden” by the effect of drug? In other words, we’re going to want to run a single analysis that includes both drug and therapy as predictors. For this analysis each person is cross-classified by the drug they were given (a factor with 3 levels) and what therapy they received (a factor with 2 levels). We refer to this as a $3 $ factorial design.</p>
+<p>When we discussed analysis of variance in <a href="comparing-several-means-one-way-anova.html#comparing-several-means-one-way-anova">Comparing several means (one-way ANOVA)</a>, we assumed a fairly simple experimental design. Each person is in one of several groups and we want to know whether these groups have different mean scores on some outcome variable. In this section, I’ll discuss a broader class of experimental designs known as <strong>factorial designs</strong>, in which we have more than one grouping variable. I gave one example of how this kind of design might arise above. Another example appears in the <a href="comparing-several-means-one-way-anova.html#comparing-several-means-one-way-anova">Comparing several means (one-way ANOVA)</a> chapter in which we were looking at the effect of different drugs on the mood.gain experienced by each person. In that chapter we did find a significant effect of drug, but at the end of the chapter we also ran an analysis to see if there was an effect of therapy. We didn’t find one, but there’s something a bit worrying about trying to run two separate analyses trying to predict the same outcome. Maybe there actually is an effect of therapy on mood gain, but we couldn’t find it because it was being “hidden” by the effect of drug? In other words, we’re going to want to run a single analysis that includes both drug and therapy as predictors. For this analysis each person is cross-classified by the drug they were given (a factor with 3 levels) and what therapy they received (a factor with 2 levels). We refer to this as a <span class="math inline">\(3 \times 2\)</span> factorial design.</p>
 <p>If we cross-tabulate drug by therapy, using the ‘Frequencies’ - ‘Contingency Tables’ analysis in jamovi (see the <a href="pragmatic-matters.html#tabulating-and-cross-tabulating-data">Tabulating and cross-tabulating data</a> section), we get the table shown in Figure <a href="factorial-anova.html#fig:fig14-1">14.1</a>.</p>
 <div class="figure">
 <span style="display:block;" id="fig:fig14-1"></span>
-<img src="images/Figure142.PNG" alt="jamovi contingency table of drug by therapy" width="90%"><p class="caption">
+<img src="images/Figure142.PNG" alt="jamovi contingency table of drug by therapy" width="70%"><p class="caption">
 Figure 14.1: jamovi contingency table of drug by therapy
 </p>
 </div>
@@ -172,50 +179,6 @@ Figure 14.1: jamovi contingency table of drug by therapy
 <td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">1.500000</td>
 </tr>
 </table></div>
-<div class="inline-table"><table style="width:53%;" class="table table-sm">
-<colgroup>
-<col width="16%">
-<col width="18%">
-<col width="18%">
-</colgroup>
-<tbody>
-<tr class="odd">
-<td>drug</td>
-<td>therapy</td>
-<td>mood.gain</td>
-</tr>
-<tr class="even">
-<td>placebo</td>
-<td>no.therapy</td>
-<td>0.300000</td>
-</tr>
-<tr class="odd">
-<td>anxifree</td>
-<td>no.therapy</td>
-<td>0.400000</td>
-</tr>
-<tr class="even">
-<td>joyzepam</td>
-<td>no.therapy</td>
-<td>1.466667</td>
-</tr>
-<tr class="odd">
-<td>placebo</td>
-<td>CBT</td>
-<td>0.600000</td>
-</tr>
-<tr class="even">
-<td>anxifree</td>
-<td>CBT</td>
-<td>1.033333</td>
-</tr>
-<tr class="odd">
-<td>joyzepam</td>
-<td>CBT</td>
-<td>1.500000</td>
-</tr>
-</tbody>
-</table></div>
 <p>Now, the next Table (Table <a href="factorial-anova.html#tab:tab14-2">14.2</a>) shows a list of the group means for all possible combinations of the two factors (e.g., people who received the placebo and no therapy, people who received the placebo while getting CBT, etc.). It is helpful to organise all these numbers, plus the marginal and grand means, into a single table which looks like this:</p>
 <div class="inline-table"><table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 101%; margin-left: auto; margin-right: auto;  " id="tab:tab14-2">
 <caption style="caption-side: bottom; text-align: left;">
@@ -255,49 +218,8 @@ Figure 14.1: jamovi contingency table of drug by therapy
 <td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">0.88</td>
 </tr>
 </table></div>
-<div class="inline-table"><table style="width:58%;" class="table table-sm">
-<colgroup>
-<col width="15%">
-<col width="18%">
-<col width="12%">
-<col width="12%">
-</colgroup>
-<tbody>
-<tr class="odd">
-<td> </td>
-<td>no therapy</td>
-<td>CBT</td>
-<td>total</td>
-</tr>
-<tr class="even">
-<td>placebo</td>
-<td>0.30</td>
-<td>0.60</td>
-<td>0.45</td>
-</tr>
-<tr class="odd">
-<td>anxifree</td>
-<td>0.40</td>
-<td>1.03</td>
-<td>0.72</td>
-</tr>
-<tr class="even">
-<td>joyzepam</td>
-<td>1.47</td>
-<td>1.50</td>
-<td>1.48</td>
-</tr>
-<tr class="odd">
-<td>total</td>
-<td>0.72</td>
-<td>1.04</td>
-<td>0.88</td>
-</tr>
-</tbody>
-</table></div>
 <p>Now, each of these different means is of course a sample statistic. It’s a quantity that pertains to the specific observations that we’ve made during our study. What we want to make inferences about are the corresponding population parameters. That is, the true means as they exist within some broader population. Those population means can also be organised into a similar table, but we’ll need a little mathematical notation to do so (Table <a href="factorial-anova.html#tab:tab14-3">14.3</a>). As usual, I’ll use the symbol <span class="math inline">\(\mu\)</span> to denote a population mean. However, because there are lots of different means, I’ll need to use subscripts to distinguish between them.</p>
 <p>Here’s how the notation works. Our table is defined in terms of two factors. Each row corresponds to a different level of Factor A (in this case drug), and each column corresponds to a different level of Factor B (in this case therapy). If we let R denote the number of rows in the table, and <span class="math inline">\(C\)</span> denote the number of columns, we can refer to this as an <span class="math inline">\(R \times C\)</span> factorial ANOVA. In this case <span class="math inline">\(R = 3\)</span> and <span class="math inline">\(C = 2\)</span>. We’ll use lowercase letters to refer to specific rows and columns, so <span class="math inline">\(\mu_{rc}\)</span> refers to the population mean associated with the <span class="math inline">\(r\)</span>-th level of Factor <span class="math inline">\(A\)</span> (i.e. row number <span class="math inline">\(r\)</span>) and the <span class="math inline">\(c\)</span>-th level of Factor B (column number c).<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;The nice thing about the subscript notation is that it generalises nicely. If our experiment had involved a third factor, then we could just add a third subscript. In principle, the notation extends to as many factors as you might care to include, but in this book we’ll rarely consider analyses involving more than two factors, and never more than three.&lt;/p&gt;"><sup>159</sup></a> So the population means are now written like in <a href="factorial-anova.html#tab:tab14-1">14.1</a>:</p>
-<p></p>
 <div class="inline-table"><table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 101%; margin-left: auto; margin-right: auto;  " id="tab:tab14-3">
 <caption style="caption-side: bottom; text-align: left;">
 <span id="tab:tab14-3">Table 14.3: </span> Notation for population means in a factorial table</caption>
@@ -336,18 +258,6 @@ Figure 14.1: jamovi contingency table of drug by therapy
 <td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;"></td>
 </tr>
 </table></div>
-
-+————+——————–+——————–+————+
-|   | no therapy | CBT | total |
-+————+——————–+——————–+————+
-| placebo | $ \mu_{11} $ | $ \mu_{12} $ |   |
-+————+——————–+——————–+————+
-| anxifree | $ \mu_{21} $ | $ \mu_{22} $ |   |
-+————+——————–+——————–+————+
-| joyzepam | $ \mu_{31} $ | $ \mu_{32} $ |   |
-+————+——————–+——————–+————+
-| total |   |   |   |
-+————+——————–+——————–+————+
 <p>Okay, what about the remaining entries? For instance, how should we describe the average mood gain across the entire (hypothetical) population of people who might be given Joyzepam in an experiment like this, regardless of whether they were in CBT? We use the “dot” notation to express this. In the case of Joyzepam, notice that we’re talking about the mean associated with the third row in the table. That is, we’re averaging across two cell means (i.e., <span class="math inline">\(\mu_{31}\)</span> and <span class="math inline">\(\mu_{32}\)</span>). The result of this averaging is referred to as a marginal mean, and would be denoted <span class="math inline">\(\mu_3.\)</span> in this case. The <strong>marginal mean</strong> for CBT corresponds to the population mean associated with the second column in the table, so we use the notation because it is the mean obtained by averaging (marginalising<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Technically, marginalising isn’t quite identical to a regular mean. It’s a weighted average where you take into account the frequency of the different events that you’re averaging over. However, in a balanced design, all of our cell frequencies are equal by definition so the two are equivalent. We’ll discuss unbalanced designs later, and when we do so you’ll see that all of our calculations become a real headache. But let’s ignore this for now.&lt;/p&gt;"><sup>160</sup></a>) over both. So our full table of population means can be written down like in Table <a href="factorial-anova.html#tab:tab14-4">14.4</a>.</p>
 <div class="inline-table"><table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 101%; margin-left: auto; margin-right: auto;  " id="tab:tab14-4">
 <caption style="caption-side: bottom; text-align: left;">
@@ -387,55 +297,13 @@ Figure 14.1: jamovi contingency table of drug by therapy
 <td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">\( \mu_{..} \)</td>
 </tr>
 </table></div>
-<div class="inline-table"><table style="width:100%;" class="table table-sm">
-<colgroup>
-<col width="20%">
-<col width="26%">
-<col width="26%">
-<col width="26%">
-</colgroup>
-<tbody>
-<tr class="odd">
-<td> </td>
-<td>no therapy</td>
-<td>CBT</td>
-<td>total</td>
-</tr>
-<tr class="even">
-<td>placebo</td>
-<td>$ \mu_{11} $ | $ \</td>
-<td>mu_{12} $ | $ \mu_{1</td>
-<td>.} $</td>
-</tr>
-<tr class="odd">
-<td>anxifree</td>
-<td>$ \mu_{21} $ | $ \</td>
-<td>mu_{22} $ | $ \mu_{2</td>
-<td>.} $</td>
-</tr>
-<tr class="even">
-<td>joyzepam</td>
-<td>$ \mu_{31} $ | $ \</td>
-<td>mu_{32} $ | $ \mu_{3</td>
-<td>.} $</td>
-</tr>
-<tr class="odd">
-<td>total</td>
-<td>$ \mu_{.1} $ | $ \</td>
-<td>mu_{.2} $ | $ \mu_{.</td>
-<td>.} $</td>
-</tr>
-</tbody>
-</table></div>
 <p>Now that we have this notation, it is straightforward to formulate and express some hypotheses. Let’s suppose that the goal is to find out two things. First, does the choice of drug have any effect on mood? And second, does CBT have any effect on mood? These aren’t the only hypotheses that we could formulate of course, and we’ll see a really important example of a different kind of hypothesis in Section <strong>14.2</strong> , but these are the two simplest hypotheses to test, and so we’ll start there. Consider the first test. If the drug has no effect then we would expect all of the row means to be identical, right? So that’s our null hypothesis. On the other hand, if the drug does matter then we should expect these row means to be different. Formally, we write down our null and alternative hypotheses in terms of the equality of marginal means:</p>
-<p><span class="math display">\[
-\text{Null hypothesis, } H_0 \text{: row means are the same, i.e., } µ_{1. } = µ_{2. } = µ_{3. } \\
-\text{Alternative hypothesis, } H_1 \text{: at least one row mean is different}
+<p><span class="math display">\[\text{Null hypothesis, } H_0 \text{: row means are the same, i.e., } µ_{1. } = µ_{2. } = µ_{3. } \\\\ \text{Alternative hypothesis, } H_1 \text{: at least one row mean is different}
 \]</span></p>
 <p>It’s worth noting that these are exactly the same statistical hypotheses that we formed when we ran a one-way ANOVA on these data in the previous chapter <a href="comparing-several-means-one-way-anova.html#comparing-several-means-one-way-anova">Comparing several means (one-way ANOVA)</a>. Back then I used the notation <span class="math inline">\(\mu*{P}\)</span> to refer to the mean mood gain for the placebo group, with <span class="math inline">\(\mu{A}\)</span> and <span class="math inline">\(\mu*{J}\)</span> corresponding to the group means for the two drugs, and the null hypothesis was <span class="math inline">\(\mu{P} = \mu{A} = \mu{J}\)</span> . So we’re actually talking about the same hypothesis, it’s just that the more complicated ANOVA requires more careful notation due to the presence of multiple grouping variables, so we’re now referring to this hypothesis as <span class="math inline">\(\mu_{ 1.} = \mu_{ 2.} = \mu_{ 3.}\)</span> . However, as we’ll see shortly, although the hypothesis is identical the test of that hypothesis is subtly different due to the fact that we’re now acknowledging the existence of the second grouping variable.</p>
 <p>Speaking of the other grouping variable, you won’t be surprised to discover that our second hypothesis test is formulated the same way. However, since we’re talking about the psychological therapy rather than drugs our null hypothesis now corresponds to the equality of the column means:</p>
 <p><span class="math display">\[
-\text{Null hypothesis, } H_0 \text{: column means are the same, i.e., } µ_{ .1} = µ_{ .2} \\
+\text{Null hypothesis, } H_0 \text{: column means are the same, i.e., } µ_{ .1} = µ_{ .2} \\\\
 \text{Alternative hypothesis, } H_1 \text{: column means are different, i.e., } µ_{ .1} \neq µ_{ .2}
 \]</span></p>
 </div>
@@ -466,7 +334,7 @@ Figure 14.3: jamovi two way anova of mood.gain by drug and therapy
 <p><span class="math display">\[F_A=\frac{MS_A}{MS_R}\]</span></p>
 <p>and an equivalent formula exists for factor B (i.e., therapy). Note that this use of “R” to refer to residuals is a bit awkward, since we also used the letter R to refer to the number of rows in the table, but I’m only going to use “R” to mean residuals in the context of SSR and MSR, so hopefully this shouldn’t be confusing. Anyway, to apply this formula to the drugs factor we take the mean square of 1.73 and divide it by the residual mean square value of <span class="math inline">\(0.07\)</span>, which gives us an F-statistic of 26.15. The corresponding calculation for the therapy variable would be to divide <span class="math inline">\(0.47\)</span> by <span class="math inline">\(0.07\)</span> which gives <span class="math inline">\(7.08\)</span> as the F-statistic. Not surprisingly, of course, these are the same values that jamovi has reported in the ANOVA table above.</p>
 <p>Also in the ANOVA table is the calculation of the p values. Once again, there is nothing new here. For each of our two factors what we’re trying to do is test the null hypothesis that there is no relationship between the factor and the outcome variable (I’ll be a bit more precise about this later on). To that end, we’ve (apparently) followed a similar strategy to what we did in the one way ANOVA and have calculated an F-statistic for each of these hypotheses. To convert these to p values, all we need to do is note that the sampling distribution for the F statistic under the null hypothesis (that the factor in question is irrelevant) is an F distribution. Also note that the two degrees of freedom values are those corresponding to the factor and those corresponding to the residuals. For the drug factor we’re talking about an F distribution with 2 and 14 degrees of freedom (I’ll discuss degrees of freedom in more detail later). In contrast, for the therapy factor the sampling distribution is F with 1 and 14 degrees of freedom.</p>
-<p>At this point, I hope you can see that the ANOVA table for this more complicated factorial analysis should be read in much the same way as the ANOVA table for the simpler one way analysis. In short, it’s telling us that the factorial ANOVA for our <span class="math inline">\(3 \times 2\)</span> design found a significant effect of drug (<span class="math inline">\(F_{2,14} = 26.15, p \&lt; .001\)</span>) as well as a significant effect of therapy (<span class="math inline">\(F_{1,14} = 7.08, p = .02\)</span>). Or, to use the more technically correct terminology, we would say that there are two <strong>main effects</strong> of drug and therapy. At the moment, it probably seems a bit redundant to refer to these as “main” effects, but it actually does make sense. Later on, we’re going to want to talk about the possibility of “interactions” between the two factors, and so we generally make a distinction between main effects and interaction effects.</p>
+<p>At this point, I hope you can see that the ANOVA table for this more complicated factorial analysis should be read in much the same way as the ANOVA table for the simpler one way analysis. In short, it’s telling us that the factorial ANOVA for our <span class="math inline">\(3 \times 2\)</span> design found a significant effect of drug (<span class="math inline">\(F_{2,14} = 26.15, p &lt; .001\)</span>) as well as a significant effect of therapy (<span class="math inline">\(F_{1,14} = 7.08, p = .02\)</span>). Or, to use the more technically correct terminology, we would say that there are two <strong>main effects</strong> of drug and therapy. At the moment, it probably seems a bit redundant to refer to these as “main” effects, but it actually does make sense. Later on, we’re going to want to talk about the possibility of “interactions” between the two factors, and so we generally make a distinction between main effects and interaction effects.</p>
 </div>
 <div id="how-are-the-sum-of-squares-calculated" class="section level3" number="14.1.3">
 <h3>
@@ -511,46 +379,6 @@ Figure 14.3: jamovi two way anova of mood.gain by drug and therapy
 <td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">\( \bar{Y}_{.2} \)</td>
 <td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">\( \bar{Y}_{..} \)</td>
 </tr>
-</table></div>
-<div class="inline-table"><table class="table table-sm">
-<colgroup>
-<col width="17%">
-<col width="27%">
-<col width="27%">
-<col width="27%">
-</colgroup>
-<tbody>
-<tr class="odd">
-<td> </td>
-<td>no therapy</td>
-<td>CBT</td>
-<td>total</td>
-</tr>
-<tr class="even">
-<td>placebo</td>
-<td>$ \bar{Y}_{11} $ | $ \</td>
-<td>bar{Y}_{12} $ | $ \bar{Y</td>
-<td>}_{1.} $</td>
-</tr>
-<tr class="odd">
-<td>anxifree</td>
-<td>$ \bar{Y}_{21} $ | $ \</td>
-<td>bar{Y}_{22} $ | $ \bar{Y</td>
-<td>}_{2.} $</td>
-</tr>
-<tr class="even">
-<td>joyzepam</td>
-<td>$ \bar{Y}_{31} $ | $ \</td>
-<td>bar{Y}_{32} $ | $ \bar{Y</td>
-<td>}_{3.} $</td>
-</tr>
-<tr class="odd">
-<td>total</td>
-<td>$ \bar{Y}_{.1} $ | $ \</td>
-<td>bar{Y}_{.2} $ | $ \bar{Y</td>
-<td>}_{..} $</td>
-</tr>
-</tbody>
 </table></div>
 <p>And if we look at the sample means that I showed earlier, we have <span class="math inline">\(\bar{Y}_{11} = 0.30\)</span>, <span class="math inline">\(\bar{Y}_{12} = 0.60\)</span> etc. In our clinical trial example, the drugs factor has 3 levels and the therapy factor has 2 levels, and so what we’re trying to run is a <span class="math inline">\(3 \times 2\)</span> factorial ANOVA. However, we’ll be a little more general and say that Factor A (the row factor) has R levels and Factor B (the column factor) has C levels, and so what we’re runnning here is an <span class="math inline">\(R \times C\)</span> factorial ANOVA.</p>
 <p>Statistical notation <a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;Now that we’ve got our notation straight, we can compute the sum of squares values for each of the two factors in a relatively familiar way. For Factor A, our between group sum of squares is calculated by assessing the extent to which the (row) marginal means &lt;span class="math inline"&gt;\(\bar{Y}_{1.} , \bar{Y}_{2.}\)&lt;/span&gt; etc, are different from the grand mean &lt;span class="math inline"&gt;\(\bar{Y}_{..}\)&lt;/span&gt; We do this in the same way that we did for one-way ANOVA: calculate the sum of squared difference between the &lt;span class="math inline"&gt;\(\bar{Y}_{i.}\)&lt;/span&gt; values and the &lt;span class="math inline"&gt;\(\bar{Y}_{..}\)&lt;/span&gt; values. Specifically, if there are N people in each group, then we calculate this &lt;span class="math display"&gt;\[SS_A=(N \times C)\sum_{r=1}^R (\bar{Y}_{r.}-\bar{Y}_{..})^2\]&lt;/span&gt; As with one-way ANOVA, the most interesting &lt;span class="math inline"&gt;\(^a\)&lt;/span&gt; part of this formula is the bit, which corresponds to the squared deviation associated with level r. All that this formula does is calculate this squared deviation for all R levels of the factor, add them up, and then multiply the result by &lt;span class="math inline"&gt;\(N \times C\)&lt;/span&gt;. The reason for this last part is that there are multiple cells in our design that have level &lt;span class="math inline"&gt;\(r\)&lt;/span&gt; on Factor A. In fact, there are C of them, one corresponding to each possible level of Factor B.
@@ -597,7 +425,7 @@ In any case, it’s probably worth taking a moment to check that we can calculat
 <h2>
 <span class="header-section-number">14.2</span> Factorial ANOVA 2: balanced designs, interactions allowed<a class="anchor" aria-label="anchor" href="#factorial-anova-2-balanced-designs-interactions-allowed"><i class="fas fa-link"></i></a>
 </h2>
-<p>The four patterns of data shown in Figure <strong>14.4</strong> are all quite realistic. There are a great many data sets that produce exactly those patterns. However, they are not the whole story and the ANOVA model that we have been talking about up to this point is not sufficient to fully account for a table of group means. Why not? Well, so far we have the ability to talk about the idea that drugs can influence mood, and therapy can influence mood, but no way of talking about the possibility of an <strong>interaction</strong> between the two. An interaction between <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> is said to occur whenever the effect of Factor <span class="math inline">\(A\)</span> is <em>different</em>, depending on which level of Factor <span class="math inline">\(B\)</span> we’re talking about. Several examples of an interaction effect with the context of a <span class="math inline">\(2 \times 2\)</span> ANOVA are shown in Figure <strong>14.5</strong>. To give a more concrete example, suppose that the operation of Anxifree and Joyzepam is governed by quite different physiological mechanisms. One consequence of this is that while Joyzepam has more or less the same effect on mood regardless of whether one is in therapy, Anxifree is actually much more effective when administered in conjunction with CBT. The ANOVA that we developed in the previous section does not capture this idea. To get some idea of whether an interaction is actually happening here, it helps to plot the various group means. In jamovi this is done via the ANOVA ‘Estimated Marginal Means’ option - just move drug and therapy across into the ‘Marginal Means’ box under ‘Term 1’. This should look something like Figure <strong>14.6</strong>. Our main concern relates to the fact that the two lines aren’t parallel. The effect of CBT (difference between solid line and dotted line) when the drug is Joyzepam (right side) appears to be near zero, even smaller than the effect of CBT when a placebo is used (left side). However, when Anxifree is administered, the effect of CBT is larger than the placebo (middle). Is this effect real, or is this just random variation due to chance? Our original ANOVA cannot answer this question, because we make no allowances for the idea that interactions even exist! In this section, we’ll fix this problem.</p>
+<p>The four patterns of data shown in Figure <a href="factorial-anova.html#fig:fig14-4">14.4</a> are all quite realistic. There are a great many data sets that produce exactly those patterns. However, they are not the whole story and the ANOVA model that we have been talking about up to this point is not sufficient to fully account for a table of group means. Why not? Well, so far we have the ability to talk about the idea that drugs can influence mood, and therapy can influence mood, but no way of talking about the possibility of an <strong>interaction</strong> between the two. An interaction between <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> is said to occur whenever the effect of Factor <span class="math inline">\(A\)</span> is <em>different</em>, depending on which level of Factor <span class="math inline">\(B\)</span> we’re talking about. Several examples of an interaction effect with the context of a <span class="math inline">\(2 \times 2\)</span> ANOVA are shown in Figure <a href="factorial-anova.html#fig:fig14-5">14.5</a>. To give a more concrete example, suppose that the operation of Anxifree and Joyzepam is governed by quite different physiological mechanisms. One consequence of this is that while Joyzepam has more or less the same effect on mood regardless of whether one is in therapy, Anxifree is actually much more effective when administered in conjunction with CBT. The ANOVA that we developed in the previous section does not capture this idea. To get some idea of whether an interaction is actually happening here, it helps to plot the various group means. In jamovi this is done via the ANOVA ‘Estimated Marginal Means’ option - just move drug and therapy across into the ‘Marginal Means’ box under ‘Term 1’. This should look something like Figure <strong>14.6</strong>. Our main concern relates to the fact that the two lines aren’t parallel. The effect of CBT (difference between solid line and dotted line) when the drug is Joyzepam (right side) appears to be near zero, even smaller than the effect of CBT when a placebo is used (left side). However, when Anxifree is administered, the effect of CBT is larger than the placebo (middle). Is this effect real, or is this just random variation due to chance? Our original ANOVA cannot answer this question, because we make no allowances for the idea that interactions even exist! In this section, we’ll fix this problem.</p>
 <div class="figure">
 <span style="display:block;" id="fig:fig14-4"></span>
 <img src="images/Figure145.PNG" alt="The four different outcomes for a $2   imes 2$ ANOVA when no interactions are present. In panel (a) we see a main effect of Factor A and no effect of Factor B. Panel (b) shows a main effect of Factor B but no effect of Factor A. Panel (c) shows main effects of both Factor A and Factor B. Finally, panel (d) shows no effect of either factor" width="90%"><p class="caption">
@@ -647,14 +475,14 @@ df_{A:B} &amp; = (R \times C - 1) - (R - 1) - (C - 1) \\
 <h3>
 <span class="header-section-number">14.2.3</span> Running the ANOVA in jamovi<a class="anchor" aria-label="anchor" href="#running-the-anova-in-jamovi"><i class="fas fa-link"></i></a>
 </h3>
-<p>Adding interaction terms to the ANOVA model in jamovi is straightforward. In fact it is more than straightforward because it is the default option for ANOVA. This means that when you specify an ANOVA with two factors, e.g. drug and therapy then the interaction component - drug <span class="math inline">\(\times\)</span> therapy - is added automatically to the model<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;You may have spotted this already when looking at the main effects analysis in jamovi that we described earlier. For the purpose of the explanation in this book I removed the interaction component from the earlier model to keep things clean and simple&lt;/p&gt;"><sup>163</sup></a>. When we run the ANOVA with the interaction term included, then we get the results shown in Figure <strong>14.7</strong>.</p>
+<p>Adding interaction terms to the ANOVA model in jamovi is straightforward. In fact it is more than straightforward because it is the default option for ANOVA. This means that when you specify an ANOVA with two factors, e.g. drug and therapy then the interaction component - drug <span class="math inline">\(\times\)</span> therapy - is added automatically to the model<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;You may have spotted this already when looking at the main effects analysis in jamovi that we described earlier. For the purpose of the explanation in this book I removed the interaction component from the earlier model to keep things clean and simple&lt;/p&gt;"><sup>163</sup></a>. When we run the ANOVA with the interaction term included, then we get the results shown in Figure <a href="factorial-anova.html#fig:fig14-7">14.7</a>.</p>
 <div class="figure">
 <span style="display:block;" id="fig:fig14-7"></span>
 <img src="images/Figure148.PNG" alt="Results for the full factorial model, including the interaction component drug $\times$ therapy" width="90%"><p class="caption">
 Figure 14.7: Results for the full factorial model, including the interaction component drug <span class="math inline">\(\times\)</span> therapy
 </p>
 </div>
-<p>As it turns out, while we do have a significant main effect of drug (<span class="math inline">\(F_{2,12} = 31.7, p \&lt; .001\)</span>) and therapy type (<span class="math inline">\(F_{1,12} = 8.6, p = .013\)</span>), there is no significant interaction between the two (<span class="math inline">\(F_{2,12} = 2.5, p = 0.125\)</span>).</p>
+<p>As it turns out, while we do have a significant main effect of drug (<span class="math inline">\(F_{2,12} = 31.7, p &lt; .001\)</span>) and therapy type (<span class="math inline">\(F_{1,12} = 8.6, p = .013\)</span>), there is no significant interaction between the two (<span class="math inline">\(F_{2,12} = 2.5, p = 0.125\)</span>).</p>
 </div>
 <div id="interpreting-the-results" class="section level3" number="14.2.4">
 <h3>
@@ -699,30 +527,6 @@ Figure 14.7: Results for the full factorial model, including the interaction com
 <td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">0.34</td>
 </tr>
 </table></div>
-<div class="inline-table"><table style="width:54%;" class="table table-sm">
-<colgroup>
-<col width="15%">
-<col width="15%">
-<col width="23%">
-</colgroup>
-<tbody>
-<tr class="odd">
-<td> </td>
-<td>eta.sq</td>
-<td>partial.eta.sq</td>
-</tr>
-<tr class="even">
-<td>drug</td>
-<td>0.71</td>
-<td>0.79</td>
-</tr>
-<tr class="odd">
-<td>therapy</td>
-<td>0.10</td>
-<td>0.34</td>
-</tr>
-</tbody>
-</table></div>
 <p>Looking at the <span class="math inline">\(\eta^2\)</span> values first, we see that drug accounts for 71% of the variance (i.e. <span class="math inline">\(\eta^2 = 0.71\)</span>) in mood.gain, whereas therapy only accounts for 10%. This leaves a total of 19% of the variation unaccounted for (i.e., the residuals constitute 19% of the variation in the outcome). Overall, this implies that we have a very large effect<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Implausibly large, I would think. The artificiality of this data set is really starting to show!&lt;/p&gt;"><sup>165</sup></a> of drug and a modest effect of therapy.</p>
 <p>Now let’s look at the partial <span class="math inline">\(\eta^2\)</span> values, shown in Figure <strong>14.3</strong>. Because the effect of therapy isn’t all that large, controlling for it doesn’t make much of a difference, so the partial <span class="math inline">\(\eta^2\)</span> for drug doesn’t increase very much, and we obtain a value of <span class="math inline">\(p^{\eta^2} = 0.79\)</span>. In contrast, because the effect of drug was very large, controlling for it makes a big difference, and so when we calculate the partial <span class="math inline">\(\eta^2\)</span> for therapy you can see that it rises to <span class="math inline">\(p^{\eta^2} = 0.34\)</span>. The question that we have to ask ourselves is, what do these partial <span class="math inline">\(\eta^2\)</span> values actually mean? The way I generally interpret the partial <span class="math inline">\(\eta^2\)</span> for the main effect of Factor A is to interpret it as a statement about a hypothetical experiment in which only Factor A was being varied. So, even though in this experiment we varied both A and B, we can easily imagine an experiment in which only Factor A was varied, and the partial <span class="math inline">\(\eta^2\)</span> statistic tells you how much of the variance in the outcome variable you would expect to see accounted for in that experiment. However, it should be noted that this interpretation, like many things associated with main effects, doesn’t make a lot of sense when there is a large and significant interaction effect.</p>
 <p>Speaking of interaction effects, Table <a href="factorial-anova.html#tab:tab14-7">14.7</a> shows what we get when we calculate the effect sizes for the model that includes the interaction term, as in Figure @ref(fig:fig14-7. As you can see, the <span class="math inline">\(\eta^2\)</span> values for the main effects don’t change, but the partial <span class="math inline">\(\eta^2\)</span> values do:</p>
@@ -752,59 +556,6 @@ Figure 14.7: Results for the full factorial model, including the interaction com
 <td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.06</td>
 <td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">0.29</td>
 </tr>
-</table></div>
-<div class="inline-table"><table style="width:54%;" class="table table-sm">
-<colgroup>
-<col width="15%">
-<col width="15%">
-<col width="23%">
-</colgroup>
-<tbody>
-<tr class="odd">
-<td> </td>
-<td>eta.sq</td>
-<td>partial.eta.sq</td>
-</tr>
-<tr class="even">
-<td>drug</td>
-<td>0.71</td>
-<td>0.79</td>
-</tr>
-<tr class="odd">
-<td>therapy</td>
-<td>0.10</td>
-<td>0.34</td>
-</tr>
-</tbody>
-</table></div>
-<div class="inline-table"><table style="width:64%;" class="table table-sm">
-<colgroup>
-<col width="22%">
-<col width="18%">
-<col width="23%">
-</colgroup>
-<tbody>
-<tr class="odd">
-<td> </td>
-<td>eta.sq</td>
-<td>partial.eta.sq</td>
-</tr>
-<tr class="even">
-<td>drug</td>
-<td>0.71</td>
-<td>0.84</td>
-</tr>
-<tr class="odd">
-<td>therapy</td>
-<td>0.10</td>
-<td>0.42</td>
-</tr>
-<tr class="even">
-<td>drug*therapy</td>
-<td>0.06</td>
-<td>0.29</td>
-</tr>
-</tbody>
 </table></div>
 <div id="estimated-group-means" class="section level3" number="14.3.1">
 <h3>
@@ -978,70 +729,6 @@ Figure 14.15: Plot of mean happiness level as a function of stress and commuting
 <td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">1</td>
 </tr>
 </table></div>
-<div class="inline-table"><table class="table table-sm">
-<colgroup>
-<col width="20%">
-<col width="21%">
-<col width="31%">
-<col width="27%">
-</colgroup>
-<tbody>
-<tr class="odd">
-<td>person, <span class="math inline">\(p\)</span> | gra</td>
-<td>de, <span class="math inline">\(Y_p\)</span> | attenda</td>
-<td>nce, <span class="math inline">\(X_{1p}\)</span> | reading, $X_</td>
-<td>{2p}$</td>
-</tr>
-<tr class="even">
-<td>1</td>
-<td>90</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr class="odd">
-<td>2</td>
-<td>87</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr class="even">
-<td>3</td>
-<td>75</td>
-<td>0</td>
-<td>1</td>
-</tr>
-<tr class="odd">
-<td>4</td>
-<td>60</td>
-<td>1</td>
-<td>0</td>
-</tr>
-<tr class="even">
-<td>5</td>
-<td>35</td>
-<td>0</td>
-<td>0</td>
-</tr>
-<tr class="odd">
-<td>6</td>
-<td>50</td>
-<td>0</td>
-<td>0</td>
-</tr>
-<tr class="even">
-<td>7</td>
-<td>65</td>
-<td>1</td>
-<td>0</td>
-</tr>
-<tr class="odd">
-<td>8</td>
-<td>70</td>
-<td>0</td>
-<td>1</td>
-</tr>
-</tbody>
-</table></div>
 <p>This isn’t anything particularly special, of course. It’s exactly the format in which we expect to see our data! See the data file rtfm.csv. We can use the jamovi ‘Descriptives’ analysis to confirm that this data set corresponds to a balanced design, with 2 observations for each combination of attend and reading. In the same way we can also calculate the mean grade for each combination. This is shown in Figure <a href="factorial-anova.html#fig:fig14-16">14.16</a>. Looking at the mean scores, one gets the strong impression that reading the text and attending the class both matter a lot.</p>
 <div class="figure">
 <span style="display:block;" id="fig:fig14-16"></span>
@@ -1129,30 +816,6 @@ Figure 14.17: ANOVA of the rtfm.csv data set in jamovi, without the interaction 
 <td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">\( \beta_0 + \beta_1 + \beta_2 \)</td>
 </tr>
 </table></div>
-<div class="inline-table"><table style="width:43%;" class="table table-sm">
-<colgroup>
-<col width="19%">
-<col width="23%">
-</colgroup>
-<tbody>
-<tr class="odd">
-<td> </td>
-<td>read textbook?</td>
-</tr>
-<tr class="even">
-<td>no</td>
-<td>yes</td>
-</tr>
-<tr class="odd">
-<td>attended?</td>
-<td>no</td>
-</tr>
-<tr class="even">
-<td> </td>
-<td>yes</td>
-</tr>
-</tbody>
-</table></div>
 <p>As you can see, the intercept term <span class="math inline">\(b_0\)</span> acts like a kind of “baseline” grade that you would expect from those students who don’t take the time to attend class or read the textbook. Similarly, <span class="math inline">\(b_1\)</span> represents the boost that you’re expected to get if you come to class, and <span class="math inline">\(b_2\)</span> represents the boost that comes from reading the textbook. In fact, if this were an ANOVA you might very well want to characterise b1 as the main effect of attendance, and <span class="math inline">\(b_2\)</span> as the main effect of reading! In fact, for a simple <span class="math inline">\(2 \times 2\)</span> ANOVA that’s exactly how it plays out.</p>
 <p>Okay, now that we’re really starting to see why ANOVA and regression are basically the same thing, let’s actually run our regression using the rtfm data and the jamovi regression analysis to convince ourselves that this is really true. Running the regression in the usual way gives the results shown in Figure <a href="factorial-anova.html#fig:fig14-18">14.18</a>.</p>
 <div class="figure">
@@ -1203,35 +866,6 @@ Figure 14.19: Omnibus ANOVA Test results from the jamovi regression analysis
 <td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0</td>
 <td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">1</td>
 </tr>
-</table></div>
-<div class="inline-table"><table style="width:61%;" class="table table-sm">
-<colgroup>
-<col width="19%">
-<col width="20%">
-<col width="20%">
-</colgroup>
-<tbody>
-<tr class="odd">
-<td>drug</td>
-<td>druganxifree</td>
-<td>drugjoyzepam</td>
-</tr>
-<tr class="even">
-<td>“placebo”</td>
-<td>0</td>
-<td>0</td>
-</tr>
-<tr class="odd">
-<td>“anxifree”</td>
-<td>1</td>
-<td>0</td>
-</tr>
-<tr class="even">
-<td>“joyzepam”</td>
-<td>0</td>
-<td>1</td>
-</tr>
-</tbody>
 </table></div>
 <p>If the drug administered to a patient is a placebo then both of the two contrast variables will equal 0. If the drug is Anxifree then the druganxifree variable will equal 1, and drugjoyzepam will be 0. The reverse is true for Joyzepam: drugjoyzepam is 1 and druganxifree is 0.</p>
 <p>Creating contrast variables is not too difficult to do using the jamovi compute new variable command. For example, to create the druganxifree variable, write this logical expression in the compute new variable formula box: IF(drug == ‘anxifree’, 1, 0)‘. Similarly, to create the new variable drugjoyzepam use this logical expression: IF(drug == ’joyzepam’, 1, 0). Likewise for CBTtherapy: IF(therapy == ‘CBT’, 1, 0). You can see these new variables, and the corresponding logical expressions, in the jamovi data file clinicaltrial2.omv.</p>
@@ -1313,35 +947,6 @@ Figure 14.23: Regression analysis with factors and contrasts in jamovi, includin
 <td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">1</td>
 </tr>
 </table></div>
-<div class="inline-table"><table style="width:61%;" class="table table-sm">
-<colgroup>
-<col width="19%">
-<col width="20%">
-<col width="20%">
-</colgroup>
-<tbody>
-<tr class="odd">
-<td>drug</td>
-<td>druganxifree</td>
-<td>drugjoyzepam</td>
-</tr>
-<tr class="even">
-<td>“placebo”</td>
-<td>0</td>
-<td>0</td>
-</tr>
-<tr class="odd">
-<td>“anxifree”</td>
-<td>1</td>
-<td>0</td>
-</tr>
-<tr class="even">
-<td>“joyzepam”</td>
-<td>0</td>
-<td>1</td>
-</tr>
-</tbody>
-</table></div>
 <p>Each row in the table corresponds to one of the factor levels, and each column corresponds to one of the contrasts. This table, which always has one more row than columns, has a special name. It is called a contrast matrix. However, there are lots of different ways to specify a contrast matrix. In this section I discuss a few of the standard contrast matrices that statisticians use and how you can use them in jamovi. If you’re planning to read the section on unbalanced ANOVA later on (Section 14.10), it’s worth reading this section carefully. If not, you can get away with skimming it, because the choice of contrasts doesn’t matter much for balanced designs.</p>
 <div id="treatment-contrasts" class="section level3" number="14.7.1">
 <h3>
@@ -1401,59 +1006,6 @@ Figure 14.23: Regression analysis with factors and contrasts in jamovi, includin
 <td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">1</td>
 </tr>
 </table></div>
-<div class="inline-table"><table style="width:33%;" class="table table-sm">
-<colgroup>
-<col width="11%">
-<col width="5%">
-<col width="5%">
-<col width="5%">
-<col width="5%">
-</colgroup>
-<tbody>
-<tr class="odd">
-<td>Level</td>
-<td>2</td>
-<td>3</td>
-<td>4</td>
-<td>5</td>
-</tr>
-<tr class="even">
-<td>1</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-</tr>
-<tr class="odd">
-<td>2</td>
-<td>1</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-</tr>
-<tr class="even">
-<td>3</td>
-<td>0</td>
-<td>1</td>
-<td>0</td>
-<td>0</td>
-</tr>
-<tr class="odd">
-<td>4</td>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-<td>0</td>
-</tr>
-<tr class="even">
-<td>5</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-</tr>
-</tbody>
-</table></div>
 <p>In this example, the first contrast is level 2 compared with level 1, the second contrast is level 3 compared with level 1, and so on. Notice that, by default, the <em>first</em> level of the factor is always treated as the baseline category (i.e., it’s the one that has all zeros and doesn’t have an explicit contrast associated with it). In jamovi you can change which category is the first level of the factor by manipulating the order of the levels of the variable shown in the ‘Data Variable’ window (double click on the name of the variable in the spreadsheet column to bring up the ‘Data Variable’ view.</p>
 </div>
 <div id="helmert-contrasts" class="section level3" number="14.7.2">
@@ -1504,52 +1056,6 @@ Figure 14.23: Regression analysis with factors and contrasts in jamovi, includin
 <td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">0</td>
 <td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">4</td>
 </tr>
-</table></div>
-<div class="inline-table"><table style="width:33%;" class="table table-sm">
-<colgroup>
-<col width="5%">
-<col width="6%">
-<col width="6%">
-<col width="6%">
-<col width="6%">
-</colgroup>
-<tbody>
-<tr class="odd">
-<td>1</td>
-<td>-1</td>
-<td>-1</td>
-<td>-1</td>
-<td>-1</td>
-</tr>
-<tr class="even">
-<td>2</td>
-<td>1</td>
-<td>-1</td>
-<td>-1</td>
-<td>-1</td>
-</tr>
-<tr class="odd">
-<td>3</td>
-<td>0</td>
-<td>2</td>
-<td>-1</td>
-<td>-1</td>
-</tr>
-<tr class="even">
-<td>4</td>
-<td>0</td>
-<td>0</td>
-<td>3</td>
-<td>-1</td>
-</tr>
-<tr class="odd">
-<td>5</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>4</td>
-</tr>
-</tbody>
 </table></div>
 <p>One useful thing about Helmert contrasts is that every contrast sums to zero (i.e., all the columns sum to zero). This has the consequence that, when we interpret the ANOVA as a regression, the intercept term corresponds to the grand mean <span class="math inline">\(\mu_{..}\)</span> if we are using Helmert contrasts. Compare this to treatment contrasts, in which the intercept term corresponds to the group mean for the baseline category. This property can be very useful in some situations. It doesn’t matter very much if you have a balanced design, which we’ve been assuming so far, but it will turn out to be important later when we consider unbalanced designs in Section 14.10. In fact, the main reason why I’ve even bothered to include this section is that contrasts become important if you want to understand unbalanced ANOVA.</p>
 </div>
@@ -1602,52 +1108,6 @@ Figure 14.23: Regression analysis with factors and contrasts in jamovi, includin
 <td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">1</td>
 </tr>
 </table></div>
-<div class="inline-table"><table style="width:33%;" class="table table-sm">
-<colgroup>
-<col width="5%">
-<col width="6%">
-<col width="6%">
-<col width="6%">
-<col width="6%">
-</colgroup>
-<tbody>
-<tr class="odd">
-<td>1</td>
-<td>-1</td>
-<td>-1</td>
-<td>-1</td>
-<td>-1</td>
-</tr>
-<tr class="even">
-<td>2</td>
-<td>1</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-</tr>
-<tr class="odd">
-<td>3</td>
-<td>0</td>
-<td>1</td>
-<td>0</td>
-<td>0</td>
-</tr>
-<tr class="even">
-<td>4</td>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-<td>0</td>
-</tr>
-<tr class="odd">
-<td>5</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-</tr>
-</tbody>
-</table></div>
 <p>Much like Helmert contrasts, we see that each column sums to zero, which means that the intercept term corresponds to the grand mean when ANOVA is treated as a regression model. When interpreting these contrasts, the thing to recognise is that each of these contrasts is a pairwise comparison between group 1 and one of the other four groups. Specifically, contrast 1 corresponds to a “group 2 minus group 1” comparison, contrast 2 corresponds to a “group 3 minus group 1” comparison, and so on.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;What’s the difference between treatment and simple contrasts, I hear you ask? Well, as a basic example consider a gender main effect, with &lt;span class="math inline"&gt;\(m=0\)&lt;/span&gt; and &lt;span class="math inline"&gt;\(f=1\)&lt;/span&gt;. The coefficient corresponding to the treatment contrast will measure the difference in mean between females and males, and the intercept would be the mean of the males. However, with a simple contrast, i.e., &lt;span class="math inline"&gt;\(m=-1\)&lt;/span&gt; and &lt;span class="math inline"&gt;\(f=1\)&lt;/span&gt;, the intercept is the average of the means and the main effect is the difference of each group mean from the intercept.&lt;/p&gt;'><sup>166</sup></a></p>
 </div>
 <div id="optional-contrasts-in-jamovi" class="section level3" number="14.7.4">
@@ -1688,42 +1148,6 @@ Figure 14.23: Regression analysis with factors and contrasts in jamovi, includin
 <td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: normal;">Polynomial</td>
 <td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">Compares the linear effect and quadratic effect. The first<br>degree of freedom contains the linear effect across all categories; the second degree of freedom, the quadratic effect.<br>These contrasts are often used to estimate polynomial trends</td>
 </tr>
-</table></div>
-<div class="inline-table"><table class="table table-sm">
-<colgroup>
-<col width="4%">
-<col width="95%">
-</colgroup>
-<tbody>
-<tr class="odd">
-<td>Contrast type</td>
-<td> </td>
-</tr>
-<tr class="even">
-<td>Deviation</td>
-<td>Compares the mean of each level (except a reference category) to the mean of all of the levels (grand mean)</td>
-</tr>
-<tr class="odd">
-<td>Simple</td>
-<td>Like the treatment contrasts, the simple contrast compares the mean of each level to the mean of a specified level. This type of contrast is useful when there is a control group. By default the first category is the reference. However, with a simple contrast the intercept is the grand mean of all the levels of the factors.</td>
-</tr>
-<tr class="even">
-<td>Difference</td>
-<td>Compares the mean of each level (except the first) to the mean of previous levels. (Sometimes called reverse Helmert contrasts)</td>
-</tr>
-<tr class="odd">
-<td>Helmert</td>
-<td>Compares the mean of each level of the factor (except the last) to the mean of subsequent levels</td>
-</tr>
-<tr class="even">
-<td>Repeated</td>
-<td>Compares the mean of each level (except the last) to the mean of the subsequent level</td>
-</tr>
-<tr class="odd">
-<td>Polynomial</td>
-<td>Compares the linear effect and quadratic effect. The first degree of freedom contains the linear effect across all categories; the second degree of freedom, the quadratic effect. These contrasts are often used to estimate polynomial trends</td>
-</tr>
-</tbody>
 </table></div>
 </div>
 </div>
@@ -1815,22 +1239,6 @@ Figure 14.26: The coffee.csv data set in jamovi, with descriptive information ag
 <td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">\(babble \sim  sugar\)</td>
 </tr>
 </table></div>
-<div class="inline-table"><table style="width:67%;" class="table table-sm">
-<colgroup>
-<col width="29%">
-<col width="37%">
-</colgroup>
-<tbody>
-<tr class="odd">
-<td>Null model:</td>
-<td><span class="math inline">\(babble \\sim 1\)</span></td>
-</tr>
-<tr class="even">
-<td>Alternative model:</td>
-<td><span class="math inline">\(babble \\sim sugar\)</span></td>
-</tr>
-</tbody>
-</table></div>
 <p>This comparison forms our hypothesis test of the main effect of sugar. The next step in our model building exercise is to add the other main effect term, so the next model in our sequence is babble ~ sugar + milk. The second hypothesis test is then formed by comparing the following pair of models (Table <a href="factorial-anova.html#tab:tab14-17">14.17</a>).</p>
 <div class="inline-table"><table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 101%; margin-left: auto; margin-right: auto;  " id="tab:tab14-17">
 <caption style="caption-side: bottom; text-align: left;">
@@ -1846,22 +1254,6 @@ Figure 14.26: The coffee.csv data set in jamovi, with descriptive information ag
 <td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">\(babble \sim  sugar + milk\)</td>
 </tr>
 </table></div>
-<div class="inline-table"><table style="width:76%;" class="table table-sm">
-<colgroup>
-<col width="29%">
-<col width="47%">
-</colgroup>
-<tbody>
-<tr class="odd">
-<td>Null model:</td>
-<td><span class="math inline">\(babble \\sim sugar\)</span></td>
-</tr>
-<tr class="even">
-<td>Alternative model:</td>
-<td><span class="math inline">\(babble \\sim sugar + milk\)</span></td>
-</tr>
-</tbody>
-</table></div>
 <p>This comparison forms our hypothesis test of the main effect of milk. In one sense, this approach is very elegant: the alternative hypothesis from the first test forms the null hypothesis for the second one. It is in this sense that the Type I method is strictly sequential. Every test builds directly on the results of the last one. However, in another sense it’s very inelegant, because there’s a strong asymmetry between the two tests. The test of the main effect of sugar (the first test) completely ignores milk, whereas the test of the main effect of milk (the second test) does take sugar into account. In any case, the fourth model in our sequence is now the full model, babble ~ sugar + milk + sugar <span class="math inline">\(\times\)</span> milk, and the corresponding hypothesis test is shown in Table <a href="factorial-anova.html#tab:tab14-18">14.18</a>.</p>
 <div class="inline-table"><table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 101%; margin-left: auto; margin-right: auto;  " id="tab:tab14-18">
 <caption style="caption-side: bottom; text-align: left;">
@@ -1876,22 +1268,6 @@ Figure 14.26: The coffee.csv data set in jamovi, with descriptive information ag
 <td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">Alternative model:</td>
 <td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">\(babble \sim  sugar + milk + sugar * milk \)</td>
 </tr>
-</table></div>
-<div class="inline-table"><table class="table table-sm">
-<colgroup>
-<col width="29%">
-<col width="70%">
-</colgroup>
-<tbody>
-<tr class="odd">
-<td>Null model:</td>
-<td><span class="math inline">\(babble \\sim sugar + milk\)</span></td>
-</tr>
-<tr class="even">
-<td>Alternative model:</td>
-<td>$babble \sim sugar + milk + sugar * milk $</td>
-</tr>
-</tbody>
 </table></div>
 <p>Type III sum of squares is the default hypothesis testing method used by jamovi ANOVA, so to run a Type I sum of squares analysis we have to select ‘Type 1’ in the ‘Sum of squares’ selection box in the jamovi ‘ANOVA’ - ‘Model’ options. This gives us the ANOVA table shown in Figure <a href="factorial-anova.html#fig:fig14-27">14.27</a>.</p>
 <div class="figure">
@@ -1930,22 +1306,6 @@ Figure 14.28: ANOVA results table using Type I sum of squares in jamovi, but wit
 <td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">\(babble \sim  sugar + milk +sugar * milk \)</td>
 </tr>
 </table></div>
-<div class="inline-table"><table style="width:99%;" class="table table-sm">
-<colgroup>
-<col width="29%">
-<col width="69%">
-</colgroup>
-<tbody>
-<tr class="odd">
-<td>Null model:</td>
-<td><span class="math inline">\(babble \\sim milk + sugar \* milk\)</span></td>
-</tr>
-<tr class="even">
-<td>Alternative model:</td>
-<td>$babble \sim sugar + milk +sugar * milk $</td>
-</tr>
-</tbody>
-</table></div>
 <p>Similarly the main effect of milk is evaluated by testing the full model against a null model that removes the milk term, like in Table <a href="factorial-anova.html#tab:tab14-20">14.20</a>.</p>
 <div class="inline-table"><table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 101%; margin-left: auto; margin-right: auto;  " id="tab:tab14-20">
 <caption style="caption-side: bottom; text-align: left;">
@@ -1961,22 +1321,6 @@ Figure 14.28: ANOVA results table using Type I sum of squares in jamovi, but wit
 <td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">\(babble \sim  sugar + milk +sugar * milk \)</td>
 </tr>
 </table></div>
-<div class="inline-table"><table style="width:99%;" class="table table-sm">
-<colgroup>
-<col width="29%">
-<col width="69%">
-</colgroup>
-<tbody>
-<tr class="odd">
-<td>Null model:</td>
-<td><span class="math inline">\(babble \\sim sugar + sugar \* milk\)</span></td>
-</tr>
-<tr class="even">
-<td>Alternative model:</td>
-<td>$babble \sim sugar + milk +sugar * milk $</td>
-</tr>
-</tbody>
-</table></div>
 <p>Finally, the interaction term sugar <span class="math inline">\(\times\)</span> milk is evaluated in exactly the same way. Once again, we test the full model against a null model that removes the sugar <span class="math inline">\(\times\)</span> milk interaction term, like in Table Table <a href="factorial-anova.html#tab:tab14-21">14.21</a>.</p>
 <div class="inline-table"><table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 101%; margin-left: auto; margin-right: auto;  " id="tab:tab14-21">
 <caption style="caption-side: bottom; text-align: left;">
@@ -1991,22 +1335,6 @@ Figure 14.28: ANOVA results table using Type I sum of squares in jamovi, but wit
 <td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">Alternative model:</td>
 <td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">\(babble \sim  sugar + milk +sugar * milk \)</td>
 </tr>
-</table></div>
-<div class="inline-table"><table style="width:99%;" class="table table-sm">
-<colgroup>
-<col width="29%">
-<col width="69%">
-</colgroup>
-<tbody>
-<tr class="odd">
-<td>Null model:</td>
-<td><span class="math inline">\(babble \\sim sugar + milk\)</span></td>
-</tr>
-<tr class="even">
-<td>Alternative model:</td>
-<td>$babble \sim sugar + milk +sugar * milk $</td>
-</tr>
-</tbody>
 </table></div>
 <p>The basic idea generalises to higher order ANOVAs. For instance, suppose that we were trying to run an ANOVA with three factors, A, B and C, and we wanted to consider all possible main effects and all possible interactions, including the three way interaction A <span class="math inline">\(\times\)</span> B <span class="math inline">\(\times\)</span> C. (Table <a href="factorial-anova.html#tab:tab14-22">14.22</a> shows you what the Type III tests look like for this situation.</p>
 <div class="inline-table"><table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 101%; margin-left: auto; margin-right: auto;  " id="tab:tab14-22">
@@ -2056,69 +1384,6 @@ Figure 14.28: ANOVA results table using Type I sum of squares in jamovi, but wit
 <td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">\(A + B + C + A*B + A*C + B*C + A*B*C \)</td>
 </tr>
 </table></div>
-<div class="inline-table"><table class="table table-sm">
-<colgroup>
-<col width="19%">
-<col width="38%">
-<col width="42%">
-</colgroup>
-<tbody>
-<tr class="odd">
-<td>Term being tested is</td>
-<td>Null model is outcome ~ ...</td>
-<td>Alternative model is outcome ~ ...</td>
-</tr>
-<tr class="even">
-<td>A</td>
-<td>$B + C + A*B + A*C + B*C + A*B*C $ | $A</td>
-<td><ul>
-<li>B + C + A*B + A*C + B*C + A*B*C $</li>
-</ul></td>
-</tr>
-<tr class="odd">
-<td>B</td>
-<td>$A + C + A*B + A*C + B*C + A*B*C $ | $A</td>
-<td><ul>
-<li>B + C + A*B + A*C + B*C + A*B*C$</li>
-</ul></td>
-</tr>
-<tr class="even">
-<td>C</td>
-<td>$A + B + A*B + A*C + B*C + A*B*C $ | $A</td>
-<td><ul>
-<li>B + C + A*B + A*C + B*C + A*B*C $</li>
-</ul></td>
-</tr>
-<tr class="odd">
-<td>A*B</td>
-<td>$A + B + C + A*C + B*C + A*B*C $ | $A</td>
-<td><ul>
-<li>B + C + A*B + A*C + B*C + A*B*C $</li>
-</ul></td>
-</tr>
-<tr class="even">
-<td>A*C</td>
-<td>$A + B + C + A*B + B*C + A*B*C $ | $A</td>
-<td><ul>
-<li>B + C + A*B + A*C + B*C + A*B*C $</li>
-</ul></td>
-</tr>
-<tr class="odd">
-<td>B*C</td>
-<td>$A + B + C + A*B + A*C + A*B*C $ | $A</td>
-<td><ul>
-<li>B + C + A*B + A*C + B*C + A*B*C $</li>
-</ul></td>
-</tr>
-<tr class="even">
-<td>A*B*C</td>
-<td>$A + B + C + A*B + A*C + B*C $ | $A</td>
-<td><ul>
-<li>B + C + A*B + A*C + B*C + A*B*C $</li>
-</ul></td>
-</tr>
-</tbody>
-</table></div>
 <p>As ugly as that table looks, it’s pretty simple. In all cases, the alternative hypothesis corresponds to the full model which contains three main effect terms (e.g. A), three two-way interactions (e.g. A*B) and one three-way interaction (i.e., A*B*C)). The null model always contains 6 of these 7 terms, and the missing one is the one whose significance we’re trying to test.</p>
 <p>At first pass, Type III tests seem like a nice idea. Firstly, we’ve removed the asymmetry that caused us to have problems when running Type I tests. And because we’re now treating all terms the same way, the results of the hypothesis tests do not depend on the order in which we specify them. This is definitely a good thing. However, there is a big problem when interpreting the results of the tests, especially for main effect terms. Consider the coffee data. Suppose it turns out that the main effect of milk is not significant according to the Type III tests. What this is telling us is that babble ~ sugar + sugar*milk is a better model for the data than the full model. But what does that even mean? If the interaction term sugar*milk was also non significant, we’d be tempted to conclude that the data are telling us that the only thing that matters is sugar. But suppose we have a significant interaction term, but a non-significant main effect of milk. In this case, are we to assume that there really is an “effect of sugar”, an “interaction between milk and sugar”, but no “effect of milk”? That seems crazy. The right answer simply must be that it’s meaningless<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Or, at the very least, rarely of interest.&lt;/p&gt;"><sup>170</sup></a> to talk about the main effect if the interaction is significant. In general, this seems to be what most statisticians advise us to do, and I think that’s the right advice. But if it really is meaningless to talk about non-significant main effects in the presence of a significant interaction, then it’s not at all obvious why Type III tests should allow the null hypothesis to rely on a model that includes the interaction but omits one of the main effects that make it up. When characterised in this fashion, the null hypotheses really don’t make much sense at all.</p>
 <p>Later on, we’ll see that Type III tests can be redeemed in some contexts, but first let’s take a look at the ANOVA results table using Type III sum of squares, see Figure <strong>14.29</strong>.</p>
@@ -2149,22 +1414,6 @@ Figure 14.28: ANOVA results table using Type I sum of squares in jamovi, but wit
 <td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">\(outcome \sim A + B + C + A*B + A*C + B*C + A*B*C\)</td>
 </tr>
 </table></div>
-<div class="inline-table"><table class="table table-sm">
-<colgroup>
-<col width="25%">
-<col width="75%">
-</colgroup>
-<tbody>
-<tr class="odd">
-<td>Null model:</td>
-<td><span class="math inline">\(outcome \\sim B + C + A\*B + A\*C + B\*C + A\*B\*C\)</span></td>
-</tr>
-<tr class="even">
-<td>Alternative model:</td>
-<td><span class="math inline">\(outcome \\sim A + B + C + A\*B + A\*C + B\*C + A\*B\*C\)</span></td>
-</tr>
-</tbody>
-</table></div>
 <p>Notice that the null hypothesis omits A, but includes A <span class="math inline">\(\times\)</span> B, A <span class="math inline">\(\times\)</span> C and A <span class="math inline">\(\times\)</span> B <span class="math inline">\(\times\)</span> C as part of the model. This, according to the Type II tests, is not a good choice of null hypothesis. What we should do instead, if we want to test the null hypothesis that A is not relevant to our outcome, is to specify the null hypothesis that is the most complicated model that does not rely on A in any form, even as an interaction. The alternative hypothesis corresponds to this null model plus a main effect term of A. This is a lot closer to what most people would intuitively think of as a “main effect of A”, and it yields the following as our Type II test of the main effect of A (Table <a href="factorial-anova.html#tab:tab14-24">14.24</a>). <a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;Note, of course, that this does depend on the model that the user specified. If the original ANOVA model doesn’t contain an interaction term for &lt;span class="math inline"&gt;\(B \times C\)&lt;/span&gt;, then obviously it won’t appear in either the null or the alternative. But that’s true for Types I, II and III. They never include any terms that you didn’t include, but they make different choices about how to construct tests for the ones that you did include.&lt;/p&gt;'><sup>172</sup></a></p>
 <div class="inline-table"><table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 101%; margin-left: auto; margin-right: auto;  " id="tab:tab14-24">
 <caption style="caption-side: bottom; text-align: left;">
@@ -2179,22 +1428,6 @@ Figure 14.28: ANOVA results table using Type I sum of squares in jamovi, but wit
 <td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">Alternative model:</td>
 <td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">\(outcome \sim A + B + C + B*C\)</td>
 </tr>
-</table></div>
-<div class="inline-table"><table style="width:83%;" class="table table-sm">
-<colgroup>
-<col width="29%">
-<col width="54%">
-</colgroup>
-<tbody>
-<tr class="odd">
-<td>Null model:</td>
-<td><span class="math inline">\(outcome \\sim B + C + B\*C\)</span></td>
-</tr>
-<tr class="even">
-<td>Alternative model:</td>
-<td><span class="math inline">\(outcome \\sim A + B + C + B\*C\)</span></td>
-</tr>
-</tbody>
 </table></div>
 <p>Anyway, just to give you a sense of how the Type II tests play out, here’s the full table (Table <a href="factorial-anova.html#tab:tab14-25">14.25</a>) of tests that would be applied in a three-way factorial ANOVA:</p>
 <div class="inline-table"><table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 101%; margin-left: auto; margin-right: auto;  " id="tab:tab14-25">
@@ -2244,69 +1477,6 @@ Figure 14.28: ANOVA results table using Type I sum of squares in jamovi, but wit
 <td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">\(A + B + C + A*B + A*C + B*C + A*B*C \)</td>
 </tr>
 </table></div>
-<div class="inline-table"><table class="table table-sm">
-<colgroup>
-<col width="20%">
-<col width="35%">
-<col width="44%">
-</colgroup>
-<tbody>
-<tr class="odd">
-<td>Term being tested is</td>
-<td>Null model is outcome ~ ...</td>
-<td>Alternative model is outcome ~ ...</td>
-</tr>
-<tr class="even">
-<td>A</td>
-<td>$B + C + B*C $ | $A</td>
-<td><ul>
-<li>B + C + B*C $</li>
-</ul></td>
-</tr>
-<tr class="odd">
-<td>B</td>
-<td>$A + C + A*C $ | $A</td>
-<td><ul>
-<li>B + C + A*C$</li>
-</ul></td>
-</tr>
-<tr class="even">
-<td>C</td>
-<td>$A + B + A*B $ | $A</td>
-<td><ul>
-<li>B + C + A*B$</li>
-</ul></td>
-</tr>
-<tr class="odd">
-<td>A*B</td>
-<td>$A + B + C + A*C + B*C $ | $A</td>
-<td><ul>
-<li>B + C + A*B + A*C + B*C $</li>
-</ul></td>
-</tr>
-<tr class="even">
-<td>A*C</td>
-<td>$A + B + C + A*B + B*C $ | $A</td>
-<td><ul>
-<li>B + C + A*B + A*C + B*C $</li>
-</ul></td>
-</tr>
-<tr class="odd">
-<td>B*C</td>
-<td>$A + B + C + A*B + A*C $ | $A</td>
-<td><ul>
-<li>B + C + A*B + A*C + B*C $</li>
-</ul></td>
-</tr>
-<tr class="even">
-<td>A*B*C</td>
-<td>$A + B + C + A*B + A*C + B*C $ | $A</td>
-<td><ul>
-<li>B + C + A*B + A*C + B*C + A*B*C $</li>
-</ul></td>
-</tr>
-</tbody>
-</table></div>
 <p>In the context of the two way ANOVA that we’ve been using in the coffee data, the hypothesis tests are even simpler. The main effect of sugar corresponds to an F-test comparing these two models (Table <a href="factorial-anova.html#tab:tab14-26">14.26</a>).</p>
 <div class="inline-table"><table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 101%; margin-left: auto; margin-right: auto;  " id="tab:tab14-26">
 <caption style="caption-side: bottom; text-align: left;">
@@ -2321,22 +1491,6 @@ Figure 14.28: ANOVA results table using Type I sum of squares in jamovi, but wit
 <td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">Alternative model:</td>
 <td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">\(babble \sim sugar + milk\)</td>
 </tr>
-</table></div>
-<div class="inline-table"><table style="width:76%;" class="table table-sm">
-<colgroup>
-<col width="29%">
-<col width="47%">
-</colgroup>
-<tbody>
-<tr class="odd">
-<td>Null model:</td>
-<td>$babble \sim milk $</td>
-</tr>
-<tr class="even">
-<td>Alternative model:</td>
-<td><span class="math inline">\(babble \\sim sugar + milk\)</span></td>
-</tr>
-</tbody>
 </table></div>
 <p>The test for the main effect of milk is in Table <a href="factorial-anova.html#tab:tab14-27">14.27</a>.</p>
 <div class="inline-table"><table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 101%; margin-left: auto; margin-right: auto;  " id="tab:tab14-27">
@@ -2353,22 +1507,6 @@ Figure 14.28: ANOVA results table using Type I sum of squares in jamovi, but wit
 <td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">\(babble \sim sugar + milk\)</td>
 </tr>
 </table></div>
-<div class="inline-table"><table style="width:76%;" class="table table-sm">
-<colgroup>
-<col width="29%">
-<col width="47%">
-</colgroup>
-<tbody>
-<tr class="odd">
-<td>Null model:</td>
-<td>$babble \sim sugar $</td>
-</tr>
-<tr class="even">
-<td>Alternative model:</td>
-<td><span class="math inline">\(babble \\sim sugar + milk\)</span></td>
-</tr>
-</tbody>
-</table></div>
 <p>Finally, the test for the interaction sugar <span class="math inline">\(\times\)</span> milk is in Table <a href="factorial-anova.html#tab:tab14-28">14.28</a>.</p>
 <div class="inline-table"><table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 101%; margin-left: auto; margin-right: auto;  " id="tab:tab14-28">
 <caption style="caption-side: bottom; text-align: left;">
@@ -2383,22 +1521,6 @@ Figure 14.28: ANOVA results table using Type I sum of squares in jamovi, but wit
 <td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">Alternative model:</td>
 <td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">\(babble \sim sugar + milk  + sugar*milk \)</td>
 </tr>
-</table></div>
-<div class="inline-table"><table style="width:97%;" class="table table-sm">
-<colgroup>
-<col width="29%">
-<col width="68%">
-</colgroup>
-<tbody>
-<tr class="odd">
-<td>Null model:</td>
-<td>$babble \sim sugar + milk $</td>
-</tr>
-<tr class="even">
-<td>Alternative model:</td>
-<td>$babble \sim sugar + milk + sugar*milk $</td>
-</tr>
-</tbody>
 </table></div>
 <p>Running the tests are again straightforward. Just select ‘Type 2’ in the ‘Sum of squares’ selection box in the jamovi ‘ANOVA’ - ‘Model’ options, This gives us the ANOVA table shown in Figure <strong>14.30</strong>.</p>
 <div class="figure">
@@ -2438,30 +1560,6 @@ Figure 14.29: ANOVA results table using Type II sum of squares in jamovi
 <td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">100</td>
 </tr>
 </table></div>
-<div class="inline-table"><table style="width:42%;" class="table table-sm">
-<colgroup>
-<col width="13%">
-<col width="12%">
-<col width="15%">
-</colgroup>
-<tbody>
-<tr class="odd">
-<td> </td>
-<td>sugar</td>
-<td>no sugar</td>
-</tr>
-<tr class="even">
-<td>milk</td>
-<td>100</td>
-<td>0</td>
-</tr>
-<tr class="odd">
-<td>no milk</td>
-<td>0</td>
-<td>100</td>
-</tr>
-</tbody>
-</table></div>
 <p>Here we have a spectacularly unbalanced design: 100 people have milk and sugar, 100 people have no milk and no sugar, and that’s all. There are 0 people with milk and no sugar, and 0 people with sugar but no milk. Now suppose that, when we collected the data, it turned out there is a large (and statistically significant) difference between the “milk and sugar” group and the “no-milk and no-sugar” group. Is this a main effect of sugar? A main effect of milk? Or an interaction? It’s impossible to tell, because the presence of sugar has a perfect association with the presence of milk. Now suppose the design had been a little more balanced (Table <a href="factorial-anova.html#tab:tab14-30">14.30</a>.</p>
 <div class="inline-table"><table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 101%; margin-left: auto; margin-right: auto;  " id="tab:tab14-30">
 <caption style="caption-side: bottom; text-align: left;">
@@ -2484,30 +1582,6 @@ Figure 14.29: ANOVA results table using Type II sum of squares in jamovi
 <td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">5</td>
 <td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">100</td>
 </tr>
-</table></div>
-<div class="inline-table"><table style="width:42%;" class="table table-sm">
-<colgroup>
-<col width="13%">
-<col width="12%">
-<col width="15%">
-</colgroup>
-<tbody>
-<tr class="odd">
-<td> </td>
-<td>sugar</td>
-<td>no sugar</td>
-</tr>
-<tr class="even">
-<td>milk</td>
-<td>100</td>
-<td>5</td>
-</tr>
-<tr class="odd">
-<td>no milk</td>
-<td>5</td>
-<td>100</td>
-</tr>
-</tbody>
 </table></div>
 <p>This time around, it’s technically possible to distinguish between the effect of milk and the effect of sugar, because we have a few people that have one but not the other. However, it will still be pretty difficult to do so, because the association between sugar and milk is still extremely strong, and there are so few observations in two of the groups. Again, we’re very likely to be in the situation where we <em>know</em> that the predictor variables (milk and sugar) are related to the outcome (babbling), but we don’t know if the nature of that relationship is a main effect of one or the other predictor, or the interaction.</p>
 <p>This uncertainty is the reason for the missing variance. The “missing” variance corresponds to variation in the outcome variable that is clearly attributable to the predictors, but we don’t know which of the effects in the model is responsible. When you calculate Type I sum of squares, no variance ever goes missing. The sequential nature of Type I sum of squares means that the ANOVA automatically attributes this variance to whichever effects are entered first. However, the Type II and Type III tests are more conservative. Variance that cannot be clearly attributed to a specific effect doesn’t get attributed to any of them, and it goes missing.</p>
@@ -2613,7 +1687,7 @@ Figure 14.29: ANOVA results table using Type II sum of squares in jamovi
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong><span style="font-family:Garamond;font-weight:700;">learning statistics with jamovi</span></strong>" was written by Danielle J. Navarro &amp; David R. Foxcroft. It was last built on 17 June 2022 (version 0.75).</p>
+    <p>"<strong><span style="font-family:Garamond;font-weight:700;">learning statistics with jamovi</span></strong>" was written by Danielle J. Navarro &amp; David R. Foxcroft. It was last built on 18 June 2022 (version 0.75).</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
