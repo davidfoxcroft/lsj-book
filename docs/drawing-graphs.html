@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 5 Drawing graphs | learning statistics with jamovi</title>
+<meta name="author" content="Danielle J. Navarro &amp; David R. Foxcroft">
+<meta name="description" content="Above all else show the data. - Edward Tufte33 Visualising data is one of the most important tasks facing the data analyst. It’s important for two distinct but closely related reasons. Firstly,...">
+<meta name="generator" content="bookdown 0.26 with bs4_book()">
+<meta property="og:title" content="Chapter 5 Drawing graphs | learning statistics with jamovi">
+<meta property="og:type" content="book">
+<meta property="og:image" content="/images/bookcover_logo.png">
+<meta property="og:description" content="Above all else show the data. - Edward Tufte33 Visualising data is one of the most important tasks facing the data analyst. It’s important for two distinct but closely related reasons. Firstly,...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 5 Drawing graphs | learning statistics with jamovi">
+<meta name="twitter:description" content="Above all else show the data. - Edward Tufte33 Visualising data is one of the most important tasks facing the data analyst. It’s important for two distinct but closely related reasons. Firstly,...">
+<meta name="twitter:image" content="/images/bookcover_logo.png">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><style>
+    .enlarge-image {
+        transition: transform .2s ease-out;
+        cursor: pointer;
+    }
+
+    .enlarge-image:hover {
+        transform: scale(2.0);
+        display: block;
+        background: black;
+        position:relative;
+        float:left;
+        z-index:999;
+    }
+    </style>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script type="text/x-mathjax-config"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title=""><span style="font-family:Garamond;font-weight:700;">learning statistics with jamovi</span></a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"></a></li>
+<li><a class="" href="preface.html">Preface</a></li>
+<li><a class="" href="why-do-we-learn-statistics.html"><span class="header-section-number">1</span> Why do we learn statistics</a></li>
+<li><a class="" href="a-brief-introduction-to-research-design.html"><span class="header-section-number">2</span> A brief introduction to research design</a></li>
+<li><a class="" href="getting-started-with-jamovi.html"><span class="header-section-number">3</span> Getting started with jamovi</a></li>
+<li><a class="" href="descriptive-statistics.html"><span class="header-section-number">4</span> Descriptive statistics</a></li>
+<li><a class="active" href="drawing-graphs.html"><span class="header-section-number">5</span> Drawing graphs</a></li>
+<li><a class="" href="pragmatic-matters.html"><span class="header-section-number">6</span> Pragmatic matters</a></li>
+<li><a class="" href="prelude-to-part-iv.html">Prelude to Part IV</a></li>
+<li><a class="" href="introduction-to-probability.html"><span class="header-section-number">7</span> Introduction to probability</a></li>
+<li><a class="" href="estimating-unkown-quantities-from-a-sample.html"><span class="header-section-number">8</span> Estimating unkown quantities from a sample</a></li>
+<li><a class="" href="hypothesis-testing.html"><span class="header-section-number">9</span> Hypothesis testing</a></li>
+<li><a class="" href="categorical-data-analysis.html"><span class="header-section-number">10</span> Categorical data analysis</a></li>
+<li><a class="" href="comparing-two-means.html"><span class="header-section-number">11</span> Comparing two means</a></li>
+<li><a class="" href="correlation-and-linear-regression.html"><span class="header-section-number">12</span> Correlation and linear regression</a></li>
+<li><a class="" href="comparing-several-means-one-way-anova.html"><span class="header-section-number">13</span> Comparing several means (one-way ANOVA)</a></li>
+<li><a class="" href="factorial-anova.html"><span class="header-section-number">14</span> Factorial ANOVA</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="drawing-graphs" class="section level1" number="5">
+<h1>
+<span class="header-section-number">5</span> Drawing graphs<a class="anchor" aria-label="anchor" href="#drawing-graphs"><i class="fas fa-link"></i></a>
+</h1>
+<blockquote>
+<p><em>Above all else show the data.</em><br>
+- Edward Tufte<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;The origin of this quote is Tufte’s lovely book &lt;em&gt;The Visual
+Display of Quantitative Information.&lt;/em&gt;&lt;/p&gt;"><sup>33</sup></a></p>
+</blockquote>
+<p>Visualising data is one of the most important tasks facing the data
+analyst. It’s important for two distinct but closely related reasons.
+Firstly, there’s the matter of drawing “presentation graphics”,
+displaying your data in a clean, visually appealing fashion makes it
+easier for your reader to understand what you’re trying to tell them.
+Equally important, perhaps even more important, is the fact that drawing
+graphs helps you to understand the data. To that end, it’s important to
+draw “exploratory graphics” that help you learn about the data as you go
+about analysing it. These points might seem pretty obvious but I cannot
+count the number of times I’ve seen people forget them.</p>
+<p>To give a sense of the importance of this chapter, I want to start with
+a classic illustration of just how powerful a good graph can be. To that
+end, Figure <a href="drawing-graphs.html#fig:fig5-1">5.1</a> shows a redrawing of one of the most famous data
+visualisations of all time. This is John Snow’s 1854 map of cholera
+deaths. The map is elegant in its simplicity. In the background we have
+a street map which helps orient the viewer. Over the top we see a large
+number of small dots, each one representing the location of a cholera
+case. The larger symbols show the location of water pumps, labelled by
+name. Even the most casual inspection of the graph makes it very clear
+that the source of the outbreak is almost certainly the Broad Street
+pump. Upon viewing this graph Dr Snow arranged to have the handle
+removed from the pump and ended the outbreak that had killed over 500
+people. Such is the power of a good data visualisation.</p>
+<p>The goals in this chapter are twofold. First, to discuss several fairly
+standard graphs that we use a lot when analysing and presenting data,
+and second to show you how to create these graphs in jamovi. The graphs
+themselves tend to be pretty straightforward, so in one respect this
+chapter is pretty simple. Where people usually struggle is learning how
+to produce graphs, and especially learning how to produce good graphs.
+Fortunately, learning how to draw graphs in jamovi is reasonably simple
+as long as you’re not too picky about what your graph looks like. What I
+mean when I say this is that jamovi has a lot of very good default
+graphs, or plots, that most of the time produce a clean, high-quality
+graphic. However, on those occasions when you do want to do something
+non-standard, or if you need to make highly specific changes to the
+figure, then the graphics functionality in jamovi is not yet capable of
+supporting advanced work or detail editing.</p>
+<div class="figure">
+<span style="display:block;" id="fig:fig5-1"></span>
+<img src="images/Figure22.PNG" alt="A stylised redrawing of John Snow’s original cholera map. Each small dot represents the location of a cholera case and each large circle shows the location of a well. As the plot makes clear, the cholera outbreak is centred very closely on the Broad St pump" width="90%"><p class="caption">
+Figure 5.1: A stylised redrawing of John Snow’s original cholera map. Each small dot represents the location of a cholera case and each large circle shows the location of a well. As the plot makes clear, the cholera outbreak is centred very closely on the Broad St pump
+</p>
+</div>
+<div id="histograms" class="section level2" number="5.1">
+<h2>
+<span class="header-section-number">5.1</span> Histograms<a class="anchor" aria-label="anchor" href="#histograms"><i class="fas fa-link"></i></a>
+</h2>
+<p>Let’s begin with the humble <strong>histogram</strong>. Histograms are one of the
+simplest and most useful ways of visualising data. They make most sense
+when you have an interval or ratio scale variable (e.g., the afl.margins
+data from the <a href="descriptive-statistics.html#descriptive-statistics">Descriptive statistics</a> chapter and what you want to do is get an overall
+impression of the variable. Most of you probably know how histograms
+work, since they’re so widely used, but for the sake of completeness
+I’ll describe them. All you do is divide up the possible values into
+<strong>bins</strong> and then count the number of observations that fall within each
+bin. This count is referred to as the frequency or density of the bin
+and is displayed as a vertical bar. Ihe AFL winning margins data there
+are 33 games in which the winning margin was less than 10 points and it
+is this fact that is represented by the height of the leftmost bar that
+we showed earlier in the <a href="descriptive-statistics.html#descriptive-statistics">Descriptive statistics</a> chapter, Figure <a href="descriptive-statistics.html#fig:fig4-2">4.2</a>. With these earlier
+graphs we used an advanced plotting package in R which, for now, is
+beyond the capability of jamovi. But jamovi gets us close, and drawing
+this histogram in jamovi is pretty straightforward. Open up the ‘plots’
+options under ‘Exploration’ - ‘Descriptives’ and click the ‘histogram’
+check box, as in Figure <a href="drawing-graphs.html#fig:fig5-1">5.1</a>. jamovi defaults to labelling the y-axis
+as ‘density’ and the x-axis with the variable name. The <strong>bins</strong> are
+selected automatically, and there is no scale, or count, information on
+the y-axis unlike the previous Figure <a href="descriptive-statistics.html#fig:fig4-2">4.2</a>. But this does not matter
+too much because after all what we are really interested in is our
+impression of the shape of the distribution: is it normally distributed
+or is there a skew or kurtosis? Our first impressions of these
+characteristics come from drawing a <strong>histogram</strong>.</p>
+<div class="figure">
+<span style="display:block;" id="fig:fig5-2"></span>
+<img src="images/Figure23.PNG" alt="jamovi screen showing the histogram check box" width="90%"><p class="caption">
+Figure 5.2: jamovi screen showing the histogram check box
+</p>
+</div>
+<p>One additional feature that jamovi provides is the ability to plot a
+‘Density’ curve. You can do this by clicking the ‘Density’ check box
+under the ‘Plots’ options (and unchecking ‘Histogram’), and this gives
+us the plot shown in Figure <a href="drawing-graphs.html#fig:fig5-3">5.3</a>. A density plot visualises the
+distribution of data over a continuous interval or time period. This
+chart is a variation of a histogram that uses <strong>kernel smoothing</strong> to
+plot values, allowing for smoother distributions by smoothing out the
+noise. The peaks of a density plot help display where values are
+concentrated over the interval. An advantage density plots have over
+histograms is that they are better at determining the distribution shape
+because they’re not affected by the number of bins used (each bar used
+in a typical histogram). A histogram comprising of only 4 bins wouldn’t
+produce a distinguishable enough shape of distribution as a 20-bin
+histogram would. However, with density plots, this isn’t an issue.</p>
+<div class="figure">
+<span style="display:block;" id="fig:fig5-3"></span>
+<img src="images/Figure24.PNG" alt="A density plot of the afl.margins variable plotted in jamovi" width="90%"><p class="caption">
+Figure 5.3: A density plot of the afl.margins variable plotted in jamovi
+</p>
+</div>
+<p>Although this image would need a lot of cleaning up in order to make a
+good presentation graphic (i.e., one you’d include in a report), it
+nevertheless does a pretty good job of describing the data. In fact, the
+big strength of a histogram or density plot is that (properly used) it
+does show the entire spread of the data, so you can get a pretty good
+sense about what it looks like. The downside to histograms is that they
+aren’t very compact. Unlike some of the other plots I’ll talk about it’s
+hard to cram 20-30 histograms into a single image without overwhelming
+the viewer. And of course, if your data are nominal scale then
+histograms are useless.</p>
+</div>
+<div id="boxplots" class="section level2" number="5.2">
+<h2>
+<span class="header-section-number">5.2</span> Boxplots<a class="anchor" aria-label="anchor" href="#boxplots"><i class="fas fa-link"></i></a>
+</h2>
+<p>Another alternative to histograms is a <strong>boxplot</strong>, sometimes called a
+“box and whiskers” plot. Like histograms they’re most suited to interval
+or ratio scale data. The idea behind a boxplot is to provide a simple
+visual depiction of the median, the interquartile range, and the range
+of the data. And because they do so in a fairly compact way boxplots
+have become a very popular statistical graphic, especially during the
+exploratory stage of data analysis when you’re trying to understand the
+data yourself. Let’s have a look at how they work, again using the
+afl.margins data as our example.</p>
+<div class="figure">
+<span style="display:block;" id="fig:fig5-4"></span>
+<img src="images/Figure25.PNG" alt="A box plot of the afl.margins variable plotted in jamovi" width="90%"><p class="caption">
+Figure 5.4: A box plot of the afl.margins variable plotted in jamovi
+</p>
+</div>
+<p>The easiest way to describe what a boxplot looks like is just to draw
+one. Click on the ‘Box plot’ check box and you will get the plot shown
+on the lower right of Figure <a href="drawing-graphs.html#fig:fig5-4">5.4</a>. jamovi has drawn the most basic
+boxplot possible. When you look at this plot this is how you should
+interpret it: the thick line in the middle of the box is the median; the
+box itself spans the range from the 25th percentile to the 75th
+percentile; and the “whiskers” go out to the most extreme data point
+that doesn’t exceed a certain bound. By default, this value is 1.5 times
+the interquartile range (IQR), calculated as 25th percentile -
+(1.5*IQR) for the lower boundary, and 75th percentile + (1.5*IQR) for
+the upper boundary. Any observation whose value falls outside this range
+is plotted as a circle or dot instead of being covered by the whiskers,
+and is commonly referred to as an <strong>outlier</strong>. For our AFL margins data
+there are two observations that fall outside this range, and these
+observations are plotted as dots (the upper boundary is 107, and looking
+over the data column in the spreadsheet there are two observations with
+values higher than this, 108 and 116, so these are the dots).</p>
+<div id="violin-plots" class="section level3" number="5.2.1">
+<h3>
+<span class="header-section-number">5.2.1</span> Violin plots<a class="anchor" aria-label="anchor" href="#violin-plots"><i class="fas fa-link"></i></a>
+</h3>
+<div class="figure">
+<span style="display:block;" id="fig:fig5-5"></span>
+<img src="images/Figure26.PNG" alt="A violin plot of the afl.margins variable plotted in jamovi, also showing a box plot and data points" width="90%"><p class="caption">
+Figure 5.5: A violin plot of the afl.margins variable plotted in jamovi, also showing a box plot and data points
+</p>
+</div>
+<p>A variation to the traditional box plot is the violin plot. Violin plots
+are similar to box plots except that they also show the kernel
+probability density of the data at different values. Typically, violin
+plots will include a marker for the median of the data and a box
+indicating the interquartile range, as in standard box plots. In jamovi
+you can achieve this sort of functionality by checking both the ‘Violin’
+and the ’Box plot’ check boxes. See Figure <a href="drawing-graphs.html#fig:fig5-5">5.5</a>, which also has the
+‘Data’ check box turned on to show the actual data points on the plot.
+This does tend to make the graph a bit too busy though, in my opinion.
+Clarity is simplicity, so in practice it might be better to just use a
+simple box plot.</p>
+</div>
+<div id="drawing-multiple-boxplots" class="section level3" number="5.2.2">
+<h3>
+<span class="header-section-number">5.2.2</span> Drawing multiple boxplots<a class="anchor" aria-label="anchor" href="#drawing-multiple-boxplots"><i class="fas fa-link"></i></a>
+</h3>
+<p>One last thing. What if you want to draw multiple boxplots at once?
+Suppose, for instance, I wanted separate boxplots showing the AFL
+margins not just for 2010 but for every year between 1987 and 2010. To
+do that the first thing we’ll have to do is find the data. These are
+stored in the <strong>aflmarginbyyear.csv</strong> file. So let’s load it into jamovi
+and see what is in it. You will see that it is a pretty big data set. It
+contains 4296 games and the variables that we’re interested in. What we
+want to do is have jamovi draw boxplots for the margin variable, but
+plotted separately for each year. The way to do this is to move the year
+variable across into the ‘Split by’ box, as in Figure <a href="drawing-graphs.html#fig:fig5-6">5.6</a>.</p>
+<div class="figure">
+<span style="display:block;" id="fig:fig5-6"></span>
+<img src="images/Figure27.PNG" alt="jamovi screen shot showing the ‘Split by’ window" width="90%"><p class="caption">
+Figure 5.6: jamovi screen shot showing the ‘Split by’ window
+</p>
+</div>
+<p>The result is shown in Figure <a href="drawing-graphs.html#fig:fig5-7">5.7</a>. This version of the box plot,
+split by year, gives a sense of why it’s sometimes useful to choose box
+plots instead of histograms. It’s possible to get a good sense of what
+the data look like from year to year without getting overwhelmed with
+too much detail. Now imagine what would have happened if I’d tried to
+cram 24 histograms into this space: no chance at all that the reader is
+going to learn anything useful.</p>
+<div class="figure">
+<span style="display:block;" id="fig:fig5-7"></span>
+<img src="images/Figure28.PNG" alt="Multiple boxplots plotted in jamovi, for the margin by year variables in the aflsmall2 data set" width="90%"><p class="caption">
+Figure 5.7: Multiple boxplots plotted in jamovi, for the margin by year variables in the aflsmall2 data set
+</p>
+</div>
+</div>
+<div id="using-box-plots-to-detect-outliers" class="section level3" number="5.2.3">
+<h3>
+<span class="header-section-number">5.2.3</span> Using box plots to detect outliers<a class="anchor" aria-label="anchor" href="#using-box-plots-to-detect-outliers"><i class="fas fa-link"></i></a>
+</h3>
+<p>Because the boxplot automatically separates out those observations that
+lie outside a certain range, depicting them with a dot in jamovi, people
+often use them as an informal method for detecting <strong>outliers</strong>:
+observations that are “suspiciously” distant from the rest of the data.
+Here’s an example. Suppose that I’d drawn the boxplot for the AFL
+margins data and it came up looking like Figure <a href="drawing-graphs.html#fig:fig5-8">5.8</a>. It’s pretty clear
+that something funny is going on with two of the observations.
+Apparently, there were two games in which the margin was over 300
+points! That doesn’t sound right to me. Now that I’ve become suspicious
+it’s time to look a bit more closely at the data. In jamovi you can
+quickly find out which of these observations are suspicious and then you
+can go back to the raw data to see if there has been a mistake in data
+entry. To do this you need to set up a filter so that only those
+observations with values over a certain threshold are included. In our
+example, the threshold is over 300, so that is the filter we will
+create. First, click on the ‘Filters’ button at the top of the jamovi
+window, and then type ‘margin &gt; 300’ into the filter field, as in
+Figure <a href="drawing-graphs.html#fig:fig5-9">5.9</a>.</p>
+<div class="figure">
+<span style="display:block;" id="fig:fig5-8"></span>
+<img src="images/Figure29.PNG" alt="A boxplot showing two very suspicious outliers!" width="90%"><p class="caption">
+Figure 5.8: A boxplot showing two very suspicious outliers!
+</p>
+</div>
+<p>This filter creates a new column in the spreadsheet view where only
+those observations that pass the filter are included. One neat way to
+quickly identify which observations these are is to tell jamovi to
+produce a ‘Frequency table’ (in the ‘Exploration’ - ‘Descriptives’
+window) for the ID variable (which must be a nominal variable otherwise
+the Frequency table is not produced). In Figure <a href="drawing-graphs.html#fig:fig5-10">5.10</a> you can see that
+the ID values for the observations where the margin was over 300 are 14
+and 134. These are suspicious cases, or observations, where you should
+go back to the original data source to find out what is going on.</p>
+<div class="figure">
+<span style="display:block;" id="fig:fig5-9"></span>
+<img src="images/Figure30.PNG" alt="The jamovi filter screen" width="90%"><p class="caption">
+Figure 5.9: The jamovi filter screen
+</p>
+</div>
+<div class="figure">
+<span style="display:block;" id="fig:fig5-10"></span>
+<img src="images/Figure31.PNG" alt="Frequency table for ID showing the ID numbers for the two suspicious outliers: 14 and 134" width="90%"><p class="caption">
+Figure 5.10: Frequency table for ID showing the ID numbers for the two suspicious outliers: 14 and 134
+</p>
+</div>
+<p>Usually you find that someone has just typed in the wrong number. Whilst
+this might seem like a silly example, I should stress that this kind of
+thing actually happens a lot. Real world data sets are often riddled
+with stupid errors, especially when someone had to type something into a
+computer at some point. In fact, there’s actually a name for this phase
+of data analysis and in practice it can take up a huge chunk of our
+time: data cleaning. It involves searching for typing mistakes
+(“typos”), missing data and all sorts of other obnoxious errors in raw
+data files.</p>
+<p>For less extreme values, even if they are flagged in a a boxplot as
+outliers, the decision about whether to include outliers or exclude them
+in any analysis depends heavily on why you think the data look they way
+they do and what you want to use the data for. You really need to
+exercise good judgement here. If the outlier looks legitimate to you,
+then keep it. In any case, I’ll return to the topic again in the section on <a href="correlation-and-linear-regression.html#model-checking">Model checking</a> in the chapter on <a href="correlation-and-linear-regression.html#correlation-and-linear-regression">Correlation and linear regression</a>.</p>
+</div>
+</div>
+<div id="bar-graphs" class="section level2" number="5.3">
+<h2>
+<span class="header-section-number">5.3</span> Bar graphs<a class="anchor" aria-label="anchor" href="#bar-graphs"><i class="fas fa-link"></i></a>
+</h2>
+<p>Another form of graph that you often want to plot is the <strong>bar graph</strong>.
+Let’s use the afl.finalists data set with the afl.finalists variable
+that I introduced in Section 4.1.6. What I want to do is draw a bar
+graph that displays the number of finals that each team has played in
+over the time spanned by the afl.finalists data set. There are lots of
+teams, but I am particularly interested in just four: Brisbane, Carlton,
+Fremantle and Richmond. So the first step is to set up a filter so just
+those four teams are included in the bar graph. This is straightforward
+in jamovi and you can do it by using the ‘Filters’ function that we used
+previously. Open up the ‘Filters’ screen and type in the following:</p>
+<p>afl.finalists <span class="math inline">\(==\)</span> ‘Brisbane’ or afl.finalists <span class="math inline">\(==\)</span> ‘Carlton’ or
+afl.finalists <span class="math inline">\(==\)</span> ‘Fremantle’ or afl.finalists <span class="math inline">\(==\)</span> ‘Richmond’ <a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;jamovi uses the symbol “==” here to mean “matches”.&lt;/p&gt;"><sup>34</sup></a></p>
+<p>When you have done this you will see, in the ‘Data’ view, that jamovi
+has filtered out all values apart from those we have specified. Next,
+open up the ‘Exploration’ - ‘Descriptives’ window and click on the ‘Bar
+plot’ check box (remember to move the ‘afl.finalists’ variable across
+into the ‘Variables’ box so that jamovi knows which variable to use).
+You should then get a bar graph, something like that shown in Figure
+<a href="drawing-graphs.html#fig:fig5-11">5.11</a>.</p>
+<div class="figure">
+<span style="display:block;" id="fig:fig5-11"></span>
+<img src="images/Figure32.PNG" alt="Filtering to include just four AFL teams, and drawing a bar plot in jamovi" width="90%"><p class="caption">
+Figure 5.11: Filtering to include just four AFL teams, and drawing a bar plot in jamovi
+</p>
+</div>
+</div>
+<div id="saving-image-files-using-jamovi" class="section level2" number="5.4">
+<h2>
+<span class="header-section-number">5.4</span> Saving image files using jamovi<a class="anchor" aria-label="anchor" href="#saving-image-files-using-jamovi"><i class="fas fa-link"></i></a>
+</h2>
+<p>Hold on, you might be thinking. What’s the good of being able to draw
+pretty pictures in jamovi if I can’t save them and send them to friends
+to brag about how awesome my data is? How do I save the picture?
+Simples. Just right click on the plot image and export it to a file,
+either as ‘png’, ‘eps’, ‘svg’ or ‘pdf’. These formats all produce nice
+images that you can the send to your friends, or include in your
+assignments or papers.</p>
+</div>
+<div id="summary-3" class="section level2" number="5.5">
+<h2>
+<span class="header-section-number">5.5</span> Summary<a class="anchor" aria-label="anchor" href="#summary-3"><i class="fas fa-link"></i></a>
+</h2>
+<p>Perhaps I’m a simple minded person, but I love pictures. Every time I
+write a new scientific paper one of the first things I do is sit down
+and think about what the pictures will be. In my head an article is
+really just a sequence of pictures linked together by a story. All the
+rest of it is just window dressing. What I’m really trying to say here
+is that the human visual system is a very powerful data analysis tool.
+Give it the right kind of information and it will supply a human reader
+with a massive amount of knowledge very quickly. Not for nothing do we
+have the saying “a picture is worth a thousand words”. With that in
+mind, I think that this is one of the most important chapters in the
+book. The topics covered were:</p>
+<ul>
+<li>
+<em>Common plots</em>. Much of the chapter was focused on standard graphs
+that statisticians like to produce: <a href="drawing-graphs.html#histograms">Histograms</a>,
+<a href="drawing-graphs.html#boxplots">Boxplots</a> and <a href="drawing-graphs.html#bar-graphs">Bar graphs</a>
+</li>
+<li>
+<a href="drawing-graphs.html#saving-image-files-using-jamovi">Saving image files using jamovi</a>. Importantly, we also covered how to export
+your pictures.</li>
+</ul>
+<p>One final thing to point out. Whilst jamovi produces some really neat
+default graphics, editing the plots is currently not possible. For more
+advanced graphics and plotting capability the packages available in R
+are much more powerful. One of the most popular graphics systems is
+provided by the ggplot2 package (see
+<a href="https://ggplot2.tidyverse.org/" target="_blank">https://ggplot2.tidyverse.org/</a>), which is loosely based on “The
+grammar of graphics” <span class="citation">(<a href="references.html#ref-Wilkinson2006" role="doc-biblioref">Wilkinson et al. 2006</a>)</span>. It’s not for novices. You need to have a pretty good grasp of R before
+you can start using it, and even then it takes a while to really get the
+hang of it. But when you’re ready it’s worth taking the time to teach
+yourself, because it’s a much more powerful and cleaner system.</p>
+<hr>
+</div>
+</div>
+
+  <div class="chapter-nav">
+<div class="prev"><a href="descriptive-statistics.html"><span class="header-section-number">4</span> Descriptive statistics</a></div>
+<div class="next"><a href="pragmatic-matters.html"><span class="header-section-number">6</span> Pragmatic matters</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#drawing-graphs"><span class="header-section-number">5</span> Drawing graphs</a></li>
+<li><a class="nav-link" href="#histograms"><span class="header-section-number">5.1</span> Histograms</a></li>
+<li>
+<a class="nav-link" href="#boxplots"><span class="header-section-number">5.2</span> Boxplots</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#violin-plots"><span class="header-section-number">5.2.1</span> Violin plots</a></li>
+<li><a class="nav-link" href="#drawing-multiple-boxplots"><span class="header-section-number">5.2.2</span> Drawing multiple boxplots</a></li>
+<li><a class="nav-link" href="#using-box-plots-to-detect-outliers"><span class="header-section-number">5.2.3</span> Using box plots to detect outliers</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#bar-graphs"><span class="header-section-number">5.3</span> Bar graphs</a></li>
+<li><a class="nav-link" href="#saving-image-files-using-jamovi"><span class="header-section-number">5.4</span> Saving image files using jamovi</a></li>
+<li><a class="nav-link" href="#summary-3"><span class="header-section-number">5.5</span> Summary</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong><span style="font-family:Garamond;font-weight:700;">learning statistics with jamovi</span></strong>" was written by Danielle J. Navarro &amp; David R. Foxcroft. It was last built on 17 June 2022 (version 0.75).</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>
