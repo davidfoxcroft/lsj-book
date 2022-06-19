@@ -77,8 +77,7 @@ Remember how I said that statistical testing was kind of like a criminal trial? 
 So, what about the type II error rate? Well, we'd also like to keep those under control too, and we denote this probability by $\beta$. However, it's much more common to refer to the **power** of the test, that is the probability with which we reject a null hypothesis when it really is false, which is $1 - \beta$. To help keep this straight, here's the same table again but with the relevant numbers added (Table \@ref(tab:tab9-3)):
 
 ```{r tab9-3}
-huxtabs[[9]][[3]] %>% set_caption("Null hypothesis statistical testing (NHST) - additional detail") %>% 
-    set_contents(1, everywhere, "") 
+huxtabs[[9]][[3]] %>% set_caption("Null hypothesis statistical testing (NHST) - additional detail") 
 ```
 
 A "powerful" hypothesis test is one that has a small value of $\beta$, while still keeping $\alpha$ fixed at some (small) desired level. By convention, scientists make use of three different $\alpha$ levels: $.05$, $.01$ and $.001$. Notice the asymmetry here; the tests are designed to ensure that the $\alpha$ level is kept small but there's no corresponding guarantee regarding $\beta$. We'd certainly like the type II error rate to be small and we try to design tests that keep it small, but this is typically secondary to the overwhelming need to control the type I error rate. As Blackstone might have said if he were a statistician, it is "better to retain 10 false null hypotheses than to reject a single true one". To be honest, I don't know that I agree with this philosophy. There are situations where I think it makes sense, and situations where I think it doesn't, but that's neither here nor there. It's how the tests are built.

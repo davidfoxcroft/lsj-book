@@ -86,12 +86,11 @@ you’ll probably have a newer version.[^03.3]
 
 One way or another, regardless of what operating system you’re using,
 it’s time to open jamovi and get started. When first starting jamovi you
-will be presented with a user interface which looks something like
-[Figure 3.1](#Fig3.1).
+will be presented with a user interface which looks something like Figure \@ref(fig:fig3-1).
 
-<a name="Fig3.1"></a>
-
-![*Figure 3.1: jamovi starts up!*](images/Figure2.PNG)
+```{r fig3-1, echo=FALSE, fig.cap="jamovi starts up!", out.width = "90%"}
+knitr::include_graphics("images/Figure2.PNG")
+```
 
 To the left is the spreadsheet view, and to the right is where the
 results of statistical tests appear. Down the middle is a bar separating
@@ -140,11 +139,11 @@ representing a ‘variable’ and each row representing a ‘case’ or
 The most commonly used variables in jamovi are ‘Data Variables’, these
 variables simply contain data either loaded from a data file, or ‘typed
 in’ by the user. Data variables can be one of several measurement
-levels ([Figure 3.2](#Fig3.2)).
+levels (Figure \@ref(fig:fig3-2)).
 
-<a name="Fig3.2"></a>
-
-![*Figure 3.2: measurement levels*](images/Figure3.PNG)
+```{r fig3-2, echo=FALSE, fig.cap="measurement levels", out.width = "90%"}
+knitr::include_graphics("images/Figure3.PNG")
+```
 
 These levels are designated by the symbol in the header of the
 variable’s column. The ID variable type is unique to jamovi. It’s
@@ -208,13 +207,13 @@ examples of formulas are:
 A + B LOG10(len) MEAN(A, B) (dose - VMEAN(dose)) / VSTDEV(dose)
 
 In order, these are the sum of A and B, a log (base 10) transform of
-len, the mean of A and B, and the z-score of the variable dose. [Figure 3.3](#Fig3.3)
-below shows the jamovi screen for the new variable computed as the
+len, the mean of A and B, and the z-score of the variable dose. Figure \@ref(fig:fig3-3)
+ shows the jamovi screen for the new variable computed as the
 z-score of dose (from the ‘Tooth Growth’ example data set).
 
-<a name="Fig3.3"></a>
-
-![*Figure 3.3: A newly computed variable, the z-score of ‘dose’*](images/Figure4.PNG)
+```{r fig3-3, echo=FALSE, fig.cap="A newly computed variable, the z-score of ‘dose’", out.width = "90%"}
+knitr::include_graphics("images/Figure4.PNG")
+```
 
 #### V-functions
 
@@ -279,14 +278,9 @@ Whichever file formats you are using, it’s a good idea to create a
 folder or folders especially for your jamovi data sets and analyses and
 to make sure you keep these backed up regularly.
 
-<a name="Fig3.4"></a>
-
-![*Figure 3.4: The booksales.csv data file. On the left I’ve opened the
-file using a spreadsheet program (OpenOffice), which shows that the file
-is basically a table. On the right the same file is open in a standard
-text editor (the TextEdit program on a Mac), which shows how the file is
-formatted. The entries in the table are wrapped in quote marks and
-separated by commas*](images/Figure5.PNG)
+```{r fig3-4, echo=FALSE, fig.cap="The booksales.csv data file. On the left I have opened the file using a spreadsheet program (OpenOffice), which shows that the file is basically a table. On the right the same file is open in a standard text editor (the TextEdit program on a Mac), which shows how the file is formatted. The entries in the table are wrapped in quote marks and separated by commas", out.width = "90%"}
+knitr::include_graphics("images/Figure5.PNG")
+```
 
 ### Importing data from csv files
 
@@ -294,7 +288,7 @@ One quite commonly used data format is the humble “comma separated
 value” file, also called a csv file, and usually bearing the file
 extension .csv. csv files are just plain old-fashioned text files and
 what they store is basically just a table of data. This is illustrated
-in [Figure 3.4](#Fig3.4), which shows a file called booksales.csv that I’ve
+in Figure \@ref(fig:fig3-4), which shows a file called booksales.csv that I’ve
 created. As you can see, each row represents the book sales data for one
 month. The first row doesn’t contain actual data though, it has the
 names of the variables.
@@ -304,7 +298,7 @@ button with three parallel lines) choose ‘Open’ and browse to where you
 have stored the csv file on your computer. If you’re on a Mac, it’ll
 look like the usual Finder window that you use to choose a file; on
 Windows it looks like an Explorer window. An example of what it looks
-like on a Mac is shown in [Figure 3.5](#Fig3.5). I’m assuming that you’re
+like on a Mac is shown in Figure \@ref(fig:fig3-5). I’m assuming that you’re
 familiar with your own computer, so you should have no problem finding
 the csv file that you want to import! Find the one you want, then click
 on the “Open” button.
@@ -323,14 +317,9 @@ gets imported correctly:
     usually going to be a double quote mark ("). It is for the
     booksales.csv file.
 
-<a name="Fig3.5"></a>
-
-![*Figure 3.5: A dialog box on a Mac asking you to select the csv file
-jamovi should try to import. Mac users will recognise this immediately,
-it’s the usual way in which a Mac asks you to find a file. Windows users
-won’t see this, instead they’ll see the usual explorer window that
-Windows always gives you when it wants you to select a
-file*](images/Figure6.PNG)
+```{r fig3-5, echo=FALSE, fig.cap="A dialog box on a Mac asking you to select the csv file jamovi should try to import. Mac users will recognise this immediately, it’s the usual way in which a Mac asks you to find a file. Windows users won’t see this, instead they’ll see the usual explorer window that Windows always gives you when it wants you to select a file", out.width = "90%"}
+knitr::include_graphics("images/Figure6.PNG")
+```
 
 ## Importing unusual data files
 
@@ -353,7 +342,6 @@ change are:
     not true then it’s a good idea to open up the csv file in a
     spreadsheet programme such as Open Office and add the header row
     manually.
-
 -   sep. As the name “comma separated value” indicates, the values in a
     row of a csv file are usually separated by commas. This isn’t
     universal, however. In Europe the decimal point is typically written
@@ -361,19 +349,16 @@ change are:
     to use , as the separator. Therefore it is not unusual to use ;
     instead of , as the separator. At other times, I’ve seen a TAB
     character used.
-
 -   quote. It’s conventional in csv files to include a quoting character
     for textual data. As you can see by looking at the booksales.csv
     file, this is usually a double quote character, ". But sometimes
     there is no quoting character at all, or you might see a single
     quote mark ’ used instead.
-
 -   skip. It’s actually very common to receive CSV files in which the
     first few rows have nothing to do with the actual data. Instead,
     they provide a human readable summary of where the data came from,
     or maybe they include some technical info that doesn’t relate to the
     data.
-
 -   missing values. Often you’ll get given data with missing values. For
     one reason or another, some entries in the table are missing. The
     data file needs to include a “special” value to indicate that the
@@ -445,14 +430,14 @@ program.
 To install add-on modules, just click on the large $+$ in the top right
 of the jamovi window, select “jamovi-library” and then browse through
 the various add-on modules that are available. Choose the one(s) you
-want, and then install them, as in [Figure 3.6](#Fig3.6). It’s that easy. The newly
+want, and then install them, as in Figure \@ref(fig:fig3-6). It’s that easy. The newly
 installed modules can then be accessed from the “Analyses” button bar.
 Try it...useful add-on modules to install include ”scatr” (added under
 “Descriptives”) and $R_j$.
 
-<a name="Fig3.6"></a>
-
-![*Figure 3.6: Installing add-on modules in jamovi*](images/Figure7.PNG)
+```{r fig3-6, echo=FALSE, fig.cap="Installing add-on modules in jamovi", out.width = "90%"}
+knitr::include_graphics("images/Figure7.PNG")
+```
 
 ## Quitting jamovi
 
