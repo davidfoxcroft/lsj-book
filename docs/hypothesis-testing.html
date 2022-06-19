@@ -105,6 +105,9 @@
 <li><a class="" href="correlation-and-linear-regression.html"><span class="header-section-number">12</span> Correlation and linear regression</a></li>
 <li><a class="" href="comparing-several-means-one-way-anova.html"><span class="header-section-number">13</span> Comparing several means (one-way ANOVA)</a></li>
 <li><a class="" href="factorial-anova.html"><span class="header-section-number">14</span> Factorial ANOVA</a></li>
+<li><a class="" href="factor-analysis.html"><span class="header-section-number">15</span> Factor Analysis</a></li>
+<li><a class="" href="bayesian-statistics.html"><span class="header-section-number">16</span> Bayesian statistics</a></li>
+<li><a class="" href="epilogue.html"><span class="header-section-number">17</span> Epilogue</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
 
@@ -222,8 +225,8 @@
 <col>
 <tr>
 <th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: bold;"></th>
-<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;"></th>
-<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;"></th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">retain \( H_0 \)</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">reject  \( H_0 \)</th>
 </tr>
 <tr>
 <td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">\( H_0 \) is true</td>
@@ -542,7 +545,7 @@ Figure 9.8: The power of our test plotted as a function of the sample size <span
 <span class="header-section-number">9.9.2</span> Bayesians versus frequentists<a class="anchor" aria-label="anchor" href="#bayesians-versus-frequentists"><i class="fas fa-link"></i></a>
 </h3>
 <p>Earlier on in this chapter I was quite emphatic about the fact that you <em>cannot</em> interpret the p value as the probability that the null hypothesis is true. NHST is fundamentally a frequentist tool (see the chapter on [Probability testing]) and as such it does not allow you to assign probabilities to hypotheses. The null hypothesis is either true or it is not. The Bayesian approach to statistics interprets probability as a degree of belief, so it’s totally okay to say that there is a <span class="math inline">\(10\%\)</span> chance that the null hypothesis is true. That’s just a reflection of the degree of confidence that you have in this hypothesis. You aren’t allowed to do this within the frequentist approach. Remember, if you’re a frequentist, a probability can only be defined in terms of what happens after a large number of independent replications (i.e., a long run frequency). If this is your interpretation of probability, talking about the “probability” that the null hypothesis is true is complete gibberish: a null hypothesis is either true or it is false. There’s no way you can talk about a long run frequency for this statement. To talk about “the probability of the null hypothesis” is as meaningless as “the colour of freedom”. It doesn’t have one!</p>
-<p>Most importantly, this isn’t a purely ideological matter. If you decide that you are a Bayesian and that you’re okay with making probability statements about hypotheses, you have to follow the Bayesian rules for calculating those probabilities. I’ll talk more about this in the chapter on [Bayesian statistics], but for now what I want to point out to you is the p value is a terrible approximation to the probability that <span class="math inline">\(H_0\)</span> is true. If what you want to know is the probability of the null, then the p value is not what you’re looking for!</p>
+<p>Most importantly, this isn’t a purely ideological matter. If you decide that you are a Bayesian and that you’re okay with making probability statements about hypotheses, you have to follow the Bayesian rules for calculating those probabilities. I’ll talk more about this in the chapter on <a href="bayesian-statistics.html#bayesian-statistics">Bayesian statistics</a>, but for now what I want to point out to you is the p value is a terrible approximation to the probability that <span class="math inline">\(H_0\)</span> is true. If what you want to know is the probability of the null, then the p value is not what you’re looking for!</p>
 </div>
 <div id="traps" class="section level3" number="9.9.3">
 <h3>
@@ -574,7 +577,7 @@ Figure 9.8: The power of our test plotted as a function of the sample size <span
 <li>
 <a href="hypothesis-testing.html#some-issues-to-consider">Some issues to consider</a> regarding hypothesis testing</li>
 </ul>
-<p>Later in the book, in the chapter on [Bayesian statistics], I’ll revisit the theory of null hypothesis tests from a Bayesian perspective and introduce a number of new tools that you can use if you aren’t particularly fond of the orthodox approach. But for now, though, we’re done with the abstract statistical theory, and we can start discussing specific data analysis tools.</p>
+<p>Later in the book, in the chapter on <a href="bayesian-statistics.html#bayesian-statistics">Bayesian statistics</a>, I’ll revisit the theory of null hypothesis tests from a Bayesian perspective and introduce a number of new tools that you can use if you aren’t particularly fond of the orthodox approach. But for now, though, we’re done with the abstract statistical theory, and we can start discussing specific data analysis tools.</p>
 
 </div>
 </div>
@@ -646,7 +649,7 @@ Figure 9.8: The power of our test plotted as a function of the sample size <span
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong><span style="font-family:Garamond;font-weight:700;">learning statistics with jamovi</span></strong>" was written by Danielle J. Navarro &amp; David R. Foxcroft. It was last built on 18 June 2022 (version 0.75).</p>
+    <p>"<strong><span style="font-family:Garamond;font-weight:700;">learning statistics with jamovi</span></strong>" was written by Danielle J. Navarro &amp; David R. Foxcroft. It was last built on 19 June 2022 (version 0.75).</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

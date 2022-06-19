@@ -2,7 +2,7 @@
 
 Previous chapters have covered statistical tests for differences between two or more groups. However, sometimes when conducting research, we may wish to examine how multiple variables *co-vary*. That is, how they are related to each other and whether the patterns of relatedness suggest anything interesting and meaningful. For example, we are often interested in exploring whether there are any underlying unobserved latent factors that are represented by the observed, directly measured, variables in our dataset. In statistics, latent factors are initially hidden variables that are not directly observed but are rather inferred (through statistical analysis) from other variables that are observed (directly measured).
 
-In this chapter we will consider a number of different Factor Analysis and related techniques, starting with Exploratory Factor Analysis (EFA). EFA is a statistical technique for identifying underlying latent factors in a data set (Section 15.1). Then in Section 15.2 we will cover Principal Component Analysis (PCA) which is a data reduction technique which, strictly speaking, does not identify underlying latent factors. Instead, PCA simply produces a linear combination of observed variables. Following this, the Section (15.3) on Confirmatory Factor Analysis (CFA) shows that, unlike EFA, with CFA you start with an idea - a model - of how the variables in your data are related to each other. You then test your model against the observed data and assess how good a fit the model is. A more sophisticated version of CFA is the so-called Multi-Trait Multi-Method (MTMM) approach (Section 15.4) in which both latent factor and method variance are included in the model. This is useful when there are different methodological approaches used for measurement and therefore method variance is an important consideration. Finally, we will cover a related analysis: internal consistency reliability analysis tests how consistently a scale measures a psychological construct (Section 15.5).
+In this chapter we will consider a number of different Factor Analysis and related techniques, starting with [Exploratory Factor Analysis] (EFA). EFA is a statistical technique for identifying underlying latent factors in a data set. Then we will cover [Principal Component Analysis] (PCA) which is a data reduction technique which, strictly speaking, does not identify underlying latent factors. Instead, PCA simply produces a linear combination of observed variables. Following this, the section on [Confirmatory Factor Analysis] (CFA) shows that, unlike EFA, with CFA you start with an idea - a model - of how the variables in your data are related to each other. You then test your model against the observed data and assess how good a fit the model is. A more sophisticated version of CFA is the so-called [Multi-Trait Multi-Method CFA] approach in which both latent factor and method variance are included in the model. This is useful when there are different methodological approaches used for measurement and therefore method variance is an important consideration. Finally, we will cover a related analysis: [Internal consistency reliability analysis] tests how consistently a scale measures a psychological construct.
 
 ## Exploratory Factor Analysis
 
@@ -10,7 +10,7 @@ In this chapter we will consider a number of different Factor Analysis and relat
 
 In Figure \@ref(fig:fig15-1) each observed variable $V$ is 'caused' to some extent by the underlying latent factor ($F$), depicted by the coefficients $b_1$ to $b_5$ (also called factor loadings). Each observed variable also has an associated error term, e1 to e5. Each error term is the variance in the associated observed variable, $V_i$ , that is unexplained by the underlying latent factor.
 
-```{r fig15-1, fig.cap=" Latent factor underlying the relationship between several observed variables", out.width = "70%"}
+```{r fig15-1, fig.cap=" Latent factor underlying the relationship between several observed variables", out.width = "90%"}
 knitr::include_graphics("images/Figure172.PNG")
 ```
 
@@ -49,20 +49,15 @@ target="_blank">http://sapa-project.org</a>) project. The 25 items are organized
 The item data were collected using a 6-point response scale:
 
 1.  Very Inaccurate
-
 2.  Moderately Inaccurate
-
 3.  Slightly Inaccurate
-
 4.  Slightly Accurate
-
 5.  Moderately Accurate
-
 6.  Very Accurate.
 
 A sample of $N=250$ responses is contained in the dataset bfi_sample.csv. As researchers, we are interested in exploring the data to see whether there are some underlying latent factors that are measured reasonably well by the $25$ observed variables in the bfi_sample.csv data file. Open up the dataset and check that the $25$ variables are coded as continuous variables (technically they are ordinal though for EFA in jamovi it mostly doesn't matter, except if you decide to calculate weighted factor scores in which case continuous variables are needed). To perform EFA in jamovi:
 
-```{r fig15-2, fig.cap="Twenty-five observed variable items organised by five putative personality factors in the dataset bfi\_sample.csv", out.width = "70%"}
+```{r fig15-2, fig.cap="Twenty-five observed variable items organised by five putative personality factors in the dataset bfi_sample.csv", out.width = "90%"}
 knitr::include_graphics("images/Figure173.PNG")
 ```
 
@@ -72,11 +67,11 @@ knitr::include_graphics("images/Figure173.PNG")
 
 -   Check appropriate options, including 'Assumption Checks', but also Rotation 'Method', 'Number of Factors' to extract, and 'Additional Output' options. See Figure \@ref(fig:fig15-3) for suggested options for this illustrative EFA, and please note that the Rotation 'Method' and 'Number of Factors' extracted is typically adjusted by the researcher during the analysis to find the best result, as described below.
 
-```{r fig15-3, chunk.class = "enlarge.image", fig.cap="The jamovi EFA analysis window", out.width = "70%"}
+```{r fig15-3, chunk.class = "enlarge.image", fig.cap="The jamovi EFA analysis window", out.width = "90%"}
 knitr::include_graphics("images/Figure174.PNG")
 ```
 
-```{r fig15-4, chunk.class = "enlarge.image", fig.cap="jamovi EFA assumption checks for the personality questionnaire data", out.width = "70%"}
+```{r fig15-4, chunk.class = "enlarge.image", fig.cap="jamovi EFA assumption checks for the personality questionnaire data", out.width = "50%"}
 knitr::include_graphics("images/Figure175.PNG")
 ```
 
@@ -86,12 +81,11 @@ The next thing to check is how many factors to use (or "extract" from the data).
 
 -   One convention is to choose all components with Eigen values greater than 12 . This would give us four factors with our data (try it and see).
 
--   Examination of the scree plot, as in Figure \@ref(fig:fig15-1
-5, lets you identify the "point of inflection". This is the point at which the slope of the scree curve clearly levels off, below the "elbow". This would give us five factors with our data. Interpreting scree plots is a bit of an art: in Figure \@ref(fig:fig15-5) there is a noticeable step from $5$ to $6$ factors, but in other scree plots you look at it will not be so clear cut.
+-   Examination of the scree plot, as in Figure \@ref(fig:fig15-5, lets you identify the "point of inflection". This is the point at which the slope of the scree curve clearly levels off, below the "elbow". This would give us five factors with our data. Interpreting scree plots is a bit of an art: in Figure \@ref(fig:fig15-5) there is a noticeable step from $5$ to $6$ factors, but in other scree plots you look at it will not be so clear cut.
 
 -   Using a parallel analysis technique, the obtained Eigen values are compared to those that would be obtained from random data. The number of factors extracted is the number with Eigen values greater than what would be found with random data.
 
-```{r fig15-5, chunk.class = "enlarge.image", fig.cap="Scree plot of the personality data in jamovi EFA, showing a noticeable inflection and levelling off after point 5 (the 'elbow', out.width = "70%"}
+```{r fig15-5, chunk.class = "enlarge.image", fig.cap="Scree plot of the personality data in jamovi EFA, showing a noticeable inflection and levelling off after point 5 (the 'elbow')", out.width = "90%"}
 knitr::include_graphics("images/Figure176.PNG")
 ```
 
@@ -101,23 +95,27 @@ At the same time, we should also consider the best way to rotate the final solut
 
 [^factor-analysis-2]: Oblique rotations provide two factor matrices, one called a structure matrix and one called a pattern matrix. In jamovi just the pattern matrix is shown in the results as this is typically the most useful for interpretation, though some experts suggest that both can be helpful. In a structure matrix coefficients show the relationship between the variable and the factors whilst ignoring the relationship of that factor with all the other factors (i.e. a zero-order correlation). Pattern matrix coefficients show the unique contribution of a factor to a variable whilst controlling for the effects of other factors on that variable (akin to standardized partial regression coefficient). Under orthogonal rotation, structure and pattern coefficients are the same.
 
-```{r fig15-6, chunk.class = "enlarge.image", fig.cap="Factor summary statistics and correlations for a five factor solution in jamovi EFA", out.width = "70%"}
+```{r fig15-6, chunk.class = "enlarge.image", fig.cap="Factor summary statistics and correlations for a five factor solution in jamovi EFA", out.width = "90%"}
 knitr::include_graphics("images/Figure177.PNG")
 ```
 
-Practically, if in an oblique rotation the factors are found to be substantially correlated (positive or negative, and > 0.3), as in Figure \@ref(fig:fig15-6) where a correlation between two of the extracted factors is $0.31$, then this would confirm our intuition to prefer oblique rotation. If the factors are, in fact, correlated, then an oblique rotation will produce a better estimate of the true factors and a better simple structure than will an orthogonal rotation. And, if the oblique rotation indicates that the factors have close to zero correlations between one another, then the researcher can go ahead and conduct an orthogonal rotation (which should then give about the same solution as the oblique rotation).
+Practically, if in an oblique rotation the factors are found to be substantially correlated (positive or negative, and > 0.3), as in Figure \@ref(fig:fig15-6) where a correlation between two of the extracted factors is 0.31, then this would confirm our intuition to prefer oblique rotation. If the factors are, in fact, correlated, then an oblique rotation will produce a better estimate of the true factors and a better simple structure than will an orthogonal rotation. And, if the oblique rotation indicates that the factors have close to zero correlations between one another, then the researcher can go ahead and conduct an orthogonal rotation (which should then give about the same solution as the oblique rotation).
 
-On checking the correlation between the extracted factors at least one correlation was greater than $0.3$ (Figure \@ref(fig:fig15-6)), so an oblique ('oblimin') rotation of the five extracted factors is preferred. We can also see in Figure \@ref(fig:fig15-6) that the proportion of overall variance in the data that is accounted for by the five factors is $46\%$. Factor one accounts for around 10% of the variance, factors two to four around 9% each, and factor five just over $7\%$. This isn't great; it would have been better if the overall solution accounted for a more substantive proportion of the variance in our data.
+On checking the correlation between the extracted factors at least one correlation was greater than 0.3 (Figure \@ref(fig:fig15-6)), so an oblique ('oblimin') rotation of the five extracted factors is preferred. We can also see in Figure \@ref(fig:fig15-6) that the proportion of overall variance in the data that is accounted for by the five factors is 46%. Factor one accounts for around 10% of the variance, factors two to four around 9% each, and factor five just over 7%. This isn't great; it would have been better if the overall solution accounted for a more substantive proportion of the variance in our data.
 
-Be aware that in every EFA you could potentially have the same number of factors as observed variables, but every additional factor you include will add a smaller amount of explained variance. If the first few factors explain a good amount of the variance in the original $25$ variables, then those factors are clearly a useful, simpler substitute for the $25$ variables. You can drop the rest without losing too much of the original variability. But if it takes 18 factors (for example) to explain most of the variance in those $25$ variables, you might as well just use the original $25$.
+Be aware that in every EFA you could potentially have the same number of factors as observed variables, but every additional factor you include will add a smaller amount of explained variance. If the first few factors explain a good amount of the variance in the original 25 variables, then those factors are clearly a useful, simpler substitute for the 25 variables. You can drop the rest without losing too much of the original variability. But if it takes 18 factors (for example) to explain most of the variance in those 25 variables, you might as well just use the original 25.
 
-Figure \@ref(fig:fig15-7) shows the factor loadings. That is, how the $25$ different personality items load onto each of the five selected factors. We have hidden loadings less than $0.3$ (set in the options shown in Figure \@ref(fig:fig15-3).
+Figure \@ref(fig:fig15-7) shows the factor loadings. That is, how the 25 different personality items load onto each of the five selected factors. We have hidden loadings less than $0.3$ (set in the options shown in Figure \@ref(fig:fig15-3).
 
-For Factors $1, 2, 3$ and $4$ the pattern of factor loadings closely matches the putative factors specified in Figure \@ref(fig:fig15-2). Phew! And factor 5 is pretty close, with four of the five observed variables that putatively measure "openness" loading pretty well onto the factor. Variable 04 doesn't quite seem to fit though, as the factor solution in Figure \@ref(fig:fig15-7) suggests that it loads onto factor $4$ (albeit with a relatively low loading) but not substantively onto factor $5$.
+For Factors $1, 2, 3$ and $4$ the pattern of factor loadings closely matches the putative factors specified in Figure \@ref(fig:fig15-2). Phew! And factor $5$ is pretty close, with four of the five observed variables that putatively measure "openness" loading pretty well onto the factor. Variable $04$ doesn't quite seem to fit though, as the factor solution in Figure \@ref(fig:fig15-7) suggests that it loads onto factor $4$ (albeit with a relatively low loading) but not substantively onto factor $5$.
 
 The other thing to note is that those variables that were denoted as "R: reverse coding" in Figure \@ref(fig:fig15-2) are those that have negative factor loadings. Take a look at the items A1 ("Am indifferent to the feelings of others") and A2 ("Inquire about others' well-being"). We can see that a high score on $A1$ indicates low Agreeableness, whereas a high score on $A2$ (and all the other "A" variables for that matter) indicates high Agreeableness. Therefore A1 will be negatively correlated with the other "A" variables, and this is why it has a negative factor loading, as shown in Figure \@ref(fig:fig15-7).
 
-We can also see in Figure \@ref(fig:fig15-7) the "uniqueness" of each variable. Uniqueness is the proportion of variance that is 'unique' to the variable and not explained by the factors[^factor-analysis-3]. For example, $72\%$ of the variance in 'A1' is not explained by the factors in the five factor solution. In contrast, 'N1' has relatively low variance not accounted for by the factor solution ($35\%$). Note that the greater the 'uniqueness', the lower the relevance or contribution of the variable in the factor model.
+```{r fig15-7, chunk.class = "enlarge.image", fig.cap="Factor loadings for a five factor solution in jamovi EFA", out.width = "90%"}
+knitr::include_graphics("images/Figure15_7.PNG")
+```
+
+We can also see in Figure \@ref(fig:fig15-7) the "uniqueness" of each variable. Uniqueness is the proportion of variance that is 'unique' to the variable and not explained by the factors[^factor-analysis-3]. For example, 72% of the variance in 'A1' is not explained by the factors in the five factor solution. In contrast, 'N1' has relatively low variance not accounted for by the factor solution (35%). Note that the greater the 'uniqueness', the lower the relevance or contribution of the variable in the factor model.
 
 [^factor-analysis-3]: Sometimes reported in factor analysis is "communality" which is the amount of variance in a variable that is accounted for by the factor solution. Uniqueness is equal to (1 $\sim$ communality)
 
@@ -131,28 +129,35 @@ So, we seem to have a pretty good five factor solution, albeit accounting for a 
 
 -   Compute a new variable, called "Agreeableness', by calculating the mean of A1R, A2, A3, A4 and A5. Do this using the jamovi compute new variable command (see Figure \@ref(fig:fig15-9)).
 
-
-```{r fig15-7, chunk.class = "enlarge.image", fig.cap="Factor loadings for a five factor solution in jamovi EFA", out.width = "70%"}
-knitr::include_graphics("images/Figure15_7.PNG")
+```{r fig15-8, chunk.class = "enlarge.image", fig.cap="Recode variable using the jamovi Transform command", out.width = "90%"}
+knitr::include_graphics("images/Figure178.PNG")
 ```
 
-```{r fig15-8, chunk.class = "enlarge.image", fig.cap="Recode variable using the jamovi Transform command", out.width = "70%"}
-knitr::include_graphics("images/Figure178.PNG")
+```{r fig15-9, chunk.class = "enlarge.image", fig.cap="Compute new scale score variable using the jamovi Computed variable command", out.width = "90%"}
+knitr::include_graphics("images/Figure179.PNG")
 ```
 
 Another option is to create an optimally-weighted factor score index. We can use the jamovi Rj editor to do this in R. [^factor-analysis-5] Again, there are two steps:
 
 [^factor-analysis-5]: In the latest version of jamovi you can now save factor scores directly from within jamovi - it's an option. But I've left this explanation in as it provides a good insight into using R directly from jamovi.
 
--   Use the Rj editor to run the EFA in R to the same specification as the one in jamovi (i.e. five factors and oblimin rotation) and compute optimally weighted factor scores. Save the new dataset, with the factor scores, to a file. See Figure \@ref(fig:fig15-10).
+-   Use the Rj editor to run the EFA in R to the same specification as the one in jamovi (i.e. five factors and oblimin rotation) and compute optimally weighted factor scores (Figure \@ref(fig:fig15-10)). Save the new dataset, with the factor scores, to a file (Figure \@ref(fig:fig15-11)).
+
+```{r fig15-10, chunk.class = "enlarge.image", fig.cap="Rj editor commands for creating optimally weighted factor scores for the five factor solution", out.width = "90%"}
+knitr::include_graphics("images/Figure180.PNG")
+```
+
+```{r fig15-11, chunk.class = "enlarge.image", fig.cap="The newly created data file 'bfifactscores.csv'created in the Rj editor and containing the five factor score variables. Note that each of the new factor score variables is labelled corresponding to the order that the factors are listed in the factor loadings table", out.width = "90%"}
+knitr::include_graphics("images/Figure181.PNG")
+```
 
 -   Open up the new file in jamovi and check that variable types have been set correctly. Label the new factor score variables corresponding to the relevant factor names or definitions (NB it is possible that the factors will not be in the expected order, so make sure you check).
 
-```{r fig15-9, chunk.class = "enlarge.image", fig.cap="Compute new scale score variable using the jamovi Computed variable command", out.width = "70%"}
-knitr::include_graphics("images/Figure179.PNG")
-```
-
 Now you can go ahead and undertake further analyses, using either the factor-based scores (a mean scale score approach) or using the optimally-weighted factor scores calculated via the Rj editor. Your choice! For example, one thing you might like to do is see whether there are any gender differences in each of our personality scales. We did this for the Agreeableness score that we calculated using the factor-based score approach, and although the plot (Figure **15.12**) showed that males were less agreeable than females, this was not a significant difference (Mann-Whitney $U = 5760.5$, $p = .073$).
+
+```{r fig15-12, chunk.class = "enlarge.image", fig.cap="Comparing differences in Agreeableness factor-based scores between males and females", out.width = "90%"}
+knitr::include_graphics("images/Figure182.PNG")
+```
 
 ### Writing up an EFA
 
@@ -176,18 +181,6 @@ Hopefully, so far we have given you some sense of EFA and how to undertake EFA i
 
 9.  Meaningful names for the extracted factors should be provided. You may like to use previously selected factor names, but on examining the actual items and factors you may think a different name is more appropriate
 
-```{r fig15-10, chunk.class = "enlarge.image", fig.cap="Rj editor commands for creating optimally weighted factor scores for the five factor solution", out.width = "70%"}
-knitr::include_graphics("images/Figure180.PNG")
-```
-
-```{r fig15-11, chunk.class = "enlarge.image", fig.cap="The newly created data file 'bfifactscores.csv'"created in the Rj editor and containing the five factor score variables. Note that each of the new factor score variables is labelled corresponding to the order that the factors are listed in the factor loadings table", out.width = "70%"}
-knitr::include_graphics("images/Figure181.PNG")
-```
-
-```{r fig15-12, chunk.class = "enlarge.image", fig.cap="Comparing differences in Agreeableness factor-based scores between males and females", out.width = "70%"}
-knitr::include_graphics("images/Figure182.PNG")
-```
-
 ## Principal Component Analysis
 
 In the previous section we saw that EFA works to identify underlying latent factors. And, as we saw, in one scenario the smaller number of latent factors can be used in further statistical analysis using some sort of combined factor scores.
@@ -202,57 +195,57 @@ PCA has been popular in Psychology for a number of reasons, and therefore it's w
 
 ### Performing PCA in jamovi
 
-Once you have loaded up the bfi sample.csv data, select Factor - Principal Component Analysis from the main jamovi button bar to open the PCA analysis window (Figure \@ref(fig:fig15-13)). Then select the 25 personality questions and transfer them into the 'Variables' box. Check appropriate options, including 'Assumption Checks', but also Rotation 'Method', 'Number of Factors to extract, and 'Additional Output' options. See Figure \@ref(fig:fig15-13) for suggested options for this PCA, and please note that the Rotation 'Method' and 'Number of Factors' extracted is typically adjusted during the analysis to find the best result, as described below.
+Once you have loaded up the bfi_sample.csv data, select Factor - Principal Component Analysis from the main jamovi button bar to open the PCA analysis window (Figure \@ref(fig:fig15-13)). Then select the 25 personality questions and transfer them into the 'Variables' box. Check appropriate options, including 'Assumption Checks', but also Rotation 'Method', 'Number of Factors to extract, and 'Additional Output' options. See Figure \@ref(fig:fig15-13) for suggested options for this PCA, and please note that the Rotation 'Method' and 'Number of Factors' extracted is typically adjusted during the analysis to find the best result, as described below.
 
-First, checking the assumptions, you can see that (1) Bartlett's test of sphericity is significant, so this assumption is satisfied; and (2) the KMO measure of sampling adequacy (MSA) is $0.81$ overall, suggesting very good sampling adequacy. No problems here then!
-
-The next thing to check is how many components to use (or "extract" from the data). As with EFA, three different approaches are available:
-
-```{r fig15-13, chunk.class = "enlarge.image", fig.cap="The jamovi PCA analysis window", out.width = "70%"}
+```{r fig15-13, chunk.class = "enlarge.image", fig.cap="The jamovi PCA analysis window", out.width = "90%"}
 knitr::include_graphics("images/Figure183.PNG")
 ```
+
+First, checking the assumptions (Figure \@ref(fig:fig15-14)). You can see that (1) Bartlett's test of sphericity is significant, so this assumption is satisfied; and (2) the KMO measure of sampling adequacy (MSA) is $0.81$ overall, suggesting very good sampling adequacy. No problems here then!
+
+```{r fig15-14, chunk.class = "enlarge.image", fig.cap="jamovi PCA assumption checks for the personality item data", out.width = "80%"}
+knitr::include_graphics("images/Figure184.PNG")
+```
+
+The next thing to check is how many components to use (or "extract" from the data). As with EFA, three different approaches are available:
 
 -   One convention is to choose all components with Eigen values greater than 1.[^factor-analysis-7] This would give us two components with our data.
 
 -   Examination of the scree plot, as in Figure \@ref(fig:fig15-15), lets you identify the "point of inflection". This is the point at which the slope of the scree curve clearly levels off, below the "elbow". Again, this would give us two components as the levelling off clearly occurs after the second component.
 
+```{r fig15-15, chunk.class = "enlarge.image", fig.cap="Scree plot of the personality item data in jamovi PCA, showing the levelling off point, the 'elbow', after component 5", out.width = "90%"}
+knitr::include_graphics("images/Figure185.PNG")
+```
+
 -   Using a parallel analysis technique, the obtained Eigen values are compared to those that would be obtained from random data. The number of components extracted is the number with Eigen values greater than what would be found with random data.
 
 [^factor-analysis-7]: An Eigen value indicates how much of the variance in the observed variables a factor accounts for. A factor with an Eigen value \> 1 accounts for more variance than a single observed variable
 
-```{r fig15-14, chunk.class = "enlarge.image", fig.cap="jamovi PCA assumption checks for the personality item data", out.width = "70%"}
-knitr::include_graphics("images/Figure184.PNG")
-```
-
 The third approach is a good one according to @Fabrigar1999, although in practice researchers tend to look at all three and then make a judgement about the number of components that are most easily or helpfully interpreted. This can be understood as the "meaningfulness criterion", and researchers will typically examine, in addition to the solution from one of the approaches above, solutions with one or two more or fewer components. They then adopt the solution which makes the most sense to them.
-
-```{r fig15-15, chunk.class = "enlarge.image", fig.cap="Scree plot of the personality item data in jamovi PCA, showing the levelling off point, the 'elbow', after component 5", out.width = "70%"}
-knitr::include_graphics("images/Figure185.PNG")
-```
 
 At the same time, we should also consider the best way to rotate the final solution. Again, as with EFA, there are two main approaches to rotation: orthogonal (e.g. "varimax") rotation forces the selected components to be uncorrelated; whereas oblique (e.g. "oblimin") rotation allows the selected components to be correlated. Dimensions of interest to psychologists and behavioural scientists are not often dimensions we would expect to be orthogonal, so oblique solutions are arguably more sensible. Practically, if in an oblique rotation the components are found to be substantially correlated (i.e. > 0.3) then this would confirm our intuition to prefer oblique rotation. If the components are, in fact, correlated, then an oblique rotation will produce a better estimate of the true components and a better simple structure than will an orthogonal rotation. And, if the oblique rotation indicates that the components have close to zero correlations between one another, then the researcher can go ahead and conduct an orthogonal rotation (which should then give about the same solution as the oblique rotation). In Figure \@ref(fig:fig15-16) we see that none of the correlations is > 0.3 so it is appropriate to switch to orthogonal (varimax) rotation.
 
-```{r fig15-16, chunk.class = "enlarge.image", fig.cap="Component summary statistics and correlations for a five component solution in jamovi PCA", out.width = "70%"}
+```{r fig15-16, chunk.class = "enlarge.image", fig.cap="Component summary statistics and correlations for a five component solution in jamovi PCA", out.width = "90%"}
 knitr::include_graphics("images/Figure186.PNG")
 ```
 
-In Figure \@ref(fig:fig15-16) we also have the proportion of overall variance in the data that is accounted for by the two components. Components one and two account for just over $12\%$ of the variance each. Taken together, the five component solution accounts for just over half of the variance ($56\%$) in the observed data. Be aware that in every PCA you could potentially have the same number of components as observed variables, but every additional component you include will add a smaller amount of explained variance. If the first few components explain a good amount of the variance in the original $25$ variables, then those components are clearly a useful, simpler substitute for all 25 variables. You can drop the rest without losing too much of the original variability. But if it takes $18$ components to explain most of the variance in those $25$ variables, you might as well just use the original $25$.
+In Figure \@ref(fig:fig15-16) we also have the proportion of overall variance in the data that is accounted for by the two components. Components one and two account for just over 12%$ of the variance each. Taken together, the five component solution accounts for just over half of the variance (56%) in the observed data. Be aware that in every PCA you could potentially have the same number of components as observed variables, but every additional component you include will add a smaller amount of explained variance. If the first few components explain a good amount of the variance in the original 25 variables, then those components are clearly a useful, simpler substitute for all 25 variables. You can drop the rest without losing too much of the original variability. But if it takes 18 components to explain most of the variance in those 25 variables, you might as well just use the original 25.
 
-Figure \@ref(fig:fig15-17) shows the component loadings. That's is, how the $25$ different personality items load onto each of the selected components. We have hidden loadings less than $0.4$ (set in the options shown in Figure \@ref(fig:fig15-17)) as we were interested in items with a substantive loading and setting the threshold at the higher $0.4$ value also provided a cleaner, clearer solution.
+Figure \@ref(fig:fig15-17) shows the component loadings. That's is, how the 25 different personality items load onto each of the selected components. We have hidden loadings less than $0.4$ (set in the options shown in Figure \@ref(fig:fig15-17)) as we were interested in items with a substantive loading and setting the threshold at the higher $0.4$ value also provided a cleaner, clearer solution.
 
-```{r fig15-17, chunk.class = "enlarge.image", fig.cap="Component loadings for a five component solution in jamovi PCA", out.width = "70%"}
+```{r fig15-17, chunk.class = "enlarge.image", fig.cap="Component loadings for a five component solution in jamovi PCA", out.width = "90%"}
 knitr::include_graphics("images/Figure187.PNG")
 ```
 
-For components $1, 2, 3$ and $4$ the pattern of component loadings closely matches the putative factors specified in Figure \@ref(fig:fig15-2. And component $5$ is pretty close, with four of the five observed variables that putatively measure "openness" loading pretty well onto the component. Variable 04 doesn't quite seem to fit though, as the component solution in Figure **15.17** suggests that it loads onto component $4$ (albeit with a relatively low loading) but not substantively onto component $5$.
+For components $1, 2, 3$ and $4$ the pattern of component loadings closely matches the putative factors specified in Figure \@ref(fig:fig15-2. And component $5$ is pretty close, with four of the five observed variables that putatively measure "openness" loading pretty well onto the component. Variable 04 doesn't quite seem to fit though, as the component solution in Figure \@ref(fig:fig15-17) suggests that it loads onto component $4$ (albeit with a relatively low loading) but not substantively onto component $5$.
 
-We can also see in Figure \@ref(fig:fig15-17) the "uniqueness" of each variable. Uniqueness is the proportion of variance that is 'unique' to the variable and not explained by the components. For example, $52\%$ of the variance in 'A1' is not explained by the components in the five component solution. In contrast, 'N1' has relatively low variance not accounted for by the component solution ($30\%$). Note that the greater the 'uniqueness', the lower the relevance or contribution of the variable in the component model.
+We can also see in Figure \@ref(fig:fig15-17) the "uniqueness" of each variable. Uniqueness is the proportion of variance that is 'unique' to the variable and not explained by the components. For example, 52% of the variance in 'A1' is not explained by the components in the five component solution. In contrast, 'N1' has relatively low variance not accounted for by the component solution (30%). Note that the greater the 'uniqueness', the lower the relevance or contribution of the variable in the component model.
 
 Hopefully, this has given you a good first idea about how to undertake PCA in jamovi, and how it is conceptually different but practically fairly similar (given the right data) to EFA.
 
 You can go on to create and save component scores in much the same way as in EFA. However, if you take the option to create an optimally-weighted component score index then the commands and syntax in the jamovi Rj editor are a little different. See Figure \@ref(fig:fig15-18).
 
-```{r fig15-18, chunk.class = "enlarge.image", fig.cap="Rj editor commands for creating optimally weighted component scores for the five component solution", out.width = "70%"}
+```{r fig15-18, chunk.class = "enlarge.image", fig.cap="Rj editor commands for creating optimally weighted component scores for the five component solution", out.width = "90%"}
 knitr::include_graphics("images/Figure188.PNG")
 ```
 
@@ -266,6 +259,10 @@ In CFA, instead of doing an analysis where we see how the data goes together in 
 
 A straightforward confirmatory factor analysis (CFA) of the personality items would therefore specify five latent factors as shown in Figure \@ref(fig:fig15-19), each measured by five observed variables. Each variable is a measure of an underlying latent factor. For example, A1 is predicted by the underlying latent factor Agreeableness. And because A1 is not a perfect measure of the Agreeableness factor, there is an error term, e, associated with it. In other words, e represents the variance in A1 that is not accounted for by the Agreeableness factor. This is sometimes called **measurement error**.
 
+```{r fig15-19, chunk.class = "enlarge.image", fig.cap="Initial pre-specification of latent factor structure for the five factor personality scales, for use in CFA", out.width = "80%"}
+knitr::include_graphics("images/Figure189.PNG")
+```
+
 The next step is to consider whether the latent factors should be allowed to correlate in our model. As mentioned earlier, in the psychological and behavioural sciences constructs are often related to each other, and we also think that some of our personality factors may be correlated with each other. So, in our model, we should allow these latent factors to co-vary, as shown by the double-headed arrows in Figure \@ref(fig:fig15-19).
 
 At the same time, we should consider whether there is any good, systematic, reason for some of the error terms to be correlated with each other. One reason for this might be that there is a shared methodological feature for particular sub-sets of the observed variables such that the observed variables might be correlated for methodological rather than substantive latent factor reasons. We'll return to this possibility in a later section but, for now, there are no clear reasons that we can see that would justify correlating some of the error terms with each other
@@ -274,13 +271,9 @@ Without any correlated error terms, the model we are testing to see how well it 
 
 Right, let's take a look at how we set this CFA analysis up in jamovi.
 
-```{r fig15-19, chunk.class = "enlarge.image", fig.cap="Initial pre-specification of latent factor structure for the five factor personality scales, for use in CFA", out.width = "70%"}
-knitr::include_graphics("images/Figure189.PNG")
-```
-
 ### CFA in jamovi
 
-Open up the bfi sample2.csv file, check that the 25 variables are coded as ordinal (or continuous; it won't make any difference for this analysis). To perform CFA in jamovi:
+Open up the bfi_sample2.csv file, check that the 25 variables are coded as ordinal (or continuous; it won't make any difference for this analysis). To perform CFA in jamovi:
 
 -   Select Factor - Confirmatory Factor Analysis from the main jamovi button bar to open the CFA analysis window (Figure \@ref(fig:fig15-20)).
 
@@ -296,7 +289,15 @@ Open up the bfi sample2.csv file, check that the 25 variables are coded as ordin
 
 -   Check other appropriate options, the defaults are ok for this initial work through, though you might want to check the "Path diagram" option under 'Plots' to see jamovi produce a (fairly) similar diagram to our Figure \@ref(fig:fig15-19).
 
+```{r fig15-20, chunk.class = "enlarge.image", fig.cap="The jamovi CFA analysis window", out.width = "90%"}
+knitr::include_graphics("images/Figure190.PNG")
+```
+
 Once we have set up the analysis we can turn our attention to the jamovi results window and see what's what. The first thing to look at is **model fit** (Figure \@ref(fig:fig15-21)) as this tells us how good a fit our model is to the observed data. NB in our model only the pre-specified covariances are estimated, including the factor correlations by default. Everything else is set to zero.
+
+```{r fig15-21, chunk.class = "enlarge.image", fig.cap="The jamovi CFA Model Fit results for our CFA model", out.width = "70%"}
+knitr::include_graphics("images/Figure191.PNG")
+```
 
 There are several ways of assessing model fit. The first is a chi-square statistic that, if small, indicates that the model is a good fit to the data. However, the chi-squared statistic used for assessing model fit is pretty sensitive to sample size, meaning that with a large sample a good enough fit between the model and the data almost always produces a large and significant (p < .05) chi-square value.
 
@@ -304,45 +305,41 @@ So, we need some other ways of assessing model fit. In jamovi several are provid
 
 So, looking at Figure \@ref(fig:fig15-21) we can see that the chi-square value is large and highly significant. Our sample size is not too large, so this possibly indicates a poor fit. The CFI is $0.762$ and the TLI is 0.731, indicating poor fit between the model and the data. The RMSEA is $0.085$ with a $90\%$ confidence interval from $0.077$ to $0.092$, again this does not indicate a good fit.
 
-```{r fig15-20, chunk.class = "enlarge.image", fig.cap="The jamovi CFA analysis window", out.width = "70%"}
-knitr::include_graphics("images/Figure190.PNG")
-```
-
-```{r fig15-21, chunk.class = "enlarge.image", fig.cap="The jamovi CFA Model Fit results for our CFA model", out.width = "70%"}
-knitr::include_graphics("images/Figure191.PNG")
-```
-
-Pretty disappointing, huh? But perhaps not too surprising given that in the earlier EFA, when we ran with a similar data set (Section **15.1**), only around half of the variance in the data was accounted for by the five factor model.
+Pretty disappointing, huh? But perhaps not too surprising given that in the earlier EFA, when we ran with a similar data set (see [Exploratory Factor Analysis] section), only around half of the variance in the data was accounted for by the five factor model.
 
 Let's go on to look at the factor loadings and the factor covariance estimates, shown in Figures \@ref(fig:fig15-22) and \@ref(fig:fig15-23). The Z-statistic and p-value for each of these parameters indicates they make a reasonable contribution to the model (i.e. they are not zero) so there doesn't appear to be any reason to remove any of the specified variable-factor paths, or factor-factor correlations from the model. Often the standardized estimates are easier to interpret, and these can be specified under the 'Estimates' option. These tables can usefully be incorporated into a written report or scientific article.
 
-How could we improve the model? One option is to go back a few stages and think again about the items / measures we are using and how they might be improved or changed. Another option is to make some post hoc tweaks to the model to improve the fit. One way of doing this is to use "modification indices", specified as an 'Additional output' option in jamovi (see Figure \@ref(fig:fig15-24)).
+```{r fig15-22, chunk.class = "enlarge.image", fig.cap="The jamovi CFA Factor Loadings table for our CFA model", out.width = "90%"}
+knitr::include_graphics("images/Figure192.PNG")
+```
+
+```{r fig15-23, chunk.class = "enlarge.image", fig.cap="The jamovi CFA Factor Covariances table for our CFA model", out.width = "90%"}
+knitr::include_graphics("images/Figure193.PNG")
+```
+
+How could we improve the model? One option is to go back a few stages and think again about the items / measures we are using and how they might be improved or changed. Another option is to make some post hoc tweaks to the model to improve the fit. One way of doing this is to use "modification indices" (Figure \@ref(fig:fig15-24)), specified as an 'Additional output' option in jamovi.
+
+```{r fig15-24, chunk.class = "enlarge.image", fig.cap="The jamovi CFA Factor Loadings Modification Indices", out.width = "90%"}
+knitr::include_graphics("images/Figure194.PNG")
+```
 
 What we are looking for is the highest modification index (MI) value. We would then judge whether it makes sense to add that additional term into the model, using a *post hoc* rationalisation. For example, we can see in Figure \@ref(fig:fig15-24) that the largest MI for the factor loadings that are not already in the model is a value of 28.786 for the loading of N4 ("Often feel blue") onto the latent factor Extraversion. This indicates that if we add this path into the model then the chi-square value will reduce by around the same amount.
 
 But in our model adding this path arguably doesn't really make any theoretical or methodological sense, so it's not a good idea (unless you can come up with a persuasive argument that "Often feel blue" measures both Neuroticism and Extraversion). I can't think of a good reason. But, for the sake of argument, let's pretend it does make some sense and add this path into the model. Go back to the CFA analysis window (see Figure \@ref(fig:fig15-20)) and add N4 into the Extraversion factor. The results of the CFA will now change (not shown); the chi-square has come down to around 709 (a drop of around 30, roughly similar to the size of the MI) and the other fit indices have also improved, though only a bit. But it's not enough: it's still not a good fitting model.
 
-```{r fig15-22, chunk.class = "enlarge.image", fig.cap="The jamovi CFA Factor Loadings table for our CFA model", out.width = "70%"}
-knitr::include_graphics("images/Figure192.PNG")
-```
-
 If you do find yourself adding new parameters to a model using the MI values then always re-check the MI tables after each new addition, as the MIs are refreshed each time.
 
 There is also a Table of Residual Covariance Modification Indices produced by jamovi (Figure \@ref(fig:fig15-25)). In other words, a table showing which correlated errors, if added to the model, would improve the model fit the most. It's a good idea to look across both MI tables at the same time, spot the largest MI, think about whether the addition of the suggested parameter can be reasonably justified and, if it can, add it to the model. And then you can start again looking for the biggest MI in the re-calculated results.
 
-```{r fig15-23, chunk.class = "enlarge.image", fig.cap="The jamovi CFA Factor Covariances table for our CFA model", out.width = "70%"}
-knitr::include_graphics("images/Figure193.PNG")
+```{r fig15-25, chunk.class = "enlarge.image", fig.cap="Residual Covariance Modification Indices produced by jamovi", out.width = "70%"}
+knitr::include_graphics("images/Figure194a.PNG")
 ```
 
 You can keep going this way for as long as you like, adding parameters to the model based on the largest MI, and eventually you will achieve a satisfactory fit. But there will also be a strong possibility that in doing this you will have created a monster! A model that is ugly and deformed and doesn't have any theoretical sense or purity. In other words, be very careful!
 
 So far, we have checked out the factor structure obtained in the EFA using a second sample and CFA. Unfortunately, we didn't find that the factor structure from the EFA was confirmed in the CFA, so it's back to the drawing board as far as the development of this personality scale goes.
 
-Although we could have tweaked the CFA using modification indexes, there really were not any good reasons (that I could think of) for these suggested additional factor loadings or residual covariances to be included. However, sometimes there is a good reason for residuals to be allowed to co-vary (or correlate), and a good example of this is shown in the next section on **Multi-Trait Multi-Method (MTMM)** CFA. Before we do that, let's cover how to report the results of a CFA.
-
-```{r fig15-24, chunk.class = "enlarge.image", fig.cap="The jamovi CFA Factor Loadings Modification Indices", out.width = "70%"}
-knitr::include_graphics("images/Figure194.PNG")
-```
+Although we could have tweaked the CFA using modification indexes, there really were not any good reasons (that I could think of) for these suggested additional factor loadings or residual covariances to be included. However, sometimes there is a good reason for residuals to be allowed to co-vary (or correlate), and a good example of this is shown in the next section on [Multi-Trait Multi-Method CFA]. Before we do that, let's cover how to report the results of a CFA.
 
 ### Reporting a CFA
 
@@ -382,13 +379,13 @@ The Attributional Style Questionnaire (ASQ) was used [@Hewitt2004] to collect ps
 
 There are six hypothetical scenarios and for each scenario respondents answer a question aimed at (a) internality, (b) stability and (c) globality. So there are $6 \times 3 = 18$ items overall. See Figure \@ref(fig:fig15-26) for more details.
 
+```{r fig15-26, chunk.class = "enlarge.image", fig.cap="The Attributional Style Questionnaire (ASQ) for negative events", out.width = "90%"}
+knitr::include_graphics("images/Figure195.PNG")
+```
+
 Researchers are interested in checking their data to see whether there are some underlying latent factors that are measured reasonably well by the 18 observed variables in the ASQ.
 
 First, they try EFA with these 18 variables (not shown), but no matter how they extract or rotate, they can't find a good factor solution. Their attempt to identify underlying latent factors in the Attributional Style Questionnaire (ASQ) proved fruitless. If you get results like this then either your theory is wrong (there is no underlying latent factor structure for attributional style, which is possible), the sample is not relevant (which is unlikely given the size and characteristics of this sample of young adults from the United Kingdom and New Zealand), or the analysis was not the right tool for the job. We're going to look at this third possibility.
-
-```{r fig15-26, chunk.class = "enlarge.image", fig.cap="The Attributional Style Questionnaire (ASQ) for negative events", out.width = "70%"}
-knitr::include_graphics("images/Figure195.PNG")
-```
 
 Remember that there were three dimensions measured in the ASQ: Internality, Stability and Globality, each measured by six questions as shown in Figure \@ref(fig:fig15-27).
 
@@ -396,13 +393,21 @@ What if, instead of doing an analysis where we see how the data goes together in
 
 A straightforward confirmatory factor analysis (CFA) of the ASQ would therefore specify three latent factors as shown in the columns of Figure \@ref(fig:fig15-27), each measured by six observed variables.
 
-We could depict this as in the diagram in Figure \@ref(fig:fig15-28), which shows that each variable is a measure of an underlying latent factor. For example INT1 is predicted by the underlying latent factor Internality. And because INT1 is not a perfect measure of the Internality factor, there is an error term, e1, associated with it. In other words, e1 represents the variance in INT1 that is not accounted for by the Internality factor. This is sometimes called "measurement error".
-
-```{r fig15-27, chunk.class = "enlarge.image", fig.cap="Six questions on the ASQ for each of the Internality, Stability and Globality dimensions", out.width = "70%"}
+```{r fig15-27, chunk.class = "enlarge.image", fig.cap="Six questions on the ASQ for each of the Internality, Stability and Globality dimensions", out.width = "80%"}
 knitr::include_graphics("images/Figure196.PNG")
 ```
 
+We could depict this as in the diagram in Figure \@ref(fig:fig15-28), which shows that each variable is a measure of an underlying latent factor. For example INT1 is predicted by the underlying latent factor Internality. And because INT1 is not a perfect measure of the Internality factor, there is an error term, e1, associated with it. In other words, e1 represents the variance in INT1 that is not accounted for by the Internality factor. This is sometimes called "measurement error".
+
+```{r fig15-28, chunk.class = "enlarge.image", fig.cap="Initial pre-specification of latent factor structure for the ASQ", out.width = "80%"}
+knitr::include_graphics("images/Figure197.PNG")
+```
+
 The next step is to consider whether the latent factors should be allowed to correlate in our model. As mentioned earlier, in the psychological and behavioural sciences constructs are often related to each other, and we also think that Internality, Stability, and Globality might be correlated with each other, so in our model we should allow these latent factors to co-vary, as shown in Figure \@ref(fig:fig15-29).
+
+```{r fig15-29, chunk.class = "enlarge.image", fig.cap="Final pre-specification of latent factor structure for the ASQ, including latent factor correlations, and shared method error term correlations for the observed variable INT1, STAB1 and GLOB1, in a CFA MTMM model. For clarity, other pre-specified error term correlations are not shown", out.width = "80%"}
+knitr::include_graphics("images/Figure198.PNG")
+```
 
 At the same time, we should consider whether there is any good, systematic, reason for some of the error terms to be correlated with each other. Thinking back to the ASQ questions, there were three different sub-questions (a, b and c) for each main question (1-6). Q1 was about unsuccessful job hunting and it is plausible that this question has some distinctive artefactual or methodological aspects over and above the other questions (2-5), something to do with job hunting perhaps. Similarly, Q2 was about not helping a friend with a problem, and there may be some distinctive artefactual or methodological aspects to do with not helping a friend that is not present in the other questions (1, and 3-5).
 
@@ -410,13 +415,7 @@ So, as well as multiple factors, we also have multiple methodological features i
 
 Whilst a basic CFA model like the one shown in Figure \@ref(fig:fig15-28) could be tested against our observed data, we have in fact come up with a more sophisticated model, as shown in the diagram in Figure \@ref(fig:fig15-29). This more sophisticated CFA model is known as a **Multi-Trait Multi-Method (MTMM)** model, and it is the one we will test in jamovi.
 
-```{r fig15-28, chunk.class = "enlarge.image", fig.cap="Initial pre-specification of latent factor structure for the ASQ", out.width = "70%"}
-knitr::include_graphics("images/Figure197.PNG")
-```
 
-```{r fig15-29, chunk.class = "enlarge.image", fig.cap="Final pre-specification of latent factor structure for the ASQ, including latent factor correlations, and shared method error term correlations for the observed variable INT1, STAB1 and GLOB1, in a CFA MTMM model. For clarity, other pre-specified error term correlations are not shown", out.width = "70%"}
-knitr::include_graphics("images/Figure198.PNG")
-```
 
 ### MTMM CFA in jamovi
 
@@ -436,25 +435,29 @@ To perform MTMM CFA in jamovi:
 
 -   Check other appropriate options, the defaults are ok for this initial work through, though you might want to check the "Path diagram" option under 'Plots' to see jamovi produce a (fairly) similar diagram to our Figure \@ref(fig:fig15-29), but including all the error term correlations that we have added above.
 
-Once we have set up the analysis we can turn our attention to the jamovi results window and see what's what. The first thing to look at is "Model fit" as this tells us how good a fit our model is to the observed data. NB in our model only the pre-specified covariances are estimated, everything else is set to zero, so model fit is testing both whether the pre-specified "free" parameters are not zero, and conversely whether the other relationships in the data -- the ones we have not specified in the model -- can be held at zero.
+```{r fig15-30, chunk.class = "enlarge.image", fig.cap="The jamovi CFA analysis window", out.width = "90%"}
+knitr::include_graphics("images/Figure199.PNG")
+```
+
+Once we have set up the analysis we can turn our attention to the jamovi results window and see what's what. The first thing to look at is "Model fit" as this tells us how good a fit our model is to the observed data (Figure \@ref(fig:fig15-31)). NB in our model only the pre-specified covariances are estimated, everything else is set to zero, so model fit is testing both whether the pre-specified "free" parameters are not zero, and conversely whether the other relationships in the data -- the ones we have not specified in the model -- can be held at zero.
+
+```{r fig15-31, chunk.class = "enlarge.image", fig.cap="The jamovi CFA Model Fit results for our CFA MTMM model", out.width = "90%"}
+knitr::include_graphics("images/Figure200.PNG")
+```
 
 There are several ways of assessing model fit. The first is a chi-square statistic, which if small indicates that the model is a good fit to the data. However, the chi-square statistic used for assessing model fit is very sensitive to sample size, meaning that with a large sample (more than 300-400 cases) a good enough fit between the model and the data almost always produces a large and significant chi-square value.
 
 So, we need some other ways of assessing model fit. In jamovi several are provided by default. These are the Comparative Fit Index (CFI), the Tucker Fit Index (TFI) and the Root Mean Square Error of Approximation (RMSEA) together with the 90% confidence interval for the RMSEA. As we mentioned previously, some useful rules of thumb are that a satisfactory fit is indicated by CFI > 0.9, TFI > 0.9, and RMSEA of about 0.05 to 0.08. A good fit is CFI > 0.95, TFI > 0.95, and RMSEA and upper CI for RMSEA < 0.05.
 
-So, looking at Figure \@ref(fig:fig15-31) we can see that the chi-square value is highly significant, which is not a surprise given the large sample size ($N = 2748$). The CFI is $0.98$ and the TLI is also 0.98, indicating a very good fit. The RMSEA is 0.02 with a $90\%$ confidence interval from $0.02$ to 0.02 -- pretty tight!
-
-```{r fig15-30, chunk.class = "enlarge.image", fig.cap="The jamovi CFA analysis window", out.width = "70%"}
-knitr::include_graphics("images/Figure199.PNG")
-```
-
-```{r fig15-31, chunk.class = "enlarge.image", fig.cap="```{r fig15-20, chunk.class = "enlarge.image", fig.cap="The jamovi CFA Model Fit results for our CFA MTMM model", out.width = "70%"}
-knitr::include_graphics("images/Figure200.PNG")
-```
+So, looking at Figure \@ref(fig:fig15-31) we can see that the chi-square value is highly significant, which is not a surprise given the large sample size (N = 2748). The CFI is 0.98 and the TLI is also 0.98, indicating a very good fit. The RMSEA is 0.02 with a 90% confidence interval from 0.02 to 0.02 -- pretty tight!
 
 Overall, I think we can be satisfied that our pre-specified model is a very good fit to the observed data, lending support to our MTMM model for the ASQ.
 
 We can now go on to look at the factor loadings and the factor covariance estimates, as in Figure \@ref(fig:fig15-32). Often the standardized estimates are easier to interpret, and these can be specified under the 'Estimates' option. These tables can usefully be incorporated into a written report or scientific article.
+
+```{r fig15-32, chunk.class = "enlarge.image", fig.cap="The jamovi CFA Factor Loadings and Covariances tables for our CFA MTMM model", out.width = "90%"}
+knitr::include_graphics("images/Figure201.PNG")
+```
 
 You can see from Figure \@ref(fig:fig15-32) that all of our pre-specified factor loadings and factor covariances are significantly different from zero. In other words, they all seem to be making a useful contribution to the model.
 
@@ -462,7 +465,15 @@ We've been pretty lucky with this analysis, getting a very good fit on our first
 
 What we are looking for is the highest modification index (MI) value. We would then judge whether it makes sense to add that additional term into the model, using a post hoc rationalisation. For example, we can see in Figure \@ref(fig:fig15-33) that the largest MI for the factor loadings that are not already in the model is a value of 24.52 for the loading of INT6 onto the latent factor Globality. This indicates that if we add this path into the model then the chi-square value will reduce by about 25. But in our model adding this path doesn't really make any theoretical or methodological sense, and therefore we won't be including this path in a revised model.
 
+```{r fig15-33, chunk.class = "enlarge.image", fig.cap="The jamovi CFA Factor Loadings Modification Indices", out.width = "80%"}
+knitr::include_graphics("images/Figure202.PNG")
+```
+
 Likewise, when we look at the MIs for the residual terms (Figure \@ref(fig:fig15-34)) the highest MI is 13.48 for allowing the errors between INT1 and INT3 to co-vary -- i.e. to be included -- in the model. But, this isn't a particularly high MI, there is no reasonable justification for including this parameter in the model, and we already have a good fit; so again our answer is no modification.
+
+```{r fig15-34, chunk.class = "enlarge.image", fig.cap="The jamovi CFA Residual Covariances Modification Indices", out.width = "80%"}
+knitr::include_graphics("images/Figure203.PNG")
+```
 
 If you do find yourself adding new parameters to a model using the MI then always re-check the MI tables after each new addition (or exclusion -- in some software a MI can also suggest parameters to be removed from a model to improve model fit), as the MIs are refreshed each time.
 
@@ -470,21 +481,9 @@ If you do find yourself adding new parameters to a model using the MI then alway
 
 After you have been through the process of initial scale development using EFA and CFA, you should have reached a stage where the scale holds up pretty well using CFA with different samples. One thing that you might also be interested in at this stage is to see how well the factors are measured using a scale that combines the observed variables.
 
-In psychometrics we use reliability analysis to provide information about how consistently a scale measures a psychological construct (See Section **2.3**). **Internal consistency** is what we are concerned with here, and that refers to the consistency across all the individual items that make up a measurement scale. So, if we have $V1, V2, V3, V4$ and $V5$ as observed item variables, then we can calculate a statistic that tells us how internally consistent these items are in measuring the underlying construct.
+In psychometrics we use reliability analysis to provide information about how consistently a scale measures a psychological construct (See earlier section on [Assessing the reliability of a measurement]. **Internal consistency** is what we are concerned with here, and that refers to the consistency across all the individual items that make up a measurement scale. So, if we have $V1, V2, V3, V4$ and $V5$ as observed item variables, then we can calculate a statistic that tells us how internally consistent these items are in measuring the underlying construct.
 
-```{r fig15-32, chunk.class = "enlarge.image", fig.cap="The jamovi CFA Factor Loadings and Covariances tables for our CFA MTMM model", out.width = "70%"}
-knitr::include_graphics("images/Figure201.PNG")
-```
-
-```{r fig15-33, chunk.class = "enlarge.image", fig.cap="The jamovi CFA Factor Loadings Modification Indices", out.width = "70%"}
-knitr::include_graphics("images/Figure202.PNG")
-```
-
-```{r fig15-34, chunk.class = "enlarge.image", fig.cap="The jamovi CFA Residual Covariances Modification Indices", out.width = "70%"}
-knitr::include_graphics("images/Figure203.PNG")
-```
-
-A popular statistic used to check the internal consistency of a scale is **Cronbach's alpha** [@Cronbach1951]. Cronbach's alpha is a measure of equivalence (whether different sets of scale items would give the same measurement outcomes). Equivalence is tested by dividing the scale items into two groups (a "split-half") and seeing whether analysis of the two parts gives comparable results. Of course, there are many ways a set of items could be split, but if all possible splits are made then it is possible to produce a statistic that reflects the overall pattern of split-half coefficients. Cronbach's alpha ($\alpha$) is such a statistic: a function of all the split-half coefficients for a scale. If a set of items that measure a construct (e.g. an Extraversion scale) has an $\alpha$ of $0.80$, then the proportion of error variance in the scale is $0.20$. In other words, a scale with an $\alpha$ of $0.80$ includes approximately $20\\%$ error.
+A popular statistic used to check the internal consistency of a scale is **Cronbach's alpha** [@Cronbach1951]. Cronbach's alpha is a measure of equivalence (whether different sets of scale items would give the same measurement outcomes). Equivalence is tested by dividing the scale items into two groups (a "split-half") and seeing whether analysis of the two parts gives comparable results. Of course, there are many ways a set of items could be split, but if all possible splits are made then it is possible to produce a statistic that reflects the overall pattern of split-half coefficients. Cronbach's alpha ($\alpha$) is such a statistic: a function of all the split-half coefficients for a scale. If a set of items that measure a construct (e.g. an Extraversion scale) has an $\alpha$ of $0.80$, then the proportion of error variance in the scale is $0.20$. In other words, a scale with an $\alpha$ of $0.80$ includes approximately 20% error.
 
 BUT, (and that's a BIG "BUT"), Cronbach's alpha is not a measure of unidimensionality (i.e. an indicator that a scale is measuring a single factor or construct rather than multiple related constructs). Scales that are multidimensional will cause alpha to be under-estimated if not assessed separately for each dimension, but high values for alpha are not necessarily indicators of unidimensionality. So, an $\alpha$ of 0.80 does not mean that 80% of a single underlying construct is accounted for. It could be that the 80% comes from more than one underlying construct. That's why EFA and CFA are useful to do first.
 
@@ -492,19 +491,15 @@ Further, another feature of $\alpha$ is that it tends to be sample specific: it 
 
 An alternative is **McDonald's omega** ($\omega$), and jamovi also provides this statistic. Whereas $\alpha$ makes the following assumptions: (a) no residual correlations, (b) items have identical loadings, and (c) the scale is unidimensional, $\omega$ does not and is therefore a more robust reliability statistic. If these assumptions are not violated then $\alpha$ and $\omega$ will be similar, but if they are then $\omega$ is to be preferred.
 
-Sometimes a threshold for $\alpha$ or $\omega$ is provided, suggesting a "good enough" value. This might be something like $\alpha$s of $0.70$ or $0.80$ representing "acceptable" and "good" reliability, respectively. However, this does depend on what exactly the scale is supposed to be measuring, so thresholds like this should be used cautiously. It could be better to simply state that an $\alpha$ or $\omega$ of $0.70$ is associated with $30\\%$ error variance in a scale, and an $\alpha$ or $\omega$ of $0.80$ is associated with $20\\%$.
+Sometimes a threshold for $\alpha$ or $\omega$ is provided, suggesting a "good enough" value. This might be something like $\alpha$s of $0.70$ or $0.80$ representing "acceptable" and "good" reliability, respectively. However, this does depend on what exactly the scale is supposed to be measuring, so thresholds like this should be used cautiously. It could be better to simply state that an $\alpha$ or $\omega$ of $0.70$ is associated with 30% error variance in a scale, and an $\alpha$ or $\omega$ of $0.80$ is associated with 20%.
 
 Can $\alpha$ be too high? Probably: if you are getting an $\alpha$ coefficient above $0.95$ then this indicates high inter-correlations between the items and that there might be too much overly redundant specificity in the measurement, with a risk that the construct being measured is perhaps overly narrow.
 
 ### Reliability analysis in jamovi
 
-```{r fig15-35, chunk.class = "enlarge.image", fig.cap="The jamovi Reliability Analysis window", out.width = "70%"}
-knitr::include_graphics("images/Figure204.PNG")
-```
+We have a third sample of personality data to use to undertake reliability analysis: in the bfi_sample3.csv file. Once again, check that the 25 personality item variables are coded as continuous. To perform reliability analysis in jamovi:
 
-We have a third sample of personality data to use to undertake reliability analysis: in the bfi sample3.csv file. Once again, check that the 25 personality item variables are coded as continuous. To perform reliability analysis in jamovi:
-
--   Select Factor - Reliability Analysis from the main jamovi button bar to open the reliability analysis window (Figure \@ref(fig:fig15-3)).
+-   Select Factor - Reliability Analysis from the main jamovi button bar to open the reliability analysis window (Figure \@ref(fig:fig15-35)).
 
 -   Select the 5 A variables and transfer them into the 'Items' box.
 
@@ -512,13 +507,17 @@ We have a third sample of personality data to use to undertake reliability analy
 
 -   Check other appropriate options, as in Figure \@ref(fig:fig15-35).
 
+```{r fig15-35, chunk.class = "enlarge.image", fig.cap="The jamovi Reliability Analysis window", out.width = "90%"}
+knitr::include_graphics("images/Figure204.PNG")
+```
+
 Once done, look across at the jamovi results window. You should see something like Figure \@ref(fig:fig15-36). This tells us that the Cronbach's $\alpha$ coefficient for the Agreeableness scale is 0.72. This means that just under 30% of the Agreeableness scale score is error variance. McDonald's $\omega$ is also given, and this is 0.74, not much different from $\alpha$.
 
-We can also check how $\alpha$ or $\omega$ can be improved if a specific item is dropped from the scale. For example, $\alpha$ would increase to 0.74 and $\omega$ to 0.75 if we dropped item A1. This isn't a big increase, so probably not worth doing.
-
-```{r fig15-36, chunk.class = "enlarge.image", fig.cap="The jamovi Reliability Analysis results for the Agreeableness factor", out.width = "70%"}
+```{r fig15-36, chunk.class = "enlarge.image", fig.cap="The jamovi Reliability Analysis results for the Agreeableness factor", out.width = "90%"}
 knitr::include_graphics("images/Figure205.PNG")
 ```
+
+We can also check how $\alpha$ or $\omega$ can be improved if a specific item is dropped from the scale. For example, $\alpha$ would increase to 0.74 and $\omega$ to 0.75 if we dropped item A1. This isn't a big increase, so probably not worth doing.
 
 The process of calculating and checking scale statistics ($\alpha$ and $\omega$) is the same for all the other scales, and they all had similar reliability estimates apart from Openness. For Openness, the amount of error variance in the Scale score is around 40%, which is high and indicates that Openness is substantially less consistent as a reliable measure of a personality attribute than the other personality scales.
 
@@ -526,12 +525,12 @@ The process of calculating and checking scale statistics ($\alpha$ and $\omega$)
 
 In this chapter on factor analysis and related techniques we have introduced and demonstrated statistical analyses that assess the pattern of relationships in a data set. Specifically, we have covered:
 
--   Exploratory Factor Analysis (EFA). EFA is a statistical technique for identifying underlying latent factors in a data set. Each observed variable is conceptualised as representing the latent factor to some extent, indicated by a factor loading. Researchers also use EFA as a way of data reduction, i.e. identifying observed variables than can be combined into new factor variables for subsequent analysis. (Section **15.1**)
+-   [Exploratory Factor Analysis] (EFA). EFA is a statistical technique for identifying underlying latent factors in a data set. Each observed variable is conceptualised as representing the latent factor to some extent, indicated by a factor loading. Researchers also use EFA as a way of data reduction, i.e. identifying observed variables than can be combined into new factor variables for subsequent analysis.
 
--   Principal Component Analysis (PCA) is a data reduction technique which, strictly speaking, does not identify underlying latent factors. Instead, PCA simply produces a linear combination of observed variables. (Section **15.2**)
+-   [Principal Component Analysis] (PCA) is a data reduction technique which, strictly speaking, does not identify underlying latent factors. Instead, PCA simply produces a linear combination of observed variables. 
 
--   Confirmatory Factor Analysis (CFA). Unlike EFA, with CFA you start with an idea - a model - of how the variables in your data are related to each other. You then test your model against the observed data and assess how good a fit the model is to the data. (Section **15.3**)
+-   [Confirmatory Factor Analysis] (CFA). Unlike EFA, with CFA you start with an idea - a model - of how the variables in your data are related to each other. You then test your model against the observed data and assess how good a fit the model is to the data. 
 
--   In Multi-Trait Multi-Method (MTMM) CFA, both latent factor and method variance are included in the model in an approach that is useful when there are different methodological approaches used and therefore method variance is an important consideration (Section **15.4**)
+-   In [Multi-Trait Multi-Method CFA] (MTMM CFA), both latent factor and method variance are included in the model in an approach that is useful when there are different methodological approaches used and therefore method variance is an important consideration.
 
--   Internal Consistency Reliability Analysis. This form of reliability analysis tests how consistently a scale measures a measurement (psychological) construct. (Section **15.5**)
+-   [Internal consistency reliability analysis]. This form of reliability analysis tests how consistently a scale measures a measurement (psychological) construct.

@@ -83,6 +83,29 @@ saveRDS(lsj_chapter_tables, "lsj_chapter_tables.rds")
 huxtabs[[7]][[1]] %>% set_caption("...") 
 ```
 
+x <- lsj_chapter_tables[[9]][[3]] 
+x
+
+library(huxtable)
+library(janitor)
+
+huxthattibble <- function(x) {
+  hux(x) %>% 
+    { if (names(x[1]) == "X1") 
+    ( row_to_names(., 1) %>% 
+       set_header_rows(1, TRUE))
+      else ( hux(x) %>% 
+               set_contents(1, value = names(x)) ) 
+      } %>% 
+    set_align(everywhere, everywhere, "center") %>% 
+    set_width(1.01) %>% 
+    set_caption_pos("bottomleft") %>% 
+    theme_article() %>% 
+    set_background_color(odds, everywhere, "grey95")
+}
+
+huxthattibble(x)
+
 lsj_chapter_tables
 
 ```{r fig1-1, fig.cap="...", out.width = "90%"}
