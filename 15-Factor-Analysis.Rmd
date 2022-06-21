@@ -34,8 +34,8 @@ If the EFA has provided a good solution (i.e. factor model), then we need to dec
 
 In line with this approach, another consequence of EFA is to combine the variables that load onto distinct factors into a factor score, sometimes known as a scale score. There are two options for combining variables into a scale score:
 
--   Create a new variable with a score weighted by the factor loadings for each item that contributes to the factor.
--   Create a new variable based on each item that contributes to the factor, but weighting them equally.
+- Create a new variable with a score weighted by the factor loadings for each item that contributes to the factor.
+- Create a new variable based on each item that contributes to the factor, but weighting them equally.
 
 In the first option each item's contribution to the combined score depends on how strongly it relates to the factor. In the second option we typically just average across all the items that contribute substantively to a factor to create the combined scale score variable. Which to choose is a matter of preference, though a disadvantage with the first option is that loadings can vary quite a bit from sample to sample, and in behavioural and health sciences we are often interested in developing and using composite questionnaire scale scores across different studies and different samples. In which case it is reasonable to use a composite measure that is based on the substantive items contributing equally rather than weighting by sample specific loadings from a different sample. In any case, understanding a combined variable measure as an average of items is simpler and more intuitive than using a sample specific optimally-weighted combination.
 
@@ -79,11 +79,11 @@ First, check the assumptions (Figure \@ref(fig:fig15-4)). You can see that (1) B
 
 The next thing to check is how many factors to use (or "extract" from the data). Three different approaches are available:
 
--   One convention is to choose all components with Eigen values greater than 12 . This would give us four factors with our data (try it and see).
+- One convention is to choose all components with Eigen values greater than 12 . This would give us four factors with our data (try it and see).
 
--   Examination of the scree plot, as in Figure \@ref(fig:fig15-5, lets you identify the "point of inflection". This is the point at which the slope of the scree curve clearly levels off, below the "elbow". This would give us five factors with our data. Interpreting scree plots is a bit of an art: in Figure \@ref(fig:fig15-5) there is a noticeable step from $5$ to $6$ factors, but in other scree plots you look at it will not be so clear cut.
+- Examination of the scree plot, as in Figure \@ref(fig:fig15-5, lets you identify the "point of inflection". This is the point at which the slope of the scree curve clearly levels off, below the "elbow". This would give us five factors with our data. Interpreting scree plots is a bit of an art: in Figure \@ref(fig:fig15-5) there is a noticeable step from $5$ to $6$ factors, but in other scree plots you look at it will not be so clear cut.
 
--   Using a parallel analysis technique, the obtained Eigen values are compared to those that would be obtained from random data. The number of factors extracted is the number with Eigen values greater than what would be found with random data.
+- Using a parallel analysis technique, the obtained Eigen values are compared to those that would be obtained from random data. The number of factors extracted is the number with Eigen values greater than what would be found with random data.
 
 ```{r fig15-5, chunk.class = "enlarge.image", fig.cap="Scree plot of the personality data in jamovi EFA, showing a noticeable inflection and levelling off after point 5 (the 'elbow')", out.width = "90%"}
 knitr::include_graphics("images/Figure176.PNG")

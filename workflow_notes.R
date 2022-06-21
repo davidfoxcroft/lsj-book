@@ -5,7 +5,6 @@ download mathjax script for use offline
 add toc divisions
 check padding under figures
 
-check formatting tables 6... and table 7.1
 check adding page numbers to citations
 check footnote formatting ch 12
 check what technical detail to show / hide ch 13
