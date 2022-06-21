@@ -12,7 +12,7 @@ Suppose you've become involved in a clinical trial in which you are testing a ne
 
 For the purposes of this chapter, what we're really interested in is the effect of drug on mood.gain. The first thing to do is calculate some descriptive statistics and draw some graphs. In the [Descriptive statistics] chapter we showed you how to do this, and some of the descriptive statistics we can calculate in jamovi are shown in Figure \@ref(fig:fig13-1)
 
-```{r fig13-1, chunk.class="enlarge.image", fig.cap="Descriptives for mood gain, and box plots by drug administered", out.width = "90%"}
+```{r fig13-1, class.chunk="enlarge-image", fig.cap="Descriptives for mood gain, and box plots by drug administered", out.width = "90%"}
 knitr::include_graphics("images/Figure129.PNG")  
 ```
 
@@ -33,7 +33,7 @@ $$H_1: \text{ it } \underline{ is \text{ } not } \text{ true that }
 
 This null hypothesis is a lot trickier to test than any of the ones we've seen previously. How shall we do it? A sensible guess would be to "do an ANOVA", since that's the title of the chapter, but it's not particularly clear why an "analysis of variances" will help us learn anything useful about the means. In fact, this is one of the biggest conceptual difficulties that people have when first encountering ANOVA. To see how this works, I find it most helpful to start by talking about variances, specifically between group variability and within-group variability (Figure \@ref(fig:fig13-2)). 
 
-```{r fig13-2, chunk.class="enlarge.image", fig.cap="Graphical illustration of 'between groups' variation (panel a) and 'within groups' variation (panel b). On the left the arrows show the differences in the group means. On the right the arrows highlight the variability within each group", out.width = "90%"}
+```{r fig13-2, class.chunk="enlarge-image", fig.cap="Graphical illustration of 'between groups' variation (panel a) and 'within groups' variation (panel b). On the left the arrows show the differences in the group means. On the right the arrows highlight the variability within each group", out.width = "90%"}
 knitr::include_graphics("images/Figure130.PNG")
 ```
 
@@ -106,12 +106,10 @@ huxtabs[[13]][[2]] %>% set_caption("All of the key quantities involved in an ANO
 
 A summary of all the key quantities involved in a one-way ANOVA, including the formulas showing how they are calculated, is shown in Table \@ref(tab:tab13-2).
 
-Statistical notation [^13-comparing-several-means-one-way-anova-8]
+<span class="technical">[Additional technical detail [^13-comparing-several-means-one-way-anova-8]]</span>
 
 [^13-comparing-several-means-one-way-anova-8]: At a fundamental level ANOVA is a competition between two different statistical models, $H_0$ and $H_1$. When I described the null and alternative hypotheses at the start of the section, I was a little imprecise about what these models actually are. I'll remedy that now, though you probably won't like me for doing so. If you recall, our null hypothesis was that all of the group means are identical to one another. If so, then a natural way to think about the outcome variable $Y_{ik}$ is to describe individual scores in terms of a single population mean µ, plus the deviation from that population mean. This deviation is usually denoted $\epsilon_{ik}$ and is traditionally called the error or residual associated with that observation. Be careful though. Just like we saw with the word "significant", the word "error" has a technical meaning in statistics that isn't quite the same as its everyday English definition. In everyday language, "error" implies a mistake of some kind, but in statistics it doesn't (or at least, not necessarily). With that in mind, the word "residual" is a better term than the word "error". In statistics both words mean "leftover variability", that is "stuff" that the model can't explain.
-    In any case, here's what the null hypothesis looks like when we write it as a statistical model $$Y_{ik}=\mu+\epsilon_{ik}$$ where we make the assumption (discussed later) that the residual values $\epsilon_{ik}$ are normally distributed, with mean $0$ and a standard deviation $\sigma$ that is the same for all groups. To use the notation that we introduced in the [Introduction to probability] we would write this assumption like this $$\epsilon_{ik} \sim Normal(0,\sigma^2)$$ What about the alternative hypothesis, $H_1$? The only difference between the null hypothesis and the alternative hypothesis is that we allow each group to have a different population mean. So, if we let $\mu_k$ denote the population mean for the k-th group in our experiment, then the statistical model corresponding to $H_1$ is $$Y_{ik}=\mu_k+\epsilon_{ik}$$ where, once again, we assume that the error terms are normally distributed with mean 0 and standard deviation $\sigma$. That is, the alternative hypothesis also assumes that $\epsilon \sim Normal(0,\sigma^2)$ Okay, now that we've described the statistical models underpinning $H_0$ and $H_1$ in more detail, it's now pretty straightforward to say what the mean square values are measuring, and what this means for the interpretation of $F$. I won't bore you with the proof of this but it turns out that the within-groups mean square, $MS_w$, can be viewed as an estimator of the error variance $\sigma^2$ . The between-groups mean square $MS_b$ is also an estimator, but what it estimates is the error variance plus a quantity that depends on the true differences among the group means. If we call this quantity $Q$, then we can see that the F-statistic is basically$^a$ $$F=\frac{\hat{Q}+\hat{\sigma}^2}{\hat{\sigma}^2}$$ where the true value $Q = 0$ if the null hypothesis is true, and Q < 0 if the alternative hypothesis is true (e.g., @Hays1994, ch. 10). Therefore, at a bare minimum the $F$ *value must be larger than* 1 to have any chance of rejecting the null hypothesis. Note that this doesn't mean that it's impossible to get an F-value less than 1. What it means is that if the null hypothesis is true the sampling distribution of the F ratio has a mean of 1,[\^b] and so we need to see F-values larger than 1 in order to safely reject the null. To be a bit more precise about the sampling distribution, notice that if the null hypothesis is true, both MSb and MSw are estimators of the variance of the residuals $\epsilon_{ik}$. If those residuals are normally distributed, then you might suspect that the estimate of the variance of $\epsilon_{ik}$ is chisquare distributed, because (as discussed in the [Other useful distributions] that's what a chi-square distribution is: it's what you get when you square a bunch of normally-distributed things and add them up. And since the F distribution is (again, by definition) what you get when you take the ratio between two things that are $\chi^2$ distributed, we have our sampling distribution. Obviously, I'm glossing over a whole lot of stuff when I say this, but in broad terms, this really is where our sampling distribution comes from. 
-  --
-  $^a$ If you read ahead to the [Factorial ANOVA] chapter and look at how the "treatment effect" at level k of a factor is defined in terms of the $\alpha_k$ values (see section on Factorial ANOVA 2: balanced designs, interactions allowed]), it turns out that $Q$ refers to a weighted mean of the squared treatment effects, $Q = \frac{(\sum_{k=1}^{G}N_k \alpha_k^2)}{(G-1)}$ $^b$ Or, if we want to be sticklers for accuracy, $1+ \frac{2}{df_2-2}$
+    In any case, here's what the null hypothesis looks like when we write it as a statistical model $$Y_{ik}=\mu+\epsilon_{ik}$$ where we make the assumption (discussed later) that the residual values $\epsilon_{ik}$ are normally distributed, with mean $0$ and a standard deviation $\sigma$ that is the same for all groups. To use the notation that we introduced in the [Introduction to probability] we would write this assumption like this $$\epsilon_{ik} \sim Normal(0,\sigma^2)$$ What about the alternative hypothesis, $H_1$? The only difference between the null hypothesis and the alternative hypothesis is that we allow each group to have a different population mean. So, if we let $\mu_k$ denote the population mean for the k-th group in our experiment, then the statistical model corresponding to $H_1$ is $$Y_{ik}=\mu_k+\epsilon_{ik}$$ where, once again, we assume that the error terms are normally distributed with mean 0 and standard deviation $\sigma$. That is, the alternative hypothesis also assumes that $\epsilon \sim Normal(0,\sigma^2)$ Okay, now that we've described the statistical models underpinning $H_0$ and $H_1$ in more detail, it's now pretty straightforward to say what the mean square values are measuring, and what this means for the interpretation of $F$. I won't bore you with the proof of this but it turns out that the within-groups mean square, $MS_w$, can be viewed as an estimator of the error variance $\sigma^2$ . The between-groups mean square $MS_b$ is also an estimator, but what it estimates is the error variance plus a quantity that depends on the true differences among the group means. If we call this quantity $Q$, then we can see that the F-statistic is basically$^a$ $$F=\frac{\hat{Q}+\hat{\sigma}^2}{\hat{\sigma}^2}$$ where the true value $Q = 0$ if the null hypothesis is true, and Q < 0 if the alternative hypothesis is true (e.g., @Hays1994, ch. 10). Therefore, at a bare minimum the $F$ *value must be larger than* 1 to have any chance of rejecting the null hypothesis. Note that this doesn't mean that it's impossible to get an F-value less than 1. What it means is that if the null hypothesis is true the sampling distribution of the F ratio has a mean of 1,[\^b] and so we need to see F-values larger than 1 in order to safely reject the null. To be a bit more precise about the sampling distribution, notice that if the null hypothesis is true, both MSb and MSw are estimators of the variance of the residuals $\epsilon_{ik}$. If those residuals are normally distributed, then you might suspect that the estimate of the variance of $\epsilon_{ik}$ is chisquare distributed, because (as discussed in the [Other useful distributions] that's what a chi-square distribution is: it's what you get when you square a bunch of normally-distributed things and add them up. And since the F distribution is (again, by definition) what you get when you take the ratio between two things that are $\chi^2$ distributed, we have our sampling distribution. Obviously, I'm glossing over a whole lot of stuff when I say this, but in broad terms, this really is where our sampling distribution comes from. <br /> --- <br />  $^a$ If you read ahead to the [Factorial ANOVA] chapter and look at how the "treatment effect" at level k of a factor is defined in terms of the $\alpha_k$ values (see section on Factorial ANOVA 2: balanced designs, interactions allowed]), it turns out that $Q$ refers to a weighted mean of the squared treatment effects, $Q = \frac{(\sum_{k=1}^{G}N_k \alpha_k^2)}{(G-1)}$ <br /> $^b$ Or, if we want to be sticklers for accuracy, $1+ \frac{2}{df_2-2}$
 
 ### A worked example
 
@@ -162,8 +160,7 @@ $$ \begin{equation}
 SS_b & = 1.14 + 0.18 + 2.16 \\ 
 & = 3.48 
 \end{split} 
-\end{equation} 
-$$
+\end{equation} $$
 
 As you can see, the between group calculations are a lot shorter[^13-comparing-several-means-one-way-anova-10]. Now that we've calculated our sums of squares values, $SS_b$ and $SS_w$, the rest of the ANOVA is pretty painless. The next step is to calculate the degrees of freedom. Since we have $G = 3$ groups and $N = 18$ observations in total our degrees of freedom can be calculated by simple subtraction:
 
@@ -222,7 +219,7 @@ I'm pretty sure I know what you're thinking after reading the last section, espe
 
 To make life easier for you, jamovi can do ANOVA..hurrah! Go to the 'ANOVA' - 'ANOVA' analysis, and move the mood.gain variable across so it is in the 'Dependent Variable' box, and then move the drug variable across so it is in the 'Fixed Factors' box. This should give the results as shown in Figure \@ref(fig:fig13-3). [^13-comparing-several-means-one-way-anova-11] Note I have also checked the $\eta^2$ checkbox, pronounced "eta" squared, under the 'Effect Size' option and this is also shown on the results table. We will come back to effect sizes a bit later.
 
-```{r fig13-3, chunk.class="enlarge.image", fig.cap="jamovi results table for ANOVA of mood gain by drug administered", out.width = "90%"}
+```{r fig13-3, class.chunk="enlarge-image", fig.cap="jamovi results table for ANOVA of mood gain by drug administered", out.width = "90%"}
 knitr::include_graphics("images/Figure131.PNG")  
 ```
 
@@ -264,7 +261,7 @@ By rejecting the null hypothesis, we've decided that we don't believe that #1 is
 
 How might we go about solving our problem? Given that we've got three separate pairs of means (placebo versus Anxifree, placebo versus Joyzepam, and Anxifree versus Joyzepam) to compare, what we could do is run three separate t-tests and see what happens. This is easy to do in jamovi. Go to the ANOVA 'Post Hoc Tests' options, move the 'drug' variable across into the active box on the right, and then click on the 'No correction' checkbox. This will produce a neat table showing all the pairwise t-test comparisons amongst the three levels of the drug variable, as in Figure \@ref(fig:fig13-4)
 
-```{r fig13-4, chunk.class="enlarge.image", fig.cap="Uncorrected pairwise t-tests as post hoc comparisons in jamovi", out.width = "90%"}
+```{r fig13-4, class.chunk="enlarge-image", fig.cap="Uncorrected pairwise t-tests as post hoc comparisons in jamovi", out.width = "90%"}
 knitr::include_graphics("images/Figure132.PNG")  
 ```
 
@@ -324,7 +321,7 @@ Or, if you don't like the idea of reporting exact p-values, then you'd change th
 
 Like any statistical test, analysis of variance relies on some assumptions about the data, specifically the residuals. There are three key assumptions that you need to be aware of: normality, homogeneity of variance and independence.
 
-Statistical notation [^13-comparing-several-means-one-way-anova-14]
+<span class="technical">[Additional technical detail [^13-comparing-several-means-one-way-anova-14]]</span>
 
 [^13-comparing-several-means-one-way-anova-14]: If you remember back to [A worked example], which I hope you at least skimmed even if you didn't read the whole thing, I described the statistical models underpinning ANOVA in this way: $$H_0:Y_{ik}=\mu + \epsilon_{ik}$$ $$H_1:Y_{ik}=\mu_k + \epsilon_{ik}$$ In these equations $\mu$ refers to a single grand population mean which is the same for all groups, and µk is the population mean for the k-th group. Up to this point we've been mostly interested in whether our data are best described in terms of a single grand mean (the null hypothesis) or in terms of different group-specific means (the alternative hypothesis). This makes sense, of course, as that's actually the important research question! However, all of our testing procedures have, implicitly, relied on a specific assumption about the residuals, $\epsilon\_{ik}$, namely that $$\epsilon_{ik} \sim Normal(0,\sigma^2)$$ None of the maths works properly without this bit. Or, to be precise, you can still do all the calculations and you'll end up with an F-statistic, but you have no guarantee that this F-statistic actually measures what you think it's measuring, and so any conclusions that you might draw on the basis of the F test might be wrong.
 
@@ -343,7 +340,7 @@ There's more than one way to skin a cat, as the saying goes, and more than one w
 
 Regardless of whether you're doing the standard Levene test or the Brown-Forsythe test, the test statistic, which is sometimes denoted $F$ but also sometimes written as $W$, is calculated in exactly the same way that the F-statistic for the regular ANOVA is calculated, just using a $Z_{ik}$ rather than $Y_{ik}$. With that in mind, we can go on to look at how to run the test in jamovi.
 
-Technical detail [^13-comparing-several-means-one-way-anova-15]
+<span class="technical">[Additional technical detail [^13-comparing-several-means-one-way-anova-15]]</span>
 
 [^13-comparing-several-means-one-way-anova-15]: The Levene test is shockingly simple. Suppose we have our outcome variable $Y_{ik}$. All we do is define a new variable, which I'll call $Z_{ik}$, corresponding to the absolute deviation from the group mean $$Z_{ik}=Y_{ik}-\bar{Y}_{k}$$ Okay, what good does this do us? Well, let's take a moment to think about what $Z_{ik}$ actually is and what we're trying to test. The value of $Z_{ik}$ is a measure of how the $i$-th observation in the $k$-th group deviates from its group mean. And our null hypothesis is that all groups have the same variance, i.e., the same overall deviations from the group means! So the null hypothesis in a Levene test is that the population means of $Z$ are identical for all groups. Hmm. So what we need now is a statistical test of the null hypothesis that all group means are identical. Where have we seen  that before? Oh right, that's what ANOVA is, and so all that the Levene test does is run an ANOVA on the new variable $Z_{ik}$. What about the Brown-Forsythe test? Does that do anything particularly different? Nope. The only change from the Levene test is that it constructs the transformed variable Z in a slightly different way, using deviations from the group medians rather than deviations from the group means. That is, for the Brown-Forsythe test: $$Z_{ik}=Y_{ik}-median_k(Y)$$ where $median_k(Y)$ is the median for group k.
 
@@ -401,7 +398,7 @@ Looking at this table, notice that the third entry in the frequency table has a 
 
 And so jamovi uses a tie-correction factor to calculate the tie-corrected Kruskall-Wallis statistic. And at long last, we're actually finished with the theory of the Kruskal-Wallis test. I'm sure you're all terribly relieved that I've cured you of the existential anxiety that naturally arises when you realise that you don't know how to calculate the tie-correction factor for the Kruskal-Wallis test. Right?
 
-```{r fig13-7, chunk.class="enlarge.image", fig.cap="QQ plot produced from jamovi one way ANOVA options", out.width = "90%"}
+```{r fig13-7, class.chunk="enlarge-image", fig.cap="QQ plot produced from jamovi one way ANOVA options", out.width = "90%"}
 knitr::include_graphics("images/Figure13_7.PNG")  
 ```
 
@@ -409,7 +406,7 @@ knitr::include_graphics("images/Figure13_7.PNG")
 
 Despite the horror that we've gone through in trying to understand what the Kruskal Wallis test actually does, it turns out that running the test is pretty painless, since jamovi has an analysis as part of the ANOVA analysis set called 'Non-Parametric' - 'One Way ANOVA (Kruskall-Wallis)' Most of the time you'll have data like the clinicaltrial.csv data set, in which you have your outcome variable mood.gain and a grouping variable drug. If so, you can just go ahead and run the analysis in jamovi. What this gives us is a Kruskal-Wallis $\chi^2 =12.076, df = 2, p = 0.00239$, as in Figure \@ref(fig:fig13-8)
 
-```{r fig13-8, chunk.class="enlarge.image", fig.cap="Kruskall-Wallis one-way non-parametric ANOVA in jamovi", out.width = "90%"}
+```{r fig13-8, class.chunk="enlarge-image", fig.cap="Kruskall-Wallis one-way non-parametric ANOVA in jamovi", out.width = "90%"}
 knitr::include_graphics("images/Figure135.PNG")  
 ```
 
@@ -440,7 +437,7 @@ The patients were required to complete three word recognition tasks. On the firs
 
 To perform a one-way related ANOVA in jamovi, open the one-way repeated measures ANOVA dialogue box, as in Figure \@ref(fig:fig13-9), via ANOVA - Repeated Measures ANOVA. 
 
-```{r fig13-9, chunk.class="enlarge.image", fig.cap="Repeated measures ANOVA dialogue box in jamovi]", out.width = "90%"}
+```{r fig13-9, class.chunk="enlarge-image", fig.cap="Repeated measures ANOVA dialogue box in jamovi]", out.width = "90%"}
 knitr::include_graphics("images/Figure136.PNG")  
 ```
 
@@ -453,7 +450,7 @@ Then:
 
 jamovi output for a one-way repeated measures ANOVA is produced as shown in the Figures **13.10** to **13.13**. The first output we should look at is Mauchly's Test of Sphericity, which tests the hypothesis that the variances of the differences between the conditions are equal (meaning that the spread of difference scores between the study conditions is approximately the same). In Figure \@ref(fig:fig13-10) Mauchly's test significance level is $p = .720$. If Mauchly's test is non-significant (i.e. p < .05, as is the case in this analysis) then it is reasonable to conclude that the variances of the differences are not significantly different (i.e. they are roughly equal and sphericity can be assumed.).
 
-```{r fig13-10, chunk.class="enlarge.image", fig.cap="One-way repeated measures ANOVA output: Mauchly's Test of Sphericity", out.width = "90%"}
+```{r fig13-10, class.chunk="enlarge-image", fig.cap="One-way repeated measures ANOVA output: Mauchly's Test of Sphericity", out.width = "90%"}
 knitr::include_graphics("images/Figure137.PNG")  
 ```
 
@@ -464,7 +461,7 @@ If, on the other hand, Mauchly's test had been significant (p < .05) then we wou
 
 Both these corrected F-values can be specified in the Sphericity Corrections check boxes under the Assumption Checks options, and the corrected F-values are then shown in the results table, as in Figure **13.11**.
 
-```{r fig13-11, chunk.class="enlarge.image", fig.cap="One-way repeated measures ANOVA output: Tests of Within-Subjects Effects", out.width = "90%"}
+```{r fig13-11, class.chunk="enlarge-image", fig.cap="One-way repeated measures ANOVA output: Tests of Within-Subjects Effects", out.width = "90%"}
 knitr::include_graphics("images/Figure138.PNG")  
 ```
 
@@ -472,13 +469,13 @@ In our analysis, we saw that the significance of Mauchly's Test of Sphericity wa
 
 Post-hoc tests can also be specified in jamovi for repeated measures ANOVA in the same way as for independent ANOVA. The results are shown in Figure \@ref(fig:fig13-12). These indicate that there is a significant difference between Speech and Syntax, but not between other levels.
 
-```{r fig13-12, chunk.class="enlarge.image", fig.cap="Post-hoc tests in repeated measures ANOVA in jamovi", out.width = "90%"}
+```{r fig13-12, class.chunk="enlarge-image", fig.cap="Post-hoc tests in repeated measures ANOVA in jamovi", out.width = "90%"}
 knitr::include_graphics("images/Figure139.PNG")  
 ```
 
 Descriptive statistics (marginal means) can be reviewed to help interpret the results, produced in the jamovi output as in Figure **13.13**. Comparison of the mean number of trials successfully completed by participants shows that Broca's Aphasics perform reasonably well on speech production (mean = 7.17) and language comprehension (mean = 6.17) tasks. However, their performance was considerably worse on the syntax task (mean = 4.33), with a significant difference in post-hoc tests between Speech and Syntax task performance.
 
-```{r fig13-13, chunk.class="enlarge.image", fig.cap="One-way repeated measures ANOVA output: Descriptive Statistics", out.width = "90%"}
+```{r fig13-13, class.chunk="enlarge-image", fig.cap="One-way repeated measures ANOVA output: Descriptive Statistics", out.width = "90%"}
 knitr::include_graphics("images/Figure140.PNG")  
 ```
 
@@ -488,7 +485,7 @@ The Friedman test is a non-parametric version of a repeated measures ANOVA and c
  
 As with the Kruskall-Wallis test, the underlying mathematics is complicated, and won't be presented here. For the purpose of this book, it is sufficient to note that jamovi calculates the tie-corrected version of the Friedman test, and in Figure \@ref(fig:fig13-14) there is an example using the Broca's Aphasia data we have already looked at.
 
-```{r fig13-14, chunk.class="enlarge.image", fig.cap="The 'Repeated Measures ANOVA (Non-parametric)' dialogue box in jamovi", out.width = "90%"}
+```{r fig13-14, class.chunk="enlarge-image", fig.cap="The 'Repeated Measures ANOVA (Non-parametric)' dialogue box in jamovi", out.width = "90%"}
 knitr::include_graphics("images/Figure141.PNG")  
 ```
 

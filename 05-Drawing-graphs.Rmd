@@ -1,7 +1,7 @@
 # Drawing graphs
 
 > *Above all else show the data.*\
-> - Edward Tufte[^drawing-graphs-1]
+> -- Edward Tufte[^drawing-graphs-1]
 
 [^drawing-graphs-1]: The origin of this quote is Tufte's lovely book *The Visual Display of Quantitative Information.*
 
@@ -19,13 +19,13 @@ knitr::include_graphics("images/Figure22.PNG")
 
 Let's begin with the humble **histogram**. Histograms are one of the simplest and most useful ways of visualising data. They make most sense when you have an interval or ratio scale variable (e.g., the afl.margins data from the [Descriptive statistics] chapter and what you want to do is get an overall impression of the variable. Most of you probably know how histograms work, since they're so widely used, but for the sake of completeness I'll describe them. All you do is divide up the possible values into **bins** and then count the number of observations that fall within each bin. This count is referred to as the frequency or density of the bin and is displayed as a vertical bar. Ihe AFL winning margins data there are 33 games in which the winning margin was less than 10 points and it is this fact that is represented by the height of the leftmost bar that we showed earlier in the [Descriptive statistics] chapter, Figure \@ref(fig:fig4-2). With these earlier graphs we used an advanced plotting package in R which, for now, is beyond the capability of jamovi. But jamovi gets us close, and drawing this histogram in jamovi is pretty straightforward. Open up the 'plots' options under 'Exploration' - 'Descriptives' and click the 'histogram' check box, as in Figure \@ref(fig:fig5-1). jamovi defaults to labelling the y-axis as 'density' and the x-axis with the variable name. The **bins** are selected automatically, and there is no scale, or count, information on the y-axis unlike the previous Figure \@ref(fig:fig4-2). But this does not matter too much because after all what we are really interested in is our impression of the shape of the distribution: is it normally distributed or is there a skew or kurtosis? Our first impressions of these characteristics come from drawing a **histogram**.
 
-```{r fig5-2, chunk.class="enlarge.image", echo=FALSE, fig.cap="jamovi screen showing the histogram check box", out.width = "90%"}
+```{r fig5-2, class.chunk="enlarge-image", echo=FALSE, fig.cap="jamovi screen showing the histogram check box", out.width = "90%"}
 knitr::include_graphics("images/Figure23.PNG")
 ```
 
 One additional feature that jamovi provides is the ability to plot a 'Density' curve. You can do this by clicking the 'Density' check box under the 'Plots' options (and unchecking 'Histogram'), and this gives us the plot shown in Figure \@ref(fig:fig5-3). A density plot visualises the distribution of data over a continuous interval or time period. This chart is a variation of a histogram that uses **kernel smoothing** to plot values, allowing for smoother distributions by smoothing out the noise. The peaks of a density plot help display where values are concentrated over the interval. An advantage density plots have over histograms is that they are better at determining the distribution shape because they're not affected by the number of bins used (each bar used in a typical histogram). A histogram comprising of only 4 bins wouldn't produce a distinguishable enough shape of distribution as a 20-bin histogram would. However, with density plots, this isn't an issue.
 
-```{r fig5-3, chunk.class="enlarge.image", echo=FALSE, fig.cap="A density plot of the afl.margins variable plotted in jamovi", out.width = "90%"}
+```{r fig5-3, class.chunk="enlarge-image", echo=FALSE, fig.cap="A density plot of the afl.margins variable plotted in jamovi", out.width = "90%"}
 knitr::include_graphics("images/Figure24.PNG")
 ```
 
@@ -35,7 +35,7 @@ Although this image would need a lot of cleaning up in order to make a good pres
 
 Another alternative to histograms is a **boxplot**, sometimes called a "box and whiskers" plot. Like histograms they're most suited to interval or ratio scale data. The idea behind a boxplot is to provide a simple visual depiction of the median, the interquartile range, and the range of the data. And because they do so in a fairly compact way boxplots have become a very popular statistical graphic, especially during the exploratory stage of data analysis when you're trying to understand the data yourself. Let's have a look at how they work, again using the afl.margins data as our example.
 
-```{r fig5-4, chunk.class="enlarge.image", echo=FALSE, fig.cap="A box plot of the afl.margins variable plotted in jamovi", out.width = "90%"}
+```{r fig5-4, class.chunk="enlarge-image", echo=FALSE, fig.cap="A box plot of the afl.margins variable plotted in jamovi", out.width = "90%"}
 knitr::include_graphics("images/Figure25.PNG")
 ```
 
@@ -43,7 +43,7 @@ The easiest way to describe what a boxplot looks like is just to draw one. Click
 
 ### Violin plots
 
-```{r fig5-5, chunk.class="enlarge.image", echo=FALSE, fig.cap="A violin plot of the afl.margins variable plotted in jamovi, also showing a box plot and data points", out.width = "90%"}
+```{r fig5-5, class.chunk="enlarge-image", echo=FALSE, fig.cap="A violin plot of the afl.margins variable plotted in jamovi, also showing a box plot and data points", out.width = "90%"}
 knitr::include_graphics("images/Figure26.PNG")
 ```
 
@@ -53,13 +53,13 @@ A variation to the traditional box plot is the violin plot. Violin plots are sim
 
 One last thing. What if you want to draw multiple boxplots at once? Suppose, for instance, I wanted separate boxplots showing the AFL margins not just for 2010 but for every year between 1987 and 2010. To do that the first thing we'll have to do is find the data. These are stored in the **aflmarginbyyear.csv** file. So let's load it into jamovi and see what is in it. You will see that it is a pretty big data set. It contains 4296 games and the variables that we're interested in. What we want to do is have jamovi draw boxplots for the margin variable, but plotted separately for each year. The way to do this is to move the year variable across into the 'Split by' box, as in Figure \@ref(fig:fig5-6).
 
-```{r fig5-6, chunk.class="enlarge.image", echo=FALSE, fig.cap="jamovi screen shot showing the ‘Split by’ window", out.width = "90%"}
+```{r fig5-6, class.chunk="enlarge-image", echo=FALSE, fig.cap="jamovi screen shot showing the ‘Split by’ window", out.width = "90%"}
 knitr::include_graphics("images/Figure27.PNG")
 ```
 
 The result is shown in Figure \@ref(fig:fig5-7). This version of the box plot, split by year, gives a sense of why it's sometimes useful to choose box plots instead of histograms. It's possible to get a good sense of what the data look like from year to year without getting overwhelmed with too much detail. Now imagine what would have happened if I'd tried to cram 24 histograms into this space: no chance at all that the reader is going to learn anything useful.
 
-```{r fig5-7, chunk.class="enlarge.image", echo=FALSE, fig.cap="Multiple boxplots plotted in jamovi, for the margin by year variables in the aflsmall2 data set", out.width = "90%"}
+```{r fig5-7, class.chunk="enlarge-image", echo=FALSE, fig.cap="Multiple boxplots plotted in jamovi, for the margin by year variables in the aflsmall2 data set", out.width = "90%"}
 knitr::include_graphics("images/Figure28.PNG")
 ```
 
@@ -67,17 +67,17 @@ knitr::include_graphics("images/Figure28.PNG")
 
 Because the boxplot automatically separates out those observations that lie outside a certain range, depicting them with a dot in jamovi, people often use them as an informal method for detecting **outliers**: observations that are "suspiciously" distant from the rest of the data. Here's an example. Suppose that I'd drawn the boxplot for the AFL margins data and it came up looking like Figure \@ref(fig:fig5-8). It's pretty clear that something funny is going on with two of the observations. Apparently, there were two games in which the margin was over 300 points! That doesn't sound right to me. Now that I've become suspicious it's time to look a bit more closely at the data. In jamovi you can quickly find out which of these observations are suspicious and then you can go back to the raw data to see if there has been a mistake in data entry. To do this you need to set up a filter so that only those observations with values over a certain threshold are included. In our example, the threshold is over 300, so that is the filter we will create. First, click on the 'Filters' button at the top of the jamovi window, and then type 'margin \> 300' into the filter field, as in Figure \@ref(fig:fig5-9).
 
-```{r fig5-8, chunk.class="enlarge.image", echo=FALSE, fig.cap="A boxplot showing two very suspicious outliers!", out.width = "90%"}
+```{r fig5-8, class.chunk="enlarge-image", echo=FALSE, fig.cap="A boxplot showing two very suspicious outliers!", out.width = "90%"}
 knitr::include_graphics("images/Figure29.PNG")
 ```
 
 This filter creates a new column in the spreadsheet view where only those observations that pass the filter are included. One neat way to quickly identify which observations these are is to tell jamovi to produce a 'Frequency table' (in the 'Exploration' - 'Descriptives' window) for the ID variable (which must be a nominal variable otherwise the Frequency table is not produced). In Figure \@ref(fig:fig5-10) you can see that the ID values for the observations where the margin was over 300 are 14 and 134. These are suspicious cases, or observations, where you should go back to the original data source to find out what is going on.
 
-```{r fig5-9, chunk.class="enlarge.image", echo=FALSE, fig.cap="The jamovi filter screen", out.width = "90%"}
+```{r fig5-9, class.chunk="enlarge-image", echo=FALSE, fig.cap="The jamovi filter screen", out.width = "90%"}
 knitr::include_graphics("images/Figure30.PNG")
 ```
 
-```{r fig5-10, chunk.class="enlarge.image", echo=FALSE, fig.cap="Frequency table for ID showing the ID numbers for the two suspicious outliers: 14 and 134", out.width = "90%"}
+```{r fig5-10, class.chunk="enlarge-image", echo=FALSE, fig.cap="Frequency table for ID showing the ID numbers for the two suspicious outliers: 14 and 134", out.width = "90%"}
 knitr::include_graphics("images/Figure31.PNG")
 ```
 
@@ -95,7 +95,7 @@ afl.finalists $==$ 'Brisbane' or afl.finalists $==$ 'Carlton' or afl.finalists $
 
 When you have done this you will see, in the 'Data' view, that jamovi has filtered out all values apart from those we have specified. Next, open up the 'Exploration' - 'Descriptives' window and click on the 'Bar plot' check box (remember to move the 'afl.finalists' variable across into the 'Variables' box so that jamovi knows which variable to use). You should then get a bar graph, something like that shown in Figure \@ref(fig:fig5-11).
 
-```{r fig5-11, chunk.class="enlarge.image", echo=FALSE, fig.cap="Filtering to include just four AFL teams, and drawing a bar plot in jamovi", out.width = "90%"}
+```{r fig5-11, class.chunk="enlarge-image", echo=FALSE, fig.cap="Filtering to include just four AFL teams, and drawing a bar plot in jamovi", out.width = "90%"}
 knitr::include_graphics("images/Figure32.PNG")
 ```
 

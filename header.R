@@ -5,6 +5,7 @@ options(knitr.table.format = function() {
   if (knits::is_html_output()) 'html' else pandoc
 })
 
+library(tinytex)
 library(magrittr)
 library(huxtable)
 library(dplyr)

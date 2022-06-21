@@ -6,50 +6,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 7 Introduction to probability | learning statistics with jamovi</title>
 <meta name="author" content="Danielle J. Navarro &amp; David R. Foxcroft">
-<meta name="description" content="[God] has afforded us only the twilight … of Probability. - John Locke Up to this point in the book we’ve discussed some of the key ideas in experimental design, and we’ve talked a little about...">
+<meta name="description" content="[God] has afforded us only the twilight … of Probability. – John Locke Up to this point in the book we’ve discussed some of the key ideas in experimental design, and we’ve talked a little about...">
 <meta name="generator" content="bookdown 0.27 with bs4_book()">
 <meta property="og:title" content="Chapter 7 Introduction to probability | learning statistics with jamovi">
 <meta property="og:type" content="book">
 <meta property="og:image" content="/images/bookcover_logo.png">
-<meta property="og:description" content="[God] has afforded us only the twilight … of Probability. - John Locke Up to this point in the book we’ve discussed some of the key ideas in experimental design, and we’ve talked a little about...">
+<meta property="og:description" content="[God] has afforded us only the twilight … of Probability. – John Locke Up to this point in the book we’ve discussed some of the key ideas in experimental design, and we’ve talked a little about...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 7 Introduction to probability | learning statistics with jamovi">
-<meta name="twitter:description" content="[God] has afforded us only the twilight … of Probability. - John Locke Up to this point in the book we’ve discussed some of the key ideas in experimental design, and we’ve talked a little about...">
+<meta name="twitter:description" content="[God] has afforded us only the twilight … of Probability. – John Locke Up to this point in the book we’ve discussed some of the key ideas in experimental design, and we’ve talked a little about...">
 <meta name="twitter:image" content="/images/bookcover_logo.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><style>
-
-    .enlarge-image {
-        transition: transform .2s ease-out;
-        cursor: pointer;
-    }
-
-    .enlarge-image:hover {
-        transform: scale(1.8);
-        display: block;
-        background: #eee;
-        border: 4px solid #27466C; 
-        position: relative;
-        float: middle;
-        z-index: 999;
-    }
-    .enlarge-image:hover .inline-figure, .figure {
-      margin:  1rem 0rem 1rem 0rem; 
-      padding: 1rem 0.5rem 1rem 2rem;
-    }
-
-    .technical {
-      background-color:Gainsboro;
-      font-style:italic;
-      font-family:Garamond;
-      border: 1px solid #3d6da9;
-      padding: 0px;
-    }
-
-    </style>
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script type="text/x-mathjax-config" src="docs/libs/MathJax.js">></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script type="text/x-mathjax-config"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
@@ -75,6 +45,7 @@
       margin-left: 2em;
     }
   </style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -84,7 +55,7 @@
 
     <div class="d-flex align-items-start justify-content-between">
       <h1>
-        <a href="index.html" title=""><span style="font-family:Garamond;font-weight:700;">learning statistics with jamovi</span></a>
+        <a href="index.html" title=""><span style="font-family:Garamond;color:#3d6da9;font-weight:700;">learning statistics with jamovi</span></a>
       </h1>
       <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
     </div>
@@ -98,22 +69,28 @@
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html"></a></li>
 <li><a class="" href="preface.html">Preface</a></li>
+<li class="book-part">Background</li>
 <li><a class="" href="why-do-we-learn-statistics.html"><span class="header-section-number">1</span> Why do we learn statistics</a></li>
 <li><a class="" href="a-brief-introduction-to-research-design.html"><span class="header-section-number">2</span> A brief introduction to research design</a></li>
+<li class="book-part">An introduction to jamovi</li>
 <li><a class="" href="getting-started-with-jamovi.html"><span class="header-section-number">3</span> Getting started with jamovi</a></li>
+<li class="book-part">Working with data</li>
 <li><a class="" href="descriptive-statistics.html"><span class="header-section-number">4</span> Descriptive statistics</a></li>
 <li><a class="" href="drawing-graphs.html"><span class="header-section-number">5</span> Drawing graphs</a></li>
 <li><a class="" href="pragmatic-matters.html"><span class="header-section-number">6</span> Pragmatic matters</a></li>
-<li><a class="" href="prelude-to-part-iv.html">Prelude to Part IV</a></li>
+<li class="book-part">Statistical theory</li>
+<li><a class="" href="prelude.html">Prelude</a></li>
 <li><a class="active" href="introduction-to-probability.html"><span class="header-section-number">7</span> Introduction to probability</a></li>
 <li><a class="" href="estimating-unkown-quantities-from-a-sample.html"><span class="header-section-number">8</span> Estimating unkown quantities from a sample</a></li>
 <li><a class="" href="hypothesis-testing.html"><span class="header-section-number">9</span> Hypothesis testing</a></li>
+<li class="book-part">Statistical tools</li>
 <li><a class="" href="categorical-data-analysis.html"><span class="header-section-number">10</span> Categorical data analysis</a></li>
 <li><a class="" href="comparing-two-means.html"><span class="header-section-number">11</span> Comparing two means</a></li>
 <li><a class="" href="correlation-and-linear-regression.html"><span class="header-section-number">12</span> Correlation and linear regression</a></li>
 <li><a class="" href="comparing-several-means-one-way-anova.html"><span class="header-section-number">13</span> Comparing several means (one-way ANOVA)</a></li>
 <li><a class="" href="factorial-anova.html"><span class="header-section-number">14</span> Factorial ANOVA</a></li>
 <li><a class="" href="factor-analysis.html"><span class="header-section-number">15</span> Factor Analysis</a></li>
+<li class="book-part">Endings, alternatives and prospects</li>
 <li><a class="" href="bayesian-statistics.html"><span class="header-section-number">16</span> Bayesian statistics</a></li>
 <li><a class="" href="epilogue.html"><span class="header-section-number">17</span> Epilogue</a></li>
 <li><a class="" href="references.html">References</a></li>
@@ -130,7 +107,7 @@
 </h1>
 <blockquote>
 <p><em>[God] has afforded us only the twilight … of Probability.</em><br>
-- John Locke</p>
+– John Locke</p>
 </blockquote>
 <p>Up to this point in the book we’ve discussed some of the key ideas in experimental design, and we’ve talked a little about how you can summarise a data set. To a lot of people this is all there is to statistics: collecting all the numbers, calculating averages, drawing pictures, and putting them all in a report somewhere. Kind of like stamp collecting but with numbers. However, statistics covers much more than that. In fact, descriptive statistics is one of the smallest parts of statistics and one of the least powerful. The bigger and more useful part of statistics is that it provides information that lets you make inferences about data.</p>
 <p>Once you start thinking about statistics in these terms, that statistics is there to help us draw inferences from data, you start seeing examples of it everywhere. For instance, here’s a tiny extract from a newspaper article in the Sydney Morning Herald (30 Oct 2010):</p>
@@ -403,7 +380,7 @@ Figure 7.2: A visual depiction of the ‘trousers’ probability distribution. T
 <p>As usual, we’ll want to introduce some names and some notation. We’ll let <span class="math inline">\(N\)</span> denote the number of dice rolls in our experiment, which is often referred to as the <strong>size parameter</strong> of our binomial distribution. We’ll also use <span class="math inline">\(\theta\)</span> to refer to the the probability that a single die comes up skulls, a quantity that is usually called the <strong>success probability</strong> of the binomial.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;Note that the term “success” is pretty arbitrary and doesn’t actually imply that the outcome is something to be desired. If &lt;span class="math inline"&gt;\(\theta\)&lt;/span&gt; referred to the probability that any one passenger gets injured in a bus crash I’d still call it the success probability, but that doesn’t mean I want people to get hurt in bus crashes!&lt;/p&gt;'><sup>46</sup></a> Finally, we’ll use <span class="math inline">\(X\)</span> to refer to the results of our experiment, namely the number of skulls I get when I roll the dice. Since the actual value of <span class="math inline">\(X\)</span> is due to chance we refer to it as a <strong>random variable</strong>. In any case, now that we have all this terminology and notation we can use it to state the problem a little more precisely. The quantity that we want to calculate is the probability that <span class="math inline">\(X = 4\)</span> given that we know that <span class="math inline">\(\theta = .167\)</span> and <span class="math inline">\(N = 20\)</span>. The general “form” of the thing I’m interested in calculating could be written as</p>
 <p><span class="math display">\[P(X|\theta,N)\]</span></p>
 <p>and we’re interested in the special case where $X = 4, = .167 $ and <span class="math inline">\(N = 20\)</span>.</p>
-<p>Statistical notation <a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;For those readers who know a little calculus, I’ll give a slightly more precise explanation. In the same way that probabilities are non-negative numbers that must sum to 1, probability densities are non-negative numbers that must integrate to 1 (where the integral is taken across all possible values of X). To calculate the probability that X falls between a and b we calculate the definite integral of the density function over the corresponding range, &lt;span class="math inline"&gt;\(\int\_{a}^{b} p(x) dx\)&lt;/span&gt;. If you don’t remember or never learned calculus, don’t worry about this. It’s not needed for this book.&lt;/p&gt;'><sup>47</sup></a></p>
+<p><span class="technical">[Additional technical detail <a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;For those readers who know a little calculus, I’ll give a slightly more precise explanation. In the same way that probabilities are non-negative numbers that must sum to 1, probability densities are non-negative numbers that must integrate to 1 (where the integral is taken across all possible values of X). To calculate the probability that X falls between a and b we calculate the definite integral of the density function over the corresponding range, &lt;span class="math inline"&gt;\(\int\_{a}^{b} p(x) dx\)&lt;/span&gt;. If you don’t remember or never learned calculus, don’t worry about this. It’s not needed for this book.&lt;/p&gt;'><sup>47</sup></a>]</span></p>
 <p>Yeah, yeah. I know what you’re thinking: notation, notation, notation. Really, who cares? Very few readers of this book are here for the notation, so I should probably move on and talk about how to use the binomial distribution. I’ve included the formula for the binomial distribution in Table <a href="introduction-to-probability.html#tab:tab7-2">7.2</a>, since some readers may want to play with it themselves, but since most people probably don’t care that much and because we don’t need the formula in this book, I won’t talk about it in any detail. Instead, I just want to show you what the binomial distribution looks like.</p>
 <p>To that end, Figure <a href="introduction-to-probability.html#fig:fig7-3">7.3</a> plots the binomial probabilities for all possible values of <span class="math inline">\(X\)</span> for our dice rolling experiment, from <span class="math inline">\(X = 0\)</span> (no skulls) all the way up to <span class="math inline">\(X = 20\)</span> (all skulls). Note that this is basically a bar chart, and is no different to the “trousers probability” plot I drew in Figure <a href="introduction-to-probability.html#fig:fig7-2">7.2</a>. On the horizontal axis we have all the possible events, and on the vertical axis we can read off the probability of each of those events. So, the probability of rolling <span class="math inline">\(4\)</span> skulls out of <span class="math inline">\(20\)</span> is about <span class="math inline">\(0.20\)</span> (the actual answer is <span class="math inline">\(0.2022036\)</span>, as we’ll see in a moment). In other words, you’d expect that to happen about 20% of the times you repeated this experiment.</p>
 <p>To give you a feel for how the binomial distribution changes when we alter the values of <span class="math inline">\(theta\)</span> and <span class="math inline">\(N\)</span>, let’s suppose that instead of rolling dice I’m actually flipping coins. This time around, my experiment involves flipping a fair coin repeatedly and the outcome that I’m interested in is the number of heads that I observe. In this scenario, the success probability is now <span class="math inline">\(\theta = \frac{1}{2}\)</span>. Suppose I were to flip the coin <span class="math inline">\(N = 20\)</span> times. In this example, I’ve changed the success probability but kept the size of the experiment the same. What does this do to our binomial distribution? Well, as Figure <a href="introduction-to-probability.html#fig:fig7-4">7.4</a> shows, the main effect of this is to shift the whole distribution, as you’d expect. Okay, what if we flipped a coin <span class="math inline">\(N = 100\)</span> times? Well, in that case we get Figure <strong>7.4b</strong>. The distribution stays roughly in the middle but there’s a bit more variability in the possible outcomes.</p>
@@ -433,7 +410,7 @@ Figure 7.4: Two binomial distributions, involving a scenario in which I’m flip
 Figure 7.5: The normal distribution with mean <span class="math inline">\(\mu = 0\)</span> and standard deviation <span class="math inline">\(\sigma = 1\)</span>. The x-axis corresponds to the value of some variable, and the y-axis tells us something about how likely we are to observe that value. However, notice that the y-axis is labelled <em>Probability Density</em> and not <em>Probability</em>. There is a subtle and somewhat frustrating characteristic of continuous distributions that makes the <span class="math inline">\(y\)</span> axis behave a bit oddly: the height of the curve here isn’t actually the probability of observing a particular x value. On the other hand, it is true that the heights of the curve tells you which <span class="math inline">\(x\)</span> values are more likely (the higher ones!). (see <a href="introduction-to-probability.html#probability-density">Probability density</a> section for all the annoying details)
 </p>
 </div>
-<p>Statistical notation <a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;The notation that we sometimes use to say that a variable &lt;span class="math inline"&gt;\(X\)&lt;/span&gt; is normally distributed is as follows: &lt;span class="math display"&gt;\[X \sim Normal(\mu,\sigma) \]&lt;/span&gt; Of course, that’s just notation. It doesn’t tell us anything interesting about the normal distribution itself. As was the case with the binomial distribution, I have included the formula for the normal distribution in this book, because I think it’s important enough that everyone who learns statistics should at least look at it, but since this is an introductory text I don’t want to focus on it, so I’ve tucked it away in this footnote.&lt;/p&gt;'><sup>48</sup></a></p>
+<p><span class="technical">[Additional technical detail <a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;The notation that we sometimes use to say that a variable &lt;span class="math inline"&gt;\(X\)&lt;/span&gt; is normally distributed is as follows: &lt;span class="math display"&gt;\[X \sim Normal(\mu,\sigma) \]&lt;/span&gt; Of course, that’s just notation. It doesn’t tell us anything interesting about the normal distribution itself. As was the case with the binomial distribution, I have included the formula for the normal distribution in this book, because I think it’s important enough that everyone who learns statistics should at least look at it, but since this is an introductory text I don’t want to focus on it, so I’ve tucked it away in this footnote.&lt;/p&gt;'><sup>48</sup></a>]</span></p>
 <p>Let’s try to get a sense for what it means for a variable to be normally distributed. To that end, have a look at Figure <a href="introduction-to-probability.html#fig:fig7-5">7.5</a> which plots a normal distribution with mean <span class="math inline">\(\mu = 0\)</span> and standard deviation <span class="math inline">\(\sigma = 1\)</span>. You can see where the name “bell curve” comes from; it looks a bit like a bell. Notice that, unlike the plots that I drew to illustrate the binomial distribution, the picture of the normal distribution in Figure <a href="introduction-to-probability.html#fig:fig7-5">7.5</a> shows a smooth curve instead of “histogram-like” bars. This isn’t an arbitrary choice, the normal distribution is continuous whereas the binomial is discrete. For instance, in the die rolling example from the last section it was possible to get 3 skulls or 4 skulls, but impossible to get 3.9 skulls. The figures that I drew in the previous section reflected this fact. In Figure <a href="introduction-to-probability.html#fig:fig7-3">7.3</a>, for instance, there’s a bar located at <span class="math inline">\(X = 3\)</span> and another one at <span class="math inline">\(X = 4\)</span> but there’s nothing in between. Continuous quantities don’t have this constraint. For instance, suppose we’re talking about the weather. The temperature on a pleasant Spring day could be 23 degrees, 24 degrees, 23.9 degrees, or anything in between since temperature is a continuous variable. And so a normal distribution might be quite appropriate for describing Spring temperatures<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;In practice, the normal distribution is so handy that people tend to use it even when the variable isn’t actually continuous. As long as there are enough categories (e.g., Likert scale responses to a questionnaire), it’s pretty standard practice to use the normal distribution as an approximation. This works out much better in practice than you’d think.&lt;/p&gt;"><sup>49</sup></a></p>
 <div class="figure">
 <span style="display:block;" id="fig:fig7-6"></span>
@@ -523,7 +500,7 @@ Figure 7.12: An <span class="math inline">\(F\)</span> distribution with 3 and 5
 </div>
 
   <div class="chapter-nav">
-<div class="prev"><a href="prelude-to-part-iv.html">Prelude to Part IV</a></div>
+<div class="prev"><a href="prelude.html">Prelude</a></div>
 <div class="next"><a href="estimating-unkown-quantities-from-a-sample.html"><span class="header-section-number">8</span> Estimating unkown quantities from a sample</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
@@ -564,7 +541,7 @@ Figure 7.12: An <span class="math inline">\(F\)</span> distribution with 3 and 5
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong><span style="font-family:Garamond;font-weight:700;">learning statistics with jamovi</span></strong>" was written by Danielle J. Navarro &amp; David R. Foxcroft. It was last built on 21 June 2022 (version 0.75).</p>
+    <p>"<strong><span style="font-family:Garamond;color:#3d6da9;font-weight:700;">learning statistics with jamovi</span></strong>" was written by Danielle J. Navarro &amp; David R. Foxcroft. It was last built on 21 June 2022 (version 0.75).</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

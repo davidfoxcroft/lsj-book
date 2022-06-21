@@ -1,3 +1,5 @@
+# (PART) Statistical tools {-}
+
 # Categorical data analysis
 
 Now that we've covered the basic theory behind hypothesis testing it's time to start looking at specific tests that are commonly used in psychology. So where should we start? Not every textbook agrees on where to start, but I'm going to start with "$\chi^2$ tests" (this chapter, pronounced "chi-square"[^10-categorical-data-analysis-1] and "t-tests" in the next chapter ([Comparing two means]). Both of these tools are very frequently used in scientific practice, and whilst they're not as powerful as "regression" and "analysis of variance" which we cover in later chapters, they're much easier to understand.
@@ -91,7 +93,7 @@ $$\sum( (observed - expected)^2 / expected )$$
 
 This gives us a value of 8.44.
 
-Statistical notation[^10-categorical-data-analysis-3]
+<span class="technical">[Additional technical detail [^10-categorical-data-analysis-3]]</span>
 
 [^10-categorical-data-analysis-3]: If we let k refer to the total number of categories (i.e., k = 4 for our cards data), then the $\chi^2$ statistic is given by: $$\chi^2 = \sum_{i=1}^{k} \frac{(O_i-E_i)^2}{E_i}$$ Intuitively, it's clear that if $chi^2$ is small, then the observed data Oi are very close to what the null hypothesis predicted $E_i$, so we're going to need a large $\chi^2$ statistic in order to reject the null.
 
@@ -113,7 +115,7 @@ There's one last detail to talk about, namely the degrees of freedom. If you rem
 
 ### Degrees of freedom
 
-```{r fig10-1, chunk.class="enlarge.image", fig.cap="$\\chi^2$ (chi-square) distributions with different values for the 'degrees of freedom'", out.width = "90%"}
+```{r fig10-1, chunk.class="enlarge-image", fig.cap="$\\chi^2$ (chi-square) distributions with different values for the 'degrees of freedom'", out.width = "90%"}
 knitr::include_graphics("images/Figure75.PNG")
 ```
 
@@ -131,13 +133,13 @@ how many people chose hearts, how many chose diamonds and how many chose clubs, 
 
 The final step in the process of constructing our hypothesis test is to figure out what the rejection region is. That is, what values of $\chi^2$ would lead us to reject the null hypothesis. As we saw earlier, large values of $\chi^2$ imply that the null hypothesis has done a poor job of predicting the data from our experiment, whereas small values of $\chi^2$ imply that it's actually done pretty well. Therefore, a pretty sensible strategy would be to say there is some critical value such that if $\chi^2$ is bigger than the critical value we reject the null, but if $\chi^2$ is smaller than this value we retain the null. In other words, to use the language we introduced in the chapter on [Hypothesis testing] the chi-square goodness-of-fit test is always a **one-sided test**. Right, so all we have to do is figure out what this critical value is. And it's pretty straightforward. If we want our test to have significance level of $\alpha = .05$ (that is, we are willing to tolerate a Type I error rate of $5%$), then we have to choose our critical value so that there is only a 5% chance that $\chi^2$ could get to be that big if the null hypothesis is true. This is illustrated in Figure \@ref(fig:fig10-2).
 
-```{r fig10-2, chunk.class="enlarge.image", fig.cap="Illustration of how the hypothesis testing works for the $\\chi^2$ (chi-square) goodness of-fit test", out.width = "90%"}
+```{r fig10-2, chunk.class="enlarge-image", fig.cap="Illustration of how the hypothesis testing works for the $\\chi^2$ (chi-square) goodness of-fit test", out.width = "90%"}
 knitr::include_graphics("images/Figure76.PNG")
 ```
 
 Ah but, I hear you ask, how do I find the critical value of a chi-square distribution with $k-1$ degrees of freedom? Many many years ago when I first took a psychology statistics class we used to look up these critical values in a book of critical value tables, like the one in Figure \@ref(fig:fig10-3). Looking at this Figure, we can see that the critical value for a $\chi^2$ distribution with 3 degrees of freedom, and p=0.05 is 7.815.
 
-```{r fig10-3, chunk.class="enlarge.image", fig.cap="Table of critical values for the chi-square distribution", out.width = "90%"}
+```{r fig10-3, chunk.class="enlarge-image", fig.cap="Table of critical values for the chi-square distribution", out.width = "90%"}
 knitr::include_graphics("images/Figure77.PNG")
 ```
 
@@ -147,7 +149,7 @@ So, if our calculated $\chi^2$ statistic is bigger than the critical value of $7
 
 Not surprisingly, jamovi provides an analysis that will do these calculations for you. From the main 'Analyses' toolbar select 'Frequencies' - 'One Sample Proportion Tests' - '$N$ Outcomes'. Then in the analysis window that appears move the variable you want to analyse (choice 1 across into the 'Variable' box. Also, click on the 'Expected counts' check box so that these are shown on the results table. When you have done all this, you should see the analysis results in jamovi as in Figure \@ref(fig:fig10-4). No surprise then that jamovi provides the same expected counts and statistics that we calculated by hand above, with a $\chi^2$ value of $(8.44$ with $3$ d.f. and $p=0.038$. Note that we don't need to look up a critical p-value threshold value any more, as jamovi gives us the actual p-value of the calculated $\chi^2$ for $3$ d.f.
 
-```{r fig10-4, chunk.class="enlarge.image", fig.cap="A $\\chi^2$ One Sample Proportion Test in jamovi, with table showing both observed and expected frequencies and proportions", out.width = "90%"}
+```{r fig10-4, chunk.class="enlarge-image", fig.cap="A $\\chi^2$ One Sample Proportion Test in jamovi, with table showing both observed and expected frequencies and proportions", out.width = "90%"}
 knitr::include_graphics("images/Figure78.PNG")
 ```
 
@@ -155,7 +157,7 @@ knitr::include_graphics("images/Figure78.PNG")
 
 At this point you might be wondering what to do if you want to run a goodness-of-fit test but your null hypothesis is not that all categories are equally likely. For instance, let's suppose that someone had made the theoretical prediction that people should choose red cards $60\%$ of the time, and black cards $40\%$ of the time (I've no idea why you'd predict that), but had no other preferences. If that were the case, the null hypothesis would be to expect $30\%$ of the choices to be hearts, $30\%$ to be diamonds, $20\%$ to be spades and $20\%$ to be clubs. In other words we would expect hearts and diamonds to appear 1.5 times more often than spades and clubs (the ratio $30\%$ : $20\%$ is the same as 1.5 : 1). This seems like a silly theory to me, and it's pretty easy to test this explicitly specified null hypothesis with the data in our jamovi analysis. In the analysis window (labelled 'Proportion Test (N Outcomes)' in Figure \@ref(fig:fig10-4) you can expand the options for 'Expected Proportions'. When you do this, there are options for entering different ratio values for the variable you have selected, in our case this is choice 1. Change the ratio to reflect the new null hypothesis, as in Figure \@ref(fig:fig10-5), and see how the results change.
 
-```{r fig10-5, chunk.class="enlarge.image", fig.cap="Changing the expected proportions in the $\\chi^2$ One Sample Proportion Test in jamovi", out.width = "90%"}
+```{r fig10-5, chunk.class="enlarge-image", fig.cap="Changing the expected proportions in the $\\chi^2$ One Sample Proportion Test in jamovi", out.width = "90%"}
 knitr::include_graphics("images/Figure79.PNG")
 ```
 
@@ -186,7 +188,8 @@ This is pretty straightforward and hopefully it seems pretty unremarkable. That 
 
 As with everything else, your overriding concern should be that you explain things to your reader. Always remember that the point of reporting your results is to communicate to another human being. I cannot tell you just how many times I've seen the results section of a report or a thesis or even a scientific article that is just gibberish, because the writer has focused solely on making sure they've included all the numbers and forgotten to actually communicate with the human reader.
 
-> *Satan delights equally in statistics and in quoting scripture*[^10-categorical-data-analysis-9] - H.G. Wells
+> *Satan delights equally in statistics and in quoting scripture*[^10-categorical-data-analysis-9] 
+> -- H.G. Wells
 
 [^10-categorical-data-analysis-9]: If you've been reading very closely, and are as much of a mathematical pedant as I am, there is one thing about the way I wrote up the chi-square test in the last section that might be bugging you a little bit. There's something that feels a bit wrong with writing "$\chi^2(3) = 8.44$", you might be thinking. After all, it's the goodness-of-fit statistic that is equal to 8.44, so shouldn't I have written $X^2 = 8.44$ or maybe $GOF = 8.44$? This seems to be conflating the sampling distribution (i.e., $\chi^2$ with df = 3) with the test statistic (i.e., $X^2$). Odds are you figured it was a typo, since $\chi$ and X look pretty similar. Oddly, it's not. Writing $\chi^2$(3)= 8.44 is essentially a highly condensed way of writing "the sampling distribution of the test statistic is $\chi^2$(3), and the value of the test statistic is 8.44" In one sense, this is kind of stupid. There are lots of different test statistics out there that turn out to have a chi-square sampling distribution. The $X^2$ statistic that we've used for our goodness-of-fit test is only one of many (albeit one of the most commonly encountered ones). In a sensible, perfectly organised world we'd always have a separate name for the test statistic and the sampling distribution. That way, the stat block itself would tell you exactly what it was that the researcher had calculated. Sometimes this happens. For instance, the test statistic used in the Pearson goodness-of-fit test is written $X^2$ , but there's a closely related test known as the G-test$^a$ [@Sokal1994], in which the test statistic is written as $G$. As it happens, the Pearson goodness-of-fit test and the G-test both test the same null hypothesis, and the sampling distribution is exactly the same (i.e., chi-square with $k - 1$ degrees of freedom). If I'd done a G-test for the cards data rather than a goodness-of-fit test, then I'd have ended up with a test statistic of $G = 8.65$, which is slightly different from the $X^2 = 8.44$ value that I got earlier and which produces a slightly smaller p-value of $p = .034$. Suppose that the convention was to report the test statistic, then the sampling distribution, and then the p-value. If that were true, then these two situations would produce different stat blocks: my original result would be written $X^2 = 8.44$, $\chi^2(3)$, $p = .038$, whereas the new version using the G-test would be written as $G = 8.65$, $\chi^2(3)$, $p = .034$. However, using the condensed reporting standard, the original result is written $\chi^2(3) = 8.44, p =.038$, and the new one is written $\chi^2(3) = 8.65, p = .034$, and so it's actually unclear which test I actually ran. So why don't we live in a world in which the contents of the stat block uniquely specifies what tests were ran? The deep reason is that life is messy. We (as users of statistical tools) want it to be nice and neat and organised. We want it to be designed, as if it were a product, but that's not how life works. Statistics is an intellectual discipline just as much as any other one, and as such it's a massively distributed, partly-collaborative and partly-competitive project that no-one really understands completely. The things that you and I use as data analysis tools weren't created by an Act of the Gods of Statistics. They were invented by lots of different people, published as papers in academic journals, implemented, corrected and modified by lots of other people, and then explained to students in textbooks by someone else. As a consequence, there's a lot of test statistics that don't even have names, and as a consequence they're just given the same name as the corresponding sampling distribution. As we'll see later, any test statistic that follows a $\chi^2$ distribution is commonly called a "chi-square statistic", anything that follows a $t$-distribution is called a "t-statistic", and so on. But, as the $\chi^2$ versus $G$ example illustrates, two different things with the same sampling distribution are still, well, different. As a consequence, it's sometimes a good idea to be clear about what the actual test was that you ran, especially if you're doing something unusual. If you just say "chi-square test" it's not actually clear what test you're talking about. Although, since the two most common chi-square tests are the goodness-of-fit test and the independence test, most readers with stats training can probably guess. Nevertheless, it's something to be aware of. -- $^a$ Complicating matters, the G-test is a special case of a whole class of tests that are known as likelihood ratio tests. I don't cover LRTs in this book, but they are quite handy things to know about.
 
@@ -250,9 +253,9 @@ Therefore, our expected frequency can be written as the product (i.e. multiplica
 
 $$\hat{E}_{ij}= \frac{R_i \times C_j}{N}$$
 
-Statistical notation [^10-categorical-data-analysis-12]
+<span class="technical">[Additional technical detail [^10-categorical-data-analysis-12]]</span>
 
-[^10-categorical-data-analysis-12]: Now that we've figured out how to calculate the expected frequencies, it's straightforward to define a test statistic, following the exact same strategy that we used in the goodness-of-fit test. In fact, it's pretty much the same statistic. For a contingency table with r rows and c columns, the equation that defines our \$X\^2\$ statistic is \$\$X\^2=\\sum\_{i=1}\^{r}\\sum\_{j=1}\^{c} \\frac{(E\_{ij}-O\_{ij})\^2}{E\_{ij}}\$\$ The only difference is that I have to include two summation signs (i.e., $\\sum$ ) to indicate that we're summing over both rows and columns. \|
+[^10-categorical-data-analysis-12]: Now that we've figured out how to calculate the expected frequencies, it's straightforward to define a test statistic, following the exact same strategy that we used in the goodness-of-fit test. In fact, it's pretty much the same statistic. For a contingency table with r rows and c columns, the equation that defines our $X^2$ statistic is $$X^2=\sum_{i=1}^{r}\sum_{j=1}^{c} \frac{(E_{ij}-O_{ij})^2}{E_{ij}}$$ The only difference is that I have to include two summation signs (i.e., $\sum$ ) to indicate that we're summing over both rows and columns. 
 
 As before, large values of $X^2$ indicate that the null hypothesis provides a poor description of the data, whereas small values of $X^2$ suggest that it does a good job of accounting for the data. Therefore, just like last time, we want to reject the null hypothesis if $X^2$ is too large.
 
@@ -298,7 +301,7 @@ Okay, time for a little bit of a digression. I've been lying to you a little bit
 
 As far as I can tell from reading Yates' paper[^10-categorical-data-analysis-14], the correction is basically a hack. It's not derived from any principled theory. Rather, it's based on an examination of the behaviour of the test, and observing that the corrected version seems to work better. You can specify this correction in jamovi from a check box in the 'Statistics' options, where it is called '$\chi^2$ continuity correction'.
 
-[^10-categorical-data-analysis-14]: [Yates (1934)](https://www.jstor.org/stable/2983604) suggested a simple fix, in which you redefine the goodness-of-fit statistic as: \$\$\\chi\^{2}=\\sum\_{i}\\frac{(\|E_i-O_i\|-0.5)\^2}{E_i}\$\$ Basically, he just subtracts off 0.5 everywhere.
+[^10-categorical-data-analysis-14]: [Yates (1934)](https://www.jstor.org/stable/2983604) suggested a simple fix, in which you redefine the goodness-of-fit statistic as: $$\chi^{2}=\sum_{i}\frac{(|E_i-O_i|-0.5)^2}{E_i}$$ Basically, he just subtracts off 0.5 everywhere.
 
 ## Effect size
 
@@ -308,7 +311,7 @@ There are several different measures that you can choose to report, and several 
 
 By default, the two measures that people tend to report most frequently are the $\phi$ statistic and the somewhat superior version, known as Cramér's $V$ .
 
-Statistical notation[^10-categorical-data-analysis-15]
+<span class="technical">[Additional technical detail [^10-categorical-data-analysis-15]]</span>
 
 [^10-categorical-data-analysis-15]: Mathematically, they're very simple. To calculate the $\phi$ statistic, you just divide your $X^2$ value by the sample size, and take the square root: $$\phi=\sqrt{\frac{X^2}{N}}$$ The idea here is that the $\phi$ statistic is supposed to range between 0 (no association at all) and 1 (perfect association), but it doesn't always do this when your contingency table is bigger than $2 \times 2$ , which is a total pain. For bigger tables it's actually possible to obtain $\phi > 1$, which is pretty unsatisfactory. So, to correct for this, people usually prefer to report the $V$ statistic proposed by @Cramer1946. It's a pretty simple adjustment to $\phi$. If you've got a contingency table with r rows and c columns, then define $k = min(r, c)$ to be the smaller of the two values. If so, then Cramér's $V$ statistic is $$V=\sqrt{\frac{X^2}{N(k-1)}}$$ 
 
@@ -349,7 +352,7 @@ $$P(O_{11}, O_{12}, O_{21}, O_{22}  \text{ | } R_1, R_2, C_1, C_2)$$ and as you 
 
 You can specify this test in jamovi from a check box in the 'Statistics' options of the 'Contingency Tables' analysis. When you do this with the data from the salem.csv file, the Fisher exact test statistic is shown in the results. The main thing we're interested in here is the p-value, which in this case is small enough (p = .036) to justify rejecting the null hypothesis that people on fire are just as happy as people not on fire. See Figure \@ref(fig:fig10-6).
 
-```{r fig10-6, chunk.class="enlarge.image", fig.cap="Fisher exact test analysis in jamovi", out.width = "60%"}
+```{r fig10-6, chunk.class="enlarge-image", fig.cap="Fisher exact test analysis in jamovi", out.width = "60%"}
 knitr::include_graphics("images/Fisher.png")
 ```
 
@@ -379,7 +382,7 @@ $$\chi^2=\frac{(|O_{12}-O_{21}|-0.5)^2}{O_{12}+O_{21}}$$ and this statistic has 
 
 Now that you know what the McNemar test is all about, lets actually run one. The agpp.csv file contains the raw data that I discussed previously. The agpp data set contains three variables, an id variable that labels each participant in the data set (we'll see why that's useful in a moment), a **response_before** variable that records the person's answer when they were asked the question the first time, and a response_after variable that shows the answer that they gave when asked the same question a second time. Notice that each participant appears only once in this data set. Go to the 'Analyses' - 'Frequencies' - 'Contingency Tables' - 'Paired Samples' analysis in jamovi, and move **response_before** into the 'Rows' box, and **response_after** into the 'Columns' box. You will then get a contingency table in the results window, with the statistic for the McNemar test just below it, see Figure \@ref(fig:fig10-7).
 
-```{r fig10-7, chunk.class="enlarge.image", fig.cap="McNemar test output in jamovi", out.width = "90%"}
+```{r fig10-7, chunk.class="enlarge-image", fig.cap="McNemar test output in jamovi", out.width = "90%"}
 knitr::include_graphics("images/Figure80.PNG")
 ```
 
@@ -399,7 +402,7 @@ Alternatively, suppose I wanted to know if on average, the frequencies of suit c
 
 The different statistics produced by these different analyses are shown in Figure \@ref(fig:fig(10-8). Notice that the results are different! These aren't the same test.
 
-```{r fig10-8, chunk.class="enlarge.image", fig.cap="Independent vs. Paired (McNemar) test output in jamovi", out.width = "90%"}
+```{r fig10-8, chunk.class="enlarge-image", fig.cap="Independent vs. Paired (McNemar) test output in jamovi", out.width = "90%"}
 knitr::include_graphics("images/Figure81.PNG")
 ```
 

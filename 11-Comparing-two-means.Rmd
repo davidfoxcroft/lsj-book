@@ -24,7 +24,7 @@ To answer the question, it helps to be able to write down what it is that I thin
 
 Next, it helps to be clear about what I want to learn from the data. In this case my research hypothesis relates to the population mean µ for the psychology student grades, which is unknown. Specifically, I want to know if $\mu = 67.5$ or not. Given that this is what I know, can we devise a hypothesis test to solve our problem? The data, along with the hypothesised distribution from which they are thought to arise, are shown in Figure \@ref(fig:fig11.1). Not entirely obvious what the right answer is, is it? For this, we are going to need some statistics.
 
-```{r fig11-1, chunk.class="enlarge.image", fig.cap="The theoretical distribution (solid line) from which the psychology student grades (bars) are supposed to have been generated", out.width = "70%"}
+```{r fig11-1, class.chunk="enlarge-image", fig.cap="The theoretical distribution (solid line) from which the psychology student grades (bars) are supposed to have been generated", out.width = "70%"}
 knitr::include_graphics("images/Figure82.PNG")
 ```
 
@@ -41,7 +41,7 @@ though to be honest this notation doesn't add much to our understanding of the p
 
 For the moment, we'll act as if these are absolutely trustworthy facts. In real life, this kind of absolutely trustworthy background knowledge doesn't exist, and so if we want to rely on these facts we'll just have make the *assumption* that these things are true. However, since these assumptions may or may not be warranted, we might need to check them. For now though, we'll keep things simple.
 
-```{r fig11-2, chunk.class="enlarge.image", fig.cap="Graphical illustration of the null and alternate hypotheses assumed by the one sample $z$-test (the two sided version, that is). The null and alternate hypotheses both assume that the population distribution is normal, and additionally assumes that the population standard deviation is known (fixed at some value $\\sigma_0$). The null hypothesis (left) is that the population mean $\\mu$ is equal to some specified value $\\mu_0$. The alternative hypothesis (right) is that the population mean differs from this value, $\\mu \\neq \\mu_0$", out.width = "90%"}
+```{r fig11-2, class.chunk="enlarge-image", fig.cap="Graphical illustration of the null and alternate hypotheses assumed by the one sample $z$-test (the two sided version, that is). The null and alternate hypotheses both assume that the population distribution is normal, and additionally assumes that the population standard deviation is known (fixed at some value $\\sigma_0$). The null hypothesis (left) is that the population mean $\\mu$ is equal to some specified value $\\mu_0$. The alternative hypothesis (right) is that the population mean differs from this value, $\\mu \\neq \\mu_0$", out.width = "90%"}
 knitr::include_graphics("images/one-sample-ztest-null-and-alternate.png")
 ```
 
@@ -119,7 +119,7 @@ After some thought, I decided that it might not be safe to assume that the psych
 
 Okay, cool. The obvious thing that you might think to do is run a z-test, but using the estimated standard deviation of $9.52$ instead of relying on my assumption that the true standard deviation is $9.5$. And you probably wouldn't be surprised to hear that this would still give us a significant result. This approach is close, but it's not quite correct. Because we are now relying on an estimate of the population standard deviation we need to make some adjustment for the fact that we have some uncertainty about what the true population standard deviation actually is. Maybe our data are just a fluke...maybe the true population standard deviation is $11$, for instance. But if that were actually true, and we ran the z-test assuming $\sigma=11$, then the result would end up being non-significant. That's a problem, and it's one we're going to have to address.
 
-```{r fig11-4, chunk.class="enlarge.image", fig.cap="Graphical illustration of the null and alternative hypotheses assumed by the (two sided) one sample t-test. Note the similarity to the z-test (Figure \\@ref(fig:fig11-2)). The null hypothesis is that the population mean $\\mu$ is equal to some specified value $\\mu_0$, and the alternative hypothesis is that it is not. Like the z-test, we assume that the data are normally distributed, but we do not assume that the population standard deviation $\\sigma$ is known in advance", out.width = "90%"}
+```{r fig11-4, class.chunk="enlarge-image", fig.cap="Graphical illustration of the null and alternative hypotheses assumed by the (two sided) one sample t-test. Note the similarity to the z-test (Figure \\@ref(fig:fig11-2)). The null hypothesis is that the population mean $\\mu$ is equal to some specified value $\\mu_0$, and the alternative hypothesis is that it is not. Like the z-test, we assume that the data are normally distributed, but we do not assume that the population standard deviation $\\sigma$ is known in advance", out.width = "90%"}
 knitr::include_graphics("images/Figure84.PNG")
 ```
 
@@ -131,7 +131,7 @@ This ambiguity is annoying, and it was resolved in 1908 by a guy called William 
 
 $$t=\frac{\bar{X}-\mu}{\frac{\hat{\sigma}}{\sqrt{N}}}$$
 
-```{r fig11-5, chunk.class="enlarge.image", fig.cap="The t distribution with 2 degrees of freedom (left) and 10 degrees of freedom (right), with a standard normal distribution (i.e., mean 0 and std dev 1) plotted as dotted lines for comparison purposes. Notice that the t distribution has heavier tails (leptokurtic: higher kurtosis) than the normal distribution; this effect is quite exaggerated when the degrees of freedom are very small, but negligible for larger values. In other words, for large $df$ the t distribution is essentially identical to a normal distribution", out.width = "90%"}
+```{r fig11-5, class.chunk="enlarge-image", fig.cap="The t distribution with 2 degrees of freedom (left) and 10 degrees of freedom (right), with a standard normal distribution (i.e., mean 0 and std dev 1) plotted as dotted lines for comparison purposes. Notice that the t distribution has heavier tails (leptokurtic: higher kurtosis) than the normal distribution; this effect is quite exaggerated when the degrees of freedom are very small, but negligible for larger values. In other words, for large $df$ the t distribution is essentially identical to a normal distribution", out.width = "90%"}
 knitr::include_graphics("images/Figure85.PNG")
 ```
 
@@ -141,7 +141,7 @@ The only thing that has changed in the equation is that instead of using the kno
 
 As you might expect, the mechanics of the t-test are almost identical to the mechanics of the z-test. So there's not much point in going through the tedious exercise of showing you how to do the calculations using low level commands. It's pretty much identical to the calculations that we did earlier, except that we use the estimated standard deviation and then we test our hypothesis using the t distribution rather than the normal distribution. And so instead of going through the calculations in tedious detail for a second time, I'll jump straight to showing you how t-tests are actually done. jamovi comes with a dedicated analysis for t-tests that is very flexible (it can run lots of different kinds of t-tests). It's pretty straightforward to use; all you need to do is specify 'Analyses' - 'T-Tests' - 'One Sample T-Test', move the variable you are interested in (X) across into the 'Variables' box, and type in the mean value for the null hypothesis ('67.5') in the 'Hypothesis' - 'Test value' box. Easy enough. See Figure \@ref(fig:fig11-6), which, amongst other things that we will get to in a moment, gives you a t-test statistic = 2.25, with 19 degrees of freedom and an associated p-value of $0.036$.
 
-```{r fig11-6, chunk.class="enlarge.image",  fig.cap="jamovi does the one-sample t-test", out.width = "90%"}
+```{r fig11-6, class.chunk="enlarge-image",  fig.cap="jamovi does the one-sample t-test", out.width = "90%"}
 knitr::include_graphics("images/Figure86.PNG")
 ```
 
@@ -188,17 +188,17 @@ To give you a more detailed sense of what's going on here, I've plotted histogra
 
 The **independent samples t-test** comes in two different forms, Student's and Welch's. The original Student t-test, which is the one I'll describe in this section, is the simpler of the two but relies on much more restrictive assumptions than the Welch t-test. Assuming for the moment that you want to run a two-sided test, the goal is to determine whether two "independent samples" of data are drawn from populations with the same mean (the null hypothesis) or different means (the alternative hypothesis). When we say "independent" samples, what we really mean here is that there's no special relationship between observations in the two samples. This probably doesn't make a lot of sense right now, but it will be clearer when we come to talk about the paired samples t-test later on. For now, let's just point out that if we have an experimental design where participants are randomly allocated to one of two groups, and we want to compare the two groups' mean performance on some outcome measure, then an independent samples t-test (rather than a paired samples t-test) is what we're after.
 
-```{r fig11-7, chunk.class="enlarge.image",  fig.cap="Histograms showing the distribution of grades for students in Anastasia's (panel a) and in Bernadette's (panel b) classes. Visually, these suggest that students in Anastasia's class may be getting slightly better grades on average, though they also seem a bit more variable", out.width = "90%"}
+```{r fig11-7, class.chunk="enlarge-image",  fig.cap="Histograms showing the distribution of grades for students in Anastasia's (panel a) and in Bernadette's (panel b) classes. Visually, these suggest that students in Anastasia's class may be getting slightly better grades on average, though they also seem a bit more variable", out.width = "90%"}
 knitr::include_graphics("images/Figure87.PNG")
 ```
 
-```{r fig11-8, chunk.class="enlarge.image", fig.cap="The plots show the mean grade for students in Anastasia's and Bernadette's tutorials. Error bars depict $95\\%$ confidence intervals around the mean. Visually, it does look like there's a real difference between the groups, though it's hard to say for sure", out.width = "90%"}
+```{r fig11-8, class.chunk="enlarge-image", fig.cap="The plots show the mean grade for students in Anastasia's and Bernadette's tutorials. Error bars depict $95\\%$ confidence intervals around the mean. Visually, it does look like there's a real difference between the groups, though it's hard to say for sure", out.width = "90%"}
 knitr::include_graphics("images/Figure88.PNG")
 ```
 
 Okay, so let's let $\mu_1$ denote the true population mean for group 1 (e.g., Anastasia's students), and $\mu_2$ will be the true population mean for group 2 (e.g., Bernadette's students),[^11-comparing-two-means-11] and as usual we'll let $\bar{X_1}$ and $\bar{X_2}$ denote the observed sample means for both of these groups. Our null hypothesis states that the two population means are identical ($\mu_1 = \mu_2$) and the alternative to this is that they are not ($\mu_1 \neq \mu_2$) (Figure \@ref(fig:fig11-9)). Written in mathematical-ese, this is:
 
-```{r fig11-9, chunk.class="enlarge.image", fig.cap="Graphical illustration of the null and alternative hypotheses assumed by the Student t-test. The null hypothesis assumes that both groups have the same mean $\\mu$, whereas the alternative assumes that they have different means $\\mu_1$ and $\\mu_2$. Notice that it is assumed that the population distributions are normal, and that, although the alternative hypothesis allows the group to have different means, it assumes they have the same standard deviation", out.width = "90%"}
+```{r fig11-9, class.chunk="enlarge-image", fig.cap="Graphical illustration of the null and alternative hypotheses assumed by the Student t-test. The null hypothesis assumes that both groups have the same mean $\\mu$, whereas the alternative assumes that they have different means $\\mu_1$ and $\\mu_2$. Notice that it is assumed that the population distributions are normal, and that, although the alternative hypothesis allows the group to have different means, it assumes they have the same standard deviation", out.width = "90%"}
 knitr::include_graphics("images/Figure89.PNG")
 ```
 
@@ -214,17 +214,16 @@ We just need to figure out what this standard error estimate actually is. This i
 
 In the original "Student t-test", we make the assumption that the two groups have the same population standard deviation. That is, regardless of whether the population means are the same, we assume that the population standard deviations are identical, $\sigma_1 = \sigma_2$. Since we're assuming that the two standard deviations are the same, we drop the subscripts and refer to both of them as $\sigma$. How should we estimate this? How should we construct a single estimate of a standard deviation when we have two samples? The answer is, basically, we average them. Well, sort of. Actually, what we do is take a *weighted* average of the *variance* estimates, which we use as our **pooled estimate of the variance**. The weight assigned to each sample is equal to the number of observations in that sample, minus 1.
 
-Statistical notation [^11-comparing-two-means-12]
+<span class="technical">[Additional technical detail [^11-comparing-two-means-12]]</span>
 
 [^11-comparing-two-means-12]: Mathematically, we can write this as $$w_1=N_1-1$$ $$w_2=N_2-1$$ Now that we've assigned weights to each sample we calculate the pooled estimate of the variance by taking the weighted average of the two variance estimates, $\hat{sigma}_{1}^{2}$ and $\hat{sigma}_{2}^{2}$ $$\hat{\sigma}_p^2=\frac{w_1\hat{\sigma}_1^2+w_2\hat{\sigma}_2^2}{w_1+w_2}$$ Finally, we convert the pooled variance estimate to a pooled standard deviation estimate, by taking the square root. $$\hat{\sigma}_p=\sqrt{\frac{w_1\hat{\sigma}_1^2+w_2\hat{\sigma}_2^2}{w_1+w_2}}$$ And if you mentally substitute $(w_1 = N_1 - 1)$ and $w_2 = N_2 - 1$ into this equation you get a very ugly looking formula. A very ugly formula that actually seems to be the "standard" way of describing the pooled standard deviation estimate. It's not my favourite way of thinking about pooled standard deviations, however. I prefer to think about it like this. Our data set actually corresponds to a set of N observations which are sorted into two groups. So let's use the notation $X_{ik}$ to referto the grade received by the i-th student in the k-th tutorial group. That is, $(X_{11}$ is the grade received by the first student in Anastasia's class, $X_{21}$ is her second student, and so on. And we have two separate group means $\bar{X}_1$ and $\bar{X}_2$, which we could "generically" refer to using the notation $\bar{X}_k$, i.e., the mean grade for the k-th tutorial group. So far, so good. Now, since every single student falls into one of the two tutorials, we can describe their deviation from the group mean as the difference $$X_{ik}-\bar{X}_k$$ So why not just use these deviations (i.e., the extent to which each student's grade differs from the mean grade in their tutorial)? Remember, a variance is just the average of a bunch of squared deviations, so let's do that. Mathematically, we could write it like this $$\frac{\sum_{ik}(X_{ik}-\bar{X}_k)^2}{N}$$ where the notation "$\sum_{ik}$" is a lazy way of saying "calculate a sum by looking at all students in all tutorials", since each "$_{ik}$" corresponds to one student.$^a$ But, as we saw in the chapter on [Estimating unknown quantities from a sample], calculating the variance by dividing by N produces a biased estimate of the population variance. And previously we needed to divide by $(N - 1)$ to fix this. However, as I mentioned at the time, the reason why this bias exists is because the variance estimate relies on the sample mean, and to the extent that the sample mean isn't equal to the population mean it can systematically bias our estimate of the variance. But this time we're relying on two sample means! Does this mean that we've got more bias? Yes, yes it does. And does this mean we now need to divide by $(N - 2)$ instead of $(N - 1)$, in order to calculate our pooled variance estimate? Why, yes $$\hat {\sigma}_p^2=\frac{\sum_{ik}(X_{ik}-\bar{X}_k)^2}{N-2}$$\
-    Oh, and if you take the square root of this then you get $\hat{\sigma}_p$, the pooled standard deviation estimate. In other words, the pooled standard deviation calculation is nothing special. It's not terribly different to the regular\
-    standard deviation calculation. -- $^a$ A more correct notation will be introduced in the chapter on [Comparing several means (one-way ANOVA)]
+    Oh, and if you take the square root of this then you get $\hat{\sigma}_p$, the pooled standard deviation estimate. In other words, the pooled standard deviation calculation is nothing special. It's not terribly different to the regular standard deviation calculation. <br /> --- <br />$^a$ A more correct notation will be introduced in the chapter on [Comparing several means (one-way ANOVA)]
 
 ## Completing the test
 
 Regardless of which way you want to think about it, we now have our pooled estimate of the standard deviation. From now on, I'll drop the silly p subscript, and just refer to this estimate as $\hat{\sigma}$. Great. Let's now go back to thinking about the bloody hypothesis test, shall we? Our whole reason for calculating this pooled estimate was that we knew it would be helpful when calculating our standard error estimate. But standard error of what? In the one-sample t-test it was the standard error of the sample mean, $se(\bar{X})$, and since $se(\bar{X}) = \frac{\sigma}{\sqrt{N}}$ that's what the denominator of our t-statistic looked like. This time around, however, we have two sample means. And what we're interested in, specifically, is the the difference between the two $\bar{X}_1-\bar{X}_2$ As a consequence, the standard error that we need to divide by is in fact the **standard error of the difference** between means.
 
-Statistical notation [^11-comparing-two-means-13]
+<span class="technical">[Additional technical detail [^11-comparing-two-means-13]]</span>
 
 [^11-comparing-two-means-13]: As long as the two variables really do have the same standard deviation, then our estimate for the standard error is $$SE(\bar{X}_1-\bar{X}_2)=\hat{\sigma}\sqrt{\frac{1}{N_1}+\frac{1}{N_2}}$$ and our t-statistic is therefore $$t=\frac{\bar{X}_1-\bar{X}_2}{SE(\bar{X}_1-\bar{X}_2)}$$
 
@@ -234,7 +233,7 @@ Just as we saw with our one-sample test, the sampling distribution of this t-sta
 
 Not surprisingly, you can run an independent samples t-test easily in jamovi. The outcome variable for our test is the student grade, and the groups are defined in terms of the tutor for each class. So you probably won't be too surprised that all you have to do in jamovi is go to the relevant analysis ('Analyses' - 'T-Tests' - 'Independent Samples T-Test') and move the grade variable across to the 'Dependent Variables' box, and the tutor variable across into the 'Grouping Variable' box, as shown in Figure \@ref(fig:fig11-10).
 
-```{r fig11-10, chunk.class="enlarge.image", fig.cap="Independent t-test in jamovi, with options checked for useful results", out.width = "90%"}
+```{r fig11-10, class.chunk="enlarge-image", fig.cap="Independent t-test in jamovi, with options checked for useful results", out.width = "90%"}
 knitr::include_graphics("images/Figure90.PNG")
 ```
 
@@ -278,7 +277,7 @@ As always, our hypothesis test relies on some assumptions. So what are they? For
 
 The biggest problem with using the Student test in practice is the third assumption listed in the previous section. It assumes that both groups have the same standard deviation. This is rarely true in real life. If two samples don't have the same means, why should we expect them to have the same standard deviation? There's really no reason to expect this assumption to be true. We'll talk a little bit about how you can check this assumption later on because it does crop up in a few different places, not just the t-test. But right now I'll talk about a different form of the t-test [@Welch1947] that does not rely on this assumption. A graphical illustration of what the Welch t test assumes about the data is shown in Figure \@ref(fig:fig11-11), to provide a contrast with the Student test version in Figure \@ref(fig:fig11-9). I'll admit it's a bit odd to talk about the cure before talking about the diagnosis, but as it happens the Welch test can be specified as one of the 'Independent Samples T-Test' options in jamovi, so this is probably the best place to discuss it.
 
-```{r fig11-11,chunk.class="enlarge.image",  fig.cap="Graphical illustration of the null and alternative hypotheses assumed by the Welch t-test. Like the Student test (Figure \\@ref(fig:fig11-9)) we assume that both samples are drawn from a normal population; but the alternative hypothesis no longer requires the two populations to have equal variance", out.width = "90%"}
+```{r fig11-11,class.chunk="enlarge-image",  fig.cap="Graphical illustration of the null and alternative hypotheses assumed by the Welch t-test. Like the Student test (Figure \\@ref(fig:fig11-9)) we assume that both samples are drawn from a normal population; but the alternative hypothesis no longer requires the two populations to have equal variance", out.width = "90%"}
 knitr::include_graphics("images/Figure91.PNG")
 ```
 
@@ -290,11 +289,9 @@ The main difference is that the standard error calculations are different. If th
 
 [^11-comparing-two-means-14]: Well, I guess you can average apples and oranges, and what you end up with is a delicious fruit smoothie. But no one really thinks that a fruit smoothie is a very good way to describe the original fruits, do they?
 
-Statistical notation [^11-comparing-two-means-15]
+<span class="technical">[Additional technical detail [^11-comparing-two-means-15]]</span>
 
-[^11-comparing-two-means-15]: But you can still estimate the standard error of the difference between sample means, it just ends up looking different $$SE(\bar{X}_1-\bar{X}_2)=\sqrt{\frac{\hat{\sigma}_1^2}{N_1}+\frac{\hat{\sigma}_2^2}{N_2}}$$ The reason why it's calculated this way is beyond the scope of\
-    this book. What matters for our purposes is that the t-statistic\
-    that comes out of the Welch t-test is actually somewhat different to the one that comes from the Student t-test.
+[^11-comparing-two-means-15]: But you can still estimate the standard error of the difference between sample means, it just ends up looking different $$SE(\bar{X}_1-\bar{X}_2)=\sqrt{\frac{\hat{\sigma}_1^2}{N_1}+\frac{\hat{\sigma}_2^2}{N_2}}$$ The reason why it's calculated this way is beyond the scope of this book. What matters for our purposes is that the t-statistic  that comes out of the Welch t-test is actually somewhat different to the one that comes from the Student t-test.
 
 The second difference between Welch and Student is that the degrees of freedom are calculated in a very different way. In the Welch test, the "degrees of freedom" doesn't have to be a whole number any more, and it doesn't correspond all that closely to the "number of data points minus the number of constraints" heuristic that I've been using up to this point.
 
@@ -302,7 +299,7 @@ The second difference between Welch and Student is that the degrees of freedom a
 
 If you tick the check box for the Welch test in the analysis we did above, then this is what it gives you (Figure \@ref(fig:fig11-12)).
 
-```{r fig11-12, chunk.class="enlarge.image", fig.cap="Results showing the Welch test alongside the default Student's t-test in jamovi", out.width = "90%"}
+```{r fig11-12, class.chunk="enlarge-image", fig.cap="Results showing the Welch test alongside the default Student's t-test in jamovi", out.width = "90%"}
 knitr::include_graphics("images/Figure92.PNG")
 ```
 
@@ -330,13 +327,13 @@ If we look at the jamovi spreadsheet it does seem like the class is a hard one (
 
 If we take a quick look at the descriptive statistics, in Figure \@ref(fig:fig11-13), we see that this impression seems to be supported. Across all 20 students the mean grade for the first test is 57%, but this rises to 58% for the second test. Although, given that the standard deviations are 6.6% and 6.4% respectively, it's starting to feel like maybe the improvement is just illusory; maybe just random variation. This impression is reinforced when you see the means and confidence intervals plotted in Figure \@ref(fig:fig11-14)a. If we were to rely on this plot alone, looking at how wide those confidence intervals are, we'd be tempted to think that the apparent improvement in student performance is pure chance.
 
-```{r fig11-13, chunk.class="enlarge.image", fig.cap="Descriptives for the two grade test variables in the chico data set", out.width = "90%"}
+```{r fig11-13, class.chunk="enlarge-image", fig.cap="Descriptives for the two grade test variables in the chico data set", out.width = "90%"}
 knitr::include_graphics("images/Figure93.PNG")
 ```
 
 Nevertheless, this impression is wrong. To see why, take a look at the scatterplot of the grades for test 1 against the grades for test 2, shown in Figure \@ref(fig:fig11-14)b. In this plot each dot corresponds to the two grades for a given student. If their grade for test 1 (x co-ordinate) equals their grade for test 2 (y co-ordinate), then the dot falls on the line. Points falling above the line are the students that performed better on the second test. Critically, almost all of the data points fall above the diagonal line: almost all of the students do seem to have improved their grade, if only by a small amount. This suggests that we should be looking at the improvement made by each student from one test to the next and treating that as our raw data. To do this, we'll need to create a new variable for the improvement that each student makes, and add it to the chico data set. The easiest way to do this is to compute a new variable, with the expression grade test2 - grade test1.
 
-```{r fig11-14, chunk.class="enlarge.image", fig.cap="Mean grade for test 1 and test 2, with associated 95\\% confidence intervals (panel a). Scatterplot showing the individual grades for test 1 and test 2 (panel b). Histogram showing the improvement made by each student in Dr Chico's class (panel c). In panel c, notice that almost the entire distribution is above zero: the vast majority of students did improve their performance from the first test to the second one", out.width = "90%"}
+```{r fig11-14, class.chunk="enlarge-image", fig.cap="Mean grade for test 1 and test 2, with associated 95\\% confidence intervals (panel a). Scatterplot showing the individual grades for test 1 and test 2 (panel b). Histogram showing the improvement made by each student in Dr Chico's class (panel c). In panel c, notice that almost the entire distribution is above zero: the vast majority of students did improve their performance from the first test to the second one", out.width = "90%"}
 knitr::include_graphics("images/Figure94.PNG")
 ```
 
@@ -364,7 +361,7 @@ where $\hat{\sigma}_D$ is the standard deviation of the difference scores. Since
 
 How do you do a paired samples t-test in jamovi? One possibility is to follow the process I outlined above. That is, create a "difference" variable and then run a one sample t-test on that. Since we've already created a variable called improvement, let's do that and see what we get, Figure \@ref(fig:fig11-15).
 
-```{r fig11-15, chunk.class="enlarge.image", fig.cap="Results showing a one sample t-test on paired difference scores", out.width = "90%"}
+```{r fig11-15, class.chunk="enlarge-image", fig.cap="Results showing a one sample t-test on paired difference scores", out.width = "90%"}
 knitr::include_graphics("images/Figure95.PNG")
 ```
 
@@ -372,7 +369,7 @@ The output shown in Figure \@ref(fig:fig11-15) is (obviously) formatted exactly 
 
 However, suppose you're lazy and you don't want to go to all the effort of creating a new variable. Or perhaps you just want to keep the difference between one-sample and paired samples tests clear in your head. If so, you can use the jamovi 'Paired Samples T-Test' analysis, getting the results shown in Figure \@ref(fig:fig11-16).
 
-```{r fig11-16, chunk.class="enlarge.image", fig.cap="Results showing a paired sample t-test. Compare with Figure \\@ref(fig:fig11-15)", out.width = "90%"}
+```{r fig11-16, class.chunk="enlarge-image", fig.cap="Results showing a paired sample t-test. Compare with Figure \\@ref(fig:fig11-15)", out.width = "90%"}
 knitr::include_graphics("images/Figure96.PNG")
 ```
 
@@ -382,7 +379,7 @@ The numbers are identical to those that come from the one sample test, which of 
 
 When introducing the theory of null hypothesis tests, I mentioned that there are some situations when it's appropriate to specify a one-sided test (see section on [The difference between one sided and two sided tests]). So far all of the t-tests have been two-sided tests. For instance, when we specified a one sample t-test for the grades in Dr Zeppo's class the null hypothesis was that the true mean was $67.5\%$. The alternative hypothesis was that the true mean was greater than or less than $67.5\%$. Suppose we were only interested in finding out if the true mean is greater than $67.5\%$, and have no interest whatsoever in testing to find out if the true mean is lower than $67.5\%$. If so, our null hypothesis would be that the true mean is $67.5\%$ or less, and the alternative hypothesis would be that the true mean is greater than $67.5\%$. In jamovi, for the 'One Sample T-Test' analysis, you can specify this by clicking on the '$>$ Test Value' option, under 'Hypothesis'. When you have done this, you will get the results as shown in Figure \@ref(fig:fig11-17).
 
-```{r fig11-17, chunk.class="enlarge.image", fig.cap="jamovi results showing a 'One Sample T-Test' where the actual hypothesis is one sided, i.e. that the true mean is greater than $67.5\\%$", out.width = "90%"}
+```{r fig11-17, class.chunk="enlarge-image", fig.cap="jamovi results showing a 'One Sample T-Test' where the actual hypothesis is one sided, i.e. that the true mean is greater than $67.5\\%$", out.width = "90%"}
 knitr::include_graphics("images/Figure97.PNG")
 ```
 
@@ -390,7 +387,7 @@ Notice that there are a few changes from the output that we saw last time. Most 
 
 So that's how to do a one-sided one sample t-test. However, all versions of the t-test can be one-sided. For an independent samples t test, you could have a one-sided test if you're only interested in testing to see if group A has higher scores than group B, but have no interest in finding out if group B has higher scores than group A. Let's suppose that, for Dr Harpo's class, you wanted to see if Anastasia's students had higher grades than Bernadette's. For this analysis, in the 'Hypothesis' options, specify that 'Group 1 \> Group2'. You should get the results shown in Figure \@ref(fig:fig11-18).
 
-```{r fig11-18, chunk.class="enlarge.image", fig.cap="jamovi results showing an 'Independent Samples t-Test' where the actual hypothesis is one sided, i.e. that Anastasia's students had higher grades than Bernadette's", out.width = "90%"}
+```{r fig11-18, class.chunk="enlarge-image", fig.cap="jamovi results showing an 'Independent Samples t-Test' where the actual hypothesis is one sided, i.e. that Anastasia's students had higher grades than Bernadette's", out.width = "90%"}
 knitr::include_graphics("images/Figure98.PNG")
 ```
 
@@ -398,7 +395,7 @@ Again, the output changes in a predictable way. The definition of the alternativ
 
 What about the paired samples t-test? Suppose we wanted to test the hypothesis that grades go up from test 1 to test 2 in Dr Zeppo's class, and are not prepared to consider the idea that the grades go down. In jamovi you would do this by specifying, under the 'Hypotheses' option, that grade_test2 ('Measure 1' in jamovi, because we copied this first into the paired variables box) \> grade test1 ('Measure 2' in jamovi). You should get the results shown in Figure \@ref(fig:fig11-19).
 
-```{r fig11-19, chunk.class="enlarge.image", fig.cap="jamovi results showing a 'Paired Samples T-Test' where the actual hypothesis is one sided, i.e. that grade test2 ('Measure 1') $>$ grade test1 ('Measure 2')", out.width = "90%"}
+```{r fig11-19, class.chunk="enlarge-image", fig.cap="jamovi results showing a 'Paired Samples T-Test' where the actual hypothesis is one sided, i.e. that grade test2 ('Measure 1') $>$ grade test1 ('Measure 2')", out.width = "90%"}
 knitr::include_graphics("images/Figure99.PNG")
 ```
 
@@ -471,13 +468,13 @@ All of the tests that we have discussed so far in this chapter have assumed that
 
 One way to check whether a sample violates the normality assumption is to draw a **"QQ plot"** (Quantile-Quantile plot). This allows you to visually check whether you're seeing any systematic violations. In a QQ plot, each observation is plotted as a single dot. The x coordinate is the theoretical quantile that the observation should fall in if the data were normally distributed (with mean and variance estimated from the sample), and on the y co-ordinate is the actual quantile of the data within the sample. If the data are normal, the dots should form a straight line. For instance, lets see what happens if we generate data by sampling from a normal distribution, and then drawing a QQ plot. The results are shown in Figure \@ref(fig:fig11-20). 
 
-```{r fig11-20, chunk.class="enlarge.image", fig.cap="Histogram (panel a) and normal QQ plot (panel b) of normal.data, a normally distributed sample with $100$ observations. The Shapiro-Wilk statistic associated with these data is $W = .99$, indicating that no significant departures from normality were detected ($p = .73)$", out.width = "90%"}
+```{r fig11-20, class.chunk="enlarge-image", fig.cap="Histogram (panel a) and normal QQ plot (panel b) of normal.data, a normally distributed sample with $100$ observations. The Shapiro-Wilk statistic associated with these data is $W = .99$, indicating that no significant departures from normality were detected ($p = .73)$", out.width = "90%"}
 knitr::include_graphics("images/Figure100.PNG")
 ```
 
 As you can see, these data form a pretty straight line; which is no surprise given that we sampled them from a normal distribution! In contrast, have a look at the two data sets shown in Figure \@ref(fig:fig11-21). The top panels show the histogram and a QQ plot for a data set that is highly skewed: the QQ plot curves upwards. The lower panels show the same plots for a heavy tailed (i.e., high kurtosis) data set: in this case the QQ plot flattens in the middle and curves sharply at either end.
 
-```{r fig11-21, chunk.class="enlarge.image", fig.cap="In the top row, a histogram (panel a) and normal QQ plot (panel b) of the $100$ observations in a skewed.data set. The skewness of the data here is $1.94$, and is reflected in a QQ plot that curves upwards. As a consequence, the Shapiro-Wilk statistic is $W = .80$, reflecting a significant departure from normality ($p< .001$). The bottom row shows the same plots for a heavy tailed data set, again consisting of 100 observations. In this case the heavy tails in the data produce a high kurtosis ($2.80$), and cause the QQ plot to flatten in the middle, and curve away sharply on either side. The resulting Shapiro-Wilk statistic is $W = .93$, again reflecting significant non-normality ($p<.001)$", out.width = "90%"}
+```{r fig11-21, class.chunk="enlarge-image", fig.cap="In the top row, a histogram (panel a) and normal QQ plot (panel b) of the $100$ observations in a skewed.data set. The skewness of the data here is $1.94$, and is reflected in a QQ plot that curves upwards. As a consequence, the Shapiro-Wilk statistic is $W = .80$, reflecting a significant departure from normality ($p< .001$). The bottom row shows the same plots for a heavy tailed data set, again consisting of 100 observations. In this case the heavy tails in the data produce a high kurtosis ($2.80$), and cause the QQ plot to flatten in the middle, and curve away sharply on either side. The resulting Shapiro-Wilk statistic is $W = .93$, again reflecting significant non-normality ($p<.001)$", out.width = "90%"}
 knitr::include_graphics("images/Figure101.PNG")
 ```
 
@@ -487,7 +484,7 @@ QQ plots provide a nice way to informally check the normality of your data, but 
 
 [^11-comparing-two-means-21]: Either that, or the Kolmogorov-Smirnov test, which is probably more traditional than the Shapiro-Wilk. Although most things I've read seem to suggest Shapiro-Wilk is the better test of normality, the Kolomogorov Smirnov is a general purpose test of distributional equivalence that can be adapted to handle other kinds of distribution tests. In jamovi the Shapiro-Wilk test is preferred.
 
-Statistical notation [^11-comparing-two-means-22]
+<span class="technical">[Additional technical detail [^11-comparing-two-means-22]]</span>
 
 [^11-comparing-two-means-22]: The test statistic that it calculates is conventionally denoted as $W$, and it's calculated as follows. First, we sort the observations in order of increasing size, and let $\bar{X_1}$ be the smallest value in the sample, $X_2$ be the second smallest and so on. Then the value of $W$ is given by $$W=\frac{(\sum_{i=1}^N a_iX_i)^2}{\sum_{i=1}^N(X_i-\bar{X})^2}$$ where $\bar{X}$ is the mean of the observations, and the $a_i$ values are ...mumble, mumble... something complicated that is a bit beyond the scope of an introductory text.
 
@@ -541,7 +538,7 @@ huxtabs[[11]][[5]] %>% set_caption("Comparing observations by group for a one-sa
 
 Counting up the tick marks this time we get a test statistic of $W = 7$. As before, if our test is two sided, then we reject the null hypothesis when W is very large or very small. As far as running it in jamovi goes, it's pretty much what you'd expect. For the one-sample version, you specify the 'Wilcoxon rank' option under 'Tests' in the 'One Sample T-Test' analysis window. This gives you Wilcoxon $W = 7$, p-value = $0.03711$. As this shows, we have a significant effect. Evidently, taking a statistics class does have an effect on your happiness. Switching to a paired samples version of the test won't give us a different answer, of course; see Figure \@ref(fig:fig11-24).
 
-```{r fig11-24, chunk.class="enlarge.image", fig.cap="jamovi screen showing results for one sample and paired sample Wilcoxon nonparametric tests", out.width = "90%"}
+```{r fig11-24, class.chunk="enlarge-image", fig.cap="jamovi screen showing results for one sample and paired sample Wilcoxon nonparametric tests", out.width = "90%"}
 knitr::include_graphics("images/Figure104.PNG")
 ```
 

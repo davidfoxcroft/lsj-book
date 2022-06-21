@@ -1,12 +1,3 @@
-check bookdown footnote numbering by chapter
-check bs4_book css for footnote formatting
-check div class background and border text only
-download mathjax script for use offline
-add toc divisions
-check padding under figures
-
-check adding page numbers to citations
-check footnote formatting ch 12
 check what technical detail to show / hide ch 13
 
 

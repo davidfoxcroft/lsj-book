@@ -1,8 +1,10 @@
+# (PART) Working with data {-}
+ 
 # Descriptive statistics
 
 Any time that you get a new data set to look at one of the first tasks that you have to do is find ways of summarising the data in a compact, easily understood fashion. This is what **descriptive statistics** (as opposed to inferential statistics) is all about. In fact, to many people the term "statistics" is synonymous with descriptive statistics. It is this topic that we'll consider in this chapter, but before going into any details, let's take a moment to get a sense of why we need descriptive statistics. To do this, let's open the aflsmall_margins file and see what variables are stored in the file, see Figure \@ref(fig:fig4-1).
 
-```{r fig4-1, chunk.class="enlarge.image", fig.cap="A screenshot of jamovi showing the variables stored in the aflsmallmargins.csv file", out.width = "90%"}
+```{r fig4-1, class.chunk="enlarge-image", fig.cap="A screenshot of jamovi showing the variables stored in the aflsmallmargins.csv file", out.width = "90%"}
 knitr::include_graphics("images/Figure8.PNG")
 ```
 
@@ -30,23 +32,22 @@ $$
 
 Of course, this definition of the mean isn't news to anyone. Averages (i.e., means) are used so often in everyday life that this is pretty familiar stuff. However, since the concept of a mean is something that everyone already understands, I'll use this as an excuse to start introducing some of the mathematical notation that statisticians use to describe this calculation, and talk about how the calculations would be done in jamovi.
 
-The first piece of notation to introduce is $N$, which we'll use to refer to the number of observations that we're averaging (in this case $N = 5$). Next, we need to attach a label to the observations themselves. It's traditional to use X for this, and to use subscripts to indicate which observation we're actually talking about. That is, we'll use $X_1$ to refer to the first observation, $X_2$ to refer to the second observation, and so on all the way up to $X_N$ for the last one. Or, to say the same thing in a slightly more abstract way, we use $X_i$ to refer to the i-th observation. Just to make sure we're clear on the notation, Table \@ref(tab:tab4-1) lists the 5 observations in the afl.margins variable, along with the mathematical symbol used to refer to it and the actual value that the observation corresponds to:
+The first piece of notation to introduce is $N$, which we'll use to refer to the number of observations that we're averaging (in this case $N = 5$). Next, we need to attach a label to the observations themselves. It's traditional to use X for this, and to use subscripts to indicate which observation we're actually talking about. That is, we'll use $X_1$ to refer to the first observation, $X_2$ to refer to the second observation, and so on all the way up to $X_N$ for the last one. Or, to say the same thing in a slightly more abstract way, we use $X_i$ to refer to the i-th observation. Just to make sure we're clear on the notation, Table \@ref(tab:tab4-1) lists the 5 observations in the afl.margins variable, along with the mathematical symbol used to refer to it and the actual value that the observation corresponds to.
 
 ```{r tab4-1}
 huxtabs[[4]][[1]] %>% set_caption("Observations in the afl.margins variable")
 ```
 
-<br />
-<p class="technical">Technical detail [^04-descriptive-statistics-2]</p>
+<span class="technical">[Additional technical detail [^04-descriptive-statistics-2]]</span>
 
 
-[^04-descriptive-statistics-2]: [Okay, now let's try to write a formula for the mean. By tradition, we use $\bar{X}$ as the notation for the mean. So the calculation for the mean could be expressed using the following formula: $$\bar{X}=\frac{X_1 + X_2 ... + X_{N-1} + X_{N}}{N}$$ This formula is entirely correct but it's terribly long, so we make use of the <strong>summation symbol</strong> $\sum$ to shorten it.$^a$ If I want to add up the first five observations I could write out the sum the long way, $X_1 + X_2 + X_3 + X_4 + X_5$ or I could use the summation symbol to shorten it to this: $$\sum_{i=1}^{5} X_i$$ Taken literally, this could be read as "the sum, taken over all i values from 1 to 5, of the value $X_i$". But basically what it means is "add up the first five observations". In any case, we can use this notation to write out the formula for the mean, which looks like this: $$\bar{X}=\frac{1}{N}\sum_{i=1}^{N}X_i$$ In all honesty, I can't imagine that all this mathematical notation helps clarify the concept of the mean at all. In fact, it's really just a fancy way of writing out the same thing I said in words: add all the values up and then divide by the total number of items. However, that's not really the reason I went into all that detail. My goal was to try to make sure that everyone reading this book is clear on the notation that we'll be using throughout the book: $\bar{X}$ for the mean, $\sum$ for the idea of summation, $X_i$ for the ith observation, and $N$ for the total number of observations. We're going to be re-using these symbols a fair bit so it's important that you understand them well enough to be able to "read" the equations, and to be able to see that it's just saying "add up lots of things and then divide by another thing". <br>---<br>$^a$ *The choice to use* $\sum$ to denote summation isn't arbitrary. It's the Greek upper case letter sigma, which is the analogue of the letter $S$ in that alphabet. Similarly, there's an equivalent symbol used to denote the multiplication of lots of numbers, because multiplications are also called "products" we use the $\prod$ symbol for this (the Greek upper case pi, which is the analogue of the letter $P$.]{style="background-color:Gainsboro;font-style:italic;"}
+[^04-descriptive-statistics-2]: Okay, now let's try to write a formula for the mean. By tradition, we use $\bar{X}$ as the notation for the mean. So the calculation for the mean could be expressed using the following formula: $$\bar{X}=\frac{X_1 + X_2 ... + X_{N-1} + X_{N}}{N}$$ This formula is entirely correct but it's terribly long, so we make use of the <strong>summation symbol</strong> $\sum$ to shorten it.$^a$ If I want to add up the first five observations I could write out the sum the long way, $X_1 + X_2 + X_3 + X_4 + X_5$ or I could use the summation symbol to shorten it to this: $$\sum_{i=1}^{5} X_i$$ Taken literally, this could be read as "the sum, taken over all i values from 1 to 5, of the value $X_i$". But basically what it means is "add up the first five observations". In any case, we can use this notation to write out the formula for the mean, which looks like this: $$\bar{X}=\frac{1}{N}\sum_{i=1}^{N}X_i$$ In all honesty, I can't imagine that all this mathematical notation helps clarify the concept of the mean at all. In fact, it's really just a fancy way of writing out the same thing I said in words: add all the values up and then divide by the total number of items. However, that's not really the reason I went into all that detail. My goal was to try to make sure that everyone reading this book is clear on the notation that we'll be using throughout the book: $\bar{X}$ for the mean, $\sum$ for the idea of summation, $X_i$ for the ith observation, and $N$ for the total number of observations. We're going to be re-using these symbols a fair bit so it's important that you understand them well enough to be able to "read" the equations, and to be able to see that it's just saying "add up lots of things and then divide by another thing". <br>---<br>$^a$ *The choice to use* $\sum$ to denote summation isn't arbitrary. It's the Greek upper case letter sigma, which is the analogue of the letter $S$ in that alphabet. Similarly, there's an equivalent symbol used to denote the multiplication of lots of numbers, because multiplications are also called "products" we use the $\prod$ symbol for this (the Greek upper case pi, which is the analogue of the letter $P$.
 
 ### Calculating the mean in jamovi
 
 Okay, that's the maths. So how do we get the magic computing box to do the work for us? When the number of observations starts to become large it's much easier to do these sorts of calculations using a computer. To calculate the mean using all the data we can use jamovi. The first step is to click on the 'Exploration' button and then click 'Descriptives'. Then you can highlight the afl.margins variable and click the 'right arrow' to move it across into the 'Variables box'. As soon as you do that a Table appears on the right hand side of the screen containing default 'Descriptives' information; see Figure \@ref(fig:fig4-3).
 
-```{r fig4-3, fig.cap="Default descriptives for the AFL 2010 winning margin data (the afl.margins variable)", out.width = "90%"}
+```{r fig4-3, class.chunk="enlarge-image", fig.cap="Default descriptives for the AFL 2010 winning margin data (the afl.margins variable)", out.width = "90%"}
 knitr::include_graphics("images/Figure10.PNG")
 ```
 
@@ -62,7 +63,7 @@ From inspection, it's obvious that the median value of these 5 observations is 3
 
 8, **31**, **32**, 56, 56
 
-and there are two middle numbers, 31 and 32. The median is defined as the average of those two numbers, which is of course 31.5. As before, it's very tedious to do this by hand when you've got lots of numbers. In real life, of course, no-one actually calculates the median by sorting the data and then looking for the middle value. In real life we use a computer to do the heavy lifting for us, and jamovi has provided us with a Median value of 30.50 for the afl.margins variable (Figure \@ref(fig:fig4-3).
+and there are two middle numbers, 31 and 32. The median is defined as the average of those two numbers, which is of course 31.5. As before, it's very tedious to do this by hand when you've got lots of numbers. In real life, of course, no-one actually calculates the median by sorting the data and then looking for the middle value. In real life we use a computer to do the heavy lifting for us, and jamovi has provided us with a Median value of 30.50 for the afl.margins variable (Figure \@ref(fig:fig4-3)).
 
 ### Mean or median? What's the difference?
 
@@ -112,17 +113,17 @@ What we could do is read through all 400 entries and count the number of occasio
 
 Now that we have our frequency table we can just look at it and see that, over the 24 years for which we have data, Geelong has played in more finals than any other team. Thus, the mode of the afl.finalists data is "Geelong". We can see that Geelong (39 finals) played in more finals than any other team during the 1987-2010 period. It's also worth noting that in the 'Descriptives' Table no results are calculated for Mean, Median, Minimum or Maximum. This is because the afl.finalists variable is a nominal text variable so it makes no sense to calculate these values.
 
-```{r fig4-5, fig.cap="A screenshot of jamovi showing the variables stored in the aflsmall finalists.csv file", out.width = "90%"}
+```{r fig4-5, class.chunk="enlarge-image", fig.cap="A screenshot of jamovi showing the variables stored in the aflsmall finalists.csv file", out.width = "90%"}
 knitr::include_graphics("images/Figure12.PNG")
 ```
 
-```{r fig4-6, fig.cap="A screenshot of jamovi showing the frequency table for the afl.finalists variable", out.width = "90%"}
+```{r fig4-6, class.chunk="enlarge-image", fig.cap="A screenshot of jamovi showing the frequency table for the afl.finalists variable", out.width = "90%"}
 knitr::include_graphics("images/Figure13.PNG")
 ```
 
 One last point to make regarding the mode. Whilst the mode is most often calculated when you have nominal data, because means and medians are useless for those sorts of variables, there are some situations in which you really do want to know the mode of an ordinal, interval or ratio scale variable. For instance, let's go back to our afl.margins variable. This variable is clearly ratio scale (if it's not clear to you, it may help to re-read the section on [Scales of measurement]), and so in most situations the mean or the median is the measure of central tendency that you want. But consider this scenario: a friend of yours is offering a bet and they pick a football game at random. Without knowing who is playing you have to guess the exact winning margin. If you guess correctly you win \$50. If you don't you lose \$1. There are no consolation prizes for "almost" getting the right answer. You have to guess exactly the right margin. For this bet, the mean and the median are completely useless to you. It is the mode that you should bet on. To calculate the mode for the afl.margins variable in jamovi, go back to that data set and on the 'Exploration' - 'Descriptives' screen you will see you can expand the section marked 'Statistics'. Click on the checkbox marked 'Mode' and you will see the modal value presented in the 'Descriptives' Table, as in Figure \@ref(fig:fig4-7). So the 2010 data suggest you should bet on a 3 point margin.
 
-```{r fig4-7, fig.cap="A screenshot of jamovi showing the modal value for the afl.margins variable", out.width = "90%"}
+```{r fig4-7, class.chunk="enlarge-image", fig.cap="A screenshot of jamovi showing the modal value for the afl.margins variable", out.width = "90%"}
 knitr::include_graphics("images/Figure14.PNG")
 ```
 
@@ -168,9 +169,9 @@ $$
 
 And we're done. The mean absolute deviation for these five scores is 15.52.
 
-[[Option: statistical formulae]]{style="background-color:Gainsboro;font-style:italic;"}[^04-descriptive-statistics-4]
+<span class="technical">[Additional technical detail [^04-descriptive-statistics-4]]</span>
 
-[^04-descriptive-statistics-4]: [However, whilst our calculations for this little example are at an end, we do have a couple of things left to talk about. First, we should really try to write down a proper mathematical formula. But in order do to this I need some mathematical notation to refer to the mean absolute deviation. Irritatingly, "mean absolute deviation" and "median absolute deviation" have the same acronym (MAD), which leads to a certain amount of ambiguity so I'd better come up with something different for the mean absolute deviation. Sigh. What I'll do is use AAD instead, short for average absolute deviation. Now that we have some unambiguous notation, here's the formula that describes what we just calculated: $$AAD(X) =\frac{1}{N} \sum_{i=1}^{N} \mid X_i - \bar{X} \mid = 15.52$$]{style="background-color:Gainsboro;font-style:italic;"}
+[^04-descriptive-statistics-4]: However, whilst our calculations for this little example are at an end, we do have a couple of things left to talk about. First, we should really try to write down a proper mathematical formula. But in order do to this I need some mathematical notation to refer to the mean absolute deviation. Irritatingly, "mean absolute deviation" and "median absolute deviation" have the same acronym (MAD), which leads to a certain amount of ambiguity so I'd better come up with something different for the mean absolute deviation. Sigh. What I'll do is use AAD instead, short for average absolute deviation. Now that we have some unambiguous notation, here's the formula that describes what we just calculated: $$AAD(X) =\frac{1}{N} \sum_{i=1}^{N} \mid X_i - \bar{X} \mid = 15.52$$
 
 ### Variance
 
@@ -178,9 +179,9 @@ Although the average absolute deviation measure has its uses, it's not the best 
 
 [^04-descriptive-statistics-5]: Well, I will very briefly mention the one that I think is coolest, for a very particular definition of "cool", that is. Variances are additive. Here's what that means. Suppose I have two variables $X$ and $Y$ , whose variances are $Var(X)$ and $Var(Y)$ respectively. Now imagine I want to define a new variable Z that is the sum of the two, $Z = X + Y$ . As it turns out, the variance of $Z$ is equal to $Var(X) + Var(Y)$. This is a very useful property, but it's not true of the other measures that I talk about in this section.
 
-[[Option: statistical formulae]]{style="background-color:Gainsboro;font-style:italic;"}[^04-descriptive-statistics-6]
+<span class="technical"> [Additional technical detail [^04-descriptive-statistics-6]]</span>
 
-[^04-descriptive-statistics-6]: [The formula that we use to calculate the variance of a set of observations is as follows: $$VAR(X) =\frac{1}{N} \sum_{i=1}^{N} ( X_i - \bar{X} )^2$$ As you can see, it's basically the same formula that we used to calculate the average absolute deviation, except that instead of using "absolute deviations" we use "squared deviations". It is for this reason that the variance is sometimes referred to as the "mean square deviation".]]{style="background-color:Gainsboro;font-style:italic;"}
+[^04-descriptive-statistics-6]: The formula that we use to calculate the variance of a set of observations is as follows: $$VAR(X) =\frac{1}{N} \sum_{i=1}^{N} ( X_i - \bar{X} )^2$$ As you can see, it's basically the same formula that we used to calculate the average absolute deviation, except that instead of using "absolute deviations" we use "squared deviations". It is for this reason that the variance is sometimes referred to as the "mean square deviation".
 
 Now that we've got the basic idea, let's have a look at a concrete example. Once again, let's use the first five AFL games as our data. If we follow the same approach that we took last time, we end up with the information shown in Table \@ref(tab:tab4-3).
 
@@ -190,7 +191,7 @@ huxtabs[[4]][[3]] %>% set_caption("Measures  of variability for the first five A
 
 That last column contains all of our squared deviations, so all we have to do is average them. If we do that by hand, i.e. using a calculator, we end up with a variance of $324.64$. Exciting, isn't it? For the moment, let's ignore the burning question that you're all probably thinking (i.e., what the heck does a variance of $324.64$ actually mean?) and instead talk a bit more about how to do the calculations in jamovi, because this will reveal something very weird. Start a new jamovi session by clicking on the main menu button (three horizontal lines in the top left corner and selecting 'New'. Now type in the first five values from the afl.margins data set in column A ($56$, $31$, $56$, $8$, $32$. Change the variable type to 'Continuous' and under 'Descriptives' click the 'Variance' check box, and you get the same values for variance as the one we calculated by hand ($324.64$). No, wait, you get a completely different answer ($405.80$) - see Figure \@ref(fig:fig4-9). That's just weird. Is jamovi broken? Is this a typo? Am I an idiot?
 
-```{r fig4-9, fig.cap="A screenshot of jamovi showing the Variance for the first 5 values of the afl.margins variable", out.width = "90%"}
+```{r fig4-9, class.chunk="enlarge-image", fig.cap="A screenshot of jamovi showing the Variance for the first 5 values of the afl.margins variable", out.width = "90%"}
 knitr::include_graphics("images/Figure16.PNG")
 ```
 
@@ -198,9 +199,9 @@ As it happens, the answer is no.[^04-descriptive-statistics-7] It's not a typo, 
 
 [^04-descriptive-statistics-7]: With the possible exception of the third question.
 
-[[Option: statistical formulae]]{style="background-color:Gainsboro;font-style:italic;"}[^04-descriptive-statistics-8]
+<span class="technical">[Additional technical detail [^04-descriptive-statistics-8]]</span>
 
-[^04-descriptive-statistics-8]: [In other words, the formula that jamovi is using is this one: $$\frac{1}{N-1} \sum_{i=1}^{N} ( X_i - \bar{X} )^2$$]{style="background-color:Gainsboro;font-style:italic;"}
+[^04-descriptive-statistics-8]: In other words, the formula that jamovi is using is this one: $$\frac{1}{N-1} \sum_{i=1}^{N} ( X_i - \bar{X} )^2$$
 
 So that's the *what*. The real question is why jamovi is dividing by $N - 1$ and not by $N$. After all, the variance is supposed to be the mean squared deviation, right? So shouldn't we be dividing by N, the actual number of observations in the sample? Well, yes, we should. However, as we'll discuss in the chapter on [Estimating unknown quantities from a sample], there's a subtle distinction between "describing a sample" and "making guesses about the population from which the sample came". Up to this point, it's been a distinction without a difference. Regardless of whether you're describing a sample or drawing inferences about the population, the mean is calculated exactly the same way. Not so for the variance, or the standard deviation, or for many other measures besides. What I outlined to you initially (i.e., take the actual average, and thus divide by $N$) assumes that you literally intend to calculate the variance of the sample. Most of the time, however, you're not terribly interested in the sample in and of itself. Rather, the sample exists to tell you something about the world. If so, you're actually starting to move away from calculating a "sample statistic" and towards the idea of estimating a "population parameter". However, I'm getting ahead of myself. For now, let's just take it on faith that jamovi knows what it's doing, and we'll revisit the question later on when we talk about estimation in the chapter on [Estimating unknown quantities from a sample].
 
@@ -210,15 +211,15 @@ Okay, one last thing. This section so far has read a bit like a mystery novel. I
 
 Okay, suppose that you like the idea of using the variance because of those nice mathematical properties that I haven't talked about, but since you're a human and not a robot you'd like to have a measure that is expressed in the same units as the data itself (i.e., points, not points squared). What should you do? The solution to the problem is obvious! Take the square root of the variance, known as the **standard deviation**, also called the "root mean squared deviation", or RMSD. This solves our problem fairly neatly. Whilst nobody has a clue what "a variance of 324.68 points-squared" really means, it's much easier to understand "a standard deviation of 18.01 points" since it's expressed in the original units. It is traditional to refer to the standard deviation of a sample of data as s, though "sd" and "std dev." are also used at times.
 
-[[Option: statistical formulae]]{style="background-color:Gainsboro;font-style:italic;"}[^04-descriptive-statistics-9]
+<span class="technical">[Additional technical detail [^04-descriptive-statistics-9]]</span>
 
-[^04-descriptive-statistics-9]: [Because the standard deviation is equal to the square root of the variance, you probably won't be surprised to see that the formula is: $$s=\sqrt{\frac{1}{N} \sum_{i=1}^{N} ( X_i - \bar{X} )^2 }$$ and in jamovi there is a check box for 'Std. deviation' right above the check box for 'Variance'. Selecting this gives a value of $26.07$ for the standard deviation.]{style="background-color:Gainsboro;font-style:italic;"}
+[^04-descriptive-statistics-9]: Because the standard deviation is equal to the square root of the variance, you probably won't be surprised to see that the formula is: $$s=\sqrt{\frac{1}{N} \sum_{i=1}^{N} ( X_i - \bar{X} )^2 }$$ and in jamovi there is a check box for 'Std. deviation' right above the check box for 'Variance'. Selecting this gives a value of $26.07$ for the standard deviation.
 
 However, as you might have guessed from our discussion of the variance, what jamovi actually calculates is slightly different to the formula given above. Just like the we saw with the variance, what jamovi calculates is a version that divides by $N - 1$ rather than $N$.
 
-[[Option: statistical formulae]]{style="background-color:Gainsboro;font-style:italic;"}[^04-descriptive-statistics-10]
+<span class="technical">[Additional technical detail [^04-descriptive-statistics-10]]</span>
 
-[^04-descriptive-statistics-10]: [For reasons that will make sense when we return to this topic in the chapter on [Estimating unknown quantities from a sample] I'll refer to this new quantity as $\hat{\sigma}$ (read as: "sigma hat"), and the formula for this is: $$\hat{\sigma}=\sqrt{\frac{1}{N-1} \sum_{i=1}^{N} ( X_i - \bar{X} )^2}$$]{style="background-color:Gainsboro;font-style:italic;"}
+[^04-descriptive-statistics-10]: For reasons that will make sense when we return to this topic in the chapter on [Estimating unknown quantities from a sample] I'll refer to this new quantity as $\hat{\sigma}$ (read as: "sigma hat"), and the formula for this is: $$\hat{\sigma}=\sqrt{\frac{1}{N-1} \sum_{i=1}^{N} ( X_i - \bar{X} )^2}$$
 
 Interpreting standard deviations is slightly more complex. Because the standard deviation is derived from the variance, and the variance is a quantity that has little to no meaning that makes sense to us humans, the standard deviation doesn't have a simple interpretation. As a consequence, most of us just rely on a simple rule of thumb. In general, you should expect 68% of the data to fall within 1 standard deviation of the mean, 95% of the data to fall within 2 standard deviation of the mean, and 99.7% of the data to fall within 3 standard deviations of the mean. This rule tends to work pretty well most of the time, but it's not exact. It's actually calculated based on an assumption that the histogram is symmetric and "bell shaped".[\^04.5] As you can tell from looking at the AFL winning margins histogram in Figure \@ref(fig:fig4-2), this isn't exactly true of our data! Even so, the rule is approximately correct. As it turns out, 65.3% of the AFL margins data fall within one standard deviation of the mean. This is shown visually in \@ref(fig:fig4-10).
 
@@ -248,9 +249,9 @@ knitr::include_graphics("images/Figure18.PNG")
 
 Since it's the more interesting of the two, let's start by talking about the **skewness**. Skewness is basically a measure of asymmetry and the easiest way to explain it is by drawing some pictures. As Figure \@ref(fig:fig4-11) illustrates, if the data tend to have a lot of extreme small values (i.e., the lower tail is "longer" than the upper tail) and not so many extremely large values (left panel) then we say that the data are *negatively skewed*. On the other hand, if there are more extremely large values than extremely small ones (right panel) we say that the data are positively skewed. That's the qualitative idea behind skewness. If there are relatively more values that are far greater than the mean, the distribution is positively skewed or right skewed, with a tail stretching to the right. Negative or left skew is the opposite. A symmetric distribution has a skewness of 0. The skewness value for a positively skewed distribution is positive, and a negative value for a negatively skewed distribution.
 
-[[Option: statistical formulae]]{style="background-color:Gainsboro;font-style:italic;"}[^04-descriptive-statistics-11]
+<span class="technical">[Additional technical detail [^04-descriptive-statistics-11]]</span>
 
-[^04-descriptive-statistics-11]: [One formula for the skewness of a data set is as follows $$    skewness(X)=\frac{1}{N \hat{\sigma}^3} \sum_{i=1}^{N} ( X_i - \bar{X})^3$$ where N is the number of observations, $\bar{X}$ is the sample mean, and $\hat{\sigma}$ is the standard deviation (the "divide by $N - 1$" version, that is).]{style="background-color:Gainsboro;font-style:italic;"}
+[^04-descriptive-statistics-11]: One formula for the skewness of a data set is as follows $$    skewness(X)=\frac{1}{N \hat{\sigma}^3} \sum_{i=1}^{N} ( X_i - \bar{X})^3$$ where N is the number of observations, $\bar{X}$ is the sample mean, and $\hat{\sigma}$ is the standard deviation (the "divide by $N - 1$" version, that is).
 
 Perhaps more helpfully, you can use jamovi to calculate skewness: it's a check box in the 'Statistics' options under 'Exploration' - 'Descriptives'. For the afl.margins variable, the skewness figure is $0.780$. If you divide the skewness estimate by the Std. error for skewness you have an indication of how skewed the data is. Especially in small samples (N $<$ 50), one rule of thumb suggests that a value of 2 or less can mean that the data is not very skewed, and a value of over 2 that there is sufficient skew in the data to possibly limit its use in some statistical analyses. Though there is no clear agreement on this interpretation. That said, this does indicate that the AFL winning margins data is somewhat skewed ($\frac{0.780}{0.183} = 4.262$).
 
@@ -266,9 +267,9 @@ In this Figure, the data on the left have a pretty flat distribution, with thin 
 huxtabs[[4]][[4]] %>% set_caption("Thin to fat tails to illustrate kurtosis")
 ```
 
-[[Option: statistical formulae]]{style="background-color:Gainsboro;font-style:italic;"}[^04-descriptive-statistics-12]
+<span class="technical">[Additional technical detail [^04-descriptive-statistics-12]]</span>
 
-[^04-descriptive-statistics-12]: [The equation for kurtosis is pretty similar in spirit to the formulas we've seen already for the variance and the skewness. Except that where the variance involved squared deviations and the skewness involved cubed deviations, the kurtosis involves raising the deviations to the fourth power:$^b$ $$kurtosis(X)=\frac{1}{N \hat{\sigma}^4} \sum_{i=1}^{N} ( X_i - \bar{X} )^4 - 3$$ I know, it's not terribly interesting to me either. <br>---<br> $^b$ The "-3" part is something that statisticians tack on to ensure that the normal curve has kurtosis zero. It looks a bit stupid, just sticking a "-3" at the end of the formula, but there are good mathematical reasons for doing this.]{style="background-color:Gainsboro;font-style:italic;"}
+[^04-descriptive-statistics-12]: The equation for kurtosis is pretty similar in spirit to the formulas we've seen already for the variance and the skewness. Except that where the variance involved squared deviations and the skewness involved cubed deviations, the kurtosis involves raising the deviations to the fourth power:$^b$ $$kurtosis(X)=\frac{1}{N \hat{\sigma}^4} \sum_{i=1}^{N} ( X_i - \bar{X} )^4 - 3$$ I know, it's not terribly interesting to me either. <br />---<br /> $^b$ The "-3" part is something that statisticians tack on to ensure that the normal curve has kurtosis zero. It looks a bit stupid, just sticking a "-3" at the end of the formula, but there are good mathematical reasons for doing this.
 
 More to the point, jamovi has a check box for kurtosis just below the check box for skewness, and this gives a value for kurtosis of $0.101$ with a standard error of $0.364$. This means that the AFL winning margins data has only a small kurtosis, which is ok.
 
@@ -304,9 +305,9 @@ $$
 \text{standard score} = \frac{\text{raw score} - mean}{\text{standard deviation}}
 $$
 
-[[Option: statistical formulae]]{style="background-color:Gainsboro;font-style:italic;"}[^04-descriptive-statistics-14]
+<span class="technical">[Additional technical detail [^04-descriptive-statistics-14]]</span>
 
-[^04-descriptive-statistics-14]: [In actual maths, the equation for the z-score is $$z_i =\frac{X_i - \bar{X}}{\hat{\sigma}}$$]{style="background-color:Gainsboro;font-style:italic;"}
+[^04-descriptive-statistics-14]: In actual maths, the equation for the z-score is $$z_i =\frac{X_i - \bar{X}}{\hat{\sigma}}$$
 
 So, going back to the grumpiness data, we can now transform Dani's raw grumpiness into a standardised grumpiness score.
 

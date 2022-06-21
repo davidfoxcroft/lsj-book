@@ -1,7 +1,9 @@
+# (PART) An introduction to jamovi {-}
+
 # Getting started with jamovi
 
 > *Robots are nice to work with.*\
-> - Roger Zelazny[^getting-started-with-jamovi-1]
+> -- Roger Zelazny[^getting-started-with-jamovi-1]
 
 [^getting-started-with-jamovi-1]: Source: Dismal Light (1968).
 
@@ -30,7 +32,7 @@ At the top of the page, under the heading "Download", you'll see separate links 
 
 One way or another, regardless of what operating system you're using, it's time to open jamovi and get started. When first starting jamovi you will be presented with a user interface which looks something like Figure \@ref(fig:fig3-1).
 
-```{r fig3-1, chunk.class="enlarge.image", echo=FALSE, fig.cap="jamovi starts up!", out.width = "90%"}
+```{r fig3-1, class.chunk="enlarge-image", echo=FALSE, fig.cap="jamovi starts up!", out.width = "90%"}
 knitr::include_graphics("images/Figure2.PNG")
 ```
 
@@ -84,7 +86,7 @@ A + B LOG10(len) MEAN(A, B) (dose - VMEAN(dose)) / VSTDEV(dose)
 
 In order, these are the sum of A and B, a log (base 10) transform of len, the mean of A and B, and the z-score of the variable dose. Figure \@ref(fig:fig3-3) shows the jamovi screen for the new variable computed as the z-score of dose (from the 'Tooth Growth' example data set).
 
-```{r fig3-3, chunk.class="enlarge.image", echo=FALSE, fig.cap="A newly computed variable, the z-score of ‘dose’", out.width = "90%"}
+```{r fig3-3, class.chunk="enlarge-image", echo=FALSE, fig.cap="A newly computed variable, the z-score of ‘dose’", out.width = "90%"}
 knitr::include_graphics("images/Figure4.PNG")
 ```
 
@@ -116,13 +118,13 @@ There are also several other kinds of data file that you might want to import in
 
 One quite commonly used data format is the humble "comma separated value" file, also called a csv file, and usually bearing the file extension .csv. csv files are just plain old-fashioned text files and what they store is basically just a table of data. This is illustrated in Figure \@ref(fig:fig3-4), which shows a file called booksales.csv that I've created. As you can see, each row represents the book sales data for one month. The first row doesn't contain actual data though, it has the names of the variables.
 
-```{r fig3-4, chunk.class="enlarge.image", echo=FALSE, fig.cap="The booksales.csv data file. On the left I have opened the file using a spreadsheet program (OpenOffice), which shows that the file is basically a table. On the right the same file is open in a standard text editor (the TextEdit program on a Mac), which shows how the file is formatted. The entries in the table are wrapped in quote marks and separated by commas", out.width = "90%"}
+```{r fig3-4, class.chunk="enlarge-image", echo=FALSE, fig.cap="The booksales.csv data file. On the left I have opened the file using a spreadsheet program (OpenOffice), which shows that the file is basically a table. On the right the same file is open in a standard text editor (the TextEdit program on a Mac), which shows how the file is formatted. The entries in the table are wrapped in quote marks and separated by commas", out.width = "90%"}
 knitr::include_graphics("images/Figure5.PNG")
 ```
 
 It's easy to open csv files in jamovi. From the top left menu (the button with three parallel lines) choose 'Open' and browse to where you have stored the csv file on your computer. If you're on a Mac, it'll look like the usual Finder window that you use to choose a file; on Windows it looks like an Explorer window. An example of what it looks like on a Mac is shown in Figure \@ref(fig:fig3-5). I'm assuming that you're familiar with your own computer, so you should have no problem finding the csv file that you want to import! Find the one you want, then click on the "Open" button.
 
-```{r fig3-5, chunk.class="enlarge.image", echo=FALSE, fig.cap="A dialog box on a Mac asking you to select the csv file jamovi should try to import. Mac users will recognise this immediately, it's the usual way in which a Mac asks you to find a file. Windows users won't see this, instead they'll see the usual explorer window that Windows always gives you when it wants you to select a file", out.width = "90%"}
+```{r fig3-5, class.chunk="enlarge-image", echo=FALSE, fig.cap="A dialog box on a Mac asking you to select the csv file jamovi should try to import. Mac users will recognise this immediately, it's the usual way in which a Mac asks you to find a file. Windows users won't see this, instead they'll see the usual explorer window that Windows always gives you when it wants you to select a file", out.width = "90%"}
 knitr::include_graphics("images/Figure6.PNG")
 ```
 
@@ -172,7 +174,7 @@ A really great feature of jamovi is the ability to install add-on modules from t
 
 To install add-on modules, just click on the large $+$ in the top right of the jamovi window, select "jamovi-library" and then browse through the various add-on modules that are available. Choose the one(s) you want, and then install them, as in Figure \@ref(fig:fig3-6). It's that easy. The newly installed modules can then be accessed from the "Analyses" button bar. Try it...useful add-on modules to install include "scatr" (added under "Descriptives") and $R_j$.
 
-```{r fig3-6, chunk.class="enlarge.image", echo=FALSE, fig.cap="Installing add-on modules in jamovi", out.width = "90%"}
+```{r fig3-6, class.chunk="enlarge-image", echo=FALSE, fig.cap="Installing add-on modules in jamovi", out.width = "90%"}
 knitr::include_graphics("images/Figure7.PNG")
 ```
 

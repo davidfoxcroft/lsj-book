@@ -1,7 +1,7 @@
 # Hypothesis testing
 
 > The process of induction is the process of assuming the simplest law that can be made to harmonize with our experience. This process, however, has no logical foundation but only a psychological one. It is clear that there are no grounds for believing that the simplest course of events will really happen. It is an hypothesis that the sun will rise tomorrow: and this means that we do not know whether it will rise.\
-> - Ludwig Wittgenstein [^09-hypothesis-testing-1]
+> -- Ludwig Wittgenstein [^09-hypothesis-testing-1]
 
 [^09-hypothesis-testing-1]: The quote comes from Wittgenstein's (1922) text, *Tractatus Logico-Philosphicus.*
 
@@ -92,7 +92,7 @@ $$X \sim Binomial(\theta,N)$$
 
 Since the null hypothesis states that $\theta = 0.5$ and our experiment has $N = 100$ people, we have the sampling distribution we need. This sampling distribution is plotted in Figure \@ref(fig:fig9-1). No surprises really, the null hypothesis says that $X = 50$ is the most likely outcome, and it says that we're almost certain to see somewhere between $40$ and $60$ correct responses.
 
-```{r fig9-1, chunk.class="enlarge.image", fig.cap="The sampling distribution for our test statistic X when the null hypothesis is true. For our ESP scenario this is a binomial distribution. Not surprisingly, since the null hypothesis says that the probability of a correct response is $\\theta = .5$, the sampling distribution says that the most likely value is 50 (out of 100) correct responses. Most of the probability mass lies between 40 and 60", out.width = "90%"}
+```{r fig9-1, class.chunk="enlarge-image", fig.cap="The sampling distribution for our test statistic X when the null hypothesis is true. For our ESP scenario this is a binomial distribution. Not surprisingly, since the null hypothesis says that the probability of a correct response is $\\theta = .5$, the sampling distribution says that the most likely value is 50 (out of 100) correct responses. Most of the probability mass lies between 40 and 60", out.width = "90%"}
 knitr::include_graphics("images/Figure67.PNG")
 ```
 
@@ -114,7 +114,7 @@ As it turns out those three things uniquely solve the problem. Our critical regi
 
 [^09-hypothesis-testing-6]: Strictly speaking, the test I just constructed has $\alpha = .057$, which is a bit too generous. However, if I'd chosen 39 and 61 to be the boundaries for the critical region then the critical region only covers $3.5\%$ of the distribution. I figured that it makes more sense to use $40$ and $60$ as my critical values, and be willing to tolerate a $5.7\%$ type I error rate, since that's as close as I can get to a value of $\alpha = .05$.
 
-```{r fig9-2, chunk.class="enlarge.image", fig.cap="The critical region associated with the hypothesis test for the ESP study, for a hypothesis test with a significance level of $\\alpha = .05$. The plot shows the sampling distribution of $X$ under the null hypothesis (i.e., same as Figure \\@ref(fig:fig9-1)). The grey bars correspond to those values of $X$ for which we would retain the null hypothesis. The blue (darker shaded) bars show the critical region, those values of $X$ for which we would reject the null. Because the alternative hypothesis is two sided (i.e., allows both $\\theta < .5$ and $\\theta > .5$, the critical region covers both tails of the distribution. To ensure an $\\alpha$ level of $.05$, we need to ensure that each of the two regions encompasses $2.5\\%$ of the sampling distribution", out.width = "90%"}
+```{r fig9-2, class.chunk="enlarge-image", fig.cap="The critical region associated with the hypothesis test for the ESP study, for a hypothesis test with a significance level of $\\alpha = .05$. The plot shows the sampling distribution of $X$ under the null hypothesis (i.e., same as Figure \\@ref(fig:fig9-1)). The grey bars correspond to those values of $X$ for which we would retain the null hypothesis. The blue (darker shaded) bars show the critical region, those values of $X$ for which we would reject the null. Because the alternative hypothesis is two sided (i.e., allows both $\\theta < .5$ and $\\theta > .5$, the critical region covers both tails of the distribution. To ensure an $\\alpha$ level of $.05$, we need to ensure that each of the two regions encompasses $2.5\\%$ of the sampling distribution", out.width = "90%"}
 knitr::include_graphics("images/Figure68.PNG")
 ```
 
@@ -130,7 +130,7 @@ All that we have to do now is calculate the value of the test statistic for the 
 ### A note on statistical "significance"
 
 > *Like other occult techniques of divination, the statistical method has a private jargon deliberately contrived to obscure its methods from non-practitioners.*\
-> - Attributed to G. O. Ashley [^09-hypothesis-testing-7]
+> -- Attributed to G. O. Ashley [^09-hypothesis-testing-7]
 
 [^09-hypothesis-testing-7]: The internet seems fairly convinced that Ashley said this, though I can't for the life of me find anyone willing to give a source for the claim.
 
@@ -142,7 +142,7 @@ There's one more thing I want to point out about the hypothesis test that I've j
 \theta \neq 0.5$$ we notice that the alternative hypothesis covers both the possibility that $\theta < .5$ and the possibility that $\theta \> .5.$ This makes sense if I really think that ESP could produce either better-thanchance performance or worse-than-chance performance (and there are some people who think that). In statistical language this is an example of a **two-sided test**. It's called this because the alternative hypothesis covers the area on both "sides" of the null hypothesis, and as a consequence the critical region of the test covers both tails of the sampling distribution (2.5% on either side if α = .05), as illustrated earlier in Figure \@ref(fig:fig9-2). However, that's not the only possibility. I might only be willing to believe in ESP if it produces better than chance performance. If so, then my alternative hypothesis would only covers the possibility that θ ą .5, and as a consequence the null hypothesis now becomes $$H_0: \theta \leq
 0.5$$ $$H_1: \theta \gt 0.5$$ When this happens, we have what's called a **one-sided test** and the critical region only covers one tail of the sampling distribution. This is illustrated in Figure \@ref(fig:fig9-3).
 
-```{r fig9-3, chunk.class="enlarge.image", fig.cap="The critical region for a one sided test. In this case, the alternative hypothesis is that $\\theta \\geq .5$ so we would only reject the null hypothesis for large values of $X$. As a consequence, the critical region only covers the upper tail of the sampling distribution, specifically the upper $5\\%$ of the distribution. Contrast this to the two-sided version in Figure \\@ref(fig:fig9-2)", out.width = "90%"}
+```{r fig9-3, class.chunk="enlarge-image", fig.cap="The critical region for a one sided test. In this case, the alternative hypothesis is that $\\theta \\geq .5$ so we would only reject the null hypothesis for large values of $X$. As a consequence, the critical region only covers the upper tail of the sampling distribution, specifically the upper $5\\%$ of the distribution. Contrast this to the two-sided version in Figure \\@ref(fig:fig9-2)", out.width = "90%"}
 knitr::include_graphics("images/Figure69.PNG")
 ```
 
@@ -208,7 +208,7 @@ At this point some of you might be wondering if this is a "real" hypothesis test
 
 [^09-hypothesis-testing-9]: Note that the p here has nothing to do with a $p$ value. The $p$ argument in the jamovi binomial test corresponds to the probability of making a correct response, according to the null hypothesis. In other words, it's the $\theta$ value.
 
-```{r fig9-4, chunk.class="enlarge.image", fig.cap="Binomial test analysis and results in jamovi", out.width = "90%"}
+```{r fig9-4, class.chunk="enlarge-image", fig.cap="Binomial test analysis and results in jamovi", out.width = "90%"}
 knitr::include_graphics("images/Figure70.PNG")
 ```
 
@@ -220,19 +220,19 @@ In previous sections I've emphasised the fact that the major design principle be
 
 ### The power function
 
-```{r fig9-5, chunk.class="enlarge.image", fig.cap="Sampling distribution under the alternative hypothesis for a population parameter value of $\\theta = 0.55$. A reasonable proportion of the distribution lies in the rejection region", out.width = "90%"}
+```{r fig9-5, class.chunk="enlarge-image", fig.cap="Sampling distribution under the alternative hypothesis for a population parameter value of $\\theta = 0.55$. A reasonable proportion of the distribution lies in the rejection region", out.width = "90%"}
 knitr::include_graphics("images/Figure71.PNG")
 ```
 
 Let's take a moment to think about what a Type II error actually is. A Type II error occurs when the alternative hypothesis is true, but we are nevertheless unable to reject the null hypothesis. Ideally, we'd be able to calculate a single number $\beta$ that tells us the Type II error rate, in the same way that we can set $\alpha = .05$ for the Type I error rate. Unfortunately, this is a lot trickier to do. To see this, notice that in my ESP study the alternative hypothesis actually corresponds to lots of possible values of $\theta$. In fact, the alternative hypothesis corresponds to every value of $\theta$ except 0.5. Let's suppose that the true probability of someone choosing the correct response is 55% (i.e., $\theta = .55$). If so, then the true sampling distribution for $X$ is not the same one that the null hypothesis predicts, as the most likely value for $X$ is now $55$ out of 100. Not only that, the whole sampling distribution has now shifted, as shown in Figure \@ref(fig:fig9-5). The critical regions, of course, do not change. By definition the critical regions are based on what the null hypothesis predicts. What we're seeing in this figure is the fact that when the null hypothesis is wrong, a much larger proportion of the sampling distribution distribution falls in the critical region. And of course that's what should happen. The probability of rejecting the null hypothesis is larger when the null hypothesis is actually false! However $\theta = .55$ is not the only possibility consistent with the alternative hypothesis. Let's instead suppose that the true value of $\theta$ is actually $0.7$. What happens to the sampling distribution when this occurs? The answer, shown in Figure \@ref(fig:fig9-6), is that almost the entirety of the sampling distribution has now moved into the critical region. Therefore, if $\theta = 0.7$, the probability of us correctly rejecting the null hypothesis (i.e., the power of the test) is much larger than if $\theta = 0.55$. In short, while $\theta = .55$ and $\theta = .70$ are both part of the alternative hypothesis, the Type II error rate is different.
 
-```{r fig9-6, chunk.class="enlarge.image", fig.cap="Sampling distribution under the *alternative* hypothesis for a population parameter value of $\\theta = 0.70$). Almost all of the distribution lies in the rejection region", out.width = "90%"}
+```{r fig9-6, class.chunk="enlarge-image", fig.cap="Sampling distribution under the *alternative* hypothesis for a population parameter value of $\\theta = 0.70$). Almost all of the distribution lies in the rejection region", out.width = "90%"}
 knitr::include_graphics("images/Figure72.PNG")
 ```
 
 What all this means is that the power of a test (i.e., $1 - \beta$) depends on the true value of $\theta$. To illustrate this, I've calculated the expected probability of rejecting the null hypothesis for all values of $\theta$, and plotted it in Figure \@ref(fig:fig9-7). This plot describes what is usually called the power function of the test. It's a nice summary of how good the test is, because it actually tells you the power $(1 - \beta$) for all possible values of $\theta$. As you can see, when the true value of $\theta$ is very close to $0.5$, the power of the test drops very sharply, but when it is further away, the power is large.
 
-```{r fig9-7, chunk.class="enlarge.image", fig.cap="The probability that we will reject the null hypothesis, plotted as a function of the true value of $\\theta$. Obviously, the test is more powerful (greater chance of correct rejection) if the true value of $\\theta$ is very different from the value that the null hypothesis specifies (i.e., $\\theta = .5$ ). Notice that when $\\theta$ actually is equal to $.5$ (plotted as a black dot), the null hypothesis is in fact true and rejecting the null hypothesis in this instance would be a Type I error", out.width = "90%"}
+```{r fig9-7, class.chunk="enlarge-image", fig.cap="The probability that we will reject the null hypothesis, plotted as a function of the true value of $\\theta$. Obviously, the test is more powerful (greater chance of correct rejection) if the true value of $\\theta$ is very different from the value that the null hypothesis specifies (i.e., $\\theta = .5$ ). Notice that when $\\theta$ actually is equal to $.5$ (plotted as a black dot), the null hypothesis is in fact true and rejecting the null hypothesis in this instance would be a Type I error", out.width = "90%"}
 knitr::include_graphics("images/Figure73.PNG")
 ```
 
@@ -265,7 +265,7 @@ Because power is important, whenever you're contemplating running an experiment 
 
 [^09-hypothesis-testing-12]: One possible exception to this is when researchers study the effectiveness of a new medical treatment and they specify in advance what an important effect size would be to detect, for example over and above any existing treatment. In this way some information about the potential value of a new treatment can be obtained.
 
-```{r fig9-8, chunk.class="enlarge.image", fig.cap="The power of our test plotted as a function of the sample size $N$. In this case, the true value of $\\theta$ is 0.7 but the null hypothesis is that $\\theta = 0.5$. Overall, larger $N$ means greater power. (The small zig-zags in this function occur because of some odd interactions between $\\theta$, $\\alpha$ and the fact that the binomial distribution is discrete, it doesn't matter for any serious purpose)", out.width = "90%"}
+```{r fig9-8, class.chunk="enlarge-image", fig.cap="The power of our test plotted as a function of the sample size $N$. In this case, the true value of $\\theta$ is 0.7 but the null hypothesis is that $\\theta = 0.5$. Overall, larger $N$ means greater power. (The small zig-zags in this function occur because of some odd interactions between $\\theta$, $\\alpha$ and the fact that the binomial distribution is discrete, it doesn't matter for any serious purpose)", out.width = "90%"}
 knitr::include_graphics("images/Figure74.PNG")
 ```
 
