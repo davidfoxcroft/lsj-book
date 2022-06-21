@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 16 Bayesian statistics | learning statistics with jamovi</title>
+<meta name="author" content="Danielle J. Navarro &amp; David R. Foxcroft">
+<meta name="description" content="“In our reasonings concerning matter of fact, there are all imaginable degrees of assurance, from the highest certainty to the lowest species of moral evidence. A wise man, therefore, proportions...">
+<meta name="generator" content="bookdown 0.27 with bs4_book()">
+<meta property="og:title" content="Chapter 16 Bayesian statistics | learning statistics with jamovi">
+<meta property="og:type" content="book">
+<meta property="og:image" content="/images/bookcover_logo.png">
+<meta property="og:description" content="“In our reasonings concerning matter of fact, there are all imaginable degrees of assurance, from the highest certainty to the lowest species of moral evidence. A wise man, therefore, proportions...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 16 Bayesian statistics | learning statistics with jamovi">
+<meta name="twitter:description" content="“In our reasonings concerning matter of fact, there are all imaginable degrees of assurance, from the highest certainty to the lowest species of moral evidence. A wise man, therefore, proportions...">
+<meta name="twitter:image" content="/images/bookcover_logo.png">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><style>
+
+    .enlarge-image {
+        transition: transform .2s ease-out;
+        cursor: pointer;
+    }
+
+    .enlarge-image:hover {
+        transform: scale(1.8);
+        display: block;
+        background: #eee;
+        border: 4px solid #27466C; 
+        position: relative;
+        float: middle;
+        z-index: 999;
+    }
+    .enlarge-image:hover .inline-figure, .figure {
+      margin:  1rem 0rem 1rem 0rem; 
+      padding: 1rem 0.5rem 1rem 2rem;
+    }
+
+    .technical {
+      background-color:Gainsboro;
+      font-style:italic;
+      font-family:Garamond;
+      border: 1px solid #3d6da9;
+      padding: 0px;
+    }
+
+    </style>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script type="text/x-mathjax-config"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title=""><span style="font-family:Garamond;font-weight:700;">learning statistics with jamovi</span></a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"></a></li>
+<li><a class="" href="preface.html">Preface</a></li>
+<li><a class="" href="why-do-we-learn-statistics.html"><span class="header-section-number">1</span> Why do we learn statistics</a></li>
+<li><a class="" href="a-brief-introduction-to-research-design.html"><span class="header-section-number">2</span> A brief introduction to research design</a></li>
+<li><a class="" href="getting-started-with-jamovi.html"><span class="header-section-number">3</span> Getting started with jamovi</a></li>
+<li><a class="" href="descriptive-statistics.html"><span class="header-section-number">4</span> Descriptive statistics</a></li>
+<li><a class="" href="drawing-graphs.html"><span class="header-section-number">5</span> Drawing graphs</a></li>
+<li><a class="" href="pragmatic-matters.html"><span class="header-section-number">6</span> Pragmatic matters</a></li>
+<li><a class="" href="prelude-to-part-iv.html">Prelude to Part IV</a></li>
+<li><a class="" href="introduction-to-probability.html"><span class="header-section-number">7</span> Introduction to probability</a></li>
+<li><a class="" href="estimating-unkown-quantities-from-a-sample.html"><span class="header-section-number">8</span> Estimating unkown quantities from a sample</a></li>
+<li><a class="" href="hypothesis-testing.html"><span class="header-section-number">9</span> Hypothesis testing</a></li>
+<li><a class="" href="categorical-data-analysis.html"><span class="header-section-number">10</span> Categorical data analysis</a></li>
+<li><a class="" href="comparing-two-means.html"><span class="header-section-number">11</span> Comparing two means</a></li>
+<li><a class="" href="correlation-and-linear-regression.html"><span class="header-section-number">12</span> Correlation and linear regression</a></li>
+<li><a class="" href="comparing-several-means-one-way-anova.html"><span class="header-section-number">13</span> Comparing several means (one-way ANOVA)</a></li>
+<li><a class="" href="factorial-anova.html"><span class="header-section-number">14</span> Factorial ANOVA</a></li>
+<li><a class="" href="factor-analysis.html"><span class="header-section-number">15</span> Factor Analysis</a></li>
+<li><a class="active" href="bayesian-statistics.html"><span class="header-section-number">16</span> Bayesian statistics</a></li>
+<li><a class="" href="epilogue.html"><span class="header-section-number">17</span> Epilogue</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="bayesian-statistics" class="section level1" number="16">
+<h1>
+<span class="header-section-number">16</span> Bayesian statistics<a class="anchor" aria-label="anchor" href="#bayesian-statistics"><i class="fas fa-link"></i></a>
+</h1>
+<blockquote>
+<p><em>“In our reasonings concerning matter of fact, there are all imaginable degrees of assurance, from the highest certainty to the lowest species of moral evidence. A wise man, therefore, proportions his belief to the evidence.”</em><br>
+– David Hume <a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="http://en.wikiquote.org/wiki/David%20Hume." target="_blank"&gt;&lt;/a&gt;&lt;a href="http://en.wikiquote.org/wiki/David_Hume" class="uri"&gt;http://en.wikiquote.org/wiki/David_Hume&lt;/a&gt;.&lt;/p&gt;'><sup>182</sup></a></p>
+</blockquote>
+<p>The ideas I’ve presented to you in this book describe inferential statistics from the frequentist perspective. I’m not alone in doing this. In fact, almost every textbook given to undergraduate psychology students presents the opinions of the frequentist statistician as <em>the</em> theory of inferential statistics, the one true way to do things. I have taught this way for practical reasons. The frequentist view of statistics dominated the academic field of statistics for most of the 20th century, and this dominance is even more extreme among applied scientists. It was and is current practice among psychologists to use frequentist methods. Because frequentist methods are ubiquitous in scientific papers, every student of statistics needs to understand those methods, otherwise they will be unable to make sense of what those papers are saying! Unfortunately, in my opinion at least, the current practice in psychology is often misguided and the reliance on frequentist methods is partly to blame. In this chapter I explain why I think this and provide an introduction to Bayesian statistics, an approach that I think is generally superior to the orthodox approach.</p>
+<p>This chapter comes in two parts. In Sections <strong>16.1</strong> through <strong>16.3</strong> I talk about what Bayesian statistics are all about, covering the basic mathematical rules for how it works as well as an explanation for why I think the Bayesian approach is so useful. Afterwards, I provide a brief overview of how you can do Bayesian versions of t-tests (Section <strong>16.4</strong>).</p>
+<div id="probabilistic-reasoning-by-rational-agents" class="section level2" number="16.1">
+<h2>
+<span class="header-section-number">16.1</span> Probabilistic reasoning by rational agents<a class="anchor" aria-label="anchor" href="#probabilistic-reasoning-by-rational-agents"><i class="fas fa-link"></i></a>
+</h2>
+<p>From a Bayesian perspective statistical inference is all about <em>belief revision</em>. I start out with a set of candidate hypotheses h about the world. I don’t know which of these hypotheses is true, but do I have some beliefs about which hypotheses are plausible and which are not. When I observe the data, d, I have to revise those beliefs. If the data are consistent with a hypothesis, my belief in that hypothesis is strengthened. If the data are inconsistent with the hypothesis, my belief in that hypothesis is weakened. That’s it! At the end of this section I’ll give a precise description of how Bayesian reasoning works, but first I want to work through a simple example in order to introduce the key ideas. Consider the following reasoning problem.</p>
+<blockquote>
+<p><em>I’m carrying an umbrella. Do you think it will rain?</em></p>
+</blockquote>
+<p>In this problem I have presented you with a single piece of data (d = I’m carrying the umbrella), and I’m asking you to tell me your belief or hypothesis about whether it’s raining. You have two alternatives, h: either it will rain today or it will not. How should you solve this problem?</p>
+<div id="priors-what-you-believed-before" class="section level3" number="16.1.1">
+<h3>
+<span class="header-section-number">16.1.1</span> Priors: what you believed before<a class="anchor" aria-label="anchor" href="#priors-what-you-believed-before"><i class="fas fa-link"></i></a>
+</h3>
+<p>The first thing you need to do is ignore what I told you about the umbrella, and write down your pre-existing beliefs about rain. This is important. If you want to be honest about how your beliefs have been revised in the light of new evidence (data) then you must say something about what you believed before those data appeared! So, what might you believe about whether it will rain today? You probably know that I live in Australia and that much of Australia is hot and dry. The city of Adelaide where I live has a Mediterranean climate, very similar to southern California, southern Europe or northern Africa. I’m writing this in January and so you can assume it’s the middle of summer. In fact, you might have decided to take a quick look on Wikipedia<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="http://en.wikipedia.org/wiki/Climate_of_Adelaide" target="_blank"&gt;http://en.wikipedia.org/wiki/Climate_of_Adelaide&lt;/a&gt;&lt;/p&gt;'><sup>183</sup></a> and discovered that Adelaide gets an average of 4.4 days of rain across the 31 days of January. Without knowing anything else, you might conclude that the probability of January rain in Adelaide is about 15%, and the probability of a dry day is 85% (see Table <a href="bayesian-statistics.html#tab:tab16-1">16.1</a>). If this is really what you believe about Adelaide rainfall (and now that I’ve told it to you I’m betting that this really is what you believe) then what I have written here is your <strong>prior distribution</strong>, written <span class="math inline">\(P(h)\)</span>.</p>
+<div class="inline-table"><table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 101%; margin-left: auto; margin-right: auto;  " id="tab:tab16-1">
+<caption style="caption-side: bottom; text-align: left;">
+<span id="tab:tab16-1">Table 16.1: </span> How likely is it to rain in Adelaide: pre-existing beliefs based on knowledge average January rainfall</caption>
+<col>
+<col>
+<tr>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: bold;">Hypothesis</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">Degree of Belief</th>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">Rainy day</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">0.15</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: normal;">Dry day</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">0.85</td>
+</tr>
+</table></div>
+</div>
+<div id="likelihoods-theories-about-the-data" class="section level3" number="16.1.2">
+<h3>
+<span class="header-section-number">16.1.2</span> Likelihoods: theories about the data<a class="anchor" aria-label="anchor" href="#likelihoods-theories-about-the-data"><i class="fas fa-link"></i></a>
+</h3>
+<p>To solve the reasoning problem you need a theory about my behaviour. When does Dan carry an umbrella? You might guess that I’m not a complete idiot,<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;It’s a leap of faith, I know, but let’s run with it okay?&lt;/p&gt;"><sup>184</sup></a> and I try to carry umbrellas only on rainy days. On the other hand, you also know that I have young kids, and you wouldn’t be all that surprised to know that I’m pretty forgetful about this sort of thing. Let’s suppose that on rainy days I remember my umbrella about 30% of the time (I really am awful at this). But let’s say that on dry days I’m only about 5% likely to be carrying an umbrella. So you might write this out as in Table <a href="bayesian-statistics.html#tab:tab16-2">16.2</a>.</p>
+<div class="inline-table"><table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 101%; margin-left: auto; margin-right: auto;  " id="tab:tab16-2">
+<caption style="caption-side: bottom; text-align: left;">
+<span id="tab:tab16-2">Table 16.2: </span> How likely am I to be carrying an umbrella on rainy and dry days</caption>
+<col>
+<col>
+<col>
+<tr>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: bold;"></th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">Data</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">Data</th>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">Hypothesis</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Umbrella</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">No umbrella</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: normal;">Rainy day</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">0.30</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">0.70</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">Dry day</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.05</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">0.95</td>
+</tr>
+</table></div>
+<p>It’s important to remember that each cell in this table describes your beliefs about what data d will be observed, <em>given</em> the truth of a particular hypothesis <span class="math inline">\(h\)</span>. This “conditional probability” is written <span class="math inline">\(P(d|h)\)</span>, which you can read as “the probability of <span class="math inline">\(d\)</span> given <span class="math inline">\(h\)</span>”. In Bayesian statistics, this is referred to as the <strong>likelihood</strong> of the data <span class="math inline">\(d\)</span> given the hypothesis <span class="math inline">\(h\)</span>.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Um. I hate to bring this up, but some statisticians would object to me using the word “likelihood” here. The problem is that the word “likelihood” has a very specific meaning in frequentist statistics, and it’s not quite the same as what it means in Bayesian statistics. As far as I can tell Bayesians didn’t originally have any agreed upon name for the likelihood, and so it became common practice for people to use the frequentist terminology. This wouldn’t have been a problem except for the fact that the way that Bayesians use the word turns out to be quite different to the way frequentists do. This isn’t the place for yet another lengthy history lesson but, to put it crudely, when a Bayesian says “a likelihood function” they’re usually referring one of the rows of the table. When a frequentist says the same thing, they’re referring to the same table, but to them “a likelihood function” almost always refers to one of the columns. This distinction matters in some contexts, but it’s not important for our purposes.&lt;/p&gt;"><sup>185</sup></a></p>
+</div>
+<div id="the-joint-probability-of-data-and-hypothesis" class="section level3" number="16.1.3">
+<h3>
+<span class="header-section-number">16.1.3</span> The joint probability of data and hypothesis<a class="anchor" aria-label="anchor" href="#the-joint-probability-of-data-and-hypothesis"><i class="fas fa-link"></i></a>
+</h3>
+<p>At this point all the elements are in place. Having written down the priors and the likelihood, you have all the information you need to do Bayesian reasoning. The question now becomes how do we use this information? As it turns out, there’s a very simple equation that we can use here, but it’s important that you understand why we use it so I’m going to try to build it up from more basic ideas.</p>
+<p>Let’s start out with one of the rules of probability theory. I listed it way back in Table Table <a href="introduction-to-probability.html#tab:tab7-1">7.1</a>, but I didn’t make a big deal out of it at the time and you probably ignored it. The rule in question is the one that talks about the probability that two things are true. In our example, you might want to calculate the probability that today is rainy (i.e., hypothesis h is true) and I’m carrying an umbrella (i.e., data <span class="math inline">\(d\)</span> is observed). The <strong>joint probability</strong> of the hypothesis and the data is written <span class="math inline">\(P(d,h)\)</span>, and you can calculate it by multiplying the prior <span class="math inline">\(P(h)\)</span> by the likelihood <span class="math inline">\(P(d|h)\)</span>. Mathematically, we say that</p>
+<p><span class="math display">\[P(d,h)=P(d|h)P(h)\]</span></p>
+<p>So, what is the probability that today is a rainy day <em>and</em> I remember to carry an umbrella? As we discussed earlier, the prior tells us that the probability of a rainy day is 15%, and the likelihood tells us that the probability of me remembering my umbrella on a rainy day is <span class="math inline">\(30\\%\)</span>. So the probability that both of these things are true is calculated by multiplying the two</p>
+<span class="math display">\[\begin{equation}
+\begin{split}
+P(rainy, umbrella)
+&amp; = P(umbrella|rainy) \times P(rainy) \\\\
+&amp; = 0.30 \times 0.15
+\\\\ &amp; = 0.045
+\end{split}
+\end{equation}\]</span>
+<p>In other words, before being told anything about what actually happened, you think that there is a 4.5% probability that today will be a rainy day and that I will remember an umbrella. However, there are of course four possible things that could happen, right? So let’s repeat the exercise for all four. If we do that, we end up with Table <a href="bayesian-statistics.html#tab:tab16-3">16.3</a>.</p>
+<div class="inline-table"><table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 101%; margin-left: auto; margin-right: auto;  " id="tab:tab16-3">
+<caption style="caption-side: bottom; text-align: left;">
+<span id="tab:tab16-3">Table 16.3: </span> Four possibilities combining rain (or not) and umbrella carrying (or not)</caption>
+<col>
+<col>
+<col>
+<tr>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: bold;"></th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">Umbrella</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">No-umbrella</th>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">Rainy</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.045</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">0.105</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: normal;">Dry</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">0.0425</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">0.807</td>
+</tr>
+</table></div>
+<p>This table captures all the information about which of the four possibilities are likely. To really get the full picture, though, it helps to add the row totals and column totals. That gives us Table <a href="bayesian-statistics.html#tab:tab16-4">16.4</a>.</p>
+<div class="inline-table"><table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 101%; margin-left: auto; margin-right: auto;  " id="tab:tab16-4">
+<caption style="caption-side: bottom; text-align: left;">
+<span id="tab:tab16-4">Table 16.4: </span> Four possibilities combining rain (or not) and umbrella carrying (or not), with row and column totals</caption>
+<col>
+<col>
+<col>
+<col>
+<tr>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: bold;"></th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">Umbrella</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">No-umbrella</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">Total</th>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">Rainy</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.045</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.105</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">0.15</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: normal;">Dry</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">0.0425</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">0.807</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">0.85</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">Total</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.0875</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.912</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">1</td>
+</tr>
+</table></div>
+<p>This is a very useful table, so it’s worth taking a moment to think about what all these numbers are telling us. First, notice that the row sums aren’t telling us anything new at all. For example, the first row tells us that if we ignore all this umbrella business, the chance that today will be a rainy day is 15%. That’s not surprising, of course, as that’s our prior.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Just to be clear, “prior” information is pre-existing knowledge or beliefs, before we collect or use any data to improve that information.&lt;/p&gt;"><sup>186</sup></a> The important thing isn’t the number itself. Rather, the important thing is that it gives us some confidence that our calculations are sensible! Now take a look at the column sums and notice that they tell us something that we haven’t explicitly stated yet. In the same way that the row sums tell us the probability of rain, the column sums tell us the probability of me carrying an umbrella. Specifically, the first column tells us that on average (i.e., ignoring whether it’s a rainy day or not) the probability of me carrying an umbrella is 8.75%. Finally, notice that when we sum across all four logically-possible events, everything adds up to 1. In other words, what we have written down is a proper probability distribution defined over all possible combinations of data and hypothesis.</p>
+<p>Now, because this table is so useful, I want to make sure you understand what all the elements correspond to and how they written (Table <a href="bayesian-statistics.html#tab:tab16-5">16.5</a>):</p>
+<div class="inline-table"><table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 101%; margin-left: auto; margin-right: auto;  " id="tab:tab16-5">
+<caption style="caption-side: bottom; text-align: left;">
+<span id="tab:tab16-5">Table 16.5: </span> Four possibilities combining rain (or not) and umbrella carrying (or not), expressed as conditional probabilities</caption>
+<col>
+<col>
+<col>
+<col>
+<tr>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: bold;"></th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">Umbrella</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">No-umbrella</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;"></th>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">Rainy</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">P(Umbrella, Rainy)</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">P(No-umbrella, Rainy)</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">P(Rainy)</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: normal;">Dry</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">P(Umbrella, Dry)</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">P(No-umbrella, Dry)</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">P(Dry)</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">P(Umbrella)</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">P(No-umbrella)</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;"></td>
+</tr>
+</table></div>
+<p>Finally, let’s use “proper” statistical notation. In the rainy day problem, the data corresponds to the observation that I do or do not have an umbrella. So we’ll let <span class="math inline">\(d_1\)</span> refer to the possibility that you observe me carrying an umbrella, and <span class="math inline">\(d_2\)</span> refers to you observing me not carrying one. Similarly, <span class="math inline">\(h_1\)</span> is your hypothesis that today is rainy, and <span class="math inline">\(h_2\)</span> is the hypothesis that it is not. Using this notation, the table looks like Table <a href="bayesian-statistics.html#tab:tab16-6">16.6</a>.</p>
+<div class="inline-table"><table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 101%; margin-left: auto; margin-right: auto;  " id="tab:tab16-6">
+<caption style="caption-side: bottom; text-align: left;">
+<span id="tab:tab16-6">Table 16.6: </span> Four possibilities combining rain (or not) and umbrella carrying (or not), expressed in hypothjetical terms as conditional probabilities</caption>
+<col>
+<col>
+<col>
+<col>
+<tr>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: bold;"></th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">\( d_1 \)</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">\( d_2 \)</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;"></th>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">\( h_1 \)</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">\(P(h_1, d_1)\)</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">\(P(h_1, d_2)\)</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">\( P(h_1) \)</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: normal;">\( h_2 \)</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">\(P(h_2, d_1)\)</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">\(P(h_2, d_2)\)</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">\( P(h_2) \)</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">\( P(d_1) \)</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">\( P(d_2) \)</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;"></td>
+</tr>
+</table></div>
+</div>
+<div id="updating-beliefs-using-bayes-rule" class="section level3" number="16.1.4">
+<h3>
+<span class="header-section-number">16.1.4</span> Updating beliefs using Bayes’ rule<a class="anchor" aria-label="anchor" href="#updating-beliefs-using-bayes-rule"><i class="fas fa-link"></i></a>
+</h3>
+<p>The table we laid out in the last section is a very powerful tool for solving the rainy day problem, because it considers all four logical possibilities and states exactly how confident you are in each of them before being given any data. It’s now time to consider what happens to our beliefs when we are actually given the data. In the rainy day problem, you are told that I really am carrying an umbrella. This is something of a surprising event. According to our table, the probability of me carrying an umbrella is only 8.75%. But that makes sense, right? A woman carrying an umbrella on a summer day in a hot dry city is pretty unusual, and so you really weren’t expecting that. Nevertheless, the data tells you that it is true. No matter how unlikely you thought it was, you must now adjust your beliefs to accommodate the fact that you now <em>know</em> that I have an umbrella.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;If we were being a bit more sophisticated, we could extend the example to accommodate the possibility that I’m lying about the umbrella. But let’s keep things simple, shall we?&lt;/p&gt;"><sup>187</sup></a> To reflect this new knowledge, our <em>revised</em> table must have the following numbers. (see Table <a href="bayesian-statistics.html#tab:tab16-7">16.7</a>).</p>
+<div class="inline-table"><table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 101%; margin-left: auto; margin-right: auto;  " id="tab:tab16-7">
+<caption style="caption-side: bottom; text-align: left;">
+<span id="tab:tab16-7">Table 16.7: </span> Revising beliefs given new data about umbrella carrying</caption>
+<col>
+<col>
+<col>
+<tr>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: bold;"></th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">Umbrella</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">No-umbrella</th>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">Rainy</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">0</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: normal;">Dry</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">0</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">Total</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">0</td>
+</tr>
+</table></div>
+<p>In other words, the facts have eliminated any possibility of “no umbrella”, so we have to put zeros into any cell in the table that implies that I’m not carrying an umbrella. Also, you know for a fact that I am carrying an umbrella, so the column sum on the left must be 1 to correctly describe the fact that <span class="math inline">\(P(umbrella) = 1\)</span>.</p>
+<p>What two numbers should we put in the empty cells? Again, let’s not worry about the maths, and instead think about our intuitions. When we wrote out our table the first time, it turned out that those two cells had almost identical numbers, right? We worked out that the joint probability of “rain and umbrella” was 4.5%, and the joint probability of “dry and umbrella” was 4.25%. In other words, before I told you that I am in fact carrying an umbrella, you’d have said that these two events were almost identical in probability, yes? But notice that both of these possibilities are consistent with the fact that I actually am carrying an umbrella. From the perspective of these two possibilities, very little has changed. I hope you’d agree that it’s still true that these two possibilities are equally plausible. So what we expect to see in our final table is some numbers that preserve the fact that “rain and umbrella” is <em>slightly</em> more plausible than “dry and umbrella”, while still ensuring that numbers in the table add up. Something like Table <a href="bayesian-statistics.html#tab:tab16-8">16.8</a>, perhaps?</p>
+<div class="inline-table"><table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 101%; margin-left: auto; margin-right: auto;  " id="tab:tab16-8">
+<caption style="caption-side: bottom; text-align: left;">
+<span id="tab:tab16-8">Table 16.8: </span> Revising probabilities given new data about umbrella carrying</caption>
+<col>
+<col>
+<col>
+<tr>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: bold;"></th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">Umbrella</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">No-umbrella</th>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">Rainy</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.514</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">0</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: normal;">Dry</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">0.486</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">0</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">Total</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">0</td>
+</tr>
+</table></div>
+<p>What this table is telling you is that, after being told that I’m carrying an umbrella, you believe that there’s a 51.4%) chance that today will be a rainy day, and a 48.6% chance that it won’t. That’s the answer to our problem! The <strong>posterior probability</strong> of rain <span class="math inline">\(P(h\|d)\)</span> given that I am carrying an umbrella is 51.4%</p>
+<p>How did I calculate these numbers? You can probably guess. To work out that there was a <span class="math inline">\(0.514\)</span> probability of “rain”, all I did was take the <span class="math inline">\(0.045\)</span> probability of “rain and umbrella” and divide it by the <span class="math inline">\(0.0875\)</span> chance of “umbrella”. This produces a table that satisfies our need to have everything sum to 1, and our need not to interfere with the relative plausibility of the two events that are actually consistent with the data. To say the same thing using fancy statistical jargon, what I’ve done here is divide the joint probability of the hypothesis and the data <span class="math inline">\(P(d, h)\)</span> by the <strong>marginal probability</strong> of the data <span class="math inline">\(P(d)\)</span>, and this is what gives us the posterior probability of the hypothesis given the data that have been observed. To write this as an equation: <a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;You might notice that this equation is actually a restatement of the same basic rule I listed at the start of the last section. If you multiply both sides of the equation by &lt;span class="math inline"&gt;\(P(d)\)&lt;/span&gt;, then you get &lt;span class="math inline"&gt;\(P(d)P(h|d) = P(d, h)\)&lt;/span&gt;, which is the rule for how joint probabilities are calculated. So I’m not actually introducing any “new” rules here, I’m just using the same rule in a different way.&lt;/p&gt;'><sup>188</sup></a></p>
+<p><span class="math display">\[P(h|d)=\frac{P(h|d)}{P(d)}\]</span></p>
+<p>However, remember what I said at the start of the last section, namely that the joint probability <span class="math inline">\(P(d, h)\)</span> is calculated by multiplying the prior Pphq by the likelihood <span class="math inline">\(P(d|h)\)</span>. In real life, the things we actually know how to write down are the priors and the likelihood, so let’s substitute those back into the equation. This gives us the following formula for the posterior probability:</p>
+<p><span class="math display">\[P(h|d)=\frac{P(d|h)P(h)}{P(d)}\]</span></p>
+<p>And this formula, folks, is known as <strong>Bayes’ rule</strong>. It describes how a learner starts out with prior beliefs about the plausibility of different hypotheses, and tells you how those beliefs should be revised in the face of data. In the Bayesian paradigm, all statistical inference flows from this one simple rule.</p>
+</div>
+</div>
+<div id="bayesian-hypothesis-tests" class="section level2" number="16.2">
+<h2>
+<span class="header-section-number">16.2</span> Bayesian hypothesis tests<a class="anchor" aria-label="anchor" href="#bayesian-hypothesis-tests"><i class="fas fa-link"></i></a>
+</h2>
+<p>In an earlier chapter I described the orthodox approach to <a href="hypothesis-testing.html#hypothesis-testing">Hypothesis testing</a>. It took an entire chapter to describe, because null hypothesis testing is a very elaborate contraption that people find very hard to make sense of. In contrast, the Bayesian approach to hypothesis testing is incredibly simple. Let’s pick a setting that is closely analogous to the orthodox scenario. There are two hypotheses that we want to compare, a null hypothesis <span class="math inline">\(h_0\)</span> and an alternative hypothesis <span class="math inline">\(h_1\)</span>. Prior to running the experiment we have some beliefs <span class="math inline">\(P(h)\)</span> about which hypotheses are true. We run an experiment and obtain data d. Unlike frequentist statistics, Bayesian statistics does allow us to talk about the probability that the null hypothesis is true. Better yet, it allows us to calculate the <strong>posterior probability of the null hypothesis</strong>, using Bayes’ rule:</p>
+<p><span class="math display">\[P(h_0|d)=\frac{P(d|h_0)P(h_0)}{P(d)}\]</span></p>
+<p>This formula tells us exactly how much belief we should have in the null hypothesis after having observed the data d. Similarly, we can work out how much belief to place in the alternative hypothesis using essentially the same equation. All we do is change the subscript</p>
+<p><span class="math display">\[P(h_1|d)=\frac{P(d|h_1)P(h_1)}{P(d)}\]</span></p>
+<p>It’s all so simple that I feel like an idiot even bothering to write these equations down, since all I’m doing is copying Bayes rule from the previous section.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;Obviously, this is a highly simplified story. All the complexity of real life Bayesian hypothesis testing comes down to how you calculate the likelihood &lt;span class="math inline"&gt;\(P(d\|h)\)&lt;/span&gt; when the hypothesis h is a complex and vague thing. I’m not going to talk about those complexities in this book, but I do want to highlight that although this simple story is true as far as it goes, real life is messier than I’m able to cover in an introductory stats textbook.&lt;/p&gt;'><sup>189</sup></a></p>
+<div id="the-bayes-factor" class="section level3" number="16.2.1">
+<h3>
+<span class="header-section-number">16.2.1</span> The Bayes factor<a class="anchor" aria-label="anchor" href="#the-bayes-factor"><i class="fas fa-link"></i></a>
+</h3>
+<p>In practice, most Bayesian data analysts tend not to talk in terms of the raw posterior probabilities <span class="math inline">\(P(h_0|d)\)</span> and <span class="math inline">\(P(h_1|d)\)</span>. Instead, we tend to talk in terms of the <strong>posterior odds</strong> ratio. Think of it like betting. Suppose, for instance, the posterior probability of the null hypothesis is 25%, and the posterior probability of the alternative is 75%. The alternative hypothesis is three times as probable as the null, so we say that the odds are 3:1 in favour of the alternative. Mathematically, all we have to do to calculate the posterior odds is divide one posterior probability by the other</p>
+<p><span class="math display">\[\frac{P(h_1|d)}{P(h_0|d)}=\frac{0.75}{0.25}=3\]</span></p>
+<p>Or, to write the same thing in terms of the equations above</p>
+<p><span class="math display">\[\frac{P(h_1|d)}{P(h_0|d)}=\frac{d|h_1}{d|h_0} \times \frac{h_1}{h_0}\]</span></p>
+<p>Actually, this equation is worth expanding on. There are three different terms here that you should know. On the left hand side, we have the posterior odds, which tells you what you believe about the relative plausibilty of the null hypothesis and the alternative hypothesis after seeing the data. On the right hand side, we have the <strong>prior odds</strong>, which indicates what you thought before seeing the data. In the middle, we have the <strong>Bayes factor</strong>, which describes the amount of evidence provided by the data. (Table <a href="bayesian-statistics.html#tab:tab16-9">16.9</a>).</p>
+<div class="inline-table"><table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 101%; margin-left: auto; margin-right: auto;  " id="tab:tab16-9">
+<caption style="caption-side: bottom; text-align: left;">
+<span id="tab:tab16-9">Table 16.9: </span> Posterior odds given the Bsyes factor and prior odds</caption>
+<col>
+<col>
+<col>
+<col>
+<col>
+<tr>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: bold;">\(\frac{P(h_1|d)}{h_0|d}\)</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">\(=\)</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">\(\frac{P(d|h_1)}{d|h_0}\)</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">\(\times \)</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">\(\frac{P(h_1)}{h_0}\)</th>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">\(\Uparrow\)</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">\(\Uparrow\)</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">\(\Uparrow\)</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: normal;">Posterior odds</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">Bayes factor</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">Prior odds</td>
+</tr>
+</table></div>
+<p>The Bayes factor (sometimes abbreviated as BF) has a special place in Bayesian hypothesis testing, because it serves a similar role to the p-value in orthodox hypothesis testing. The Bayes factor quantifies the strength of evidence provided by the data, and as such it is the Bayes factor that people tend to report when running a Bayesian hypothesis test. The reason for reporting Bayes factors rather than posterior odds is that different researchers will have different priors. Some people might have a strong bias to believe the null hypothesis is true, others might have a strong bias to believe it is false. Because of this, the polite thing for an applied researcher to do is report the Bayes factor. That way, anyone reading the paper can multiply the Bayes factor by their own personal prior odds, and they can work out for themselves what the posterior odds would be. In any case, by convention we like to pretend that we give equal consideration to both the null hypothesis and the alternative, in which case the prior odds equals 1, and the posterior odds becomes the same as the Bayes factor</p>
+</div>
+<div id="interpreting-bayes-factors" class="section level3" number="16.2.2">
+<h3>
+<span class="header-section-number">16.2.2</span> Interpreting Bayes factors<a class="anchor" aria-label="anchor" href="#interpreting-bayes-factors"><i class="fas fa-link"></i></a>
+</h3>
+<p>One of the really nice things about the Bayes factor is the numbers are inherently meaningful. If you run an experiment and you compute a Bayes factor of 4, it means that the evidence provided by your data corresponds to betting odds of 4:1 in favour of the alternative. However, there have been some attempts to quantify the standards of evidence that would be considered meaningful in a scientific context. The two most widely used are from <span class="citation">Jeffreys (<a href="references.html#ref-Jeffreys1961" role="doc-biblioref">1961</a>)</span> and <span class="citation">Kass and Raftery (<a href="references.html#ref-Kass1995" role="doc-biblioref">1995</a>)</span>. Of the two, I tend to prefer the <span class="citation">Kass and Raftery (<a href="references.html#ref-Kass1995" role="doc-biblioref">1995</a>)</span> table because it’s a bit more conservative. So here it is (Table <a href="bayesian-statistics.html#tab:tab16-10">16.10</a>).</p>
+<div class="inline-table"><table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 101%; margin-left: auto; margin-right: auto;  " id="tab:tab16-10">
+<caption style="caption-side: bottom; text-align: left;">
+<span id="tab:tab16-10">Table 16.10: </span> Bayes factors and strength of evidence</caption>
+<col>
+<col>
+<tr>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: bold;">Bayes factor</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">Interpretation</th>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">1 - 3</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">Negligible evidence</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: normal;">3 - 20</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">Positive evidence</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; font-weight: normal;">20 - 150</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; font-weight: normal;">Strong evidence</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: normal;">&gt; 150</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">Very strong evidence</td>
+</tr>
+</table></div>
+<p>And to be perfectly honest, I think that even the <span class="citation">Kass and Raftery (<a href="references.html#ref-Kass1995" role="doc-biblioref">1995</a>)</span> standards are being a bit charitable. If it were up to me, I’d have called the “positive evidence” category “weak evidence”. To me, anything in the range 3:1 to 20:1 is “weak” or “modest” evidence at best. But there are no hard and fast rules here. What counts as strong or weak evidence depends entirely on how conservative you are and upon the standards that your community insists upon before it is willing to label a finding as “true”.</p>
+<p>In any case, note that all the numbers listed above make sense if the Bayes factor is greater than 1 (i.e., the evidence favours the alternative hypothesis). However, one big practical advantage of the Bayesian approach relative to the orthodox approach is that it also allows you to quantify evidence for the null. When that happens, the Bayes factor will be less than 1. You can choose to report a Bayes factor less than 1, but to be honest I find it confusing. For example, suppose that the likelihood of the data under the null hypothesis <span class="math inline">\(P(d|h_0)\)</span> is equal to 0.2, and the corresponding likelihood <span class="math inline">\(P(d|h_1)\)</span> under the alternative hypothesis is 0.1. Using the equations given above, Bayes factor here would be</p>
+<p><span class="math display">\[BF=\frac{P(d|h_1)}{P(d|h_0)}=\frac{0.1}{0.2}=0.5\]</span></p>
+<p>Read literally, this result tells is that the evidence in favour of the alternative is 0.5 to 1. I find this hard to understand. To me, it makes a lot more sense to turn the equation “upside down”, and report the amount op evidence in favour of the null. In other words, what we calculate is this</p>
+<p><span class="math display">\[BF^{'}=\frac{P(d|h_0)}{P(d|h_1)}=\frac{0.2}{0.1}=2\]</span></p>
+<p>And what we would report is a Bayes factor of 2:1 in favour of the null. Much easier to understand, and you can interpret this using the table above.</p>
+</div>
+</div>
+<div id="why-be-a-bayesian" class="section level2" number="16.3">
+<h2>
+<span class="header-section-number">16.3</span> Why be a Bayesian?<a class="anchor" aria-label="anchor" href="#why-be-a-bayesian"><i class="fas fa-link"></i></a>
+</h2>
+<p>Up to this point I’ve focused exclusively on the logic underpinning Bayesian statistics. We’ve talked about the idea of “probability as a degree of belief”, and what it implies about how a rational agent should reason about the world. The question that you have to answer for yourself is this: how do you want to do your statistics? Do you want to be an orthodox statistician, relying on sampling distributions and p-values to guide your decisions? Or do you want to be a Bayesian, relying on things like prior beliefs, Bayes factors and the rules for rational belief revision? And to be perfectly honest, I can’t answer this question for you. Ultimately it depends on what you think is right. It’s your call and your call alone. That being said, I can talk a little about why I prefer the Bayesian approach.</p>
+<div id="statistics-that-mean-what-you-think-they-mean" class="section level3" number="16.3.1">
+<h3>
+<span class="header-section-number">16.3.1</span> Statistics that mean what you think they mean<a class="anchor" aria-label="anchor" href="#statistics-that-mean-what-you-think-they-mean"><i class="fas fa-link"></i></a>
+</h3>
+<blockquote>
+<p><em>You keep using that word. I do not think it means what you think it means</em><br>
+– Inigo Montoya, The Princess Bride <a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="http://www.imdb.com/title/tt0093779/quotes" target="_blank"&gt;http://www.imdb.com/title/tt0093779/quotes&lt;/a&gt; . I should note in passing that I’m not the first person to use this quote to complain about frequentist methods. Rich Morey and colleagues had the idea first. I’m shamelessly stealing it because it’s such an awesome pull quote to use in this context and I refuse to miss any opportunity to quote &lt;em&gt;The Princess Bride&lt;/em&gt;.&lt;/p&gt;'><sup>190</sup></a></p>
+</blockquote>
+<p>To me, one of the biggest advantages to the Bayesian approach is that it answers the right questions. Within the Bayesian framework, it is perfectly sensible and allowable to refer to “the probability that a hypothesis is true”. You can even try to calculate this probability. Ultimately, isn’t that what you want your statistical tests to tell you? To an actual human being, this would seem to be the whole point of doing statistics, i.e., to determine what is true and what isn’t. Any time that you aren’t exactly sure about what the truth is, you should use the language of probability theory to say things like “there is an 80% chance that Theory A is true, but a 20% chance that Theory B is true instead”.</p>
+<p>This seems so obvious to a human, yet it is explicitly forbidden within the orthodox framework. To a frequentist, such statements are a nonsense because “the theory is true” is not a repeatable event. A theory is true or it is not, and no probabilistic statements are allowed, no matter how much you might want to make them. There’s a reason why, back in Section 9.5, I repeatedly warned you not to interpret the p-value as the probability that the null hypothesis is true. There’s a reason why almost every textbook on statstics is forced to repeat that warning. It’s because people desperately want that to be the correct interpretation. Frequentist dogma notwithstanding, a lifetime of experience of teaching undergraduates and of doing data analysis on a daily basis suggests to me that most actual humans think that “the probability that the hypothesis is true” is not only meaningful, it’s the thing we care most about. It’s such an appealing idea that even trained statisticians fall prey to the mistake of trying to interpret a p-value this way. For example, here is a quote from an official Newspoll report in 2013, explaining how to interpret their (frequentist) data analysis:<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="http://about.abc.net.au/reports-publications/appreciation-survey-summary-report-2013/%0A" target="_blank"&gt;http://about.abc.net.au/reports-publications/appreciation-survey-summary-report-2013/&lt;/a&gt; .&lt;/p&gt;'><sup>191</sup></a></p>
+<blockquote>
+<p><em>Throughout the report, where relevant, statistically significant changes have been noted. All significance tests have been based on the 95 percent level of confidence. <strong>This means that if a change is noted as being statistically significant, there is a 95 percent probability that a real change has occurred</strong>, and is not simply due to chance variation. (emphasis added)</em></p>
+</blockquote>
+<p>Nope! That’s not what p &lt; .05 means. That’s not what 95% confidence means to a frequentist statistician. The bolded section is just plain wrong. Orthodox methods cannot tell you that “there is a 95% chance that a real change has occurred”, because this is not the kind of event to which frequentist probabilities may be assigned. To an ideological frequentist, this sentence should be meaningless. Even if you’re a more pragmatic frequentist, it’s still the wrong definition of a p-value. It is simply not an allowed or correct thing to say if you want to rely on orthodox statistical tools.</p>
+<p>On the other hand, let’s suppose you are a Bayesian. Although the bolded passage is the wrong definition of a p-value, it’s pretty much exactly what a Bayesian means when they say that the posterior probability of the alternative hypothesis is greater than 95%. And here’s the thing. If the Bayesian posterior is actually the thing you want to report, why are you even trying to use orthodox methods? If you want to make Bayesian claims, all you have to do is be a Bayesian and use Bayesian tools.</p>
+<p>Speaking for myself, I found this to be the most liberating thing about switching to the Bayesian view. Once you’ve made the jump, you no longer have to wrap your head around counter-intuitive definitions of p-values. You don’t have to bother remembering why you can’t say that you’re 95% confident that the true mean lies within some interval. All you have to do is be honest about what you believed before you ran the study and then report what you learned from doing it. Sounds nice, doesn’t it? To me, this is the big promise of the Bayesian approach. You do the analysis you really want to do, and express what you really believe the data are telling you.</p>
+</div>
+<div id="evidentiary-standards-you-can-believe" class="section level3" number="16.3.2">
+<h3>
+<span class="header-section-number">16.3.2</span> Evidentiary standards you can believe<a class="anchor" aria-label="anchor" href="#evidentiary-standards-you-can-believe"><i class="fas fa-link"></i></a>
+</h3>
+<blockquote>
+<p><em>If</em> <span class="math inline">\(p\)</span> is below .02 it is strongly indicated that the <span class="math inline">\(null\)</span> hypothesis fails to account for the whole of the facts. We shall not often be astray if we draw a conventional line at .05 and consider that smaller values of <span class="math inline">\(p\)</span> indicate a real discrepancy.<br>
+– Sir Ronald Fisher <span class="citation">(<a href="references.html#ref-Fisher1925" role="doc-biblioref">Fisher 1925</a>)</span></p>
+</blockquote>
+<p>Consider the quote above by Sir Ronald Fisher, one of the founders of what has become the orthodox approach to statistics. If anyone has ever been entitled to express an opinion about the intended function of p-values, it’s Fisher. In this passage, taken from his classic guide Statistical Methods for Research Workers, he’s pretty clear about what it means to reject a null hypothesis at p &lt; .05. In his opinion, if we take p &lt; .05 to mean there is “a real effect”, then “we shall not often be astray”. This view is hardly unusual. In my experience, most practitioners express views very similar to Fisher’s. In essence, the p &lt; .05 convention is assumed to represent a fairly stringent evidential standard.</p>
+<p>Well, how true is that? One way to approach this question is to try to convert p-values to Bayes factors, and see how the two compare. It’s not an easy thing to do because a p-value is a fundamentally different kind of calculation to a Bayes factor, and they don’t measure the same thing. However, there have been some attempts to work out the relationship between the two, and it’s somewhat surprising. For example, <span class="citation">Johnson (<a href="references.html#ref-Johnson2013" role="doc-biblioref">2013</a>)</span> presents a pretty compelling case that (for t-tests at least) the p &lt; .05 threshold corresponds roughly to a Bayes factor of somewhere between 3:1 and 5:1 in favour of the alternative. If that’s right, then Fisher’s claim is a bit of a stretch. Let’s suppose that the null hypothesis is true about half the time (i.e., the prior probability of <span class="math inline">\(H_0\)</span> is 0.5), and we use those numbers to work out the posterior probability of the null hypothesis given that it has been rejected at p &lt; .05. Using the data from <span class="citation">Johnson (<a href="references.html#ref-Johnson2013" role="doc-biblioref">2013</a>)</span>, we see that if you reject the null at p ă .05, you’ll be correct about 80% of the time. I don’t know about you but, in my opinion, an evidential standard that ensures you’ll be wrong on 20% of your decisions isn’t good enough. The fact remains that, quite contrary to Fisher’s claim, if you reject at p &lt; .05 you shall quite often go astray. It’s not a very stringent evidential threshold at all.</p>
+</div>
+<div id="the-p-value-is-a-lie." class="section level3" number="16.3.3">
+<h3>
+<span class="header-section-number">16.3.3</span> The p-value is a lie.<a class="anchor" aria-label="anchor" href="#the-p-value-is-a-lie."><i class="fas fa-link"></i></a>
+</h3>
+<blockquote>
+<p><em>The cake is a lie.</em><br><em>The cake is a lie.</em><br><em>The cake is a lie.</em><br><em>The cake is a lie.</em><br>
+– Portal<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="http://knowyourmeme.com/memes/the-cake-is-a-lie" target="_blank"&gt;http://knowyourmeme.com/memes/the-cake-is-a-lie&lt;/a&gt; .&lt;/p&gt;'><sup>192</sup></a></p>
+</blockquote>
+<p>Okay, at this point you might be thinking that the real problem is not with orthodox statistics, just the p &lt; .05 standard. In one sense, that’s true. The recommendation that <span class="citation">Johnson (<a href="references.html#ref-Johnson2013" role="doc-biblioref">2013</a>)</span> gives is not that “everyone must be a Bayesian now”. Instead, the suggestion is that it would be wiser to shift the conventional standard to something like a p &lt; .01 level. That’s not an unreasonable view to take, but in my view the problem is a little more severe than that. In my opinion, there’s a fairly big problem built into the way most (but not all) orthodox hypothesis tests are constructed. They are grossly naive about how humans actually do research, and because of this most p-values are wrong.</p>
+<p>Sounds like an absurd claim, right? Well, consider the following scenario. You’ve come up with a really exciting research hypothesis and you design a study to test it. You’re very diligent, so you run a power analysis to work out what your sample size should be, and you run the study. You run your hypothesis test and out pops a p-value of 0.072. Really bloody annoying, right?</p>
+<p>What should you do? Here are some possibilities:</p>
+<ol style="list-style-type: decimal">
+<li>You conclude that there is no effect and try to publish it as a null result</li>
+<li>You guess that there might be an effect and try to publish it as a “borderline significant” result</li>
+<li>You give up and try a new study</li>
+<li>You collect some more data to see if the p value goes up or (preferably!) drops below the “magic” criterion of p &lt; .05</li>
+</ol>
+<p>Which would you choose? Before reading any further, I urge you to take some time to think about it. Be honest with yourself. But don’t stress about it too much, because you’re screwed no matter what you choose. Based on my own experiences as an author, reviewer and editor, as well as stories I’ve heard from others, here’s what will happen in each case:</p>
+<ul>
+<li><p>Let’s start with option 1. If you try to publish it as a null result, the paper will struggle to be published. Some reviewers will think that p = .072 is not really a null result. They’ll argue it’s borderline significant. Other reviewers will agree it’s a null result but will claim that even though some null results are publishable, yours isn’t. One or two reviewers might even be on your side, but you’ll be fighting an uphill battle to get it through.</p></li>
+<li><p>Okay, let’s think about option number 2. Suppose you try to publish it as a borderline significant result. Some reviewers will claim that it’s a null result and should not be published. Others will claim that the evidence is ambiguous, and that you should collect more data until you get a clear significant result. Again, the publication process does not favour you.</p></li>
+<li><p>Given the difficulties in publishing an “ambiguous” result like p = .072, option number 3 might seem tempting: give up and do something else. But that’s a recipe for career suicide. If you give up and try a new project every time you find yourself faced with ambiguity, your work will never be published. And if you’re in academia without a publication record you can lose your job. So that option is out.</p></li>
+<li><p>It looks like you’re stuck with option 4. You don’t have conclusive results, so you decide to collect some more data and re-run the analysis. Seems sensible, but unfortunately for you, if you do this all of your p-values are now incorrect. All of them. Not just the p-values that you calculated for this study. All of them. All the p-values you calculated in the past and all the p-values you will calculate in the future. Fortunately, no-one will notice. You’ll get published, and you’ll have lied.</p></li>
+</ul>
+<p>Wait, what? How can that last part be true? I mean, it sounds like a perfectly reasonable strategy doesn’t it? You collected some data, the results weren’t conclusive, so now what you want to do is collect more data until the the results are conclusive. What’s wrong with that?</p>
+<p>Honestly, there’s nothing wrong with it. It’s a reasonable, sensible and rational thing to do. In real life, this is exactly what every researcher does. Unfortunately, the theory of null <a href="hypothesis-testing.html#hypothesis-testing">Hypothesis testing</a> as I described it in in an earlier chapter forbids you from doing this.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;In the interests of being completely honest, I should acknowledge that not all orthodox statistical tests rely on this silly assumption. There are a number of sequential analysis tools that are sometimes used in clinical trials and the like. These methods are built on the assumption that data are analysed as they arrive, and these tests aren’t horribly broken in the way I’m complaining about here. However, sequential analysis methods are constructed in a very different fashion to the “standard” version of null hypothesis testing. They don’t make it into any introductory textbooks, and they’re not very widely used in the psychological literature. The concern I’m raising here is valid for every single orthodox test I’ve presented so far and for almost every test I’ve seen reported in the papers I read.&lt;/p&gt;"><sup>193</sup></a> The reason is that the theory assumes that the experiment is finished and all the data are in. And because it assumes the experiment is over, it only considers two possible decisions. If you’re using the conventional p &lt; .05 threshold, those decisions are shown oin Table <a href="bayesian-statistics.html#tab:tab16-11">16.11</a>.</p>
+<div class="inline-table"><table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 101%; margin-left: auto; margin-right: auto;  " id="tab:tab16-11">
+<caption style="caption-side: bottom; text-align: left;">
+<span id="tab:tab16-11">Table 16.11: </span> Conventional Null hypothesis signicance testing (NHST) with p &lt; .05)</caption>
+<col>
+<col>
+<tr>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: bold;">Outcome</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">Action</th>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">p less than .05</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">Reject the null</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: normal;">p greater than .05</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">Retain the null</td>
+</tr>
+</table></div>
+<p>What you’re doing is adding a third possible action to the decision making problem. Specifically, what you’re doing is using the p-value itself as a reason to justify continuing the experiment. And as a consequence you’ve transformed the decision-making procedure into one that looks more like Table <a href="bayesian-statistics.html#tab:tab16-12">16.12</a>.</p>
+<div class="inline-table"><table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 101%; margin-left: auto; margin-right: auto;  " id="tab:tab16-12">
+<caption style="caption-side: bottom; text-align: left;">
+<span id="tab:tab16-12">Table 16.12: </span> Carrying on data collecting based on p-values obtained in preliminary testing</caption>
+<col>
+<col>
+<tr>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: bold;">Outcome</th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;">Action</th>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">p less than .05</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">Stop the experiment and reject the null</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: normal;">p between .05 and .1</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">Continue the experiment</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">p greater than .1</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">Stop the experiment and retain the null</td>
+</tr>
+</table></div>
+<p>The “basic” theory of null <a href="hypothesis-testing.html#hypothesis-testing">Hypothesis testing</a> isn’t built to handle this sort of thing, not in the form I described in that earlier chapter. If you’re the kind of person who would choose to “collect more data” in real life, it implies that you are not making decisions in accordance with the rules of null hypothesis testing. Even if you happen to arrive at the same decision as the hypothesis test, you aren’t following the decision process it implies, and it’s this failure to follow the process that is causing the problem.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;A related problem: &lt;a href="http://xkcd.com/1478/" target="_blank"&gt;http://xkcd.com/1478/&lt;/a&gt; .&lt;/p&gt;'><sup>194</sup></a> Your p-values are a lie.</p>
+<p>Worse yet, they’re a lie in a dangerous way, because they’re all <em>too small</em>. To give you a sense of just how bad it can be, consider the following (worst case) scenario. Imagine you’re a really super-enthusiastic researcher on a tight budget who didn’t pay any attention to my warnings above. You design a study comparing two groups. You desperately want to see a significant result at the <span class="math inline">\(p &lt; .05\)</span> level, but you really don’t want to collect any more data than you have to (because it’s expensive). In order to cut costs you start collecting data but every time a new observation arrives you run a t-test on your data. If the t-tests says <span class="math inline">\(p &lt; .05\)</span> then you stop the experiment and report a significant result. If not, you keep collecting data. You keep doing this until you reach your pre-defined spending limit for this experiment. Let’s say that limit kicks in at <span class="math inline">\(N = 1000\)</span> observations. As it turns out, the truth of the matter is that there is no real effect to be found: the null hypothesis is true. So, what’s the chance that you’ll make it to the end of the experiment and (correctly) conclude that there is no effect? In an ideal world, the answer here should be 95%. After all, the whole point of the <span class="math inline">\(p &lt; .05\)</span> criterion is to control the Type I error rate at 5%, so what we’d hope is that there’s only a 5% chance of falsely rejecting the null hypothesis in this situation. However, there’s no guarantee that will be true. You’re breaking the rules. Because you’re running tests repeatedly, “peeking” at your data to see if you’ve gotten a significant result, all bets are off.</p>
+<p>So how bad is it? The answer is shown as the solid black line in Figure <a href="bayesian-statistics.html#fig:fig16-1">16.1</a>, and it’s astoundingly bad. If you peek at your data after every single observation, there is a 49% chance that you will make a Type I error. That’s, um, quite a bit bigger than the 5% that it’s supposed to be. By way of comparison, imagine that you had used the following strategy. Start collecting data. Every single time an observation arrives, run a <em>Bayesian</em> t-test (Section <strong>16.4</strong>) and look at the Bayes factor. I’ll assume that <span class="citation">Johnson (<a href="references.html#ref-Johnson2013" role="doc-biblioref">2013</a>)</span> is right, and I’ll treat a Bayes factor of 3:1 as roughly equivalent to a p-value of .05.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;Some readers might wonder why I picked 3:1 rather than 5:1, given that &lt;span class="citation"&gt;Johnson (&lt;a href="references.html#ref-Johnson2013" role="doc-biblioref"&gt;2013&lt;/a&gt;)&lt;/span&gt; suggests that &lt;span class="math inline"&gt;\(p = .05\)&lt;/span&gt; lies somewhere in that range. I did so in order to be charitable to the p-value. If I’d chosen a 5:1 Bayes factor instead, the results would look even better for the Bayesian approach.&lt;/p&gt;'><sup>195</sup></a> This time around, our trigger happy researcher uses the following procedure. If the Bayes factor is 3:1 or more in favour of the null, stop the experiment and retain the null. If it is 3:1 or more in favour of the alternative, stop the experiment and reject the null. Otherwise continue testing. Now, just like last time, let’s assume that the null hypothesis is true. What happens? As it happens, I ran the simulations for this scenario too, and the results are shown as the dashed line in Figure <a href="bayesian-statistics.html#fig:fig16-1">16.1</a>. It turns out that the Type I error rate is much much lower than the 49% rate that we were getting by using the orthodox t-test.</p>
+<div class="figure">
+<span style="display:block;" id="fig:fig16-1"></span>
+<img src="images/Figure205.PNG" alt="..." width="90%"><p class="caption">
+Figure 16.1: …
+</p>
+</div>
+<p>In some ways, this is remarkable. The entire <em>point</em> of orthodox null hypothesis testing is to control the Type I error rate. Bayesian methods aren’t actually designed to do this at all. Yet, as it turns out, when faced with a “trigger happy” researcher who keeps running hypothesis tests as the data come in, the Bayesian approach is much more effective. Even the 3:1 standard, which most Bayesians would consider unacceptably lax, is much safer than the p &lt; .05 rule.</p>
+</div>
+<div id="is-it-really-this-bad" class="section level3" number="16.3.4">
+<h3>
+<span class="header-section-number">16.3.4</span> Is it really this bad?<a class="anchor" aria-label="anchor" href="#is-it-really-this-bad"><i class="fas fa-link"></i></a>
+</h3>
+<p>The example I gave in the previous section is a pretty extreme situation. In real life, people don’t run hypothesis tests every time a new observation arrives. So it’s not fair to say that the p &lt; .05 threshold “really” corresponds to a 49% Type I error rate (i.e., <span class="math inline">\(p = .49\)</span>). But the fact remains that if you want your p-values to be honest then you either have to switch to a completely different way of doing hypothesis tests or enforce a strict rule of no peeking. You are not allowed to use the data to decide when to terminate the experiment. You are not allowed to look at a “borderline” p-value and decide to collect more data. You aren’t even allowed to change your data analyis strategy after looking at data. You are strictly required to follow these rules, otherwise the p-values you calculate will be nonsense.</p>
+<p>And yes, these rules are surprisingly strict. As a class exercise a couple of years back, I asked students to think about this scenario. Suppose you started running your study with the intention of collecting <span class="math inline">\(N = 80\)</span> people. When the study starts out you follow the rules, refusing to look at the data or run any tests. But when you reach <span class="math inline">\(N = 50\)</span> your willpower gives in… and you take a peek. Guess what? You’ve got a significant result! Now, sure, you know you said that you’d keep running the study out to a sample size of <span class="math inline">\(N = 80\)</span>, but it seems sort of pointless now, right? The result is significant with a sample size of <span class="math inline">\(N = 50\)</span>, so wouldn’t it be wasteful and inefficient to keep collecting data? Aren’t you tempted to stop? Just a little? Well, keep in mind that if you do, your Type I error rate at <span class="math inline">\(p &lt; .05\)</span> just ballooned out to 8%. When you report <span class="math inline">\(p &lt; .05\)</span> in your paper, what you’re really saying is <span class="math inline">\(p &lt; .08\)</span>. That’s how bad the consequences of “just one peek” can be.</p>
+<p>Now consider this. The scientific literature is filled with t-tests, ANOVAs, regressions and chi-square tests. When I wrote this book I didn’t pick these tests arbitrarily. The reason why these four tools appear in most introductory statistics texts is that these are the bread and butter tools of science. None of these tools include a correction to deal with “data peeking”: they all assume that you’re not doing it. But how realistic is that assumption? In real life, how many people do you think have “peeked” at their data before the experiment was finished and adapted their subsequent behaviour after seeing what the data looked like? Except when the sampling procedure is fixed by an external constraint, I’m guessing the answer is “most people have done it”. If that has happened, you can infer that the reported p-values are wrong. Worse yet, because we don’t know what decision process they actually followed, we have no way to know what the p-values should have been. You can’t compute a p-value when you don’t know the decision making procedure that the researcher used. And so the reported p-value remains a lie.</p>
+<p>Given all of the above, what is the take home message? It’s not that Bayesian methods are foolproof. If a researcher is determined to cheat, they can always do so. Bayes’ rule cannot stop people from lying, nor can it stop them from rigging an experiment. That’s not my point here. My point is the same one I made at the very beginning of the book in Section 1.1: the reason why we run statistical tests is to protect us from ourselves. And the reason why “data peeking” is such a concern is that it’s so tempting, even for honest researchers. A theory for statistical inference has to acknowledge this. Yes, you might try to defend p-values by saying that it’s the fault of the researcher for not using them properly, but to my mind that misses the point. A theory of statistical inference that is so completely naive about humans that it doesn’t even consider the possibility that the researcher might look at their own data isn’t a theory worth having. In essence, my point is this:</p>
+<blockquote>
+<p><em>Good laws have their origins in bad morals.</em><br>
+– Ambrosius Macrobius <a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="http://www.quotationspage.com/quotes/Ambrosius%20Macrobius/" target="_blank"&gt;&lt;/a&gt;&lt;a href="http://www.quotationspage.com/quotes/Ambrosius" class="uri"&gt;http://www.quotationspage.com/quotes/Ambrosius&lt;/a&gt; Macrobius/&lt;/p&gt;'><sup>196</sup></a></p>
+</blockquote>
+<p>Good rules for statistical testing have to acknowledge human frailty. None of us are without sin. None of us are beyond temptation. A good system for statistical inference should still work even when it is used by actual humans. Orthodox null hypothesis testing does not.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Okay, I just know that some knowledgeable frequentists will read this and start complaining about this section. Look, I’m not dumb. I absolutely know that if you adopt a sequential analysis perspective you can avoid these errors within the orthodox framework. I also know that you can explictly design studies with interim analyses in mind. So yes, in one sense I’m attacking a “straw man” version of orthodox methods. However, the straw man that I’m attacking is the one that &lt;em&gt;is used by almost every single practitioner&lt;/em&gt;. If it ever reaches the point where sequential methods become the norm among experimental psychologists and I’m no longer forced to read 20 extremely dubious ANOVAs a day, I promise I’ll rewrite this section and dial down the vitriol. But until that day arrives, I stand by my claim that default Bayes factor methods are much more robust in the face of data analysis practices as they exist in the real world. &lt;em&gt;Default&lt;/em&gt; orthodox methods suck, and we all know it.&lt;/p&gt;"><sup>197</sup></a></p>
+</div>
+</div>
+<div id="bayesian-t-tests" class="section level2" number="16.4">
+<h2>
+<span class="header-section-number">16.4</span> Bayesian t-tests<a class="anchor" aria-label="anchor" href="#bayesian-t-tests"><i class="fas fa-link"></i></a>
+</h2>
+<p>An important type of statistical inference problem discussed in this book is <a href="comparing-two-means.html#comparing-two-means">Comparing two means</a>, discussed in some detail in the chapter on t-tests. If you can remember back that far, you’ll recall that there are several versions of the t-test. I’ll talk a little about Bayesian versions of the independent samples t-tests and the paired samples t-test in this section.</p>
+<div id="independent-samples-t-test" class="section level3" number="16.4.1">
+<h3>
+<span class="header-section-number">16.4.1</span> Independent samples t-test<a class="anchor" aria-label="anchor" href="#independent-samples-t-test"><i class="fas fa-link"></i></a>
+</h3>
+<p>The most common type of t-test is the independent samples t-test, and it arises when you have data as in the harpo.csv data set that we used in the earlier <a href="Comparing%20two%20means">chapter</a> on t-tests. In this data set, we have two groups of students, those who received lessons from Anastasia and those who took their classes with Bernadette. The question we want to answer is whether there’s any difference in the grades received by these two groups of students. Back in that <a href="Comparing%20two%20means">chapter</a> I suggested you could analyse this kind of data using the Independent Samples t-test in jamovi, which gave us the results in Figure <a href="bayesian-statistics.html#fig:fig16-2">16.2</a>. As we obtain a p-value less than 0.05, we reject the null hypothesis.</p>
+<div class="figure">
+<span style="display:block;" id="fig:fig16-2"></span>
+<img src="images/Figure206.PNG" alt="Independent Samples t-test result in jamovi" width="90%"><p class="caption">
+Figure 16.2: Independent Samples t-test result in jamovi
+</p>
+</div>
+<p>What does the Bayesian version of the t-test look like? We can get the Bayes factor analysis by selecting the ‘Bayes factor’ checkbox under the ‘Tests’ option, and accepting the suggested default value for the ‘Prior’. This gives the results shown in the table in Figure <a href="bayesian-statistics.html#fig:fig16-3">16.3</a>. What we get in this table is a Bayes factor statistic of 1.75, meaning that the evidence provided by these data are about 1.8:1 in favour of the alternative hypothesis.</p>
+<p>Before moving on, it’s worth highlighting the difference between the orthodox test results and the Bayesian one. According to the orthodox test, we obtained a significant result, though only barely. Nevertheless, many people would happily accept p = .043 as reasonably strong evidence for an effect. In contrast, notice that the Bayesian test doesn’t even reach 2:1 odds in favour of an effect, and would be considered very weak evidence at best. In my experience that’s a pretty typical outcome. Bayesian methods usually require more evidence before rejecting the null.</p>
+<div class="figure">
+<span style="display:block;" id="fig:fig16-3"></span>
+<img src="images/Figure207.PNG" alt="Bayes factors analysis alongside Independent Samples t-Test" width="90%"><p class="caption">
+Figure 16.3: Bayes factors analysis alongside Independent Samples t-Test
+</p>
+</div>
+</div>
+<div id="paired-samples-t-test" class="section level3" number="16.4.2">
+<h3>
+<span class="header-section-number">16.4.2</span> Paired samples t-test<a class="anchor" aria-label="anchor" href="#paired-samples-t-test"><i class="fas fa-link"></i></a>
+</h3>
+<p>Back in Section 11.5 I discussed the chico.csv data set in which student grades were measured on two tests, and we were interested in finding out whether grades went up from test 1 to test 2. Because every student did both tests, the tool we used to analyse the data was a paired samples t-test. Figure <a href="bayesian-statistics.html#fig:fig16-4">16.4</a> shows the jamovi results table for the conventional paired t-test alongside the Bayes factor analysis. At this point, I hope you can read this output without any difficulty. The data provide evidence of about 6000:1 in favour of the alternative. We could probably reject the null with some confidence!</p>
+<div class="figure">
+<span style="display:block;" id="fig:fig16-4"></span>
+<img src="images/Figure208.PNG" alt="Paired samples T-Test and Bayes Factor result in jamovi" width="90%"><p class="caption">
+Figure 16.4: Paired samples T-Test and Bayes Factor result in jamovi
+</p>
+</div>
+</div>
+</div>
+<div id="summary-14" class="section level2" number="16.5">
+<h2>
+<span class="header-section-number">16.5</span> Summary<a class="anchor" aria-label="anchor" href="#summary-14"><i class="fas fa-link"></i></a>
+</h2>
+<p>The first half of this chapter was focused primarily on the theoretical underpinnings of Bayesian statistics. I introduced the mathematics for how Bayesian inference works (Section <strong>16.1</strong>), and gave a very basic overview of how Bayesian hypothesis testing is typically done (Section <strong>16.2</strong>). Finally, I devoted some space to talking about why I think Bayesian methods are worth using (Section <strong>16.3</strong>).</p>
+<p>Then I gave a practical example, a Bayesian t-test (Section <strong>16.4</strong>). If you’re interested in learning more about the Bayesian approach, there are many good books you could look into. John Kruschke’s book <em>Doing Bayesian Data Analysis</em> is a pretty good place to start <span class="citation">(<a href="references.html#ref-Kruschke2011" role="doc-biblioref">Kruschke 2011</a>)</span> and is a nice mix of theory and practice. His approach is a little different to the “Bayes factor” approach that I’ve discussed here, so you won’t be covering the same ground. If you’re a cognitive psychologist, you might want to check out <span class="citation">Lee and Wagenmakers (<a href="references.html#ref-Lee2014" role="doc-biblioref">2014</a>)</span>. I picked these two because I think they’re especially useful for people in my discipline, but there’s a lot of good books out there, so look around!</p>
+
+</div>
+</div>
+
+  <div class="chapter-nav">
+<div class="prev"><a href="factor-analysis.html"><span class="header-section-number">15</span> Factor Analysis</a></div>
+<div class="next"><a href="epilogue.html"><span class="header-section-number">17</span> Epilogue</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#bayesian-statistics"><span class="header-section-number">16</span> Bayesian statistics</a></li>
+<li>
+<a class="nav-link" href="#probabilistic-reasoning-by-rational-agents"><span class="header-section-number">16.1</span> Probabilistic reasoning by rational agents</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#priors-what-you-believed-before"><span class="header-section-number">16.1.1</span> Priors: what you believed before</a></li>
+<li><a class="nav-link" href="#likelihoods-theories-about-the-data"><span class="header-section-number">16.1.2</span> Likelihoods: theories about the data</a></li>
+<li><a class="nav-link" href="#the-joint-probability-of-data-and-hypothesis"><span class="header-section-number">16.1.3</span> The joint probability of data and hypothesis</a></li>
+<li><a class="nav-link" href="#updating-beliefs-using-bayes-rule"><span class="header-section-number">16.1.4</span> Updating beliefs using Bayes’ rule</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#bayesian-hypothesis-tests"><span class="header-section-number">16.2</span> Bayesian hypothesis tests</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#the-bayes-factor"><span class="header-section-number">16.2.1</span> The Bayes factor</a></li>
+<li><a class="nav-link" href="#interpreting-bayes-factors"><span class="header-section-number">16.2.2</span> Interpreting Bayes factors</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#why-be-a-bayesian"><span class="header-section-number">16.3</span> Why be a Bayesian?</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#statistics-that-mean-what-you-think-they-mean"><span class="header-section-number">16.3.1</span> Statistics that mean what you think they mean</a></li>
+<li><a class="nav-link" href="#evidentiary-standards-you-can-believe"><span class="header-section-number">16.3.2</span> Evidentiary standards you can believe</a></li>
+<li><a class="nav-link" href="#the-p-value-is-a-lie."><span class="header-section-number">16.3.3</span> The p-value is a lie.</a></li>
+<li><a class="nav-link" href="#is-it-really-this-bad"><span class="header-section-number">16.3.4</span> Is it really this bad?</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#bayesian-t-tests"><span class="header-section-number">16.4</span> Bayesian t-tests</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#independent-samples-t-test"><span class="header-section-number">16.4.1</span> Independent samples t-test</a></li>
+<li><a class="nav-link" href="#paired-samples-t-test"><span class="header-section-number">16.4.2</span> Paired samples t-test</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#summary-14"><span class="header-section-number">16.5</span> Summary</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong><span style="font-family:Garamond;font-weight:700;">learning statistics with jamovi</span></strong>" was written by Danielle J. Navarro &amp; David R. Foxcroft. It was last built on 20 June 2022 (version 0.75).</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

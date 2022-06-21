@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 11 Comparing two means | learning statistics with jamovi</title>
+<meta name="author" content="Danielle J. Navarro &amp; David R. Foxcroft">
+<meta name="description" content="In Categorical data analysis we covered the situation when your outcome variable is nominal scale and your predictor variable is also nominal scale. Lots of real world situations have that...">
+<meta name="generator" content="bookdown 0.27 with bs4_book()">
+<meta property="og:title" content="Chapter 11 Comparing two means | learning statistics with jamovi">
+<meta property="og:type" content="book">
+<meta property="og:image" content="/images/bookcover_logo.png">
+<meta property="og:description" content="In Categorical data analysis we covered the situation when your outcome variable is nominal scale and your predictor variable is also nominal scale. Lots of real world situations have that...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 11 Comparing two means | learning statistics with jamovi">
+<meta name="twitter:description" content="In Categorical data analysis we covered the situation when your outcome variable is nominal scale and your predictor variable is also nominal scale. Lots of real world situations have that...">
+<meta name="twitter:image" content="/images/bookcover_logo.png">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><style>
+
+    .enlarge-image {
+        transition: transform .2s ease-out;
+        cursor: pointer;
+    }
+
+    .enlarge-image:hover {
+        transform: scale(1.8);
+        display: block;
+        background: #eee;
+        border: 4px solid #27466C; 
+        position: relative;
+        float: middle;
+        z-index: 999;
+    }
+    .enlarge-image:hover .inline-figure, .figure {
+      margin:  1rem 0rem 1rem 0rem; 
+      padding: 1rem 0.5rem 1rem 2rem;
+    }
+
+    .technical {
+      background-color:Gainsboro;
+      font-style:italic;
+      font-family:Garamond;
+      border: 1px solid #3d6da9;
+      padding: 0px;
+    }
+
+    </style>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script type="text/x-mathjax-config"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title=""><span style="font-family:Garamond;font-weight:700;">learning statistics with jamovi</span></a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"></a></li>
+<li><a class="" href="preface.html">Preface</a></li>
+<li><a class="" href="why-do-we-learn-statistics.html"><span class="header-section-number">1</span> Why do we learn statistics</a></li>
+<li><a class="" href="a-brief-introduction-to-research-design.html"><span class="header-section-number">2</span> A brief introduction to research design</a></li>
+<li><a class="" href="getting-started-with-jamovi.html"><span class="header-section-number">3</span> Getting started with jamovi</a></li>
+<li><a class="" href="descriptive-statistics.html"><span class="header-section-number">4</span> Descriptive statistics</a></li>
+<li><a class="" href="drawing-graphs.html"><span class="header-section-number">5</span> Drawing graphs</a></li>
+<li><a class="" href="pragmatic-matters.html"><span class="header-section-number">6</span> Pragmatic matters</a></li>
+<li><a class="" href="prelude-to-part-iv.html">Prelude to Part IV</a></li>
+<li><a class="" href="introduction-to-probability.html"><span class="header-section-number">7</span> Introduction to probability</a></li>
+<li><a class="" href="estimating-unkown-quantities-from-a-sample.html"><span class="header-section-number">8</span> Estimating unkown quantities from a sample</a></li>
+<li><a class="" href="hypothesis-testing.html"><span class="header-section-number">9</span> Hypothesis testing</a></li>
+<li><a class="" href="categorical-data-analysis.html"><span class="header-section-number">10</span> Categorical data analysis</a></li>
+<li><a class="active" href="comparing-two-means.html"><span class="header-section-number">11</span> Comparing two means</a></li>
+<li><a class="" href="correlation-and-linear-regression.html"><span class="header-section-number">12</span> Correlation and linear regression</a></li>
+<li><a class="" href="comparing-several-means-one-way-anova.html"><span class="header-section-number">13</span> Comparing several means (one-way ANOVA)</a></li>
+<li><a class="" href="factorial-anova.html"><span class="header-section-number">14</span> Factorial ANOVA</a></li>
+<li><a class="" href="factor-analysis.html"><span class="header-section-number">15</span> Factor Analysis</a></li>
+<li><a class="" href="bayesian-statistics.html"><span class="header-section-number">16</span> Bayesian statistics</a></li>
+<li><a class="" href="epilogue.html"><span class="header-section-number">17</span> Epilogue</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="comparing-two-means" class="section level1" number="11">
+<h1>
+<span class="header-section-number">11</span> Comparing two means<a class="anchor" aria-label="anchor" href="#comparing-two-means"><i class="fas fa-link"></i></a>
+</h1>
+<p>In <a href="categorical-data-analysis.html#categorical-data-analysis">Categorical data analysis</a> we covered the situation when your outcome variable is nominal scale and your predictor variable is also nominal scale. Lots of real world situations have that character, and so you’ll find that chi-square tests in particular are quite widely used. However, you’re much more likely to find yourself in a situation where your outcome variable is interval scale or higher, and what you’re interested in is whether the average value of the outcome variable is higher in one group or another. For instance, a psychologist might want to know if anxiety levels are higher among parents than non-parents, or if working memory capacity is reduced by listening to music (relative to not listening to music). In a medical context we might want to know if a new drug increases or decreases blood pressure. An agricultural scientist might want to know whether adding phosphorus to Australian native plants will kill them.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Informal experimentation in my garden suggests that yes, it does. Australian natives are adapted to low phosphorus levels relative to everywhere else on Earth, so if you’ve bought a house with a bunch of exotics and you want to plant natives, keep them separate; nutrients to European plants are poison to Australian ones.&lt;/p&gt;"><sup>91</sup></a> In all these situations our outcome variable is a fairly continuous, interval or ratio scale variable, and our predictor is a binary “grouping” variable. In other words, we want to compare the means of the two groups.</p>
+<p>The standard answer to the problem of comparing means is to use a t-test, of which there are several varieties depending on exactly what question you want to solve. As a consequence, the majority of this chapter focuses on different types of t-test: one sample t-tests, independent samples t-tests and paired samples t-tests. We’ll then talk about one sided tests and, after that, we’ll talk a bit about Cohen’s d, which is the standard measure of effect size for a t-test. The later sections of the chapter focus on the assumptions of the t-tests, and possible remedies if they are violated. However, before discussing any of these useful things, we’ll start with a discussion of the z-test.</p>
+<div id="the-one-sample-z-test" class="section level2" number="11.1">
+<h2>
+<span class="header-section-number">11.1</span> The one-sample z-test<a class="anchor" aria-label="anchor" href="#the-one-sample-z-test"><i class="fas fa-link"></i></a>
+</h2>
+<p>In this section I’ll describe one of the most useless tests in all of statistics: the z-test. Seriously – this test is almost never used in real life. Its only real purpose is that, when teaching statistics, it’s a very convenient stepping stone along the way towards the t-test, which is probably the most (over)used tool in all statistics.</p>
+<div id="the-inference-problem-that-the-test-addresses" class="section level3" number="11.1.1">
+<h3>
+<span class="header-section-number">11.1.1</span> The inference problem that the test addresses<a class="anchor" aria-label="anchor" href="#the-inference-problem-that-the-test-addresses"><i class="fas fa-link"></i></a>
+</h3>
+<p>To introduce the idea behind the z-test, let’s use a simple example. A friend of mine, Dr Zeppo, grades his introductory statistics class on a curve. Let’s suppose that the average grade in his class is <span class="math inline">\(67.5\)</span>, and the standard deviation is <span class="math inline">\(9.5\)</span>. Of his many hundreds of students, it turns out that 20 of them also take psychology classes. Out of curiosity, I find myself wondering if the psychology students tend to get the same grades as everyone else (i.e., mean <span class="math inline">\(67.5\)</span>) or do they tend to score higher or lower? He emails me the zeppo.csv file, which I use to look at the grades of those students, in the jamovi spreadsheet view,and then calculate the mean in ‘Exploration’ - ‘Descriptives’ <a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;In order to do this I had to change the measurement level for &lt;span class="math inline"&gt;\(X\)&lt;/span&gt; to ‘Continuous’, as during the opening / import of the csv file jamovi made this a nominal level variable, which isn’t right for my analysis&lt;/p&gt;'><sup>92</sup></a>. The mean value is <span class="math inline">\(72.3\)</span>.</p>
+<p>50 60 60 64 66 66 67 69 70 74 76 76 77 79 79 79 81 82 82 89</p>
+<p>Hmm. It might be that the psychology students are scoring a bit higher than normal. That sample mean of <span class="math inline">\(\bar{X} = 72.3\)</span> is a fair bit higher than the hypothesised population mean of <span class="math inline">\(\mu = 67.5\)</span> but, on the other hand, a sample size of <span class="math inline">\(N = 20\)</span> isn’t all that big. Maybe it’s pure chance.</p>
+<p>To answer the question, it helps to be able to write down what it is that I think I know. Firstly, I know that the sample mean is <span class="math inline">\(\bar{X} = 72.3\)</span>. If I’m willing to assume that the psychology students have the same standard deviation as the rest of the class then I can say that the population standard deviation is <span class="math inline">\(\sigma = 9.5\)</span>. I’ll also assume that since Dr Zeppo is grading to a curve, the psychology student grades are normally distributed.</p>
+<p>Next, it helps to be clear about what I want to learn from the data. In this case my research hypothesis relates to the population mean µ for the psychology student grades, which is unknown. Specifically, I want to know if <span class="math inline">\(\mu = 67.5\)</span> or not. Given that this is what I know, can we devise a hypothesis test to solve our problem? The data, along with the hypothesised distribution from which they are thought to arise, are shown in Figure @ref(fig:fig11.1**. Not entirely obvious what the right answer is, is it? For this, we are going to need some statistics.</p>
+<div class="figure">
+<span style="display:block;" id="fig:fig11-1"></span>
+<img src="images/Figure82.PNG" alt="The theoretical distribution (solid line) from which the psychology student grades (bars) are supposed to have been generated" width="70%"><p class="caption">
+Figure 11.1: The theoretical distribution (solid line) from which the psychology student grades (bars) are supposed to have been generated
+</p>
+</div>
+</div>
+<div id="constructing-the-hypothesis-test" class="section level3" number="11.1.2">
+<h3>
+<span class="header-section-number">11.1.2</span> Constructing the hypothesis test<a class="anchor" aria-label="anchor" href="#constructing-the-hypothesis-test"><i class="fas fa-link"></i></a>
+</h3>
+<p>The first step in constructing a hypothesis test is to be clear about what the null and alternative hypotheses are. This isn’t too hard to do. Our null hypothesis, H0, is that the true population mean µ for psychology student grades is <span class="math inline">\(67.5\%\)</span>, and our alternative hypothesis is that the population mean isn’t <span class="math inline">\(67.5\%\)</span>. If we write this in mathematical notation, these hypotheses become:</p>
+<p><span class="math display">\[ H_0:\mu= 67.5 \]</span> <span class="math display">\[ H_1:\mu \neq 67.5 \]</span></p>
+<p>though to be honest this notation doesn’t add much to our understanding of the problem, it’s just a compact way of writing down what we’re trying to learn from the data. The null hypotheses H0 and the alternative hypothesis <span class="math inline">\(H_1\)</span> for our test are both illustrated in Figure <a href="comparing-two-means.html#fig:fig11-2">11.2</a>. In addition to providing us with these hypotheses, the scenario outlined above provides us with a fair amount of background knowledge that might be useful. Specifically, there are two special pieces of information that we can add:</p>
+<ol style="list-style-type: decimal">
+<li>The psychology grades are normally distributed.</li>
+<li>The true standard deviation of these scores σ is known to be 9.5.</li>
+</ol>
+<p>For the moment, we’ll act as if these are absolutely trustworthy facts. In real life, this kind of absolutely trustworthy background knowledge doesn’t exist, and so if we want to rely on these facts we’ll just have make the <em>assumption</em> that these things are true. However, since these assumptions may or may not be warranted, we might need to check them. For now though, we’ll keep things simple.</p>
+<div class="figure">
+<span style="display:block;" id="fig:fig11-2"></span>
+<img src="images/one-sample-ztest-null-and-alternate.png" alt="Graphical illustration of the null and alternate hypotheses assumed by the one sample $z$-test (the two sided version, that is). The null and alternate hypotheses both assume that the population distribution is normal, and additionally assumes that the population standard deviation is known (fixed at some value $\sigma_0$). The null hypothesis (left) is that the population mean $\mu$ is equal to some specified value $\mu_0$. The alternative hypothesis (right) is that the population mean differs from this value, $\mu \neq \mu_0$" width="90%"><p class="caption">
+Figure 11.2: Graphical illustration of the null and alternate hypotheses assumed by the one sample <span class="math inline">\(z\)</span>-test (the two sided version, that is). The null and alternate hypotheses both assume that the population distribution is normal, and additionally assumes that the population standard deviation is known (fixed at some value <span class="math inline">\(\sigma_0\)</span>). The null hypothesis (left) is that the population mean <span class="math inline">\(\mu\)</span> is equal to some specified value <span class="math inline">\(\mu_0\)</span>. The alternative hypothesis (right) is that the population mean differs from this value, <span class="math inline">\(\mu \neq \mu_0\)</span>
+</p>
+</div>
+<p>The next step is to figure out what we would be a good choice for a diagnostic test statistic, something that would help us discriminate between <span class="math inline">\(H_0\)</span> and <span class="math inline">\(H_1\)</span>. Given that the hypotheses all refer to the population mean <span class="math inline">\(\mu\)</span>, you’d feel pretty confident that the sample mean <span class="math inline">\(\bar{X}\)</span> would be a pretty useful place to start. What we could do is look at the difference between the sample mean <span class="math inline">\(\bar{X}\)</span> and the value that the null hypothesis predicts for the population mean. In our example that would mean we calculate <span class="math inline">\(\bar{X} - 67.5\)</span>. More generally, if we let <span class="math inline">\(\mu_0\)</span> refer to the value that the null hypothesis claims is our population mean, then we’d want to calculate</p>
+<p><span class="math display">\[\bar{X}-\mu_0\]</span></p>
+<p>If this quantity equals or is very close to 0, things are looking good for the null hypothesis. If this quantity is a long way away from 0, then it’s looking less likely that the null hypothesis is worth retaining. But how far away from zero should it be for us to reject H0?</p>
+<p>To figure that out we need to be a bit more sneaky, and we’ll need to rely on those two pieces of background knowledge that I wrote down previously; namely that the raw data are normally distributed and that we know the value of the population standard deviation <span class="math inline">\(\sigma\)</span>. If the null hypothesis is actually true, and the true mean is <span class="math inline">\(\mu_0\)</span>, then these facts together mean that we know the complete population distribution of the data: a normal distribution with mean <span class="math inline">\(\mu_0\)</span> and standard deviation <span class="math inline">\(\sigma\)</span>.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;Adopting the notation from Section &lt;strong&gt;7.5&lt;/strong&gt;, a statistician might write this as: &lt;span class="math display"&gt;\[X \sim Normal(\mu_0,\sigma^2)\]&lt;/span&gt;&lt;/p&gt;'><sup>93</sup></a></p>
+<p>Okay, if that’s true, then what can we say about the distribution of <span class="math inline">\(\bar{X}\)</span>? Well, as we discussed earlier (see Section <strong>8.3.3</strong>), the sampling distribution of the mean <span class="math inline">\(\bar{X}\)</span> is also normal, and has mean <span class="math inline">\(\mu\)</span>. But the standard deviation of this sampling distribution <span class="math inline">\(\\{se(\bar{X})\\}\)</span>, which is called the standard error of the mean, is <a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;In other words, if the null hypothesis is true then the sampling distribution of the mean can be written as follows: &lt;span class="math display"&gt;\[\bar{X} \sim Normal(\mu_0,SE(\bar{X})) \]&lt;/span&gt;&lt;/p&gt;'><sup>94</sup></a></p>
+<p><span class="math display">\[se(\bar{X}=\frac{\sigma}{\sqrt{N}})\]</span></p>
+<p>Now comes the trick. What we can do is convert the sample mean <span class="math inline">\(\bar{X}\)</span> into a standard score (Section <strong>4.5</strong>). This is conventionally written as z, but for now I’m going to refer to it as <span class="math inline">\(z_{\bar{X}}\)</span>. The reason for using this expanded notation is to help you remember that we’re calculating a standardised version of a sample mean, not a standardised version of a single observation, which is what a z-score usually refers to). When we do so the z-score for our sample mean is</p>
+<p><span class="math display">\[z_{\bar{X}}=\frac{\bar{X}-\mu_0}{SE(\bar{X})}\]</span> or, equivalently <span class="math display">\[z_{\bar{X}}=\frac{\bar{X}-\mu_0}{\frac{\sigma}{\sqrt{N}}}\]</span></p>
+<p>This z-score is our test statistic. The nice thing about using this as our test statistic is that like all z-scores, it has a standard normal distribution:<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;Again, see Section &lt;strong&gt;4.5&lt;/strong&gt; if you’ve forgotten why this is true). In other words, regardless of what scale the original data are on, the z-statistic itself always has the same interpretation: it’s equal to the number of standard errors that separate the observed sample mean &lt;span class="math inline"&gt;\(\bar{X}\)&lt;/span&gt; from the population mean &lt;span class="math inline"&gt;\(\mu_0\)&lt;/span&gt; predicted by the null hypothesis. Better yet, regardless of what the population parameters for the raw scores actually are, the 5% critical regions for the z-test are always the same, as illustrated in Figure &lt;a href="comparing-two-means.html#fig:fig11-3"&gt;11.3&lt;/a&gt;. And what this meant, way back in the days where people did all their statistics by hand, is that someone could publish a table like Table &lt;a href="comparing-two-means.html#tab:tab11-1"&gt;11.1&lt;/a&gt;. This, in turn, meant that researchers could calculate their z-statistic by hand and then look up the critical value in a text book.&lt;/p&gt;'><sup>95</sup></a></p>
+<p><span class="math display">\[z_{\bar{X}} \sim Normal(0,1) \]</span></p>
+<div class="inline-table"><table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 101%; margin-left: auto; margin-right: auto;  " id="tab:tab11-1">
+<caption style="caption-side: bottom; text-align: left;">
+<span id="tab:tab11-1">Table 11.1: </span> Critical values for different \( \alpha \) levels</caption>
+<col>
+<col>
+<col>
+<tr>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: bold;"></th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;"></th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;"></th>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">desired \(\alpha\) level</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">two-sided test</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">one-sided test</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: normal;">.1</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">1.644854</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">1.281552</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; font-weight: normal;">.05</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1.959964</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; font-weight: normal;">1.644854</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: normal;">.01</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">2.575829</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">2.326348</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">.001</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3.290527</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">3.090232</td>
+</tr>
+</table></div>
+</div>
+<div id="a-worked-example-by-hand" class="section level3" number="11.1.3">
+<h3>
+<span class="header-section-number">11.1.3</span> A worked example, by hand<a class="anchor" aria-label="anchor" href="#a-worked-example-by-hand"><i class="fas fa-link"></i></a>
+</h3>
+<p>Now, as I mentioned earlier, the z-test is almost never used in practice. It’s so rarely used in real life that the basic installation of jamovi doesn’t have a built in function for it. However, the test is so incredibly simple that it’s really easy to do one manually. Let’s go back to the data from Dr Zeppo’s class. Having loaded the grades data, the first thing I need to do is calculate the sample mean, which I’ve already done (<span class="math inline">\(72.3\)</span>). We already have the known population standard deviation (<span class="math inline">\(\sigma = 9.5\)</span>), and the value of the population mean that the null hypothesis specifies (<span class="math inline">\(\mu_0 = 67.5\)</span>), and we know the sample size (<span class="math inline">\(N=20\)</span>).</p>
+<div class="figure">
+<span style="display:block;" id="fig:fig11-3"></span>
+<img src="images/Figure83.PNG" alt="Rejection regions for the two-sided z-test (panel a) and the one-sided z-test (panel b)" width="90%"><p class="caption">
+Figure 11.3: Rejection regions for the two-sided z-test (panel a) and the one-sided z-test (panel b)
+</p>
+</div>
+<p>Next, let’s calculate the (true) standard error of the mean (easily done with a calculator):</p>
+<p><span class="math display">\[ \begin{equation} \begin{split} sem.true &amp; = \frac{sd.true}{\sqrt{N}}
+\\\\ &amp; = \frac{9.5}{\sqrt{20}} \\\\ &amp; = 2.124265 \end{split}
+\end{equation} \]</span></p>
+<p>And finally, we calculate our z-score:</p>
+<p><span class="math display">\[ \begin{equation} \begin{split} z.score &amp; = \frac{sample.mean -
+mu.null}{sem.true} \\\\ &amp; = \frac{ (72.3 - 67.5)}{ 2.124265} \\\\ &amp; =
+2.259606 \end{split} \end{equation} \]</span></p>
+<p>At this point, we would traditionally look up the value <span class="math inline">\(2.26\)</span> in our table of critical values. Our original hypothesis was two-sided (we didn’t really have any theory about whether psych students would be better or worse at statistics than other students) so our hypothesis test is two-sided (or two-tailed) also. Looking at the little table that I showed earlier, we can see that <span class="math inline">\(2.26\)</span> is bigger than the critical value of <span class="math inline">\(1.96\)</span> that would be required to be significant at <span class="math inline">\(\alpha = .05\)</span>, but smaller than the value of <span class="math inline">\(2.58\)</span> that would be required to be significant at a level of <span class="math inline">\(\alpha = .01\)</span>. Therefore, we can conclude that we have a significant effect, which we might write up by saying something like this:</p>
+<p><em>With a mean grade of</em> <span class="math inline">\(73.2\)</span> in the sample of psychology students, and assuming a true population standard deviation of <span class="math inline">\(9.5\)</span>, we can conclude that the psychology students have significantly different statistics scores to the class average (<span class="math inline">\(z = 2.26, N = 20, p&lt;.05\)</span>).</p>
+</div>
+<div id="assumptions-of-the-z-test" class="section level3" number="11.1.4">
+<h3>
+<span class="header-section-number">11.1.4</span> Assumptions of the z-test<a class="anchor" aria-label="anchor" href="#assumptions-of-the-z-test"><i class="fas fa-link"></i></a>
+</h3>
+<p>As I’ve said before, all statistical tests make assumptions. Some tests make reasonable assumptions, while other tests do not. The test I’ve just described, the one sample z-test, makes three basic assumptions. These are:</p>
+<ul>
+<li>
+<em>Normality</em>. As usually described, the z-test assumes that the true population distribution is normal.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Actually this is too strong. Strictly speaking the z test only requires that the sampling distribution of the mean be normally distributed. If the population is normal then it necessarily follows that the sampling distribution of the mean is also normal. However, as we saw when talking about the central limit theorem, it’s quite possible (even commonplace) for the sampling distribution to be normal even if the population distribution itself is nonnormal. However, in light of the sheer ridiculousness of the assumption that the true standard deviation is known, there really isn’t much point in going into details on this front!&lt;/p&gt;"><sup>96</sup></a> This is often a pretty reasonable assumption, and it’s also an assumption that we can check if we feel worried about it (see Section on <a href="comparing-two-means.html#checking-the-normality-of-a-sample">Checking the normality of a sample</a>).</li>
+<li>
+<em>Independence</em>. The second assumption of the test is that the observations in your data set are not correlated with each other, or related to each other in some funny way. This isn’t as easy to check statistically, it relies a bit on good experimental design. An obvious (and stupid) example of something that violates this assumption is a data set where you “copy” the same observation over and over again in your data file so that you end up with a massive “sample size”, which consists of only one genuine observation. More realistically, you have to ask yourself if it’s really plausible to imagine that each observation is a completely random sample from the population that you’re interested in. In practice this assumption is never met, but we try our best to design studies that minimise the problems of correlated data.</li>
+<li>
+<em>Known standard deviation</em>. The third assumption of the z-test is that the true standard deviation of the population is known to the researcher. This is just stupid. In no real world data analysis problem do you know the standard deviation σ of some population but are completely ignorant about the mean <span class="math inline">\(\mu\)</span>. In other words, this assumption is always wrong.</li>
+</ul>
+<p>In view of the stupidity of assuming that <span class="math inline">\(\alpha\)</span> is known, let’s see if we can live without it. This takes us out of the dreary domain of the z-test, and into the magical kingdom of the t-test, with unicorns and fairies and leprechauns!</p>
+</div>
+</div>
+<div id="the-one-sample-t-test" class="section level2" number="11.2">
+<h2>
+<span class="header-section-number">11.2</span> The one-sample t-test<a class="anchor" aria-label="anchor" href="#the-one-sample-t-test"><i class="fas fa-link"></i></a>
+</h2>
+<p>After some thought, I decided that it might not be safe to assume that the psychology student grades necessarily have the same standard deviation as the other students in Dr Zeppo’s class. After all, if I’m entertaining the hypothesis that they don’t have the same mean, then why should I believe that they absolutely have the same standard deviation? In view of this, I should really stop assuming that I know the true value of <span class="math inline">\(\sigma\)</span>. This violates the assumptions of my z-test, so in one sense I’m back to square one. However, it’s not like I’m completely bereft of options. After all, I’ve still got my raw data, and those raw data give me an estimate of the population standard deviation, which is 9.52. In other words, while I can’t say that I know that <span class="math inline">\(\sigma = 9.5\)</span>, I can say that <span class="math inline">\(\hat{\sigma}\)</span> = 9.52.</p>
+<p>Okay, cool. The obvious thing that you might think to do is run a z-test, but using the estimated standard deviation of <span class="math inline">\(9.52\)</span> instead of relying on my assumption that the true standard deviation is <span class="math inline">\(9.5\)</span>. And you probably wouldn’t be surprised to hear that this would still give us a significant result. This approach is close, but it’s not quite correct. Because we are now relying on an estimate of the population standard deviation we need to make some adjustment for the fact that we have some uncertainty about what the true population standard deviation actually is. Maybe our data are just a fluke…maybe the true population standard deviation is <span class="math inline">\(11\)</span>, for instance. But if that were actually true, and we ran the z-test assuming <span class="math inline">\(\sigma=11\)</span>, then the result would end up being non-significant. That’s a problem, and it’s one we’re going to have to address.</p>
+<div class="figure">
+<span style="display:block;" id="fig:fig11-4"></span>
+<img src="images/Figure84.PNG" alt="Graphical illustration of the null and alternative hypotheses assumed by the (two sided) one sample t-test. Note the similarity to the z-test (Figure \@ref(fig:fig11-2)). The null hypothesis is that the population mean $\mu$ is equal to some specified value $\mu_0$, and the alternative hypothesis is that it is not. Like the z-test, we assume that the data are normally distributed, but we do not assume that the population standard deviation $\sigma$ is known in advance" width="90%"><p class="caption">
+Figure 11.4: Graphical illustration of the null and alternative hypotheses assumed by the (two sided) one sample t-test. Note the similarity to the z-test (Figure <a href="comparing-two-means.html#fig:fig11-2">11.2</a>). The null hypothesis is that the population mean <span class="math inline">\(\mu\)</span> is equal to some specified value <span class="math inline">\(\mu_0\)</span>, and the alternative hypothesis is that it is not. Like the z-test, we assume that the data are normally distributed, but we do not assume that the population standard deviation <span class="math inline">\(\sigma\)</span> is known in advance
+</p>
+</div>
+<div id="introducing-the-t-test" class="section level3" number="11.2.1">
+<h3>
+<span class="header-section-number">11.2.1</span> Introducing the t-test<a class="anchor" aria-label="anchor" href="#introducing-the-t-test"><i class="fas fa-link"></i></a>
+</h3>
+<p>This ambiguity is annoying, and it was resolved in 1908 by a guy called William Sealy Gosset <span class="citation">(<a href="references.html#ref-Student1908" role="doc-biblioref">Student 1908</a>)</span>, who was working as a chemist for the Guinness brewery at the time (see <span class="citation">J. F. Box (<a href="references.html#ref-Box1987" role="doc-biblioref">1987</a>)</span>). Because Guinness took a dim view of its employees publishing statistical analysis (apparently they felt it was a trade secret), he published the work under the pseudonym “A Student” and, to this day, the full name of the t-test is actually <strong>Student’s t-test</strong>. The key thing that Gosset figured out is how we should accommodate the fact that we aren’t completely sure what the true standard deviation is.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Well, sort of. As I understand the history, Gosset only provided a partial solution; the general solution to the problem was provided by Sir Ronald Fisher.&lt;/p&gt;"><sup>97</sup></a> The answer is that it subtly changes the sampling distribution. In the t-test our test statistic, now called a t-statistic, is calculated in exactly the same way I mentioned above. If our null hypothesis is that the true mean is µ, but our sample has mean <span class="math inline">\(\bar{X}\)</span> and our estimate of the population standard deviation is <span class="math inline">\(\hat{\sigma}\)</span>, then our t statistic is:</p>
+<p><span class="math display">\[t=\frac{\bar{X}-\mu}{\frac{\hat{\sigma}}{\sqrt{N}}}\]</span></p>
+<div class="figure">
+<span style="display:block;" id="fig:fig11-5"></span>
+<img src="images/Figure85.PNG" alt="The t distribution with 2 degrees of freedom (left) and 10 degrees of freedom (right), with a standard normal distribution (i.e., mean 0 and std dev 1) plotted as dotted lines for comparison purposes. Notice that the t distribution has heavier tails (leptokurtic: higher kurtosis) than the normal distribution; this effect is quite exaggerated when the degrees of freedom are very small, but negligible for larger values. In other words, for large $df$ the t distribution is essentially identical to a normal distribution" width="90%"><p class="caption">
+Figure 11.5: The t distribution with 2 degrees of freedom (left) and 10 degrees of freedom (right), with a standard normal distribution (i.e., mean 0 and std dev 1) plotted as dotted lines for comparison purposes. Notice that the t distribution has heavier tails (leptokurtic: higher kurtosis) than the normal distribution; this effect is quite exaggerated when the degrees of freedom are very small, but negligible for larger values. In other words, for large <span class="math inline">\(df\)</span> the t distribution is essentially identical to a normal distribution
+</p>
+</div>
+<p>The only thing that has changed in the equation is that instead of using the known true value <span class="math inline">\(\sigma\)</span>, we use the estimate <span class="math inline">\(\hat{\sigma}\)</span>. And if this estimate has been constructed from N observations, then the sampling distribution turns into a t-distribution with <span class="math inline">\(N-1\)</span> <strong>degrees of freedom</strong> (df). The t distribution is very similar to the normal distribution, but has “heavier” tails, as discussed earlier in Section <strong>7.6</strong> and illustrated in Figure <a href="comparing-two-means.html#fig:fig11-5">11.5</a>. Notice, though, that as df gets larger, the t-distribution starts to look identical to the standard normal distribution. This is as it should be: if you have a sample size of <span class="math inline">\(N = 70,000,000\)</span> then your “estimate” of the standard deviation would be pretty much perfect, right? So, you should expect that for large <span class="math inline">\(N\)</span>, the t-test would behave exactly the same way as a z-test. And that’s exactly what happens!</p>
+</div>
+<div id="doing-the-test-in-jamovi-2" class="section level3" number="11.2.2">
+<h3>
+<span class="header-section-number">11.2.2</span> Doing the test in jamovi<a class="anchor" aria-label="anchor" href="#doing-the-test-in-jamovi-2"><i class="fas fa-link"></i></a>
+</h3>
+<p>As you might expect, the mechanics of the t-test are almost identical to the mechanics of the z-test. So there’s not much point in going through the tedious exercise of showing you how to do the calculations using low level commands. It’s pretty much identical to the calculations that we did earlier, except that we use the estimated standard deviation and then we test our hypothesis using the t distribution rather than the normal distribution. And so instead of going through the calculations in tedious detail for a second time, I’ll jump straight to showing you how t-tests are actually done. jamovi comes with a dedicated analysis for t-tests that is very flexible (it can run lots of different kinds of t-tests). It’s pretty straightforward to use; all you need to do is specify ‘Analyses’ - ‘T-Tests’ - ‘One Sample T-Test’, move the variable you are interested in (X) across into the ‘Variables’ box, and type in the mean value for the null hypothesis (‘67.5’) in the ‘Hypothesis’ - ‘Test value’ box. Easy enough. See Figure <a href="comparing-two-means.html#fig:fig11-6">11.6</a>, which, amongst other things that we will get to in a moment, gives you a t-test statistic = 2.25, with 19 degrees of freedom and an associated p-value of <span class="math inline">\(0.036\)</span>.</p>
+<div class="enlarge-image">
+<div class="figure">
+<span style="display:block;" id="fig:fig11-6"></span>
+<img src="images/Figure86.PNG" alt="jamovi does the one-sample t-test" width="90%"><p class="caption">
+Figure 11.6: jamovi does the one-sample t-test
+</p>
+</div>
+<p></p>
+</div>
+<p>Also reported are two other things you might care about: the 95% confidence interval and a measure of effect size (we’ll talk more about effect sizes later). So that seems straightforward enough. Now what do we do with this output? Well, since we’re pretending that we actually care about my toy example, we’re overjoyed to discover that the result is statistically significant (i.e. p value below .05). We could report the result by saying something like this:</p>
+<blockquote>
+<p><em>With a mean grade of</em> <span class="math inline">\(72.3\)</span>, the psychology students scored slightly higher than the average grade of <span class="math inline">\(67.5\)</span> (<span class="math inline">\(t(19) = 2.25\)</span>, <span class="math inline">\(p = .036\)</span>); the mean difference was <span class="math inline">\(4.80\)</span> and the <span class="math inline">\(95\%\)</span> confidence interval was from <span class="math inline">\(0.34\)</span> to <span class="math inline">\(9.26\)</span>.</p>
+</blockquote>
+<p>…where <span class="math inline">\(t(19)\)</span> is shorthand notation for a t-statistic that has <span class="math inline">\(19\)</span> degrees of freedom. That said, it’s often the case that people don’t report the confidence interval, or do so using a much more compressed form than I’ve done here. For instance, it’s not uncommon to see the confidence interval included as part of the stat block after reporting the mean difference, like this:</p>
+<p><span class="math display">\[t(19)=2.25, p = .036, CI_{95} = [0.34, 9.26]\]</span> With that much jargon crammed into half a line, you know it must be really smart.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;More seriously, I tend to think the reverse is true. I get very suspicious of technical reports that fill their results sections with nothing except the numbers. It might just be that I’m an arrogant jerk, but I often feel like an author that makes no attempt to explain and interpret their analysis to the reader either doesn’t understand it themselves, or is being a bit lazy. Your readers are smart, but not infinitely patient. Don’t annoy them if you can help it.&lt;/p&gt;"><sup>98</sup></a></p>
+</div>
+<div id="assumptions-of-the-one-sample-t-test" class="section level3" number="11.2.3">
+<h3>
+<span class="header-section-number">11.2.3</span> Assumptions of the one sample t-test<a class="anchor" aria-label="anchor" href="#assumptions-of-the-one-sample-t-test"><i class="fas fa-link"></i></a>
+</h3>
+<p>Okay, so what assumptions does the one-sample t-test make? Well, since the t-test is basically a z-test with the assumption of known standard deviation removed, you shouldn’t be surprised to see that it makes the same assumptions as the z-test, minus the one about the known standard deviation. That is</p>
+<ul>
+<li>Normality. We’re still assuming that the population distribution is normal<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;A technical comment. In the same way that we can weaken the assumptions of the z-test so that we’re only talking about the sampling distribution, we can weaken the t-test assumptions so that we don’t have to assume normality of the population. However, for the t-test it’s trickier to do this. As before, we can replace the assumption of population normality with an assumption that the sampling distribution of &lt;span class="math inline"&gt;\(\bar{X}\)&lt;/span&gt; is normal. However, remember that we’re also relying on a sample estimate of the standard deviation, and so we also require the sampling distribution of &lt;span class="math inline"&gt;\(\hat{\sigma}\)&lt;/span&gt; to be chi-square. That makes things nastier, and this version is rarely used in practice. Fortunately, if the population distribution is normal, then both of these two assumptions are met.&lt;/p&gt;'><sup>99</sup></a>, and as noted earlier, there are standard tools that you can use to check to see if this assumption is met (<a href="comparing-two-means.html#checking-the-normality-of-a-sample">Checking the normality of a sample</a>), and other tests you can do in it’s place if this assumption is violated (<a href="comparing-two-means.html#testing-non-normal-data">Testing non-normal data</a>).</li>
+<li>Independence. Once again, we have to assume that the observations in our sample are generated independently of one another. See the earlier discussion about the z-test for specifics (<a href="comparing-two-means.html#assumptions-of-the-z-test">Assumptions of the z-test</a>).</li>
+</ul>
+<p>Overall, these two assumptions aren’t terribly unreasonable, and as a consequence the onesample t-test is pretty widely used in practice as a way of comparing a sample mean against a hypothesised population mean.</p>
+</div>
+</div>
+<div id="the-independent-samples-t-test-student-test" class="section level2" number="11.3">
+<h2>
+<span class="header-section-number">11.3</span> The independent samples t-test (Student test)<a class="anchor" aria-label="anchor" href="#the-independent-samples-t-test-student-test"><i class="fas fa-link"></i></a>
+</h2>
+<p>Although the one sample t-test has its uses, it’s not the most typical example of a t-test<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Although it is the simplest, which is why I started with it.&lt;/p&gt;"><sup>100</sup></a>. A much more common situation arises when you’ve got two different groups of observations. In psychology, this tends to correspond to two different groups of participants, where each group corresponds to a different condition in your study. For each person in the study you measure some outcome variable of interest, and the research question that you’re asking is whether or not the two groups have the same population mean. This is the situation that the independent samples t-test is designed for.</p>
+<div id="the-data" class="section level3" number="11.3.1">
+<h3>
+<span class="header-section-number">11.3.1</span> The data<a class="anchor" aria-label="anchor" href="#the-data"><i class="fas fa-link"></i></a>
+</h3>
+<p>Suppose we have 33 students taking Dr Harpo’s statistics lectures, and Dr Harpo doesn’t grade to a curve. Actually, Dr Harpo’s grading is a bit of a mystery, so we don’t really know anything about what the average grade is for the class as a whole. There are two tutors for the class, Anastasia and Bernadette. There are N1 = 15 students in Anastasia’s tutorials, and <span class="math inline">\(N_2 = 18\)</span> in Bernadette’s tutorials. The research question I’m interested in is whether Anastasia or Bernadette is a better tutor, or if it doesn’t make much of a difference. Dr Harpo emails me the course grades, in the harpo.csv file. As usual, I’ll load the file into jamovi and have a look at what variables it contains - there are three variables, ID, grade and tutor. The grade variable contains each student’s grade, but it is not imported into jamovi with the correct measurement level attribute, so I need to change this so it is regarded as a continuous variable (see earlier section on <a href="getting-started-with-jamovi.html#changing-data-from-one-level-to-another">Changing data from one level to another</a>). The tutor variable is a factor that indicates who each student’s tutor was - either Anastasia or Bernadette.</p>
+<p>We can calculate means and standard deviations, using the ‘Exploration’ - ‘descriptives’ analysis, and here’s a nice little summary table (Table <a href="comparing-two-means.html#tab:tab11-2">11.2</a>).</p>
+<div class="inline-table"><table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 101%; margin-left: auto; margin-right: auto;  " id="tab:tab11-2">
+<caption style="caption-side: bottom; text-align: left;">
+<span id="tab:tab11-2">Table 11.2: </span> Descriptives summary table</caption>
+<col>
+<col>
+<col>
+<col>
+<tr>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: bold;"></th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;"></th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;"></th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;"></th>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">Anastasia's students</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">74.53</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">9.00</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">15</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: normal;">Bernadette's students</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">69.06</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">5.77</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">18</td>
+</tr>
+</table></div>
+<p>To give you a more detailed sense of what’s going on here, I’ve plotted histograms (not in jamovi, but using R) showing the distribution of grades for both tutors (Figure <a href="comparing-two-means.html#fig:fig11-7">11.7</a>), as well as a simpler plot showing the means and corresponding confidence intervals for both groups of students (Figure <a href="comparing-two-means.html#fig:fig11-8">11.8</a>).</p>
+</div>
+<div id="introducing-the-test" class="section level3" number="11.3.2">
+<h3>
+<span class="header-section-number">11.3.2</span> Introducing the test<a class="anchor" aria-label="anchor" href="#introducing-the-test"><i class="fas fa-link"></i></a>
+</h3>
+<p>The <strong>independent samples t-test</strong> comes in two different forms, Student’s and Welch’s. The original Student t-test, which is the one I’ll describe in this section, is the simpler of the two but relies on much more restrictive assumptions than the Welch t-test. Assuming for the moment that you want to run a two-sided test, the goal is to determine whether two “independent samples” of data are drawn from populations with the same mean (the null hypothesis) or different means (the alternative hypothesis). When we say “independent” samples, what we really mean here is that there’s no special relationship between observations in the two samples. This probably doesn’t make a lot of sense right now, but it will be clearer when we come to talk about the paired samples t-test later on. For now, let’s just point out that if we have an experimental design where participants are randomly allocated to one of two groups, and we want to compare the two groups’ mean performance on some outcome measure, then an independent samples t-test (rather than a paired samples t-test) is what we’re after.</p>
+<div class="figure">
+<span style="display:block;" id="fig:fig11-7"></span>
+<img src="images/Figure87.PNG" alt="Histograms showing the distribution of grades for students in Anastasia's (panel a) and in Bernadette's (panel b) classes. Visually, these suggest that students in Anastasia's class may be getting slightly better grades on average, though they also seem a bit more variable" width="90%"><p class="caption">
+Figure 11.7: Histograms showing the distribution of grades for students in Anastasia’s (panel a) and in Bernadette’s (panel b) classes. Visually, these suggest that students in Anastasia’s class may be getting slightly better grades on average, though they also seem a bit more variable
+</p>
+</div>
+<div class="figure">
+<span style="display:block;" id="fig:fig11-8"></span>
+<img src="images/Figure88.PNG" alt="The plots show the mean grade for students in Anastasia's and Bernadette's tutorials. Error bars depict $95\%$ confidence intervals around the mean. Visually, it does look like there's a real difference between the groups, though it's hard to say for sure" width="90%"><p class="caption">
+Figure 11.8: The plots show the mean grade for students in Anastasia’s and Bernadette’s tutorials. Error bars depict <span class="math inline">\(95\%\)</span> confidence intervals around the mean. Visually, it does look like there’s a real difference between the groups, though it’s hard to say for sure
+</p>
+</div>
+<p>Okay, so let’s let <span class="math inline">\(\mu_1\)</span> denote the true population mean for group 1 (e.g., Anastasia’s students), and <span class="math inline">\(\mu_2\)</span> will be the true population mean for group 2 (e.g., Bernadette’s students),<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;A funny question almost always pops up at this point: what the heck is the population being referred to in this case? Is it the set of students actually taking Dr Harpo’s class (all 33 of them)? The set of people who might take the class (an unknown number of them)? Or something else? Does it matter which of these we pick? It’s traditional in an introductory behavioural stats class to mumble a lot at this point, but since I get asked this question every year by my students, I’ll give a brief answer. Technically yes, it does matter. If you change your definition of what the “real world” population actually is, then the sampling distribution of your observed mean &lt;span class="math inline"&gt;\(\bar{X}\)&lt;/span&gt; changes too. The t-test relies on an assumption that the observations are sampled at random from an infinitely large population and, to the extent that real life isn’t like that, then the t-test can be wrong. In practice, however, this isn’t usually a big deal. Even though the assumption is almost always wrong, it doesn’t lead to a lot of pathological behaviour from the test, so we tend to just ignore it.&lt;/p&gt;'><sup>101</sup></a> and as usual we’ll let <span class="math inline">\(\bar{X_1}\)</span> and <span class="math inline">\(\bar{X_2}\)</span> denote the observed sample means for both of these groups. Our null hypothesis states that the two population means are identical (<span class="math inline">\(\mu_1 = \mu_2\)</span>) and the alternative to this is that they are not (<span class="math inline">\(\mu_1 \neq \mu_2\)</span>). Written in mathematical-ese, this is:</p>
+<p><span class="math display">\[H_0: \mu_1=\mu_2 \]</span> <span class="math display">\[H_0: \mu_1 \neq \mu_2 \]</span> To construct a hypothesis test that handles this scenario we start by noting that if the null hypothesis is true, then the difference between the population means is <em>exactly</em> zero, <span class="math inline">\(\mu_1-\mu_2 = 0\)</span>. As a consequence, a diagnostic test statistic will be based on the difference between the two sample means. Because if the null hypothesis is true, then we’d expect <span class="math inline">\(\bar{X}_1 - \bar{X}_2\)</span> to be pretty close to zero. However, just like we saw with our one-sample tests (i.e., the one-sample z-test and the one-sample t-test) we have to be precise about exactly how close to zero this difference should be. And the solution to the problem is more or less the same one. We calculate a standard error estimate (SE), just like last time, and then divide the difference between means by this estimate. So our <strong>t-statistic</strong> will be of the form:</p>
+<p><span class="math display">\[t=\frac{\bar{X_1}-\bar{X_2}}{SE}\]</span> We just need to figure out what this standard error estimate actually is. This is a bit trickier than was the case for either of the two tests we’ve looked at so far, so we need to go through it a lot more carefully to understand how it works.</p>
+</div>
+<div id="a-pooled-estimate-of-the-standard-deviation" class="section level3" number="11.3.3">
+<h3>
+<span class="header-section-number">11.3.3</span> A “pooled estimate” of the standard deviation<a class="anchor" aria-label="anchor" href="#a-pooled-estimate-of-the-standard-deviation"><i class="fas fa-link"></i></a>
+</h3>
+<p>In the original “Student t-test”, we make the assumption that the two groups have the same population standard deviation. That is, regardless of whether the population means are the same, we assume that the population standard deviations are identical, <span class="math inline">\(\sigma_1 = \sigma_2\)</span>. Since we’re assuming that the two standard deviations are the same, we drop the subscripts and refer to both of them as <span class="math inline">\(\sigma\)</span>. How should we estimate this? How should we construct a single estimate of a standard deviation when we have two samples? The answer is, basically, we average them. Well, sort of. Actually, what we do is take a <em>weighted</em> average of the <em>variance</em> estimates, which we use as our <strong>pooled estimate of the variance</strong>. The weight assigned to each sample is equal to the number of observations in that sample, minus 1.</p>
+<div class="figure">
+<span style="display:block;" id="fig:fig11-9"></span>
+<img src="images/Figure89.PNG" alt="Graphical illustration of the null and alternative hypotheses assumed by the Student t-test. The null hypothesis assumes that both groups have the same mean $\mu$, whereas the alternative assumes that they have different means $\mu_1$ and $\mu_2$. Notice that it is assumed that the population distributions are normal, and that, although the alternative hypothesis allows the group to have different means, it assumes they have the same standard deviation" width="90%"><p class="caption">
+Figure 11.9: Graphical illustration of the null and alternative hypotheses assumed by the Student t-test. The null hypothesis assumes that both groups have the same mean <span class="math inline">\(\mu\)</span>, whereas the alternative assumes that they have different means <span class="math inline">\(\mu_1\)</span> and <span class="math inline">\(\mu_2\)</span>. Notice that it is assumed that the population distributions are normal, and that, although the alternative hypothesis allows the group to have different means, it assumes they have the same standard deviation
+</p>
+</div>
+<p>Statistical notation <a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;Mathematically, we can write this as &lt;span class="math display"&gt;\[w_1=N_1-1\]&lt;/span&gt; &lt;span class="math display"&gt;\[w_2=N_2-1\]&lt;/span&gt; Now that we’ve assigned weights to each sample we calculate the pooled estimate of the variance by taking the weighted average of the two variance estimates, &lt;span class="math inline"&gt;\(\hat{sigma}_{1}^{2}\)&lt;/span&gt; and &lt;span class="math inline"&gt;\(\hat{sigma}_{2}^{2}\)&lt;/span&gt; &lt;span class="math display"&gt;\[\hat{\sigma}_p^2=\frac{w_1\hat{\sigma}_1^2+w_2\hat{\sigma}_2^2}{w_1+w_2}\]&lt;/span&gt; Finally, we convert the pooled variance estimate to a pooled standard deviation estimate, by taking the square root. &lt;span class="math display"&gt;\[\hat{\sigma}_p=\sqrt{\frac{w_1\hat{\sigma}_1^2+w_2\hat{\sigma}_2^2}{w_1+w_2}}\]&lt;/span&gt; And if you mentally substitute &lt;span class="math inline"&gt;\((w_1 = N_1 - 1)\)&lt;/span&gt; and &lt;span class="math inline"&gt;\(w_2 = N_2 - 1\)&lt;/span&gt; into this equation you get a very ugly looking formula. A very ugly formula that actually seems to be the “standard” way of describing the pooled standard deviation estimate. It’s not my favourite way of thinking about pooled standard deviations, however. I prefer to think about it like this. Our data set actually corresponds to a set of N observations which are sorted into two groups. So let’s use the notation &lt;span class="math inline"&gt;\(X_{ik}\)&lt;/span&gt; to referto the grade received by the i-th student in the k-th tutorial group. That is, &lt;span class="math inline"&gt;\((X_{11}\)&lt;/span&gt; is the grade received by the first student in Anastasia’s class, &lt;span class="math inline"&gt;\(X_{21}\)&lt;/span&gt; is her second student, and so on. And we have two separate group means &lt;span class="math inline"&gt;\(\bar{X}_1\)&lt;/span&gt; and &lt;span class="math inline"&gt;\(\bar{X}_2\)&lt;/span&gt;, which we could “generically” refer to using the notation &lt;span class="math inline"&gt;\(\bar{X}_k\)&lt;/span&gt;, i.e., the mean grade for the k-th tutorial group. So far, so good. Now, since every single student falls into one of the two tutorials, we can describe their deviation from the group mean as the difference &lt;span class="math display"&gt;\[X_{ik}-\bar{X}_k\]&lt;/span&gt; So why not just use these deviations (i.e., the extent to which each student’s grade differs from the mean grade in their tutorial)? Remember, a variance is just the average of a bunch of squared deviations, so let’s do that. Mathematically, we could write it like this &lt;span class="math display"&gt;\[\frac{\sum_{ik}(X_{ik}-\bar{X}_k)^2}{N}\]&lt;/span&gt; where the notation “&lt;span class="math inline"&gt;\(\sum_{ik}\)&lt;/span&gt;” is a lazy way of saying “calculate a sum by looking at all students in all tutorials”, since each “&lt;span class="math inline"&gt;\(_{ik}\)&lt;/span&gt;” corresponds to one student.&lt;span class="math inline"&gt;\(^a\)&lt;/span&gt; But, as we saw in the chapter on [Estimating unknown quantities from a sample], calculating the variance by dividing by N produces a biased estimate of the population variance. And previously we needed to divide by &lt;span class="math inline"&gt;\((N - 1)\)&lt;/span&gt; to fix this. However, as I mentioned at the time, the reason why this bias exists is because the variance estimate relies on the sample mean, and to the extent that the sample mean isn’t equal to the population mean it can systematically bias our estimate of the variance. But this time we’re relying on two sample means! Does this mean that we’ve got more bias? Yes, yes it does. And does this mean we now need to divide by &lt;span class="math inline"&gt;\((N - 2)\)&lt;/span&gt; instead of &lt;span class="math inline"&gt;\((N - 1)\)&lt;/span&gt;, in order to calculate our pooled variance estimate? Why, yes &lt;span class="math display"&gt;\[\hat {\sigma}_p^2=\frac{\sum_{ik}(X_{ik}-\bar{X}_k)^2}{N-2}\]&lt;/span&gt;&lt;br&gt;
+Oh, and if you take the square root of this then you get &lt;span class="math inline"&gt;\(\hat{\sigma}_p\)&lt;/span&gt;, the pooled standard deviation estimate. In other words, the pooled standard deviation calculation is nothing special. It’s not terribly different to the regular&lt;br&gt;
+standard deviation calculation. – &lt;span class="math inline"&gt;\(^a\)&lt;/span&gt; A more correct notation will be introduced in the chapter on &lt;a href="comparing-several-means-one-way-anova.html#comparing-several-means-one-way-anova"&gt;Comparing several means (one-way ANOVA)&lt;/a&gt;&lt;/p&gt;'><sup>102</sup></a></p>
+</div>
+</div>
+<div id="completing-the-test" class="section level2" number="11.4">
+<h2>
+<span class="header-section-number">11.4</span> Completing the test<a class="anchor" aria-label="anchor" href="#completing-the-test"><i class="fas fa-link"></i></a>
+</h2>
+<p>Regardless of which way you want to think about it, we now have our pooled estimate of the standard deviation. From now on, I’ll drop the silly p subscript, and just refer to this estimate as <span class="math inline">\(\hat{\sigma}\)</span>. Great. Let’s now go back to thinking about the bloody hypothesis test, shall we? Our whole reason for calculating this pooled estimate was that we knew it would be helpful when calculating our standard error estimate. But standard error of what? In the one-sample t-test it was the standard error of the sample mean, <span class="math inline">\(se(\bar{X})\)</span>, and since <span class="math inline">\(se(\bar{X}) = \frac{\sigma}{\sqrt{N}}\)</span> that’s what the denominator of our t-statistic looked like. This time around, however, we have two sample means. And what we’re interested in, specifically, is the the difference between the two <span class="math inline">\(\bar{X}_1-\bar{X}_2\)</span> As a consequence, the standard error that we need to divide by is in fact the <strong>standard error of the difference</strong> between means.</p>
+<p>Statistical notation <a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;As long as the two variables really do have the same standard deviation, then our estimate for the standard error is &lt;span class="math display"&gt;\[SE(\bar{X}_1-\bar{X}_2)=\hat{\sigma}\sqrt{\frac{1}{N_1}+\frac{1}{N_2}}\]&lt;/span&gt; and our t-statistic is therefore &lt;span class="math display"&gt;\[t=\frac{\bar{X}_1-\bar{X}_2}{SE(\bar{X}_1-\bar{X}_2)}\]&lt;/span&gt;&lt;/p&gt;'><sup>103</sup></a></p>
+<p>Just as we saw with our one-sample test, the sampling distribution of this t-statistic is a t-distribution (shocking, isn’t it?) as long as the null hypothesis is true and all of the assumptions of the test are met. The degrees of freedom, however, is slightly different. As usual, we can think of the degrees of freedom to be equal to the number of data points minus the number of constraints. In this case, we have N observations (<span class="math inline">\(N_1\)</span> in sample 1, and <span class="math inline">\(N_2\)</span> in sample 2), and 2 constraints (the sample means). So the total degrees of freedom for this test are <span class="math inline">\(N - 2\)</span>.</p>
+<div id="doing-the-test-in-jamovi-3" class="section level3" number="11.4.1">
+<h3>
+<span class="header-section-number">11.4.1</span> Doing the test in jamovi<a class="anchor" aria-label="anchor" href="#doing-the-test-in-jamovi-3"><i class="fas fa-link"></i></a>
+</h3>
+<p>Not surprisingly, you can run an independent samples t-test easily in jamovi. The outcome variable for our test is the student grade, and the groups are defined in terms of the tutor for each class. So you probably won’t be too surprised that all you have to do in jamovi is go to the relevant analysis (‘Analyses’ - ‘T-Tests’ - ‘Independent Samples T-Test’) and move the grade variable across to the ‘Dependent Variables’ box, and the tutor variable across into the ‘Grouping Variable’ box, as shown in Figure <a href="comparing-two-means.html#fig:fig11-10">11.10</a>.</p>
+<p>The output has a very familiar form. First, it tells you what test was run, and it tells you the name of the dependent variable that you used. It then reports the test results. Just like last time the test results consist of a t-statistic, the degrees of freedom, and the <em>p-value</em>. The final section reports two things: it gives you a confidence interval and an effect size. I’ll talk about effect sizes later. The confidence interval, however, I should talk about now.</p>
+<p>It’s pretty important to be clear on what this confidence interval actually refers to. It is a confidence interval for the <em>difference</em> between the group means. In our example, Anastasia’s students had an average grade of <span class="math inline">\(74.53\)</span>, and Bernadette’s students had an average grade of <span class="math inline">\(69.06\)</span>, so the difference between the two sample means is <span class="math inline">\(5.48\)</span>. But of course the difference between population means might be bigger or smaller than this. The confidence interval reported in Figure <a href="comparing-two-means.html#fig:fig11-10">11.10</a> tells you that there’s a if we replicated this study again and again, then <span class="math inline">\(95\%\)</span> of the time the true difference in means would lie between <span class="math inline">\(0.20\)</span> and <span class="math inline">\(10.76\)</span>. Look back at Section <strong>8.5</strong> for a reminder about what confidence intervals mean.</p>
+<div class="figure">
+<span style="display:block;" id="fig:fig11-10"></span>
+<img src="images/Figure90.PNG" alt="Independent t-test in jamovi, with options checked for useful results" width="90%"><p class="caption">
+Figure 11.10: Independent t-test in jamovi, with options checked for useful results
+</p>
+</div>
+<p>In any case, the difference between the two groups is significant (just barely), so we might write up the result using text like this:</p>
+<blockquote>
+<p>The mean grade in Anastasia’s class was <span class="math inline">\(74.5\%\)</span> (std dev = <span class="math inline">\(9.0\)</span>), whereas the mean in Bernadette’s class was <span class="math inline">\(69.1\%\)</span> (std dev = <span class="math inline">\(5.8\)</span>). A Student’s independent samples t-test showed that this <span class="math inline">\(5.4\%\)</span> difference was significant <span class="math inline">\((t(31) = 2.1, p&lt;.05, CI_95 = [0.2, 10.8], d = .74)\)</span>, suggesting that a genuine difference in learning outcomes has occurred.</p>
+</blockquote>
+<p>Notice that I’ve included the confidence interval and the effect size in the stat block. People don’t always do this. At a bare minimum, you’d expect to see the t-statistic, the degrees of freedom and the p value. So you should include something like this at a minimum: <span class="math inline">\(t(31) = 2.1, p&lt; .05\)</span>. If statisticians had their way, everyone would also report the confidence interval and probably the effect size measure too, because they are useful things to know. But real life doesn’t always work the way statisticians want it to so you should make a judgement based on whether you think it will help your readers and, if you’re writing a scientific paper, the editorial standard for the journal in question. Some journals expect you to report effect sizes, others don’t. Within some scientific communities it is standard practice to report confidence intervals, in others it is not. You’ll need to figure out what your audience expects. But, just for the sake of clarity, if you’re taking my class, my default position is that it’s usually worth including both the effect size and the confidence interval.</p>
+</div>
+<div id="positive-and-negative-t-values" class="section level3" number="11.4.2">
+<h3>
+<span class="header-section-number">11.4.2</span> Positive and negative t values<a class="anchor" aria-label="anchor" href="#positive-and-negative-t-values"><i class="fas fa-link"></i></a>
+</h3>
+<p>Before moving on to talk about the assumptions of the t-test, there’s one additional point I want to make about the use of t-tests in practice. The first one relates to the sign of the t-statistic (that is, whether it is a positive number or a negative one). One very common worry that students have when they start running their first t-test is that they often end up with negative values for the t-statistic and don’t know how to interpret it. In fact, it’s not at all uncommon for two people working independently to end up with results that are almost identical, except that one person has a negative t values and the other one has a positive t value. Assuming that you’re running a two-sided test then the p-values will be identical. On closer inspection, the students will notice that the confidence intervals also have the opposite signs. This is perfectly okay. Whenever this happens, what you’ll find is that the two versions of the results arise from slightly different ways of running the t-test. What’s happening here is very simple. The t-statistic that we calculate here is always of the form</p>
+<p><span class="math display">\[t=\frac{\text{mean 1-mean 2}}{SE}\]</span></p>
+<p>If “mean 1” is larger than “mean 2” the t statistic will be positive, whereas if “mean 2” is larger then the t statistic will be negative. Similarly, the confidence interval that jamovi reports is the confidence interval for the difference “(mean 1) minus (mean 2)”, which will be the reverse of what you’d get if you were calculating the confidence interval for the difference “(mean 2) minus (mean 1)”.</p>
+<p>Okay, that’s pretty straightforward when you think about it, but now consider our t-test comparing Anastasia’s class to Bernadette’s class. Which one should we call “mean 1” and which one should we call “mean 2”. It’s arbitrary. However, you really do need to designate one of them as “mean 1” and the other one as “mean 2”. Not surprisingly, the way that jamovi handles this is also pretty arbitrary. In earlier versions of the book I used to try to explain it, but after a while I gave up, because it’s not really all that important and to be honest I can never remember myself. Whenever I get a significant t-test result, and I want to figure out which mean is the larger one, I don’t try to figure it out by looking at the t-statistic. Why would I bother doing that? It’s foolish. It’s easier just to look at the actual group means since the jamovi output actually shows them!</p>
+<p>Here’s the important thing. Because it really doesn’t matter what jamovi shows you, I usually try to report the t-statistic in such a way that the numbers match up with the text. Suppose that what I want to write in my report is: <em>Anastasia’s class had higher grades than Bernadette’s class</em>. The phrasing here implies that Anastasia’s group comes first, so it makes sense to report the t-statistic as if Anastasia’s class corresponded to group 1. If so, I would write <em>Anastasia’s class had</em> <u>higher</u> grades than Bernadette’s class (<span class="math inline">\(t(31) = 2.1, p = .04\)</span>).</p>
+<p>(I wouldn’t actually underline the word “higher” in real life, I’m just doing it to emphasise the point that “higher” corresponds to positive t values). On the other hand, suppose the phrasing I wanted to use has Bernadette’s class listed first. If so, it makes more sense to treat her class as group 1, and if so, the write up looks like this: <em>Bernadette’s class had</em> <u>lower</u> grades than Anastasia’s class <span class="math inline">\((t(31) = -2.1, p = .04)\)</span>.</p>
+<p>Because I’m talking about one group having “lower” scores this time around, it is more sensible to use the negative form of the t-statistic. It just makes it read more cleanly.</p>
+<p>One last thing: please note that you can’t do this for other types of test statistics. It works for t-tests, but it wouldn’t be meaningful for chi-square tests, F-tests or indeed for most of the tests I talk about in this book. So don’t over-generalise this advice! I’m really just talking about t-tests here and nothing else!</p>
+</div>
+<div id="assumptions-of-the-test" class="section level3" number="11.4.3">
+<h3>
+<span class="header-section-number">11.4.3</span> Assumptions of the test<a class="anchor" aria-label="anchor" href="#assumptions-of-the-test"><i class="fas fa-link"></i></a>
+</h3>
+<p>As always, our hypothesis test relies on some assumptions. So what are they? For the Student t-test there are three assumptions, some of which we saw previously in the context of the one sample t-test (see <a href="comparing-two-means.html#assumptions-of-the-one-sample-t-test">Assumptions of the one sample t-test</a>):</p>
+<ul>
+<li>
+<em>Normality.</em> Like the one-sample t-test, it is assumed that the data are normally distributed. Specifically, we assume that both groups are normally distributed. In the section on <a href="comparing-two-means.html#checking-the-normality-of-a-sample">Checking the normality of a sample</a> we’ll discuss how to test for normality, and in <a href="comparing-two-means.html#testing-non-normal-data">Testing non-normal data</a> we’ll discuss possible solutions.</li>
+<li>
+<em>Independence.</em> Once again, it is assumed that the observations are independently sampled. In the context of the Student test this has two aspects to it. Firstly, we assume that the observations within each sample are independent of one another (exactly the same as for the one-sample test). However, we also assume that there are no cross-sample dependencies. If, for instance, it turns out that you included some participants in both experimental conditions of your study (e.g., by accidentally allowing the same person to sign up to different conditions), then there are some cross sample dependencies that you’d need to take into account.</li>
+<li>
+<em>Homogeneity of variance</em> (also called “homoscedasticity”). The third assumption is that the population standard deviation is the same in both groups. You can test this assumption using the Levene test, which I’ll talk about later on in the book (Section <strong>13.6.1</strong>). However, there’s a very simple remedy for this assumption if you are worried, which I’ll talk about in the next section.</li>
+</ul>
+</div>
+</div>
+<div id="the-independent-samples-t-test-welch-test" class="section level2" number="11.5">
+<h2>
+<span class="header-section-number">11.5</span> The independent samples t-test (Welch test)<a class="anchor" aria-label="anchor" href="#the-independent-samples-t-test-welch-test"><i class="fas fa-link"></i></a>
+</h2>
+<p>The biggest problem with using the Student test in practice is the third assumption listed in the previous section. It assumes that both groups have the same standard deviation. This is rarely true in real life. If two samples don’t have the same means, why should we expect them to have the same standard deviation? There’s really no reason to expect this assumption to be true. We’ll talk a little bit about how you can check this assumption later on because it does crop up in a few different places, not just the t-test. But right now I’ll talk about a different form of the t-test <span class="citation">(<a href="references.html#ref-Welch1947" role="doc-biblioref">Welch 1947</a>)</span> that does not rely on this assumption. A graphical illustration of what the Welch t test assumes about the data is shown in Figure <a href="comparing-two-means.html#fig:fig11-11">11.11</a>, to provide a contrast with the Student test version in Figure <a href="comparing-two-means.html#fig:fig11-9">11.9</a>. I’ll admit it’s a bit odd to talk about the cure before talking about the diagnosis, but as it happens the Welch test can be specified as one of the ‘Independent Samples T-Test’ options in jamovi, so this is probably the best place to discuss it.</p>
+<div class="figure">
+<span style="display:block;" id="fig:fig11-11"></span>
+<img src="images/Figure91.PNG" alt="Graphical illustration of the null and alternative hypotheses assumed by the Welch t-test. Like the Student test (Figure \@ref(fig:fig11-9)) we assume that both samples are drawn from a normal population; but the alternative hypothesis no longer requires the two populations to have equal variance" width="90%"><p class="caption">
+Figure 11.11: Graphical illustration of the null and alternative hypotheses assumed by the Welch t-test. Like the Student test (Figure <a href="comparing-two-means.html#fig:fig11-9">11.9</a>) we assume that both samples are drawn from a normal population; but the alternative hypothesis no longer requires the two populations to have equal variance
+</p>
+</div>
+<p>The Welch test is very similar to the Student test. For example, the t-statistic that we use in the Welch test is calculated in much the same way as it is for the Student test. That is, we take the difference between the sample means and then divide it by some estimate of the standard error of that difference</p>
+<p><span class="math display">\[t=\frac{\bar{X}_1-\bar{X}_2}{SE(\bar{X}_1-\bar{X}_2)}\]</span></p>
+<p>The main difference is that the standard error calculations are different. If the two populations have different standard deviations, then it’s a complete nonsense to try to calculate a pooled standard deviation estimate, because you’re averaging apples and oranges.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Well, I guess you can average apples and oranges, and what you end up with is a delicious fruit smoothie. But no one really thinks that a fruit smoothie is a very good way to describe the original fruits, do they?&lt;/p&gt;"><sup>104</sup></a></p>
+<p>Statistical notation <a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;But you can still estimate the standard error of the difference between sample means, it just ends up looking different &lt;span class="math display"&gt;\[SE(\bar{X}_1-\bar{X}_2)=\sqrt{\frac{\hat{\sigma}_1^2}{N_1}+\frac{\hat{\sigma}_2^2}{N_2}}\]&lt;/span&gt; The reason why it’s calculated this way is beyond the scope of&lt;br&gt;
+this book. What matters for our purposes is that the t-statistic&lt;br&gt;
+that comes out of the Welch t-test is actually somewhat different to the one that comes from the Student t-test.&lt;/p&gt;'><sup>105</sup></a></p>
+<p>The second difference between Welch and Student is that the degrees of freedom are calculated in a very different way. In the Welch test, the “degrees of freedom” doesn’t have to be a whole number any more, and it doesn’t correspond all that closely to the “number of data points minus the number of constraints” heuristic that I’ve been using up to this point.</p>
+<div id="doing-the-welch-test-in-jamovi" class="section level3" number="11.5.1">
+<h3>
+<span class="header-section-number">11.5.1</span> Doing the Welch test in jamovi<a class="anchor" aria-label="anchor" href="#doing-the-welch-test-in-jamovi"><i class="fas fa-link"></i></a>
+</h3>
+<p>If you tick the check box for the Welch test in the analysis we did above, then this is what it gives you (Figure <a href="comparing-two-means.html#fig:fig11-12">11.12</a>).</p>
+<div class="figure">
+<span style="display:block;" id="fig:fig11-12"></span>
+<img src="images/Figure92.PNG" alt="Results showing the Welch test alongside the default Student's t-test in jamovi" width="90%"><p class="caption">
+Figure 11.12: Results showing the Welch test alongside the default Student’s t-test in jamovi
+</p>
+</div>
+<p>The interpretation of this output should be fairly obvious. You read the output for the Welch’s test in the same way that you would for the Student’s test. You’ve got your descriptive statistics, the test results and some other information. So that’s all pretty easy.</p>
+<p>Except, except…our result isn’t significant anymore. When we ran the Student test we did get a significant effect, but the Welch test on the same data set is not (<span class="math inline">\(t(23.02) = 2.03, p = .054\)</span>). What does this mean? Should we panic? Is the sky burning? Probably not. The fact that one test is significant and the other isn’t doesn’t itself mean very much, especially since I kind of rigged the data so that this would happen. As a general rule, it’s not a good idea to go out of your way to try to interpret or explain the difference between a p-value of <span class="math inline">\(.049\)</span> and a p-value of <span class="math inline">\(.051\)</span>. If this sort of thing happens in real life, the <em>difference</em> in these p-values is almost certainly due to chance. What does matter is that you take a little bit of care in thinking about what test you use. The Student test and the Welch test have different strengths and weaknesses. If the two populations really do have equal variances, then the Student test is slightly more powerful (lower Type II error rate) than the Welch test. However, if they <em>don’t</em> have the same variances, then the assumptions of the Student test are violated and you may not be able to trust it; you might end up with a higher Type I error rate. So it’s a trade off. However, in real life I tend to prefer the Welch test, because almost no-one actually believes that the population variances are identical.</p>
+</div>
+<div id="assumptions-of-the-test-1" class="section level3" number="11.5.2">
+<h3>
+<span class="header-section-number">11.5.2</span> Assumptions of the test<a class="anchor" aria-label="anchor" href="#assumptions-of-the-test-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>The assumptions of the Welch test are very similar to those made by the Student t-test (see Section 11.3.7), except that the Welch test does not assume homogeneity of variance. This leaves only the assumption of normality and the assumption of independence. The specifics of these assumptions are the same for the Welch test as for the Student test.</p>
+</div>
+</div>
+<div id="the-paired-samples-t-test" class="section level2" number="11.6">
+<h2>
+<span class="header-section-number">11.6</span> The paired-samples t-test<a class="anchor" aria-label="anchor" href="#the-paired-samples-t-test"><i class="fas fa-link"></i></a>
+</h2>
+<p>Regardless of whether we’re talking about the Student test or the Welch test, an independent samples t-test is intended to be used in a situation where you have two samples that are, well, independent of one another. This situation arises naturally when participants are assigned randomly to one of two experimental conditions, but it provides a very poor approximation to other sorts of research designs. In particular, a repeated measures design, in which each participant is measured (with respect to the same outcome variable) in both experimental conditions, is not suited for analysis using independent samples t-tests. For example, we might be interested in whether listening to music reduces people’s working memory capacity. To that end, we could measure each person’s working memory capacity in two conditions: with music, and without music. In an experimental design such as this one, <a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;This design is very similar to the one in &lt;strong&gt;Section 10.7&lt;/strong&gt; that motivated the McNemar test. This should be no surprise. Both are standard repeated measures designs involving two measurements. The only difference is that this time our outcome variable is interval scale (working memory capacity) rather than a binary, nominal scale variable (a yes-or-no question).&lt;/p&gt;"><sup>106</sup></a> each participant appears in <em>both</em> groups. This requires us to approach the problem in a different way, by using the <strong>paired samples t-test</strong>.</p>
+<div id="the-data-1" class="section level3" number="11.6.1">
+<h3>
+<span class="header-section-number">11.6.1</span> The data<a class="anchor" aria-label="anchor" href="#the-data-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>The data set that we’ll use this time comes from Dr Chico’s class.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;At this point we have Drs Harpo, Chico and Zeppo. No prizes for guessing who Dr Groucho is.&lt;/p&gt;"><sup>107</sup></a> In her class students take two major tests, one early in the semester and one later in the semester. To hear her tell it, she runs a very hard class, one that most students find very challenging. But she argues that by setting hard assessments students are encouraged to work harder. Her theory is that the first test is a bit of a “wake up call” for students. When they realise how hard her class really is, they’ll work harder for the second test and get a better mark. Is she right? To test this, let’s import the chico.csv file into jamovi. This time jamovi does a good job during the import of attributing measurement levels correctly. The chico data set contains three variables: an id variable that identifies each student in the class, the grade_test1 variable that records the student grade for the first test, and the grade_test2 variable that has the grades for the second test.</p>
+<p>If we look at the jamovi spreadsheet it does seem like the class is a hard one (most grades are between 50% and 60%), but it does look like there’s an improvement from the first test to the second one.</p>
+<p>If we take a quick look at the descriptive statistics, in Figure <a href="comparing-two-means.html#fig:fig11-13">11.13</a>, we see that this impression seems to be supported. Across all 20 students the mean grade for the first test is 57%, but this rises to 58% for the second test. Although, given that the standard deviations are 6.6% and 6.4% respectively, it’s starting to feel like maybe the improvement is just illusory; maybe just random variation. This impression is reinforced when you see the means and confidence intervals plotted in Figure <a href="comparing-two-means.html#fig:fig11-14">11.14</a>a. If we were to rely on this plot alone, looking at how wide those confidence intervals are, we’d be tempted to think that the apparent improvement in student performance is pure chance.</p>
+<p>Nevertheless, this impression is wrong. To see why, take a look at the scatterplot of the grades for test 1 against the grades for test 2, shown in Figure <a href="comparing-two-means.html#fig:fig11-14">11.14</a>b. In this plot each dot corresponds to the two grades for a given student. If their grade for test 1 (x co-ordinate) equals their grade for test 2 (y co-ordinate), then the dot falls on the line. Points falling above the line are the students that performed better on the second test. Critically, almost all of the data points fall above the diagonal line: almost all of the students do seem to have improved their grade, if only by a small amount. This suggests that we should be looking at the improvement made by each student from one test to the next and treating that as our raw data. To do this, we’ll need to create a new variable for the improvement that each student makes, and add it to the chico data set. The easiest way to do this is to compute a new variable, with the expression grade test2 - grade test1.</p>
+<p>Once we have computed this new improvement variable we can draw a histogram showing the distribution of these improvement scores, shown in Figure <a href="comparing-two-means.html#fig:fig11-14">11.14</a>c. When we look at the histogram, it’s very clear that there is a real improvement here. The vast majority of the students scored higher on test 2 than on test 1, reflected in the fact that almost the entire histogram is above zero.</p>
+<div class="figure">
+<span style="display:block;" id="fig:fig11-13"></span>
+<img src="images/Figure93.PNG" alt="Descriptives for the two grade test variables in the chico data set" width="90%"><p class="caption">
+Figure 11.13: Descriptives for the two grade test variables in the chico data set
+</p>
+</div>
+</div>
+<div id="what-is-the-paired-samples-t-test" class="section level3" number="11.6.2">
+<h3>
+<span class="header-section-number">11.6.2</span> What is the paired samples t-test?<a class="anchor" aria-label="anchor" href="#what-is-the-paired-samples-t-test"><i class="fas fa-link"></i></a>
+</h3>
+<p>In light of the previous exploration, let’s think about how to construct an appropriate t test. One possibility would be to try to run an independent samples t-test using grade_test1 and grade_test2 as the variables of interest. However, this is clearly the wrong thing to do as the independent samples t-test assumes that there is no particular relationship between the two samples. Yet clearly that’s not true in this case because of the repeated measures structure in the data. To use the language that I introduced in the last section, if we were to try to do an independent samples t-test, we would be conflating the <strong>within subject</strong> differences (which is what we’re interested in testing) with the <strong>between subject</strong> variability (which we are not).</p>
+<p>The solution to the problem is obvious, I hope, since we already did all the hard work in the previous section. Instead of running an independent samples t-test on grade_test1 and grade_test2, we run a one-sample t-test on the within-subject difference variable, improvement. To formalise this slightly, if <span class="math inline">\(X_{i1}\)</span> is the score that the i-th participant obtained on the first variable, and <span class="math inline">\(X_{i2}\)</span> is the score that the same person obtained on the second one, then the difference score is:</p>
+<p><span class="math display">\[D_i=X_{i1}-X_{i2}\]</span></p>
+<div class="figure">
+<span style="display:block;" id="fig:fig11-14"></span>
+<img src="images/Figure94.PNG" alt="Mean grade for test 1 and test 2, with associated 95\% confidence intervals (panel a). Scatterplot showing the individual grades for test 1 and test 2 (panel b). Histogram showing the improvement made by each student in Dr Chico's class (panel c). In panel c, notice that almost the entire distribution is above zero: the vast majority of students did improve their performance from the first test to the second one" width="90%"><p class="caption">
+Figure 11.14: Mean grade for test 1 and test 2, with associated 95% confidence intervals (panel a). Scatterplot showing the individual grades for test 1 and test 2 (panel b). Histogram showing the improvement made by each student in Dr Chico’s class (panel c). In panel c, notice that almost the entire distribution is above zero: the vast majority of students did improve their performance from the first test to the second one
+</p>
+</div>
+<p>Notice that the difference scores is variable 1 minus variable 2 and not the other way around, so if we want improvement to correspond to a positive valued difference, we actually want “test 2” to be our “variable 1”. Equally, we would say that <span class="math inline">\(\mu_D = \mu_1 - \mu_2\)</span> is the population mean for this difference variable. So, to convert this to a hypothesis test, our null hypothesis is that this mean difference is zero and the alternative hypothesis is that it is not</p>
+<p><span class="math display">\[H_0:\mu_D=0\]</span> <span class="math display">\[H_1:\mu_D \neq 0\]</span></p>
+<p>This is assuming we’re talking about a two-sided test here. This is more or less identical to the way we described the hypotheses for the one-sample t-test. The only difference is that the specific value that the null hypothesis predicts is 0. And so our t-statistic is defined in more or less the same way too. If we let {D} denote the mean of the difference scores, then</p>
+<p><span class="math display">\[t=\frac{\bar{D}}{SE(\bar{D})}\]</span> which is <span class="math display">\[t=\frac{\bar{D}}{\frac{\hat{\sigma}_D}{\sqrt{N}}}\]</span></p>
+<p>where <span class="math inline">\(\hat{\sigma}_D\)</span> is the standard deviation of the difference scores. Since this is just an ordinary, one-sample t-test, with nothing special about it, the degrees of freedom are still <span class="math inline">\(N - 1\)</span>. And that’s it. The paired samples t-test really isn’t a new test at all. It’s a one-sample t-test, but applied to the difference between two variables. It’s actually very simple. The only reason it merits a discussion as long as the one we’ve just gone through is that you need to be able to recognise <em>when</em> a paired samples test is appropriate, and to understand <em>why</em> it’s better than an independent samples t test.</p>
+</div>
+<div id="doing-the-test-in-jamovi-4" class="section level3" number="11.6.3">
+<h3>
+<span class="header-section-number">11.6.3</span> Doing the test in jamovi<a class="anchor" aria-label="anchor" href="#doing-the-test-in-jamovi-4"><i class="fas fa-link"></i></a>
+</h3>
+<p>How do you do a paired samples t-test in jamovi? One possibility is to follow the process I outlined above. That is, create a “difference” variable and then run a one sample t-test on that. Since we’ve already created a variable called improvement, let’s do that and see what we get, Figure <a href="comparing-two-means.html#fig:fig11-15">11.15</a>.</p>
+<div class="figure">
+<span style="display:block;" id="fig:fig11-15"></span>
+<img src="images/Figure95.PNG" alt="Results showing a one sample t-test on paired difference scores" width="90%"><p class="caption">
+Figure 11.15: Results showing a one sample t-test on paired difference scores
+</p>
+</div>
+<p>The output shown in Figure <a href="comparing-two-means.html#fig:fig11-15">11.15</a> is (obviously) formatted exactly the same was as it was the last time we used <a href="comparing-two-means.html#the-one-sample-t-test">The one-sample t-Test</a> analysis, and it confirms our intuition. There’s an average improvement of <span class="math inline">\(1.4\%\)</span> from test 1 to test 2, and this is significantly different from <span class="math inline">\(0 (t(19) = 6.48, p&lt; .001)\)</span>.</p>
+<p>However, suppose you’re lazy and you don’t want to go to all the effort of creating a new variable. Or perhaps you just want to keep the difference between one-sample and paired samples tests clear in your head. If so, you can use the jamovi ‘Paired Samples T-Test’ analysis, getting the results shown in Figure <a href="comparing-two-means.html#fig:fig11-16">11.16</a>.</p>
+<div class="figure">
+<span style="display:block;" id="fig:fig11-16"></span>
+<img src="images/Figure96.PNG" alt="Results showing a paired sample t-test. Compare with Figure \@ref(fig:fig11-15)" width="90%"><p class="caption">
+Figure 11.16: Results showing a paired sample t-test. Compare with Figure <a href="comparing-two-means.html#fig:fig11-15">11.15</a>
+</p>
+</div>
+<p>The numbers are identical to those that come from the one sample test, which of course they have to be given that the paired samples t-test is just a one sample test under the hood.</p>
+</div>
+</div>
+<div id="one-sided-tests" class="section level2" number="11.7">
+<h2>
+<span class="header-section-number">11.7</span> One-sided tests<a class="anchor" aria-label="anchor" href="#one-sided-tests"><i class="fas fa-link"></i></a>
+</h2>
+<p>When introducing the theory of null hypothesis tests, I mentioned that there are some situations when it’s appropriate to specify a one-sided test (see section on <a href="hypothesis-testing.html#the-difference-between-one-sided-and-two-sided-tests">The difference between one sided and two sided tests</a>. So far all of the t-tests have been two-sided tests. For instance, when we specified a one sample t-test for the grades in Dr Zeppo’s class the null hypothesis was that the true mean was <span class="math inline">\(67.5\%\)</span>. The alternative hypothesis was that the true mean was greater than or less than <span class="math inline">\(67.5\%\)</span>. Suppose we were only interested in finding out if the true mean is greater than <span class="math inline">\(67.5\%\)</span>, and have no interest whatsoever in testing to find out if the true mean is lower than <span class="math inline">\(67.5\%\)</span>. If so, our null hypothesis would be that the true mean is <span class="math inline">\(67.5\%\)</span> or less, and the alternative hypothesis would be that the true mean is greater than <span class="math inline">\(67.5\%\)</span>. In jamovi, for the ‘One Sample T-Test’ analysis, you can specify this by clicking on the ‘<span class="math inline">\(&gt;\)</span> Test Value’ option, under ‘Hypothesis’. When you have done this, you will get the results as shown in Figure <a href="comparing-two-means.html#fig:fig11-17">11.17</a>.</p>
+<div class="figure">
+<span style="display:block;" id="fig:fig11-17"></span>
+<img src="images/Figure97.PNG" alt="jamovi results showing a 'One Sample T-Test' where the actual hypothesis is one sided, i.e. that the true mean is greater than $67.5\%$" width="90%"><p class="caption">
+Figure 11.17: jamovi results showing a ‘One Sample T-Test’ where the actual hypothesis is one sided, i.e. that the true mean is greater than <span class="math inline">\(67.5\%\)</span>
+</p>
+</div>
+<p>Notice that there are a few changes from the output that we saw last time. Most important is the fact that the actual hypothesis has changed, to reflect the different test. The second thing to note is that although the t-statistic and degrees of freedom have not changed, the p-value has. This is because the one-sided test has a different rejection region from the two-sided test. If you’ve forgotten why this is and what it means, you may find it helpful to read back over the chapter on <a href="hypothesis-testing.html#hypothesis-testing">Hypothesis testing</a>, and <a href="hypothesis-testing.html#the-difference-between-one-sided-and-two-sided-tests">The difference between one sided and two sided tests</a> in particular. The third thing to note is that the confidence interval is different too: it now reports a “one-sided” confidence interval rather than a two-sided one. In a two-sided confidence interval we’re trying to find numbers a and b such that we’re confident that, if we were to repeat the study many times, then <span class="math inline">\(95\%\)</span> of the time the mean would lie between a and b. In a one-sided confidence interval, we’re trying to find a single number a such that we’re confident that <span class="math inline">\(95\%\)</span> of the time the true mean would be greater than a (or less than a if you selected Measure 1 ¡ Measure 2 in the ‘Hypothesis’ section).</p>
+<p>So that’s how to do a one-sided one sample t-test. However, all versions of the t-test can be one-sided. For an independent samples t test, you could have a one-sided test if you’re only interested in testing to see if group A has higher scores than group B, but have no interest in finding out if group B has higher scores than group A. Let’s suppose that, for Dr Harpo’s class, you wanted to see if Anastasia’s students had higher grades than Bernadette’s. For this analysis, in the ‘Hypothesis’ options, specify that ‘Group 1 &gt; Group2’. You should get the results shown in Figure <a href="comparing-two-means.html#fig:fig11-18">11.18</a>.</p>
+<div class="figure">
+<span style="display:block;" id="fig:fig11-18"></span>
+<img src="images/Figure98.PNG" alt="jamovi results showing an 'Independent Samples t-Test' where the actual hypothesis is one sided, i.e. that Anastasia's students had higher grades than Bernadette's" width="90%"><p class="caption">
+Figure 11.18: jamovi results showing an ‘Independent Samples t-Test’ where the actual hypothesis is one sided, i.e. that Anastasia’s students had higher grades than Bernadette’s
+</p>
+</div>
+<p>Again, the output changes in a predictable way. The definition of the alternative hypothesis has changed, the p-value has changed, and it now reports a one-sided confidence interval rather than a two-sided one.</p>
+<p>What about the paired samples t-test? Suppose we wanted to test the hypothesis that grades go up from test 1 to test 2 in Dr Zeppo’s class, and are not prepared to consider the idea that the grades go down. In jamovi you would do this by specifying, under the ‘Hypotheses’ option, that grade_test2 (‘Measure 1’ in jamovi, because we copied this first into the paired variables box) &gt; grade test1 (‘Measure 2’ in jamovi). You should get the results shown in Figure <a href="comparing-two-means.html#fig:fig11-19">11.19</a>.</p>
+<div class="figure">
+<span style="display:block;" id="fig:fig11-19"></span>
+<img src="images/Figure99.PNG" alt="jamovi results showing a 'Paired Samples T-Test' where the actual hypothesis is one sided, i.e. that grade test2 ('Measure 1') $&gt;$ grade test1 ('Measure 2')" width="90%"><p class="caption">
+Figure 11.19: jamovi results showing a ‘Paired Samples T-Test’ where the actual hypothesis is one sided, i.e. that grade test2 (‘Measure 1’) <span class="math inline">\(&gt;\)</span> grade test1 (‘Measure 2’)
+</p>
+</div>
+<p>Yet again, the output changes in a predictable way. The hypothesis has changed, the p-value has changed, and the confidence interval is now one-sided.</p>
+</div>
+<div id="effect-size-1" class="section level2" number="11.8">
+<h2>
+<span class="header-section-number">11.8</span> Effect size<a class="anchor" aria-label="anchor" href="#effect-size-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>The most commonly used measure of effect size for a t-test is <strong>Cohen’s d</strong> <span class="citation">(<a href="references.html#ref-Cohen1988" role="doc-biblioref">Cohen 1988</a>)</span>. It’s a very simple measure in principle, with quite a few wrinkles when you start digging into the details. Cohen himself defined it primarily in the context of an independent samples t-test, specifically the Student test. In that context, a natural way of defining the effect size is to divide the difference between the means by an estimate of the standard deviation. In other words, we’re looking to calculate something along the lines of this:</p>
+<p><span class="math display">\[d=\frac{(\text{mean 1})-(\text{mean 2})}{\text{std dev}}\]</span></p>
+<p>and he suggested a rough guide for interpreting <span class="math inline">\(d\)</span> in Table <a href="comparing-two-means.html#tab:tab11-3">11.3</a>.</p>
+<div class="inline-table"><table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 70%; margin-left: auto; margin-right: auto;  " id="tab:tab11-3">
+<caption style="caption-side: bottom; text-align: center;width: 120%;">
+<span id="tab:tab11-3">Table 11.3: </span> A (very) rough guide to interpreting Cohen's d. My personal recommendation is to not use these blindly. The d statistic has a natural interpretation in and of itself. It re-describes the difference in means as the number of standard deviations that separates those means. So it's generally a good idea to think about what that means in practical terms. In some contexts a 'small' effect could be of big practical importance. In other situations a 'large' effect may not be all that interesting</caption>
+<col>
+<col>
+<tr>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: bold;"></th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;"></th>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">about 0.2</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">"small" effect</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: normal;">about 0.5</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">"moderate" effect</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">about 0.8</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">"large" effect</td>
+</tr>
+</table></div>
+<p>You’d think that this would be pretty unambiguous, but it’s not. This is largely because Cohen wasn’t too specific on what he thought should be used as the measure of the standard deviation (in his defence he was trying to make a broader point in his book, not nitpick about tiny details). As discussed by <span class="citation">McGrath and Meyer (<a href="references.html#ref-McGrath2006" role="doc-biblioref">2006</a>)</span>, there are several different versions in common usage, and each author tends to adopt slightly different notation. For the sake of simplicity (as opposed to accuracy), I’ll use d to refer to any statistic that you calculate from the sample, and use <span class="math inline">\(\delta\)</span> to refer to a theoretical population effect. Obviously, that does mean that there are several different things all called d.</p>
+<p>My suspicion is that the only time that you would want Cohen’s d is when you’re running a t-test, and jamovi has an option to calculate the effect size for all the different flavours of t-test it provides.</p>
+<div id="cohens-d-from-one-sample" class="section level3" number="11.8.1">
+<h3>
+<span class="header-section-number">11.8.1</span> Cohen’s d from one sample<a class="anchor" aria-label="anchor" href="#cohens-d-from-one-sample"><i class="fas fa-link"></i></a>
+</h3>
+<p>The simplest situation to consider is the one corresponding to a one-sample t-test. In this case, this is the one sample mean <span class="math inline">\(\bar{X}\)</span> and one (hypothesised) population mean <span class="math inline">\(\mu_0\)</span> to compare it to. Not only that, there’s really only one sensible way to estimate the population standard deviation. We just use our usual estimate <span class="math inline">\(\hat{\sigma}\)</span>. Therefore, we end up with the following as the only way to calculate <span class="math inline">\(d\)</span></p>
+<p><span class="math display">\[d=\frac{\bar{X}-\mu_0}{\hat{\sigma}}\]</span></p>
+<p>When we look back at the results in Figure <a href="comparing-two-means.html#fig:fig11-6">11.6</a>, the effect size value is Cohen’s <span class="math inline">\(d = 0.50\)</span>. Overall, then, the psychology students in Dr Zeppo’s class are achieving grades (<span class="math inline">\(mean = 72.3\%\)</span>) that are about .5 standard deviations higher than the level that you’d expect (<span class="math inline">\(67.5\%\)</span>) if they were performing at the same level as other students. Judged against Cohen’s rough guide, this is a moderate effect size.</p>
+</div>
+<div id="cohens-d-from-a-students-t-test" class="section level3" number="11.8.2">
+<h3>
+<span class="header-section-number">11.8.2</span> Cohen’s d from a Student’s t test<a class="anchor" aria-label="anchor" href="#cohens-d-from-a-students-t-test"><i class="fas fa-link"></i></a>
+</h3>
+<p>The majority of discussions of Cohen’s <span class="math inline">\(d\)</span> focus on a situation that is analogous to Student’s independent samples t test, and it’s in this context that the story becomes messier, since there are several different versions of <span class="math inline">\(d\)</span> that you might want to use in this situation. To understand why there are multiple versions of <span class="math inline">\(d\)</span>, it helps to take the time to write down a formula that corresponds to the true population effect size <span class="math inline">\(\delta\)</span>. It’s pretty straightforward,</p>
+<p><span class="math display">\[\delta=\frac{\mu_1-\mu_2}{\sigma}\]</span></p>
+<p>where, as usual, <span class="math inline">\(\mu_1\)</span> and <span class="math inline">\(\mu_2\)</span> are the population means corresponding to group 1 and group 2 respectively, and <span class="math inline">\(\sigma\)</span> is the standard deviation (the same for both populations). The obvious way to estimate <span class="math inline">\(\delta\)</span> is to do exactly the same thing that we did in the t-test itself, i.e., use the sample means as the top line and a pooled standard deviation estimate for the bottom line</p>
+<p><span class="math display">\[d=\frac{\bar{X}_1-\bar{X}_2}{\hat{\sigma}_p}\]</span></p>
+<p>where <span class="math inline">\(\hat{\sigma}_p\)</span> is the exact same pooled standard deviation measure that appears in the t-test. This is the most commonly used version of Cohen’s d when applied to the outcome of a Student t-test, and is the one provided in jamovi. It is sometimes referred to as Hedges’ <span class="math inline">\(g\)</span> statistic <span class="citation">(<a href="references.html#ref-Hedges1981" role="doc-biblioref">Hedges 1981</a>)</span>.</p>
+<p>However, there are other possibilities which I’ll briefly describe. Firstly, you may have reason to want to use only one of the two groups as the basis for calculating the standard deviation. This approach (often called Glass’ <span class="math inline">\(\triangle\)</span>, pronounced delta) only makes most sense when you have good reason to treat one of the two groups as a purer reflection of “natural variation” than the other. This can happen if, for instance, one of the two groups is a control group. Secondly, recall that in the usual calculation of the pooled standard deviation we divide by <span class="math inline">\(N - 2\)</span> to correct for the bias in the sample variance. In one version of Cohen’s d this correction is omitted, and instead we divide by <span class="math inline">\(N\)</span>. This version makes sense primarily when you’re trying to calculate the effect size in the sample rather than estimating an effect size in the population. Finally, there is a version called Hedge’s g, based on <span class="citation">Hedges and Olkin (<a href="references.html#ref-Hedges1985" role="doc-biblioref">1985</a>)</span>, who point out there is a small bias in the usual (pooled) estimation for Cohen’s d.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;They introduce a small correction by multiplying the usual value of &lt;span class="math inline"&gt;\(d\)&lt;/span&gt; by &lt;span class="math inline"&gt;\(\frac{(N - 3)}{(N - 2.25)}\)&lt;/span&gt;.&lt;/p&gt;'><sup>108</sup></a></p>
+<p>In any case, ignoring all those variations that you could make use of if you wanted, let’s have a look at the default version in jamovi. In Figure <a href="comparing-two-means.html#fig:fig11-10">11.10</a> Cohen’s <span class="math inline">\(d = 0.74\)</span>, indicating that the grade scores for students in Anastasia’s class are, on average, <span class="math inline">\(0.74\)</span> standard deviations higher than the grade scores for students in Bernadette’s class. For a Welch test, the estimated effect size is the same (Figure <a href="comparing-two-means.html#fig:fig11-12">11.12</a>).</p>
+</div>
+<div id="cohens-d-from-a-paired-samples-test" class="section level3" number="11.8.3">
+<h3>
+<span class="header-section-number">11.8.3</span> Cohen’s d from a paired-samples test<a class="anchor" aria-label="anchor" href="#cohens-d-from-a-paired-samples-test"><i class="fas fa-link"></i></a>
+</h3>
+<p>Finally, what should we do for a paired samples t-test? In this case, the answer depends on what it is you’re trying to do. jamovi assumes that you want to measure your effect sizes relative to the distribution of difference scores, and the measure of d that you calculate is:</p>
+<p><span class="math display">\[d=\frac{\bar{D}}{\hat{\sigma}_D}\]</span></p>
+<p>where <span class="math inline">\(\hat{\sigma}_D\)</span> is the estimate of the standard deviation of the differences. In Figure <a href="comparing-two-means.html#fig:fig11-16">11.16</a> Cohen’s <span class="math inline">\(d = 1.45\)</span>, indicating that the time 2 grade scores are, on average, <span class="math inline">\(1.45\)</span> standard deviations higher than the time 1 grade scores.</p>
+<p>This is the version of Cohen’s <span class="math inline">\(d\)</span> that gets reported by the jamovi ‘Paired Samples T-Test’ analysis. The only wrinkle is figuring out whether this is the measure you want or not. To the extent that you care about the practical consequences of your research, you often want to measure the effect size relative to the <em>original</em> variables, not the <em>difference scores</em> (e.g., the 1% improvement in Dr Chico’s class over time is pretty small when measured against the amount of between-student variation in grades), in which case you use the same versions of Cohen’s d that you would use for a Student or Welch test. It’s not so straightforward to do this in jamovi; essentially you have to change the structure of the data in the spreadsheet view so I won’t go into that here<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;If you are interested, you can look at how this was done in the chico2.omv file&lt;/p&gt;"><sup>109</sup></a>, but the Cohen’s d for this perspective is quite different: it is <span class="math inline">\(0.22\)</span> which is quite small when assessed on the scale of the original variables.</p>
+</div>
+</div>
+<div id="checking-the-normality-of-a-sample" class="section level2" number="11.9">
+<h2>
+<span class="header-section-number">11.9</span> Checking the normality of a sample<a class="anchor" aria-label="anchor" href="#checking-the-normality-of-a-sample"><i class="fas fa-link"></i></a>
+</h2>
+<p>All of the tests that we have discussed so far in this chapter have assumed that the data are normally distributed. This assumption is often quite reasonable, because the [Central limit theorem] does tend to ensure that many real world quantities are normally distributed. Any time that you suspect that your variable is <em>actually</em> an average of lots of different things, there’s a pretty good chance that it will be normally distributed, or at least close enough to normal that you can get away with using t-tests. However, life doesn’t come with guarantees, and besides there are lots of ways in which you can end up with variables that are highly non-normal. For example, any time you think that your variable is actually the minimum of lots of different things, there’s a very good chance it will end up quite skewed. In psychology, response time (RT) data is a good example of this. If you suppose that there are lots of things that could trigger a response from a human participant, then the actual response will occur the first time one of these trigger events occurs.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;This is a massive oversimplification.&lt;/p&gt;"><sup>110</sup></a> This means that RT data are systematically non-normal. Okay, so if normality is assumed by all the tests, and is mostly but not always satisfied (at least approximately) by real world data, how can we check the normality of a sample? In this section I discuss two methods: QQ plots and the Shapiro-Wilk test.</p>
+<div id="qq-plots" class="section level3" number="11.9.1">
+<h3>
+<span class="header-section-number">11.9.1</span> QQ plots<a class="anchor" aria-label="anchor" href="#qq-plots"><i class="fas fa-link"></i></a>
+</h3>
+<div class="figure">
+<span style="display:block;" id="fig:fig11-20"></span>
+<img src="images/Figure100.PNG" alt="Histogram (panel a) and normal QQ plot (panel b) of normal.data, a normally distributed sample with $100$ observations. The Shapiro-Wilk statistic associated with these data is $W = .99$, indicating that no significant departures from normality were detected ($p = .73)$" width="90%"><p class="caption">
+Figure 11.20: Histogram (panel a) and normal QQ plot (panel b) of normal.data, a normally distributed sample with <span class="math inline">\(100\)</span> observations. The Shapiro-Wilk statistic associated with these data is <span class="math inline">\(W = .99\)</span>, indicating that no significant departures from normality were detected (<span class="math inline">\(p = .73)\)</span>
+</p>
+</div>
+<p>One way to check whether a sample violates the normality assumption is to draw a <strong>“QQ plot”</strong> (Quantile-Quantile plot). This allows you to visually check whether you’re seeing any systematic violations. In a QQ plot, each observation is plotted as a single dot. The x coordinate is the theoretical quantile that the observation should fall in if the data were normally distributed (with mean and variance estimated from the sample), and on the y co-ordinate is the actual quantile of the data within the sample. If the data are normal, the dots should form a straight line. For instance, lets see what happens if we generate data by sampling from a normal distribution, and then drawing a QQ plot. The results are shown in Figure <a href="comparing-two-means.html#fig:fig11-20">11.20</a>. As you can see, these data form a pretty straight line; which is no surprise given that we sampled them from a normal distribution! In contrast, have a look at the two data sets shown in Figure <a href="comparing-two-means.html#fig:fig11-21">11.21</a>. The top panels show the histogram and a QQ plot for a data set that is highly skewed: the QQ plot curves upwards. The lower panels show the same plots for a heavy tailed (i.e., high kurtosis) data set: in this case the QQ plot flattens in the middle and curves sharply at either end.</p>
+<div class="figure">
+<span style="display:block;" id="fig:fig11-21"></span>
+<img src="images/Figure101.PNG" alt="In the top row, a histogram (panel a) and normal QQ plot (panel b) of the $100$ observations in a skewed.data set. The skewness of the data here is $1.94$, and is reflected in a QQ plot that curves upwards. As a consequence, the Shapiro-Wilk statistic is $W = .80$, reflecting a significant departure from normality ($p&lt; .001$). The bottom row shows the same plots for a heavy tailed data set, again consisting of 100 observations. In this case the heavy tails in the data produce a high kurtosis ($2.80$), and cause the QQ plot to flatten in the middle, and curve away sharply on either side. The resulting Shapiro-Wilk statistic is $W = .93$, again reflecting significant non-normality ($p&lt;.001)$" width="90%"><p class="caption">
+Figure 11.21: In the top row, a histogram (panel a) and normal QQ plot (panel b) of the <span class="math inline">\(100\)</span> observations in a skewed.data set. The skewness of the data here is <span class="math inline">\(1.94\)</span>, and is reflected in a QQ plot that curves upwards. As a consequence, the Shapiro-Wilk statistic is <span class="math inline">\(W = .80\)</span>, reflecting a significant departure from normality (<span class="math inline">\(p&lt; .001\)</span>). The bottom row shows the same plots for a heavy tailed data set, again consisting of 100 observations. In this case the heavy tails in the data produce a high kurtosis (<span class="math inline">\(2.80\)</span>), and cause the QQ plot to flatten in the middle, and curve away sharply on either side. The resulting Shapiro-Wilk statistic is <span class="math inline">\(W = .93\)</span>, again reflecting significant non-normality (<span class="math inline">\(p&lt;.001)\)</span>
+</p>
+</div>
+</div>
+<div id="shapiro-wilk-tests" class="section level3" number="11.9.2">
+<h3>
+<span class="header-section-number">11.9.2</span> Shapiro-Wilk tests<a class="anchor" aria-label="anchor" href="#shapiro-wilk-tests"><i class="fas fa-link"></i></a>
+</h3>
+<p>QQ plots provide a nice way to informally check the normality of your data, but sometimes you’ll want to do something a bit more formal and the <strong>Shapiro-Wilk test</strong> <span class="citation">(<a href="references.html#ref-Shapiro1965" role="doc-biblioref">Shapiro and Wilk 1965</a>)</span> is probably what you’re looking for.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Either that, or the Kolmogorov-Smirnov test, which is probably more traditional than the Shapiro-Wilk. Although most things I’ve read seem to suggest Shapiro-Wilk is the better test of normality, the Kolomogorov Smirnov is a general purpose test of distributional equivalence that can be adapted to handle other kinds of distribution tests. In jamovi the Shapiro-Wilk test is preferred.&lt;/p&gt;"><sup>111</sup></a> As you’d expect, the null hypothesis being tested is that a set of <span class="math inline">\(N\)</span> observations is normally distributed.</p>
+<p>Statistical notation <a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;The test statistic that it calculates is conventionally denoted as &lt;span class="math inline"&gt;\(W\)&lt;/span&gt;, and it’s calculated as follows. First, we sort the observations in order of increasing size, and let &lt;span class="math inline"&gt;\(\bar{X_1}\)&lt;/span&gt; be the smallest value in the sample, &lt;span class="math inline"&gt;\(X_2\)&lt;/span&gt; be the second smallest and so on. Then the value of &lt;span class="math inline"&gt;\(W\)&lt;/span&gt; is given by &lt;span class="math display"&gt;\[W=\frac{(\sum_{i=1}^N a_iX_i)^2}{\sum_{i=1}^N(X_i-\bar{X})^2}\]&lt;/span&gt; where &lt;span class="math inline"&gt;\(\bar{X}\)&lt;/span&gt; is the mean of the observations, and the &lt;span class="math inline"&gt;\(a_i\)&lt;/span&gt; values are …mumble, mumble… something complicated that is a bit beyond the scope of an introductory text.&lt;/p&gt;'><sup>112</sup></a></p>
+<p>Because it’s a little hard to explain the maths behind the <span class="math inline">\(W\)</span> statistic, a better idea is to give a broad brush description of how it behaves. Unlike most of the test statistics that we’ll encounter in this book, it’s actually small values of <span class="math inline">\(W\)</span> that indicate departure from normality. The <span class="math inline">\(W\)</span> statistic has a maximum value of 1, which occurs when the data look “perfectly normal”. The smaller the value of <span class="math inline">\(W\)</span> the less normal the data are. However, the sampling distribution for <span class="math inline">\(W\)</span>, which is not one of the standard ones that I discussed in Chapter <strong>7</strong> and is in fact a complete pain in the arse to work with, does depend on the sample size <span class="math inline">\(N\)</span>. To give you a feel for what these sampling distributions look like, I’ve plotted three of them in Figure <a href="comparing-two-means.html#fig:fig11-22">11.22</a>. Notice that, as the sample size starts to get large, the sampling distribution becomes very tightly clumped up near <span class="math inline">\(W = 1\)</span>, and as a consequence, for larger samples <span class="math inline">\(W\)</span> doesn’t have to be very much smaller than 1 in order for the test to be significant.</p>
+<p>To get the Shapiro-Wilk statistic in jamovi t-tests, check the option for ‘Normality’ listed under ‘Assumptions’. In the randomly sampled data (<span class="math inline">\(N = 100\)</span>) we used for the QQ plot, the value for the Shapiro-Wilk normality test statistic was <span class="math inline">\(W = 0.99\)</span> with a p-value of <span class="math inline">\(0.69\)</span>. So, not surprisingly, we have no evidence that these data depart from normality. When reporting the results for a Shapiro-Wilk test, you should (as usual) make sure to include the test statistic <span class="math inline">\(W\)</span> and the p value, though given that the sampling distribution depends so heavily on <span class="math inline">\(N\)</span> it would probably be a politeness to include <span class="math inline">\(N\)</span> as well.</p>
+</div>
+<div id="example" class="section level3" number="11.9.3">
+<h3>
+<span class="header-section-number">11.9.3</span> Example<a class="anchor" aria-label="anchor" href="#example"><i class="fas fa-link"></i></a>
+</h3>
+<div class="figure">
+<span style="display:block;" id="fig:fig11-22"></span>
+<img src="images/Figure102.PNG" alt="Sampling distribution of the Shapiro-Wilk $W$ statistic, under the null hypothesis that the data are normally distributed, for samples of size 10, 20 and 50. Note that small values of $W$ indicate departure from normality" width="90%"><p class="caption">
+Figure 11.22: Sampling distribution of the Shapiro-Wilk <span class="math inline">\(W\)</span> statistic, under the null hypothesis that the data are normally distributed, for samples of size 10, 20 and 50. Note that small values of <span class="math inline">\(W\)</span> indicate departure from normality
+</p>
+</div>
+<p>In the meantime, it’s probably worth showing you an example of what happens to the QQ plot and the Shapiro-Wilk test when the data turn out to be non-normal. For that, let’s look at the distribution of our AFL winning margins data, which if you remember back to the chapter on <a href="descriptive-statistics.html#descriptive-statistics">Descriptive statistics</a> it didn’t look like they came from a normal distribution at all. Here’s what happens to the QQ plot (Figure <a href="comparing-two-means.html#fig:fig11-23">11.23</a>).</p>
+<div class="figure">
+<span style="display:block;" id="fig:fig11-23"></span>
+<img src="images/Figure103.PNG" alt="QQ plot showing non-normality from the AFL winning margins data" width="90%"><p class="caption">
+Figure 11.23: QQ plot showing non-normality from the AFL winning margins data
+</p>
+</div>
+<p>And when we run the Shapiro-Wilk test on the AFL margins data, we get a value for the Shapiro-Wilk normality test statistic of <span class="math inline">\(W = 0.94\)</span>, and p-value = <span class="math inline">\(9.481\)</span>x<span class="math inline">\(10^{-07}\)</span>. Clearly a significant effect!</p>
+</div>
+</div>
+<div id="testing-non-normal-data" class="section level2" number="11.10">
+<h2>
+<span class="header-section-number">11.10</span> Testing non-normal data<a class="anchor" aria-label="anchor" href="#testing-non-normal-data"><i class="fas fa-link"></i></a>
+</h2>
+<p>Okay, suppose your data turn out to be pretty substantially non-normal, but you still want to run something like a t-test? This situation occurs a lot in real life. For the AFL winning margins data, for instance, the Shapiro-Wilk test made it very clear that the normality assumption is violated. This is the situation where you want to use Wilcoxon tests.</p>
+<p>Like the t-test, the Wilcoxon test comes in two forms, one-sample and two-sample, and they’re used in more or less the exact same situations as the corresponding t-tests. Unlike the t-test, the Wilcoxon test doesn’t assume normality, which is nice. In fact, they don’t make any assumptions about what kind of distribution is involved. In statistical jargon, this makes them <strong>nonparametric tests</strong>. While avoiding the normality assumption is nice, there’s a drawback: the Wilcoxon test is usually less powerful than the t-test (i.e., higher Type II error rate). I won’t discuss the Wilcoxon tests in as much detail as the t-tests, but I’ll give you a brief overview.</p>
+<div id="two-sample-mann-whitney-u-test" class="section level3" number="11.10.1">
+<h3>
+<span class="header-section-number">11.10.1</span> Two sample Mann-Whitney U test<a class="anchor" aria-label="anchor" href="#two-sample-mann-whitney-u-test"><i class="fas fa-link"></i></a>
+</h3>
+<p>I’ll start by describing the <strong>Mann-Whitney U test</strong>, since it’s actually simpler than the one sample version. Suppose we’re looking at the scores of 10 people on some test. Since my imagination has now failed me completely, let’s pretend it’s a “test of awesomeness” and there are two groups of people, “A” and “B”. I’m curious to know which group is more awesome. The data are included in the file awesome.csv, and there are two variables apart from the usual ID variable: scores and group.</p>
+<p>As long as there are no ties (i.e., people with the exact same awesomeness score) then the test that we want to do is surprisingly simple. All we have to do is construct a table that compares every observation in group A against every observation in group B. Whenever the group A datum is larger, we place a check mark in the table (Table <a href="comparing-two-means.html#tab:tab11-4">11.4</a>).</p>
+<div class="inline-table"><table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 101%; margin-left: auto; margin-right: auto;  " id="tab:tab11-4">
+<caption style="caption-side: bottom; text-align: left;">
+<span id="tab:tab11-4">Table 11.4: </span> Comparing observations by group for a two-sample Mann-Whitney U test</caption>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<tr>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: bold;"></th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;"></th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;"></th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;"></th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;"></th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;"></th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;"></th>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">14.5</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">10.4</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">12.4</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">11.7</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">13.0</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: normal;">group A</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">6.4</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">.</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">.</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">.</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">.</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">.</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; font-weight: normal;">group A</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">10.7</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">.</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">✓</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">.</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">.</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; font-weight: normal;">.</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: normal;">group A</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">11.9</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">.</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">✓</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">.</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">✓</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">.</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; font-weight: normal;">group A</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">7.3</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">.</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">.</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">.</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">.</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; font-weight: normal;">.</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: normal;">group A</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">10</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">.</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">.</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">.</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">.</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">.</td>
+</tr>
+</table></div>
+<p>We then count up the number of checkmarks. This is our test statistic, W. <a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Actually, there are two different versions of the test statistic that differ from each other by a constant value. The version that I’ve described is the one that jamovi calculates.&lt;/p&gt;"><sup>113</sup></a> The actual sampling distribution for W is somewhat complicated, and I’ll skip the details. For our purposes, it’s sufficient to note that the interpretation of W is qualitatively the same as the interpretation of <span class="math inline">\(t\)</span> or <span class="math inline">\(z\)</span>. That is, if we want a two-sided test then we reject the null hypothesis when W is very large or very small, but if we have a directional (i.e., one-sided) hypothesis then we only use one or the other.</p>
+<p>In jamovi, if we run an ‘Independent Samples T-Test’ with scores as the dependent variable. and group as the grouping variable, and then under the options for ‘tests’ check the option for ’Mann-Whitney <span class="math inline">\(U^{’}\)</span>, we will get results showing that <span class="math inline">\(U = 3\)</span> (i.e., the same number of checkmarks as shown above), and a p-value = <span class="math inline">\(0.05556\)</span>.</p>
+</div>
+<div id="one-sample-wilcoxon-test" class="section level3" number="11.10.2">
+<h3>
+<span class="header-section-number">11.10.2</span> One sample Wilcoxon test<a class="anchor" aria-label="anchor" href="#one-sample-wilcoxon-test"><i class="fas fa-link"></i></a>
+</h3>
+<p>What about the <strong>one sample Wilcoxon test</strong> (or equivalently, the paired samples Wilcoxon test)? Suppose I’m interested in finding out whether taking a statistics class has any effect on the happiness of students. My data is in the happiness.csv file. What I’ve measured here is the happiness of each student before taking the class and after taking the class, and the change score is the difference between the two. Just like we saw with the t-test, there’s no fundamental difference between doing a paired-samples test using before and after, versus doing a onesample test using the change scores. As before, the simplest way to think about the test is to construct a tabulation. The way to do it this time is to take those change scores that are positive differences, and tabulate them against all the complete sample. What you end up with is a table that looks like Table <a href="comparing-two-means.html#tab:tab11-5">11.5</a>.</p>
+<div class="inline-table"><table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 101%; margin-left: auto; margin-right: auto;  " id="tab:tab11-5">
+<caption style="caption-side: bottom; text-align: left;">
+<span id="tab:tab11-5">Table 11.5: </span> Comparing observations by group for a one-sample Wilcoxon U test</caption>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<tr>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: bold;"></th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;"></th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;"></th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;"></th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;"></th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;"></th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;"></th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;"></th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;"></th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;"></th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;"></th>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: bold;"></th>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-24</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-14</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-10</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">7</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-6</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-38</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-35</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-30</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">5</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: normal;">positive differences</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">7</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">.</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">.</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">.</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">✓</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">✓</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">.</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">✓</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">.</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">.</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">✓</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; font-weight: normal;">positive differences</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">.</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">.</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">.</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">.</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">.</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">.</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">✓</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">.</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">.</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; font-weight: normal;">.</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: normal;">positive differences</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">5</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">.</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">.</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">.</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">.</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">.</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">.</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">✓</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">.</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">.</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">✓</td>
+</tr>
+</table></div>
+<p>Counting up the tick marks this time we get a test statistic of <span class="math inline">\(W = 7\)</span>. As before, if our test is two sided, then we reject the null hypothesis when W is very large or very small. As far as running it in jamovi goes, it’s pretty much what you’d expect. For the one-sample version, you specify the ‘Wilcoxon rank’ option under ‘Tests’ in the ‘One Sample T-Test’ analysis window. This gives you Wilcoxon <span class="math inline">\(W = 7\)</span>, p-value = <span class="math inline">\(0.03711\)</span>. As this shows, we have a significant effect. Evidently, taking a statistics class does have an effect on your happiness. Switching to a paired samples version of the test won’t give us a different answer, of course; see Figure <a href="comparing-two-means.html#fig:fig11-24">11.24</a>.</p>
+<div class="figure">
+<span style="display:block;" id="fig:fig11-24"></span>
+<img src="images/Figure104.PNG" alt="jamovi screen showing results for one sample and paired sample Wilcoxon nonparametric tests" width="90%"><p class="caption">
+Figure 11.24: jamovi screen showing results for one sample and paired sample Wilcoxon nonparametric tests
+</p>
+</div>
+</div>
+</div>
+<div id="summary-9" class="section level2" number="11.11">
+<h2>
+<span class="header-section-number">11.11</span> Summary<a class="anchor" aria-label="anchor" href="#summary-9"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>
+<a href="comparing-two-means.html#the-one-sample-t-test">The one-sample t-test</a> is used to compare a single sample mean against a hypothesised value for the population mean.</li>
+<li>An independent samples t-test is used to compare the means of two groups, and tests the null hypothesis that they have the same mean. It comes in two forms: <a href="comparing-two-means.html#the-independent-samples-t-test-student-test">The independent samples t-test (Student test)</a> assumes that the groups have the same standard deviation, <a href="comparing-two-means.html#the-independent-samples-t-test-welch-test">The independent samples t-test (Welch test)</a> does not.</li>
+<li>
+<a href="comparing-two-means.html#the-paired-samples-t-test">The paired-samples t-test</a> is used when you have two scores from each person, and you want to test the null hypothesis that the two scores have the same mean. It is equivalent to taking the difference between the two scores for each person, and then running a one sample t-test on the difference scores.</li>
+<li>
+<a href="comparing-two-means.html#one-sided-tests">One-sided tests</a> are perfectly legitimate as long as they are pre-planned (like all tests!).</li>
+<li>
+<a href="factorial-anova.html#effect-size-3">Effect size</a> calculations for the difference between means can be calculated via the Cohen’s d statistic.</li>
+<li>
+<a href="comparing-two-means.html#checking-the-normality-of-a-sample">Checking the normality of a sample</a> using QQ plots and the Shapiro-Wilk test.</li>
+<li>If your data are non-normal, you can use Mann-Whitney or Wilcoxon tests instead of t-tests for <a href="comparing-two-means.html#testing-non-normal-data">Testing non-normal data</a>.</li>
+</ul>
+</div>
+</div>
+
+  <div class="chapter-nav">
+<div class="prev"><a href="categorical-data-analysis.html"><span class="header-section-number">10</span> Categorical data analysis</a></div>
+<div class="next"><a href="correlation-and-linear-regression.html"><span class="header-section-number">12</span> Correlation and linear regression</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#comparing-two-means"><span class="header-section-number">11</span> Comparing two means</a></li>
+<li>
+<a class="nav-link" href="#the-one-sample-z-test"><span class="header-section-number">11.1</span> The one-sample z-test</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#the-inference-problem-that-the-test-addresses"><span class="header-section-number">11.1.1</span> The inference problem that the test addresses</a></li>
+<li><a class="nav-link" href="#constructing-the-hypothesis-test"><span class="header-section-number">11.1.2</span> Constructing the hypothesis test</a></li>
+<li><a class="nav-link" href="#a-worked-example-by-hand"><span class="header-section-number">11.1.3</span> A worked example, by hand</a></li>
+<li><a class="nav-link" href="#assumptions-of-the-z-test"><span class="header-section-number">11.1.4</span> Assumptions of the z-test</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#the-one-sample-t-test"><span class="header-section-number">11.2</span> The one-sample t-test</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#introducing-the-t-test"><span class="header-section-number">11.2.1</span> Introducing the t-test</a></li>
+<li><a class="nav-link" href="#doing-the-test-in-jamovi-2"><span class="header-section-number">11.2.2</span> Doing the test in jamovi</a></li>
+<li><a class="nav-link" href="#assumptions-of-the-one-sample-t-test"><span class="header-section-number">11.2.3</span> Assumptions of the one sample t-test</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#the-independent-samples-t-test-student-test"><span class="header-section-number">11.3</span> The independent samples t-test (Student test)</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#the-data"><span class="header-section-number">11.3.1</span> The data</a></li>
+<li><a class="nav-link" href="#introducing-the-test"><span class="header-section-number">11.3.2</span> Introducing the test</a></li>
+<li><a class="nav-link" href="#a-pooled-estimate-of-the-standard-deviation"><span class="header-section-number">11.3.3</span> A “pooled estimate” of the standard deviation</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#completing-the-test"><span class="header-section-number">11.4</span> Completing the test</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#doing-the-test-in-jamovi-3"><span class="header-section-number">11.4.1</span> Doing the test in jamovi</a></li>
+<li><a class="nav-link" href="#positive-and-negative-t-values"><span class="header-section-number">11.4.2</span> Positive and negative t values</a></li>
+<li><a class="nav-link" href="#assumptions-of-the-test"><span class="header-section-number">11.4.3</span> Assumptions of the test</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#the-independent-samples-t-test-welch-test"><span class="header-section-number">11.5</span> The independent samples t-test (Welch test)</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#doing-the-welch-test-in-jamovi"><span class="header-section-number">11.5.1</span> Doing the Welch test in jamovi</a></li>
+<li><a class="nav-link" href="#assumptions-of-the-test-1"><span class="header-section-number">11.5.2</span> Assumptions of the test</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#the-paired-samples-t-test"><span class="header-section-number">11.6</span> The paired-samples t-test</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#the-data-1"><span class="header-section-number">11.6.1</span> The data</a></li>
+<li><a class="nav-link" href="#what-is-the-paired-samples-t-test"><span class="header-section-number">11.6.2</span> What is the paired samples t-test?</a></li>
+<li><a class="nav-link" href="#doing-the-test-in-jamovi-4"><span class="header-section-number">11.6.3</span> Doing the test in jamovi</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#one-sided-tests"><span class="header-section-number">11.7</span> One-sided tests</a></li>
+<li>
+<a class="nav-link" href="#effect-size-1"><span class="header-section-number">11.8</span> Effect size</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#cohens-d-from-one-sample"><span class="header-section-number">11.8.1</span> Cohen’s d from one sample</a></li>
+<li><a class="nav-link" href="#cohens-d-from-a-students-t-test"><span class="header-section-number">11.8.2</span> Cohen’s d from a Student’s t test</a></li>
+<li><a class="nav-link" href="#cohens-d-from-a-paired-samples-test"><span class="header-section-number">11.8.3</span> Cohen’s d from a paired-samples test</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#checking-the-normality-of-a-sample"><span class="header-section-number">11.9</span> Checking the normality of a sample</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#qq-plots"><span class="header-section-number">11.9.1</span> QQ plots</a></li>
+<li><a class="nav-link" href="#shapiro-wilk-tests"><span class="header-section-number">11.9.2</span> Shapiro-Wilk tests</a></li>
+<li><a class="nav-link" href="#example"><span class="header-section-number">11.9.3</span> Example</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#testing-non-normal-data"><span class="header-section-number">11.10</span> Testing non-normal data</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#two-sample-mann-whitney-u-test"><span class="header-section-number">11.10.1</span> Two sample Mann-Whitney U test</a></li>
+<li><a class="nav-link" href="#one-sample-wilcoxon-test"><span class="header-section-number">11.10.2</span> One sample Wilcoxon test</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#summary-9"><span class="header-section-number">11.11</span> Summary</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong><span style="font-family:Garamond;font-weight:700;">learning statistics with jamovi</span></strong>" was written by Danielle J. Navarro &amp; David R. Foxcroft. It was last built on 20 June 2022 (version 0.75).</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>
