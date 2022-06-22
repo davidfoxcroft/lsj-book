@@ -20,6 +20,7 @@ huxthattibble <- function(x) {
     else ( hux(x) %>% 
              set_contents(1, value = names(x)) ) 
     } %>% 
+  set_escape_contents(everywhere, value = FALSE) %>% 
   set_align(everywhere, everywhere, "center") %>% 
   set_width(1.01) %>% 
   set_caption_pos("bottomleft") %>% 

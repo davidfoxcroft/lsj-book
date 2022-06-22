@@ -27,7 +27,7 @@ That little frequency table is quite helpful. Looking at it, there's a bit of a 
 Excellent. From this point on, we'll treat this table as the data that we're looking to analyse. However, since I'm going to have to talk about this data in mathematical terms (sorry!) it might be a good idea to be clear about what the notation is. In mathematical notation, we shorten the human-readable word "observed" to the letter $O$, and we use subscripts to denote the position of the observation. So the second observation in our table is written as $O_2$ in maths. The relationship between the English descriptions and the mathematical symbols are illustrated in Table \@ref(tab:tab10-2).
 
 ```{r tab10-2}
-huxtabs[[10]][[2]] %>% set_caption("Relationship between English descriptions and mathematical symbols")
+huxtabs[[10]][[2]] %>% set_caption("Relationship between English descriptions and mathematical symbols") 
 ```
 
 
@@ -265,18 +265,17 @@ $$df=(r-1)(c-1)$$
 
 but the explanation for why the degrees of freedom takes this value is different depending on the experimental design. For the sake of argument, let's suppose that we had honestly intended to survey exactly 87 robots and 93 humans (column totals fixed by the experimenter), but left the row totals free to vary (row totals are random variables). Let's think about the constraints that apply here. Well, since we deliberately fixed the column totals by Act of Experimenter, we have $c$ constraints right there. But, there's actually more to it than that. Remember how our null hypothesis had some free parameters (i.e., we had to estimate the Pi values)? Those matter too. I won't explain why in this book, but every free parameter in the null hypothesis is rather like an additional constraint. So, how many of those are there? Well, since these probabilities have to sum to 1, there's only $r - 1$ of these. So our total degrees of freedom is:
 
-$$ \begin{equation} \begin{split} df & = \text{(number of
+$$ \begin{split} df & = \text{(number of
 observations) - (number of constraints)} \\\\ & = (r \times c) - (c +
-(r - 1)) \\\\ & = rc - c - r + 1 \\\\ & = (r - 1)(c - 1) \end{split}
-\end{equation} $$
+(r - 1)) \\\\ & = rc - c - r + 1 \\\\ & = (r - 1)(c - 1) \end{split}$$
 
 Alternatively, suppose that the only thing that the experimenter fixed was the total sample size N. That is, we quizzed the first 180 people that we saw and it just turned out that 87 were robots and 93 were humans. This time around our reasoning would be slightly different, but would still lead us to the same answer. Our null hypothesis still has $r - 1$ free parameters corresponding to the choice probabilities, but it now also has $c - 1$ free parameters corresponding to the species probabilities, because we'd also have to estimate the probability that a randomly sampled person turns out to be a robot.[^10-categorical-data-analysis-13] Finally, since we did actually fix the total number of observations N, that's one more constraint. So, now we have rc observations, and $(c-1)+(r-1)+1$ constraints. What does that give?
 
 [^10-categorical-data-analysis-13]: A problem many of us worry about in real life.
 
-$$ \begin{equation} \begin{split} df & = \text{(number of
+$$\begin{split} df & = \text{(number of
 observations) - (number of constraints)} \\\\ & = (r \times c) -
-((c-1) + (r - 1)+1) \\\\ & = (r - 1)(c - 1) \end{split} \end{equation}
+((c-1) + (r - 1)+1) \\\\ & = (r - 1)(c - 1) \end{split}
 $$ Amazing.
 
 ### Doing the test in jamovi

@@ -766,13 +766,12 @@ Figure 11.3: Rejection regions for the two-sided z-test (panel a) and the one-si
 </p>
 </div>
 <p>Next, let’s calculate the (true) standard error of the mean (easily done with a calculator):</p>
-<p><span class="math display">\[ \begin{equation} \begin{split} sem.true &amp; = \frac{sd.true}{\sqrt{N}}
-\\\\ &amp; = \frac{9.5}{\sqrt{20}} \\\\ &amp; = 2.124265 \end{split}
-\end{equation} \]</span></p>
+<p><span class="math display">\[ \begin{split} sem.true &amp; = \frac{sd.true}{\sqrt{N}}
+\\\\ &amp; = \frac{9.5}{\sqrt{20}} \\\\ &amp; = 2.124265 \end{split}\]</span></p>
 <p>And finally, we calculate our z-score:</p>
-<p><span class="math display">\[ \begin{equation} \begin{split} z.score &amp; = \frac{sample.mean -
+<p><span class="math display">\[\begin{split} z.score &amp; = \frac{sample.mean -
 mu.null}{sem.true} \\\\ &amp; = \frac{ (72.3 - 67.5)}{ 2.124265} \\\\ &amp; =
-2.259606 \end{split} \end{equation} \]</span></p>
+2.259606 \end{split}\]</span></p>
 <p>At this point, we would traditionally look up the value <span class="math inline">\(2.26\)</span> in our table of critical values. Our original hypothesis was two-sided (we didn’t really have any theory about whether psych students would be better or worse at statistics than other students) so our hypothesis test is two-sided (or two-tailed) also. Looking at the little table that I showed earlier, we can see that <span class="math inline">\(2.26\)</span> is bigger than the critical value of <span class="math inline">\(1.96\)</span> that would be required to be significant at <span class="math inline">\(\alpha = .05\)</span>, but smaller than the value of <span class="math inline">\(2.58\)</span> that would be required to be significant at a level of <span class="math inline">\(\alpha = .01\)</span>. Therefore, we can conclude that we have a significant effect, which we might write up by saying something like this:</p>
 <blockquote>
 <p><em>With a mean grade of</em> <span class="math inline">\(73.2\)</span> in the sample of psychology students, and assuming a true population standard deviation of <span class="math inline">\(9.5\)</span>, we can conclude that the psychology students have significantly different statistics scores to the class average (<span class="math inline">\(z = 2.26, N = 20, p&lt;.05\)</span>).</p>
@@ -1013,7 +1012,7 @@ Figure 11.14: Mean grade for test 1 and test 2, with associated 95% confidence i
 <p><span class="math display">\[D_i=X_{i1}-X_{i2}\]</span></p>
 <p>Notice that the difference scores is variable 1 minus variable 2 and not the other way around, so if we want improvement to correspond to a positive valued difference, we actually want “test 2” to be our “variable 1”. Equally, we would say that <span class="math inline">\(\mu_D = \mu_1 - \mu_2\)</span> is the population mean for this difference variable. So, to convert this to a hypothesis test, our null hypothesis is that this mean difference is zero and the alternative hypothesis is that it is not</p>
 <p><span class="math display">\[H_0:\mu_D=0\]</span> <span class="math display">\[H_1:\mu_D \neq 0\]</span></p>
-<p>This is assuming we’re talking about a two-sided test here. This is more or less identical to the way we described the hypotheses for the one-sample t-test. The only difference is that the specific value that the null hypothesis predicts is 0. And so our t-statistic is defined in more or less the same way too. If we let {D} denote the mean of the difference scores, then</p>
+<p>This is assuming we’re talking about a two-sided test here. This is more or less identical to the way we described the hypotheses for the one-sample t-test. The only difference is that the specific value that the null hypothesis predicts is 0. And so our t-statistic is defined in more or less the same way too. If we let <span class="math inline">\(\bar{D}\)</span> denote the mean of the difference scores, then</p>
 <p><span class="math display">\[t=\frac{\bar{D}}{SE(\bar{D})}\]</span> which is <span class="math display">\[t=\frac{\bar{D}}{\frac{\hat{\sigma}_D}{\sqrt{N}}}\]</span></p>
 <p>where <span class="math inline">\(\hat{\sigma}_D\)</span> is the standard deviation of the difference scores. Since this is just an ordinary, one-sample t-test, with nothing special about it, the degrees of freedom are still <span class="math inline">\(N - 1\)</span>. And that’s it. The paired samples t-test really isn’t a new test at all. It’s a one-sample t-test, but applied to the difference between two variables. It’s actually very simple. The only reason it merits a discussion as long as the one we’ve just gone through is that you need to be able to recognise <em>when</em> a paired samples test is appropriate, and to understand <em>why</em> it’s better than an independent samples t test.</p>
 </div>

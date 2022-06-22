@@ -1064,29 +1064,23 @@ Figure 14.17: ANOVA of the rtfm.csv data set in jamovi, without the interaction 
 <p>So, by reading the key numbers off the ANOVA table and the mean scores that we presented earlier, we can see that the students obtained a higher grade if they attended class (<span class="math inline">\(F_{1,5} = 21.6, p = .0056\)</span>) and if they read the textbook (<span class="math inline">\(F_{1,5} = 52.3, p = .0008\)</span>). Let’s make a note of those p-values and those <span class="math inline">\(F\)</span> statistics.</p>
 <p>Now let’s think about the same analysis from a linear regression perspective. In the rtfm data set, we have encoded attend and reading as if they were numeric predictors. In this case, this is perfectly acceptable. There really is a sense in which a student who turns up to class (i.e. attend = 1) has in fact done “more attendance” than a student who does not (i.e. attend = 0). So it’s not at all unreasonable to include it as a predictor in a regression model. It’s a little unusual, because the predictor only takes on two possible values, but it doesn’t violate any of the assumptions of linear regression. And it’s easy to interpret. If the regression coefficient for attend is greater than 0 it means that students that attend lectures get higher grades. If it’s less than zero then students attending lectures get lower grades. The same is true for our reading variable.</p>
 <p>Wait a second though. Why is this true? It’s something that is intuitively obvious to everyone who has taken a few stats classes and is comfortable with the maths, but it isn’t clear to everyone else at first pass. To see why this is true, it helps to look closely at a few specific students. Let’s start by considering the 6th and 7th students in our data set (i.e. <span class="math inline">\(p = 6\)</span> and <span class="math inline">\(p = 7\)</span>). Neither one has read the textbook, so in both cases we can set reading = 0. Or, to say the same thing in our mathematical notation, we observe <span class="math inline">\(X_{2,6} = 0\)</span> and <span class="math inline">\(X_{2,7} = 0\)</span>. However, student number 7 did turn up to lectures (i.e., attend = 1, <span class="math inline">\(X_{1,7} = 1\)</span>) whereas student number 6 did not (i.e., attend = 0, <span class="math inline">\(X_{1,6} = 0\)</span>). Now let’s look at what happens when we insert these numbers into the general formula for our regression line. For student number 6, the regression predicts that</p>
-<p><span class="math display">\[\begin{equation}
-\begin{split}
+<p><span class="math display">\[\begin{split}
 \hat{Y}_6 &amp; = b_0 + b_1 X_{1,6} + b_2 X_{2,6} \\
 &amp; = b_0 + (b_1 \times 0) + (b_2 \times 0) \\
 &amp; = b_0
-\end{split}
-\end{equation}\]</span></p>
+\end{split}\]</span></p>
 <p>So we’re expecting that this student will obtain a grade corresponding to the value of the intercept term <span class="math inline">\(b_0\)</span>. What about student 7? This time when we insert the numbers into the formula for the regression line, we obtain the following</p>
-<p><span class="math display">\[\begin{equation}
-\begin{split}
+<p><span class="math display">\[\begin{split}
 \hat{Y}_7 &amp; = b_0 + b_1 X_{1,7} + b_2 X_{2,7} \\
 &amp; = b_0 + (b_1 \times 1) + (b_2 \times 0) \\
 &amp; = b_0 + b_1
-\end{split}
-\end{equation}\]</span></p>
+\end{split}\]</span></p>
 <p>Because this student attended class, the predicted grade is equal to the intercept term b0 plus the coefficient associated with the attend variable, <span class="math inline">\(b_1\)</span>. So, if <span class="math inline">\(b_1\)</span> is greater than zero, we’re expecting that the students who turn up to lectures will get higher grades than those students who don’t. If this coefficient is negative we’re expecting the opposite: students who turn up at class end up performing much worse. In fact, we can push this a little bit further. What about student number 1, who turned up to class (<span class="math inline">\(X_{1,1} = 1\)</span>) and read the textbook (<span class="math inline">\(X_{2,1} = 1\)</span>)? If we plug these numbers into the regression we get</p>
-<p><span class="math display">\[\begin{equation}
-\begin{split}
+<p><span class="math display">\[\begin{split}
 \hat{Y}_1 &amp; = b_0 + b_1 X_{1,1} + b_2 X_{2,1} \\
 &amp; = b_0 + (b_1 \times 1) + (b_2 \times 1) \\
 &amp; = b_0 + b_1 + b_2
-\end{split}
-\end{equation}\]</span></p>
+\end{split}\]</span></p>
 <p>So if we assume that attending class helps you get a good grade (i.e., <span class="math inline">\(b1 \&gt; 0\)</span>) and if we assume that reading the textbook also helps you get a good grade (i.e., <span class="math inline">\(b2 \&gt; 0\)</span>), then our expectation is that student 1 will get a grade that that is higher than student 6 and student 7.</p>
 <p>And at this point you won’t be at all suprised to learn that the regression model predicts that student 3, who read the book but didn’t attend lectures, will obtain a grade of <span class="math inline">\(b_{2} + b_{0}\)</span>. I won’t bore you with yet another regression formula. Instead, what I’ll do is show you is Table <a href="factorial-anova.html#tab:tab14-9">14.9</a> with the <em>expected grades</em>.</p>
 <table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 101%; margin-left: auto; margin-right: auto;  " id="tab:tab14-9">

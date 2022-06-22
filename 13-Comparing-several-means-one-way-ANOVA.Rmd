@@ -136,8 +136,8 @@ huxtabs[[13]][[5]] %>% set_caption("A worked example...3")
 
 The last step is equally straightforward. In order to calculate the within-group sum of squares we just add up the squared deviations across all observations:
 
-$$ \begin{equation} \begin{split} SS_w & = 0.0025 + 0.0225 + 0.1225 +
-0.0136 + 0.1003 \\ & = 0.2614 \end{split} \end{equation} $$
+$$\begin{split} SS_w & = 0.0025 + 0.0225 + 0.1225 +
+0.0136 + 0.1003 \\ & = 0.2614 \end{split}$$
 
 Of course, if we actually wanted to get the right answer we'd need to do this for all 18 observations in the data set, not just the first five. We could continue with the pencil and paper calculations if we wanted to, but it's pretty tedious. Alternatively, it's not too hard to do this in a dedicated spreadsheet programme such as OpenOffice or Excel. Try and do it yourself. The one that I did, in Excel, is in the file clinicaltrial_anova.xls. When you do it you should end up with a within-group sum of squares value of $1.39$.
 
@@ -155,47 +155,30 @@ huxtabs[[13]][[7]] %>% set_caption("A worked example...5")
 
 And so now our between group sum of squares is obtained by summing these "weighted squared deviations" over all three groups in the study:
 
-$$ \begin{equation} 
-\begin{split} 
-SS_b & = 1.14 + 0.18 + 2.16 \\ 
-& = 3.48 
-\end{split} 
-\end{equation} $$
+$$\begin{aligned} SS_b & = 1.14 + 0.18 + 2.16 \\ &= 3.48 \end{aligned}$$
 
 As you can see, the between group calculations are a lot shorter[^13-comparing-several-means-one-way-anova-10]. Now that we've calculated our sums of squares values, $SS_b$ and $SS_w$, the rest of the ANOVA is pretty painless. The next step is to calculate the degrees of freedom. Since we have $G = 3$ groups and $N = 18$ observations in total our degrees of freedom can be calculated by simple subtraction:
 
 [^13-comparing-several-means-one-way-anova-10]: In the Excel clinicaltrial anova.xls the value for SSb worked out to be very slightly different, $3.45$, than that shown in the text above (rounding errors!)
 
-$$ 
-\begin{equation} 
-\begin{split} 
-df_b & = G-1 & = 2 \\ 
-df_w & = N-G &= 15 
-\end{split} 
-\end{equation} 
-$$
+$$\begin{split} 
+df_b & = G-1 = 2 \\ 
+df_w & = N-G = 15 
+\end{split}$$
 
 Next, since we've now calculated the values for the sums of squares and the degrees of freedom, for both the within-groups variability and the between-groups variability, we can obtain the mean square values by dividing one by the other:
 
-$$ 
-\begin{equation} 
-\begin{split} 
-MS_b & = \frac{SS_b}{df_b} & = \frac{3.48}{2} & = 1.74 \\ 
-MS_w & = \frac{SS_w}{df_w} & = \frac{1.39}{15} & = 0.09 
-\end{split} 
-\end{equation} 
-$$
+$$\begin{split} 
+MS_b & = \frac{SS_b}{df_b} = \frac{3.48}{2} = 1.74 \\ 
+MS_w & = \frac{SS_w}{df_w} = \frac{1.39}{15} = 0.09 
+\end{split}$$
 
 We're almost done. The mean square values can be used to calculate the F-value, which is the test statistic that we're interested in. We do this by dividing the between-groups MS value by the within-groups MS value.
 
-$$ 
-\begin{equation} 
-\begin{split} 
-F & = \frac{MS_b}{MS_w} & = \frac{1.74}{0.09} \\
+$$\begin{split} 
+F & = \frac{MS_b}{MS_w}  = \frac{1.74}{0.09} \\
 & = 19.3 
-\end{split} 
-\end{equation} 
-$$
+\end{split}$$
 
 Woohooo! This is terribly exciting, yes? Now that we have our test statistic, the last step is to find out whether the test itself gives us a significant result. As discussed in [Hypothesis testing] back in the "old days" what we'd do is open up a statistics textbook or flick to the back section which would actually have a huge lookup table and we would find the threshold $F$ value corresponding to a particular value of alpha (the null hypothesis rejection region), e.g. $0.05$, $0.01$ or $0.001$, for 2 and 15 degrees of freedom. Doing it this way would give us a threshold F value for an alpha of $0.001$ of $11.34$. As this is less than our calculated $F$ value we say that $p < 0.001$. But those were the old days, and nowadays fancy stats software calculates the exact p-value for you. In fact, the exact p-value is $0.000071$. So, unless we're being *extremely* conservative about our Type I error rate, we're pretty much guaranteed to reject the null hypothesis.
 
@@ -376,7 +359,7 @@ Now that we've seen how to check for normality, we are led naturally to ask what
 
 The Kruskal-Wallis test is surprisingly similar to ANOVA, in some ways. In ANOVA we started with $Y_{ik}$, the value of the outcome variable for the ith person in the kth group. For the Kruskal Wallis test what we'll do is rank order all of these $Y_{ik}$ values and conduct our analysis on the ranked data. [^13-comparing-several-means-one-way-anova-16]
 
-[^13-comparing-several-means-one-way-anova-16]: So let's let R\_{ik} refer to the ranking given to the ith member of the kth group. Now, let's calculate $\bar{R}_k$, the average rank given to observations in the kth group $$\bar{R}_k=\frac{1}{N_k}\sum_i R_{ik}$$ and let's also calculate $\bar{R}$, the grand mean rank $$\bar{R}=\frac{1}{N}\sum_i\sum_k R_{ik}$$ Now that we've done this, we can calculate the squared deviations from the grand mean rank $\bar{R}$. When we do this for the individual scores, i.e., if we calculate $(R_{ik} - \bar{R})^2$ , what we have is a "nonparametric" measure of how far the ik-th observation deviates from the grand mean rank. When we calculate the squared deviation of the group means from the grand means, i.e., if we calculate $(R_{ik} - \bar{R})^2$, then what we have is a nonparametric measure of how much the group deviates from the grand mean rank. With this in mind, we'll follow the same logic that we did with ANOVA and define our ranked sums of squares measures, much like we did earlier. First, we have our "total ranked sums of squares" $$RSS_{tot}=\sum_k\sum_i (R_{ik}-\bar{R})^2$$ and we can define the "between groups ranked sums of squares" like this $$\begin{equation} \begin{aligned} RSS_{b}& =\sum{k}\sum_{i}(\bar{R}_{k}-\bar{R})^2 \\ &= \sum_{k} N_k (\bar{R}_{k}-\bar{R})^2 \end{aligned}\end{equation}$$ So, if the null hypothesis is true and there are no true group differences at all, you'd expect the between group rank sums $RSS_b$ to be very small, much smaller than the total rank sums $RSS_{tot}$. Qualitatively this is very much the same as what we found when we went about constructing the ANOVA F-statistic, but for technical reasons the Kruskal-Wallis test statistic, usually denoted K, is constructed in a slightly different way, $$K=(N-1) \times \frac{RSS_b}{RSS_{tot}}$$ and if the null hypothesis is true, then the sampling distribution of K is approximately chi square with $G-1$ degrees of freedom (where $G$ is the number of groups). The larger the value of K, the less consistent the data are with the null hypothesis, so this is a one-sided test. We reject $H_0$ when K is sufficiently large.
+[^13-comparing-several-means-one-way-anova-16]: So let's let R\_{ik} refer to the ranking given to the ith member of the kth group. Now, let's calculate $\bar{R}_k$, the average rank given to observations in the kth group $$\bar{R}_k=\frac{1}{N_k}\sum_i R_{ik}$$ and let's also calculate $\bar{R}$, the grand mean rank $$\bar{R}=\frac{1}{N}\sum_i\sum_k R_{ik}$$ Now that we've done this, we can calculate the squared deviations from the grand mean rank $\bar{R}$. When we do this for the individual scores, i.e., if we calculate $(R_{ik} - \bar{R})^2$ , what we have is a "nonparametric" measure of how far the ik-th observation deviates from the grand mean rank. When we calculate the squared deviation of the group means from the grand means, i.e., if we calculate $(R_{ik} - \bar{R})^2$, then what we have is a nonparametric measure of how much the group deviates from the grand mean rank. With this in mind, we'll follow the same logic that we did with ANOVA and define our ranked sums of squares measures, much like we did earlier. First, we have our "total ranked sums of squares" $$RSS_{tot}=\sum_k\sum_i (R_{ik}-\bar{R})^2$$ and we can define the "between groups ranked sums of squares" like this $$\begin{aligned} RSS_{b}& =\sum{k}\sum_{i}(\bar{R}_{k}-\bar{R})^2 \\ &= \sum_{k} N_k (\bar{R}_{k}-\bar{R})^2 \end{aligned}$$ So, if the null hypothesis is true and there are no true group differences at all, you'd expect the between group rank sums $RSS_b$ to be very small, much smaller than the total rank sums $RSS_{tot}$. Qualitatively this is very much the same as what we found when we went about constructing the ANOVA F-statistic, but for technical reasons the Kruskal-Wallis test statistic, usually denoted K, is constructed in a slightly different way, $$K=(N-1) \times \frac{RSS_b}{RSS_{tot}}$$ and if the null hypothesis is true, then the sampling distribution of K is approximately chi square with $G-1$ degrees of freedom (where $G$ is the number of groups). The larger the value of K, the less consistent the data are with the null hypothesis, so this is a one-sided test. We reject $H_0$ when K is sufficiently large.
 
 ### Additional details
 

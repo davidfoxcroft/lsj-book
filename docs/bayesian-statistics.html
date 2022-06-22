@@ -737,15 +737,12 @@ div.csl-indent {
 <p>At this point all the elements are in place. Having written down the priors and the likelihood, you have all the information you need to do Bayesian reasoning. The question now becomes how do we use this information? As it turns out, there’s a very simple equation that we can use here, but it’s important that you understand why we use it so I’m going to try to build it up from more basic ideas.</p>
 <p>Let’s start out with one of the rules of probability theory. I listed it way back in Table Table <a href="introduction-to-probability.html#tab:tab7-1">7.1</a>, but I didn’t make a big deal out of it at the time and you probably ignored it. The rule in question is the one that talks about the probability that two things are true. In our example, you might want to calculate the probability that today is rainy (i.e., hypothesis h is true) and I’m carrying an umbrella (i.e., data <span class="math inline">\(d\)</span> is observed). The <strong>joint probability</strong> of the hypothesis and the data is written <span class="math inline">\(P(d,h)\)</span>, and you can calculate it by multiplying the prior <span class="math inline">\(P(h)\)</span> by the likelihood <span class="math inline">\(P(d|h)\)</span>. Mathematically, we say that</p>
 <p><span class="math display">\[P(d,h)=P(d|h)P(h)\]</span></p>
-<p>So, what is the probability that today is a rainy day <em>and</em> I remember to carry an umbrella? As we discussed earlier, the prior tells us that the probability of a rainy day is 15%, and the likelihood tells us that the probability of me remembering my umbrella on a rainy day is <span class="math inline">\(30\\%\)</span>. So the probability that both of these things are true is calculated by multiplying the two</p>
-<span class="math display">\[\begin{equation}
-\begin{split}
-P(rainy, umbrella)
-&amp; = P(umbrella|rainy) \times P(rainy) \\\\
-&amp; = 0.30 \times 0.15
-\\\\ &amp; = 0.045
-\end{split}
-\end{equation}\]</span>
+<p>So, what is the probability that today is a rainy day <em>and</em> I remember to carry an umbrella? As we discussed earlier, the prior tells us that the probability of a rainy day is 15%, and the likelihood tells us that the probability of me remembering my umbrella on a rainy day is <span class="math inline">\(30\%\)</span>. So the probability that both of these things are true is calculated by multiplying the two</p>
+<p><span class="math display">\[\begin{split}
+P(rainy, umbrella) &amp; = P(umbrella|rainy) \times P(rainy) \\
+&amp; = 0.30 \times 0.15 \\
+&amp; = 0.045
+\end{split}\]</span></p>
 <p>In other words, before being told anything about what actually happened, you think that there is a 4.5% probability that today will be a rainy day and that I will remember an umbrella. However, there are of course four possible things that could happen, right? So let’s repeat the exercise for all four. If we do that, we end up with Table <a href="bayesian-statistics.html#tab:tab16-3">16.3</a>.</p>
 <table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 101%; margin-left: auto; margin-right: auto;  " id="tab:tab16-3">
 <caption style="caption-side: bottom; text-align: left;"><span id="tab:tab16-3">Table 16.3: </span> Four possibilities combining rain (or not) and umbrella carrying (or not)</caption><col><col><col><tr>
@@ -867,7 +864,7 @@ P(rainy, umbrella)
 <tr>
 <td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; font-weight: normal;">20 - 150</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; font-weight: normal;">Strong evidence</td></tr>
 <tr>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: normal;">&gt; 150</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">Very strong evidence</td></tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; background-color: rgb(242, 242, 242); font-weight: normal;">> 150</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">Very strong evidence</td></tr>
 </table>
 
 <p>And to be perfectly honest, I think that even the <span class="citation">Kass and Raftery (<a href="#ref-Kass1995" role="doc-biblioref">1995</a>)</span> standards are being a bit charitable. If it were up to me, I’d have called the “positive evidence” category “weak evidence”. To me, anything in the range 3:1 to 20:1 is “weak” or “modest” evidence at best. But there are no hard and fast rules here. What counts as strong or weak evidence depends entirely on how conservative you are and upon the standards that your community insists upon before it is willing to label a finding as “true”.</p>

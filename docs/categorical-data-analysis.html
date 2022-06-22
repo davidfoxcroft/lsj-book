@@ -931,14 +931,13 @@ H_0 &amp;: \text{All of the following are true:} \\
 <p>Not surprisingly, this statistic is <span class="math inline">\(\chi^2\)</span> distributed. All we need to do is figure out how many degrees of freedom are involved, which actually isn’t too hard. As I mentioned before, you can (usually) think of the degrees of freedom as being equal to the number of data points that you’re analysing, minus the number of constraints. A contingency table with r rows and c columns contains a total of <span class="math inline">\(r^{c}\)</span> observed frequencies, so that’s the total number of observations. What about the constraints? Here, it’s slightly trickier. The answer is always the same</p>
 <p><span class="math display">\[df=(r-1)(c-1)\]</span></p>
 <p>but the explanation for why the degrees of freedom takes this value is different depending on the experimental design. For the sake of argument, let’s suppose that we had honestly intended to survey exactly 87 robots and 93 humans (column totals fixed by the experimenter), but left the row totals free to vary (row totals are random variables). Let’s think about the constraints that apply here. Well, since we deliberately fixed the column totals by Act of Experimenter, we have <span class="math inline">\(c\)</span> constraints right there. But, there’s actually more to it than that. Remember how our null hypothesis had some free parameters (i.e., we had to estimate the Pi values)? Those matter too. I won’t explain why in this book, but every free parameter in the null hypothesis is rather like an additional constraint. So, how many of those are there? Well, since these probabilities have to sum to 1, there’s only <span class="math inline">\(r - 1\)</span> of these. So our total degrees of freedom is:</p>
-<p><span class="math display">\[ \begin{equation} \begin{split} df &amp; = \text{(number of
+<p><span class="math display">\[ \begin{split} df &amp; = \text{(number of
 observations) - (number of constraints)} \\\\ &amp; = (r \times c) - (c +
-(r - 1)) \\\\ &amp; = rc - c - r + 1 \\\\ &amp; = (r - 1)(c - 1) \end{split}
-\end{equation} \]</span></p>
+(r - 1)) \\\\ &amp; = rc - c - r + 1 \\\\ &amp; = (r - 1)(c - 1) \end{split}\]</span></p>
 <p>Alternatively, suppose that the only thing that the experimenter fixed was the total sample size N. That is, we quizzed the first 180 people that we saw and it just turned out that 87 were robots and 93 were humans. This time around our reasoning would be slightly different, but would still lead us to the same answer. Our null hypothesis still has <span class="math inline">\(r - 1\)</span> free parameters corresponding to the choice probabilities, but it now also has <span class="math inline">\(c - 1\)</span> free parameters corresponding to the species probabilities, because we’d also have to estimate the probability that a randomly sampled person turns out to be a robot.<a href="#fn86" class="footnote-ref" id="fnref86"><sup>86</sup></a> Finally, since we did actually fix the total number of observations N, that’s one more constraint. So, now we have rc observations, and <span class="math inline">\((c-1)+(r-1)+1\)</span> constraints. What does that give?</p>
-<p><span class="math display">\[ \begin{equation} \begin{split} df &amp; = \text{(number of
+<p><span class="math display">\[\begin{split} df &amp; = \text{(number of
 observations) - (number of constraints)} \\\\ &amp; = (r \times c) -
-((c-1) + (r - 1)+1) \\\\ &amp; = (r - 1)(c - 1) \end{split} \end{equation}
+((c-1) + (r - 1)+1) \\\\ &amp; = (r - 1)(c - 1) \end{split}
 \]</span> Amazing.</p>
 </div>
 <div id="doing-the-test-in-jamovi-1" class="section level3 hasAnchor" number="10.2.2">

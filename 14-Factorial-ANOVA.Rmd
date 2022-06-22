@@ -355,33 +355,27 @@ Now let's think about the same analysis from a linear regression perspective. In
 
 Wait a second though. Why is this true? It's something that is intuitively obvious to everyone who has taken a few stats classes and is comfortable with the maths, but it isn't clear to everyone else at first pass. To see why this is true, it helps to look closely at a few specific students. Let's start by considering the 6th and 7th students in our data set (i.e. $p = 6$ and $p = 7$). Neither one has read the textbook, so in both cases we can set reading = 0. Or, to say the same thing in our mathematical notation, we observe $X_{2,6} = 0$ and $X_{2,7} = 0$. However, student number 7 did turn up to lectures (i.e., attend = 1, $X_{1,7} = 1$) whereas student number 6 did not (i.e., attend = 0, $X_{1,6} = 0$). Now let's look at what happens when we insert these numbers into the general formula for our regression line. For student number 6, the regression predicts that
 
-$$\begin{equation} 
-\begin{split} 
+$$\begin{split} 
 \hat{Y}_6 & = b_0 + b_1 X_{1,6} + b_2 X_{2,6} \\ 
 & = b_0 + (b_1 \times 0) + (b_2 \times 0) \\ 
 & = b_0
-\end{split} 
-\end{equation}$$
+\end{split}$$
 
 So we're expecting that this student will obtain a grade corresponding to the value of the intercept term $b_0$. What about student 7? This time when we insert the numbers into the formula for the regression line, we obtain the following
 
-$$\begin{equation} 
-\begin{split} 
+$$\begin{split} 
 \hat{Y}_7 & = b_0 + b_1 X_{1,7} + b_2 X_{2,7} \\ 
 & = b_0 + (b_1 \times 1) + (b_2 \times 0) \\ 
 & = b_0 + b_1 
-\end{split} 
-\end{equation}$$
+\end{split}$$
 
 Because this student attended class, the predicted grade is equal to the intercept term b0 plus the coefficient associated with the attend variable, $b_1$. So, if $b_1$ is greater than zero, we're expecting that the students who turn up to lectures will get higher grades than those students who don't. If this coefficient is negative we're expecting the opposite: students who turn up at class end up performing much worse. In fact, we can push this a little bit further. What about student number 1, who turned up to class ($X_{1,1} = 1$) and read the textbook ($X_{2,1} = 1$)? If we plug these numbers into the regression we get
 
-$$\begin{equation} 
-\begin{split} 
+$$\begin{split} 
 \hat{Y}_1 & = b_0 + b_1 X_{1,1} + b_2 X_{2,1} \\ 
 & = b_0 + (b_1 \times 1) + (b_2 \times 1) \\ 
 & = b_0 + b_1 + b_2 
-\end{split} 
-\end{equation}$$
+\end{split}$$
 
 So if we assume that attending class helps you get a good grade (i.e., $b1 \> 0$) and if we assume that reading the textbook also helps you get a good grade (i.e., $b2 \> 0$), then our expectation is that student 1 will get a grade that that is higher than student 6 and student 7.
 

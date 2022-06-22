@@ -39,22 +39,6 @@ lsj_chapter14_tables <- read_html("html_tables/14. Factorial ANOVA.html") %>% ht
 lsj_chapter15_tables <- read_html("html_tables/15. Factor Analysis.html") %>% html_table() 
 lsj_chapter16_tables <- read_html("html_tables/16. Bayesian statistics.html") %>% html_table() 
 
-lsj_chapter1_tables
-lsj_chapter2_tables
-lsj_chapter3_tables #empty
-lsj_chapter4_tables
-lsj_chapter5_tables #empty
-lsj_chapter6_tables
-lsj_chapter7_tables
-lsj_chapter8_tables
-lsj_chapter9_tables 
-lsj_chapter10_tables 
-lsj_chapter11_tables 
-lsj_chapter12_tables 
-lsj_chapter13_tables 
-lsj_chapter14_tables 
-lsj_chapter15_tables #empty
-lsj_chapter16_tables 
 
 lsj_chapter_tables <- list(lsj_chapter1_tables,
                         lsj_chapter2_tables,
@@ -74,8 +58,28 @@ lsj_chapter_tables <- list(lsj_chapter1_tables,
                         lsj_chapter16_tables
 )
                   
-lsj_chapter_tables      
+#lsj_chapter_tables      
 saveRDS(lsj_chapter_tables, "lsj_chapter_tables.rds")
+
+
+lsj_chapter1_tables
+lsj_chapter2_tables
+lsj_chapter3_tables #empty
+lsj_chapter4_tables
+lsj_chapter5_tables #empty
+lsj_chapter6_tables
+lsj_chapter7_tables
+lsj_chapter8_tables
+lsj_chapter9_tables 
+lsj_chapter10_tables 
+lsj_chapter11_tables 
+lsj_chapter12_tables 
+lsj_chapter13_tables 
+lsj_chapter14_tables 
+lsj_chapter15_tables #empty
+lsj_chapter16_tables 
+
+
 
 # re-open chapter.Rmd file rstudio and replace figures and tables with rcode chunks, fix fig and tab refs
 
@@ -126,3 +130,12 @@ knitr::include_graphics("images/Figure1.PNG")
 
 # build bookdown different formats and proof
 
+lsj_chapter_tables[[2]][[4]]
+
+testhux <- dplyr::as_tibble(c("","nominal","$\\bar_{x}$", "\\leftarrow"))
+colnames(testhux) <- "$\\hat{F}$"
+testhux
+
+'''{r}
+huxtable::hux(testhux)  %>% huxtable::set_escape_contents(T)
+'''
