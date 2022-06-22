@@ -9,7 +9,7 @@
     display: block;
     background: #eee;
     border: 4px solid #27466C; 
-    position: relative;
+    position: absolute;
     float: middle;
     z-index: 999;
 }
@@ -37,37 +37,41 @@
 }
 
 /* don't show the wrong footnote calls */
-.footnote-ref sup,
-.footnoteRef sup {
-  display: none;
+.footnote-ref sup, .footnoteRef sup {
+    display: none;
 }
 
-.footnote-ref,
-.footnoteRef {
-  counter-increment: fn-call;
+/* use a counter for footnote calls */
+.page-inner {
+    counter-reset: fn-call;
 }
 
-.footnote-ref::after,
-.footnoteRef::after {
-  content: counter(fn-call);
-  position: relative;
-  top: -.5em;
-  font-size: 85%;
-  line-height: 0;
-  vertical-align: baseline;
+.footnote-ref, .footnoteRef {
+    counter-increment: fn-call;
+}
+
+/* generate new footnote calls */
+.footnote-ref::after, .footnoteRef::after {
+    content: counter(fn-call);
+    position: relative;
+    top: -.5em;
+    font-size: 85%;
+    line-height: 0;
+    vertical-align: baseline;
 }
 
 /* use a counter for footnotes numbering */
 .footnotes ol {
-list-style: none;
-counter-reset: fn-number;
+    list-style: none;
+    counter-reset: fn-number;
 }
 
 .footnotes li {
-counter-increment: fn-number;
+    counter-increment: fn-number;
 }
 
-.footnotes p::before {
-content: counter(fn-number) '. ';
+.footnotes li p:first-child::before {
+ 	content: counter(fn-number) '. ';
+	width: 1.5em;
+	float: left;
 }
-
