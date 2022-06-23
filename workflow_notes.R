@@ -85,12 +85,12 @@ lsj_chapter16_tables
 
 ------ ### code fragments stored here for convenient copy / paste
   \@ref[tab:tab-1-1)
-  
-```{r tab1-1}
-huxtabs[[7]][[1]] %>% set_caption("...") 
-```
+library(huxtable)  
+x <- huxtable::hux(lsj_chapter_tables[[6]][[4]])
+x[,1:8]
+x[,9:12]
 
-x <- lsj_chapter_tables[[9]][[3]] 
+x <- lsj_chapter_tables[[9]][[3]][,1:12] 
 x
 
 library(huxtable)
