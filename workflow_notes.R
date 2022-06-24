@@ -130,12 +130,10 @@ knitr::include_graphics("images/Figure1.PNG")
 
 # build bookdown different formats and proof
 
-lsj_chapter_tables[[2]][[4]]
-
+library(knitr)
+library(huxtable)
 testhux <- dplyr::as_tibble(c("","nominal","$\\bar_{x}$", "\\leftarrow"))
 colnames(testhux) <- "$\\hat{F}$"
 testhux
-
-'''{r}
-huxtable::hux(testhux)  %>% huxtable::set_escape_contents(T)
-'''
+thux <- huxtable::hux(testhux)  %>% huxtable::set_escape_contents(T)
+huxtable::knit_print.huxtable(thux)
