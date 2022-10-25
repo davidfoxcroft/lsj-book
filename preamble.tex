@@ -1,7 +1,11 @@
 \usepackage{titling}
-\pretitle{%
-  \begin{center}
-  \LARGE
-  \includegraphics[width=8cm,height=11.3cm]{"images/bookcover_original.png"}\\[\bigskipamount]
-}
-\posttitle{\end{center}}
+\usepackage{pdfpages}
+\usepackage{atbegshi}% http://ctan.org/pkg/atbegshi
+\let\oldmaketitle\maketitle
+\AtBeginDocument{\let\maketitle\relax}
+\AtBeginDocument{\AtBeginShipoutNext{\AtBeginShipoutDiscard}} % Discard next blank page
+
+
+
+
+

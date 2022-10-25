@@ -1,12 +1,11 @@
 library(knitr)
-knitr::opts_chunk$set(echo = FALSE, message = FALSE)
+if (knitr::is_html_output()) options(huxtable.knitr_output_format = 'html')
 options(knitr.table.format = function() {
   if (knitr::is_latex_output()) 'latex'
-  if (knits::is_html_output()) 'html' else pandoc
+  if (knitr::is_html_output()) 'html' else pandoc
 })
 
 library(tinytex)
-library(magrittr)
 library(huxtable)
 library(dplyr)
 library(janitor)
@@ -57,9 +56,9 @@ huxthattibble <- function(x) {
           set_header_rows(1, TRUE))
     else ( hux(x) %>% 
              set_contents(1, value = names(x)) ) 
-    } %>% 
+   } %>%
   { if (knitr::is_latex_output()) 
-    (set_escape_contents(., everywhere, value = FALSE))
+    (set_escape_contents(., everywhere, value = FALSE)) 
     else (set_escape_contents(., everywhere, value = TRUE))
   } %>% 
   set_align(everywhere, everywhere, "center") %>% 
@@ -82,5 +81,7 @@ dfrapply <- function(object, f, ...) {
 
 #lsj_chapter_tables <- readRDS("lsj_chapter_tables.rds")
 huxtabs <- dfrapply(lsj_chapter_tables, huxthattibble)
+saveRDS(huxtabs, "lsj_chapter_huxtabs.rds")
+#huxtabs <- readRDS("lsj_chapter_huxtabs.rds")
 
 
