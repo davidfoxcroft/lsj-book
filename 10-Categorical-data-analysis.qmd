@@ -136,7 +136,7 @@ There's one last detail to talk about, namely the degrees of freedom. If you rem
 knitr::include_graphics("images/fig10-1.png")
 ```
 
-When I introduced the chi-square distribution in [Other useful distributions], I was a bit vague about what **"degrees of freedom"** actually means. Obviously, it matters. Looking at @fig-fig10-1, you can see that if we change the degrees of freedom then the chi-square distribution changes shape quite substantially. But what exactly is it? Again, when I introduced the distribution and explained its relationship to the normal distribution, I did offer an answer: it's the number of "normally distributed variables" that I'm squaring and adding together. But, for most people, that's kind of abstract and not entirely helpful. What we really need to do is try to understand degrees of freedom in terms of our data. So here goes.
+When I introduced the chi-square distribution in @sec-Other-useful-distributions, I was a bit vague about what **"degrees of freedom"** actually means. Obviously, it matters. Looking at @fig-fig10-1, you can see that if we change the degrees of freedom then the chi-square distribution changes shape quite substantially. But what exactly is it? Again, when I introduced the distribution and explained its relationship to the normal distribution, I did offer an answer: it's the number of "normally distributed variables" that I'm squaring and adding together. But, for most people, that's kind of abstract and not entirely helpful. What we really need to do is try to understand degrees of freedom in terms of our data. So here goes.
 
 The basic idea behind degrees of freedom is quite simple. You calculate it by counting up the number of distinct "quantities" that are used to describe your data and then subtracting off all of the "constraints" that those data must satisfy.[^10-categorical-data-analysis-5] This is a bit vague, so let's use our cards data as a concrete example. We describe our data using four numbers, $O1, O2, O3$ and O4 corresponding to the observed frequencies of the four different categories (hearts, clubs, diamonds, spades). These four numbers are the random outcomes of our experiment. But my experiment actually has a fixed constraint built into it: the sample size $N$. [^10-categorical-data-analysis-6] That is, if we know
 
@@ -148,7 +148,7 @@ how many people chose hearts, how many chose diamonds and how many chose clubs, 
 
 ### Testing the null hypothesis
 
-The final step in the process of constructing our hypothesis test is to figure out what the rejection region is. That is, what values of $\chi^2$ would lead us to reject the null hypothesis. As we saw earlier, large values of $\chi^2$ imply that the null hypothesis has done a poor job of predicting the data from our experiment, whereas small values of $\chi^2$ imply that it's actually done pretty well. Therefore, a pretty sensible strategy would be to say there is some critical value such that if $\chi^2$ is bigger than the critical value we reject the null, but if $\chi^2$ is smaller than this value we retain the null. In other words, to use the language we introduced in the chapter on [Hypothesis testing] the chi-square goodness-of-fit test is always a **one-sided test**. Right, so all we have to do is figure out what this critical value is. And it's pretty straightforward. If we want our test to have significance level of $\alpha = .05$ (that is, we are willing to tolerate a Type I error rate of $5%$), then we have to choose our critical value so that there is only a 5% chance that $\chi^2$ could get to be that big if the null hypothesis is true. This is illustrated in @fig-fig10-2.
+The final step in the process of constructing our hypothesis test is to figure out what the rejection region is. That is, what values of $\chi^2$ would lead us to reject the null hypothesis. As we saw earlier, large values of $\chi^2$ imply that the null hypothesis has done a poor job of predicting the data from our experiment, whereas small values of $\chi^2$ imply that it's actually done pretty well. Therefore, a pretty sensible strategy would be to say there is some critical value such that if $\chi^2$ is bigger than the critical value we reject the null, but if $\chi^2$ is smaller than this value we retain the null. In other words, to use the language we introduced in @sec-Hypothesis-testing the chi-square goodness-of-fit test is always a **one-sided test**. Right, so all we have to do is figure out what this critical value is. And it's pretty straightforward. If we want our test to have significance level of $\alpha = .05$ (that is, we are willing to tolerate a Type I error rate of $5%$), then we have to choose our critical value so that there is only a 5% chance that $\chi^2$ could get to be that big if the null hypothesis is true. This is illustrated in @fig-fig10-2.
 
 ```{r}
 #| label: fig-fig10-2
@@ -204,7 +204,7 @@ huxtabs[[10]][[6]]
 
 and the $\chi^2$ statistic is 4.74, 3 d.f., $p = 0.182$. Now, the results of our updated hypotheses and the expected frequencies are different from what they were last time. As a consequence our $\chi^2$ test statistic is different, and our p-value is different too. Annoyingly, the p-value is $.182$, so we can't reject the null hypothesis (look back at @sec-The-p-value-of-a-test to remind yourself why). Sadly, despite the fact that the null hypothesis corresponds to a very silly theory, these data don't provide enough evidence against it.
 
-### How to report the results of the test
+### How to report the results of the test {#sec-How-to-report-the-results-of-a-test}
 
 So now you know how the test works, and you know how to do the test using a wonderful jamovi flavoured magic computing box. The next thing you need to know is how to write up the results. After all, there's no point in designing and running an experiment and then analysing the data if you don't tell anyone about it! So let's now talk about what you need to do when reporting your analysis. Let's stick with our card-suits example. If I wanted to write this result up for a paper or something, then the conventional way to report this would be to write something like this:
 
@@ -282,7 +282,7 @@ $$E_{ij}=C_j \times P_i$$
 
 Now, this is all very well and good, but we have a problem. Unlike the situation we had with the goodness-of-fit test, the null hypothesis doesn't actually specify a particular value for Pi .
 
-It's something we have to estimate (see earlier chapter on [Estimating unknown quantities from a sample]) from the data! Fortunately, this is pretty easy to do. If 28 out of 180 people selected the flowers, then a natural estimate for the probability of choosing flowers is $\frac{28}{180}$, which is approximately $.16$. If we phrase this in mathematical terms, what we're saying is that our estimate for the probability of choosing option i is just the row total divided by the total sample size:
+It's something we have to estimate (see @sec-Estimating-unknown-quantities-from-a-sample) from the data! Fortunately, this is pretty easy to do. If 28 out of 180 people selected the flowers, then a natural estimate for the probability of choosing flowers is $\frac{28}{180}$, which is approximately $.16$. If we phrase this in mathematical terms, what we're saying is that our estimate for the probability of choosing option i is just the row total divided by the total sample size:
 
 $$\hat{P}_{i}= \frac{R_i}{N}$$
 
@@ -411,7 +411,7 @@ You can specify this test in jamovi from a check box in the 'Statistics' options
 knitr::include_graphics("images/fig10-7.png")
 ```
 
-## The McNemar test
+## The McNemar test {#sec-The-McNemar-test}
 
 Suppose you've been hired to work for the *Australian Generic Political Party* (AGPP), and part of your job is to find out how effective the AGPP political advertisements are. So you decide to put together a sample of $N = 100$ people and ask them to watch the AGPP ads. Before they see anything, you ask them if they intend to vote for the AGPP, and then after showing the ads you ask them again to see if anyone has changed their minds. Obviously, if you're any good at your job, you'd also do a whole lot of other things too, but let's consider just this one simple experiment. One way to describe your data is via the contingency table shown in @tbl-tab10-11.
 
