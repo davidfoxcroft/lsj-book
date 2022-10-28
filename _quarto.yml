@@ -10,7 +10,7 @@ book:
   date: last-modified
   date-format: "D MMMM YYYY"
   doi: 10.24384/hgc3-7p15
-  cover-image: images/bookcover_scaled.png
+  cover-image: "<img style='border:1px solid #000000' src='images/bookcover_scaled.png' />"
   downloads: [pdf, epub]
   reader-mode: true
   sidebar:
@@ -86,10 +86,18 @@ format:
   pdf:
     title: "learning statistics with jamovi (version 0.75)"
     documentclass: book
-    papersize: A4
+    geometry:
+      - paperwidth=8.00in
+      - paperheight=10.00in
+      - left= 1.25in
+      - textwidth= 5.25in
+      - top= 1.00in
+      - textheight= 8.25in
+      #- showframe
     include-in-header: preamble.tex
     include-before-body: first.tex
     include-after-body: backcover.tex
     toc: true
     colorlinks: true
+    keep-tex: true
 
