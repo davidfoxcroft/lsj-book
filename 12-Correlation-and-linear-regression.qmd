@@ -30,7 +30,7 @@ Next, I'll take a look at some basic descriptive statistics and, to give a graph
 ```{r}
 #| label: fig-fig12-1
 #| fig-align: left
-#| out.width: 80%
+#| fig-width: 0.9
 #| fig-cap: Histograms for the three interesting variables in the parenthood data set
 knitr::include_graphics("images/fig12-1.png")
 ```
@@ -42,7 +42,7 @@ We can draw scatterplots to give us a general sense of how closely related two v
 ```{r}
 #| label: fig-fig12-2
 #| fig-align: left
-#| out.width: 80%
+#| fig-width: 0.9
 #| fig-cap: Scatterplots showing the relationship between dani.sleep and dani.grump (left) and the relationship between baby.sleep and dani.grump (right)
 knitr::include_graphics("images/fig12-2.png")
 ```
@@ -52,7 +52,7 @@ In contrast, let's consider the two scatterplots shown in @fig-fig12-3. If we co
 ```{r}
 #| label: fig-fig12-3
 #| fig-align: left
-#| out.width: 80%
+#| fig-width: 0.9
 #| fig-cap: Scatterplots showing the relationship between baby.sleep and dani.grump (left), as compared to the relationship between baby.sleep and dani.sleep (right)
 knitr::include_graphics("images/fig12-3.png")
 ```
@@ -69,7 +69,7 @@ We can make these ideas a bit more explicit by introducing the idea of a **corre
 ```{r}
 #| label: fig-fig12-4
 #| fig-align: left
-#| out.width: 80%
+#| fig-width: 0.9
 #| fig-cap: Illustration of the effect of varying the strength and direction of a correlation. In the left hand column, the correlations are $0, .33, .66$ and $1$. In the right hand column, the correlations are $0, -.33, -.66$ and $-1$
 knitr::include_graphics("images/fig12-4.png")
 ```
@@ -83,7 +83,7 @@ Calculating correlations in jamovi can be done by clicking on the 'Regression' -
 ```{r}
 #| label: fig-fig12-5
 #| fig-align: left
-#| out.width: 80%
+#| fig-width: 0.9
 #| fig-cap: A jamovi screenshot showing correlations between variables in the parenthood.csv file
 knitr::include_graphics("images/fig12-5.png")
 ```
@@ -105,7 +105,7 @@ You'd think that these four data sets would look pretty similar to one another. 
 ```{r}
 #| label: fig-fig12-6
 #| fig-align: left
-#| out.width: 80%
+#| fig-width: 0.9
 #| fig-cap: Anscombe's quartet. All four of these data sets have a Pearson correlation of r = .816, but they are qualitatively different from one another
 knitr::include_graphics("images/fig12-6.png")
 ```
@@ -121,7 +121,7 @@ To illustrate, consider the data plotted in @fig-fig12-7, showing the relationsh
 ```{r}
 #| label: fig-fig12-7
 #| fig-align: left
-#| out.width: 80%
+#| fig-width: 0.9
 #| fig-cap: The relationship between hours worked and grade received for a toy data set consisting of only 10 students (each circle corresponds to one student). The dashed line through the middle shows the linear relationship between the two variables. This produces a strong Pearson correlation of $r = .91$. However, the interesting thing to note here is that there's actually a perfect monotonic relationship between the two variables. In this toy example, increasing the hours worked always increases the grade received, as illustrated by the solid line. This is reflected in a Spearman correlation of $\rho = 1$. With such a small data set, however, it's an open question as to which version better describes the actual relationship involved
 knitr::include_graphics("images/fig12-7.png")
 ```
@@ -149,7 +149,7 @@ Suppose my goal is to draw a scatterplot displaying the relationship between the
 ```{r}
 #| label: fig-fig12-8 
 #| fig-align: left
-#| out.width: 80%
+#| fig-width: 0.9
 #| fig-cap: Scatterplot via the 'Correlation Matrix' command in jamovi
 knitr::include_graphics("images/fig12-8.png")  
 ```
@@ -159,7 +159,7 @@ The second way do to it is to use one of the jamovi add-on modules. This module 
 ```{r}
 #| label: fig-fig12-9
 #| fig-align: left
-#| out.width: 80%
+#| fig-width: 0.9
 #| fig-cap: Scatterplot via the 'scatr' add-on module in - jamovi
 knitr::include_graphics("images/fig12-9.png")  
 ```
@@ -171,7 +171,7 @@ Often you will want to look at the relationships between several variables at on
 ```{r}
 #| label: fig-fig12-10
 #| fig-align: left
-#| out.width: 80%
+#| fig-width: 0.9
 #| fig-cap: A matrix of scatterplots produced using jamovi
 knitr::include_graphics("images/fig12-10.png")
 ```
@@ -185,7 +185,7 @@ Since the basic ideas in regression are closely tied to correlation, we'll retur
 ```{r}
 #| label: fig-fig12-11
 #| fig-align: left
-#| out.width: 80%
+#| fig-width: 0.9
 #| fig-cap: Panel (a) shows the sleep-grumpiness scatterplot from @fig-fig12-9 with the best fitting regression line drawn over the top. Not surprisingly, the line goes through the middle of the data. In contrast, panel (b) shows the same data, but with a very poor choice of regression line drawn over the top
 knitr::include_graphics("images/fig12-11.png")
 ```
@@ -221,7 +221,7 @@ Okay, now let's redraw our pictures but this time I'll add some lines to show th
 ```{r}
 #| label: fig-fig12-12
 #| fig-align: left
-#| out.width: 80%
+#| fig-width: 0.9
 #| fig-cap: A depiction of the residuals associated with the best fitting regression line (panel a), and the residuals associated with a poor regression line (panel b). The residuals are much smaller for the good regression line. Again, this is no surprise given that the good line is the one that goes right through the middle of the data
 knitr::include_graphics("images/fig12-12.png")  
 ```
@@ -241,7 +241,7 @@ $$\hat{Y}_i=125.96+(-8.94 X_i)$$
 ```{r}
 #| label: fig-fig12-13
 #| fig-align: left
-#| out.width: 80%
+#| fig-width: 0.9
 #| fig-cap: A jamovi screenshot showing a simple linear regression analysis
 knitr::include_graphics("images/fig12-13.png")  
 ```
@@ -275,7 +275,7 @@ The coefficient associated with dani.sleep is quite large, suggesting that every
 ```{r}
 #| label: fig-fig12-14
 #| fig-align: left
-#| out.width: 80%
+#| fig-width: 0.9
 #| fig-cap: A 3D visualisation of a multiple regression model. There are two predictors in the model, dani.sleep and baby.sleep and the outcome variable is dani.grump. Together, these three variables form a 3D space. Each observation (dot) is a point in this space. In much the same way that a simple linear regression model forms a line in 2D space, this multiple regression model forms a plane in 3D space. When we estimate the regression coefficients what we're trying to do is find a plane that is as close to all the blue dots as possible
 knitr::include_graphics("images/fig12-14.png")
 ```
@@ -369,7 +369,7 @@ To compute all of the statistics that we have talked about so far, all you need 
 ```{r}
 #| label: fig-fig12-15
 #| fig-align: left
-#| out.width: 80%
+#| fig-width: 0.9
 #| fig-cap: A jamovi screenshot showing a multiple linear regression analysis, with some useful options checked
 knitr::include_graphics("images/fig12-15.png")  
 ```
@@ -411,7 +411,7 @@ To make things even simpler, jamovi has an option that computes the $\beta$ coef
 ```{r}
 #| label: fig-fig12-16
 #| fig-align: left
-#| out.width: 80%
+#| fig-width: 0.9
 #| fig-cap: Standardised coefficients, with 95% confidence intervals, for multiple linear regression
 knitr::include_graphics("images/fig12-16.png")  
 ```
@@ -467,7 +467,7 @@ The first kind of unusual observation is an **outlier**. The definition of an ou
 ```{r}
 #| label: fig-fig12-17
 #| fig-align: left
-#| out.width: 80%
+#| fig-width: 0.9
 #| fig-cap: An illustration of outliers. The dotted lines plot the regression line that would have been estimated without the anomalous observation included, and the corresponding residual (i.e., the Studentised residual). The solid line shows the regression line with the anomalous observation included. The outlier has an unusual value on the outcome (y axis location) but not the predictor (x axis location), and lies a long way from the regression line
 knitr::include_graphics("images/fig12-17.png")  
 ```
@@ -479,7 +479,7 @@ The second way in which an observation can be unusual is if it has high **levera
 ```{r}
 #| label: fig-fig12-18
 #| fig-align: left
-#| out.width: 80%
+#| fig-width: 0.9
 #| fig-cap: An illustration of high leverage points. The anomalous observation in this case is unusual both in terms of the predictor (x axis) and the outcome (y axis), but this unusualness is highly consistent with the pattern of correlations that exists among the other observations. The observation falls very close to the regression line and does not distort it
 knitr::include_graphics("images/fig12-18.png")  
 ```
@@ -493,7 +493,7 @@ This brings us to our third measure of unusualness, the **influence** of an obse
 ```{r}
 #| label: fig-fig12-19
 #| fig-align: left
-#| out.width: 80%
+#| fig-width: 0.9
 #| fig-cap: An illustration of high influence points. In this case, the anomalous observation is highly unusual on the predictor variable (x axis), and falls a long way from the regression line. As a consequence, the regression line is highly distorted, even though (in this case) the anomalous observation is entirely typical in terms of the outcome variable (y axis)
 knitr::include_graphics("images/fig12-19.png")  
 ```
@@ -505,7 +505,7 @@ In jamovi, information about Cook's distance can be calculated by clicking on th
 ```{r}
 #| label: fig-fig12-20
 #| fig-align: left
-#| out.width: 80%
+#| fig-width: 0.9
 #| fig-cap: jamovi output showing the table for the Cook's distance statistics
 knitr::include_graphics("images/fig12-20.png")  
 ```
@@ -523,7 +523,7 @@ Like many of the statistical tools we've discussed in this book, regression mode
 ```{r}
 #| label: fig-fig12-21
 #| fig-align: left
-#| out.width: 80%
+#| fig-width: 0.9
 #| fig-cap: Plot of the theoretical quantiles according to the model, against the quantiles of the standardised residuals, produced in jamovi
 knitr::include_graphics("images/fig12-21.png")  
 ```
@@ -533,7 +533,7 @@ Another thing we should check is the relationship between the fitted values and 
 ```{r}
 #| label: fig-fig12-22
 #| fig-align: left
-#| out.width: 80%
+#| fig-width: 0.9
 #| fig-cap: Residuals plots produced in jamovi
 knitr::include_graphics("images/fig12-22.png")  
 ```
@@ -565,7 +565,7 @@ We have some fairly large correlations between some of our predictor variables! 
 ```{r}
 #| label: fig-fig12-23
 #| fig-align: left
-#| out.width: 80%
+#| fig-width: 0.9
 #| fig-cap: Collinearity statistics for multiple regression, produced in jamovi
 knitr::include_graphics("images/fig12-23.png")  
 ```
@@ -623,7 +623,7 @@ We can also use this 'Model Comparison' option to display a table that shows the
 ```{r}
 #| label: fig-fig12-24
 #| fig-align: left
-#| out.width: 80%
+#| fig-width: 0.9
 #| fig-cap: Model comparison in jamovi using the 'Model Builder' option
 knitr::include_graphics("images/fig12-24.png")  
 ```
