@@ -93,7 +93,7 @@ However, it also has undesirable characteristics. First, infinite sequences don'
 ```{r}
 #| label: fig-fig7-1
 #| fig-align: left
-#| fig-width: 0.9
+#| out.width: 80%
 #| fig-cap: An illustration of how frequentist probability works. If you flip a fair coin over and over again the proportion of heads that you've seen eventually settles down and converges to the true probability of $0.5$. Each panel shows four different simulated experiments. In each case we pretend we flipped a coin $1000$ times and kept track of the proportion of flips that were heads as we went along. Although none of these sequences actually ended up with an exact value of $.5$, if we'd extended the experiment for an infinite number of coin flips they would have
 knitr::include_graphics("images/fig7-1.png")
 ```
@@ -139,7 +139,7 @@ Each of the events has a probability that lies between 0 and 1, and if we add up
 ```{r}
 #| label: fig-fig7-2
 #| fig-align: left
-#| fig-width: 0.9
+#| out.width: 80%
 #| fig-cap: A visual depiction of the 'trousers' probability distribution. There are five 'elementary events', corresponding to the five pairs of trousers that I own. Each event has some probability of occurring - this probability is a number between 0 to 1. The sum of these probabilities is 1
 knitr::include_graphics("images/fig7-2.png")
 ```
@@ -179,7 +179,7 @@ To give you a feel for how the binomial distribution changes when we alter the v
 ```{r}
 #| label: fig-fig7-3
 #| fig-align: left
-#| fig-width: 0.9
+#| out.width: 80%
 #| fig-cap: The binomial distribution with size parameter of $N = 20$ and an underlying success probability of $\theta = \frac{1}{6}$. Each vertical bar depicts the probability of one specific outcome (i.e., one possible value of X). Because this is a probability distribution, each of the probabilities must be a number between 0 and 1, and the heights of the bars must sum to 1 as well
 knitr::include_graphics("images/fig7-3.png")
 ```
@@ -193,7 +193,7 @@ While the binomial distribution is conceptually the simplest distribution to und
 ```{r}
 #| label: fig-fig7-4
 #| fig-align: left
-#| fig-width: 0.9
+#| out.width: 80%
 #| fig-cap: Two binomial distributions, involving a scenario in which I'm flipping a fair coin, so the underlying success probability is $\theta = \frac{1}{2}$. In panel (a), we assume I'm flipping the coin $N = 20$ times. In panel (b) we assume that the coin is flipped $N = 100$ times
 knitr::include_graphics("images/fig7-4.png")
 ```
@@ -201,7 +201,7 @@ knitr::include_graphics("images/fig7-4.png")
 ```{r}
 #| label: fig-fig7-5
 #| fig-align: left
-#| fig-width: 0.9
+#| out.width: 80%
 #| fig-cap: The normal distribution with mean $\mu = 0$ and standard deviation $\sigma = 1$. The x-axis corresponds to the value of some variable, and the y-axis tells us something about how likely we are to observe that value. However, notice that the y-axis is labelled *Probability Density* and not *Probability*. There is a subtle and somewhat frustrating characteristic of continuous distributions that makes the $y$ axis behave a bit oddly - the height of the curve here isn't actually the probability of observing a particular x value. On the other hand, it is true that the heights of the curve tells you which $x$ values are more likely (the higher ones!). (see [Probability density] section for all the annoying details)
 knitr::include_graphics("images/fig7-5.png")
 ```
@@ -217,7 +217,7 @@ Let's try to get a sense for what it means for a variable to be normally distrib
 ```{r}
 #| label: fig-fig7-6
 #| fig-align: left
-#| fig-width: 0.9
+#| out.width: 80%
 #| fig-cap: An illustration of what happens when you change the mean of a normal distribution. The solid line depicts a normal distribution with a mean of $\mu = 4$. The dashed line shows a normal distribution with a mean of $\mu = 7$. In both cases, the standard deviation is $\sigma = 1$. Not surprisingly, the two distributions have the same shape, but the dashed line is shifted to the right
 knitr::include_graphics("images/fig7-6.png")
 ```
@@ -227,7 +227,7 @@ With this in mind, let's see if we can't get an intuition for how the normal dis
 ```{r}
 #| label: fig-fig7-7
 #| fig-align: left
-#| fig-width: 0.9
+#| out.width: 80%
 #| fig-cap: An illustration of what happens when you change the the standard deviation of a normal distribution. Both distributions plotted in this figure have a mean of $\mu = 5$, but they have different standard deviations. The solid line plots a distribution with standard deviation $\sigma = 1$, and the dashed line shows a distribution with standard deviation $\sigma = 2$. As a consequence, both distributions are 'centred' on the same spot, but the dashed line is wider than the solid one
 knitr::include_graphics("images/fig7-7.png")
 ```
@@ -235,7 +235,7 @@ knitr::include_graphics("images/fig7-7.png")
 ```{r}
 #| label: fig-fig7-8
 #| fig-align: left
-#| fig-width: 0.9
+#| out.width: 80%
 #| fig-cap: The area under the curve tells you the probability that an observation falls within a particular range. The solid lines plot normal distributions with mean $\mu = 0$ and standard deviation $\sigma = 1$. The shaded areas illustrate 'areas under the curve' for two important cases. In panel (a), we can see that there is a 68.3% chance that an observation will fall within one standard deviation of the mean. In panel (b), we see that there is a 95.4% chance that an observation will fall within two standard deviations of the mean
 knitr::include_graphics("images/fig7-8.png")
 ```
@@ -243,7 +243,7 @@ knitr::include_graphics("images/fig7-8.png")
 ```{r}
 #| label: fig-fig7-9
 #| fig-align: left
-#| fig-width: 0.9
+#| out.width: 80%
 #| fig-cap: Two more examples of the 'area under the curve idea'. There is a 15.9% chance that an observation is one standard deviation below the mean or smaller (panel (a)), and a 34.1% chance that the observation is somewhere between one standard deviation below the mean and the mean (panel (b)). Notice that if you add these two numbers together you get 15.9% + 34.1% = 50%. For normally distributed data, there is a 50% chance that an observation falls below the mean. And of course that also implies that there is a 50% chance that it falls above the mean
 knitr::include_graphics("images/fig7-9.png")
 ```
@@ -271,7 +271,7 @@ The normal distribution is the distribution that statistics makes most use of (f
 ```{r}
 #| label: fig-fig7-10
 #| fig-align: left
-#| fig-width: 0.9
+#| out.width: 80%
 #| fig-cap: A $t$ distribution with 3 degrees of freedom (solid line). It looks similar to a normal distribution, but it's not quite the same. For comparison purposes I've plotted a standard normal distribution as the dashed line
 knitr::include_graphics("images/fig7-10.png")
 ```
@@ -279,7 +279,7 @@ knitr::include_graphics("images/fig7-10.png")
 ```{r}
 #| label: fig-fig7-11
 #| fig-align: left
-#| fig-width: 0.9
+#| out.width: 80%
 #| fig-cap: $\chi^2$ distribution with 3 degrees of freedom. Notice that the observed values must always be greater than zero, and that the distribution is pretty skewed. These are the key features of a chi-square  distribution
 knitr::include_graphics("images/fig7-11.png")
 ```
@@ -287,7 +287,7 @@ knitr::include_graphics("images/fig7-11.png")
 ```{r}
 #| label: fig-fig7-12
 #| fig-align: left
-#| fig-width: 0.9
+#| out.width: 80%
 #| fig-cap: An $F$ distribution with 3 and 5 degrees of freedom. Qualitatively speaking, it looks pretty similar to a chi-square distribution, but they're not quite the same in general
 knitr::include_graphics("images/fig7-12.png")
 ```
