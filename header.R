@@ -11,6 +11,7 @@ library(dplyr)
 library(janitor)
 library(rvest)
 library(magrittr)
+library(tidyr)
 lsj_chapter1_tables <- read_html("html_tables/1. Why do we learn statistics.html") %>% html_table() 
 lsj_chapter2_tables <- read_html("html_tables/2. A brief introduction to research design.html") %>% html_table() 
 lsj_chapter3_tables <- read_html("html_tables/3. Getting started with jamovi.html") %>% html_table() 
@@ -64,8 +65,8 @@ huxthattibble <- function(x) {
   set_align(everywhere, everywhere, "center") %>% 
   set_width(0.9) %>% 
   set_caption_pos("bottomleft") %>% 
-  theme_article() %>% 
-  set_background_color(odds, everywhere, "grey95")
+  theme_article() #%>% 
+  #set_background_color(odds, everywhere, "grey95")
 }
 
 # Recursively apply function to all data frames in a nested list
@@ -85,3 +86,14 @@ saveRDS(huxtabs, "lsj_chapter_huxtabs.rds")
 #huxtabs <- readRDS("lsj_chapter_huxtabs.rds")
 
 
+# colours etc for Danielle's images
+emphCol <- rgb(0,0,1)
+emphColLight <- rgb(.5,.5,1)
+emphGrey <- grey(.5)
+eps <- TRUE
+colour <- TRUE
+
+
+library(HistData)
+library(ggplot2)
+library(ggpointdensity)

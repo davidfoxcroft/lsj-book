@@ -44,7 +44,7 @@ To keep things simple, let's imagine that we have a bag containing 10 chips. Eac
 ```{r}
 #| label: fig-fig8-1
 #| fig-align: left
-#| fig-width: 0.9
+#| out.width: 80%
 #| fig-cap: Simple random sampling without replacement from a finite population
 knitr::include_graphics("images/fig8-1.png")
 ```
@@ -56,7 +56,7 @@ To help make sure you understand the importance of the sampling procedure, consi
 ```{r}
 #| label: fig-fig8-2
 #| fig-align: left
-#| fig-width: 0.9
+#| out.width: 80%
 #| fig-cap: Biased sampling without replacement from a finite population
 knitr::include_graphics("images/fig8-2.png")
 ```
@@ -66,7 +66,7 @@ A third procedure is worth mentioning. This time around we close our eyes, shake
 ```{r}
 #| label: fig-fig8-3
 #| fig-align: left
-#| fig-width: 0.9
+#| out.width: 80%
 #| fig-cap: Simple random sampling *with* replacement from a finite population
 knitr::include_graphics("images/fig8-3.png")
 ```
@@ -100,9 +100,34 @@ The idea is quite simple. Let's say we're talking about IQ scores. To a psycholo
 ```{r}
 #| label: fig-fig8-4
 #| fig-align: left
-#| fig-width: 0.9
+#| fig-width: 9
+#| fig-height: 3
+#| out-width: 100%
 #| fig-cap: The population distribution of IQ scores (panel (a)) and two samples drawn randomly from it. In panel (b) we have a sample of 100 observations, and panel (c) we have a sample of 10,000 observations
-knitr::include_graphics("images/fig8-4.png")
+
+plota <- ggplot(data = data.frame(x = seq(60, 140, 1)), aes(x)) +
+  stat_function(fun = dnorm, n = 1000, args = list(mean = 100, sd = 15), col="blue", size=1) + 
+  scale_x_continuous(breaks = seq(60, 140, 20)) +
+  ylab("Probability Density\n") +
+  xlab("\nIQ score") +
+  theme_classic()
+
+plotb <- ggplot(data = data.frame(x = rnorm(100, 100, 15)), aes(x)) +
+  geom_histogram(binwidth=6, col="blue", fill="blue", alpha=0.6) + 
+  scale_x_continuous(breaks = seq(60, 140, 20)) +
+  ylab("Frequency\n") +
+  xlab("\nIQ score") +
+  theme_classic()
+
+plotc <- ggplot(data = data.frame(x = rnorm(10000, 100, 15)), aes(x)) +
+  geom_histogram(binwidth=6, col="blue", fill="blue", alpha=0.6) + 
+  scale_x_continuous(breaks = seq(60, 140, 20)) +
+  ylab("Frequency\n") +
+  xlab("\nIQ score") +
+  theme_classic()
+
+gridExtra::grid.arrange(plota, plotb, plotc, ncol = 3)
+
 ```
 
 Now suppose I run an experiment. I select 100 people at random and administer an IQ test, giving me a simple random sample from the population. My sample would consist of a collection of numbers like this:
@@ -118,7 +143,8 @@ In the previous section I showed you the results of one fictitious IQ experiment
 ```{r}
 #| label: fig-fig8-5
 #| fig-align: left
-#| fig-width: 0.9
+#| out.width: 80%
+#| classes: .enlarge-image
 #| fig-cap: A random sample drawn from a normal distribution using jamovi
 knitr::include_graphics("images/fig8-5.png")
 ```
@@ -168,9 +194,27 @@ What if I continued like this for 10,000 replications, and then drew a histogram
 ```{r}
 #| label: fig-fig8-6
 #| fig-align: left
-#| fig-width: 0.9
+#| out.width: 80%
 #| fig-cap: The sampling distribution of the mean for the 'five IQ scores experiment'. If you sample 5 people at random and calculate their average IQ you'll almost certainly get a number between 80 and 120, even though there are quite a lot of individuals who have IQs above 120 or below 80. For comparison, the black line plots the population distribution of IQ scores
-knitr::include_graphics("images/fig8-6.png")
+
+sdm_data <- lapply(1:10000, function (x) {
+  rnorm(5, 100, 15)
+})
+sdm_data_means <- data.frame(sample_means = unlist(lapply(sdm_data,mean)))
+
+ggplot(data = sdm_data_means, aes(x = sample_means )) +
+  geom_histogram(aes(y =..density..), binwidth=4, col="blue", fill="blue", alpha=0.7) + 
+  stat_function(fun = dnorm, args = list(mean = 100, sd = 15), col="black", size=1) + 
+  scale_x_continuous(limits=c(60,140), breaks = seq(60, 140, 20)) +
+  xlab("\nIQ score") +
+  theme_classic() +
+  theme(
+    axis.title.y = element_blank(),
+    axis.line.y = element_blank(),
+    axis.ticks.y = element_blank(),
+    axis.text.y = element_blank())
+
+
 ```
 
 Sampling distributions are another important theoretical idea in statistics, and they're crucial for understanding the behaviour of small samples. For instance, when I ran the very first "five IQ scores" experiment, the sample mean turned out to be 95. What the sampling distribution in @fig-fig8-6 tells us, though, is that the "five IQ scores" experiment is not very accurate. If I repeat the experiment, the sampling distribution tells me that I can expect to see a sample mean anywhere between 80 and 120.
@@ -186,17 +230,67 @@ Doing this over and over again would give me a very different sampling distribut
 ```{r}
 #| label: fig-fig8-7
 #| fig-align: left
-#| fig-width: 0.9
+#| out.width: 80%
 #| fig-cap: The sampling distribution of the maximum for the 'five IQ scores experiment'. If you sample 5 people at random and select the one with the highest IQ score you'll probably see someone with an IQ between 100 and 140
-knitr::include_graphics("images/fig8-7.png")
+
+sdm_data <- lapply(1:10000, function (x) {
+  rnorm(5, 100, 15)
+})
+sdm_data_max <- data.frame(sample_max = unlist(lapply(sdm_data,max)))
+
+ggplot(data = sdm_data_max, aes(x = sample_max )) +
+  geom_histogram(aes(y =..density..), binwidth=4, col="blue", fill="blue", alpha=0.7) + 
+  stat_function(fun = dnorm, args = list(mean = 100, sd = 15), col="black", size=1) + 
+  scale_x_continuous(limits=c(60,140), breaks = seq(60, 140, 20)) +
+  xlab("\nIQ score") +
+  theme_classic() +
+  theme(
+    axis.title.y = element_blank(),
+    axis.line.y = element_blank(),
+    axis.ticks.y = element_blank(),
+    axis.text.y = element_blank())
+
+
 ```
 
 ```{r}
 #| label: fig-fig8-8
 #| fig-align: left
-#| fig-width: 0.9
+#| fig-width: 9
+#| fig-height: 3
+#| out.width: 100%
 #| fig-cap: An illustration of the how sampling distribution of the mean depends on sample size. In each panel I generated 10,000 samples of IQ data and calculated the mean IQ observed within each of these data sets. The histograms in these plots show the distribution of these means (i.e., the sampling distribution of the mean). Each individual IQ score was drawn from a normal distribution with mean 100 and standard deviation 15, which is shown as the solid black line. In panel (a), each data set contained only a single observation, so the mean of each sample is just one person's IQ score. As a consequence, the sampling distribution of the mean is of course identical to the population distribution of IQ scores. However, when we raise the sample size to 2 the mean of any one sample tends to be closer to the population mean than any one person's IQ score, and so the histogram (i.e., the sampling distribution) is a bit narrower than the population distribution. By the time we raise the sample size to 10 (panel (c)), we can see that the distribution of sample means tend to be fairly tightly clustered around the true population mean
-knitr::include_graphics("images/fig8-8.png")
+
+sampling_plots_df <- data.frame(n = c(1,2,10), 
+                                lab = c("(a)", 
+                                      "(b)", 
+                                      "(c)"))
+sampling_plots <- lapply(sampling_plots_df$n, function(i) {
+  sdm_data <- lapply(1:10000, function (x) {
+    rnorm(i, 100, 15)
+  })
+  sdm_data_mean <- data.frame(sample_mean = unlist(lapply(sdm_data,mean)))
+
+  ggplot(data = sdm_data_mean, aes(x = sample_mean )) +
+  geom_histogram(aes(y =..density..), binwidth=4, col="blue", fill="blue", alpha=0.7) + 
+  stat_function(fun = dnorm, args = list(mean = 100, sd = 15), col="black", size=1) + 
+  scale_x_continuous(limits=c(60,140), breaks = seq(60, 140, 20)) +
+  xlab(paste0("IQ Score \n\n", sampling_plots_df$lab[sampling_plots_df$n == i])) +
+  ggtitle(paste0("Sample size = ", i)) +
+  theme_classic() +
+  theme(
+    axis.title.y = element_blank(),
+    axis.line.y = element_blank(),
+    axis.ticks.y = element_blank(),
+    axis.text.y = element_blank(),
+    plot.title = element_text(hjust = 0.5))
+})
+
+gridExtra::grid.arrange(grob = sampling_plots[[1]],
+                        sampling_plots[[2]],
+                        sampling_plots[[3]],
+                        ncol = 3)
+                        
 ```
 
 ### The central limit theorem {#sec-The-central-limit-theorem}
@@ -208,9 +302,55 @@ Okay, so that's one part of the story. However, there's something I've been glos
 ```{r}
 #| label: fig-fig8-9
 #| fig-align: left
-#| fig-width: 0.9
+#| fig-width: 12
+#| fig-height: 12
+#| out-width: 100%
 #| fig-cap: A demonstration of the central limit theorem. In panel (a), we have a non-normal population distribution, and panels (b)-(d) show the sampling distribution of the mean for samples of size 2,4 and 8 for data drawn from the distribution in panel (a). As you can see, even though the original population distribution is non-normal the sampling distribution of the mean becomes pretty close to normal by the time you have a sample of even 4 observations
-knitr::include_graphics("images/fig8-9.png")
+
+# parameters of the beta
+a <- 2
+b <- 1
+# mean and standard deviation of the beta
+s <- sqrt( a*b / (a+b)^2 / (a+b+1) )
+m <- a / (a+b)
+
+sampling_plots_df <- data.frame(n = c(1,2,4,8), 
+                                lab = c("(a)", 
+                                      "(b)", 
+                                      "(c)",
+                                      "(d)"))
+sampling_plots <- lapply(sampling_plots_df$n, function(i) {
+  sdm_data <- lapply(1:10000, function (x) {
+    rbeta(i, a, b)
+  })
+  sdm_data_mean <- data.frame(sample_mean = unlist(lapply(sdm_data,mean)))
+
+  ggplot(data=sdm_data_mean, aes(x=sample_mean)) +
+  geom_histogram(aes(y =..density..), binwidth=0.0339, col="blue", fill="blue", alpha=0.6) +
+  stat_function(fun = dnorm, args = list(mean = m, s/sqrt(i)), col="black", size=1) + 
+  scale_x_continuous(limits=c(0,1.2), breaks = seq(0, 1.2, 0.2)) +
+  scale_y_continuous(limits=c(0,5)) +
+  xlab("Sample Mean") +
+  ggtitle(paste0(sampling_plots_df$lab[sampling_plots_df$n == i]," Sample size = ", i)) +
+  theme_classic() +
+  theme(
+    axis.title.y = element_blank(),
+    axis.title.x=element_text(size=12),
+    axis.line.y = element_blank(),
+    axis.ticks.y = element_blank(),
+    axis.text.y = element_blank(),
+    panel.border = element_rect(color = "black",
+                                    fill = NA,
+                                    size = 0.8),
+    plot.title = element_text(hjust = 0.5, size=12))
+})
+
+gridExtra::grid.arrange(grob = sampling_plots[[1]],
+                        sampling_plots[[2]],
+                        sampling_plots[[3]],
+                        sampling_plots[[4]],
+                        nrow = 2,
+                        ncol = 2)
 ```
 
 On the basis of these figures, it seems like we have evidence for all of the following claims about the sampling distribution of the mean.
@@ -219,11 +359,11 @@ On the basis of these figures, it seems like we have evidence for all of the fol
 - The standard deviation of the sampling distribution (i.e., the standard error) gets smaller as the sample size increases
 - The shape of the sampling distribution becomes normal as the sample size increases
 
-As it happens, not only are all of these statements true, there is a very famous theorem in statistics that proves all three of them, known as the **central limit theorem**. Among other things, the central limit theorem tells us that if the population distribution has mean µ and standard deviation σ, then the sampling distribution of the mean also has mean µ and the standard error of the mean is
+As it happens, not only are all of these statements true, there is a very famous theorem in statistics that proves all three of them, known as the **central limit theorem**. Among other things, the central limit theorem tells us that if the population distribution has mean $\mu$ and standard deviation $\sigma$, then the sampling distribution of the mean also has mean $\mu$ and the standard error of the mean is
 
 $$SEM=\frac{\sigma}{\sqrt{N}}$$
 
-Because we divide the population standard deviation σ by the square root of the sample size N, the SEM gets smaller as the sample size increases. It also tells us that the shape of the sampling distribution becomes normal.[^08-estimating-unknown-quantities-from-a-sample-4]
+Because we divide the population standard deviation $\sigma$ by the square root of the sample size N, the SEM gets smaller as the sample size increases. It also tells us that the shape of the sampling distribution becomes normal.[^08-estimating-unknown-quantities-from-a-sample-4]
 
 [^08-estimating-unknown-quantities-from-a-sample-4]: As usual, I'm being a bit sloppy here. The central limit theorem is a bit more general than this section implies. Like most introductory stats texts I've discussed one situation where the central limit theorem holds: when you're taking an average across lots of independent events drawn from the same distribution. However, the central limit theorem is much broader than this. There's a whole class of things called "U-statistics" for instance, all of which satisfy the central limit theorem and therefore become normally distributed for large sample sizes. The mean is one such statistic, but it's not the only one.
 
@@ -270,9 +410,29 @@ This intuition feels right, but it would be nice to demonstrate this somehow. Th
 ```{r}
 #| label: fig-fig8-10
 #| fig-align: left
-#| fig-width: 0.9
-#| fig-cap: The sampling distribution of the sample standard deviation for a 'two IQ scores' experiment. The true population standard deviation is 15 (dashed line), but as you can see from the histogram the vast majority of experiments will produce a much smaller sample standard deviation than this. On average, this experiment would produce a sample standard deviation of only 8.5, well below the true value! In other words, the sample standard deviation is a biased estimate of the population standard deviation
-knitr::include_graphics("images/fig8-10.png")
+#| fig-width: 8
+#| fig-height: 8
+#| out.width: 80%
+#| fig-cap: The sampling distribution of the sample standard deviation for a 'two IQ scores' experiment. The true population standard deviation is 15 (dashed line), but as you can see from the histogram the vast majority of experiments will produce a much smaller sample standard deviation than this. On average, this experiment would produce an estimated standard deviation of only 8.4, well below the true value! In other words, the sample standard deviation is a biased estimate of the population standard deviation
+n <- 2
+N <- 10000
+IQ.m <- matrix(rnorm(n*N, 100,15),N,n)
+sd2_r <- function(x) { sqrt((sum((x-mean(x))^2))/(n)) }
+sdsd <- data.frame(sd=apply(IQ.m,1,sd2_r))
+mean(sdsd$sd)
+
+ggplot(data = sdsd, aes(x = sd )) +
+  geom_histogram(binwidth=2.5, col="blue", fill="blue", alpha=0.6) + 
+  geom_segment(aes(x = 15, y = 0, xend = 15, yend = 1900), colour = "black", linetype=2, size=1) +
+  annotate("text", x = 15, y = 2000, label = "Population Standard deviation") +  
+  scale_x_continuous(limits=c(0,60), breaks = seq(0, 60, 10)) +
+  xlab("Sample standard deviation") +
+  theme_classic() +
+  theme(
+    axis.title.y = element_blank(),
+    axis.line.y = element_blank(),
+    axis.ticks.y = element_blank(),
+    axis.text.y = element_blank())
 ```
 
 Now let's extend the simulation. Instead of restricting ourselves to the situation where $N=2$, let's repeat the exercise for sample sizes from 1 to 10. If we plot the average sample mean and average sample standard deviation as a function of sample size, you get the results shown in @fig-fig8-11. On the left hand side (panel (a)) I've plotted the average sample mean and on the right hand side (panel (b)) I've plotted the average standard deviation. The two plots are quite different:on average, the average sample mean is equal to the population mean. It is an **unbiased estimator**, which is essentially the reason why your best estimate for the population mean is the sample mean.[^08-estimating-unknown-quantities-from-a-sample-6] The plot on the right is quite different: on average, the sample standard deviation $s$ is smaller than the population standard deviation $\sigma$. It is a **biased estimator**. In other words, if we want to make a "best guess" $\hat{\sigma}$ about the value of the population standard deviation $\hat{\sigma}$ we should make sure our guess is a little bit larger than the sample standard deviation $s$.
@@ -282,9 +442,46 @@ Now let's extend the simulation. Instead of restricting ourselves to the situati
 ```{r}
 #| label: fig-fig8-11
 #| fig-align: left
-#| fig-width: 0.9
+#| fig-width: 8
+#| fig-height: 4
+#| out.width: 90%
 #| fig-cap: An illustration of the fact that the sample mean is an unbiased estimator of the population mean (panel a), but the sample standard deviation is a biased estimator of the population standard deviation (panel b). For the figure I generated $10,000$ simulated data sets with 1 observation each, $10,000$ more with 2 observations, and so on up to a sample size of 10. Each data set consisted of fake IQ data, that is the data were normally distributed with a true population mean of 100 and standard deviation 15. On average, the sample means turn out to be 100, regardless of sample size (panel a). However, the sample standard deviations turn out to be systematically too small (panel b), especially for small sample sizes
-knitr::include_graphics("images/fig8-11.png")
+
+N <- 10000
+sd.demo <- sapply(1:10, function (n) {
+  sd2_r <- function(x) { sqrt((sum((x-mean(x))^2))/(n)) }
+  IQ.m <- matrix(rnorm(n*N, 100,15),N,n)
+  sdsd <- data.frame(sd=apply(IQ.m,1,sd2_r))
+  sdmean <- data.frame(mean=apply(IQ.m,1,mean))
+  ssize <- n
+  sd.demo.out <- c(ssize, mean(sdmean$mean), mean(sdsd$sd)) 
+})
+
+sd.demo <- as_tibble(t(sd.demo))
+colnames(sd.demo) <- c("sample_size", "mean", "sd")
+
+ps1 <- ggplot(data=sd.demo, aes(x=sample_size, y=mean)) +
+  geom_point(col="blue", alpha=0.6) +
+  geom_path(col="blue", alpha=0.6) +
+  geom_hline(yintercept=100, col="darkgrey", linetype="dashed") +
+  xlab("\nSample Size\n\n(a)") +
+  ylab("Average Sample Mean\n") +
+  scale_y_continuous(limits=c(96,106)) +
+  scale_x_continuous(breaks=seq(0,10,2)) +
+  theme_classic()
+
+ps2 <- ggplot(data=sd.demo, aes(x=sample_size, y=sd)) +
+  geom_point(col="blue", alpha=0.6) +
+  geom_path(col="blue", alpha=0.6) +
+  geom_hline(yintercept=15, col="darkgrey", linetype="dashed") +
+  xlab("\nSample Size\n\n(b)") +
+  ylab("Average Sample Standard Deviation\n") +
+  scale_y_continuous(limits=c(0,16)) +
+  scale_x_continuous(breaks=seq(0,10,2)) +
+  theme_classic()
+
+gridExtra::grid.arrange(grob=ps1,ps2, ncol=2)
+
 ```
 
 The fix to this systematic bias turns out to be very simple. Here's how it works. Before tackling the standard deviation let's look at the variance. If you recall from the section on [Estimating population parameters], the sample variance is defined to be the average of the squared deviations from the sample mean. That is: $$s^2=\frac{1}{N} \sum_{i=1}^{N}(X_i-\bar{X})^2$$ The sample variance $s^2$ is a biased estimator of the population variance $\sigma^2$. But as it turns out, we only need to make a tiny tweak to transform this into an unbiased estimator. All we have to do is divide by $N-1$ rather than by $N$. 
@@ -335,14 +532,68 @@ Of course, there's nothing special about the number 1.96. It just happens to be 
 
 ### Interpreting a confidence interval
 
-The hardest thing about confidence intervals is understanding what they mean. Whenever people first encounter confidence intervals, the first instinct is almost always to say that "there is a 95% probability that the true mean lies inside the confidence interval". It's simple and it seems to capture the common sense idea of what it means to say that I am "95% confident". Unfortunately, it's not quite right. The intuitive definition relies very heavily on your own personal beliefs about the value of the population mean. I say that I am 95% confident because those are my beliefs. In everyday life that's perfectly okay, but if you remember back to the the section [What does probability mean?], you'll notice that talking about personal belief and confidence is a Bayesian idea. However, confidence intervals are not Bayesian tools. Like everything else in this chapter, confidence intervals are frequentist tools, and if you are going to use frequentist methods then it's not appropriate to attach a Bayesian interpretation to them. If you use frequentist methods, you must adopt frequentist interpretations! Okay, so if that's not the right answer, what is? Remember what we said about frequentist probability. The only way we are allowed to make "probability statements" is to talk about a sequence of events, and to count up the frequencies of different kinds of events. From that perspective, the interpretation of a 95% confidence interval must have something to do with replication. Specifically, if we replicated the experiment over and over again and computed a 95% confidence interval for each replication, then 95% of those intervals would contain the true mean. More generally, 95% of all confidence intervals constructed using this procedure should contain the true population mean. This idea is illustrated in @fig-fig8-12, which shows 50 confidence intervals constructed for a "measure 10 IQ scores" experiment (top panel) and another 50 confidence intervals for a "measure 25 IQ scores" experiment (bottom panel). A bit fortuitously, across the 100 replications that I simulated, it turned out that exactly 95 of them contained the true mean. The critical difference here is that the Bayesian claim makes a probability statement about the population mean (i.e., it refers to our uncertainty about the population mean), which is not allowed under the frequentist interpretation of probability because you can't "replicate" a population! In the frequentist claim, the population mean is fixed and no probabilistic claims can be made about it. Confidence intervals, however, are repeatable so we can replicate experiments. Therefore a *frequentist* is allowed to talk about the probability that the *confidence interval* (a random variable) contains the true mean, but is not allowed to talk about the probability that the *true population mean* (not a repeatable event) falls within the confidence interval I know that this seems a little pedantic, but it does matter. It matters because the difference in interpretation leads to a difference in the mathematics. There is a Bayesian alternative to confidence intervals, known as *credible intervals*. In most situations credible intervals are quite similar to confidence intervals, but in other cases they are drastically different. As promised, though, I'll talk more about the Bayesian perspective in @sec-Bayesian-statistics.
+The hardest thing about confidence intervals is understanding what they mean. Whenever people first encounter confidence intervals, the first instinct is almost always to say that "there is a 95% probability that the true mean lies inside the confidence interval". It's simple and it seems to capture the common sense idea of what it means to say that I am "95% confident". Unfortunately, it's not quite right. The intuitive definition relies very heavily on your own personal beliefs about the value of the population mean. I say that I am 95% confident because those are my beliefs. In everyday life that's perfectly okay, but if you remember back to the the section [What does probability mean?], you'll notice that talking about personal belief and confidence is a Bayesian idea. However, confidence intervals are not Bayesian tools. Like everything else in this chapter, confidence intervals are frequentist tools, and if you are going to use frequentist methods then it's not appropriate to attach a Bayesian interpretation to them. If you use frequentist methods, you must adopt frequentist interpretations! Okay, so if that's not the right answer, what is? Remember what we said about frequentist probability. The only way we are allowed to make "probability statements" is to talk about a sequence of events, and to count up the frequencies of different kinds of events. From that perspective, the interpretation of a 95% confidence interval must have something to do with replication. Specifically, if we replicated the experiment over and over again and computed a 95% confidence interval for each replication, then 95% of those intervals would contain the true mean. More generally, 95% of all confidence intervals constructed using this procedure should contain the true population mean. This idea is illustrated in @fig-fig8-12, which shows 50 confidence intervals constructed for a "measure 10 IQ scores" experiment (top panel) and another 50 confidence intervals for a "measure 25 IQ scores" experiment (bottom panel). We'd expect that around 95 of our confidence intervals would contain the true population mean, and that's what we found in @fig-fig8-12. The critical difference here is that the Bayesian claim makes a probability statement about the population mean (i.e., it refers to our uncertainty about the population mean), which is not allowed under the frequentist interpretation of probability because you can't "replicate" a population! In the frequentist claim, the population mean is fixed and no probabilistic claims can be made about it. Confidence intervals, however, are repeatable so we can replicate experiments. Therefore a *frequentist* is allowed to talk about the probability that the *confidence interval* (a random variable) contains the true mean, but is not allowed to talk about the probability that the *true population mean* (not a repeatable event) falls within the confidence interval I know that this seems a little pedantic, but it does matter. It matters because the difference in interpretation leads to a difference in the mathematics. There is a Bayesian alternative to confidence intervals, known as *credible intervals*. In most situations credible intervals are quite similar to confidence intervals, but in other cases they are drastically different. As promised, though, I'll talk more about the Bayesian perspective in @sec-Bayesian-statistics.
 
 ```{r}
 #| label: fig-fig8-12
 #| fig-align: left
-#| fig-width: 0.9
-#| fig-cap: 95% confidence intervals. The top (panel a) shows 50 simulated replications of an experiment in which we measure the IQs of 10 people. The dot marks the location of the sample mean and the line shows the 95% confidence interval. In total 47 of the 50 confidence intervals do contain the true mean (i.e., 100), but the three intervals marked with asterisks do not. The lower graph (panel b) shows a similar simulation, but this time we simulate replications of an experiment that measures the IQs of 25 people
-knitr::include_graphics("images/fig8-12.png")
+#| fig-width: 7
+#| fig-height: 7
+#| out.width: 90%
+#| fig-cap: 95% confidence intervals. The top (panel a) shows 50 simulated replications of an experiment in which we measure the IQs of 10 people. The dot marks the location of the sample mean and the line shows the 95% confidence interval. Most of the 50 confidence intervals do contain the true mean (i.e., 100), but a few - in blue and marked with asterisks - do not. The lower graph (panel b) shows a similar simulation, but this time we simulate replications of an experiment that measures the IQs of 25 people
+
+N <- 50
+n <- 10
+ci.demo.10 <- matrix(rnorm(n*N, 100,15),N,n)
+ci_m <- apply(ci.demo.10,1,mean)
+ci_se <- (apply(ci.demo.10,1,sd))/sqrt(n)
+uci <- ci_m + 1.95*ci_se
+lci <- ci_m - 1.95*ci_se
+ci.demo.10 <- data.frame(Replication=c(1:50), ci_m, ci_se, lci, uci)
+plotcol <- with(ci.demo.10, ifelse(lci>100 | uci<100, "blue", "darkgrey"))
+asterisk_pos <- 118-ci_m
+ci.demo.10 <- cbind(ci.demo.10, plotcol, asterisk_pos)
+
+p.ci1  <- ggplot(data=ci.demo.10, aes(x=Replication, y=ci_m)) +
+  geom_point(col=plotcol) +
+  geom_linerange(ymin=lci, ymax=uci, col=plotcol) +
+  geom_hline(yintercept=100, col="darkgrey", linetype="dashed") +
+  geom_text(aes(label = ifelse(plotcol == "blue", "*", "")), col="blue", size=10, nudge_y = asterisk_pos) +
+  xlab("\nReplication Number") +
+  ylab("Mean IQ\n") +
+  ggtitle("(b) Sample Size = 10") +
+  scale_fill_identity() +
+  scale_y_continuous(limits=c(80,120)) +
+  theme_classic()
+
+N <- 50
+n <- 25
+ci.demo.25 <- matrix(rnorm(n*N, 100,15),N,n)
+ci_m <- apply(ci.demo.25,1,mean)
+ci_se <- (apply(ci.demo.25,1,sd))/sqrt(n)
+uci <- ci_m + 1.95*ci_se
+lci <- ci_m - 1.95*ci_se
+ci.demo.25 <- data.frame(Replication=c(1:50), ci_m, ci_se, lci, uci)
+plotcol <- with(ci.demo.25, ifelse(lci>100 | uci<100, "blue", "darkgrey"))
+asterisk_pos <- 118-ci_m
+ci.demo.10 <- cbind(ci.demo.10, plotcol, asterisk_pos)
+
+
+p.ci2  <- ggplot(data=ci.demo.25, aes(x=Replication, y=ci_m)) +
+  geom_point(col=plotcol) +
+  geom_linerange(ymin=lci, ymax=uci, col=plotcol) +
+  geom_hline(yintercept=100, col="darkgrey", linetype="dashed") +
+  geom_text(aes(label = ifelse(plotcol == "blue", "*", "")), col="blue", size=10, nudge_y = asterisk_pos) +
+  xlab("\nReplication Number") +
+  ylab("Mean IQ\n") +
+  ggtitle("(b) Sample Size = 25") +
+  scale_fill_identity() +
+  scale_y_continuous(limits=c(80,120)) +
+  theme_classic()
+
+
+gridExtra::grid.arrange(grob=p.ci1,p.ci2, nrow=2)
+
 ```
 
 ### Calculating confidence intervals in jamovi

@@ -67,19 +67,16 @@ T,H,H,H,H,T,T,H,H,H,H,T,H,H,T,T,T,T,T,H
 
 In this case 11 of these 20 coin flips (55%) came up heads. Now suppose that I'd been keeping a running tally of the number of heads (which I'll call $N_H$) that I've seen, across the first N flips, and calculate the proportion of heads $\frac{N_H}{N}$ every time. @tbl-tab7-1 shows what I'd get (I did literally flip coins to produce this!):
 
+
 ```{r}
 #| label: tbl-tab7-1
 #| tbl-cap: Coin flips and proportion of heads
-huxtabs[[7]][[1]] |>
-  merge_cells(1, 1:2) |>
-  merge_cells(2, 1:2) |>
-  merge_cells(3, 1:2) |>
-  merge_cells(4, 1:2) |>
-  merge_cells(5, 1:2) |>
-  merge_cells(6, 1:2) |>
-  set_top_border(4, 1:12) |>
-  set_bottom_border(4, 1:12) |>
-  set_bold(4, 1:12) 
+huxthattibble(tibble(`number of flips` = c(1 , 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9 , 10, 11 , 12 , 13 , 14 , 15 , 16 , 17 , 18 , 19 , 20), 
+                    `number of heads` = c( 0 , 1 , 2 , 3 , 4 , 4 , 4 , 5 , 6 , 7,  8  ,  8 ,  9 , 10 , 10 , 10 , 10 , 10 , 10 , 11 ), 
+                    `proportion` = c( 0.00 , .50 , .67 , .75 , .80 , .67 , .57 , .63 , .67 , .70, .73 , .67 , .69 , .71 , .67 ,  .63 , .59 , .56 , .53 , .55))) |>
+  set_number_format(,3,"%.2f") |>
+  set_top_padding(3:21, everywhere, value=0 ) |>
+   set_bottom_padding(2:20, everywhere, value=0 )
 ```
 
 Notice that at the start of the sequence the *proportion* of heads fluctuates wildly, starting at $.00$ and rising as high as $.80$. Later on, one gets the impression that it dampens out a bit, with more and more of the values actually being pretty close to the "right" answer of $.50$. This is the frequentist definition of probability in a nutshell. Flip a fair coin over and over again, and as N grows large (approaches infinity, denoted $N \rightarrow \infty$ ) the proportion of heads will converge to 50%. There are some subtle technicalities that the mathematicians care about, but qualitatively speaking that's how the frequentists define probability. Unfortunately, I don't have an infinite number of coins or the infinite patience required to flip a coin an infinite number of times. However, I do have a computer and computers excel at mindless repetitive tasks. So I asked my computer to simulate flipping a coin 1000 times and then drew a picture of what happens to the proportion $\frac{N_H}{N}$ as $N$ increases. Actually, I did it four times just to make sure it wasn't a fluke. The results are shown in @fig-fig7-1. As you can see, the proportion of observed heads eventually stops fluctuating and settles down. When it does, the number at which it finally settles is the true probability of heads.
@@ -92,10 +89,22 @@ However, it also has undesirable characteristics. First, infinite sequences don'
 
 ```{r}
 #| label: fig-fig7-1
+#| warning: FALSE
 #| fig-align: left
-#| fig-width: 0.9
 #| fig-cap: An illustration of how frequentist probability works. If you flip a fair coin over and over again the proportion of heads that you've seen eventually settles down and converges to the true probability of $0.5$. Each panel shows four different simulated experiments. In each case we pretend we flipped a coin $1000$ times and kept track of the proportion of flips that were heads as we went along. Although none of these sequences actually ended up with an exact value of $.5$, if we'd extended the experiment for an infinite number of coin flips they would have
-knitr::include_graphics("images/fig7-1.png")
+coinflips <- list()
+coinflips <- lapply(1:4, function(i) {
+    ggplot(data=tibble(flips = 1:1000, heads = cumsum(as.numeric( runif(1000) > .5 )) / (1:1000)),
+           aes(x=flips, y=heads)) +
+    geom_line(color="blue", size=1) +
+    ylim(0.3, 0.7) + 
+    xlim(0, 1000) +
+    geom_hline(yintercept=0.5, color="grey") +
+    xlab("Number of flips") +
+    ylab("Proportion of heads") +
+    theme_classic()
+})
+gridExtra::grid.arrange(grobs = coinflips)
 ```
 
 ### The Bayesian view
@@ -139,9 +148,19 @@ Each of the events has a probability that lies between 0 and 1, and if we add up
 ```{r}
 #| label: fig-fig7-2
 #| fig-align: left
-#| fig-width: 0.9
+#| out-width: 80%
 #| fig-cap: A visual depiction of the 'trousers' probability distribution. There are five 'elementary events', corresponding to the five pairs of trousers that I own. Each event has some probability of occurring - this probability is a number between 0 to 1. The sum of these probabilities is 1
-knitr::include_graphics("images/fig7-2.png")
+
+pantsdat <- tibble(probabilities = c( .5, .3, .1, 0, .1),
+                    eventNames = c( "Blue jeans", "Grey jeans", "Black jeans",  "Black suit", "Blue track" ))
+pantsdat$eventNames = factor(pantsdat$eventNames, levels = c( "Blue jeans", "Grey jeans", "Black jeans",  "Black suit", "Blue track" ))
+
+ggplot(data=pantsdat, aes(x=eventNames, y=probabilities)) +
+  geom_bar(stat='identity', col="black", fill="blue", alpha=0.6) +
+  theme_classic() +
+  ylab("Probability of event") +
+  xlab("Event")
+
 ```
 
 ```{r}
@@ -164,7 +183,7 @@ As usual, we'll want to introduce some names and some notation. We'll let $N$ de
 
 $$P(X|\theta,N)$$
 
-and we're interested in the special case where \$X = 4, \theta = .167 \$ and $N = 20$.
+and we're interested in the special case where $X = 4, \theta = .167$ and $N = 20$.
 
 [Additional technical detail [^07-introduction-to-probability-3]]
 
@@ -179,12 +198,20 @@ To give you a feel for how the binomial distribution changes when we alter the v
 ```{r}
 #| label: fig-fig7-3
 #| fig-align: left
-#| fig-width: 0.9
+#| out.width: 80%
 #| fig-cap: The binomial distribution with size parameter of $N = 20$ and an underlying success probability of $\theta = \frac{1}{6}$. Each vertical bar depicts the probability of one specific outcome (i.e., one possible value of X). Because this is a probability distribution, each of the probabilities must be a number between 0 and 1, and the heights of the bars must sum to 1 as well
-knitr::include_graphics("images/fig7-3.png")
+
+binom1 <- data.frame(heads = 0:20, pmf = dbinom(x = 0:20, size = 20, prob = 1/6)+0.0001) 
+
+ggplot(data=binom1, aes(x = factor(heads), y = pmf)) +
+  geom_col(col="blue", fill="blue", alpha=0.6, width=.1) +
+  labs(x = "\nNumber of skulls observed",
+       y = "Probability/n") +
+  scale_x_discrete(breaks=seq(0,20,5)) +
+  theme_classic()
+
 ```
 
-I were to flip the coin $N = 20$ times. In this example, I've changed the success probability but kept the size of the experiment the same. What does this do to our binomial distribution? Well, as @fig-fig7-4 (a) shows, the main effect of this is to shift the whole distribution, as you'd expect. Okay, what if we flipped a coin $N = 100$ times? Well, in that case we get @fig-fig7-4 (a). The distribution stays roughly in the middle but there's a bit more variability in the possible outcomes.
 
 ## The normal distribution {#sec-The-normal-distribution}
 
@@ -193,17 +220,46 @@ While the binomial distribution is conceptually the simplest distribution to und
 ```{r}
 #| label: fig-fig7-4
 #| fig-align: left
-#| fig-width: 0.9
+#| out.width: 80%
 #| fig-cap: Two binomial distributions, involving a scenario in which I'm flipping a fair coin, so the underlying success probability is $\theta = \frac{1}{2}$. In panel (a), we assume I'm flipping the coin $N = 20$ times. In panel (b) we assume that the coin is flipped $N = 100$ times
-knitr::include_graphics("images/fig7-4.png")
+
+binom2 <- data.frame(heads = 0:20, pmf = dbinom(x = 0:20, size = 20, prob = 1/2)+0.0001) 
+
+ggplot(data=binom2, aes(x = factor(heads), y = pmf)) +
+  geom_col(col="blue", fill="blue", alpha=0.6, width=.1) +
+  labs(x = "Number of skulls observed",
+       y = "Probability") +
+  scale_x_discrete(breaks=seq(0,20,5)) +
+  labs(tag = "(a)") +
+  theme(plot.tag.position = c(0.3, 0.70)) +
+  theme_classic()
+
+binom3 <- data.frame(heads = 0:100, pmf = dbinom(x = 0:100, size = 100, prob = 1/2)+0.0001) 
+
+ggplot(data=binom3, aes(x = factor(heads), y = pmf)) +
+  geom_col(col="blue", fill="blue", alpha=0.6, width=.1) +
+  labs(x = "\nNumber of skulls observed",
+       y = "Probability\n") +
+  scale_x_discrete(breaks=seq(0,100,5)) +
+  labs(tag = "(b)") +
+  theme(plot.tag.position = c(0.3, 0.70)) +
+  theme_classic()
+
 ```
 
 ```{r}
 #| label: fig-fig7-5
 #| fig-align: left
-#| fig-width: 0.9
+#| out.width: 80%
 #| fig-cap: The normal distribution with mean $\mu = 0$ and standard deviation $\sigma = 1$. The x-axis corresponds to the value of some variable, and the y-axis tells us something about how likely we are to observe that value. However, notice that the y-axis is labelled *Probability Density* and not *Probability*. There is a subtle and somewhat frustrating characteristic of continuous distributions that makes the $y$ axis behave a bit oddly - the height of the curve here isn't actually the probability of observing a particular x value. On the other hand, it is true that the heights of the curve tells you which $x$ values are more likely (the higher ones!). (see [Probability density] section for all the annoying details)
-knitr::include_graphics("images/fig7-5.png")
+
+ggplot(data = data.frame(x = seq(-3, 3, 1)), aes(x)) +
+  stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col="blue", size=1) + 
+  scale_x_continuous(breaks = seq(-3, 3, 1)) +
+  ylab("Probability Density\n") +
+  xlab("\nObserved Value") +
+  theme_classic()
+
 ```
 
 [Additional technical detail [^07-introduction-to-probability-4]]
@@ -217,9 +273,17 @@ Let's try to get a sense for what it means for a variable to be normally distrib
 ```{r}
 #| label: fig-fig7-6
 #| fig-align: left
-#| fig-width: 0.9
+#| out.width: 80%
 #| fig-cap: An illustration of what happens when you change the mean of a normal distribution. The solid line depicts a normal distribution with a mean of $\mu = 4$. The dashed line shows a normal distribution with a mean of $\mu = 7$. In both cases, the standard deviation is $\sigma = 1$. Not surprisingly, the two distributions have the same shape, but the dashed line is shifted to the right
-knitr::include_graphics("images/fig7-6.png")
+
+ggplot(data = data.frame(x = seq(0, 10, 1)), aes(x)) +
+  stat_function(fun = dnorm, n = 1000, args = list(mean = 4, sd = 1), col="blue", size=1) + 
+  stat_function(fun = dnorm, n = 1000, args = list(mean = 7, sd = 1), col="blue", linetype=2, size=1) + 
+  scale_x_continuous(breaks = seq(0, 10, 2)) +
+  ylab("Probability Density\n") +
+  xlab("\nObserved Value") +
+  theme_classic()
+
 ```
 
 With this in mind, let's see if we can't get an intuition for how the normal distribution works. First, let's have a look at what happens when we play around with the parameters of the distribution. To that end, @fig-fig7-6 plots normal distributions that have different means but have the same standard deviation. As you might expect, all of these distributions have the same "width". The only difference between them is that they've been shifted to the left or to the right. In every other respect they're identical. In contrast, if we increase the standard deviation while keeping the mean constant, the peak of the distribution stays in the same place but the distribution gets wider, as you can see in @fig-fig7-7. Notice, though, that when we widen the distribution the height of the peak shrinks. This has to happen, in the same way that the heights of the bars that we used to draw a discrete binomial distribution have to sum to 1, the total area under the curve for the normal distribution must equal 1. Before moving on, I want to point out one important characteristic of the normal distribution. Irrespective of what the actual mean and standard deviation are, $68.3\%$ of the area falls within 1 standard deviation of the mean. Similarly, $95.4\%$ of the distribution falls within 2 standard deviations of the mean, and $(99.7\%)$ of the distribution is within 3 standard deviations. This idea is illustrated in @fig-fig7-8; see also @fig-fig7-9.
@@ -227,25 +291,102 @@ With this in mind, let's see if we can't get an intuition for how the normal dis
 ```{r}
 #| label: fig-fig7-7
 #| fig-align: left
-#| fig-width: 0.9
+#| out.width: 80%
 #| fig-cap: An illustration of what happens when you change the the standard deviation of a normal distribution. Both distributions plotted in this figure have a mean of $\mu = 5$, but they have different standard deviations. The solid line plots a distribution with standard deviation $\sigma = 1$, and the dashed line shows a distribution with standard deviation $\sigma = 2$. As a consequence, both distributions are 'centred' on the same spot, but the dashed line is wider than the solid one
-knitr::include_graphics("images/fig7-7.png")
+
+ggplot(data = data.frame(x = seq(0, 10, 1)), aes(x)) +
+  stat_function(fun = dnorm, n = 1000, args = list(mean = 5, sd = 1), col="blue", size=1) + 
+  stat_function(fun = dnorm, n = 1000, args = list(mean = 5, sd = 2), col="blue", linetype=2, size=1) + 
+  scale_x_continuous(breaks = seq(0, 10, 2)) +
+  ylab("Probability Density\n") +
+  xlab("\nObserved Value") +
+  theme_classic()
+
 ```
 
 ```{r}
 #| label: fig-fig7-8
 #| fig-align: left
-#| fig-width: 0.9
+#| fig-width: 8
+#| fig-height: 4
+#| out-width: 80%
 #| fig-cap: The area under the curve tells you the probability that an observation falls within a particular range. The solid lines plot normal distributions with mean $\mu = 0$ and standard deviation $\sigma = 1$. The shaded areas illustrate 'areas under the curve' for two important cases. In panel (a), we can see that there is a 68.3% chance that an observation will fall within one standard deviation of the mean. In panel (b), we see that there is a 95.4% chance that an observation will fall within two standard deviations of the mean
-knitr::include_graphics("images/fig7-8.png")
+
+p1 <- ggplot(data = data.frame(x = seq(-4, 4, 1)), aes(x)) +
+  stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col="grey", geom = "area",
+                fill = "grey", alpha=0.8, xlim = c(-1, 1)) + 
+  stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col="blue", size=1) + 
+  scale_x_continuous(breaks = seq(-4, 4, 1)) +
+  ggtitle("Shaded area = 68.3%") +
+  xlab("\n(a)") +
+  theme_classic() +
+  theme(
+    axis.text.y = element_blank(),
+    axis.title.y = element_blank(),
+    axis.line.y = element_blank(),
+    axis.ticks.y = element_blank(),
+    plot.title = element_text(hjust = 0.5),
+    plot.tag.position = c(0.5, -0.1))
+
+p2 <- ggplot(data = data.frame(x = seq(-4, 4, 1)), aes(x)) +
+  stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col="grey", geom = "area",
+                fill = "grey", alpha=0.8, xlim = c(-2, 2)) + 
+  stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col="blue", size=1) + 
+  scale_x_continuous(breaks = seq(-4, 4, 1)) +
+  ggtitle("Shaded area = 95.4%") +
+  xlab("\n(b)") +
+  theme_classic() +
+  theme(
+    axis.text.y = element_blank(),
+    axis.title.y = element_blank(),
+    axis.line.y = element_blank(),
+    axis.ticks.y = element_blank(),
+    plot.title = element_text(hjust = 0.5))
+
+gridExtra::grid.arrange(p1,p2, ncol=2)
 ```
 
 ```{r}
 #| label: fig-fig7-9
 #| fig-align: left
-#| fig-width: 0.9
+#| fig-width: 8
+#| fig-height: 4
+#| out-width: 80%
 #| fig-cap: Two more examples of the 'area under the curve idea'. There is a 15.9% chance that an observation is one standard deviation below the mean or smaller (panel (a)), and a 34.1% chance that the observation is somewhere between one standard deviation below the mean and the mean (panel (b)). Notice that if you add these two numbers together you get 15.9% + 34.1% = 50%. For normally distributed data, there is a 50% chance that an observation falls below the mean. And of course that also implies that there is a 50% chance that it falls above the mean
-knitr::include_graphics("images/fig7-9.png")
+
+p3 <- ggplot(data = data.frame(x = seq(-4, 4, 1)), aes(x)) +
+  stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col="grey", geom = "area",
+                fill = "grey", alpha=0.8, xlim = c(-4, -1)) + 
+  stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col="blue", size=1) + 
+  scale_x_continuous(breaks = seq(-4, 4, 1)) +
+  ggtitle("Shaded area = 15.9%") +
+  xlab("\n(a)") +
+  theme_classic() +
+  theme(
+    axis.text.y = element_blank(),
+    axis.title.y = element_blank(),
+    axis.line.y = element_blank(),
+    axis.ticks.y = element_blank(),
+    plot.title = element_text(hjust = 0.5),
+    plot.tag.position = c(0.5, -0.1))
+
+p4 <- ggplot(data = data.frame(x = seq(-4, 4, 1)), aes(x)) +
+  stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col="grey", geom = "area",
+                fill = "grey", alpha=0.8, xlim = c(-1, 0)) + 
+  stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col="blue", size=1) + 
+  scale_x_continuous(breaks = seq(-4, 4, 1)) +
+  ggtitle("Shaded area = 34.1%") +
+  xlab("\n(b)") +
+  theme_classic() +
+  theme(
+    axis.text.y = element_blank(),
+    axis.title.y = element_blank(),
+    axis.line.y = element_blank(),
+    axis.ticks.y = element_blank(),
+    plot.title = element_text(hjust = 0.5))
+
+gridExtra::grid.arrange(p3,p4, ncol=2)
+```
 ```
 
 ### Probability density
@@ -271,25 +412,48 @@ The normal distribution is the distribution that statistics makes most use of (f
 ```{r}
 #| label: fig-fig7-10
 #| fig-align: left
-#| fig-width: 0.9
+#| out.width: 80%
 #| fig-cap: A $t$ distribution with 3 degrees of freedom (solid line). It looks similar to a normal distribution, but it's not quite the same. For comparison purposes I've plotted a standard normal distribution as the dashed line
-knitr::include_graphics("images/fig7-10.png")
+
+ggplot(data = data.frame(x = seq(-4, 4, 1)), aes(x)) +
+  stat_function(fun = dt, n = 1000, args = list(df = 3), col="blue", size=1) + 
+  stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col="grey", linetype=5, size=1) + 
+  scale_x_continuous(breaks = seq(-4, 4, 2)) +
+  ylab("Probability Density\n") +
+  xlab("\nObserved Value") +
+  theme_classic()
+
 ```
+
 
 ```{r}
 #| label: fig-fig7-11
 #| fig-align: left
-#| fig-width: 0.9
+#| out.width: 80%
 #| fig-cap: $\chi^2$ distribution with 3 degrees of freedom. Notice that the observed values must always be greater than zero, and that the distribution is pretty skewed. These are the key features of a chi-square  distribution
-knitr::include_graphics("images/fig7-11.png")
+
+ggplot(data = data.frame(x = seq(0, 10, 1)), aes(x)) +
+  stat_function(fun = dchisq, n = 1000, args = list(df = 3), col="blue", size=1) + 
+  scale_x_continuous(breaks = seq(0, 10, 2)) +
+  ylab("Probability Density\n") +
+  xlab("\nObserved Value") +
+  theme_classic()
+
 ```
 
 ```{r}
 #| label: fig-fig7-12
 #| fig-align: left
-#| fig-width: 0.9
+#| out.width: 80%
 #| fig-cap: An $F$ distribution with 3 and 5 degrees of freedom. Qualitatively speaking, it looks pretty similar to a chi-square distribution, but they're not quite the same in general
-knitr::include_graphics("images/fig7-12.png")
+
+ggplot(data = data.frame(x = seq(0, 10, 1)), aes(x)) +
+  stat_function(fun = df, n = 1000, args = list(df1 = 3, df2 = 5), col="blue", size=1) + 
+  scale_x_continuous(breaks = seq(0, 10, 2)) +
+  ylab("Probability Density\n") +
+  xlab("\nObserved Value") +
+  theme_classic()
+
 ```
 
 -   The $t$ distribution is a continuous distribution that looks very similar to a normal distribution, see @fig-fig7-10. Note that the "tails" of the t distribution are "heavier" (i.e., extend further outwards) than the tails of the normal distribution). That's the important difference between the two. This distribution tends to arise in situations where you think that the data actually follow a normal distribution, but you don't know the mean or standard deviation. We'll run into this distribution again in @sec-Comparing-two-means.
