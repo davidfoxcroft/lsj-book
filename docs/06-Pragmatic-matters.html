@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>learning statistics with jamovi - 6&nbsp; Pragmatic matters</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./Prelude-Part-IV.html" rel="next">
+<link href="./05-Drawing-graphs.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      displayMath: [ ['S$','S$'], ["\\[","\\]"] ]
+      processEscapes: true
+    }
+  });
+</script>
+    
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="styles.css">
+<meta property="og:title" content="learning statistics with jamovi - 6&nbsp; Pragmatic matters">
+<meta property="og:description" content="This is a somewhat strange chapter, even by my standards. My goal in this chapter is to talk a bit more honestly about the realities of working with data than you’ll see anywhere else in the book.">
+<meta property="og:site-name" content="learning statistics with jamovi">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Pragmatic matters</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">learning statistics with jamovi</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/davidfoxcroft/lsj-book/" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+    <a href="" title="Download" id="sidebar-tool-dropdown-0" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-download"></i></a>
+    <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-0">
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="./learning-statistics-with-jamovi.pdf">
+            <i class="bi bi-bi-file-pdf pe-1"></i>
+          Download PDF
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="./learning-statistics-with-jamovi.epub">
+            <i class="bi bi-bi-journal pe-1"></i>
+          Download ePub
+          </a>
+        </li>
+    </ul>
+    <a href="" title="Share" id="sidebar-tool-dropdown-1" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-share"></i></a>
+    <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-1">
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
+            <i class="bi bi-bi-twitter pe-1"></i>
+          Twitter
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
+            <i class="bi bi-bi-facebook pe-1"></i>
+          Facebook
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
+            <i class="bi bi-bi-linkedin pe-1"></i>
+          LinkedIn
+          </a>
+        </li>
+    </ul>
+  <a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle sidebar-tool" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">&nbsp;</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Preface.html" class="sidebar-item-text sidebar-link">Preface</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">Beginnings</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-Why-do-we-learn-statistics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Why do we learn statistics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-A-brief-introduction-to-research-design.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">A brief introduction to research design</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">An introduction to jamovi</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-Getting-started-with-jamovi.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Getting started with jamovi</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">Working with data</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-Descriptive-statistics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Descriptive statistics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-Drawing-graphs.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Drawing graphs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-Pragmatic-matters.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Pragmatic matters</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">Statistical theory</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Prelude-Part-IV.html" class="sidebar-item-text sidebar-link">Prelude</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-Introduction-to-probability.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Introduction to probability</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-Estimating-unknown-quantities-from-a-sample.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Estimating unknown quantities from a sample</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-Hypothesis-testing.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Hypothesis testing</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">Statistical tools</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-Categorical-data-analysis.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Categorical data analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-Comparing-two-means.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Comparing two means</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-Correlation-and-linear-regression.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Correlation and linear regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-Comparing-several-means-one-way-ANOVA.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Comparing several means (one-way ANOVA)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-Factorial-ANOVA.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Factorial ANOVA</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-Factor-Analysis.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Factor Analysis</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">Endings, alternatives and prospects</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-Bayesian-statistics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Bayesian statistics</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Epilogue.html" class="sidebar-item-text sidebar-link">Epilogue</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./References.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec-Tabulating-and-cross-tabulating-data" id="toc-sec-Tabulating-and-cross-tabulating-data" class="nav-link active" data-scroll-target="#sec-Tabulating-and-cross-tabulating-data"><span class="toc-section-number">6.1</span>  Tabulating and cross-tabulating data</a>
+  <ul class="collapse">
+  <li><a href="#creating-tables-for-single-variables" id="toc-creating-tables-for-single-variables" class="nav-link" data-scroll-target="#creating-tables-for-single-variables"><span class="toc-section-number">6.1.1</span>  Creating tables for single variables</a></li>
+  <li><a href="#adding-percentages-to-a-contingency-table" id="toc-adding-percentages-to-a-contingency-table" class="nav-link" data-scroll-target="#adding-percentages-to-a-contingency-table"><span class="toc-section-number">6.1.2</span>  Adding percentages to a contingency table</a></li>
+  </ul></li>
+  <li><a href="#logical-expressions-in-jamovi" id="toc-logical-expressions-in-jamovi" class="nav-link" data-scroll-target="#logical-expressions-in-jamovi"><span class="toc-section-number">6.2</span>  Logical expressions in jamovi</a>
+  <ul class="collapse">
+  <li><a href="#assessing-mathematical-truths" id="toc-assessing-mathematical-truths" class="nav-link" data-scroll-target="#assessing-mathematical-truths"><span class="toc-section-number">6.2.1</span>  Assessing mathematical truths</a></li>
+  <li><a href="#logical-operations" id="toc-logical-operations" class="nav-link" data-scroll-target="#logical-operations"><span class="toc-section-number">6.2.2</span>  Logical operations</a></li>
+  <li><a href="#applying-logical-operation-to-text" id="toc-applying-logical-operation-to-text" class="nav-link" data-scroll-target="#applying-logical-operation-to-text"><span class="toc-section-number">6.2.3</span>  Applying logical operation to text</a></li>
+  </ul></li>
+  <li><a href="#sec-Transforming-and-recoding-a-variable" id="toc-sec-Transforming-and-recoding-a-variable" class="nav-link" data-scroll-target="#sec-Transforming-and-recoding-a-variable"><span class="toc-section-number">6.3</span>  Transforming and recoding a variable</a>
+  <ul class="collapse">
+  <li><a href="#creating-a-transformed-variable" id="toc-creating-a-transformed-variable" class="nav-link" data-scroll-target="#creating-a-transformed-variable"><span class="toc-section-number">6.3.1</span>  Creating a transformed variable</a></li>
+  <li><a href="#collapsing-a-variable-into-a-smaller-number-of-discrete-levels-or-categories" id="toc-collapsing-a-variable-into-a-smaller-number-of-discrete-levels-or-categories" class="nav-link" data-scroll-target="#collapsing-a-variable-into-a-smaller-number-of-discrete-levels-or-categories"><span class="toc-section-number">6.3.2</span>  Collapsing a variable into a smaller number of discrete levels or categories</a></li>
+  <li><a href="#creating-a-transformation-that-can-be-applied-to-multiple-variables" id="toc-creating-a-transformation-that-can-be-applied-to-multiple-variables" class="nav-link" data-scroll-target="#creating-a-transformation-that-can-be-applied-to-multiple-variables"><span class="toc-section-number">6.3.3</span>  Creating a transformation that can be applied to multiple variables</a></li>
+  </ul></li>
+  <li><a href="#a-few-more-mathematical-functions-and-operations" id="toc-a-few-more-mathematical-functions-and-operations" class="nav-link" data-scroll-target="#a-few-more-mathematical-functions-and-operations"><span class="toc-section-number">6.4</span>  A few more mathematical functions and operations</a>
+  <ul class="collapse">
+  <li><a href="#logarithms-and-exponentials" id="toc-logarithms-and-exponentials" class="nav-link" data-scroll-target="#logarithms-and-exponentials"><span class="toc-section-number">6.4.1</span>  Logarithms and exponentials</a></li>
+  </ul></li>
+  <li><a href="#extracting-a-subset-of-the-data" id="toc-extracting-a-subset-of-the-data" class="nav-link" data-scroll-target="#extracting-a-subset-of-the-data"><span class="toc-section-number">6.5</span>  Extracting a subset of the data</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="toc-section-number">6.6</span>  Summary</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/davidfoxcroft/lsj-book/edit/main/06-Pragmatic-matters.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/davidfoxcroft/lsj-book/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header">
+<h1 class="title display-7"><span id="sec-Pragmatic-matters" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Pragmatic matters</span></span></h1>
+
+</header>
+
+<blockquote class="blockquote">
+<p><em>The garden of life never seems to confine itself to the plots philosophers have laid out for its convenience. Maybe a few more tractors would do the trick.</em><br>
+– Roger Zelazny<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+</blockquote>
+<p>This is a somewhat strange chapter, even by my standards. My goal in this chapter is to talk a bit more honestly about the realities of working with data than you’ll see anywhere else in the book. The problem with real world data sets is that they are <em>messy</em>. Very often the data file that you start out with doesn’t have the variables stored in the right format for the analysis you want to do. Sometimes there might be a lot of missing values in your data set. Sometimes you only want to analyse a subset of the data. Et cetera. In other words, there’s a lot of <strong>data manipulation</strong> that you need to do just to get the variables in your data set into the format that you need it. The purpose of this chapter is to provide a basic introduction to these pragmatic topics. Although the chapter is motivated by the kinds of practical issues that arise when manipulating real data, I’ll stick with the practice that I’ve adopted through most of the book and rely on very small, toy data sets that illustrate the underlying issue. Because this chapter is essentially a collection of techniques and doesn’t tell a single coherent story, it may be useful to start with a list of topics:</p>
+<ul>
+<li><a href="#sec-Tabulating-and-cross-tabulating-data">Tabulating and cross-tabulating data</a></li>
+<li><a href="#logical-expressions-in-jamovi">Logical expressions in jamovi</a></li>
+<li><a href="#sec-Transforming-and-recoding-a-variable">Transforming and recoding a variable</a></li>
+<li><a href="#a-few-more-mathematical-functions-and-operations">A few more mathematical functions and operations</a></li>
+<li><a href="#extracting-a-subset-of-the-data">Extracting a subset of the data</a></li>
+</ul>
+<p>As you can see, the list of topics that the chapter covers is pretty broad, and there’s a lot of content there. Even though this is one of the longest and hardest chapters in the book, I’m really only scratching the surface of several fairly different and important topics. My advice, as usual, is to read through the chapter once and try to follow as much of it as you can. Don’t worry too much if you can’t grasp it all at once, especially the later sections. The rest of the book is only lightly reliant on this chapter so you can get away with just understanding the basics. However, what you’ll probably find is that later on you’ll need to flick back to this chapter in order to understand some of the concepts that I refer to here.</p>
+<section id="sec-Tabulating-and-cross-tabulating-data" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="sec-Tabulating-and-cross-tabulating-data"><span class="header-section-number">6.1</span> Tabulating and cross-tabulating data</h2>
+<p>A very common task when analysing data is the construction of frequency tables, or crosstabulation of one variable against another. These tasks can be achieved in jamovi and I’ll show you how in this section.</p>
+<section id="creating-tables-for-single-variables" class="level3" data-number="6.1.1">
+<h3 data-number="6.1.1" class="anchored" data-anchor-id="creating-tables-for-single-variables"><span class="header-section-number">6.1.1</span> Creating tables for single variables</h3>
+<p>Let’s start with a simple example. As the father of a small child I naturally spend a lot of time watching TV shows like In the <em>Night Garden</em>. In the nightgarden.csv file, I’ve transcribed a short section of the dialogue. The file contains two variables of interest, speaker and utterance. Open up this data set in jamovi and take a look at the data in the ‘spreadsheet’ view. You will see that the data looks something like this:</p>
+<p>‘speaker’ variable: upsy-daisy upsy-daisy upsy-daisy upsy-daisy tombliboo tombliboo makka-pakka makka-pakka makka-pakka makka-pakka ‘utterance’ variable: pip pip onk onk ee oo pip pip onk onk</p>
+<p>Looking at this it becomes very clear what happened to my sanity! With these as my data, one task I might find myself needing to do is construct a frequency count of the number of words each character speaks during the show. The jamovi ‘Descriptives’ screen has a check box called ‘Frequency tables’ which does just this, see <a href="#tbl-tab6-1">Table&nbsp;<span>6.1</span></a>.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-tab6-1" class="anchored">
+
+<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab6-1"><caption>Table&nbsp;6.1:  Frequency table for the speaker variable </caption>
+<colgroup><col><col><col><col></colgroup><tbody><tr>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: bold;">levels</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">Counts</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">\(\%\) of Total</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: bold;">Cumulative \(\%\)</th></tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">makka-pakka</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">4</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">40\(\%\)</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">40\(\%\)</td></tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; font-weight: normal;">tombliboo</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">20\(\%\)</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; font-weight: normal;">60\(\%\)</td></tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">upsy-daisy</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">4</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">40\(\%\)</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">100\(\%\)</td></tr>
+</tbody></table>
+
+</div>
+</div>
+</div>
+<p>The output here tells us on the first line that what we’re looking at is a tabulation of the speaker variable. In the ‘Levels’ column it lists all the different speakers that exist in the data, and in the ‘Counts’ column it tells you how many times that speaker appears in the data. In other words, it’s a frequency table.</p>
+<p>In jamovi, the ‘Frequency tables’ check box will only produce a table for single variables. For a table of two variables, for example combining speaker and utterance so that we can see how many times each speaker said a particular utterance, we need a cross-tabulation or contingency table. In jamovi you can do this by selecting the ‘Frequencies’ - ‘Contingency Tables’ - ‘Independent Samples’ analysis, and moving the speaker variable into the ‘Rows’ box, and the utterances variable into the ‘Columns’ box. You then should have a contingency table like the one shown in <a href="#fig-fig6-1">Figure&nbsp;<span>6.1</span></a>.</p>
+<div class="cell enlarge-image" data-layout-align="left">
+<div class="cell-output-display">
+<div id="fig-fig6-1" class="quarto-figure quarto-figure-left anchored">
+<figure class="figure">
+<p><img src="images/fig6-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;6.1: Contingency table for the speaker and utterances variables</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Don’t worry about the “<span class="math inline">\(\chi^2\)</span> Tests” table that is produced. We are going to cover this later on in <a href="10-Categorical-data-analysis.html"><span>Chapter&nbsp;10</span></a>. When interpreting the contingency table remember that these are counts, so the fact that the first row and second column of numbers corresponds to a value of 2 indicates that Makka-Pakka (row 1) says “onk” (column 2) twice in this data set.</p>
+</section>
+<section id="adding-percentages-to-a-contingency-table" class="level3" data-number="6.1.2">
+<h3 data-number="6.1.2" class="anchored" data-anchor-id="adding-percentages-to-a-contingency-table"><span class="header-section-number">6.1.2</span> Adding percentages to a contingency table</h3>
+<p>The contingency table shown in <a href="#fig-fig6-1">Figure&nbsp;<span>6.1</span></a> shows a table of raw frequencies. That is, a count of the total number of cases for different combinations of levels of the specified variables. However, often you want your data to be organised in terms of percentages as well as counts. You can find the check boxes for different percentages under the ‘Cells’ option in the ‘Contingency Tables’ window. First, click on the ‘Row’ check box and the Contingency Table in the output window will change to the one in <a href="#fig-fig6-2">Figure&nbsp;<span>6.2</span></a>.</p>
+<div class="cell enlarge-image" data-layout-align="left">
+<div class="cell-output-display">
+<div id="fig-fig6-2" class="quarto-figure quarto-figure-left anchored">
+<figure class="figure">
+<p><img src="images/fig6-2.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;6.2: Contingency table for the speaker and utterances variables, with row percentages</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>What we’re looking at here is the percentage of utterances made by each character. In other words, 50% of Makka-Pakka’s utterances are “pip”, and the other 50% are “onk”. Let’s contrast this with the table we get when we calculate column percentages (uncheck ‘Row’ and check ‘Column’ in the Cells options window), see <a href="#fig-fig6-3">Figure&nbsp;<span>6.3</span></a>. In this version, what we’re seeing is the percentage of characters associated with each utterance. For instance, whenever the utterance “ee” is made (in this data set), 100% of the time it’s a Tombliboo saying it.</p>
+<div class="cell enlarge-image" data-layout-align="left">
+<div class="cell-output-display">
+<div id="fig-fig6-3" class="quarto-figure quarto-figure-left anchored">
+<figure class="figure">
+<p><img src="images/fig6-3.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;6.3: Contingency table for the speaker and utterances variables, with column percentages</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="logical-expressions-in-jamovi" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="logical-expressions-in-jamovi"><span class="header-section-number">6.2</span> Logical expressions in jamovi</h2>
+<p>A key concept that a lot of data transformations in jamovi rely on is the idea of a <strong>logical value</strong>. A logical value is an assertion about whether something is true or false. This is implemented in jamovi in a pretty straightforward way. There are two logical values, namely TRUE and FALSE. Despite the simplicity, logical values are very useful things. Let’s see how they work.</p>
+<section id="assessing-mathematical-truths" class="level3" data-number="6.2.1">
+<h3 data-number="6.2.1" class="anchored" data-anchor-id="assessing-mathematical-truths"><span class="header-section-number">6.2.1</span> Assessing mathematical truths</h3>
+<p>In George Orwell’s classic book 1984 one of the slogans used by the totalitarian Party was “two plus two equals five”. The idea being that the political domination of human freedom becomes complete when it is possible to subvert even the most basic of truths. It’s a terrifying thought, especially when the protagonist Winston Smith finally breaks down under torture and agrees to the proposition. “Man is infinitely malleable”, the book says. I’m pretty sure that this isn’t true of humans<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> and it’s definitely not true of jamovi. jamovi is not infinitely malleable, it has rather firm opinions on the topic of what is and isn’t true, at least as regards basic mathematics. If I ask it to calculate <span class="math inline">\(2 + 2\)</span><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>, it always gives the same answer, and it’s not bloody 5!</p>
+<p>Of course, so far jamovi is just doing the calculations. I haven’t asked it to explicitly assert that <span class="math inline">\(2 + 2 = 4\)</span> is a true statement. If I want jamovi to make an explicit judgement, I can use a command like this: <span class="math inline">\(2 + 2 == 4\)</span></p>
+<p>What I’ve done here is use the <strong>equality operator</strong>, <span class="math inline">\(==\)</span>, to force jamovi to make a “true or false” judgement.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> Okay, let’s see what jamovi thinks of the Party slogan, so type this into the compute new variable ‘formula’ box:</p>
+<p><span class="math display">\[2 + 2 == 5\]</span></p>
+<p>And what do you get? It should be a whole set of ‘false’ values in the spreadsheet column for your newly computed variable. Booyah! Freedom and ponies for all! Or something like that. Anyway, it was worth having a look at what happens if I try to force jamovi to believe that two plus two is five by making a statement like <span class="math inline">\(2 + 2 = 5\)</span>. I know that if I do this in another program, say R, then it throws up an error message. But wait, if you do this in jamovi you get a whole set of ‘false’ values. So what is going on? Well, it seems that jamovi is being pretty smart and realises that you are testing whether it is TRUE or FALSE that <span class="math inline">\(2 + 2 = 5\)</span>, regardless of whether you use the correct <strong>equality operator</strong>, <span class="math inline">\(==\)</span>, or the equals sign “<span class="math inline">\(=\)</span>”.</p>
+<p>Anyway, it was worth having a look at what happens if I try to force jamovi to believe that two plus two is five by making a statement like <span class="math inline">\(2 + 2 = 5\)</span>. I know that if I do this in another program, say R, then it throws up an error message. But wait, if you do this in jamovi you get a whole set of ‘false’ values. So what is going on? Well, it seems that jamovi is being pretty smart and realises that you are testing whether it is TRUE or FALSE that <span class="math inline">\(2 + 2 = 5\)</span>, regardless of whether you use the correct <strong>equality operator</strong>, <span class="math inline">\(==\)</span>, or the equals sign “<span class="math inline">\(=\)</span>”.</p>
+</section>
+<section id="logical-operations" class="level3" data-number="6.2.2">
+<h3 data-number="6.2.2" class="anchored" data-anchor-id="logical-operations"><span class="header-section-number">6.2.2</span> Logical operations</h3>
+<p>So now we’ve seen logical operations at work. But so far we’ve only seen the simplest possible example. You probably won’t be surprised to discover that we can combine logical operations with other operations and functions in a more complicated way, like this: <span class="math inline">\(3 \times 3 + 4 \times 4 == 5 \times 5\)</span> or this <span class="math inline">\(SQRT(25) == 5\)</span></p>
+<p>Not only that, but as <a href="#tbl-tab6-2">Table&nbsp;<span>6.2</span></a> illustrates, there are several other logical operators that you can use corresponding to some basic mathematical concepts. Hopefully these are all pretty self-explanatory. For example, the <strong>less than</strong> operator &lt; checks to see if the number on the left is less than the number on the right. If it’s less, then jamovi returns an answer of TRUE, but if the two numbers are equal, or if the one on the right is larger, then jamovi returns an answer of FALSE.</p>
+<p>In contrast, the <strong>less than or equal to</strong> operator <span class="math inline">\(&lt;=\)</span> will do exactly what it says. It returns a value of TRUE if the number of the left hand side is less than or equal to the number on the right hand side. At this point I hope it’s pretty obvious what the <strong>greater than</strong> operator <span class="math inline">\(&lt;\)</span> and the <strong>greater than or equal to</strong> operator <span class="math inline">\(&lt;=\)</span> do!</p>
+<p>Next on the list of logical operators is the <strong>not equal to</strong> operator != which, as with all the others, does what it says it does. It returns a value of TRUE when things on either side are not identical to each other. Therefore, since <span class="math inline">\(2 + 2\)</span> isn’t equal to <span class="math inline">\(5\)</span>, we would get ‘true’ as the value for our newly computed variable. Try it and see:</p>
+<p><span class="math display">\[2 + 2 \text{ != } 5\]</span></p>
+<p>We’re not quite done yet. There are three more logical operations that are worth knowing about, listed in <a href="#tbl-tab6-3">Table&nbsp;<span>6.3</span></a>. These are the <strong>not</strong> operator !, the <strong>and</strong> operator and, and the <strong>or</strong> operator or. Like the other logical operators, their behaviour is more or less exactly what you’d expect given their names. For instance, if I ask you to assess the claim that “either <span class="math inline">\(2 + 2 = 4\)</span> or <span class="math inline">\(2 + 2 = 5\)</span>” you’d say that it’s true. Since it’s an “either-or” statement, all we need is for one of the two parts to be true. That’s what the or operator does:<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-tab6-2" class="anchored">
+
+<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab6-2"><caption>Table&nbsp;6.2:  Some logical operators </caption>
+<colgroup><col><col><col><col></colgroup><tbody><tr>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: bold;">operation</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">operator</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">example input</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: bold;">answer</th></tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">less than</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">TRUE</td></tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; font-weight: normal;">less than or equal to</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&lt;</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2 &lt; = 2</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; font-weight: normal;">TRUE</td></tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; font-weight: normal;">greater than</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&gt;</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2 &gt; 3</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; font-weight: normal;">FALSE</td></tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; font-weight: normal;">greater than or equal to</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&gt; =</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2 &gt; = 2</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; font-weight: normal;">TRUE</td></tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; font-weight: normal;">equal to</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">= =</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2 = = 3</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; font-weight: normal;">FALSE</td></tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">not equal to</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">!=</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2 != 3</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">TRUE</td></tr>
+</tbody></table>
+
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-tab6-3" class="anchored">
+
+<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab6-3"><caption>Table&nbsp;6.3:  Some more logical operators </caption>
+<colgroup><col><col><col><col></colgroup><tbody><tr>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: bold;">operation</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">operator</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">example input</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: bold;">answer</th></tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">not</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">NOT</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">NOT(1==1)</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">FALSE</td></tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; font-weight: normal;">or</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">or</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(1==1) or (2==3)</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; font-weight: normal;">TRUE</td></tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">and</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">and</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(1==1) and (2==3)</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">FALSE</td></tr>
+</tbody></table>
+
+</div>
+</div>
+</div>
+<p><span class="math display">\[(2+2 == 4) \text{ or } (2+2 == 5)\]</span></p>
+<p>On the other hand, if I ask you to assess the claim that “both <span class="math inline">\(2 + 2 = 4\)</span> and <span class="math inline">\(2 + 2 = 5\)</span>” you’d say that it’s false. Since this is an and statement we need both parts to be true. And that’s what the and operator does:</p>
+<p><span class="math display">\[(2+2 == 4) \text{ and } (2+2 == 5)\]</span></p>
+<p>Finally, there’s the not operator, which is simple but annoying to describe in English. If I ask you to assess my claim that “it is not true that <span class="math inline">\(2 + 2 = 5\)</span>” then you would say that my claim is true, because actually my claim is that “<span class="math inline">\(2 + 2 = 5\)</span> is false”. And I’m right. If we write this in jamovi we use this:</p>
+<p><span class="math display">\[NOT(2+2 == 5)\]</span></p>
+<p>In other words, since <span class="math inline">\(2+2 == 5\)</span> is a FALSE statement, it must be the case that <span class="math inline">\(NOT(2+2 == 5)\)</span> is a TRUE one. Essentially, what we’ve really done is claim that “not false” is the same thing as “true”. Obviously, this isn’t really quite right in real life. But jamovi lives in a much more black or white world. For jamovi everything is either true or false. No shades of grey are allowed.</p>
+<p>Of course, in our <span class="math inline">\(2 + 2 = 5\)</span> example, we didn’t really need to use the “not” operator <span class="math inline">\(NOT\)</span> and the “equals to” operator <span class="math inline">\(==\)</span> as two separate operators. We could have just used the “not equals to” operator <span class="math inline">\(!=\)</span> like this:</p>
+<p><span class="math display">\[2+2 \text{ != } 5\]</span></p>
+</section>
+<section id="applying-logical-operation-to-text" class="level3" data-number="6.2.3">
+<h3 data-number="6.2.3" class="anchored" data-anchor-id="applying-logical-operation-to-text"><span class="header-section-number">6.2.3</span> Applying logical operation to text</h3>
+<p>I also want to briefly point out that you can apply these logical operators to text as well as to logical data. It’s just that we need to be a bit more careful in understanding how jamovi interprets the different operations. In this section I’ll talk about how the equal to operator <span class="math inline">\(==\)</span> applies to text, since this is the most important one. Obviously, the not equal to operator != gives the exact opposite answers to <span class="math inline">\(==\)</span> so I’m implicitly talking about that one too, but I won’t give specific commands showing the use of <span class="math inline">\(!=\)</span>.</p>
+<p>Okay, let’s see how it works. In one sense, it’s very simple. For instance, I can ask jamovi if the word “cat” is the same as the word “dog”, like this:</p>
+<p>“cat” <span class="math inline">\(==\)</span> “dog” That’s pretty obvious, and it’s good to know that even jamovi can figure that out. Similarly, jamovi does recognise that a “cat” is a “cat”: “cat” <span class="math inline">\(==\)</span> “cat” Again, that’s exactly what we’d expect. However, what you need to keep in mind is that jamovi is not at all tolerant when it comes to grammar and spacing. If two strings differ in any way whatsoever, jamovi will say that they’re not equal to each other, as with the following: ” cat” <span class="math inline">\(==\)</span> “cat” “cat” <span class="math inline">\(==\)</span> “CAT” “cat” <span class="math inline">\(==\)</span> “c a t”</p>
+<p>You can also use other logical operators too. For instance jamovi also allows you to use the &gt; and &gt; operators to determine which of two text ‘strings’ comes first, alphabetically speaking. Sort of. Actually, it’s a bit more complicated than that, but let’s start with a simple example:</p>
+<p>“cat” <span class="math inline">\(&lt;\)</span> “dog”</p>
+<p>In jamovi, this example evaluates to ‘true’. This is because “cat” does does come before “dog” alphabetically, so jamovi judges the statement to be true. However, if we ask jamovi to tell us if “cat” comes before “anteater” then it will evaluate the expression as false. So far, so good. But text data is a bit more complicated than the dictionary suggests. What about “cat” and “CAT”? Which of these comes first? Try it and find out:</p>
+<p>“CAT” <span class="math inline">\(&lt;\)</span> “cat”</p>
+<p>This in fact evaluates to ‘true’. In other words, jamovi assumes that uppercase letters come before lowercase ones. Fair enough. No-one is likely to be surprised by that. What you might find surprising is that jamovi assumes that all uppercase letters come before all lowercase ones. That is, while “anteater” <span class="math inline">\(&lt;\)</span> “zebra” is a true statement, and the uppercase equivalent “ANTEATER” <span class="math inline">\(&lt;\)</span> “ZEBRA” is also true, it is not true to say that “anteater” <span class="math inline">\(&lt;\)</span> “ZEBRA”, as the following extract illustrates. Try this:</p>
+<p>“anteater” <span class="math inline">\(&lt;\)</span> “ZEBRA”</p>
+<p>This evaluates to ‘false’, and this may seem slightly counter-intuitive. With that in mind, it may help to have a quick look at <a href="#tbl-tab6-4">Table&nbsp;<span>6.4</span></a> which lists various text characters in the order that jamovi processes them.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-tab6-4" class="anchored">
+
+<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab6-4"><caption>Table&nbsp;6.4:  Text characters in the order that jamovi processes them </caption>
+<colgroup><col><col><col><col><col><col><col><col></colgroup><tbody><tr>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">\( \text{!} \)</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">\( \text{"} \)</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">\( \# \)</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">\( \text{\$} \)</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">\( \% \)</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">\( \&amp; \)</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">\( \text{'} \)</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">\( \text{(} \)</th></tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; font-weight: normal;">\( \text{)} \)</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">\( \text{*} \)</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">\( \text{+} \)</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">\( \text{,} \)</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">\( \text{-} \)</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">\( \text{.} \)</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">\( \text{/} \)</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; font-weight: normal;">0</td></tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; font-weight: normal;">1</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">4</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">5</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">6</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">7</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; font-weight: normal;">8</td></tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; font-weight: normal;">9</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">\( \text{:} \)</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">\( \text{;} \)</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&lt;</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">\( \text{=} \)</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&gt;</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">\( \text{?} \)</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; font-weight: normal;">\( \text{@} \)</td></tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; font-weight: normal;">A</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">B</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">C</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">D</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">E</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">F</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">G</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; font-weight: normal;">H</td></tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; font-weight: normal;">I</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">J</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">K</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">L</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">M</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">N</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">O</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; font-weight: normal;">P</td></tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; font-weight: normal;">Q</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">R</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">S</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">T</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">U</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">V</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">W</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; font-weight: normal;">X</td></tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; font-weight: normal;">Y</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Z</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">\( \text{[} \)</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">\( \backslash \)</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">\( \text{]} \)</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">\( \hat{} \)</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">\( \_ \)</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; font-weight: normal;">\( \text{`} \)</td></tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; font-weight: normal;">a</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">b</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">c</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">d</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">e</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">g</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">h</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; font-weight: normal;">i</td></tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; font-weight: normal;">j</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">k</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">l</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">m</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">n</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">o</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">p</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; font-weight: normal;">q</td></tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; font-weight: normal;">r</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">s</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">t</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">u</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">v</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">w</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">x</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; font-weight: normal;">y</td></tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">z</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">\(\text{\{}\)</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">\(\text{|}\)</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">\(\text{\}}\)</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;"></td></tr>
+</tbody></table>
+
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-Transforming-and-recoding-a-variable" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="sec-Transforming-and-recoding-a-variable"><span class="header-section-number">6.3</span> Transforming and recoding a variable</h2>
+<p>It’s not uncommon in real world data analysis to find that one of your variables isn’t quite equivalent to the variable that you really want. For instance, it’s often convenient to take a continuous-valued variable (e.g., age) and break it up into a smallish number of categories (e.g., younger, middle, older). At other times, you may need to convert a numeric variable into a different numeric variable (e.g., you may want to analyse at the absolute value of the original variable). In this section I’ll describe a few key ways you can do these things in jamovi.</p>
+<section id="creating-a-transformed-variable" class="level3" data-number="6.3.1">
+<h3 data-number="6.3.1" class="anchored" data-anchor-id="creating-a-transformed-variable"><span class="header-section-number">6.3.1</span> Creating a transformed variable</h3>
+<p>The first trick to discuss is the idea of <strong>transforming</strong> a variable. Taken literally, anything you do to a variable is a transformation, but in practice what it usually means is that you apply a relatively simple mathematical function to the original variable in order to create a new variable that either (a) provides a better way of describing the thing you’re actually interested in, or (b) is more closely in agreement with the assumptions of the statistical tests you want to do. Since, at this stage, I haven’t talked about statistical tests or their assumptions, I’ll show you an example based on the first case.</p>
+<p>Suppose I’ve run a short study in which I ask 10 people a single question:<br> On a scale of 1 (strongly disagree) to 7 (strongly agree), to what extent do you agree with the proposition that “Dinosaurs are awesome”?</p>
+<p>Now let’s load and look at the data. The data file likert.omv contains a single variable that contains raw Likert-scale responses for these 10 people. However, if you think about it, this isn’t the best way to represent these responses. Because of the fairly symmetric way that we set up the response scale, there’s a sense in which the midpoint of the scale should have been coded as 0 (no opinion), and the two endpoints should be `3 (strongly agree) and ´3 (strongly disagree). By recoding the data in this way it’s a bit more reflective of how we really think about the responses. The recoding here is pretty straightforward, we just subtract 4 from the raw scores. In jamovi you can do this by computing a new variable: click on the ‘Data’ - ‘Compute’ button and you will see that a new variable has been added to the spreadsheet. Let’s call this new variable likert.centred (go ahead and type that in) and then add the following in the formula box, like in <a href="#fig-fig6-4">Figure&nbsp;<span>6.4</span></a>: ‘likert.raw - 4’</p>
+<div class="cell enlarge-image" data-layout-align="left">
+<div class="cell-output-display">
+<div id="fig-fig6-4" class="quarto-figure quarto-figure-left anchored">
+<figure class="figure">
+<p><img src="images/fig6-4.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;6.4: Creating a new computed variable in jamovi</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>One reason why it might be useful to have the data in this format is that there are a lot of situations where you might prefer to analyse the strength of the opinion separately from the direction of the opinion. We can do two different transformations on this likert.centred variable in order to distinguish between these two different concepts. First, to compute an opinion.strength variable, we want to take the absolute value of the centred data (using the ‘ABS’ function).<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> In jamovi, create another new variable using the ‘Compute’ button. Name the variable opinion.strength and this time click on the fx button next to the ‘Formula’ box. This shows the different ‘Functions’ and ‘Variables’ that you can add to the ‘Formula’ box, so double click on ‘ABS’ and then double click on “likert.centred’ and you will see that the ‘Formula’ box is populated with ABS(likert.centred) and a new variable has been created in the spreadsheet view, as in <a href="#fig-fig6-5">Figure&nbsp;<span>6.5</span></a>.</p>
+<div class="cell enlarge-image" data-layout-align="left">
+<div class="cell-output-display">
+<div id="fig-fig6-5" class="quarto-figure quarto-figure-left anchored">
+<figure class="figure">
+<p><img src="images/fig6-5.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;6.5: Using the <span class="math inline">\(f_x\)</span> button to select functions and variables</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Second, to compute a variable that contains only the direction of the opinion and ignores the strength, we want to calculate the ‘sign’ of the variable. In jamovi we can use the IF function to do this. Create another new variable using the ‘Compute’ button, name this one opinion.sign, and then type the following into the function box:</p>
+<p>IF(likert.centred <span class="math inline">\(==\)</span> 0, 0, likert.centred / opinion.strength) When done, you’ll see that all negative numbers from the likert.centred variable are converted to -1, all positive numbers are converted to 1 and zero stays as 0, like so:</p>
+<p>-1 1 -1 0 0 0 -1 1 1 1</p>
+<p>Let’s break down what this ‘IF’ command is doing. In jamovi there are three parts to an ‘IF’ statement, written as ‘IF(expression, value, else)’. The first part, ‘expression’ can be a logical or mathematical statement. In our example, we have specified ‘likert.centred <span class="math inline">\(==\)</span> 0’, which is TRUE for values where likert.centred is zero. The next part, ‘value’, is the new value where the expression in part one is TRUE. In our example, we have said that for all those values where likert.centred is zero, keep them zero. In the next part, ‘else’, we can enter another logical or mathematical statement to be used if part one evaluates to FALSE, i.e.&nbsp;where likert.centred is not zero. In our example we have divided likert.centred by opinion.strength to give ‘-1’ or ‘+1’ depending of the sign of the original value in likert.centred.<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></p>
+<p>And we’re done. We now have three shiny new variables, all of which are useful transformations of the original likert.raw data.</p>
+</section>
+<section id="collapsing-a-variable-into-a-smaller-number-of-discrete-levels-or-categories" class="level3" data-number="6.3.2">
+<h3 data-number="6.3.2" class="anchored" data-anchor-id="collapsing-a-variable-into-a-smaller-number-of-discrete-levels-or-categories"><span class="header-section-number">6.3.2</span> Collapsing a variable into a smaller number of discrete levels or categories</h3>
+<p>One pragmatic task that comes up quite often is the problem of collapsing a variable into a smaller number of discrete levels or categories. For instance, suppose I’m interested in looking at the age distribution of people at a social gathering:</p>
+<p>60,58,24,26,34,42,31,30,33,2,9</p>
+<p>In some situations it can be quite helpful to group these into a smallish number of categories. For example, we could group the data into three broad categories: young (0-20), adult (21-40) and older (41-60). This is a quite coarse-grained classification, and the labels that I’ve attached only make sense in the context of this data set (e.g., viewed more generally, a 42 year old wouldn’t consider themselves as “older”). We can slice this variable up quite easily using the jamovi ‘IF’ function that we have already used. This time we have to specify nested ‘IF’ statements, meaning simply that IF the first logical expression is TRUE, insert a first value, but IF a second logical expression is TRUE, insert a second value, but IF a third logical expression is TRUE, then insert a third value. This can be written as:</p>
+<p>IF(Age &gt;= 0 and Age &lt;= 20, 1, IF(Age &gt;= 21 and Age &lt;= 40, 2, IF(Age &gt;= 41 and Age &lt;= 60, 3 )))</p>
+<p>Note that there are three left parentheses used during the nesting, so the whole statement has to end with three right parentheses otherwise you will get an error message. The jamovi screen shot for this data manipulation, along with an accompanying frequency table, is shown in <a href="#fig-fig6-6">Figure&nbsp;<span>6.6</span></a>.</p>
+<div class="cell enlarge-image" data-layout-align="left">
+<div class="cell-output-display">
+<div id="fig-fig6-6" class="quarto-figure quarto-figure-left anchored">
+<figure class="figure">
+<p><img src="images/fig6-6.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;6.6: Collapsing a variable into a smaller number of discrete levels using the jamovi ‘IF’ function</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>It’s important to take the time to figure out whether or not the resulting categories make any sense at all in terms of your research project. If they don’t make any sense to you as meaningful categories, then any data analysis that uses those categories is likely to be just as meaningless. More generally, in practice I’ve noticed that people have a very strong desire to carve their (continuous and messy) data into a few (discrete and simple) categories, and then run analyses using the categorised data instead of the original data.<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a> I wouldn’t go so far as to say that this is an inherently bad idea, but it does have some fairly serious drawbacks at times, so I would advise some caution if you are thinking about doing it.</p>
+</section>
+<section id="creating-a-transformation-that-can-be-applied-to-multiple-variables" class="level3" data-number="6.3.3">
+<h3 data-number="6.3.3" class="anchored" data-anchor-id="creating-a-transformation-that-can-be-applied-to-multiple-variables"><span class="header-section-number">6.3.3</span> Creating a transformation that can be applied to multiple variables</h3>
+<p>Sometimes you want to apply the same transformation to more than one variable, for example when you have multiple questionnaire items that all need to be recalculated or recoded in the same way. And one of the neat features in jamovi is that you can create a transformation, using the ‘Data’ - ‘Transform’ button, that can then be saved and applied to multiple variables. Let’s go back to the first example above, using the data file likert.omv that contains a single variable with raw Likert-scale responses for 10 people. To create a transformation that you can save and then apply across multiple variables (assuming you had more variables like this in your data file), first in the spreadsheet editor select (i.e., click) the variable you want to use to initially create the transformation. In our example this is likert.raw. Next click the ‘Transform’ button in the jamovi ‘Data’ ribbon, and you’ll see something like <a href="#fig-fig6-7">Figure&nbsp;<span>6.7</span></a>.</p>
+<p>Give your new variable a name, let’s call it opinion.strength and then click on the ‘using transform’ selection box and select ‘Create New Transform…’. This is where you will create, and name, the transformation that can be re-applied to as many variables as you like. The transformation is automatically named for us as ‘Transform 1’ (imaginative, huh. You can change this if you like). Then type the expression “ABS($source - 4)” into the function text box, as in <a href="#fig-fig6-8">Figure&nbsp;<span>6.8</span></a>, press Enter or Return on your keyboard and, hey presto, you have created a new transformation and applied it to the likert.raw variable! Good, eh. Note that instead of using the variable label in the expression, we have instead used ‘$source’. This is so that we can then use the same transformation with as many different variables as we like - jamovi requires you to use ‘$source’ to refer to the source variable you are transforming. Your transformation has also been saved and can be re-used any time you like (providing you save the dataset as an ‘.omv’ file, otherwise you’ll lose it!).</p>
+<p>You can also create a transformation with the second example we looked at, the age distribution of people at a social gathering. Go on, you know you want to! Remember that we collapsed this variable into three groups: younger, adult and older. This time we will achieve the same thing, but using the jamovi ‘Transform’ - ‘Add condition’ button. With this data set (go back to it or create it again if you didn’t save it) set up a new variable transformation. Call the transformed variable AgeCats and the transformation you will create Agegroupings. Then click on the big “<span class="math inline">\(+\)</span>” sign next to the function box. This is the ‘Add condition’ button and I’ve stuck a big red arrow onto <a href="#fig-fig6-9">Figure&nbsp;<span>6.9</span></a> so you can see exactly where this is. Re-create the transformation shown in <a href="#fig-fig6-9">Figure&nbsp;<span>6.9</span></a> and when you have done, you will see the new values appear in the spreadsheet window. What’s more, the Age groupings transformation has been saved and can be re-applied any time you like. Ok, so I know that it’s unlikely you will have more than one ‘Age’ variable, but you get the idea now of how to set up transformations in jamovi, so you can follow this idea with other sorts of variables. A typical scenario for this is when you have a questionnaire scale with, say, 20 items (variables) and each item was originally scored from 1 to 6 but, for some reason or quirk of the data you decide to recode all the items as 1 to 3. You can easily do this in jamovi by creating and then re-applying your transformation for each variable that you want to recode.</p>
+<div class="cell enlarge-image" data-layout-align="left">
+<div class="cell-output-display">
+<div id="fig-fig6-7" class="quarto-figure quarto-figure-left anchored">
+<figure class="figure">
+<p><img src="images/fig6-7.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;6.7: Creating a new variable transformation using the jamovi ‘Transform’ command</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell enlarge-image" data-layout-align="left">
+<div class="cell-output-display">
+<div id="fig-fig6-8" class="quarto-figure quarto-figure-left anchored">
+<figure class="figure">
+<p><img src="images/fig6-8.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;6.8: Specifying a transformation in jamovi, to be saved as the imaginatively named ‘Transform 1’</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell enlarge-image" data-layout-align="left">
+<div class="cell-output-display">
+<div id="fig-fig6-9" class="quarto-figure quarto-figure-left anchored">
+<figure class="figure">
+<p><img src="images/fig6-9.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;6.9: jamovi transformation into three age categories, using the ‘Add condition’ button</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-tab6-5" class="anchored">
+
+<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab6-5"><caption>Table&nbsp;6.5:  Some mathematical operators </caption>
+<colgroup><col><col><col><col></colgroup><tbody><tr>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: bold;"></th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">function</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">example input</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: bold;">(answer)</th></tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">square root</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">SQRT(x)</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">SQRT(25)</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">5</td></tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; font-weight: normal;">absolute value</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">ABS(x)</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">ABS(-23)</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; font-weight: normal;">23</td></tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; font-weight: normal;">logarithm (base 10)</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">LOG10(x)</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">LOG10(1000)</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; font-weight: normal;">3</td></tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; font-weight: normal;">logarithm (base e)</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">LN(x)</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">LN(1000)</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; font-weight: normal;">6.91</td></tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; font-weight: normal;">exponentiation</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">EXP(x)</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">EXP(6.908)</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; font-weight: normal;">1e+03</td></tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">box-cox</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">BOXCOX(x, lamda)</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">BOXCOX(6.908, 3)</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">110</td></tr>
+</tbody></table>
+
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="a-few-more-mathematical-functions-and-operations" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="a-few-more-mathematical-functions-and-operations"><span class="header-section-number">6.4</span> A few more mathematical functions and operations</h2>
+<p>In the section on <a href="#sec-Transforming-and-recoding-a-variable">Transforming and recoding a variable</a> I discussed the ideas behind variable transformations and showed that a lot of the transformations that you might want to apply to your data are based on fairly simple mathematical functions and operations. In this section I want to return to that discussion and mention several other mathematical functions and arithmetic operations that are actually quite useful for a lot of real world data analysis. <a href="#tbl-tab6-5">Table&nbsp;<span>6.5</span></a> gives a brief overview of the various mathematical functions I want to talk about here, or later.<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a> Obviously this doesn’t even come close to cataloguing the range of possibilities available, but it does cover a range of functions that are used regularly in data analysis and that are available in jamovi.</p>
+<section id="logarithms-and-exponentials" class="level3" data-number="6.4.1">
+<h3 data-number="6.4.1" class="anchored" data-anchor-id="logarithms-and-exponentials"><span class="header-section-number">6.4.1</span> Logarithms and exponentials</h3>
+<p>As I’ve mentioned earlier, jamovi has an useful range of mathematical functions built into it and there really wouldn’t be much point in trying to describe or even list all of them. For the most part, I’ve focused only on those functions that are strictly necessary for this book. However I do want to make an exception for logarithms and exponentials. Although they aren’t needed anywhere else in this book, they are <em>everywhere</em> in statistics more broadly. And not only that, there are a <em>lot of</em> situations in which it is convenient to analyse the logarithm of a variable (i.e., to take a “log-transform” of the variable). I suspect that many (maybe most) readers of this book will have encountered logarithms and exponentials before, but from past experience I know that there’s a substantial proportion of students who take a social science statistics class who haven’t touched logarithms since high school, and would appreciate a bit of a refresher.</p>
+<p>In order to understand logarithms and exponentials, the easiest thing to do is to actually calculate them and see how they relate to other simple calculations. There are three jamovi functions in particular that I want to talk about, namely LN(), LOG10() and EXP(). To start with, let’s consider LOG10(), which is known as the “logarithm in base 10”. The trick to understanding a <strong>logarithm</strong> is to understand that it’s basically the “opposite” of taking a power. Specifically, the logarithm in base 10 is closely related to the powers of 10. So let’s start by noting that 10-cubed is 1000. Mathematically, we would write this:</p>
+<p><span class="math display">\[10^3=1000\]</span></p>
+<p>The trick to understanding a logarithm is to recognise that the statement that “10 to the power of 3 is equal to 1000” is equivalent to the statement that “the logarithm (in base 10) of 1000 is equal to 3”. Mathematically, we write this as follows,</p>
+<p><span class="math display">\[log_{10}(1000)=3\]</span></p>
+<p>Okay, since the LOG10() function is related to the powers of 10, you might expect that there are other logarithms (in bases other than 10) that are related to other powers too. And of course that’s true: there’s not really anything mathematically special about the number 10. You and I happen to find it useful because decimal numbers are built around the number 10, but the big bad world of mathematics scoffs at our decimal numbers. Sadly, the universe doesn’t actually care how we write down numbers. Anyway, the consequence of this cosmic indifference is that there’s nothing particularly special about calculating logarithms in base 10. You could, for instance, calculate your logarithms in base 2. Alternatively, a third type of logarithm, and one we see a lot more of in statistics than either base 10 or base 2, is called the <strong>natural logarithm</strong>, and corresponds to the logarithm in base e. Since you might one day run into it, I’d better explain what e is. The number e, known as <strong>Euler’s number</strong>, is one of those annoying “irrational” numbers whose decimal expansion is infinitely long, and is considered one of the most important numbers in mathematics. The first few digits of e are:</p>
+<p><span class="math display">\[e = 2.718282 \]</span></p>
+<p>There are quite a few situation in statistics that require us to calculate powers of <span class="math inline">\(e\)</span>, though none of them appear in this book. Raising e to the power <span class="math inline">\(x\)</span> is called the <strong>exponential</strong> of <span class="math inline">\(x\)</span>, and so it’s very common to see <span class="math inline">\(e^x\)</span> written as exppxq. And so it’s no surprise that jamovi has a function that calculates exponentials, called EXP(). Because the number e crops up so often in statistics, the natural logarithm (i.e., logarithm in base e) also tends to turn up. Mathematicians often write it as <span class="math inline">\(log_e(x)\)</span> or <span class="math inline">\(ln(x)\)</span>. In fact, jamovi works the same way: the LN() function corresponds to the natural logarithm.</p>
+<p>And with that, I think we’ve had quite enough exponentials and logarithms for this book!</p>
+</section>
+</section>
+<section id="extracting-a-subset-of-the-data" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="extracting-a-subset-of-the-data"><span class="header-section-number">6.5</span> Extracting a subset of the data</h2>
+<p>One very important kind of data handling is being able to extract a particular subset of the data. For instance, you might be interested only in analysing the data from one experimental condition, or you may want to look closely at the data from people over 50 years in age. To do this, the first step is getting jamovi to filter the subset of the data corresponding to the observations that you’re interested in.</p>
+<p>This section returns to the nightgarden.csv data set. If you’re reading this whole chapter in one sitting, then you should already have this data set loaded into a jamovi window. For this section, let’s focus on the two variables speaker and utterance (see <a href="#sec-Tabulating-and-cross-tabulating-data">Tabulating and cross-tabulating data</a>) if you’ve forgotten what those variables look like). Suppose that what I want to do is pull out only those utterances that were made by Makka-Pakka. To that end, we need to specify a filter in jamovi. First open up a filter window by clicking on ‘Filters’ on the main jamovi ‘Data’ toolbar. Then, in the ‘Filter 1’ text box, next to the ‘=’ sign, type the following:</p>
+<p>speaker == ‘makka-pakka’</p>
+<div class="cell enlarge-image" data-layout-align="left">
+<div class="cell-output-display">
+<div id="fig-fig6-10" class="quarto-figure quarto-figure-left anchored">
+<figure class="figure">
+<p><img src="images/fig6-10.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;6.10: Creating a subset of the nightgarden data using the jamovi ‘Filters’ option</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>When you have done this, you will see that a new column has been added to the spreadsheet window (see <a href="#fig-fig6-10">Figure&nbsp;<span>6.10</span></a>), labelled ‘Filter 1’, with the cases where speaker is <u>not</u> ‘makka-pakka’ greyed-out (i.e., filtered out) and, conversely, the cases where speaker <u>is</u> ‘makka-pakka’ have a green check mark indicating they are filtered in. You can test this by running ‘Exploration’ - ‘Descriptives’ - ‘Frequency tables’ for the speaker variable and seeing what that shows. Go on, try it!</p>
+<p>Following on from this simple example, you can also build up more complex filters using logical expressions in jamovi. For instance, suppose I wanted to keep only those cases when the utterance is either “pip” or “oo”. In this case in the ‘Filter 1’ text box, next to the ‘=’ sign, you would type the following:</p>
+<p>utterance == ‘pip’ or utterance == ‘oo’</p>
+</section>
+<section id="summary" class="level2" data-number="6.6">
+<h2 data-number="6.6" class="anchored" data-anchor-id="summary"><span class="header-section-number">6.6</span> Summary</h2>
+<p>Obviously, there’s no real coherence to this chapter. It’s just a grab bag of topics and tricks that can be handy to know about, so the best wrap up I can give here is just to repeat this list:</p>
+<ul>
+<li><a href="#sec-Tabulating-and-cross-tabulating-data">Tabulating and cross-tabulating data</a></li>
+<li><a href="#logical-expressions-in-jamovi">Logical expressions in jamovi</a></li>
+<li><a href="#sec-Transforming-and-recoding-a-variable">Transforming and recoding a variable</a></li>
+<li><a href="#a-few-more-mathematical-functions-and-operations">A few more mathematical functions and operations</a></li>
+<li><a href="#extracting-a-subset-of-the-data">Extracting a subset of the data</a></li>
+</ul>
+
+
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>The quote comes from Home is the Hangman, published in 1975.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>I offer up my teenage attempts to be “cool” as evidence that some things just can’t be done.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>You can do this in the Compute new variable screen, though just calculating 2 + 2 for every cell of a new variable is not very useful!<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Note that this is a very different operator to the equals operator =. A common typo that people make when trying to write logical commands in jamovi (or other languages, since the “= versus ==” distinction is important in many computer and statistical programs) is to accidentally type = when you really mean ==. Be especially cautious with this, I’ve been programming in various languages since I was a teenager and I still screw this up a lot. Hmm. I think I see why I wasn’t cool as a teenager. And why I’m still not cool.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>Now, here’s a quirk in jamovi. When you have simple logical expressions like the ones we have already met, e.g.&nbsp;2 + 2 == 5 then jamovi neatly states ‘false’ (or ‘true’) in the corresponding spreadsheet column. Underneath the hood, jamovi stores ‘false’ as 0 and ‘true’ as 1. When we have more complex logical expressions, such as (2+2 == 4) or (2+2 == 5), then jamovi just displays either 0 or 1, depending whether the logical expression is evaluated as false, or true.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>The absolute value of a number is its distance from zero, regardless of whether it’s sign is negative or positive.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>The reason we have to use the ‘IF’ command and keep zero as zero is that you cannot just use likert.centred / opinion.strength to calculate the sign of likert.centred, because mathematically dividing zero by zero does not work. Try it and see<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>If you’ve read further into the book, and are re-reading this section, then a good example of this would be someone choosing to do an ANOVA using AgeCats as the grouping variable, instead of running a regression using Age as a predictor. There are sometimes good reasons for doing this. For instance, if the relationship between Age and your outcome variable is highly non-linear and you aren’t comfortable with trying to run non-linear regression! However, unless you really do have a good rationale for doing this, it’s best not to. It tends to introduce all sorts of other problems (e.g., the data will probably violate the normality assumption) and you can lose a lot of statistical power.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9"><p>We’ll leave the box-cox function until later on<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } 
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp(/https:\/\/davidfoxcroft\.github\.io\/lsj-book\//);
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+      }
+    }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./05-Drawing-graphs.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Drawing graphs</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./Prelude-Part-IV.html" class="pagination-link">
+        <span class="nav-page-text">Prelude</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left"><a href="https://learnstatswithjamovi.com">learning statistics with jamovi</a></div>   
+    <div class="nav-footer-right">This book was built with <a href="https://quarto.org/">Quarto</a></div>
+  </div>
+</footer>
+
+
+
+</body></html>

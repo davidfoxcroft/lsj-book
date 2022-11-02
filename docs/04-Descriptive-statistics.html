@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>learning statistics with jamovi - 4&nbsp; Descriptive statistics</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./05-Drawing-graphs.html" rel="next">
+<link href="./03-Getting-started-with-jamovi.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      displayMath: [ ['S$','S$'], ["\\[","\\]"] ]
+      processEscapes: true
+    }
+  });
+</script>
+    
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="styles.css">
+<meta property="og:title" content="learning statistics with jamovi - 4&nbsp; Descriptive statistics">
+<meta property="og:description" content="Any time that you get a new data set to look at one of the first tasks that you have to do is find ways of summarising the data in a compact, easily understood fashion.">
+<meta property="og:site-name" content="learning statistics with jamovi">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Descriptive statistics</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">learning statistics with jamovi</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/davidfoxcroft/lsj-book/" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+    <a href="" title="Download" id="sidebar-tool-dropdown-0" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-download"></i></a>
+    <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-0">
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="./learning-statistics-with-jamovi.pdf">
+            <i class="bi bi-bi-file-pdf pe-1"></i>
+          Download PDF
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="./learning-statistics-with-jamovi.epub">
+            <i class="bi bi-bi-journal pe-1"></i>
+          Download ePub
+          </a>
+        </li>
+    </ul>
+    <a href="" title="Share" id="sidebar-tool-dropdown-1" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-share"></i></a>
+    <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-1">
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
+            <i class="bi bi-bi-twitter pe-1"></i>
+          Twitter
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
+            <i class="bi bi-bi-facebook pe-1"></i>
+          Facebook
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
+            <i class="bi bi-bi-linkedin pe-1"></i>
+          LinkedIn
+          </a>
+        </li>
+    </ul>
+  <a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle sidebar-tool" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">&nbsp;</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Preface.html" class="sidebar-item-text sidebar-link">Preface</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">Beginnings</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-Why-do-we-learn-statistics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Why do we learn statistics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-A-brief-introduction-to-research-design.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">A brief introduction to research design</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">An introduction to jamovi</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-Getting-started-with-jamovi.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Getting started with jamovi</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">Working with data</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-Descriptive-statistics.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Descriptive statistics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-Drawing-graphs.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Drawing graphs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-Pragmatic-matters.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Pragmatic matters</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">Statistical theory</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Prelude-Part-IV.html" class="sidebar-item-text sidebar-link">Prelude</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-Introduction-to-probability.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Introduction to probability</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-Estimating-unknown-quantities-from-a-sample.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Estimating unknown quantities from a sample</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-Hypothesis-testing.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Hypothesis testing</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">Statistical tools</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-Categorical-data-analysis.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Categorical data analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-Comparing-two-means.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Comparing two means</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-Correlation-and-linear-regression.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Correlation and linear regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-Comparing-several-means-one-way-ANOVA.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Comparing several means (one-way ANOVA)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-Factorial-ANOVA.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Factorial ANOVA</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-Factor-Analysis.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Factor Analysis</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">Endings, alternatives and prospects</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-Bayesian-statistics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Bayesian statistics</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Epilogue.html" class="sidebar-item-text sidebar-link">Epilogue</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./References.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#measures-of-central-tendency" id="toc-measures-of-central-tendency" class="nav-link active" data-scroll-target="#measures-of-central-tendency"><span class="toc-section-number">4.1</span>  Measures of central tendency</a>
+  <ul class="collapse">
+  <li><a href="#the-mean" id="toc-the-mean" class="nav-link" data-scroll-target="#the-mean"><span class="toc-section-number">4.1.1</span>  The mean</a></li>
+  <li><a href="#calculating-the-mean-in-jamovi" id="toc-calculating-the-mean-in-jamovi" class="nav-link" data-scroll-target="#calculating-the-mean-in-jamovi"><span class="toc-section-number">4.1.2</span>  Calculating the mean in jamovi</a></li>
+  <li><a href="#the-median" id="toc-the-median" class="nav-link" data-scroll-target="#the-median"><span class="toc-section-number">4.1.3</span>  The median</a></li>
+  <li><a href="#mean-or-median-whats-the-difference" id="toc-mean-or-median-whats-the-difference" class="nav-link" data-scroll-target="#mean-or-median-whats-the-difference"><span class="toc-section-number">4.1.4</span>  Mean or median? What’s the difference?</a></li>
+  <li><a href="#sec-A-real-life-example" id="toc-sec-A-real-life-example" class="nav-link" data-scroll-target="#sec-A-real-life-example"><span class="toc-section-number">4.1.5</span>  A real life example</a></li>
+  <li><a href="#sec-Mode" id="toc-sec-Mode" class="nav-link" data-scroll-target="#sec-Mode"><span class="toc-section-number">4.1.6</span>  Mode</a></li>
+  </ul></li>
+  <li><a href="#sec-Measures-of-variability" id="toc-sec-Measures-of-variability" class="nav-link" data-scroll-target="#sec-Measures-of-variability"><span class="toc-section-number">4.2</span>  Measures of variability</a>
+  <ul class="collapse">
+  <li><a href="#range" id="toc-range" class="nav-link" data-scroll-target="#range"><span class="toc-section-number">4.2.1</span>  Range</a></li>
+  <li><a href="#interquartile-range" id="toc-interquartile-range" class="nav-link" data-scroll-target="#interquartile-range"><span class="toc-section-number">4.2.2</span>  Interquartile range</a></li>
+  <li><a href="#mean-absolute-deviation" id="toc-mean-absolute-deviation" class="nav-link" data-scroll-target="#mean-absolute-deviation"><span class="toc-section-number">4.2.3</span>  Mean absolute deviation</a></li>
+  <li><a href="#variance" id="toc-variance" class="nav-link" data-scroll-target="#variance"><span class="toc-section-number">4.2.4</span>  Variance</a></li>
+  <li><a href="#sec-Standard-deviation" id="toc-sec-Standard-deviation" class="nav-link" data-scroll-target="#sec-Standard-deviation"><span class="toc-section-number">4.2.5</span>  Standard deviation</a></li>
+  <li><a href="#which-measure-to-use" id="toc-which-measure-to-use" class="nav-link" data-scroll-target="#which-measure-to-use"><span class="toc-section-number">4.2.6</span>  Which measure to use?</a></li>
+  </ul></li>
+  <li><a href="#skew-and-kurtosis" id="toc-skew-and-kurtosis" class="nav-link" data-scroll-target="#skew-and-kurtosis"><span class="toc-section-number">4.3</span>  Skew and kurtosis</a></li>
+  <li><a href="#descriptive-statistics-separately-for-each-group" id="toc-descriptive-statistics-separately-for-each-group" class="nav-link" data-scroll-target="#descriptive-statistics-separately-for-each-group"><span class="toc-section-number">4.4</span>  Descriptive statistics separately for each group</a></li>
+  <li><a href="#sec-Standard-scores" id="toc-sec-Standard-scores" class="nav-link" data-scroll-target="#sec-Standard-scores"><span class="toc-section-number">4.5</span>  Standard scores</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="toc-section-number">4.6</span>  Summary</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/davidfoxcroft/lsj-book/edit/main/04-Descriptive-statistics.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/davidfoxcroft/lsj-book/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header">
+<h1 class="title display-7"><span id="sec-Descriptive-statistics" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Descriptive statistics</span></span></h1>
+
+</header>
+
+<p>Any time that you get a new data set to look at one of the first tasks that you have to do is find ways of summarising the data in a compact, easily understood fashion. This is what <strong>descriptive statistics</strong> (as opposed to inferential statistics) is all about. In fact, to many people the term “statistics” is synonymous with descriptive statistics. It is this topic that we’ll consider in this chapter, but before going into any details, let’s take a moment to get a sense of why we need descriptive statistics. To do this, let’s open the aflsmall_margins file and see what variables are stored in the file, see <a href="#fig-fig4-1">Figure&nbsp;<span>4.1</span></a>.</p>
+<div class="cell" data-layout-align="left">
+<div class="cell-output-display">
+<div id="fig-fig4-1" class="quarto-figure quarto-figure-left anchored">
+<figure class="figure">
+<p><img src="images/fig4-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4.1: A screenshot of jamovi showing the variables stored in the aflsmallmargins.csv file</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>In fact, there is just one variable here, afl.margins. We’ll focus a bit on this variable in this chapter, so I’d better tell you what it is. Unlike most of the data sets in this book, this is actually real data, relating to the Australian Football League (AFL).<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> The afl.margins variable contains the winning margin (number of points) for all 176 home and away games played during the 2010 season.</p>
+<p>This output doesn’t make it easy to get a sense of what the data are actually saying. Just “looking at the data” isn’t a terribly effective way of understanding data. In order to get some idea about what the data are actually saying we need to calculate some descriptive statistics (this chapter) and draw some nice pictures (<a href="05-Drawing-graphs.html"><span>Chapter&nbsp;5</span></a>). Since the descriptive statistics are the easier of the two topics I’ll start with those, but nevertheless I’ll show you a histogram of the afl.margins data since it should help you get a sense of what the data we’re trying to describe actually look like, see <a href="#fig-fig4-2">Figure&nbsp;<span>4.2</span></a>. We’ll talk a lot more about how to draw histograms in <a href="05-Drawing-graphs.html#sec-Histograms"><span>Section&nbsp;5.1</span></a> in the next chapter. For now, it’s enough to look at the histogram and note that it provides a fairly interpretable representation of the afl.margins data.</p>
+<div class="cell" data-layout-align="left">
+<div class="cell-output-display">
+<div id="fig-fig4-2" class="quarto-figure quarto-figure-left anchored">
+<figure class="figure">
+<p><img src="images/fig4-2.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4.2: A histogram of the AFL 2010 winning margin data (the afl.margins variable). As you might expect, the larger the winning margin the less frequently you tend to see it</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="measures-of-central-tendency" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="measures-of-central-tendency"><span class="header-section-number">4.1</span> Measures of central tendency</h2>
+<p>Drawing pictures of the data, as I did in <a href="#fig-fig4-2">Figure&nbsp;<span>4.2</span></a>, is an excellent way to convey the “gist” of what the data is trying to tell you. It’s often extremely useful to try to condense the data into a few simple “summary” statistics. In most situations, the first thing that you’ll want to calculate is a measure of <strong>central tendency</strong>. That is, you’d like to know something about where the “average” or “middle” of your data lies. The three most commonly used measures are the mean, median and mode. I’ll explain each of these in turn, and then discuss when each of them is useful.</p>
+<section id="the-mean" class="level3" data-number="4.1.1">
+<h3 data-number="4.1.1" class="anchored" data-anchor-id="the-mean"><span class="header-section-number">4.1.1</span> The mean</h3>
+<p>The <strong>mean</strong> of a set of observations is just a normal, old-fashioned average. Add all of the values up, and then divide by the total number of values. The first five AFL winning margins were 56, 31, 56, 8 and 32, so the mean of these observations is just:</p>
+<p><span class="math display">\[
+\frac{56 + 31 + 56 + 8 + 32}{5} = \frac{183}{5} = 36.60
+\]</span> Of course, this definition of the mean isn’t news to anyone. Averages (i.e., means) are used so often in everyday life that this is pretty familiar stuff. However, since the concept of a mean is something that everyone already understands, I’ll use this as an excuse to start introducing some of the mathematical notation that statisticians use to describe this calculation, and talk about how the calculations would be done in jamovi.</p>
+<p>The first piece of notation to introduce is <span class="math inline">\(N\)</span>, which we’ll use to refer to the number of observations that we’re averaging (in this case <span class="math inline">\(N = 5\)</span>). Next, we need to attach a label to the observations themselves. It’s traditional to use X for this, and to use subscripts to indicate which observation we’re actually talking about. That is, we’ll use <span class="math inline">\(X_1\)</span> to refer to the first observation, <span class="math inline">\(X_2\)</span> to refer to the second observation, and so on all the way up to <span class="math inline">\(X_N\)</span> for the last one. Or, to say the same thing in a slightly more abstract way, we use <span class="math inline">\(X_i\)</span> to refer to the i-th observation. Just to make sure we’re clear on the notation, <a href="#tbl-tab4-1">Table&nbsp;<span>4.1</span></a> lists the 5 observations in the afl.margins variable, along with the mathematical symbol used to refer to it and the actual value that the observation corresponds to.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-tab4-1" class="anchored">
+
+<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab4-1"><caption>Table&nbsp;4.1:  Observations in the afl.margins variable </caption>
+<colgroup><col><col><col></colgroup><tbody><tr>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: bold;">the observation</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">its symbol</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: bold;">the observed value</th></tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">winning margin, game 1</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">\( X_1 \)</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">56 points</td></tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; font-weight: normal;">winning margin, game 2</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">\( X_2 \)</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; font-weight: normal;">31 points</td></tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; font-weight: normal;">winning margin, game 3</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">\( X_3 \)</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; font-weight: normal;">56 points</td></tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; font-weight: normal;">winning margin, game 4</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">\( X_4 \)</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; font-weight: normal;">8 points</td></tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">winning margin, game 5</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">\( X_5 \)</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">32 points</td></tr>
+</tbody></table>
+
+</div>
+</div>
+</div>
+<p>[Additional technical detail<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>]</p>
+</section>
+<section id="calculating-the-mean-in-jamovi" class="level3" data-number="4.1.2">
+<h3 data-number="4.1.2" class="anchored" data-anchor-id="calculating-the-mean-in-jamovi"><span class="header-section-number">4.1.2</span> Calculating the mean in jamovi</h3>
+<p>Okay, that’s the maths. So how do we get the magic computing box to do the work for us? When the number of observations starts to become large it’s much easier to do these sorts of calculations using a computer. To calculate the mean using all the data we can use jamovi. The first step is to click on the ‘Exploration’ button and then click ‘Descriptives’. Then you can highlight the afl.margins variable and click the ‘right arrow’ to move it across into the ‘Variables box’. As soon as you do that a Table appears on the right hand side of the screen containing default ‘Descriptives’ information; see <a href="#fig-fig4-3">Figure&nbsp;<span>4.3</span></a>.</p>
+<div class="cell enlarge-image" data-layout-align="left">
+<div class="cell-output-display">
+<div id="fig-fig4-3" class="quarto-figure quarto-figure-left anchored">
+<figure class="figure">
+<p><img src="images/fig4-3.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4.3: Default descriptives for the AFL 2010 winning margin data (the afl.margins variable)</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>As you can see in <a href="#fig-fig4-3">Figure&nbsp;<span>4.3</span></a>, the mean value for the afl.margins variable is 35.30. Other information presented includes the total number of observations (N=176), the number of missing values (none), and the Median, Minimum and Maximum values for the variable.</p>
+</section>
+<section id="the-median" class="level3" data-number="4.1.3">
+<h3 data-number="4.1.3" class="anchored" data-anchor-id="the-median"><span class="header-section-number">4.1.3</span> The median</h3>
+<p>The second measure of central tendency that people use a lot is the <strong>median</strong>, and it’s even easier to describe than the mean. The median of a set of observations is just the middle value. As before let’s imagine we were interested only in the first 5 AFL winning margins: <span class="math inline">\(56\)</span>, <span class="math inline">\(31\)</span>, <span class="math inline">\(56\)</span>, <span class="math inline">\(8\)</span> and <span class="math inline">\(32\)</span>. To figure out the median we sort these numbers into ascending order:</p>
+<p>8, 31, <strong>32</strong>, 56, 56</p>
+<p>From inspection, it’s obvious that the median value of these 5 observations is 32 since that’s the middle one in the sorted list (I’ve put it in bold to make it even more obvious). Easy stuff. But what should we do if we are interested in the first 6 games rather than the first 5? Since the sixth game in the season had a winning margin of 14 points, our sorted list is now</p>
+<p>8, <strong>31</strong>, <strong>32</strong>, 56, 56</p>
+<p>and there are two middle numbers, 31 and 32. The median is defined as the average of those two numbers, which is of course 31.5. As before, it’s very tedious to do this by hand when you’ve got lots of numbers. In real life, of course, no-one actually calculates the median by sorting the data and then looking for the middle value. In real life we use a computer to do the heavy lifting for us, and jamovi has provided us with a Median value of 30.50 for the afl.margins variable (<a href="#fig-fig4-3">Figure&nbsp;<span>4.3</span></a>).</p>
+</section>
+<section id="mean-or-median-whats-the-difference" class="level3" data-number="4.1.4">
+<h3 data-number="4.1.4" class="anchored" data-anchor-id="mean-or-median-whats-the-difference"><span class="header-section-number">4.1.4</span> Mean or median? What’s the difference?</h3>
+<p>Knowing how to calculate means and medians is only a part of the story. You also need to understand what each one is saying about the data, and what that implies for when you should use each one. This is illustrated in <a href="#fig-fig4-4">Figure&nbsp;<span>4.4</span></a>. The mean is kind of like the “centre of gravity” of the data set, whereas the median is the “middle value” in the data. What this implies, as far as which one you should use, depends a little on what type of data you’ve got and what you’re trying to achieve. As a rough guide:</p>
+<ul>
+<li>If your data are nominal scale you probably shouldn’t be using either the mean or the median. Both the mean and the median rely on the idea that the numbers assigned to values are meaningful. If the numbering scheme is arbitrary then it’s probably best to use the <a href="#sec-Mode">Mode</a> instead.</li>
+<li>If your data are ordinal scale you’re more likely to want to use the median than the mean. The median only makes use of the order information in your data (i.e., which numbers are bigger) but doesn’t depend on the precise numbers involved. That’s exactly the situation that applies when your data are ordinal scale. The mean, on the other hand, makes use of the precise numeric values assigned to the observations, so it’s not really appropriate for ordinal data.</li>
+<li>For interval and ratio scale data either one is generally acceptable. Which one you pick depends a bit on what you’re trying to achieve. The mean has the advantage that it uses all the information in the data (which is useful when you don’t have a lot of data). But it’s very sensitive to extreme, outlying values.</li>
+</ul>
+<p>Let’s expand on that last part a little. One consequence is that there are systematic differences between the mean and the median when the histogram is asymmetric (<a href="#skew-and-kurtosis">Skew and kurtosis</a>). This is illustrated in <a href="#fig-fig4-4">Figure&nbsp;<span>4.4</span></a>. Notice that the median (right hand side) is located closer to the “body” of the histogram, whereas the mean (left hand side) gets dragged towards the “tail” (where the extreme values are). To give a concrete example, suppose Bob (income $50,000), Kate (income $60,000) and Jane (income $65,000) are sitting at a table. The average income at the table is $58,333 and the median income is $60,000. Then Bill sits down with them (income $100,000,000). The average income has now jumped to $25,043,750 but the median rises only to $62,500. If you’re interested in looking at the overall income at the table the mean might be the right answer. But if you’re interested in what counts as a typical income at the table the median would be a better choice here.</p>
+<div id="fig-fig4-4" class="quarto-layout-panel">
+<figure class="figure">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 48.2%;justify-content: center;">
+<p><img src="images/fig4-4a.png" class="img-fluid figure-img"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 51.8%;justify-content: center;">
+<p><img src="images/fig4-4b.png" class="img-fluid figure-img"></p>
+</div>
+</div>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4.4: An illustration of the difference between how the mean and the median should be interpreted. The mean is basically the ‘centre of gravity’ of the data set. If you imagine that the histogram of the data is a solid object, then the point on which you could balance it (as if on a see-saw) is the mean. In contrast, the median is the middle observation, with half of the observations smaller and half of the observations larger</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="sec-A-real-life-example" class="level3" data-number="4.1.5">
+<h3 data-number="4.1.5" class="anchored" data-anchor-id="sec-A-real-life-example"><span class="header-section-number">4.1.5</span> A real life example</h3>
+<p>To try to get a sense of why you need to pay attention to the differences between the mean and the median let’s consider a real life example. Since I tend to mock journalists for their poor scientific and statistical knowledge, I should give credit where credit is due. This is an excellent article on the ABC news website<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> from 24 September, 2010:</p>
+<blockquote class="blockquote">
+<p>Senior Commonwealth Bank executives have travelled the world in the past couple of weeks with a presentation showing how Australian house prices, and the key price to income ratios, compare favourably with similar countries. “Housing affordability has actually been going sideways for the last five to six years,” said Craig James, the chief economist of the bank’s trading arm, CommSec.</p>
+</blockquote>
+<p>This probably comes as a huge surprise to anyone with a mortgage, or who wants a mortgage, or pays rent, or isn’t completely oblivious to what’s been going on in the Australian housing market over the last several years. Back to the article:</p>
+<blockquote class="blockquote">
+<p>CBA has waged its war against what it believes are housing doomsayers with graphs, numbers and international comparisons. In its presentation, the bank rejects arguments that Australia’s housing is relatively expensive compared to incomes. It says Australia’s house price to household income ratio of 5.6 in the major cities, and 4.3 nationwide, is comparable to many other developed nations. It says San Francisco and New York have ratios of 7, Auckland’s is 6.7, and Vancouver comes in at 9.3.</p>
+</blockquote>
+<p>More excellent news! Except, the article goes on to make the observation that:</p>
+<blockquote class="blockquote">
+<p>Many analysts say that has led the bank to use misleading figures and comparisons. If you go to page four of CBA’s presentation and read the source information at the bottom of the graph and table, you would notice there is an additional source on the international comparison – Demographia. However, if the Commonwealth Bank had also used Demographia’s analysis of Australia’s house price to income ratio, it would have come up with a figure closer to 9 rather than 5.6 or 4.3</p>
+</blockquote>
+<p>That’s, um, a rather serious discrepancy. One group of people say 9, another says 4-5. Should we just split the difference and say the truth lies somewhere in between? Absolutely not! This is a situation where there is a right answer and a wrong answer. Demographia is correct, and the Commonwealth Bank is wrong. As the article points out:</p>
+<blockquote class="blockquote">
+<p>[An] obvious problem with the Commonwealth Bank’s domestic price to income figures is they compare average incomes with median house prices (unlike the Demographia figures that compare median incomes to median prices). The median is the mid-point, effectively cutting out the highs and lows, and that means the average is generally higher when it comes to incomes and asset prices, because it includes the earnings of Australia’s wealthiest people. To put it another way: the Commonwealth Bank’s figures count Ralph Norris’ multi-million dollar pay packet on the income side, but not his (no doubt) very expensive house in the property price figures, thus understating the house price to income ratio for middle-income Australians.</p>
+</blockquote>
+<p>Couldn’t have put it better myself. The way that Demographia calculated the ratio is the right thing to do. The way that the Bank did it is incorrect. As for why an extremely quantitatively sophisticated organisation such as a major bank made such an elementary mistake, well… I can’t say for sure since I have no special insight into their thinking. But the article itself does happen to mention the following facts, which may or may not be relevant:</p>
+<blockquote class="blockquote">
+<p>[As] Australia’s largest home lender, the Commonwealth Bank has one of the biggest vested interests in house prices rising. It effectively owns a massive swathe of Australian housing as security for its home loans as well as many small business loans.</p>
+</blockquote>
+<p>My, my.</p>
+</section>
+<section id="sec-Mode" class="level3" data-number="4.1.6">
+<h3 data-number="4.1.6" class="anchored" data-anchor-id="sec-Mode"><span class="header-section-number">4.1.6</span> Mode</h3>
+<p>The mode of a sample is very simple. It is the value that occurs most frequently. We can illustrate the mode using a different AFL variable: who has played in the most finals? Open the aflsmall finalists file and take a look at the afl.finalists variable, see <a href="#fig-fig4-5">Figure&nbsp;<span>4.5</span></a>. This variable contains the names of all 400 teams that played in all 200 finals matches played during the period 1987 to 2010.</p>
+<p>What we could do is read through all 400 entries and count the number of occasions on which each team name appears in our list of finalists, thereby producing a <strong>frequency table</strong>. However, that would be mindless and boring: exactly the sort of task that computers are great at. So let’s use jamovi to do this for us. Under ‘Exploration’ - ‘Descriptives’ click the small check box labelled ‘Frequency tables’ and you should get something like <a href="#fig-fig4-6">Figure&nbsp;<span>4.6</span></a>.</p>
+<p>Now that we have our frequency table we can just look at it and see that, over the 24 years for which we have data, Geelong has played in more finals than any other team. Thus, the mode of the afl.finalists data is “Geelong”. We can see that Geelong (39 finals) played in more finals than any other team during the 1987-2010 period. It’s also worth noting that in the ‘Descriptives’ Table no results are calculated for Mean, Median, Minimum or Maximum. This is because the afl.finalists variable is a nominal text variable so it makes no sense to calculate these values.</p>
+<div class="cell" data-layout-align="left">
+<div class="cell-output-display">
+<div id="fig-fig4-5" class="quarto-figure quarto-figure-left anchored">
+<figure class="figure">
+<p><img src="images/fig4-5.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4.5: A screenshot of jamovi showing the variables stored in the aflsmall finalists.csv file</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell enlarge-image" data-layout-align="left">
+<div class="cell-output-display">
+<div id="fig-fig4-6" class="quarto-figure quarto-figure-left anchored">
+<figure class="figure">
+<p><img src="images/fig4-6.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4.6: A screenshot of jamovi showing the frequency table for the afl.finalists variable</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>One last point to make regarding the mode. Whilst the mode is most often calculated when you have nominal data, because means and medians are useless for those sorts of variables, there are some situations in which you really do want to know the mode of an ordinal, interval or ratio scale variable. For instance, let’s go back to our afl.margins variable. This variable is clearly ratio scale (if it’s not clear to you, it may help to re-read <a href="02-A-brief-introduction-to-research-design.html#sec-Scales-of-measurement"><span>Section&nbsp;2.2</span></a>), and so in most situations the mean or the median is the measure of central tendency that you want. But consider this scenario: a friend of yours is offering a bet and they pick a football game at random. Without knowing who is playing you have to guess the exact winning margin. If you guess correctly you win $50. If you don’t you lose $1. There are no consolation prizes for “almost” getting the right answer. You have to guess exactly the right margin. For this bet, the mean and the median are completely useless to you. It is the mode that you should bet on. To calculate the mode for the afl.margins variable in jamovi, go back to that data set and on the ‘Exploration’ - ‘Descriptives’ screen you will see you can expand the section marked ‘Statistics’. Click on the checkbox marked ‘Mode’ and you will see the modal value presented in the ‘Descriptives’ Table, as in <a href="#fig-fig4-7">Figure&nbsp;<span>4.7</span></a>. So the 2010 data suggest you should bet on a 3 point margin.</p>
+<div class="cell enlarge-image" data-layout-align="left">
+<div class="cell-output-display">
+<div id="fig-fig4-7" class="quarto-figure quarto-figure-left anchored">
+<figure class="figure">
+<p><img src="images/fig4-7.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4.7: A screenshot of jamovi showing the modal value for the afl.margins variable</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-Measures-of-variability" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="sec-Measures-of-variability"><span class="header-section-number">4.2</span> Measures of variability</h2>
+<p>The statistics that we’ve discussed so far all relate to central tendency. That is, they all talk about which values are “in the middle” or “popular” in the data. However, central tendency is not the only type of summary statistic that we want to calculate. The second thing that we really want is a measure of the <strong>variability</strong> of the data. That is, how “spread out” are the data? How “far” away from the mean or median do the observed values tend to be? For now, let’s assume that the data are interval or ratio scale, and we’ll continue to use the afl.margins data. We’ll use this data to discuss several different measures of spread, each with different strengths and weaknesses.</p>
+<section id="range" class="level3" data-number="4.2.1">
+<h3 data-number="4.2.1" class="anchored" data-anchor-id="range"><span class="header-section-number">4.2.1</span> Range</h3>
+<p>The statistics that we’ve discussed so far all relate to central tendency. That is, they all talk about which values are “in the middle” or “popular” in the data. However, central tendency is not the only type of summary statistic that we want to calculate. The second thing that we really want is a measure of the <strong>variability</strong> of the data. That is, how “spread out” are the data? How “far” away from the mean or median do the observed values tend to be? For now, let’s assume that the data are interval or ratio scale, and we’ll continue to use the afl.margins data. We’ll use this data to discuss several different measures of spread, each with different strengths and weaknesses.</p>
+<p>The <strong>range</strong> of a variable is very simple. It’s the biggest value minus the smallest value. For the AFL winning margins data the maximum value is 116 and the minimum value is 0. Although the range is the simplest way to quantify the notion of “variability”, it’s one of the worst. Recall from our discussion of the mean that we want our summary measure to be robust. If the data set has one or two extremely bad values in it we’d like our statistics to not be unduly influenced by these cases. For example, in a variable containing very extreme outliers</p>
+<p>-100, 2, 3, 4, 5, 6, 7, 8, 9, 10</p>
+<p>it is clear that the range is not robust. This variable has a range of 110 but if the outlier were removed we would have a range of only 8.</p>
+</section>
+<section id="interquartile-range" class="level3" data-number="4.2.2">
+<h3 data-number="4.2.2" class="anchored" data-anchor-id="interquartile-range"><span class="header-section-number">4.2.2</span> Interquartile range</h3>
+<p>The <strong>interquartile range</strong> (IQR) is like the range, but instead of the difference between the biggest and smallest value the difference between the 25th percentile and the 75th percentile is taken. If you don’t already know what a <strong>percentile</strong> is, the 10th percentile of a data set is the smallest number x such that 10% of the data is less than x. In fact, we’ve already come across the idea. The median of a data set is its 50th percentile! In jamovi you can easily specify the 25th, 50th and 75th percentiles by clicking the checkbox ‘Quartiles’ in the ‘Exploration’ - ‘Descriptives’ - ‘Statistics’ screen.</p>
+<p>And not surprisingly, in <a href="#fig-fig4-8">Figure&nbsp;<span>4.8</span></a> the 50th percentile is the same as the median value. And, by noting that <span class="math inline">\(50.50 - 12.75 = 37.75\)</span>, we can see that the interquartile range for the 2010 AFL winning margins data is 37.75. While it’s obvious how to interpret the range it’s a little less obvious how to interpret the IQR. The simplest way to think about it is like this: the interquartile range is the range spanned by the “middle half” of the data. That is, one quarter of the data falls below the 25th percentile and one quarter of the data is above the 75th percentile, leaving the “middle half” of the data lying in between the two. And the IQR is the range covered by that middle half.</p>
+<div class="cell" data-layout-align="left">
+<div class="cell-output-display">
+<div id="fig-fig4-8" class="quarto-figure quarto-figure-left anchored">
+<figure class="figure">
+<p><img src="images/fig4-8.png" class="img-fluid figure-img" style="width:60.0%"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4.8: A screenshot of jamovi showing the Quartiles for the afl.margins variable</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="mean-absolute-deviation" class="level3" data-number="4.2.3">
+<h3 data-number="4.2.3" class="anchored" data-anchor-id="mean-absolute-deviation"><span class="header-section-number">4.2.3</span> Mean absolute deviation</h3>
+<p>The two measures we’ve looked at so far, the range and the interquartile range, both rely on the idea that we can measure the spread of the data by looking at the percentiles of the data. However, this isn’t the only way to think about the problem. A different approach is to select a meaningful reference point (usually the mean or the median) and then report the “typical” deviations from that reference point. What do we mean by “typical” deviation? Usually, this is the mean or median value of these deviations. In practice, this leads to two different measures: the “mean absolute deviation” (from the mean) and the “median absolute deviation” (from the median). From what I’ve read, the measure based on the median seems to be used in statistics and does seem to be the better of the two. But to be honest I don’t think I’ve seen it used much in psychology. The measure based on the mean does occasionally show up in psychology though. In this section I’ll talk about the first one, and I’ll come back to talk about the second one later.</p>
+<p>Since the previous paragraph might sound a little abstract, let’s go through the <strong>mean absolute deviation</strong> from the mean a little more slowly. One useful thing about this measure is that the name actually tells you exactly how to calculate it. Let’s think about our AFL winning margins data, and once again we’ll start by pretending that there are only 5 games in total, with winning margins of 56, 31, 56, 8 and 32. Since our calculations rely on an examination of the deviation from some reference point (in this case the mean), the first thing we need to calculate is the mean, <span class="math inline">\(\bar{X}\)</span>. For these five observations, our mean is <span class="math inline">\(\bar{X} = 36.6\)</span>. The next step is to convert each of our observations <span class="math inline">\(X_i\)</span> into a deviation score. We do this by calculating the difference between the observation <span class="math inline">\(X_i\)</span> and the mean <span class="math inline">\(\bar{X}\)</span>. That is, the deviation score is defined to be <span class="math inline">\(X_i - \bar{X}\)</span>. For the first observation in our sample, this is equal to <span class="math inline">\(56 - 36.6 = 19.4\)</span>. Okay, that’s simple enough. The next step in the process is to convert these deviations to absolute deviations, and we do this by converting any negative values to positive ones. Mathematically, we would denote the absolute value of <span class="math inline">\(-3\)</span> as <span class="math inline">\(\mid -3 \mid\)</span>, and so we say that <span class="math inline">\(\mid -3 \mid = 3\)</span>. We use the absolute value here because we don’t really care whether the value is higher than the mean or lower than the mean, we’re just interested in how close it is to the mean. To help make this process as obvious as possible, <a href="#tbl-tab4-2">Table&nbsp;<span>4.2</span></a> shows these calculations for all five observations.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-tab4-2" class="anchored">
+
+<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab4-2"><caption>Table&nbsp;4.2:  Measures of variability </caption>
+<colgroup><col><col><col><col><col></colgroup><tbody><tr>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: bold;">English</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">notation</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">value</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">deviation from mean</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: bold;">absolute deviation</th></tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">notation:</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">\(i\)</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">\(X_i\)</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">\(X_i - \bar{X} \)</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">\( \mid X_i - \bar{X} \mid \)</td></tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; font-weight: normal;"></td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">56</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">19.4</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; font-weight: normal;">19.4</td></tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; font-weight: normal;"></td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">31</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-5.6</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; font-weight: normal;">5.6</td></tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; font-weight: normal;"></td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">56</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">19.4</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; font-weight: normal;">19.4</td></tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; font-weight: normal;"></td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">4</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">8</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-28.6</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; font-weight: normal;">28.6</td></tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;"></td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">5</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">32</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-4.6</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">4.6</td></tr>
+</tbody></table>
+
+</div>
+</div>
+</div>
+<p>Now that we have calculated the absolute deviation score for every observation in the data set, all that we have to do to calculate the mean of these scores. Let’s do that:</p>
+<p><span class="math display">\[
+\frac{19.4 + 5.6 + 19.4 + 28.6 + 4.6}{5} = 15.52
+\]</span></p>
+<p>And we’re done. The mean absolute deviation for these five scores is 15.52.</p>
+<p>[Additional technical detail<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>]</p>
+</section>
+<section id="variance" class="level3" data-number="4.2.4">
+<h3 data-number="4.2.4" class="anchored" data-anchor-id="variance"><span class="header-section-number">4.2.4</span> Variance</h3>
+<p>Although the average absolute deviation measure has its uses, it’s not the best measure of variability to use. From a purely mathematical perspective there are some solid reasons to prefer squared deviations rather than absolute deviations. If we do that we obtain a measure called the <strong>variance</strong>, which has a lot of really nice statistical properties that I’m going to ignore,<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> and one massive psychological flaw that I’m going to make a big deal out of in a moment. The variance of a data set <span class="math inline">\(X\)</span> is sometimes written as Var( <span class="math inline">\(X\)</span> ), but it’s more commonly denoted <span class="math inline">\(s^2\)</span> (the reason for this will become clearer shortly).</p>
+<p>[Additional technical detail<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>]</p>
+<p>Now that we’ve got the basic idea, let’s have a look at a concrete example. Once again, let’s use the first five AFL games as our data. If we follow the same approach that we took last time, we end up with the information shown in <a href="#tbl-tab4-3">Table&nbsp;<span>4.3</span></a>.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-tab4-3" class="anchored">
+
+<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab4-3"><caption>Table&nbsp;4.3:  Measures of variability for the first five AFL games </caption>
+<colgroup><col><col><col><col><col></colgroup><tbody><tr>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: bold;">English</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">maths:</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">value</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">deviation from mean</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: bold;">absolute deviation</th></tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">notation:</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">\(i\)</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">\(X_i\)</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">\(X_i - \bar{X} \)</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">\( ( X_i - \bar{X} )^2 \)</td></tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; font-weight: normal;"></td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">56</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">19.4</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; font-weight: normal;">376.36</td></tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; font-weight: normal;"></td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">31</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-5.6</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; font-weight: normal;">31.36</td></tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; font-weight: normal;"></td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">56</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">19.4</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; font-weight: normal;">376.36</td></tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; font-weight: normal;"></td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">4</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">8</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-28.6</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; font-weight: normal;">817.96</td></tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;"></td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">5</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">32</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-4.6</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">21.16</td></tr>
+</tbody></table>
+
+</div>
+</div>
+</div>
+<p>That last column contains all of our squared deviations, so all we have to do is average them. If we do that by hand, i.e.&nbsp;using a calculator, we end up with a variance of <span class="math inline">\(324.64\)</span>. Exciting, isn’t it? For the moment, let’s ignore the burning question that you’re all probably thinking (i.e., what the heck does a variance of <span class="math inline">\(324.64\)</span> actually mean?) and instead talk a bit more about how to do the calculations in jamovi, because this will reveal something very weird. Start a new jamovi session by clicking on the main menu button (three horizontal lines in the top left corner and selecting ‘New’. Now type in the first five values from the afl.margins data set in column A (<span class="math inline">\(56\)</span>, <span class="math inline">\(31\)</span>, <span class="math inline">\(56\)</span>, <span class="math inline">\(8\)</span>, <span class="math inline">\(32\)</span>. Change the variable type to ‘Continuous’ and under ‘Descriptives’ click the ‘Variance’ check box, and you get the same values for variance as the one we calculated by hand (<span class="math inline">\(324.64\)</span>). No, wait, you get a completely different answer (<span class="math inline">\(405.80\)</span>) - see <a href="#fig-fig4-9">Figure&nbsp;<span>4.9</span></a>. That’s just weird. Is jamovi broken? Is this a typo? Am I an idiot?</p>
+<div class="cell enlarge-image" data-layout-align="left">
+<div class="cell-output-display">
+<div id="fig-fig4-9" class="quarto-figure quarto-figure-left anchored">
+<figure class="figure">
+<p><img src="images/fig4-9.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4.9: A screenshot of jamovi showing the Variance for the first 5 values of the afl.margins variable</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>As it happens, the answer is no.<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> It’s not a typo, and jamovi is not making a mistake. In fact, it’s very simple to explain what jamovi is doing here, but slightly trickier to explain why jamovi is doing it. So let’s start with the “what”. What jamovi is doing is evaluating a slightly different formula to the one I showed you above. Instead of averaging the squared deviations, which requires you to divide by the number of data points N, jamovi has chosen to divide by <span class="math inline">\(N - 1\)</span>.</p>
+<p>[Additional technical detail<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a>]</p>
+<p>So that’s the <em>what</em>. The real question is why jamovi is dividing by <span class="math inline">\(N - 1\)</span> and not by <span class="math inline">\(N\)</span>. After all, the variance is supposed to be the mean squared deviation, right? So shouldn’t we be dividing by N, the actual number of observations in the sample? Well, yes, we should. However, as we’ll discuss in the chapter on <a href="08-Estimating-unknown-quantities-from-a-sample.html"><span>Chapter&nbsp;8</span></a>, there’s a subtle distinction between “describing a sample” and “making guesses about the population from which the sample came”. Up to this point, it’s been a distinction without a difference. Regardless of whether you’re describing a sample or drawing inferences about the population, the mean is calculated exactly the same way. Not so for the variance, or the standard deviation, or for many other measures besides. What I outlined to you initially (i.e., take the actual average, and thus divide by <span class="math inline">\(N\)</span>) assumes that you literally intend to calculate the variance of the sample. Most of the time, however, you’re not terribly interested in the sample in and of itself. Rather, the sample exists to tell you something about the world. If so, you’re actually starting to move away from calculating a “sample statistic” and towards the idea of estimating a “population parameter”. However, I’m getting ahead of myself. For now, let’s just take it on faith that jamovi knows what it’s doing, and we’ll revisit the question later on when we talk about estimation in <a href="08-Estimating-unknown-quantities-from-a-sample.html"><span>Chapter&nbsp;8</span></a>.</p>
+<p>Okay, one last thing. This section so far has read a bit like a mystery novel. I’ve shown you how to calculate the variance, described the weird “<span class="math inline">\(N - 1\)</span>” thing that jamovi does and hinted at the reason why it’s there, but I haven’t mentioned the single most important thing. How do you interpret the variance? Descriptive statistics are supposed to describe things, after all, and right now the variance is really just a gibberish number. Unfortunately, the reason why I haven’t given you the human-friendly interpretation of the variance is that there really isn’t one. This is the most serious problem with the variance. Although it has some elegant mathematical properties that suggest that it really is a fundamental quantity for expressing variation, it’s completely useless if you want to communicate with an actual human. Variances are completely uninterpretable in terms of the original variable! All the numbers have been squared and they don’t mean anything anymore. This is a huge issue. For instance, according to <a href="#tbl-tab4-3">Table&nbsp;<span>4.3</span></a>, the margin in game 1 was “376.36 points-squared higher than the average margin”. This is <em>exactly</em> as stupid as it sounds, and so when we calculate a variance of <span class="math inline">\(324.64\)</span> we’re in the same situation. I’ve watched a lot of footy games, and at no time has anyone ever referred to “points squared”. It’s not a real unit of measurement, and since the variance is expressed in terms of this gibberish unit, it is totally meaningless to a human.</p>
+</section>
+<section id="sec-Standard-deviation" class="level3" data-number="4.2.5">
+<h3 data-number="4.2.5" class="anchored" data-anchor-id="sec-Standard-deviation"><span class="header-section-number">4.2.5</span> Standard deviation</h3>
+<p>Okay, suppose that you like the idea of using the variance because of those nice mathematical properties that I haven’t talked about, but since you’re a human and not a robot you’d like to have a measure that is expressed in the same units as the data itself (i.e., points, not points squared). What should you do? The solution to the problem is obvious! Take the square root of the variance, known as the <strong>standard deviation</strong>, also called the “root mean squared deviation”, or RMSD. This solves our problem fairly neatly. Whilst nobody has a clue what “a variance of 324.68 points-squared” really means, it’s much easier to understand “a standard deviation of 18.01 points” since it’s expressed in the original units. It is traditional to refer to the standard deviation of a sample of data as s, though “sd” and “std dev.” are also used at times.</p>
+<p>[Additional technical detail<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a>]</p>
+<p>However, as you might have guessed from our discussion of the variance, what jamovi actually calculates is slightly different to the formula given above. Just like the we saw with the variance, what jamovi calculates is a version that divides by <span class="math inline">\(N - 1\)</span> rather than <span class="math inline">\(N\)</span>.</p>
+<p>[Additional technical detail<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a>]</p>
+<p>Interpreting standard deviations is slightly more complex. Because the standard deviation is derived from the variance, and the variance is a quantity that has little to no meaning that makes sense to us humans, the standard deviation doesn’t have a simple interpretation. As a consequence, most of us just rely on a simple rule of thumb. In general, you should expect 68% of the data to fall within 1 standard deviation of the mean, 95% of the data to fall within 2 standard deviation of the mean, and 99.7% of the data to fall within 3 standard deviations of the mean. This rule tends to work pretty well most of the time, but it’s not exact. It’s actually calculated based on an assumption that the histogram is symmetric and “bell shaped”. As you can tell from looking at the AFL winning margins histogram in <a href="#fig-fig4-2">Figure&nbsp;<span>4.2</span></a>, this isn’t exactly true of our data! Even so, the rule is approximately correct. As it turns out, 65.3% of the AFL margins data fall within one standard deviation of the mean. This is shown visually in <a href="#fig-fig4-10">Figure&nbsp;<span>4.10</span></a>.</p>
+</section>
+<section id="which-measure-to-use" class="level3" data-number="4.2.6">
+<h3 data-number="4.2.6" class="anchored" data-anchor-id="which-measure-to-use"><span class="header-section-number">4.2.6</span> Which measure to use?</h3>
+<p>We’ve discussed quite a few measures of spread: range, IQR, mean absolute deviation, variance and standard deviation; and hinted at their strengths and weaknesses. Here’s a quick summary:</p>
+<ul>
+<li><em>Range</em>. Gives you the full spread of the data. It’s very vulnerable to outliers and as a consequence it isn’t often used unless you have good reasons to care about the extremes in the data.</li>
+<li><em>Interquartile range</em>. Tells you where the “middle half” of the data sits. It’s pretty robust and complements the median nicely. This is used a lot.</li>
+<li><em>Mean absolute deviation</em>. Tells you how far “on average” the observations are from the mean. It’s very interpretable but has a few minor issues (not discussed here) that make it less attractive to statisticians than the standard deviation. Used sometimes, but not often.</li>
+<li><em>Variance</em>. Tells you the average squared deviation from the mean. It’s mathematically elegant and is probably the “right” way to describe variation around the mean, but it’s completely uninterpretable because it doesn’t use the same units as the data. Almost never used except as a mathematical tool, but it’s buried “under the hood” of a very large number of statistical tools.</li>
+<li><em>Standard deviation</em>. This is the square root of the variance. It’s fairly elegant mathematically and it’s expressed in the same units as the data so it can be interpreted pretty well. In situations where the mean is the measure of central tendency, this is the default. This is by far the most popular measure of variation.</li>
+</ul>
+<p>In short, the IQR and the standard deviation are easily the two most common measures used to report the variability of the data. But there are situations in which the others are used. I’ve described all of them in this book because there’s a fair chance you’ll run into most of these somewhere.</p>
+<div class="cell" data-layout-align="left">
+<div class="cell-output-display">
+<div id="fig-fig4-10" class="quarto-figure quarto-figure-left anchored">
+<figure class="figure">
+<p><img src="04-Descriptive-statistics_files/figure-html/fig-fig4-10-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4.10: An illustration of the standard deviation from the AFL winning margins data. The shaded bars in the histogram show how much of the data fall within one standard deviation of the mean. In this case, 65.3% of the data set lies within this range, which is pretty consistent with the ‘approximately 68% rule’ discussed in the main text</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="skew-and-kurtosis" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="skew-and-kurtosis"><span class="header-section-number">4.3</span> Skew and kurtosis</h2>
+<p>There are two more descriptive statistics that you will sometimes see reported in the psychological literature: skew and kurtosis. In practice, neither one is used anywhere near as frequently as the measures of central tendency and variability that we’ve been talking about. Skew is pretty important, so you do see it mentioned a fair bit, but I’ve actually never seen kurtosis reported in a scientific article to date.</p>
+<div class="cell" data-layout-align="left">
+<div class="cell-output-display">
+<div id="fig-fig4-11" class="quarto-figure quarto-figure-left anchored">
+<figure class="figure">
+<p><img src="04-Descriptive-statistics_files/figure-html/fig-fig4-11-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4.11: An illustration of skewness. On the left we have a negatively skewed data set, in the middle we have a data set with no skew, and on the right we have a positively skewed data set</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Since it’s the more interesting of the two, let’s start by talking about the <strong>skewness</strong>. Skewness is basically a measure of asymmetry and the easiest way to explain it is by drawing some pictures. As <a href="#fig-fig4-11">Figure&nbsp;<span>4.11</span></a> illustrates, if the data tend to have a lot of extreme small values (i.e., the lower tail is “longer” than the upper tail) and not so many extremely large values (left panel) then we say that the data are <em>negatively skewed</em>. On the other hand, if there are more extremely large values than extremely small ones (right panel) we say that the data are positively skewed. That’s the qualitative idea behind skewness. If there are relatively more values that are far greater than the mean, the distribution is positively skewed or right skewed, with a tail stretching to the right. Negative or left skew is the opposite. A symmetric distribution has a skewness of 0. The skewness value for a positively skewed distribution is positive, and a negative value for a negatively skewed distribution.</p>
+<p>[Additional technical detail<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a>]</p>
+<p>Perhaps more helpfully, you can use jamovi to calculate skewness: it’s a check box in the ‘Statistics’ options under ‘Exploration’ - ‘Descriptives’. For the afl.margins variable, the skewness figure is <span class="math inline">\(0.780\)</span>. If you divide the skewness estimate by the Std. error for skewness you have an indication of how skewed the data is. Especially in small samples (N <span class="math inline">\(&lt;\)</span> 50), one rule of thumb suggests that a value of 2 or less can mean that the data is not very skewed, and a value of over 2 that there is sufficient skew in the data to possibly limit its use in some statistical analyses. Though there is no clear agreement on this interpretation. That said, this does indicate that the AFL winning margins data is somewhat skewed (<span class="math inline">\(\frac{0.780}{0.183} = 4.262\)</span>).</p>
+<p>The final measure that is sometimes referred to, though very rarely in practice, is the kurtosis of a data set. Put simply, kurtosis is a measure of how thin or fat the tails of a distribution are, as illustrated in <a href="#fig-fig4-12">Figure&nbsp;<span>4.12</span></a>. By convention, we say that the “normal curve” (black lines) has zero kurtosis, so the degree of kurtosis is assessed relative to this curve.</p>
+<div class="cell" data-layout-align="left">
+<div class="cell-output-display">
+<div id="fig-fig4-12" class="quarto-figure quarto-figure-left anchored">
+<figure class="figure">
+<p><img src="04-Descriptive-statistics_files/figure-html/fig-fig4-12-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4.12: An illustration of kurtosis. On the left, we have a ‘platykurtic’ distribution (kurtosis = -.95) meaning that the distribution has ‘thin’ or flat tails. In the middle we have a ‘mesokurtic’ distribution (kurtosis is almost exactly 0) which means that the tails are neither thin or fat. Finally, on the right, we have a ‘leptokurtic’ distribution (kurtosis = 2.12) indicating that the distribution has ‘fat’ tails. Note that kurtosis is measured with respect to a normal curve (black line)</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>In this Figure, the data on the left have a pretty flat distribution, with thin tails, so the kurtosis is negative and we call the data platykurtic. The data on the right have a distribution with fat tails, so the kurtosis is positive and we say that the data is leptokurtic. But the data in the middle have neither think or fat tails, so we say that it is mesokurtic and has kurtosis zero. This is summarised in <a href="#tbl-tab4-4">Table&nbsp;<span>4.4</span></a>:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-tab4-4" class="anchored">
+
+<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab4-4"><caption>Table&nbsp;4.4:  Thin to fat tails to illustrate kurtosis </caption>
+<colgroup><col><col><col></colgroup><tbody><tr>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: bold;">English</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">informal term</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: bold;">kurtosis value</th></tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">"tails too thin"</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">platykurtic</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">negative</td></tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 0pt; font-weight: normal;">"tails neither thin or fat"</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">mesokurtic</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 0pt 6pt 6pt; font-weight: normal;">zero</td></tr>
+<tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">"tails too fat"</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">leptokurtic</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">positive</td></tr>
+</tbody></table>
+
+</div>
+</div>
+</div>
+<p>[Additional technical detail<a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a>]</p>
+<p>More to the point, jamovi has a check box for kurtosis just below the check box for skewness, and this gives a value for kurtosis of <span class="math inline">\(0.101\)</span> with a standard error of <span class="math inline">\(0.364\)</span>. This means that the AFL winning margins data has only a small kurtosis, which is ok.</p>
+</section>
+<section id="descriptive-statistics-separately-for-each-group" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="descriptive-statistics-separately-for-each-group"><span class="header-section-number">4.4</span> Descriptive statistics separately for each group</h2>
+<p>It is very commonly the case that you find yourself needing to look at descriptive statistics broken down by some grouping variable. This is pretty easy to do in jamovi. For instance, let’s say I want to look at the descriptive statistics for some clinical trial data, broken down separately by therapy type. This is a new data set, one that you’ve never seen before. The data is stored in the clinicaltrial.csv file and we’ll use it a lot later on in <a href="13-Comparing-several-means-one-way-ANOVA.html"><span>Chapter&nbsp;13</span></a> (you can find a complete description of the data at the start of that chapter). Let’s load it and see what we’ve got (<a href="#fig-fig4-13">Figure&nbsp;<span>4.13</span></a>):</p>
+<p>Evidently there were three drugs: a placebo, something called “anxifree” and something called “joyzepam”, and there were 6 people administered each drug. There were 9 people treated using cognitive behavioural therapy (CBT) and 9 people who received no psychological treatment. And we can see from looking at the ‘Descriptives’ of the mood.gain variable that most people did show a mood gain (<span class="math inline">\(mean = 0.88\)</span>), though without knowing what the scale is here it’s hard to say much more than that. Still, that’s not too bad. Overall I feel that I learned something from that.</p>
+<p>We can also go ahead and look at some other descriptive statistics, and this time separately for each type of therapy. In jamovi, check Std. deviation, Skewness and Kurtosis in the ‘Statistics’ options. At the same time, transfer the therapy variable into the ‘Split by’ box, and you should get something like <a href="#fig-fig4-14">Figure&nbsp;<span>4.14</span></a>.</p>
+<div class="cell" data-layout-align="left">
+<div class="cell-output-display">
+<div id="fig-fig4-13" class="quarto-figure quarto-figure-left anchored">
+<figure class="figure">
+<p><img src="images/fig4-13.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4.13: A screenshot of jamovi showing the variables stored in the clinicaltrial.csv file</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>What if you have multiple grouping variables? Suppose you want to look at the average mood gain separately for all possible combinations of drug and therapy. It is possible to do this by adding another variable, drug, into the ‘Split by’ box. Easy peasy, though sometimes if you split too much there isn’t enough data in each breakdown combination to make meaningful calculations. In this case jamovi tells you this by stating something like NaN or Inf. <a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a></p>
+<div class="cell enlarge-image" data-layout-align="left">
+<div class="cell-output-display">
+<div id="fig-fig4-14" class="quarto-figure quarto-figure-left anchored">
+<figure class="figure">
+<p><img src="images/fig4-14.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4.14: A screenshot of jamovi showing Descriptives split by therapy type</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-Standard-scores" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="sec-Standard-scores"><span class="header-section-number">4.5</span> Standard scores</h2>
+<p>Suppose my friend is putting together a new questionnaire intended to measure “grumpiness”. The survey has <span class="math inline">\(50\)</span> questions which you can answer in a grumpy way or not. Across a big sample (hypothetically, let’s imagine a million people or so!) the data are fairly normally distributed, with the mean grumpiness score being <span class="math inline">\(17\)</span> out of <span class="math inline">\(50\)</span> questions answered in a grumpy way, and the standard deviation is <span class="math inline">\(5\)</span>. In contrast, when I take the questionnaire I answer <span class="math inline">\(35\)</span> out of <span class="math inline">\(50\)</span> questions in a grumpy way. So, how grumpy am I? One way to think about it would be to say that I have grumpiness of <span class="math inline">\(\frac{35}{50}\)</span>, so you might say that I’m 70% grumpy. But that’s a bit weird, when you think about it. If my friend had phrased her questions a bit differently people might have answered them in a different way, so the overall distribution of answers could easily move up or down depending on the precise way in which the questions were asked. So, I’m only 70% grumpy <em>with respect to this set of survey questions</em>. Even if it’s a very good questionnaire this isn’t very a informative statement.</p>
+<p>A simpler way around this is to describe my grumpiness by comparing me to other people. Shockingly, out of my friend’s sample of <span class="math inline">\(1,000,000\)</span> people, only <span class="math inline">\(159\)</span> people were as grumpy as me (that’s not at all unrealistic, frankly) suggesting that I’m in the top 0.016% of people for grumpiness. This makes much more sense than trying to interpret the raw data. This idea, that we should describe my grumpiness in terms of the overall distribution of the grumpiness of humans, is the qualitative idea that standardisation attempts to get at. One way to do this is to do exactly what I just did and describe everything in terms of percentiles. However, the problem with doing this is that “it’s lonely at the top”. Suppose that my friend had only collected a sample of <span class="math inline">\(1000\)</span> people (still a pretty big sample for the purposes of testing a new questionnaire, I’d like to add), and this time gotten, let’s say, a mean of <span class="math inline">\(16\)</span> out of <span class="math inline">\(50\)</span> with a standard deviation of <span class="math inline">\(5\)</span>. The problem is that almost certainly not a single person in that sample would be as grumpy as me.</p>
+<p>However, all is not lost. A different approach is to convert my grumpiness score into a <strong>standard score</strong>, also referred to as a z-score. The standard score is defined as the number of standard deviations above the mean that my grumpiness score lies. To phrase it in “pseudomaths” the standard score is calculated like this:</p>
+<p><span class="math display">\[
+\text{standard score} = \frac{\text{raw score} - mean}{\text{standard deviation}}
+\]</span></p>
+<p>[Additional technical detail<a href="#fn14" class="footnote-ref" id="fnref14" role="doc-noteref"><sup>14</sup></a>]</p>
+<p>So, going back to the grumpiness data, we can now transform Dani’s raw grumpiness into a standardised grumpiness score.</p>
+<p><span class="math display">\[ z =\frac{35 - 17}{5} = 3.6 \]</span> To interpret this value, recall the rough heuristic that I provided in <a href="#sec-Standard-deviation"><span>Section&nbsp;4.2.5</span></a> in which I noted that 99.7% of values are expected to lie within 3 standard deviations of the mean. So the fact that my grumpiness corresponds to a z score of 3.6 indicates that I’m very grumpy indeed. In fact this suggests that I’m grumpier than 99.98% of people. Sounds about right.</p>
+<p>In addition to allowing you to interpret a raw score in relation to a larger population (and thereby allowing you to make sense of variables that lie on arbitrary scales), standard scores serve a second useful function. Standard scores can be compared to one another in situations where the raw scores can’t. Suppose, for instance, my friend also had another questionnaire that measured extraversion using a <span class="math inline">\(24\)</span> item questionnaire. The overall mean for this measure turns out to be 13 with standard deviation <span class="math inline">\(4\)</span>, and I scored a <span class="math inline">\(2\)</span>. As you can imagine, it doesn’t make a lot of sense to try to compare my raw score of <span class="math inline">\(2\)</span> on the extraversion questionnaire to my raw score of 35 on the grumpiness questionnaire. The raw scores for the two variables are “about” fundamentally different things, so this would be like comparing apples to oranges.</p>
+<p>What about the standard scores? Well, this is a little different. If we calculate the standard scores we get <span class="math inline">\((z = \frac{(35-17)}{5}=3.6)\)</span> for grumpiness and <span class="math inline">\((z = \frac{(2-13)}{4}=-2.75)\)</span> for extraversion. These two numbers can be compared to each other.<a href="#fn15" class="footnote-ref" id="fnref15" role="doc-noteref"><sup>15</sup></a> I’m much less extraverted than most people (<span class="math inline">\(z = -2.75\)</span>) and much grumpier than most people (<span class="math inline">\(z=3.6\)</span>). But the extent of my unusualness is much more extreme for grumpiness, since <span class="math inline">\(3.6\)</span> is a bigger number than <span class="math inline">\(2.75\)</span>. Because each standardised score is a statement about where an observation falls relative to its own population, it is possible to compare standardised scores across completely different variables.</p>
+</section>
+<section id="summary" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="summary"><span class="header-section-number">4.6</span> Summary</h2>
+<p>Calculating some basic descriptive statistics is one of the very first things you do when analysing real data, and descriptive statistics are much simpler to understand than inferential statistics, so like every other statistics textbook I’ve started with descriptives. In this chapter, we talked about the following topics:</p>
+<ul>
+<li><a href="#measures-of-central-tendency">Measures of central tendency</a>. Broadly speaking, central tendency measures tell you where the data are. There’s three measures that are typically reported in the literature: the mean, median and mode.</li>
+<li><a href="#sec-Measures-of-variability">Measures of variability</a>. In contrast, measures of variability tell you about how “spread out” the data are. The key measures are: range, standard deviation, and interquartile range.</li>
+<li><a href="#skew-and-kurtosis">Skew and kurtosis</a>. We also looked at assymetry in a variable’s distribution (skew) and thin or fat tailed distributions (kurtosis).</li>
+<li><a href="#descriptive-statistics-separately-for-each-group">Descriptive statistics separately for each group</a>. Since this book focuses on doing data analysis in jamovi, we spent a bit of time talking about how descriptive statistics are computed for different subgroups.</li>
+<li><a href="#sec-Standard-scores">Standard scores</a>. The z-score is a slightly unusual beast. It’s not quite a descriptive statistic, and not quite an inference. Make sure you understand this section. It’ll come up again later.</li>
+</ul>
+<p>In the next Chapter we’ll move on to a discussion of how to draw pictures! Everyone loves a pretty picture, right? But before we do, I want to end on an important point. A traditional first course in statistics spends only a small proportion of the class on descriptive statistics, maybe one or two lectures at most. The vast majority of the lecturer’s time is spent on inferential statistics because that’s where all the hard stuff is. That makes sense, but it hides the practical everyday importance of choosing good descriptives. With that in mind…</p>
+
+
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Note for non-Australians: the AFL is an Australian rules football competition. You don’t need to know anything about Australian rules in order to follow this section.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Okay, now let’s try to write a formula for the mean. By tradition, we use <span class="math inline">\(\bar{X}\)</span> as the notation for the mean. So the calculation for the mean could be expressed using the following formula: <span class="math display">\[\bar{X}=\frac{X_1 + X_2 ... + X_{N-1} + X_{N}}{N}\]</span> This formula is entirely correct but it’s terribly long, so we make use of the <strong>summation symbol</strong> <span class="math inline">\(\sum\)</span> to shorten it.<span class="math inline">\(^a\)</span> If I want to add up the first five observations I could write out the sum the long way, <span class="math inline">\(X_1 + X_2 + X_3 + X_4 + X_5\)</span> or I could use the summation symbol to shorten it to this: <span class="math display">\[\sum_{i=1}^{5} X_i\]</span> Taken literally, this could be read as “the sum, taken over all i values from 1 to 5, of the value <span class="math inline">\(X_i\)</span>”. But basically what it means is “add up the first five observations”. In any case, we can use this notation to write out the formula for the mean, which looks like this: <span class="math display">\[\bar{X}=\frac{1}{N}\sum_{i=1}^{N}X_i\]</span> In all honesty, I can’t imagine that all this mathematical notation helps clarify the concept of the mean at all. In fact, it’s really just a fancy way of writing out the same thing I said in words: add all the values up and then divide by the total number of items. However, that’s not really the reason I went into all that detail. My goal was to try to make sure that everyone reading this book is clear on the notation that we’ll be using throughout the book: <span class="math inline">\(\bar{X}\)</span> for the mean, <span class="math inline">\(\sum\)</span> for the idea of summation, <span class="math inline">\(X_i\)</span> for the ith observation, and <span class="math inline">\(N\)</span> for the total number of observations. We’re going to be re-using these symbols a fair bit so it’s important that you understand them well enough to be able to “read” the equations, and to be able to see that it’s just saying “add up lots of things and then divide by another thing”. <br>—<br><span class="math inline">\(^a\)</span> <em>The choice to use</em> <span class="math inline">\(\sum\)</span> to denote summation isn’t arbitrary. It’s the Greek upper case letter sigma, which is the analogue of the letter <span class="math inline">\(S\)</span> in that alphabet. Similarly, there’s an equivalent symbol used to denote the multiplication of lots of numbers, because multiplications are also called “products” we use the <span class="math inline">\(\prod\)</span> symbol for this (the Greek upper case pi, which is the analogue of the letter <span class="math inline">\(P\)</span>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p><a href="www.abc.net.au/news/stories/2010/09/24/3021480.htm">www.abc.net.au/news/stories/2010/09/24/3021480.htm</a><a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>However, whilst our calculations for this little example are at an end, we do have a couple of things left to talk about. First, we should really try to write down a proper mathematical formula. But in order do to this I need some mathematical notation to refer to the mean absolute deviation. Irritatingly, “mean absolute deviation” and “median absolute deviation” have the same acronym (MAD), which leads to a certain amount of ambiguity so I’d better come up with something different for the mean absolute deviation. Sigh. What I’ll do is use AAD instead, short for average absolute deviation. Now that we have some unambiguous notation, here’s the formula that describes what we just calculated:<span class="math display">\[AAD(X) =\frac{1}{N} \sum_{i=1}^{N} \mid X_i - \bar{X} \mid = 15.52\]</span><a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>Well, I will very briefly mention the one that I think is coolest, for a very particular definition of “cool”, that is. Variances are additive. Here’s what that means. Suppose I have two variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> , whose variances are <span class="math inline">\(Var(X)\)</span> and <span class="math inline">\(Var(Y)\)</span> respectively. Now imagine I want to define a new variable Z that is the sum of the two, <span class="math inline">\(Z = X + Y\)</span> . As it turns out, the variance of <span class="math inline">\(Z\)</span> is equal to <span class="math inline">\(Var(X) + Var(Y)\)</span>. This is a very useful property, but it’s not true of the other measures that I talk about in this section.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>The formula that we use to calculate the variance of a set of observations is as follows: <span class="math display">\[VAR(X) =\frac{1}{N} \sum_{i=1}^{N} ( X_i - \bar{X} )^2\]</span> As you can see, it’s basically the same formula that we used to calculate the average absolute deviation, except that instead of using “absolute deviations” we use “squared deviations”. It is for this reason that the variance is sometimes referred to as the “mean square deviation”.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>With the possible exception of the third question.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>In other words, the formula that jamovi is using is this one: <span class="math display">\[\frac{1}{N-1} \sum_{i=1}^{N} ( X_i - \bar{X} )^2\]</span><a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9"><p>Because the standard deviation is equal to the square root of the variance, you probably won’t be surprised to see that the formula is: <span class="math display">\[s=\sqrt{\frac{1}{N} \sum_{i=1}^{N} ( X_i - \bar{X} )^2 }\]</span> and in jamovi there is a check box for ‘Std. deviation’ right above the check box for ‘Variance’. Selecting this gives a value of <span class="math inline">\(26.07\)</span> for the standard deviation.<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn10"><p>For reasons that will make sense when we return to this topic in <a href="08-Estimating-unknown-quantities-from-a-sample.html"><span>Chapter&nbsp;8</span></a> I’ll refer to this new quantity as <span class="math inline">\(\hat{\sigma}\)</span> (read as: “sigma hat”), and the formula for this is: <span class="math display">\[\hat{\sigma}=\sqrt{\frac{1}{N-1} \sum_{i=1}^{N} ( X_i - \bar{X} )^2}\]</span><a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn11"><p>One formula for the skewness of a data set is as follows <span class="math display">\[skewness(X)=\frac{1}{N \hat{\sigma}^3} \sum_{i=1}^{N} ( X_i - \bar{X})^3\]</span> where N is the number of observations, <span class="math inline">\(\bar{X}\)</span> is the sample mean, and <span class="math inline">\(\hat{\sigma}\)</span> is the standard deviation (the “divide by <span class="math inline">\(N - 1\)</span>” version, that is).<a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn12"><p>The equation for kurtosis is pretty similar in spirit to the formulas we’ve seen already for the variance and the skewness. Except that where the variance involved squared deviations and the skewness involved cubed deviations, the kurtosis involves raising the deviations to the fourth power:<span class="math inline">\(^b\)</span> <span class="math display">\[kurtosis(X)=\frac{1}{N \hat{\sigma}^4} \sum_{i=1}^{N} ( X_i - \bar{X} )^4 - 3\]</span> I know, it’s not terribly interesting to me either. <br>—<br> <span class="math inline">\(^b\)</span> The “-3” part is something that statisticians tack on to ensure that the normal curve has kurtosis zero. It looks a bit stupid, just sticking a “-3” at the end of the formula, but there are good mathematical reasons for doing this.<a href="#fnref12" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn13"><p>Sometimes jamovi will also present numbers in an unusual way. If a number is very small, or very large, then jamovi switches to an exponential form for numbers. For example 6.51e-4 is the same as saying that the decimal point is moved 4 places to the left, so the actual number is 0.000651. If there is a plus sign (i.e.&nbsp;6.51e+4 then the decimal point is moved to the right, i.e.&nbsp;65,100.00. Usually only very small or very large numbers are expressed in this way, for example 6.51e-16, which would be quite unwieldy to write out in the normal way.<a href="#fnref13" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn14"><p>In actual maths, the equation for the z-score is <span class="math display">\[z_i =\frac{X_i - \bar{X}}{\hat{\sigma}}\]</span><a href="#fnref14" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn15"><p>Though some caution is usually warranted. It’s not always the case that one standard deviation on variable A corresponds to the same “kind” of thing as one standard deviation on variable B. Use common sense when trying to determine whether or not the z scores of two variables can be meaningfully compared<a href="#fnref15" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } 
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp(/https:\/\/davidfoxcroft\.github\.io\/lsj-book\//);
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+      }
+    }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./03-Getting-started-with-jamovi.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Getting started with jamovi</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./05-Drawing-graphs.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Drawing graphs</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left"><a href="https://learnstatswithjamovi.com">learning statistics with jamovi</a></div>   
+    <div class="nav-footer-right">This book was built with <a href="https://quarto.org/">Quarto</a></div>
+  </div>
+</footer>
+
+
+
+</body></html>
