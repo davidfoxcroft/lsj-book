@@ -44,7 +44,7 @@ To keep things simple, let's imagine that we have a bag containing 10 chips. Eac
 ```{r}
 #| label: fig-fig8-1
 #| fig-align: left
-#| out.width: 80%
+#| out.width: 70%
 #| fig-cap: Simple random sampling without replacement from a finite population
 knitr::include_graphics("images/fig8-1.png")
 ```
@@ -56,7 +56,7 @@ To help make sure you understand the importance of the sampling procedure, consi
 ```{r}
 #| label: fig-fig8-2
 #| fig-align: left
-#| out.width: 80%
+#| out.width: 70%
 #| fig-cap: Biased sampling without replacement from a finite population
 knitr::include_graphics("images/fig8-2.png")
 ```
@@ -66,7 +66,7 @@ A third procedure is worth mentioning. This time around we close our eyes, shake
 ```{r}
 #| label: fig-fig8-3
 #| fig-align: left
-#| out.width: 80%
+#| out.width: 70%
 #| fig-cap: Simple random sampling *with* replacement from a finite population
 knitr::include_graphics("images/fig8-3.png")
 ```
@@ -106,21 +106,21 @@ The idea is quite simple. Let's say we're talking about IQ scores. To a psycholo
 #| fig-cap: The population distribution of IQ scores (panel (a)) and two samples drawn randomly from it. In panel (b) we have a sample of 100 observations, and panel (c) we have a sample of 10,000 observations
 
 plota <- ggplot(data = data.frame(x = seq(60, 140, 1)), aes(x)) +
-  stat_function(fun = dnorm, n = 1000, args = list(mean = 100, sd = 15), col="blue", size=1) + 
+  stat_function(fun = dnorm, n = 1000, args = list(mean = 100, sd = 15), col="#3d6da9", size=1) + 
   scale_x_continuous(breaks = seq(60, 140, 20)) +
   ylab("Probability Density\n") +
   xlab("\nIQ score") +
   theme_classic()
 
 plotb <- ggplot(data = data.frame(x = rnorm(100, 100, 15)), aes(x)) +
-  geom_histogram(binwidth=6, col="blue", fill="blue", alpha=0.6) + 
+  geom_histogram(binwidth=6, col="#3d6da9", fill="#3d6da9", alpha=0.6) + 
   scale_x_continuous(breaks = seq(60, 140, 20)) +
   ylab("Frequency\n") +
   xlab("\nIQ score") +
   theme_classic()
 
 plotc <- ggplot(data = data.frame(x = rnorm(10000, 100, 15)), aes(x)) +
-  geom_histogram(binwidth=6, col="blue", fill="blue", alpha=0.6) + 
+  geom_histogram(binwidth=6, col="#3d6da9", fill="#3d6da9", alpha=0.6) + 
   scale_x_continuous(breaks = seq(60, 140, 20)) +
   ylab("Frequency\n") +
   xlab("\nIQ score") +
@@ -143,7 +143,7 @@ In the previous section I showed you the results of one fictitious IQ experiment
 ```{r}
 #| label: fig-fig8-5
 #| fig-align: left
-#| out.width: 80%
+#| out.width: 70%
 #| classes: .enlarge-image
 #| fig-cap: A random sample drawn from a normal distribution using jamovi
 knitr::include_graphics("images/fig8-5.png")
@@ -194,7 +194,7 @@ What if I continued like this for 10,000 replications, and then drew a histogram
 ```{r}
 #| label: fig-fig8-6
 #| fig-align: left
-#| out.width: 80%
+#| out.width: 70%
 #| fig-cap: The sampling distribution of the mean for the 'five IQ scores experiment'. If you sample 5 people at random and calculate their average IQ you'll almost certainly get a number between 80 and 120, even though there are quite a lot of individuals who have IQs above 120 or below 80. For comparison, the black line plots the population distribution of IQ scores
 
 sdm_data <- lapply(1:10000, function (x) {
@@ -203,7 +203,7 @@ sdm_data <- lapply(1:10000, function (x) {
 sdm_data_means <- data.frame(sample_means = unlist(lapply(sdm_data,mean)))
 
 ggplot(data = sdm_data_means, aes(x = sample_means )) +
-  geom_histogram(aes(y =..density..), binwidth=4, col="blue", fill="blue", alpha=0.7) + 
+  geom_histogram(aes(y =..density..), binwidth=4, col="#3d6da9", fill="#3d6da9", alpha=0.7) + 
   stat_function(fun = dnorm, args = list(mean = 100, sd = 15), col="black", size=1) + 
   scale_x_continuous(limits=c(60,140), breaks = seq(60, 140, 20)) +
   xlab("\nIQ score") +
@@ -230,7 +230,7 @@ Doing this over and over again would give me a very different sampling distribut
 ```{r}
 #| label: fig-fig8-7
 #| fig-align: left
-#| out.width: 80%
+#| out.width: 70%
 #| fig-cap: The sampling distribution of the maximum for the 'five IQ scores experiment'. If you sample 5 people at random and select the one with the highest IQ score you'll probably see someone with an IQ between 100 and 140
 
 sdm_data <- lapply(1:10000, function (x) {
@@ -239,7 +239,7 @@ sdm_data <- lapply(1:10000, function (x) {
 sdm_data_max <- data.frame(sample_max = unlist(lapply(sdm_data,max)))
 
 ggplot(data = sdm_data_max, aes(x = sample_max )) +
-  geom_histogram(aes(y =..density..), binwidth=4, col="blue", fill="blue", alpha=0.7) + 
+  geom_histogram(aes(y =..density..), binwidth=4, col="#3d6da9", fill="#3d6da9", alpha=0.7) + 
   stat_function(fun = dnorm, args = list(mean = 100, sd = 15), col="black", size=1) + 
   scale_x_continuous(limits=c(60,140), breaks = seq(60, 140, 20)) +
   xlab("\nIQ score") +
@@ -272,7 +272,7 @@ sampling_plots <- lapply(sampling_plots_df$n, function(i) {
   sdm_data_mean <- data.frame(sample_mean = unlist(lapply(sdm_data,mean)))
 
   ggplot(data = sdm_data_mean, aes(x = sample_mean )) +
-  geom_histogram(aes(y =..density..), binwidth=4, col="blue", fill="blue", alpha=0.7) + 
+  geom_histogram(aes(y =..density..), binwidth=4, col="#3d6da9", fill="#3d6da9", alpha=0.7) + 
   stat_function(fun = dnorm, args = list(mean = 100, sd = 15), col="black", size=1) + 
   scale_x_continuous(limits=c(60,140), breaks = seq(60, 140, 20)) +
   xlab(paste0("IQ Score \n\n", sampling_plots_df$lab[sampling_plots_df$n == i])) +
@@ -326,7 +326,7 @@ sampling_plots <- lapply(sampling_plots_df$n, function(i) {
   sdm_data_mean <- data.frame(sample_mean = unlist(lapply(sdm_data,mean)))
 
   ggplot(data=sdm_data_mean, aes(x=sample_mean)) +
-  geom_histogram(aes(y =..density..), binwidth=0.0339, col="blue", fill="blue", alpha=0.6) +
+  geom_histogram(aes(y =..density..), binwidth=0.0339, col="#3d6da9", fill="#3d6da9", alpha=0.6) +
   stat_function(fun = dnorm, args = list(mean = m, s/sqrt(i)), col="black", size=1) + 
   scale_x_continuous(limits=c(0,1.2), breaks = seq(0, 1.2, 0.2)) +
   scale_y_continuous(limits=c(0,5)) +
@@ -412,7 +412,7 @@ This intuition feels right, but it would be nice to demonstrate this somehow. Th
 #| fig-align: left
 #| fig-width: 8
 #| fig-height: 8
-#| out.width: 80%
+#| out.width: 70%
 #| fig-cap: The sampling distribution of the sample standard deviation for a 'two IQ scores' experiment. The true population standard deviation is 15 (dashed line), but as you can see from the histogram the vast majority of experiments will produce a much smaller sample standard deviation than this. On average, this experiment would produce an estimated standard deviation of only 8.4, well below the true value! In other words, the sample standard deviation is a biased estimate of the population standard deviation
 n <- 2
 N <- 10000
@@ -422,7 +422,7 @@ sdsd <- data.frame(sd=apply(IQ.m,1,sd2_r))
 mean(sdsd$sd)
 
 ggplot(data = sdsd, aes(x = sd )) +
-  geom_histogram(binwidth=2.5, col="blue", fill="blue", alpha=0.6) + 
+  geom_histogram(binwidth=2.5, col="#3d6da9", fill="#3d6da9", alpha=0.6) + 
   geom_segment(aes(x = 15, y = 0, xend = 15, yend = 1900), colour = "black", linetype=2, size=1) +
   annotate("text", x = 15, y = 2000, label = "Population Standard deviation") +  
   scale_x_continuous(limits=c(0,60), breaks = seq(0, 60, 10)) +
@@ -461,8 +461,8 @@ sd.demo <- as_tibble(t(sd.demo))
 colnames(sd.demo) <- c("sample_size", "mean", "sd")
 
 ps1 <- ggplot(data=sd.demo, aes(x=sample_size, y=mean)) +
-  geom_point(col="blue", alpha=0.6) +
-  geom_path(col="blue", alpha=0.6) +
+  geom_point(col="#3d6da9", alpha=0.8) +
+  geom_path(col="#3d6da9", alpha=0.8) +
   geom_hline(yintercept=100, col="darkgrey", linetype="dashed") +
   xlab("\nSample Size\n\n(a)") +
   ylab("Average Sample Mean\n") +
@@ -471,8 +471,8 @@ ps1 <- ggplot(data=sd.demo, aes(x=sample_size, y=mean)) +
   theme_classic()
 
 ps2 <- ggplot(data=sd.demo, aes(x=sample_size, y=sd)) +
-  geom_point(col="blue", alpha=0.6) +
-  geom_path(col="blue", alpha=0.6) +
+  geom_point(col="#3d6da9", alpha=0.8) +
+  geom_path(col="#3d6da9", alpha=0.8) +
   geom_hline(yintercept=15, col="darkgrey", linetype="dashed") +
   xlab("\nSample Size\n\n(b)") +
   ylab("Average Sample Standard Deviation\n") +
@@ -540,7 +540,8 @@ The hardest thing about confidence intervals is understanding what they mean. Wh
 #| fig-width: 7
 #| fig-height: 7
 #| out.width: 90%
-#| fig-cap: 95% confidence intervals. The top (panel a) shows 50 simulated replications of an experiment in which we measure the IQs of 10 people. The dot marks the location of the sample mean and the line shows the 95% confidence interval. Most of the 50 confidence intervals do contain the true mean (i.e., 100), but a few - in blue and marked with asterisks - do not. The lower graph (panel b) shows a similar simulation, but this time we simulate replications of an experiment that measures the IQs of 25 people
+#| fig-cap: 95% confidence intervals. The top panel (a) shows 50 simulated replications of an experiment in which we measure the IQs of 10 people. The dot marks the location of the sample mean and the line shows the 95% confidence interval. Most of the 50 confidence intervals do contain the true mean (i.e., 100), but a few - in blue and marked with asterisks - do not. The lower graph (panel b) shows a similar simulation, but this time we simulate replications of an experiment that measures the IQs of 25 people
+
 
 N <- 50
 n <- 10
@@ -550,7 +551,7 @@ ci_se <- (apply(ci.demo.10,1,sd))/sqrt(n)
 uci <- ci_m + 1.95*ci_se
 lci <- ci_m - 1.95*ci_se
 ci.demo.10 <- data.frame(Replication=c(1:50), ci_m, ci_se, lci, uci)
-plotcol <- with(ci.demo.10, ifelse(lci>100 | uci<100, "blue", "darkgrey"))
+plotcol <- with(ci.demo.10, ifelse(lci>100 | uci<100, "#3d6da9", "darkgrey"))
 asterisk_pos <- 118-ci_m
 ci.demo.10 <- cbind(ci.demo.10, plotcol, asterisk_pos)
 
@@ -558,10 +559,10 @@ p.ci1  <- ggplot(data=ci.demo.10, aes(x=Replication, y=ci_m)) +
   geom_point(col=plotcol) +
   geom_linerange(ymin=lci, ymax=uci, col=plotcol) +
   geom_hline(yintercept=100, col="darkgrey", linetype="dashed") +
-  geom_text(aes(label = ifelse(plotcol == "blue", "*", "")), col="blue", size=10, nudge_y = asterisk_pos) +
+  geom_text(aes(label = ifelse(plotcol == "#3d6da9", "*", "")), col="#3d6da9", size=10, nudge_y = asterisk_pos) +
   xlab("\nReplication Number") +
   ylab("Mean IQ\n") +
-  ggtitle("(b) Sample Size = 10") +
+  ggtitle("(a) Sample Size = 10") +
   scale_fill_identity() +
   scale_y_continuous(limits=c(80,120)) +
   theme_classic()
@@ -574,7 +575,7 @@ ci_se <- (apply(ci.demo.25,1,sd))/sqrt(n)
 uci <- ci_m + 1.95*ci_se
 lci <- ci_m - 1.95*ci_se
 ci.demo.25 <- data.frame(Replication=c(1:50), ci_m, ci_se, lci, uci)
-plotcol <- with(ci.demo.25, ifelse(lci>100 | uci<100, "blue", "darkgrey"))
+plotcol <- with(ci.demo.25, ifelse(lci>100 | uci<100, "#3d6da9", "darkgrey"))
 asterisk_pos <- 118-ci_m
 ci.demo.10 <- cbind(ci.demo.10, plotcol, asterisk_pos)
 
@@ -583,7 +584,7 @@ p.ci2  <- ggplot(data=ci.demo.25, aes(x=Replication, y=ci_m)) +
   geom_point(col=plotcol) +
   geom_linerange(ymin=lci, ymax=uci, col=plotcol) +
   geom_hline(yintercept=100, col="darkgrey", linetype="dashed") +
-  geom_text(aes(label = ifelse(plotcol == "blue", "*", "")), col="blue", size=10, nudge_y = asterisk_pos) +
+  geom_text(aes(label = ifelse(plotcol == "#3d6da9", "*", "")), col="#3d6da9", size=10, nudge_y = asterisk_pos) +
   xlab("\nReplication Number") +
   ylab("Mean IQ\n") +
   ggtitle("(b) Sample Size = 25") +

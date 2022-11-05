@@ -106,9 +106,19 @@ Since the null hypothesis states that $\theta = 0.5$ and our experiment has $N =
 ```{r}
 #| label: fig-fig9-1
 #| fig-align: left
-#| out.width: 80%
+#| out.width: 70%
 #| fig-cap: The sampling distribution for our test statistic $X$ when the null hypothesis is true. For our ESP scenario this is a binomial distribution. Not surprisingly, since the null hypothesis says that the probability of a correct response is $\theta = .5$, the sampling distribution says that the most likely value is 50 (out of 100) correct responses. Most of the probability mass lies between 40 and 60
-knitr::include_graphics("images/fig9-1.png")
+
+binom1 <- data.frame(success = 0:100, pmf = dbinom(x = 0:100, size = 100, prob = .5)) 
+ggplot(data=binom1, aes(x = factor(success), y = pmf+.001)) +
+  geom_col(col="#3d6da9", fill="#3d6da9", alpha=0.6, width=.3) +
+  ggtitle("Sampling Distribution for X if the Null is True") +
+  labs(x = "\nNumber of correct responses (X)",
+       y = "Probability\n") +
+  scale_x_discrete(breaks=seq(0,100,20)) +
+  theme_classic() +
+  theme(plot.title = element_text(hjust = 0.5))
+
 ```
 
 ## Making decisions
@@ -132,9 +142,33 @@ As it turns out those three things uniquely solve the problem. Our critical regi
 ```{r}
 #| label: fig-fig9-2
 #| fig-align: left
-#| out.width: 80%
+#| out.width: 70%
 #| fig-cap: The critical region associated with the hypothesis test for the ESP study, for a hypothesis test with a significance level of $\alpha = .05$. The plot shows the sampling distribution of $X$ under the null hypothesis (i.e., same as @fig-fig9-1) . The grey bars correspond to those values of $X$ for which we would retain the null hypothesis. The blue (darker shaded) bars show the critical region, those values of $X$ for which we would reject the null. Because the alternative hypothesis is two sided (i.e., allows both $\theta < .5$ and $\theta > .5$, the critical region covers both tails of the distribution. To ensure an $\alpha$ level of $.05$, we need to ensure that each of the two regions encompasses $2.5\%$ of the sampling distribution
-knitr::include_graphics("images/fig9-2.png")
+
+binom1 <- data.frame(success = 0:100, pmf = dbinom(x = 0:100, size = 100, prob = .5)) 
+binom1$plotcol <- with(binom1, ifelse(success<=40 | success >= 60, "#3d6da9", "lightgrey"))
+
+ggplot(data=binom1, aes(x = factor(success), y = pmf+.001)) +
+  geom_bar(aes(colour=plotcol, fill=plotcol), width=.3, stat = "identity") +
+  ggtitle("Critical Regions for a Two-sided Test") +
+  labs(x = "\nNumber of correct responses (X)") +
+  geom_text(x=27, y=.035, label="lower critical region\n(2.5% of the distribution)", size=5) +
+  geom_segment(x = 40, y = .025, xend = 15, yend = .025,
+               arrow = arrow(length = unit(0.03, "npc"))) +
+  geom_text(x=75, y=.035, label="upper critical region\n(2.5% of the distribution)", size=5) +
+  geom_segment(x = 61, y = .025, xend = 85, yend = .025,
+               arrow = arrow(length = unit(0.03, "npc"))) +
+  scale_x_discrete(breaks=seq(0,100,20)) +
+  scale_colour_identity() +
+  scale_fill_identity() +
+  theme_classic() +
+  theme(
+    axis.title.y = element_blank(), 
+    axis.line.y = element_blank(),     
+    axis.text.y = element_blank(), 
+    axis.ticks.y = element_blank(), 
+    plot.title = element_text(hjust = 0.5))
+
 ```
 
 At this point, our hypothesis test is essentially complete:
@@ -165,9 +199,30 @@ When this happens, we have what's called a **one-sided test** and the critical r
 ```{r}
 #| label: fig-fig9-3
 #| fig-align: left
-#| out.width: 80%
+#| out.width: 70%
 #| fig-cap: The critical region for a one sided test. In this case, the alternative hypothesis is that $\theta \geq .5$ so we would only reject the null hypothesis for large values of $X$. As a consequence, the critical region only covers the upper tail of the sampling distribution, specifically the upper $5\%$ of the distribution. Contrast this to the two-sided version in @fig-fig9-2
-knitr::include_graphics("images/fig9-3.png")
+
+binom1 <- data.frame(success = 0:100, pmf = dbinom(x = 0:100, size = 100, prob = .5)) 
+binom1$plotcol <- with(binom1, ifelse(success>= 58, "#3d6da9", "lightgrey"))
+
+ggplot(data=binom1, aes(x = factor(success), y = pmf+.001)) +
+  geom_bar(aes(colour=plotcol, fill=plotcol), width=.3, stat = "identity") +
+  ggtitle("Critical Region for a One-sided Test") +
+  labs(x = "\nNumber of correct responses (X)") +
+  geom_text(x=73, y=.04, label="critical region\n(5% of the distribution)", size=5) +
+  geom_segment(x = 59, y = .028, xend = 85, yend = .028,
+               arrow = arrow(length = unit(0.03, "npc"))) +
+  scale_x_discrete(breaks=seq(0,100,20)) +
+  scale_colour_identity() +
+  scale_fill_identity() +
+  theme_classic() +
+  theme(
+    axis.title.y = element_blank(), 
+    axis.line.y = element_blank(),     
+    axis.text.y = element_blank(), 
+    axis.ticks.y = element_blank(), 
+    plot.title = element_text(hjust = 0.5))
+
 ```
 
 ## The p value of a test {#sec-The-p-value-of-a-test}
@@ -239,7 +294,8 @@ At this point some of you might be wondering if this is a "real" hypothesis test
 ```{r}
 #| label: fig-fig9-4
 #| fig-align: left
-#| out.width: 80%
+#| out.width: 70%
+#| classes: .enlarge-image
 #| fig-cap: Binomial test analysis and results in jamovi
 knitr::include_graphics("images/fig9-4.png")
 ```
@@ -255,9 +311,33 @@ In previous sections I've emphasised the fact that the major design principle be
 ```{r}
 #| label: fig-fig9-5
 #| fig-align: left
-#| out.width: 80%
+#| out.width: 70%
 #| fig-cap: Sampling distribution under the alternative hypothesis for a population parameter value of $\theta = 0.55$. A reasonable proportion of the distribution lies in the rejection region
-knitr::include_graphics("images/fig9-5.png")
+
+binom1 <- data.frame(success = 0:100, pmf = dbinom(x = 0:100, size = 100, prob = .55)) 
+binom1$plotcol <- with(binom1, ifelse(success<=40 | success >= 60, "#3d6da9", "lightgrey"))
+
+ggplot(data=binom1, aes(x = factor(success), y = pmf+.001)) +
+  geom_bar(aes(colour=plotcol, fill=plotcol), width=.3, stat = "identity") +
+  ggtitle(expression("Sampling Distribution for X if" ~ theta ~"=.55")) +
+  labs(x = "\nNumber of correct responses (X)") +
+  geom_text(x=27, y=.07, label="lower critical region\n(2.5% of the distribution)", size=5) +
+  geom_segment(x = 40, y = .06, xend = 10, yend = .06,
+               arrow = arrow(length = unit(0.03, "npc"))) +
+  geom_text(x=78, y=.07, label="upper critical region\n(2.5% of the distribution)", size=5) +
+  geom_segment(x = 61, y = .06, xend = 90, yend = .06,
+               arrow = arrow(length = unit(0.03, "npc"))) +
+  scale_x_discrete(breaks=seq(0,100,20)) +
+  scale_colour_identity() +
+  scale_fill_identity() +
+  theme_classic() +
+  theme(
+    axis.title.y = element_blank(), 
+    axis.line.y = element_blank(),     
+    axis.text.y = element_blank(), 
+    axis.ticks.y = element_blank(), 
+    plot.title = element_text(hjust = 0.5))
+
 ```
 
 Let's take a moment to think about what a Type II error actually is. A Type II error occurs when the alternative hypothesis is true, but we are nevertheless unable to reject the null hypothesis. Ideally, we'd be able to calculate a single number $\beta$ that tells us the Type II error rate, in the same way that we can set $\alpha = .05$ for the Type I error rate. Unfortunately, this is a lot trickier to do. To see this, notice that in my ESP study the alternative hypothesis actually corresponds to lots of possible values of $\theta$. In fact, the alternative hypothesis corresponds to every value of $\theta$ except 0.5. Let's suppose that the true probability of someone choosing the correct response is 55% (i.e., $\theta = .55$). If so, then the true sampling distribution for $X$ is not the same one that the null hypothesis predicts, as the most likely value for $X$ is now $55$ out of 100. Not only that, the whole sampling distribution has now shifted, as shown in @fig-fig9-5. The critical regions, of course, do not change. By definition the critical regions are based on what the null hypothesis predicts. What we're seeing in this figure is the fact that when the null hypothesis is wrong, a much larger proportion of the sampling distribution distribution falls in the critical region. And of course that's what should happen. The probability of rejecting the null hypothesis is larger when the null hypothesis is actually false! However $\theta = .55$ is not the only possibility consistent with the alternative hypothesis. Let's instead suppose that the true value of $\theta$ is actually $0.7$. What happens to the sampling distribution when this occurs? The answer, shown in @fig-fig9-6, is that almost the entirety of the sampling distribution has now moved into the critical region. Therefore, if $\theta = 0.7$, the probability of us correctly rejecting the null hypothesis (i.e., the power of the test) is much larger than if $\theta = 0.55$. In short, while $\theta = .55$ and $\theta = .70$ are both part of the alternative hypothesis, the Type II error rate is different.
@@ -265,9 +345,33 @@ Let's take a moment to think about what a Type II error actually is. A Type II e
 ```{r}
 #| label: fig-fig9-6
 #| fig-align: left
-#| out.width: 80%
+#| out.width: 70%
 #| fig-cap: Sampling distribution under the *alternative* hypothesis for a population parameter value of $\theta = 0.70$. Almost all of the distribution lies in the rejection region.
-knitr::include_graphics("images/fig9-6.png")
+
+binom1 <- data.frame(success = 0:100, pmf = dbinom(x = 0:100, size = 100, prob = .7)) 
+binom1$plotcol <- with(binom1, ifelse(success<=40 | success >= 60, "#3d6da9", "lightgrey"))
+
+ggplot(data=binom1, aes(x = factor(success), y = pmf+.001)) +
+  geom_bar(aes(colour=plotcol, fill=plotcol), width=.3, stat = "identity") +
+  ggtitle(expression("Sampling Distribution for X if" ~ theta ~"=.70")) +
+  labs(x = "\nNumber of correct responses (X)") +
+  geom_text(x=27, y=.07, label="lower critical region\n(2.5% of the distribution)", size=5) +
+  geom_segment(x = 40, y = .06, xend = 10, yend = .06,
+               arrow = arrow(length = unit(0.03, "npc"))) +
+  geom_label(aes(x=75, y=.07, label="upper critical region\n(2.5% of the distribution)"), size=5, label.size=NA, fill="white", alpha=0.025) +
+  geom_segment(x = 61, y = .06, xend = 90, yend = .06,
+               arrow = arrow(length = unit(0.03, "npc"))) +
+  scale_x_discrete(breaks=seq(0,100,20)) +
+  scale_colour_identity() +
+  scale_fill_identity() +
+  theme_classic() +
+  theme(
+    axis.title.y = element_blank(), 
+    axis.line.y = element_blank(),     
+    axis.text.y = element_blank(), 
+    axis.ticks.y = element_blank(), 
+    plot.title = element_text(hjust = 0.5))
+
 ```
 
 What all this means is that the power of a test (i.e., $1 - \beta$) depends on the true value of $\theta$. To illustrate this, I've calculated the expected probability of rejecting the null hypothesis for all values of $\theta$, and plotted it in @fig-fig9-7. This plot describes what is usually called the power function of the test. It's a nice summary of how good the test is, because it actually tells you the power $(1 - \beta$) for all possible values of $\theta$. As you can see, when the true value of $\theta$ is very close to $0.5$, the power of the test drops very sharply, but when it is further away, the power is large.
@@ -275,9 +379,26 @@ What all this means is that the power of a test (i.e., $1 - \beta$) depends on t
 ```{r}
 #| label: fig-fig9-7
 #| fig-align: left
-#| out.width: 80%
+#| out.width: 70%
 #| fig-cap: The probability that we will reject the null hypothesis, plotted as a function of the true value of $\theta$. Obviously, the test is more powerful (greater chance of correct rejection) if the true value of $\theta$ is very different from the value that the null hypothesis specifies (i.e., $\theta = .5$ ). Notice that when $\theta$ actually is equal to $.5$ (plotted as a black dot), the null hypothesis is in fact true and rejecting the null hypothesis in this instance would be a Type I error
-knitr::include_graphics("images/fig9-7.png")
+
+theta <- seq(.01,.99,.01)
+pow <- vector("numeric",length(theta))
+for( i in seq_along(theta) ) {
+	pow[i] <- pbinom(40,100,theta[i],lower.tail=TRUE) + pbinom(59,100,theta[i],lower.tail=FALSE) 
+}
+
+dpower <- data.frame(theta,pow)
+
+ggplot(dat=dpower, aes(x=theta, y=pow)) +
+  geom_line(col="#3d6da9", size=1) +
+  annotate("point", x = .5, y = min(pow), colour = "black", size=4) +
+  labs(x=expression("\nTrue value of " ~theta), y="Probability of Rejecting the Null\n") +
+  ggtitle("Power function for the Test (N=100)") +
+  theme_classic() +
+  theme(
+    plot.title = element_text(hjust = 0.5))
+
 ```
 
 ### The power function
@@ -310,9 +431,27 @@ Unfortunately, it's often the case that even with the best of experimental desig
 ```{r}
 #| label: fig-fig9-8
 #| fig-align: left
-#| out.width: 80%
-#| fig-cap: The power of our test plotted as a function of the sample size $N$. In this case, the true value of $\theta$ is 0.7 but the null hypothesis is that $\theta = 0.5$. Overall, larger $N$ means greater power. (The small zig-zags in this function occur because of some odd interactions between $\theta$, $\alpha$ and the fact that the binomial distribution is discrete, it doesn't matter for any serious purpose)
-knitr::include_graphics("images/fig9-8.png")
+#| out.width: 70%
+#| fig-cap: The power of our test plotted as a function of the sample size $N$. In this case, the true value of $\theta$ is 0.7 but the null hypothesis is that $\theta = 0.5$. Overall, larger $N$ means greater power. (The small zig-zags in this function occur because of some odd interactions between $\theta$,  $\alpha$ and the fact that the binomial distribution is discrete, it doesn't matter for any serious purpose)
+
+N <- 1:100
+pow <- vector("numeric",length(N))
+theta <- .7
+for( i in seq_along(N) ) {
+	crit.lo <- qbinom(.025,N[i],.5)-1
+	crit.hi <- qbinom(.975,N[i],.5)
+	pow[i] <- 	pbinom(crit.lo,N[i],theta,lower.tail=TRUE) + pbinom(crit.hi,N[i],theta,lower.tail=FALSE) 
+}
+
+testpow <- data.frame(N,pow)
+
+ggplot(dat=testpow, aes(x=N, y=pow)) +
+  geom_line(col="#3d6da9", size=1) +
+  labs(x=expression("\nSample size, N"), y="Probability of Rejecting the Null\n") +
+  theme_classic() +
+  theme(
+    plot.title = element_text(hjust = 0.5))
+
 ```
 
 Because power is important, whenever you're contemplating running an experiment it would be pretty useful to know how much power you're likely to have. It's never possible to know for sure since you can't possibly know what your real effect size is. However, it's often (well, sometimes) possible to guess how big it should be. If so, you can guess what sample size you need! This idea is called **power analysis**, and if it's feasible to do it then it's very helpful. It can tell you something about whether you have enough time or money to be able to run the experiment successfully. It's increasingly common to see people arguing that power analysis should be a required part of experimental design, so it's worth knowing about. I don't discuss power analysis in this book, however. This is partly for a boring reason and partly for a substantive one. The boring reason is that I haven't had time to write about power analysis yet. The substantive one is that I'm still a little suspicious of power analysis. Speaking as a researcher, I have very rarely found myself in a position to be able to do one. It's either the case that (a) my experiment is a bit non-standard and I don't know how to define effect size properly, or (b) I literally have so little idea about what the effect size will be that I wouldn't know how to interpret the answers. Not only that, after extensive conversations with someone who does stats consulting for a living (my wife, as it happens), I can't help but notice that in practice the only time anyone ever asks her for a power analysis is when she's helping someone write a grant application. In other words, the only time any scientist ever seems to want a power analysis in real life is when they're being forced to do it by bureaucratic process. It's not part of anyone's day to day work. In short, I've always been of the view that whilst power is an important concept, power analysis is not as useful as people make it sound, except in the rare cases where (a) someone has figured out how to calculate power for your actual experimental design and (b) you have a pretty good idea what the effect size is likely to be.[^09-hypothesis-testing-12] Maybe other people have had better experiences than me, but I've personally never been in a situation where both (a) and (b) were true. Maybe I'll be convinced otherwise in the future, and probably a future version of this book would include a more detailed discussion of power analysis, but for now this is about as much as I'm comfortable saying about the topic.

@@ -46,7 +46,7 @@ themeval = theme(panel.border = element_blank(),
 ggplot() + 
   geom_path(data=streets,aes(x=x, y=y, group = street), color="grey") +
   geom_pointdensity(data=deaths,aes(x=x, y=y), color="orange", shape=15, size=2, adjust=0.1) +
-  geom_pointdensity(data=pumps, aes(x=x, y=y), color="blue", shape=16, size=3, adjust=0.1) +
+  geom_pointdensity(data=pumps, aes(x=x, y=y), color="#3d6da9", shape=16, size=3, adjust=0.1) +
   geom_text(data=pumps, aes(x=x, y=y, label=label), size=3, nudge_x = -0.5, nudge_y = 0.5, check_overlap = F) +
   geom_segment(aes(x = 3.5, y = 20.5, xend = 7.5, yend = 20.5), color="grey50") +
   geom_segment(aes(x = 3.5, y = 20.3, xend = 3.5, yend = 20.7), color="grey50") +
@@ -54,7 +54,7 @@ ggplot() +
   geom_segment(aes(x = 5.5, y = 20.3, xend = 5.5, yend = 20.7), color="grey50") +
   geom_segment(aes(x = 6.5, y = 20.3, xend = 6.5, yend = 20.7), color="grey50") +
   geom_segment(aes(x = 7.5, y = 20.3, xend = 7.5, yend = 20.7), color="grey50") +
-  annotate(geom="text", x=9.7, y=20.5, label="100 metres", color="grey50") +
+  annotate(geom="text", x=9.9, y=20.5, label="100 metres", color="grey50") +
   ggtitle("Snow's cholera map of London") +
   theme(plot.title = element_text(hjust = 0.5)) +
   coord_fixed() + 
@@ -69,7 +69,7 @@ Let's begin with the humble **histogram**. Histograms are one of the simplest an
 ```{r}
 #| label: fig-fig5-2
 #| fig-align: left
-#| out.width: 80%
+#| out.width: 70%
 #| classes: .enlarge-image
 #| fig-cap: jamovi screen showing the histogram check box
 knitr::include_graphics("images/fig5-2.png")
@@ -94,7 +94,7 @@ Another alternative to histograms is a **boxplot**, sometimes called a "box and 
 ```{r}
 #| label: fig-fig5-4
 #| fig-align: left
-#| out.width: 80%
+#| out.width: 70%
 #| fig-cap: A box plot of the afl.margins variable plotted in jamovi
 knitr::include_graphics("images/fig5-4.png")
 ```
@@ -106,7 +106,7 @@ The easiest way to describe what a boxplot looks like is just to draw one. Click
 ```{r}
 #| label: fig-fig5-5
 #| fig-align: left
-#| out.width: 80%
+#| out.width: 70%
 #| fig-cap: A violin plot of the afl.margins variable plotted in jamovi, also showing a box plot and data points
 knitr::include_graphics("images/fig5-5.png")
 ```
@@ -120,7 +120,7 @@ One last thing. What if you want to draw multiple boxplots at once? Suppose, for
 ```{r}
 #| label: fig-fig5-6
 #| fig-align: left
-#| out.width: 80%
+#| out.width: 70%
 #| fig-cap: jamovi screen shot showing the ‘Split by’ window
 knitr::include_graphics("images/fig5-6.png")
 ```
@@ -129,7 +129,6 @@ The result is shown in @fig-fig5-7. This version of the box plot, split by year,
 
 ```{r}
 #| label: fig-fig5-7
-#| column: screen-inset-right
 #| fig-align: left
 #| out.width: 100%
 #| classes: .enlarge-image
@@ -144,7 +143,7 @@ Because the boxplot automatically separates out those observations that lie outs
 ```{r}
 #| label: fig-fig5-8
 #| fig-align: left
-#| out.width: 80%
+#| out.width: 70%
 #| fig-cap: A boxplot showing two very suspicious outliers!
 knitr::include_graphics("images/fig5-8.png")
 ```
@@ -154,7 +153,7 @@ This filter creates a new column in the spreadsheet view where only those observ
 ```{r}
 #| label: fig-fig5-9
 #| fig-align: left
-#| out.width: 80%
+#| out.width: 70%
 #| fig-cap: The jamovi filter screen
 knitr::include_graphics("images/fig5-9.png")
 ```
@@ -162,7 +161,7 @@ knitr::include_graphics("images/fig5-9.png")
 ```{r}
 #| label: fig-fig5-10
 #| fig-align: left
-#| out.width: 80%
+#| out.width: 70%
 #| classes: .enlarge-image
 #| fig-cap: Frequency table for ID showing the ID numbers for the two suspicious outliers, 14 and 134
 knitr::include_graphics("images/fig5-10.png")
@@ -185,7 +184,7 @@ When you have done this you will see, in the 'Data' view, that jamovi has filter
 ```{r}
 #| label: fig-fig5-11
 #| fig-align: left
-#| out.width: 80%
+#| out.width: 70%
 #| classes: .enlarge-image
 #| fig-cap: Filtering to include just four AFL teams, and drawing a bar plot in jamovi
 knitr::include_graphics("images/fig5-11.png")
@@ -205,4 +204,3 @@ Perhaps I'm a simple minded person, but I love pictures. Every time I write a ne
 One final thing to point out. Whilst jamovi produces some really neat default graphics, editing the plots is currently not possible. For more advanced graphics and plotting capability the packages available in R are much more powerful. One of the most popular graphics systems is provided by the ggplot2 package (see <a href="https://ggplot2.tidyverse.org/"
 target="_blank">https://ggplot2.tidyverse.org/</a>), which is loosely based on "The grammar of graphics" [@Wilkinson2006]. It's not for novices. You need to have a pretty good grasp of R before you can start using it, and even then it takes a while to really get the hang of it. But when you're ready it's worth taking the time to teach yourself, because it's a much more powerful and cleaner system.
 
-------------------------------------------------------------------------

@@ -131,9 +131,28 @@ There's one last detail to talk about, namely the degrees of freedom. If you rem
 ```{r}
 #| label: fig-fig10-1
 #| fig-align: left
-#| out.width: 80%
+#| out.width: 70%
 #| fig-cap: $\chi^2$ (chi-square) distributions with different values for the 'degrees of freedom'
-knitr::include_graphics("images/fig10-1.png")
+
+ggplot(data = data.frame(x = seq(0, 12, 1)), aes(x)) +
+  stat_function(aes(linetype = 'df = 3'), fun = dchisq, n = 1000, args = list(df = 3), col="#3d6da9", size=1) + 
+  stat_function(aes(linetype = 'df = 4'), fun = dchisq, n = 1000, args = list(df = 4), col="#3d6da9", size=1) + 
+  stat_function(aes(linetype = 'df = 5'), fun = dchisq, n = 1000, args = list(df = 5), col="#3d6da9", size=1) + 
+  scale_x_continuous(breaks = seq(0, 12, 2)) +
+  ylab("Probability Density\n") +
+  xlab("\nObserved Value") +
+  scale_linetype_manual(values = c('solid', 'dashed', 'dotted'), labels = c( "df = 3", "df = 4", "df = 5")) + 
+  theme_classic() +
+  theme(
+    axis.title.y = element_blank(),
+    axis.text.y = element_blank(),
+    axis.line.y = element_blank(),
+    axis.ticks.y = element_blank(),
+    legend.title = element_blank(),
+    legend.text = element_text(size=12),
+    legend.key.width= unit(1, 'cm'),
+    legend.position = c(0.6, 0.8))
+
 ```
 
 When I introduced the chi-square distribution in @sec-Other-useful-distributions, I was a bit vague about what **"degrees of freedom"** actually means. Obviously, it matters. Looking at @fig-fig10-1, you can see that if we change the degrees of freedom then the chi-square distribution changes shape quite substantially. But what exactly is it? Again, when I introduced the distribution and explained its relationship to the normal distribution, I did offer an answer: it's the number of "normally distributed variables" that I'm squaring and adding together. But, for most people, that's kind of abstract and not entirely helpful. What we really need to do is try to understand degrees of freedom in terms of our data. So here goes.
@@ -153,9 +172,35 @@ The final step in the process of constructing our hypothesis test is to figure o
 ```{r}
 #| label: fig-fig10-2
 #| fig-align: left
-#| out.width: 80%
+#| out.width: 70%
 #| fig-cap: Illustration of how the hypothesis testing works for the $\chi^2$ (chi-square) goodness of-fit test
-knitr::include_graphics("images/fig10-2.png")
+
+
+ggplot(data = data.frame(x = seq(0, 12, 0.01)), aes(x)) +
+  stat_function(fun = dchisq, n = 1000, args = list(df = 3), linetype = "solid", col="black", size=1) + 
+  stat_function(fun = dchisq, n = 1000, args = list(df = 3), geom = "area",
+                fill = "#3d6da9", alpha=0.8, xlim = c(7.82, 12)) + 
+  scale_x_continuous(breaks = seq(0, 12, 2)) +
+  geom_text(x=6.5, y=.12, label="The critical value is 7.82", size=5) +
+  geom_segment(x = 6.5, y = .11, xend = 7.82, yend = .026,
+               arrow = arrow(length = unit(0.03, "npc"))) +
+  geom_text(x=10, y=.08, label="The observed GOF\nvalue is 8.44)", size=5) +
+  geom_segment(x = 10, y = .06, xend = 8.52, yend = .006,
+               arrow = arrow(length = unit(0.03, "npc"))) +
+  annotate("point", x = 8.44, y = 0, colour = "black", size=3) +
+  ylab("Probability Density\n") +
+  xlab("\nObserved Value") +
+  theme_classic() +
+  theme(
+    axis.title.y = element_blank(),
+    axis.text.y = element_blank(),
+    axis.line.y = element_blank(),
+    axis.ticks.y = element_blank(),
+    legend.title = element_blank(),
+    legend.text = element_text(size=12),
+    legend.key.width= unit(1, 'cm'),
+    legend.position = c(0.6, 0.8))
+
 ```
 
 Ah but, I hear you ask, how do I find the critical value of a chi-square distribution with $k-1$ degrees of freedom? Many many years ago when I first took a psychology statistics class we used to look up these critical values in a book of critical value tables, like the one in @fig-fig10-3. Looking at this Figure, we can see that the critical value for a $\chi^2$ distribution with 3 degrees of freedom, and p=0.05 is 7.815.
@@ -163,7 +208,7 @@ Ah but, I hear you ask, how do I find the critical value of a chi-square distrib
 ```{r}
 #| label: fig-fig10-3
 #| fig-align: left
-#| out.width: 80%
+#| out.width: 70%
 #| fig-cap: Table of critical values for the chi-square distribution
 knitr::include_graphics("images/fig10-3.png")
 ```
@@ -177,7 +222,8 @@ Not surprisingly, jamovi provides an analysis that will do these calculations fo
 ```{r}
 #| label: fig-fig10-4
 #| fig-align: left
-#| out.width: 80%
+#| out.width: 70%
+#| classes: .enlarge-image
 #| fig-cap: A $\chi^2$ One Sample Proportion Test in jamovi, with table showing both observed and expected frequencies and proportions
 knitr::include_graphics("images/fig10-4.png")
 ```
@@ -189,7 +235,7 @@ At this point you might be wondering what to do if you want to run a goodness-of
 ```{r}
 #| label: fig-fig10-5
 #| fig-align: left
-#| out.width: 80%
+#| out.width: 70%
 #| fig-cap: Changing the expected proportions in the $\\chi^2$ One Sample Proportion Test in jamovi
 knitr::include_graphics("images/fig10-5.png")
 ```
@@ -326,7 +372,8 @@ That was easy, wasn't it! You can also ask jamovi to show you the expected count
 ```{r}
 #| label: fig-fig10-6
 #| fig-align: left
-#| out.width: 80%
+#| out.width: 70%
+#| classes: .enlarge-image
 #| fig-cap: Independent samples $\chi^2$ test in jamovi using the Chapek 9 data
 knitr::include_graphics("images/fig10-6.png")
 ```
@@ -406,7 +453,7 @@ You can specify this test in jamovi from a check box in the 'Statistics' options
 ```{r}
 #| label: fig-fig10-7
 #| fig-align: left
-#| out.width: 80%
+#| out.width: 60%
 #| fig-cap: Fisher exact test analysis in jamovi
 knitr::include_graphics("images/fig10-7.png")
 ```
@@ -444,7 +491,8 @@ Now that you know what the McNemar test is all about, lets actually run one. The
 ```{r}
 #| label: fig-fig10-8
 #| fig-align: left
-#| out.width: 80%
+#| out.width: 70%
+#| classes: .enlarge-image
 #| fig-cap: McNemar test output in jamovi
 knitr::include_graphics("images/fig10-8.png")
 ```
@@ -470,7 +518,7 @@ The different statistics produced by these different analyses are shown in @fig-
 ```{r}
 #| label: fig-fig10-9
 #| fig-align: left
-#| out.width: 80%
+#| out.width: 60%
 #| fig-cap: Independent vs. Paired (McNemar) with the Randomness.omv (cards) data
 knitr::include_graphics("images/fig10-9.png")
 ```

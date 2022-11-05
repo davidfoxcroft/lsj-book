@@ -362,7 +362,7 @@ div.csl-indent {
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/davidfoxcroft/lsj-book/edit/main/05-Drawing-graphs.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/davidfoxcroft/lsj-book/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
 <header id="title-block-header">
 <h1 class="title display-7"><span id="sec-Drawing-graphs" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Drawing graphs</span></span></h1>
@@ -393,7 +393,7 @@ div.csl-indent {
 <div class="cell-output-display">
 <div id="fig-fig5-2" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
-<p><img src="images/fig5-2.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<p><img src="images/fig5-2.png" class="img-fluid figure-img" style="width:70.0%"></p>
 <p></p><figcaption class="figure-caption">Figure&nbsp;5.2: jamovi screen showing the histogram check box</figcaption><p></p>
 </figure>
 </div>
@@ -412,14 +412,14 @@ div.csl-indent {
 </div>
 <p>Although this image would need a lot of cleaning up in order to make a good presentation graphic (i.e., one you’d include in a report), it nevertheless does a pretty good job of describing the data. In fact, the big strength of a histogram or density plot is that (properly used) it does show the entire spread of the data, so you can get a pretty good sense about what it looks like. The downside to histograms is that they aren’t very compact. Unlike some of the other plots I’ll talk about it’s hard to cram 20-30 histograms into a single image without overwhelming the viewer. And of course, if your data are nominal scale then histograms are useless.</p>
 </section>
-<section id="boxplots" class="level2 page-columns page-full" data-number="5.2">
+<section id="boxplots" class="level2" data-number="5.2">
 <h2 data-number="5.2" class="anchored" data-anchor-id="boxplots"><span class="header-section-number">5.2</span> Boxplots</h2>
 <p>Another alternative to histograms is a <strong>boxplot</strong>, sometimes called a “box and whiskers” plot. Like histograms they’re most suited to interval or ratio scale data. The idea behind a boxplot is to provide a simple visual depiction of the median, the interquartile range, and the range of the data. And because they do so in a fairly compact way boxplots have become a very popular statistical graphic, especially during the exploratory stage of data analysis when you’re trying to understand the data yourself. Let’s have a look at how they work, again using the afl.margins data as our example.</p>
 <div class="cell" data-layout-align="left">
 <div class="cell-output-display">
 <div id="fig-fig5-4" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
-<p><img src="images/fig5-4.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<p><img src="images/fig5-4.png" class="img-fluid figure-img" style="width:70.0%"></p>
 <p></p><figcaption class="figure-caption">Figure&nbsp;5.4: A box plot of the afl.margins variable plotted in jamovi</figcaption><p></p>
 </figure>
 </div>
@@ -432,7 +432,7 @@ div.csl-indent {
 <div class="cell-output-display">
 <div id="fig-fig5-5" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
-<p><img src="images/fig5-5.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<p><img src="images/fig5-5.png" class="img-fluid figure-img" style="width:70.0%"></p>
 <p></p><figcaption class="figure-caption">Figure&nbsp;5.5: A violin plot of the afl.margins variable plotted in jamovi, also showing a box plot and data points</figcaption><p></p>
 </figure>
 </div>
@@ -440,22 +440,22 @@ div.csl-indent {
 </div>
 <p>A variation to the traditional box plot is the violin plot. Violin plots are similar to box plots except that they also show the kernel probability density of the data at different values. Typically, violin plots will include a marker for the median of the data and a box indicating the interquartile range, as in standard box plots. In jamovi you can achieve this sort of functionality by checking both the ‘Violin’ and the ‘Box plot’ check boxes. See <a href="#fig-fig5-5">Figure&nbsp;<span>5.5</span></a>, which also has the ‘Data’ check box turned on to show the actual data points on the plot. This does tend to make the graph a bit too busy though, in my opinion. Clarity is simplicity, so in practice it might be better to just use a simple box plot.</p>
 </section>
-<section id="drawing-multiple-boxplots" class="level3 page-columns page-full" data-number="5.2.2">
+<section id="drawing-multiple-boxplots" class="level3" data-number="5.2.2">
 <h3 data-number="5.2.2" class="anchored" data-anchor-id="drawing-multiple-boxplots"><span class="header-section-number">5.2.2</span> Drawing multiple boxplots</h3>
 <p>One last thing. What if you want to draw multiple boxplots at once? Suppose, for instance, I wanted separate boxplots showing the AFL margins not just for 2010 but for every year between 1987 and 2010. To do that the first thing we’ll have to do is find the data. These are stored in the <strong>aflmarginbyyear.csv</strong> file. So let’s load it into jamovi and see what is in it. You will see that it is a pretty big data set. It contains 4296 games and the variables that we’re interested in. What we want to do is have jamovi draw boxplots for the margin variable, but plotted separately for each year. The way to do this is to move the year variable across into the ‘Split by’ box, as in <a href="#fig-fig5-6">Figure&nbsp;<span>5.6</span></a>.</p>
 <div class="cell" data-layout-align="left">
 <div class="cell-output-display">
 <div id="fig-fig5-6" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
-<p><img src="images/fig5-6.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<p><img src="images/fig5-6.png" class="img-fluid figure-img" style="width:70.0%"></p>
 <p></p><figcaption class="figure-caption">Figure&nbsp;5.6: jamovi screen shot showing the ‘Split by’ window</figcaption><p></p>
 </figure>
 </div>
 </div>
 </div>
 <p>The result is shown in <a href="#fig-fig5-7">Figure&nbsp;<span>5.7</span></a>. This version of the box plot, split by year, gives a sense of why it’s sometimes useful to choose box plots instead of histograms. It’s possible to get a good sense of what the data look like from year to year without getting overwhelmed with too much detail. Now imagine what would have happened if I’d tried to cram 24 histograms into this space: no chance at all that the reader is going to learn anything useful.</p>
-<div class="cell enlarge-image page-columns page-full" data-layout-align="left">
-<div class="cell-output-display column-screen-inset-right">
+<div class="cell enlarge-image" data-layout-align="left">
+<div class="cell-output-display">
 <div id="fig-fig5-7" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="images/fig5-7.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -472,7 +472,7 @@ div.csl-indent {
 <div class="cell-output-display">
 <div id="fig-fig5-8" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
-<p><img src="images/fig5-8.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<p><img src="images/fig5-8.png" class="img-fluid figure-img" style="width:70.0%"></p>
 <p></p><figcaption class="figure-caption">Figure&nbsp;5.8: A boxplot showing two very suspicious outliers!</figcaption><p></p>
 </figure>
 </div>
@@ -483,7 +483,7 @@ div.csl-indent {
 <div class="cell-output-display">
 <div id="fig-fig5-9" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
-<p><img src="images/fig5-9.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<p><img src="images/fig5-9.png" class="img-fluid figure-img" style="width:70.0%"></p>
 <p></p><figcaption class="figure-caption">Figure&nbsp;5.9: The jamovi filter screen</figcaption><p></p>
 </figure>
 </div>
@@ -493,7 +493,7 @@ div.csl-indent {
 <div class="cell-output-display">
 <div id="fig-fig5-10" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
-<p><img src="images/fig5-10.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<p><img src="images/fig5-10.png" class="img-fluid figure-img" style="width:70.0%"></p>
 <p></p><figcaption class="figure-caption">Figure&nbsp;5.10: Frequency table for ID showing the ID numbers for the two suspicious outliers, 14 and 134</figcaption><p></p>
 </figure>
 </div>
@@ -512,7 +512,7 @@ div.csl-indent {
 <div class="cell-output-display">
 <div id="fig-fig5-11" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
-<p><img src="images/fig5-11.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<p><img src="images/fig5-11.png" class="img-fluid figure-img" style="width:70.0%"></p>
 <p></p><figcaption class="figure-caption">Figure&nbsp;5.11: Filtering to include just four AFL teams, and drawing a bar plot in jamovi</figcaption><p></p>
 </figure>
 </div>
@@ -531,7 +531,6 @@ div.csl-indent {
 <li><a href="#saving-image-files-using-jamovi">Saving image files using jamovi</a>. Importantly, we also covered how to export your pictures.</li>
 </ul>
 <p>One final thing to point out. Whilst jamovi produces some really neat default graphics, editing the plots is currently not possible. For more advanced graphics and plotting capability the packages available in R are much more powerful. One of the most popular graphics systems is provided by the ggplot2 package (see <a href="https://ggplot2.tidyverse.org/" target="_blank">https://ggplot2.tidyverse.org/</a>), which is loosely based on “The grammar of graphics” <span class="citation" data-cites="Wilkinson2006">(<a href="References.html#ref-Wilkinson2006" role="doc-biblioref">Wilkinson et al., 2006</a>)</span>. It’s not for novices. You need to have a pretty good grasp of R before you can start using it, and even then it takes a while to really get the hang of it. But when you’re ready it’s worth taking the time to teach yourself, because it’s a much more powerful and cleaner system.</p>
-<hr>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="doc-bibliography" style="display: none">

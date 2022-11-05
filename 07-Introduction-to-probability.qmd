@@ -81,12 +81,6 @@ huxthattibble(tibble(`number of flips` = c(1 , 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9 , 1
 
 Notice that at the start of the sequence the *proportion* of heads fluctuates wildly, starting at $.00$ and rising as high as $.80$. Later on, one gets the impression that it dampens out a bit, with more and more of the values actually being pretty close to the "right" answer of $.50$. This is the frequentist definition of probability in a nutshell. Flip a fair coin over and over again, and as N grows large (approaches infinity, denoted $N \rightarrow \infty$ ) the proportion of heads will converge to 50%. There are some subtle technicalities that the mathematicians care about, but qualitatively speaking that's how the frequentists define probability. Unfortunately, I don't have an infinite number of coins or the infinite patience required to flip a coin an infinite number of times. However, I do have a computer and computers excel at mindless repetitive tasks. So I asked my computer to simulate flipping a coin 1000 times and then drew a picture of what happens to the proportion $\frac{N_H}{N}$ as $N$ increases. Actually, I did it four times just to make sure it wasn't a fluke. The results are shown in @fig-fig7-1. As you can see, the proportion of observed heads eventually stops fluctuating and settles down. When it does, the number at which it finally settles is the true probability of heads.
 
-The frequentist definition of probability has some desirable characteristics. First, it is objective. The probability of an event is *necessarily* grounded in the world. The only way that probability statements can make sense is if they refer to (a sequence of) events that occur in the physical universe.[^07-introduction-to-probability-1] Secondly, it is unambiguous. Any two people watching the same sequence of events unfold, trying to calculate the probability of an event, must inevitably come up with the same answer.
-
-[^07-introduction-to-probability-1]: This doesn't mean that frequentists can't make hypothetical statements, of course. It's just that if you want to make a statement about probability then it must be possible to redescribe that statement in terms of a sequence of potentially observable events, together with the relative frequencies of different outcomes that appear within that sequence.
-
-However, it also has undesirable characteristics. First, infinite sequences don't exist in the physical world. Suppose you picked up a coin from your pocket and started to flip it. Every time it lands it impacts on the ground. Each impact wears the coin down a bit. Eventually the coin will be destroyed. So, one might ask whether it really makes sense to pretend that an "infinite" sequence of coin flips is even a meaningful concept, or an objective one. We can't say that an "infinite sequence" of events is a real thing in the physical universe, because the physical universe doesn't allow infinite anything. More seriously, the frequentist definition has a narrow scope. There are lots of things out there that human beings are happy to assign probability to in everyday language, but cannot (even in theory) be mapped onto a hypothetical sequence of events. For instance, if a meteorologist comes on TV and says "the probability of rain in Adelaide on 2 November 2048 is 60%" we humans are happy to accept this. But it's not clear how to define this in frequentist terms. There's only one city of Adelaide, and only one 2 November 2048. There's no infinite sequence of events here, just a one-off thing. Frequentist probability genuinely *forbids* us from making probability statements about a single event. From the frequentist perspective it will either rain tomorrow or it will not. There is no "probability" that attaches to a single non-repeatable event. Now, it should be said that there are some very clever tricks that frequentists can use to get around this. One possibility is that what the meteorologist means is something like "There is a category of days for which I predict a 60% chance of rain, and if we look only across those days for which I make this prediction, then on 60% of those days it will actually rain". It's very weird and counter-intuitive to think of it this way, but you do see frequentists do this sometimes. And it will come up later in this book (e.g. in @sec-Estimating-a-confidence-interval).
-
 ```{r}
 #| label: fig-fig7-1
 #| warning: FALSE
@@ -96,7 +90,7 @@ coinflips <- list()
 coinflips <- lapply(1:4, function(i) {
     ggplot(data=tibble(flips = 1:1000, heads = cumsum(as.numeric( runif(1000) > .5 )) / (1:1000)),
            aes(x=flips, y=heads)) +
-    geom_line(color="blue", size=1) +
+    geom_line(color="#3d6da9", size=1) +
     ylim(0.3, 0.7) + 
     xlim(0, 1000) +
     geom_hline(yintercept=0.5, color="grey") +
@@ -106,6 +100,12 @@ coinflips <- lapply(1:4, function(i) {
 })
 gridExtra::grid.arrange(grobs = coinflips)
 ```
+
+The frequentist definition of probability has some desirable characteristics. First, it is objective. The probability of an event is *necessarily* grounded in the world. The only way that probability statements can make sense is if they refer to (a sequence of) events that occur in the physical universe.[^07-introduction-to-probability-1] Secondly, it is unambiguous. Any two people watching the same sequence of events unfold, trying to calculate the probability of an event, must inevitably come up with the same answer.
+
+[^07-introduction-to-probability-1]: This doesn't mean that frequentists can't make hypothetical statements, of course. It's just that if you want to make a statement about probability then it must be possible to redescribe that statement in terms of a sequence of potentially observable events, together with the relative frequencies of different outcomes that appear within that sequence.
+
+However, it also has undesirable characteristics. First, infinite sequences don't exist in the physical world. Suppose you picked up a coin from your pocket and started to flip it. Every time it lands it impacts on the ground. Each impact wears the coin down a bit. Eventually the coin will be destroyed. So, one might ask whether it really makes sense to pretend that an "infinite" sequence of coin flips is even a meaningful concept, or an objective one. We can't say that an "infinite sequence" of events is a real thing in the physical universe, because the physical universe doesn't allow infinite anything. More seriously, the frequentist definition has a narrow scope. There are lots of things out there that human beings are happy to assign probability to in everyday language, but cannot (even in theory) be mapped onto a hypothetical sequence of events. For instance, if a meteorologist comes on TV and says "the probability of rain in Adelaide on 2 November 2048 is 60%" we humans are happy to accept this. But it's not clear how to define this in frequentist terms. There's only one city of Adelaide, and only one 2 November 2048. There's no infinite sequence of events here, just a one-off thing. Frequentist probability genuinely *forbids* us from making probability statements about a single event. From the frequentist perspective it will either rain tomorrow or it will not. There is no "probability" that attaches to a single non-repeatable event. Now, it should be said that there are some very clever tricks that frequentists can use to get around this. One possibility is that what the meteorologist means is something like "There is a category of days for which I predict a 60% chance of rain, and if we look only across those days for which I make this prediction, then on 60% of those days it will actually rain". It's very weird and counter-intuitive to think of it this way, but you do see frequentists do this sometimes. And it will come up later in this book (e.g. in @sec-Estimating-a-confidence-interval).
 
 ### The Bayesian view
 
@@ -156,7 +156,7 @@ pantsdat <- tibble(probabilities = c( .5, .3, .1, 0, .1),
 pantsdat$eventNames = factor(pantsdat$eventNames, levels = c( "Blue jeans", "Grey jeans", "Black jeans",  "Black suit", "Blue track" ))
 
 ggplot(data=pantsdat, aes(x=eventNames, y=probabilities)) +
-  geom_bar(stat='identity', col="black", fill="blue", alpha=0.6) +
+  geom_bar(stat='identity', col="black", fill="#3d6da9", alpha=0.6) +
   theme_classic() +
   ylab("Probability of event") +
   xlab("Event")
@@ -193,40 +193,36 @@ Yeah, yeah. I know what you're thinking: notation, notation, notation. Really, w
 
 To that end, @fig-fig7-3 plots the binomial probabilities for all possible values of $X$ for our dice rolling experiment, from $X = 0$ (no skulls) all the way up to $X = 20$ (all skulls). Note that this is basically a bar chart, and is no different to the "trousers probability" plot I drew in @fig-fig7-2. On the horizontal axis we have all the possible events, and on the vertical axis we can read off the probability of each of those events. So, the probability of rolling $4$ skulls out of $20$ is about $0.20$ (the actual answer is $0.2022036$, as we'll see in a moment). In other words, you'd expect that to happen about 20% of the times you repeated this experiment.
 
-To give you a feel for how the binomial distribution changes when we alter the values of $theta$ and $N$, let's suppose that instead of rolling dice I'm actually flipping coins. This time around, my experiment involves flipping a fair coin repeatedly and the outcome that I'm interested in is the number of heads that I observe. In this scenario, the success probability is now $\theta = \frac{1}{2}$. Suppose I were to flip the coin $N = 20$ times. In this example, I've changed the success probability but kept the size of the experiment the same. What does this do to our binomial distribution? Well, as @fig-fig7-4 shows, the main effect of this is to shift the whole distribution, as you'd expect. Okay, what if we flipped a coin $N = 100$ times? Well, in that case we get @fig-fig7-4 (b). The distribution stays roughly in the middle but there's a bit more variability in the possible outcomes.
-
 ```{r}
 #| label: fig-fig7-3
 #| fig-align: left
-#| out.width: 80%
+#| out.width: 70%
 #| fig-cap: The binomial distribution with size parameter of $N = 20$ and an underlying success probability of $\theta = \frac{1}{6}$. Each vertical bar depicts the probability of one specific outcome (i.e., one possible value of X). Because this is a probability distribution, each of the probabilities must be a number between 0 and 1, and the heights of the bars must sum to 1 as well
 
 binom1 <- data.frame(heads = 0:20, pmf = dbinom(x = 0:20, size = 20, prob = 1/6)+0.0001) 
 
 ggplot(data=binom1, aes(x = factor(heads), y = pmf)) +
-  geom_col(col="blue", fill="blue", alpha=0.6, width=.1) +
+  geom_col(col="#3d6da9", fill="#3d6da9", alpha=0.6, width=.1) +
   labs(x = "\nNumber of skulls observed",
-       y = "Probability/n") +
+       y = "Probability\n") +
   scale_x_discrete(breaks=seq(0,20,5)) +
   theme_classic()
 
 ```
 
-
-## The normal distribution {#sec-The-normal-distribution}
-
-While the binomial distribution is conceptually the simplest distribution to understand, it's not the most important one. That particular honour goes to the normal distribution, also referred to as "the bell curve" or a "Gaussian distribution". A **normal distribution** is described using two parameters: the mean of the distribution µ and the standard deviation of the distribution $\sigma$.
+To give you a feel for how the binomial distribution changes when we alter the values of $theta$ and $N$, let's suppose that instead of rolling dice I'm actually flipping coins. This time around, my experiment involves flipping a fair coin repeatedly and the outcome that I'm interested in is the number of heads that I observe. In this scenario, the success probability is now $\theta = \frac{1}{2}$. Suppose I were to flip the coin $N = 20$ times. In this example, I've changed the success probability but kept the size of the experiment the same. What does this do to our binomial distribution? Well, as @fig-fig7-4 shows, the main effect of this is to shift the whole distribution, as you'd expect. Okay, what if we flipped a coin $N = 100$ times? Well, in that case we get @fig-fig7-4 (b). The distribution stays roughly in the middle but there's a bit more variability in the possible outcomes.
 
 ```{r}
 #| label: fig-fig7-4
 #| fig-align: left
-#| out.width: 80%
-#| fig-cap: Two binomial distributions, involving a scenario in which I'm flipping a fair coin, so the underlying success probability is $\theta = \frac{1}{2}$. In panel (a), we assume I'm flipping the coin $N = 20$ times. In panel (b) we assume that the coin is flipped $N = 100$ times
+#| fig-width: 5
+#| fig-height: 7
+#| out.width: 70%
+#| fig-cap: Two binomial distributions, involving a scenario in which I flip a fair coin so the underlying success probability is $\theta = \frac{1}{2}$. In panel (a), I flipped the coin $N = 20$ times. In panel (b) the coin was flipped $N = 100$ times
 
 binom2 <- data.frame(heads = 0:20, pmf = dbinom(x = 0:20, size = 20, prob = 1/2)+0.0001) 
-
-ggplot(data=binom2, aes(x = factor(heads), y = pmf)) +
-  geom_col(col="blue", fill="blue", alpha=0.6, width=.1) +
+bd1 <- ggplot(data=binom2, aes(x = factor(heads), y = pmf)) +
+  geom_col(col="#3d6da9", fill="#3d6da9", alpha=0.6, width=.1) +
   labs(x = "Number of skulls observed",
        y = "Probability") +
   scale_x_discrete(breaks=seq(0,20,5)) +
@@ -235,9 +231,8 @@ ggplot(data=binom2, aes(x = factor(heads), y = pmf)) +
   theme_classic()
 
 binom3 <- data.frame(heads = 0:100, pmf = dbinom(x = 0:100, size = 100, prob = 1/2)+0.0001) 
-
-ggplot(data=binom3, aes(x = factor(heads), y = pmf)) +
-  geom_col(col="blue", fill="blue", alpha=0.6, width=.1) +
+bd2 <- ggplot(data=binom3, aes(x = factor(heads), y = pmf)) +
+  geom_col(col="#3d6da9", fill="#3d6da9", alpha=0.6, width=.1) +
   labs(x = "\nNumber of skulls observed",
        y = "Probability\n") +
   scale_x_discrete(breaks=seq(0,100,5)) +
@@ -245,22 +240,14 @@ ggplot(data=binom3, aes(x = factor(heads), y = pmf)) +
   theme(plot.tag.position = c(0.3, 0.70)) +
   theme_classic()
 
-```
-
-```{r}
-#| label: fig-fig7-5
-#| fig-align: left
-#| out.width: 80%
-#| fig-cap: The normal distribution with mean $\mu = 0$ and standard deviation $\sigma = 1$. The x-axis corresponds to the value of some variable, and the y-axis tells us something about how likely we are to observe that value. However, notice that the y-axis is labelled *Probability Density* and not *Probability*. There is a subtle and somewhat frustrating characteristic of continuous distributions that makes the $y$ axis behave a bit oddly - the height of the curve here isn't actually the probability of observing a particular x value. On the other hand, it is true that the heights of the curve tells you which $x$ values are more likely (the higher ones!). (see [Probability density] section for all the annoying details)
-
-ggplot(data = data.frame(x = seq(-3, 3, 1)), aes(x)) +
-  stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col="blue", size=1) + 
-  scale_x_continuous(breaks = seq(-3, 3, 1)) +
-  ylab("Probability Density\n") +
-  xlab("\nObserved Value") +
-  theme_classic()
+gridExtra::grid.arrange(bd1,bd2,nrow=2)
 
 ```
+
+
+## The normal distribution {#sec-The-normal-distribution}
+
+While the binomial distribution is conceptually the simplest distribution to understand, it's not the most important one. That particular honour goes to the normal distribution, also referred to as "the bell curve" or a "Gaussian distribution". A **normal distribution** is described using two parameters: the mean of the distribution µ and the standard deviation of the distribution $\sigma$.
 
 [Additional technical detail [^07-introduction-to-probability-4]]
 
@@ -271,15 +258,14 @@ Let's try to get a sense for what it means for a variable to be normally distrib
 [^07-introduction-to-probability-5]: In practice, the normal distribution is so handy that people tend to use it even when the variable isn't actually continuous. As long as there are enough categories (e.g., Likert scale responses to a questionnaire), it's pretty standard practice to use the normal distribution as an approximation. This works out much better in practice than you'd think.
 
 ```{r}
-#| label: fig-fig7-6
+#| label: fig-fig7-5
 #| fig-align: left
-#| out.width: 80%
-#| fig-cap: An illustration of what happens when you change the mean of a normal distribution. The solid line depicts a normal distribution with a mean of $\mu = 4$. The dashed line shows a normal distribution with a mean of $\mu = 7$. In both cases, the standard deviation is $\sigma = 1$. Not surprisingly, the two distributions have the same shape, but the dashed line is shifted to the right
+#| out.width: 70%
+#| fig-cap: The normal distribution with mean $\mu = 0$ and standard deviation $\sigma = 1$. The x-axis corresponds to the value of some variable, and the y-axis tells us something about how likely we are to observe that value. However, notice that the y-axis is labelled *Probability Density* and not *Probability*. There is a subtle and somewhat frustrating characteristic of continuous distributions that makes the $y$ axis behave a bit oddly - the height of the curve here isn't actually the probability of observing a particular x value. On the other hand, it is true that the heights of the curve tells you which $x$ values are more likely (the higher ones!). (see [Probability density] section for all the annoying details)
 
-ggplot(data = data.frame(x = seq(0, 10, 1)), aes(x)) +
-  stat_function(fun = dnorm, n = 1000, args = list(mean = 4, sd = 1), col="blue", size=1) + 
-  stat_function(fun = dnorm, n = 1000, args = list(mean = 7, sd = 1), col="blue", linetype=2, size=1) + 
-  scale_x_continuous(breaks = seq(0, 10, 2)) +
+ggplot(data = data.frame(x = seq(-3, 3, 1)), aes(x)) +
+  stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col="#3d6da9", size=1) + 
+  scale_x_continuous(breaks = seq(-3, 3, 1)) +
   ylab("Probability Density\n") +
   xlab("\nObserved Value") +
   theme_classic()
@@ -289,14 +275,30 @@ ggplot(data = data.frame(x = seq(0, 10, 1)), aes(x)) +
 With this in mind, let's see if we can't get an intuition for how the normal distribution works. First, let's have a look at what happens when we play around with the parameters of the distribution. To that end, @fig-fig7-6 plots normal distributions that have different means but have the same standard deviation. As you might expect, all of these distributions have the same "width". The only difference between them is that they've been shifted to the left or to the right. In every other respect they're identical. In contrast, if we increase the standard deviation while keeping the mean constant, the peak of the distribution stays in the same place but the distribution gets wider, as you can see in @fig-fig7-7. Notice, though, that when we widen the distribution the height of the peak shrinks. This has to happen, in the same way that the heights of the bars that we used to draw a discrete binomial distribution have to sum to 1, the total area under the curve for the normal distribution must equal 1. Before moving on, I want to point out one important characteristic of the normal distribution. Irrespective of what the actual mean and standard deviation are, $68.3\%$ of the area falls within 1 standard deviation of the mean. Similarly, $95.4\%$ of the distribution falls within 2 standard deviations of the mean, and $(99.7\%)$ of the distribution is within 3 standard deviations. This idea is illustrated in @fig-fig7-8; see also @fig-fig7-9.
 
 ```{r}
+#| label: fig-fig7-6
+#| fig-align: left
+#| out.width: 70%
+#| fig-cap: An illustration of what happens when you change the mean of a normal distribution. The solid line depicts a normal distribution with a mean of $\mu = 4$. The dashed line shows a normal distribution with a mean of $\mu = 7$. In both cases, the standard deviation is $\sigma = 1$. Not surprisingly, the two distributions have the same shape, but the dashed line is shifted to the right
+
+ggplot(data = data.frame(x = seq(0, 10, 1)), aes(x)) +
+  stat_function(fun = dnorm, n = 1000, args = list(mean = 4, sd = 1), col="#3d6da9", size=1) + 
+  stat_function(fun = dnorm, n = 1000, args = list(mean = 7, sd = 1), col="#3d6da9", linetype=2, size=1) + 
+  scale_x_continuous(breaks = seq(0, 10, 2)) +
+  ylab("Probability Density\n") +
+  xlab("\nObserved Value") +
+  theme_classic()
+
+```
+
+```{r}
 #| label: fig-fig7-7
 #| fig-align: left
-#| out.width: 80%
+#| out.width: 70%
 #| fig-cap: An illustration of what happens when you change the the standard deviation of a normal distribution. Both distributions plotted in this figure have a mean of $\mu = 5$, but they have different standard deviations. The solid line plots a distribution with standard deviation $\sigma = 1$, and the dashed line shows a distribution with standard deviation $\sigma = 2$. As a consequence, both distributions are 'centred' on the same spot, but the dashed line is wider than the solid one
 
 ggplot(data = data.frame(x = seq(0, 10, 1)), aes(x)) +
-  stat_function(fun = dnorm, n = 1000, args = list(mean = 5, sd = 1), col="blue", size=1) + 
-  stat_function(fun = dnorm, n = 1000, args = list(mean = 5, sd = 2), col="blue", linetype=2, size=1) + 
+  stat_function(fun = dnorm, n = 1000, args = list(mean = 5, sd = 1), col="#3d6da9", size=1) + 
+  stat_function(fun = dnorm, n = 1000, args = list(mean = 5, sd = 2), col="#3d6da9", linetype=2, size=1) + 
   scale_x_continuous(breaks = seq(0, 10, 2)) +
   ylab("Probability Density\n") +
   xlab("\nObserved Value") +
@@ -315,7 +317,7 @@ ggplot(data = data.frame(x = seq(0, 10, 1)), aes(x)) +
 p1 <- ggplot(data = data.frame(x = seq(-4, 4, 1)), aes(x)) +
   stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col="grey", geom = "area",
                 fill = "grey", alpha=0.8, xlim = c(-1, 1)) + 
-  stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col="blue", size=1) + 
+  stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col="#3d6da9", size=1) + 
   scale_x_continuous(breaks = seq(-4, 4, 1)) +
   ggtitle("Shaded area = 68.3%") +
   xlab("\n(a)") +
@@ -325,13 +327,12 @@ p1 <- ggplot(data = data.frame(x = seq(-4, 4, 1)), aes(x)) +
     axis.title.y = element_blank(),
     axis.line.y = element_blank(),
     axis.ticks.y = element_blank(),
-    plot.title = element_text(hjust = 0.5),
-    plot.tag.position = c(0.5, -0.1))
+    plot.title = element_text(hjust = 0.5))
 
 p2 <- ggplot(data = data.frame(x = seq(-4, 4, 1)), aes(x)) +
   stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col="grey", geom = "area",
                 fill = "grey", alpha=0.8, xlim = c(-2, 2)) + 
-  stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col="blue", size=1) + 
+  stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col="#3d6da9", size=1) + 
   scale_x_continuous(breaks = seq(-4, 4, 1)) +
   ggtitle("Shaded area = 95.4%") +
   xlab("\n(b)") +
@@ -357,7 +358,7 @@ gridExtra::grid.arrange(p1,p2, ncol=2)
 p3 <- ggplot(data = data.frame(x = seq(-4, 4, 1)), aes(x)) +
   stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col="grey", geom = "area",
                 fill = "grey", alpha=0.8, xlim = c(-4, -1)) + 
-  stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col="blue", size=1) + 
+  stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col="#3d6da9", size=1) + 
   scale_x_continuous(breaks = seq(-4, 4, 1)) +
   ggtitle("Shaded area = 15.9%") +
   xlab("\n(a)") +
@@ -367,13 +368,12 @@ p3 <- ggplot(data = data.frame(x = seq(-4, 4, 1)), aes(x)) +
     axis.title.y = element_blank(),
     axis.line.y = element_blank(),
     axis.ticks.y = element_blank(),
-    plot.title = element_text(hjust = 0.5),
-    plot.tag.position = c(0.5, -0.1))
+    plot.title = element_text(hjust = 0.5))
 
 p4 <- ggplot(data = data.frame(x = seq(-4, 4, 1)), aes(x)) +
   stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col="grey", geom = "area",
                 fill = "grey", alpha=0.8, xlim = c(-1, 0)) + 
-  stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col="blue", size=1) + 
+  stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col="#3d6da9", size=1) + 
   scale_x_continuous(breaks = seq(-4, 4, 1)) +
   ggtitle("Shaded area = 34.1%") +
   xlab("\n(b)") +
@@ -386,7 +386,6 @@ p4 <- ggplot(data = data.frame(x = seq(-4, 4, 1)), aes(x)) +
     plot.title = element_text(hjust = 0.5))
 
 gridExtra::grid.arrange(p3,p4, ncol=2)
-```
 ```
 
 ### Probability density
@@ -412,11 +411,11 @@ The normal distribution is the distribution that statistics makes most use of (f
 ```{r}
 #| label: fig-fig7-10
 #| fig-align: left
-#| out.width: 80%
+#| out.width: 70%
 #| fig-cap: A $t$ distribution with 3 degrees of freedom (solid line). It looks similar to a normal distribution, but it's not quite the same. For comparison purposes I've plotted a standard normal distribution as the dashed line
 
 ggplot(data = data.frame(x = seq(-4, 4, 1)), aes(x)) +
-  stat_function(fun = dt, n = 1000, args = list(df = 3), col="blue", size=1) + 
+  stat_function(fun = dt, n = 1000, args = list(df = 3), col="#3d6da9", size=1) + 
   stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col="grey", linetype=5, size=1) + 
   scale_x_continuous(breaks = seq(-4, 4, 2)) +
   ylab("Probability Density\n") +
@@ -429,11 +428,11 @@ ggplot(data = data.frame(x = seq(-4, 4, 1)), aes(x)) +
 ```{r}
 #| label: fig-fig7-11
 #| fig-align: left
-#| out.width: 80%
+#| out.width: 70%
 #| fig-cap: $\chi^2$ distribution with 3 degrees of freedom. Notice that the observed values must always be greater than zero, and that the distribution is pretty skewed. These are the key features of a chi-square  distribution
 
 ggplot(data = data.frame(x = seq(0, 10, 1)), aes(x)) +
-  stat_function(fun = dchisq, n = 1000, args = list(df = 3), col="blue", size=1) + 
+  stat_function(fun = dchisq, n = 1000, args = list(df = 3), col="#3d6da9", size=1) + 
   scale_x_continuous(breaks = seq(0, 10, 2)) +
   ylab("Probability Density\n") +
   xlab("\nObserved Value") +
@@ -444,11 +443,11 @@ ggplot(data = data.frame(x = seq(0, 10, 1)), aes(x)) +
 ```{r}
 #| label: fig-fig7-12
 #| fig-align: left
-#| out.width: 80%
+#| out.width: 70%
 #| fig-cap: An $F$ distribution with 3 and 5 degrees of freedom. Qualitatively speaking, it looks pretty similar to a chi-square distribution, but they're not quite the same in general
 
 ggplot(data = data.frame(x = seq(0, 10, 1)), aes(x)) +
-  stat_function(fun = df, n = 1000, args = list(df1 = 3, df2 = 5), col="blue", size=1) + 
+  stat_function(fun = df, n = 1000, args = list(df1 = 3, df2 = 5), col="#3d6da9", size=1) + 
   scale_x_continuous(breaks = seq(0, 10, 2)) +
   ylab("Probability Density\n") +
   xlab("\nObserved Value") +
