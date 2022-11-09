@@ -320,7 +320,7 @@ computeP <- function(x,g){
 }
 computeBF <- function(x,g){
   bayesttest <- BayesFactor::ttestBF( formula= x ~ g, data=data.frame(x,g))
-  reject_BF <-  BayesFactor::extractBF(bayesttest)["bf"][[1]] >= bayes_crit
+  reject_BF <-  BayesFactor::extractBF(bayesttest)["bf"][[1]] >= bf_crit
 }
 
 getP <- function(a,b){
@@ -424,6 +424,7 @@ peeking_method <- function (observations, by=by){
 
 calc_p_bf <- function(from, N, by, peek) {
   mclapply(seq(from, N, by), function(obs) {
+    cat("N= "obs)
     monte_carlo(1000, callback=peeking_method,
                            observations=obs,
                            by=peek)
@@ -448,8 +449,8 @@ peek <- 2
 
 library(parallel)
 p_bf <- calc_p_bf(from=from,N=N,by=by,peek=peek)
-saveRDS(p_bf, "data_and_table_files/p_bf.rds")
-p_bf <- readRDS("data_and_table_files/p_bf.rds")
+saveRDS(p_bf, "data_and_tables/p_bf.rds")
+p_bf <- readRDS("data_and_tables/p_bf.rds")
 
 pdat <- lapply(p_bf, head, 1)
 pdat <- matrix(unlist(pdat), ncol=1000, byrow=TRUE)

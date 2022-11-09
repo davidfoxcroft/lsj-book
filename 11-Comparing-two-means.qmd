@@ -35,7 +35,7 @@ Next, it helps to be clear about what I want to learn from the data. In this cas
 #| out.width: 60%
 #| fig-cap: The theoretical distribution (solid line) from which the psychology student grades (bars) are supposed to have been generated
 
-load("data_and_table_files/zeppo.Rdata") #grades 
+load("data_and_tables/zeppo.Rdata") #grades 
 ggplot(as.data.frame(grades), aes(x=grades)) +
   geom_histogram(aes(y =..density..), binwidth=5, col=blueshade, fill=blueshade, alpha=0.4) + 
   stat_function(fun = dnorm, args = list(mean = 67.7, sd = sd(grades)), col="black", size=1) + 

@@ -251,7 +251,7 @@ Since the basic ideas in regression are closely tied to correlation, we'll retur
 #| out.width: 80%
 #| fig-cap: Panel (a) shows the sleep-grumpiness scatterplot from @fig-fig12-9 with the best fitting regression line drawn over the top. Not surprisingly, the line goes through the middle of the data. In contrast, panel (b) shows the same data, but with a very poor choice of regression line drawn over the top
 
-load("data_and_table_files/parenthood.Rdata")
+load("data_and_tables/parenthood.Rdata")
 
 p1 <- ggplot(parenthood, aes(dan.sleep, dan.grump)) +
   geom_point(col="darkgrey") +
@@ -308,7 +308,7 @@ Okay, now let's redraw our pictures but this time I'll add some lines to show th
 #| fig-cap: A depiction of the residuals associated with the best fitting regression line (panel a), and the residuals associated with a poor regression line (panel b). The residuals are much smaller for the good regression line. Again, this is no surprise given that the good line is the one that goes right through the middle of the data
 
 
-load("data_and_table_files/parenthood.Rdata")
+load("data_and_tables/parenthood.Rdata")
 fit <- lm(data=parenthood, dan.grump ~ dan.sleep)
 parenthood$predicted <- stats::predict(fit)
 parenthood$residuals <- stats::residuals(fit)
@@ -397,7 +397,7 @@ The coefficient associated with dani.sleep is quite large, suggesting that every
 #| out.width: 90%
 #| fig-cap: A 3D visualisation of a multiple regression model. There are two predictors in the model, dani.sleep and baby.sleep and the outcome variable is dani.grump. Together, these three variables form a 3D space. Each observation (dot) is a point in this space. In much the same way that a simple linear regression model forms a line in 2D space, this multiple regression model forms a plane in 3D space. When we estimate the regression coefficients what we're trying to do is find a plane that is as close to all the blue dots as possible
 
-load("data_and_table_files/parenthood.Rdata")
+load("data_and_tables/parenthood.Rdata")
 z <- parenthood$dan.grump
 x <- parenthood$baby.sleep
 y <- parenthood$dan.sleep
