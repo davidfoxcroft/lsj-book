@@ -99,7 +99,5 @@ saveRDS(huxtabs, "data_and_table_files/lsj_chapter_huxtabs.rds")
 # eps <- TRUE
 # colour <- TRUE
 
-
-library(HistData)
 library(ggplot2)
-library(ggpointdensity)
+blueshade <- "#3d6da9"

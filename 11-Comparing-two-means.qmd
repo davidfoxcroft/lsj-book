@@ -37,7 +37,7 @@ Next, it helps to be clear about what I want to learn from the data. In this cas
 
 load("data_and_table_files/zeppo.Rdata") #grades 
 ggplot(as.data.frame(grades), aes(x=grades)) +
-  geom_histogram(aes(y =..density..), binwidth=5, col="#3d6da9", fill="#3d6da9", alpha=0.4) + 
+  geom_histogram(aes(y =..density..), binwidth=5, col=blueshade, fill=blueshade, alpha=0.4) + 
   stat_function(fun = dnorm, args = list(mean = 67.7, sd = sd(grades)), col="black", size=1) + 
   xlab("\nGrades") +
   theme_classic() +
@@ -161,9 +161,9 @@ Now, as I mentioned earlier, the z-test is almost never used in practice. It's s
 
 p1 <- ggplot(data = data.frame(x = seq(-3, 3, 0.1)), aes(x)) +
   stat_function(fun = dnorm, n = 1000, args = list(mean=0, sd=1), geom = "area",
-                fill = "#3d6da9", alpha=0.4, xlim = c(-3, -1.96))  + 
+                fill = blueshade, alpha=0.4, xlim = c(-3, -1.96))  + 
   stat_function(fun = dnorm, n = 1000, args = list(mean=0, sd=1), geom = "area",
-                fill = "#3d6da9", alpha=0.4, xlim = c(1.96, 3))  + 
+                fill = blueshade, alpha=0.4, xlim = c(1.96, 3))  + 
   stat_function(fun = dnorm, n = 1000, args = list(mean=0, sd=1), col="black", size=1) +
   xlab("\nValue of z Statistic") + 
   ggtitle("(a) Two Sided Test") +
@@ -179,7 +179,7 @@ p1 <- ggplot(data = data.frame(x = seq(-3, 3, 0.1)), aes(x)) +
 
 p2 <- ggplot(data = data.frame(x = seq(-3, 3, 0.1)), aes(x)) +
   stat_function(fun = dnorm, n = 1000, args = list(mean=0, sd=1), geom = "area",
-                fill = "#3d6da9", alpha=0.4, xlim = c(1.64, 3))  + 
+                fill = blueshade, alpha=0.4, xlim = c(1.64, 3))  + 
   stat_function(fun = dnorm, n = 1000, args = list(mean=0, sd=1), col="black", size=1) +
   xlab("\nValue of z Statistic") + 
   ggtitle("(b) One Sided Test") +
@@ -828,7 +828,7 @@ df <- data.frame(y=rnorm(100))
 shap_df <- shapiro.test(df$y) 
 
 p1 <- ggplot(df, aes(x=y)) +
-  geom_histogram(bins=10, col="white", fill="#3d6da9", alpha=0.6) +
+  geom_histogram(bins=10, col="white", fill=blueshade, alpha=0.6) +
   xlab("\nValue") +
   ylab("Frequency\n") +
   ggtitle("Normally Distributed Data") +
@@ -871,7 +871,7 @@ shap_df1 <- shapiro.test(df1$y)
 shap_df2 <- shapiro.test(df2$y)
   
 p1 <- ggplot(df1, aes(x=y)) +
-  geom_histogram(bins=10, col="white", fill="#3d6da9", alpha=0.6) +
+  geom_histogram(bins=10, col="white", fill=blueshade, alpha=0.6) +
   xlab("\nValue") +
   ylab("Frequency\n") +
   ggtitle("Skewed Distributed Data") +
@@ -891,7 +891,7 @@ p2 <- ggplot(df1, aes(sample=y)) +
 
 
 p3 <- ggplot(df2, aes(x=y)) +
-  geom_histogram(bins=10, col="white", fill="#3d6da9", alpha=0.6) +
+  geom_histogram(bins=10, col="white", fill=blueshade, alpha=0.6) +
   xlab("\nValue") +
   ylab("Frequency\n") +
   ggtitle("Heavy-Tailed Distributed Data") +
@@ -961,17 +961,17 @@ W_sampdist <- lapply(c(10,20,50), function(i) {
 W_sampdist <- tibble(W_10=W_sampdist[[1]], W_20=W_sampdist[[2]], W_50=W_sampdist[[3]])
 
 ggplot(W_sampdist) + 
-  geom_density(aes(x=W_10), adjust=3, col = "#3d6da9", linetype = "solid", show.legend=FALSE) +
+  geom_density(aes(x=W_10), adjust=3, col = blueshade, linetype = "solid", show.legend=FALSE) +
   stat_density(aes(x=W_10, linetype = "N = 10"), alpha = 0, 
                   geom="line", position="identity") +
-  geom_density(aes(x=W_20), adjust=3, col = "#3d6da9", linetype = "dashed", show.legend=FALSE) +
+  geom_density(aes(x=W_20), adjust=3, col = blueshade, linetype = "dashed", show.legend=FALSE) +
   stat_density(aes(x=W_20, linetype = "N = 20"), alpha = 0, 
                   geom="line", position="identity") +
-  geom_density(aes(x=W_50), adjust=3, col = "#3d6da9", linetype = "dotted", show.legend=FALSE)+
+  geom_density(aes(x=W_50), adjust=3, col = blueshade, linetype = "dotted", show.legend=FALSE)+
   stat_density(aes(x=W_50, linetype = "N = 50"), alpha = 0, 
                   geom="line", position="identity") +
   scale_linetype_manual(values = c('solid', 'dashed', 'dotted')) +
-  guides(linetype = guide_legend(override.aes = list(col = "#3d6da9", alpha = 1) ) ) +
+  guides(linetype = guide_legend(override.aes = list(col = blueshade, alpha = 1) ) ) +
   xlab("\nValue of W") +
   ggtitle("Sampling distribution of W\n(for normally distributed data)") +
   scale_x_continuous(limits=c(.75,1)) +

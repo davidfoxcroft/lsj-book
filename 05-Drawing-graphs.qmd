@@ -23,6 +23,7 @@ The goals in this chapter are twofold. First, to discuss several fairly standard
 #| out.width: 100%
 #| fig-cap: A stylised redrawing of John Snow’s original cholera map. Each small orange square represents the location of a cholera death and each blue circle shows the location of a water pump. As the plot makes clear, the cholera outbreak is centred very closely on the Broad St pump
 
+library(HistData)
 deaths = Snow.deaths
 streets = Snow.streets
 pumps = Snow.pumps
@@ -46,7 +47,7 @@ themeval = theme(panel.border = element_blank(),
 ggplot() + 
   geom_path(data=streets,aes(x=x, y=y, group = street), color="grey") +
   geom_pointdensity(data=deaths,aes(x=x, y=y), color="orange", shape=15, size=2, adjust=0.1) +
-  geom_pointdensity(data=pumps, aes(x=x, y=y), color="#3d6da9", shape=16, size=3, adjust=0.1) +
+  geom_pointdensity(data=pumps, aes(x=x, y=y), color=blueshade, shape=16, size=3, adjust=0.1) +
   geom_text(data=pumps, aes(x=x, y=y, label=label), size=3, nudge_x = -0.5, nudge_y = 0.5, check_overlap = F) +
   geom_segment(aes(x = 3.5, y = 20.5, xend = 7.5, yend = 20.5), color="grey50") +
   geom_segment(aes(x = 3.5, y = 20.3, xend = 3.5, yend = 20.7), color="grey50") +

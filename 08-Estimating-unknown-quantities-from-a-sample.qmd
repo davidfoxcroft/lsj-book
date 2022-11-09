@@ -106,21 +106,21 @@ The idea is quite simple. Let's say we're talking about IQ scores. To a psycholo
 #| fig-cap: The population distribution of IQ scores (panel (a)) and two samples drawn randomly from it. In panel (b) we have a sample of 100 observations, and panel (c) we have a sample of 10,000 observations
 
 plota <- ggplot(data = data.frame(x = seq(60, 140, 1)), aes(x)) +
-  stat_function(fun = dnorm, n = 1000, args = list(mean = 100, sd = 15), col="#3d6da9", size=1) + 
+  stat_function(fun = dnorm, n = 1000, args = list(mean = 100, sd = 15), col=blueshade, size=1) + 
   scale_x_continuous(breaks = seq(60, 140, 20)) +
   ylab("Probability Density\n") +
   xlab("\nIQ score") +
   theme_classic()
 
 plotb <- ggplot(data = data.frame(x = rnorm(100, 100, 15)), aes(x)) +
-  geom_histogram(binwidth=6, col="#3d6da9", fill="#3d6da9", alpha=0.6) + 
+  geom_histogram(binwidth=6, col=blueshade, fill=blueshade, alpha=0.6) + 
   scale_x_continuous(breaks = seq(60, 140, 20)) +
   ylab("Frequency\n") +
   xlab("\nIQ score") +
   theme_classic()
 
 plotc <- ggplot(data = data.frame(x = rnorm(10000, 100, 15)), aes(x)) +
-  geom_histogram(binwidth=6, col="#3d6da9", fill="#3d6da9", alpha=0.6) + 
+  geom_histogram(binwidth=6, col=blueshade, fill=blueshade, alpha=0.6) + 
   scale_x_continuous(breaks = seq(60, 140, 20)) +
   ylab("Frequency\n") +
   xlab("\nIQ score") +
@@ -203,7 +203,7 @@ sdm_data <- lapply(1:10000, function (x) {
 sdm_data_means <- data.frame(sample_means = unlist(lapply(sdm_data,mean)))
 
 ggplot(data = sdm_data_means, aes(x = sample_means )) +
-  geom_histogram(aes(y =..density..), binwidth=4, col="#3d6da9", fill="#3d6da9", alpha=0.7) + 
+  geom_histogram(aes(y =..density..), binwidth=4, col=blueshade, fill=blueshade, alpha=0.7) + 
   stat_function(fun = dnorm, args = list(mean = 100, sd = 15), col="black", size=1) + 
   scale_x_continuous(limits=c(60,140), breaks = seq(60, 140, 20)) +
   xlab("\nIQ score") +
@@ -239,7 +239,7 @@ sdm_data <- lapply(1:10000, function (x) {
 sdm_data_max <- data.frame(sample_max = unlist(lapply(sdm_data,max)))
 
 ggplot(data = sdm_data_max, aes(x = sample_max )) +
-  geom_histogram(aes(y =..density..), binwidth=4, col="#3d6da9", fill="#3d6da9", alpha=0.7) + 
+  geom_histogram(aes(y =..density..), binwidth=4, col=blueshade, fill=blueshade, alpha=0.7) + 
   stat_function(fun = dnorm, args = list(mean = 100, sd = 15), col="black", size=1) + 
   scale_x_continuous(limits=c(60,140), breaks = seq(60, 140, 20)) +
   xlab("\nIQ score") +
@@ -272,7 +272,7 @@ sampling_plots <- lapply(sampling_plots_df$n, function(i) {
   sdm_data_mean <- data.frame(sample_mean = unlist(lapply(sdm_data,mean)))
 
   ggplot(data = sdm_data_mean, aes(x = sample_mean )) +
-  geom_histogram(aes(y =..density..), binwidth=4, col="#3d6da9", fill="#3d6da9", alpha=0.7) + 
+  geom_histogram(aes(y =..density..), binwidth=4, col=blueshade, fill=blueshade, alpha=0.7) + 
   stat_function(fun = dnorm, args = list(mean = 100, sd = 15), col="black", size=1) + 
   scale_x_continuous(limits=c(60,140), breaks = seq(60, 140, 20)) +
   xlab(paste0("IQ Score \n\n", sampling_plots_df$lab[sampling_plots_df$n == i])) +
@@ -326,7 +326,7 @@ sampling_plots <- lapply(sampling_plots_df$n, function(i) {
   sdm_data_mean <- data.frame(sample_mean = unlist(lapply(sdm_data,mean)))
 
   ggplot(data=sdm_data_mean, aes(x=sample_mean)) +
-  geom_histogram(aes(y =..density..), binwidth=0.0339, col="#3d6da9", fill="#3d6da9", alpha=0.6) +
+  geom_histogram(aes(y =..density..), binwidth=0.0339, col=blueshade, fill=blueshade, alpha=0.6) +
   stat_function(fun = dnorm, args = list(mean = m, s/sqrt(i)), col="black", size=1) + 
   scale_x_continuous(limits=c(0,1.2), breaks = seq(0, 1.2, 0.2)) +
   scale_y_continuous(limits=c(0,5)) +
@@ -422,7 +422,7 @@ sdsd <- data.frame(sd=apply(IQ.m,1,sd2_r))
 mean(sdsd$sd)
 
 ggplot(data = sdsd, aes(x = sd )) +
-  geom_histogram(binwidth=2.5, col="#3d6da9", fill="#3d6da9", alpha=0.6) + 
+  geom_histogram(binwidth=2.5, col=blueshade, fill=blueshade, alpha=0.6) + 
   geom_segment(aes(x = 15, y = 0, xend = 15, yend = 1900), colour = "black", linetype=2, size=1) +
   annotate("text", x = 15, y = 2000, label = "Population Standard deviation") +  
   scale_x_continuous(limits=c(0,60), breaks = seq(0, 60, 10)) +
@@ -461,8 +461,8 @@ sd.demo <- as_tibble(t(sd.demo))
 colnames(sd.demo) <- c("sample_size", "mean", "sd")
 
 ps1 <- ggplot(data=sd.demo, aes(x=sample_size, y=mean)) +
-  geom_point(col="#3d6da9", alpha=0.8) +
-  geom_path(col="#3d6da9", alpha=0.8) +
+  geom_point(col=blueshade, alpha=0.8) +
+  geom_path(col=blueshade, alpha=0.8) +
   geom_hline(yintercept=100, col="darkgrey", linetype="dashed") +
   xlab("\nSample Size\n\n(a)") +
   ylab("Average Sample Mean\n") +
@@ -471,8 +471,8 @@ ps1 <- ggplot(data=sd.demo, aes(x=sample_size, y=mean)) +
   theme_classic()
 
 ps2 <- ggplot(data=sd.demo, aes(x=sample_size, y=sd)) +
-  geom_point(col="#3d6da9", alpha=0.8) +
-  geom_path(col="#3d6da9", alpha=0.8) +
+  geom_point(col=blueshade, alpha=0.8) +
+  geom_path(col=blueshade, alpha=0.8) +
   geom_hline(yintercept=15, col="darkgrey", linetype="dashed") +
   xlab("\nSample Size\n\n(b)") +
   ylab("Average Sample Standard Deviation\n") +
@@ -551,7 +551,7 @@ ci_se <- (apply(ci.demo.10,1,sd))/sqrt(n)
 uci <- ci_m + 1.95*ci_se
 lci <- ci_m - 1.95*ci_se
 ci.demo.10 <- data.frame(Replication=c(1:50), ci_m, ci_se, lci, uci)
-plotcol <- with(ci.demo.10, ifelse(lci>100 | uci<100, "#3d6da9", "darkgrey"))
+plotcol <- with(ci.demo.10, ifelse(lci>100 | uci<100, blueshade, "darkgrey"))
 asterisk_pos <- 118-ci_m
 ci.demo.10 <- cbind(ci.demo.10, plotcol, asterisk_pos)
 
@@ -559,7 +559,7 @@ p.ci1  <- ggplot(data=ci.demo.10, aes(x=Replication, y=ci_m)) +
   geom_point(col=plotcol) +
   geom_linerange(ymin=lci, ymax=uci, col=plotcol) +
   geom_hline(yintercept=100, col="darkgrey", linetype="dashed") +
-  geom_text(aes(label = ifelse(plotcol == "#3d6da9", "*", "")), col="#3d6da9", size=10, nudge_y = asterisk_pos) +
+  geom_text(aes(label = ifelse(plotcol == blueshade, "*", "")), col=blueshade, size=10, nudge_y = asterisk_pos) +
   xlab("\nReplication Number") +
   ylab("Mean IQ\n") +
   ggtitle("(a) Sample Size = 10") +
@@ -575,7 +575,7 @@ ci_se <- (apply(ci.demo.25,1,sd))/sqrt(n)
 uci <- ci_m + 1.95*ci_se
 lci <- ci_m - 1.95*ci_se
 ci.demo.25 <- data.frame(Replication=c(1:50), ci_m, ci_se, lci, uci)
-plotcol <- with(ci.demo.25, ifelse(lci>100 | uci<100, "#3d6da9", "darkgrey"))
+plotcol <- with(ci.demo.25, ifelse(lci>100 | uci<100, blueshade, "darkgrey"))
 asterisk_pos <- 118-ci_m
 ci.demo.10 <- cbind(ci.demo.10, plotcol, asterisk_pos)
 
@@ -584,7 +584,7 @@ p.ci2  <- ggplot(data=ci.demo.25, aes(x=Replication, y=ci_m)) +
   geom_point(col=plotcol) +
   geom_linerange(ymin=lci, ymax=uci, col=plotcol) +
   geom_hline(yintercept=100, col="darkgrey", linetype="dashed") +
-  geom_text(aes(label = ifelse(plotcol == "#3d6da9", "*", "")), col="#3d6da9", size=10, nudge_y = asterisk_pos) +
+  geom_text(aes(label = ifelse(plotcol == blueshade, "*", "")), col=blueshade, size=10, nudge_y = asterisk_pos) +
   xlab("\nReplication Number") +
   ylab("Mean IQ\n") +
   ggtitle("(b) Sample Size = 25") +

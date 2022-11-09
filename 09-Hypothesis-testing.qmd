@@ -111,7 +111,7 @@ Since the null hypothesis states that $\theta = 0.5$ and our experiment has $N =
 
 binom1 <- data.frame(success = 0:100, pmf = dbinom(x = 0:100, size = 100, prob = .5)) 
 ggplot(data=binom1, aes(x = factor(success), y = pmf+.001)) +
-  geom_col(col="#3d6da9", fill="#3d6da9", alpha=0.6, width=.3) +
+  geom_col(col=blueshade, fill=blueshade, alpha=0.6, width=.3) +
   ggtitle("Sampling Distribution for X if the Null is True") +
   labs(x = "\nNumber of correct responses (X)",
        y = "Probability\n") +
@@ -146,7 +146,7 @@ As it turns out those three things uniquely solve the problem. Our critical regi
 #| fig-cap: The critical region associated with the hypothesis test for the ESP study, for a hypothesis test with a significance level of $\alpha = .05$. The plot shows the sampling distribution of $X$ under the null hypothesis (i.e., same as @fig-fig9-1) . The grey bars correspond to those values of $X$ for which we would retain the null hypothesis. The blue (darker shaded) bars show the critical region, those values of $X$ for which we would reject the null. Because the alternative hypothesis is two sided (i.e., allows both $\theta < .5$ and $\theta > .5$, the critical region covers both tails of the distribution. To ensure an $\alpha$ level of $.05$, we need to ensure that each of the two regions encompasses $2.5\%$ of the sampling distribution
 
 binom1 <- data.frame(success = 0:100, pmf = dbinom(x = 0:100, size = 100, prob = .5)) 
-binom1$plotcol <- with(binom1, ifelse(success<=40 | success >= 60, "#3d6da9", "lightgrey"))
+binom1$plotcol <- with(binom1, ifelse(success<=40 | success >= 60, blueshade, "lightgrey"))
 
 ggplot(data=binom1, aes(x = factor(success), y = pmf+.001)) +
   geom_bar(aes(colour=plotcol, fill=plotcol), width=.3, stat = "identity") +
@@ -203,7 +203,7 @@ When this happens, we have what's called a **one-sided test** and the critical r
 #| fig-cap: The critical region for a one sided test. In this case, the alternative hypothesis is that $\theta \geq .5$ so we would only reject the null hypothesis for large values of $X$. As a consequence, the critical region only covers the upper tail of the sampling distribution, specifically the upper $5\%$ of the distribution. Contrast this to the two-sided version in @fig-fig9-2
 
 binom1 <- data.frame(success = 0:100, pmf = dbinom(x = 0:100, size = 100, prob = .5)) 
-binom1$plotcol <- with(binom1, ifelse(success>= 58, "#3d6da9", "lightgrey"))
+binom1$plotcol <- with(binom1, ifelse(success>= 58, blueshade, "lightgrey"))
 
 ggplot(data=binom1, aes(x = factor(success), y = pmf+.001)) +
   geom_bar(aes(colour=plotcol, fill=plotcol), width=.3, stat = "identity") +
@@ -315,7 +315,7 @@ In previous sections I've emphasised the fact that the major design principle be
 #| fig-cap: Sampling distribution under the alternative hypothesis for a population parameter value of $\theta = 0.55$. A reasonable proportion of the distribution lies in the rejection region
 
 binom1 <- data.frame(success = 0:100, pmf = dbinom(x = 0:100, size = 100, prob = .55)) 
-binom1$plotcol <- with(binom1, ifelse(success<=40 | success >= 60, "#3d6da9", "lightgrey"))
+binom1$plotcol <- with(binom1, ifelse(success<=40 | success >= 60, blueshade, "lightgrey"))
 
 ggplot(data=binom1, aes(x = factor(success), y = pmf+.001)) +
   geom_bar(aes(colour=plotcol, fill=plotcol), width=.3, stat = "identity") +
@@ -349,7 +349,7 @@ Let's take a moment to think about what a Type II error actually is. A Type II e
 #| fig-cap: Sampling distribution under the *alternative* hypothesis for a population parameter value of $\theta = 0.70$. Almost all of the distribution lies in the rejection region.
 
 binom1 <- data.frame(success = 0:100, pmf = dbinom(x = 0:100, size = 100, prob = .7)) 
-binom1$plotcol <- with(binom1, ifelse(success<=40 | success >= 60, "#3d6da9", "lightgrey"))
+binom1$plotcol <- with(binom1, ifelse(success<=40 | success >= 60, blueshade, "lightgrey"))
 
 ggplot(data=binom1, aes(x = factor(success), y = pmf+.001)) +
   geom_bar(aes(colour=plotcol, fill=plotcol), width=.3, stat = "identity") +
@@ -391,7 +391,7 @@ for( i in seq_along(theta) ) {
 dpower <- data.frame(theta,pow)
 
 ggplot(dat=dpower, aes(x=theta, y=pow)) +
-  geom_line(col="#3d6da9", size=1) +
+  geom_line(col=blueshade, size=1) +
   annotate("point", x = .5, y = min(pow), colour = "black", size=4) +
   labs(x=expression("\nTrue value of " ~theta), y="Probability of Rejecting the Null\n") +
   ggtitle("Power function for the Test (N=100)") +
@@ -446,7 +446,7 @@ for( i in seq_along(N) ) {
 testpow <- data.frame(N,pow)
 
 ggplot(dat=testpow, aes(x=N, y=pow)) +
-  geom_line(col="#3d6da9", size=1) +
+  geom_line(col=blueshade, size=1) +
   labs(x=expression("\nSample size, N"), y="Probability of Rejecting the Null\n") +
   theme_classic() +
   theme(

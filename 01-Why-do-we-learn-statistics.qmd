@@ -134,7 +134,7 @@ Before leaving this topic entirely, I want to point out something else really cr
 
 load("data_and_table_files/berkeley.Rdata")
 ggplot() +
-  geom_point(data=berkeley, aes(x=women.apply, y=total.admit, size=sqrt(number.apply)), shape=1, color="#3d6da9") +
+  geom_point(data=berkeley, aes(x=women.apply, y=total.admit, size=sqrt(number.apply)), shape=1, color=blueshade) +
   scale_size(range = c(3,14)) +
   geom_point(data=berkeley.small, aes(x=women.apply, y=total.admit), shape=3, color="grey") +
   geom_smooth(data=berkeley, aes(x=women.apply, y=total.admit, weight=number.apply), formula=y~x, method=lm, se=FALSE, col="black", size=0.3) +

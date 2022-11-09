@@ -299,6 +299,181 @@ So how bad is it? The answer is shown as the solid black line in @fig-fig16-1, a
 #| fig-align: left
 #| out.width: 70%
 #| fig-cap: How badly can things go wrong if you re-run your tests every time new data arrive? If you are a frequentist, the answer is *very wrong*
+
+set.seed(1963)
+N <- 50
+M <- 1000
+alpha <- 0.05
+bf_crit <- 3
+
+X <- matrix(rnorm(N*M),M,N)
+str(X)
+G <- matrix(as.numeric(runif(N*M)<.5)+1,M,N)
+str(G)
+
+
+P <- matrix(NA,M,N)
+BF <- matrix(NA,M,N)
+
+computeP <- function(x,g){
+  reject_t <- t.test(formula=x~g)$p.value <= alpha
+}
+computeBF <- function(x,g){
+  bayesttest <- BayesFactor::ttestBF( formula= x ~ g, data=data.frame(x,g))
+  reject_BF <-  BayesFactor::extractBF(bayesttest)["bf"][[1]] >= bayes_crit
+}
+
+getP <- function(a,b){
+  g <- factor(G[a,1:b])
+  computeP(X[a,1:b],g)
+}
+getBF <- function(a,b){
+  g <- factor(G[a,1:b])
+  computeBF(X[a,1:b],g)
+}
+
+check <- function(a,b){
+  g <- G[a,1:b]
+  t <- c(sum(g==1),sum(g==2))
+  if(min(t)<=2) return(FALSE)
+  return(TRUE)
+}
+
+
+
+# takes a long time to run....beware!
+
+# P_BF <- mclapply(1:N, function (n) {
+#   if(n%%10==0) cat(".")
+#   if(n%%200==0) cat(n, "\n")
+#   for(m in 1:M) {
+#     if(check(m,n)){
+#       P[m,n] <- getP(m,n)
+#       BF[m,n] <- getBF(m,n)
+#     }
+#   }
+# })
+
+P <- readRDS("data_and_tabel_files\P.rds")
+BF <- readRDS("data_and_tabel_files\BF.rds")
+sumx <- function(x) {
+ sum(x <= .05, na.rm=TRUE)
+}
+
+
+
+
+
+
+########################################################33
+########################################################
+########################################################
+########################################################
+########################################################
+
+
+alpha <- 0.05 # the false positive rate
+bf_crit <- 3
+
+monte_carlo <- function(n_simulations, callback, ...){
+  simulations <- 1:n_simulations
+
+  sapply(1:n_simulations, function(x){
+    callback(...)
+  })
+}
+
+peeking_method <- function (observations, by=by){
+  
+  scores_a <- rnorm(observations)
+  scores_b <- rnorm(observations)  
+
+  reject <- FALSE;
+  
+  for (i in seq(from=from,to=observations,by=by)) {
+    tryCatch(
+      {
+        reject_t <- t.test(scores_a[1:i],scores_b[1:i],
+   var.equal=TRUE)$p.value <= alpha
+
+        if(reject_t){
+          break;
+        }
+      }, error=function(e){
+        print(e)
+      }
+    )
+  }
+  
+  tryCatch(
+      {
+        bayesttest <- BayesFactor::ttestBF(scores_a[1:i],scores_b[1:i])
+        reject_BF <-  BayesFactor::extractBF(bayesttest)["bf"][[1]] >= bf_crit
+
+        if(reject_BF){
+          break;
+        }
+      }, error=function(e){
+        print(e)
+      }
+    )
+
+  c(t=reject_t, BF=reject_BF)
+
+}
+
+calc_p_bf <- function(from, N, by, peek) {
+  mclapply(seq(from, N, by), function(obs) {
+    monte_carlo(1000, callback=peeking_method,
+                           observations=obs,
+                           by=peek)
+  }, mc.cores = detectCores())
+}
+
+sumT <- function(x) {
+ sum(x == 'TRUE', na.rm=TRUE)
+}
+
+### run the sim
+# x - first data collected
+# N - overall sample size
+# testevery - number of data points collected after which you run a test
+# 
+
+N <- 1000
+from <- 2
+by <- 1
+peek <- 2
+
+
+library(parallel)
+p_bf <- calc_p_bf(from=from,N=N,by=by,peek=peek)
+saveRDS(p_bf, "data_and_table_files/p_bf.rds")
+p_bf <- readRDS("data_and_table_files/p_bf.rds")
+
+pdat <- lapply(p_bf, head, 1)
+pdat <- matrix(unlist(pdat), ncol=1000, byrow=TRUE)
+p <- apply(pdat,1,sumT) / 1000
+p
+
+bfdat <- lapply(p_bf, tail, 1)
+bfdat <- matrix(unlist(bfdat), ncol=1000, byrow=TRUE)
+bf <- apply(bfdat,1,sumT) / 1000
+bf
+
+str(p_bf)
+str(pdat)
+str(bfdat)
+
+
+plotdat <- data.frame(Ssize=seq(1, N, by), p=p, bf=bf)
+
+
+ggplot(plotdat) +
+  geom_smooth(aes(x=Ssize, y=p), se=F) +
+  geom_smooth(aes(x=Ssize, y=bf), se=F) 
+
+
 knitr::include_graphics("images/fig16-1.png")
 ```
 
@@ -351,6 +526,8 @@ Before moving on, it's worth highlighting the difference between the orthodox te
 #| fig-align: left
 #| out.width: 70%
 #| fig-cap: Bayes factors analysis alongside Independent Samples t-Test
+
+
 knitr::include_graphics("images/fig16-3.png")
 ```
 

@@ -32,7 +32,8 @@ Like one-way ANOVA, factorial ANOVA is a tool for testing certain types of hypot
 ```{r}
 #| label: tbl-tab14-1
 #| tbl-cap: Group means for drug and therapy groups in the clinicaltrial.csv data
-huxtabs[[14]][[1]]
+huxtabs[[14]][[1]] |>
+  set_number_format(value=2)
 ```
 
 Now, the next Table (@tbl-tab14-2) shows a list of the group means for all possible combinations of the two factors (e.g., people who received the placebo and no therapy, people who received the placebo while getting CBT, etc.). It is helpful to organise all these numbers, plus the marginal and grand means, into a single table which looks like this:
@@ -87,7 +88,8 @@ If the data you're trying to analyse correspond to a balanced factorial design t
 ```{r}
 #| label: fig-fig14-2
 #| fig-align: left
-#| out.width: 70%
+#| out.width: 80%
+#| classes: .enlarge-image
 #| fig-cap: jamovi one way anova of mood.gain by drug
 knitr::include_graphics("images/fig14-2.png")
 ```
@@ -97,7 +99,8 @@ Now, suppose I'm also curious to find out if therapy has a relationship to mood.
 ```{r}
 #| label: fig-fig14-3
 #| fig-align: left
-#| out.width: 70%
+#| out.width: 90%
+#| classes: .enlarge-image
 #| fig-cap: jamovi two way anova of mood.gain by drug and therapy
 knitr::include_graphics("images/fig14-3.png")
 ```
@@ -159,23 +162,209 @@ The four patterns of data shown in @fig-fig14-4 are all quite realistic. There a
 ```{r}
 #| label: fig-fig14-4
 #| fig-align: left
-#| out.width: 70%
+#| out.width: 90%
 #| fig-cap: The four different outcomes for a $2 \times 2$ ANOVA when no interactions are present. In panel (a) we see a main effect of Factor A and no effect of Factor B. Panel (b) shows a main effect of Factor B but no effect of Factor A. Panel (c) shows main effects of both Factor A and Factor B. Finally, panel (d) shows no effect of either factor
-knitr::include_graphics("images/fig14-4.png") 
+
+mn=c(1.0, 2.0, 1.0, 2.0)
+FactA = factor(c('level 1', 'level 2', 'level 1', 'level 2'))
+FactB = factor(c('level 1', 'level 2', 'level 2', 'level 1'))
+dat <- data.frame(mn, FactA, FactB)
+
+p1 <- ggplot(dat, aes(x= FactA, y=mn, group=FactB)) +
+  geom_line(aes(linetype = FactB), position=position_dodge(width=.1), 
+            stat="identity", col=blueshade) +
+  geom_point(aes(shape = FactB), size = 3, position=position_dodge(width=.1), 
+             stat="identity", col= blueshade) +
+  scale_shape_manual("Factor B", values=c(16,1), labels=c('Factor B, level 1', 'Factor B, level 2')) +
+  scale_linetype_manual("Factor B", values=c("solid", "dotted"),  labels=c('Factor B, level 1', 'Factor B, level 2')) +
+  ggtitle("Only Factor A has an effect") +
+  ylim(0.5,2.5) +
+  labs(x = "Factor A\n\n(a)", y = "Group mean", group = "Factor B") + 
+  theme_classic() +
+  theme(
+    plot.title = element_text(hjust=0.5),
+    legend.key.width = unit(1,"cm"),
+    legend.key.size = unit(0.7, 'lines'),
+    legend.background = element_rect(fill = "transparent"),
+    legend.position = c(0.25, 0.9),
+    legend.title = element_blank())
+
+mn=c(1.8, 1.2, 1.2, 1.8)
+dat <- data.frame(mn, FactA, FactB)
+
+p2 <- ggplot(dat, aes(x= FactA, y=mn, group=FactB)) +
+  geom_line(aes(linetype = FactB), 
+            stat="identity", col=blueshade) +
+  geom_point(aes(shape = FactB), size = 3, 
+             stat="identity", col= blueshade) +
+  scale_shape_manual("Factor B", values=c(16,1), labels=c('Factor B, level 1', 'Factor B, level 2')) +
+  scale_linetype_manual("Factor B", values=c("solid", "dotted"),  labels=c('Factor B, level 1', 'Factor B, level 2')) +
+  ggtitle("Only Factor B has an effect") +
+  ylim(0.5,2.5) +
+  labs(x = "Factor A\n\n(b)", y = "Group mean", group = "Factor B") + 
+  theme_classic() +
+  theme(
+    plot.title = element_text(hjust=0.5),
+    legend.key.width = unit(1,"cm"),
+    legend.key.size = unit(0.7, 'lines'),
+    legend.background = element_rect(fill = "transparent"),
+    legend.position = c(0.25, 0.9),
+    legend.title = element_blank())
+
+mn=c(1.5, 1.5, 0.6, 2.4)
+dat <- data.frame(mn, FactA, FactB)
+
+p3 <- ggplot(dat, aes(x= FactA, y=mn, group=FactB)) +
+  geom_line(aes(linetype = FactB), 
+            stat="identity", col=blueshade) +
+  geom_point(aes(shape = FactB), size = 3, 
+             stat="identity", col= blueshade) +
+  scale_shape_manual("Factor B", values=c(16,1), labels=c('Factor B, level 1', 'Factor B, level 2')) +
+  scale_linetype_manual("Factor B", values=c("solid", "dotted"),  labels=c('Factor B, level 1', 'Factor B, level 2')) +
+  ggtitle("A and B both have an effect") +
+  ylim(0.5,2.5) +
+  labs(x = "Factor A\n\n(c)", y = "Group mean", group = "Factor B") + 
+  theme_classic() +
+  theme(
+    plot.title = element_text(hjust=0.5),
+    legend.key.width = unit(1,"cm"),
+    legend.key.size = unit(0.7, 'lines'),
+    legend.background = element_rect(fill = "transparent"),
+    legend.position = c(0.25, 0.9),
+    legend.title = element_blank())
+
+mn=c(1.6, 1.5, 1.5, 1.6)
+dat <- data.frame(mn, FactA, FactB)
+
+p4 <- ggplot(dat, aes(x= FactA, y=mn, group=FactB)) +
+  geom_line(aes(linetype = FactB), 
+            stat="identity", col=blueshade) +
+  geom_point(aes(shape = FactB), size = 3, 
+             stat="identity", col= blueshade) +
+  scale_shape_manual("Factor B", values=c(16,1), labels=c('Factor B, level 1', 'Factor B, level 2')) +
+  scale_linetype_manual("Factor B", values=c("solid", "dotted"),  labels=c('Factor B, level 1', 'Factor B, level 2')) +
+  ggtitle("Neither A or B has an effect") +
+  ylim(0.5,2.5) +
+  labs(x = "Factor A\n\n(d)", y = "Group mean", group = "Factor B") + 
+  theme_classic() +
+  theme(
+    plot.title = element_text(hjust=0.5),
+    legend.key.width = unit(1,"cm"),
+    legend.key.size = unit(0.7, 'lines'),
+    legend.background = element_rect(fill = "transparent"),
+    legend.position = c(0.25, 0.9),
+    legend.title = element_blank())
+
+gridExtra::grid.arrange(p1,p2,p3,p4,ncol=2)
+
 ```
 
 ```{r}
 #| label: fig-fig14-5
 #| fig-align: left
-#| out.width: 70%
+#| out.width: 90%
 #| fig-cap: Qualitatively different interactions for a $2 \times 2$ ANOVA
-knitr::include_graphics("images/fig14-5.png") 
+
+mn=c(1.0, 1.0, 2.0, 2.0)
+FactA = factor(c('level 1', 'level 2', 'level 1', 'level 2'))
+FactB = factor(c('level 1', 'level 2', 'level 2', 'level 1'))
+dat <- data.frame(mn, FactA, FactB)
+
+p1 <- ggplot(dat, aes(x= FactA, y=mn, group=FactB)) +
+  geom_line(aes(linetype = FactB), 
+            stat="identity", col=blueshade) +
+  geom_point(aes(shape = FactB), size = 3,  
+             stat="identity", col= blueshade) +
+  scale_shape_manual("Factor B", values=c(16,1), labels=c('Factor B, level 1', 'Factor B, level 2')) +
+  scale_linetype_manual("Factor B", values=c("solid", "dotted"),  labels=c('Factor B, level 1', 'Factor B, level 2')) +
+  ggtitle("Crossover interaction") +
+  ylim(0.5,2.5) +
+  labs(x = "Factor A\n\n(a)", y = "Group mean", group = "Factor B") + 
+  theme_classic() +
+  theme(
+    plot.title = element_text(hjust=0.5),
+    legend.key.width = unit(1,"cm"),
+    legend.key.size = unit(0.7, 'lines'),
+    legend.background = element_rect(fill = "transparent"),
+    legend.position = c(0.25, 0.9),
+    legend.title = element_blank())
+
+mn=c(1.0, 2.0, 1.05, 1.4)
+dat <- data.frame(mn, FactA, FactB)
+
+p2 <- ggplot(dat, aes(x= FactA, y=mn, group=FactB)) +
+  geom_line(aes(linetype = FactB), 
+            stat="identity", col=blueshade) +
+  geom_point(aes(shape = FactB), size = 3, 
+             stat="identity", col= blueshade) +
+  scale_shape_manual("Factor B", values=c(16,1), labels=c('Factor B, level 1', 'Factor B, level 2')) +
+  scale_linetype_manual("Factor B", values=c("solid", "dotted"),  labels=c('Factor B, level 1', 'Factor B, level 2')) +
+  ggtitle("Effect for one level of Factor A") +
+  ylim(0.5,2.5) +
+  labs(x = "Factor A\n\n(b)", y = "Group mean", group = "Factor B") + 
+  theme_classic() +
+  theme(
+    plot.title = element_text(hjust=0.5),
+    legend.key.width = unit(1,"cm"),
+    legend.key.size = unit(0.7, 'lines'),
+    legend.background = element_rect(fill = "transparent"),
+    legend.position = c(0.25, 0.9),
+    legend.title = element_blank())
+
+mn=c(1.0, 2.0, 1.05, 1.0)
+dat <- data.frame(mn, FactA, FactB)
+
+p3 <- ggplot(dat, aes(x= FactA, y=mn, group=FactB)) +
+  geom_line(aes(linetype = FactB), 
+            stat="identity", col=blueshade) +
+  geom_point(aes(shape = FactB), size = 3, 
+             stat="identity", col= blueshade) +
+  scale_shape_manual("Factor B", values=c(16,1), labels=c('Factor B, level 1', 'Factor B, level 2')) +
+  scale_linetype_manual("Factor B", values=c("solid", "dotted"),  labels=c('Factor B, level 1', 'Factor B, level 2')) +
+  ggtitle("One cell is different") +
+  ylim(0.5,2.5) +
+  labs(x = "Factor A\n\n(c)", y = "Group mean", group = "Factor B") + 
+  theme_classic() +
+  theme(
+    plot.title = element_text(hjust=0.5),
+    legend.key.width = unit(1,"cm"),
+    legend.key.size = unit(0.7, 'lines'),
+    legend.background = element_rect(fill = "transparent"),
+    legend.position = c(0.25, 0.9),
+    legend.title = element_blank())
+
+mn=c(1.0, 2.0, 1.5, 1.0)
+dat <- data.frame(mn, FactA, FactB)
+
+p4 <- ggplot(dat, aes(x= FactA, y=mn, group=FactB)) +
+  geom_line(aes(linetype = FactB), 
+            stat="identity", col=blueshade) +
+  geom_point(aes(shape = FactB), size = 3, 
+             stat="identity", col= blueshade) +
+  scale_shape_manual("Factor B", values=c(16,1), labels=c('Factor B, level 1', 'Factor B, level 2')) +
+  scale_linetype_manual("Factor B", values=c("solid", "dotted"),  labels=c('Factor B, level 1', 'Factor B, level 2')) +
+  ggtitle("Effect for one level of Factor B") +
+  ylim(0.5,2.5) +
+  labs(x = "Factor A\n\n(d)", y = "Group mean", group = "Factor B") + 
+  theme_classic() +
+  theme(
+    plot.title = element_text(hjust=0.5),
+    legend.key.width = unit(1,"cm"),
+    legend.key.size = unit(0.7, 'lines'),
+    legend.background = element_rect(fill = "transparent"),
+    legend.position = c(0.25, 0.9),
+    legend.title = element_blank())
+
+
+gridExtra::grid.arrange(p1,p2,p3,p4,ncol=2)
+
 ```
 
 ```{r}
 #| label: fig-fig14-6
 #| fig-align: left
-#| out.width: 70%
+#| out.width: 90%
+#| classes: .enlarge-image
 #| fig-cap: jamovi screen showing how to generate a descriptive interaction plot in ANOVA using the clinical trial data
 knitr::include_graphics("images/fig14-6.png") 
 ```
@@ -214,7 +403,8 @@ Adding interaction terms to the ANOVA model in jamovi is straightforward. In fac
 ```{r}
 #| label: fig-fig14-7
 #| fig-align: left
-#| out.width: 70%
+#| out.width: 80%
+#| classes: .enlarge-image
 #| fig-cap: Results for the full factorial model, including the interaction component drug $\times$ therapy
 knitr::include_graphics("images/fig14-7.png") 
 ```
@@ -276,7 +466,8 @@ In many situations you will find yourself wanting to report estimates of all the
 ```{r}
 #| label: fig-fig14-8
 #| fig-align: left
-#| out.width: 70%
+#| out.width: 90%
+#| classes: .enlarge-image
 #| fig-cap: jamovi screenshot showing the marginal means for the saturated model, i.e. including the interaction component, with the clinical trial data set
 knitr::include_graphics("images/fig14-8.png")
 ```
@@ -288,7 +479,8 @@ When the model doesn't contain the interaction term, then the estimated group me
 ```{r}
 #| label: fig-fig14-9
 #| fig-align: left
-#| out.width: 70%
+#| out.width: 80%
+#| classes: .enlarge-image
 #| fig-cap: jamovi screenshot showing the marginal means for the unsaturated model, i.e. without the interaction component, with the clinical trial data set
 knitr::include_graphics("images/fig14-9.png")
 ```
@@ -308,7 +500,8 @@ As with one-way ANOVA we can test for the normality of residuals in a straightfo
 ```{r}
 #| label: fig-fig14-10
 #| fig-align: left
-#| out.width: 70%
+#| out.width: 80%
+#| classes: .enlarge-image
 #| fig-cap: Checking assumptions in an ANOVA model
 knitr::include_graphics("images/fig14-10.png")
 ```
@@ -339,6 +532,7 @@ A health psychologist was interested in the effect of routine cycling and stress
 #| label: fig-fig14-12
 #| fig-align: left
 #| out.width: 70%
+#| classes: .enlarge-image
 #| fig-cap: The jamovi ANCOVA analysis window
 knitr::include_graphics("images/fig14-12.png")
 ```
@@ -348,7 +542,8 @@ An ANCOVA table showing Tests of Between-Subjects Effects is produced in the jam
 ```{r}
 #| label: fig-fig14-13
 #| fig-align: left
-#| out.width: 70%
+#| out.width: 80%
+#| classes: .enlarge-image
 #| fig-cap: jamovi ANCOVA output for happiness as a function of stress and commuting method, with age as a covariate
 knitr::include_graphics("images/fig14-13.png")
 ```
@@ -356,7 +551,8 @@ knitr::include_graphics("images/fig14-13.png")
 ```{r}
 #| label: fig-fig14-14
 #| fig-align: left
-#| out.width: 70%
+#| out.width: 80%
+#| classes: .enlarge-image
 #| fig-cap: Table of mean happiness level as a function of stress and commuting method (adjusted for the covariate age) with 95% confidence intervals
 knitr::include_graphics("images/fig14-14.png")
 ```
@@ -406,7 +602,8 @@ This isn't anything particularly special, of course. It's exactly the format in 
 ```{r}
 #| label: fig-fig14-16
 #| fig-align: left
-#| out.width: 70%
+#| out.width: 90%
+#| classes: .enlarge-image
 #| fig-cap: jamovi descriptives for the rtfm data set
 knitr::include_graphics("images/fig14-16.png")
 ```
@@ -422,7 +619,8 @@ This is, of course, the exact same equation that I used earlier to describe a tw
 ```{r}
 #| label: fig-fig14-17
 #| fig-align: left
-#| out.width: 70%
+#| out.width: 80%
+#| classes: .enlarge-image
 #| fig-cap: ANOVA of the rtfm.csv data set in jamovi, without the interaction term
 knitr::include_graphics("images/fig14-17.png")
 ```
@@ -479,6 +677,7 @@ Okay, now that we're really starting to see why ANOVA and regression are basical
 #| label: fig-fig14-18
 #| fig-align: left
 #| out.width: 70%
+#| classes: .enlarge-image
 #| fig-cap: Regression analysis of the rtfm.csv data set in jamovi, without the interaction term
 knitr::include_graphics("images/fig14-18.png")
 ```
@@ -492,7 +691,8 @@ Finally, one last thing you should know. Because jamovi understands the fact tha
 ```{r}
 #| label: fig-fig14-19
 #| fig-align: left
-#| out.width: 70%
+#| out.width: 80%
+#| classes: .enlarge-image
 #| fig-cap: Omnibus ANOVA Test results from the jamovi regression analysis
 knitr::include_graphics("images/fig14-19.png")
 ```
@@ -522,7 +722,8 @@ Now we have two different versions of the same data set. Our original data in wh
 ```{r}
 #| label: fig-fig14-20
 #| fig-align: left
-#| out.width: 70%
+#| out.width: 80%
+#| classes: .enlarge-image
 #| fig-cap: jamovi ANOVA results, without interaction component
 knitr::include_graphics("images/fig14-20.png")
 ```
@@ -532,7 +733,8 @@ Obviously, there are no surprises here. That's the exact same ANOVA that we ran 
 ```{r}
 #| label: fig-fig14-21
 #| fig-align: left
-#| out.width: 70%
+#| out.width: 80%
+#| classes: .enlarge-image
 #| fig-cap: jamovi regression results, with contrast variables druganxifree and drugjoyzepam
 knitr::include_graphics("images/fig14-21.png")
 ```
@@ -542,7 +744,8 @@ Hmm. This isn't the same output that we got last time. Not surprisingly, the reg
 ```{r}
 #| label: fig-fig14-22
 #| fig-align: left
-#| out.width: 70%
+#| out.width: 90%
+#| classes: .enlarge-image
 #| fig-cap: Model comparison in jamovi regression, null model 1 vs. contrasts model 2
 knitr::include_graphics("images/fig14-22.png")
 ```
@@ -554,7 +757,8 @@ Although we went through all the faff of computing new variables in jamovi for t
 ```{r}
 #| label: fig-fig14-23
 #| fig-align: left
-#| out.width: 70%
+#| out.width: 90%
+#| classes: .enlarge-image
 #| fig-cap: Regression analysis with factors and contrasts in jamovi, including omnibus ANOVA test results
 knitr::include_graphics("images/fig14-23.png")
 ```
@@ -615,7 +819,7 @@ The third option that I should briefly mention are "sum to zero" contrasts, call
 
 ```{r}
 #| label: tbl-tab14-14
-#| tbl-cap: Matrix of 'sum-to'zero contrasts with 5 levels
+#| tbl-cap: Matrix of 'sum-to' zero contrasts with 5 levels
 huxtabs[[14]][[14]] 
 ```
 
@@ -654,7 +858,8 @@ The TukeyHSD function in jamovi is pretty easy to use. You simply specify the AN
 ```{r}
 #| label: fig-fig14-24
 #| fig-align: left
-#| out.width: 70%
+#| out.width: 90%
+#| classes: .enlarge-image
 #| fig-cap: Tukey HSD post hoc test in jamovi factorial ANOVA, without an interaction term
 knitr::include_graphics("images/fig14-24.png")
 ```
@@ -672,7 +877,8 @@ There are quite a lot of these comparisons that you need to consider. So, when w
 ```{r}
 #| label: fig-fig14-25
 #| fig-align: left
-#| out.width: 70%
+#| out.width: 90%
+#| classes: .enlarge-image
 #| fig-cap: Tukey HSD post hoc test in jamovi factorial ANOVA with an interaction term
 knitr::include_graphics("images/fig14-25.png")
 ```
@@ -696,7 +902,8 @@ As usual, it will help us to work with some data. The coffee.csv file contains a
 ```{r}
 #| label: fig-fig14-26
 #| fig-align: left
-#| out.width: 70%
+#| out.width: 90%
+#| classes: .enlarge-image
 #| fig-cap: The coffee.csv data set in jamovi, with descriptive information aggregated by factor levels
 knitr::include_graphics("images/fig14-26.png")
 ```
@@ -747,7 +954,8 @@ Type III sum of squares is the default hypothesis testing method used by jamovi 
 ```{r}
 #| label: fig-fig14-27
 #| fig-align: left
-#| out.width: 70%
+#| out.width: 80%
+#| classes: .enlarge-image
 #| fig-cap: ANOVA results table using Type I sum of squares in jamovi
 knitr::include_graphics("images/fig14-27.png")
 ```
@@ -757,7 +965,8 @@ The big problem with using Type I sum of squares is the fact that it really does
 ```{r}
 #| label: fig-fig14-28
 #| fig-align: left
-#| out.width: 70%
+#| out.width: 80%
+#| classes: .enlarge-image
 #| fig-cap: ANOVA results table using Type I sum of squares in jamovi, but with factors entered in a different order (milk first)
 knitr::include_graphics("images/fig14-28.png")
 ```
@@ -813,7 +1022,8 @@ Later on, we'll see that Type III tests can be redeemed in some contexts, but fi
 ```{r}
 #| label: fig-fig14-29
 #| fig-align: left
-#| out.width: 70%
+#| out.width: 80%
+#| classes: .enlarge-image
 #| fig-cap: ANOVA results table using Type III sum of squares in jamovi
 knitr::include_graphics("images/fig14-29.png")
 ```
@@ -885,7 +1095,8 @@ Running the tests are again straightforward. Just select 'Type 2' in the 'Sum of
 ```{r}
 #| label: fig-fig14-30
 #| fig-align: left
-#| out.width: 70%
+#| out.width: 80%
+#| classes: .enlarge-image
 #| fig-cap: ANOVA results table using Type II sum of squares in jamovi
 knitr::include_graphics("images/fig14-30.png")
 ```

@@ -90,7 +90,7 @@ coinflips <- list()
 coinflips <- lapply(1:4, function(i) {
     ggplot(data=tibble(flips = 1:1000, heads = cumsum(as.numeric( runif(1000) > .5 )) / (1:1000)),
            aes(x=flips, y=heads)) +
-    geom_line(color="#3d6da9", size=1) +
+    geom_line(color=blueshade, size=1) +
     ylim(0.3, 0.7) + 
     xlim(0, 1000) +
     geom_hline(yintercept=0.5, color="grey") +
@@ -156,7 +156,7 @@ pantsdat <- tibble(probabilities = c( .5, .3, .1, 0, .1),
 pantsdat$eventNames = factor(pantsdat$eventNames, levels = c( "Blue jeans", "Grey jeans", "Black jeans",  "Black suit", "Blue track" ))
 
 ggplot(data=pantsdat, aes(x=eventNames, y=probabilities)) +
-  geom_bar(stat='identity', col="black", fill="#3d6da9", alpha=0.6) +
+  geom_bar(stat='identity', col="black", fill=blueshade, alpha=0.6) +
   theme_classic() +
   ylab("Probability of event") +
   xlab("Event")
@@ -202,7 +202,7 @@ To that end, @fig-fig7-3 plots the binomial probabilities for all possible value
 binom1 <- data.frame(heads = 0:20, pmf = dbinom(x = 0:20, size = 20, prob = 1/6)+0.0001) 
 
 ggplot(data=binom1, aes(x = factor(heads), y = pmf)) +
-  geom_col(col="#3d6da9", fill="#3d6da9", alpha=0.6, width=.1) +
+  geom_col(col=blueshade, fill=blueshade, alpha=0.6, width=.1) +
   labs(x = "\nNumber of skulls observed",
        y = "Probability\n") +
   scale_x_discrete(breaks=seq(0,20,5)) +
@@ -222,7 +222,7 @@ To give you a feel for how the binomial distribution changes when we alter the v
 
 binom2 <- data.frame(heads = 0:20, pmf = dbinom(x = 0:20, size = 20, prob = 1/2)+0.0001) 
 bd1 <- ggplot(data=binom2, aes(x = factor(heads), y = pmf)) +
-  geom_col(col="#3d6da9", fill="#3d6da9", alpha=0.6, width=.1) +
+  geom_col(col=blueshade, fill=blueshade, alpha=0.6, width=.1) +
   labs(x = "Number of skulls observed",
        y = "Probability") +
   scale_x_discrete(breaks=seq(0,20,5)) +
@@ -232,7 +232,7 @@ bd1 <- ggplot(data=binom2, aes(x = factor(heads), y = pmf)) +
 
 binom3 <- data.frame(heads = 0:100, pmf = dbinom(x = 0:100, size = 100, prob = 1/2)+0.0001) 
 bd2 <- ggplot(data=binom3, aes(x = factor(heads), y = pmf)) +
-  geom_col(col="#3d6da9", fill="#3d6da9", alpha=0.6, width=.1) +
+  geom_col(col=blueshade, fill=blueshade, alpha=0.6, width=.1) +
   labs(x = "\nNumber of skulls observed",
        y = "Probability\n") +
   scale_x_discrete(breaks=seq(0,100,5)) +
@@ -264,7 +264,7 @@ Let's try to get a sense for what it means for a variable to be normally distrib
 #| fig-cap: The normal distribution with mean $\mu = 0$ and standard deviation $\sigma = 1$. The x-axis corresponds to the value of some variable, and the y-axis tells us something about how likely we are to observe that value. However, notice that the y-axis is labelled *Probability Density* and not *Probability*. There is a subtle and somewhat frustrating characteristic of continuous distributions that makes the $y$ axis behave a bit oddly - the height of the curve here isn't actually the probability of observing a particular x value. On the other hand, it is true that the heights of the curve tells you which $x$ values are more likely (the higher ones!). (see [Probability density] section for all the annoying details)
 
 ggplot(data = data.frame(x = seq(-3, 3, 1)), aes(x)) +
-  stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col="#3d6da9", size=1) + 
+  stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col=blueshade, size=1) + 
   scale_x_continuous(breaks = seq(-3, 3, 1)) +
   ylab("Probability Density\n") +
   xlab("\nObserved Value") +
@@ -281,8 +281,8 @@ With this in mind, let's see if we can't get an intuition for how the normal dis
 #| fig-cap: An illustration of what happens when you change the mean of a normal distribution. The solid line depicts a normal distribution with a mean of $\mu = 4$. The dashed line shows a normal distribution with a mean of $\mu = 7$. In both cases, the standard deviation is $\sigma = 1$. Not surprisingly, the two distributions have the same shape, but the dashed line is shifted to the right
 
 ggplot(data = data.frame(x = seq(0, 10, 1)), aes(x)) +
-  stat_function(fun = dnorm, n = 1000, args = list(mean = 4, sd = 1), col="#3d6da9", size=1) + 
-  stat_function(fun = dnorm, n = 1000, args = list(mean = 7, sd = 1), col="#3d6da9", linetype=2, size=1) + 
+  stat_function(fun = dnorm, n = 1000, args = list(mean = 4, sd = 1), col=blueshade, size=1) + 
+  stat_function(fun = dnorm, n = 1000, args = list(mean = 7, sd = 1), col=blueshade, linetype=2, size=1) + 
   scale_x_continuous(breaks = seq(0, 10, 2)) +
   ylab("Probability Density\n") +
   xlab("\nObserved Value") +
@@ -297,8 +297,8 @@ ggplot(data = data.frame(x = seq(0, 10, 1)), aes(x)) +
 #| fig-cap: An illustration of what happens when you change the the standard deviation of a normal distribution. Both distributions plotted in this figure have a mean of $\mu = 5$, but they have different standard deviations. The solid line plots a distribution with standard deviation $\sigma = 1$, and the dashed line shows a distribution with standard deviation $\sigma = 2$. As a consequence, both distributions are 'centred' on the same spot, but the dashed line is wider than the solid one
 
 ggplot(data = data.frame(x = seq(0, 10, 1)), aes(x)) +
-  stat_function(fun = dnorm, n = 1000, args = list(mean = 5, sd = 1), col="#3d6da9", size=1) + 
-  stat_function(fun = dnorm, n = 1000, args = list(mean = 5, sd = 2), col="#3d6da9", linetype=2, size=1) + 
+  stat_function(fun = dnorm, n = 1000, args = list(mean = 5, sd = 1), col=blueshade, size=1) + 
+  stat_function(fun = dnorm, n = 1000, args = list(mean = 5, sd = 2), col=blueshade, linetype=2, size=1) + 
   scale_x_continuous(breaks = seq(0, 10, 2)) +
   ylab("Probability Density\n") +
   xlab("\nObserved Value") +
@@ -317,7 +317,7 @@ ggplot(data = data.frame(x = seq(0, 10, 1)), aes(x)) +
 p1 <- ggplot(data = data.frame(x = seq(-4, 4, 1)), aes(x)) +
   stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col="grey", geom = "area",
                 fill = "grey", alpha=0.8, xlim = c(-1, 1)) + 
-  stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col="#3d6da9", size=1) + 
+  stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col=blueshade, size=1) + 
   scale_x_continuous(breaks = seq(-4, 4, 1)) +
   ggtitle("Shaded area = 68.3%") +
   xlab("\n(a)") +
@@ -332,7 +332,7 @@ p1 <- ggplot(data = data.frame(x = seq(-4, 4, 1)), aes(x)) +
 p2 <- ggplot(data = data.frame(x = seq(-4, 4, 1)), aes(x)) +
   stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col="grey", geom = "area",
                 fill = "grey", alpha=0.8, xlim = c(-2, 2)) + 
-  stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col="#3d6da9", size=1) + 
+  stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col=blueshade, size=1) + 
   scale_x_continuous(breaks = seq(-4, 4, 1)) +
   ggtitle("Shaded area = 95.4%") +
   xlab("\n(b)") +
@@ -358,7 +358,7 @@ gridExtra::grid.arrange(p1,p2, ncol=2)
 p3 <- ggplot(data = data.frame(x = seq(-4, 4, 1)), aes(x)) +
   stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col="grey", geom = "area",
                 fill = "grey", alpha=0.8, xlim = c(-4, -1)) + 
-  stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col="#3d6da9", size=1) + 
+  stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col=blueshade, size=1) + 
   scale_x_continuous(breaks = seq(-4, 4, 1)) +
   ggtitle("Shaded area = 15.9%") +
   xlab("\n(a)") +
@@ -373,7 +373,7 @@ p3 <- ggplot(data = data.frame(x = seq(-4, 4, 1)), aes(x)) +
 p4 <- ggplot(data = data.frame(x = seq(-4, 4, 1)), aes(x)) +
   stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col="grey", geom = "area",
                 fill = "grey", alpha=0.8, xlim = c(-1, 0)) + 
-  stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col="#3d6da9", size=1) + 
+  stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col=blueshade, size=1) + 
   scale_x_continuous(breaks = seq(-4, 4, 1)) +
   ggtitle("Shaded area = 34.1%") +
   xlab("\n(b)") +
@@ -415,7 +415,7 @@ The normal distribution is the distribution that statistics makes most use of (f
 #| fig-cap: A $t$ distribution with 3 degrees of freedom (solid line). It looks similar to a normal distribution, but it's not quite the same. For comparison purposes I've plotted a standard normal distribution as the dashed line
 
 ggplot(data = data.frame(x = seq(-4, 4, 1)), aes(x)) +
-  stat_function(fun = dt, n = 1000, args = list(df = 3), col="#3d6da9", size=1) + 
+  stat_function(fun = dt, n = 1000, args = list(df = 3), col=blueshade, size=1) + 
   stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col="grey", linetype=5, size=1) + 
   scale_x_continuous(breaks = seq(-4, 4, 2)) +
   ylab("Probability Density\n") +
@@ -432,7 +432,7 @@ ggplot(data = data.frame(x = seq(-4, 4, 1)), aes(x)) +
 #| fig-cap: $\chi^2$ distribution with 3 degrees of freedom. Notice that the observed values must always be greater than zero, and that the distribution is pretty skewed. These are the key features of a chi-square  distribution
 
 ggplot(data = data.frame(x = seq(0, 10, 1)), aes(x)) +
-  stat_function(fun = dchisq, n = 1000, args = list(df = 3), col="#3d6da9", size=1) + 
+  stat_function(fun = dchisq, n = 1000, args = list(df = 3), col=blueshade, size=1) + 
   scale_x_continuous(breaks = seq(0, 10, 2)) +
   ylab("Probability Density\n") +
   xlab("\nObserved Value") +
@@ -447,7 +447,7 @@ ggplot(data = data.frame(x = seq(0, 10, 1)), aes(x)) +
 #| fig-cap: An $F$ distribution with 3 and 5 degrees of freedom. Qualitatively speaking, it looks pretty similar to a chi-square distribution, but they're not quite the same in general
 
 ggplot(data = data.frame(x = seq(0, 10, 1)), aes(x)) +
-  stat_function(fun = df, n = 1000, args = list(df1 = 3, df2 = 5), col="#3d6da9", size=1) + 
+  stat_function(fun = df, n = 1000, args = list(df1 = 3, df2 = 5), col=blueshade, size=1) + 
   scale_x_continuous(breaks = seq(0, 10, 2)) +
   ylab("Probability Density\n") +
   xlab("\nObserved Value") +
