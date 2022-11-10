@@ -24,7 +24,7 @@ For the moment, let's just focus on the first choice that people made. We'll use
 ```{r}
 #| label: tbl-tab10-1
 #| tbl-cap: Number of times each suit was chosen
-huxtabs[[10]][[1]] 
+huxtabs[[10]][[1]]
 ```
 
 That little frequency table is quite helpful. Looking at it, there's a bit of a hint that people might be more likely to select hearts than clubs, but it's not completely obvious just from looking at it whether that's really true, or if this is just due to chance. So we'll probably have to do some kind of statistical analysis to find out, which is what I'm going to talk about in the next section.
@@ -34,7 +34,7 @@ Excellent. From this point on, we'll treat this table as the data that we're loo
 ```{r}
 #| label: tbl-tab10-2
 #| tbl-cap: Relationship between English descriptions and mathematical symbols
-huxtabs[[10]][[2]] 
+huxtabs[[10]][[2]]
 ```
 
 
@@ -60,12 +60,12 @@ In this particular instance, our null hypothesis corresponds to a vector of prob
 
 What about our alternative hypothesis, $H_1$? All we're really interested in is demonstrating that the probabilities involved aren't all identical (that is, people's choices weren't completely random). As a consequence, the "human friendly" versions of our hypotheses look like this:
 
-$H_0: \text{ All four suits are chosen with equal probability}$  
+$H_0: \text{ All four suits are chosen with equal probability}$
 $H_1: \text{ At least one of the suit-choice probabilities isn’t 0.25}$
 
-...and the "mathematician friendly" version is: 
+...and the "mathematician friendly" version is:
 
-$H_0: P= (.25, .25, .25, .25)$  
+$H_0: P= (.25, .25, .25, .25)$
 $H_1: P \neq (.25, .25, .25, .25)$
 
 ### The "goodness-of-fit" test statistic
@@ -81,7 +81,7 @@ Now, how do we translate this into a test statistic? Clearly, what we want to do
 ```{r}
 #| label: tbl-tab10-3
 #| tbl-cap: Expected and observed frequencies
-huxtabs[[10]][[3]] 
+huxtabs[[10]][[3]]
 ```
 
 So, based on our calculations, it's clear that people chose more hearts and fewer clubs than the null hypothesis predicted. However, a moment's thought suggests that these raw differences aren't quite what we're looking for. Intuitively, it feels like it's just as bad when the null hypothesis predicts too few observations (which is what happened with hearts) as it is when it predicts too many (which is what happened with clubs). So it's a bit weird that we have a negative number for clubs and a positive number for hearts. One easy way to fix this is to square everything, so that we now calculate the squared differences, $(E_i - O_i)^2$ . As before, we can do this by hand (@tbl-tab10-4).
@@ -89,7 +89,7 @@ So, based on our calculations, it's clear that people chose more hearts and fewe
 ```{r}
 #| label: tbl-tab10-4
 #| tbl-cap: Squaring the difference scores
-huxtabs[[10]][[4]] 
+huxtabs[[10]][[4]]
 ```
 
 Now we're making progress. What we've got now is a collection of numbers that are big whenever the null hypothesis makes a bad prediction (clubs and hearts), but are small whenever it makes a good one (diamonds and spades). Next, for some technical reasons that I'll explain in a moment, let's also divide all these numbers by the expected frequency Ei , so we're actually calculating $\frac{(E_i-O_i)^2}{E_i}$ . Since $E_i = 50$ for all categories in our example, it's not a very interesting calculation, but let's do it anyway (@tbl-tab10-5).
@@ -97,7 +97,7 @@ Now we're making progress. What we've got now is a collection of numbers that ar
 ```{r}
 #| label: tbl-tab10-5
 #| tbl-cap: Dividing the squared difference scores by the expected frequency to provide an 'error' score
-huxtabs[[10]][[5]]  
+huxtabs[[10]][[5]]
 ```
 
 In effect, what we've got here are four different "error" scores, each one telling us how big a "mistake" the null hypothesis made when we tried to use it to predict our observed frequencies. So, in order to convert this into a useful test statistic, one thing we could do is just add these numbers up. The result is called the **goodness-of-fit** statistic, conventionally referred to either as $\chi^2$ (chi-square) or GOF. We can calculate it as in @tbl-tab10-6.
@@ -130,18 +130,16 @@ There's one last detail to talk about, namely the degrees of freedom. If you rem
 
 ```{r}
 #| label: fig-fig10-1
-#| fig-align: left
-#| out.width: 70%
 #| fig-cap: $\chi^2$ (chi-square) distributions with different values for the 'degrees of freedom'
 
 ggplot(data = data.frame(x = seq(0, 12, 1)), aes(x)) +
-  stat_function(aes(linetype = 'df = 3'), fun = dchisq, n = 1000, args = list(df = 3), col=blueshade, size=1) + 
-  stat_function(aes(linetype = 'df = 4'), fun = dchisq, n = 1000, args = list(df = 4), col=blueshade, size=1) + 
-  stat_function(aes(linetype = 'df = 5'), fun = dchisq, n = 1000, args = list(df = 5), col=blueshade, size=1) + 
+  stat_function(aes(linetype = 'df = 3'), fun = dchisq, n = 1000, args = list(df = 3), col=blueshade, size=1) +
+  stat_function(aes(linetype = 'df = 4'), fun = dchisq, n = 1000, args = list(df = 4), col=blueshade, size=1) +
+  stat_function(aes(linetype = 'df = 5'), fun = dchisq, n = 1000, args = list(df = 5), col=blueshade, size=1) +
   scale_x_continuous(breaks = seq(0, 12, 2)) +
   ylab("Probability Density\n") +
   xlab("\nObserved Value") +
-  scale_linetype_manual(values = c('solid', 'dashed', 'dotted'), labels = c( "df = 3", "df = 4", "df = 5")) + 
+  scale_linetype_manual(values = c('solid', 'dashed', 'dotted'), labels = c( "df = 3", "df = 4", "df = 5")) +
   theme_classic() +
   theme(
     axis.title.y = element_blank(),
@@ -171,15 +169,13 @@ The final step in the process of constructing our hypothesis test is to figure o
 
 ```{r}
 #| label: fig-fig10-2
-#| fig-align: left
-#| out.width: 70%
 #| fig-cap: Illustration of how the hypothesis testing works for the $\chi^2$ (chi-square) goodness of-fit test
 
 
 ggplot(data = data.frame(x = seq(0, 12, 0.01)), aes(x)) +
-  stat_function(fun = dchisq, n = 1000, args = list(df = 3), linetype = "solid", col="black", size=1) + 
+  stat_function(fun = dchisq, n = 1000, args = list(df = 3), linetype = "solid", col="black", size=1) +
   stat_function(fun = dchisq, n = 1000, args = list(df = 3), geom = "area",
-                fill = blueshade, alpha=0.8, xlim = c(7.82, 12)) + 
+                fill = blueshade, alpha=0.8, xlim = c(7.82, 12)) +
   scale_x_continuous(breaks = seq(0, 12, 2)) +
   geom_text(x=6.5, y=.12, label="The critical value is 7.82", size=5) +
   geom_segment(x = 6.5, y = .11, xend = 7.82, yend = .026,
@@ -207,8 +203,6 @@ Ah but, I hear you ask, how do I find the critical value of a chi-square distrib
 
 ```{r}
 #| label: fig-fig10-3
-#| fig-align: left
-#| out.width: 70%
 #| fig-cap: Table of critical values for the chi-square distribution
 knitr::include_graphics("images/fig10-3.png")
 ```
@@ -221,8 +215,6 @@ Not surprisingly, jamovi provides an analysis that will do these calculations fo
 
 ```{r}
 #| label: fig-fig10-4
-#| fig-align: left
-#| out.width: 70%
 #| classes: .enlarge-image
 #| fig-cap: A $\chi^2$ One Sample Proportion Test in jamovi, with table showing both observed and expected frequencies and proportions
 knitr::include_graphics("images/fig10-4.png")
@@ -234,8 +226,6 @@ At this point you might be wondering what to do if you want to run a goodness-of
 
 ```{r}
 #| label: fig-fig10-5
-#| fig-align: left
-#| out.width: 70%
 #| fig-cap: Changing the expected proportions in the $\\chi^2$ One Sample Proportion Test in jamovi
 knitr::include_graphics("images/fig10-5.png")
 ```
@@ -245,7 +235,7 @@ The expected counts are now shown in @tbl-tab10-6.
 ```{r}
 #| label: tbl-tab10-6
 #| tbl-cap: Expected counts for a different null hypothesis
-huxtabs[[10]][[6]] 
+huxtabs[[10]][[6]]
 ```
 
 and the $\chi^2$ statistic is 4.74, 3 d.f., $p = 0.182$. Now, the results of our updated hypotheses and the expected frequencies are different from what they were last time. As a consequence our $\chi^2$ test statistic is different, and our p-value is different too. Annoyingly, the p-value is $.182$, so we can't reject the null hypothesis (look back at @sec-The-p-value-of-a-test to remind yourself why). Sadly, despite the fact that the null hypothesis corresponds to a very silly theory, these data don't provide enough evidence against it.
@@ -269,7 +259,7 @@ This is pretty straightforward and hopefully it seems pretty unremarkable. That 
 
 As with everything else, your overriding concern should be that you explain things to your reader. Always remember that the point of reporting your results is to communicate to another human being. I cannot tell you just how many times I've seen the results section of a report or a thesis or even a scientific article that is just gibberish, because the writer has focused solely on making sure they've included all the numbers and forgotten to actually communicate with the human reader.
 
-> *Satan delights equally in statistics and in quoting scripture*[^10-categorical-data-analysis-9] 
+> *Satan delights equally in statistics and in quoting scripture*[^10-categorical-data-analysis-9]
 > -- H.G. Wells
 
 [^10-categorical-data-analysis-9]: If you've been reading very closely, and are as much of a mathematical pedant as I am, there is one thing about the way I wrote up the chi-square test in the last section that might be bugging you a little bit. There's something that feels a bit wrong with writing "$\chi^2(3) = 8.44$", you might be thinking. After all, it's the goodness-of-fit statistic that is equal to 8.44, so shouldn't I have written $X^2 = 8.44$ or maybe $GOF = 8.44$? This seems to be conflating the sampling distribution (i.e., $\chi^2$ with df = 3) with the test statistic (i.e., $X^2$). Odds are you figured it was a typo, since $\chi$ and X look pretty similar. Oddly, it's not. Writing $\chi^2$(3)= 8.44 is essentially a highly condensed way of writing "the sampling distribution of the test statistic is $\chi^2$(3), and the value of the test statistic is 8.44" In one sense, this is kind of stupid. There are lots of different test statistics out there that turn out to have a chi-square sampling distribution. The $X^2$ statistic that we've used for our goodness-of-fit test is only one of many (albeit one of the most commonly encountered ones). In a sensible, perfectly organised world we'd always have a separate name for the test statistic and the sampling distribution. That way, the stat block itself would tell you exactly what it was that the researcher had calculated. Sometimes this happens. For instance, the test statistic used in the Pearson goodness-of-fit test is written $X^2$ , but there's a closely related test known as the G-test$^a$ [@Sokal1994], in which the test statistic is written as $G$. As it happens, the Pearson goodness-of-fit test and the G-test both test the same null hypothesis, and the sampling distribution is exactly the same (i.e., chi-square with $k - 1$ degrees of freedom). If I'd done a G-test for the cards data rather than a goodness-of-fit test, then I'd have ended up with a test statistic of $G = 8.65$, which is slightly different from the $X^2 = 8.44$ value that I got earlier and which produces a slightly smaller p-value of $p = .034$. Suppose that the convention was to report the test statistic, then the sampling distribution, and then the p-value. If that were true, then these two situations would produce different stat blocks: my original result would be written $X^2 = 8.44$, $\chi^2(3)$, $p = .038$, whereas the new version using the G-test would be written as $G = 8.65$, $\chi^2(3)$, $p = .034$. However, using the condensed reporting standard, the original result is written $\chi^2(3) = 8.44, p =.038$, and the new one is written $\chi^2(3) = 8.65, p = .034$, and so it's actually unclear which test I actually ran. So why don't we live in a world in which the contents of the stat block uniquely specifies what tests were ran? The deep reason is that life is messy. We (as users of statistical tools) want it to be nice and neat and organised. We want it to be designed, as if it were a product, but that's not how life works. Statistics is an intellectual discipline just as much as any other one, and as such it's a massively distributed, partly-collaborative and partly-competitive project that no-one really understands completely. The things that you and I use as data analysis tools weren't created by an Act of the Gods of Statistics. They were invented by lots of different people, published as papers in academic journals, implemented, corrected and modified by lots of other people, and then explained to students in textbooks by someone else. As a consequence, there's a lot of test statistics that don't even have names, and as a consequence they're just given the same name as the corresponding sampling distribution. As we'll see later, any test statistic that follows a $\chi^2$ distribution is commonly called a "chi-square statistic", anything that follows a $t$-distribution is called a "t-statistic", and so on. But, as the $\chi^2$ versus $G$ example illustrates, two different things with the same sampling distribution are still, well, different. As a consequence, it's sometimes a good idea to be clear about what the actual test was that you ran, especially if you're doing something unusual. If you just say "chi-square test" it's not actually clear what test you're talking about. Although, since the two most common chi-square tests are the goodness-of-fit test and the independence test, most readers with stats training can probably guess. Nevertheless, it's something to be aware of. -- $^a$ Complicating matters, the G-test is a special case of a whole class of tests that are known as likelihood ratio tests. I don't cover LRTs in this book, but they are quite handy things to know about.
@@ -290,7 +280,7 @@ The other day I was watching an animated documentary examining the quaint custom
 ```{r}
 #| label: tbl-tab10-7
 #| tbl-cap: Cross-tabulating the data
-huxtabs[[10]][[7]] 
+huxtabs[[10]][[7]]
 ```
 
 From this, it's quite clear that the vast majority of the humans chose the data file, whereas the robots tended to be a lot more even in their preferences. Leaving aside the question of why the humans might be more likely to choose the data file for the moment (which does seem quite odd, admittedly), our first order of business is to determine if the discrepancy between human choices and robot choices in the data set is statistically significant.
@@ -301,8 +291,8 @@ How do we analyse this data? Specifically, since my research hypothesis is that 
 
 ```{r}
 #| label: tbl-tab10-8
-#| tbl-cap: Notation to describe the data 
-huxtabs[[10]][[8]] 
+#| tbl-cap: Notation to describe the data
+huxtabs[[10]][[8]]
 ```
 
 In this notation we say that $O_{ij}$ is a count (observed frequency) of the number of respondents that are of species j (robots or human) who gave answer i (puppy, flower or data) when asked to make a choice. The total number of observations is written $N$, as usual. Finally, I've used $R_i$ to denote the row totals (e.g., $R_1$ is the total number of people who chose the flower), and $C_j$ to denote the column totals (e.g., $C_1$ is the total number of robots).[^10-categorical-data-analysis-10]
@@ -340,7 +330,7 @@ $$\hat{E}_{ij}= \frac{R_i \times C_j}{N}$$
 
 [Additional technical detail [^10-categorical-data-analysis-12]]
 
-[^10-categorical-data-analysis-12]: Now that we've figured out how to calculate the expected frequencies, it's straightforward to define a test statistic, following the exact same strategy that we used in the goodness-of-fit test. In fact, it's pretty much the same statistic. For a contingency table with r rows and c columns, the equation that defines our $X^2$ statistic is $$X^2=\sum_{i=1}^{r}\sum_{j=1}^{c} \frac{(E_{ij}-O_{ij})^2}{E_{ij}}$$ The only difference is that I have to include two summation signs (i.e., $\sum$ ) to indicate that we're summing over both rows and columns. 
+[^10-categorical-data-analysis-12]: Now that we've figured out how to calculate the expected frequencies, it's straightforward to define a test statistic, following the exact same strategy that we used in the goodness-of-fit test. In fact, it's pretty much the same statistic. For a contingency table with r rows and c columns, the equation that defines our $X^2$ statistic is $$X^2=\sum_{i=1}^{r}\sum_{j=1}^{c} \frac{(E_{ij}-O_{ij})^2}{E_{ij}}$$ The only difference is that I have to include two summation signs (i.e., $\sum$ ) to indicate that we're summing over both rows and columns.
 
 As before, large values of $X^2$ indicate that the null hypothesis provides a poor description of the data, whereas small values of $X^2$ suggest that it does a good job of accounting for the data. Therefore, just like last time, we want to reject the null hypothesis if $X^2$ is too large.
 
@@ -371,8 +361,6 @@ That was easy, wasn't it! You can also ask jamovi to show you the expected count
 
 ```{r}
 #| label: fig-fig10-6
-#| fig-align: left
-#| out.width: 70%
 #| classes: .enlarge-image
 #| fig-cap: Independent samples $\chi^2$ test in jamovi using the Chapek 9 data
 knitr::include_graphics("images/fig10-6.png")
@@ -407,7 +395,7 @@ By default, the two measures that people tend to report most frequently are the 
 
 [Additional technical detail [^10-categorical-data-analysis-15]]
 
-[^10-categorical-data-analysis-15]: Mathematically, they're very simple. To calculate the $\phi$ statistic, you just divide your $X^2$ value by the sample size, and take the square root: $$\phi=\sqrt{\frac{X^2}{N}}$$ The idea here is that the $\phi$ statistic is supposed to range between 0 (no association at all) and 1 (perfect association), but it doesn't always do this when your contingency table is bigger than $2 \times 2$ , which is a total pain. For bigger tables it's actually possible to obtain $\phi > 1$, which is pretty unsatisfactory. So, to correct for this, people usually prefer to report the $V$ statistic proposed by @Cramer1946. It's a pretty simple adjustment to $\phi$. If you've got a contingency table with r rows and c columns, then define $k = min(r, c)$ to be the smaller of the two values. If so, then Cramér's $V$ statistic is $$V=\sqrt{\frac{X^2}{N(k-1)}}$$ 
+[^10-categorical-data-analysis-15]: Mathematically, they're very simple. To calculate the $\phi$ statistic, you just divide your $X^2$ value by the sample size, and take the square root: $$\phi=\sqrt{\frac{X^2}{N}}$$ The idea here is that the $\phi$ statistic is supposed to range between 0 (no association at all) and 1 (perfect association), but it doesn't always do this when your contingency table is bigger than $2 \times 2$ , which is a total pain. For bigger tables it's actually possible to obtain $\phi > 1$, which is pretty unsatisfactory. So, to correct for this, people usually prefer to report the $V$ statistic proposed by @Cramer1946. It's a pretty simple adjustment to $\phi$. If you've got a contingency table with r rows and c columns, then define $k = min(r, c)$ to be the smaller of the two values. If so, then Cramér's $V$ statistic is $$V=\sqrt{\frac{X^2}{N(k-1)}}$$
 
 And you're done. This seems to be a fairly popular measure, presumably because it's easy to calculate, and it gives answers that aren't completely silly. With Cramér's $V$, you know that the value really does range from 0 (no association at all) to 1 (perfect association).
 
@@ -429,7 +417,7 @@ What should you do if your cell counts are too small, but you'd still like to te
 ```{r}
 #| label: tbl-tab10-9
 #| tbl-cap: Contingency table of the salem.csv data
-huxtabs[[10]][[9]] 
+huxtabs[[10]][[9]]
 ```
 
 Looking at this data, you'd be hard pressed not to suspect that people not on fire are more likely to be happy than people on fire. However, the chi-square test makes this very hard to test because of the small sample size. So, speaking as someone who doesn't want to be set on fire, I'd *really* like to be able to get a better answer than this. This is where **Fisher's exact test** [@Fisher1922a] comes in very handy.
@@ -439,7 +427,7 @@ The Fisher exact test works somewhat differently to the chi-square test (or in f
 ```{r}
 #| label: tbl-tab10-10
 #| tbl-cap: Notation for the Fisher exact test
-huxtabs[[10]][[10]]  
+huxtabs[[10]][[10]]
 ```
 
 In order to construct the test Fisher treats both the row and column totals $(R_1, R_2, C_1 \text{ and } C_2)$ as known, fixed quantities and then calculates the probability that we would have obtained the observed frequencies that we did $(O_{11}, O_{12}, O_{21} \text{ and } O_{22})$ given those totals. In the notation that we developed in @sec-Introduction-to-probability this is written:
@@ -452,7 +440,6 @@ You can specify this test in jamovi from a check box in the 'Statistics' options
 
 ```{r}
 #| label: fig-fig10-7
-#| fig-align: left
 #| out.width: 60%
 #| fig-cap: Fisher exact test analysis in jamovi
 knitr::include_graphics("images/fig10-7.png")
@@ -465,7 +452,7 @@ Suppose you've been hired to work for the *Australian Generic Political Party* (
 ```{r}
 #| label: tbl-tab10-11
 #| tbl-cap: Contingency table with data on AGPP political advertisements
-huxtabs[[10]][[11]] 
+huxtabs[[10]][[11]]
 ```
 
 At first pass, you might think that this situation lends itself to the Pearson $\chi^2$ test of independence (as per [The $\chi^2$ test of independence (or association)]). However, a little bit of thought reveals that we've got a problem. We have 100 participants but 200 observations. This is because each person has provided us with an answer in both the before column and the after column. What this means is that the 200 observations aren't independent of each other. If voter A says "yes" the first time and voter B says "no", then you'd expect that voter A is more likely to say "yes" the second time than voter B! The consequence of this is that the usual $\chi^2$ test won't give trustworthy answers due to the violation of the independence assumption. Now, if this were a really uncommon situation, I wouldn't be bothering to waste your time talking about it. But it's not uncommon at all. This is a standard repeated measures design, and none of the tests we've considered so far can handle it. Eek.
@@ -475,7 +462,7 @@ The solution to the problem was published by McNemar (1947). The trick is to sta
 ```{r}
 #| label: tbl-tab10-12
 #| tbl-cap: Tabulate the data in a different way when you have repeated measures data
-huxtabs[[10]][[12]] 
+huxtabs[[10]][[12]]
 ```
 
 Next, let's think about what our null hypothesis is: it's that the "before" test and the "after" test have the same proportion of people saying "Yes, I will vote for AGPP". Because of the way that we have rewritten the data, it means that we're now testing the hypothesis that the row totals and column totals come from the same distribution. Thus, the null hypothesis in McNemar's test is that we have "marginal homogeneity". That is, the row totals and column totals have the same distribution: $P_a + P_b = P_a + P_c$ and similarly that $P_c + P_d = P_b + P_d$. Notice that this means that the null hypothesis actually simplifies to Pb = Pc. In other words, as far as the McNemar test is concerned, it's only the off-diagonal entries in this table (i.e., b and c) that matter! After noticing this, the **McNemar test of marginal homogeneity** is no different to a usual $\chi^2$ test. After applying the Yates correction, our test statistic becomes:
@@ -490,8 +477,6 @@ Now that you know what the McNemar test is all about, lets actually run one. The
 
 ```{r}
 #| label: fig-fig10-8
-#| fig-align: left
-#| out.width: 70%
 #| classes: .enlarge-image
 #| fig-cap: McNemar test output in jamovi
 knitr::include_graphics("images/fig10-8.png")
@@ -506,7 +491,7 @@ Let's go all the way back to the beginning of the chapter and look at the cards 
 ```{r}
 #| label: tbl-tab10-13
 #| tbl-cap: Cross-tabulating first against second choice with the Randomness.omv (cards) data
-huxtabs[[10]][[13]] 
+huxtabs[[10]][[13]]
 ```
 
 Suppose I wanted to know whether the choice you make the second time is dependent on the choice you made the first time. This is where a test of independence is useful, and what we're trying to do is see if there's some relationship between the rows and columns of this table.
@@ -517,7 +502,6 @@ The different statistics produced by these different analyses are shown in @fig-
 
 ```{r}
 #| label: fig-fig10-9
-#| fig-align: left
 #| out.width: 60%
 #| fig-cap: Independent vs. Paired (McNemar) with the Randomness.omv (cards) data
 knitr::include_graphics("images/fig10-9.png")

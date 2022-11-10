@@ -16,7 +16,7 @@ In this section we'll talk about how to describe the relationships between varia
 ```{r}
 #| label: tbl-tab12-1
 #| tbl-cap: Data for correlation analysis - descriptive statistics for the parenthood data
-huxtabs[[12]][[1]] 
+huxtabs[[12]][[1]]
 ```
 
 Let's turn to a topic close to every parent's heart: sleep. The data set we'll use is fictitious, but based on real events. Suppose I'm curious to find out how much my infant son's sleeping habits affect my mood. Let's say that I can rate my grumpiness very precisely, on a scale from 0 (not at all grumpy) to $100$ (grumpy as a very, very grumpy old man or woman). And lets also assume that I've been measuring my grumpiness, my sleeping patterns and my son's sleeping patterns for quite some time now. Let's say, for $100$ days. And, being a nerd, I've saved the data as a file called parenthood.csv. If we load the data we can see that the file contains four variables dani.sleep, baby.sleep, dani.grump and day. Note that when you first load this data set jamovi may not have guessed the data type for each variable correctly, in which case you should fix it: dani.sleep, baby.sleep, dani.grump and day can be specified as continuous variables, and ID is a nominal(integer) variable.[^12-correlation-and-linear-regression-1]
@@ -74,18 +74,16 @@ We can make these ideas a bit more explicit by introducing the idea of a **corre
 #| label: fig-fig12-4
 #| fig-width: 5
 #| fig-height: 8
-#| out-width: 60%
-#| fig-align: left
 #| fig-cap: Illustration of the effect of varying the strength and direction of a correlation. In the left hand column, the correlations are $0, .33, .66$ and $1$. In the right hand column, the correlations are $0, -.33, -.66$ and $-1$
 
 
 onePlot <- function( r,n=100 ) {
 	sigma <- cbind( c(1,r), c(r,1))
 	X <- MASS::mvrnorm(n,c(0,0),sigma, empirical=TRUE)
-		
+
 	ggplot(data.frame(X), aes(x=X[,1], y=X[,2])) +
 	  geom_point(col=blueshade, size=.5) +
-	  ylab(r) + 
+	  ylab(r) +
 	  theme_classic() +
 	  theme(
 	    axis.text.y = element_blank(),
@@ -98,13 +96,13 @@ onePlot <- function( r,n=100 ) {
 	    axis.line.x = element_blank(),
 	    plot.background = element_rect(color = "lightgrey", size = 0.4))
 }
-	
+
 onePlot_out <- lapply(c(0, .33, -.33, .66, -.66, 1, -1), function(r)  {
 	onePlot(r)
 })
 
 tgrob <- ggpubr::text_grob("Positive Correlations", hjust=0.7, vjust=0.7)
-plot_01 <- ggpubr::as_ggplot(tgrob) 
+plot_01 <- ggpubr::as_ggplot(tgrob)
 tgrob <- ggpubr::text_grob("Negative Correlations", hjust=0.7, vjust=0.7)
 plot_02 <- ggpubr::as_ggplot(tgrob)
 
@@ -112,7 +110,7 @@ plot_02 <- ggpubr::as_ggplot(tgrob)
 
 library(patchwork)
 
-theme_border <- theme_gray() + 
+theme_border <- theme_gray() +
   theme(plot.background = element_rect(fill = NA, colour = 'black', size = 4))
 p1 <- plot_01 + onePlot_out[[1]] + onePlot_out[[2]] + onePlot_out[[4]] + onePlot_out[[6]] +
   plot_layout(ncol = 1, heights = c(2, 4, 4, 4, 4)) + plot_annotation(theme = theme_border)
@@ -133,8 +131,6 @@ Calculating correlations in jamovi can be done by clicking on the 'Regression' -
 
 ```{r}
 #| label: fig-fig12-5
-#| fig-align: left
-#| out.width: 90%
 #| classes: .enlarge-image
 #| fig-cap: A jamovi screenshot showing correlations between variables in the parenthood.csv file
 knitr::include_graphics("images/fig12-5.png")
@@ -146,14 +142,13 @@ Naturally, in real life you don't see many correlations of $1$. So how should yo
 
 ```{r}
 #| label: tbl-tab12-2
-#| tbl-cap: A rough guide* to interpreting correlations
+#| tbl-cap: A rough guide to interpreting correlations
 huxtabs[[12]][[2]] |>
-  set_width("60%") |>
-  add_footnote(text = "*Note that I say a rough guide. There aren't hard and fast rules for what counts as strong or weak relationships. It depends on the context", border = 0.8) |>
-  set_number_format(value = '%5.2f') |>
+  add_footnote(text = "*Note that I say a rough guide. There aren't hard and fast rules for what counts as strong or weak relationships. It depends on the context") |>
+  set_number_format(value = 2) |>
   set_italic(row=12,,value=TRUE) |>
   set_font_size(row=12,,value=12)
-  
+
 ```
 
 However, something that can never be stressed enough is that you should always look at the scatterplot before attaching any interpretation to the data. A correlation might not mean what you think it means. The classic illustration of this is "Anscombe's Quartet" [@Anscombe1973], a collection of four data sets. Each data set has two variables, an $X$ and a $Y$. For all four data sets the mean value for $X$ is $9$ and the mean for $Y$ is $7.5$. The standard deviations for all $X$ variables are almost identical, as are those for the Y variables. And in each case the correlation between $X$ and $Y$ is $r = 0.816$. You can verify this yourself, since I happen to have saved it in a file called anscombe.csv.
@@ -181,8 +176,6 @@ To illustrate, consider the data plotted in @fig-fig12-7, showing the relationsh
 
 ```{r}
 #| label: fig-fig12-7
-#| fig-align: left
-#| out.width: 70%
 #| fig-cap: The relationship between hours worked and grade received for a toy data set consisting of only 10 students (each dot corresponds to one student). The line through the middle shows the linear relationship between the two variables. This produces a strong Pearson correlation of $r = .91$. However, the interesting thing to note here is that there's actually a perfect monotonic relationship between the two variables. In this toy example, increasing the hours worked always increases the grade received, as illustrated by the solid line. This is reflected in a Spearman correlation of $\rho = 1$. With such a small data set, however, it's an open question as to which version better describes the actual relationship involved
 
 knitr::include_graphics("images/fig12-7.png")
@@ -195,7 +188,7 @@ Okay, so let's have a look at our students when we rank them from worst to best 
 ```{r}
 #| label: tbl-tab12-3
 #| tbl-cap: Students ranked in terms of effort and reward
-huxtabs[[12]][[3]] 
+huxtabs[[12]][[3]]
 ```
 
 Hmm. These are identical. The student who put in the most effort got the best grade, the student with the least effort got the worst grade, etc. As the table above shows, these two rankings are identical, so if we now correlate them we get a perfect relationship, with a correlation of 1.0.
@@ -209,22 +202,18 @@ What we've just re-invented is **Spearman's rank order correlation**, usually de
 Suppose my goal is to draw a scatterplot displaying the relationship between the amount of sleep that I get (dani.sleep) and how grumpy I am the next day (dani.grump). There are two different ways in which we can use jamovi to get the plot that we're after. The first way is to use the 'Plot' option under the 'Regression' - 'Correlation Matrix' button, giving us the output shown in @fig-fig12-8. Note that jamovi draws a line through the points, we'll come onto this a bit later in the section on [What is a linear regression model?]. Plotting a scatterplot in this way also allow you to specify 'Densities for variables' and this option adds a density curve showing how the data in each variable is distributed.
 
 ```{r}
-#| label: fig-fig12-8 
-#| fig-align: left
-#| out.width: 80%
+#| label: fig-fig12-8
 #| classes: .enlarge-image
 #| fig-cap: Scatterplot via the 'Correlation Matrix' command in jamovi
-knitr::include_graphics("images/fig12-8.png")  
+knitr::include_graphics("images/fig12-8.png")
 ```
 
 The second way do to it is to use one of the jamovi add-on modules. This module is called 'scatr' and you can install it by clicking on the large '$+$' icon in the top right of the jamovi screen, opening the jamovi library, scrolling down until you find 'scatr' and clicking 'install'. When you have done this, you will find a new 'Scatterplot' command available under the 'Exploration' button. This plot is a bit different than the first way, see @fig-fig12-9, but the important information is the same.
 
 ```{r}
 #| label: fig-fig12-9
-#| fig-align: left
-#| out.width: 50%
 #| fig-cap: Scatterplot via the 'scatr' add-on module in - jamovi
-knitr::include_graphics("images/fig12-9.png")  
+knitr::include_graphics("images/fig12-9.png")
 ```
 
 ### More elaborate options
@@ -233,8 +222,6 @@ Often you will want to look at the relationships between several variables at on
 
 ```{r}
 #| label: fig-fig12-10
-#| fig-align: left
-#| out.width: 70%
 #| fig-cap: A matrix of scatterplots produced using jamovi
 knitr::include_graphics("images/fig12-10.png")
 ```
@@ -247,8 +234,6 @@ Since the basic ideas in regression are closely tied to correlation, we'll retur
 
 ```{r}
 #| label: fig-fig12-11
-#| fig-align: left
-#| out.width: 80%
 #| fig-cap: Panel (a) shows the sleep-grumpiness scatterplot from @fig-fig12-9 with the best fitting regression line drawn over the top. Not surprisingly, the line goes through the middle of the data. In contrast, panel (b) shows the same data, but with a very poor choice of regression line drawn over the top
 
 load("data_and_tables/parenthood.Rdata")
@@ -256,7 +241,7 @@ load("data_and_tables/parenthood.Rdata")
 p1 <- ggplot(parenthood, aes(dan.sleep, dan.grump)) +
   geom_point(col="darkgrey") +
   geom_smooth(method='lm', se = F, col=blueshade, size=1) +
-  ggtitle("The Best Fitting Regression Line") + 
+  ggtitle("The Best Fitting Regression Line") +
   xlab("My sleep (hours)\n\n(a)") +
   ylab("My grumpiness (0-100)") +
   theme_classic()
@@ -268,7 +253,7 @@ p2 <- ggplot(parenthood, aes(dan.sleep, dan.grump)) +
   xlab("My sleep (hours)\n\n(b)") +
   ylab("My grumpiness (0-100)") +
   theme_classic()
-           
+
 gridExtra::grid.arrange(p1,p2, ncol=2)
 
 ```
@@ -303,8 +288,6 @@ Okay, now let's redraw our pictures but this time I'll add some lines to show th
 
 ```{r}
 #| label: fig-fig12-12
-#| fig-align: left
-#| out.width: 80%
 #| fig-cap: A depiction of the residuals associated with the best fitting regression line (panel a), and the residuals associated with a poor regression line (panel b). The residuals are much smaller for the good regression line. Again, this is no surprise given that the good line is the one that goes right through the middle of the data
 
 
@@ -313,32 +296,33 @@ fit <- lm(data=parenthood, dan.grump ~ dan.sleep)
 parenthood$predicted <- stats::predict(fit)
 parenthood$residuals <- stats::residuals(fit)
 parenthood <- parenthood |> dplyr::select(dan.grump, dan.sleep, predicted, residuals)
-mydat <- parenthood |> tidyr::gather(key = "grp", value = "x", -1, -.data$predicted, -.data$residuals)
+mydat <- parenthood |> tidyr::gather(key = "grp", value = "x", -1, -predicted, -residuals)
+
 p1 <- ggplot(mydat, aes(x = x, y = dan.grump)) +
   stat_smooth(method = "lm", colour = blueshade, se = F) +
   geom_segment(aes(xend = x, yend = predicted), colour = "grey50", alpha = .7) +
   geom_point(aes(fill = residuals), colour = "grey50") +
-  ggtitle("Regression Line Close to the Data") + 
+  ggtitle("Regression Line Close to the Data") +
   xlab("My sleep (hours)\n\n(a)") +
   ylab("My grumpiness (0-100)") +
-  guides(fill = FALSE)  +
-  theme_classic() 
+  guides(fill = "none")  +
+  theme_classic()
+
 
 parenthood$predicted <- with(parenthood, predicted <- 80 + -3*dan.sleep)
 parenthood$residuals <- with(parenthood, residuals <- dan.sleep - predicted)
 parenthood <- parenthood |> dplyr::select(dan.grump, dan.sleep, predicted, residuals)
-mydat <- parenthood |> tidyr::gather(key = "grp", value = "x", -1, -.data$predicted, -.data$residuals)
-
+mydat <- parenthood |> tidyr::gather(key = "grp", value = "x", -1, -predicted, -residuals)
 
 p2 <- ggplot(mydat, aes(x = x, y = dan.grump)) +
   geom_abline(intercept = 80, slope = -3, col=blueshade, size=1) +
   geom_segment(aes(xend = x, yend = predicted), colour = "grey50", alpha = .7) +
   geom_point(aes(fill = residuals), colour = "grey50") +
-  ggtitle("Regression Line Distant from the Data") + 
+  ggtitle("Regression Line Distant from the Data") +
   xlab("My sleep (hours)\n\n(a)") +
   ylab("My grumpiness (0-100)") +
-  guides(fill = FALSE) +
-  theme_classic() 
+  guides(fill = "none") +
+  theme_classic()
 
 gridExtra::grid.arrange(p1,p2, ncol=2)
 
@@ -358,11 +342,9 @@ $$\hat{Y}_i=125.96+(-8.94 X_i)$$
 
 ```{r}
 #| label: fig-fig12-13
-#| fig-align: left
-#| out.width: 90%
 #| classes: .enlarge-image
 #| fig-cap: A jamovi screenshot showing a simple linear regression analysis
-knitr::include_graphics("images/fig12-13.png")  
+knitr::include_graphics("images/fig12-13.png")
 ```
 
 ### Interpreting the estimated model
@@ -386,15 +368,13 @@ Multiple regression in jamovi is no different to simple regression. All we have 
 ```{r}
 #| label: tbl-tab12-4
 #| tbl-cap: Adding multiple variables as predictors in a regression
-huxtabs[[12]][[4]] 
+huxtabs[[12]][[4]]
 ```
 
 The coefficient associated with dani.sleep is quite large, suggesting that every hour of sleep I lose makes me a lot grumpier. However, the coefficient for baby.sleep is very small, suggesting that it doesn't really matter how much sleep my son gets. What matters as far as my grumpiness goes is how much sleep I get. To get a sense of what this multiple regression model looks like, @fig-fig12-14 shows a 3D plot that plots all three variables, along with the regression model itself.
 
 ```{r}
 #| label: fig-fig12-14
-#| fig-align: left
-#| out.width: 90%
 #| fig-cap: A 3D visualisation of a multiple regression model. There are two predictors in the model, dani.sleep and baby.sleep and the outcome variable is dani.grump. Together, these three variables form a 3D space. Each observation (dot) is a point in this space. In much the same way that a simple linear regression model forms a line in 2D space, this multiple regression model forms a plane in 3D space. When we estimate the regression coefficients what we're trying to do is find a plane that is as close to all the blue dots as possible
 
 load("data_and_tables/parenthood.Rdata")
@@ -402,14 +382,14 @@ z <- parenthood$dan.grump
 x <- parenthood$baby.sleep
 y <- parenthood$dan.sleep
 
-# Compute the linear regression 
+# Compute the linear regression
 fit <- lm(z ~ x + y)
 # predict values on regular xy grid
 grid.lines = 26
 x.pred <- seq(min(x), max(x), length.out = grid.lines)
 y.pred <- seq(min(y), max(y), length.out = grid.lines)
 xy <- expand.grid( x = x.pred, y = y.pred)
-z.pred <- matrix(predict(fit, newdata = xy), 
+z.pred <- matrix(predict(fit, newdata = xy),
                  nrow = grid.lines, ncol = grid.lines)
 # predicted (fitted) points for droplines to surface
 fitpoints <- predict(fit)
@@ -417,9 +397,9 @@ fitpoints <- predict(fit)
 library(plot3D)
 scatter3D(x, y, z, pch = 20, cex = 1.2, col = blueshade, colkey = F, colvar = NULL,
     theta = -130, phi = 20, ticktype = "detailed",
-    xlab = "\n\nbaby.sleep", ylab = "\n\ndan.sleep", zlab = "\n\ndan.grump",  
+    xlab = "\n\nbaby.sleep", ylab = "\n\ndan.sleep", zlab = "\n\ndan.grump",
     surf = list(x = x.pred, y = y.pred, z = z.pred, col="grey",
-    facets = NA, fit = fitpoints), main = "") 
+    facets = NA, fit = fitpoints), main = "")
 
 ```
 
@@ -511,11 +491,9 @@ To compute all of the statistics that we have talked about so far, all you need 
 
 ```{r}
 #| label: fig-fig12-15
-#| fig-align: left
-#| out.width: 90%
 #| classes: .enlarge-image
 #| fig-cap: A jamovi screenshot showing a multiple linear regression analysis, with some useful options checked
-knitr::include_graphics("images/fig12-15.png")  
+knitr::include_graphics("images/fig12-15.png")
 ```
 
 The 'Model Coefficients' at the bottom of the jamovi analysis results shown in @fig-fig12-15 provides the coefficients of the regression model. Each row in this table refers to one of the coefficients in the regression model. The first row is the intercept term, and the later ones look at each of the predictors. The columns give you all of the relevant information. The first column is the actual estimate of $b$ (e.g., $125.97$ for the intercept, and -8.95 for the dani.sleep predictor). The second column is the standard error estimate $\hat{\sigma}_b$. The third and fourth columns provide the lower and upper values for the 95% confidence interval around the b estimate (more on this later). The fifth column gives you the t-statistic, and it's worth noticing that in this table $t=\frac{\hat{b}} {se({\hat{b}})}$ every time. Finally, the last column gives you the actual p-value for each of these tests.[^12-correlation-and-linear-regression-12]
@@ -554,11 +532,9 @@ To make things even simpler, jamovi has an option that computes the $\beta$ coef
 
 ```{r}
 #| label: fig-fig12-16
-#| fig-align: left
-#| out.width: 90%
 #| classes: .enlarge-image
 #| fig-cap: Standardised coefficients, with 95% confidence intervals, for multiple linear regression
-knitr::include_graphics("images/fig12-16.png")  
+knitr::include_graphics("images/fig12-16.png")
 ```
 
 These results clearly show that the dani.sleep variable has a much stronger effect than the baby.sleep variable. However, this is a perfect example of a situation where it would probably make sense to use the original coefficients b rather than the standardised coefficients $\beta$. After all, my sleep and the baby's sleep are already on the same scale: number of hours slept. Why complicate matters by converting these to z-scores?
@@ -579,7 +555,7 @@ So, we have four main assumptions for linear regression (that neatly form the ac
 
 ## Model checking {#sec-Model-checking}
 
-The main focus of this section is **regression diagnostics**, a term that refers to the art of checking that the assumptions of your regression model have been met, figuring out how to fix the model if the assumptions are violated, and generally to check that nothing "funny" is going on. I refer to this as the "art" of model checking with good reason. It's not easy, and while there are a lot of easily available tools that you can use to diagnose and maybe even cure the problems that affect your model (if there are any, that is!), you really do need to exercise a certain amount of judgement when doing this. 
+The main focus of this section is **regression diagnostics**, a term that refers to the art of checking that the assumptions of your regression model have been met, figuring out how to fix the model if the assumptions are violated, and generally to check that nothing "funny" is going on. I refer to this as the "art" of model checking with good reason. It's not easy, and while there are a lot of easily available tools that you can use to diagnose and maybe even cure the problems that affect your model (if there are any, that is!), you really do need to exercise a certain amount of judgement when doing this.
 
 In this section I describe several different things you can do to check that your regression model is doing what it's supposed to. It doesn't cover the full space of things you could do, but it's still much more detailed than what is often done in practice - unfortunately! But it's important that you get a sense of what tools are at your disposal, so I'll try to introduce a bunch of them here. Finally, I should note that this section draws quite heavily from @Fox2011, the book associated with the 'car' package that is used to conduct regression analysis in R. The 'car' package is notable for providing some excellent tools for regression diagnostics, and the book itself talks about them in an admirably clear fashion. I don't want to sound too gushy about it, but I do think that @Fox2011 is well worth reading, even if some of the advanced diagnostic techniques are only available in R and not jamovi.
 
@@ -595,48 +571,42 @@ This is of course what we saw earlier, and unless I specifically refer to some o
 
 \[Additional technical detail[^12-correlation-and-linear-regression-16]\]
 
-[^12-correlation-and-linear-regression-16]: The way we calculate these is to divide the ordinary residual by an estimate of the (population) standard deviation of these residuals. For technical reasons, the formula for this is $$\epsilon_i^{'}=\frac{\epsilon_i}{\hat{\sigma}\sqrt{1-h_i}}$$ where $\hat{\sigma}$ in this context is the estimated population standard deviation of the ordinary residuals, and $h_i$ is the "hat value" of the $i$th observation. I haven't explained hat values to you yet, so this won't make a lot of sense. For now, it's enough to interpret the standardised residuals as if we'd converted the ordinary residuals to z-scores. 
+[^12-correlation-and-linear-regression-16]: The way we calculate these is to divide the ordinary residual by an estimate of the (population) standard deviation of these residuals. For technical reasons, the formula for this is $$\epsilon_i^{'}=\frac{\epsilon_i}{\hat{\sigma}\sqrt{1-h_i}}$$ where $\hat{\sigma}$ in this context is the estimated population standard deviation of the ordinary residuals, and $h_i$ is the "hat value" of the $i$th observation. I haven't explained hat values to you yet, so this won't make a lot of sense. For now, it's enough to interpret the standardised residuals as if we'd converted the ordinary residuals to z-scores.
 
 The third kind of residuals are **Studentised residuals** (also called "jackknifed residuals") and they're even fancier than standardised residuals. Again, the idea is to take the ordinary residual and divide it by some quantity in order to estimate some standardised notion of the residual. [^12-correlation-and-linear-regression-17]
 
-[^12-correlation-and-linear-regression-17]: The formula for doing the calculations this time is subtly different $\epsilon _i^*=\frac{\epsilon_i}{\hat{\sigma}_{(-i)}\sqrt{1-h_i}}$ Notice that our estimate of the standard deviation here is written $\hat{\sigma}_{(-i)}$. What this corresponds to is the estimate of the residual standard deviation that you would have obtained if you just deleted the ith observation from the data set. This sounds like the sort of thing that would be a nightmare to calculate, since it seems to be saying that you have to run N new regression models (even a modern computer might grumble a bit at that, especially if you've got a large data set). Fortunately, this standard deviation estimate is actually given by the following equation: $\hat{\sigma}_{(-i)}= \hat{\sigma}\sqrt{\frac{N-K-1-{\epsilon_i^{'}}^2}{N-K-2}}$ 
+[^12-correlation-and-linear-regression-17]: The formula for doing the calculations this time is subtly different $\epsilon _i^*=\frac{\epsilon_i}{\hat{\sigma}_{(-i)}\sqrt{1-h_i}}$ Notice that our estimate of the standard deviation here is written $\hat{\sigma}_{(-i)}$. What this corresponds to is the estimate of the residual standard deviation that you would have obtained if you just deleted the ith observation from the data set. This sounds like the sort of thing that would be a nightmare to calculate, since it seems to be saying that you have to run N new regression models (even a modern computer might grumble a bit at that, especially if you've got a large data set). Fortunately, this standard deviation estimate is actually given by the following equation: $\hat{\sigma}_{(-i)}= \hat{\sigma}\sqrt{\frac{N-K-1-{\epsilon_i^{'}}^2}{N-K-2}}$
 
 Before moving on, I should point out that you don't often need to obtain these residuals yourself, even though they are at the heart of almost all regression diagnostics. Most of the time the various options that provide the diagnostics, or assumption checks, will take care of these calculations for you. Even so, it's always nice to know how to actually get hold of these things yourself in case you ever need to do something non-standard.
 
-### Checking the linearity of the relationship 
+### Checking the linearity of the relationship
 
 We should check for the linearity of the relationships between the predictors and the outcomes. There's a few different things that you might want to do in order to check this. Firstly, it never hurts to just plot the relationship between the predicted values $\hat{Y}_i$ and the observed values $Y_i$ for the outcome variable, as illustrated in @fig-fig12-17. To draw this in jamovi we saved the predicted values to the dataset, and then drew a scatterplot of the observed against the predicted (fitted) values. This gives you a kind of "big picture view" - if this plot looks approximately linear, then we're probably not doing too badly (though that's not to say that there aren't problems). However, if you can see big departures from linearity here, then it strongly suggests that you need to make some changes.
 
 ```{r}
 #| label: fig-fig12-17
-#| fig-align: left
-#| out.width: 60%
 #| fig-cap: jamovi plot of the predicted values against the observed values of the outcome variable. A straight(-ish) line is what we're hoping to see here. This looks pretty good, suggesting that there's nothing grossly wrong
-knitr::include_graphics("images/fig12-17.png")  
+knitr::include_graphics("images/fig12-17.png")
 ```
 
 In any case, in order to get a more detailed picture it's often more informative to look at the relationship between the predicted values and the residuals themselves. Again, in jamovi you can save the residuals to the dataset and then draw a scatterplot of the predicted values against the residual values, as in @fig-fig12-18. As you can see, not only does it draw the scatterplot showing the predicted value against the residuals, you can also plot a line through the data that shows the relationship between the two. Ideally, this should be a straight, perfectly horizontal line. In practice, we're looking for a reasonably straight or flat line. This is a matter of judgement.
 
 ```{r}
 #| label: fig-fig12-18
-#| fig-align: left
-#| out.width: 60%
-#| fig-cap: jamovi plot of the predicted values against the residuals, with a line showing the relationship between the two. If this is horizontal and straight(-ish), then we can feel reasonably confident that the "average residual" for all "predicted values" is more or less the same. 
-knitr::include_graphics("images/fig12-18.png")  
+#| fig-cap: jamovi plot of the predicted values against the residuals, with a line showing the relationship between the two. If this is horizontal and straight(-ish), then we can feel reasonably confident that the "average residual" for all "predicted values" is more or less the same.
+knitr::include_graphics("images/fig12-18.png")
 ```
 
-Somewhat more advanced versions of the same plot is produced by checking 'Residuals plots' in the regression analysis 'Assumption checks' options in jamovi. These are useful not only for checking linearity, but also for checking normality and equality of variance assumptions, and we look at these in more detail in @Checking-the-normality-of-the-residuals. This option not only draws plots comparing the predicted values to the residuals, it does so for each individual predictor. 
+Somewhat more advanced versions of the same plot is produced by checking 'Residuals plots' in the regression analysis 'Assumption checks' options in jamovi. These are useful not only for checking linearity, but also for checking normality and equality of variance assumptions, and we look at these in more detail in @sec-Checking-the-normality-of-the-residuals. This option not only draws plots comparing the predicted values to the residuals, it does so for each individual predictor.
 
-### Checking the normality of the residuals {#Checking-the-normality-of-the-residuals}
+### Checking the normality of the residuals {#sec-Checking-the-normality-of-the-residuals}
 
 Like many of the statistical tools we've discussed in this book, regression models rely on a normality assumption. In this case, we assume that the residuals are normally distributed. The first thing we can do is draw a QQ-plot via the 'Assumption Checks' - 'Assumption Checks' - 'Q-Q plot of residuals' option. The output is shown in @fig-fig12-19, showing the standardised residuals plotted as a function of their theoretical quantiles according to the regression model.
 
 ```{r}
 #| label: fig-fig12-19
-#| fig-align: left
-#| out.width: 60%
 #| fig-cap: Plot of the theoretical quantiles according to the model, against the quantiles of the standardised residuals, produced in jamovi
-knitr::include_graphics("images/fig12-19.png")  
+knitr::include_graphics("images/fig12-19.png")
 ```
 
 Another thing we should check is the relationship between the predicted (fitted) values and the residuals themselves. We can get jamovi to do this using the 'Residuals Plots' option, which provides a scatterplot for each predictor variable, the outcome variable, and the predicted values against residuals, see @fig-fig12-20. In these plots we are looking for a fairly uniform distribution of 'dots', with no clear bunching or patterning of the 'dots'. Looking at these plots, there is nothing particularly worrying as the dots are fairly evenly spread across the whole plot. There may be a little bit of non-uniformity in plot (b), but it is not a strong deviation and probably not worth worrying about.
@@ -659,21 +629,19 @@ If we were worried, then in a lot of cases the solution to this problem (and man
 
 You can calculate it using the BOXCOX function in the 'Compute' variables screen in jamovi.
 
-### Checking equality of variance 
+### Checking equality of variance
 
-The regression models that we've talked about all make am equality (i.e.homogeneity) of variance assumption: the variance of the residuals is assumed to be constant. To plot this in jamovi first we need to calculate the square root of the (absolute) size of the residual[^Correlation-and-regression-23] and then plot this against the predicted values, as in @fig12-21. Note that this plot actually uses the standardised residuals rather than the raw ones, but it's immaterial from our point of view. What we're looking to see here is a straight, horizontal line running through the middle of the plot.[^Correlation-and-linear-regression-23]
+The regression models that we've talked about all make am equality (i.e.homogeneity) of variance assumption: the variance of the residuals is assumed to be constant. To plot this in jamovi first we need to calculate the square root of the (absolute) size of the residual[^Correlation-and-regression-22] and then plot this against the predicted values, as in @fig-fig12-21. Note that this plot actually uses the standardised residuals rather than the raw ones, but it's immaterial from our point of view. What we're looking to see here is a straight, horizontal line running through the middle of the plot.[^Correlation-and-linear-regression-23]
 
 ```{r}
 #| label: fig-fig12-21
-#| fig-align: left
-#| out.width: 60%
-#| fig-cap: jamovi plot of the predicted values (model predictions) against the square root of the absolute standardised residuals. This plot is used to diagnose violations of homogeneity of variance. If the variance is really constant, then the line through the middle should be horizontal and flat(-ish). 
-knitr::include_graphics("images/fig12-21.png")  
+#| fig-cap: jamovi plot of the predicted values (model predictions) against the square root of the absolute standardised residuals. This plot is used to diagnose violations of homogeneity of variance. If the variance is really constant, then the line through the middle should be horizontal and flat(-ish).
+knitr::include_graphics("images/fig12-21.png")
 ```
 
-[^Correlation-and-regression-22]: In jamovi, you can compute this new variable using the formula 'SQRT(ABS(Residuals))' 
+[^Correlation-and-regression-22]: In jamovi, you can compute this new variable using the formula 'SQRT(ABS(Residuals))'
 
-[^Correlation-and-linear-regression-23]: It's a bit beyond the scope of this chapter to talk about how to deal with violations of homogeneity of variance, but I'll give you a quick sense of what you need to consider. The **main** thing to worry about, if homogeneity of variance is violated, is that the standard error estimates associated with the regression coefficients are no longer entirely reliable, and so your $t$ tests for the coefficients aren't quite right either. A simple fix to the problem is to make use of a "heteroscedasticity corrected covariance matrix" when estimating the standard errors. These are often called **_sandwich estimators_**, and these can be estimated in R (but not directly in jamovi).  
+[^Correlation-and-linear-regression-23]: It's a bit beyond the scope of this chapter to talk about how to deal with violations of homogeneity of variance, but I'll give you a quick sense of what you need to consider. The **main** thing to worry about, if homogeneity of variance is violated, is that the standard error estimates associated with the regression coefficients are no longer entirely reliable, and so your $t$ tests for the coefficients aren't quite right either. A simple fix to the problem is to make use of a "heteroscedasticity corrected covariance matrix" when estimating the standard errors. These are often called **_sandwich estimators_**, and these can be estimated in R (but not directly in jamovi).
 
 ### Checking for collinearity
 
@@ -687,22 +655,18 @@ To give a sense of how we could end up with a model that has bigger collinearity
 
 ```{r}
 #| label: fig-fig12-22
-#| fig-align: left
-#| out.width: 80%
 #| classes: .enlarge-image
 #| fig-cap: Correlation matrix in jamovi for all four variables
-knitr::include_graphics("images/fig12-22.png")  
+knitr::include_graphics("images/fig12-22.png")
 ```
 
 We have some fairly large correlations between some of our predictor variables! When we run the regression model and look at the VIF values, we see that the collinearity is causing a lot of uncertainty about the coefficients. First, run the regression, as in @fig-fig12-23 and you can see from the VIF values that, yep, that's some mighty fine collinearity there.
 
 ```{r}
 #| label: fig-fig12-23
-#| fig-align: left
-#| out.width: 90%
 #| classes: .enlarge-image
 #| fig-cap: Collinearity statistics for multiple regression, produced in jamovi
-knitr::include_graphics("images/fig12-23.png")  
+knitr::include_graphics("images/fig12-23.png")
 ```
 
 
@@ -714,8 +678,6 @@ The first kind of unusual observation is an **outlier**. The definition of an ou
 
 ```{r}
 #| label: fig-fig12-24
-#| fig-align: left
-#| out.width: 70%
 #| fig-cap: An illustration of outliers. The solid line shows the regression line with the anomalous outlier observation included. The dashed line plots the regression line estimated without the anomalous outlier observation included. The vertical line from the outlier point to the dashed regression line illustrates the large residual error for the outlier. The outlier has an unusual value on the outcome (y axis location) but not the predictor (x axis location), and lies a long way from the regression line
 
 dat <- data.frame(x=c(2,   2.1, 3.3, 3.7, 4.2,  4.3, 4.5, 4.7, 4.9, 5.1, 5.2, 5.4, 5.8, 6.6),
@@ -730,7 +692,7 @@ ggplot(dat, aes(x=x, y=y)) +
   geom_point(col=blueshade, size=3) +
   geom_smooth(method=lm, se=F, fullrange=T, col="black", size=0.8) +
   geom_smooth(data=dat2, method=lm, se=F, fullrange=T, linetype = 'dashed', col="black", size=0.4) +
-  geom_segment(x=4.3, y=10.85, xend=4.3, yend=yendpoint, col="darkgrey", size = 0.4) + 
+  geom_segment(x=4.3, y=10.85, xend=4.3, yend=yendpoint, col="darkgrey", size = 0.4) +
   annotate(geom="text", label="Outlier", x=3.7, y=11) +
   xlim(1,12) +
   ylim(1,12) +
@@ -745,12 +707,10 @@ ggplot(dat, aes(x=x, y=y)) +
 
 The second way in which an observation can be unusual is if it has high **leverage**, which happens when the observation is very different from all the other observations. This doesn't necessarily have to correspond to a large residual. If the observation happens to be unusual on all variables in precisely the same way, it can actually lie very close to the regression line. An example of this is shown in @fig-fig12-24. The leverage of an observation is operationalised in terms of its hat value, usually written $h_i$ . The formula for the hat value is rather complicated[^12-correlation-and-linear-regression-25] but its interpretation is not: $h_i$ is a measure of the extent to which the i-th observation is "in control" of where the regression line ends up going.
 
-[^12-correlation-and-linear-regression-25]: Again, for the linear algebra fanatics: the "hat matrix" is defined to be that matrix $H$ that converts the vector of observed values $y$ into a vector of predicted values $\hat{y}$, such that $\hat{y} = Hy$. The name comes from the fact that this is the matrix that "puts a hat on y". The hat value of the i-th observation is the i-th diagonal element of this matrix (so technically I should be writing it as $h_{ii}$ rather than $h_i$). And here's how it's calculated: $H = X(X^{'}X)^{1}X^{'}$. 
+[^12-correlation-and-linear-regression-25]: Again, for the linear algebra fanatics: the "hat matrix" is defined to be that matrix $H$ that converts the vector of observed values $y$ into a vector of predicted values $\hat{y}$, such that $\hat{y} = Hy$. The name comes from the fact that this is the matrix that "puts a hat on y". The hat value of the i-th observation is the i-th diagonal element of this matrix (so technically I should be writing it as $h_{ii}$ rather than $h_i$). And here's how it's calculated: $H = X(X^{'}X)^{1}X^{'}$.
 
 ```{r}
 #| label: fig-fig12-25
-#| fig-align: left
-#| out.width: 70%
 #| fig-cap: An illustration of high leverage points. The anomalous observation in this case is unusual both in terms of the predictor (x axis) and the outcome (y axis), but this unusualness is highly consistent with the pattern of correlations that exists among the other observations. The observation falls very close to the regression line and does not distort it by very much
 
 
@@ -765,7 +725,7 @@ ggplot(dat, aes(x=x, y=y)) +
   geom_point(col=blueshade, size=3) +
   geom_smooth(method=lm, se=F, fullrange=T, col="black", size=0.8) +
   geom_smooth(data=dat2, fullrange=T, method=lm, se=F, linetype = 'dashed', col="black", size=0.4) +
-  geom_segment(x=10, y=9.65, xend=10, yend=yendpoint, col="darkgrey", size = 0.4) + 
+  geom_segment(x=10, y=9.65, xend=10, yend=yendpoint, col="darkgrey", size = 0.4) +
   annotate(geom="text", label="High leverage", x=9.3, y=10.6) +
   xlim(1,12) +
   ylim(1,12) +
@@ -786,8 +746,6 @@ This brings us to our third measure of unusualness, the **influence** of an obse
 
 ```{r}
 #| label: fig-fig12-26
-#| fig-align: left
-#| out.width: 70%
 #| fig-cap: An illustration of high influence points. In this case, the anomalous observation is highly unusual on the predictor variable (x axis), and falls a long way from the regression line. As a consequence, the regression line is highly distorted, even though (in this case) the anomalous observation is entirely typical in terms of the outcome variable (y axis)
 
 
@@ -802,7 +760,7 @@ ggplot(dat, aes(x=x, y=y)) +
   geom_point(col=blueshade, size=3) +
   geom_smooth(method=lm, se=F, fullrange=T, col="black", size=0.8) +
   geom_smooth(data=dat2, fullrange=T, method=lm, se=F, linetype = 'dashed', col="black", size=0.4) +
-  geom_segment(x=10, y=4.1, xend=10, yend=yendpoint, col="darkgrey", size = 0.4) + 
+  geom_segment(x=10, y=4.1, xend=10, yend=yendpoint, col="darkgrey", size = 0.4) +
   annotate(geom="text", label="High influence", x=10.3, y=3.4) +
   xlim(1,12) +
   ylim(1,12) +
@@ -821,10 +779,8 @@ In jamovi, information about Cook's distance can be calculated by clicking on th
 
 ```{r}
 #| label: fig-fig12-27
-#| fig-align: left
-#| out.width: 70%
 #| fig-cap: jamovi output showing the table for the Cook's distance statistics
-knitr::include_graphics("images/fig12-27.png")  
+knitr::include_graphics("images/fig12-27.png")
 ```
 
 You can see that, in this example, the mean Cook's distance value is $0.01$, and the range is from $0.00$ to $0.11$, so this is some way off the rule of thumb figure mentioned above that a Cook's distance greater than 1 is considered large.
@@ -886,11 +842,9 @@ We can also use this 'Model Comparison' option to display a table that shows the
 
 ```{r}
 #| label: fig-fig12-28
-#| fig-align: left
-#| out.width: 90%
 #| classes: .enlarge-image
 #| fig-cap: Model comparison in jamovi using the 'Model Builder' option
-knitr::include_graphics("images/fig12-28.png")  
+knitr::include_graphics("images/fig12-28.png")
 ```
 
 ## Summary

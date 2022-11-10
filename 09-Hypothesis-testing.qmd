@@ -74,7 +74,7 @@ At this point, we need to be a bit more precise about what we mean by "errors". 
 ```{r}
 #| label: tbl-tab9-2
 #| tbl-cap: Null hypothesis statistical testing (NHST)
-huxtabs[[9]][[2]] 
+huxtabs[[9]][[2]]
 ```
 
 As a consequence there are actually two different types of error here. If we reject a null hypothesis that is actually true then we have made a **type I error**. On the other hand, if we retain the null hypothesis when it is in fact false then we have made a **type II error**.
@@ -86,7 +86,7 @@ So, what about the type II error rate? Well, we'd also like to keep those under 
 ```{r}
 #| label: tbl-tab9-3
 #| tbl-cap: Null hypothesis statistical testing (NHST) - additional detail
-huxtabs[[9]][[3]] 
+huxtabs[[9]][[3]]
 ```
 
 A "powerful" hypothesis test is one that has a small value of $\beta$, while still keeping $\alpha$ fixed at some (small) desired level. By convention, scientists make use of three different $\alpha$ levels: $.05$, $.01$ and $.001$. Notice the asymmetry here; the tests are designed to ensure that the $\alpha$ level is kept small but there's no corresponding guarantee regarding $\beta$. We'd certainly like the type II error rate to be small and we try to design tests that keep it small, but this is typically secondary to the overwhelming need to control the type I error rate. As Blackstone might have said if he were a statistician, it is "better to retain 10 false null hypotheses than to reject a single true one". To be honest, I don't know that I agree with this philosophy. There are situations where I think it makes sense, and situations where I think it doesn't, but that's neither here nor there. It's how the tests are built.
@@ -105,11 +105,9 @@ Since the null hypothesis states that $\theta = 0.5$ and our experiment has $N =
 
 ```{r}
 #| label: fig-fig9-1
-#| fig-align: left
-#| out.width: 70%
 #| fig-cap: The sampling distribution for our test statistic $X$ when the null hypothesis is true. For our ESP scenario this is a binomial distribution. Not surprisingly, since the null hypothesis says that the probability of a correct response is $\theta = .5$, the sampling distribution says that the most likely value is 50 (out of 100) correct responses. Most of the probability mass lies between 40 and 60
 
-binom1 <- data.frame(success = 0:100, pmf = dbinom(x = 0:100, size = 100, prob = .5)) 
+binom1 <- data.frame(success = 0:100, pmf = dbinom(x = 0:100, size = 100, prob = .5))
 ggplot(data=binom1, aes(x = factor(success), y = pmf+.001)) +
   geom_col(col=blueshade, fill=blueshade, alpha=0.6, width=.3) +
   ggtitle("Sampling Distribution for X if the Null is True") +
@@ -141,11 +139,9 @@ As it turns out those three things uniquely solve the problem. Our critical regi
 
 ```{r}
 #| label: fig-fig9-2
-#| fig-align: left
-#| out.width: 70%
 #| fig-cap: The critical region associated with the hypothesis test for the ESP study, for a hypothesis test with a significance level of $\alpha = .05$. The plot shows the sampling distribution of $X$ under the null hypothesis (i.e., same as @fig-fig9-1) . The grey bars correspond to those values of $X$ for which we would retain the null hypothesis. The blue (darker shaded) bars show the critical region, those values of $X$ for which we would reject the null. Because the alternative hypothesis is two sided (i.e., allows both $\theta < .5$ and $\theta > .5$, the critical region covers both tails of the distribution. To ensure an $\alpha$ level of $.05$, we need to ensure that each of the two regions encompasses $2.5\%$ of the sampling distribution
 
-binom1 <- data.frame(success = 0:100, pmf = dbinom(x = 0:100, size = 100, prob = .5)) 
+binom1 <- data.frame(success = 0:100, pmf = dbinom(x = 0:100, size = 100, prob = .5))
 binom1$plotcol <- with(binom1, ifelse(success<=40 | success >= 60, blueshade, "lightgrey"))
 
 ggplot(data=binom1, aes(x = factor(success), y = pmf+.001)) +
@@ -163,10 +159,10 @@ ggplot(data=binom1, aes(x = factor(success), y = pmf+.001)) +
   scale_fill_identity() +
   theme_classic() +
   theme(
-    axis.title.y = element_blank(), 
-    axis.line.y = element_blank(),     
-    axis.text.y = element_blank(), 
-    axis.ticks.y = element_blank(), 
+    axis.title.y = element_blank(),
+    axis.line.y = element_blank(),
+    axis.text.y = element_blank(),
+    axis.ticks.y = element_blank(),
     plot.title = element_text(hjust = 0.5))
 
 ```
@@ -191,18 +187,16 @@ A very brief digression is in order at this point, regarding the word "significa
 
 ### The difference between one sided and two sided tests {#sec-The-difference-between-one-sided-and-two-sided-tests}
 
-There's one more thing I want to point out about the hypothesis test that I've just constructed. If we take a moment to think about the statistical hypotheses I've been using, $$H_0: \theta=0.5$$ $$H_1:\theta \neq 0.5$$ we notice that the alternative hypothesis covers both the possibility that $\theta < .5$ and the possibility that $\theta \> .5.$ This makes sense if I really think that ESP could produce either better-than chance performance or worse-than-chance performance (and there are some people who think that). In statistical language this is an example of a **two-sided test**. It's called this because the alternative hypothesis covers the area on both "sides" of the null hypothesis, and as a consequence the critical region of the test covers both tails of the sampling distribution (2.5% on either side if α = .05), as illustrated earlier in @fig-fig9-2. However, that's not the only possibility. I might only be willing to believe in ESP if it produces better than chance performance. If so, then my alternative hypothesis would only covers the possibility that $\theta > .5$, and as a consequence the null hypothesis now becomes 
-$$H_0: \theta \leq 0.5$$ 
-$$H_1: \theta > 0.5$$ 
+There's one more thing I want to point out about the hypothesis test that I've just constructed. If we take a moment to think about the statistical hypotheses I've been using, $$H_0: \theta=0.5$$ $$H_1:\theta \neq 0.5$$ we notice that the alternative hypothesis covers both the possibility that $\theta < .5$ and the possibility that $\theta \> .5.$ This makes sense if I really think that ESP could produce either better-than chance performance or worse-than-chance performance (and there are some people who think that). In statistical language this is an example of a **two-sided test**. It's called this because the alternative hypothesis covers the area on both "sides" of the null hypothesis, and as a consequence the critical region of the test covers both tails of the sampling distribution (2.5% on either side if α = .05), as illustrated earlier in @fig-fig9-2. However, that's not the only possibility. I might only be willing to believe in ESP if it produces better than chance performance. If so, then my alternative hypothesis would only covers the possibility that $\theta > .5$, and as a consequence the null hypothesis now becomes
+$$H_0: \theta \leq 0.5$$
+$$H_1: \theta > 0.5$$
 When this happens, we have what's called a **one-sided test** and the critical region only covers one tail of the sampling distribution. This is illustrated in @fig-fig9-3.
 
 ```{r}
 #| label: fig-fig9-3
-#| fig-align: left
-#| out.width: 70%
 #| fig-cap: The critical region for a one sided test. In this case, the alternative hypothesis is that $\theta \geq .5$ so we would only reject the null hypothesis for large values of $X$. As a consequence, the critical region only covers the upper tail of the sampling distribution, specifically the upper $5\%$ of the distribution. Contrast this to the two-sided version in @fig-fig9-2
 
-binom1 <- data.frame(success = 0:100, pmf = dbinom(x = 0:100, size = 100, prob = .5)) 
+binom1 <- data.frame(success = 0:100, pmf = dbinom(x = 0:100, size = 100, prob = .5))
 binom1$plotcol <- with(binom1, ifelse(success>= 58, blueshade, "lightgrey"))
 
 ggplot(data=binom1, aes(x = factor(success), y = pmf+.001)) +
@@ -217,10 +211,10 @@ ggplot(data=binom1, aes(x = factor(success), y = pmf+.001)) +
   scale_fill_identity() +
   theme_classic() +
   theme(
-    axis.title.y = element_blank(), 
-    axis.line.y = element_blank(),     
-    axis.text.y = element_blank(), 
-    axis.ticks.y = element_blank(), 
+    axis.title.y = element_blank(),
+    axis.line.y = element_blank(),
+    axis.text.y = element_blank(),
+    axis.ticks.y = element_blank(),
     plot.title = element_text(hjust = 0.5))
 
 ```
@@ -238,7 +232,7 @@ This is where the p value comes in handy. To understand how it works, let's supp
 ```{r}
 #| label: tbl-tab9-4
 #| tbl-cap: Rejecting the NH at different levels of alpha
-huxtabs[[9]][[4]] 
+huxtabs[[9]][[4]]
 ```
 
 When we test the ESP data ($X = 62$ successes out of $N = 100$ observations), using $\alpha$ levels of $.03$ and above, we'd always find ourselves rejecting the null hypothesis. For $\alpha$ levels of $.02$ and below we always end up retaining the null hypothesis. Therefore, somewhere between $.02$ and $.03$ there must be a smallest value of $\alpha$ that would allow us to reject the null hypothesis for this data. This is the $p$ value. As it turns out the ESP data has $p = .021$. In short, $p$ is defined to be the smallest Type I error rate ($\alpha$) that you have to be willing to tolerate if you want to reject the null hypothesis.
@@ -293,8 +287,6 @@ At this point some of you might be wondering if this is a "real" hypothesis test
 
 ```{r}
 #| label: fig-fig9-4
-#| fig-align: left
-#| out.width: 70%
 #| classes: .enlarge-image
 #| fig-cap: Binomial test analysis and results in jamovi
 knitr::include_graphics("images/fig9-4.png")
@@ -310,11 +302,9 @@ In previous sections I've emphasised the fact that the major design principle be
 
 ```{r}
 #| label: fig-fig9-5
-#| fig-align: left
-#| out.width: 70%
 #| fig-cap: Sampling distribution under the alternative hypothesis for a population parameter value of $\theta = 0.55$. A reasonable proportion of the distribution lies in the rejection region
 
-binom1 <- data.frame(success = 0:100, pmf = dbinom(x = 0:100, size = 100, prob = .55)) 
+binom1 <- data.frame(success = 0:100, pmf = dbinom(x = 0:100, size = 100, prob = .55))
 binom1$plotcol <- with(binom1, ifelse(success<=40 | success >= 60, blueshade, "lightgrey"))
 
 ggplot(data=binom1, aes(x = factor(success), y = pmf+.001)) +
@@ -332,10 +322,10 @@ ggplot(data=binom1, aes(x = factor(success), y = pmf+.001)) +
   scale_fill_identity() +
   theme_classic() +
   theme(
-    axis.title.y = element_blank(), 
-    axis.line.y = element_blank(),     
-    axis.text.y = element_blank(), 
-    axis.ticks.y = element_blank(), 
+    axis.title.y = element_blank(),
+    axis.line.y = element_blank(),
+    axis.text.y = element_blank(),
+    axis.ticks.y = element_blank(),
     plot.title = element_text(hjust = 0.5))
 
 ```
@@ -344,11 +334,9 @@ Let's take a moment to think about what a Type II error actually is. A Type II e
 
 ```{r}
 #| label: fig-fig9-6
-#| fig-align: left
-#| out.width: 70%
 #| fig-cap: Sampling distribution under the *alternative* hypothesis for a population parameter value of $\theta = 0.70$. Almost all of the distribution lies in the rejection region.
 
-binom1 <- data.frame(success = 0:100, pmf = dbinom(x = 0:100, size = 100, prob = .7)) 
+binom1 <- data.frame(success = 0:100, pmf = dbinom(x = 0:100, size = 100, prob = .7))
 binom1$plotcol <- with(binom1, ifelse(success<=40 | success >= 60, blueshade, "lightgrey"))
 
 ggplot(data=binom1, aes(x = factor(success), y = pmf+.001)) +
@@ -366,10 +354,10 @@ ggplot(data=binom1, aes(x = factor(success), y = pmf+.001)) +
   scale_fill_identity() +
   theme_classic() +
   theme(
-    axis.title.y = element_blank(), 
-    axis.line.y = element_blank(),     
-    axis.text.y = element_blank(), 
-    axis.ticks.y = element_blank(), 
+    axis.title.y = element_blank(),
+    axis.line.y = element_blank(),
+    axis.text.y = element_blank(),
+    axis.ticks.y = element_blank(),
     plot.title = element_text(hjust = 0.5))
 
 ```
@@ -378,14 +366,12 @@ What all this means is that the power of a test (i.e., $1 - \beta$) depends on t
 
 ```{r}
 #| label: fig-fig9-7
-#| fig-align: left
-#| out.width: 70%
 #| fig-cap: The probability that we will reject the null hypothesis, plotted as a function of the true value of $\theta$. Obviously, the test is more powerful (greater chance of correct rejection) if the true value of $\theta$ is very different from the value that the null hypothesis specifies (i.e., $\theta = .5$ ). Notice that when $\theta$ actually is equal to $.5$ (plotted as a black dot), the null hypothesis is in fact true and rejecting the null hypothesis in this instance would be a Type I error
 
 theta <- seq(.01,.99,.01)
 pow <- vector("numeric",length(theta))
 for( i in seq_along(theta) ) {
-	pow[i] <- pbinom(40,100,theta[i],lower.tail=TRUE) + pbinom(59,100,theta[i],lower.tail=FALSE) 
+	pow[i] <- pbinom(40,100,theta[i],lower.tail=TRUE) + pbinom(59,100,theta[i],lower.tail=FALSE)
 }
 
 dpower <- data.frame(theta,pow)
@@ -430,8 +416,6 @@ Unfortunately, it's often the case that even with the best of experimental desig
 
 ```{r}
 #| label: fig-fig9-8
-#| fig-align: left
-#| out.width: 70%
 #| fig-cap: The power of our test plotted as a function of the sample size $N$. In this case, the true value of $\theta$ is 0.7 but the null hypothesis is that $\theta = 0.5$. Overall, larger $N$ means greater power. (The small zig-zags in this function occur because of some odd interactions between $\theta$,  $\alpha$ and the fact that the binomial distribution is discrete, it doesn't matter for any serious purpose)
 
 N <- 1:100
@@ -440,7 +424,7 @@ theta <- .7
 for( i in seq_along(N) ) {
 	crit.lo <- qbinom(.025,N[i],.5)-1
 	crit.hi <- qbinom(.975,N[i],.5)
-	pow[i] <- 	pbinom(crit.lo,N[i],theta,lower.tail=TRUE) + pbinom(crit.hi,N[i],theta,lower.tail=FALSE) 
+	pow[i] <- 	pbinom(crit.lo,N[i],theta,lower.tail=TRUE) + pbinom(crit.hi,N[i],theta,lower.tail=FALSE)
 }
 
 testpow <- data.frame(N,pow)
@@ -500,8 +484,8 @@ Null hypothesis testing is one of the most ubiquitous elements to statistical th
 - Hypothesis testing for [Making decisions]
 - [The p value of a test]. p-values as "soft" decisions
 - [Reporting the results of a hypothesis test]
-- [Running the hypothesis test in practice] 
+- [Running the hypothesis test in practice]
 - [Effect size, sample size and power]
-- [Some issues to consider] regarding hypothesis testing 
+- [Some issues to consider] regarding hypothesis testing
 
 Later in the book, in @sec-Bayesian-statistics, I'll revisit the theory of null hypothesis tests from a Bayesian perspective and introduce a number of new tools that you can use if you aren't particularly fond of the orthodox approach. But for now, though, we're done with the abstract statistical theory, and we can start discussing specific data analysis tools.

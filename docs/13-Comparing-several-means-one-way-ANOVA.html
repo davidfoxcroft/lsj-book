@@ -405,11 +405,11 @@ div.csl-indent {
 <h2 data-number="13.1" class="anchored" data-anchor-id="an-illustrative-data-set"><span class="header-section-number">13.1</span> An illustrative data set</h2>
 <p>Suppose you’ve become involved in a clinical trial in which you are testing a new antidepressant drug called <em>Joyzepam</em>. In order to construct a fair test of the drug’s effectiveness, the study involves three separate drugs to be administered. One is a placebo, and the other is an existing antidepressant / anti-anxiety drug called <em>Anxifree</em>. A collection of 18 participants with moderate to severe depression are recruited for your initial testing. Because the drugs are sometimes administered in conjunction with psychological therapy, your study includes 9 people undergoing cognitive behavioural therapy (CBT) and 9 who are not. Participants are randomly assigned (doubly blinded, of course) a treatment, such that there are 3 CBT people and 3 no-therapy people assigned to each of the 3 drugs. A psychologist assesses the mood of each person after a 3 month run with each drug, and the overall improvement in each person’s mood is assessed on a scale ranging from <span class="math inline">\(-5\)</span> to <span class="math inline">\(+5\)</span>. With that as the study design, let’s now load up the data file in clinicaltrial.csv. We can see that this data set contains the three variables drug, therapy and mood.gain.</p>
 <p>For the purposes of this chapter, what we’re really interested in is the effect of drug on mood.gain. The first thing to do is calculate some descriptive statistics and draw some graphs. In the <a href="04-Descriptive-statistics.html"><span>Chapter&nbsp;4</span></a> chapter we showed you how to do this, and some of the descriptive statistics we can calculate in jamovi are shown in <a href="#fig-fig13-1">Figure&nbsp;<span>13.1</span></a></p>
-<div class="cell" data-layout-align="left">
+<div class="cell enlarge-image" data-layout-align="left">
 <div class="cell-output-display">
 <div id="fig-fig13-1" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
-<p><img src="images/fig13-1.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<p><img src="images/fig13-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
 <p></p><figcaption class="figure-caption">Figure&nbsp;13.1: Descriptives for mood gain, and box plots by drug administered</figcaption><p></p>
 </figure>
 </div>
@@ -430,7 +430,7 @@ div.csl-indent {
 <div class="cell-output-display">
 <div id="fig-fig13-2" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
-<p><img src="images/fig13-2.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<p><img src="13-Comparing-several-means-one-way-ANOVA_files/figure-html/fig-fig13-2-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
 <p></p><figcaption class="figure-caption">Figure&nbsp;13.2: Graphical illustration of ‘between groups’ variation (panel (a)) and ‘within groups’ variation (panel (b)). On the left the arrows show the differences in the group means. On the right the arrows highlight the variability within each group</figcaption><p></p>
 </figure>
 </div>
@@ -441,11 +441,11 @@ div.csl-indent {
 <p>First, let’s start by introducing some notation. We’ll use G to refer to the total number of groups. For our data set there are three drugs, so there are <span class="math inline">\(G = 3\)</span> groups. Next, we’ll use <span class="math inline">\(N\)</span> to refer to the total sample size; there are a total of <span class="math inline">\(N = 18\)</span> people in our data set. Similarly, let’s use <span class="math inline">\(N_k\)</span> to denote the number of people in the k-th group. In our fake clinical trial, the sample size is <span class="math inline">\(N_k = 6\)</span> for all three groups.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Finally, we’ll use Y to denote the outcome variable. In our case, Y refers to mood change. Specifically, we’ll use Yik to refer to the mood change experienced by the i-th member of the k-th group. Similarly, we’ll use <span class="math inline">\(\bar{Y}\)</span> to be the average mood change, taken across all 18 people in the experiment, and <span class="math inline">\(\bar{Y}_k\)</span> to refer to the average mood change experienced by the 6 people in group <span class="math inline">\(k\)</span>.</p>
 <p>Now that we’ve got our notation sorted out we can start writing down formulas. To start with, let’s recall the formula for the variance that we used in <a href="04-Descriptive-statistics.html#sec-Measures-of-variability"><span>Section&nbsp;4.2</span></a>, way back in those kinder days when we were just doing descriptive statistics. The sample variance of Y is defined as follows <span class="math display">\[Var(Y)=\frac{1}{N}\sum_{k=1}^{G}\sum_{i=1}^{N_k}(Y_{ik}-\bar{Y})^2\]</span> This formula looks pretty much identical to the formula for the variance in <a href="04-Descriptive-statistics.html#sec-Measures-of-variability"><span>Section&nbsp;4.2</span></a>. The only difference is that this time around I’ve got two summations here: I’m summing over groups (i.e., values for <span class="math inline">\(k\)</span>) and over the people within the groups (i.e., values for <span class="math inline">\(i\)</span>). This is purely a cosmetic detail. If I’d instead used the notation <span class="math inline">\(Y_p\)</span> to refer to the value of the outcome variable for person p in the sample, then I’d only have a single summation. The only reason that we have a double summation here is that I’ve classified people into groups, and then assigned numbers to people within groups.</p>
 <p>A concrete example might be useful here. Let’s consider <a href="#tbl-tab13-1">Table&nbsp;<span>13.1</span></a>, in which we have a total of <span class="math inline">\(N = 5\)</span> people sorted into <span class="math inline">\(G = 2\)</span> groups. Arbitrarily, let’s say that the “cool” people are group 1 and the “uncool” people are group 2. It turns out that we have three cool people (<span class="math inline">\(N_1 = 3\)</span>) and two uncool people (<span class="math inline">\(N_2 = 2\)</span>)</p>
-<div class="cell">
+<div class="cell" data-layout-align="left">
 <div class="cell-output-display">
 <div id="tbl-tab13-1" class="anchored">
 
-<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab13-1"><caption>Table&nbsp;13.1:  Grumpiness for people in cool and uncool groups </caption>
+<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab13-1"><caption>Table&nbsp;13.1:  Grumpiness for people in cool and uncool groups </caption>
 <colgroup><col><col><col><col><col><col></colgroup><tbody><tr>
 <th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 0pt; font-weight: bold;">name</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">person P</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">group</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">group num. k</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">index in group</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 0pt 2pt 12pt; font-weight: bold;">grumpiness \( Y_{ik} \) or \( Y_p \)</th></tr>
 <tr>
@@ -487,11 +487,11 @@ div.csl-indent {
 <p><span class="math display">\[F=\frac{MS_b}{MS_w}\]</span></p>
 <p>At a very general level, the intuition behind the F statistic is straightforward. Bigger values of F means that the between-groups variation is large relative to the within-groups variation. As a consequence, the larger the value of F the more evidence we have against the null hypothesis. But how large does <span class="math inline">\(F\)</span> have to be in order to actually reject <span class="math inline">\(H_0\)</span>? In order to understand this, you need a slightly deeper understanding of what ANOVA is and what the mean squares values actually are.</p>
 <p>The next section discusses that in a bit of detail, but for readers that aren’t interested in the details of what the test is actually measuring I’ll cut to the chase. In order to complete our hypothesis test we need to know the sampling distribution for F if the null hypothesis is true. Not surprisingly, the sampling distribution for the F <u>statistic</u> under the null hypothesis is an <span class="math inline">\(F\)</span> distribution. If you recall our discussion of the F distribution in <a href="07-Introduction-to-probability.html"><span>Chapter&nbsp;7</span></a>, the <span class="math inline">\(F\)</span> <u>distribution</u> has two parameters, corresponding to the two degrees of freedom involved. The first one <span class="math inline">\(df_1\)</span> is the between groups degrees of freedom <span class="math inline">\(df_b\)</span>, and the second one <span class="math inline">\(df_2\)</span> is the within groups degrees of freedom <span class="math inline">\(df_w\)</span>.</p>
-<div class="cell">
+<div class="cell" data-layout-align="left">
 <div class="cell-output-display">
 <div id="tbl-tab13-2" class="anchored">
 
-<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab13-2"><caption>Table&nbsp;13.2:  All of the key quantities involved in an ANOVA organised into a ‘standard’ ANOVA table. The formulas for all quantities (except the p-value which has a very ugly formula and would be nightmarishly hard to calculate without a computer) are shown </caption>
+<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab13-2"><caption>Table&nbsp;13.2:  All of the key quantities involved in an ANOVA organised into a ‘standard’ ANOVA table. The formulas for all quantities (except the p-value which has a very ugly formula and would be nightmarishly hard to calculate without a computer) are shown </caption>
 <colgroup><col><col><col></colgroup><tbody><tr>
 <th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 0pt; font-weight: bold;"></th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">between<br>groups</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 0pt 2pt 12pt; font-weight: bold;">within<br>groups</th></tr>
 <tr>
@@ -515,11 +515,11 @@ div.csl-indent {
 <section id="a-worked-example" class="level3" data-number="13.2.4">
 <h3 data-number="13.2.4" class="anchored" data-anchor-id="a-worked-example"><span class="header-section-number">13.2.4</span> A worked example</h3>
 <p>The previous discussion was fairly abstract and a little on the technical side, so I think that at this point it might be useful to see a worked example. For that, let’s go back to the clinical trial data that I introduced at the start of the chapter. The descriptive statistics that we calculated at the beginning tell us our group means: an average mood gain of <span class="math inline">\(0.45\)</span> for the placebo, <span class="math inline">\(0.72\)</span> for Anxifree, and <span class="math inline">\(1.48\)</span> for Joyzepam. With that in mind, let’s party like it’s 1899 <a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> and start doing some pencil and paper calculations. I’ll only do this for the first <span class="math inline">\(5\)</span> observations because it’s not bloody <span class="math inline">\(1899\)</span> and I’m very lazy. Let’s start by calculating <span class="math inline">\(SS_w\)</span>, the within-group sums of squares. First, let’s draw up a nice table to help us with our calculations (<a href="#tbl-tab13-3">Table&nbsp;<span>13.3</span></a>)</p>
-<div class="cell">
+<div class="cell" data-layout-align="left">
 <div class="cell-output-display">
 <div id="tbl-tab13-3" class="anchored">
 
-<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab13-3"><caption>Table&nbsp;13.3:  A worked example…1 </caption>
+<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab13-3"><caption>Table&nbsp;13.3:  A worked example…1 </caption>
 <colgroup><col><col></colgroup><tbody><tr>
 <th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 0pt; font-weight: bold;">group k</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 0pt 2pt 12pt; font-weight: bold;">outcome \( Y_{ik} \)</th></tr>
 <tr>
@@ -538,11 +538,11 @@ div.csl-indent {
 </div>
 </div>
 <p>At this stage, the only thing I’ve included in the table is the raw data itself. That is, the grouping variable (i.e., drug) and outcome variable (i.e.&nbsp;mood.gain) for each person. Note that the outcome variable here corresponds to the <span class="math inline">\(\bar{Y}_{ik}\)</span> value in our equation previously. The next step in the calculation is to write down, for each person in the study, the corresponding group mean, <span class="math inline">\(\bar{Y}_k\)</span>. This is slightly repetitive but not particularly difficult since we already calculated those group means when doing our descriptive statistics, see <a href="#tbl-tab13-4">Table&nbsp;<span>13.4</span></a>.</p>
-<div class="cell">
+<div class="cell" data-layout-align="left">
 <div class="cell-output-display">
 <div id="tbl-tab13-4" class="anchored">
 
-<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab13-4"><caption>Table&nbsp;13.4:  A worked example…2 </caption>
+<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab13-4"><caption>Table&nbsp;13.4:  A worked example…2 </caption>
 <colgroup><col><col><col></colgroup><tbody><tr>
 <th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 0pt; font-weight: bold;">group k</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">outcome \( Y_{ik} \)</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 0pt 2pt 12pt; font-weight: bold;">group mean \( \bar{Y}_k \)</th></tr>
 <tr>
@@ -561,11 +561,11 @@ div.csl-indent {
 </div>
 </div>
 <p>Now that we’ve written those down, we need to calculate, again for every person, the deviation from the corresponding group mean. That is, we want to subtract <span class="math inline">\(Y_{ik} - \bar{Y}_k\)</span>. After we’ve done that, we need to square everything. When we do that, here’s what we get (<a href="#tbl-tab13-5">Table&nbsp;<span>13.5</span></a>)</p>
-<div class="cell">
+<div class="cell" data-layout-align="left">
 <div class="cell-output-display">
 <div id="tbl-tab13-5" class="anchored">
 
-<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab13-5"><caption>Table&nbsp;13.5:  A worked example…3 </caption>
+<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab13-5"><caption>Table&nbsp;13.5:  A worked example…3 </caption>
 <colgroup><col><col><col><col><col></colgroup><tbody><tr>
 <th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 0pt; font-weight: bold;">group k</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">outcome \( Y_{ik} \)</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">group mean  \( \bar{Y}_k \)</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">dev. from group mean  \( Y_{ik} - \bar{Y}_k \)</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 0pt 2pt 12pt; font-weight: bold;">squared deviation \(  (Y_{ik}-\bar{Y}_k)^2 \)</th></tr>
 <tr>
@@ -592,11 +592,11 @@ SS_w &amp; = 0.0025 + 0.0225 + 0.1225 + 0.0136 + 0.1003 \\
 \]</span></p>
 <p>Of course, if we actually wanted to get the right answer we’d need to do this for all 18 observations in the data set, not just the first five. We could continue with the pencil and paper calculations if we wanted to, but it’s pretty tedious. Alternatively, it’s not too hard to do this in a dedicated spreadsheet programme such as OpenOffice or Excel. Try and do it yourself. The one that I did, in Excel, is in the file clinicaltrial_anova.xls. When you do it you should end up with a within-group sum of squares value of <span class="math inline">\(1.39\)</span>.</p>
 <p>Okay. Now that we’ve calculated the within groups variation, <span class="math inline">\(SS_w\)</span>, it’s time to turn our attention to the between-group sum of squares, <span class="math inline">\(SS_b\)</span>. The calculations for this case are very similar. The main difference is that instead of calculating the differences between an observation Yik and a group mean <span class="math inline">\(\bar{Y}_k\)</span> for all of the observations, we calculate the differences between the group means <span class="math inline">\(\bar{Y}_k\)</span> and the grand mean <span class="math inline">\(\bar{Y}\)</span> (in this case <span class="math inline">\(0.88\)</span>) for all of the groups (<a href="#tbl-tab13-6">Table&nbsp;<span>13.6</span></a>).</p>
-<div class="cell">
+<div class="cell" data-layout-align="left">
 <div class="cell-output-display">
 <div id="tbl-tab13-6" class="anchored">
 
-<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab13-6"><caption>Table&nbsp;13.6:  A worked example…4 </caption>
+<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab13-6"><caption>Table&nbsp;13.6:  A worked example…4 </caption>
 <colgroup><col><col><col><col><col></colgroup><tbody><tr>
 <th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 0pt; font-weight: bold;">group k</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">group mean \( \bar{Y}_k \)</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">grand mean  \( \bar{Y} \)</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">deviation  \( \bar{Y}_k - \bar{Y} \)</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 0pt 2pt 12pt; font-weight: bold;">squared deviation \(  ( \bar{Y}_k-\bar{Y})^2 \)</th></tr>
 <tr>
@@ -611,11 +611,11 @@ SS_w &amp; = 0.0025 + 0.0225 + 0.1225 + 0.0136 + 0.1003 \\
 </div>
 </div>
 <p>However, for the between group calculations we need to multiply each of these squared deviations by <span class="math inline">\(N_k\)</span>, the number of observations in the group. We do this because every observation in the group (all <span class="math inline">\(N_k\)</span> of them) is associated with a between group difference. So if there are six people in the placebo group and the placebo group mean differs from the grand mean by <span class="math inline">\(0.19\)</span>, then the total between group variation associated with these six people is <span class="math inline">\(6 \times 0.19 = 1.14\)</span>. So we have to extend our little table of calculations (<a href="#tbl-tab13-7">Table&nbsp;<span>13.7</span></a>).</p>
-<div class="cell">
+<div class="cell" data-layout-align="left">
 <div class="cell-output-display">
 <div id="tbl-tab13-7" class="anchored">
 
-<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab13-7"><caption>Table&nbsp;13.7:  A worked example…5 </caption>
+<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab13-7"><caption>Table&nbsp;13.7:  A worked example…5 </caption>
 <colgroup><col><col><col><col><col></colgroup><tbody><tr>
 <th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 0pt; font-weight: bold;">group k</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">...</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">squared deviations  \( (\bar{Y}_k-\bar{Y})^2 \)</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">sample size  \( N_k \)</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 0pt 2pt 12pt; font-weight: bold;">weighted squared dev   \(  N_k (\bar{Y}_k-\bar{Y})^2 \)</th></tr>
 <tr>
@@ -654,11 +654,11 @@ F &amp; = \frac{MS_b}{MS_w}  = \frac{1.74}{0.09} \\
 \]</span></p>
 <p>Woohooo! This is terribly exciting, yes? Now that we have our test statistic, the last step is to find out whether the test itself gives us a significant result. As discussed in <a href="09-Hypothesis-testing.html"><span>Chapter&nbsp;9</span></a> back in the “old days” what we’d do is open up a statistics textbook or flick to the back section which would actually have a huge lookup table and we would find the threshold <span class="math inline">\(F\)</span> value corresponding to a particular value of alpha (the null hypothesis rejection region), e.g.&nbsp;<span class="math inline">\(0.05\)</span>, <span class="math inline">\(0.01\)</span> or <span class="math inline">\(0.001\)</span>, for 2 and 15 degrees of freedom. Doing it this way would give us a threshold F value for an alpha of <span class="math inline">\(0.001\)</span> of <span class="math inline">\(11.34\)</span>. As this is less than our calculated <span class="math inline">\(F\)</span> value we say that <span class="math inline">\(p &lt; 0.001\)</span>. But those were the old days, and nowadays fancy stats software calculates the exact p-value for you. In fact, the exact p-value is <span class="math inline">\(0.000071\)</span>. So, unless we’re being <em>extremely</em> conservative about our Type I error rate, we’re pretty much guaranteed to reject the null hypothesis.</p>
 <p>At this point, we’re basically done. Having completed our calculations, it’s traditional to organise all these numbers into an ANOVA table like the one in Table 13.1. For our clinical trial data, the ANOVA table would look like <a href="#tbl-tab13-8">Table&nbsp;<span>13.8</span></a>.</p>
-<div class="cell">
+<div class="cell" data-layout-align="left">
 <div class="cell-output-display">
 <div id="tbl-tab13-8" class="anchored">
 
-<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab13-8"><caption>Table&nbsp;13.8:  The ANOVA results table </caption>
+<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab13-8"><caption>Table&nbsp;13.8:  The ANOVA results table </caption>
 <colgroup><col><col><col><col><col><col></colgroup><tbody><tr>
 <th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 0pt; font-weight: bold;"></th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">df</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">sum of squares</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">mean squares</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">F-statistic</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 0pt 2pt 12pt; font-weight: bold;">p-value</th></tr>
 <tr>
@@ -683,11 +683,11 @@ F &amp; = \frac{MS_b}{MS_w}  = \frac{1.74}{0.09} \\
 <section id="using-jamovi-to-specify-your-anova" class="level3" data-number="13.3.1">
 <h3 data-number="13.3.1" class="anchored" data-anchor-id="using-jamovi-to-specify-your-anova"><span class="header-section-number">13.3.1</span> Using jamovi to specify your ANOVA</h3>
 <p>To make life easier for you, jamovi can do ANOVA…hurrah! Go to the ‘ANOVA’ - ‘ANOVA’ analysis, and move the mood.gain variable across so it is in the ‘Dependent Variable’ box, and then move the drug variable across so it is in the ‘Fixed Factors’ box. This should give the results as shown in <a href="#fig-fig13-3">Figure&nbsp;<span>13.3</span></a>. <a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a> Note I have also checked the <span class="math inline">\(\eta^2\)</span> checkbox, pronounced “eta” squared, under the ‘Effect Size’ option and this is also shown on the results table. We will come back to effect sizes a bit later.</p>
-<div class="cell" data-layout-align="left">
+<div class="cell enlarge-image" data-layout-align="left">
 <div class="cell-output-display">
 <div id="fig-fig13-3" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
-<p><img src="images/fig13-3.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<p><img src="images/fig13-3.png" class="img-fluid figure-img" style="width:80.0%"></p>
 <p></p><figcaption class="figure-caption">Figure&nbsp;13.3: jamovi results table for ANOVA of mood gain by drug administered</figcaption><p></p>
 </figure>
 </div>
@@ -714,11 +714,11 @@ F &amp; = \frac{MS_b}{MS_w}  = \frac{1.74}{0.09} \\
 </ul>
 <p>If any one of those three claims is false, then the null hypothesis is also false. So, now that we’ve rejected our null hypothesis, we’re thinking that at least one of those things isn’t true. But which ones? All three of these propositions are of interest. Since you certainly want to know if your new drug Joyzepam is better than a placebo, it would be nice to know how well it stacks up against an existing commercial alternative (i.e., Anxifree). It would even be useful to check the performance of Anxifree against the placebo. Even if Anxifree has already been extensively tested against placebos by other researchers, it can still be very useful to check that your study is producing similar results to earlier work.</p>
 <p>When we characterise the null hypothesis in terms of these three distinct propositions, it becomes clear that there are eight possible “states of the world” that we need to distinguish between (<a href="#tbl-tab13-9">Table&nbsp;<span>13.9</span></a>).</p>
-<div class="cell">
+<div class="cell" data-layout-align="left">
 <div class="cell-output-display">
 <div id="tbl-tab13-9" class="anchored">
 
-<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab13-9"><caption>Table&nbsp;13.9:  The null hypothesis and eight possible ‘states of the world’ </caption>
+<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab13-9"><caption>Table&nbsp;13.9:  The null hypothesis and eight possible ‘states of the world’ </caption>
 <colgroup><col><col><col><col><col></colgroup><tbody><tr>
 <th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 0pt; font-weight: bold;">possibility:</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">is \( \mu_P = \mu_A \)?</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">is \( \mu_P = \mu_J \)?</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">is \( \mu_A = \mu_J \)?</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 0pt 2pt 12pt; font-weight: bold;">which hypothesis?</th></tr>
 <tr>
@@ -746,11 +746,11 @@ F &amp; = \frac{MS_b}{MS_w}  = \frac{1.74}{0.09} \\
 <section id="running-pairwise-t-tests" class="level3" data-number="13.5.1">
 <h3 data-number="13.5.1" class="anchored" data-anchor-id="running-pairwise-t-tests"><span class="header-section-number">13.5.1</span> Running “pairwise” t-tests</h3>
 <p>How might we go about solving our problem? Given that we’ve got three separate pairs of means (placebo versus Anxifree, placebo versus Joyzepam, and Anxifree versus Joyzepam) to compare, what we could do is run three separate t-tests and see what happens. This is easy to do in jamovi. Go to the ANOVA ‘Post Hoc Tests’ options, move the ‘drug’ variable across into the active box on the right, and then click on the ‘No correction’ checkbox. This will produce a neat table showing all the pairwise t-test comparisons amongst the three levels of the drug variable, as in <a href="#fig-fig13-4">Figure&nbsp;<span>13.4</span></a></p>
-<div class="cell" data-layout-align="left">
+<div class="cell enlarge-image" data-layout-align="left">
 <div class="cell-output-display">
 <div id="fig-fig13-4" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
-<p><img src="images/fig13-4.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<p><img src="images/fig13-4.png" class="img-fluid figure-img" style="width:80.0%"></p>
 <p></p><figcaption class="figure-caption">Figure&nbsp;13.4: Uncorrected pairwise t-tests as post hoc comparisons in jamovi</figcaption><p></p>
 </figure>
 </div>
@@ -780,11 +780,11 @@ F &amp; = \frac{MS_b}{MS_w}  = \frac{1.74}{0.09} \\
 <p>(i.e., the biggest p-value remains unchanged, the second biggest p-value is doubled, the third biggest p-value is tripled, and so on), or</p>
 <p><span class="math display">\[p_j^{'}=p_{j+1}^{'}\]</span></p>
 <p>whichever one is <u>larger</u>. This might sound a little confusing, so let’s go through it a little more slowly. Here’s what the Holm correction does. First, you sort all of your p-values in order, from smallest to largest. For the smallest p-value all you do is multiply it by <span class="math inline">\(m\)</span>, and you’re done. However, for all the other ones it’s a two-stage process. For instance, when you move to the second smallest p value, you first multiply it by <span class="math inline">\(m - 1\)</span>. If this produces a number that is bigger than the adjusted p-value that you got last time, then you keep it. But if it’s smaller than the last one, then you copy the last p-value. To illustrate how this works, consider <a href="#tbl-tab13-10">Table&nbsp;<span>13.10</span></a> which shows the calculations of a Holm correction for a collection of five p-values.</p>
-<div class="cell">
+<div class="cell" data-layout-align="left">
 <div class="cell-output-display">
 <div id="tbl-tab13-10" class="anchored">
 
-<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab13-10"><caption>Table&nbsp;13.10:  Holm corrected p values </caption>
+<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab13-10"><caption>Table&nbsp;13.10:  Holm corrected p values </caption>
 <colgroup><col><col><col><col></colgroup><tbody><tr>
 <th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 0pt; font-weight: bold;">raw p</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">rank j</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">p \( \times \) j</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 0pt 2pt 12pt; font-weight: bold;">Holm p</th></tr>
 <tr>
@@ -841,7 +841,7 @@ F &amp; = \frac{MS_b}{MS_w}  = \frac{1.74}{0.09} \\
 <div class="cell-output-display">
 <div id="fig-fig13-5" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
-<p><img src="images/fig13-5.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<p><img src="images/fig13-5.png" class="img-fluid figure-img" style="width:80.0%"></p>
 <p></p><figcaption class="figure-caption">Figure&nbsp;13.5: Levene test output for one-way ANOVA in jamovi</figcaption><p></p>
 </figure>
 </div>
@@ -851,11 +851,11 @@ F &amp; = \frac{MS_b}{MS_w}  = \frac{1.74}{0.09} \\
 <section id="removing-the-homogeneity-of-variance-assumption" class="level3" data-number="13.6.3">
 <h3 data-number="13.6.3" class="anchored" data-anchor-id="removing-the-homogeneity-of-variance-assumption"><span class="header-section-number">13.6.3</span> Removing the homogeneity of variance assumption</h3>
 <p>In our example, the homogeneity of variance assumption turned out to be a pretty safe one: the Levene test came back non-significant (notwithstanding that we should also look at the plot of standard deviations), so we probably don’t need to worry. However, in real life we aren’t always that lucky. How do we save our ANOVA when the homogeneity of variance assumption is violated? If you recall from our discussion of t-tests, we’ve seen this problem before. The Student t-test assumes equal variances, so the solution was to use the Welch t-test, which does not. In fact, <span class="citation" data-cites="Welch1951">Welch (<a href="References.html#ref-Welch1951" role="doc-biblioref">1951</a>)</span> also showed how we can solve this problem for ANOVA too (the <strong>Welch one-way test</strong>). It’s implemented in jamovi using the One-Way ANOVA analysis. This is a specific analysis approach just for one-way ANOVA, and to run the Welch one-way ANOVA for our example, we would re-run the analysis as previously, but this time use the jamovi ANOVA - One Way ANOVA analysis command, and check the option for Welch’s test (see <a href="#fig-fig13-6">Figure&nbsp;<span>13.6</span></a>). To understand what’s happening here, let’s compare these numbers to what we got earlier when <a href="#running-an-anova-in-jamovi">Running an ANOVA in jamovi</a> originally. To save you the trouble of flicking back, this is what we got last time: <span class="math inline">\(F(2, 15) = 18.611, p = .00009\)</span>, also shown as the Fisher’s test in the One-Way ANOVA shown in <a href="#fig-fig13-6">Figure&nbsp;<span>13.6</span></a>.</p>
-<div class="cell" data-layout-align="left">
+<div class="cell enlarge-image" data-layout-align="left">
 <div class="cell-output-display">
 <div id="fig-fig13-6" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
-<p><img src="images/fig13-6.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<p><img src="images/fig13-6.png" class="img-fluid figure-img" style="width:80.0%"></p>
 <p></p><figcaption class="figure-caption">Figure&nbsp;13.6: Welch’s test as part of the One Way ANOVA analysis in jamovi</figcaption><p></p>
 </figure>
 </div>
@@ -870,7 +870,7 @@ F &amp; = \frac{MS_b}{MS_w}  = \frac{1.74}{0.09} \\
 <div class="cell-output-display">
 <div id="fig-fig13-7" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
-<p><img src="images/fig13-7.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<p><img src="images/fig13-7.png" class="img-fluid figure-img" style="width:80.0%"></p>
 <p></p><figcaption class="figure-caption">Figure&nbsp;13.7: QQ plot in the One Way ANOVA analysis in jamovi</figcaption><p></p>
 </figure>
 </div>
@@ -890,11 +890,11 @@ F &amp; = \frac{MS_b}{MS_w}  = \frac{1.74}{0.09} \\
 <h3 data-number="13.6.7" class="anchored" data-anchor-id="additional-details"><span class="header-section-number">13.6.7</span> Additional details</h3>
 <p>The description in the previous section illustrates the logic behind the Kruskal-Wallis test. At a conceptual level, this is the right way to think about how the test works.<a href="#fn15" class="footnote-ref" id="fnref15" role="doc-noteref"><sup>15</sup></a></p>
 <p>But wait, there’s more! Dear lord, why is there always more? The story I’ve told so far is only actually true when there are no ties in the raw data. That is, if there are no two observations that have exactly the same value. If there are ties, then we have to introduce a correction factor to these calculations. At this point I’m assuming that even the most diligent reader has stopped caring (or at least formed the opinion that the tie-correction factor is something that doesn’t require their immediate attention). So I’ll very quickly tell you how it’s calculated, and omit the tedious details about why it’s done this way. Suppose we construct a frequency table for the raw data, and let fj be the number of observations that have the j-th unique value. This might sound a bit abstract, so here’s a concrete example from the frequency table of mood.gain from the clinicaltrials.csv data set (<a href="#tbl-tab13-11">Table&nbsp;<span>13.11</span></a>)</p>
-<div class="cell">
+<div class="cell" data-layout-align="left">
 <div class="cell-output-display">
 <div id="tbl-tab13-11" class="anchored">
 
-<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab13-11"><caption>Table&nbsp;13.11:  Frequency table of mood gain from the clinicaltrials.csv data </caption>
+<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab13-11"><caption>Table&nbsp;13.11:  Frequency table of mood gain from the clinicaltrials.csv data </caption>
 <colgroup><col><col><col><col><col><col><col><col><col><col><col><col><col><col></colgroup><tbody><tr>
 <th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 0pt; font-weight: bold;">0.1</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">0.2</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">0.3</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">0.4</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">0.5</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">0.6</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">0.8</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">0.9</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">1.1</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">1.2</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">1.3</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">1.4</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">1.7</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 0pt 2pt 12pt; font-weight: bold;">1.8</th></tr>
 <tr>
@@ -910,11 +910,11 @@ F &amp; = \frac{MS_b}{MS_w}  = \frac{1.74}{0.09} \\
 <section id="how-to-run-the-kruskal-wallis-test-in-jamovi" class="level3" data-number="13.6.8">
 <h3 data-number="13.6.8" class="anchored" data-anchor-id="how-to-run-the-kruskal-wallis-test-in-jamovi"><span class="header-section-number">13.6.8</span> How to run the Kruskal-Wallis test in jamovi</h3>
 <p>Despite the horror that we’ve gone through in trying to understand what the Kruskal Wallis test actually does, it turns out that running the test is pretty painless, since jamovi has an analysis as part of the ANOVA analysis set called ‘Non-Parametric’ - ‘One Way ANOVA (Kruskall-Wallis)’ Most of the time you’ll have data like the clinicaltrial.csv data set, in which you have your outcome variable mood.gain and a grouping variable drug. If so, you can just go ahead and run the analysis in jamovi. What this gives us is a Kruskal-Wallis <span class="math inline">\(\chi^2 =12.076, df = 2, p = 0.00239\)</span>, as in <a href="#fig-fig13-8">Figure&nbsp;<span>13.8</span></a></p>
-<div class="cell" data-layout-align="left">
+<div class="cell enlarge-image" data-layout-align="left">
 <div class="cell-output-display">
 <div id="fig-fig13-8" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
-<p><img src="images/fig13-8.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<p><img src="images/fig13-8.png" class="img-fluid figure-img" style="width:80.0%"></p>
 <p></p><figcaption class="figure-caption">Figure&nbsp;13.8: Kruskall-Wallis one-way non-parametric ANOVA in jamovi</figcaption><p></p>
 </figure>
 </div>
@@ -932,11 +932,11 @@ F &amp; = \frac{MS_b}{MS_w}  = \frac{1.74}{0.09} \\
 <section id="repeated-measures-anova-in-jamovi" class="level3" data-number="13.7.1">
 <h3 data-number="13.7.1" class="anchored" data-anchor-id="repeated-measures-anova-in-jamovi"><span class="header-section-number">13.7.1</span> Repeated measures ANOVA in jamovi</h3>
 <p>First, we need some data. <span class="citation" data-cites="Geschwind1972">Geschwind (<a href="References.html#ref-Geschwind1972" role="doc-biblioref">1972</a>)</span> has suggested that the exact nature of a patient’s language deficit following a stroke can be used to diagnose the specific region of the brain that has been damaged. A researcher is concerned with identifying the specific communication difficulties experienced by six patients suffering from Broca’s Aphasia (a language deficit commonly experienced following a stroke) (<a href="#tbl-tab13-12">Table&nbsp;<span>13.12</span></a>).</p>
-<div class="cell">
+<div class="cell" data-layout-align="left">
 <div class="cell-output-display">
 <div id="tbl-tab13-12" class="anchored">
 
-<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab13-12"><caption>Table&nbsp;13.12:  Word recognition task scores in stroke patients </caption>
+<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab13-12"><caption>Table&nbsp;13.12:  Word recognition task scores in stroke patients </caption>
 <colgroup><col><col><col><col></colgroup><tbody><tr>
 <th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 0pt; font-weight: bold;">Participant</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">Speech</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">Conceptual</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 0pt 2pt 12pt; font-weight: bold;">Syntax</th></tr>
 <tr>
@@ -962,7 +962,7 @@ F &amp; = \frac{MS_b}{MS_w}  = \frac{1.74}{0.09} \\
 <div class="cell-output-display">
 <div id="fig-fig13-9" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
-<p><img src="images/fig13-9.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<p><img src="images/fig13-9.png" class="img-fluid figure-img" style="width:80.0%"></p>
 <p></p><figcaption class="figure-caption">Figure&nbsp;13.9: Repeated measures ANOVA dialogue box in jamovi</figcaption><p></p>
 </figure>
 </div>
@@ -976,11 +976,11 @@ F &amp; = \frac{MS_b}{MS_w}  = \frac{1.74}{0.09} \\
 <li>Finally, under the Assumption Checks option, tick the “Sphericity checks” text box.</li>
 </ul>
 <p>jamovi output for a one-way repeated measures ANOVA is produced as shown in <a href="#fig-fig13-10">Figure&nbsp;<span>13.10</span></a> to <a href="#fig-fig13-13">Figure&nbsp;<span>13.13</span></a>. The first output we should look at is Mauchly’s Test of Sphericity, which tests the hypothesis that the variances of the differences between the conditions are equal (meaning that the spread of difference scores between the study conditions is approximately the same). In <a href="#fig-fig13-10">Figure&nbsp;<span>13.10</span></a> Mauchly’s test significance level is <span class="math inline">\(p = .720\)</span>. If Mauchly’s test is non-significant (i.e.&nbsp;p &lt; .05, as is the case in this analysis) then it is reasonable to conclude that the variances of the differences are not significantly different (i.e.&nbsp;they are roughly equal and sphericity can be assumed.).</p>
-<div class="cell" data-layout-align="left">
+<div class="cell enlarge-image" data-layout-align="left">
 <div class="cell-output-display">
 <div id="fig-fig13-10" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
-<p><img src="images/fig13-10.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<p><img src="images/fig13-10.png" class="img-fluid figure-img" style="width:80.0%"></p>
 <p></p><figcaption class="figure-caption">Figure&nbsp;13.10: One-way repeated measures ANOVA output - Mauchly’s Test of Sphericity</figcaption><p></p>
 </figure>
 </div>
@@ -992,11 +992,11 @@ F &amp; = \frac{MS_b}{MS_w}  = \frac{1.74}{0.09} \\
 <li>But if the Greenhouse-Geisser value is &lt; .75, then you should use the Greenhouse-Geisser correction.</li>
 </ul>
 <p>Both these corrected F-values can be specified in the Sphericity Corrections check boxes under the Assumption Checks options, and the corrected F-values are then shown in the results table, as in Figure <strong>13.11</strong>.</p>
-<div class="cell" data-layout-align="left">
+<div class="cell enlarge-image" data-layout-align="left">
 <div class="cell-output-display">
 <div id="fig-fig13-11" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
-<p><img src="images/fig13-11.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<p><img src="images/fig13-11.png" class="img-fluid figure-img" style="width:80.0%"></p>
 <p></p><figcaption class="figure-caption">Figure&nbsp;13.11: One-way repeated measures ANOVA output - Tests of Within-Subjects Effects</figcaption><p></p>
 </figure>
 </div>
@@ -1004,22 +1004,22 @@ F &amp; = \frac{MS_b}{MS_w}  = \frac{1.74}{0.09} \\
 </div>
 <p>In our analysis, we saw that the significance of Mauchly’s Test of Sphericity was p = .720 (i.e.&nbsp;p &gt; 0.05). So, this means we can assume that the requirement of sphericity has been met so no correction to the F-value is needed. Therefore, we can use the ‘None’ Sphericity Correction output values for the repeated measure ‘Task’: <span class="math inline">\(F = 6.93\)</span>, <span class="math inline">\(df = 2\)</span>, <span class="math inline">\(p = .013\)</span>, and we can conclude that the number of tests successfully completed on each language task did vary significantly depending on whether the task was speech, comprehension or syntax based (<span class="math inline">\(F(2, 10) = 6.93\)</span>, <span class="math inline">\(p = .013\)</span>).</p>
 <p>Post-hoc tests can also be specified in jamovi for repeated measures ANOVA in the same way as for independent ANOVA. The results are shown in <a href="#fig-fig13-12">Figure&nbsp;<span>13.12</span></a>. These indicate that there is a significant difference between Speech and Syntax, but not between other levels.</p>
-<div class="cell" data-layout-align="left">
+<div class="cell enlarge-image" data-layout-align="left">
 <div class="cell-output-display">
 <div id="fig-fig13-12" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
-<p><img src="images/fig13-12.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<p><img src="images/fig13-12.png" class="img-fluid figure-img" style="width:80.0%"></p>
 <p></p><figcaption class="figure-caption">Figure&nbsp;13.12: Post-hoc tests in repeated measures ANOVA in jamovi</figcaption><p></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Descriptive statistics (marginal means) can be reviewed to help interpret the results, produced in the jamovi output as in <a href="#fig-fig13-13">Figure&nbsp;<span>13.13</span></a>. Comparison of the mean number of trials successfully completed by participants shows that Broca’s Aphasics perform reasonably well on speech production (mean = 7.17) and language comprehension (mean = 6.17) tasks. However, their performance was considerably worse on the syntax task (mean = 4.33), with a significant difference in post-hoc tests between Speech and Syntax task performance.</p>
-<div class="cell" data-layout-align="left">
+<div class="cell enlarge-image" data-layout-align="left">
 <div class="cell-output-display">
 <div id="fig-fig13-13" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
-<p><img src="images/fig13-13.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<p><img src="images/fig13-13.png" class="img-fluid figure-img" style="width:80.0%"></p>
 <p></p><figcaption class="figure-caption">Figure&nbsp;13.13: One-way repeated measures ANOVA output - Descriptive Statistics</figcaption><p></p>
 </figure>
 </div>
@@ -1031,11 +1031,11 @@ F &amp; = \frac{MS_b}{MS_w}  = \frac{1.74}{0.09} \\
 <h2 data-number="13.8" class="anchored" data-anchor-id="the-friedman-non-parametric-repeated-measures-anova-test"><span class="header-section-number">13.8</span> The Friedman non-parametric repeated measures ANOVA test</h2>
 <p>The Friedman test is a non-parametric version of a repeated measures ANOVA and can be used instead of the Kruskall-Wallis test when testing for differences between three or more groups where the same participants are in each group, or each participant is closely matched with participants in other conditions. If the dependent variable is ordinal, or if the assumption of normality is not met, then the Friedman test can be used.</p>
 <p>As with the Kruskall-Wallis test, the underlying mathematics is complicated, and won’t be presented here. For the purpose of this book, it is sufficient to note that jamovi calculates the tie-corrected version of the Friedman test, and in <a href="#fig-fig13-14">Figure&nbsp;<span>13.14</span></a> there is an example using the Broca’s Aphasia data we have already looked at.</p>
-<div class="cell" data-layout-align="left">
+<div class="cell enlarge-image" data-layout-align="left">
 <div class="cell-output-display">
 <div id="fig-fig13-14" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
-<p><img src="images/fig13-14.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<p><img src="images/fig13-14.png" class="img-fluid figure-img" style="width:80.0%"></p>
 <p></p><figcaption class="figure-caption">Figure&nbsp;13.14: The ‘Repeated Measures ANOVA (Non-parametric)’ dialogue box and results in jamovi</figcaption><p></p>
 </figure>
 </div>

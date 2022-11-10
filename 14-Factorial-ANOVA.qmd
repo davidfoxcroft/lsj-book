@@ -17,8 +17,6 @@ If we cross-tabulate drug by therapy, using the 'Frequencies' - 'Contingency Tab
 
 ```{r}
 #| label: fig-fig14-1
-#| fig-align: left
-#| fig-width: 0.7
 #| fig-cap: jamovi contingency table of drug by therapy
 knitr::include_graphics("images/fig14-1.png")
 ```
@@ -41,7 +39,7 @@ Now, the next Table (@tbl-tab14-2) shows a list of the group means for all possi
 ```{r}
 #| label: tbl-tab14-2
 #| tbl-cap: Group and total means for drug and therapy groups in the clintrial.csv data
-huxtabs[[14]][[2]] 
+huxtabs[[14]][[2]]
 ```
 
 Now, each of these different means is of course a sample statistic. It's a quantity that pertains to the specific observations that we've made during our study. What we want to make inferences about are the corresponding population parameters. That is, the true means as they exist within some broader population. Those population means can also be organised into a similar table, but we'll need a little mathematical notation to do so (@tbl-tab14-3). As usual, I'll use the symbol $\mu$ to denote a population mean. However, because there are lots of different means, I'll need to use subscripts to distinguish between them.
@@ -53,7 +51,7 @@ Here's how the notation works. Our table is defined in terms of two factors. Eac
 ```{r}
 #| label: tbl-tab14-3
 #| tbl-cap: Notation for population means in a factorial table
-huxtabs[[14]][[3]] 
+huxtabs[[14]][[3]]
 ```
 
 Okay, what about the remaining entries? For instance, how should we describe the average mood gain across the entire (hypothetical) population of people who might be given Joyzepam in an experiment like this, regardless of whether they were in CBT? We use the "dot" notation to express this. In the case of Joyzepam, notice that we're talking about the mean associated with the third row in the table. That is, we're averaging across two cell means (i.e., $\mu_{31}$ and $\mu_{32}$). The result of this averaging is referred to as a marginal mean, and would be denoted $\mu_3.$ in this case. The **marginal mean** for CBT corresponds to the population mean associated with the second column in the table, so we use the notation because it is the mean obtained by averaging (marginalising[^factorial-anova-2]) over both. So our full table of population means can be written down like in @tbl-tab14-4.
@@ -63,7 +61,7 @@ Okay, what about the remaining entries? For instance, how should we describe the
 ```{r}
 #| label: tbl-tab14-4
 #| tbl-cap: Notation for population and total means in a factorial table
-huxtabs[[14]][[4]] 
+huxtabs[[14]][[4]]
 ```
 
 Now that we have this notation, it is straightforward to formulate and express some hypotheses. Let's suppose that the goal is to find out two things. First, does the choice of drug have any effect on mood? And second, does CBT have any effect on mood? These aren't the only hypotheses that we could formulate of course, and we'll see a really important example of a different kind of hypothesis in the section [Factorial ANOVA 2: balanced designs, interactions allowed], but these are the two simplest hypotheses to test, and so we'll start there. Consider the first test. If the drug has no effect then we would expect all of the row means to be identical, right? So that's our null hypothesis. On the other hand, if the drug does matter then we should expect these row means to be different. Formally, we write down our null and alternative hypotheses in terms of the equality of marginal means:
@@ -87,8 +85,6 @@ If the data you're trying to analyse correspond to a balanced factorial design t
 
 ```{r}
 #| label: fig-fig14-2
-#| fig-align: left
-#| out.width: 80%
 #| classes: .enlarge-image
 #| fig-cap: jamovi one way anova of mood.gain by drug
 knitr::include_graphics("images/fig14-2.png")
@@ -98,8 +94,6 @@ Now, suppose I'm also curious to find out if therapy has a relationship to mood.
 
 ```{r}
 #| label: fig-fig14-3
-#| fig-align: left
-#| out.width: 90%
 #| classes: .enlarge-image
 #| fig-cap: jamovi two way anova of mood.gain by drug and therapy
 knitr::include_graphics("images/fig14-3.png")
@@ -132,7 +126,7 @@ Okay, let's start by looking at some of those details. The explanation that I ga
 ```{r}
 #| label: tbl-tab14-5
 #| tbl-cap: Notation for sample means for the clinical trial data
-huxtabs[[14]][[5]] 
+huxtabs[[14]][[5]]
 ```
 
 And if we look at the sample means that I showed earlier, we have $\bar{Y}_{11} = 0.30$, $\bar{Y}_{12} = 0.60$ etc. In our clinical trial example, the drugs factor has 3 levels and the therapy factor has 2 levels, and so what we're trying to run is a $3 \times 2$ factorial ANOVA. However, we'll be a little more general and say that Factor A (the row factor) has R levels and Factor B (the column factor) has C levels, and so what we're running here is an $R \times C$ factorial ANOVA.
@@ -161,8 +155,6 @@ The four patterns of data shown in @fig-fig14-4 are all quite realistic. There a
 
 ```{r}
 #| label: fig-fig14-4
-#| fig-align: left
-#| out.width: 90%
 #| fig-cap: The four different outcomes for a $2 \times 2$ ANOVA when no interactions are present. In panel (a) we see a main effect of Factor A and no effect of Factor B. Panel (b) shows a main effect of Factor B but no effect of Factor A. Panel (c) shows main effects of both Factor A and Factor B. Finally, panel (d) shows no effect of either factor
 
 mn=c(1.0, 2.0, 1.0, 2.0)
@@ -171,15 +163,15 @@ FactB = factor(c('level 1', 'level 2', 'level 2', 'level 1'))
 dat <- data.frame(mn, FactA, FactB)
 
 p1 <- ggplot(dat, aes(x= FactA, y=mn, group=FactB)) +
-  geom_line(aes(linetype = FactB), position=position_dodge(width=.1), 
+  geom_line(aes(linetype = FactB), position=position_dodge(width=.1),
             stat="identity", col=blueshade) +
-  geom_point(aes(shape = FactB), size = 3, position=position_dodge(width=.1), 
+  geom_point(aes(shape = FactB), size = 3, position=position_dodge(width=.1),
              stat="identity", col= blueshade) +
   scale_shape_manual("Factor B", values=c(16,1), labels=c('Factor B, level 1', 'Factor B, level 2')) +
   scale_linetype_manual("Factor B", values=c("solid", "dotted"),  labels=c('Factor B, level 1', 'Factor B, level 2')) +
   ggtitle("Only Factor A has an effect") +
   ylim(0.5,2.5) +
-  labs(x = "Factor A\n\n(a)", y = "Group mean", group = "Factor B") + 
+  labs(x = "Factor A\n\n(a)", y = "Group mean", group = "Factor B") +
   theme_classic() +
   theme(
     plot.title = element_text(hjust=0.5),
@@ -193,15 +185,15 @@ mn=c(1.8, 1.2, 1.2, 1.8)
 dat <- data.frame(mn, FactA, FactB)
 
 p2 <- ggplot(dat, aes(x= FactA, y=mn, group=FactB)) +
-  geom_line(aes(linetype = FactB), 
+  geom_line(aes(linetype = FactB),
             stat="identity", col=blueshade) +
-  geom_point(aes(shape = FactB), size = 3, 
+  geom_point(aes(shape = FactB), size = 3,
              stat="identity", col= blueshade) +
   scale_shape_manual("Factor B", values=c(16,1), labels=c('Factor B, level 1', 'Factor B, level 2')) +
   scale_linetype_manual("Factor B", values=c("solid", "dotted"),  labels=c('Factor B, level 1', 'Factor B, level 2')) +
   ggtitle("Only Factor B has an effect") +
   ylim(0.5,2.5) +
-  labs(x = "Factor A\n\n(b)", y = "Group mean", group = "Factor B") + 
+  labs(x = "Factor A\n\n(b)", y = "Group mean", group = "Factor B") +
   theme_classic() +
   theme(
     plot.title = element_text(hjust=0.5),
@@ -215,15 +207,15 @@ mn=c(1.5, 1.5, 0.6, 2.4)
 dat <- data.frame(mn, FactA, FactB)
 
 p3 <- ggplot(dat, aes(x= FactA, y=mn, group=FactB)) +
-  geom_line(aes(linetype = FactB), 
+  geom_line(aes(linetype = FactB),
             stat="identity", col=blueshade) +
-  geom_point(aes(shape = FactB), size = 3, 
+  geom_point(aes(shape = FactB), size = 3,
              stat="identity", col= blueshade) +
   scale_shape_manual("Factor B", values=c(16,1), labels=c('Factor B, level 1', 'Factor B, level 2')) +
   scale_linetype_manual("Factor B", values=c("solid", "dotted"),  labels=c('Factor B, level 1', 'Factor B, level 2')) +
   ggtitle("A and B both have an effect") +
   ylim(0.5,2.5) +
-  labs(x = "Factor A\n\n(c)", y = "Group mean", group = "Factor B") + 
+  labs(x = "Factor A\n\n(c)", y = "Group mean", group = "Factor B") +
   theme_classic() +
   theme(
     plot.title = element_text(hjust=0.5),
@@ -237,15 +229,15 @@ mn=c(1.6, 1.5, 1.5, 1.6)
 dat <- data.frame(mn, FactA, FactB)
 
 p4 <- ggplot(dat, aes(x= FactA, y=mn, group=FactB)) +
-  geom_line(aes(linetype = FactB), 
+  geom_line(aes(linetype = FactB),
             stat="identity", col=blueshade) +
-  geom_point(aes(shape = FactB), size = 3, 
+  geom_point(aes(shape = FactB), size = 3,
              stat="identity", col= blueshade) +
   scale_shape_manual("Factor B", values=c(16,1), labels=c('Factor B, level 1', 'Factor B, level 2')) +
   scale_linetype_manual("Factor B", values=c("solid", "dotted"),  labels=c('Factor B, level 1', 'Factor B, level 2')) +
   ggtitle("Neither A or B has an effect") +
   ylim(0.5,2.5) +
-  labs(x = "Factor A\n\n(d)", y = "Group mean", group = "Factor B") + 
+  labs(x = "Factor A\n\n(d)", y = "Group mean", group = "Factor B") +
   theme_classic() +
   theme(
     plot.title = element_text(hjust=0.5),
@@ -261,8 +253,6 @@ gridExtra::grid.arrange(p1,p2,p3,p4,ncol=2)
 
 ```{r}
 #| label: fig-fig14-5
-#| fig-align: left
-#| out.width: 90%
 #| fig-cap: Qualitatively different interactions for a $2 \times 2$ ANOVA
 
 mn=c(1.0, 1.0, 2.0, 2.0)
@@ -271,15 +261,15 @@ FactB = factor(c('level 1', 'level 2', 'level 2', 'level 1'))
 dat <- data.frame(mn, FactA, FactB)
 
 p1 <- ggplot(dat, aes(x= FactA, y=mn, group=FactB)) +
-  geom_line(aes(linetype = FactB), 
+  geom_line(aes(linetype = FactB),
             stat="identity", col=blueshade) +
-  geom_point(aes(shape = FactB), size = 3,  
+  geom_point(aes(shape = FactB), size = 3,
              stat="identity", col= blueshade) +
   scale_shape_manual("Factor B", values=c(16,1), labels=c('Factor B, level 1', 'Factor B, level 2')) +
   scale_linetype_manual("Factor B", values=c("solid", "dotted"),  labels=c('Factor B, level 1', 'Factor B, level 2')) +
   ggtitle("Crossover interaction") +
   ylim(0.5,2.5) +
-  labs(x = "Factor A\n\n(a)", y = "Group mean", group = "Factor B") + 
+  labs(x = "Factor A\n\n(a)", y = "Group mean", group = "Factor B") +
   theme_classic() +
   theme(
     plot.title = element_text(hjust=0.5),
@@ -293,15 +283,15 @@ mn=c(1.0, 2.0, 1.05, 1.4)
 dat <- data.frame(mn, FactA, FactB)
 
 p2 <- ggplot(dat, aes(x= FactA, y=mn, group=FactB)) +
-  geom_line(aes(linetype = FactB), 
+  geom_line(aes(linetype = FactB),
             stat="identity", col=blueshade) +
-  geom_point(aes(shape = FactB), size = 3, 
+  geom_point(aes(shape = FactB), size = 3,
              stat="identity", col= blueshade) +
   scale_shape_manual("Factor B", values=c(16,1), labels=c('Factor B, level 1', 'Factor B, level 2')) +
   scale_linetype_manual("Factor B", values=c("solid", "dotted"),  labels=c('Factor B, level 1', 'Factor B, level 2')) +
   ggtitle("Effect for one level of Factor A") +
   ylim(0.5,2.5) +
-  labs(x = "Factor A\n\n(b)", y = "Group mean", group = "Factor B") + 
+  labs(x = "Factor A\n\n(b)", y = "Group mean", group = "Factor B") +
   theme_classic() +
   theme(
     plot.title = element_text(hjust=0.5),
@@ -315,15 +305,15 @@ mn=c(1.0, 2.0, 1.05, 1.0)
 dat <- data.frame(mn, FactA, FactB)
 
 p3 <- ggplot(dat, aes(x= FactA, y=mn, group=FactB)) +
-  geom_line(aes(linetype = FactB), 
+  geom_line(aes(linetype = FactB),
             stat="identity", col=blueshade) +
-  geom_point(aes(shape = FactB), size = 3, 
+  geom_point(aes(shape = FactB), size = 3,
              stat="identity", col= blueshade) +
   scale_shape_manual("Factor B", values=c(16,1), labels=c('Factor B, level 1', 'Factor B, level 2')) +
   scale_linetype_manual("Factor B", values=c("solid", "dotted"),  labels=c('Factor B, level 1', 'Factor B, level 2')) +
   ggtitle("One cell is different") +
   ylim(0.5,2.5) +
-  labs(x = "Factor A\n\n(c)", y = "Group mean", group = "Factor B") + 
+  labs(x = "Factor A\n\n(c)", y = "Group mean", group = "Factor B") +
   theme_classic() +
   theme(
     plot.title = element_text(hjust=0.5),
@@ -337,15 +327,15 @@ mn=c(1.0, 2.0, 1.5, 1.0)
 dat <- data.frame(mn, FactA, FactB)
 
 p4 <- ggplot(dat, aes(x= FactA, y=mn, group=FactB)) +
-  geom_line(aes(linetype = FactB), 
+  geom_line(aes(linetype = FactB),
             stat="identity", col=blueshade) +
-  geom_point(aes(shape = FactB), size = 3, 
+  geom_point(aes(shape = FactB), size = 3,
              stat="identity", col= blueshade) +
   scale_shape_manual("Factor B", values=c(16,1), labels=c('Factor B, level 1', 'Factor B, level 2')) +
   scale_linetype_manual("Factor B", values=c("solid", "dotted"),  labels=c('Factor B, level 1', 'Factor B, level 2')) +
   ggtitle("Effect for one level of Factor B") +
   ylim(0.5,2.5) +
-  labs(x = "Factor A\n\n(d)", y = "Group mean", group = "Factor B") + 
+  labs(x = "Factor A\n\n(d)", y = "Group mean", group = "Factor B") +
   theme_classic() +
   theme(
     plot.title = element_text(hjust=0.5),
@@ -362,11 +352,9 @@ gridExtra::grid.arrange(p1,p2,p3,p4,ncol=2)
 
 ```{r}
 #| label: fig-fig14-6
-#| fig-align: left
-#| out.width: 90%
 #| classes: .enlarge-image
 #| fig-cap: jamovi screen showing how to generate a descriptive interaction plot in ANOVA using the clinical trial data
-knitr::include_graphics("images/fig14-6.png") 
+knitr::include_graphics("images/fig14-6.png")
 ```
 
 ### What exactly is an interaction effect?
@@ -386,7 +374,7 @@ $$
 \begin{aligned}
 df_{A:B} & = (R \times C - 1) - (R - 1) - (C - 1) \\
 & = RC - R - C + 1 \\
-& = (R-1)(C-1) 
+& = (R-1)(C-1)
 \end{aligned}
 $$
 
@@ -402,11 +390,9 @@ Adding interaction terms to the ANOVA model in jamovi is straightforward. In fac
 
 ```{r}
 #| label: fig-fig14-7
-#| fig-align: left
-#| out.width: 80%
 #| classes: .enlarge-image
 #| fig-cap: Results for the full factorial model, including the interaction component drug $\times$ therapy
-knitr::include_graphics("images/fig14-7.png") 
+knitr::include_graphics("images/fig14-7.png")
 ```
 
 As it turns out, while we do have a significant main effect of drug ($F_{2,12} = 31.7, p < .001$) and therapy type ($F_{1,12} = 8.6, p = .013$), there is no significant interaction between the two ($F_{2,12} = 2.5, p = 0.125$).
@@ -456,7 +442,7 @@ Speaking of interaction effects, @tbl-tab14-7 shows what we get when we calculat
 ```{r}
 #| label: tbl-tab14-7
 #| tbl-cap: Effect sizes when the interaction term **is** included in the ANOVA model
-huxtabs[[14]][[7]] 
+huxtabs[[14]][[7]]
 ```
 
 ### Estimated group means
@@ -465,8 +451,6 @@ In many situations you will find yourself wanting to report estimates of all the
 
 ```{r}
 #| label: fig-fig14-8
-#| fig-align: left
-#| out.width: 90%
 #| classes: .enlarge-image
 #| fig-cap: jamovi screenshot showing the marginal means for the saturated model, i.e. including the interaction component, with the clinical trial data set
 knitr::include_graphics("images/fig14-8.png")
@@ -478,8 +462,6 @@ When the model doesn't contain the interaction term, then the estimated group me
 
 ```{r}
 #| label: fig-fig14-9
-#| fig-align: left
-#| out.width: 80%
 #| classes: .enlarge-image
 #| fig-cap: jamovi screenshot showing the marginal means for the unsaturated model, i.e. without the interaction component, with the clinical trial data set
 knitr::include_graphics("images/fig14-9.png")
@@ -499,8 +481,6 @@ As with one-way ANOVA we can test for the normality of residuals in a straightfo
 
 ```{r}
 #| label: fig-fig14-10
-#| fig-align: left
-#| out.width: 80%
 #| classes: .enlarge-image
 #| fig-cap: Checking assumptions in an ANOVA model
 knitr::include_graphics("images/fig14-10.png")
@@ -516,8 +496,6 @@ Despite this advantage, ANCOVA runs the risk of undoing real differences between
 
 ```{r}
 #| label: fig-fig14-11
-#| fig-align: left
-#| out.width: 70%
 #| fig-cap: Plot of Statistics anxiety against age for two distinct groups
 knitr::include_graphics("images/fig14-11.png")
 ```
@@ -530,8 +508,6 @@ A health psychologist was interested in the effect of routine cycling and stress
 
 ```{r}
 #| label: fig-fig14-12
-#| fig-align: left
-#| out.width: 70%
 #| classes: .enlarge-image
 #| fig-cap: The jamovi ANCOVA analysis window
 knitr::include_graphics("images/fig14-12.png")
@@ -541,8 +517,6 @@ An ANCOVA table showing Tests of Between-Subjects Effects is produced in the jam
 
 ```{r}
 #| label: fig-fig14-13
-#| fig-align: left
-#| out.width: 80%
 #| classes: .enlarge-image
 #| fig-cap: jamovi ANCOVA output for happiness as a function of stress and commuting method, with age as a covariate
 knitr::include_graphics("images/fig14-13.png")
@@ -550,8 +524,6 @@ knitr::include_graphics("images/fig14-13.png")
 
 ```{r}
 #| label: fig-fig14-14
-#| fig-align: left
-#| out.width: 80%
 #| classes: .enlarge-image
 #| fig-cap: Table of mean happiness level as a function of stress and commuting method (adjusted for the covariate age) with 95% confidence intervals
 knitr::include_graphics("images/fig14-14.png")
@@ -563,8 +535,6 @@ In @fig-fig14-15 we can see the adjusted, marginal, mean happiness scores when a
 
 ```{r}
 #| label: fig-fig14-15
-#| fig-align: left
-#| out.width: 70%
 #| fig-cap: Plot of mean happiness level as a function of stress and commuting method
 knitr::include_graphics("images/fig14-15.png")
 ```
@@ -594,15 +564,13 @@ Okay, so far that's simple enough. The next thing we need to do is to wrap some 
 ```{r}
 #| label: tbl-tab14-8
 #| tbl-cap: Data for grade, attendance and reading the textbook
-huxtabs[[14]][[8]] 
+huxtabs[[14]][[8]]
 ```
 
 This isn't anything particularly special, of course. It's exactly the format in which we expect to see our data! See the data file rtfm.csv. We can use the jamovi 'Descriptives' analysis to confirm that this data set corresponds to a balanced design, with 2 observations for each combination of attend and reading. In the same way we can also calculate the mean grade for each combination. This is shown in @fig-fig14-16. Looking at the mean scores, one gets the strong impression that reading the text and attending the class both matter a lot.
 
 ```{r}
 #| label: fig-fig14-16
-#| fig-align: left
-#| out.width: 90%
 #| classes: .enlarge-image
 #| fig-cap: jamovi descriptives for the rtfm data set
 knitr::include_graphics("images/fig14-16.png")
@@ -618,8 +586,6 @@ This is, of course, the exact same equation that I used earlier to describe a tw
 
 ```{r}
 #| label: fig-fig14-17
-#| fig-align: left
-#| out.width: 80%
 #| classes: .enlarge-image
 #| fig-cap: ANOVA of the rtfm.csv data set in jamovi, without the interaction term
 knitr::include_graphics("images/fig14-17.png")
@@ -632,9 +598,9 @@ Now let's think about the same analysis from a linear regression perspective. In
 Wait a second though. Why is this true? It's something that is intuitively obvious to everyone who has taken a few stats classes and is comfortable with the maths, but it isn't clear to everyone else at first pass. To see why this is true, it helps to look closely at a few specific students. Let's start by considering the 6th and 7th students in our data set (i.e. $p = 6$ and $p = 7$). Neither one has read the textbook, so in both cases we can set reading = 0. Or, to say the same thing in our mathematical notation, we observe $X_{2,6} = 0$ and $X_{2,7} = 0$. However, student number 7 did turn up to lectures (i.e., attend = 1, $X_{1,7} = 1$) whereas student number 6 did not (i.e., attend = 0, $X_{1,6} = 0$). Now let's look at what happens when we insert these numbers into the general formula for our regression line. For student number 6, the regression predicts that
 
 $$
-\begin{split} 
-\hat{Y}_6 & = b_0 + b_1 X_{1,6} + b_2 X_{2,6} \\ 
-& = b_0 + (b_1 \times 0) + (b_2 \times 0) \\ 
+\begin{split}
+\hat{Y}_6 & = b_0 + b_1 X_{1,6} + b_2 X_{2,6} \\
+& = b_0 + (b_1 \times 0) + (b_2 \times 0) \\
 & = b_0
 \end{split}
 $$
@@ -642,20 +608,20 @@ $$
 So we're expecting that this student will obtain a grade corresponding to the value of the intercept term $b_0$. What about student 7? This time when we insert the numbers into the formula for the regression line, we obtain the following
 
 $$
-\begin{split} 
-\hat{Y}_7 & = b_0 + b_1 X_{1,7} + b_2 X_{2,7} \\ 
-& = b_0 + (b_1 \times 1) + (b_2 \times 0) \\ 
-& = b_0 + b_1 
+\begin{split}
+\hat{Y}_7 & = b_0 + b_1 X_{1,7} + b_2 X_{2,7} \\
+& = b_0 + (b_1 \times 1) + (b_2 \times 0) \\
+& = b_0 + b_1
 \end{split}
 $$
 
 Because this student attended class, the predicted grade is equal to the intercept term b0 plus the coefficient associated with the attend variable, $b_1$. So, if $b_1$ is greater than zero, we're expecting that the students who turn up to lectures will get higher grades than those students who don't. If this coefficient is negative we're expecting the opposite: students who turn up at class end up performing much worse. In fact, we can push this a little bit further. What about student number 1, who turned up to class ($X_{1,1} = 1$) and read the textbook ($X_{2,1} = 1$)? If we plug these numbers into the regression we get
 
 $$
-\begin{split} 
-\hat{Y}_1 & = b_0 + b_1 X_{1,1} + b_2 X_{2,1} \\ 
-& = b_0 + (b_1 \times 1) + (b_2 \times 1) \\ 
-& = b_0 + b_1 + b_2 
+\begin{split}
+\hat{Y}_1 & = b_0 + b_1 X_{1,1} + b_2 X_{2,1} \\
+& = b_0 + (b_1 \times 1) + (b_2 \times 1) \\
+& = b_0 + b_1 + b_2
 \end{split}
 $$
 
@@ -666,7 +632,7 @@ And at this point you won't be at all suprised to learn that the regression mode
 ```{r}
 #| label: tbl-tab14-9
 #| tbl-cap: Expected grades from the regression model
-huxtabs[[14]][[9]] 
+huxtabs[[14]][[9]]
 ```
 
 As you can see, the intercept term $b_0$ acts like a kind of "baseline" grade that you would expect from those students who don't take the time to attend class or read the textbook. Similarly, $b_1$ represents the boost that you're expected to get if you come to class, and $b_2$ represents the boost that comes from reading the textbook. In fact, if this were an ANOVA you might very well want to characterise b1 as the main effect of attendance, and $b_2$ as the main effect of reading! In fact, for a simple $2 \times 2$ ANOVA that's exactly how it plays out.
@@ -675,8 +641,6 @@ Okay, now that we're really starting to see why ANOVA and regression are basical
 
 ```{r}
 #| label: fig-fig14-18
-#| fig-align: left
-#| out.width: 70%
 #| classes: .enlarge-image
 #| fig-cap: Regression analysis of the rtfm.csv data set in jamovi, without the interaction term
 knitr::include_graphics("images/fig14-18.png")
@@ -690,8 +654,6 @@ Finally, one last thing you should know. Because jamovi understands the fact tha
 
 ```{r}
 #| label: fig-fig14-19
-#| fig-align: left
-#| out.width: 80%
 #| classes: .enlarge-image
 #| fig-cap: Omnibus ANOVA Test results from the jamovi regression analysis
 knitr::include_graphics("images/fig14-19.png")
@@ -721,10 +683,8 @@ Now we have two different versions of the same data set. Our original data in wh
 
 ```{r}
 #| label: fig-fig14-20
-#| fig-align: left
-#| out.width: 80%
 #| classes: .enlarge-image
-#| fig-cap: jamovi ANOVA results, without interaction component
+#| fig-cap:  jamovi ANOVA results, without interaction component
 knitr::include_graphics("images/fig14-20.png")
 ```
 
@@ -732,8 +692,6 @@ Obviously, there are no surprises here. That's the exact same ANOVA that we ran 
 
 ```{r}
 #| label: fig-fig14-21
-#| fig-align: left
-#| out.width: 80%
 #| classes: .enlarge-image
 #| fig-cap: jamovi regression results, with contrast variables druganxifree and drugjoyzepam
 knitr::include_graphics("images/fig14-21.png")
@@ -743,10 +701,8 @@ Hmm. This isn't the same output that we got last time. Not surprisingly, the reg
 
 ```{r}
 #| label: fig-fig14-22
-#| fig-align: left
-#| out.width: 90%
 #| classes: .enlarge-image
-#| fig-cap: Model comparison in jamovi regression, null model 1 vs. contrasts model 2
+#| fig-cap:  Model comparison in jamovi regression, null model 1 vs. contrasts model 2
 knitr::include_graphics("images/fig14-22.png")
 ```
 
@@ -756,8 +712,6 @@ Although we went through all the faff of computing new variables in jamovi for t
 
 ```{r}
 #| label: fig-fig14-23
-#| fig-align: left
-#| out.width: 90%
 #| classes: .enlarge-image
 #| fig-cap: Regression analysis with factors and contrasts in jamovi, including omnibus ANOVA test results
 knitr::include_graphics("images/fig14-23.png")
@@ -780,7 +734,7 @@ In the previous section, I showed you a method for converting a factor into a co
 ```{r}
 #| label: tbl-tab14-11
 #| tbl-cap: Binary contrasts to discriminate between all three possible drugs
-huxtabs[[14]][[11]] 
+huxtabs[[14]][[11]]
 ```
 
 Each row in the table corresponds to one of the factor levels, and each column corresponds to one of the contrasts. This table, which always has one more row than columns, has a special name. It is called a contrast matrix. However, there are lots of different ways to specify a contrast matrix. In this section I discuss a few of the standard contrast matrices that statisticians use and how you can use them in jamovi. If you're planning to read the section on [Factorial ANOVA 3: unbalanced designs] later on, it's worth reading this section carefully. If not, you can get away with skimming it, because the choice of contrasts doesn't matter much for balanced designs.
@@ -796,7 +750,7 @@ The table shown above is a matrix of treatment contrasts for a factor that has 3
 ```{r}
 #| label: tbl-tab14-12
 #| tbl-cap: Matrix of treatment contrasts with 5 levels
-huxtabs[[14]][[12]] 
+huxtabs[[14]][[12]]
 ```
 
 In this example, the first contrast is level 2 compared with level 1, the second contrast is level 3 compared with level 1, and so on. Notice that, by default, the *first* level of the factor is always treated as the baseline category (i.e., it's the one that has all zeros and doesn't have an explicit contrast associated with it). In jamovi you can change which category is the first level of the factor by manipulating the order of the levels of the variable shown in the 'Data Variable' window (double click on the name of the variable in the spreadsheet column to bring up the 'Data Variable' view.
@@ -808,7 +762,7 @@ Treatment contrasts are useful for a lot of situations. However, they make most 
 ```{r}
 #| label: tbl-tab14-13
 #| tbl-cap: Matrix of helmert contrasts with 5 levels
-huxtabs[[14]][[13]] 
+huxtabs[[14]][[13]]
 ```
 
 One useful thing about Helmert contrasts is that every contrast sums to zero (i.e., all the columns sum to zero). This has the consequence that, when we interpret the ANOVA as a regression, the intercept term corresponds to the grand mean $\mu_{..}$ if we are using Helmert contrasts. Compare this to treatment contrasts, in which the intercept term corresponds to the group mean for the baseline category. This property can be very useful in some situations. It doesn't matter very much if you have a balanced design, which we've been assuming so far, but it will turn out to be important later when we consider [unbalanced designs](Factorial ANOVA: unbalanced designs). In fact, the main reason why I've even bothered to include this section is that contrasts become important if you want to understand unbalanced ANOVA.
@@ -820,7 +774,7 @@ The third option that I should briefly mention are "sum to zero" contrasts, call
 ```{r}
 #| label: tbl-tab14-14
 #| tbl-cap: Matrix of 'sum-to' zero contrasts with 5 levels
-huxtabs[[14]][[14]] 
+huxtabs[[14]][[14]]
 ```
 
 Much like Helmert contrasts, we see that each column sums to zero, which means that the intercept term corresponds to the grand mean when ANOVA is treated as a regression model. When interpreting these contrasts, the thing to recognise is that each of these contrasts is a pairwise comparison between group 1 and one of the other four groups. Specifically, contrast 1 corresponds to a "group 2 minus group 1" comparison, contrast 2 corresponds to a "group 3 minus group 1" comparison, and so on.[^factorial-anova-8]
@@ -834,7 +788,7 @@ jamovi also comes with a variety of options that can generate different kinds of
 ```{r}
 #| label: tbl-tab14-15
 #| tbl-cap: Contrasts types available in the jamovi ANOVA analysis
-huxtabs[[14]][[15]] |> 
+huxtabs[[14]][[15]] |>
   set_align(everywhere, 2, "left")
 ```
 
@@ -857,8 +811,6 @@ The TukeyHSD function in jamovi is pretty easy to use. You simply specify the AN
 
 ```{r}
 #| label: fig-fig14-24
-#| fig-align: left
-#| out.width: 90%
 #| classes: .enlarge-image
 #| fig-cap: Tukey HSD post hoc test in jamovi factorial ANOVA, without an interaction term
 knitr::include_graphics("images/fig14-24.png")
@@ -876,8 +828,6 @@ There are quite a lot of these comparisons that you need to consider. So, when w
 
 ```{r}
 #| label: fig-fig14-25
-#| fig-align: left
-#| out.width: 90%
 #| classes: .enlarge-image
 #| fig-cap: Tukey HSD post hoc test in jamovi factorial ANOVA with an interaction term
 knitr::include_graphics("images/fig14-25.png")
@@ -901,8 +851,6 @@ As usual, it will help us to work with some data. The coffee.csv file contains a
 
 ```{r}
 #| label: fig-fig14-26
-#| fig-align: left
-#| out.width: 90%
 #| classes: .enlarge-image
 #| fig-cap: The coffee.csv data set in jamovi, with descriptive information aggregated by factor levels
 knitr::include_graphics("images/fig14-26.png")
@@ -930,7 +878,7 @@ The simplest possible model for the data would be one in which neither milk nor 
 ```{r}
 #| label: tbl-tab14-16
 #| tbl-cap: Null and alternative hypotheses with the outcome variable 'babble'
-huxtabs[[14]][[16]]  
+huxtabs[[14]][[16]]
 ```
 
 This comparison forms our hypothesis test of the main effect of sugar. The next step in our model building exercise is to add the other main effect term, so the next model in our sequence is babble \~ sugar + milk. The second hypothesis test is then formed by comparing the following pair of models (@tbl-tab14-17).
@@ -946,15 +894,13 @@ This comparison forms our hypothesis test of the main effect of milk. In one sen
 ```{r}
 #| label: tbl-tab14-18
 #| tbl-cap: And more possible null and alternative hypotheses with the outcome variable 'babble'
-huxtabs[[14]][[18]] 
+huxtabs[[14]][[18]]
 ```
 
 Type III sum of squares is the default hypothesis testing method used by jamovi ANOVA, so to run a Type I sum of squares analysis we have to select 'Type 1' in the 'Sum of squares' selection box in the jamovi 'ANOVA' - 'Model' options. This gives us the ANOVA table shown in @fig-fig14-27.
 
 ```{r}
 #| label: fig-fig14-27
-#| fig-align: left
-#| out.width: 80%
 #| classes: .enlarge-image
 #| fig-cap: ANOVA results table using Type I sum of squares in jamovi
 knitr::include_graphics("images/fig14-27.png")
@@ -964,8 +910,6 @@ The big problem with using Type I sum of squares is the fact that it really does
 
 ```{r}
 #| label: fig-fig14-28
-#| fig-align: left
-#| out.width: 80%
 #| classes: .enlarge-image
 #| fig-cap: ANOVA results table using Type I sum of squares in jamovi, but with factors entered in a different order (milk first)
 knitr::include_graphics("images/fig14-28.png")
@@ -984,7 +928,7 @@ Having just finished talking about Type I tests, you might think that the natura
 ```{r}
 #| label: tbl-tab14-19
 #| tbl-cap: Null and alternative hypotheses with the outcome variable 'babble', with Type III sum of squares
-huxtabs[[14]][[19]]  
+huxtabs[[14]][[19]]
 ```
 
 Similarly the main effect of milk is evaluated by testing the full model against a null model that removes the milk term, like in @tbl-tab14-20.
@@ -992,7 +936,7 @@ Similarly the main effect of milk is evaluated by testing the full model against
 ```{r}
 #| label: tbl-tab14-20
 #| tbl-cap: Further null and alternative hypotheses with the outcome variable 'babble', with Type III sum of squares
-huxtabs[[14]][[20]]  
+huxtabs[[14]][[20]]
 ```
 
 Finally, the interaction term sugar $\times$ milk is evaluated in exactly the same way. Once again, we test the full model against a null model that removes the sugar $\times$ milk interaction term, like in @tbl-tab14-21.
@@ -1000,7 +944,7 @@ Finally, the interaction term sugar $\times$ milk is evaluated in exactly the sa
 ```{r}
 #| label: tbl-tab14-21
 #| tbl-cap: Removing the interaction term from hypotheses with the outcome variable 'babble', with Type III sum of squares
-huxtabs[[14]][[21]] 
+huxtabs[[14]][[21]]
 ```
 
 The basic idea generalises to higher order ANOVAs. For instance, suppose that we were trying to run an ANOVA with three factors, A, B and C, and we wanted to consider all possible main effects and all possible interactions, including the three way interaction A $\times$ B $\times$ C. (@tbl-tab14-22) shows you what the Type III tests look like for this situation).
@@ -1008,7 +952,7 @@ The basic idea generalises to higher order ANOVAs. For instance, suppose that we
 ```{r}
 #| label: tbl-tab14-22
 #| tbl-cap: Type III tests with three factors and all main effect and interaction term
-huxtabs[[14]][[22]] 
+huxtabs[[14]][[22]]
 ```
 
 As ugly as that table looks, it's pretty simple. In all cases, the alternative hypothesis corresponds to the full model which contains three main effect terms (e.g. A), three two-way interactions (e.g. A\*B) and one three-way interaction (i.e., A\*B\*C)). The null model always contains 6 of these 7 terms, and the missing one is the one whose significance we're trying to test.
@@ -1021,8 +965,6 @@ Later on, we'll see that Type III tests can be redeemed in some contexts, but fi
 
 ```{r}
 #| label: fig-fig14-29
-#| fig-align: left
-#| out.width: 80%
 #| classes: .enlarge-image
 #| fig-cap: ANOVA results table using Type III sum of squares in jamovi
 knitr::include_graphics("images/fig14-29.png")
@@ -1045,7 +987,7 @@ Type II tests are broadly similar to Type III tests. Start with a "full" model, 
 ```{r}
 #| label: tbl-tab14-23
 #| tbl-cap: Type III tests for a main effect, A, in a three-way ANOVA with all possible interaction terms
-huxtabs[[14]][[23]] 
+huxtabs[[14]][[23]]
 ```
 
 Notice that the null hypothesis omits A, but includes A $\times$ B, A $\times$ C and A $\times$ B $\times$ C as part of the model. This, according to the Type II tests, is not a good choice of null hypothesis. What we should do instead, if we want to test the null hypothesis that A is not relevant to our outcome, is to specify the null hypothesis that is the most complicated model that does not rely on A in any form, even as an interaction. The alternative hypothesis corresponds to this null model plus a main effect term of A. This is a lot closer to what most people would intuitively think of as a "main effect of A", and it yields the following as our Type II test of the main effect of A (@tbl-tab14-24). [^factorial-anova-14]
@@ -1055,7 +997,7 @@ Notice that the null hypothesis omits A, but includes A $\times$ B, A $\times$ C
 ```{r}
 #| label: tbl-tab14-24
 #| tbl-cap: Type II tests for a main effect, A, in a three-way ANOVA with all possible interaction terms
-huxtabs[[14]][[24]] 
+huxtabs[[14]][[24]]
 ```
 
 Anyway, just to give you a sense of how the Type II tests play out, here's the full table (@tbl-tab14-25) of tests that would be applied in a three-way factorial ANOVA:
@@ -1063,7 +1005,7 @@ Anyway, just to give you a sense of how the Type II tests play out, here's the f
 ```{r}
 #| label: tbl-tab14-25
 #| tbl-cap: Type II tests for a three-way factorial model
-huxtabs[[14]][[25]]  
+huxtabs[[14]][[25]]
 ```
 
 In the context of the two way ANOVA that we've been using in the coffee data, the hypothesis tests are even simpler. The main effect of sugar corresponds to an F-test comparing these two models (@tbl-tab14-26).
@@ -1071,7 +1013,7 @@ In the context of the two way ANOVA that we've been using in the coffee data, th
 ```{r}
 #| label: tbl-tab14-26
 #| tbl-cap: Type II tests for the main effect of sugar in the coffee data
-huxtabs[[14]][[26]] 
+huxtabs[[14]][[26]]
 ```
 
 The test for the main effect of milk is in @tbl-tab14-27.
@@ -1079,7 +1021,7 @@ The test for the main effect of milk is in @tbl-tab14-27.
 ```{r}
 #| label: tbl-tab14-27
 #| tbl-cap: Type II tests for the main effect of milk in the coffee data
-huxtabs[[14]][[27]] 
+huxtabs[[14]][[27]]
 ```
 
 Finally, the test for the interaction sugar $\times$ milk is in @tbl-tab14-28.
@@ -1087,15 +1029,13 @@ Finally, the test for the interaction sugar $\times$ milk is in @tbl-tab14-28.
 ```{r}
 #| label: tbl-tab14-28
 #| tbl-cap: Type II tests for the sugar x  milk interaction term
-huxtabs[[14]][[28]] 
+huxtabs[[14]][[28]]
 ```
 
 Running the tests are again straightforward. Just select 'Type 2' in the 'Sum of squares' selection box in the jamovi 'ANOVA' - 'Model' options, This gives us the ANOVA table shown in @fig-fig14-30.
 
 ```{r}
 #| label: fig-fig14-30
-#| fig-align: left
-#| out.width: 80%
 #| classes: .enlarge-image
 #| fig-cap: ANOVA results table using Type II sum of squares in jamovi
 knitr::include_graphics("images/fig14-30.png")
@@ -1116,7 +1056,7 @@ This seems a bit odd at first, but here's why. When you have unbalanced designs 
 ```{r}
 #| label: tbl-tab14-29
 #| tbl-cap: N participants in a 2 x 2 very (very!) unbalanced factorial design
-huxtabs[[14]][[29]] 
+huxtabs[[14]][[29]]
 ```
 
 Here we have a spectacularly unbalanced design: 100 people have milk and sugar, 100 people have no milk and no sugar, and that's all. There are 0 people with milk and no sugar, and 0 people with sugar but no milk. Now suppose that, when we collected the data, it turned out there is a large (and statistically significant) difference between the "milk and sugar" group and the "no-milk and no-sugar" group. Is this a main effect of sugar? A main effect of milk? Or an interaction? It's impossible to tell, because the presence of sugar has a perfect association with the presence of milk. Now suppose the design had been a little more balanced (@tbl-tab14-30).
@@ -1124,7 +1064,7 @@ Here we have a spectacularly unbalanced design: 100 people have milk and sugar, 
 ```{r}
 #| label: tbl-tab14-30
 #| tbl-cap: N participants in a 2 x 2 still very unbalanced factorial design
-huxtabs[[14]][[30]] 
+huxtabs[[14]][[30]]
 ```
 
 This time around, it's technically possible to distinguish between the effect of milk and the effect of sugar, because we have a few people that have one but not the other. However, it will still be pretty difficult to do so, because the association between sugar and milk is still extremely strong, and there are so few observations in two of the groups. Again, we're very likely to be in the situation where we *know* that the predictor variables (milk and sugar) are related to the outcome (babbling), but we don't know if the nature of that relationship is a main effect of one or the other predictor, or the interaction.

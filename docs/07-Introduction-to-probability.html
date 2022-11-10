@@ -429,11 +429,11 @@ div.csl-indent {
 <p>The first of the two major approaches to probability, and the more dominant one in statistics, is referred to as the <strong>frequentist view</strong> and it defines probability as a <strong>long-run frequency</strong>. Suppose we were to try flipping a fair coin over and over again. By definition this is a coin that has <span class="math inline">\(P(H) = 0.5\)</span>. What might we observe? One possibility is that the first 20 flips might look like this:</p>
 <p>T,H,H,H,H,T,T,H,H,H,H,T,H,H,T,T,T,T,T,H</p>
 <p>In this case 11 of these 20 coin flips (55%) came up heads. Now suppose that I’d been keeping a running tally of the number of heads (which I’ll call <span class="math inline">\(N_H\)</span>) that I’ve seen, across the first N flips, and calculate the proportion of heads <span class="math inline">\(\frac{N_H}{N}\)</span> every time. <a href="#tbl-tab7-1">Table&nbsp;<span>7.1</span></a> shows what I’d get (I did literally flip coins to produce this!):</p>
-<div class="cell">
+<div class="cell" data-layout-align="left">
 <div class="cell-output-display">
 <div id="tbl-tab7-1" class="anchored">
 
-<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab7-1"><caption>Table&nbsp;7.1:  Coin flips and proportion of heads </caption>
+<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab7-1"><caption>Table&nbsp;7.1:  Coin flips and proportion of heads </caption>
 <colgroup><col><col><col></colgroup><tbody><tr>
 <th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 0pt; font-weight: bold;">number of flips</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">number of heads</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 0pt 2pt 12pt; font-weight: bold;">proportion</th></tr>
 <tr>
@@ -486,7 +486,7 @@ div.csl-indent {
 <div class="cell-output-display">
 <div id="fig-fig7-1" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
-<p><img src="07-Introduction-to-probability_files/figure-html/fig-fig7-1-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="07-Introduction-to-probability_files/figure-html/fig-fig7-1-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
 <p></p><figcaption class="figure-caption">Figure&nbsp;7.1: An illustration of how frequentist probability works. If you flip a fair coin over and over again the proportion of heads that you’ve seen eventually settles down and converges to the true probability of <span class="math inline">\(0.5\)</span>. Each panel shows four different simulated experiments. In each case we pretend we flipped a coin <span class="math inline">\(1000\)</span> times and kept track of the proportion of flips that were heads as we went along. Although none of these sequences actually ended up with an exact value of <span class="math inline">\(.5\)</span>, if we’d extended the experiment for an infinite number of coin flips they would have</figcaption><p></p>
 </figure>
 </div>
@@ -517,11 +517,11 @@ div.csl-indent {
 <p>One of the disturbing truths about my life is that I only own 5 pairs of trousers. Three pairs of jeans, the bottom half of a suit, and a pair of tracksuit pants. Even sadder, I’ve given them names: I call them <span class="math inline">\(X_1\)</span>, <span class="math inline">\(X_2\)</span>, <span class="math inline">\(X_3\)</span>, <span class="math inline">\(X_4\)</span> and <span class="math inline">\(X_5\)</span>. I really have, that’s why they call me Mister Imaginative. Now, on any given day, I pick out exactly one of pair of trousers to wear. Not even I’m so stupid as to try to wear two pairs of trousers, and thanks to years of training I never go outside without wearing trousers anymore. If I were to describe this situation using the language of probability theory, I would refer to each pair of trousers (i.e., each <span class="math inline">\(X\)</span>) as an elementary event. The key characteristic of <strong>elementary events</strong> is that every time we make an observation (e.g., every time I put on a pair of trousers) then the outcome will be one and only one of these events. Like I said, these days I always wear exactly one pair of trousers so my trousers satisfy this constraint. Similarly, the set of all possible events is called a <strong>sample space</strong>. Granted, some people would call it a “wardrobe”, but that’s because they’re refusing to think about my trousers in probabilistic terms. Sad.</p>
 <p>Okay, now that we have a sample space (a wardrobe), which is built from lots of possible elementary events (trousers), what we want to do is assign a <strong>probability</strong> of one of these elementary events. For an event <span class="math inline">\(X\)</span>, the probability of that event <span class="math inline">\(P(X)\)</span> is a number that lies between 0 and 1. The bigger the value of <span class="math inline">\(P(X)\)</span>, the more likely the event is to occur. So, for example, if <span class="math inline">\(P(X) = 0\)</span> it means the event <span class="math inline">\(X\)</span> is impossible (i.e., I never wear those trousers). On the other hand, if <span class="math inline">\(P(X) = 1\)</span> it means that event <span class="math inline">\(X\)</span> is certain to occur (i.e., I always wear those trousers). For probability values in the middle it means that I sometimes wear those trousers. For instance, if <span class="math inline">\(P(X) = 0.5\)</span> it means that I wear those trousers half of the time.</p>
 <p>At this point, we’re almost done. The last thing we need to recognise is that “something always happens”. Every time I put on trousers, I really do end up wearing trousers (crazy, right?). What this somewhat trite statement means, in probabilistic terms, is that the probabilities of the elementary events need to add up to 1. This is known as the <strong>law of total probability</strong>, not that any of us really care. More importantly, if these requirements are satisfied then what we have is a <strong>probability distribution</strong>. For example, <a href="#tbl-tab7-2">Table&nbsp;<span>7.2</span></a> shows an example of a probability distribution.</p>
-<div class="cell">
+<div class="cell" data-layout-align="left">
 <div class="cell-output-display">
 <div id="tbl-tab7-2" class="anchored">
 
-<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab7-2"><caption>Table&nbsp;7.2:  A probability distribution for trouser wearing </caption>
+<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab7-2"><caption>Table&nbsp;7.2:  A probability distribution for trouser wearing </caption>
 <colgroup><col><col><col></colgroup><tbody><tr>
 <th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 0pt; font-weight: bold;">Which trousers?</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">Label</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 0pt 2pt 12pt; font-weight: bold;">Probability</th></tr>
 <tr>
@@ -550,11 +550,11 @@ div.csl-indent {
 </div>
 </div>
 </div>
-<div class="cell">
+<div class="cell" data-layout-align="left">
 <div class="cell-output-display">
 <div id="tbl-tab7-3" class="anchored">
 
-<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab7-3"><caption>Table&nbsp;7.3:  Some rules that probabilities satisfy </caption>
+<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab7-3"><caption>Table&nbsp;7.3:  Some rules that probabilities satisfy </caption>
 <colgroup><col><col><col></colgroup><tbody><tr>
 <th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 0pt; font-weight: bold;">English</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">Notation</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 0pt 2pt 12pt; font-weight: bold;">Formula</th></tr>
 <tr>
@@ -586,7 +586,7 @@ div.csl-indent {
 <div class="cell-output-display">
 <div id="fig-fig7-3" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
-<p><img src="07-Introduction-to-probability_files/figure-html/fig-fig7-3-1.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<p><img src="07-Introduction-to-probability_files/figure-html/fig-fig7-3-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
 <p></p><figcaption class="figure-caption">Figure&nbsp;7.3: The binomial distribution with size parameter of <span class="math inline">\(N = 20\)</span> and an underlying success probability of <span class="math inline">\(\theta = \frac{1}{6}\)</span>. Each vertical bar depicts the probability of one specific outcome (i.e., one possible value of X). Because this is a probability distribution, each of the probabilities must be a number between 0 and 1, and the heights of the bars must sum to 1 as well</figcaption><p></p>
 </figure>
 </div>
@@ -597,7 +597,7 @@ div.csl-indent {
 <div class="cell-output-display">
 <div id="fig-fig7-4" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
-<p><img src="07-Introduction-to-probability_files/figure-html/fig-fig7-4-1.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<p><img src="07-Introduction-to-probability_files/figure-html/fig-fig7-4-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
 <p></p><figcaption class="figure-caption">Figure&nbsp;7.4: Two binomial distributions, involving a scenario in which I flip a fair coin so the underlying success probability is <span class="math inline">\(\theta = \frac{1}{2}\)</span>. In panel (a), I flipped the coin <span class="math inline">\(N = 20\)</span> times. In panel (b) the coin was flipped <span class="math inline">\(N = 100\)</span> times</figcaption><p></p>
 </figure>
 </div>
@@ -614,7 +614,7 @@ div.csl-indent {
 <div class="cell-output-display">
 <div id="fig-fig7-5" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
-<p><img src="07-Introduction-to-probability_files/figure-html/fig-fig7-5-1.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<p><img src="07-Introduction-to-probability_files/figure-html/fig-fig7-5-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
 <p></p><figcaption class="figure-caption">Figure&nbsp;7.5: The normal distribution with mean <span class="math inline">\(\mu = 0\)</span> and standard deviation <span class="math inline">\(\sigma = 1\)</span>. The x-axis corresponds to the value of some variable, and the y-axis tells us something about how likely we are to observe that value. However, notice that the y-axis is labelled <em>Probability Density</em> and not <em>Probability</em>. There is a subtle and somewhat frustrating characteristic of continuous distributions that makes the <span class="math inline">\(y\)</span> axis behave a bit oddly - the height of the curve here isn’t actually the probability of observing a particular x value. On the other hand, it is true that the heights of the curve tells you which <span class="math inline">\(x\)</span> values are more likely (the higher ones!). (see <a href="#probability-density">Probability density</a> section for all the annoying details)</figcaption><p></p>
 </figure>
 </div>
@@ -625,7 +625,7 @@ div.csl-indent {
 <div class="cell-output-display">
 <div id="fig-fig7-6" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
-<p><img src="07-Introduction-to-probability_files/figure-html/fig-fig7-6-1.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<p><img src="07-Introduction-to-probability_files/figure-html/fig-fig7-6-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
 <p></p><figcaption class="figure-caption">Figure&nbsp;7.6: An illustration of what happens when you change the mean of a normal distribution. The solid line depicts a normal distribution with a mean of <span class="math inline">\(\mu = 4\)</span>. The dashed line shows a normal distribution with a mean of <span class="math inline">\(\mu = 7\)</span>. In both cases, the standard deviation is <span class="math inline">\(\sigma = 1\)</span>. Not surprisingly, the two distributions have the same shape, but the dashed line is shifted to the right</figcaption><p></p>
 </figure>
 </div>
@@ -635,7 +635,7 @@ div.csl-indent {
 <div class="cell-output-display">
 <div id="fig-fig7-7" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
-<p><img src="07-Introduction-to-probability_files/figure-html/fig-fig7-7-1.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<p><img src="07-Introduction-to-probability_files/figure-html/fig-fig7-7-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
 <p></p><figcaption class="figure-caption">Figure&nbsp;7.7: An illustration of what happens when you change the the standard deviation of a normal distribution. Both distributions plotted in this figure have a mean of <span class="math inline">\(\mu = 5\)</span>, but they have different standard deviations. The solid line plots a distribution with standard deviation <span class="math inline">\(\sigma = 1\)</span>, and the dashed line shows a distribution with standard deviation <span class="math inline">\(\sigma = 2\)</span>. As a consequence, both distributions are ‘centred’ on the same spot, but the dashed line is wider than the solid one</figcaption><p></p>
 </figure>
 </div>
@@ -678,7 +678,7 @@ div.csl-indent {
 <div class="cell-output-display">
 <div id="fig-fig7-10" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
-<p><img src="07-Introduction-to-probability_files/figure-html/fig-fig7-10-1.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<p><img src="07-Introduction-to-probability_files/figure-html/fig-fig7-10-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
 <p></p><figcaption class="figure-caption">Figure&nbsp;7.10: A <span class="math inline">\(t\)</span> distribution with 3 degrees of freedom (solid line). It looks similar to a normal distribution, but it’s not quite the same. For comparison purposes I’ve plotted a standard normal distribution as the dashed line</figcaption><p></p>
 </figure>
 </div>
@@ -688,7 +688,7 @@ div.csl-indent {
 <div class="cell-output-display">
 <div id="fig-fig7-11" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
-<p><img src="07-Introduction-to-probability_files/figure-html/fig-fig7-11-1.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<p><img src="07-Introduction-to-probability_files/figure-html/fig-fig7-11-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
 <p></p><figcaption class="figure-caption">Figure&nbsp;7.11: <span class="math inline">\(\chi^2\)</span> distribution with 3 degrees of freedom. Notice that the observed values must always be greater than zero, and that the distribution is pretty skewed. These are the key features of a chi-square distribution</figcaption><p></p>
 </figure>
 </div>
@@ -698,7 +698,7 @@ div.csl-indent {
 <div class="cell-output-display">
 <div id="fig-fig7-12" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
-<p><img src="07-Introduction-to-probability_files/figure-html/fig-fig7-12-1.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<p><img src="07-Introduction-to-probability_files/figure-html/fig-fig7-12-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
 <p></p><figcaption class="figure-caption">Figure&nbsp;7.12: An <span class="math inline">\(F\)</span> distribution with 3 and 5 degrees of freedom. Qualitatively speaking, it looks pretty similar to a chi-square distribution, but they’re not quite the same in general</figcaption><p></p>
 </figure>
 </div>

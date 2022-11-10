@@ -1,4 +1,4 @@
-# Estimating unknown quantities from a sample {#sec-Estimating-unknown-quantities-from-a-sample} 
+# Estimating unknown quantities from a sample {#sec-Estimating-unknown-quantities-from-a-sample}
 
 ```{r}
 #| include: FALSE
@@ -43,8 +43,6 @@ To keep things simple, let's imagine that we have a bag containing 10 chips. Eac
 
 ```{r}
 #| label: fig-fig8-1
-#| fig-align: left
-#| out.width: 70%
 #| fig-cap: Simple random sampling without replacement from a finite population
 knitr::include_graphics("images/fig8-1.png")
 ```
@@ -55,8 +53,6 @@ To help make sure you understand the importance of the sampling procedure, consi
 
 ```{r}
 #| label: fig-fig8-2
-#| fig-align: left
-#| out.width: 70%
 #| fig-cap: Biased sampling without replacement from a finite population
 knitr::include_graphics("images/fig8-2.png")
 ```
@@ -65,8 +61,6 @@ A third procedure is worth mentioning. This time around we close our eyes, shake
 
 ```{r}
 #| label: fig-fig8-3
-#| fig-align: left
-#| out.width: 70%
 #| fig-cap: Simple random sampling *with* replacement from a finite population
 knitr::include_graphics("images/fig8-3.png")
 ```
@@ -99,28 +93,26 @@ The idea is quite simple. Let's say we're talking about IQ scores. To a psycholo
 
 ```{r}
 #| label: fig-fig8-4
-#| fig-align: left
 #| fig-width: 9
 #| fig-height: 3
-#| out-width: 100%
 #| fig-cap: The population distribution of IQ scores (panel (a)) and two samples drawn randomly from it. In panel (b) we have a sample of 100 observations, and panel (c) we have a sample of 10,000 observations
 
 plota <- ggplot(data = data.frame(x = seq(60, 140, 1)), aes(x)) +
-  stat_function(fun = dnorm, n = 1000, args = list(mean = 100, sd = 15), col=blueshade, size=1) + 
+  stat_function(fun = dnorm, n = 1000, args = list(mean = 100, sd = 15), col=blueshade, size=1) +
   scale_x_continuous(breaks = seq(60, 140, 20)) +
   ylab("Probability Density\n") +
   xlab("\nIQ score") +
   theme_classic()
 
 plotb <- ggplot(data = data.frame(x = rnorm(100, 100, 15)), aes(x)) +
-  geom_histogram(binwidth=6, col=blueshade, fill=blueshade, alpha=0.6) + 
+  geom_histogram(binwidth=6, col=blueshade, fill=blueshade, alpha=0.6) +
   scale_x_continuous(breaks = seq(60, 140, 20)) +
   ylab("Frequency\n") +
   xlab("\nIQ score") +
   theme_classic()
 
 plotc <- ggplot(data = data.frame(x = rnorm(10000, 100, 15)), aes(x)) +
-  geom_histogram(binwidth=6, col=blueshade, fill=blueshade, alpha=0.6) + 
+  geom_histogram(binwidth=6, col=blueshade, fill=blueshade, alpha=0.6) +
   scale_x_continuous(breaks = seq(60, 140, 20)) +
   ylab("Frequency\n") +
   xlab("\nIQ score") +
@@ -142,8 +134,6 @@ In the previous section I showed you the results of one fictitious IQ experiment
 
 ```{r}
 #| label: fig-fig8-5
-#| fig-align: left
-#| out.width: 70%
 #| classes: .enlarge-image
 #| fig-cap: A random sample drawn from a normal distribution using jamovi
 knitr::include_graphics("images/fig8-5.png")
@@ -182,7 +172,7 @@ This time around, the mean IQ in my sample is 101. If I repeat the experiment 10
 ```{r}
 #| label: tbl-tab8-1
 #| tbl-cap: Ten replications of the IQ experiment, each with a sample size of $( N = 5 )$
-huxtabs[[8]][[1]] 
+huxtabs[[8]][[1]]
 ```
 
 Now suppose that I decided to keep going in this fashion, replicating this "five IQ scores" experiment over and over again. Every time I replicate the experiment I write down the sample mean. Over time, I'd be amassing a new data set, in which every experiment generates a single data point. The first 10 observations from my data set are the sample means listed in @tbl-tab8-1, so my data set starts out like this:
@@ -193,8 +183,6 @@ What if I continued like this for 10,000 replications, and then drew a histogram
 
 ```{r}
 #| label: fig-fig8-6
-#| fig-align: left
-#| out.width: 70%
 #| fig-cap: The sampling distribution of the mean for the 'five IQ scores experiment'. If you sample 5 people at random and calculate their average IQ you'll almost certainly get a number between 80 and 120, even though there are quite a lot of individuals who have IQs above 120 or below 80. For comparison, the black line plots the population distribution of IQ scores
 
 sdm_data <- lapply(1:10000, function (x) {
@@ -203,8 +191,8 @@ sdm_data <- lapply(1:10000, function (x) {
 sdm_data_means <- data.frame(sample_means = unlist(lapply(sdm_data,mean)))
 
 ggplot(data = sdm_data_means, aes(x = sample_means )) +
-  geom_histogram(aes(y =..density..), binwidth=4, col=blueshade, fill=blueshade, alpha=0.7) + 
-  stat_function(fun = dnorm, args = list(mean = 100, sd = 15), col="black", size=1) + 
+  geom_histogram(aes(y =..density..), binwidth=4, col=blueshade, fill=blueshade, alpha=0.7) +
+  stat_function(fun = dnorm, args = list(mean = 100, sd = 15), col="black", size=1) +
   scale_x_continuous(limits=c(60,140), breaks = seq(60, 140, 20)) +
   xlab("\nIQ score") +
   theme_classic() +
@@ -229,8 +217,6 @@ Doing this over and over again would give me a very different sampling distribut
 
 ```{r}
 #| label: fig-fig8-7
-#| fig-align: left
-#| out.width: 70%
 #| fig-cap: The sampling distribution of the maximum for the 'five IQ scores experiment'. If you sample 5 people at random and select the one with the highest IQ score you'll probably see someone with an IQ between 100 and 140
 
 sdm_data <- lapply(1:10000, function (x) {
@@ -239,8 +225,8 @@ sdm_data <- lapply(1:10000, function (x) {
 sdm_data_max <- data.frame(sample_max = unlist(lapply(sdm_data,max)))
 
 ggplot(data = sdm_data_max, aes(x = sample_max )) +
-  geom_histogram(aes(y =..density..), binwidth=4, col=blueshade, fill=blueshade, alpha=0.7) + 
-  stat_function(fun = dnorm, args = list(mean = 100, sd = 15), col="black", size=1) + 
+  geom_histogram(aes(y =..density..), binwidth=4, col=blueshade, fill=blueshade, alpha=0.7) +
+  stat_function(fun = dnorm, args = list(mean = 100, sd = 15), col="black", size=1) +
   scale_x_continuous(limits=c(60,140), breaks = seq(60, 140, 20)) +
   xlab("\nIQ score") +
   theme_classic() +
@@ -255,15 +241,14 @@ ggplot(data = sdm_data_max, aes(x = sample_max )) +
 
 ```{r}
 #| label: fig-fig8-8
-#| fig-align: left
 #| fig-width: 9
 #| fig-height: 3
 #| out.width: 100%
 #| fig-cap: An illustration of the how sampling distribution of the mean depends on sample size. In each panel I generated 10,000 samples of IQ data and calculated the mean IQ observed within each of these data sets. The histograms in these plots show the distribution of these means (i.e., the sampling distribution of the mean). Each individual IQ score was drawn from a normal distribution with mean 100 and standard deviation 15, which is shown as the solid black line. In panel (a), each data set contained only a single observation, so the mean of each sample is just one person's IQ score. As a consequence, the sampling distribution of the mean is of course identical to the population distribution of IQ scores. However, when we raise the sample size to 2 the mean of any one sample tends to be closer to the population mean than any one person's IQ score, and so the histogram (i.e., the sampling distribution) is a bit narrower than the population distribution. By the time we raise the sample size to 10 (panel (c)), we can see that the distribution of sample means tend to be fairly tightly clustered around the true population mean
 
-sampling_plots_df <- data.frame(n = c(1,2,10), 
-                                lab = c("(a)", 
-                                      "(b)", 
+sampling_plots_df <- data.frame(n = c(1,2,10),
+                                lab = c("(a)",
+                                      "(b)",
                                       "(c)"))
 sampling_plots <- lapply(sampling_plots_df$n, function(i) {
   sdm_data <- lapply(1:10000, function (x) {
@@ -272,8 +257,8 @@ sampling_plots <- lapply(sampling_plots_df$n, function(i) {
   sdm_data_mean <- data.frame(sample_mean = unlist(lapply(sdm_data,mean)))
 
   ggplot(data = sdm_data_mean, aes(x = sample_mean )) +
-  geom_histogram(aes(y =..density..), binwidth=4, col=blueshade, fill=blueshade, alpha=0.7) + 
-  stat_function(fun = dnorm, args = list(mean = 100, sd = 15), col="black", size=1) + 
+  geom_histogram(aes(y =..density..), binwidth=4, col=blueshade, fill=blueshade, alpha=0.7) +
+  stat_function(fun = dnorm, args = list(mean = 100, sd = 15), col="black", size=1) +
   scale_x_continuous(limits=c(60,140), breaks = seq(60, 140, 20)) +
   xlab(paste0("IQ Score \n\n", sampling_plots_df$lab[sampling_plots_df$n == i])) +
   ggtitle(paste0("Sample size = ", i)) +
@@ -290,7 +275,7 @@ gridExtra::grid.arrange(grob = sampling_plots[[1]],
                         sampling_plots[[2]],
                         sampling_plots[[3]],
                         ncol = 3)
-                        
+
 ```
 
 ### The central limit theorem {#sec-The-central-limit-theorem}
@@ -301,10 +286,8 @@ Okay, so that's one part of the story. However, there's something I've been glos
 
 ```{r}
 #| label: fig-fig8-9
-#| fig-align: left
 #| fig-width: 12
 #| fig-height: 12
-#| out-width: 100%
 #| fig-cap: A demonstration of the central limit theorem. In panel (a), we have a non-normal population distribution, and panels (b)-(d) show the sampling distribution of the mean for samples of size 2,4 and 8 for data drawn from the distribution in panel (a). As you can see, even though the original population distribution is non-normal the sampling distribution of the mean becomes pretty close to normal by the time you have a sample of even 4 observations
 
 # parameters of the beta
@@ -314,9 +297,9 @@ b <- 1
 s <- sqrt( a*b / (a+b)^2 / (a+b+1) )
 m <- a / (a+b)
 
-sampling_plots_df <- data.frame(n = c(1,2,4,8), 
-                                lab = c("(a)", 
-                                      "(b)", 
+sampling_plots_df <- data.frame(n = c(1,2,4,8),
+                                lab = c("(a)",
+                                      "(b)",
                                       "(c)",
                                       "(d)"))
 sampling_plots <- lapply(sampling_plots_df$n, function(i) {
@@ -327,7 +310,7 @@ sampling_plots <- lapply(sampling_plots_df$n, function(i) {
 
   ggplot(data=sdm_data_mean, aes(x=sample_mean)) +
   geom_histogram(aes(y =..density..), binwidth=0.0339, col=blueshade, fill=blueshade, alpha=0.6) +
-  stat_function(fun = dnorm, args = list(mean = m, s/sqrt(i)), col="black", size=1) + 
+  stat_function(fun = dnorm, args = list(mean = m, s/sqrt(i)), col="black", size=1) +
   scale_x_continuous(limits=c(0,1.2), breaks = seq(0, 1.2, 0.2)) +
   scale_y_continuous(limits=c(0,5)) +
   xlab("Sample Mean") +
@@ -386,7 +369,7 @@ In this example estimating the unknown poulation parameter is straightforward. I
 ```{r}
 #| label: tbl-tab8-2
 #| tbl-cap: Notation for the mean
-huxtabs[[8]][[2]]  
+huxtabs[[8]][[2]]
 ```
 
 ### Estimating the population standard deviation
@@ -409,10 +392,8 @@ This intuition feels right, but it would be nice to demonstrate this somehow. Th
 
 ```{r}
 #| label: fig-fig8-10
-#| fig-align: left
 #| fig-width: 8
 #| fig-height: 8
-#| out.width: 70%
 #| fig-cap: The sampling distribution of the sample standard deviation for a 'two IQ scores' experiment. The true population standard deviation is 15 (dashed line), but as you can see from the histogram the vast majority of experiments will produce a much smaller sample standard deviation than this. On average, this experiment would produce an estimated standard deviation of only 8.4, well below the true value! In other words, the sample standard deviation is a biased estimate of the population standard deviation
 n <- 2
 N <- 10000
@@ -422,9 +403,9 @@ sdsd <- data.frame(sd=apply(IQ.m,1,sd2_r))
 mean(sdsd$sd)
 
 ggplot(data = sdsd, aes(x = sd )) +
-  geom_histogram(binwidth=2.5, col=blueshade, fill=blueshade, alpha=0.6) + 
+  geom_histogram(binwidth=2.5, col=blueshade, fill=blueshade, alpha=0.6) +
   geom_segment(aes(x = 15, y = 0, xend = 15, yend = 1900), colour = "black", linetype=2, size=1) +
-  annotate("text", x = 15, y = 2000, label = "Population Standard deviation") +  
+  annotate("text", x = 15, y = 2000, label = "Population Standard deviation") +
   scale_x_continuous(limits=c(0,60), breaks = seq(0, 60, 10)) +
   xlab("Sample standard deviation") +
   theme_classic() +
@@ -441,10 +422,8 @@ Now let's extend the simulation. Instead of restricting ourselves to the situati
 
 ```{r}
 #| label: fig-fig8-11
-#| fig-align: left
 #| fig-width: 8
 #| fig-height: 4
-#| out.width: 90%
 #| fig-cap: An illustration of the fact that the sample mean is an unbiased estimator of the population mean (panel a), but the sample standard deviation is a biased estimator of the population standard deviation (panel b). For the figure I generated $10,000$ simulated data sets with 1 observation each, $10,000$ more with 2 observations, and so on up to a sample size of 10. Each data set consisted of fake IQ data, that is the data were normally distributed with a true population mean of 100 and standard deviation 15. On average, the sample means turn out to be 100, regardless of sample size (panel a). However, the sample standard deviations turn out to be systematically too small (panel b), especially for small sample sizes
 
 N <- 10000
@@ -454,7 +433,7 @@ sd.demo <- sapply(1:10, function (n) {
   sdsd <- data.frame(sd=apply(IQ.m,1,sd2_r))
   sdmean <- data.frame(mean=apply(IQ.m,1,mean))
   ssize <- n
-  sd.demo.out <- c(ssize, mean(sdmean$mean), mean(sdsd$sd)) 
+  sd.demo.out <- c(ssize, mean(sdmean$mean), mean(sdsd$sd))
 })
 
 sd.demo <- as_tibble(t(sd.demo))
@@ -484,12 +463,12 @@ gridExtra::grid.arrange(grob=ps1,ps2, ncol=2)
 
 ```
 
-The fix to this systematic bias turns out to be very simple. Here's how it works. Before tackling the standard deviation let's look at the variance. If you recall from the section on [Estimating population parameters], the sample variance is defined to be the average of the squared deviations from the sample mean. That is: $$s^2=\frac{1}{N} \sum_{i=1}^{N}(X_i-\bar{X})^2$$ The sample variance $s^2$ is a biased estimator of the population variance $\sigma^2$. But as it turns out, we only need to make a tiny tweak to transform this into an unbiased estimator. All we have to do is divide by $N-1$ rather than by $N$. 
- 
+The fix to this systematic bias turns out to be very simple. Here's how it works. Before tackling the standard deviation let's look at the variance. If you recall from the section on [Estimating population parameters], the sample variance is defined to be the average of the squared deviations from the sample mean. That is: $$s^2=\frac{1}{N} \sum_{i=1}^{N}(X_i-\bar{X})^2$$ The sample variance $s^2$ is a biased estimator of the population variance $\sigma^2$. But as it turns out, we only need to make a tiny tweak to transform this into an unbiased estimator. All we have to do is divide by $N-1$ rather than by $N$.
+
 This is an unbiased estimator of the population variance $\sigma$. Moreover, this finally answers the question we raised in [Estimating population parameters]. Why did jamovi give us slightly different answers for variance? It's because jamovi calculates $\hat{\sigma}^2 \text{ not } s^2$, that's why. A similar story applies for the standard deviation. If we divide by $N - 1$ rather than $N$ our estimate of the population standard deviation is unbiased, and when we use jamovi's built in standard deviation function, what it's doing is calculating $\hat{\sigma}$ not $s$.[^08-estimating-unknown-quantities-from-a-sample-7]
 
-[^08-estimating-unknown-quantities-from-a-sample-7]: 
-Dividing by $N-1$ gives us an unbiased estimate of the population variance: $$\hat{\sigma}^2=\frac{1}{N-1}\sum_{i=1}^{N}(X_i - \bar{X})^2$$, and similarly for standard deviation: 
+[^08-estimating-unknown-quantities-from-a-sample-7]:
+Dividing by $N-1$ gives us an unbiased estimate of the population variance: $$\hat{\sigma}^2=\frac{1}{N-1}\sum_{i=1}^{N}(X_i - \bar{X})^2$$, and similarly for standard deviation:
 $$\hat{\sigma}=\sqrt{\frac{1}{N-1}\sum_{i=1}^{N}(X_i-\bar{X})^2}$$. Okay, I'm hiding something else here. In a bizarre and counter-intuitive twist, since $\hat{\sigma}^2$ is an unbiased estimator of $\sigma^2$, you'd assume that taking the square root would be fine and $\hat{\sigma}$ would be an unbiased estimator of σ. Right? Weirdly, it's not. There's actually a subtle, tiny bias in $\hat{\sigma}$. This is just bizarre: $\hat{\sigma}^2$ is an unbiased estimate of the population variance $\sigma^2$ , but when you take the square root, it turns out that $\hat{\sigma}$ is a biased estimator of the population standard deviation σ. Weird, weird, weird, right? So, why is $\hat{\sigma}$ biased? The technical answer is "because non-linear transformations (e.g., the square root) don't commute with expectation", but that just sounds like gibberish to everyone who hasn't taken a course in mathematical statistics. Fortunately, it doesn't matter for practical purposes. The bias is small, and in real life everyone uses $\hat{\sigma}$ and it works just fine. Sometimes mathematics is just annoying.
 
 One final point. In practice, a lot of people tend to refer to $\hat{\sigma}$ (i.e., the formula where we divide by $N - 1$) as the sample standard deviation. Technically, this is incorrect. The sample standard deviation should be equal to s (i.e., the formula where we divide by N). These aren't the same thing, either conceptually or numerically. One is a property of the sample, the other is an estimated characteristic of the population. However, in almost every real life application what we actually care about is the estimate of the population parameter, and so people always report $\hat{\sigma}$ rather than s. This is the right number to report, of course. It's just that people tend to get a little bit imprecise about terminology when they write it up, because "sample standard deviation" is shorter than "estimated population standard deviation". It's no big deal, and in practice I do the same thing everyone else does. Nevertheless, I think it's important to keep the two concepts separate. It's never a good idea to confuse "known properties of your sample" with "guesses about the population from which it came". The moment you start thinking that $s$ and $\hat{\sigma}$ are the same thing, you start doing exactly that.
@@ -499,13 +478,13 @@ To finish this section off, here's another couple of tables to help keep things 
 ```{r}
 #| label: tbl-tab8-3
 #| tbl-cap: Notation for standard deviation
-huxtabs[[8]][[3]] 
+huxtabs[[8]][[3]]
 ```
 
 ```{r}
 #| label: tbl-tab8-4
 #| tbl-cap: Notation for variance
-huxtabs[[8]][[4]] 
+huxtabs[[8]][[4]]
 ```
 
 ## Estimating a confidence interval {#sec-Estimating-a-confidence-interval}
@@ -536,10 +515,8 @@ The hardest thing about confidence intervals is understanding what they mean. Wh
 
 ```{r}
 #| label: fig-fig8-12
-#| fig-align: left
 #| fig-width: 7
 #| fig-height: 7
-#| out.width: 90%
 #| fig-cap: 95% confidence intervals. The top panel (a) shows 50 simulated replications of an experiment in which we measure the IQs of 10 people. The dot marks the location of the sample mean and the line shows the 95% confidence interval. Most of the 50 confidence intervals do contain the true mean (i.e., 100), but a few - in blue and marked with asterisks - do not. The lower graph (panel b) shows a similar simulation, but this time we simulate replications of an experiment that measures the IQs of 25 people
 
 
@@ -599,7 +576,7 @@ gridExtra::grid.arrange(grob=p.ci1,p.ci2, nrow=2)
 
 ### Calculating confidence intervals in jamovi
 
-jamovi include a simple way to calculate confidence intervals for the mean as part of the 'Descriptives' functionality. Under 'Descriptives'-'Statistics' there is a check box for both the 'Std. error of Mean' and 'Confidence interval for the mean', so you can use this to find out the 95% confidence interval (which is the default). So, for example, if I load the IQsim.omv file, check 'Confidence interval for the mean', I can see the confidence interval associated with the simulated mean IQ: Lower 95% CI = 99.39 and Upper 95% CI = 99.97 So, in our simulated large sample data with N=10,000, the mean IQ score is 99.68 with a 95% CI from 99.39 to 99.97. 
+jamovi include a simple way to calculate confidence intervals for the mean as part of the 'Descriptives' functionality. Under 'Descriptives'-'Statistics' there is a check box for both the 'Std. error of Mean' and 'Confidence interval for the mean', so you can use this to find out the 95% confidence interval (which is the default). So, for example, if I load the IQsim.omv file, check 'Confidence interval for the mean', I can see the confidence interval associated with the simulated mean IQ: Lower 95% CI = 99.39 and Upper 95% CI = 99.97 So, in our simulated large sample data with N=10,000, the mean IQ score is 99.68 with a 95% CI from 99.39 to 99.97.
 
 When it comes to plotting confidence intervals in jamovi, you can specify that the mean is included as an option in a box plot. Moreover, when we get onto learning about specific statistical tests, for example in @sec-Comparing-several-means-one-way-ANOVA, we will see that we can also plot confidence intervals as part of the data analysis. That's pretty cool, so we'll show you how to do that later on.
 
