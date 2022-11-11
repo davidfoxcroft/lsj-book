@@ -296,28 +296,37 @@ So how bad is it? The answer is shown as the solid line in @fig-fig16-1, and it'
 
 ```{r}
 #| label: fig-fig16-1
-#| fig-cap: Probability of Type I error in an experiment with target N=1000 per group and "peeking" at different intervals:- things can go badly wrong if you "peek" at your data and re-run your tests as new data arrives. If you are a frequentist, this is *very wrong* (blue circles and solid line). If you are a bayesian it's better (green triangles and dashed line). The Type I error threshold is set at 0.05 (red dotted line)
+#| fig-cap: Probability of Type I error in an experiment with target N of 1000 per group and **peeking** at different intervals:- things can go badly wrong if you **peek** at your data and re-run your tests as new data arrives. If you are a frequentist, this is *very wrong* (blue circles and solid line). If you are a bayesian it's not so bad (green triangles and dashed line). The Type I error threshold is set at 0.05 (red dotted line)
 
 ## takes a long time to run so load saved data instead
-#include"peeking_type_I_error.R"
+## include"peeking_type_I_error.R"
+
 
 p_bf <- readRDS("data_and_tables/p_bf.rds")
 
-ggplot(p_bf) +
-  geom_point(aes(x=peek, y=p_peek/1000), shape=1, col=blueshade, size = 2) +
-  geom_line(aes(x=peek, y=p_peek/1000), stat="smooth", method = "loess",
-    colour=blueshade, alpha=0.6, linetype = 'solid') +
-  geom_point(aes(x=peek, y=bf_peek/1000), shape=2, col="#009E73", size = 2) +
-  geom_line(aes(x=peek, y=bf_peek/1000), stat="smooth", method = "loess",
-    colour="#009E73", alpha=0.6, linetype = 'dashed') +
+p <- ggplot(p_bf) +
+  geom_point(aes(x=peek, y=p_peek/1000, shape="p1", colour="p1"), size = 2) +
+  geom_line(aes(x=peek, y=p_peek/1000, colour="p1", linetype="p1"), stat="smooth", method = "loess", alpha=0.7) +
+  geom_point(aes(x=peek, y=bf_peek/1000, shape="p2", colour="p2"), size = 2) +
+  geom_line(aes(x=peek, y=bf_peek/1000, colour="p2", linetype="p2"), stat="smooth", method = "loess", alpha=0.7) +
   geom_hline(yintercept=.05, col = 'red', size = 0.4, linetype = 'dotted') +
+  scale_colour_manual(name="Null Hypothesis Rejection Threshold",
+      values=c(p1=blueshade, p2="#009E73"), labels=c("p < 0.05  ", "BF > 3"), guide = guide_legend(title.position = "top", nrow = 1)) +
+  scale_shape_manual(name="Null Hypothesis Rejection Threshold",
+      values=c(p1=1, p2=2), labels=c("p < 0.05  ", "BF > 3"), guide = guide_legend(title.position = "top", nrow = 1)) +
+  scale_linetype_manual(name="Null Hypothesis Rejection Threshold",
+      values=c(p1="solid", p2="dashed"), labels=c("p < 0.05  ", "BF > 3"), guide = guide_legend(title.position = "top", nrow = 1)) +
   theme_classic() +
+  theme(
+    legend.position = c(.5, .85),
+    legend.direction = 'horizontal',
+    legend.key.width = unit (1, 'cm')) +
   ylim(0,0.5) +
   ylab("Probability of Type I Error\n") +
   xlab("\nFrequency of 'Peeking' as new data comes in") +
-  annotate(geom="text",label="alpha = .05", col = "red", size=2.5, x=3, y=0.035) +
-  annotate(geom="text",label=" p < .05", x=90, y=0.35) +
-  annotate(geom="text",label="BF > 3", x=90, y=0.13)
+  annotate(geom="text",label="alpha = .05", col = "red", size=2.5, x=10, y=0.035)
+
+p
 
 ```
 
