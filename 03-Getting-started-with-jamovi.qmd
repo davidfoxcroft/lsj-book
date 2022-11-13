@@ -132,12 +132,12 @@ There are also several other kinds of data file that you might want to import in
 
 ### Importing data from csv files
 
-One quite commonly used data format is the humble "comma separated value" file, also called a csv file, and usually bearing the file extension .csv. csv files are just plain old-fashioned text files and what they store is basically just a table of data. This is illustrated in @fig-fig3-4, which shows a file called booksales.csv that I've created. As you can see, each row represents the book sales data for one month. The first row doesn't contain actual data though, it has the names of the variables.
+One quite commonly used data format is the humble "comma separated value" file, also called a csv file, and usually bearing the file extension .csv. csv files are just plain old-fashioned text files and what they store is basically just a table of data. This is illustrated in @fig-fig3-4, which shows a file called *booksales.csv* that I've created. As you can see, each row represents the book sales data for one month. The first row doesn't contain actual data though, it has the names of the variables.
 
 ```{r}
 #| label: fig-fig3-4
 #| classes: .enlarge-image
-#| fig-cap: The booksales.csv data file. On the left I have opened the file using a spreadsheet program (OpenOffice), which shows that the file is basically a table. On the right the same file is open in a standard text editor (the TextEdit program on a Mac), which shows how the file is formatted. The entries in the table are wrapped in quote marks and separated by commas
+#| fig-cap: The *booksales.csv* data file. On the left I have opened the file using a spreadsheet program (OpenOffice), which shows that the file is basically a table. On the right the same file is open in a standard text editor (the TextEdit program on a Mac), which shows how the file is formatted. The entries in the table are wrapped in quote marks and separated by commas
 knitr::include_graphics("images/fig3-4.png")
 ```
 
@@ -152,9 +152,9 @@ knitr::include_graphics("images/fig3-5.png")
 
 There are a few things that you can check to make sure that the data gets imported correctly:
 
--   Heading. Does the first row of the file contain the names for each variable - a 'header' row? The booksales.csv file has a header, so that's a yes.
+-   Heading. Does the first row of the file contain the names for each variable - a 'header' row? The *booksales.csv* file has a header, so that's a yes.
 -   Decimal. What character is used to specify the decimal point? In English speaking countries this is almost always a period (i.e., .). That's not universally true though, many European countries use a comma.
--   Quote. What character is used to denote a block of text? That's usually going to be a double quote mark ("). It is for the booksales.csv file.
+-   Quote. What character is used to denote a block of text? That's usually going to be a double quote mark ("). It is for the *booksales.csv* file.
 
 ## Importing unusual data files
 
@@ -166,7 +166,7 @@ The first thing I should point out is that if your data are saved as a text file
 
 -   header. A lot of the time when you're storing data as a csv file the first row actually contains the column names and not data. If that's not true then it's a good idea to open up the csv file in a spreadsheet programme such as Open Office and add the header row manually.
 -   sep. As the name "comma separated value" indicates, the values in a row of a csv file are usually separated by commas. This isn't universal, however. In Europe the decimal point is typically written as , instead of . and as a consequence it would be somewhat awkward to use , as the separator. Therefore it is not unusual to use ; instead of , as the separator. At other times, I've seen a TAB character used.
--   quote. It's conventional in csv files to include a quoting character for textual data. As you can see by looking at the booksales.csv file, this is usually a double quote character, ". But sometimes there is no quoting character at all, or you might see a single quote mark ' used instead.
+-   quote. It's conventional in csv files to include a quoting character for textual data. As you can see by looking at the *booksales.csv* file, this is usually a double quote character, ". But sometimes there is no quoting character at all, or you might see a single quote mark ' used instead.
 -   skip. It's actually very common to receive CSV files in which the first few rows have nothing to do with the actual data. Instead, they provide a human readable summary of where the data came from, or maybe they include some technical info that doesn't relate to the data.
 -   missing values. Often you'll get given data with missing values. For one reason or another, some entries in the table are missing. The data file needs to include a "special" value to indicate that the entry is missing. By default jamovi assumes that this value is 99[^getting-started-with-jamovi-4], for both numeric and text data, so you should make sure that, where necessary, all missing values in the csv file are replaced with 99 (or -9999; whichever you choose) before opening / importing the file into jamovi. Once you have opened / imported the file into jamovi all the missing values are converted to blank or greyed out cells in the jamovi spreadsheet view. You can also change the missing value for each variable as an option in the Data - Setup view.
 

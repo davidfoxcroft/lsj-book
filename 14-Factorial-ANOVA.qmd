@@ -29,7 +29,7 @@ Like one-way ANOVA, factorial ANOVA is a tool for testing certain types of hypot
 
 ```{r}
 #| label: tbl-tab14-1
-#| tbl-cap: Group means for drug and therapy groups in the clinicaltrial.csv data
+#| tbl-cap: Group means for drug and therapy groups in the *clinicaltrial.csv*  data
 huxtabs[[14]][[1]] |>
   set_number_format(value=2)
 ```
@@ -504,7 +504,7 @@ Clearly, careful thought needs to be given to an analysis of covariance with dis
 
 ### Running ANCOVA in jamovi
 
-A health psychologist was interested in the effect of routine cycling and stress on happiness levels, with age as a covariate. You can find the dataset in the file ancova.csv. Open this file in jamovi and then, to undertake an ANCOVA, select Analyses - ANOVA - ANCOVA to open the ANCOVA analysis window (@fig-fig14-12). Highlight the dependent variable 'happiness' and transfer it into the 'Dependent Variable' text box. Highlight the independent variables 'stress' and 'commute' and transfer them into the 'Fixed Factors' text box. Highlight the covariate 'age' and transfer it into the 'Covariates' text box. Then Click on Estimated Marginal Means to bring up the plots and tables options.
+A health psychologist was interested in the effect of routine cycling and stress on happiness levels, with age as a covariate. You can find the dataset in the file *ancova.csv*. Open this file in jamovi and then, to undertake an ANCOVA, select Analyses - ANOVA - ANCOVA to open the ANCOVA analysis window (@fig-fig14-12). Highlight the dependent variable 'happiness' and transfer it into the 'Dependent Variable' text box. Highlight the independent variables 'stress' and 'commute' and transfer them into the 'Fixed Factors' text box. Highlight the covariate 'age' and transfer it into the 'Covariates' text box. Then Click on Estimated Marginal Means to bring up the plots and tables options.
 
 ```{r}
 #| label: fig-fig14-12
@@ -567,7 +567,7 @@ Okay, so far that's simple enough. The next thing we need to do is to wrap some 
 huxtabs[[14]][[8]]
 ```
 
-This isn't anything particularly special, of course. It's exactly the format in which we expect to see our data! See the data file rtfm.csv. We can use the jamovi 'Descriptives' analysis to confirm that this data set corresponds to a balanced design, with 2 observations for each combination of attend and reading. In the same way we can also calculate the mean grade for each combination. This is shown in @fig-fig14-16. Looking at the mean scores, one gets the strong impression that reading the text and attending the class both matter a lot.
+This isn't anything particularly special, of course. It's exactly the format in which we expect to see our data! See the data file *rtfm.csv*. We can use the jamovi 'Descriptives' analysis to confirm that this data set corresponds to a balanced design, with 2 observations for each combination of attend and reading. In the same way we can also calculate the mean grade for each combination. This is shown in @fig-fig14-16. Looking at the mean scores, one gets the strong impression that reading the text and attending the class both matter a lot.
 
 ```{r}
 #| label: fig-fig14-16
@@ -587,7 +587,7 @@ This is, of course, the exact same equation that I used earlier to describe a tw
 ```{r}
 #| label: fig-fig14-17
 #| classes: .enlarge-image
-#| fig-cap: ANOVA of the rtfm.csv data set in jamovi, without the interaction term
+#| fig-cap: ANOVA of the *rtfm.csv* data set in jamovi, without the interaction term
 knitr::include_graphics("images/fig14-17.png")
 ```
 
@@ -642,7 +642,7 @@ Okay, now that we're really starting to see why ANOVA and regression are basical
 ```{r}
 #| label: fig-fig14-18
 #| classes: .enlarge-image
-#| fig-cap: Regression analysis of the rtfm.csv data set in jamovi, without the interaction term
+#| fig-cap: Regression analysis of the *rtfm.csv* data set in jamovi, without the interaction term
 knitr::include_graphics("images/fig14-18.png")
 ```
 
@@ -661,7 +661,7 @@ knitr::include_graphics("images/fig14-19.png")
 
 ### How to encode non binary factors as contrasts
 
-At this point, I've shown you how we can view a $2 \times 2$ ANOVA into a linear model. And it's pretty easy to see how this generalises to a $2 \times 2 \times 2$ ANOVA or a $2 \times 2 \times 2 \times 2$ ANOVA. It's the same thing, really. You just add a new binary variable for each of your factors. Where it begins to get trickier is when we consider factors that have more than two levels. Consider, for instance, the $3 \times 2$ ANOVA that we ran earlier in this chapter using the clinicaltrial.csv data. How can we convert the three-level drug factor into a numerical form that is appropriate for a regression?
+At this point, I've shown you how we can view a $2 \times 2$ ANOVA into a linear model. And it's pretty easy to see how this generalises to a $2 \times 2 \times 2$ ANOVA or a $2 \times 2 \times 2 \times 2$ ANOVA. It's the same thing, really. You just add a new binary variable for each of your factors. Where it begins to get trickier is when we consider factors that have more than two levels. Consider, for instance, the $3 \times 2$ ANOVA that we ran earlier in this chapter using the *clinicaltrial.csv*  data. How can we convert the three-level drug factor into a numerical form that is appropriate for a regression?
 
 The answer to this question is pretty simple, actually. All we have to do is realise that a three-level factor can be redescribed as two binary variables. Suppose, for instance, I were to create a new binary variable called druganxifree. Whenever the drug variable is equal to "anxifree" we set druganxifree = 1. Otherwise, we set druganxifree = 0. This variable sets up a **contrast**, in this case between anxifree and the other two drugs. By itself, of course, the druganxifree contrast isn't enough to fully capture all of the information in our drug variable. We need a second contrast, one that allows us to distinguish between joyzepam and the placebo. To do this, we can create a second binary contrast, called drugjoyzepam, which equals 1 if the drug is joyzepam and 0 if it is not. Taken together, these two contrasts allows us to perfectly discriminate between all three possible drugs. @tbl-tab14-10 illustrates this.
 
@@ -673,13 +673,13 @@ huxtabs[[14]][[10]]
 
 If the drug administered to a patient is a placebo then both of the two contrast variables will equal 0. If the drug is Anxifree then the druganxifree variable will equal 1, and drugjoyzepam will be 0. The reverse is true for Joyzepam: drugjoyzepam is 1 and druganxifree is 0.
 
-Creating contrast variables is not too difficult to do using the jamovi compute new variable command. For example, to create the druganxifree variable, write this logical expression in the compute new variable formula box: IF(drug == 'anxifree', 1, 0)'. Similarly, to create the new variable drugjoyzepam use this logical expression: IF(drug == 'joyzepam', 1, 0). Likewise for CBTtherapy: IF(therapy == 'CBT', 1, 0). You can see these new variables, and the corresponding logical expressions, in the jamovi data file clinicaltrial2.omv.
+Creating contrast variables is not too difficult to do using the jamovi compute new variable command. For example, to create the druganxifree variable, write this logical expression in the compute new variable formula box: IF(drug == 'anxifree', 1, 0)'. Similarly, to create the new variable drugjoyzepam use this logical expression: IF(drug == 'joyzepam', 1, 0). Likewise for CBTtherapy: IF(therapy == 'CBT', 1, 0). You can see these new variables, and the corresponding logical expressions, in the jamovi data file *clinicaltrial2.omv* .
 
 We have now recoded our three-level factor in terms of two binary variables, and we've already seen that ANOVA and regression behave the same way for binary variables. However, there are some additional complexities that arise in this case, which we'll discuss in the next section.
 
 ### The equivalence between ANOVA and regression for non-binary factors
 
-Now we have two different versions of the same data set. Our original data in which the drug variable from the clinicaltrial.csv file is expressed as a single three-level factor, and the expanded data clinicaltrial2.omv in which it is expanded into two binary contrasts. Once again, the thing that we want to demonstrate is that our original $3 \times 2$ factorial ANOVA is equivalent to a regression model applied to the contrast variables. Let's start by re-running the ANOVA, with results shown in @fig-fig14-20.
+Now we have two different versions of the same data set. Our original data in which the drug variable from the *clinicaltrial.csv*  file is expressed as a single three-level factor, and the expanded data *clinicaltrial2.omv*  in which it is expanded into two binary contrasts. Once again, the thing that we want to demonstrate is that our original $3 \times 2$ factorial ANOVA is equivalent to a regression model applied to the contrast variables. Let's start by re-running the ANOVA, with results shown in @fig-fig14-20.
 
 ```{r}
 #| label: fig-fig14-20
@@ -796,7 +796,7 @@ huxtabs[[14]][[15]] |>
 
 Time to switch to a different topic. Rather than pre-planned comparisons that you have tested using contrasts, let's suppose you've done your ANOVA and it turns out that you obtained some significant effects. Because of the fact that the F-tests are "omnibus" tests that only really test the null hypothesis that there are no differences among groups, obtaining a significant effect doesn't tell you which groups are different to which other ones. We discussed this issue back in @sec-Comparing-several-means-one-way-ANOVA, and in that chapter our solution was to run t-tests for all possible pairs of groups, making corrections for multiple comparisons (e.g., Bonferroni, Holm) to control the Type I error rate across all comparisons. The methods that we used back in @sec-Comparing-several-means-one-way-ANOVA have the advantage of being relatively simple and being the kind of tools that you can use in a lot of different situations where you're testing multiple hypotheses, but they're not necessarily the best choices if you're interested in doing efficient post hoc testing in an ANOVA context. There are actually quite a lot of different methods for performing multiple comparisons in the statistics literature [@Hsu1996], and it would be beyond the scope of an introductory text like this one to discuss all of them in any detail.
 
-That being said, there's one tool that I do want to draw your attention to, namely Tukey's "Honestly Significant Difference", or **Tukey's HSD** for short. For once, I'll spare you the formulas and just stick to the qualitative ideas. The basic idea in Tukey's HSD is to examine all relevant pairwise comparisons between groups, and it's only really appropriate to use Tukey's HSD if it is pairwise differences that you're interested in.[^factorial-anova-9] For instance, earlier we conducted a factorial ANOVA using the clinicaltrial.csv data set, and where we specified a main effect for drug and a main effect of therapy we would be interested in the following four comparisons:
+That being said, there's one tool that I do want to draw your attention to, namely Tukey's "Honestly Significant Difference", or **Tukey's HSD** for short. For once, I'll spare you the formulas and just stick to the qualitative ideas. The basic idea in Tukey's HSD is to examine all relevant pairwise comparisons between groups, and it's only really appropriate to use Tukey's HSD if it is pairwise differences that you're interested in.[^factorial-anova-9] For instance, earlier we conducted a factorial ANOVA using the *clinicaltrial.csv*  data set, and where we specified a main effect for drug and a main effect of therapy we would be interested in the following four comparisons:
 
 [^factorial-anova-9]: If, for instance, you actually find yourself interested to know if Group A is significantly different from the mean of Group B and Group C, then you need to use a different tool (e.g., Scheffe's method, which is more conservative, and beyond the scope of this book). However, in most cases you probably are interested in pairwise group differences, so Tukey's HSD is a pretty useful thing to know about.
 
@@ -845,14 +845,14 @@ Factorial ANOVA is a very handy thing to know about. It's been one of the standa
 
 Unbalanced designs need to be treated with a lot more care than balanced designs, and the statistical theory that underpins them is a lot messier. It might be a consequence of this messiness, or it might be a shortage of time, but my experience has been that undergraduate research methods classes in psychology have a nasty tendency to ignore this issue completely. A lot of stats textbooks tend to gloss over it too. The net result of this, I think, is that a lot of active researchers in the field don't actually know that there's several different "types" of unbalanced ANOVAs, and they produce quite different answers. In fact, reading the psychological literature, I'm kind of amazed at the fact that most people who report the results of an unbalanced factorial ANOVA don't actually give you enough details to reproduce the analysis. I secretly suspect that most people don't even realise that their statistical software package is making a whole lot of substantive data analysis decisions on their behalf. It's actually a little terrifying when you think about it. So, if you want to avoid handing control of your data analysis to stupid software, read on.
 
-### The coffee data
+### The *coffee* data
 
-As usual, it will help us to work with some data. The coffee.csv file contains a hypothetical data set that produces an unbalanced $3 \times 2$ ANOVA. Suppose we were interested in finding out whether or not the tendency of people to babble when they have too much coffee is purely an effect of the coffee itself, or whether there's some effect of the milk and sugar that people add to the coffee. Suppose we took 18 people and gave them some coffee to drink. The amount of coffee / caffeine was held constant, and we varied whether or not milk was added, so milk is a binary factor with two levels, "yes" and "no". We also varied the kind of sugar involved. The coffee might contain "real" sugar or it might contain "fake" sugar (i.e., artificial sweetener) or it might contain "none" at all, so the sugar variable is a three level factor. Our outcome variable is a continuous variable that presumably refers to some psychologically sensible measure of the extent to which someone is "babbling". The details don't really matter for our purpose. Take a look at the data in the jamovi spreadsheet view, as in @fig-fig14-26.
+As usual, it will help us to work with some data. The *coffee.csv* file contains a hypothetical data set that produces an unbalanced $3 \times 2$ ANOVA. Suppose we were interested in finding out whether or not the tendency of people to babble when they have too much coffee is purely an effect of the coffee itself, or whether there's some effect of the milk and sugar that people add to the coffee. Suppose we took 18 people and gave them some coffee to drink. The amount of coffee / caffeine was held constant, and we varied whether or not milk was added, so milk is a binary factor with two levels, "yes" and "no". We also varied the kind of sugar involved. The coffee might contain "real" sugar or it might contain "fake" sugar (i.e., artificial sweetener) or it might contain "none" at all, so the sugar variable is a three level factor. Our outcome variable is a continuous variable that presumably refers to some psychologically sensible measure of the extent to which someone is "babbling". The details don't really matter for our purpose. Take a look at the data in the jamovi spreadsheet view, as in @fig-fig14-26.
 
 ```{r}
 #| label: fig-fig14-26
 #| classes: .enlarge-image
-#| fig-cap: The coffee.csv data set in jamovi, with descriptive information aggregated by factor levels
+#| fig-cap: The *coffee.csv* data set in jamovi, with descriptive information aggregated by factor levels
 knitr::include_graphics("images/fig14-26.png")
 ```
 
@@ -871,9 +871,9 @@ The first kind of ANOVA is conventionally referred to as **Type I sum of squares
 
 ### Type I sum of squares
 
-The Type I method is sometimes referred to as the "sequential" sum of squares, because it involves a process of adding terms to the model one at a time. Consider the coffee data, for instance. Suppose we want to run the full $3 \times 2$ factorial ANOVA, including interaction terms. The full model contains the outcome variable babble, the predictor variables sugar and milk, and the interaction term sugar $\times$ milk. This can be written as $babble \sim sugar + milk + sugar {\times} milk$. The Type I strategy builds this model up sequentially, starting from the simplest possible model and gradually adding terms.
+The Type I method is sometimes referred to as the "sequential" sum of squares, because it involves a process of adding terms to the model one at a time. Consider the *coffee* data, for instance. Suppose we want to run the full $3 \times 2$ factorial ANOVA, including interaction terms. The full model contains the outcome variable babble, the predictor variables sugar and milk, and the interaction term sugar $\times$ milk. This can be written as $babble \sim sugar + milk + sugar {\times} milk$. The Type I strategy builds this model up sequentially, starting from the simplest possible model and gradually adding terms.
 
-The simplest possible model for the data would be one in which neither milk nor sugar is assumed to have any effect on babbling. The only term that would be included in such a model is the intercept, written as babble ~ 1. This is our initial null hypothesis. The next simplest model for the data would be one in which only one of the two main effects is included. In the coffee data, there are two different possible choices here, because we could choose to add milk first or to add sugar first. The order actually turns out to matter, as we'll see later, but for now let's just make a choice arbitrarily and pick sugar. So, the second model in our sequence of models is babble ~ sugar, and it forms the alternative hypothesis for our first test. We now have our first hypothesis test (@tbl-tab14-16).
+The simplest possible model for the data would be one in which neither milk nor sugar is assumed to have any effect on babbling. The only term that would be included in such a model is the intercept, written as babble ~ 1. This is our initial null hypothesis. The next simplest model for the data would be one in which only one of the two main effects is included. In the *coffee* data, there are two different possible choices here, because we could choose to add milk first or to add sugar first. The order actually turns out to matter, as we'll see later, but for now let's just make a choice arbitrarily and pick sugar. So, the second model in our sequence of models is babble ~ sugar, and it forms the alternative hypothesis for our first test. We now have our first hypothesis test (@tbl-tab14-16).
 
 ```{r}
 #| label: tbl-tab14-16
@@ -957,7 +957,7 @@ huxtabs[[14]][[22]]
 
 As ugly as that table looks, it's pretty simple. In all cases, the alternative hypothesis corresponds to the full model which contains three main effect terms (e.g. A), three two-way interactions (e.g. A\*B) and one three-way interaction (i.e., A\*B\*C)). The null model always contains 6 of these 7 terms, and the missing one is the one whose significance we're trying to test.
 
-At first pass, Type III tests seem like a nice idea. Firstly, we've removed the asymmetry that caused us to have problems when running Type I tests. And because we're now treating all terms the same way, the results of the hypothesis tests do not depend on the order in which we specify them. This is definitely a good thing. However, there is a big problem when interpreting the results of the tests, especially for main effect terms. Consider the coffee data. Suppose it turns out that the main effect of milk is not significant according to the Type III tests. What this is telling us is that babble \~ sugar + sugar\*milk is a better model for the data than the full model. But what does that even mean? If the interaction term sugar\*milk was also non significant, we'd be tempted to conclude that the data are telling us that the only thing that matters is sugar. But suppose we have a significant interaction term, but a non-significant main effect of milk. In this case, are we to assume that there really is an "effect of sugar", an "interaction between milk and sugar", but no "effect of milk"? That seems crazy. The right answer simply must be that it's meaningless[^factorial-anova-12] to talk about the main effect if the interaction is significant. In general, this seems to be what most statisticians advise us to do, and I think that's the right advice. But if it really is meaningless to talk about non-significant main effects in the presence of a significant interaction, then it's not at all obvious why Type III tests should allow the null hypothesis to rely on a model that includes the interaction but omits one of the main effects that make it up. When characterised in this fashion, the null hypotheses really don't make much sense at all.
+At first pass, Type III tests seem like a nice idea. Firstly, we've removed the asymmetry that caused us to have problems when running Type I tests. And because we're now treating all terms the same way, the results of the hypothesis tests do not depend on the order in which we specify them. This is definitely a good thing. However, there is a big problem when interpreting the results of the tests, especially for main effect terms. Consider the *coffee* data. Suppose it turns out that the main effect of milk is not significant according to the Type III tests. What this is telling us is that babble \~ sugar + sugar\*milk is a better model for the data than the full model. But what does that even mean? If the interaction term sugar\*milk was also non significant, we'd be tempted to conclude that the data are telling us that the only thing that matters is sugar. But suppose we have a significant interaction term, but a non-significant main effect of milk. In this case, are we to assume that there really is an "effect of sugar", an "interaction between milk and sugar", but no "effect of milk"? That seems crazy. The right answer simply must be that it's meaningless[^factorial-anova-12] to talk about the main effect if the interaction is significant. In general, this seems to be what most statisticians advise us to do, and I think that's the right advice. But if it really is meaningless to talk about non-significant main effects in the presence of a significant interaction, then it's not at all obvious why Type III tests should allow the null hypothesis to rely on a model that includes the interaction but omits one of the main effects that make it up. When characterised in this fashion, the null hypotheses really don't make much sense at all.
 
 [^factorial-anova-12]: Or, at the very least, rarely of interest.
 
@@ -1008,11 +1008,11 @@ Anyway, just to give you a sense of how the Type II tests play out, here's the f
 huxtabs[[14]][[25]]
 ```
 
-In the context of the two way ANOVA that we've been using in the coffee data, the hypothesis tests are even simpler. The main effect of sugar corresponds to an F-test comparing these two models (@tbl-tab14-26).
+In the context of the two way ANOVA that we've been using in the *coffee* data, the hypothesis tests are even simpler. The main effect of sugar corresponds to an F-test comparing these two models (@tbl-tab14-26).
 
 ```{r}
 #| label: tbl-tab14-26
-#| tbl-cap: Type II tests for the main effect of sugar in the coffee data
+#| tbl-cap: Type II tests for the main effect of sugar in the *coffee* data
 huxtabs[[14]][[26]]
 ```
 
@@ -1020,7 +1020,7 @@ The test for the main effect of milk is in @tbl-tab14-27.
 
 ```{r}
 #| label: tbl-tab14-27
-#| tbl-cap: Type II tests for the main effect of milk in the coffee data
+#| tbl-cap: Type II tests for the main effect of milk in the *coffee* data
 huxtabs[[14]][[27]]
 ```
 

@@ -17,7 +17,7 @@ In this section I'll describe one of the most useless tests in all of statistics
 
 ### The inference problem that the test addresses
 
-To introduce the idea behind the z-test, let's use a simple example. A friend of mine, Dr Zeppo, grades his introductory statistics class on a curve. Let's suppose that the average grade in his class is $67.5$, and the standard deviation is $9.5$. Of his many hundreds of students, it turns out that 20 of them also take psychology classes. Out of curiosity, I find myself wondering if the psychology students tend to get the same grades as everyone else (i.e., mean $67.5$) or do they tend to score higher or lower? He emails me the zeppo.csv file, which I use to look at the grades of those students, in the jamovi spreadsheet view,and then calculate the mean in 'Exploration' - 'Descriptives' [^11-comparing-two-means-2]. The mean value is $72.3$.
+To introduce the idea behind the z-test, let's use a simple example. A friend of mine, Dr Zeppo, grades his introductory statistics class on a curve. Let's suppose that the average grade in his class is $67.5$, and the standard deviation is $9.5$. Of his many hundreds of students, it turns out that 20 of them also take psychology classes. Out of curiosity, I find myself wondering if the psychology students tend to get the same grades as everyone else (i.e., mean $67.5$) or do they tend to score higher or lower? He emails me the *zeppo.csv* file, which I use to look at the grades of those students, in the jamovi spreadsheet view,and then calculate the mean in 'Exploration' - 'Descriptives' [^11-comparing-two-means-2]. The mean value is $72.3$.
 
 [^11-comparing-two-means-2]: In order to do this I had to change the measurement level for $X$ to 'Continuous', as during the opening / import of the csv file jamovi made this a nominal level variable, which isn't right for my analysis
 
@@ -374,7 +374,7 @@ Although the one sample t-test has its uses, it's not the most typical example o
 
 ### The data
 
-Suppose we have 33 students taking Dr Harpo's statistics lectures, and Dr Harpo doesn't grade to a curve. Actually, Dr Harpo's grading is a bit of a mystery, so we don't really know anything about what the average grade is for the class as a whole. There are two tutors for the class, Anastasia and Bernadette. There are $N_1 = 15$ students in Anastasia's tutorials, and $N_2 = 18$ in Bernadette's tutorials. The research question I'm interested in is whether Anastasia or Bernadette is a better tutor, or if it doesn't make much of a difference. Dr Harpo emails me the course grades, in the harpo.csv file. As usual, I'll load the file into jamovi and have a look at what variables it contains - there are three variables, ID, grade and tutor. The grade variable contains each student's grade, but it is not imported into jamovi with the correct measurement level attribute, so I need to change this so it is regarded as a continuous variable (see @sec-Changing-data-from-one-level-to-another). The tutor variable is a factor that indicates who each student's tutor was - either Anastasia or Bernadette.
+Suppose we have 33 students taking Dr Harpo's statistics lectures, and Dr Harpo doesn't grade to a curve. Actually, Dr Harpo's grading is a bit of a mystery, so we don't really know anything about what the average grade is for the class as a whole. There are two tutors for the class, Anastasia and Bernadette. There are $N_1 = 15$ students in Anastasia's tutorials, and $N_2 = 18$ in Bernadette's tutorials. The research question I'm interested in is whether Anastasia or Bernadette is a better tutor, or if it doesn't make much of a difference. Dr Harpo emails me the course grades, in the *harpo.csv* file. As usual, I'll load the file into jamovi and have a look at what variables it contains - there are three variables, ID, grade and tutor. The grade variable contains each student's grade, but it is not imported into jamovi with the correct measurement level attribute, so I need to change this so it is regarded as a continuous variable (see @sec-Changing-data-from-one-level-to-another). The tutor variable is a factor that indicates who each student's tutor was - either Anastasia or Bernadette.
 
 We can calculate means and standard deviations, using the 'Exploration' - 'descriptives' analysis, and here's a nice little summary table (@tbl-tab11-2).
 
@@ -606,7 +606,7 @@ Regardless of whether we're talking about the Student test or the Welch test, an
 
 ### The data
 
-The data set that we'll use this time comes from Dr Chico's class.[^11-comparing-two-means-17] In her class students take two major tests, one early in the semester and one later in the semester. To hear her tell it, she runs a very hard class, one that most students find very challenging. But she argues that by setting hard assessments students are encouraged to work harder. Her theory is that the first test is a bit of a "wake up call" for students. When they realise how hard her class really is, they'll work harder for the second test and get a better mark. Is she right? To test this, let's import the chico.csv file into jamovi. This time jamovi does a good job during the import of attributing measurement levels correctly. The chico data set contains three variables: an id variable that identifies each student in the class, the grade_test1 variable that records the student grade for the first test, and the grade_test2 variable that has the grades for the second test.
+The data set that we'll use this time comes from Dr Chico's class.[^11-comparing-two-means-17] In her class students take two major tests, one early in the semester and one later in the semester. To hear her tell it, she runs a very hard class, one that most students find very challenging. But she argues that by setting hard assessments students are encouraged to work harder. Her theory is that the first test is a bit of a "wake up call" for students. When they realise how hard her class really is, they'll work harder for the second test and get a better mark. Is she right? To test this, let's import the *chico.csv* file into jamovi. This time jamovi does a good job during the import of attributing measurement levels correctly. The *chico* data set contains three variables: an id variable that identifies each student in the class, the grade_test1 variable that records the student grade for the first test, and the grade_test2 variable that has the grades for the second test.
 
 [^11-comparing-two-means-17]: At this point we have Drs Harpo, Chico and Zeppo. No prizes for guessing who Dr Groucho is.
 
@@ -617,11 +617,11 @@ If we take a quick look at the descriptive statistics, in @fig-fig11-12, we see 
 ```{r}
 #| label: fig-fig11-12
 #| classes: .enlarge-image
-#| fig-cap: Descriptives for the two grade test variables in the chico data set
+#| fig-cap: Descriptives for the two grade test variables in the *chico* data set
 knitr::include_graphics("images/fig11-12.png")
 ```
 
-Nevertheless, this impression is wrong. To see why, take a look at the scatterplot of the grades for test 1 against the grades for test 2, shown in @fig-fig11-13b. In this plot each dot corresponds to the two grades for a given student. If their grade for test 1 (x co-ordinate) equals their grade for test 2 (y co-ordinate), then the dot falls on the line. Points falling above the line are the students that performed better on the second test. Critically, almost all of the data points fall above the diagonal line: almost all of the students do seem to have improved their grade, if only by a small amount. This suggests that we should be looking at the improvement made by each student from one test to the next and treating that as our raw data. To do this, we'll need to create a new variable for the improvement that each student makes, and add it to the chico data set. The easiest way to do this is to compute a new variable, with the expression grade test2 - grade test1.
+Nevertheless, this impression is wrong. To see why, take a look at the scatterplot of the grades for test 1 against the grades for test 2, shown in @fig-fig11-13b. In this plot each dot corresponds to the two grades for a given student. If their grade for test 1 (x co-ordinate) equals their grade for test 2 (y co-ordinate), then the dot falls on the line. Points falling above the line are the students that performed better on the second test. Critically, almost all of the data points fall above the diagonal line: almost all of the students do seem to have improved their grade, if only by a small amount. This suggests that we should be looking at the improvement made by each student from one test to the next and treating that as our raw data. To do this, we'll need to create a new variable for the improvement that each student makes, and add it to the *chico* data set. The easiest way to do this is to compute a new variable, with the expression grade test2 - grade test1.
 
 ::: {#fig-fig11-13 layout-ncol=2 layout-valign="bottom" width=80%}
 
@@ -770,7 +770,7 @@ where $\hat{\sigma}_D$ is the estimate of the standard deviation of the differen
 
 This is the version of Cohen's $d$ that gets reported by the jamovi 'Paired Samples T-Test' analysis. The only wrinkle is figuring out whether this is the measure you want or not. To the extent that you care about the practical consequences of your research, you often want to measure the effect size relative to the *original* variables, not the *difference scores* (e.g., the 1% improvement in Dr Chico's class over time is pretty small when measured against the amount of between-student variation in grades), in which case you use the same versions of Cohen's d that you would use for a Student or Welch test. It's not so straightforward to do this in jamovi; essentially you have to change the structure of the data in the spreadsheet view so I won't go into that here[^11-comparing-two-means-19], but the Cohen's d for this perspective is quite different: it is $0.22$ which is quite small when assessed on the scale of the original variables.
 
-[^11-comparing-two-means-19]: If you are interested, you can look at how this was done in the chico2.omv file
+[^11-comparing-two-means-19]: If you are interested, you can look at how this was done in the *chico2.omv* file
 
 ## Checking the normality of a sample {#sec-Checking-the-normality-of-a-sample}
 
@@ -958,7 +958,7 @@ In the meantime, it's probably worth showing you an example of what happens to t
 knitr::include_graphics("images/fig11-25.png")
 ```
 
-And when we run the Shapiro-Wilk test on the AFL margins data, we get a value for the Shapiro-Wilk normality test statistic of $W = 0.94$, and p-value = $9.481$x$10^{-07}$. Clearly a significant effect!
+And when we run the Shapiro-Wilk test on the *AFL margins* data, we get a value for the Shapiro-Wilk normality test statistic of $W = 0.94$, and p-value = $9.481$x$10^{-07}$. Clearly a significant effect!
 
 ## Testing non-normal data
 
@@ -968,7 +968,7 @@ Like the t-test, the Wilcoxon test comes in two forms, one-sample and two-sample
 
 ### Two sample Mann-Whitney U test
 
-I'll start by describing the **Mann-Whitney U test**, since it's actually simpler than the one sample version. Suppose we're looking at the scores of 10 people on some test. Since my imagination has now failed me completely, let's pretend it's a "test of awesomeness" and there are two groups of people, "A" and "B". I'm curious to know which group is more awesome. The data are included in the file awesome.csv, and there are two variables apart from the usual ID variable: scores and group.
+I'll start by describing the **Mann-Whitney U test**, since it's actually simpler than the one sample version. Suppose we're looking at the scores of 10 people on some test. Since my imagination has now failed me completely, let's pretend it's a "test of awesomeness" and there are two groups of people, "A" and "B". I'm curious to know which group is more awesome. The data are included in the file *awesome.csv*, and there are two variables apart from the usual ID variable: scores and group.
 
 As long as there are no ties (i.e., people with the exact same awesomeness score) then the test that we want to do is surprisingly simple. All we have to do is construct a table that compares every observation in group A against every observation in group B. Whenever the group A datum is larger, we place a check mark in the table (@tbl-tab11-4).
 
@@ -998,7 +998,7 @@ knitr::include_graphics("images/fig11-26.png")
 
 ### One sample Wilcoxon test
 
-What about the **one sample Wilcoxon test** (or equivalently, the paired samples Wilcoxon test)? Suppose I'm interested in finding out whether taking a statistics class has any effect on the happiness of students. My data is in the happiness.csv file. What I've measured here is the happiness of each student before taking the class and after taking the class, and the change score is the difference between the two. Just like we saw with the t-test, there's no fundamental difference between doing a paired-samples test using before and after, versus doing a onesample test using the change scores. As before, the simplest way to think about the test is to construct a tabulation. The way to do it this time is to take those change scores that are positive differences, and tabulate them against all the complete sample. What you end up with is a table that looks like @tbl-tab11-5.
+What about the **one sample Wilcoxon test** (or equivalently, the paired samples Wilcoxon test)? Suppose I'm interested in finding out whether taking a statistics class has any effect on the happiness of students. My data is in the *happiness.csv* file. What I've measured here is the happiness of each student before taking the class and after taking the class, and the change score is the difference between the two. Just like we saw with the t-test, there's no fundamental difference between doing a paired-samples test using before and after, versus doing a onesample test using the change scores. As before, the simplest way to think about the test is to construct a tabulation. The way to do it this time is to take those change scores that are positive differences, and tabulate them against all the complete sample. What you end up with is a table that looks like @tbl-tab11-5.
 
 ```{r}
 #| label: tbl-tab11-5
