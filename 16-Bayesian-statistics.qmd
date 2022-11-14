@@ -309,7 +309,7 @@ p <- ggplot(p_bf) +
   geom_line(aes(x=peek, y=p_peek/1000, colour="p1", linetype="p1"), stat="smooth", method = "loess", alpha=0.7) +
   geom_point(aes(x=peek, y=bf_peek/1000, shape="p2", colour="p2"), size = 2) +
   geom_line(aes(x=peek, y=bf_peek/1000, colour="p2", linetype="p2"), stat="smooth", method = "loess", alpha=0.7) +
-  geom_hline(yintercept=.05, col = 'red', size = 0.4, linetype = 'dotted') +
+  geom_hline(yintercept=.05, col = 'red', linewidth = 0.4, linetype = 'dotted') +
   scale_colour_manual(name="Null Hypothesis Rejection Threshold",
       values=c(p1=blueshade, p2="#009E73"), labels=c("p < 0.05  ", "BF > 3"), guide = guide_legend(title.position = "top", nrow = 1)) +
   scale_shape_manual(name="Null Hypothesis Rejection Threshold",

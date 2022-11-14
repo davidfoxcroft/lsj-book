@@ -130,11 +130,12 @@ Before leaving this topic entirely, I want to point out something else really cr
 #| fig-cap: The Berkeley 1973 college admissions data. This figure plots the admission rate for the 85 departments that had at least one female applicant, as a function of the percentage of applicants that were female. The plot is a redrawing of Figure 1 from @Bickel1975. Circles plot departments with more than 40 applicants; the area of the circle is proportional to the total number of applicants. The crosses plot departments with fewer than 40 applicants
 
 load("data_and_tables/berkeley.Rdata")
+  
 ggplot() +
   geom_point(data=berkeley, aes(x=women.apply, y=total.admit, size=sqrt(number.apply)), shape=1, color=blueshade) +
   scale_size(range = c(3,14)) +
+  geom_smooth(data=berkeley, aes(x=women.apply, y=total.admit, weight=number.apply), method=lm, se=FALSE, col="black", linewidth=0.3) +
   geom_point(data=berkeley.small, aes(x=women.apply, y=total.admit), shape=3, color="grey") +
-  geom_smooth(data=berkeley, aes(x=women.apply, y=total.admit, weight=number.apply), formula=y~x, method=lm, se=FALSE, col="black", size=0.3) +
   scale_x_continuous(limits=c(0,100),breaks=seq(0,100,20)) +
   scale_y_continuous(limits=c(0,100), breaks=seq(0,100,20)) +
   xlab("Percentage of female applicants") +

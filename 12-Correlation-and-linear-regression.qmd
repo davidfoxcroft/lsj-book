@@ -94,7 +94,7 @@ onePlot <- function( r,n=100 ) {
 	    axis.title.x = element_blank(),
 	    axis.ticks.x = element_blank(),
 	    axis.line.x = element_blank(),
-	    plot.background = element_rect(color = "lightgrey", size = 0.4))
+	    plot.background = element_rect(color = "lightgrey", linewidth = 0.4))
 }
 
 onePlot_out <- lapply(c(0, .33, -.33, .66, -.66, 1, -1), function(r)  {
@@ -111,7 +111,7 @@ plot_02 <- ggpubr::as_ggplot(tgrob)
 library(patchwork)
 
 theme_border <- theme_gray() +
-  theme(plot.background = element_rect(fill = NA, colour = 'black', size = 4))
+  theme(plot.background = element_rect(fill = NA, colour = 'black', linewidth = 4))
 p1 <- plot_01 + onePlot_out[[1]] + onePlot_out[[2]] + onePlot_out[[4]] + onePlot_out[[6]] +
   plot_layout(ncol = 1, heights = c(2, 4, 4, 4, 4)) + plot_annotation(theme = theme_border)
 
@@ -240,7 +240,7 @@ load("data_and_tables/parenthood.Rdata")
 
 p1 <- ggplot(parenthood, aes(dan.sleep, dan.grump)) +
   geom_point(col="darkgrey") +
-  geom_smooth(method='lm', se = F, col=blueshade, size=1) +
+  geom_smooth(method='lm', se = F, col=blueshade, linewidth=1) +
   ggtitle("The Best Fitting Regression Line") +
   xlab("My sleep (hours)\n\n(a)") +
   ylab("My grumpiness (0-100)") +
@@ -248,7 +248,7 @@ p1 <- ggplot(parenthood, aes(dan.sleep, dan.grump)) +
 
 p2 <- ggplot(parenthood, aes(dan.sleep, dan.grump)) +
   geom_point(col="darkgrey") +
-  geom_abline(intercept = 80, slope = -3, col=blueshade, size=1) +
+  geom_abline(intercept = 80, slope = -3, col=blueshade, linewidth=1) +
   ggtitle("Not The Best Fitting Regression Line!") +
   xlab("My sleep (hours)\n\n(b)") +
   ylab("My grumpiness (0-100)") +
@@ -315,7 +315,7 @@ parenthood <- parenthood |> dplyr::select(dan.grump, dan.sleep, predicted, resid
 mydat <- parenthood |> tidyr::gather(key = "grp", value = "x", -1, -predicted, -residuals)
 
 p2 <- ggplot(mydat, aes(x = x, y = dan.grump)) +
-  geom_abline(intercept = 80, slope = -3, col=blueshade, size=1) +
+  geom_abline(intercept = 80, slope = -3, col=blueshade, linewidth=1) +
   geom_segment(aes(xend = x, yend = predicted), colour = "grey50", alpha = .7) +
   geom_point(aes(fill = residuals), colour = "grey50") +
   ggtitle("Regression Line Distant from the Data") +
@@ -690,9 +690,9 @@ yendpoint <- predict(fit, newdata = data.frame(x=c(4.3)))
 
 ggplot(dat, aes(x=x, y=y)) +
   geom_point(col=blueshade, size=3) +
-  geom_smooth(method=lm, se=F, fullrange=T, col="black", size=0.8) +
-  geom_smooth(data=dat2, method=lm, se=F, fullrange=T, linetype = 'dashed', col="black", size=0.4) +
-  geom_segment(x=4.3, y=10.85, xend=4.3, yend=yendpoint, col="darkgrey", size = 0.4) +
+  geom_smooth(method=lm, se=F, fullrange=T, col="black", linewidth=0.8) +
+  geom_smooth(data=dat2, method=lm, se=F, fullrange=T, linetype = 'dashed', col="black", linewidth=0.4) +
+  geom_segment(x=4.3, y=10.85, xend=4.3, yend=yendpoint, col="darkgrey", linewidth = 0.4) +
   annotate(geom="text", label="Outlier", x=3.7, y=11) +
   xlim(1,12) +
   ylim(1,12) +
@@ -723,9 +723,9 @@ yendpoint <- predict(fit, newdata = data.frame(x=c(10)))
 
 ggplot(dat, aes(x=x, y=y)) +
   geom_point(col=blueshade, size=3) +
-  geom_smooth(method=lm, se=F, fullrange=T, col="black", size=0.8) +
-  geom_smooth(data=dat2, fullrange=T, method=lm, se=F, linetype = 'dashed', col="black", size=0.4) +
-  geom_segment(x=10, y=9.65, xend=10, yend=yendpoint, col="darkgrey", size = 0.4) +
+  geom_smooth(method=lm, se=F, fullrange=T, col="black", linewidth=0.8) +
+  geom_smooth(data=dat2, fullrange=T, method=lm, se=F, linetype = 'dashed', col="black", linewidth=0.4) +
+  geom_segment(x=10, y=9.65, xend=10, yend=yendpoint, col="darkgrey", linewidth = 0.4) +
   annotate(geom="text", label="High leverage", x=9.3, y=10.6) +
   xlim(1,12) +
   ylim(1,12) +
@@ -758,9 +758,9 @@ yendpoint <- predict(fit, newdata = data.frame(x=c(10)))
 
 ggplot(dat, aes(x=x, y=y)) +
   geom_point(col=blueshade, size=3) +
-  geom_smooth(method=lm, se=F, fullrange=T, col="black", size=0.8) +
-  geom_smooth(data=dat2, fullrange=T, method=lm, se=F, linetype = 'dashed', col="black", size=0.4) +
-  geom_segment(x=10, y=4.1, xend=10, yend=yendpoint, col="darkgrey", size = 0.4) +
+  geom_smooth(method=lm, se=F, fullrange=T, col="black", linewidth=0.8) +
+  geom_smooth(data=dat2, fullrange=T, method=lm, se=F, linetype = 'dashed', col="black", linewidth=0.4) +
+  geom_segment(x=10, y=4.1, xend=10, yend=yendpoint, col="darkgrey", linewidth = 0.4) +
   annotate(geom="text", label="High influence", x=10.3, y=3.4) +
   xlim(1,12) +
   ylim(1,12) +

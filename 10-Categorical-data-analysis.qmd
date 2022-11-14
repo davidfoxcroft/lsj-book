@@ -133,9 +133,9 @@ There's one last detail to talk about, namely the degrees of freedom. If you rem
 #| fig-cap: $\chi^2$ (chi-square) distributions with different values for the 'degrees of freedom'
 
 ggplot(data = data.frame(x = seq(0, 12, 1)), aes(x)) +
-  stat_function(aes(linetype = 'df = 3'), fun = dchisq, n = 1000, args = list(df = 3), col=blueshade, size=1) +
-  stat_function(aes(linetype = 'df = 4'), fun = dchisq, n = 1000, args = list(df = 4), col=blueshade, size=1) +
-  stat_function(aes(linetype = 'df = 5'), fun = dchisq, n = 1000, args = list(df = 5), col=blueshade, size=1) +
+  stat_function(aes(linetype = 'df = 3'), fun = dchisq, n = 1000, args = list(df = 3), col=blueshade, linewidth=1) +
+  stat_function(aes(linetype = 'df = 4'), fun = dchisq, n = 1000, args = list(df = 4), col=blueshade, linewidth=1) +
+  stat_function(aes(linetype = 'df = 5'), fun = dchisq, n = 1000, args = list(df = 5), col=blueshade, linewidth=1) +
   scale_x_continuous(breaks = seq(0, 12, 2)) +
   ylab("Probability Density\n") +
   xlab("\nObserved Value") +
@@ -173,7 +173,7 @@ The final step in the process of constructing our hypothesis test is to figure o
 
 
 ggplot(data = data.frame(x = seq(0, 12, 0.01)), aes(x)) +
-  stat_function(fun = dchisq, n = 1000, args = list(df = 3), linetype = "solid", col="black", size=1) +
+  stat_function(fun = dchisq, n = 1000, args = list(df = 3), linetype = "solid", col="black", linewidth=1) +
   stat_function(fun = dchisq, n = 1000, args = list(df = 3), geom = "area",
                 fill = blueshade, alpha=0.8, xlim = c(7.82, 12)) +
   scale_x_continuous(breaks = seq(0, 12, 2)) +

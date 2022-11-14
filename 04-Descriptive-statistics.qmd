@@ -348,7 +348,7 @@ kurtplots <- lapply(1:3, function(i) {
   ggplot(X[[i]], aes(x=value)) +
     geom_histogram(binwidth=0.5, col="white", fill=blueshade, alpha=0.6) +
     stat_function(fun = function(x) dnorm(x, mean = mean(X[[i]]$value),
-                                          sd = sd(X[[i]]$value)) * .5 * 100000, color = "black", size = 0.8) +
+                                          sd = sd(X[[i]]$value)) * .5 * 100000, color = "black", linewidth = 0.8) +
     theme_classic() +
     ggtitle(X_labels[[i]]) +
     theme(axis.title.x = element_blank(),

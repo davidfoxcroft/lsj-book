@@ -48,9 +48,9 @@ This null hypothesis is a lot trickier to test than any of the ones we've seen p
 #| fig-cap: Graphical illustration of 'between groups' variation (panel (a)) and 'within groups' variation (panel (b)). On the left the arrows show the differences in the group means. On the right the arrows highlight the variability within each group
 
 p1 <- ggplot(data = data.frame(x = seq(-5, 5, 1)), aes(x)) +
-  stat_function(fun = dnorm, n = 1000, args = list(mean = -2, sd = 1), col="darkgrey", size=1) +
-  stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col="darkgrey", size=1) +
-  stat_function(fun = dnorm, n = 1000, args = list(mean = 2, sd = 1), col="darkgrey", size=1) +
+  stat_function(fun = dnorm, n = 1000, args = list(mean = -2, sd = 1), col="darkgrey", linewidth=1) +
+  stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col="darkgrey", linewidth=1) +
+  stat_function(fun = dnorm, n = 1000, args = list(mean = 2, sd = 1), col="darkgrey", linewidth=1) +
   geom_segment(x=-2, xend=0, y=0.33, yend=0.33, arrow=arrow(ends='both', length=unit(0.30,"cm"))) +
   geom_segment(x=0, xend=2, y=0.28, yend=0.28, arrow=arrow(ends='both', length=unit(0.30,"cm"))) +
   geom_segment(x=-2, xend=2, y=0.23, yend=0.23, arrow=arrow(ends='both', length=unit(0.30,"cm"))) +
@@ -67,9 +67,9 @@ p1 <- ggplot(data = data.frame(x = seq(-5, 5, 1)), aes(x)) +
     plot.title = element_text(hjust = 0.5))
 
 p2 <- ggplot(data = data.frame(x = seq(-5, 5, 1)), aes(x)) +
-  stat_function(fun = dnorm, n = 1000, args = list(mean = -2, sd = 1), col="darkgrey", size=1) +
-  stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col="darkgrey", size=1) +
-  stat_function(fun = dnorm, n = 1000, args = list(mean = 2, sd = 1), col="darkgrey", size=1) +
+  stat_function(fun = dnorm, n = 1000, args = list(mean = -2, sd = 1), col="darkgrey", linewidth=1) +
+  stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col="darkgrey", linewidth=1) +
+  stat_function(fun = dnorm, n = 1000, args = list(mean = 2, sd = 1), col="darkgrey", linewidth=1) +
   geom_segment(x=-2.8, xend=-1.2, y=0.28, yend=0.28, arrow=arrow(ends='both', length=unit(0.30,"cm"))) +
   geom_segment(x=-0.8, xend=0.8, y=0.28, yend=0.28, arrow=arrow(ends='both', length=unit(0.30,"cm"))) +
   geom_segment(x=1.2, xend=2.8, y=0.28, yend=0.28, arrow=arrow(ends='both', length=unit(0.30,"cm"))) +

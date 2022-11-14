@@ -377,7 +377,7 @@ for( i in seq_along(theta) ) {
 dpower <- data.frame(theta,pow)
 
 ggplot(dat=dpower, aes(x=theta, y=pow)) +
-  geom_line(col=blueshade, size=1) +
+  geom_line(col=blueshade, linewidth=1) +
   annotate("point", x = .5, y = min(pow), colour = "black", size=4) +
   labs(x=expression("\nTrue value of " ~theta), y="Probability of Rejecting the Null\n") +
   ggtitle("Power function for the Test (N=100)") +
@@ -430,7 +430,7 @@ for( i in seq_along(N) ) {
 testpow <- data.frame(N,pow)
 
 ggplot(dat=testpow, aes(x=N, y=pow)) +
-  geom_line(col=blueshade, size=1) +
+  geom_line(col=blueshade, linewidth=1) +
   labs(x=expression("\nSample size, N"), y="Probability of Rejecting the Null\n") +
   theme_classic() +
   theme(

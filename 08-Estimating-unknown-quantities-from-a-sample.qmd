@@ -98,7 +98,7 @@ The idea is quite simple. Let's say we're talking about IQ scores. To a psycholo
 #| fig-cap: The population distribution of IQ scores (panel (a)) and two samples drawn randomly from it. In panel (b) we have a sample of 100 observations, and panel (c) we have a sample of 10,000 observations
 
 plota <- ggplot(data = data.frame(x = seq(60, 140, 1)), aes(x)) +
-  stat_function(fun = dnorm, n = 1000, args = list(mean = 100, sd = 15), col=blueshade, size=1) +
+  stat_function(fun = dnorm, n = 1000, args = list(mean = 100, sd = 15), col=blueshade, linewidth=1) +
   scale_x_continuous(breaks = seq(60, 140, 20)) +
   ylab("Probability Density\n") +
   xlab("\nIQ score") +
@@ -192,7 +192,7 @@ sdm_data_means <- data.frame(sample_means = unlist(lapply(sdm_data,mean)))
 
 ggplot(data = sdm_data_means, aes(x = sample_means )) +
   geom_histogram(aes(y =after_stat(density)), binwidth=4, col=blueshade, fill=blueshade, alpha=0.7) +
-  stat_function(fun = dnorm, args = list(mean = 100, sd = 15), col="black", size=1) +
+  stat_function(fun = dnorm, args = list(mean = 100, sd = 15), col="black", linewidth=1) +
   scale_x_continuous(limits=c(60,140), breaks = seq(60, 140, 20)) +
   xlab("\nIQ score") +
   theme_classic() +
@@ -324,7 +324,7 @@ sampling_plots <- lapply(sampling_plots_df$n, function(i) {
     axis.text.y = element_blank(),
     panel.border = element_rect(color = "black",
                                     fill = NA,
-                                    size = 0.8),
+                                    linewidth = 0.8),
     plot.title = element_text(hjust = 0.5, size=12))
 })
 

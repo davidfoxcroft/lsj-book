@@ -37,7 +37,7 @@ Next, it helps to be clear about what I want to learn from the data. In this cas
 load("data_and_tables/zeppo.Rdata") #grades
 ggplot(as.data.frame(grades), aes(x=grades)) +
   geom_histogram(aes(y =after_stat(density)), binwidth=5, col=blueshade, fill=blueshade, alpha=0.4) +
-  stat_function(fun = dnorm, args = list(mean = 67.7, sd = sd(grades)), col="black", size=1) +
+  stat_function(fun = dnorm, args = list(mean = 67.7, sd = sd(grades)), col="black", linewidth=1) +
   xlab("\nGrades") +
   theme_classic() +
   theme(
@@ -68,7 +68,7 @@ For the moment, we'll act as if these are absolutely trustworthy facts. In real 
 #| fig-cap: Graphical illustration of the null and alternate hypotheses assumed by the one sample $z$-test (the two sided version, that is). The null and alternate hypotheses both assume that the population distribution is normal, and additionally assumes that the population standard deviation is known (fixed at some value $\$sigma_0$). The null hypothesis (left) is that the population mean $\mu$ is equal to some specified value $\mu_0$. The alternative hypothesis (right) is that the population mean differs from this value, $\mu \neq \mu_0$
 
 p1 <- ggplot(data = data.frame(x = seq(-4, 4, 1)), aes(x)) +
-  stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col="black", size=1) +
+  stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col="black", linewidth=1) +
   geom_segment(x = 0, y = 0.25, xend = -1, yend = 0.25) +
   geom_segment(x = 0, y = 0, xend = 0, yend = dnorm(0)) +
   geom_text(x=-2.2, y=.25, label=expression(~sigma~" = "~sigma[0]), size=5) +
@@ -87,7 +87,7 @@ p1 <- ggplot(data = data.frame(x = seq(-4, 4, 1)), aes(x)) +
     plot.title = element_text(hjust = 0.5))
 
 p2 <- ggplot(data = data.frame(x = seq(-4, 4, 1)), aes(x)) +
-  stat_function(fun = dnorm, n = 1000, args = list(mean = -.75, sd = 1), col="black", size=1) +
+  stat_function(fun = dnorm, n = 1000, args = list(mean = -.75, sd = 1), col="black", linewidth=1) +
   geom_segment(x = -.75, y = 0.25, xend = -1.75, yend = 0.25) +
   geom_segment(x = 0, y = 0, xend = 0, yend = dnorm(0)) +
   geom_text(x=-3, y=.25, label=expression(~sigma~" = " ~sigma[0]), size=5) +
@@ -159,7 +159,7 @@ p1 <- ggplot(data = data.frame(x = seq(-3, 3, 0.1)), aes(x)) +
                 fill = blueshade, alpha=0.4, xlim = c(-3, -1.96))  +
   stat_function(fun = dnorm, n = 1000, args = list(mean=0, sd=1), geom = "area",
                 fill = blueshade, alpha=0.4, xlim = c(1.96, 3))  +
-  stat_function(fun = dnorm, n = 1000, args = list(mean=0, sd=1), col="black", size=1) +
+  stat_function(fun = dnorm, n = 1000, args = list(mean=0, sd=1), col="black", linewidth=1) +
   xlab("\nValue of z Statistic") +
   ggtitle("(a) Two Sided Test") +
   scale_x_continuous(breaks=c(-1.96, 0, 1.96), labels=c("-1.96", "0", "1.96")) +
@@ -175,7 +175,7 @@ p1 <- ggplot(data = data.frame(x = seq(-3, 3, 0.1)), aes(x)) +
 p2 <- ggplot(data = data.frame(x = seq(-3, 3, 0.1)), aes(x)) +
   stat_function(fun = dnorm, n = 1000, args = list(mean=0, sd=1), geom = "area",
                 fill = blueshade, alpha=0.4, xlim = c(1.64, 3))  +
-  stat_function(fun = dnorm, n = 1000, args = list(mean=0, sd=1), col="black", size=1) +
+  stat_function(fun = dnorm, n = 1000, args = list(mean=0, sd=1), col="black", linewidth=1) +
   xlab("\nValue of z Statistic") +
   ggtitle("(b) One Sided Test") +
   scale_x_continuous(breaks=c(0, 1.64), labels=c("0", "1.64")) +
@@ -242,7 +242,7 @@ Okay, cool. The obvious thing that you might think to do is run a z-test, but us
 
 
 p1 <- ggplot(data = data.frame(x = seq(-4, 4, 1)), aes(x)) +
-  stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col="black", size=1) +
+  stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col="black", linewidth=1) +
   geom_segment(x = 0, y = 0.25, xend = -1, yend = 0.25) +
   geom_segment(x = 0, y = 0, xend = 0, yend = dnorm(0)) +
   geom_text(x=-2.2, y=.25, label=expression(~sigma~" = ??"), size=5) +
@@ -261,7 +261,7 @@ p1 <- ggplot(data = data.frame(x = seq(-4, 4, 1)), aes(x)) +
     plot.title = element_text(hjust = 0.5))
 
 p2 <- ggplot(data = data.frame(x = seq(-4, 4, 1)), aes(x)) +
-  stat_function(fun = dnorm, n = 1000, args = list(mean = -.75, sd = 1), col="black", size=1) +
+  stat_function(fun = dnorm, n = 1000, args = list(mean = -.75, sd = 1), col="black", linewidth=1) +
   geom_segment(x = -.75, y = 0.25, xend = -1.75, yend = 0.25) +
   geom_segment(x = 0, y = 0, xend = 0, yend = dnorm(0)) +
   geom_text(x=-3, y=.25, label=expression(~sigma~" = ??"), size=5) +
@@ -300,8 +300,8 @@ $$
 #| fig-cap: The t distribution with 2 degrees of freedom (left) and 10 degrees of freedom (right), with a standard normal distribution (i.e., mean 0 and std dev 1) plotted as dotted lines for comparison purposes. Notice that the t distribution has heavier tails (leptokurtic, higher kurtosis) than the normal distribution; this effect is quite exaggerated when the degrees of freedom are very small, but negligible for larger values. In other words, for large $df$ the t distribution is essentially identical to a normal distribution
 
 p1 <- ggplot(data = data.frame(x = seq(-4, 4, 1)), aes(x)) +
-  stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col="grey", linetype=2, size=1) +
-  stat_function(fun = dt, n = 1000, args = list(df = 2), col="black", size=1) +
+  stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col="grey", linetype=2, linewidth=1) +
+  stat_function(fun = dt, n = 1000, args = list(df = 2), col="black", linewidth=1) +
   scale_x_continuous(breaks = seq(-4, 4, 2)) +
   ggtitle("df = 2") +
   xlab("\nValue of t-statistic") +
@@ -315,8 +315,8 @@ p1 <- ggplot(data = data.frame(x = seq(-4, 4, 1)), aes(x)) +
 
 
 p2 <- ggplot(data = data.frame(x = seq(-4, 4, 1)), aes(x)) +
-  stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col="grey", linetype=2, size=1) +
-  stat_function(fun = dt, n = 1000, args = list(df = 20), col="black", size=1) +
+  stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col="grey", linetype=2, linewidth=1) +
+  stat_function(fun = dt, n = 1000, args = list(df = 20), col="black", linewidth=1) +
   scale_x_continuous(breaks = seq(-4, 4, 2)) +
   ggtitle("df = 10") +
   xlab("\nValue of t-statistic") +
@@ -405,7 +405,7 @@ Okay, so let's let $\mu_1$ denote the true population mean for group 1 (e.g., An
 #| fig-cap: Graphical illustration of the null and alternative hypotheses assumed by the Student t-test. The null hypothesis assumes that both groups have the same mean $\mu$, whereas the alternative assumes that they have different means $\mu_1$ and $\mu_2$. Notice that it is assumed that the population distributions are normal, and that, although the alternative hypothesis allows the group to have different means, it assumes they have the same standard deviation
 
 p1 <- ggplot(data = data.frame(x = seq(30, 110, 10)), aes(x)) +
-  stat_function(fun = dnorm, n = 1000, args = list(mean = 70, sd = 9), col="black", size=1) +
+  stat_function(fun = dnorm, n = 1000, args = list(mean = 70, sd = 9), col="black", linewidth=1) +
   scale_x_continuous(breaks = seq(40, 100, 20)) +
   geom_text(x=70, y=.047, label=expression(~mu), size=5) +
   ylim(0,0.05) +
@@ -421,8 +421,8 @@ p1 <- ggplot(data = data.frame(x = seq(30, 110, 10)), aes(x)) +
     plot.title = element_text(hjust = 0.5))
 
 p2 <- ggplot(data = data.frame(x = seq(30, 110, 10)), aes(x)) +
-  stat_function(fun = dnorm, n = 1000, args = list(mean = 60, sd = 9), col="black", size=1) +
-  stat_function(fun = dnorm, n = 1000, args = list(mean = 75, sd = 9), col="black", size=1) +
+  stat_function(fun = dnorm, n = 1000, args = list(mean = 60, sd = 9), col="black", linewidth=1) +
+  stat_function(fun = dnorm, n = 1000, args = list(mean = 75, sd = 9), col="black", linewidth=1) +
   scale_x_continuous(breaks = seq(40, 100, 20)) +
   geom_text(x=60, y=.047, label=expression(~mu[1]), size=5) +
   geom_text(x=75, y=.047, label=expression(~mu[2]), size=5) +
@@ -528,7 +528,7 @@ The biggest problem with using the Student test in practice is the third assumpt
 #| fig-cap: Graphical illustration of the null and alternative hypotheses assumed by the Welch t-test. Like the Student test (@fig-fig11-9) we assume that both samples are drawn from a normal population; but the alternative hypothesis no longer requires the two populations to have equal variance
 
 p1 <- ggplot(data = data.frame(x = seq(30, 110, 10)), aes(x)) +
-  stat_function(fun = dnorm, n = 1000, args = list(mean = 70, sd = 6.5), col="black", size=1) +
+  stat_function(fun = dnorm, n = 1000, args = list(mean = 70, sd = 6.5), col="black", linewidth=1) +
   scale_x_continuous(breaks = seq(40, 100, 20)) +
   geom_text(x=70, y=.066, label=expression(~mu), size=5) +
   ylim(0,0.07) +
@@ -544,8 +544,8 @@ p1 <- ggplot(data = data.frame(x = seq(30, 110, 10)), aes(x)) +
     plot.title = element_text(hjust = 0.5))
 
 p2 <- ggplot(data = data.frame(x = seq(30, 110, 10)), aes(x)) +
-  stat_function(fun = dnorm, n = 1000, args = list(mean = 60, sd = 6.5), col="black", size=1) +
-  stat_function(fun = dnorm, n = 1000, args = list(mean = 75, sd = 7.95), col="black", size=1) +
+  stat_function(fun = dnorm, n = 1000, args = list(mean = 60, sd = 6.5), col="black", linewidth=1) +
+  stat_function(fun = dnorm, n = 1000, args = list(mean = 75, sd = 7.95), col="black", linewidth=1) +
   scale_x_continuous(breaks = seq(40, 100, 20)) +
   geom_text(x=60, y=.066, label=expression(~mu[1]), size=5) +
   geom_text(x=75, y=.055, label=expression(~mu[2]), size=5) +
