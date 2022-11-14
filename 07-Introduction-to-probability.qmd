@@ -89,7 +89,7 @@ coinflips <- list()
 coinflips <- lapply(1:4, function(i) {
     ggplot(data=tibble(flips = 1:1000, heads = cumsum(as.numeric( runif(1000) > .5 )) / (1:1000)),
            aes(x=flips, y=heads)) +
-    geom_line(color=blueshade, size=1) +
+    geom_line(color=blueshade, linewidth=1) +
     ylim(0.3, 0.7) +
     xlim(0, 1000) +
     geom_hline(yintercept=0.5, color="grey") +
