@@ -210,7 +210,7 @@
 \mainmatter
 %\pagestyle{plain}
 
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[frame hidden, interior hidden, enhanced, boxrule=0pt, breakable, borderline west={3pt}{0pt}{shadecolor}, sharp corners]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[interior hidden, sharp corners, borderline west={3pt}{0pt}{shadecolor}, enhanced, frame hidden, boxrule=0pt, breakable]}{\end{tcolorbox}}\fi
 
 \renewcommand*\contentsname{Table of contents}
 {
@@ -3635,21 +3635,21 @@ One quite commonly used data format is the humble ``comma separated
 value'' file, also called a csv file, and usually bearing the file
 extension .csv. csv files are just plain old-fashioned text files and
 what they store is basically just a table of data. This is illustrated
-in Figure~\ref{fig-fig3-4}, which shows a file called booksales.csv that
-I've created. As you can see, each row represents the book sales data
-for one month. The first row doesn't contain actual data though, it has
-the names of the variables.
+in Figure~\ref{fig-fig3-4}, which shows a file called
+\emph{booksales.csv} that I've created. As you can see, each row
+represents the book sales data for one month. The first row doesn't
+contain actual data though, it has the names of the variables.
 
 \begin{figure}
 
 \includegraphics[width=1\textwidth,height=\textheight]{./images/fig3-4.png} \hfill{}
 
-\caption{\label{fig-fig3-4}The booksales.csv data file. On the left I
-have opened the file using a spreadsheet program (OpenOffice), which
-shows that the file is basically a table. On the right the same file is
-open in a standard text editor (the TextEdit program on a Mac), which
-shows how the file is formatted. The entries in the table are wrapped in
-quote marks and separated by commas}
+\caption{\label{fig-fig3-4}The \emph{booksales.csv} data file. On the
+left I have opened the file using a spreadsheet program (OpenOffice),
+which shows that the file is basically a table. On the right the same
+file is open in a standard text editor (the TextEdit program on a Mac),
+which shows how the file is formatted. The entries in the table are
+wrapped in quote marks and separated by commas}
 
 \end{figure}
 
@@ -3682,8 +3682,8 @@ gets imported correctly:
 \tightlist
 \item
   Heading. Does the first row of the file contain the names for each
-  variable - a `header' row? The booksales.csv file has a header, so
-  that's a yes.
+  variable - a `header' row? The \emph{booksales.csv} file has a header,
+  so that's a yes.
 \item
   Decimal. What character is used to specify the decimal point? In
   English speaking countries this is almost always a period (i.e., .).
@@ -3692,7 +3692,7 @@ gets imported correctly:
 \item
   Quote. What character is used to denote a block of text? That's
   usually going to be a double quote mark (``). It is for the
-  booksales.csv file.
+  \emph{booksales.csv} file.
 \end{itemize}
 
 \hypertarget{importing-unusual-data-files}{%
@@ -3732,10 +3732,10 @@ change are:
   of , as the separator. At other times, I've seen a TAB character used.
 \item
   quote. It's conventional in csv files to include a quoting character
-  for textual data. As you can see by looking at the booksales.csv file,
-  this is usually a double quote character, ``. But sometimes there is
-  no quoting character at all, or you might see a single quote mark '
-  used instead.
+  for textual data. As you can see by looking at the
+  \emph{booksales.csv} file, this is usually a double quote character,
+  ``. But sometimes there is no quoting character at all, or you might
+  see a single quote mark ' used instead.
 \item
   skip. It's actually very common to receive CSV files in which the
   first few rows have nothing to do with the actual data. Instead, they
@@ -3921,8 +3921,8 @@ people the term ``statistics'' is synonymous with descriptive
 statistics. It is this topic that we'll consider in this chapter, but
 before going into any details, let's take a moment to get a sense of why
 we need descriptive statistics. To do this, let's open the
-aflsmall\_margins file and see what variables are stored in the file,
-see Figure~\ref{fig-fig4-1}.
+\emph{aflsmall\_margins} file and see what variables are stored in the
+file, see Figure~\ref{fig-fig4-1}.
 
 \begin{figure}
 
@@ -3933,15 +3933,15 @@ stored in the aflsmallmargins.csv file}
 
 \end{figure}
 
-In fact, there is just one variable here, afl.margins. We'll focus a bit
-on this variable in this chapter, so I'd better tell you what it is.
-Unlike most of the data sets in this book, this is actually real data,
-relating to the Australian Football League (AFL).\footnote{Note for
-  non-Australians: the AFL is an Australian rules football competition.
-  You don't need to know anything about Australian rules in order to
-  follow this section.} The afl.margins variable contains the winning
-margin (number of points) for all 176 home and away games played during
-the 2010 season.
+In fact, there is just one variable here, \emph{afl.margins}. We'll
+focus a bit on this variable in this chapter, so I'd better tell you
+what it is. Unlike most of the data sets in this book, this is actually
+real data, relating to the Australian Football League (AFL).\footnote{Note
+  for non-Australians: the AFL is an Australian rules football
+  competition. You don't need to know anything about Australian rules in
+  order to follow this section.} The \emph{afl.margins} variable
+contains the winning margin (number of points) for all 176 home and away
+games played during the 2010 season.
 
 This output doesn't make it easy to get a sense of what the data are
 actually saying. Just ``looking at the data'' isn't a terribly effective
@@ -3950,20 +3950,20 @@ are actually saying we need to calculate some descriptive statistics
 (this chapter) and draw some nice pictures
 (Chapter~\ref{sec-Drawing-graphs}). Since the descriptive statistics are
 the easier of the two topics I'll start with those, but nevertheless
-I'll show you a histogram of the afl.margins data since it should help
-you get a sense of what the data we're trying to describe actually look
-like, see Figure~\ref{fig-fig4-2}. We'll talk a lot more about how to
-draw histograms in Section~\ref{sec-Histograms} in the next chapter. For
-now, it's enough to look at the histogram and note that it provides a
-fairly interpretable representation of the afl.margins data.
+I'll show you a histogram of the \emph{afl.margins} data since it should
+help you get a sense of what the data we're trying to describe actually
+look like, see Figure~\ref{fig-fig4-2}. We'll talk a lot more about how
+to draw histograms in Section~\ref{sec-Histograms} in the next chapter.
+For now, it's enough to look at the histogram and note that it provides
+a fairly interpretable representation of the \emph{afl.margins} data.
 
 \begin{figure}
 
 \includegraphics[width=1\textwidth,height=\textheight]{./images/fig4-2.png} \hfill{}
 
 \caption{\label{fig-fig4-2}A histogram of the AFL 2010 winning margin
-data (the afl.margins variable). As you might expect, the larger the
-winning margin the less frequently you tend to see it}
+data (the \emph{afl.margins} variable). As you might expect, the larger
+the winning margin the less frequently you tend to see it}
 
 \end{figure}
 
@@ -4009,8 +4009,8 @@ second observation, and so on all the way up to \(X_N\) for the last
 one. Or, to say the same thing in a slightly more abstract way, we use
 \(X_i\) to refer to the i-th observation. Just to make sure we're clear
 on the notation, Table~\ref{tbl-tab4-1} lists the 5 observations in the
-afl.margins variable, along with the mathematical symbol used to refer
-to it and the actual value that the observation corresponds to.
+\emph{afl.margins} variable, along with the mathematical symbol used to
+refer to it and the actual value that the observation corresponds to.
 
 \hypertarget{tbl-tab4-1}{}
  
@@ -4129,9 +4129,9 @@ the work for us? When the number of observations starts to become large
 it's much easier to do these sorts of calculations using a computer. To
 calculate the mean using all the data we can use jamovi. The first step
 is to click on the `Exploration' button and then click `Descriptives'.
-Then you can highlight the afl.margins variable and click the `right
-arrow' to move it across into the `Variables box'. As soon as you do
-that a Table appears on the right hand side of the screen containing
+Then you can highlight the \emph{afl.margins} variable and click the
+`right arrow' to move it across into the `Variables box'. As soon as you
+do that a Table appears on the right hand side of the screen containing
 default `Descriptives' information; see Figure~\ref{fig-fig4-3}.
 
 \begin{figure}
@@ -4139,14 +4139,15 @@ default `Descriptives' information; see Figure~\ref{fig-fig4-3}.
 \includegraphics[width=1\textwidth,height=\textheight]{./images/fig4-3.png} \hfill{}
 
 \caption{\label{fig-fig4-3}Default descriptives for the AFL 2010 winning
-margin data (the afl.margins variable)}
+margin data (the \emph{afl.margins} variable)}
 
 \end{figure}
 
 As you can see in Figure~\ref{fig-fig4-3}, the mean value for the
-afl.margins variable is 35.30. Other information presented includes the
-total number of observations (N=176), the number of missing values
-(none), and the Median, Minimum and Maximum values for the variable.
+\emph{afl.margins} variable is 35.30. Other information presented
+includes the total number of observations (N=176), the number of missing
+values (none), and the Median, Minimum and Maximum values for the
+variable.
 
 \hypertarget{the-median}{%
 \subsection{The median}\label{the-median}}
@@ -4175,7 +4176,7 @@ it's very tedious to do this by hand when you've got lots of numbers. In
 real life, of course, no-one actually calculates the median by sorting
 the data and then looking for the middle value. In real life we use a
 computer to do the heavy lifting for us, and jamovi has provided us with
-a Median value of 30.50 for the afl.margins variable
+a Median value of 30.50 for the \emph{afl.margins} variable
 (Figure~\ref{fig-fig4-3}).
 
 \hypertarget{mean-or-median-whats-the-difference}{%
@@ -4362,9 +4363,10 @@ My, my.
 The mode of a sample is very simple. It is the value that occurs most
 frequently. We can illustrate the mode using a different AFL variable:
 who has played in the most finals? Open the aflsmall finalists file and
-take a look at the afl.finalists variable, see Figure~\ref{fig-fig4-5}.
-This variable contains the names of all 400 teams that played in all 200
-finals matches played during the period 1987 to 2010.
+take a look at the \emph{afl.finalists} variable, see
+Figure~\ref{fig-fig4-5}. This variable contains the names of all 400
+teams that played in all 200 finals matches played during the period
+1987 to 2010.
 
 What we could do is read through all 400 entries and count the number of
 occasions on which each team name appears in our list of finalists,
@@ -4376,13 +4378,13 @@ you should get something like Figure~\ref{fig-fig4-6}.
 
 Now that we have our frequency table we can just look at it and see
 that, over the 24 years for which we have data, Geelong has played in
-more finals than any other team. Thus, the mode of the afl.finalists
-data is ``Geelong''. We can see that Geelong (39 finals) played in more
-finals than any other team during the 1987-2010 period. It's also worth
-noting that in the `Descriptives' Table no results are calculated for
-Mean, Median, Minimum or Maximum. This is because the afl.finalists
-variable is a nominal text variable so it makes no sense to calculate
-these values.
+more finals than any other team. Thus, the mode of the
+\emph{afl.finalists} data is ``Geelong''. We can see that Geelong (39
+finals) played in more finals than any other team during the 1987-2010
+period. It's also worth noting that in the `Descriptives' Table no
+results are calculated for Mean, Median, Minimum or Maximum. This is
+because the \emph{afl.finalists} variable is a nominal text variable so
+it makes no sense to calculate these values.
 
 \begin{figure}
 
@@ -4398,7 +4400,7 @@ stored in the aflsmall finalists.csv file}
 \includegraphics[width=1\textwidth,height=\textheight]{./images/fig4-6.png} \hfill{}
 
 \caption{\label{fig-fig4-6}A screenshot of jamovi showing the frequency
-table for the afl.finalists variable}
+table for the \emph{afl.finalists} variable}
 
 \end{figure}
 
@@ -4406,30 +4408,30 @@ One last point to make regarding the mode. Whilst the mode is most often
 calculated when you have nominal data, because means and medians are
 useless for those sorts of variables, there are some situations in which
 you really do want to know the mode of an ordinal, interval or ratio
-scale variable. For instance, let's go back to our afl.margins variable.
-This variable is clearly ratio scale (if it's not clear to you, it may
-help to re-read Section~\ref{sec-Scales-of-measurement}), and so in most
-situations the mean or the median is the measure of central tendency
-that you want. But consider this scenario: a friend of yours is offering
-a bet and they pick a football game at random. Without knowing who is
-playing you have to guess the exact winning margin. If you guess
-correctly you win \$50. If you don't you lose \$1. There are no
-consolation prizes for ``almost'' getting the right answer. You have to
-guess exactly the right margin. For this bet, the mean and the median
+scale variable. For instance, let's go back to our \emph{afl.margins}
+variable. This variable is clearly ratio scale (if it's not clear to
+you, it may help to re-read Section~\ref{sec-Scales-of-measurement}),
+and so in most situations the mean or the median is the measure of
+central tendency that you want. But consider this scenario: a friend of
+yours is offering a bet and they pick a football game at random. Without
+knowing who is playing you have to guess the exact winning margin. If
+you guess correctly you win \$50. If you don't you lose \$1. There are
+no consolation prizes for ``almost'' getting the right answer. You have
+to guess exactly the right margin. For this bet, the mean and the median
 are completely useless to you. It is the mode that you should bet on. To
-calculate the mode for the afl.margins variable in jamovi, go back to
-that data set and on the `Exploration' - `Descriptives' screen you will
-see you can expand the section marked `Statistics'. Click on the
-checkbox marked `Mode' and you will see the modal value presented in the
-`Descriptives' Table, as in Figure~\ref{fig-fig4-7}. So the 2010 data
-suggest you should bet on a 3 point margin.
+calculate the mode for the \emph{afl.margins} variable in jamovi, go
+back to that data set and on the `Exploration' - `Descriptives' screen
+you will see you can expand the section marked `Statistics'. Click on
+the checkbox marked `Mode' and you will see the modal value presented in
+the `Descriptives' Table, as in Figure~\ref{fig-fig4-7}. So the 2010
+data suggest you should bet on a 3 point margin.
 
 \begin{figure}
 
 \includegraphics[width=1\textwidth,height=\textheight]{./images/fig4-7.png} \hfill{}
 
 \caption{\label{fig-fig4-7}A screenshot of jamovi showing the modal
-value for the afl.margins variable}
+value for the \emph{afl.margins} variable}
 
 \end{figure}
 
@@ -4444,9 +4446,9 @@ thing that we really want is a measure of the \textbf{variability} of
 the data. That is, how ``spread out'' are the data? How ``far'' away
 from the mean or median do the observed values tend to be? For now,
 let's assume that the data are interval or ratio scale, and we'll
-continue to use the afl.margins data. We'll use this data to discuss
-several different measures of spread, each with different strengths and
-weaknesses.
+continue to use the \emph{afl.margins} data. We'll use this data to
+discuss several different measures of spread, each with different
+strengths and weaknesses.
 
 \hypertarget{range}{%
 \subsection{Range}\label{range}}
@@ -4459,9 +4461,9 @@ thing that we really want is a measure of the \textbf{variability} of
 the data. That is, how ``spread out'' are the data? How ``far'' away
 from the mean or median do the observed values tend to be? For now,
 let's assume that the data are interval or ratio scale, and we'll
-continue to use the afl.margins data. We'll use this data to discuss
-several different measures of spread, each with different strengths and
-weaknesses.
+continue to use the \emph{afl.margins} data. We'll use this data to
+discuss several different measures of spread, each with different
+strengths and weaknesses.
 
 The \textbf{range} of a variable is very simple. It's the biggest value
 minus the smallest value. For the AFL winning margins data the maximum
@@ -4507,7 +4509,7 @@ that middle half.
 \includegraphics[width=1\textwidth,height=\textheight]{./images/fig4-8.png} \hfill{}
 
 \caption{\label{fig-fig4-8}A screenshot of jamovi showing the Quartiles
-for the afl.margins variable}
+for the \emph{afl.margins} variable}
 
 \end{figure}
 
@@ -4813,9 +4815,9 @@ mean?) and instead talk a bit more about how to do the calculations in
 jamovi, because this will reveal something very weird. Start a new
 jamovi session by clicking on the main menu button (three horizontal
 lines in the top left corner and selecting `New'. Now type in the first
-five values from the afl.margins data set in column A (\(56\), \(31\),
-\(56\), \(8\), \(32\). Change the variable type to `Continuous' and
-under `Descriptives' click the `Variance' check box, and you get the
+five values from the \emph{afl.margins} data set in column A (\(56\),
+\(31\), \(56\), \(8\), \(32\). Change the variable type to `Continuous'
+and under `Descriptives' click the `Variance' check box, and you get the
 same values for variance as the one we calculated by hand (\(324.64\)).
 No, wait, you get a completely different answer (\(405.80\)) - see
 Figure~\ref{fig-fig4-9}. That's just weird. Is jamovi broken? Is this a
@@ -4940,8 +4942,8 @@ exact. It's actually calculated based on an assumption that the
 histogram is symmetric and ``bell shaped''. As you can tell from looking
 at the AFL winning margins histogram in Figure~\ref{fig-fig4-2}, this
 isn't exactly true of our data! Even so, the rule is approximately
-correct. As it turns out, 65.3\% of the AFL margins data fall within one
-standard deviation of the mean. This is shown visually in
+correct. As it turns out, 65.3\% of the \emph{AFL margins} data fall
+within one standard deviation of the mean. This is shown visually in
 Figure~\ref{fig-fig4-10}.
 
 \hypertarget{which-measure-to-use}{%
@@ -5047,8 +5049,8 @@ value for a negatively skewed distribution.
 
 Perhaps more helpfully, you can use jamovi to calculate skewness: it's a
 check box in the `Statistics' options under `Exploration' -
-`Descriptives'. For the afl.margins variable, the skewness figure is
-\(0.780\). If you divide the skewness estimate by the Std. error for
+`Descriptives'. For the \emph{afl.margins} variable, the skewness figure
+is \(0.780\). If you divide the skewness estimate by the Std. error for
 skewness you have an indication of how skewed the data is. Especially in
 small samples (N \(<\) 50), one rule of thumb suggests that a value of 2
 or less can mean that the data is not very skewed, and a value of over 2
@@ -5170,8 +5172,8 @@ descriptive statistics broken down by some grouping variable. This is
 pretty easy to do in jamovi. For instance, let's say I want to look at
 the descriptive statistics for some clinical trial data, broken down
 separately by therapy type. This is a new data set, one that you've
-never seen before. The data is stored in the clinicaltrial.csv file and
-we'll use it a lot later on in
+never seen before. The data is stored in the \emph{clinicaltrial.csv}
+file and we'll use it a lot later on in
 Chapter~\ref{sec-Comparing-several-means-one-way-ANOVA} (you can find a
 complete description of the data at the start of that chapter). Let's
 load it and see what we've got (Figure~\ref{fig-fig4-13}):
@@ -5197,7 +5199,7 @@ you should get something like Figure~\ref{fig-fig4-14}.
 \includegraphics[width=1\textwidth,height=\textheight]{./images/fig4-13.png} \hfill{}
 
 \caption{\label{fig-fig4-13}A screenshot of jamovi showing the variables
-stored in the clinicaltrial.csv file}
+stored in the \emph{clinicaltrial.csv} file}
 
 \end{figure}
 
@@ -5431,16 +5433,16 @@ the Broad St pump}
 Let's begin with the humble \textbf{histogram}. Histograms are one of
 the simplest and most useful ways of visualising data. They make most
 sense when you have an interval or ratio scale variable (e.g., the
-afl.margins data from Chapter~\ref{sec-Descriptive-statistics} and what
-you want to do is get an overall impression of the variable. Most of you
-probably know how histograms work, since they're so widely used, but for
-the sake of completeness I'll describe them. All you do is divide up the
-possible values into \textbf{bins} and then count the number of
-observations that fall within each bin. This count is referred to as the
-frequency or density of the bin and is displayed as a vertical bar. Ihe
-AFL winning margins data there are 33 games in which the winning margin
-was less than 10 points and it is this fact that is represented by the
-height of the leftmost bar that we showed earlier in
+\emph{afl.margins} data from Chapter~\ref{sec-Descriptive-statistics}
+and what you want to do is get an overall impression of the variable.
+Most of you probably know how histograms work, since they're so widely
+used, but for the sake of completeness I'll describe them. All you do is
+divide up the possible values into \textbf{bins} and then count the
+number of observations that fall within each bin. This count is referred
+to as the frequency or density of the bin and is displayed as a vertical
+bar. Ihe AFL winning margins data there are 33 games in which the
+winning margin was less than 10 points and it is this fact that is
+represented by the height of the leftmost bar that we showed earlier in
 Chapter~\ref{sec-Descriptive-statistics}, Figure~\ref{fig-fig4-2}. With
 these earlier graphs we used an advanced plotting package in R which,
 for now, is beyond the capability of jamovi. But jamovi gets us close,
@@ -5484,8 +5486,8 @@ histogram would. However, with density plots, this isn't an issue.
 
 \includegraphics[width=1\textwidth,height=\textheight]{./images/fig5-3.png} \hfill{}
 
-\caption{\label{fig-fig5-3}A density plot of the afl.margins variable
-plotted in jamovi}
+\caption{\label{fig-fig5-3}A density plot of the \emph{afl.margins}
+variable plotted in jamovi}
 
 \end{figure}
 
@@ -5511,13 +5513,13 @@ the range of the data. And because they do so in a fairly compact way
 boxplots have become a very popular statistical graphic, especially
 during the exploratory stage of data analysis when you're trying to
 understand the data yourself. Let's have a look at how they work, again
-using the afl.margins data as our example.
+using the \emph{afl.margins} data as our example.
 
 \begin{figure}
 
 \includegraphics[width=1\textwidth,height=\textheight]{./images/fig5-4.png} \hfill{}
 
-\caption{\label{fig-fig5-4}A box plot of the afl.margins variable
+\caption{\label{fig-fig5-4}A box plot of the \emph{afl.margins} variable
 plotted in jamovi}
 
 \end{figure}
@@ -5534,11 +5536,12 @@ times the interquartile range (IQR), calculated as 25th percentile -
 (1.5*IQR) for the lower boundary, and 75th percentile + (1.5*IQR) for
 the upper boundary. Any observation whose value falls outside this range
 is plotted as a circle or dot instead of being covered by the whiskers,
-and is commonly referred to as an \textbf{outlier}. For our AFL margins
-data there are two observations that fall outside this range, and these
-observations are plotted as dots (the upper boundary is 107, and looking
-over the data column in the spreadsheet there are two observations with
-values higher than this, 108 and 116, so these are the dots).
+and is commonly referred to as an \textbf{outlier}. For our \emph{AFL
+margins} data there are two observations that fall outside this range,
+and these observations are plotted as dots (the upper boundary is 107,
+and looking over the data column in the spreadsheet there are two
+observations with values higher than this, 108 and 116, so these are the
+dots).
 
 \hypertarget{violin-plots}{%
 \subsection{Violin plots}\label{violin-plots}}
@@ -5547,8 +5550,8 @@ values higher than this, 108 and 116, so these are the dots).
 
 \includegraphics[width=1\textwidth,height=\textheight]{./images/fig5-5.png} \hfill{}
 
-\caption{\label{fig-fig5-5}A violin plot of the afl.margins variable
-plotted in jamovi, also showing a box plot and data points}
+\caption{\label{fig-fig5-5}A violin plot of the \emph{afl.margins}
+variable plotted in jamovi, also showing a box plot and data points}
 
 \end{figure}
 
@@ -5568,8 +5571,8 @@ just use a simple box plot.
 \subsection{Drawing multiple boxplots}\label{drawing-multiple-boxplots}}
 
 One last thing. What if you want to draw multiple boxplots at once?
-Suppose, for instance, I wanted separate boxplots showing the AFL
-margins not just for 2010 but for every year between 1987 and 2010. To
+Suppose, for instance, I wanted separate boxplots showing the \emph{AFL
+margins} not just for 2010 but for every year between 1987 and 2010. To
 do that the first thing we'll have to do is find the data. These are
 stored in the \textbf{aflmarginbyyear.csv} file. So let's load it into
 jamovi and see what is in it. You will see that it is a pretty big data
@@ -5613,23 +5616,23 @@ Because the boxplot automatically separates out those observations that
 lie outside a certain range, depicting them with a dot in jamovi, people
 often use them as an informal method for detecting \textbf{outliers}:
 observations that are ``suspiciously'' distant from the rest of the
-data. Here's an example. Suppose that I'd drawn the boxplot for the AFL
-margins data and it came up looking like Figure~\ref{fig-fig5-8}. It's
-pretty clear that something funny is going on with two of the
-observations. Apparently, there were two games in which the margin was
-over 300 points! That doesn't sound right to me. Now that I've become
-suspicious it's time to look a bit more closely at the data. In jamovi
-you can quickly find out which of these observations are suspicious and
-then you can go back to the raw data to see if there has been a mistake
-in data entry. One way to do this is to tell jamovi to label the
-outliers, by checking the box next to the Box plot check box. This adds
-a row number label next to the outlier in the boxplot, so you can go
-look at that row and find the extreme value. Another, more flexible way,
-is to set up a filter so that only those observations with values over a
-certain threshold are included. In our example, the threshold is over
-300, so that is the filter we will create. First, click on the `Filters'
-button at the top of the jamovi window, and then type `margin
-\textgreater{} 300' into the filter field, as in
+data. Here's an example. Suppose that I'd drawn the boxplot for the
+\emph{AFL margins} data and it came up looking like
+Figure~\ref{fig-fig5-8}. It's pretty clear that something funny is going
+on with two of the observations. Apparently, there were two games in
+which the margin was over 300 points! That doesn't sound right to me.
+Now that I've become suspicious it's time to look a bit more closely at
+the data. In jamovi you can quickly find out which of these observations
+are suspicious and then you can go back to the raw data to see if there
+has been a mistake in data entry. One way to do this is to tell jamovi
+to label the outliers, by checking the box next to the Box plot check
+box. This adds a row number label next to the outlier in the boxplot, so
+you can go look at that row and find the extreme value. Another, more
+flexible way, is to set up a filter so that only those observations with
+values over a certain threshold are included. In our example, the
+threshold is over 300, so that is the filter we will create. First,
+click on the `Filters' button at the top of the jamovi window, and then
+type `margin \textgreater{} 300' into the filter field, as in
 Figure~\ref{fig-fig5-9}.
 
 \begin{figure}
@@ -5692,16 +5695,16 @@ Chapter~\ref{sec-Correlation-and-linear-regression}.
 \section{Bar graphs}\label{sec-Bar-graphs}}
 
 Another form of graph that you often want to plot is the \textbf{bar
-graph}. Let's use the afl.finalists data set with the afl.finalists
-variable that I introduced in Section~\ref{sec-Mode}. What I want to do
-is draw a bar graph that displays the number of finals that each team
-has played in over the time spanned by the afl.finalists data set. There
-are lots of teams, but I am particularly interested in just four:
-Brisbane, Carlton, Fremantle and Richmond. So the first step is to set
-up a filter so just those four teams are included in the bar graph. This
-is straightforward in jamovi and you can do it by using the `Filters'
-function that we used previously. Open up the `Filters' screen and type
-in the following:
+graph}. Let's use the \emph{afl.finalists} data set with the
+\emph{afl.finalists} variable that I introduced in
+Section~\ref{sec-Mode}. What I want to do is draw a bar graph that
+displays the number of finals that each team has played in over the time
+spanned by the \emph{afl.finalists} data set. There are lots of teams,
+but I am particularly interested in just four: Brisbane, Carlton,
+Fremantle and Richmond. So the first step is to set up a filter so just
+those four teams are included in the bar graph. This is straightforward
+in jamovi and you can do it by using the `Filters' function that we used
+previously. Open up the `Filters' screen and type in the following:
 
 afl.finalists \(==\) `Brisbane' or afl.finalists \(==\) `Carlton' or
 afl.finalists \(==\) `Fremantle' or afl.finalists \(==\) `Richmond'
@@ -5850,10 +5853,10 @@ variables}\label{creating-tables-for-single-variables}}
 
 Let's start with a simple example. As the father of a small child I
 naturally spend a lot of time watching TV shows like In the \emph{Night
-Garden}. In the nightgarden.csv file, I've transcribed a short section
-of the dialogue. The file contains two variables of interest, speaker
-and utterance. Open up this data set in jamovi and take a look at the
-data in the `spreadsheet' view. You will see that the data looks
+Garden}. In the \emph{nightgarden.csv} file, I've transcribed a short
+section of the dialogue. The file contains two variables of interest,
+speaker and utterance. Open up this data set in jamovi and take a look
+at the data in the `spreadsheet' view. You will see that the data looks
 something like this:
 
 `speaker' variable: upsy-daisy upsy-daisy upsy-daisy upsy-daisy
@@ -6578,20 +6581,20 @@ question: On a scale of 1 (strongly disagree) to 7 (strongly agree), to
 what extent do you agree with the proposition that ``Dinosaurs are
 awesome''?
 
-Now let's load and look at the data. The data file likert.omv contains a
-single variable that contains raw Likert-scale responses for these 10
-people. However, if you think about it, this isn't the best way to
-represent these responses. Because of the fairly symmetric way that we
-set up the response scale, there's a sense in which the midpoint of the
-scale should have been coded as 0 (no opinion), and the two endpoints
-should be `3 (strongly agree) and ´3 (strongly disagree). By recoding
-the data in this way it's a bit more reflective of how we really think
-about the responses. The recoding here is pretty straightforward, we
-just subtract 4 from the raw scores. In jamovi you can do this by
-computing a new variable: click on the `Data' - `Compute' button and you
-will see that a new variable has been added to the spreadsheet. Let's
-call this new variable likert.centred (go ahead and type that in) and
-then add the following in the formula box, like in
+Now let's load and look at the data. The data file \emph{likert.omv}
+contains a single variable that contains raw Likert-scale responses for
+these 10 people. However, if you think about it, this isn't the best way
+to represent these responses. Because of the fairly symmetric way that
+we set up the response scale, there's a sense in which the midpoint of
+the scale should have been coded as 0 (no opinion), and the two
+endpoints should be `3 (strongly agree) and ´3 (strongly disagree). By
+recoding the data in this way it's a bit more reflective of how we
+really think about the responses. The recoding here is pretty
+straightforward, we just subtract 4 from the raw scores. In jamovi you
+can do this by computing a new variable: click on the `Data' - `Compute'
+button and you will see that a new variable has been added to the
+spreadsheet. Let's call this new variable likert.centred (go ahead and
+type that in) and then add the following in the formula box, like in
 Figure~\ref{fig-fig6-4}: `likert.raw - 4'
 
 \begin{figure}
@@ -6737,7 +6740,7 @@ all need to be recalculated or recoded in the same way. And one of the
 neat features in jamovi is that you can create a transformation, using
 the `Data' - `Transform' button, that can then be saved and applied to
 multiple variables. Let's go back to the first example above, using the
-data file likert.omv that contains a single variable with raw
+data file \emph{likert.omv} that contains a single variable with raw
 Likert-scale responses for 10 people. To create a transformation that
 you can save and then apply across multiple variables (assuming you had
 more variables like this in your data file), first in the spreadsheet
@@ -7006,10 +7009,10 @@ want to look closely at the data from people over 50 years in age. To do
 this, the first step is getting jamovi to filter the subset of the data
 corresponding to the observations that you're interested in.
 
-This section returns to the nightgarden.csv data set. If you're reading
-this whole chapter in one sitting, then you should already have this
-data set loaded into a jamovi window. For this section, let's focus on
-the two variables speaker and utterance (see
+This section returns to the \emph{nightgarden.csv} data set. If you're
+reading this whole chapter in one sitting, then you should already have
+this data set loaded into a jamovi window. For this section, let's focus
+on the two variables speaker and utterance (see
 \protect\hyperlink{sec-Tabulating-and-cross-tabulating-data}{Tabulating
 and cross-tabulating data}) if you've forgotten what those variables
 look like). Suppose that what I want to do is pull out only those
@@ -9150,8 +9153,8 @@ statistics to be much closer to the population parameters, what can we
 do about it? The obvious answer is to collect more data. Suppose that we
 ran a much larger experiment, this time measuring the IQs of 10,000
 people. We can simulate the results of this experiment using jamovi. The
-IQsim.omv file is a jamovi data file. In this file I have generated
-10,000 random numbers sampled from a normal distribution for a
+\emph{IQsim.omv} file is a jamovi data file. In this file I have
+generated 10,000 random numbers sampled from a normal distribution for a
 population with mean = 100 and sd = 15. This was done by computing a new
 variable using the = NORM(100,15) function. A histogram and density plot
 shows that this larger sample is a much better approximation to the true
@@ -10278,7 +10281,7 @@ mean as part of the `Descriptives' functionality. Under
 `Descriptives'-`Statistics' there is a check box for both the `Std.
 error of Mean' and `Confidence interval for the mean', so you can use
 this to find out the 95\% confidence interval (which is the default).
-So, for example, if I load the IQsim.omv file, check `Confidence
+So, for example, if I load the \emph{IQsim.omv} file, check `Confidence
 interval for the mean', I can see the confidence interval associated
 with the simulated mean IQ: Lower 95\% CI = 99.39 and Upper 95\% CI =
 99.97 So, in our simulated large sample data with N=10,000, the mean IQ
@@ -11458,8 +11461,8 @@ test the null hypothesis that the response probability is one-half
   the probability of making a correct response, according to the null
   hypothesis. In other words, it's the \(\theta\) value.} and using data
 in which \(x =62\) of \(n = 100\) people made the correct response,
-available in the binomialtest.omv data file, we get the results shown in
-Figure~\ref{fig-fig9-4}.
+available in the \emph{binomialtest.omv} data file, we get the results
+shown in Figure~\ref{fig-fig9-4}.
 
 \begin{figure}
 
@@ -12070,11 +12073,12 @@ second one. For both choices what we're going to look at is the suit
 (hearts, clubs, spades or diamonds) that people chose. After asking,
 say, \(N = 200\) people to do this, I'd like to look at the data and
 figure out whether or not the cards that people pretended to select were
-really random. The data are contained in the randomness.csv file in
-which, when you open it up in jamovi and take a look at the spreadsheet
-view, you will see three variables. These are: an id variable that
-assigns a unique identifier to each participant, and the two variables
-choice\_1 and choice\_2 that indicate the card suits that people chose.
+really random. The data are contained in the \emph{randomness.csv} file
+in which, when you open it up in jamovi and take a look at the
+spreadsheet view, you will see three variables. These are: an id
+variable that assigns a unique identifier to each participant, and the
+two variables choice\_1 and choice\_2 that indicate the card suits that
+people chose.
 
 For the moment, let's just focus on the first choice that people made.
 We'll use the Frequency tables option under `Exploration' -
@@ -12722,18 +12726,18 @@ goodness-of-fit''. Lucky you.
 \subsection{Doing the test in jamovi}\label{doing-the-test-in-jamovi}}
 
 Not surprisingly, jamovi provides an analysis that will do these
-calculations for you. Let's use the Randomness.omv file. From the main
-`Analyses' toolbar select `Frequencies' - `One Sample Proportion Tests'
-- `\(N\) Outcomes'. Then in the analysis window that appears move the
-variable you want to analyse (choice 1 across into the `Variable' box.
-Also, click on the `Expected counts' check box so that these are shown
-on the results table. When you have done all this, you should see the
-analysis results in jamovi as in Figure~\ref{fig-fig10-4}. No surprise
-then that jamovi provides the same expected counts and statistics that
-we calculated by hand above, with a \(\chi^2\) value of \((8.44\) with
-\(3\) d.f. and \(p=0.038\). Note that we don't need to look up a
-critical p-value threshold value any more, as jamovi gives us the actual
-p-value of the calculated \(\chi^2\) for \(3\) d.f.
+calculations for you. Let's use the \emph{Randomness.omv} file. From the
+main `Analyses' toolbar select `Frequencies' - `One Sample Proportion
+Tests' - `\(N\) Outcomes'. Then in the analysis window that appears move
+the variable you want to analyse (choice 1 across into the `Variable'
+box. Also, click on the `Expected counts' check box so that these are
+shown on the results table. When you have done all this, you should see
+the analysis results in jamovi as in Figure~\ref{fig-fig10-4}. No
+surprise then that jamovi provides the same expected counts and
+statistics that we calculated by hand above, with a \(\chi^2\) value of
+\((8.44\) with \(3\) d.f. and \(p=0.038\). Note that we don't need to
+look up a critical p-value threshold value any more, as jamovi gives us
+the actual p-value of the calculated \(\chi^2\) for \(3\) d.f.
 
 \begin{figure}
 
@@ -13055,18 +13059,18 @@ it?'' As it happens, I got my hands on the testing data that the civil
 authorities of \emph{Chapek 9} used to check this. It turns out that
 what they did was very simple. They found a bunch of robots and a bunch
 of humans and asked them what they preferred. I saved their data in a
-file called chapek9.omv, which we can now load into jamovi. As well as
-the ID variable that identifies individual people, there are two nominal
-text variables, species and choice. In total there are 180 entries in
-the data set, one for each person (counting both robots and humans as
-``people'') who was asked to make a choice. Specifically, there are 93
-humans and 87 robots, and overwhelmingly the preferred choice is the
-data file. You can check this yourself by asking jamovi for Frequency
-Tables, under the `Exploration' - `Descriptives' button. However, this
-summary does not address the question we're interested in. To do that,
-we need a more detailed description of the data. What we want to do is
-look at the choices broken down \emph{by species}. That is, we need to
-cross-tabulate the data (see
+file called \emph{chapek9.omv}, which we can now load into jamovi. As
+well as the ID variable that identifies individual people, there are two
+nominal text variables, species and choice. In total there are 180
+entries in the data set, one for each person (counting both robots and
+humans as ``people'') who was asked to make a choice. Specifically,
+there are 93 humans and 87 robots, and overwhelmingly the preferred
+choice is the data file. You can check this yourself by asking jamovi
+for Frequency Tables, under the `Exploration' - `Descriptives' button.
+However, this summary does not address the question we're interested in.
+To do that, we need a more detailed description of the data. What we
+want to do is look at the choices broken down \emph{by species}. That
+is, we need to cross-tabulate the data (see
 Section~\ref{sec-Tabulating-and-cross-tabulating-data}). In jamovi we do
 this using the `Frequencies' - `Contingency Tables' - `Independent
 Samples' analysis, and we should get a table something like
@@ -13400,7 +13404,7 @@ about this some more in just a moment.
 \includegraphics[width=1\textwidth,height=\textheight]{./images/fig10-6.png} \hfill{}
 
 \caption{\label{fig-fig10-6}Independent samples \(\chi^2\) test in
-jamovi using the Chapek 9 data}
+jamovi using the \emph{Chapek 9} data}
 
 \end{figure}
 
@@ -13590,7 +13594,8 @@ stake.\footnote{This example is based on a joke article published in the
 scientist (but rather fortunately for the general populace), it's
 actually quite hard to find people in the process of being set on fire,
 so the cell counts are awfully small in some cases. A contingency table
-of the salem.csv data illustrates the point (Table~\ref{tbl-tab10-9}).
+of the \emph{salem.csv} data illustrates the point
+(Table~\ref{tbl-tab10-9}).
 
 \hypertarget{tbl-tab10-9}{}
  
@@ -13746,11 +13751,11 @@ probability is the most extreme. This then gives us the p-value.
 
 You can specify this test in jamovi from a check box in the `Statistics'
 options of the `Contingency Tables' analysis. When you do this with the
-data from the salem.csv file, the Fisher exact test statistic is shown
-in the results. The main thing we're interested in here is the p-value,
-which in this case is small enough (p = .036) to justify rejecting the
-null hypothesis that people on fire are just as happy as people not on
-fire. See Figure~\ref{fig-fig10-7}.
+data from the \emph{salem.csv} file, the Fisher exact test statistic is
+shown in the results. The main thing we're interested in here is the
+p-value, which in this case is small enough (p = .036) to justify
+rejecting the null hypothesis that people on fire are just as happy as
+people not on fire. See Figure~\ref{fig-fig10-7}.
 
 \begin{figure}
 
@@ -13949,16 +13954,16 @@ for it to work.
 jamovi}\label{doing-the-mcnemar-test-in-jamovi}}
 
 Now that you know what the McNemar test is all about, lets actually run
-one. The agpp.csv file contains the raw data that I discussed
-previously. The agpp data set contains three variables, an id variable
-that labels each participant in the data set (we'll see why that's
-useful in a moment), a \textbf{response\_before} variable that records
-the person's answer when they were asked the question the first time,
-and a response\_after variable that shows the answer that they gave when
-asked the same question a second time. Notice that each participant
-appears only once in this data set. Go to the `Analyses' - `Frequencies'
-- `Contingency Tables' - `Paired Samples' analysis in jamovi, and move
-\textbf{response\_before} into the `Rows' box, and
+one. The \emph{agpp.csv} file contains the raw data that I discussed
+previously. The \emph{agpp} data set contains three variables, an id
+variable that labels each participant in the data set (we'll see why
+that's useful in a moment), a \textbf{response\_before} variable that
+records the person's answer when they were asked the question the first
+time, and a response\_after variable that shows the answer that they
+gave when asked the same question a second time. Notice that each
+participant appears only once in this data set. Go to the `Analyses' -
+`Frequencies' - `Contingency Tables' - `Paired Samples' analysis in
+jamovi, and move \textbf{response\_before} into the `Rows' box, and
 \textbf{response\_after} into the `Columns' box. You will then get a
 contingency table in the results window, with the statistic for the
 McNemar test just below it, see Figure~\ref{fig-fig10-8}.
@@ -14072,7 +14077,7 @@ These aren't the same test.
 \includegraphics[width=0.6\textwidth,height=\textheight]{./images/fig10-9.png} \hfill{}
 
 \caption{\label{fig-fig10-9}Independent vs.~Paired (McNemar) with the
-Randomness.omv (cards) data}
+\emph{Randomness.omv} (cards) data}
 
 \end{figure}
 
@@ -14175,13 +14180,13 @@ and the standard deviation is \(9.5\). Of his many hundreds of students,
 it turns out that 20 of them also take psychology classes. Out of
 curiosity, I find myself wondering if the psychology students tend to
 get the same grades as everyone else (i.e., mean \(67.5\)) or do they
-tend to score higher or lower? He emails me the zeppo.csv file, which I
-use to look at the grades of those students, in the jamovi spreadsheet
-view,and then calculate the mean in `Exploration' - `Descriptives'
-\footnote{In order to do this I had to change the measurement level for
-  \(X\) to `Continuous', as during the opening / import of the csv file
-  jamovi made this a nominal level variable, which isn't right for my
-  analysis}. The mean value is \(72.3\).
+tend to score higher or lower? He emails me the \emph{zeppo.csv} file,
+which I use to look at the grades of those students, in the jamovi
+spreadsheet view,and then calculate the mean in `Exploration' -
+`Descriptives' \footnote{In order to do this I had to change the
+  measurement level for \(X\) to `Continuous', as during the opening /
+  import of the csv file jamovi made this a nominal level variable,
+  which isn't right for my analysis}. The mean value is \(72.3\).
 
 50 60 60 64 66 66 67 69 70 74 76 76 77 79 79 79 81 82 82 89
 
@@ -14771,12 +14776,12 @@ Anastasia and Bernadette. There are \(N_1 = 15\) students in Anastasia's
 tutorials, and \(N_2 = 18\) in Bernadette's tutorials. The research
 question I'm interested in is whether Anastasia or Bernadette is a
 better tutor, or if it doesn't make much of a difference. Dr Harpo
-emails me the course grades, in the harpo.csv file. As usual, I'll load
-the file into jamovi and have a look at what variables it contains -
-there are three variables, ID, grade and tutor. The grade variable
-contains each student's grade, but it is not imported into jamovi with
-the correct measurement level attribute, so I need to change this so it
-is regarded as a continuous variable (see
+emails me the course grades, in the \emph{harpo.csv} file. As usual,
+I'll load the file into jamovi and have a look at what variables it
+contains - there are three variables, ID, grade and tutor. The grade
+variable contains each student's grade, but it is not imported into
+jamovi with the correct measurement level attribute, so I need to change
+this so it is regarded as a continuous variable (see
 Section~\ref{sec-Changing-data-from-one-level-to-another}). The tutor
 variable is a factor that indicates who each student's tutor was -
 either Anastasia or Bernadette.
@@ -15389,12 +15394,12 @@ students are encouraged to work harder. Her theory is that the first
 test is a bit of a ``wake up call'' for students. When they realise how
 hard her class really is, they'll work harder for the second test and
 get a better mark. Is she right? To test this, let's import the
-chico.csv file into jamovi. This time jamovi does a good job during the
-import of attributing measurement levels correctly. The chico data set
-contains three variables: an id variable that identifies each student in
-the class, the grade\_test1 variable that records the student grade for
-the first test, and the grade\_test2 variable that has the grades for
-the second test.
+\emph{chico.csv} file into jamovi. This time jamovi does a good job
+during the import of attributing measurement levels correctly. The
+\emph{chico} data set contains three variables: an id variable that
+identifies each student in the class, the grade\_test1 variable that
+records the student grade for the first test, and the grade\_test2
+variable that has the grades for the second test.
 
 If we look at the jamovi spreadsheet it does seem like the class is a
 hard one (most grades are between 50\% and 60\%), but it does look like
@@ -15417,7 +15422,7 @@ student performance is pure chance.
 \includegraphics[width=1\textwidth,height=\textheight]{./images/fig11-12.png} \hfill{}
 
 \caption{\label{fig-fig11-12}Descriptives for the two grade test
-variables in the chico data set}
+variables in the \emph{chico} data set}
 
 \end{figure}
 
@@ -15433,9 +15438,9 @@ to have improved their grade, if only by a small amount. This suggests
 that we should be looking at the improvement made by each student from
 one test to the next and treating that as our raw data. To do this,
 we'll need to create a new variable for the improvement that each
-student makes, and add it to the chico data set. The easiest way to do
-this is to compute a new variable, with the expression grade test2 -
-grade test1.
+student makes, and add it to the \emph{chico} data set. The easiest way
+to do this is to compute a new variable, with the expression grade test2
+- grade test1.
 
 \begin{figure}
 
@@ -15880,9 +15885,9 @@ versions of Cohen's d that you would use for a Student or Welch test.
 It's not so straightforward to do this in jamovi; essentially you have
 to change the structure of the data in the spreadsheet view so I won't
 go into that here\footnote{If you are interested, you can look at how
-  this was done in the chico2.omv file}, but the Cohen's d for this
-perspective is quite different: it is \(0.22\) which is quite small when
-assessed on the scale of the original variables.
+  this was done in the \emph{chico2.omv} file}, but the Cohen's d for
+this perspective is quite different: it is \(0.22\) which is quite small
+when assessed on the scale of the original variables.
 
 \hypertarget{sec-Checking-the-normality-of-a-sample}{%
 \section{Checking the normality of a
@@ -16064,9 +16069,10 @@ winning margins data}
 
 \end{figure}
 
-And when we run the Shapiro-Wilk test on the AFL margins data, we get a
-value for the Shapiro-Wilk normality test statistic of \(W = 0.94\), and
-p-value = \(9.481\)x\(10^{-07}\). Clearly a significant effect!
+And when we run the Shapiro-Wilk test on the \emph{AFL margins} data, we
+get a value for the Shapiro-Wilk normality test statistic of
+\(W = 0.94\), and p-value = \(9.481\)x\(10^{-07}\). Clearly a
+significant effect!
 
 \hypertarget{testing-non-normal-data}{%
 \section{Testing non-normal data}\label{testing-non-normal-data}}
@@ -16098,7 +16104,7 @@ the scores of 10 people on some test. Since my imagination has now
 failed me completely, let's pretend it's a ``test of awesomeness'' and
 there are two groups of people, ``A'' and ``B''. I'm curious to know
 which group is more awesome. The data are included in the file
-awesome.csv, and there are two variables apart from the usual ID
+\emph{awesome.csv}, and there are two variables apart from the usual ID
 variable: scores and group.
 
 As long as there are no ties (i.e., people with the exact same
@@ -16245,16 +16251,17 @@ Mann-Whitney \(U\) test}
 What about the \textbf{one sample Wilcoxon test} (or equivalently, the
 paired samples Wilcoxon test)? Suppose I'm interested in finding out
 whether taking a statistics class has any effect on the happiness of
-students. My data is in the happiness.csv file. What I've measured here
-is the happiness of each student before taking the class and after
-taking the class, and the change score is the difference between the
-two. Just like we saw with the t-test, there's no fundamental difference
-between doing a paired-samples test using before and after, versus doing
-a onesample test using the change scores. As before, the simplest way to
-think about the test is to construct a tabulation. The way to do it this
-time is to take those change scores that are positive differences, and
-tabulate them against all the complete sample. What you end up with is a
-table that looks like Table~\ref{tbl-tab11-5}.
+students. My data is in the \emph{happiness.csv} file. What I've
+measured here is the happiness of each student before taking the class
+and after taking the class, and the change score is the difference
+between the two. Just like we saw with the t-test, there's no
+fundamental difference between doing a paired-samples test using before
+and after, versus doing a onesample test using the change scores. As
+before, the simplest way to think about the test is to construct a
+tabulation. The way to do it this time is to take those change scores
+that are positive differences, and tabulate them against all the
+complete sample. What you end up with is a table that looks like
+Table~\ref{tbl-tab11-5}.
 
 \hypertarget{tbl-tab11-5}{}
  
@@ -16447,7 +16454,7 @@ the \textbf{correlation} between variables. But first, we need some data
 
 \begin{table}[ht]
 \caption{\label{tbl-tab12-1}Data for correlation analysis - descriptive statistics for the
-parenthood data }\tabularnewline
+parenthooddata }\tabularnewline
 
 \begin{centerbox}
 \begin{threeparttable}
@@ -16520,15 +16527,15 @@ Let's say that I can rate my grumpiness very precisely, on a scale from
 or woman). And lets also assume that I've been measuring my grumpiness,
 my sleeping patterns and my son's sleeping patterns for quite some time
 now. Let's say, for \(100\) days. And, being a nerd, I've saved the data
-as a file called parenthood.csv. If we load the data we can see that the
-file contains four variables dani.sleep, baby.sleep, dani.grump and day.
-Note that when you first load this data set jamovi may not have guessed
-the data type for each variable correctly, in which case you should fix
-it: dani.sleep, baby.sleep, dani.grump and day can be specified as
-continuous variables, and ID is a nominal(integer) variable.\footnote{I've
-  noticed that in jamovi you can also specify an `ID' variable type, but
-  for our purposes it does not matter how we specify the ID variable as
-  we won't be including it in any analyses.}
+as a file called \emph{parenthood.csv}. If we load the data we can see
+that the file contains four variables dani.sleep, baby.sleep, dani.grump
+and day. Note that when you first load this data set jamovi may not have
+guessed the data type for each variable correctly, in which case you
+should fix it: dani.sleep, baby.sleep, dani.grump and day can be
+specified as continuous variables, and ID is a nominal(integer)
+variable.\footnote{I've noticed that in jamovi you can also specify an
+  `ID' variable type, but for our purposes it does not matter how we
+  specify the ID variable as we won't be including it in any analyses.}
 
 Next, I'll take a look at some basic descriptive statistics and, to give
 a graphical depiction of what each of the three interesting variables
@@ -16581,7 +16588,7 @@ me that it's pretty standard.
 \end{minipage}%
 
 \caption{\label{fig-fig12-1}Histograms from jamovi for the three
-interesting variables in the parenthood data set}
+interesting variables in the \emph{parenthood}data set}
 
 \end{figure}
 
@@ -16759,7 +16766,7 @@ Figure~\ref{fig-fig12-5}.
 \includegraphics[width=1\textwidth,height=\textheight]{./images/fig12-5.png} \hfill{}
 
 \caption{\label{fig-fig12-5}A jamovi screenshot showing correlations
-between variables in the parenthood.csv file}
+between variables in the \emph{parenthood.csv} file}
 
 \end{figure}
 
@@ -16913,7 +16920,7 @@ a collection of four data sets. Each data set has two variables, an
 \(X\) variables are almost identical, as are those for the Y variables.
 And in each case the correlation between \(X\) and \(Y\) is
 \(r = 0.816\). You can verify this yourself, since I happen to have
-saved it in a file called anscombe.csv.
+saved it in a file called \emph{anscombe.csv}.
 
 You'd think that these four data sets would look pretty similar to one
 another. They do not. If we draw scatterplots of \(X\) against \(Y\) for
@@ -17170,8 +17177,8 @@ most likely to be causal, or at least you have some suspicions in that
 direction. If so, then it's conventional to plot the cause variable on
 the x-axis, and the effect variable on the y-axis. With that in mind,
 let's look at how to draw scatterplots in jamovi, using the same
-parenthood data set (i.e.~parenthood.csv) that I used when introducing
-correlations.
+\emph{parenthood}data set (i.e.~\emph{parenthood.csv}) that I used when
+introducing correlations.
 
 Suppose my goal is to draw a scatterplot displaying the relationship
 between the amount of sleep that I get (dani.sleep) and how grumpy I am
@@ -17241,10 +17248,10 @@ a slightly fancier version of the Pearson correlation (see
 regression models are much more powerful tools.
 
 Since the basic ideas in regression are closely tied to correlation,
-we'll return to the parenthood.csv file that we were using to illustrate
-how correlations work. Recall that, in this data set we were trying to
-find out why Dani is so very grumpy all the time and our working
-hypothesis was that I'm not getting enough sleep. We drew some
+we'll return to the \emph{parenthood.csv} file that we were using to
+illustrate how correlations work. Recall that, in this data set we were
+trying to find out why Dani is so very grumpy all the time and our
+working hypothesis was that I'm not getting enough sleep. We drew some
 scatterplots to help us examine the relationship between the amount of
 sleep I get and my grumpiness the following day, as in
 Figure~\ref{fig-fig12-9}, and as we saw previously this corresponds to a
@@ -17417,10 +17424,10 @@ do all the heavy lifting.
 jamovi}\label{linear-regression-in-jamovi}}
 
 To run my linear regression, open up the `Regression' - `Linear
-Regression' analysis in jamovi, using the parenthood.csv data file. Then
-specify dani.grump as the `Dependent Variable' and dani.sleep as the
-variable entered in the `Covariates' box. This gives the results shown
-in Figure~\ref{fig-fig12-13}, showing an intercept
+Regression' analysis in jamovi, using the \emph{parenthood.csv} data
+file. Then specify dani.grump as the `Dependent Variable' and dani.sleep
+as the variable entered in the `Covariates' box. This gives the results
+shown in Figure~\ref{fig-fig12-13}, showing an intercept
 \(\hat{b}_0 = 125.96\) and the slope \(\hat{b}_1 = -8.94\). In other
 words, the best fitting regression line that I plotted in
 Figure~\ref{fig-fig12-11} has this formula:
@@ -17603,10 +17610,10 @@ outcome variable
 
 While we're here, let's calculate these values ourselves, not by hand
 though. Let's use something like Excel or another standard spreadsheet
-programme. I have done this by opening up the parenthood.csv file in
-Excel and saving it as parenthood rsquared.xls so that I can work on it.
-The first thing to do is calculate the \(\hat{Y}\) values, and for the
-simple model that uses only a single predictor we would do the
+programme. I have done this by opening up the \emph{parenthood.csv} file
+in Excel and saving it as parenthood rsquared.xls so that I can work on
+it. The first thing to do is calculate the \(\hat{Y}\) values, and for
+the simple model that uses only a single predictor we would do the
 following:
 
 \begin{enumerate}
@@ -18902,8 +18909,8 @@ no-therapy people assigned to each of the 3 drugs. A psychologist
 assesses the mood of each person after a 3 month run with each drug, and
 the overall improvement in each person's mood is assessed on a scale
 ranging from \(-5\) to \(+5\). With that as the study design, let's now
-load up the data file in clinicaltrial.csv. We can see that this data
-set contains the three variables drug, therapy and mood.gain.
+load up the data file in \emph{clinicaltrial.csv} . We can see that this
+data set contains the three variables drug, therapy and mood.gain.
 
 For the purposes of this chapter, what we're really interested in is the
 effect of drug on mood.gain. The first thing to do is calculate some
@@ -19860,13 +19867,13 @@ And so now our between group sum of squares is obtained by summing these
 \[\begin{aligned} SS_b & = 1.14 + 0.18 + 2.16 \\ &= 3.48 \end{aligned}\]
 
 As you can see, the between group calculations are a lot
-shorter\footnote{In the Excel clinicaltrial anova.xls the value for SSb
-  worked out to be very slightly different, \(3.45\), than that shown in
-  the text above (rounding errors!)}. Now that we've calculated our sums
-of squares values, \(SS_b\) and \(SS_w\), the rest of the ANOVA is
-pretty painless. The next step is to calculate the degrees of freedom.
-Since we have \(G = 3\) groups and \(N = 18\) observations in total our
-degrees of freedom can be calculated by simple subtraction:
+shorter\footnote{In the Excel \emph{clinicaltrial-anova.xls} the value
+  for SSb worked out to be very slightly different, \(3.45\), than that
+  shown in the text above (rounding errors!)}. Now that we've calculated
+our sums of squares values, \(SS_b\) and \(SS_w\), the rest of the ANOVA
+is pretty painless. The next step is to calculate the degrees of
+freedom. Since we have \(G = 3\) groups and \(N = 18\) observations in
+total our degrees of freedom can be calculated by simple subtraction:
 
 \[
 \begin{split}
@@ -20816,7 +20823,7 @@ and omit the tedious details about why it's done this way. Suppose we
 construct a frequency table for the raw data, and let fj be the number
 of observations that have the j-th unique value. This might sound a bit
 abstract, so here's a concrete example from the frequency table of
-mood.gain from the clinicaltrials.csv data set
+mood.gain from the \emph{clinicaltrials.csv} data set
 (Table~\ref{tbl-tab13-11})
 
 \hypertarget{tbl-tab13-11}{}
@@ -20910,10 +20917,11 @@ the Kruskal Wallis test actually does, it turns out that running the
 test is pretty painless, since jamovi has an analysis as part of the
 ANOVA analysis set called `Non-Parametric' - `One Way ANOVA
 (Kruskall-Wallis)' Most of the time you'll have data like the
-clinicaltrial.csv data set, in which you have your outcome variable
-mood.gain and a grouping variable drug. If so, you can just go ahead and
-run the analysis in jamovi. What this gives us is a Kruskal-Wallis
-\(\chi^2 =12.076, df = 2, p = 0.00239\), as in Figure~\ref{fig-fig13-8}
+\emph{clinicaltrial.csv} data set, in which you have your outcome
+variable mood.gain and a grouping variable drug. If so, you can just go
+ahead and run the analysis in jamovi. What this gives us is a
+Kruskal-Wallis \(\chi^2 =12.076, df = 2, p = 0.00239\), as in
+Figure~\ref{fig-fig13-8}
 
 \begin{figure}
 
@@ -21081,7 +21089,7 @@ the tasks was counterbalanced between participants. Each task consisted
 of a series of 10 attempts. The number of attempts successfully
 completed by each patient are shown in Table~\ref{tbl-tab13-11}. Enter
 these data into jamovi ready for analysis (or take a short-cut and load
-up the broca.csv file).
+up the \emph{broca.csv} file).
 
 To perform a one-way related ANOVA in jamovi, open the one-way repeated
 measures ANOVA dialogue box, as in Figure~\ref{fig-fig13-9}, via ANOVA -
@@ -22931,9 +22939,9 @@ designs, as ANCOVA can be used with both.
 
 A health psychologist was interested in the effect of routine cycling
 and stress on happiness levels, with age as a covariate. You can find
-the dataset in the file ancova.csv. Open this file in jamovi and then,
-to undertake an ANCOVA, select Analyses - ANOVA - ANCOVA to open the
-ANCOVA analysis window (Figure~\ref{fig-fig14-12}). Highlight the
+the dataset in the file \emph{ancova.csv}. Open this file in jamovi and
+then, to undertake an ANCOVA, select Analyses - ANOVA - ANCOVA to open
+the ANCOVA analysis window (Figure~\ref{fig-fig14-12}). Highlight the
 dependent variable `happiness' and transfer it into the `Dependent
 Variable' text box. Highlight the independent variables `stress' and
 `commute' and transfer them into the `Fixed Factors' text box. Highlight
@@ -23207,12 +23215,12 @@ might look like Table~\ref{tbl-tab14-8}.
  
 
 This isn't anything particularly special, of course. It's exactly the
-format in which we expect to see our data! See the data file rtfm.csv.
-We can use the jamovi `Descriptives' analysis to confirm that this data
-set corresponds to a balanced design, with 2 observations for each
-combination of attend and reading. In the same way we can also calculate
-the mean grade for each combination. This is shown in
-Figure~\ref{fig-fig14-16}. Looking at the mean scores, one gets the
+format in which we expect to see our data! See the data file
+\emph{rtfm.csv}. We can use the jamovi `Descriptives' analysis to
+confirm that this data set corresponds to a balanced design, with 2
+observations for each combination of attend and reading. In the same way
+we can also calculate the mean grade for each combination. This is shown
+in Figure~\ref{fig-fig14-16}. Looking at the mean scores, one gets the
 strong impression that reading the text and attending the class both
 matter a lot.
 
@@ -23255,8 +23263,8 @@ what we get when we run the analysis in jamovi.
 
 \includegraphics[width=1\textwidth,height=\textheight]{./images/fig14-17.png} \hfill{}
 
-\caption{\label{fig-fig14-17}ANOVA of the rtfm.csv data set in jamovi,
-without the interaction term}
+\caption{\label{fig-fig14-17}ANOVA of the \emph{rtfm.csv} data set in
+jamovi, without the interaction term}
 
 \end{figure}
 
@@ -23427,8 +23435,8 @@ results shown in Figure~\ref{fig-fig14-18}.
 
 \includegraphics[width=1\textwidth,height=\textheight]{./images/fig14-18.png} \hfill{}
 
-\caption{\label{fig-fig14-18}Regression analysis of the rtfm.csv data
-set in jamovi, without the interaction term}
+\caption{\label{fig-fig14-18}Regression analysis of the \emph{rtfm.csv}
+data set in jamovi, without the interaction term}
 
 \end{figure}
 
@@ -23488,8 +23496,8 @@ ANOVA. It's the same thing, really. You just add a new binary variable
 for each of your factors. Where it begins to get trickier is when we
 consider factors that have more than two levels. Consider, for instance,
 the \(3 \times 2\) ANOVA that we ran earlier in this chapter using the
-clinicaltrial.csv data. How can we convert the three-level drug factor
-into a numerical form that is appropriate for a regression?
+\emph{clinicaltrial.csv} data. How can we convert the three-level drug
+factor into a numerical form that is appropriate for a regression?
 
 The answer to this question is pretty simple, actually. All we have to
 do is realise that a three-level factor can be redescribed as two binary
@@ -23575,7 +23583,7 @@ formula box: IF(drug == `anxifree', 1, 0)`. Similarly, to create the new
 variable drugjoyzepam use this logical expression: IF(drug ==
 'joyzepam', 1, 0). Likewise for CBTtherapy: IF(therapy == `CBT', 1, 0).
 You can see these new variables, and the corresponding logical
-expressions, in the jamovi data file clinicaltrial2.omv.
+expressions, in the jamovi data file \emph{clinicaltrial2.omv} .
 
 We have now recoded our three-level factor in terms of two binary
 variables, and we've already seen that ANOVA and regression behave the
@@ -23588,13 +23596,13 @@ section.
 factors}\label{the-equivalence-between-anova-and-regression-for-non-binary-factors}}
 
 Now we have two different versions of the same data set. Our original
-data in which the drug variable from the clinicaltrial.csv file is
-expressed as a single three-level factor, and the expanded data
-clinicaltrial2.omv in which it is expanded into two binary contrasts.
-Once again, the thing that we want to demonstrate is that our original
-\(3 \times 2\) factorial ANOVA is equivalent to a regression model
-applied to the contrast variables. Let's start by re-running the ANOVA,
-with results shown in Figure~\ref{fig-fig14-20}.
+data in which the drug variable from the \emph{clinicaltrial.csv} file
+is expressed as a single three-level factor, and the expanded data
+\emph{clinicaltrial2.omv} in which it is expanded into two binary
+contrasts. Once again, the thing that we want to demonstrate is that our
+original \(3 \times 2\) factorial ANOVA is equivalent to a regression
+model applied to the contrast variables. Let's start by re-running the
+ANOVA, with results shown in Figure~\ref{fig-fig14-20}.
 
 \begin{figure}
 
@@ -24277,9 +24285,9 @@ that you're interested in.\footnote{If, for instance, you actually find
   scope of this book). However, in most cases you probably are
   interested in pairwise group differences, so Tukey's HSD is a pretty
   useful thing to know about.} For instance, earlier we conducted a
-factorial ANOVA using the clinicaltrial.csv data set, and where we
-specified a main effect for drug and a main effect of therapy we would
-be interested in the following four comparisons:
+factorial ANOVA using the \emph{clinicaltrial.csv} data set, and where
+we specified a main effect for drug and a main effect of therapy we
+would be interested in the following four comparisons:
 
 \begin{itemize}
 \tightlist
@@ -24445,10 +24453,11 @@ when you think about it. So, if you want to avoid handing control of
 your data analysis to stupid software, read on.
 
 \hypertarget{the-coffee-data}{%
-\subsection{The coffee data}\label{the-coffee-data}}
+\subsection{\texorpdfstring{The \emph{coffee}
+data}{The coffee data}}\label{the-coffee-data}}
 
-As usual, it will help us to work with some data. The coffee.csv file
-contains a hypothetical data set that produces an unbalanced
+As usual, it will help us to work with some data. The \emph{coffee.csv}
+file contains a hypothetical data set that produces an unbalanced
 \(3 \times 2\) ANOVA. Suppose we were interested in finding out whether
 or not the tendency of people to babble when they have too much coffee
 is purely an effect of the coffee itself, or whether there's some effect
@@ -24469,8 +24478,8 @@ Figure~\ref{fig-fig14-26}.
 
 \includegraphics[width=1\textwidth,height=\textheight]{./images/fig14-26.png} \hfill{}
 
-\caption{\label{fig-fig14-26}The coffee.csv data set in jamovi, with
-descriptive information aggregated by factor levels}
+\caption{\label{fig-fig14-26}The \emph{coffee.csv} data set in jamovi,
+with descriptive information aggregated by factor levels}
 
 \end{figure}
 
@@ -24551,10 +24560,10 @@ different way of choosing the model pairs for the tests.
 
 The Type I method is sometimes referred to as the ``sequential'' sum of
 squares, because it involves a process of adding terms to the model one
-at a time. Consider the coffee data, for instance. Suppose we want to
-run the full \(3 \times 2\) factorial ANOVA, including interaction
-terms. The full model contains the outcome variable babble, the
-predictor variables sugar and milk, and the interaction term sugar
+at a time. Consider the \emph{coffee} data, for instance. Suppose we
+want to run the full \(3 \times 2\) factorial ANOVA, including
+interaction terms. The full model contains the outcome variable babble,
+the predictor variables sugar and milk, and the interaction term sugar
 \(\times\) milk. This can be written as
 \(babble \sim sugar + milk + sugar {\times} milk\). The Type I strategy
 builds this model up sequentially, starting from the simplest possible
@@ -24565,7 +24574,7 @@ milk nor sugar is assumed to have any effect on babbling. The only term
 that would be included in such a model is the intercept, written as
 babble \textasciitilde{} 1. This is our initial null hypothesis. The
 next simplest model for the data would be one in which only one of the
-two main effects is included. In the coffee data, there are two
+two main effects is included. In the \emph{coffee} data, there are two
 different possible choices here, because we could choose to add milk
 first or to add sugar first. The order actually turns out to matter, as
 we'll see later, but for now let's just make a choice arbitrarily and
@@ -25026,9 +25035,9 @@ I tests. And because we're now treating all terms the same way, the
 results of the hypothesis tests do not depend on the order in which we
 specify them. This is definitely a good thing. However, there is a big
 problem when interpreting the results of the tests, especially for main
-effect terms. Consider the coffee data. Suppose it turns out that the
-main effect of milk is not significant according to the Type III tests.
-What this is telling us is that babble \textasciitilde{} sugar +
+effect terms. Consider the \emph{coffee} data. Suppose it turns out that
+the main effect of milk is not significant according to the Type III
+tests. What this is telling us is that babble \textasciitilde{} sugar +
 sugar*milk is a better model for the data than the full model. But what
 does that even mean? If the interaction term sugar*milk was also non
 significant, we'd be tempted to conclude that the data are telling us
@@ -25310,9 +25319,9 @@ applied in a three-way factorial ANOVA:
 \end{table}
  
 
-In the context of the two way ANOVA that we've been using in the coffee
-data, the hypothesis tests are even simpler. The main effect of sugar
-corresponds to an F-test comparing these two models
+In the context of the two way ANOVA that we've been using in the
+\emph{coffee} data, the hypothesis tests are even simpler. The main
+effect of sugar corresponds to an F-test comparing these two models
 (Table~\ref{tbl-tab14-26}).
 
 \hypertarget{tbl-tab14-26}{}
@@ -25878,11 +25887,11 @@ The item data were collected using a 6-point response scale:
 \end{enumerate}
 
 A sample of \(N=250\) responses is contained in the dataset
-bfi\_sample.csv. As researchers, we are interested in exploring the data
-to see whether there are some underlying latent factors that are
-measured reasonably well by the \(25\) observed variables in the
-bfi\_sample.csv data file. Open up the dataset and check that the \(25\)
-variables are coded as continuous variables (technically they are
+\emph{bfi\_sample.csv} . As researchers, we are interested in exploring
+the data to see whether there are some underlying latent factors that
+are measured reasonably well by the \(25\) observed variables in the
+\emph{bfi\_sample.csv} data file. Open up the dataset and check that the
+\(25\) variables are coded as continuous variables (technically they are
 ordinal though for EFA in jamovi it mostly doesn't matter, except if you
 decide to calculate weighted factor scores in which case continuous
 variables are needed). To perform EFA in jamovi:
@@ -26357,9 +26366,9 @@ Right, let's take a look at how we set this CFA analysis up in jamovi.
 \hypertarget{cfa-in-jamovi}{%
 \subsection{CFA in jamovi}\label{cfa-in-jamovi}}
 
-Open up the bfi\_sample2.csv file, check that the 25 variables are coded
-as ordinal (or continuous; it won't make any difference for this
-analysis). To perform CFA in jamovi:
+Open up the \emph{bfi\_sample2.csv} file, check that the 25 variables
+are coded as ordinal (or continuous; it won't make any difference for
+this analysis). To perform CFA in jamovi:
 
 \begin{itemize}
 \item
@@ -26749,7 +26758,7 @@ will test in jamovi.
 \hypertarget{mtmm-cfa-in-jamovi}{%
 \subsection{MTMM CFA in jamovi}\label{mtmm-cfa-in-jamovi}}
 
-Open up the ASQ.csv file and check that the 18 variables (six
+Open up the \emph{ASQ.csv} file and check that the 18 variables (six
 ``Internality'', six ``Stability'' and six ``Globality'' variables) are
 specified as continuous variables.
 
@@ -28588,12 +28597,12 @@ samples t-tests and the paired samples t-test in this section.
 t-test}\label{independent-samples-t-test}}
 
 The most common type of t-test is the independent samples t-test, and it
-arises when you have data as in the harpo.csv data set that we used in
-Chapter~\ref{sec-Comparing-two-means} on t-tests. In this data set, we
-have two groups of students, those who received lessons from Anastasia
-and those who took their classes with Bernadette. The question we want
-to answer is whether there's any difference in the grades received by
-these two groups of students. Back in
+arises when you have data as in the \emph{harpo.csv} data set that we
+used in Chapter~\ref{sec-Comparing-two-means} on t-tests. In this data
+set, we have two groups of students, those who received lessons from
+Anastasia and those who took their classes with Bernadette. The question
+we want to answer is whether there's any difference in the grades
+received by these two groups of students. Back in
 Chapter~\ref{sec-Comparing-two-means} I suggested you could analyse this
 kind of data using the Independent Samples t-test in jamovi, which gave
 us the results in Figure~\ref{fig-fig16-2}. As we obtain a p-value less
@@ -28637,15 +28646,15 @@ Samples t-Test}
 \hypertarget{paired-samples-t-test}{%
 \subsection{Paired samples t-test}\label{paired-samples-t-test}}
 
-Back in Section 11.5 I discussed the chico.csv data set in which student
-grades were measured on two tests, and we were interested in finding out
-whether grades went up from test 1 to test 2. Because every student did
-both tests, the tool we used to analyse the data was a paired samples
-t-test. Figure~\ref{fig-fig16-4} shows the jamovi results table for the
-conventional paired t-test alongside the Bayes factor analysis. At this
-point, I hope you can read this output without any difficulty. The data
-provide evidence of about 6000:1 in favour of the alternative. We could
-probably reject the null with some confidence!
+Back in Section 11.5 I discussed the \emph{chico.csv} data set in which
+student grades were measured on two tests, and we were interested in
+finding out whether grades went up from test 1 to test 2. Because every
+student did both tests, the tool we used to analyse the data was a
+paired samples t-test. Figure~\ref{fig-fig16-4} shows the jamovi results
+table for the conventional paired t-test alongside the Bayes factor
+analysis. At this point, I hope you can read this output without any
+difficulty. The data provide evidence of about 6000:1 in favour of the
+alternative. We could probably reject the null with some confidence!
 
 \begin{figure}
 
