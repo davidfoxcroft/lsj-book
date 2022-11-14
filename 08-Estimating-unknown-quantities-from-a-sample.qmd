@@ -191,7 +191,7 @@ sdm_data <- lapply(1:10000, function (x) {
 sdm_data_means <- data.frame(sample_means = unlist(lapply(sdm_data,mean)))
 
 ggplot(data = sdm_data_means, aes(x = sample_means )) +
-  geom_histogram(aes(y =..density..), binwidth=4, col=blueshade, fill=blueshade, alpha=0.7) +
+  geom_histogram(aes(y =after_stat(density)), binwidth=4, col=blueshade, fill=blueshade, alpha=0.7) +
   stat_function(fun = dnorm, args = list(mean = 100, sd = 15), col="black", size=1) +
   scale_x_continuous(limits=c(60,140), breaks = seq(60, 140, 20)) +
   xlab("\nIQ score") +
@@ -225,7 +225,7 @@ sdm_data <- lapply(1:10000, function (x) {
 sdm_data_max <- data.frame(sample_max = unlist(lapply(sdm_data,max)))
 
 ggplot(data = sdm_data_max, aes(x = sample_max )) +
-  geom_histogram(aes(y =..density..), binwidth=4, col=blueshade, fill=blueshade, alpha=0.7) +
+  geom_histogram(aes(y =after_stat(density)), binwidth=4, col=blueshade, fill=blueshade, alpha=0.7) +
   stat_function(fun = dnorm, args = list(mean = 100, sd = 15), col="black", size=1) +
   scale_x_continuous(limits=c(60,140), breaks = seq(60, 140, 20)) +
   xlab("\nIQ score") +
@@ -257,7 +257,7 @@ sampling_plots <- lapply(sampling_plots_df$n, function(i) {
   sdm_data_mean <- data.frame(sample_mean = unlist(lapply(sdm_data,mean)))
 
   ggplot(data = sdm_data_mean, aes(x = sample_mean )) +
-  geom_histogram(aes(y =..density..), binwidth=4, col=blueshade, fill=blueshade, alpha=0.7) +
+  geom_histogram(aes(y =after_stat(density)), binwidth=4, col=blueshade, fill=blueshade, alpha=0.7) +
   stat_function(fun = dnorm, args = list(mean = 100, sd = 15), col="black", size=1) +
   scale_x_continuous(limits=c(60,140), breaks = seq(60, 140, 20)) +
   xlab(paste0("IQ Score \n\n", sampling_plots_df$lab[sampling_plots_df$n == i])) +
@@ -309,7 +309,7 @@ sampling_plots <- lapply(sampling_plots_df$n, function(i) {
   sdm_data_mean <- data.frame(sample_mean = unlist(lapply(sdm_data,mean)))
 
   ggplot(data=sdm_data_mean, aes(x=sample_mean)) +
-  geom_histogram(aes(y =..density..), binwidth=0.0339, col=blueshade, fill=blueshade, alpha=0.6) +
+  geom_histogram(aes(y =after_stat(density)), binwidth=0.0339, col=blueshade, fill=blueshade, alpha=0.6) +
   stat_function(fun = dnorm, args = list(mean = m, s/sqrt(i)), col="black", size=1) +
   scale_x_continuous(limits=c(0,1.2), breaks = seq(0, 1.2, 0.2)) +
   scale_y_continuous(limits=c(0,5)) +

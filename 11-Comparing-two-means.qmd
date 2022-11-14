@@ -36,7 +36,7 @@ Next, it helps to be clear about what I want to learn from the data. In this cas
 
 load("data_and_tables/zeppo.Rdata") #grades
 ggplot(as.data.frame(grades), aes(x=grades)) +
-  geom_histogram(aes(y =..density..), binwidth=5, col=blueshade, fill=blueshade, alpha=0.4) +
+  geom_histogram(aes(y =after_stat(density)), binwidth=5, col=blueshade, fill=blueshade, alpha=0.4) +
   stat_function(fun = dnorm, args = list(mean = 67.7, sd = sd(grades)), col="black", size=1) +
   xlab("\nGrades") +
   theme_classic() +
