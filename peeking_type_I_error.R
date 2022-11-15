@@ -9,7 +9,16 @@
 alpha <- 0.05 # the false positive rate
 bf_crit <- 3 # bayes factor critical value
 n_obs <- 1000 # target sample size
-peek <- c(1,2,3,4,5,10,15,20,30,40,50,60,70,80,90,100) # how frequently to peek, ie test, the data as observations are collected
+
+# simulation N (n_obs) powered to detect effect size
+# library(pwr)
+# mde <- 0.1  # minimum detectable effect
+# power <- 0.80 # 1-false negative rate
+# ptpt <- pwr.t.test(d = mde, sig.level = alpha, power = power, 
+#                    type='two.sample', alternative='two.sided')
+# n_obs2 <- ceiling(ptpt$n)
+
+peek <- c(1,2,3,4,5,10,15,20,30,40,50,60,70,80,90,100,200,500) # how frequently to peek, ie test, the data as observations are collected
 cores = parallel::detectCores() # speed up processing
 
 # monte carlo function from https://ras44.github.io/blog/2019/04/08/validating-type-i-and-ii-errors-in-a-b-tests-in-r.html
@@ -29,7 +38,7 @@ peeking_method1 <- function (observations, by=1){
   
   reject_t <- FALSE;
   
-  for (i in seq(from=from,to=observations,by=by)) {
+  for (i in seq(from=by,to=observations,by=by)) {
     tryCatch(
       {
         reject_t <- t.test(scores_a[1:i],scores_b[1:i],
@@ -56,7 +65,7 @@ peeking_method2 <- function (observations, by=1){
   
   reject_BF <- FALSE;
   
-  for (i in seq(from=from,to=observations,by=by)) {
+  for (i in seq(from=by,to=observations,by=by)) {
     tryCatch(
       {
         bayesttest <- BayesFactor::ttestBF(scores_a[1:i],scores_b[1:i])

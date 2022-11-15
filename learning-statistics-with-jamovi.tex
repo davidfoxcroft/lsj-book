@@ -210,7 +210,7 @@
 \mainmatter
 %\pagestyle{plain}
 
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[interior hidden, sharp corners, borderline west={3pt}{0pt}{shadecolor}, enhanced, frame hidden, boxrule=0pt, breakable]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[breakable, enhanced, borderline west={3pt}{0pt}{shadecolor}, interior hidden, sharp corners, boxrule=0pt, frame hidden]}{\end{tcolorbox}}\fi
 
 \renewcommand*\contentsname{Table of contents}
 {
@@ -223,6 +223,8 @@
 
 \hypertarget{section}{%
 \chapter*{~}\label{section}}
+
+\markboth{~}{~}
 
 This textbook covers the contents of an introductory statistics class,
 as typically taught to undergraduate psychology, health or social
@@ -246,9 +248,13 @@ jamovi: a tutorial for psychology students and other beginners. (Version
 \chapter*{Preface}\label{preface}}
 \addcontentsline{toc}{chapter}{Preface}
 
+\markboth{Preface}{Preface}
+
 \hypertarget{history-and-license}{%
 \section*{History and License}\label{history-and-license}}
 \addcontentsline{toc}{section}{History and License}
+
+\markright{History and License}
 
 This book is an adaptation of DJ Navarro (2018). Learning statistics
 with R: A tutorial for psychology students and other beginners. (Version
@@ -266,6 +272,8 @@ versions of this open textbook under the same license - CC BY-SA.
 \section*{Preface to Version 0.75}\label{preface-to-version-0.75}}
 \addcontentsline{toc}{section}{Preface to Version 0.75}
 
+\markright{Preface to Version 0.75}
+
 In this version we have updated the figures, images and text to maintain
 compatibility with latest versions of jamovi (2.2); many thanks to Peter
 Fisk for his help with this. Also tweaked and corrected are a few
@@ -282,6 +290,8 @@ February 9th, 2022}
 
 \hypertarget{preface-to-version-0.70}{%
 \section*{Preface to Version 0.70}\label{preface-to-version-0.70}}
+
+\markright{Preface to Version 0.70}
 
 This update from version 0.65 introduces some new analyses. In the ANOVA
 chapters we have added sections on repeated measures ANOVA and analysis
@@ -313,6 +323,8 @@ February 1st, 2019}
 \hypertarget{preface-to-version-0.65}{%
 \section*{Preface to Version 0.65}\label{preface-to-version-0.65}}
 
+\markright{Preface to Version 0.65}
+
 In this adaptation of the excellent `Learning statistics with R', by
 Danielle Navarro, we have replaced the statistical software used for the
 analyses and examples with jamovi. Although R is a powerful statistical
@@ -336,6 +348,8 @@ July 1st, 2018}
 
 \hypertarget{preface-to-version-0.6}{%
 \section*{Preface to Version 0.6}\label{preface-to-version-0.6}}
+
+\markright{Preface to Version 0.6}
 
 The book hasn't changed much since 2015 when I released Version 0.5 --
 it's probably fair to say that I've changed more than it has. I moved
@@ -378,6 +392,8 @@ Best,\\
 \hypertarget{preface-to-version-0.5}{%
 \section*{Preface to Version 0.5}\label{preface-to-version-0.5}}
 
+\markright{Preface to Version 0.5}
+
 Another year, another update. This time around, the update has focused
 almost entirely on the theory sections of the book. Chapters 9, 10 and
 11 have been rewritten, hopefully for the better. Along the same lines,
@@ -396,6 +412,8 @@ February 16, 2015}
 
 \hypertarget{preface-to-version-0.4}{%
 \section*{Preface to Version 0.4}\label{preface-to-version-0.4}}
+
+\markright{Preface to Version 0.4}
 
 A year has gone by since I wrote the last preface. The book has changed
 in a few important ways: Chapters 3 and 4 do a better job of documenting
@@ -428,6 +446,8 @@ February 4, 2014}
 
 \hypertarget{preface-to-version-0.3}{%
 \section*{Preface to Version 0.3}\label{preface-to-version-0.3}}
+
+\markright{Preface to Version 0.3}
 
 There's a part of me that really doesn't want to publish this book. It's
 not finished.
@@ -7081,6 +7101,8 @@ wrap up I can give here is just to repeat this list:
 \chapter*{Prelude}\label{prelude}}
 \addcontentsline{toc}{chapter}{Prelude}
 
+\markboth{Prelude}{Prelude}
+
 Part IV of the book is by far the most theoretical, focusing as it does
 on the theory of statistical inference. Over the next three chapters my
 goal is to give you an introduction to probability theory, sampling and
@@ -7104,6 +7126,8 @@ never to say such things around philosophers!
 \section*{On the limits of logical
 reasoning}\label{on-the-limits-of-logical-reasoning}}
 \addcontentsline{toc}{section}{On the limits of logical reasoning}
+
+\markright{On the limits of logical reasoning}
 
 \begin{quote}
 \emph{The whole art of war consists in getting at what is on the other
@@ -7274,6 +7298,8 @@ me: I don't see the logical evidence for that.
 myth}\label{learning-without-making-assumptions-is-a-myth}}
 \addcontentsline{toc}{section}{Learning without making assumptions is a
 myth}
+
+\markright{Learning without making assumptions is a myth}
 
 There are lots of different ways in which we could dissect this
 dialogue, but since this is a statistics book pitched at psychologists
@@ -28439,24 +28465,24 @@ breaking the rules. Because you're running tests repeatedly, ``peeking''
 at your data to see if you've gotten a significant result, all bets are
 off.
 
-So how bad is it? The answer is shown as the solid line in
-Figure~\ref{fig-fig16-1}, and it's astoundingly bad. If you peek at your
-data after every single observation, there is a 37\% chance that you
-will make a Type I error. That's, um, quite a bit bigger than the 5\%
-that it's supposed to be. And it doesn't improve much with less frequent
-peeking: if you only peek every 10, or every 50 observations. then the
-Type I error rates are still way too high - 33\% and 31\% respectively.
-By way of comparison, imagine that you had used the following strategy.
-Start collecting data. Every single time an observation arrives, run
-\protect\hyperlink{bayesian-t-tests}{Bayesian t-tests} and look at the
-Bayes factor. I'll assume that Johnson (2013) is right, and I'll treat a
-Bayes factor of 3:1 as roughly equivalent to a p-value of
-.05.\footnote{Some readers might wonder why I picked 3:1 rather than
-  5:1, given that Johnson (2013) suggests that \(p = .05\) lies
-  somewhere in that range. I did so in order to be charitable to the
-  p-value. If I'd chosen a 5:1 Bayes factor instead, the results would
-  look even better for the Bayesian approach.} This time around, our
-trigger happy researcher uses the following procedure. If the Bayes
+So how bad is it? The answer from a simulation study is shown as the
+solid line in Figure~\ref{fig-fig16-1}, and it's astoundingly bad. If
+you peek at your data after every single observation, there is a 53\%
+chance that you will make a Type I error. That's, um, quite a bit bigger
+than the 5\% that it's supposed to be. And it doesn't improve much with
+less frequent peeking: if you only peek every 10, or every 50
+observations. then the Type I error rates are still way too high: 40\%
+and 38\% respectively. By way of comparison, imagine that you had used
+the following strategy. Start collecting data. Every single time an
+observation arrives, run \protect\hyperlink{bayesian-t-tests}{Bayesian
+t-tests} and look at the Bayes factor. I'll assume that Johnson (2013)
+is right, and I'll treat a Bayes factor of 3:1 as roughly equivalent to
+a p-value of .05.\footnote{Some readers might wonder why I picked 3:1
+  rather than 5:1, given that Johnson (2013) suggests that \(p = .05\)
+  lies somewhere in that range. I did so in order to be charitable to
+  the p-value. If I'd chosen a 5:1 Bayes factor instead, the results
+  would look even better for the Bayesian approach.} This time around,
+our trigger happy researcher uses the following procedure. If the Bayes
 factor is 3:1 or more in favour of the null, stop the experiment and
 retain the null. If it is 3:1 or more in favour of the alternative, stop
 the experiment and reject the null. Otherwise continue testing. Now,
@@ -28464,9 +28490,9 @@ just like last time, let's assume that the null hypothesis is true. What
 happens? As it happens, I ran the simulations for this scenario too, and
 the results are shown as the dashed line in Figure~\ref{fig-fig16-1}. It
 turns out that the Type I error rate for peeking every time a new
-observation arrives is 10\% - much much lower than the 37\% rate that we
+observation arrives is 23\% - much much lower than the 53\% rate that we
 were getting by using the orthodox t-test. And for peeking every 10 or
-50 observations the rates are 10\% and 8\%, respectively.
+50 observations the rates are 13\% and 11\%, respectively.
 
 \begin{figure}
 
@@ -28496,8 +28522,8 @@ unacceptably lax, is much safer than the p \textless{} .05 rule.
 The example I gave in the previous section is a pretty extreme
 situation. In real life, people don't run hypothesis tests every time a
 new observation arrives. So it's not fair to say that the p \textless{}
-.05 threshold ``really'' corresponds to a 37\% Type I error rate (i.e.,
-\(p = .37\)). But the fact remains that if you want your p-values to be
+.05 threshold ``really'' corresponds to a 53\% Type I error rate (i.e.,
+p = 0.53). But the fact remains that if you want your p-values to be
 honest then you either have to switch to a completely different way of
 doing hypothesis tests or enforce a strict rule of no peeking. You are
 not allowed to use the data to decide when to terminate the experiment.
@@ -28696,6 +28722,8 @@ around!
 \chapter*{Epilogue}\label{epilogue}}
 \addcontentsline{toc}{chapter}{Epilogue}
 
+\markboth{Epilogue}{Epilogue}
+
 \begin{quote}
 \emph{``Begin at the beginning'', the King said, very gravely, ``and go
 on till you come to the end: then stop''}~-- Lewis Carroll
@@ -28719,6 +28747,8 @@ a go, shall we?
 \section*{The undiscovered
 statistics}\label{the-undiscovered-statistics}}
 \addcontentsline{toc}{section}{The undiscovered statistics}
+
+\markright{The undiscovered statistics}
 
 First, I'm going to talk a bit about some of the content that I wish I'd
 had the chance to cram into this version of the book, just so that you
@@ -29223,6 +29253,8 @@ jamovi}\label{learning-the-basics-and-learning-them-in-jamovi}}
 \addcontentsline{toc}{section}{Learning the basics, and learning them in
 jamovi}
 
+\markright{Learning the basics, and learning them in jamovi}
+
 Okay, that was a long list. And even that listing is massively
 incomplete. There really are a lot of big ideas in statistics that I
 haven't covered in this book. It can seem pretty depressing to finish an
@@ -29318,6 +29350,8 @@ excellent work. I just haven't had the chance to give it to them yet.
 \hypertarget{references}{%
 \chapter*{References}\label{references}}
 \addcontentsline{toc}{chapter}{References}
+
+\markboth{References}{References}
 
 \hypertarget{refs}{}
 \begin{CSLReferences}{1}{0}

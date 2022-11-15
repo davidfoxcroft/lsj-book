@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.1.251">
+<meta name="generator" content="quarto-1.3.8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -732,7 +732,10 @@ P(rainy, umbrella) &amp; = P(umbrella|rainy) \times P(rainy) \\
 </div>
 <p>The “basic” theory of null hypothesis testing isn’t built to handle this sort of thing, not in the form I described in <a href="09-Hypothesis-testing.html"><span>Chapter&nbsp;9</span></a>. If you’re the kind of person who would choose to “collect more data” in real life, it implies that you are not making decisions in accordance with the rules of null hypothesis testing. Even if you happen to arrive at the same decision as the hypothesis test, you aren’t following the decision process it implies, and it’s this failure to follow the process that is causing the problem.<a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a> Your p-values are a lie.</p>
 <p>Worse yet, they’re a lie in a dangerous way, because they’re all <em>too small</em>. To give you a sense of just how bad it can be, consider the following (worst case) scenario. Imagine you’re a really super-enthusiastic researcher on a tight budget who didn’t pay any attention to my warnings above. You design a study comparing two groups. You desperately want to see a significant result at the <span class="math inline">\(p &lt; .05\)</span> level, but you really don’t want to collect any more data than you have to (because it’s expensive). In order to cut costs you start collecting data but every time a set of observations arrive you run a t-test on your data. If the t-test says <span class="math inline">\(p &lt; .05\)</span> then you stop the experiment and report a significant result. If not, you keep collecting data. You keep doing this until you reach your pre-defined spending limit for this experiment. Let’s say that limit kicks in at <span class="math inline">\(N = 1000\)</span> observations. As it turns out, the truth of the matter is that there is no real effect to be found: the null hypothesis is true. So, what’s the chance that you’ll make it to the end of the experiment and (correctly) conclude that there is no effect? In an ideal world, the answer here should be 95%. After all, the whole point of the <span class="math inline">\(p &lt; .05\)</span> criterion is to control the Type I error rate at 5%, so what we’d hope is that there’s only a 5% chance of falsely rejecting the null hypothesis in this situation. However, there’s no guarantee that will be true. You’re breaking the rules. Because you’re running tests repeatedly, “peeking” at your data to see if you’ve gotten a significant result, all bets are off.</p>
-<p>So how bad is it? The answer is shown as the solid line in <a href="#fig-fig16-1">Figure&nbsp;<span>16.1</span></a>, and it’s astoundingly bad. If you peek at your data after every single observation, there is a 37% chance that you will make a Type I error. That’s, um, quite a bit bigger than the 5% that it’s supposed to be. And it doesn’t improve much with less frequent peeking: if you only peek every 10, or every 50 observations. then the Type I error rates are still way too high - 33% and 31% respectively. By way of comparison, imagine that you had used the following strategy. Start collecting data. Every single time an observation arrives, run <a href="#bayesian-t-tests">Bayesian t-tests</a> and look at the Bayes factor. I’ll assume that <span class="citation" data-cites="Johnson2013">Johnson (<a href="References.html#ref-Johnson2013" role="doc-biblioref">2013</a>)</span> is right, and I’ll treat a Bayes factor of 3:1 as roughly equivalent to a p-value of .05.<a href="#fn14" class="footnote-ref" id="fnref14" role="doc-noteref"><sup>14</sup></a> This time around, our trigger happy researcher uses the following procedure. If the Bayes factor is 3:1 or more in favour of the null, stop the experiment and retain the null. If it is 3:1 or more in favour of the alternative, stop the experiment and reject the null. Otherwise continue testing. Now, just like last time, let’s assume that the null hypothesis is true. What happens? As it happens, I ran the simulations for this scenario too, and the results are shown as the dashed line in <a href="#fig-fig16-1">Figure&nbsp;<span>16.1</span></a>. It turns out that the Type I error rate for peeking every time a new observation arrives is 10% - much much lower than the 37% rate that we were getting by using the orthodox t-test. And for peeking every 10 or 50 observations the rates are 10% and 8%, respectively.</p>
+<div class="cell" data-layout-align="left">
+
+</div>
+<p>So how bad is it? The answer from a simulation study is shown as the solid line in <a href="#fig-fig16-1">Figure&nbsp;<span>16.1</span></a>, and it’s astoundingly bad. If you peek at your data after every single observation, there is a 53% chance that you will make a Type I error. That’s, um, quite a bit bigger than the 5% that it’s supposed to be. And it doesn’t improve much with less frequent peeking: if you only peek every 10, or every 50 observations. then the Type I error rates are still way too high: 40% and 38% respectively. By way of comparison, imagine that you had used the following strategy. Start collecting data. Every single time an observation arrives, run <a href="#bayesian-t-tests">Bayesian t-tests</a> and look at the Bayes factor. I’ll assume that <span class="citation" data-cites="Johnson2013">Johnson (<a href="References.html#ref-Johnson2013" role="doc-biblioref">2013</a>)</span> is right, and I’ll treat a Bayes factor of 3:1 as roughly equivalent to a p-value of .05.<a href="#fn14" class="footnote-ref" id="fnref14" role="doc-noteref"><sup>14</sup></a> This time around, our trigger happy researcher uses the following procedure. If the Bayes factor is 3:1 or more in favour of the null, stop the experiment and retain the null. If it is 3:1 or more in favour of the alternative, stop the experiment and reject the null. Otherwise continue testing. Now, just like last time, let’s assume that the null hypothesis is true. What happens? As it happens, I ran the simulations for this scenario too, and the results are shown as the dashed line in <a href="#fig-fig16-1">Figure&nbsp;<span>16.1</span></a>. It turns out that the Type I error rate for peeking every time a new observation arrives is 23% - much much lower than the 53% rate that we were getting by using the orthodox t-test. And for peeking every 10 or 50 observations the rates are 13% and 11%, respectively.</p>
 <div class="cell" data-layout-align="left">
 <div class="cell-output-display">
 <div id="fig-fig16-1" class="quarto-figure quarto-figure-left anchored">
@@ -747,7 +750,7 @@ P(rainy, umbrella) &amp; = P(umbrella|rainy) \times P(rainy) \\
 </section>
 <section id="is-it-really-this-bad" class="level3" data-number="16.3.4">
 <h3 data-number="16.3.4" class="anchored" data-anchor-id="is-it-really-this-bad"><span class="header-section-number">16.3.4</span> Is it really this bad?</h3>
-<p>The example I gave in the previous section is a pretty extreme situation. In real life, people don’t run hypothesis tests every time a new observation arrives. So it’s not fair to say that the p &lt; .05 threshold “really” corresponds to a 37% Type I error rate (i.e., <span class="math inline">\(p = .37\)</span>). But the fact remains that if you want your p-values to be honest then you either have to switch to a completely different way of doing hypothesis tests or enforce a strict rule of no peeking. You are not allowed to use the data to decide when to terminate the experiment. You are not allowed to look at a “borderline” p-value and decide to collect more data. You aren’t even allowed to change your data analyis strategy after looking at data. You are strictly required to follow these rules, otherwise the p-values you calculate will be nonsense.</p>
+<p>The example I gave in the previous section is a pretty extreme situation. In real life, people don’t run hypothesis tests every time a new observation arrives. So it’s not fair to say that the p &lt; .05 threshold “really” corresponds to a 53% Type I error rate (i.e., p = 0.53). But the fact remains that if you want your p-values to be honest then you either have to switch to a completely different way of doing hypothesis tests or enforce a strict rule of no peeking. You are not allowed to use the data to decide when to terminate the experiment. You are not allowed to look at a “borderline” p-value and decide to collect more data. You aren’t even allowed to change your data analyis strategy after looking at data. You are strictly required to follow these rules, otherwise the p-values you calculate will be nonsense.</p>
 <p>And yes, these rules are surprisingly strict. As a class exercise a couple of years back, I asked students to think about this scenario. Suppose you started running your study with the intention of collecting <span class="math inline">\(N = 80\)</span> people. When the study starts out you follow the rules, refusing to look at the data or run any tests. But when you reach <span class="math inline">\(N = 50\)</span> your willpower gives in… and you take a peek. Guess what? You’ve got a significant result! Now, sure, you know you said that you’d keep running the study out to a sample size of <span class="math inline">\(N = 80\)</span>, but it seems sort of pointless now, right? The result is significant with a sample size of <span class="math inline">\(N = 50\)</span>, so wouldn’t it be wasteful and inefficient to keep collecting data? Aren’t you tempted to stop? Just a little? Well, keep in mind that if you do, your Type I error rate at <span class="math inline">\(p &lt; .05\)</span> just ballooned out to 8%. When you report <span class="math inline">\(p &lt; .05\)</span> in your paper, what you’re really saying is <span class="math inline">\(p &lt; .08\)</span>. That’s how bad the consequences of “just one peek” can be.</p>
 <p>Now consider this. The scientific literature is filled with t-tests, ANOVAs, regressions and chi-square tests. When I wrote this book I didn’t pick these tests arbitrarily. The reason why these four tools appear in most introductory statistics texts is that these are the bread and butter tools of science. None of these tools include a correction to deal with “data peeking”: they all assume that you’re not doing it. But how realistic is that assumption? In real life, how many people do you think have “peeked” at their data before the experiment was finished and adapted their subsequent behaviour after seeing what the data looked like? Except when the sampling procedure is fixed by an external constraint, I’m guessing the answer is “most people have done it”. If that has happened, you can infer that the reported p-values are wrong. Worse yet, because we don’t know what decision process they actually followed, we have no way to know what the p-values should have been. You can’t compute a p-value when you don’t know the decision making procedure that the researcher used. And so the reported p-value remains a lie.</p>
 <p>Given all of the above, what is the take home message? It’s not that Bayesian methods are foolproof. If a researcher is determined to cheat, they can always do so. Bayes’ rule cannot stop people from lying, nor can it stop them from rigging an experiment. That’s not my point here. My point is the same one I made at the very beginning of the book in Section 1.1: the reason why we run statistical tests is to protect us from ourselves. And the reason why “data peeking” is such a concern is that it’s so tempting, even for honest researchers. A theory for statistical inference has to acknowledge this. Yes, you might try to defend p-values by saying that it’s the fault of the researcher for not using them properly, but to my mind that misses the point. A theory of statistical inference that is so completely naive about humans that it doesn’t even consider the possibility that the researcher might look at their own data isn’t a theory worth having. In essence, my point is this:</p>
@@ -790,7 +793,7 @@ P(rainy, umbrella) &amp; = P(umbrella|rainy) \times P(rainy) \\
 <section id="paired-samples-t-test" class="level3" data-number="16.4.2">
 <h3 data-number="16.4.2" class="anchored" data-anchor-id="paired-samples-t-test"><span class="header-section-number">16.4.2</span> Paired samples t-test</h3>
 <p>Back in Section 11.5 I discussed the <em>chico.csv</em> data set in which student grades were measured on two tests, and we were interested in finding out whether grades went up from test 1 to test 2. Because every student did both tests, the tool we used to analyse the data was a paired samples t-test. <a href="#fig-fig16-4">Figure&nbsp;<span>16.4</span></a> shows the jamovi results table for the conventional paired t-test alongside the Bayes factor analysis. At this point, I hope you can read this output without any difficulty. The data provide evidence of about 6000:1 in favour of the alternative. We could probably reject the null with some confidence!</p>
-<div class="cell" data-layout-align="left">
+<div class="cell enlarge-image" data-layout-align="left">
 <div class="cell-output-display">
 <div id="fig-fig16-4" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
@@ -804,7 +807,7 @@ P(rainy, umbrella) &amp; = P(umbrella|rainy) \times P(rainy) \\
 </section>
 <section id="summary" class="level2" data-number="16.5">
 <h2 data-number="16.5" class="anchored" data-anchor-id="summary"><span class="header-section-number">16.5</span> Summary</h2>
-<p>The first half of this chapter was focused primarily on the theoretical underpinnings of Bayesian statistics. I introduced the mathematics for how Bayesian inference works in the section on <a href="#probabilistic-reasoning-by-rational-agents">Probabilistic reasoning by rational agents</a>, and gave a very basic overview of Bayesian hypothesis tests]. Finally, I devoted some space to talking about why I think <a href="Why%20be%20a%20Bayesian?">Bayesian methods are worth using</a>.</p>
+<p>The first half of this chapter was focused primarily on the theoretical underpinnings of Bayesian statistics. I introduced the mathematics for how Bayesian inference works in the section on <a href="#probabilistic-reasoning-by-rational-agents">Probabilistic reasoning by rational agents</a>, and gave a very basic overview of Bayesian hypothesis tests]. Finally, I devoted some space to talking about why I think <a href="Why be a Bayesian?">Bayesian methods are worth using</a>.</p>
 <p>Then I gave a practical example, with <a href="#bayesian-t-tests">Bayesian t-tests</a>. If you’re interested in learning more about the Bayesian approach, there are many good books you could look into. John Kruschke’s book <em>Doing Bayesian Data Analysis</em> is a pretty good place to start <span class="citation" data-cites="Kruschke2011">(<a href="References.html#ref-Kruschke2011" role="doc-biblioref">Kruschke, 2011</a>)</span> and is a nice mix of theory and practice. His approach is a little different to the “Bayes factor” approach that I’ve discussed here, so you won’t be covering the same ground. If you’re a cognitive psychologist, you might want to check out <span class="citation" data-cites="Lee2014">Lee &amp; Wagenmakers (<a href="References.html#ref-Lee2014" role="doc-biblioref">2014</a>)</span>. I picked these two because I think they’re especially useful for people in my discipline, but there’s a lot of good books out there, so look around!</p>
 
 
@@ -984,7 +987,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   // Switch to dark mode if need be
   if (hasAlternateSentinel()) {
     toggleColorMode(true);
-  } 
+  } else {
+    toggleColorMode(false);
+  }
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {
@@ -1006,7 +1011,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
     button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
     setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
       button.setAttribute("title", currentTitle);
       button.classList.remove('code-copy-button-checked');
     }, 1000);
@@ -1042,24 +1064,42 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
   var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
   for (var i=0; i<bibliorefs.length; i++) {
     const ref = bibliorefs[i];
-    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-    tippyHover(ref, function() {
-      var popup = window.document.createElement('div');
-      cites.forEach(function(cite) {
-        var citeDiv = window.document.createElement('div');
-        citeDiv.classList.add('hanging-indent');
-        citeDiv.classList.add('csl-entry');
-        var biblioDiv = window.document.getElementById('ref-' + cite);
-        if (biblioDiv) {
-          citeDiv.innerHTML = biblioDiv.innerHTML;
-        }
-        popup.appendChild(citeDiv);
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
       });
-      return popup.innerHTML;
-    });
+    }
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var filterRegex = new RegExp(/https:\/\/davidfoxcroft\.github\.io\/lsj-book\//);
@@ -1067,7 +1107,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
-    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external)');
+    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
