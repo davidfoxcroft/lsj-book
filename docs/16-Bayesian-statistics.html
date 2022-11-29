@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.8">
+<meta name="generator" content="quarto-1.3.30">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -122,23 +122,9 @@ div.csl-indent {
       <a href="./">learning statistics with jamovi</a> 
         <div class="sidebar-tools-main tools-wide">
     <a href="https://github.com/davidfoxcroft/lsj-book/" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
-    <a href="" title="Download" id="sidebar-tool-dropdown-0" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-download"></i></a>
+    <a href="./learning-statistics-with-jamovi.pdf" title="Download PDF" class="sidebar-tool px-1"><i class="bi bi-file-pdf"></i></a>
+    <a href="" title="Share" id="sidebar-tool-dropdown-0" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-share"></i></a>
     <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-0">
-        <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="./learning-statistics-with-jamovi.pdf">
-            <i class="bi bi-bi-file-pdf pe-1"></i>
-          Download PDF
-          </a>
-        </li>
-        <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="./learning-statistics-with-jamovi.epub">
-            <i class="bi bi-bi-journal pe-1"></i>
-          Download ePub
-          </a>
-        </li>
-    </ul>
-    <a href="" title="Share" id="sidebar-tool-dropdown-1" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-share"></i></a>
-    <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-1">
         <li>
           <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
             <i class="bi bi-bi-twitter pe-1"></i>
@@ -374,7 +360,7 @@ div.csl-indent {
   </ul></li>
   <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="toc-section-number">16.5</span>  Summary</a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/davidfoxcroft/lsj-book/edit/main/16-Bayesian-statistics.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/davidfoxcroft/lsj-book/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/davidfoxcroft/lsj-book/edit/main/16-Bayesian-statistics.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/davidfoxcroft/lsj-book/issues/new" class="toc-action">Report an issue</a></p></div></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="16-Bayesian-statistics.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -735,13 +721,13 @@ P(rainy, umbrella) &amp; = P(umbrella|rainy) \times P(rainy) \\
 <div class="cell" data-layout-align="left">
 
 </div>
-<p>So how bad is it? The answer from a simulation study is shown as the solid line in <a href="#fig-fig16-1">Figure&nbsp;<span>16.1</span></a>, and it’s astoundingly bad. If you peek at your data after every single observation, there is a 53% chance that you will make a Type I error. That’s, um, quite a bit bigger than the 5% that it’s supposed to be. And it doesn’t improve much with less frequent peeking: if you only peek every 10, or every 50 observations. then the Type I error rates are still way too high: 40% and 38% respectively. By way of comparison, imagine that you had used the following strategy. Start collecting data. Every single time an observation arrives, run <a href="#bayesian-t-tests">Bayesian t-tests</a> and look at the Bayes factor. I’ll assume that <span class="citation" data-cites="Johnson2013">Johnson (<a href="References.html#ref-Johnson2013" role="doc-biblioref">2013</a>)</span> is right, and I’ll treat a Bayes factor of 3:1 as roughly equivalent to a p-value of .05.<a href="#fn14" class="footnote-ref" id="fnref14" role="doc-noteref"><sup>14</sup></a> This time around, our trigger happy researcher uses the following procedure. If the Bayes factor is 3:1 or more in favour of the null, stop the experiment and retain the null. If it is 3:1 or more in favour of the alternative, stop the experiment and reject the null. Otherwise continue testing. Now, just like last time, let’s assume that the null hypothesis is true. What happens? As it happens, I ran the simulations for this scenario too, and the results are shown as the dashed line in <a href="#fig-fig16-1">Figure&nbsp;<span>16.1</span></a>. It turns out that the Type I error rate for peeking every time a new observation arrives is 23%, much much lower than the 53% rate that we were getting by using the orthodox t-test. And for peeking every 10 or 50 observations the rates are 13% and 11%, respectively.</p>
+<p>So how bad is it? The answer from a simulation study is shown as the solid line in <a href="#fig-fig16-1">Figure&nbsp;<span>16.1</span></a>, and it’s astoundingly bad. If you peek at your data after every single observation, there is a 53% chance that you will make a Type I error. That’s, um, quite a bit bigger than the 5% that it’s supposed to be. And it doesn’t improve much with less frequent peeking: if you only peek every 10, or every 50 observations. then the Type I error rates are still way too high: 38% and 29% respectively. By way of comparison, imagine that you had used the following strategy. Start collecting data. Every single time an observation arrives, run <a href="#bayesian-t-tests">Bayesian t-tests</a> and look at the Bayes factor. I’ll assume that <span class="citation" data-cites="Johnson2013">Johnson (<a href="References.html#ref-Johnson2013" role="doc-biblioref">2013</a>)</span> is right, and I’ll treat a Bayes factor of 3:1 as roughly equivalent to a p-value of .05.<a href="#fn14" class="footnote-ref" id="fnref14" role="doc-noteref"><sup>14</sup></a> This time around, our trigger happy researcher uses the following procedure. If the Bayes factor is 3:1 or more in favour of the null, stop the experiment and retain the null. If it is 3:1 or more in favour of the alternative, stop the experiment and reject the null. Otherwise continue testing. Now, just like last time, let’s assume that the null hypothesis is true. What happens? As it happens, I ran the simulations for this scenario too, and the results are shown as the dashed line in <a href="#fig-fig16-1">Figure&nbsp;<span>16.1</span></a>. It turns out that the Type I error rate for peeking every time a new observation arrives is 24%, much much lower than the 53% rate that we were getting by using the orthodox t-test. And for peeking every 10 or 50 observations the rates are 11% and 8%, respectively.</p>
 <div class="cell" data-layout-align="left">
 <div class="cell-output-display">
 <div id="fig-fig16-1" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="16-Bayesian-statistics_files/figure-html/fig-fig16-1-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;16.1: Probability of Type I error in an experiment with target N of 1000 per group and <strong>peeking</strong> at different intervals:- things can go badly wrong if you <strong>peek</strong> at your data and re-run your tests as new data arrives. If you are a frequentist, this is <em>very wrong</em> (blue circles and solid line). If you are a bayesian it’s not so bad (green triangles and dashed line). The Type I error threshold is set at 0.05 (red dotted line)</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;16.1: Probability of Type I error in an experiment with target N of 1000 per group and <strong>peeking</strong> at different intervals:- things can go badly wrong if you <strong>peek</strong> at your data and re-run your tests as new data arrives. If you are a frequentist, this is <em>very wrong</em> (blue circles and solid line). If you are a bayesian it’s not so bad (green triangles and dashed line). The alpha level was set at 0.05 (red dotted line) in this simulation.</figcaption><p></p>
 </figure>
 </div>
 </div>

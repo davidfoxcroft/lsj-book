@@ -298,6 +298,7 @@ Worse yet, they're a lie in a dangerous way, because they're all *too small*. To
 
 ## so load saved data instead
 p_bf <- readRDS("data_and_tables/p_bf.rds")
+library(scales)
 ```
 
 So how bad is it? The answer from a simulation study is shown as the solid line in @fig-fig16-1, and it's astoundingly bad. If you peek at your data after every single observation, there is a `r percent(p_bf$p_peek[p_bf$peek =='1']/1000)` chance that you will make a Type I error. That's, um, quite a bit bigger than the 5% that it's supposed to be. And it doesn't improve much with less frequent peeking: if you only peek every 10, or every 50 observations. then the Type I error rates are still way too high: `r percent(p_bf$p_peek[p_bf$peek =='10']/1000)` and `r percent(p_bf$p_peek[p_bf$peek =='50']/1000)` respectively. By way of comparison, imagine that you had used the following strategy. Start collecting data. Every single time an observation arrives, run [Bayesian t-tests] and look at the Bayes factor. I'll assume that @Johnson2013 is right, and I'll treat a Bayes factor of 3:1 as roughly equivalent to a p-value of .05.[^bayesian-statistics-14] This time around, our trigger happy researcher uses the following procedure. If the Bayes factor is 3:1 or more in favour of the null, stop the experiment and retain the null. If it is 3:1 or more in favour of the alternative, stop the experiment and reject the null. Otherwise continue testing. Now, just like last time, let's assume that the null hypothesis is true. What happens? As it happens, I ran the simulations for this scenario too, and the results are shown as the dashed line in @fig-fig16-1. It turns out that the Type I error rate for peeking every time a new observation arrives is `r percent(p_bf$bf_peek[p_bf$peek =='1']/1000)`, much much lower than the `r percent(p_bf$p_peek[p_bf$peek =='1']/1000)` rate that we were getting by using the orthodox t-test. And for peeking every 10 or 50 observations the rates are `r percent(p_bf$bf_peek[p_bf$peek =='10']/1000)` and `r percent(p_bf$bf_peek[p_bf$peek =='50']/1000)`, respectively.
@@ -307,8 +308,7 @@ So how bad is it? The answer from a simulation study is shown as the solid line 
 ```{r}
 #| label: fig-fig16-1
 #| fig-cap: Probability of Type I error in an experiment with target N of 1000 per group and **peeking** at different intervals:- things can go badly wrong if you **peek** at your data and re-run your tests as new data arrives. If you are a frequentist, this is *very wrong* (blue circles and solid line). If you are a bayesian it's not so bad (green triangles and dashed line). The alpha level was set at 0.05 (red dotted line) in this simulation.
-
-library(scales)
+#| 
 p_bf <- subset(p_bf, p_bf$peek <= 200)# leave out less plausible peeking frequency - better plot 
 
 p <- ggplot(p_bf) +
