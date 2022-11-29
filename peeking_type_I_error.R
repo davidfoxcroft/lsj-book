@@ -4,9 +4,9 @@
 
 
 ########################################################
-# revised code - different figure
+# revised code - different figure to original lsr book
 
-alpha <- 0.05 # the false positive rate
+alpha <- 0.05 # the critical p-value for rejecting the null
 bf_crit <- 3 # bayes factor critical value
 n_obs <- 1000 # target sample size
 
@@ -18,7 +18,7 @@ n_obs <- 1000 # target sample size
 #                    type='two.sample', alternative='two.sided')
 # n_obs2 <- ceiling(ptpt$n)
 
-peek <- c(1,2,3,4,5,10,15,20,30,40,50,60,70,80,90,100,200,500) # how frequently to peek, ie test, the data as observations are collected
+peek <- c(seq(1,20,1), seq(22,50,2), seq(55,100,5), seq(110,500,10)) # how frequently to peek, ie test, the data as observations are collected
 cores = parallel::detectCores() # speed up processing
 
 # monte carlo function from https://ras44.github.io/blog/2019/04/08/validating-type-i-and-ii-errors-in-a-b-tests-in-r.html
