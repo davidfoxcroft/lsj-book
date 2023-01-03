@@ -76,11 +76,9 @@ We can make these ideas a bit more explicit by introducing the idea of a **corre
 #| fig-height: 8
 #| fig-cap: Illustration of the effect of varying the strength and direction of a correlation. In the left hand column, the correlations are $0, .33, .66$ and $1$. In the right hand column, the correlations are $0, -.33, -.66$ and $-1$
 
-
 onePlot <- function( r,n=100 ) {
 	sigma <- cbind( c(1,r), c(r,1))
-	X <- MASS::mvrnorm(n,c(0,0),sigma, empirical=TRUE)
-
+	X <- MASS::mvrnorm(n,c(0,0),sigma, empirical=FALSE)
 	ggplot(data.frame(X), aes(x=X[,1], y=X[,2])) +
 	  geom_point(col=blueshade, size=.5) +
 	  ylab(r) +
