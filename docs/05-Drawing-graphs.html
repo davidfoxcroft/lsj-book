@@ -453,7 +453,7 @@ div.csl-indent {
 </section>
 <section id="sec-Using-box-plots-to-detect-outliers" class="level3" data-number="5.2.3">
 <h3 data-number="5.2.3" class="anchored" data-anchor-id="sec-Using-box-plots-to-detect-outliers"><span class="header-section-number">5.2.3</span> Using box plots to detect outliers</h3>
-<p>Because the boxplot automatically separates out those observations that lie outside a certain range, depicting them with a dot in jamovi, people often use them as an informal method for detecting <strong>outliers</strong>: observations that are “suspiciously” distant from the rest of the data. Here’s an example. Suppose that I’d drawn the boxplot for the <em>AFL margins</em> data and it came up looking like <a href="#fig-fig5-8">Figure&nbsp;<span>5.8</span></a>. It’s pretty clear that something funny is going on with two of the observations. Apparently, there were two games in which the margin was over 300 points! That doesn’t sound right to me. Now that I’ve become suspicious it’s time to look a bit more closely at the data. In jamovi you can quickly find out which of these observations are suspicious and then you can go back to the raw data to see if there has been a mistake in data entry. One way to do this is to tell jamovi to label the outliers, by checking the box next to the Box plot check box. This adds a row number label next to the outlier in the boxplot, so you can go look at that row and find the extreme value. Another, more flexible way, is to set up a filter so that only those observations with values over a certain threshold are included. In our example, the threshold is over 300, so that is the filter we will create. First, click on the ‘Filters’ button at the top of the jamovi window, and then type ‘margin &gt; 300’ into the filter field, as in <a href="#fig-fig5-9">Figure&nbsp;<span>5.9</span></a>.</p>
+<p>Because the boxplot automatically separates out those observations that lie outside a certain range, depicting them with a dot in jamovi, people often use them as an informal method for detecting <strong>outliers</strong>: observations that are “suspiciously” distant from the rest of the data. Here’s an example. Suppose that I’d drawn the boxplot for the <em>AFL margins</em> data and it came up looking like <a href="#fig-fig5-8">Figure&nbsp;<span>5.8</span></a>. It’s pretty clear that something funny is going on with two of the observations. Apparently, there were two games in which the margin was over 300 points!<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> That doesn’t sound right to me. Now that I’ve become suspicious it’s time to look a bit more closely at the data. In jamovi you can quickly find out which of these observations are suspicious and then you can go back to the raw data to see if there has been a mistake in data entry. One way to do this is to tell jamovi to label the outliers, by checking the box next to the Box plot check box. This adds a row number label next to the outlier in the boxplot, so you can go look at that row and find the extreme value. Another, more flexible way, is to set up a filter so that only those observations with values over a certain threshold are included. In our example, the threshold is over 300, so that is the filter we will create. First, click on the ‘Filters’ button at the top of the jamovi window, and then type ‘margin &gt; 300’ into the filter field, as in <a href="#fig-fig5-9">Figure&nbsp;<span>5.9</span></a>.</p>
 <div class="cell" data-layout-align="left">
 <div class="cell-output-display">
 <div id="fig-fig5-8" class="quarto-figure quarto-figure-left anchored">
@@ -464,7 +464,7 @@ div.csl-indent {
 </div>
 </div>
 </div>
-<p>This filter creates a new column in the spreadsheet view where only those observations that pass the filter are included. One neat way to quickly identify which observations these are is to tell jamovi to produce a ‘Frequency table’ (in the ‘Exploration’ - ‘Descriptives’ window) for the ID variable (which must be a nominal variable otherwise the Frequency table is not produced). In <a href="#fig-fig5-10">Figure&nbsp;<span>5.10</span></a> you can see that the ID values for the observations where the margin was over 300 are 14 and 134. These are suspicious cases, or observations, where you should go back to the original data source to find out what is going on.</p>
+<p>This filter creates a new column in the spreadsheet view where only those observations that pass the filter are included. One neat way to quickly identify which observations these are is to tell jamovi to produce a ‘Frequency table’ (in the ‘Exploration’ - ‘Descriptives’ window) for the ID variable (which must be a nominal variable otherwise the Frequency table is not produced). In <a href="#fig-fig5-10">Figure&nbsp;<span>5.10</span></a> you can see that the ID values for the observations where the margin was over 300 are 176 and 202. These are suspicious cases, or observations, where you should go back to the original data source to find out what is going on.</p>
 <div class="cell" data-layout-align="left">
 <div class="cell-output-display">
 <div id="fig-fig5-9" class="quarto-figure quarto-figure-left anchored">
@@ -480,7 +480,7 @@ div.csl-indent {
 <div id="fig-fig5-10" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="images/fig5-10.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;5.10: Frequency table for ID showing the ID numbers for the two suspicious outliers, 14 and 134</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;5.10: Frequency table for ID showing the ID numbers for the two suspicious outliers, 176 and 202</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -492,7 +492,7 @@ div.csl-indent {
 <section id="sec-Bar-graphs" class="level2" data-number="5.3">
 <h2 data-number="5.3" class="anchored" data-anchor-id="sec-Bar-graphs"><span class="header-section-number">5.3</span> Bar graphs</h2>
 <p>Another form of graph that you often want to plot is the <strong>bar graph</strong>. Let’s use the <em>afl.finalists</em> data set with the <em>afl.finalists</em> variable that I introduced in <a href="04-Descriptive-statistics.html#sec-Mode"><span>Section&nbsp;4.1.6</span></a>. What I want to do is draw a bar graph that displays the number of finals that each team has played in over the time spanned by the <em>afl.finalists</em> data set. There are lots of teams, but I am particularly interested in just four: Brisbane, Carlton, Fremantle and Richmond. So the first step is to set up a filter so just those four teams are included in the bar graph. This is straightforward in jamovi and you can do it by using the ‘Filters’ function that we used previously. Open up the ‘Filters’ screen and type in the following:</p>
-<p>afl.finalists <span class="math inline">\(==\)</span> ‘Brisbane’ or afl.finalists <span class="math inline">\(==\)</span> ‘Carlton’ or afl.finalists <span class="math inline">\(==\)</span> ‘Fremantle’ or afl.finalists <span class="math inline">\(==\)</span> ‘Richmond’ <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p>afl.finalists <span class="math inline">\(==\)</span> ‘Brisbane’ or afl.finalists <span class="math inline">\(==\)</span> ‘Carlton’ or afl.finalists <span class="math inline">\(==\)</span> ‘Fremantle’ or afl.finalists <span class="math inline">\(==\)</span> ‘Richmond’ <a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
 <p>When you have done this you will see, in the ‘Data’ view, that jamovi has filtered out all values apart from those we have specified. Next, open up the ‘Exploration’ - ‘Descriptives’ window and click on the ‘Bar plot’ check box (remember to move the ‘afl.finalists’ variable across into the ‘Variables’ box so that jamovi knows which variable to use). You should then get a bar graph, something like that shown in <a href="#fig-fig5-11">Figure&nbsp;<span>5.11</span></a>.</p>
 <div class="cell enlarge-image" data-layout-align="left">
 <div class="cell-output-display">
@@ -529,7 +529,8 @@ Wilkinson, L., Wills, D., Rope, D., Norton, A., &amp; Dubbs, R. (2006). <em>The 
 <hr>
 <ol>
 <li id="fn1"><p>The origin of this quote is Tufte’s lovely book <em>The Visual Display of Quantitative Information.</em><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>jamovi uses the symbol “<span class="math inline">\(==\)</span>” here to mean “matches”.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>This altered version of the AFL Margins By Year dataset isn’t available to open / load into jamovi. I simply changed a couple of the values of margin in the dataset so that they were over 300. You can do this yourself if you want.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>jamovi uses the symbol “<span class="math inline">\(==\)</span>” here to mean “matches”.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
