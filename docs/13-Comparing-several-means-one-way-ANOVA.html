@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.335">
+<meta name="generator" content="quarto-1.3.353">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -17,14 +17,15 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
 }
-.hanging div.csl-entry {
+.hanging-indent div.csl-entry {
   margin-left:2em;
   text-indent:-2em;
 }
@@ -38,8 +39,7 @@ div.csl-right-inline {
 }
 div.csl-indent {
   margin-left: 2em;
-}
-</style>
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -92,23 +92,32 @@ div.csl-indent {
 </script>
     
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="styles.css">
 <meta property="og:title" content="learning statistics with jamovi - 13&nbsp; Comparing several means (one-way ANOVA)">
-<meta property="og:description" content="This chapter introduces one of the most widely used tools in psychological statistics, known as “the analysis of variance”, but usually referred to as ANOVA.">
+<meta property="og:description" content="">
+<meta property="og:image" content="https://davidfoxcroft.github.io/lsj-book/images/fig13-1.png">
 <meta property="og:site-name" content="learning statistics with jamovi">
+<meta property="og:image:height" content="1800">
+<meta property="og:image:width" content="2880">
 </head>
 
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Comparing several means (one-way ANOVA)</span></h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./10-Categorical-data-analysis.html">Statistical tools</a></li><li class="breadcrumb-item"><a href="./13-Comparing-several-means-one-way-ANOVA.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Comparing several means (one-way ANOVA)</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav>
@@ -116,36 +125,38 @@ div.csl-indent {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">learning statistics with jamovi</a> 
         <div class="sidebar-tools-main tools-wide">
-    <a href="https://github.com/davidfoxcroft/lsj-book/" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
-    <a href="./learning-statistics-with-jamovi.pdf" title="Download PDF" class="sidebar-tool px-1"><i class="bi bi-file-pdf"></i></a>
-    <a href="" title="Share" id="sidebar-tool-dropdown-0" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-share"></i></a>
-    <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-0">
-        <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
-            <i class="bi bi-bi-twitter pe-1"></i>
-          Twitter
-          </a>
-        </li>
-        <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
-            <i class="bi bi-bi-facebook pe-1"></i>
-          Facebook
-          </a>
-        </li>
-        <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
-            <i class="bi bi-bi-linkedin pe-1"></i>
-          LinkedIn
-          </a>
-        </li>
-    </ul>
-  <a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
-  <a href="" class="quarto-reader-toggle sidebar-tool" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+    <a href="https://github.com/davidfoxcroft/lsj-book/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="./learning-statistics-with-jamovi.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+    <div class="dropdown">
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
+              <i class="bi bi-bi-twitter pe-1"></i>
+            Twitter
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
+              <i class="bi bi-bi-facebook pe-1"></i>
+            Facebook
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
+              <i class="bi bi-bi-linkedin pe-1"></i>
+            LinkedIn
+            </a>
+          </li>
+      </ul>
+    </div>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
   <i class="bi"></i>
   </div>
@@ -153,226 +164,254 @@ div.csl-indent {
 </div>
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">&nbsp;</a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">&nbsp;</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Preface.html" class="sidebar-item-text sidebar-link">Preface</a>
+  <a href="./Preface.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">Beginnings</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+ <span class="menu-text">Beginnings</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01-Why-do-we-learn-statistics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Why do we learn statistics</span></a>
+  <a href="./01-Why-do-we-learn-statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Why do we learn statistics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./02-A-brief-introduction-to-research-design.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">A brief introduction to research design</span></a>
+  <a href="./02-A-brief-introduction-to-research-design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">A brief introduction to research design</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">An introduction to jamovi</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+ <span class="menu-text">An introduction to jamovi</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./03-Getting-started-with-jamovi.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Getting started with jamovi</span></a>
+  <a href="./03-Getting-started-with-jamovi.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Getting started with jamovi</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">Working with data</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+ <span class="menu-text">Working with data</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04-Descriptive-statistics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Descriptive statistics</span></a>
+  <a href="./04-Descriptive-statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Descriptive statistics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./05-Drawing-graphs.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Drawing graphs</span></a>
+  <a href="./05-Drawing-graphs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Drawing graphs</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./06-Pragmatic-matters.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Pragmatic matters</span></a>
+  <a href="./06-Pragmatic-matters.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Pragmatic matters</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">Statistical theory</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+ <span class="menu-text">Statistical theory</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Prelude-Part-IV.html" class="sidebar-item-text sidebar-link">Prelude</a>
+  <a href="./Prelude-Part-IV.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Prelude</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./07-Introduction-to-probability.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Introduction to probability</span></a>
+  <a href="./07-Introduction-to-probability.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Introduction to probability</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./08-Estimating-unknown-quantities-from-a-sample.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Estimating unknown quantities from a sample</span></a>
+  <a href="./08-Estimating-unknown-quantities-from-a-sample.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Estimating unknown quantities from a sample</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./09-Hypothesis-testing.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Hypothesis testing</span></a>
+  <a href="./09-Hypothesis-testing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Hypothesis testing</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">Statistical tools</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text">Statistical tools</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./10-Categorical-data-analysis.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Categorical data analysis</span></a>
+  <a href="./10-Categorical-data-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Categorical data analysis</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./11-Comparing-two-means.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Comparing two means</span></a>
+  <a href="./11-Comparing-two-means.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Comparing two means</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./12-Correlation-and-linear-regression.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Correlation and linear regression</span></a>
+  <a href="./12-Correlation-and-linear-regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Correlation and linear regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./13-Comparing-several-means-one-way-ANOVA.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Comparing several means (one-way ANOVA)</span></a>
+  <a href="./13-Comparing-several-means-one-way-ANOVA.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Comparing several means (one-way ANOVA)</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./14-Factorial-ANOVA.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Factorial ANOVA</span></a>
+  <a href="./14-Factorial-ANOVA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Factorial ANOVA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./15-Factor-Analysis.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Factor Analysis</span></a>
+  <a href="./15-Factor-Analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Factor Analysis</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">Endings, alternatives and prospects</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">
+ <span class="menu-text">Endings, alternatives and prospects</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./16-Bayesian-statistics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Bayesian statistics</span></a>
+  <a href="./16-Bayesian-statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Bayesian statistics</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Epilogue.html" class="sidebar-item-text sidebar-link">Epilogue</a>
+  <a href="./Epilogue.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Epilogue</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./References.html" class="sidebar-item-text sidebar-link">References</a>
+  <a href="./References.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#an-illustrative-data-set" id="toc-an-illustrative-data-set" class="nav-link active" data-scroll-target="#an-illustrative-data-set"><span class="toc-section-number">13.1</span>  An illustrative data set</a></li>
-  <li><a href="#sec-How-ANOVA-works" id="toc-sec-How-ANOVA-works" class="nav-link" data-scroll-target="#sec-How-ANOVA-works"><span class="toc-section-number">13.2</span>  How ANOVA works</a>
+  <li><a href="#an-illustrative-data-set" id="toc-an-illustrative-data-set" class="nav-link active" data-scroll-target="#an-illustrative-data-set"><span class="header-section-number">13.1</span> An illustrative data set</a></li>
+  <li><a href="#sec-How-ANOVA-works" id="toc-sec-How-ANOVA-works" class="nav-link" data-scroll-target="#sec-How-ANOVA-works"><span class="header-section-number">13.2</span> How ANOVA works</a>
   <ul class="collapse">
-  <li><a href="#two-formulas-for-the-variance-of-y" id="toc-two-formulas-for-the-variance-of-y" class="nav-link" data-scroll-target="#two-formulas-for-the-variance-of-y"><span class="toc-section-number">13.2.1</span>  Two formulas for the variance of Y</a></li>
-  <li><a href="#from-variances-to-sums-of-squares" id="toc-from-variances-to-sums-of-squares" class="nav-link" data-scroll-target="#from-variances-to-sums-of-squares"><span class="toc-section-number">13.2.2</span>  From variances to sums of squares</a></li>
-  <li><a href="#from-sums-of-squares-to-the-f-test" id="toc-from-sums-of-squares-to-the-f-test" class="nav-link" data-scroll-target="#from-sums-of-squares-to-the-f-test"><span class="toc-section-number">13.2.3</span>  From sums of squares to the F-test</a></li>
-  <li><a href="#a-worked-example" id="toc-a-worked-example" class="nav-link" data-scroll-target="#a-worked-example"><span class="toc-section-number">13.2.4</span>  A worked example</a></li>
+  <li><a href="#two-formulas-for-the-variance-of-y" id="toc-two-formulas-for-the-variance-of-y" class="nav-link" data-scroll-target="#two-formulas-for-the-variance-of-y"><span class="header-section-number">13.2.1</span> Two formulas for the variance of Y</a></li>
+  <li><a href="#from-variances-to-sums-of-squares" id="toc-from-variances-to-sums-of-squares" class="nav-link" data-scroll-target="#from-variances-to-sums-of-squares"><span class="header-section-number">13.2.2</span> From variances to sums of squares</a></li>
+  <li><a href="#from-sums-of-squares-to-the-f-test" id="toc-from-sums-of-squares-to-the-f-test" class="nav-link" data-scroll-target="#from-sums-of-squares-to-the-f-test"><span class="header-section-number">13.2.3</span> From sums of squares to the F-test</a></li>
+  <li><a href="#a-worked-example" id="toc-a-worked-example" class="nav-link" data-scroll-target="#a-worked-example"><span class="header-section-number">13.2.4</span> A worked example</a></li>
   </ul></li>
-  <li><a href="#running-an-anova-in-jamovi" id="toc-running-an-anova-in-jamovi" class="nav-link" data-scroll-target="#running-an-anova-in-jamovi"><span class="toc-section-number">13.3</span>  Running an ANOVA in jamovi</a>
+  <li><a href="#running-an-anova-in-jamovi" id="toc-running-an-anova-in-jamovi" class="nav-link" data-scroll-target="#running-an-anova-in-jamovi"><span class="header-section-number">13.3</span> Running an ANOVA in jamovi</a>
   <ul class="collapse">
-  <li><a href="#using-jamovi-to-specify-your-anova" id="toc-using-jamovi-to-specify-your-anova" class="nav-link" data-scroll-target="#using-jamovi-to-specify-your-anova"><span class="toc-section-number">13.3.1</span>  Using jamovi to specify your ANOVA</a></li>
+  <li><a href="#using-jamovi-to-specify-your-anova" id="toc-using-jamovi-to-specify-your-anova" class="nav-link" data-scroll-target="#using-jamovi-to-specify-your-anova"><span class="header-section-number">13.3.1</span> Using jamovi to specify your ANOVA</a></li>
   </ul></li>
-  <li><a href="#effect-size" id="toc-effect-size" class="nav-link" data-scroll-target="#effect-size"><span class="toc-section-number">13.4</span>  Effect size</a></li>
-  <li><a href="#multiple-comparisons-and-post-hoc-tests" id="toc-multiple-comparisons-and-post-hoc-tests" class="nav-link" data-scroll-target="#multiple-comparisons-and-post-hoc-tests"><span class="toc-section-number">13.5</span>  Multiple comparisons and post hoc tests</a>
+  <li><a href="#effect-size" id="toc-effect-size" class="nav-link" data-scroll-target="#effect-size"><span class="header-section-number">13.4</span> Effect size</a></li>
+  <li><a href="#multiple-comparisons-and-post-hoc-tests" id="toc-multiple-comparisons-and-post-hoc-tests" class="nav-link" data-scroll-target="#multiple-comparisons-and-post-hoc-tests"><span class="header-section-number">13.5</span> Multiple comparisons and post hoc tests</a>
   <ul class="collapse">
-  <li><a href="#running-pairwise-t-tests" id="toc-running-pairwise-t-tests" class="nav-link" data-scroll-target="#running-pairwise-t-tests"><span class="toc-section-number">13.5.1</span>  Running “pairwise” t-tests</a></li>
-  <li><a href="#corrections-for-multiple-testing" id="toc-corrections-for-multiple-testing" class="nav-link" data-scroll-target="#corrections-for-multiple-testing"><span class="toc-section-number">13.5.2</span>  Corrections for multiple testing</a></li>
-  <li><a href="#bonferroni-corrections" id="toc-bonferroni-corrections" class="nav-link" data-scroll-target="#bonferroni-corrections"><span class="toc-section-number">13.5.3</span>  Bonferroni corrections</a></li>
-  <li><a href="#holm-corrections" id="toc-holm-corrections" class="nav-link" data-scroll-target="#holm-corrections"><span class="toc-section-number">13.5.4</span>  Holm corrections</a></li>
-  <li><a href="#writing-up-the-post-hoc-test" id="toc-writing-up-the-post-hoc-test" class="nav-link" data-scroll-target="#writing-up-the-post-hoc-test"><span class="toc-section-number">13.5.5</span>  Writing up the post hoc test</a></li>
+  <li><a href="#running-pairwise-t-tests" id="toc-running-pairwise-t-tests" class="nav-link" data-scroll-target="#running-pairwise-t-tests"><span class="header-section-number">13.5.1</span> Running “pairwise” t-tests</a></li>
+  <li><a href="#corrections-for-multiple-testing" id="toc-corrections-for-multiple-testing" class="nav-link" data-scroll-target="#corrections-for-multiple-testing"><span class="header-section-number">13.5.2</span> Corrections for multiple testing</a></li>
+  <li><a href="#bonferroni-corrections" id="toc-bonferroni-corrections" class="nav-link" data-scroll-target="#bonferroni-corrections"><span class="header-section-number">13.5.3</span> Bonferroni corrections</a></li>
+  <li><a href="#holm-corrections" id="toc-holm-corrections" class="nav-link" data-scroll-target="#holm-corrections"><span class="header-section-number">13.5.4</span> Holm corrections</a></li>
+  <li><a href="#writing-up-the-post-hoc-test" id="toc-writing-up-the-post-hoc-test" class="nav-link" data-scroll-target="#writing-up-the-post-hoc-test"><span class="header-section-number">13.5.5</span> Writing up the post hoc test</a></li>
   </ul></li>
-  <li><a href="#the-assumptions-of-one-way-anova" id="toc-the-assumptions-of-one-way-anova" class="nav-link" data-scroll-target="#the-assumptions-of-one-way-anova"><span class="toc-section-number">13.6</span>  The assumptions of one-way ANOVA</a>
+  <li><a href="#the-assumptions-of-one-way-anova" id="toc-the-assumptions-of-one-way-anova" class="nav-link" data-scroll-target="#the-assumptions-of-one-way-anova"><span class="header-section-number">13.6</span> The assumptions of one-way ANOVA</a>
   <ul class="collapse">
-  <li><a href="#sec-Checking-the-homogeneity-of-variance-assumption" id="toc-sec-Checking-the-homogeneity-of-variance-assumption" class="nav-link" data-scroll-target="#sec-Checking-the-homogeneity-of-variance-assumption"><span class="toc-section-number">13.6.1</span>  Checking the homogeneity of variance assumption</a></li>
-  <li><a href="#running-the-levene-test-in-jamovi" id="toc-running-the-levene-test-in-jamovi" class="nav-link" data-scroll-target="#running-the-levene-test-in-jamovi"><span class="toc-section-number">13.6.2</span>  Running the Levene test in jamovi</a></li>
-  <li><a href="#removing-the-homogeneity-of-variance-assumption" id="toc-removing-the-homogeneity-of-variance-assumption" class="nav-link" data-scroll-target="#removing-the-homogeneity-of-variance-assumption"><span class="toc-section-number">13.6.3</span>  Removing the homogeneity of variance assumption</a></li>
-  <li><a href="#sec-Checking-the-normality-assumption" id="toc-sec-Checking-the-normality-assumption" class="nav-link" data-scroll-target="#sec-Checking-the-normality-assumption"><span class="toc-section-number">13.6.4</span>  Checking the normality assumption</a></li>
-  <li><a href="#removing-the-normality-assumption" id="toc-removing-the-normality-assumption" class="nav-link" data-scroll-target="#removing-the-normality-assumption"><span class="toc-section-number">13.6.5</span>  Removing the normality assumption</a></li>
-  <li><a href="#the-logic-behind-the-kruskal-wallis-test" id="toc-the-logic-behind-the-kruskal-wallis-test" class="nav-link" data-scroll-target="#the-logic-behind-the-kruskal-wallis-test"><span class="toc-section-number">13.6.6</span>  The logic behind the Kruskal-Wallis test</a></li>
-  <li><a href="#additional-details" id="toc-additional-details" class="nav-link" data-scroll-target="#additional-details"><span class="toc-section-number">13.6.7</span>  Additional details</a></li>
-  <li><a href="#how-to-run-the-kruskal-wallis-test-in-jamovi" id="toc-how-to-run-the-kruskal-wallis-test-in-jamovi" class="nav-link" data-scroll-target="#how-to-run-the-kruskal-wallis-test-in-jamovi"><span class="toc-section-number">13.6.8</span>  How to run the Kruskal-Wallis test in jamovi</a></li>
+  <li><a href="#sec-Checking-the-homogeneity-of-variance-assumption" id="toc-sec-Checking-the-homogeneity-of-variance-assumption" class="nav-link" data-scroll-target="#sec-Checking-the-homogeneity-of-variance-assumption"><span class="header-section-number">13.6.1</span> Checking the homogeneity of variance assumption</a></li>
+  <li><a href="#running-the-levene-test-in-jamovi" id="toc-running-the-levene-test-in-jamovi" class="nav-link" data-scroll-target="#running-the-levene-test-in-jamovi"><span class="header-section-number">13.6.2</span> Running the Levene test in jamovi</a></li>
+  <li><a href="#removing-the-homogeneity-of-variance-assumption" id="toc-removing-the-homogeneity-of-variance-assumption" class="nav-link" data-scroll-target="#removing-the-homogeneity-of-variance-assumption"><span class="header-section-number">13.6.3</span> Removing the homogeneity of variance assumption</a></li>
+  <li><a href="#sec-Checking-the-normality-assumption" id="toc-sec-Checking-the-normality-assumption" class="nav-link" data-scroll-target="#sec-Checking-the-normality-assumption"><span class="header-section-number">13.6.4</span> Checking the normality assumption</a></li>
+  <li><a href="#removing-the-normality-assumption" id="toc-removing-the-normality-assumption" class="nav-link" data-scroll-target="#removing-the-normality-assumption"><span class="header-section-number">13.6.5</span> Removing the normality assumption</a></li>
+  <li><a href="#the-logic-behind-the-kruskal-wallis-test" id="toc-the-logic-behind-the-kruskal-wallis-test" class="nav-link" data-scroll-target="#the-logic-behind-the-kruskal-wallis-test"><span class="header-section-number">13.6.6</span> The logic behind the Kruskal-Wallis test</a></li>
+  <li><a href="#additional-details" id="toc-additional-details" class="nav-link" data-scroll-target="#additional-details"><span class="header-section-number">13.6.7</span> Additional details</a></li>
+  <li><a href="#how-to-run-the-kruskal-wallis-test-in-jamovi" id="toc-how-to-run-the-kruskal-wallis-test-in-jamovi" class="nav-link" data-scroll-target="#how-to-run-the-kruskal-wallis-test-in-jamovi"><span class="header-section-number">13.6.8</span> How to run the Kruskal-Wallis test in jamovi</a></li>
   </ul></li>
-  <li><a href="#repeated-measures-one-way-anova" id="toc-repeated-measures-one-way-anova" class="nav-link" data-scroll-target="#repeated-measures-one-way-anova"><span class="toc-section-number">13.7</span>  Repeated measures one-way ANOVA</a>
+  <li><a href="#repeated-measures-one-way-anova" id="toc-repeated-measures-one-way-anova" class="nav-link" data-scroll-target="#repeated-measures-one-way-anova"><span class="header-section-number">13.7</span> Repeated measures one-way ANOVA</a>
   <ul class="collapse">
-  <li><a href="#repeated-measures-anova-in-jamovi" id="toc-repeated-measures-anova-in-jamovi" class="nav-link" data-scroll-target="#repeated-measures-anova-in-jamovi"><span class="toc-section-number">13.7.1</span>  Repeated measures ANOVA in jamovi</a></li>
+  <li><a href="#repeated-measures-anova-in-jamovi" id="toc-repeated-measures-anova-in-jamovi" class="nav-link" data-scroll-target="#repeated-measures-anova-in-jamovi"><span class="header-section-number">13.7.1</span> Repeated measures ANOVA in jamovi</a></li>
   </ul></li>
-  <li><a href="#the-friedman-non-parametric-repeated-measures-anova-test" id="toc-the-friedman-non-parametric-repeated-measures-anova-test" class="nav-link" data-scroll-target="#the-friedman-non-parametric-repeated-measures-anova-test"><span class="toc-section-number">13.8</span>  The Friedman non-parametric repeated measures ANOVA test</a></li>
-  <li><a href="#sec-On-the-relationship-between-ANOVA-and-the-Student-t-test" id="toc-sec-On-the-relationship-between-ANOVA-and-the-Student-t-test" class="nav-link" data-scroll-target="#sec-On-the-relationship-between-ANOVA-and-the-Student-t-test"><span class="toc-section-number">13.9</span>  On the relationship between ANOVA and the Student t-test</a></li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="toc-section-number">13.10</span>  Summary</a></li>
+  <li><a href="#the-friedman-non-parametric-repeated-measures-anova-test" id="toc-the-friedman-non-parametric-repeated-measures-anova-test" class="nav-link" data-scroll-target="#the-friedman-non-parametric-repeated-measures-anova-test"><span class="header-section-number">13.8</span> The Friedman non-parametric repeated measures ANOVA test</a></li>
+  <li><a href="#sec-On-the-relationship-between-ANOVA-and-the-Student-t-test" id="toc-sec-On-the-relationship-between-ANOVA-and-the-Student-t-test" class="nav-link" data-scroll-target="#sec-On-the-relationship-between-ANOVA-and-the-Student-t-test"><span class="header-section-number">13.9</span> On the relationship between ANOVA and the Student t-test</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">13.10</span> Summary</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/davidfoxcroft/lsj-book/edit/main/13-Comparing-several-means-one-way-ANOVA.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/davidfoxcroft/lsj-book/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -380,7 +419,7 @@ div.csl-indent {
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header">
-<h1 class="title display-7"><span id="sec-Comparing-several-means-one-way-ANOVA" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Comparing several means (one-way ANOVA)</span></span></h1>
+<h1 class="title display-7"><span id="sec-Comparing-several-means-one-way-ANOVA" class="quarto-section-identifier"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Comparing several means (one-way ANOVA)</span></span></h1>
 
 </header>
 
@@ -396,7 +435,7 @@ div.csl-indent {
 <div id="fig-fig13-1" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="images/fig13-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;13.1: Descriptives for mood gain, and box plots by drug administered</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;13.1: Descriptives for mood gain, and box plots by drug administered</figcaption>
 </figure>
 </div>
 </div>
@@ -417,7 +456,7 @@ div.csl-indent {
 <div id="fig-fig13-2" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="13-Comparing-several-means-one-way-ANOVA_files/figure-html/fig-fig13-2-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;13.2: Graphical illustration of ‘between groups’ variation (panel (a)) and ‘within groups’ variation (panel (b)). On the left the arrows show the differences in the group means. On the right the arrows highlight the variability within each group</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;13.2: Graphical illustration of ‘between groups’ variation (panel (a)) and ‘within groups’ variation (panel (b)). On the left the arrows show the differences in the group means. On the right the arrows highlight the variability within each group</figcaption>
 </figure>
 </div>
 </div>
@@ -431,7 +470,7 @@ div.csl-indent {
 <div class="cell-output-display">
 <div id="tbl-tab13-1" class="anchored">
 
-<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab13-1"><caption>Table&nbsp;13.1:  Grumpiness for people in cool and uncool groups </caption>
+<table class="huxtable" data-quarto-disable-processing="true" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab13-1"><caption>Table&nbsp;13.1:  <p>Grumpiness for people in cool and uncool groups</p> </caption>
 <colgroup><col><col><col><col><col><col></colgroup><tbody><tr>
 <th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 0pt; font-weight: bold;">name</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">person P</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">group</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">group num. k</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">index in group</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 0pt 2pt 12pt; font-weight: bold;">grumpiness \( Y_{ik} \) or \( Y_p \)</th></tr>
 <tr>
@@ -477,7 +516,10 @@ div.csl-indent {
 <div class="cell-output-display">
 <div id="tbl-tab13-2" class="anchored">
 
-<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab13-2"><caption>Table&nbsp;13.2:  All of the key quantities involved in an ANOVA organised into a ‘standard’ ANOVA table. The formulas for all quantities (except the p-value which has a very ugly formula and would be nightmarishly hard to calculate without a computer) are shown </caption>
+<table class="huxtable" data-quarto-disable-processing="true" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab13-2"><caption>Table&nbsp;13.2:  <p>All of the key quantities involved in an ANOVA organised into a
+‘standard’ ANOVA table. The formulas for all quantities (except the
+p-value which has a very ugly formula and would be nightmarishly hard to
+calculate without a computer) are shown</p> </caption>
 <colgroup><col><col><col></colgroup><tbody><tr>
 <th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 0pt; font-weight: bold;"></th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">between<br>groups</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 0pt 2pt 12pt; font-weight: bold;">within<br>groups</th></tr>
 <tr>
@@ -505,7 +547,7 @@ div.csl-indent {
 <div class="cell-output-display">
 <div id="tbl-tab13-3" class="anchored">
 
-<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab13-3"><caption>Table&nbsp;13.3:  A worked example…1 </caption>
+<table class="huxtable" data-quarto-disable-processing="true" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab13-3"><caption>Table&nbsp;13.3:  <p>A worked example…1</p> </caption>
 <colgroup><col><col></colgroup><tbody><tr>
 <th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 0pt; font-weight: bold;">group k</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 0pt 2pt 12pt; font-weight: bold;">outcome \( Y_{ik} \)</th></tr>
 <tr>
@@ -528,7 +570,7 @@ div.csl-indent {
 <div class="cell-output-display">
 <div id="tbl-tab13-4" class="anchored">
 
-<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab13-4"><caption>Table&nbsp;13.4:  A worked example…2 </caption>
+<table class="huxtable" data-quarto-disable-processing="true" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab13-4"><caption>Table&nbsp;13.4:  <p>A worked example…2</p> </caption>
 <colgroup><col><col><col></colgroup><tbody><tr>
 <th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 0pt; font-weight: bold;">group k</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">outcome \( Y_{ik} \)</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 0pt 2pt 12pt; font-weight: bold;">group mean \( \bar{Y}_k \)</th></tr>
 <tr>
@@ -551,7 +593,7 @@ div.csl-indent {
 <div class="cell-output-display">
 <div id="tbl-tab13-5" class="anchored">
 
-<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab13-5"><caption>Table&nbsp;13.5:  A worked example…3 </caption>
+<table class="huxtable" data-quarto-disable-processing="true" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab13-5"><caption>Table&nbsp;13.5:  <p>A worked example…3</p> </caption>
 <colgroup><col><col><col><col><col></colgroup><tbody><tr>
 <th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 0pt; font-weight: bold;">group k</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">outcome \( Y_{ik} \)</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">group mean  \( \bar{Y}_k \)</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">dev. from group mean  \( Y_{ik} - \bar{Y}_k \)</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 0pt 2pt 12pt; font-weight: bold;">squared deviation \(  (Y_{ik}-\bar{Y}_k)^2 \)</th></tr>
 <tr>
@@ -582,7 +624,7 @@ SS_w &amp; = 0.0025 + 0.0225 + 0.1225 + 0.0136 + 0.1003 \\
 <div class="cell-output-display">
 <div id="tbl-tab13-6" class="anchored">
 
-<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab13-6"><caption>Table&nbsp;13.6:  A worked example…4 </caption>
+<table class="huxtable" data-quarto-disable-processing="true" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab13-6"><caption>Table&nbsp;13.6:  <p>A worked example…4</p> </caption>
 <colgroup><col><col><col><col><col></colgroup><tbody><tr>
 <th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 0pt; font-weight: bold;">group k</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">group mean \( \bar{Y}_k \)</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">grand mean  \( \bar{Y} \)</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">deviation  \( \bar{Y}_k - \bar{Y} \)</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 0pt 2pt 12pt; font-weight: bold;">squared deviation \(  ( \bar{Y}_k-\bar{Y})^2 \)</th></tr>
 <tr>
@@ -601,7 +643,7 @@ SS_w &amp; = 0.0025 + 0.0225 + 0.1225 + 0.0136 + 0.1003 \\
 <div class="cell-output-display">
 <div id="tbl-tab13-7" class="anchored">
 
-<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab13-7"><caption>Table&nbsp;13.7:  A worked example…5 </caption>
+<table class="huxtable" data-quarto-disable-processing="true" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab13-7"><caption>Table&nbsp;13.7:  <p>A worked example…5</p> </caption>
 <colgroup><col><col><col><col><col></colgroup><tbody><tr>
 <th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 0pt; font-weight: bold;">group k</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">...</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">squared deviations  \( (\bar{Y}_k-\bar{Y})^2 \)</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">sample size  \( N_k \)</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 0pt 2pt 12pt; font-weight: bold;">weighted squared dev   \(  N_k (\bar{Y}_k-\bar{Y})^2 \)</th></tr>
 <tr>
@@ -644,7 +686,7 @@ F &amp; = \frac{MS_b}{MS_w}  = \frac{1.74}{0.09} \\
 <div class="cell-output-display">
 <div id="tbl-tab13-8" class="anchored">
 
-<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab13-8"><caption>Table&nbsp;13.8:  The ANOVA results table </caption>
+<table class="huxtable" data-quarto-disable-processing="true" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab13-8"><caption>Table&nbsp;13.8:  <p>The ANOVA results table</p> </caption>
 <colgroup><col><col><col><col><col><col></colgroup><tbody><tr>
 <th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 0pt; font-weight: bold;"></th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">df</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">sum of squares</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">mean squares</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">F-statistic</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 0pt 2pt 12pt; font-weight: bold;">p-value</th></tr>
 <tr>
@@ -674,7 +716,7 @@ F &amp; = \frac{MS_b}{MS_w}  = \frac{1.74}{0.09} \\
 <div id="fig-fig13-3" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="images/fig13-3.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;13.3: jamovi results table for ANOVA of mood gain by drug administered</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;13.3: jamovi results table for ANOVA of mood gain by drug administered</figcaption>
 </figure>
 </div>
 </div>
@@ -704,7 +746,7 @@ F &amp; = \frac{MS_b}{MS_w}  = \frac{1.74}{0.09} \\
 <div class="cell-output-display">
 <div id="tbl-tab13-9" class="anchored">
 
-<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab13-9"><caption>Table&nbsp;13.9:  The null hypothesis and eight possible ‘states of the world’ </caption>
+<table class="huxtable" data-quarto-disable-processing="true" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab13-9"><caption>Table&nbsp;13.9:  <p>The null hypothesis and eight possible ‘states of the world’</p> </caption>
 <colgroup><col><col><col><col><col></colgroup><tbody><tr>
 <th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 0pt; font-weight: bold;">possibility:</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">is \( \mu_P = \mu_A \)?</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">is \( \mu_P = \mu_J \)?</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">is \( \mu_A = \mu_J \)?</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 0pt 2pt 12pt; font-weight: bold;">which hypothesis?</th></tr>
 <tr>
@@ -737,7 +779,7 @@ F &amp; = \frac{MS_b}{MS_w}  = \frac{1.74}{0.09} \\
 <div id="fig-fig13-4" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="images/fig13-4.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;13.4: Uncorrected pairwise t-tests as post hoc comparisons in jamovi</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;13.4: Uncorrected pairwise t-tests as post hoc comparisons in jamovi</figcaption>
 </figure>
 </div>
 </div>
@@ -770,7 +812,7 @@ F &amp; = \frac{MS_b}{MS_w}  = \frac{1.74}{0.09} \\
 <div class="cell-output-display">
 <div id="tbl-tab13-10" class="anchored">
 
-<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab13-10"><caption>Table&nbsp;13.10:  Holm corrected p values </caption>
+<table class="huxtable" data-quarto-disable-processing="true" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab13-10"><caption>Table&nbsp;13.10:  <p>Holm corrected p values</p> </caption>
 <colgroup><col><col><col><col></colgroup><tbody><tr>
 <th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 0pt; font-weight: bold;">raw p</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">rank j</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">p \( \times \) j</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 0pt 2pt 12pt; font-weight: bold;">Holm p</th></tr>
 <tr>
@@ -828,7 +870,7 @@ F &amp; = \frac{MS_b}{MS_w}  = \frac{1.74}{0.09} \\
 <div id="fig-fig13-5" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="images/fig13-5.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;13.5: Levene test output for one-way ANOVA in jamovi</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;13.5: Levene test output for one-way ANOVA in jamovi</figcaption>
 </figure>
 </div>
 </div>
@@ -842,7 +884,7 @@ F &amp; = \frac{MS_b}{MS_w}  = \frac{1.74}{0.09} \\
 <div id="fig-fig13-6" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="images/fig13-6.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;13.6: Welch’s test as part of the One Way ANOVA analysis in jamovi</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;13.6: Welch’s test as part of the One Way ANOVA analysis in jamovi</figcaption>
 </figure>
 </div>
 </div>
@@ -857,7 +899,7 @@ F &amp; = \frac{MS_b}{MS_w}  = \frac{1.74}{0.09} \\
 <div id="fig-fig13-7" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="images/fig13-7.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;13.7: QQ plot in the One Way ANOVA analysis in jamovi</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;13.7: QQ plot in the One Way ANOVA analysis in jamovi</figcaption>
 </figure>
 </div>
 </div>
@@ -880,7 +922,8 @@ F &amp; = \frac{MS_b}{MS_w}  = \frac{1.74}{0.09} \\
 <div class="cell-output-display">
 <div id="tbl-tab13-11" class="anchored">
 
-<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab13-11"><caption>Table&nbsp;13.11:  Frequency table of mood gain from the clinicaltrials.csv data </caption>
+<table class="huxtable" data-quarto-disable-processing="true" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab13-11"><caption>Table&nbsp;13.11:  <p>Frequency table of mood gain from the <em>clinicaltrials.csv</em>
+data</p> </caption>
 <colgroup><col><col><col><col><col><col><col><col><col><col><col><col><col><col></colgroup><tbody><tr>
 <th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 0pt; font-weight: bold;">0.1</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">0.2</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">0.3</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">0.4</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">0.5</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">0.6</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">0.8</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">0.9</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">1.1</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">1.2</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">1.3</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">1.4</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">1.7</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 0pt 2pt 12pt; font-weight: bold;">1.8</th></tr>
 <tr>
@@ -901,7 +944,7 @@ F &amp; = \frac{MS_b}{MS_w}  = \frac{1.74}{0.09} \\
 <div id="fig-fig13-8" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="images/fig13-8.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;13.8: Kruskall-Wallis one-way non-parametric ANOVA in jamovi</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;13.8: Kruskall-Wallis one-way non-parametric ANOVA in jamovi</figcaption>
 </figure>
 </div>
 </div>
@@ -922,7 +965,7 @@ F &amp; = \frac{MS_b}{MS_w}  = \frac{1.74}{0.09} \\
 <div class="cell-output-display">
 <div id="tbl-tab13-12" class="anchored">
 
-<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab13-12"><caption>Table&nbsp;13.12:  Word recognition task scores in stroke patients </caption>
+<table class="huxtable" data-quarto-disable-processing="true" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab13-12"><caption>Table&nbsp;13.12:  <p>Word recognition task scores in stroke patients</p> </caption>
 <colgroup><col><col><col><col></colgroup><tbody><tr>
 <th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 0pt; font-weight: bold;">Participant</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">Speech</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">Conceptual</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 0pt 2pt 12pt; font-weight: bold;">Syntax</th></tr>
 <tr>
@@ -949,7 +992,7 @@ F &amp; = \frac{MS_b}{MS_w}  = \frac{1.74}{0.09} \\
 <div id="fig-fig13-9" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="images/fig13-9.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;13.9: Repeated measures ANOVA dialogue box in jamovi</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;13.9: Repeated measures ANOVA dialogue box in jamovi</figcaption>
 </figure>
 </div>
 </div>
@@ -967,7 +1010,7 @@ F &amp; = \frac{MS_b}{MS_w}  = \frac{1.74}{0.09} \\
 <div id="fig-fig13-10" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="images/fig13-10.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;13.10: One-way repeated measures ANOVA output - Mauchly’s Test of Sphericity</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;13.10: One-way repeated measures ANOVA output - Mauchly’s Test of Sphericity</figcaption>
 </figure>
 </div>
 </div>
@@ -983,7 +1026,7 @@ F &amp; = \frac{MS_b}{MS_w}  = \frac{1.74}{0.09} \\
 <div id="fig-fig13-11" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="images/fig13-11.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;13.11: One-way repeated measures ANOVA output - Tests of Within-Subjects Effects</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;13.11: One-way repeated measures ANOVA output - Tests of Within-Subjects Effects</figcaption>
 </figure>
 </div>
 </div>
@@ -995,7 +1038,7 @@ F &amp; = \frac{MS_b}{MS_w}  = \frac{1.74}{0.09} \\
 <div id="fig-fig13-12" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="images/fig13-12.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;13.12: Post-hoc tests in repeated measures ANOVA in jamovi</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;13.12: Post-hoc tests in repeated measures ANOVA in jamovi</figcaption>
 </figure>
 </div>
 </div>
@@ -1006,7 +1049,7 @@ F &amp; = \frac{MS_b}{MS_w}  = \frac{1.74}{0.09} \\
 <div id="fig-fig13-13" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="images/fig13-13.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;13.13: One-way repeated measures ANOVA output - Descriptive Statistics</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;13.13: One-way repeated measures ANOVA output - Descriptive Statistics</figcaption>
 </figure>
 </div>
 </div>
@@ -1022,7 +1065,7 @@ F &amp; = \frac{MS_b}{MS_w}  = \frac{1.74}{0.09} \\
 <div id="fig-fig13-14" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="images/fig13-14.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;13.14: The ‘Repeated Measures ANOVA (Non-parametric)’ dialogue box and results in jamovi</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;13.14: The ‘Repeated Measures ANOVA (Non-parametric)’ dialogue box and results in jamovi</figcaption>
 </figure>
 </div>
 </div>
@@ -1048,41 +1091,41 @@ F &amp; = \frac{MS_b}{MS_w}  = \frac{1.74}{0.09} \\
 </ul>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="doc-bibliography" style="display: none">
-<div id="ref-Box1953" class="csl-entry" role="doc-biblioentry">
+<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-Box1953" class="csl-entry" role="listitem">
 Box, G. E. P. (1953). Non-normality and tests on variances. <em>Biometrika</em>, <em>40</em>, 318–335.
 </div>
-<div id="ref-BrownForsythe1974" class="csl-entry" role="doc-biblioentry">
+<div id="ref-BrownForsythe1974" class="csl-entry" role="listitem">
 Brown, M. B., &amp; Forsythe, A. B. (1974). Robust tests for equality of variances. <em>Journal of the American Statistical Association</em>, <em>69</em>, 364–367.
 </div>
-<div id="ref-Dunn1961" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Dunn1961" class="csl-entry" role="listitem">
 Dunn, O. J. (1961). Multiple comparisons among means. <em>Journal of the American Statistical Association</em>, <em>56</em>, 52–64.
 </div>
-<div id="ref-Geschwind1972" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Geschwind1972" class="csl-entry" role="listitem">
 Geschwind, N. (1972). Language and the brain. <em>Scientific American</em>, <em>226(4)</em>, 76–83.
 </div>
-<div id="ref-Hays1994" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Hays1994" class="csl-entry" role="listitem">
 Hays, W. L. (1994). <em>Statistics</em> (5th ed.). Harcourt Brace.
 </div>
-<div id="ref-Holm1979" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Holm1979" class="csl-entry" role="listitem">
 Holm, S. (1979). A simple sequentially rejective multiple test procedure. <em>Scandinavian Journal of Statistics</em>, <em>6</em>, 65–70.
 </div>
-<div id="ref-Hsu1996" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Hsu1996" class="csl-entry" role="listitem">
 Hsu, J. C. (1996). <em>Multiple comparisons: Theory and methods</em>. Chapman; Hall.
 </div>
-<div id="ref-KruskalWallis1952" class="csl-entry" role="doc-biblioentry">
+<div id="ref-KruskalWallis1952" class="csl-entry" role="listitem">
 Kruskal, W. H., &amp; Wallis, W. A. (1952). Use of ranks in one-criterion variance analysis. <em>Journal of the American Statistical Association</em>, <em>47</em>, 583–621.
 </div>
-<div id="ref-Levene1960" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Levene1960" class="csl-entry" role="listitem">
 Levene, H. (1960). Robust tests for equality of variances. In I. O. et al (Ed.), <em>Contributions to probability and statistics: Essays in honor of harold hotelling</em> (pp. 278–292). Stanford University Press.
 </div>
-<div id="ref-Sahai2000" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Sahai2000" class="csl-entry" role="listitem">
 Sahai, H., &amp; Ageel, M. I. (2000). <em>The analysis of variance: Fixed, random and mixed models</em>. Birkhauser.
 </div>
-<div id="ref-Shaffer1995" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Shaffer1995" class="csl-entry" role="listitem">
 Shaffer, J. P. (1995). Multiple hypothesis testing. <em>Annual Review of Psychology</em>, <em>46</em>, 561–584.
 </div>
-<div id="ref-Welch1951" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Welch1951" class="csl-entry" role="listitem">
 Welch, B. L. (1951). On the comparison of several mean values: An alternative approach. <em>Biometrika</em>, <em>38</em>, 330–336.
 </div>
 </div>
@@ -1254,9 +1297,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -1321,6 +1378,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
@@ -1359,12 +1502,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-      var filterRegex = new RegExp(/https:\/\/davidfoxcroft\.github\.io\/lsj-book\//);
+      var filterRegex = new RegExp("https:\/\/davidfoxcroft\.github\.io\/lsj-book\/");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
-    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
@@ -1390,6 +1533,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left"><a href="https://learnstatswithjamovi.com">learning statistics with jamovi</a></div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
     <div class="nav-footer-right">This book was built with <a href="https://quarto.org/">Quarto</a></div>
   </div>
 </footer>

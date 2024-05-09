@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.335">
+<meta name="generator" content="quarto-1.3.353">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -17,14 +17,15 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
 }
-.hanging div.csl-entry {
+.hanging-indent div.csl-entry {
   margin-left:2em;
   text-indent:-2em;
 }
@@ -38,8 +39,7 @@ div.csl-right-inline {
 }
 div.csl-indent {
   margin-left: 2em;
-}
-</style>
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -101,11 +101,16 @@ div.csl-indent {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">References</h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./References.html">References</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav>
@@ -113,36 +118,38 @@ div.csl-indent {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">learning statistics with jamovi</a> 
         <div class="sidebar-tools-main tools-wide">
-    <a href="https://github.com/davidfoxcroft/lsj-book/" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
-    <a href="./learning-statistics-with-jamovi.pdf" title="Download PDF" class="sidebar-tool px-1"><i class="bi bi-file-pdf"></i></a>
-    <a href="" title="Share" id="sidebar-tool-dropdown-0" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-share"></i></a>
-    <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-0">
-        <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
-            <i class="bi bi-bi-twitter pe-1"></i>
-          Twitter
-          </a>
-        </li>
-        <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
-            <i class="bi bi-bi-facebook pe-1"></i>
-          Facebook
-          </a>
-        </li>
-        <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
-            <i class="bi bi-bi-linkedin pe-1"></i>
-          LinkedIn
-          </a>
-        </li>
-    </ul>
-  <a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
-  <a href="" class="quarto-reader-toggle sidebar-tool" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+    <a href="https://github.com/davidfoxcroft/lsj-book/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="./learning-statistics-with-jamovi.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+    <div class="dropdown">
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
+              <i class="bi bi-bi-twitter pe-1"></i>
+            Twitter
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
+              <i class="bi bi-bi-facebook pe-1"></i>
+            Facebook
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
+              <i class="bi bi-bi-linkedin pe-1"></i>
+            LinkedIn
+            </a>
+          </li>
+      </ul>
+    </div>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
   <i class="bi"></i>
   </div>
@@ -150,181 +157,209 @@ div.csl-indent {
 </div>
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">&nbsp;</a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">&nbsp;</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Preface.html" class="sidebar-item-text sidebar-link">Preface</a>
+  <a href="./Preface.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">Beginnings</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+ <span class="menu-text">Beginnings</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01-Why-do-we-learn-statistics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Why do we learn statistics</span></a>
+  <a href="./01-Why-do-we-learn-statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Why do we learn statistics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./02-A-brief-introduction-to-research-design.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">A brief introduction to research design</span></a>
+  <a href="./02-A-brief-introduction-to-research-design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">A brief introduction to research design</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">An introduction to jamovi</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+ <span class="menu-text">An introduction to jamovi</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./03-Getting-started-with-jamovi.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Getting started with jamovi</span></a>
+  <a href="./03-Getting-started-with-jamovi.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Getting started with jamovi</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">Working with data</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+ <span class="menu-text">Working with data</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04-Descriptive-statistics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Descriptive statistics</span></a>
+  <a href="./04-Descriptive-statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Descriptive statistics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./05-Drawing-graphs.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Drawing graphs</span></a>
+  <a href="./05-Drawing-graphs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Drawing graphs</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./06-Pragmatic-matters.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Pragmatic matters</span></a>
+  <a href="./06-Pragmatic-matters.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Pragmatic matters</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">Statistical theory</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+ <span class="menu-text">Statistical theory</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Prelude-Part-IV.html" class="sidebar-item-text sidebar-link">Prelude</a>
+  <a href="./Prelude-Part-IV.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Prelude</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./07-Introduction-to-probability.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Introduction to probability</span></a>
+  <a href="./07-Introduction-to-probability.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Introduction to probability</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./08-Estimating-unknown-quantities-from-a-sample.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Estimating unknown quantities from a sample</span></a>
+  <a href="./08-Estimating-unknown-quantities-from-a-sample.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Estimating unknown quantities from a sample</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./09-Hypothesis-testing.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Hypothesis testing</span></a>
+  <a href="./09-Hypothesis-testing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Hypothesis testing</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">Statistical tools</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">
+ <span class="menu-text">Statistical tools</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./10-Categorical-data-analysis.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Categorical data analysis</span></a>
+  <a href="./10-Categorical-data-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Categorical data analysis</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./11-Comparing-two-means.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Comparing two means</span></a>
+  <a href="./11-Comparing-two-means.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Comparing two means</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./12-Correlation-and-linear-regression.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Correlation and linear regression</span></a>
+  <a href="./12-Correlation-and-linear-regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Correlation and linear regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./13-Comparing-several-means-one-way-ANOVA.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Comparing several means (one-way ANOVA)</span></a>
+  <a href="./13-Comparing-several-means-one-way-ANOVA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Comparing several means (one-way ANOVA)</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./14-Factorial-ANOVA.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Factorial ANOVA</span></a>
+  <a href="./14-Factorial-ANOVA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Factorial ANOVA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./15-Factor-Analysis.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Factor Analysis</span></a>
+  <a href="./15-Factor-Analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Factor Analysis</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">Endings, alternatives and prospects</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">
+ <span class="menu-text">Endings, alternatives and prospects</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./16-Bayesian-statistics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Bayesian statistics</span></a>
+  <a href="./16-Bayesian-statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Bayesian statistics</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Epilogue.html" class="sidebar-item-text sidebar-link">Epilogue</a>
+  <a href="./Epilogue.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Epilogue</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./References.html" class="sidebar-item-text sidebar-link active">References</a>
+  <a href="./References.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">References</span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
@@ -333,299 +368,299 @@ div.csl-indent {
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header">
-<h1 class="title d-none d-lg-block display-7">References</h1>
+<h1 class="title display-7">References</h1>
 
 </header>
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="doc-bibliography">
-<div id="ref-Adair1984" class="csl-entry" role="doc-biblioentry">
+<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
+<div id="ref-Adair1984" class="csl-entry" role="listitem">
 Adair, G. (1984). The hawthorne effect: A reconsideration of the
 methodological artifact. <em>Journal of Applied Psychology</em>,
 <em>69</em>, 334–345.
 </div>
-<div id="ref-Agresti1996" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Agresti1996" class="csl-entry" role="listitem">
 Agresti, A. (1996). <em>An introduction to categorical data
 analysis</em>. Wiley.
 </div>
-<div id="ref-Agresti2002" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Agresti2002" class="csl-entry" role="listitem">
 Agresti, A. (2002). <em>Categorical data analysis</em> (2nd ed.). Wiley.
 </div>
-<div id="ref-Akaike1974" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Akaike1974" class="csl-entry" role="listitem">
 Akaike, H. (1974). A new look at the statistical model identification.
 <em>IEEE Transactions on Automatic Control</em>, <em>19</em>, 716–723.
 </div>
-<div id="ref-Anscombe1973" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Anscombe1973" class="csl-entry" role="listitem">
 Anscombe, F. J. (1973). Graphs in statistical analysis. <em>American
 Statistician</em>, <em>27</em>, 17–21.
 </div>
-<div id="ref-Bickel1975" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Bickel1975" class="csl-entry" role="listitem">
 Bickel, P. J., Hammel, E. A., &amp; O’Connell, J. W. (1975). Sex bias in
 graduate admissions: Data from <span>B</span>erkeley. <em>Science</em>,
 <em>187</em>, 398–404.
 </div>
-<div id="ref-Box1953" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Box1953" class="csl-entry" role="listitem">
 Box, G. E. P. (1953). Non-normality and tests on variances.
 <em>Biometrika</em>, <em>40</em>, 318–335.
 </div>
-<div id="ref-Box1987" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Box1987" class="csl-entry" role="listitem">
 Box, J. F. (1987). Guinness, gosset, fisher, and small samples.
 <em>Statistical Science</em>, <em>2</em>, 45–52.
 </div>
-<div id="ref-BrownForsythe1974" class="csl-entry" role="doc-biblioentry">
+<div id="ref-BrownForsythe1974" class="csl-entry" role="listitem">
 Brown, M. B., &amp; Forsythe, A. B. (1974). Robust tests for equality of
 variances. <em>Journal of the American Statistical Association</em>,
 <em>69</em>, 364–367.
 </div>
-<div id="ref-Campbell1963" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Campbell1963" class="csl-entry" role="listitem">
 Campbell, D. T., &amp; Stanley, J. C. (1963). <em>Experimental and
 quasi-experimental designs for research</em>. Houghton Mifflin.
 </div>
-<div id="ref-Cronbach1951" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Cronbach1951" class="csl-entry" role="listitem">
 Chronbach, L. J. (1951). Coefficient alpha and the internal structure of
 tests. <em>Psychometrika</em>, <em>16(3)</em>, 297–334.
 </div>
-<div id="ref-Cochran1954" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Cochran1954" class="csl-entry" role="listitem">
 Cochran, W. G. (1954). The <span class="math inline"><em>χ</em><sup>2</sup></span> test of goodness of
 fit. <em>The Annals of Mathematical Statistics</em>, <em>23</em>,
 315–345.
 </div>
-<div id="ref-Cohen1988" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Cohen1988" class="csl-entry" role="listitem">
 Cohen, J. (1988). <em>Statistical power analysis for the behavioral
 sciences</em> (2nd ed.). Lawrence Erlbaum.
 </div>
-<div id="ref-Cramer1946" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Cramer1946" class="csl-entry" role="listitem">
 Cramer, H. (1946). <em>Mathematical methods of statistics</em>.
 Princeton University Press.
 </div>
-<div id="ref-Dunn1961" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Dunn1961" class="csl-entry" role="listitem">
 Dunn, O. J. (1961). Multiple comparisons among means. <em>Journal of the
 American Statistical Association</em>, <em>56</em>, 52–64.
 </div>
-<div id="ref-Ellis2010" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Ellis2010" class="csl-entry" role="listitem">
 Ellis, P. D. (2010). <em>The essential guide to effect sizes:
 Statistical power, meta-analysis, and the interpretation of research
 results</em>. Cambridge University Press.
 </div>
-<div id="ref-Evans1983" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Evans1983" class="csl-entry" role="listitem">
 Evans, J. St. B. T., Barston, J. L., &amp; Pollard, P. (1983). On the
 conflict between logic and belief in syllogistic reasoning. <em>Memory
 and Cognition</em>, <em>11</em>, 295–306.
 </div>
-<div id="ref-Evans2011" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Evans2011" class="csl-entry" role="listitem">
 Evans, M., Hastings, N., &amp; Peacock, B. (2011). <em>Statistical
 distributions (3rd ed)</em>. Wiley.
 </div>
-<div id="ref-Everitt1996" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Everitt1996" class="csl-entry" role="listitem">
 Everitt, B. S. (1996). <em>Making sense of statistics in psychology. A
 second-level course</em>. Oxford University Press.
 </div>
-<div id="ref-Fabrigar1999" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Fabrigar1999" class="csl-entry" role="listitem">
 Fabrigar, L. R., Wegener, D. T., MacCallum, R. C., &amp; Strahan, E. J.
 (1999). Evaluating the use of exploratory factor analysis in
 psychological research. <em>Psychological Methods</em>, <em>4</em>,
 272–299.
 </div>
-<div id="ref-Fisher1922a" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Fisher1922a" class="csl-entry" role="listitem">
 Fisher, R. A. (1922a). On the interpretation of <span class="math inline"><em>χ</em><sup>2</sup></span> from contingency
 tables, and the calculation of <span class="math inline"><em>p</em></span>. <em>Journal of the Royal
 Statistical Society</em>, <em>84</em>, 87–94.
 </div>
-<div id="ref-Fisher1922b" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Fisher1922b" class="csl-entry" role="listitem">
 Fisher, R. A. (1922b). On the mathematical foundation of theoretical
 statistics. <em>Philosophical Transactions of the Royal Society A</em>,
 <em>222</em>, 309–368.
 </div>
-<div id="ref-Fisher1925" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Fisher1925" class="csl-entry" role="listitem">
 Fisher, R. A. (1925). <em>Statistical methods for research workers</em>.
 Oliver &amp; Boyd.
 </div>
-<div id="ref-Fox2011" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Fox2011" class="csl-entry" role="listitem">
 Fox, J., &amp; Weisberg, S. (2011). <em>An <span>R</span> companion to
 applied regression</em> (2nd ed.). Sage.
 </div>
-<div id="ref-Gelman2006" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Gelman2006" class="csl-entry" role="listitem">
 Gelman, A., &amp; Stern, H. (2006). The difference between
 <span>“significant”</span> and <span>“not significant”</span> is not
 itself statistically significant. <em>The American Statistician</em>,
 <em>60</em>, 328–331.
 </div>
-<div id="ref-Geschwind1972" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Geschwind1972" class="csl-entry" role="listitem">
 Geschwind, N. (1972). Language and the brain. <em>Scientific
 American</em>, <em>226(4)</em>, 76–83.
 </div>
-<div id="ref-Hays1994" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Hays1994" class="csl-entry" role="listitem">
 Hays, W. L. (1994). <em>Statistics</em> (5th ed.). Harcourt Brace.
 </div>
-<div id="ref-Hedges1981" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Hedges1981" class="csl-entry" role="listitem">
 Hedges, L. V. (1981). Distribution theory for glass’s estimator of
 effect size and related estimators. <em>Journal of Educational
 Statistics</em>, <em>6</em>, 107–128.
 </div>
-<div id="ref-Hedges1985" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Hedges1985" class="csl-entry" role="listitem">
 Hedges, L. V., &amp; Olkin, I. (1985). <em>Statistical methods for
 meta-analysis</em>. Academic Press.
 </div>
-<div id="ref-Hewitt2004" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Hewitt2004" class="csl-entry" role="listitem">
 Hewitt, A. K., Foxcroft, D. R., &amp; MacDonald, J. (2004).
 Multitrait-multimethod confirmatory factor analysis of the attributional
 style questionnaire. <em>Personality and Individual Differences</em>,
 <em>37(7)</em>, 1483–1491.
 </div>
-<div id="ref-Hogg2005" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Hogg2005" class="csl-entry" role="listitem">
 Hogg, R. V., McKean, J. V., &amp; Craig, A. T. (2005). <em>Introduction
 to mathematical statistics</em> (6th ed.). Pearson.
 </div>
-<div id="ref-Holm1979" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Holm1979" class="csl-entry" role="listitem">
 Holm, S. (1979). A simple sequentially rejective multiple test
 procedure. <em>Scandinavian Journal of Statistics</em>, <em>6</em>,
 65–70.
 </div>
-<div id="ref-hrobjartsson2010" class="csl-entry" role="doc-biblioentry">
+<div id="ref-hrobjartsson2010" class="csl-entry" role="listitem">
 Hróbjartsson, A., &amp; Gøtzsche, P. (2010). Placebo interventions for
 all clinical conditions. <em>Cochrane Database of Systematic
 Reviews</em>, <em>1</em>. <a href="https://doi.org//10.1002/14651858.CD003974.pub3">https://doi.org//10.1002/14651858.CD003974.pub3</a>
 </div>
-<div id="ref-Hsu1996" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Hsu1996" class="csl-entry" role="listitem">
 Hsu, J. C. (1996). <em>Multiple comparisons: Theory and methods</em>.
 Chapman; Hall.
 </div>
-<div id="ref-Ioannidis2005" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Ioannidis2005" class="csl-entry" role="listitem">
 Ioannidis, J. P. A. (2005). Why most published research findings are
 false. <em>PLoS Med</em>, <em>2</em>(8), 697–701.
 </div>
-<div id="ref-Jeffreys1961" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Jeffreys1961" class="csl-entry" role="listitem">
 Jeffreys, H. (1961). <em>The theory of probability</em> (3rd ed.).
 Oxford.
 </div>
-<div id="ref-Johnson2013" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Johnson2013" class="csl-entry" role="listitem">
 Johnson, V. E. (2013). Revised standards for statistical evidence.
 <em>Proceedings of the National Academy of Sciences</em>, <em>48</em>,
 19313–19317.
 </div>
-<div id="ref-Kahneman1973" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Kahneman1973" class="csl-entry" role="listitem">
 Kahneman, D., &amp; Tversky, A. (1973). On the psychology of prediction.
 <em>Psychological Review</em>, <em>80</em>, 237–251.
 </div>
-<div id="ref-Kass1995" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Kass1995" class="csl-entry" role="listitem">
 Kass, R. E., &amp; Raftery, A. E. (1995). Bayes factors. <em>Journal of
 the American Statistical Association</em>, <em>90</em>, 773–795.
 </div>
-<div id="ref-Keynes1923" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Keynes1923" class="csl-entry" role="listitem">
 Keynes, J. M. (1923). <em>A tract on monetary reform</em>. Macmillan;
 Company.
 </div>
-<div id="ref-Kruschke2011" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Kruschke2011" class="csl-entry" role="listitem">
 Kruschke, J. K. (2011). <em>Doing <span>B</span>ayesian data analysis: A
 tutorial with <span>R</span> and <span>BUGS</span></em>. Academic Press.
 </div>
-<div id="ref-KruskalWallis1952" class="csl-entry" role="doc-biblioentry">
+<div id="ref-KruskalWallis1952" class="csl-entry" role="listitem">
 Kruskal, W. H., &amp; Wallis, W. A. (1952). Use of ranks in
 one-criterion variance analysis. <em>Journal of the American Statistical
 Association</em>, <em>47</em>, 583–621.
 </div>
-<div id="ref-Kuhberger2014" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Kuhberger2014" class="csl-entry" role="listitem">
 Kühberger, A., Fritz, A., &amp; Scherndl, T. (2014). Publication bias in
 psychology: A diagnosis based on the correlation between effect size and
 sample size. <em>Public Library of Science One</em>, <em>9</em>, 1–8.
 </div>
-<div id="ref-Larntz1978" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Larntz1978" class="csl-entry" role="listitem">
 Larntz, K. (1978). Small-sample comparisons of exact levels for
 chi-squared goodness-of-fit statistics. <em>Journal of the American
 Statistical Association</em>, <em>73</em>, 253–263.
 </div>
-<div id="ref-Lee2014" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Lee2014" class="csl-entry" role="listitem">
 Lee, M. D., &amp; Wagenmakers, E.-J. (2014). <em>Bayesian cognitive
 modeling: A practical course</em>. Cambridge University Press.
 </div>
-<div id="ref-Lehmann2011" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Lehmann2011" class="csl-entry" role="listitem">
 Lehmann, E. L. (2011). <em>Fisher, <span>N</span>eyman, and the creation
 of classical statistics</em>. Springer.
 </div>
-<div id="ref-Levene1960" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Levene1960" class="csl-entry" role="listitem">
 Levene, H. (1960). Robust tests for equality of variances. In I. O. et
 al (Ed.), <em>Contributions to probability and statistics: Essays in
 honor of harold hotelling</em> (pp. 278–292). Stanford University Press.
 </div>
-<div id="ref-McGrath2006" class="csl-entry" role="doc-biblioentry">
+<div id="ref-McGrath2006" class="csl-entry" role="listitem">
 McGrath, R. E., &amp; Meyer, G. J. (2006). When effect sizes disagree:
 The case of <span class="math inline"><em>r</em></span> and <span class="math inline"><em>d</em></span>. <em>Psychological Methods</em>,
 <em>11</em>, 386–401.
 </div>
-<div id="ref-Meehl1967" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Meehl1967" class="csl-entry" role="listitem">
 Meehl, P. H. (1967). Theory testing in psychology and physics: A
 methodological paradox. <em>Philosophy of Science</em>, <em>34</em>,
 103–115.
 </div>
-<div id="ref-Pearson1900" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Pearson1900" class="csl-entry" role="listitem">
 Pearson, K. (1900). On the criterion that a given system of deviations
 from the probable in the case of a correlated system of variables is
 such that it can be reasonably supposed to have arisen from random
 sampling. <em>Philosophical Magazine</em>, <em>50</em>, 157–175.
 </div>
-<div id="ref-Peterson1984" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Peterson1984" class="csl-entry" role="listitem">
 Peterson, C., &amp; Seligman, M. (1984). Causal explanations as a risk
 factor for depression: Theory and evidence. <em>Psychological
 Review</em>, <em>91</em>, 347–374.
 </div>
-<div id="ref-Pfungst1911" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Pfungst1911" class="csl-entry" role="listitem">
 Pfungst, O. (1911). <em>Clever hans (the horse of mr. Von osten): A
 contribution to experimental animal and human psychology</em> (C. L.
 Rahn, Trans.). Henry Holt.
 </div>
-<div id="ref-Rosenthal1966" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Rosenthal1966" class="csl-entry" role="listitem">
 Rosenthal, R. (1966). <em>Experimenter effects in behavioral
 research</em>. Appleton.
 </div>
-<div id="ref-Sahai2000" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Sahai2000" class="csl-entry" role="listitem">
 Sahai, H., &amp; Ageel, M. I. (2000). <em>The analysis of variance:
 Fixed, random and mixed models</em>. Birkhauser.
 </div>
-<div id="ref-Shaffer1995" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Shaffer1995" class="csl-entry" role="listitem">
 Shaffer, J. P. (1995). Multiple hypothesis testing. <em>Annual Review of
 Psychology</em>, <em>46</em>, 561–584.
 </div>
-<div id="ref-Shapiro1965" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Shapiro1965" class="csl-entry" role="listitem">
 Shapiro, S. S., &amp; Wilk, M. B. (1965). An analysis of variance test
 for normality (complete samples). <em>Biometrika</em>, <em>52</em>,
 591–611.
 </div>
-<div id="ref-Sokal1994" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Sokal1994" class="csl-entry" role="listitem">
 Sokal, R. R., &amp; Rohlf, F. J. (1994). <em>Biometry: The principles
 and practice of statistics in biological research</em> (3rd ed.).
 Freeman.
 </div>
-<div id="ref-Stevens1946" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Stevens1946" class="csl-entry" role="listitem">
 Stevens, S. S. (1946). On the theory of scales of measurement.
 <em>Science</em>, <em>103</em>, 677–680.
 </div>
-<div id="ref-Stigler1986" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Stigler1986" class="csl-entry" role="listitem">
 Stigler, S. M. (1986). <em>The history of statistics</em>. Harvard
 University Press.
 </div>
-<div id="ref-Student1908" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Student1908" class="csl-entry" role="listitem">
 Student, A. (1908). The probable error of a mean. <em>Biometrika</em>,
 <em>6</em>, 1–2.
 </div>
-<div id="ref-Tversky1974" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Tversky1974" class="csl-entry" role="listitem">
 Tversky, A., &amp; Kahneman, D. (1974). Judgment under uncertainty:
 Heuristics and biases. <em>Science</em>, <em>185</em>(4157), 1124–1131.
 </div>
-<div id="ref-Welch1947" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Welch1947" class="csl-entry" role="listitem">
 Welch, B. L. (1947). The generalization of
 <span>“<span>S</span>tudent’s”</span> problem when several different
 population variances are involved. <em>Biometrika</em>, <em>34</em>,
 28–35.
 </div>
-<div id="ref-Welch1951" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Welch1951" class="csl-entry" role="listitem">
 Welch, B. L. (1951). On the comparison of several mean values: An
 alternative approach. <em>Biometrika</em>, <em>38</em>, 330–336.
 </div>
-<div id="ref-Wilkinson2006" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Wilkinson2006" class="csl-entry" role="listitem">
 Wilkinson, L., Wills, D., Rope, D., Norton, A., &amp; Dubbs, R. (2006).
 <em>The grammar of graphics</em>. Springer.
 </div>
 </div>
-<div id="refs" role="doc-bibliography">
+<div id="refs" role="list">
 
 </div>
 
@@ -774,9 +809,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -841,6 +890,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
@@ -879,12 +1014,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-      var filterRegex = new RegExp(/https:\/\/davidfoxcroft\.github\.io\/lsj-book\//);
+      var filterRegex = new RegExp("https:\/\/davidfoxcroft\.github\.io\/lsj-book\/");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
-    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
@@ -907,6 +1042,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left"><a href="https://learnstatswithjamovi.com">learning statistics with jamovi</a></div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/davidfoxcroft/lsj-book/edit/main/References.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/davidfoxcroft/lsj-book/issues/new" class="toc-action">Report an issue</a></p></div></div></div>
     <div class="nav-footer-right">This book was built with <a href="https://quarto.org/">Quarto</a></div>
   </div>
 </footer>

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.335">
+<meta name="generator" content="quarto-1.3.353">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -17,14 +17,15 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
 }
-.hanging div.csl-entry {
+.hanging-indent div.csl-entry {
   margin-left:2em;
   text-indent:-2em;
 }
@@ -38,8 +39,7 @@ div.csl-right-inline {
 }
 div.csl-indent {
   margin-left: 2em;
-}
-</style>
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -92,23 +92,32 @@ div.csl-indent {
 </script>
     
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="styles.css">
 <meta property="og:title" content="learning statistics with jamovi - 12&nbsp; Correlation and linear regression">
-<meta property="og:description" content="The goal in this chapter is to introduce correlation and linear regression.">
+<meta property="og:description" content="">
+<meta property="og:image" content="https://davidfoxcroft.github.io/lsj-book/images/fig12-1a.png">
 <meta property="og:site-name" content="learning statistics with jamovi">
+<meta property="og:image:height" content="700">
+<meta property="og:image:width" content="712">
 </head>
 
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Correlation and linear regression</span></h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./10-Categorical-data-analysis.html">Statistical tools</a></li><li class="breadcrumb-item"><a href="./12-Correlation-and-linear-regression.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Correlation and linear regression</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav>
@@ -116,36 +125,38 @@ div.csl-indent {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">learning statistics with jamovi</a> 
         <div class="sidebar-tools-main tools-wide">
-    <a href="https://github.com/davidfoxcroft/lsj-book/" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
-    <a href="./learning-statistics-with-jamovi.pdf" title="Download PDF" class="sidebar-tool px-1"><i class="bi bi-file-pdf"></i></a>
-    <a href="" title="Share" id="sidebar-tool-dropdown-0" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-share"></i></a>
-    <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-0">
-        <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
-            <i class="bi bi-bi-twitter pe-1"></i>
-          Twitter
-          </a>
-        </li>
-        <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
-            <i class="bi bi-bi-facebook pe-1"></i>
-          Facebook
-          </a>
-        </li>
-        <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
-            <i class="bi bi-bi-linkedin pe-1"></i>
-          LinkedIn
-          </a>
-        </li>
-    </ul>
-  <a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
-  <a href="" class="quarto-reader-toggle sidebar-tool" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+    <a href="https://github.com/davidfoxcroft/lsj-book/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="./learning-statistics-with-jamovi.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+    <div class="dropdown">
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
+              <i class="bi bi-bi-twitter pe-1"></i>
+            Twitter
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
+              <i class="bi bi-bi-facebook pe-1"></i>
+            Facebook
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
+              <i class="bi bi-bi-linkedin pe-1"></i>
+            LinkedIn
+            </a>
+          </li>
+      </ul>
+    </div>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
   <i class="bi"></i>
   </div>
@@ -153,245 +164,273 @@ div.csl-indent {
 </div>
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">&nbsp;</a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">&nbsp;</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Preface.html" class="sidebar-item-text sidebar-link">Preface</a>
+  <a href="./Preface.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">Beginnings</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+ <span class="menu-text">Beginnings</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01-Why-do-we-learn-statistics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Why do we learn statistics</span></a>
+  <a href="./01-Why-do-we-learn-statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Why do we learn statistics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./02-A-brief-introduction-to-research-design.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">A brief introduction to research design</span></a>
+  <a href="./02-A-brief-introduction-to-research-design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">A brief introduction to research design</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">An introduction to jamovi</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+ <span class="menu-text">An introduction to jamovi</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./03-Getting-started-with-jamovi.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Getting started with jamovi</span></a>
+  <a href="./03-Getting-started-with-jamovi.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Getting started with jamovi</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">Working with data</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+ <span class="menu-text">Working with data</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04-Descriptive-statistics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Descriptive statistics</span></a>
+  <a href="./04-Descriptive-statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Descriptive statistics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./05-Drawing-graphs.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Drawing graphs</span></a>
+  <a href="./05-Drawing-graphs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Drawing graphs</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./06-Pragmatic-matters.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Pragmatic matters</span></a>
+  <a href="./06-Pragmatic-matters.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Pragmatic matters</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">Statistical theory</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+ <span class="menu-text">Statistical theory</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Prelude-Part-IV.html" class="sidebar-item-text sidebar-link">Prelude</a>
+  <a href="./Prelude-Part-IV.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Prelude</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./07-Introduction-to-probability.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Introduction to probability</span></a>
+  <a href="./07-Introduction-to-probability.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Introduction to probability</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./08-Estimating-unknown-quantities-from-a-sample.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Estimating unknown quantities from a sample</span></a>
+  <a href="./08-Estimating-unknown-quantities-from-a-sample.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Estimating unknown quantities from a sample</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./09-Hypothesis-testing.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Hypothesis testing</span></a>
+  <a href="./09-Hypothesis-testing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Hypothesis testing</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">Statistical tools</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text">Statistical tools</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./10-Categorical-data-analysis.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Categorical data analysis</span></a>
+  <a href="./10-Categorical-data-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Categorical data analysis</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./11-Comparing-two-means.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Comparing two means</span></a>
+  <a href="./11-Comparing-two-means.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Comparing two means</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./12-Correlation-and-linear-regression.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Correlation and linear regression</span></a>
+  <a href="./12-Correlation-and-linear-regression.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Correlation and linear regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./13-Comparing-several-means-one-way-ANOVA.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Comparing several means (one-way ANOVA)</span></a>
+  <a href="./13-Comparing-several-means-one-way-ANOVA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Comparing several means (one-way ANOVA)</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./14-Factorial-ANOVA.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Factorial ANOVA</span></a>
+  <a href="./14-Factorial-ANOVA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Factorial ANOVA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./15-Factor-Analysis.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Factor Analysis</span></a>
+  <a href="./15-Factor-Analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Factor Analysis</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">Endings, alternatives and prospects</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">
+ <span class="menu-text">Endings, alternatives and prospects</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./16-Bayesian-statistics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Bayesian statistics</span></a>
+  <a href="./16-Bayesian-statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Bayesian statistics</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Epilogue.html" class="sidebar-item-text sidebar-link">Epilogue</a>
+  <a href="./Epilogue.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Epilogue</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./References.html" class="sidebar-item-text sidebar-link">References</a>
+  <a href="./References.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#correlations" id="toc-correlations" class="nav-link active" data-scroll-target="#correlations"><span class="toc-section-number">12.1</span>  Correlations</a>
+  <li><a href="#correlations" id="toc-correlations" class="nav-link active" data-scroll-target="#correlations"><span class="header-section-number">12.1</span> Correlations</a>
   <ul class="collapse">
-  <li><a href="#the-data" id="toc-the-data" class="nav-link" data-scroll-target="#the-data"><span class="toc-section-number">12.1.1</span>  The data</a></li>
-  <li><a href="#the-strength-and-direction-of-a-relationship" id="toc-the-strength-and-direction-of-a-relationship" class="nav-link" data-scroll-target="#the-strength-and-direction-of-a-relationship"><span class="toc-section-number">12.1.2</span>  The strength and direction of a relationship</a></li>
-  <li><a href="#the-correlation-coefficient" id="toc-the-correlation-coefficient" class="nav-link" data-scroll-target="#the-correlation-coefficient"><span class="toc-section-number">12.1.3</span>  The correlation coefficient</a></li>
-  <li><a href="#calculating-correlations-in-jamovi" id="toc-calculating-correlations-in-jamovi" class="nav-link" data-scroll-target="#calculating-correlations-in-jamovi"><span class="toc-section-number">12.1.4</span>  Calculating correlations in jamovi</a></li>
-  <li><a href="#interpreting-a-correlation" id="toc-interpreting-a-correlation" class="nav-link" data-scroll-target="#interpreting-a-correlation"><span class="toc-section-number">12.1.5</span>  Interpreting a correlation</a></li>
-  <li><a href="#spearmans-rank-correlations" id="toc-spearmans-rank-correlations" class="nav-link" data-scroll-target="#spearmans-rank-correlations"><span class="toc-section-number">12.1.6</span>  Spearman’s rank correlations</a></li>
+  <li><a href="#the-data" id="toc-the-data" class="nav-link" data-scroll-target="#the-data"><span class="header-section-number">12.1.1</span> The data</a></li>
+  <li><a href="#the-strength-and-direction-of-a-relationship" id="toc-the-strength-and-direction-of-a-relationship" class="nav-link" data-scroll-target="#the-strength-and-direction-of-a-relationship"><span class="header-section-number">12.1.2</span> The strength and direction of a relationship</a></li>
+  <li><a href="#the-correlation-coefficient" id="toc-the-correlation-coefficient" class="nav-link" data-scroll-target="#the-correlation-coefficient"><span class="header-section-number">12.1.3</span> The correlation coefficient</a></li>
+  <li><a href="#calculating-correlations-in-jamovi" id="toc-calculating-correlations-in-jamovi" class="nav-link" data-scroll-target="#calculating-correlations-in-jamovi"><span class="header-section-number">12.1.4</span> Calculating correlations in jamovi</a></li>
+  <li><a href="#interpreting-a-correlation" id="toc-interpreting-a-correlation" class="nav-link" data-scroll-target="#interpreting-a-correlation"><span class="header-section-number">12.1.5</span> Interpreting a correlation</a></li>
+  <li><a href="#spearmans-rank-correlations" id="toc-spearmans-rank-correlations" class="nav-link" data-scroll-target="#spearmans-rank-correlations"><span class="header-section-number">12.1.6</span> Spearman’s rank correlations</a></li>
   </ul></li>
-  <li><a href="#scatterplots" id="toc-scatterplots" class="nav-link" data-scroll-target="#scatterplots"><span class="toc-section-number">12.2</span>  Scatterplots</a>
+  <li><a href="#scatterplots" id="toc-scatterplots" class="nav-link" data-scroll-target="#scatterplots"><span class="header-section-number">12.2</span> Scatterplots</a>
   <ul class="collapse">
-  <li><a href="#more-elaborate-options" id="toc-more-elaborate-options" class="nav-link" data-scroll-target="#more-elaborate-options"><span class="toc-section-number">12.2.1</span>  More elaborate options</a></li>
+  <li><a href="#more-elaborate-options" id="toc-more-elaborate-options" class="nav-link" data-scroll-target="#more-elaborate-options"><span class="header-section-number">12.2.1</span> More elaborate options</a></li>
   </ul></li>
-  <li><a href="#what-is-a-linear-regression-model" id="toc-what-is-a-linear-regression-model" class="nav-link" data-scroll-target="#what-is-a-linear-regression-model"><span class="toc-section-number">12.3</span>  What is a linear regression model?</a></li>
-  <li><a href="#estimating-a-linear-regression-model" id="toc-estimating-a-linear-regression-model" class="nav-link" data-scroll-target="#estimating-a-linear-regression-model"><span class="toc-section-number">12.4</span>  Estimating a linear regression model</a>
+  <li><a href="#what-is-a-linear-regression-model" id="toc-what-is-a-linear-regression-model" class="nav-link" data-scroll-target="#what-is-a-linear-regression-model"><span class="header-section-number">12.3</span> What is a linear regression model?</a></li>
+  <li><a href="#estimating-a-linear-regression-model" id="toc-estimating-a-linear-regression-model" class="nav-link" data-scroll-target="#estimating-a-linear-regression-model"><span class="header-section-number">12.4</span> Estimating a linear regression model</a>
   <ul class="collapse">
-  <li><a href="#linear-regression-in-jamovi" id="toc-linear-regression-in-jamovi" class="nav-link" data-scroll-target="#linear-regression-in-jamovi"><span class="toc-section-number">12.4.1</span>  Linear regression in jamovi</a></li>
-  <li><a href="#interpreting-the-estimated-model" id="toc-interpreting-the-estimated-model" class="nav-link" data-scroll-target="#interpreting-the-estimated-model"><span class="toc-section-number">12.4.2</span>  Interpreting the estimated model</a></li>
+  <li><a href="#linear-regression-in-jamovi" id="toc-linear-regression-in-jamovi" class="nav-link" data-scroll-target="#linear-regression-in-jamovi"><span class="header-section-number">12.4.1</span> Linear regression in jamovi</a></li>
+  <li><a href="#interpreting-the-estimated-model" id="toc-interpreting-the-estimated-model" class="nav-link" data-scroll-target="#interpreting-the-estimated-model"><span class="header-section-number">12.4.2</span> Interpreting the estimated model</a></li>
   </ul></li>
-  <li><a href="#multiple-linear-regression" id="toc-multiple-linear-regression" class="nav-link" data-scroll-target="#multiple-linear-regression"><span class="toc-section-number">12.5</span>  Multiple linear regression</a>
+  <li><a href="#multiple-linear-regression" id="toc-multiple-linear-regression" class="nav-link" data-scroll-target="#multiple-linear-regression"><span class="header-section-number">12.5</span> Multiple linear regression</a>
   <ul class="collapse">
-  <li><a href="#doing-it-in-jamovi" id="toc-doing-it-in-jamovi" class="nav-link" data-scroll-target="#doing-it-in-jamovi"><span class="toc-section-number">12.5.1</span>  Doing it in jamovi</a></li>
+  <li><a href="#doing-it-in-jamovi" id="toc-doing-it-in-jamovi" class="nav-link" data-scroll-target="#doing-it-in-jamovi"><span class="header-section-number">12.5.1</span> Doing it in jamovi</a></li>
   </ul></li>
-  <li><a href="#quantifying-the-fit-of-the-regression-model" id="toc-quantifying-the-fit-of-the-regression-model" class="nav-link" data-scroll-target="#quantifying-the-fit-of-the-regression-model"><span class="toc-section-number">12.6</span>  Quantifying the fit of the regression model</a>
+  <li><a href="#quantifying-the-fit-of-the-regression-model" id="toc-quantifying-the-fit-of-the-regression-model" class="nav-link" data-scroll-target="#quantifying-the-fit-of-the-regression-model"><span class="header-section-number">12.6</span> Quantifying the fit of the regression model</a>
   <ul class="collapse">
-  <li><a href="#sec-The-R2-value" id="toc-sec-The-R2-value" class="nav-link" data-scroll-target="#sec-The-R2-value"><span class="toc-section-number">12.6.1</span>  The <span class="math inline">\(R^2\)</span> value</a></li>
-  <li><a href="#the-relationship-between-regression-and-correlation" id="toc-the-relationship-between-regression-and-correlation" class="nav-link" data-scroll-target="#the-relationship-between-regression-and-correlation"><span class="toc-section-number">12.6.2</span>  The relationship between regression and correlation</a></li>
-  <li><a href="#the-adjusted-r2-value" id="toc-the-adjusted-r2-value" class="nav-link" data-scroll-target="#the-adjusted-r2-value"><span class="toc-section-number">12.6.3</span>  The adjusted <span class="math inline">\(R^2\)</span> value</a></li>
+  <li><a href="#sec-The-R2-value" id="toc-sec-The-R2-value" class="nav-link" data-scroll-target="#sec-The-R2-value"><span class="header-section-number">12.6.1</span> The <span class="math inline">\(R^2\)</span> value</a></li>
+  <li><a href="#the-relationship-between-regression-and-correlation" id="toc-the-relationship-between-regression-and-correlation" class="nav-link" data-scroll-target="#the-relationship-between-regression-and-correlation"><span class="header-section-number">12.6.2</span> The relationship between regression and correlation</a></li>
+  <li><a href="#the-adjusted-r2-value" id="toc-the-adjusted-r2-value" class="nav-link" data-scroll-target="#the-adjusted-r2-value"><span class="header-section-number">12.6.3</span> The adjusted <span class="math inline">\(R^2\)</span> value</a></li>
   </ul></li>
-  <li><a href="#hypothesis-tests-for-regression-models" id="toc-hypothesis-tests-for-regression-models" class="nav-link" data-scroll-target="#hypothesis-tests-for-regression-models"><span class="toc-section-number">12.7</span>  Hypothesis tests for regression models</a>
+  <li><a href="#hypothesis-tests-for-regression-models" id="toc-hypothesis-tests-for-regression-models" class="nav-link" data-scroll-target="#hypothesis-tests-for-regression-models"><span class="header-section-number">12.7</span> Hypothesis tests for regression models</a>
   <ul class="collapse">
-  <li><a href="#testing-the-model-as-a-whole" id="toc-testing-the-model-as-a-whole" class="nav-link" data-scroll-target="#testing-the-model-as-a-whole"><span class="toc-section-number">12.7.1</span>  Testing the model as a whole</a></li>
-  <li><a href="#tests-for-individual-coefficients" id="toc-tests-for-individual-coefficients" class="nav-link" data-scroll-target="#tests-for-individual-coefficients"><span class="toc-section-number">12.7.2</span>  Tests for individual coefficients</a></li>
-  <li><a href="#running-the-hypothesis-tests-in-jamovi" id="toc-running-the-hypothesis-tests-in-jamovi" class="nav-link" data-scroll-target="#running-the-hypothesis-tests-in-jamovi"><span class="toc-section-number">12.7.3</span>  Running the hypothesis tests in jamovi</a></li>
+  <li><a href="#testing-the-model-as-a-whole" id="toc-testing-the-model-as-a-whole" class="nav-link" data-scroll-target="#testing-the-model-as-a-whole"><span class="header-section-number">12.7.1</span> Testing the model as a whole</a></li>
+  <li><a href="#tests-for-individual-coefficients" id="toc-tests-for-individual-coefficients" class="nav-link" data-scroll-target="#tests-for-individual-coefficients"><span class="header-section-number">12.7.2</span> Tests for individual coefficients</a></li>
+  <li><a href="#running-the-hypothesis-tests-in-jamovi" id="toc-running-the-hypothesis-tests-in-jamovi" class="nav-link" data-scroll-target="#running-the-hypothesis-tests-in-jamovi"><span class="header-section-number">12.7.3</span> Running the hypothesis tests in jamovi</a></li>
   </ul></li>
-  <li><a href="#regarding-regression-coefficients" id="toc-regarding-regression-coefficients" class="nav-link" data-scroll-target="#regarding-regression-coefficients"><span class="toc-section-number">12.8</span>  Regarding regression coefficients</a>
+  <li><a href="#regarding-regression-coefficients" id="toc-regarding-regression-coefficients" class="nav-link" data-scroll-target="#regarding-regression-coefficients"><span class="header-section-number">12.8</span> Regarding regression coefficients</a>
   <ul class="collapse">
-  <li><a href="#confidence-intervals-for-the-coefficients" id="toc-confidence-intervals-for-the-coefficients" class="nav-link" data-scroll-target="#confidence-intervals-for-the-coefficients"><span class="toc-section-number">12.8.1</span>  Confidence intervals for the coefficients</a></li>
-  <li><a href="#calculating-standardised-regression-coefficients" id="toc-calculating-standardised-regression-coefficients" class="nav-link" data-scroll-target="#calculating-standardised-regression-coefficients"><span class="toc-section-number">12.8.2</span>  Calculating standardised regression coefficients</a></li>
+  <li><a href="#confidence-intervals-for-the-coefficients" id="toc-confidence-intervals-for-the-coefficients" class="nav-link" data-scroll-target="#confidence-intervals-for-the-coefficients"><span class="header-section-number">12.8.1</span> Confidence intervals for the coefficients</a></li>
+  <li><a href="#calculating-standardised-regression-coefficients" id="toc-calculating-standardised-regression-coefficients" class="nav-link" data-scroll-target="#calculating-standardised-regression-coefficients"><span class="header-section-number">12.8.2</span> Calculating standardised regression coefficients</a></li>
   </ul></li>
-  <li><a href="#assumptions-of-regression" id="toc-assumptions-of-regression" class="nav-link" data-scroll-target="#assumptions-of-regression"><span class="toc-section-number">12.9</span>  Assumptions of regression</a></li>
-  <li><a href="#sec-Model-checking" id="toc-sec-Model-checking" class="nav-link" data-scroll-target="#sec-Model-checking"><span class="toc-section-number">12.10</span>  Model checking</a>
+  <li><a href="#assumptions-of-regression" id="toc-assumptions-of-regression" class="nav-link" data-scroll-target="#assumptions-of-regression"><span class="header-section-number">12.9</span> Assumptions of regression</a></li>
+  <li><a href="#sec-Model-checking" id="toc-sec-Model-checking" class="nav-link" data-scroll-target="#sec-Model-checking"><span class="header-section-number">12.10</span> Model checking</a>
   <ul class="collapse">
-  <li><a href="#three-kinds-of-residuals" id="toc-three-kinds-of-residuals" class="nav-link" data-scroll-target="#three-kinds-of-residuals"><span class="toc-section-number">12.10.1</span>  Three kinds of residuals</a></li>
-  <li><a href="#checking-the-linearity-of-the-relationship" id="toc-checking-the-linearity-of-the-relationship" class="nav-link" data-scroll-target="#checking-the-linearity-of-the-relationship"><span class="toc-section-number">12.10.2</span>  Checking the linearity of the relationship</a></li>
-  <li><a href="#sec-Checking-the-normality-of-the-residuals" id="toc-sec-Checking-the-normality-of-the-residuals" class="nav-link" data-scroll-target="#sec-Checking-the-normality-of-the-residuals"><span class="toc-section-number">12.10.3</span>  Checking the normality of the residuals</a></li>
-  <li><a href="#checking-equality-of-variance" id="toc-checking-equality-of-variance" class="nav-link" data-scroll-target="#checking-equality-of-variance"><span class="toc-section-number">12.10.4</span>  Checking equality of variance</a></li>
-  <li><a href="#checking-for-collinearity" id="toc-checking-for-collinearity" class="nav-link" data-scroll-target="#checking-for-collinearity"><span class="toc-section-number">12.10.5</span>  Checking for collinearity</a></li>
-  <li><a href="#outliers-and-anomalous-data" id="toc-outliers-and-anomalous-data" class="nav-link" data-scroll-target="#outliers-and-anomalous-data"><span class="toc-section-number">12.10.6</span>  Outliers and anomalous data</a></li>
+  <li><a href="#three-kinds-of-residuals" id="toc-three-kinds-of-residuals" class="nav-link" data-scroll-target="#three-kinds-of-residuals"><span class="header-section-number">12.10.1</span> Three kinds of residuals</a></li>
+  <li><a href="#checking-the-linearity-of-the-relationship" id="toc-checking-the-linearity-of-the-relationship" class="nav-link" data-scroll-target="#checking-the-linearity-of-the-relationship"><span class="header-section-number">12.10.2</span> Checking the linearity of the relationship</a></li>
+  <li><a href="#sec-Checking-the-normality-of-the-residuals" id="toc-sec-Checking-the-normality-of-the-residuals" class="nav-link" data-scroll-target="#sec-Checking-the-normality-of-the-residuals"><span class="header-section-number">12.10.3</span> Checking the normality of the residuals</a></li>
+  <li><a href="#checking-equality-of-variance" id="toc-checking-equality-of-variance" class="nav-link" data-scroll-target="#checking-equality-of-variance"><span class="header-section-number">12.10.4</span> Checking equality of variance</a></li>
+  <li><a href="#checking-for-collinearity" id="toc-checking-for-collinearity" class="nav-link" data-scroll-target="#checking-for-collinearity"><span class="header-section-number">12.10.5</span> Checking for collinearity</a></li>
+  <li><a href="#outliers-and-anomalous-data" id="toc-outliers-and-anomalous-data" class="nav-link" data-scroll-target="#outliers-and-anomalous-data"><span class="header-section-number">12.10.6</span> Outliers and anomalous data</a></li>
   </ul></li>
-  <li><a href="#model-selection" id="toc-model-selection" class="nav-link" data-scroll-target="#model-selection"><span class="toc-section-number">12.11</span>  Model selection</a>
+  <li><a href="#model-selection" id="toc-model-selection" class="nav-link" data-scroll-target="#model-selection"><span class="header-section-number">12.11</span> Model selection</a>
   <ul class="collapse">
-  <li><a href="#backward-elimination" id="toc-backward-elimination" class="nav-link" data-scroll-target="#backward-elimination"><span class="toc-section-number">12.11.1</span>  Backward elimination</a></li>
-  <li><a href="#forward-selection" id="toc-forward-selection" class="nav-link" data-scroll-target="#forward-selection"><span class="toc-section-number">12.11.2</span>  Forward selection</a></li>
-  <li><a href="#a-caveat" id="toc-a-caveat" class="nav-link" data-scroll-target="#a-caveat"><span class="toc-section-number">12.11.3</span>  A caveat</a></li>
-  <li><a href="#comparing-two-regression-models" id="toc-comparing-two-regression-models" class="nav-link" data-scroll-target="#comparing-two-regression-models"><span class="toc-section-number">12.11.4</span>  Comparing two regression models</a></li>
+  <li><a href="#backward-elimination" id="toc-backward-elimination" class="nav-link" data-scroll-target="#backward-elimination"><span class="header-section-number">12.11.1</span> Backward elimination</a></li>
+  <li><a href="#forward-selection" id="toc-forward-selection" class="nav-link" data-scroll-target="#forward-selection"><span class="header-section-number">12.11.2</span> Forward selection</a></li>
+  <li><a href="#a-caveat" id="toc-a-caveat" class="nav-link" data-scroll-target="#a-caveat"><span class="header-section-number">12.11.3</span> A caveat</a></li>
+  <li><a href="#comparing-two-regression-models" id="toc-comparing-two-regression-models" class="nav-link" data-scroll-target="#comparing-two-regression-models"><span class="header-section-number">12.11.4</span> Comparing two regression models</a></li>
   </ul></li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="toc-section-number">12.12</span>  Summary</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">12.12</span> Summary</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/davidfoxcroft/lsj-book/edit/main/12-Correlation-and-linear-regression.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/davidfoxcroft/lsj-book/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -399,7 +438,7 @@ div.csl-indent {
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header">
-<h1 class="title display-7"><span id="sec-Correlation-and-linear-regression" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Correlation and linear regression</span></span></h1>
+<h1 class="title display-7"><span id="sec-Correlation-and-linear-regression" class="quarto-section-identifier"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Correlation and linear regression</span></span></h1>
 
 </header>
 
@@ -413,7 +452,8 @@ div.csl-indent {
 <div class="cell-output-display">
 <div id="tbl-tab12-1" class="anchored">
 
-<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab12-1"><caption>Table&nbsp;12.1:  Data for correlation analysis - descriptive statistics for the parenthooddata </caption>
+<table class="huxtable" data-quarto-disable-processing="true" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab12-1"><caption>Table&nbsp;12.1:  <p>Data for correlation analysis - descriptive statistics for the
+<em>parenthood</em>data</p> </caption>
 <colgroup><col><col><col><col><col><col><col></colgroup><tbody><tr>
 <th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 0pt; font-weight: bold;">variable</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">min</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">max</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">mean</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">median</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">std. dev</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 0pt 2pt 12pt; font-weight: bold;">IQR</th></tr>
 <tr>
@@ -436,7 +476,7 @@ div.csl-indent {
 <div id="fig-fig12-1a" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="images/fig12-1a.png" class="img-fluid figure-img" data-ref-parent="fig-fig12-1"></p>
-<p></p><figcaption class="figure-caption">(a)</figcaption><p></p>
+<figcaption class="figure-caption">(a)</figcaption>
 </figure>
 </div>
 </div>
@@ -444,7 +484,7 @@ div.csl-indent {
 <div id="fig-fig12-1b" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="images/fig12-1b.png" class="img-fluid figure-img" data-ref-parent="fig-fig12-1"></p>
-<p></p><figcaption class="figure-caption">(b)</figcaption><p></p>
+<figcaption class="figure-caption">(b)</figcaption>
 </figure>
 </div>
 </div>
@@ -452,7 +492,7 @@ div.csl-indent {
 <div id="fig-fig12-1c" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="images/fig12-1c.png" class="img-fluid figure-img" data-ref-parent="fig-fig12-1"></p>
-<p></p><figcaption class="figure-caption">(c)</figcaption><p></p>
+<figcaption class="figure-caption">(c)</figcaption>
 </figure>
 </div>
 </div>
@@ -471,7 +511,7 @@ div.csl-indent {
 <div id="fig-fig12-2a" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="images/fig12-2a.png" class="img-fluid figure-img" data-ref-parent="fig-fig12-2"></p>
-<p></p><figcaption class="figure-caption">(a)</figcaption><p></p>
+<figcaption class="figure-caption">(a)</figcaption>
 </figure>
 </div>
 </div>
@@ -479,7 +519,7 @@ div.csl-indent {
 <div id="fig-fig12-2b" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="images/fig12-2b.png" class="img-fluid figure-img" data-ref-parent="fig-fig12-2"></p>
-<p></p><figcaption class="figure-caption">(b)</figcaption><p></p>
+<figcaption class="figure-caption">(b)</figcaption>
 </figure>
 </div>
 </div>
@@ -495,7 +535,7 @@ div.csl-indent {
 <div id="fig-fig12-3a" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="images/fig12-2a.png" class="img-fluid figure-img" data-ref-parent="fig-fig12-3"></p>
-<p></p><figcaption class="figure-caption">(a)</figcaption><p></p>
+<figcaption class="figure-caption">(a)</figcaption>
 </figure>
 </div>
 </div>
@@ -503,7 +543,7 @@ div.csl-indent {
 <div id="fig-fig12-3b" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="images/fig12-3b.png" class="img-fluid figure-img" data-ref-parent="fig-fig12-3"></p>
-<p></p><figcaption class="figure-caption">(b)</figcaption><p></p>
+<figcaption class="figure-caption">(b)</figcaption>
 </figure>
 </div>
 </div>
@@ -521,7 +561,7 @@ div.csl-indent {
 <div id="fig-fig12-4" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="12-Correlation-and-linear-regression_files/figure-html/fig-fig12-4-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;12.4: Illustration of the effect of varying the strength and direction of a correlation. In the left hand column, the correlations are <span class="math inline">\(0, .33, .66\)</span> and <span class="math inline">\(1\)</span>. In the right hand column, the correlations are <span class="math inline">\(0, -.33, -.66\)</span> and <span class="math inline">\(-1\)</span></figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;12.4: Illustration of the effect of varying the strength and direction of a correlation. In the left hand column, the correlations are <span class="math inline">\(0, .33, .66\)</span> and <span class="math inline">\(1\)</span>. In the right hand column, the correlations are <span class="math inline">\(0, -.33, -.66\)</span> and <span class="math inline">\(-1\)</span></figcaption>
 </figure>
 </div>
 </div>
@@ -536,7 +576,7 @@ div.csl-indent {
 <div id="fig-fig12-5" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="images/fig12-5.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;12.5: A jamovi screenshot showing correlations between variables in the <em>parenthood.csv</em> file</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;12.5: A jamovi screenshot showing correlations between variables in the <em>parenthood.csv</em> file</figcaption>
 </figure>
 </div>
 </div>
@@ -549,7 +589,7 @@ div.csl-indent {
 <div class="cell-output-display">
 <div id="tbl-tab12-2" class="anchored">
 
-<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab12-2"><caption>Table&nbsp;12.2:  A rough guide to interpreting correlations </caption>
+<table class="huxtable" data-quarto-disable-processing="true" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab12-2"><caption>Table&nbsp;12.2:  <p>A rough guide to interpreting correlations</p> </caption>
 <colgroup><col><col><col></colgroup><tbody><tr>
 <th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 0pt; font-weight: bold;">Correlation</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">Strength</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 0pt 2pt 12pt; font-weight: bold;">Direction</th></tr>
 <tr>
@@ -602,7 +642,7 @@ div.csl-indent {
 <div id="fig-fig12-7" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="images/fig12-7.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;12.7: The relationship between hours worked and grade received for a toy data set consisting of only 10 students (each dot corresponds to one student). The line through the middle shows the linear relationship between the two variables. This produces a strong Pearson correlation of <span class="math inline">\(r = .91\)</span>. However, the interesting thing to note here is that there’s actually a perfect monotonic relationship between the two variables. In this toy example, increasing the hours worked always increases the grade received, as illustrated by the solid line. This is reflected in a Spearman correlation of <span class="math inline">\(\rho = 1\)</span>. With such a small data set, however, it’s an open question as to which version better describes the actual relationship involved</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;12.7: The relationship between hours worked and grade received for a toy data set consisting of only 10 students (each dot corresponds to one student). The line through the middle shows the linear relationship between the two variables. This produces a strong Pearson correlation of <span class="math inline">\(r = .91\)</span>. However, the interesting thing to note here is that there’s actually a perfect monotonic relationship between the two variables. In this toy example, increasing the hours worked always increases the grade received, as illustrated by the solid line. This is reflected in a Spearman correlation of <span class="math inline">\(\rho = 1\)</span>. With such a small data set, however, it’s an open question as to which version better describes the actual relationship involved</figcaption>
 </figure>
 </div>
 </div>
@@ -613,7 +653,7 @@ div.csl-indent {
 <div class="cell-output-display">
 <div id="tbl-tab12-3" class="anchored">
 
-<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab12-3"><caption>Table&nbsp;12.3:  Students ranked in terms of effort and reward </caption>
+<table class="huxtable" data-quarto-disable-processing="true" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab12-3"><caption>Table&nbsp;12.3:  <p>Students ranked in terms of effort and reward</p> </caption>
 <colgroup><col><col><col></colgroup><tbody><tr>
 <th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 0pt; font-weight: bold;"></th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">rank (hours worked)</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 0pt 2pt 12pt; font-weight: bold;">rank (grade received)</th></tr>
 <tr>
@@ -654,7 +694,7 @@ div.csl-indent {
 <div id="fig-fig12-8" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="images/fig12-8.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;12.8: Scatterplot via the ‘Correlation Matrix’ command in jamovi</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;12.8: Scatterplot via the ‘Correlation Matrix’ command in jamovi</figcaption>
 </figure>
 </div>
 </div>
@@ -665,7 +705,7 @@ div.csl-indent {
 <div id="fig-fig12-9" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="images/fig12-9.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;12.9: Scatterplot via the ‘scatr’ add-on module in - jamovi</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;12.9: Scatterplot via the ‘scatr’ add-on module in - jamovi</figcaption>
 </figure>
 </div>
 </div>
@@ -678,7 +718,7 @@ div.csl-indent {
 <div id="fig-fig12-10" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="images/fig12-10.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;12.10: A matrix of scatterplots produced using jamovi</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;12.10: A matrix of scatterplots produced using jamovi</figcaption>
 </figure>
 </div>
 </div>
@@ -694,7 +734,7 @@ div.csl-indent {
 <div id="fig-fig12-11" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="12-Correlation-and-linear-regression_files/figure-html/fig-fig12-11-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;12.11: Panel (a) shows the sleep-grumpiness scatterplot from <a href="#fig-fig12-9">Figure&nbsp;<span>12.9</span></a> with the best fitting regression line drawn over the top. Not surprisingly, the line goes through the middle of the data. In contrast, panel (b) shows the same data, but with a very poor choice of regression line drawn over the top</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;12.11: Panel (a) shows the sleep-grumpiness scatterplot from <a href="#fig-fig12-9">Figure&nbsp;<span>12.9</span></a> with the best fitting regression line drawn over the top. Not surprisingly, the line goes through the middle of the data. In contrast, panel (b) shows the same data, but with a very poor choice of regression line drawn over the top</figcaption>
 </figure>
 </div>
 </div>
@@ -720,7 +760,7 @@ div.csl-indent {
 <div id="fig-fig12-12" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="12-Correlation-and-linear-regression_files/figure-html/fig-fig12-12-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;12.12: A depiction of the residuals associated with the best fitting regression line (panel a), and the residuals associated with a poor regression line (panel b). The residuals are much smaller for the good regression line. Again, this is no surprise given that the good line is the one that goes right through the middle of the data</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;12.12: A depiction of the residuals associated with the best fitting regression line (panel a), and the residuals associated with a poor regression line (panel b). The residuals are much smaller for the good regression line. Again, this is no surprise given that the good line is the one that goes right through the middle of the data</figcaption>
 </figure>
 </div>
 </div>
@@ -736,7 +776,7 @@ div.csl-indent {
 <div id="fig-fig12-13" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="images/fig12-13.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;12.13: A jamovi screenshot showing a simple linear regression analysis</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;12.13: A jamovi screenshot showing a simple linear regression analysis</figcaption>
 </figure>
 </div>
 </div>
@@ -760,7 +800,7 @@ div.csl-indent {
 <div class="cell-output-display">
 <div id="tbl-tab12-4" class="anchored">
 
-<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab12-4"><caption>Table&nbsp;12.4:  Adding multiple variables as predictors in a regression </caption>
+<table class="huxtable" data-quarto-disable-processing="true" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab12-4"><caption>Table&nbsp;12.4:  <p>Adding multiple variables as predictors in a regression</p> </caption>
 <colgroup><col><col><col></colgroup><tbody><tr>
 <th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 0pt; font-weight: bold;">(Intercept)</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">dani.sleep</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 0pt 2pt 12pt; font-weight: bold;">baby.sleep</th></tr>
 <tr>
@@ -776,7 +816,7 @@ div.csl-indent {
 <div id="fig-fig12-14" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="12-Correlation-and-linear-regression_files/figure-html/fig-fig12-14-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;12.14: A 3D visualisation of a multiple regression model. There are two predictors in the model, dani.sleep and baby.sleep and the outcome variable is dani.grump. Together, these three variables form a 3D space. Each observation (dot) is a point in this space. In much the same way that a simple linear regression model forms a line in 2D space, this multiple regression model forms a plane in 3D space. When we estimate the regression coefficients what we’re trying to do is find a plane that is as close to all the blue dots as possible</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;12.14: A 3D visualisation of a multiple regression model. There are two predictors in the model, dani.sleep and baby.sleep and the outcome variable is dani.grump. Together, these three variables form a 3D space. Each observation (dot) is a point in this space. In much the same way that a simple linear regression model forms a line in 2D space, this multiple regression model forms a plane in 3D space. When we estimate the regression coefficients what we’re trying to do is find a plane that is as close to all the blue dots as possible</figcaption>
 </figure>
 </div>
 </div>
@@ -845,7 +885,7 @@ div.csl-indent {
 <div id="fig-fig12-15" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="images/fig12-15.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;12.15: A jamovi screenshot showing a multiple linear regression analysis, with some useful options checked</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;12.15: A jamovi screenshot showing a multiple linear regression analysis, with some useful options checked</figcaption>
 </figure>
 </div>
 </div>
@@ -874,7 +914,7 @@ div.csl-indent {
 <div id="fig-fig12-16" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="images/fig12-16.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;12.16: Standardised coefficients, with 95% confidence intervals, for multiple linear regression</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;12.16: Standardised coefficients, with 95% confidence intervals, for multiple linear regression</figcaption>
 </figure>
 </div>
 </div>
@@ -919,7 +959,7 @@ div.csl-indent {
 <div id="fig-fig12-17" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="images/fig12-17.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;12.17: jamovi plot of the predicted values against the observed values of the outcome variable. A straight(-ish) line is what we’re hoping to see here. This looks pretty good, suggesting that there’s nothing grossly wrong</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;12.17: jamovi plot of the predicted values against the observed values of the outcome variable. A straight(-ish) line is what we’re hoping to see here. This looks pretty good, suggesting that there’s nothing grossly wrong</figcaption>
 </figure>
 </div>
 </div>
@@ -930,7 +970,7 @@ div.csl-indent {
 <div id="fig-fig12-18" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="images/fig12-18.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;12.18: jamovi plot of the predicted values against the residuals, with a line showing the relationship between the two. If this is horizontal and straight(-ish), then we can feel reasonably confident that the “average residual” for all “predicted values” is more or less the same.</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;12.18: jamovi plot of the predicted values against the residuals, with a line showing the relationship between the two. If this is horizontal and straight(-ish), then we can feel reasonably confident that the “average residual” for all “predicted values” is more or less the same.</figcaption>
 </figure>
 </div>
 </div>
@@ -945,7 +985,7 @@ div.csl-indent {
 <div id="fig-fig12-19" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="images/fig12-19.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;12.19: Plot of the theoretical quantiles according to the model, against the quantiles of the standardised residuals, produced in jamovi</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;12.19: Plot of the theoretical quantiles according to the model, against the quantiles of the standardised residuals, produced in jamovi</figcaption>
 </figure>
 </div>
 </div>
@@ -972,7 +1012,7 @@ div.csl-indent {
 <div id="fig-fig12-21" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="images/fig12-21.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;12.21: jamovi plot of the predicted values (model predictions) against the square root of the absolute standardised residuals. This plot is used to diagnose violations of homogeneity of variance. If the variance is really constant, then the line through the middle should be horizontal and flat(-ish).</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;12.21: jamovi plot of the predicted values (model predictions) against the square root of the absolute standardised residuals. This plot is used to diagnose violations of homogeneity of variance. If the variance is really constant, then the line through the middle should be horizontal and flat(-ish).</figcaption>
 </figure>
 </div>
 </div>
@@ -988,7 +1028,7 @@ div.csl-indent {
 <div id="fig-fig12-22" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="images/fig12-22.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;12.22: Correlation matrix in jamovi for all four variables</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;12.22: Correlation matrix in jamovi for all four variables</figcaption>
 </figure>
 </div>
 </div>
@@ -999,7 +1039,7 @@ div.csl-indent {
 <div id="fig-fig12-23" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="images/fig12-23.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;12.23: Collinearity statistics for multiple regression, produced in jamovi</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;12.23: Collinearity statistics for multiple regression, produced in jamovi</figcaption>
 </figure>
 </div>
 </div>
@@ -1014,7 +1054,7 @@ div.csl-indent {
 <div id="fig-fig12-24" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="12-Correlation-and-linear-regression_files/figure-html/fig-fig12-24-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;12.24: An illustration of outliers. The solid line shows the regression line with the anomalous outlier observation included. The dashed line plots the regression line estimated without the anomalous outlier observation included. The vertical line from the outlier point to the dashed regression line illustrates the large residual error for the outlier. The outlier has an unusual value on the outcome (y axis location) but not the predictor (x axis location), and lies a long way from the regression line</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;12.24: An illustration of outliers. The solid line shows the regression line with the anomalous outlier observation included. The dashed line plots the regression line estimated without the anomalous outlier observation included. The vertical line from the outlier point to the dashed regression line illustrates the large residual error for the outlier. The outlier has an unusual value on the outcome (y axis location) but not the predictor (x axis location), and lies a long way from the regression line</figcaption>
 </figure>
 </div>
 </div>
@@ -1025,7 +1065,7 @@ div.csl-indent {
 <div id="fig-fig12-25" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="12-Correlation-and-linear-regression_files/figure-html/fig-fig12-25-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;12.25: An illustration of high leverage points. The anomalous observation in this case is unusual both in terms of the predictor (x axis) and the outcome (y axis), but this unusualness is highly consistent with the pattern of correlations that exists among the other observations. The observation falls very close to the regression line and does not distort it by very much</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;12.25: An illustration of high leverage points. The anomalous observation in this case is unusual both in terms of the predictor (x axis) and the outcome (y axis), but this unusualness is highly consistent with the pattern of correlations that exists among the other observations. The observation falls very close to the regression line and does not distort it by very much</figcaption>
 </figure>
 </div>
 </div>
@@ -1037,7 +1077,7 @@ div.csl-indent {
 <div id="fig-fig12-26" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="12-Correlation-and-linear-regression_files/figure-html/fig-fig12-26-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;12.26: An illustration of high influence points. In this case, the anomalous observation is highly unusual on the predictor variable (x axis), and falls a long way from the regression line. As a consequence, the regression line is highly distorted, even though (in this case) the anomalous observation is entirely typical in terms of the outcome variable (y axis)</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;12.26: An illustration of high influence points. In this case, the anomalous observation is highly unusual on the predictor variable (x axis), and falls a long way from the regression line. As a consequence, the regression line is highly distorted, even though (in this case) the anomalous observation is entirely typical in terms of the outcome variable (y axis)</figcaption>
 </figure>
 </div>
 </div>
@@ -1049,7 +1089,7 @@ div.csl-indent {
 <div id="fig-fig12-27" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="images/fig12-27.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;12.27: jamovi output showing the table for the Cook’s distance statistics</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;12.27: jamovi output showing the table for the Cook’s distance statistics</figcaption>
 </figure>
 </div>
 </div>
@@ -1095,7 +1135,7 @@ div.csl-indent {
 <div id="fig-fig12-28" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="images/fig12-28.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;12.28: Model comparison in jamovi using the ‘Model Builder’ option</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;12.28: Model comparison in jamovi using the ‘Model Builder’ option</figcaption>
 </figure>
 </div>
 </div>
@@ -1117,14 +1157,14 @@ div.csl-indent {
 </ul>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="doc-bibliography" style="display: none">
-<div id="ref-Akaike1974" class="csl-entry" role="doc-biblioentry">
+<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-Akaike1974" class="csl-entry" role="listitem">
 Akaike, H. (1974). A new look at the statistical model identification. <em>IEEE Transactions on Automatic Control</em>, <em>19</em>, 716–723.
 </div>
-<div id="ref-Anscombe1973" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Anscombe1973" class="csl-entry" role="listitem">
 Anscombe, F. J. (1973). Graphs in statistical analysis. <em>American Statistician</em>, <em>27</em>, 17–21.
 </div>
-<div id="ref-Fox2011" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Fox2011" class="csl-entry" role="listitem">
 Fox, J., &amp; Weisberg, S. (2011). <em>An <span>R</span> companion to applied regression</em> (2nd ed.). Sage.
 </div>
 </div>
@@ -1305,9 +1345,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -1372,6 +1426,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
@@ -1410,12 +1550,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-      var filterRegex = new RegExp(/https:\/\/davidfoxcroft\.github\.io\/lsj-book\//);
+      var filterRegex = new RegExp("https:\/\/davidfoxcroft\.github\.io\/lsj-book\/");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
-    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
@@ -1441,6 +1581,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left"><a href="https://learnstatswithjamovi.com">learning statistics with jamovi</a></div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
     <div class="nav-footer-right">This book was built with <a href="https://quarto.org/">Quarto</a></div>
   </div>
 </footer>

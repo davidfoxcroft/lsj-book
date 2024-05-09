@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.335">
+<meta name="generator" content="quarto-1.3.353">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -17,14 +17,15 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
 }
-.hanging div.csl-entry {
+.hanging-indent div.csl-entry {
   margin-left:2em;
   text-indent:-2em;
 }
@@ -38,8 +39,7 @@ div.csl-right-inline {
 }
 div.csl-indent {
   margin-left: 2em;
-}
-</style>
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -92,23 +92,32 @@ div.csl-indent {
 </script>
     
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="styles.css">
 <meta property="og:title" content="learning statistics with jamovi - 9&nbsp; Hypothesis testing">
-<meta property="og:description" content="In the last chapter I discussed the ideas behind estimation, which is one of the two “big ideas” in inferential statistics.">
+<meta property="og:description" content="">
+<meta property="og:image" content="https://davidfoxcroft.github.io/lsj-book/09-Hypothesis-testing_files/figure-html/fig-fig9-1-1.png">
 <meta property="og:site-name" content="learning statistics with jamovi">
+<meta property="og:image:height" content="960">
+<meta property="og:image:width" content="960">
 </head>
 
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Hypothesis testing</span></h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Prelude-Part-IV.html">Statistical theory</a></li><li class="breadcrumb-item"><a href="./09-Hypothesis-testing.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Hypothesis testing</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav>
@@ -116,36 +125,38 @@ div.csl-indent {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">learning statistics with jamovi</a> 
         <div class="sidebar-tools-main tools-wide">
-    <a href="https://github.com/davidfoxcroft/lsj-book/" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
-    <a href="./learning-statistics-with-jamovi.pdf" title="Download PDF" class="sidebar-tool px-1"><i class="bi bi-file-pdf"></i></a>
-    <a href="" title="Share" id="sidebar-tool-dropdown-0" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-share"></i></a>
-    <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-0">
-        <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
-            <i class="bi bi-bi-twitter pe-1"></i>
-          Twitter
-          </a>
-        </li>
-        <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
-            <i class="bi bi-bi-facebook pe-1"></i>
-          Facebook
-          </a>
-        </li>
-        <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
-            <i class="bi bi-bi-linkedin pe-1"></i>
-          LinkedIn
-          </a>
-        </li>
-    </ul>
-  <a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
-  <a href="" class="quarto-reader-toggle sidebar-tool" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+    <a href="https://github.com/davidfoxcroft/lsj-book/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="./learning-statistics-with-jamovi.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+    <div class="dropdown">
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
+              <i class="bi bi-bi-twitter pe-1"></i>
+            Twitter
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
+              <i class="bi bi-bi-facebook pe-1"></i>
+            Facebook
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
+              <i class="bi bi-bi-linkedin pe-1"></i>
+            LinkedIn
+            </a>
+          </li>
+      </ul>
+    </div>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
   <i class="bi"></i>
   </div>
@@ -153,225 +164,253 @@ div.csl-indent {
 </div>
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">&nbsp;</a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">&nbsp;</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Preface.html" class="sidebar-item-text sidebar-link">Preface</a>
+  <a href="./Preface.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">Beginnings</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+ <span class="menu-text">Beginnings</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01-Why-do-we-learn-statistics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Why do we learn statistics</span></a>
+  <a href="./01-Why-do-we-learn-statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Why do we learn statistics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./02-A-brief-introduction-to-research-design.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">A brief introduction to research design</span></a>
+  <a href="./02-A-brief-introduction-to-research-design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">A brief introduction to research design</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">An introduction to jamovi</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+ <span class="menu-text">An introduction to jamovi</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./03-Getting-started-with-jamovi.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Getting started with jamovi</span></a>
+  <a href="./03-Getting-started-with-jamovi.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Getting started with jamovi</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">Working with data</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+ <span class="menu-text">Working with data</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04-Descriptive-statistics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Descriptive statistics</span></a>
+  <a href="./04-Descriptive-statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Descriptive statistics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./05-Drawing-graphs.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Drawing graphs</span></a>
+  <a href="./05-Drawing-graphs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Drawing graphs</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./06-Pragmatic-matters.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Pragmatic matters</span></a>
+  <a href="./06-Pragmatic-matters.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Pragmatic matters</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Statistical theory</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Statistical theory</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Prelude-Part-IV.html" class="sidebar-item-text sidebar-link">Prelude</a>
+  <a href="./Prelude-Part-IV.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Prelude</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./07-Introduction-to-probability.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Introduction to probability</span></a>
+  <a href="./07-Introduction-to-probability.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Introduction to probability</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./08-Estimating-unknown-quantities-from-a-sample.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Estimating unknown quantities from a sample</span></a>
+  <a href="./08-Estimating-unknown-quantities-from-a-sample.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Estimating unknown quantities from a sample</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./09-Hypothesis-testing.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Hypothesis testing</span></a>
+  <a href="./09-Hypothesis-testing.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Hypothesis testing</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">Statistical tools</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">
+ <span class="menu-text">Statistical tools</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./10-Categorical-data-analysis.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Categorical data analysis</span></a>
+  <a href="./10-Categorical-data-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Categorical data analysis</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./11-Comparing-two-means.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Comparing two means</span></a>
+  <a href="./11-Comparing-two-means.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Comparing two means</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./12-Correlation-and-linear-regression.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Correlation and linear regression</span></a>
+  <a href="./12-Correlation-and-linear-regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Correlation and linear regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./13-Comparing-several-means-one-way-ANOVA.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Comparing several means (one-way ANOVA)</span></a>
+  <a href="./13-Comparing-several-means-one-way-ANOVA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Comparing several means (one-way ANOVA)</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./14-Factorial-ANOVA.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Factorial ANOVA</span></a>
+  <a href="./14-Factorial-ANOVA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Factorial ANOVA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./15-Factor-Analysis.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Factor Analysis</span></a>
+  <a href="./15-Factor-Analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Factor Analysis</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">Endings, alternatives and prospects</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">
+ <span class="menu-text">Endings, alternatives and prospects</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./16-Bayesian-statistics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Bayesian statistics</span></a>
+  <a href="./16-Bayesian-statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Bayesian statistics</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Epilogue.html" class="sidebar-item-text sidebar-link">Epilogue</a>
+  <a href="./Epilogue.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Epilogue</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./References.html" class="sidebar-item-text sidebar-link">References</a>
+  <a href="./References.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#a-menagerie-of-hypotheses" id="toc-a-menagerie-of-hypotheses" class="nav-link active" data-scroll-target="#a-menagerie-of-hypotheses"><span class="toc-section-number">9.1</span>  A menagerie of hypotheses</a>
+  <li><a href="#a-menagerie-of-hypotheses" id="toc-a-menagerie-of-hypotheses" class="nav-link active" data-scroll-target="#a-menagerie-of-hypotheses"><span class="header-section-number">9.1</span> A menagerie of hypotheses</a>
   <ul class="collapse">
-  <li><a href="#research-hypotheses-versus-statistical-hypotheses" id="toc-research-hypotheses-versus-statistical-hypotheses" class="nav-link" data-scroll-target="#research-hypotheses-versus-statistical-hypotheses"><span class="toc-section-number">9.1.1</span>  Research hypotheses versus statistical hypotheses</a></li>
-  <li><a href="#null-hypotheses-and-alternative-hypotheses" id="toc-null-hypotheses-and-alternative-hypotheses" class="nav-link" data-scroll-target="#null-hypotheses-and-alternative-hypotheses"><span class="toc-section-number">9.1.2</span>  Null hypotheses and alternative hypotheses</a></li>
+  <li><a href="#research-hypotheses-versus-statistical-hypotheses" id="toc-research-hypotheses-versus-statistical-hypotheses" class="nav-link" data-scroll-target="#research-hypotheses-versus-statistical-hypotheses"><span class="header-section-number">9.1.1</span> Research hypotheses versus statistical hypotheses</a></li>
+  <li><a href="#null-hypotheses-and-alternative-hypotheses" id="toc-null-hypotheses-and-alternative-hypotheses" class="nav-link" data-scroll-target="#null-hypotheses-and-alternative-hypotheses"><span class="header-section-number">9.1.2</span> Null hypotheses and alternative hypotheses</a></li>
   </ul></li>
-  <li><a href="#two-types-of-errors" id="toc-two-types-of-errors" class="nav-link" data-scroll-target="#two-types-of-errors"><span class="toc-section-number">9.2</span>  Two types of errors</a></li>
-  <li><a href="#test-statistics-and-sampling-distributions" id="toc-test-statistics-and-sampling-distributions" class="nav-link" data-scroll-target="#test-statistics-and-sampling-distributions"><span class="toc-section-number">9.3</span>  Test statistics and sampling distributions</a></li>
-  <li><a href="#making-decisions" id="toc-making-decisions" class="nav-link" data-scroll-target="#making-decisions"><span class="toc-section-number">9.4</span>  Making decisions</a>
+  <li><a href="#two-types-of-errors" id="toc-two-types-of-errors" class="nav-link" data-scroll-target="#two-types-of-errors"><span class="header-section-number">9.2</span> Two types of errors</a></li>
+  <li><a href="#test-statistics-and-sampling-distributions" id="toc-test-statistics-and-sampling-distributions" class="nav-link" data-scroll-target="#test-statistics-and-sampling-distributions"><span class="header-section-number">9.3</span> Test statistics and sampling distributions</a></li>
+  <li><a href="#making-decisions" id="toc-making-decisions" class="nav-link" data-scroll-target="#making-decisions"><span class="header-section-number">9.4</span> Making decisions</a>
   <ul class="collapse">
-  <li><a href="#critical-regions-and-critical-values" id="toc-critical-regions-and-critical-values" class="nav-link" data-scroll-target="#critical-regions-and-critical-values"><span class="toc-section-number">9.4.1</span>  Critical regions and critical values</a></li>
-  <li><a href="#a-note-on-statistical-significance" id="toc-a-note-on-statistical-significance" class="nav-link" data-scroll-target="#a-note-on-statistical-significance"><span class="toc-section-number">9.4.2</span>  A note on statistical “significance”</a></li>
-  <li><a href="#sec-The-difference-between-one-sided-and-two-sided-tests" id="toc-sec-The-difference-between-one-sided-and-two-sided-tests" class="nav-link" data-scroll-target="#sec-The-difference-between-one-sided-and-two-sided-tests"><span class="toc-section-number">9.4.3</span>  The difference between one sided and two sided tests</a></li>
+  <li><a href="#critical-regions-and-critical-values" id="toc-critical-regions-and-critical-values" class="nav-link" data-scroll-target="#critical-regions-and-critical-values"><span class="header-section-number">9.4.1</span> Critical regions and critical values</a></li>
+  <li><a href="#a-note-on-statistical-significance" id="toc-a-note-on-statistical-significance" class="nav-link" data-scroll-target="#a-note-on-statistical-significance"><span class="header-section-number">9.4.2</span> A note on statistical “significance”</a></li>
+  <li><a href="#sec-The-difference-between-one-sided-and-two-sided-tests" id="toc-sec-The-difference-between-one-sided-and-two-sided-tests" class="nav-link" data-scroll-target="#sec-The-difference-between-one-sided-and-two-sided-tests"><span class="header-section-number">9.4.3</span> The difference between one sided and two sided tests</a></li>
   </ul></li>
-  <li><a href="#sec-The-p-value-of-a-test" id="toc-sec-The-p-value-of-a-test" class="nav-link" data-scroll-target="#sec-The-p-value-of-a-test"><span class="toc-section-number">9.5</span>  The p value of a test</a>
+  <li><a href="#sec-The-p-value-of-a-test" id="toc-sec-The-p-value-of-a-test" class="nav-link" data-scroll-target="#sec-The-p-value-of-a-test"><span class="header-section-number">9.5</span> The p value of a test</a>
   <ul class="collapse">
-  <li><a href="#a-softer-view-of-decision-making" id="toc-a-softer-view-of-decision-making" class="nav-link" data-scroll-target="#a-softer-view-of-decision-making"><span class="toc-section-number">9.5.1</span>  A softer view of decision making</a></li>
-  <li><a href="#the-probability-of-extreme-data" id="toc-the-probability-of-extreme-data" class="nav-link" data-scroll-target="#the-probability-of-extreme-data"><span class="toc-section-number">9.5.2</span>  The probability of extreme data</a></li>
-  <li><a href="#a-common-mistake" id="toc-a-common-mistake" class="nav-link" data-scroll-target="#a-common-mistake"><span class="toc-section-number">9.5.3</span>  A common mistake</a></li>
+  <li><a href="#a-softer-view-of-decision-making" id="toc-a-softer-view-of-decision-making" class="nav-link" data-scroll-target="#a-softer-view-of-decision-making"><span class="header-section-number">9.5.1</span> A softer view of decision making</a></li>
+  <li><a href="#the-probability-of-extreme-data" id="toc-the-probability-of-extreme-data" class="nav-link" data-scroll-target="#the-probability-of-extreme-data"><span class="header-section-number">9.5.2</span> The probability of extreme data</a></li>
+  <li><a href="#a-common-mistake" id="toc-a-common-mistake" class="nav-link" data-scroll-target="#a-common-mistake"><span class="header-section-number">9.5.3</span> A common mistake</a></li>
   </ul></li>
-  <li><a href="#reporting-the-results-of-a-hypothesis-test" id="toc-reporting-the-results-of-a-hypothesis-test" class="nav-link" data-scroll-target="#reporting-the-results-of-a-hypothesis-test"><span class="toc-section-number">9.6</span>  Reporting the results of a hypothesis test</a>
+  <li><a href="#reporting-the-results-of-a-hypothesis-test" id="toc-reporting-the-results-of-a-hypothesis-test" class="nav-link" data-scroll-target="#reporting-the-results-of-a-hypothesis-test"><span class="header-section-number">9.6</span> Reporting the results of a hypothesis test</a>
   <ul class="collapse">
-  <li><a href="#the-issue" id="toc-the-issue" class="nav-link" data-scroll-target="#the-issue"><span class="toc-section-number">9.6.1</span>  The issue</a></li>
-  <li><a href="#two-proposed-solutions" id="toc-two-proposed-solutions" class="nav-link" data-scroll-target="#two-proposed-solutions"><span class="toc-section-number">9.6.2</span>  Two proposed solutions</a></li>
+  <li><a href="#the-issue" id="toc-the-issue" class="nav-link" data-scroll-target="#the-issue"><span class="header-section-number">9.6.1</span> The issue</a></li>
+  <li><a href="#two-proposed-solutions" id="toc-two-proposed-solutions" class="nav-link" data-scroll-target="#two-proposed-solutions"><span class="header-section-number">9.6.2</span> Two proposed solutions</a></li>
   </ul></li>
-  <li><a href="#running-the-hypothesis-test-in-practice" id="toc-running-the-hypothesis-test-in-practice" class="nav-link" data-scroll-target="#running-the-hypothesis-test-in-practice"><span class="toc-section-number">9.7</span>  Running the hypothesis test in practice</a></li>
-  <li><a href="#sec-Effect-size-sample-size-and-power" id="toc-sec-Effect-size-sample-size-and-power" class="nav-link" data-scroll-target="#sec-Effect-size-sample-size-and-power"><span class="toc-section-number">9.8</span>  Effect size, sample size and power</a>
+  <li><a href="#running-the-hypothesis-test-in-practice" id="toc-running-the-hypothesis-test-in-practice" class="nav-link" data-scroll-target="#running-the-hypothesis-test-in-practice"><span class="header-section-number">9.7</span> Running the hypothesis test in practice</a></li>
+  <li><a href="#sec-Effect-size-sample-size-and-power" id="toc-sec-Effect-size-sample-size-and-power" class="nav-link" data-scroll-target="#sec-Effect-size-sample-size-and-power"><span class="header-section-number">9.8</span> Effect size, sample size and power</a>
   <ul class="collapse">
-  <li><a href="#the-power-function" id="toc-the-power-function" class="nav-link" data-scroll-target="#the-power-function"><span class="toc-section-number">9.8.1</span>  The power function</a></li>
-  <li><a href="#the-power-function-1" id="toc-the-power-function-1" class="nav-link" data-scroll-target="#the-power-function-1"><span class="toc-section-number">9.8.2</span>  The power function</a></li>
-  <li><a href="#increasing-the-power-of-your-study" id="toc-increasing-the-power-of-your-study" class="nav-link" data-scroll-target="#increasing-the-power-of-your-study"><span class="toc-section-number">9.8.3</span>  Increasing the power of your study</a></li>
+  <li><a href="#the-power-function" id="toc-the-power-function" class="nav-link" data-scroll-target="#the-power-function"><span class="header-section-number">9.8.1</span> The power function</a></li>
+  <li><a href="#the-power-function-1" id="toc-the-power-function-1" class="nav-link" data-scroll-target="#the-power-function-1"><span class="header-section-number">9.8.2</span> The power function</a></li>
+  <li><a href="#increasing-the-power-of-your-study" id="toc-increasing-the-power-of-your-study" class="nav-link" data-scroll-target="#increasing-the-power-of-your-study"><span class="header-section-number">9.8.3</span> Increasing the power of your study</a></li>
   </ul></li>
-  <li><a href="#some-issues-to-consider" id="toc-some-issues-to-consider" class="nav-link" data-scroll-target="#some-issues-to-consider"><span class="toc-section-number">9.9</span>  Some issues to consider</a>
+  <li><a href="#some-issues-to-consider" id="toc-some-issues-to-consider" class="nav-link" data-scroll-target="#some-issues-to-consider"><span class="header-section-number">9.9</span> Some issues to consider</a>
   <ul class="collapse">
-  <li><a href="#neyman-versus-fisher" id="toc-neyman-versus-fisher" class="nav-link" data-scroll-target="#neyman-versus-fisher"><span class="toc-section-number">9.9.1</span>  Neyman versus Fisher</a></li>
-  <li><a href="#bayesians-versus-frequentists" id="toc-bayesians-versus-frequentists" class="nav-link" data-scroll-target="#bayesians-versus-frequentists"><span class="toc-section-number">9.9.2</span>  Bayesians versus frequentists</a></li>
-  <li><a href="#traps" id="toc-traps" class="nav-link" data-scroll-target="#traps"><span class="toc-section-number">9.9.3</span>  Traps</a></li>
+  <li><a href="#neyman-versus-fisher" id="toc-neyman-versus-fisher" class="nav-link" data-scroll-target="#neyman-versus-fisher"><span class="header-section-number">9.9.1</span> Neyman versus Fisher</a></li>
+  <li><a href="#bayesians-versus-frequentists" id="toc-bayesians-versus-frequentists" class="nav-link" data-scroll-target="#bayesians-versus-frequentists"><span class="header-section-number">9.9.2</span> Bayesians versus frequentists</a></li>
+  <li><a href="#traps" id="toc-traps" class="nav-link" data-scroll-target="#traps"><span class="header-section-number">9.9.3</span> Traps</a></li>
   </ul></li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="toc-section-number">9.10</span>  Summary</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">9.10</span> Summary</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/davidfoxcroft/lsj-book/edit/main/09-Hypothesis-testing.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/davidfoxcroft/lsj-book/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -379,7 +418,7 @@ div.csl-indent {
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header">
-<h1 class="title display-7"><span id="sec-Hypothesis-testing" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Hypothesis testing</span></span></h1>
+<h1 class="title display-7"><span id="sec-Hypothesis-testing" class="quarto-section-identifier"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Hypothesis testing</span></span></h1>
 
 </header>
 
@@ -419,7 +458,7 @@ div.csl-indent {
 <div class="cell-output-display">
 <div id="tbl-tab9-1" class="anchored">
 
-<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab9-1"><caption>Table&nbsp;9.1:  Research and statistical hypotheses </caption>
+<table class="huxtable" data-quarto-disable-processing="true" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab9-1"><caption>Table&nbsp;9.1:  <p>Research and statistical hypotheses</p> </caption>
 <colgroup><col><col></colgroup><tbody><tr>
 <th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 0pt; font-weight: bold;">Dani's research hypothesis:</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 0pt 2pt 12pt; font-weight: bold;">"ESP exists"</th></tr>
 <tr>
@@ -445,7 +484,7 @@ div.csl-indent {
 <div class="cell-output-display">
 <div id="tbl-tab9-2" class="anchored">
 
-<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab9-2"><caption>Table&nbsp;9.2:  Null hypothesis statistical testing (NHST) </caption>
+<table class="huxtable" data-quarto-disable-processing="true" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab9-2"><caption>Table&nbsp;9.2:  <p>Null hypothesis statistical testing (NHST)</p> </caption>
 <colgroup><col><col><col></colgroup><tbody><tr>
 <th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 0pt; font-weight: bold;"></th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">retain \( H_0 \)</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 0pt 2pt 12pt; font-weight: bold;">reject  \( H_0 \)</th></tr>
 <tr>
@@ -464,7 +503,7 @@ div.csl-indent {
 <div class="cell-output-display">
 <div id="tbl-tab9-3" class="anchored">
 
-<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab9-3"><caption>Table&nbsp;9.3:  Null hypothesis statistical testing (NHST) - additional detail </caption>
+<table class="huxtable" data-quarto-disable-processing="true" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab9-3"><caption>Table&nbsp;9.3:  <p>Null hypothesis statistical testing (NHST) - additional detail</p> </caption>
 <colgroup><col><col><col></colgroup><tbody><tr>
 <th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 0pt; font-weight: bold;"></th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">retain \( H_0 \)</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 0pt 2pt 12pt; font-weight: bold;">reject  \( H_0 \)</th></tr>
 <tr>
@@ -490,7 +529,7 @@ div.csl-indent {
 <div id="fig-fig9-1" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="09-Hypothesis-testing_files/figure-html/fig-fig9-1-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;9.1: The sampling distribution for our test statistic <span class="math inline">\(X\)</span> when the null hypothesis is true. For our ESP scenario this is a binomial distribution. Not surprisingly, since the null hypothesis says that the probability of a correct response is <span class="math inline">\(\theta = .5\)</span>, the sampling distribution says that the most likely value is 50 (out of 100) correct responses. Most of the probability mass lies between 40 and 60</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;9.1: The sampling distribution for our test statistic <span class="math inline">\(X\)</span> when the null hypothesis is true. For our ESP scenario this is a binomial distribution. Not surprisingly, since the null hypothesis says that the probability of a correct response is <span class="math inline">\(\theta = .5\)</span>, the sampling distribution says that the most likely value is 50 (out of 100) correct responses. Most of the probability mass lies between 40 and 60</figcaption>
 </figure>
 </div>
 </div>
@@ -514,7 +553,7 @@ div.csl-indent {
 <div id="fig-fig9-2" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="09-Hypothesis-testing_files/figure-html/fig-fig9-2-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;9.2: The critical region associated with the hypothesis test for the ESP study, for a hypothesis test with a significance level of <span class="math inline">\(\alpha = .05\)</span>. The plot shows the sampling distribution of <span class="math inline">\(X\)</span> under the null hypothesis (i.e., same as <a href="#fig-fig9-1">Figure&nbsp;<span>9.1</span></a>) . The grey bars correspond to those values of <span class="math inline">\(X\)</span> for which we would retain the null hypothesis. The blue (darker shaded) bars show the critical region, those values of <span class="math inline">\(X\)</span> for which we would reject the null. Because the alternative hypothesis is two sided (i.e., allows both <span class="math inline">\(\theta &lt; .5\)</span> and <span class="math inline">\(\theta &gt; .5\)</span>, the critical region covers both tails of the distribution. To ensure an <span class="math inline">\(\alpha\)</span> level of <span class="math inline">\(.05\)</span>, we need to ensure that each of the two regions encompasses <span class="math inline">\(2.5\%\)</span> of the sampling distribution</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;9.2: The critical region associated with the hypothesis test for the ESP study, for a hypothesis test with a significance level of <span class="math inline">\(\alpha = .05\)</span>. The plot shows the sampling distribution of <span class="math inline">\(X\)</span> under the null hypothesis (i.e., same as <a href="#fig-fig9-1">Figure&nbsp;<span>9.1</span></a>) . The grey bars correspond to those values of <span class="math inline">\(X\)</span> for which we would retain the null hypothesis. The blue (darker shaded) bars show the critical region, those values of <span class="math inline">\(X\)</span> for which we would reject the null. Because the alternative hypothesis is two sided (i.e., allows both <span class="math inline">\(\theta &lt; .5\)</span> and <span class="math inline">\(\theta &gt; .5\)</span>, the critical region covers both tails of the distribution. To ensure an <span class="math inline">\(\alpha\)</span> level of <span class="math inline">\(.05\)</span>, we need to ensure that each of the two regions encompasses <span class="math inline">\(2.5\%\)</span> of the sampling distribution</figcaption>
 </figure>
 </div>
 </div>
@@ -544,7 +583,7 @@ div.csl-indent {
 <div id="fig-fig9-3" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="09-Hypothesis-testing_files/figure-html/fig-fig9-3-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;9.3: The critical region for a one sided test. In this case, the alternative hypothesis is that <span class="math inline">\(\theta \geq .5\)</span> so we would only reject the null hypothesis for large values of <span class="math inline">\(X\)</span>. As a consequence, the critical region only covers the upper tail of the sampling distribution, specifically the upper <span class="math inline">\(5\%\)</span> of the distribution. Contrast this to the two-sided version in <a href="#fig-fig9-2">Figure&nbsp;<span>9.2</span></a></figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;9.3: The critical region for a one sided test. In this case, the alternative hypothesis is that <span class="math inline">\(\theta \geq .5\)</span> so we would only reject the null hypothesis for large values of <span class="math inline">\(X\)</span>. As a consequence, the critical region only covers the upper tail of the sampling distribution, specifically the upper <span class="math inline">\(5\%\)</span> of the distribution. Contrast this to the two-sided version in <a href="#fig-fig9-2">Figure&nbsp;<span>9.2</span></a></figcaption>
 </figure>
 </div>
 </div>
@@ -562,7 +601,7 @@ div.csl-indent {
 <div class="cell-output-display">
 <div id="tbl-tab9-4" class="anchored">
 
-<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab9-4"><caption>Table&nbsp;9.4:  Rejecting the NH at different levels of alpha </caption>
+<table class="huxtable" data-quarto-disable-processing="true" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab9-4"><caption>Table&nbsp;9.4:  <p>Rejecting the NH at different levels of alpha</p> </caption>
 <colgroup><col><col><col><col><col><col></colgroup><tbody><tr>
 <th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 0pt; font-weight: bold;">Value of \( \alpha \)</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">0.05</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">0.04</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">0.03</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">0.02</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 0pt 2pt 12pt; font-weight: bold;">0.01</th></tr>
 <tr>
@@ -598,7 +637,7 @@ div.csl-indent {
 <div class="cell-output-display">
 <div id="tbl-tab9-5" class="anchored">
 
-<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab9-5"><caption>Table&nbsp;9.5:  Typical translations of p value levels </caption>
+<table class="huxtable" data-quarto-disable-processing="true" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab9-5"><caption>Table&nbsp;9.5:  <p>Typical translations of p value levels</p> </caption>
 <colgroup><col><col><col><col></colgroup><tbody><tr>
 <th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 0pt; font-weight: bold;">Usual notation</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">Signif. stars</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">English translation</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 0pt 2pt 12pt; font-weight: bold;">The null is...</th></tr>
 <tr>
@@ -630,7 +669,7 @@ div.csl-indent {
 <div id="fig-fig9-4" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="images/fig9-4.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;9.4: Binomial test analysis and results in jamovi</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;9.4: Binomial test analysis and results in jamovi</figcaption>
 </figure>
 </div>
 </div>
@@ -647,7 +686,7 @@ div.csl-indent {
 <div id="fig-fig9-5" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="09-Hypothesis-testing_files/figure-html/fig-fig9-5-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;9.5: Sampling distribution under the alternative hypothesis for a population parameter value of <span class="math inline">\(\theta = 0.55\)</span>. A reasonable proportion of the distribution lies in the rejection region</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;9.5: Sampling distribution under the alternative hypothesis for a population parameter value of <span class="math inline">\(\theta = 0.55\)</span>. A reasonable proportion of the distribution lies in the rejection region</figcaption>
 </figure>
 </div>
 </div>
@@ -658,7 +697,7 @@ div.csl-indent {
 <div id="fig-fig9-6" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="09-Hypothesis-testing_files/figure-html/fig-fig9-6-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;9.6: Sampling distribution under the <em>alternative</em> hypothesis for a population parameter value of <span class="math inline">\(\theta = 0.70\)</span>. Almost all of the distribution lies in the rejection region.</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;9.6: Sampling distribution under the <em>alternative</em> hypothesis for a population parameter value of <span class="math inline">\(\theta = 0.70\)</span>. Almost all of the distribution lies in the rejection region.</figcaption>
 </figure>
 </div>
 </div>
@@ -669,7 +708,7 @@ div.csl-indent {
 <div id="fig-fig9-7" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="09-Hypothesis-testing_files/figure-html/fig-fig9-7-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;9.7: The probability that we will reject the null hypothesis, plotted as a function of the true value of <span class="math inline">\(\theta\)</span>. Obviously, the test is more powerful (greater chance of correct rejection) if the true value of <span class="math inline">\(\theta\)</span> is very different from the value that the null hypothesis specifies (i.e., <span class="math inline">\(\theta = .5\)</span> ). Notice that when <span class="math inline">\(\theta\)</span> actually is equal to <span class="math inline">\(.5\)</span> (plotted as a black dot), the null hypothesis is in fact true and rejecting the null hypothesis in this instance would be a Type I error</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;9.7: The probability that we will reject the null hypothesis, plotted as a function of the true value of <span class="math inline">\(\theta\)</span>. Obviously, the test is more powerful (greater chance of correct rejection) if the true value of <span class="math inline">\(\theta\)</span> is very different from the value that the null hypothesis specifies (i.e., <span class="math inline">\(\theta = .5\)</span> ). Notice that when <span class="math inline">\(\theta\)</span> actually is equal to <span class="math inline">\(.5\)</span> (plotted as a black dot), the null hypothesis is in fact true and rejecting the null hypothesis in this instance would be a Type I error</figcaption>
 </figure>
 </div>
 </div>
@@ -686,7 +725,16 @@ div.csl-indent {
 <div class="cell-output-display">
 <div id="tbl-tab9-6" class="anchored">
 
-<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab9-6"><caption>Table&nbsp;9.6:  A crude guide to understanding the relationship between statistical significance and effect sizes. Basically, if you don’t have a significant result then the effect size is pretty meaningless because you don’t have any evidence that it’s even real. On the other hand, if you do have a significant effect but your effect size is small then there’s a pretty good chance that your result (although real) isn’t all that interesting. However, this guide is very crude. It depends a lot on what exactly you’re studying. Small effects can be of massive practical importance in some situations. So don’t take this table too seriously. It’s a rough guide at best. </caption>
+<table class="huxtable" data-quarto-disable-processing="true" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab9-6"><caption>Table&nbsp;9.6:  <p>A crude guide to understanding the relationship between statistical
+significance and effect sizes. Basically, if you don’t have a
+significant result then the effect size is pretty meaningless because
+you don’t have any evidence that it’s even real. On the other hand, if
+you do have a significant effect but your effect size is small then
+there’s a pretty good chance that your result (although real) isn’t all
+that interesting. However, this guide is very crude. It depends a lot on
+what exactly you’re studying. Small effects can be of massive practical
+importance in some situations. So don’t take this table too seriously.
+It’s a rough guide at best.</p> </caption>
 <colgroup><col><col><col></colgroup><tbody><tr>
 <th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 0pt; font-weight: bold;"></th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">big effect size</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 0pt 2pt 12pt; font-weight: bold;">small effect size</th></tr>
 <tr>
@@ -709,7 +757,7 @@ div.csl-indent {
 <div id="fig-fig9-8" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="09-Hypothesis-testing_files/figure-html/fig-fig9-8-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;9.8: The power of our test plotted as a function of the sample size <span class="math inline">\(N\)</span>. In this case, the true value of <span class="math inline">\(\theta\)</span> is 0.7 but the null hypothesis is that <span class="math inline">\(\theta = 0.5\)</span>. Overall, larger <span class="math inline">\(N\)</span> means greater power. (The small zig-zags in this function occur because of some odd interactions between <span class="math inline">\(\theta\)</span>, <span class="math inline">\(\alpha\)</span> and the fact that the binomial distribution is discrete, it doesn’t matter for any serious purpose)</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;9.8: The power of our test plotted as a function of the sample size <span class="math inline">\(N\)</span>. In this case, the true value of <span class="math inline">\(\theta\)</span> is 0.7 but the null hypothesis is that <span class="math inline">\(\theta = 0.5\)</span>. Overall, larger <span class="math inline">\(N\)</span> means greater power. (The small zig-zags in this function occur because of some odd interactions between <span class="math inline">\(\theta\)</span>, <span class="math inline">\(\alpha\)</span> and the fact that the binomial distribution is discrete, it doesn’t matter for any serious purpose)</figcaption>
 </figure>
 </div>
 </div>
@@ -756,17 +804,17 @@ div.csl-indent {
 <p>Later in the book, in <a href="16-Bayesian-statistics.html"><span>Chapter&nbsp;16</span></a>, I’ll revisit the theory of null hypothesis tests from a Bayesian perspective and introduce a number of new tools that you can use if you aren’t particularly fond of the orthodox approach. But for now, though, we’re done with the abstract statistical theory, and we can start discussing specific data analysis tools.</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="doc-bibliography" style="display: none">
-<div id="ref-Cohen1988" class="csl-entry" role="doc-biblioentry">
+<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-Cohen1988" class="csl-entry" role="listitem">
 Cohen, J. (1988). <em>Statistical power analysis for the behavioral sciences</em> (2nd ed.). Lawrence Erlbaum.
 </div>
-<div id="ref-Ellis2010" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Ellis2010" class="csl-entry" role="listitem">
 Ellis, P. D. (2010). <em>The essential guide to effect sizes: Statistical power, meta-analysis, and the interpretation of research results</em>. Cambridge University Press.
 </div>
-<div id="ref-Gelman2006" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Gelman2006" class="csl-entry" role="listitem">
 Gelman, A., &amp; Stern, H. (2006). The difference between <span>“significant”</span> and <span>“not significant”</span> is not itself statistically significant. <em>The American Statistician</em>, <em>60</em>, 328–331.
 </div>
-<div id="ref-Lehmann2011" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Lehmann2011" class="csl-entry" role="listitem">
 Lehmann, E. L. (2011). <em>Fisher, <span>N</span>eyman, and the creation of classical statistics</em>. Springer.
 </div>
 </div>
@@ -934,9 +982,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -1001,6 +1063,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
@@ -1039,12 +1187,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-      var filterRegex = new RegExp(/https:\/\/davidfoxcroft\.github\.io\/lsj-book\//);
+      var filterRegex = new RegExp("https:\/\/davidfoxcroft\.github\.io\/lsj-book\/");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
-    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
@@ -1070,6 +1218,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left"><a href="https://learnstatswithjamovi.com">learning statistics with jamovi</a></div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
     <div class="nav-footer-right">This book was built with <a href="https://quarto.org/">Quarto</a></div>
   </div>
 </footer>

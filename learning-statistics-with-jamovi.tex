@@ -8,7 +8,6 @@
 ]{book}
 
 \usepackage{amsmath,amssymb}
-\usepackage{lmodern}
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
@@ -18,6 +17,10 @@
   \usepackage{unicode-math}
   \defaultfontfeatures{Scale=MatchLowercase}
   \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else  
+    % xetex/luatex font selection
 \fi
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
@@ -171,10 +174,12 @@
 \@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
 \makeatother
 \makeatletter
-\@ifpackageloaded{tcolorbox}{}{\usepackage[many]{tcolorbox}}
+\@ifpackageloaded{tcolorbox}{}{\usepackage[skins,breakable]{tcolorbox}}
 \makeatother
 \makeatletter
 \@ifundefined{shadecolor}{\definecolor{shadecolor}{rgb}{.97, .97, .97}}
+\makeatother
+\makeatletter
 \makeatother
 \makeatletter
 \makeatother
@@ -210,7 +215,7 @@
 \mainmatter
 %\pagestyle{plain}
 
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[sharp corners, boxrule=0pt, interior hidden, enhanced, borderline west={3pt}{0pt}{shadecolor}, frame hidden, breakable]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[breakable, enhanced, interior hidden, frame hidden, boxrule=0pt, sharp corners, borderline west={3pt}{0pt}{shadecolor}]}{\end{tcolorbox}}\fi
 
 \renewcommand*\contentsname{Table of contents}
 {
@@ -267,6 +272,18 @@ retained, revised and redistributed (including commercially) as long as
 appropriate credit is given to the authors. If you remix, or modify the
 original version of this open textbook, you must redistribute all
 versions of this open textbook under the same license - CC BY-SA.
+
+\hypertarget{data-files-used-in-this-book}{%
+\section*{Data files used in this
+book}\label{data-files-used-in-this-book}}
+\addcontentsline{toc}{section}{Data files used in this book}
+
+\markright{Data files used in this book}
+
+Data sets used in the book are available as data files to use in jamovi.
+All the data files You need can be accessed within jamovi via an add-on
+module in the jamovi library. Or you can can download the data files
+from the \href{https://www.learnstatswithjamovi.com}{lsj website}.
 
 \hypertarget{preface-to-version-0.75}{%
 \section*{Preface to Version 0.75}\label{preface-to-version-0.75}}
@@ -1134,7 +1151,7 @@ for any biases that those choices produce.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./01-Why-do-we-learn-statistics_files/figure-pdf/fig-fig1-1-1.pdf} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{01-Why-do-we-learn-statistics_files/figure-pdf/fig-fig1-1-1.pdf} \hfill{}
 
 \caption{\label{fig-fig1-1}The Berkeley 1973 college admissions data.
 This figure plots the admission rate for the 85 departments that had at
@@ -1389,13 +1406,13 @@ count as a psychological measurement:
 \begin{itemize}
 \tightlist
 \item
-  My \textbf{age} is 33 years.
+  My \textbf{age} is \emph{33} years.
 \item
-  I do not \textbf{like anchovies.}
+  I \emph{do not} \textbf{like anchovies.}
 \item
-  My \textbf{chromosomal gender} is male.
+  My \textbf{chromosomal gender} is \emph{male}.
 \item
-  My \textbf{self-identified gender} is female.
+  My \textbf{self-identified gender} is \emph{female}.
 \end{itemize}
 
 In the short list above, the \textbf{bolded part} is ``the thing to be
@@ -1511,7 +1528,7 @@ process of operationalisation can involve several different things:
   in years, years and months, days, or hours? For other types of
   measurements (e.g., gender) the values aren't numerical. But, just as
   before, we need to think about what values are allowed. If we're
-  asking people to self-report their gender, what options to we allow
+  asking people to self-report their gender, what options do we allow
   them to choose between? Is it enough to allow only ``male'' or
   ``female''? Do you need an ``other'' option? Or should we not give
   people specific options and instead let them answer in their own
@@ -1526,7 +1543,7 @@ depends on what you need to use the measurement for. Often you'll find
 that the community of scientists who work in your area have some fairly
 well-established ideas for how to go about it. In other words,
 operationalisation needs to be thought through on a case by case basis.
-Nevertheless, while there a lot of issues that are specific to each
+Nevertheless, while there are a lot of issues that are specific to each
 individual research project, there are some aspects to it that are
 pretty general.
 
@@ -2129,9 +2146,9 @@ should start discussing the obvious question: is the measurement any
 good? We'll do this in terms of two related ideas: \emph{reliability}
 and \emph{validity}. Put simply, the \textbf{reliability} of a measure
 tells you how precisely you are measuring something, whereas the
-validity of a measure tells you how accurate the measure is. In this
-section I'll talk about reliability; we'll talk about validity in in the
-section on
+\textbf{validity} of a measure tells you how accurate the measure is. In
+this section I'll talk about reliability; we'll talk about validity in
+the section on
 \protect\hyperlink{assessing-the-validity-of-a-study}{Assessing the
 validity of a study}.
 
@@ -2167,8 +2184,8 @@ measure reliability:
 \tightlist
 \item
   \textbf{Test-retest reliability}. This relates to consistency over
-  time. If we repeat the measurement at a later date do we get a the
-  same answer?
+  time. If we repeat the measurement at a later date do we get the same
+  answer?
 \item
   \textbf{Inter-rater reliability}. This relates to consistency across
   people. If someone else repeats the measurement (e.g., someone else
@@ -2222,7 +2239,7 @@ When we are doing an analysis we have different names for \(X\) and
 names for these roles are \textbf{independent variable} (IV) and
 \textbf{dependent variable} (DV). The IV is the variable that you use to
 do the explaining (i.e., \(X\)) and the DV is the variable being
-explained (i.e.,\$Y \$). The logic behind these names goes like this: if
+explained (i.e.,\(Y\)). The logic behind these names goes like this: if
 there really is a relationship between \(X\) and \(Y\) then we can say
 that \(Y\)depends on \(X\), and if we have designed our study
 ``properly'' then \(X\) isn't dependent on anything else. However, I
@@ -2646,8 +2663,8 @@ external validity.
 validity}\label{confounds-artefacts-and-other-threats-to-validity}}
 
 If we look at the issue of validity in the most general fashion the two
-biggest worries that we have are \emph{confounders} and artefacts. These
-two terms are defined in the following way:
+biggest worries that we have are \emph{confounders} and
+\emph{artefacts}. These two terms are defined in the following way:
 
 \begin{itemize}
 \tightlist
@@ -3344,16 +3361,21 @@ jamovi so I'm really talking about why I use it.
   trying to do your real life data analysis using spreadsheets then
   you've dug yourself into a very deep hole.
 \item
-  ``student versions'' (crippled versions of the real thing) very
-  cheaply, and then they they sell full powered ``educational versions''
-  at a price that makes me wince. They will also sell commercial
-  licences with a staggeringly high price tag. The business model here
-  is to suck you in during your student days and then leave you
-  dependent on their tools when you go out into the real world. It's
-  hard to blame them for trying, but personally I'm not in favour of
-  shelling out thousands of dollars if I can avoid it. And you can avoid
-  it. If you make use of packages like jamovi that are open source and
-  free you never get trapped having to pay exorbitant licensing fees.
+  Avoiding proprietary software is a very good idea. There are a lot of
+  commercial packages out there that you can buy, some of which I like
+  and some of which I don't. They're usually very glossy in their
+  appearance, and generally very powerful (much more powerful than
+  spreadsheets). However, they're also very expensive: usually, the
+  company sells ``student versions'' (crippled versions of the real
+  thing) very cheaply; they sell full powered ``educational versions''
+  at a price that makes me wince; and they sell commercial licences with
+  a staggeringly high price tag. The business model here is to suck you
+  in during your student days and then leave you dependent on their
+  tools when you go out into the real world. It's hard to blame them for
+  trying, but personally I'm not in favour of shelling out thousands of
+  dollars if I can avoid it. And you can avoid it. If you make use of
+  packages like jamovi that are open source and free you never get
+  trapped having to pay exorbitant licensing fees.
 \item
   Something that you might not appreciate now, but will love later on if
   you do anything involving data analysis, is the fact that jamovi is
@@ -3407,7 +3429,7 @@ Figure~\ref{fig-fig3-1}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig3-1.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig3-1.png} \hfill{}
 
 \caption{\label{fig-fig3-1}jamovi starts up!}
 
@@ -3467,7 +3489,7 @@ in' by the user. Data variables can be one of several measurement levels
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig3-2.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig3-2.png} \hfill{}
 
 \caption{\label{fig-fig3-2}measurement levels}
 
@@ -3545,7 +3567,7 @@ set).
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig3-3.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig3-3.png} \hfill{}
 
 \caption{\label{fig-fig3-3}A newly computed variable, the z-score of
 `dose'}
@@ -3637,7 +3659,7 @@ contain actual data though, it has the names of the variables.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig3-4.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig3-4.png} \hfill{}
 
 \caption{\label{fig-fig3-4}The \emph{booksales.csv} data file. On the
 left I have opened the file using a spreadsheet program (OpenOffice),
@@ -3660,7 +3682,7 @@ then click on the ``Open'' button.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig3-5.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig3-5.png} \hfill{}
 
 \caption{\label{fig-fig3-5}A dialog box on a Mac asking you to select
 the csv file jamovi should try to import. Mac users will recognise this
@@ -3829,7 +3851,7 @@ include ``scatr'' (added under ``Descriptives'') and \(R_j\).
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig3-6.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig3-6.png} \hfill{}
 
 \caption{\label{fig-fig3-6}Installing add-on modules in jamovi}
 
@@ -3921,10 +3943,10 @@ file, see Figure~\ref{fig-fig4-1}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig4-1.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig4-1.png} \hfill{}
 
 \caption{\label{fig-fig4-1}A screenshot of jamovi showing the variables
-stored in the aflsmallmargins.csv file}
+stored in the aflsmall\_margins.csv file}
 
 \end{figure}
 
@@ -3954,7 +3976,7 @@ a fairly interpretable representation of the \emph{afl.margins} data.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig4-2.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig4-2.png} \hfill{}
 
 \caption{\label{fig-fig4-2}A histogram of the AFL 2010 winning margin
 data (the \emph{afl.margins} variable). As you might expect, the larger
@@ -4015,7 +4037,7 @@ refer to it and the actual value that the observation corresponds to.
   \providecommand{\huxbpad}[1]{\rule[-#1]{0pt}{#1}}
 
 \begin{table}[ht]
-\caption{\label{tbl-tab4-1}Observations in the afl.margins variable }\tabularnewline
+\caption{\label{tbl-tab4-1}Observations in the \emph{afl.margins} variable }\tabularnewline
 
 \begin{centerbox}
 \begin{threeparttable}
@@ -4131,7 +4153,7 @@ default `Descriptives' information; see Figure~\ref{fig-fig4-3}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig4-3.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig4-3.png} \hfill{}
 
 \caption{\label{fig-fig4-3}Default descriptives for the AFL 2010 winning
 margin data (the \emph{afl.margins} variable)}
@@ -4163,7 +4185,7 @@ should we do if we are interested in the first 6 games rather than the
 first 5? Since the sixth game in the season had a winning margin of 14
 points, our sorted list is now
 
-8, \textbf{31}, \textbf{32}, 56, 56
+8, 14, \textbf{31}, \textbf{32}, 56, 56
 
 and there are two middle numbers, 31 and 32. The median is defined as
 the average of those two numbers, which is of course 31.5. As before,
@@ -4235,7 +4257,7 @@ income at the table the median would be a better choice here.
 
 \raisebox{-\height}{
 
-\includegraphics{./images/fig4-4a.png}
+\includegraphics{images/fig4-4a.png}
 
 }
 
@@ -4249,7 +4271,7 @@ income at the table the median would be a better choice here.
 
 \raisebox{-\height}{
 
-\includegraphics{./images/fig4-4b.png}
+\includegraphics{images/fig4-4b.png}
 
 }
 
@@ -4383,7 +4405,7 @@ it makes no sense to calculate these values.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig4-5.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig4-5.png} \hfill{}
 
 \caption{\label{fig-fig4-5}A screenshot of jamovi showing the variables
 stored in the aflsmall finalists.csv file}
@@ -4392,7 +4414,7 @@ stored in the aflsmall finalists.csv file}
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig4-6.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig4-6.png} \hfill{}
 
 \caption{\label{fig-fig4-6}A screenshot of jamovi showing the frequency
 table for the \emph{afl.finalists} variable}
@@ -4423,7 +4445,7 @@ data suggest you should bet on a 3 point margin.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig4-7.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig4-7.png} \hfill{}
 
 \caption{\label{fig-fig4-7}A screenshot of jamovi showing the modal
 value for the \emph{afl.margins} variable}
@@ -4447,18 +4469,6 @@ strengths and weaknesses.
 
 \hypertarget{range}{%
 \subsection{Range}\label{range}}
-
-The statistics that we've discussed so far all relate to central
-tendency. That is, they all talk about which values are ``in the
-middle'' or ``popular'' in the data. However, central tendency is not
-the only type of summary statistic that we want to calculate. The second
-thing that we really want is a measure of the \textbf{variability} of
-the data. That is, how ``spread out'' are the data? How ``far'' away
-from the mean or median do the observed values tend to be? For now,
-let's assume that the data are interval or ratio scale, and we'll
-continue to use the \emph{afl.margins} data. We'll use this data to
-discuss several different measures of spread, each with different
-strengths and weaknesses.
 
 The \textbf{range} of a variable is very simple. It's the biggest value
 minus the smallest value. For the AFL winning margins data the maximum
@@ -4501,7 +4511,7 @@ that middle half.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig4-8.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig4-8.png} \hfill{}
 
 \caption{\label{fig-fig4-8}A screenshot of jamovi showing the Quartiles
 for the \emph{afl.margins} variable}
@@ -4820,7 +4830,7 @@ typo? Am I an idiot?
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig4-9.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig4-9.png} \hfill{}
 
 \caption{\label{fig-fig4-9}A screenshot of jamovi showing the Variance
 for the first 5 values of the afl.margins variable}
@@ -4987,7 +4997,7 @@ somewhere.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./04-Descriptive-statistics_files/figure-pdf/fig-fig4-10-1.pdf} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{04-Descriptive-statistics_files/figure-pdf/fig-fig4-10-1.pdf} \hfill{}
 
 \caption{\label{fig-fig4-10}An illustration of the standard deviation
 from the AFL winning margins data. The shaded bars in the histogram show
@@ -5011,7 +5021,7 @@ to date.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./04-Descriptive-statistics_files/figure-pdf/fig-fig4-11-1.pdf} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{04-Descriptive-statistics_files/figure-pdf/fig-fig4-11-1.pdf} \hfill{}
 
 \caption{\label{fig-fig4-11}An illustration of skewness. On the left we
 have a negatively skewed data set, in the middle we have a data set with
@@ -5063,7 +5073,7 @@ kurtosis is assessed relative to this curve.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./04-Descriptive-statistics_files/figure-pdf/fig-fig4-12-1.pdf} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{04-Descriptive-statistics_files/figure-pdf/fig-fig4-12-1.pdf} \hfill{}
 
 \caption{\label{fig-fig4-12}An illustration of kurtosis. On the left, we
 have a `platykurtic' distribution (kurtosis = -.95) meaning that the
@@ -5191,7 +5201,7 @@ you should get something like Figure~\ref{fig-fig4-14}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig4-13.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig4-13.png} \hfill{}
 
 \caption{\label{fig-fig4-13}A screenshot of jamovi showing the variables
 stored in the \emph{clinicaltrial.csv} file}
@@ -5216,7 +5226,7 @@ something like NaN or Inf. \footnote{Sometimes jamovi will also present
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig4-14.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig4-14.png} \hfill{}
 
 \caption{\label{fig-fig4-14}A screenshot of jamovi showing Descriptives
 split by therapy type}
@@ -5241,7 +5251,7 @@ people might have answered them in a different way, so the overall
 distribution of answers could easily move up or down depending on the
 precise way in which the questions were asked. So, I'm only 70\% grumpy
 \emph{with respect to this set of survey questions}. Even if it's a very
-good questionnaire this isn't very a informative statement.
+good questionnaire this isn't a very informative statement.
 
 A simpler way around this is to describe my grumpiness by comparing me
 to other people. Shockingly, out of my friend's sample of \(1,000,000\)
@@ -5280,7 +5290,7 @@ grumpiness into a standardised grumpiness score.
 rough heuristic that I provided in Section~\ref{sec-Standard-deviation}
 in which I noted that 99.7\% of values are expected to lie within 3
 standard deviations of the mean. So the fact that my grumpiness
-corresponds to a z score of 3.6 indicates that I'm very grumpy indeed.
+corresponds to a z-score of 3.6 indicates that I'm very grumpy indeed.
 In fact this suggests that I'm grumpier than 99.98\% of people. Sounds
 about right.
 
@@ -5412,7 +5422,7 @@ supporting advanced work or detail editing.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./05-Drawing-graphs_files/figure-pdf/fig-fig5-1-1.pdf} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{05-Drawing-graphs_files/figure-pdf/fig-fig5-1-1.pdf} \hfill{}
 
 \caption{\label{fig-fig5-1}A stylised redrawing of John Snow's original
 cholera map. Each small orange square represents the location of a
@@ -5455,7 +5465,7 @@ drawing a \textbf{histogram}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig5-2.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig5-2.png} \hfill{}
 
 \caption{\label{fig-fig5-2}jamovi screen showing the histogram check
 box}
@@ -5479,7 +5489,7 @@ histogram would. However, with density plots, this isn't an issue.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig5-3.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig5-3.png} \hfill{}
 
 \caption{\label{fig-fig5-3}A density plot of the \emph{afl.margins}
 variable plotted in jamovi}
@@ -5512,7 +5522,7 @@ using the \emph{afl.margins} data as our example.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig5-4.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig5-4.png} \hfill{}
 
 \caption{\label{fig-fig5-4}A box plot of the \emph{afl.margins} variable
 plotted in jamovi}
@@ -5543,7 +5553,7 @@ dots).
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig5-5.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig5-5.png} \hfill{}
 
 \caption{\label{fig-fig5-5}A violin plot of the \emph{afl.margins}
 variable plotted in jamovi, also showing a box plot and data points}
@@ -5579,7 +5589,7 @@ Figure~\ref{fig-fig5-6}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig5-6.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig5-6.png} \hfill{}
 
 \caption{\label{fig-fig5-6}jamovi screen shot showing the `Split by'
 window}
@@ -5596,7 +5606,7 @@ that the reader is going to learn anything useful.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig5-7.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig5-7.png} \hfill{}
 
 \caption{\label{fig-fig5-7}Multiple boxplots plotted in jamovi, for the
 margin by year variables}
@@ -5615,24 +5625,27 @@ data. Here's an example. Suppose that I'd drawn the boxplot for the
 \emph{AFL margins} data and it came up looking like
 Figure~\ref{fig-fig5-8}. It's pretty clear that something funny is going
 on with two of the observations. Apparently, there were two games in
-which the margin was over 300 points! That doesn't sound right to me.
-Now that I've become suspicious it's time to look a bit more closely at
-the data. In jamovi you can quickly find out which of these observations
-are suspicious and then you can go back to the raw data to see if there
-has been a mistake in data entry. One way to do this is to tell jamovi
-to label the outliers, by checking the box next to the Box plot check
-box. This adds a row number label next to the outlier in the boxplot, so
-you can go look at that row and find the extreme value. Another, more
-flexible way, is to set up a filter so that only those observations with
-values over a certain threshold are included. In our example, the
-threshold is over 300, so that is the filter we will create. First,
-click on the `Filters' button at the top of the jamovi window, and then
-type `margin \textgreater{} 300' into the filter field, as in
-Figure~\ref{fig-fig5-9}.
+which the margin was over 300 points!\footnote{This altered version of
+  the AFL Margins By Year dataset isn't available to open / load into
+  jamovi. I simply changed a couple of the values of margin in the
+  dataset so that they were over 300. You can do this yourself if you
+  want.} That doesn't sound right to me. Now that I've become suspicious
+it's time to look a bit more closely at the data. In jamovi you can
+quickly find out which of these observations are suspicious and then you
+can go back to the raw data to see if there has been a mistake in data
+entry. One way to do this is to tell jamovi to label the outliers, by
+checking the box next to the Box plot check box. This adds a row number
+label next to the outlier in the boxplot, so you can go look at that row
+and find the extreme value. Another, more flexible way, is to set up a
+filter so that only those observations with values over a certain
+threshold are included. In our example, the threshold is over 300, so
+that is the filter we will create. First, click on the `Filters' button
+at the top of the jamovi window, and then type `margin \textgreater{}
+300' into the filter field, as in Figure~\ref{fig-fig5-9}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig5-8.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig5-8.png} \hfill{}
 
 \caption{\label{fig-fig5-8}A boxplot showing two very suspicious
 outliers!}
@@ -5646,13 +5659,13 @@ produce a `Frequency table' (in the `Exploration' - `Descriptives'
 window) for the ID variable (which must be a nominal variable otherwise
 the Frequency table is not produced). In Figure~\ref{fig-fig5-10} you
 can see that the ID values for the observations where the margin was
-over 300 are 14 and 134. These are suspicious cases, or observations,
+over 300 are 176 and 202. These are suspicious cases, or observations,
 where you should go back to the original data source to find out what is
 going on.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig5-9.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig5-9.png} \hfill{}
 
 \caption{\label{fig-fig5-9}The jamovi filter screen}
 
@@ -5660,10 +5673,10 @@ going on.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig5-10.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig5-10.png} \hfill{}
 
 \caption{\label{fig-fig5-10}Frequency table for ID showing the ID
-numbers for the two suspicious outliers, 14 and 134}
+numbers for the two suspicious outliers, 176 and 202}
 
 \end{figure}
 
@@ -5715,7 +5728,7 @@ Figure~\ref{fig-fig5-11}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig5-11.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig5-11.png} \hfill{}
 
 \caption{\label{fig-fig5-11}Filtering to include just four AFL teams,
 and drawing a bar plot in jamovi}
@@ -5943,7 +5956,7 @@ table like the one shown in Figure~\ref{fig-fig6-1}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig6-1.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig6-1.png} \hfill{}
 
 \caption{\label{fig-fig6-1}Contingency table for the speaker and
 utterances variables}
@@ -5973,7 +5986,7 @@ change to the one in Figure~\ref{fig-fig6-2}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig6-2.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig6-2.png} \hfill{}
 
 \caption{\label{fig-fig6-2}Contingency table for the speaker and
 utterances variables, with row percentages}
@@ -5992,7 +6005,7 @@ saying it.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig6-3.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig6-3.png} \hfill{}
 
 \caption{\label{fig-fig6-3}Contingency table for the speaker and
 utterances variables, with column percentages}
@@ -6062,16 +6075,6 @@ smart and realises that you are testing whether it is TRUE or FALSE that
 \(2 + 2 = 5\), regardless of whether you use the correct
 \textbf{equality operator}, \(==\), or the equals sign ``\(=\)''.
 
-Anyway, it was worth having a look at what happens if I try to force
-jamovi to believe that two plus two is five by making a statement like
-\(2 + 2 = 5\). I know that if I do this in another program, say R, then
-it throws up an error message. But wait, if you do this in jamovi you
-get a whole set of `false' values. So what is going on? Well, it seems
-that jamovi is being pretty smart and realises that you are testing
-whether it is TRUE or FALSE that \(2 + 2 = 5\), regardless of whether
-you use the correct \textbf{equality operator}, \(==\), or the equals
-sign ``\(=\)''.
-
 \hypertarget{logical-operations}{%
 \subsection{Logical operations}\label{logical-operations}}
 
@@ -6091,11 +6094,11 @@ TRUE, but if the two numbers are equal, or if the one on the right is
 larger, then jamovi returns an answer of FALSE.
 
 In contrast, the \textbf{less than or equal to} operator \(<=\) will do
-exactly what it says. It returns a value of TRUE if the number of the
+exactly what it says. It returns a value of TRUE if the number on the
 left hand side is less than or equal to the number on the right hand
 side. At this point I hope it's pretty obvious what the \textbf{greater
-than} operator \(<\) and the \textbf{greater than or equal to} operator
-\(<=\) do!
+than} operator \(>\) and the \textbf{greater than or equal to} operator
+\(>=\) do!
 
 Next on the list of logical operators is the \textbf{not equal to}
 operator != which, as with all the others, does what it says it does. It
@@ -6329,7 +6332,7 @@ each other, as with the following: '' cat'' \(==\) ``cat'' ``cat''
 \(==\) ``CAT'' ``cat'' \(==\) ``c a t''
 
 You can also use other logical operators too. For instance jamovi also
-allows you to use the \textgreater{} and \textgreater{} operators to
+allows you to use the \textgreater{} and \textless{} operators to
 determine which of two text `strings' comes first, alphabetically
 speaking. Sort of. Actually, it's a bit more complicated than that, but
 let's start with a simple example:
@@ -6594,7 +6597,7 @@ Figure~\ref{fig-fig6-4}: `likert.raw - 4'
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig6-4.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig6-4.png} \hfill{}
 
 \caption{\label{fig-fig6-4}Creating a new computed variable in jamovi}
 
@@ -6619,7 +6622,7 @@ spreadsheet view, as in Figure~\ref{fig-fig6-5}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig6-5.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig6-5.png} \hfill{}
 
 \caption{\label{fig-fig6-5}Using the \(f_x\) button to select functions
 and variables}
@@ -6696,7 +6699,7 @@ Figure~\ref{fig-fig6-6}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig6-6.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig6-6.png} \hfill{}
 
 \caption{\label{fig-fig6-6}Collapsing a variable into a smaller number
 of discrete levels using the jamovi `IF' function}
@@ -6787,7 +6790,7 @@ variable that you want to recode.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig6-7.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig6-7.png} \hfill{}
 
 \caption{\label{fig-fig6-7}Creating a new variable transformation using
 the jamovi `Transform' command}
@@ -6796,7 +6799,7 @@ the jamovi `Transform' command}
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig6-8.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig6-8.png} \hfill{}
 
 \caption{\label{fig-fig6-8}Specifying a transformation in jamovi, to be
 saved as the imaginatively named `Transform 1'}
@@ -6805,7 +6808,7 @@ saved as the imaginatively named `Transform 1'}
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig6-9.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig6-9.png} \hfill{}
 
 \caption{\label{fig-fig6-9}jamovi transformation into three age
 categories, using the `Add condition' button}
@@ -6956,7 +6959,7 @@ statement that ``10 to the power of 3 is equal to 1000'' is equivalent
 to the statement that ``the logarithm (in base 10) of 1000 is equal to
 3''. Mathematically, we write this as follows,
 
-\[log_{10}(1000)=3\]
+\[\log_{10}(1000)=3\]
 
 Okay, since the LOG10() function is related to the powers of 10, you
 might expect that there are other logarithms (in bases other than 10)
@@ -6977,18 +6980,18 @@ number e, known as \textbf{Euler's number}, is one of those annoying
 is considered one of the most important numbers in mathematics. The
 first few digits of e are:
 
-\[e = 2.718282 \]
+\[e \approx 2.718282 \]
 
 There are quite a few situation in statistics that require us to
 calculate powers of \(e\), though none of them appear in this book.
-Raising e to the power \(x\) is called the \textbf{exponential} of
-\(x\), and so it's very common to see \(e^x\) written as exppxq. And so
-it's no surprise that jamovi has a function that calculates
-exponentials, called EXP(). Because the number e crops up so often in
-statistics, the natural logarithm (i.e., logarithm in base e) also tends
-to turn up. Mathematicians often write it as \(log_e(x)\) or \(ln(x)\).
-In fact, jamovi works the same way: the LN() function corresponds to the
-natural logarithm.
+Raising \(e\) to the power \(x\) is called the \textbf{exponential} of
+\(x\), and so it's very common to see \(e^x\) written as \(\exp(x)\).
+And so it's no surprise that jamovi has a function that calculates
+exponentials, called EXP(). Because the number \(e\) crops up so often
+in statistics, the natural logarithm (i.e., logarithm in base \(e\))
+also tends to turn up. Mathematicians often write it as \(\log_e(x)\) or
+\(\ln(x)\). In fact, jamovi works the same way: the LN() function
+corresponds to the natural logarithm.
 
 And with that, I think we've had quite enough exponentials and
 logarithms for this book!
@@ -7020,7 +7023,7 @@ speaker == `makka-pakka'
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig6-10.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig6-10.png} \hfill{}
 
 \caption{\label{fig-fig6-10}Creating a subset of the nightgarden data
 using the jamovi `Filters' option}
@@ -7778,7 +7781,7 @@ probability of heads.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./07-Introduction-to-probability_files/figure-pdf/fig-fig7-1-1.pdf} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{07-Introduction-to-probability_files/figure-pdf/fig-fig7-1-1.pdf} \hfill{}
 
 \caption{\label{fig-fig7-1}An illustration of how frequentist
 probability works. If you flip a fair coin over and over again the
@@ -8104,7 +8107,7 @@ so here.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./07-Introduction-to-probability_files/figure-pdf/fig-fig7-2-1.pdf} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{07-Introduction-to-probability_files/figure-pdf/fig-fig7-2-1.pdf} \hfill{}
 
 \caption{\label{fig-fig7-2}A visual depiction of the `trousers'
 probability distribution. There are five `elementary events',
@@ -8242,11 +8245,16 @@ Yeah, yeah. I know what you're thinking: notation, notation, notation.
 Really, who cares? Very few readers of this book are here for the
 notation, so I should probably move on and talk about how to use the
 binomial distribution. I've included the formula for the binomial
-distribution in Table~\ref{tbl-tab7-2}, since some readers may want to
-play with it themselves, but since most people probably don't care that
-much and because we don't need the formula in this book, I won't talk
-about it in any detail. Instead, I just want to show you what the
-binomial distribution looks like.
+distribution in a footnote\footnote{In the equation for the binomial,
+  \(X!\) is the factorial function (i.e., multiply all whole numbers
+  from 1 to \(X\)):
+  \[P(X | \theta, N) = \displaystyle\frac{N!}{X! (N-X)!} \theta^X (1-\theta)^{N-X}\]
+  If this equation doesn't make a lot of sense to you, don't worry too
+  much about it.}, since some readers may want to play with it
+themselves, but since most people probably don't care that much and
+because we don't need the formula in this book, I won't talk about it in
+any detail. Instead, I just want to show you what the binomial
+distribution looks like.
 
 To that end, Figure~\ref{fig-fig7-3} plots the binomial probabilities
 for all possible values of \(X\) for our dice rolling experiment, from
@@ -8262,7 +8270,7 @@ this experiment.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./07-Introduction-to-probability_files/figure-pdf/fig-fig7-3-1.pdf} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{07-Introduction-to-probability_files/figure-pdf/fig-fig7-3-1.pdf} \hfill{}
 
 \caption{\label{fig-fig7-3}The binomial distribution with size parameter
 of \(N = 20\) and an underlying success probability of
@@ -8290,7 +8298,7 @@ variability in the possible outcomes.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./07-Introduction-to-probability_files/figure-pdf/fig-fig7-4-1.pdf} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{07-Introduction-to-probability_files/figure-pdf/fig-fig7-4-1.pdf} \hfill{}
 
 \caption{\label{fig-fig7-4}Two binomial distributions, involving a
 scenario in which I flip a fair coin so the underlying success
@@ -8309,18 +8317,18 @@ particular honour goes to the normal distribution, also referred to as
 ``the bell curve'' or a ``Gaussian distribution''. A \textbf{normal
 distribution} is described using two parameters: the mean of the
 distribution µ and the standard deviation of the distribution
-\(\sigma\).
+\(\sigma\). The notation that we sometimes use to say that a variable
+\(X\) is normally distributed is as follows:
 
-{[}Additional technical detail \footnote{The notation that we sometimes
-  use to say that a variable \(X\) is normally distributed is as
-  follows: \[X \sim Normal(\mu,\sigma)\] Of course, that's just
-  notation. It doesn't tell us anything interesting about the normal
-  distribution itself. As was the case with the binomial distribution, I
-  have included the formula for the normal distribution in this book,
-  because I think it's important enough that everyone who learns
-  statistics should at least look at it, but since this is an
-  introductory text I don't want to focus on it, so I've tucked it away
-  in this footnote.}{]}
+\[X \sim Normal(\mu,\sigma)\]
+
+{[}Additional technical detail \footnote{As was the case with the
+  binomial distribution, I have included the formula for the normal
+  distribution in this book, because I think it's important enough that
+  everyone who learns statistics should at least look at it, but since
+  this is an introductory text I don't want to focus on it, so I've
+  tucked it away in this footnote:
+  \[p(X|\mu, \sigma) = \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(X-\mu)^2}{2\sigma^2}}\]}{]}
 
 Let's try to get a sense for what it means for a variable to be normally
 distributed. To that end, have a look at Figure~\ref{fig-fig7-5} which
@@ -8350,7 +8358,7 @@ temperatures\footnote{In practice, the normal distribution is so handy
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./07-Introduction-to-probability_files/figure-pdf/fig-fig7-5-1.pdf} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{07-Introduction-to-probability_files/figure-pdf/fig-fig7-5-1.pdf} \hfill{}
 
 \caption{\label{fig-fig7-5}The normal distribution with mean \(\mu = 0\)
 and standard deviation \(\sigma = 1\). The x-axis corresponds to the
@@ -8392,7 +8400,7 @@ Figure~\ref{fig-fig7-8}; see also Figure~\ref{fig-fig7-9}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./07-Introduction-to-probability_files/figure-pdf/fig-fig7-6-1.pdf} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{07-Introduction-to-probability_files/figure-pdf/fig-fig7-6-1.pdf} \hfill{}
 
 \caption{\label{fig-fig7-6}An illustration of what happens when you
 change the mean of a normal distribution. The solid line depicts a
@@ -8406,7 +8414,7 @@ right}
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./07-Introduction-to-probability_files/figure-pdf/fig-fig7-7-1.pdf} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{07-Introduction-to-probability_files/figure-pdf/fig-fig7-7-1.pdf} \hfill{}
 
 \caption{\label{fig-fig7-7}An illustration of what happens when you
 change the the standard deviation of a normal distribution. Both
@@ -8421,7 +8429,7 @@ dashed line is wider than the solid one}
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./07-Introduction-to-probability_files/figure-pdf/fig-fig7-8-1.pdf} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{07-Introduction-to-probability_files/figure-pdf/fig-fig7-8-1.pdf} \hfill{}
 
 \caption{\label{fig-fig7-8}The area under the curve tells you the
 probability that an observation falls within a particular range. The
@@ -8437,7 +8445,7 @@ the mean}
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./07-Introduction-to-probability_files/figure-pdf/fig-fig7-9-1.pdf} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{07-Introduction-to-probability_files/figure-pdf/fig-fig7-9-1.pdf} \hfill{}
 
 \caption{\label{fig-fig7-9}Two more examples of the `area under the
 curve idea'. There is a 15.9\% chance that an observation is one
@@ -8467,7 +8475,7 @@ worry too much, but try to make sure that you follow the gist of it.
 Throughout my discussion of the normal distribution there's been one or
 two things that don't quite make sense. Perhaps you noticed that the
 y-axis in these figures is labelled ``Probability Density'' rather than
-density. Maybe you noticed that I used \(P(X)\) instead of \(P(X)\) when
+density. Maybe you noticed that I used \(p(X)\) instead of \(P(X)\) when
 giving the formula for the normal distribution.
 
 As it turns out, what is presented here isn't actually a probability,
@@ -8517,7 +8525,7 @@ deviation of the mean).
 Okay, so that explains part of the story. I've explained a little bit
 about how continuous probability distributions should be interpreted
 (i.e., area under the curve is the key thing). But what does the formula
-for ppxq that I described earlier actually mean? Obviously, \(P(x)\)
+for \(p(x)\) that I described earlier actually mean? Obviously, \(P(x)\)
 doesn't describe a probability, but what is it? The name for this
 quantity \(P(x)\) is a \textbf{probability density}, and in terms of the
 plots we've been drawing it corresponds to the height of the curve. The
@@ -8552,7 +8560,7 @@ Figure~\ref{fig-fig7-12}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./07-Introduction-to-probability_files/figure-pdf/fig-fig7-10-1.pdf} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{07-Introduction-to-probability_files/figure-pdf/fig-fig7-10-1.pdf} \hfill{}
 
 \caption{\label{fig-fig7-10}A \(t\) distribution with 3 degrees of
 freedom (solid line). It looks similar to a normal distribution, but
@@ -8563,7 +8571,7 @@ normal distribution as the dashed line}
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./07-Introduction-to-probability_files/figure-pdf/fig-fig7-11-1.pdf} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{07-Introduction-to-probability_files/figure-pdf/fig-fig7-11-1.pdf} \hfill{}
 
 \caption{\label{fig-fig7-11}\(\chi^2\) distribution with 3 degrees of
 freedom. Notice that the observed values must always be greater than
@@ -8574,7 +8582,7 @@ features of a chi-square distribution}
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./07-Introduction-to-probability_files/figure-pdf/fig-fig7-12-1.pdf} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{07-Introduction-to-probability_files/figure-pdf/fig-fig7-12-1.pdf} \hfill{}
 
 \caption{\label{fig-fig7-12}An \(F\) distribution with 3 and 5 degrees
 of freedom. Qualitatively speaking, it looks pretty similar to a
@@ -8869,7 +8877,7 @@ replacement}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig8-1.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig8-1.png} \hfill{}
 
 \caption{\label{fig-fig8-1}Simple random sampling without replacement
 from a finite population}
@@ -8891,7 +8899,7 @@ random sample, because it makes the data analysis \emph{much} easier.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig8-2.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig8-2.png} \hfill{}
 
 \caption{\label{fig-fig8-2}Biased sampling without replacement from a
 finite population}
@@ -8911,7 +8919,7 @@ multiple times, as illustrated in Figure~\ref{fig-fig8-3}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig8-3.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig8-3.png} \hfill{}
 
 \caption{\label{fig-fig8-3}Simple random sampling \emph{with}
 replacement from a finite population}
@@ -9105,7 +9113,7 @@ the population standard deviation σ is 15.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./08-Estimating-unknown-quantities-from-a-sample_files/figure-pdf/fig-fig8-4-1.pdf} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{08-Estimating-unknown-quantities-from-a-sample_files/figure-pdf/fig-fig8-4-1.pdf} \hfill{}
 
 \caption{\label{fig-fig8-4}The population distribution of IQ scores
 (panel (a)) and two samples drawn randomly from it. In panel (b) we have
@@ -9166,7 +9174,7 @@ close to the true population. See Figure~\ref{fig-fig8-5}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig8-5.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig8-5.png} \hfill{}
 
 \caption{\label{fig-fig8-5}A random sample drawn from a normal
 distribution using jamovi}
@@ -9285,8 +9293,8 @@ one replication to the next.
   \providecommand{\huxbpad}[1]{\rule[-#1]{0pt}{#1}}
 
 \begin{table}[ht]
-\caption{\label{tbl-tab8-1}Ten replications of the IQ experiment, each with a sample size of ( N =
-5 ) }\tabularnewline
+\caption{\label{tbl-tab8-1}Ten replications of the IQ experiment, each with a sample size of
+\(( N = 5 )\) }\tabularnewline
 
 \begin{centerbox}
 \begin{threeparttable}
@@ -9456,7 +9464,7 @@ statistics, it's called the \textbf{sampling distribution of the mean}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./08-Estimating-unknown-quantities-from-a-sample_files/figure-pdf/fig-fig8-6-1.pdf} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{08-Estimating-unknown-quantities-from-a-sample_files/figure-pdf/fig-fig8-6-1.pdf} \hfill{}
 
 \caption{\label{fig-fig8-6}The sampling distribution of the mean for the
 `five IQ scores experiment'. If you sample 5 people at random and
@@ -9498,7 +9506,7 @@ whose IQ is measured in the 100 to 140 range.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./08-Estimating-unknown-quantities-from-a-sample_files/figure-pdf/fig-fig8-7-1.pdf} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{08-Estimating-unknown-quantities-from-a-sample_files/figure-pdf/fig-fig8-7-1.pdf} \hfill{}
 
 \caption{\label{fig-fig8-7}The sampling distribution of the maximum for
 the `five IQ scores experiment'. If you sample 5 people at random and
@@ -9509,7 +9517,7 @@ with an IQ between 100 and 140}
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./08-Estimating-unknown-quantities-from-a-sample_files/figure-pdf/fig-fig8-8-1.pdf} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{08-Estimating-unknown-quantities-from-a-sample_files/figure-pdf/fig-fig8-8-1.pdf} \hfill{}
 
 \caption{\label{fig-fig8-8}An illustration of the how sampling
 distribution of the mean depends on sample size. In each panel I
@@ -9585,7 +9593,7 @@ distribution looks like!
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./08-Estimating-unknown-quantities-from-a-sample_files/figure-pdf/fig-fig8-9-1.pdf} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{08-Estimating-unknown-quantities-from-a-sample_files/figure-pdf/fig-fig8-9-1.pdf} \hfill{}
 
 \caption{\label{fig-fig8-9}A demonstration of the central limit theorem.
 In panel (a), we have a non-normal population distribution, and panels
@@ -9718,7 +9726,7 @@ isn't exhaustive so we cannot give a definitive answer. Nevertheless, if
 I was forced at gunpoint to give a ``best guess'' I'd have to say 98.5.
 That's the essence of statistical estimation: giving a best guess.
 
-In this example estimating the unknown poulation parameter is
+In this example estimating the unknown population parameter is
 straightforward. I calculate the sample mean and I use that as my
 \textbf{estimate of the population mean}. It's pretty simple, and in the
 next section I'll explain the statistical justification for this
@@ -9728,8 +9736,8 @@ population parameter are conceptually different things. A sample
 statistic is a description of your data, whereas the estimate is a guess
 about the population. With that in mind, statisticians often different
 notation to refer to them. For instance, if the true population mean is
-denoted \(\mu\), then we would use \(\hat{mu}\) to refer to our estimate
-of the population mean. In contrast, the sample mean is denoted
+denoted \(\mu\), then we would use \(\hat{\mu}\) to refer to our
+estimate of the population mean. In contrast, the sample mean is denoted
 \(\bar{X}\) or sometimes m. However, in simple random samples the
 estimate of the population mean is identical to the sample mean. If I
 observe a sample mean of \(\bar{X}=98.5\) then my estimate of the
@@ -9816,6 +9824,8 @@ let's use something completely fictitious. Suppose the observation in
 question measures the cromulence of my shoes. It turns out that my shoes
 have a cromulence of \(20\). So here's my sample:
 
+\[20\]
+
 This is a perfectly legitimate sample, even if it does have a sample
 size of \(N = 1\). It has a sample mean of \(20\) and because every
 observation in this sample is equal to the sample mean (obviously!) it
@@ -9886,7 +9896,7 @@ sample means is also \(100\).
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./08-Estimating-unknown-quantities-from-a-sample_files/figure-pdf/fig-fig8-10-1.pdf} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{08-Estimating-unknown-quantities-from-a-sample_files/figure-pdf/fig-fig8-10-1.pdf} \hfill{}
 
 \caption{\label{fig-fig8-10}The sampling distribution of the sample
 standard deviation for a `two IQ scores' experiment. The true population
@@ -9924,7 +9934,7 @@ our guess is a little bit larger than the sample standard deviation
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./08-Estimating-unknown-quantities-from-a-sample_files/figure-pdf/fig-fig8-11-1.pdf} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{08-Estimating-unknown-quantities-from-a-sample_files/figure-pdf/fig-fig8-11-1.pdf} \hfill{}
 
 \caption{\label{fig-fig8-11}An illustration of the fact that the sample
 mean is an unbiased estimator of the population mean (panel a), but the
@@ -10196,11 +10206,6 @@ would have used \(1.04\) as the magic number rather than \(1.96\).
   can write this as our formula for the 95\% confidence interval:
   \[CI_{95}=\bar{X} \pm (1.96 \times \frac{\sigma}{\sqrt{N}})\]}{]}
 
-Of course, there's nothing special about the number 1.96. It just
-happens to be the multiplier you need to use if you want a 95\%
-confidence interval. If I'd wanted a 70\% confidence interval, I would
-have used 1.04 as the magic number rather than 1.96.
-
 \hypertarget{interpreting-a-confidence-interval}{%
 \subsection{Interpreting a confidence
 interval}\label{interpreting-a-confidence-interval}}
@@ -10260,7 +10265,7 @@ Chapter~\ref{sec-Bayesian-statistics}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./08-Estimating-unknown-quantities-from-a-sample_files/figure-pdf/fig-fig8-12-1.pdf} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{08-Estimating-unknown-quantities-from-a-sample_files/figure-pdf/fig-fig8-12-1.pdf} \hfill{}
 
 \caption{\label{fig-fig8-12}95\% confidence intervals. The top panel (a)
 shows 50 simulated replications of an experiment in which we measure the
@@ -10898,7 +10903,7 @@ somewhere between \(40\) and \(60\) correct responses.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./09-Hypothesis-testing_files/figure-pdf/fig-fig9-1-1.pdf} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{09-Hypothesis-testing_files/figure-pdf/fig-fig9-1-1.pdf} \hfill{}
 
 \caption{\label{fig-fig9-1}The sampling distribution for our test
 statistic \(X\) when the null hypothesis is true. For our ESP scenario
@@ -10979,7 +10984,7 @@ values} since they define the edges of the critical region
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./09-Hypothesis-testing_files/figure-pdf/fig-fig9-2-1.pdf} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{09-Hypothesis-testing_files/figure-pdf/fig-fig9-2-1.pdf} \hfill{}
 
 \caption{\label{fig-fig9-2}The critical region associated with the
 hypothesis test for the ESP study, for a hypothesis test with a
@@ -11080,7 +11085,7 @@ Figure~\ref{fig-fig9-3}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./09-Hypothesis-testing_files/figure-pdf/fig-fig9-3-1.pdf} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{09-Hypothesis-testing_files/figure-pdf/fig-fig9-3-1.pdf} \hfill{}
 
 \caption{\label{fig-fig9-3}The critical region for a one sided test. In
 this case, the alternative hypothesis is that \(\theta \geq .5\) so we
@@ -11467,7 +11472,7 @@ shown in Figure~\ref{fig-fig9-4}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig9-4.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig9-4.png} \hfill{}
 
 \caption{\label{fig-fig9-4}Binomial test analysis and results in jamovi}
 
@@ -11502,7 +11507,7 @@ power is defined as \(1 - \beta\), this is the same thing.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./09-Hypothesis-testing_files/figure-pdf/fig-fig9-5-1.pdf} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{09-Hypothesis-testing_files/figure-pdf/fig-fig9-5-1.pdf} \hfill{}
 
 \caption{\label{fig-fig9-5}Sampling distribution under the alternative
 hypothesis for a population parameter value of \(\theta = 0.55\). A
@@ -11545,7 +11550,7 @@ different.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./09-Hypothesis-testing_files/figure-pdf/fig-fig9-6-1.pdf} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{09-Hypothesis-testing_files/figure-pdf/fig-fig9-6-1.pdf} \hfill{}
 
 \caption{\label{fig-fig9-6}Sampling distribution under the
 \emph{alternative} hypothesis for a population parameter value of
@@ -11567,7 +11572,7 @@ is further away, the power is large.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./09-Hypothesis-testing_files/figure-pdf/fig-fig9-7-1.pdf} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{09-Hypothesis-testing_files/figure-pdf/fig-fig9-7-1.pdf} \hfill{}
 
 \caption{\label{fig-fig9-7}The probability that we will reject the null
 hypothesis, plotted as a function of the true value of \(\theta\).
@@ -11751,7 +11756,7 @@ parameter of \(\theta = 0.7\) for all sample sizes \(N\) from \(1\) to
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./09-Hypothesis-testing_files/figure-pdf/fig-fig9-8-1.pdf} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{09-Hypothesis-testing_files/figure-pdf/fig-fig9-8-1.pdf} \hfill{}
 
 \caption{\label{fig-fig9-8}The power of our test plotted as a function
 of the sample size \(N\). In this case, the true value of \(\theta\) is
@@ -12605,7 +12610,7 @@ truly independent, and so the degrees of freedom is actually only
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./10-Categorical-data-analysis_files/figure-pdf/fig-fig10-1-1.pdf} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{10-Categorical-data-analysis_files/figure-pdf/fig-fig10-1-1.pdf} \hfill{}
 
 \caption{\label{fig-fig10-1}\(\chi^2\) (chi-square) distributions with
 different values for the `degrees of freedom'}
@@ -12691,7 +12696,7 @@ hypothesis is true. This is illustrated in Figure~\ref{fig-fig10-2}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./10-Categorical-data-analysis_files/figure-pdf/fig-fig10-2-1.pdf} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{10-Categorical-data-analysis_files/figure-pdf/fig-fig10-2-1.pdf} \hfill{}
 
 \caption{\label{fig-fig10-2}Illustration of how the hypothesis testing
 works for the \(\chi^2\) (chi-square) goodness of-fit test}
@@ -12708,7 +12713,7 @@ and p=0.05 is 7.815.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig10-3.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig10-3.png} \hfill{}
 
 \caption{\label{fig-fig10-3}Table of critical values for the chi-square
 distribution}
@@ -12742,7 +12747,7 @@ the actual p-value of the calculated \(\chi^2\) for \(3\) d.f.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig10-4.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig10-4.png} \hfill{}
 
 \caption{\label{fig-fig10-4}A \(\chi^2\) One Sample Proportion Test in
 jamovi, with table showing both observed and expected frequencies and
@@ -12776,7 +12781,7 @@ results change.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig10-5.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig10-5.png} \hfill{}
 
 \caption{\label{fig-fig10-5}Changing the expected proportions in the
 \(\\chi^2\) One Sample Proportion Test in jamovi}
@@ -12830,7 +12835,7 @@ The expected counts are now shown in Table~\ref{tbl-tab10-6}.
 \end{table}
  
 
-and the \(\chi^2\) statistic is 4.74, 3 d.f., \(p = 0.182\). Now, the
+and the \(\chi^2\) statistic is 4.74, 3 d.f., \(p = 0.192\). Now, the
 results of our updated hypotheses and the expected frequencies are
 different from what they were last time. As a consequence our \(\chi^2\)
 test statistic is different, and our p-value is different too.
@@ -13402,7 +13407,7 @@ about this some more in just a moment.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig10-6.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig10-6.png} \hfill{}
 
 \caption{\label{fig-fig10-6}Independent samples \(\chi^2\) test in
 jamovi using the \emph{Chapek 9} data}
@@ -13606,7 +13611,7 @@ of the \emph{salem.csv} data illustrates the point
   \providecommand{\huxbpad}[1]{\rule[-#1]{0pt}{#1}}
 
 \begin{table}[ht]
-\caption{\label{tbl-tab10-9}Contingency table of the salem.csv data }\tabularnewline
+\caption{\label{tbl-tab10-9}Contingency table of the \emph{salem.csv} data }\tabularnewline
 
 \begin{centerbox}
 \begin{threeparttable}
@@ -13760,7 +13765,7 @@ people not on fire. See Figure~\ref{fig-fig10-7}.
 
 \begin{figure}
 
-\includegraphics[width=0.6\textwidth,height=\textheight]{./images/fig10-7.png} \hfill{}
+\includegraphics[width=0.6\textwidth,height=\textheight]{images/fig10-7.png} \hfill{}
 
 \caption{\label{fig-fig10-7}Fisher exact test analysis in jamovi}
 
@@ -13971,7 +13976,7 @@ McNemar test just below it, see Figure~\ref{fig-fig10-8}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig10-8.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig10-8.png} \hfill{}
 
 \caption{\label{fig-fig10-8}McNemar test output in jamovi}
 
@@ -14005,8 +14010,8 @@ cross-tabulates the first choice against the second choice
   \providecommand{\huxbpad}[1]{\rule[-#1]{0pt}{#1}}
 
 \begin{table}[ht]
-\caption{\label{tbl-tab10-13}Cross-tabulating first against second choice with the Randomness.omv
-(cards) data }\tabularnewline
+\caption{\label{tbl-tab10-13}Cross-tabulating first against second choice with the
+\emph{Randomness.omv} (cards) data }\tabularnewline
 
 \begin{centerbox}
 \begin{threeparttable}
@@ -14075,7 +14080,7 @@ These aren't the same test.
 
 \begin{figure}
 
-\includegraphics[width=0.6\textwidth,height=\textheight]{./images/fig10-9.png} \hfill{}
+\includegraphics[width=0.6\textwidth,height=\textheight]{images/fig10-9.png} \hfill{}
 
 \caption{\label{fig-fig10-9}Independent vs.~Paired (McNemar) with the
 \emph{Randomness.omv} (cards) data}
@@ -14102,7 +14107,7 @@ The key ideas discussed in this chapter are:
   variables. The null hypothesis is that there is no relationship or
   association between the variables.
 \item
-  \protect\hyperlink{effect-size-3}{Effect size} for a contingency table
+  \protect\hyperlink{effect-size}{Effect size} for a contingency table
   can be measured in several ways. In particular we noted the Cramér's
   \(V\) statistic.
 \item
@@ -14216,7 +14221,7 @@ right answer is, is it? For this, we are going to need some statistics.
 
 \begin{figure}
 
-\includegraphics[width=0.6\textwidth,height=\textheight]{./11-Comparing-two-means_files/figure-pdf/fig-fig11-1-1.pdf} \hfill{}
+\includegraphics[width=0.6\textwidth,height=\textheight]{11-Comparing-two-means_files/figure-pdf/fig-fig11-1-1.pdf} \hfill{}
 
 \caption{\label{fig-fig11-1}The theoretical distribution (solid line)
 from which the psychology student grades (bars) are supposed to have
@@ -14265,7 +14270,7 @@ them. For now though, we'll keep things simple.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./11-Comparing-two-means_files/figure-pdf/fig-fig11-2-1.pdf} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{11-Comparing-two-means_files/figure-pdf/fig-fig11-2-1.pdf} \hfill{}
 
 \caption{\label{fig-fig11-2}Graphical illustration of the null and
 alternate hypotheses assumed by the one sample \(z\)-test (the two sided
@@ -14440,7 +14445,7 @@ size (\(N=20\)).
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./11-Comparing-two-means_files/figure-pdf/fig-fig11-3-1.pdf} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{11-Comparing-two-means_files/figure-pdf/fig-fig11-3-1.pdf} \hfill{}
 
 \caption{\label{fig-fig11-3}Rejection regions for the two-sided z-test
 (panel (a)) and the one-sided z-test (panel (b))}
@@ -14575,7 +14580,7 @@ one we're going to have to address.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./11-Comparing-two-means_files/figure-pdf/fig-fig11-4-1.pdf} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{11-Comparing-two-means_files/figure-pdf/fig-fig11-4-1.pdf} \hfill{}
 
 \caption{\label{fig-fig11-4}Graphical illustration of the null and
 alternative hypotheses assumed by the (two sided) one sample t-test.
@@ -14615,7 +14620,7 @@ t=\frac{\bar{X}-\mu}{\frac{\hat{\sigma}}{\sqrt{N}}}
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./11-Comparing-two-means_files/figure-pdf/fig-fig11-5-1.pdf} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{11-Comparing-two-means_files/figure-pdf/fig-fig11-5-1.pdf} \hfill{}
 
 \caption{\label{fig-fig11-5}The t distribution with 2 degrees of freedom
 (left) and 10 degrees of freedom (right), with a standard normal
@@ -14667,7 +14672,7 @@ of \(0.036\).
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig11-6.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig11-6.png} \hfill{}
 
 \caption{\label{fig-fig11-6}jamovi does the one-sample t-test}
 
@@ -14870,7 +14875,7 @@ performance on some outcome measure, then an independent samples t-test
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig11-7.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig11-7.png} \hfill{}
 
 \caption{\label{fig-fig11-7}Box and violin plots showing the
 distribution of grades for students in Anastasia's and Bernadette's
@@ -14907,7 +14912,7 @@ and the alternative to this is that they are not (\(\mu_1 \neq \mu_2\))
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./11-Comparing-two-means_files/figure-pdf/fig-fig11-8-1.pdf} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{11-Comparing-two-means_files/figure-pdf/fig-fig11-8-1.pdf} \hfill{}
 
 \caption{\label{fig-fig11-8}Graphical illustration of the null and
 alternative hypotheses assumed by the Student t-test. The null
@@ -15060,7 +15065,7 @@ shown in Figure~\ref{fig-fig11-9}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig11-9.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig11-9.png} \hfill{}
 
 \caption{\label{fig-fig11-9}Independent t-test in jamovi, with options
 checked for useful results}
@@ -15261,7 +15266,7 @@ discuss it.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./11-Comparing-two-means_files/figure-pdf/fig-fig11-10-1.pdf} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{11-Comparing-two-means_files/figure-pdf/fig-fig11-10-1.pdf} \hfill{}
 
 \caption{\label{fig-fig11-10}Graphical illustration of the null and
 alternative hypotheses assumed by the Welch t-test. Like the Student
@@ -15313,7 +15318,7 @@ above, then this is what it gives you (Figure~\ref{fig-fig11-11}).
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig11-11.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig11-11.png} \hfill{}
 
 \caption{\label{fig-fig11-11}Results showing the Welch test alongside
 the default Student's t-test in jamovi}
@@ -15351,7 +15356,7 @@ actually believes that the population variances are identical.
 
 The assumptions of the Welch test are very similar to those made by the
 Student t-test (see
-\protect\hyperlink{assumptions-of-the-test-1}{Assumptions of the test},
+\protect\hyperlink{assumptions-of-the-test}{Assumptions of the test},
 except that the Welch test does not assume homogeneity of variance. This
 leaves only the assumption of normality and the assumption of
 independence. The specifics of these assumptions are the same for the
@@ -15420,7 +15425,7 @@ student performance is pure chance.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig11-12.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig11-12.png} \hfill{}
 
 \caption{\label{fig-fig11-12}Descriptives for the two grade test
 variables in the \emph{chico} data set}
@@ -15449,7 +15454,7 @@ to do this is to compute a new variable, with the expression grade test2
 
 {\centering 
 
-\includegraphics{./images/fig11-13a.png}
+\includegraphics{images/fig11-13a.png}
 
 }
 
@@ -15460,7 +15465,7 @@ to do this is to compute a new variable, with the expression grade test2
 
 {\centering 
 
-\includegraphics{./images/fig11-13b.png}
+\includegraphics{images/fig11-13b.png}
 
 }
 
@@ -15482,7 +15487,7 @@ that almost the entire histogram is above zero.
 
 \begin{figure}
 
-\includegraphics[width=0.6\textwidth,height=\textheight]{./images/fig11-14.png} \hfill{}
+\includegraphics[width=0.6\textwidth,height=\textheight]{images/fig11-14.png} \hfill{}
 
 \caption{\label{fig-fig11-14}Histogram showing the improvement made by
 each student in Dr Chico's class. Notice that almost the entire
@@ -15560,7 +15565,7 @@ get, Figure~\ref{fig-fig11-15}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig11-15.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig11-15.png} \hfill{}
 
 \caption{\label{fig-fig11-15}Results showing a one sample t-test on
 paired difference scores}
@@ -15582,7 +15587,7 @@ getting the results shown in Figure~\ref{fig-fig11-16}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig11-16.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig11-16.png} \hfill{}
 
 \caption{\label{fig-fig11-16}Results showing a paired sample t-test.
 Compare with Figure~\ref{fig-fig11-15}}
@@ -15616,7 +15621,7 @@ in Figure~\ref{fig-fig11-17}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig11-17.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig11-17.png} \hfill{}
 
 \caption{\label{fig-fig11-17}jamovi results showing a `One Sample
 T-Test' where the actual hypothesis is one sided, i.e.~that the true
@@ -15655,7 +15660,7 @@ should get the results shown in Figure~\ref{fig-fig11-18}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig11-18.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig11-18.png} \hfill{}
 
 \caption{\label{fig-fig11-18}jamovi results showing an `Independent
 Samples t-Test' where the actual hypothesis is one sided, i.e.~that
@@ -15678,7 +15683,7 @@ Figure~\ref{fig-fig11-19}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig11-19.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig11-19.png} \hfill{}
 
 \caption{\label{fig-fig11-19}jamovi results showing a `Paired Samples
 T-Test' where the actual hypothesis is one sided, i.e.~that grade test2
@@ -15934,7 +15939,7 @@ results are shown in Figure~\ref{fig-fig11-20}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./11-Comparing-two-means_files/figure-pdf/fig-fig11-20-1.pdf} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{11-Comparing-two-means_files/figure-pdf/fig-fig11-20-1.pdf} \hfill{}
 
 \caption{\label{fig-fig11-20}Histogram (panel (a)) and normal QQ plot
 (panel (b)) of normal.data, a normally distributed sample with \(100\)
@@ -15955,7 +15960,7 @@ curves sharply at either end.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./11-Comparing-two-means_files/figure-pdf/fig-fig11-21-1.pdf} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{11-Comparing-two-means_files/figure-pdf/fig-fig11-21-1.pdf} \hfill{}
 
 \caption{\label{fig-fig11-21}In the top row, a histogram and a normal QQ
 plot of the \(100\) observations in a skewed.data set. The skewness of
@@ -15988,7 +15993,7 @@ go!
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig11-22.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig11-22.png} \hfill{}
 
 \caption{\label{fig-fig11-22}QQ plot for the independent t test analysis
 shown in Figure~\ref{fig-fig11-10}}
@@ -15997,7 +16002,7 @@ shown in Figure~\ref{fig-fig11-10}}
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig11-23.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig11-23.png} \hfill{}
 
 \caption{\label{fig-fig11-23}QQ plot for the paired samples t test
 analysis shown in Figure~\ref{fig-fig11-16}}
@@ -16031,7 +16036,7 @@ a set of \(N\) observations is normally distributed.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./11-Comparing-two-means_files/figure-pdf/fig-fig11-24-1.pdf} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{11-Comparing-two-means_files/figure-pdf/fig-fig11-24-1.pdf} \hfill{}
 
 \caption{\label{fig-fig11-24}Sampling distribution of the Shapiro-Wilk
 \(W\) statistic, under the null hypothesis that the data are normally
@@ -16063,7 +16068,7 @@ from a normal distribution at all. Here's what happens to the QQ plot
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig11-25.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig11-25.png} \hfill{}
 
 \caption{\label{fig-fig11-25}QQ plot showing non-normality from the AFL
 winning margins data}
@@ -16239,7 +16244,7 @@ Figure~\ref{fig-fig11-26}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig11-26.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig11-26.png} \hfill{}
 
 \caption{\label{fig-fig11-26}jamovi screen showing results for the
 Mann-Whitney \(U\) test}
@@ -16378,7 +16383,7 @@ us a different answer, of course; see Figure~\ref{fig-fig11-27}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig11-27.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig11-27.png} \hfill{}
 
 \caption{\label{fig-fig11-27}jamovi screen showing results for one
 sample and paired sample Wilcoxon nonparametric tests}
@@ -16414,7 +16419,7 @@ sample and paired sample Wilcoxon nonparametric tests}
   \protect\hyperlink{one-sided-tests}{One-sided tests} are perfectly
   legitimate as long as they are pre-planned (like all tests!).
 \item
-  \protect\hyperlink{effect-size-3}{Effect size} calculations for the
+  \protect\hyperlink{effect-size}{Effect size} calculations for the
   difference between means can be calculated via the Cohen's d
   statistic.
 \item
@@ -16455,7 +16460,7 @@ the \textbf{correlation} between variables. But first, we need some data
 
 \begin{table}[ht]
 \caption{\label{tbl-tab12-1}Data for correlation analysis - descriptive statistics for the
-parenthooddata }\tabularnewline
+\emph{parenthood}data }\tabularnewline
 
 \begin{centerbox}
 \begin{threeparttable}
@@ -16559,7 +16564,7 @@ me that it's pretty standard.
 
 {\centering 
 
-\includegraphics{./images/fig12-1a.png}
+\includegraphics{images/fig12-1a.png}
 
 }
 
@@ -16570,7 +16575,7 @@ me that it's pretty standard.
 
 {\centering 
 
-\includegraphics{./images/fig12-1b.png}
+\includegraphics{images/fig12-1b.png}
 
 }
 
@@ -16581,7 +16586,7 @@ me that it's pretty standard.
 
 {\centering 
 
-\includegraphics{./images/fig12-1c.png}
+\includegraphics{images/fig12-1c.png}
 
 }
 
@@ -16618,7 +16623,7 @@ slept.
 
 {\centering 
 
-\includegraphics{./images/fig12-2a.png}
+\includegraphics{images/fig12-2a.png}
 
 }
 
@@ -16629,7 +16634,7 @@ slept.
 
 {\centering 
 
-\includegraphics{./images/fig12-2b.png}
+\includegraphics{images/fig12-2b.png}
 
 }
 
@@ -16656,7 +16661,7 @@ get less grumpy (negative relationship, left hand side).
 
 {\centering 
 
-\includegraphics{./images/fig12-2a.png}
+\includegraphics{images/fig12-2a.png}
 
 }
 
@@ -16667,7 +16672,7 @@ get less grumpy (negative relationship, left hand side).
 
 {\centering 
 
-\includegraphics{./images/fig12-3b.png}
+\includegraphics{images/fig12-3b.png}
 
 }
 
@@ -16735,7 +16740,7 @@ see several plots showing what different correlations look like.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./12-Correlation-and-linear-regression_files/figure-pdf/fig-fig12-4-1.pdf} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{12-Correlation-and-linear-regression_files/figure-pdf/fig-fig12-4-1.pdf} \hfill{}
 
 \caption{\label{fig-fig12-4}Illustration of the effect of varying the
 strength and direction of a correlation. In the left hand column, the
@@ -16764,7 +16769,7 @@ Figure~\ref{fig-fig12-5}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig12-5.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig12-5.png} \hfill{}
 
 \caption{\label{fig-fig12-5}A jamovi screenshot showing correlations
 between variables in the \emph{parenthood.csv} file}
@@ -16936,10 +16941,10 @@ graph your raw data'' (see Chapter~\ref{sec-Drawing-graphs}).
 
 {\centering 
 
-\includegraphics[width=0.45\textwidth,height=\textheight]{./images/fig12-6a.png}
-\includegraphics[width=0.45\textwidth,height=\textheight]{./images/fig12-6b.png}
-\includegraphics[width=0.45\textwidth,height=\textheight]{./images/fig12-6c.png}
-\includegraphics[width=0.45\textwidth,height=\textheight]{./images/fig12-6d.png}
+\includegraphics[width=0.45\textwidth,height=\textheight]{images/fig12-6a.png}
+\includegraphics[width=0.45\textwidth,height=\textheight]{images/fig12-6b.png}
+\includegraphics[width=0.45\textwidth,height=\textheight]{images/fig12-6c.png}
+\includegraphics[width=0.45\textwidth,height=\textheight]{images/fig12-6d.png}
 
 }
 
@@ -16999,7 +17004,7 @@ better grade. That's not what a correlation of \(r = .91\) says at all.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig12-7.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig12-7.png} \hfill{}
 
 \caption{\label{fig-fig12-7}The relationship between hours worked and
 grade received for a toy data set consisting of only 10 students (each
@@ -17195,7 +17200,7 @@ density curve showing how the data in each variable is distributed.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig12-8.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig12-8.png} \hfill{}
 
 \caption{\label{fig-fig12-8}Scatterplot via the `Correlation Matrix'
 command in jamovi}
@@ -17213,7 +17218,7 @@ information is the same.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig12-9.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig12-9.png} \hfill{}
 
 \caption{\label{fig-fig12-9}Scatterplot via the `scatr' add-on module in
 - jamovi}
@@ -17232,7 +17237,7 @@ Figure~\ref{fig-fig12-10}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig12-10.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig12-10.png} \hfill{}
 
 \caption{\label{fig-fig12-10}A matrix of scatterplots produced using
 jamovi}
@@ -17267,7 +17272,7 @@ Figure~\ref{fig-fig12-11} (b).
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./12-Correlation-and-linear-regression_files/figure-pdf/fig-fig12-11-1.pdf} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{12-Correlation-and-linear-regression_files/figure-pdf/fig-fig12-11-1.pdf} \hfill{}
 
 \caption{\label{fig-fig12-11}Panel (a) shows the sleep-grumpiness
 scatterplot from Figure~\ref{fig-fig12-9} with the best fitting
@@ -17372,7 +17377,7 @@ either write as \(\sum_i (Y_i - \hat{Y}_i)^2\) or as
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./12-Correlation-and-linear-regression_files/figure-pdf/fig-fig12-12-1.pdf} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{12-Correlation-and-linear-regression_files/figure-pdf/fig-fig12-12-1.pdf} \hfill{}
 
 \caption{\label{fig-fig12-12}A depiction of the residuals associated
 with the best fitting regression line (panel a), and the residuals
@@ -17437,7 +17442,7 @@ Figure~\ref{fig-fig12-11} has this formula:
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig12-13.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig12-13.png} \hfill{}
 
 \caption{\label{fig-fig12-13}A jamovi screenshot showing a simple linear
 regression analysis}
@@ -17559,7 +17564,7 @@ itself.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./12-Correlation-and-linear-regression_files/figure-pdf/fig-fig12-14-1.pdf} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{12-Correlation-and-linear-regression_files/figure-pdf/fig-fig12-14-1.pdf} \hfill{}
 
 \caption{\label{fig-fig12-14}A 3D visualisation of a multiple regression
 model. There are two predictors in the model, dani.sleep and baby.sleep
@@ -17852,7 +17857,7 @@ Figure~\ref{fig-fig12-15}, we get a whole bunch of useful output.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig12-15.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig12-15.png} \hfill{}
 
 \caption{\label{fig-fig12-15}A jamovi screenshot showing a multiple
 linear regression analysis, with some useful options checked}
@@ -17999,7 +18004,7 @@ Figure~\ref{fig-fig12-16}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig12-16.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig12-16.png} \hfill{}
 
 \caption{\label{fig-fig12-16}Standardised coefficients, with 95\%
 confidence intervals, for multiple linear regression}
@@ -18208,7 +18213,7 @@ then it strongly suggests that you need to make some changes.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig12-17.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig12-17.png} \hfill{}
 
 \caption{\label{fig-fig12-17}jamovi plot of the predicted values against
 the observed values of the outcome variable. A straight(-ish) line is
@@ -18230,7 +18235,7 @@ reasonably straight or flat line. This is a matter of judgement.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig12-18.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig12-18.png} \hfill{}
 
 \caption{\label{fig-fig12-18}jamovi plot of the predicted values against
 the residuals, with a line showing the relationship between the two. If
@@ -18264,7 +18269,7 @@ model.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig12-19.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig12-19.png} \hfill{}
 
 \caption{\label{fig-fig12-19}Plot of the theoretical quantiles according
 to the model, against the quantiles of the standardised residuals,
@@ -18290,10 +18295,10 @@ probably not worth worrying about.
 
 {\centering 
 
-\includegraphics[width=0.45\textwidth,height=\textheight]{./images/fig12-20a.png}
-\includegraphics[width=0.45\textwidth,height=\textheight]{./images/fig12-20b.png}
-\includegraphics[width=0.45\textwidth,height=\textheight]{./images/fig12-20c.png}
-\includegraphics[width=0.45\textwidth,height=\textheight]{./images/fig12-20d.png}
+\includegraphics[width=0.45\textwidth,height=\textheight]{images/fig12-20a.png}
+\includegraphics[width=0.45\textwidth,height=\textheight]{images/fig12-20b.png}
+\includegraphics[width=0.45\textwidth,height=\textheight]{images/fig12-20c.png}
+\includegraphics[width=0.45\textwidth,height=\textheight]{images/fig12-20d.png}
 
 }
 
@@ -18344,7 +18349,7 @@ plot.\footnote{It's a bit beyond the scope of this chapter to talk about
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig12-21.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig12-21.png} \hfill{}
 
 \caption{\label{fig-fig12-21}jamovi plot of the predicted values (model
 predictions) against the square root of the absolute standardised
@@ -18390,7 +18395,7 @@ the correlation matrix for all four variables
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig12-22.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig12-22.png} \hfill{}
 
 \caption{\label{fig-fig12-22}Correlation matrix in jamovi for all four
 variables}
@@ -18406,7 +18411,7 @@ collinearity there.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig12-23.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig12-23.png} \hfill{}
 
 \caption{\label{fig-fig12-23}Collinearity statistics for multiple
 regression, produced in jamovi}
@@ -18443,7 +18448,7 @@ different.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./12-Correlation-and-linear-regression_files/figure-pdf/fig-fig12-24-1.pdf} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{12-Correlation-and-linear-regression_files/figure-pdf/fig-fig12-24-1.pdf} \hfill{}
 
 \caption{\label{fig-fig12-24}An illustration of outliers. The solid line
 shows the regression line with the anomalous outlier observation
@@ -18478,7 +18483,7 @@ of where the regression line ends up going.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./12-Correlation-and-linear-regression_files/figure-pdf/fig-fig12-25-1.pdf} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{12-Correlation-and-linear-regression_files/figure-pdf/fig-fig12-25-1.pdf} \hfill{}
 
 \caption{\label{fig-fig12-25}An illustration of high leverage points.
 The anomalous observation in this case is unusual both in terms of the
@@ -18515,7 +18520,7 @@ worry. We operationalise influence in terms of a measure known as
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./12-Correlation-and-linear-regression_files/figure-pdf/fig-fig12-26-1.pdf} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{12-Correlation-and-linear-regression_files/figure-pdf/fig-fig12-26-1.pdf} \hfill{}
 
 \caption{\label{fig-fig12-26}An illustration of high influence points.
 In this case, the anomalous observation is highly unusual on the
@@ -18539,7 +18544,7 @@ results as shown in Figure~\ref{fig-fig12-27}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig12-27.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig12-27.png} \hfill{}
 
 \caption{\label{fig-fig12-27}jamovi output showing the table for the
 Cook's distance statistics}
@@ -18809,7 +18814,7 @@ Figure~\ref{fig-fig12-28}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig12-28.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig12-28.png} \hfill{}
 
 \caption{\label{fig-fig12-28}Model comparison in jamovi using the `Model
 Builder' option}
@@ -18922,7 +18927,7 @@ are shown in Figure~\ref{fig-fig13-1}
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig13-1.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig13-1.png} \hfill{}
 
 \caption{\label{fig-fig13-1}Descriptives for mood gain, and box plots by
 drug administered}
@@ -18984,7 +18989,7 @@ variability (Figure~\ref{fig-fig13-2}).
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./13-Comparing-several-means-one-way-ANOVA_files/figure-pdf/fig-fig13-2-1.pdf} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{13-Comparing-several-means-one-way-ANOVA_files/figure-pdf/fig-fig13-2-1.pdf} \hfill{}
 
 \caption{\label{fig-fig13-2}Graphical illustration of `between groups'
 variation (panel (a)) and `within groups' variation (panel (b)). On the
@@ -20028,7 +20033,7 @@ results table. We will come back to effect sizes a bit later.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig13-3.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig13-3.png} \hfill{}
 
 \caption{\label{fig-fig13-3}jamovi results table for ANOVA of mood gain
 by drug administered}
@@ -20267,7 +20272,7 @@ variable, as in Figure~\ref{fig-fig13-4}
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig13-4.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig13-4.png} \hfill{}
 
 \caption{\label{fig-fig13-4}Uncorrected pairwise t-tests as post hoc
 comparisons in jamovi}
@@ -20654,7 +20659,7 @@ of variance) or not.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig13-5.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig13-5.png} \hfill{}
 
 \caption{\label{fig-fig13-5}Levene test output for one-way ANOVA in
 jamovi}
@@ -20690,7 +20695,7 @@ Figure~\ref{fig-fig13-6}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig13-6.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig13-6.png} \hfill{}
 
 \caption{\label{fig-fig13-6}Welch's test as part of the One Way ANOVA
 analysis in jamovi}
@@ -20722,7 +20727,7 @@ negatives. That's why a visual inspection of the QQ plot is important.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig13-7.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig13-7.png} \hfill{}
 
 \caption{\label{fig-fig13-7}QQ plot in the One Way ANOVA analysis in
 jamovi}
@@ -20835,7 +20840,7 @@ mood.gain from the \emph{clinicaltrials.csv} data set
   \providecommand{\huxbpad}[1]{\rule[-#1]{0pt}{#1}}
 
 \begin{table}[ht]
-\caption{\label{tbl-tab13-11}Frequency table of mood gain from the clinicaltrials.csv data }\tabularnewline
+\caption{\label{tbl-tab13-11}Frequency table of mood gain from the \emph{clinicaltrials.csv} data }\tabularnewline
 
 \begin{centerbox}
 \begin{threeparttable}
@@ -20926,7 +20931,7 @@ Figure~\ref{fig-fig13-8}
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig13-8.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig13-8.png} \hfill{}
 
 \caption{\label{fig-fig13-8}Kruskall-Wallis one-way non-parametric ANOVA
 in jamovi}
@@ -21098,7 +21103,7 @@ Repeated Measures ANOVA.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig13-9.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig13-9.png} \hfill{}
 
 \caption{\label{fig-fig13-9}Repeated measures ANOVA dialogue box in
 jamovi}
@@ -21142,7 +21147,7 @@ be assumed.).
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig13-10.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig13-10.png} \hfill{}
 
 \caption{\label{fig-fig13-10}One-way repeated measures ANOVA output -
 Mauchly's Test of Sphericity}
@@ -21173,7 +21178,7 @@ corrected F-values are then shown in the results table, as in Figure
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig13-11.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig13-11.png} \hfill{}
 
 \caption{\label{fig-fig13-11}One-way repeated measures ANOVA output -
 Tests of Within-Subjects Effects}
@@ -21197,7 +21202,7 @@ difference between Speech and Syntax, but not between other levels.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig13-12.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig13-12.png} \hfill{}
 
 \caption{\label{fig-fig13-12}Post-hoc tests in repeated measures ANOVA
 in jamovi}
@@ -21215,7 +21220,7 @@ difference in post-hoc tests between Speech and Syntax task performance.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig13-13.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig13-13.png} \hfill{}
 
 \caption{\label{fig-fig13-13}One-way repeated measures ANOVA output -
 Descriptive Statistics}
@@ -21242,7 +21247,7 @@ an example using the Broca's Aphasia data we have already looked at.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig13-14.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig13-14.png} \hfill{}
 
 \caption{\label{fig-fig13-14}The `Repeated Measures ANOVA
 (Non-parametric)' dialogue box and results in jamovi}
@@ -21313,8 +21318,8 @@ discussed, the key topics were:
   \protect\hyperlink{running-an-anova-in-jamovi}{Running an ANOVA in
   jamovi}
 \item
-  How to compute an \protect\hyperlink{effect-size-3}{Effect size} for
-  an ANOVA.
+  How to compute an \protect\hyperlink{effect-size}{Effect size} for an
+  ANOVA.
 \item
   \protect\hyperlink{multiple-comparisons-and-post-hoc-tests}{Multiple
   comparisons and post hoc tests} for multiple testing.
@@ -21369,9 +21374,9 @@ have two grouping variables, we sometimes refer to the analysis as a
 two-way ANOVA, in contrast to the one-way ANOVAs that we ran in
 Chapter~\ref{sec-Comparing-several-means-one-way-ANOVA}.
 
-\hypertarget{factorial-anova-1-balanced-designs-no-interactions}{%
-\section{Factorial ANOVA 1: balanced designs, no
-interactions}\label{factorial-anova-1-balanced-designs-no-interactions}}
+\hypertarget{factorial-anova-1-balanced-designs-focus-on-main-effects}{%
+\section{Factorial ANOVA 1: balanced designs, focus on main
+effects}\label{factorial-anova-1-balanced-designs-focus-on-main-effects}}
 
 When we discussed analysis of variance in
 Chapter~\ref{sec-Comparing-several-means-one-way-ANOVA}, we assumed a
@@ -21402,7 +21407,7 @@ table shown in Figure~\ref{fig-fig14-1}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig14-1.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig14-1.png} \hfill{}
 
 \caption{\label{fig-fig14-1}jamovi contingency table of drug by therapy}
 
@@ -21440,7 +21445,8 @@ this list of group means (Table~\ref{tbl-tab14-1}).
   \providecommand{\huxbpad}[1]{\rule[-#1]{0pt}{#1}}
 
 \begin{table}[ht]
-\caption{\label{tbl-tab14-1}Group means for drug and therapy groups in the clinicaltrial.csv data }\tabularnewline
+\caption{\label{tbl-tab14-1}Group means for drug and therapy groups in the \emph{clinicaltrial.csv}
+data }\tabularnewline
 
 \begin{centerbox}
 \begin{threeparttable}
@@ -21786,9 +21792,9 @@ things. First, does the choice of drug have any effect on mood? And
 second, does CBT have any effect on mood? These aren't the only
 hypotheses that we could formulate of course, and we'll see a really
 important example of a different kind of hypothesis in the section
-\protect\hyperlink{factorial-anova-2-balanced-designs-interactions-allowed}{Factorial
-ANOVA 2: balanced designs, interactions allowed}, but these are the two
-simplest hypotheses to test, and so we'll start there. Consider the
+\protect\hyperlink{factorial-anova-2-balanced-designs-interpreting-interactions}{Factorial
+ANOVA 2: balanced designs, interpreting interactions}, but these are the
+two simplest hypotheses to test, and so we'll start there. Consider the
 first test. If the drug has no effect then we would expect all of the
 row means to be identical, right? So that's our null hypothesis. On the
 other hand, if the drug does matter then we should expect these row
@@ -21857,7 +21863,7 @@ results shown in Figure~\ref{fig-fig14-2}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig14-2.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig14-2.png} \hfill{}
 
 \caption{\label{fig-fig14-2}jamovi one way anova of mood.gain by drug}
 
@@ -21872,7 +21878,7 @@ Factor' in the analysis, see Figure~\ref{fig-fig14-3}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig14-3.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig14-3.png} \hfill{}
 
 \caption{\label{fig-fig14-3}jamovi two way anova of mood.gain by drug
 and therapy}
@@ -21882,9 +21888,11 @@ and therapy}
 This output is pretty simple to read too. The first row of the table
 reports a between-group sum of squares (SS) value associated with the
 drug factor, along with a corresponding between-group df value. It also
-calculates a mean square value (MS), an F-statistic and a p-value. is
-also a row corresponding to the therapy factor and a row corresponding
-to the residuals (i.e., the within groups variation).
+calculates a mean square value (MS), an F-statistic and a p-value. There
+is also a row corresponding to the therapy factor, a row corresponding
+to the interaction between the drug factor and the therapy factor (which
+we won't cover just yet - more on interactions later), and a row
+corresponding to the residuals (i.e., the within groups variation).
 
 Not only are all of the individual quantities pretty familiar, the
 relationships between these different quantities has remained unchanged,
@@ -21904,29 +21912,35 @@ divide \(3.45\) by \(2\) and end up with a mean square value of
 our calculations are even simpler: dividing \(0.47\) (the \(SS\) value)
 by 1 gives us an answer of \(0.47\) (the \(MS\) value).
 
-Turning to the F statistics and the p values, notice that we have two of
-each; one corresponding to the drug factor and the other corresponding
-to the therapy factor. Regardless of which one we're talking about, the
-F statistic is calculated by dividing the mean square value associated
-with the factor by the mean square value associated with the residuals.
-If we use ``A'' as shorthand notation to refer to the first factor
-(factor A; in this case drug) and ``R'' as shorthand notation to refer
-to the residuals, then the F statistic associated with factor A is
-denoted FA, and is calculated as follows:
+Turning to the F statistics and the p values, notice that we have one
+corresponding to the drug factor and one corresponding to the therapy
+factor. Regardless of which one we're talking about, the F statistic is
+calculated by dividing the mean square value associated with the factor
+by the mean square value associated with the residuals. If we use ``A''
+as shorthand notation to refer to the first factor (factor A; in this
+case drug) and ``R'' as shorthand notation to refer to the residuals,
+then the F statistic associated with factor A is denoted \(F_A\), and is
+calculated as follows:
 
 \[F_A=\frac{MS_A}{MS_R}\]
 
 and an equivalent formula exists for factor B (i.e., therapy). Note that
 this use of ``R'' to refer to residuals is a bit awkward, since we also
 used the letter R to refer to the number of rows in the table, but I'm
-only going to use ``R'' to mean residuals in the context of SSR and MSR,
-so hopefully this shouldn't be confusing. Anyway, to apply this formula
-to the drugs factor we take the mean square of 1.73 and divide it by the
-residual mean square value of \(0.07\), which gives us an F-statistic of
-26.15. The corresponding calculation for the therapy variable would be
-to divide \(0.47\) by \(0.07\) which gives \(7.08\) as the F-statistic.
-Not surprisingly, of course, these are the same values that jamovi has
-reported in the ANOVA table above.
+only going to use ``R'' to mean residuals in the context of \({SS_R}\)
+and \({MS_R}\), so hopefully this shouldn't be confusing. Anyway, to
+apply this formula to the drugs factor we take the mean square of 1.73
+and divide it by the residual mean square value of \(0.05\), which gives
+us an F-statistic of 31.71.\footnote{NB There are some rounding errors
+  here, the value of the mean square, to 5 decimal places, is 1.72667.
+  And the value of the residual mean square to 5 decimal places, is
+  0.05444. jamovi actually uses many more decimal places in its
+  calculations, but the figures shown in the results tables are rounded
+  for clarity. Though you can change the number of decimal places
+  displayed by jamovi if you want.} The corresponding calculation for
+the therapy variable would be to divide \(0.47\) by \(0.05\) which gives
+\(8.58\) as the F-statistic. Not surprisingly, of course, these are the
+same values that jamovi has reported in the ANOVA table above.
 
 Also in the ANOVA table is the calculation of the p values. Once again,
 there is nothing new here. For each of our two factors what we're trying
@@ -21940,23 +21954,22 @@ statistic under the null hypothesis (that the factor in question is
 irrelevant) is an F distribution. Also note that the two degrees of
 freedom values are those corresponding to the factor and those
 corresponding to the residuals. For the drug factor we're talking about
-an F distribution with 2 and 14 degrees of freedom (I'll discuss degrees
+an F distribution with 2 and 12 degrees of freedom (I'll discuss degrees
 of freedom in more detail later). In contrast, for the therapy factor
-the sampling distribution is F with 1 and 14 degrees of freedom.
+the sampling distribution is F with 1 and 12 degrees of freedom.
 
 At this point, I hope you can see that the ANOVA table for this more
 complicated factorial analysis should be read in much the same way as
 the ANOVA table for the simpler one way analysis. In short, it's telling
 us that the factorial ANOVA for our \(3 \times 2\) design found a
-significant effect of drug (\(F_{2,14} = 26.15, p < .001\)) as well as a
-significant effect of therapy (\(F_{1,14} = 7.08, p = .02\)). Or, to use
-the more technically correct terminology, we would say that there are
-two \textbf{main effects} of drug and therapy. At the moment, it
+significant effect of drug (\(F_{2,12} = 31.71, p < .001\)) as well as a
+significant effect of therapy (\(F_{1,12} = 8.58, p = .013\)). Or, to
+use the more technically correct terminology, we would say that there
+are two \textbf{main effects} of drug and therapy. At the moment, it
 probably seems a bit redundant to refer to these as ``main'' effects,
-but it actually does make sense. Later on, we're going to want to talk
-about the possibility of ``interactions'' between the two factors, and
-so we generally make a distinction between main effects and interaction
-effects.
+but it actually does make sense. Later on, we're going to cover
+``interactions'' between the two factors, and so we generally make a
+distinction between main effects and interaction effects.
 
 \hypertarget{how-are-the-sum-of-squares-calculated}{%
 \subsection{How are the sum of squares
@@ -22106,27 +22119,27 @@ ANOVA.
   output from the earlier section. Once again, a dedicated spreadsheet
   programme is helpful for these sorts of calculations, so please have a
   go yourself. You can also take a look at the version I did in Excel in
-  the file clinicaltrial\_factorialanova.xls. First, let's calculate the
-  sum of squares associated with the main effect of drug. There are a
-  total of \(N = 3\) people in each group and \(C = 2\) different types
-  of therapy. Or, to put it another way, there are \(3 \times 2 = 6\)
-  people who received any particular drug. When we do these calculations
-  in a spreadsheet programme, we get a value of 3.45 for the sum of
-  squares associated with the main effect of drug. Not surprisingly,
-  this is the same number that you get when you look up the SS value for
-  the drugs factor in the ANOVA table that I presented earlier, in
-  Figure~\ref{fig-fig14-3}. We can repeat the same kind of calculation
-  for the effect of therapy. Again there are \(N = 3\) people in each
-  group, but since there are \(R = 3\) different drugs, this time around
-  we note that there are \(3 \times 3 = 9\) people who received CBT and
-  an additional 9 people who received the placebo. So our calculation in
-  this case gives us a value of \(0.47\) for the sum of squares
-  associated with the main effect of therapy. Once again, we are not
-  surprised to see that our calculations are identical to the ANOVA
-  output in Figure~\ref{fig-fig14-3}. So that's how you calculate the SS
-  values for the two main effects. These SS values are analogous to the
-  between-group sum of squares values that we calculated when doing
-  one-way ANOVA in
+  the file \emph{clinicaltrial\_factorialanova.xls}. First, let's
+  calculate the sum of squares associated with the main effect of drug.
+  There are a total of \(N = 3\) people in each group and \(C = 2\)
+  different types of therapy. Or, to put it another way, there are
+  \(3 \times 2 = 6\) people who received any particular drug. When we do
+  these calculations in a spreadsheet programme, we get a value of 3.45
+  for the sum of squares associated with the main effect of drug. Not
+  surprisingly, this is the same number that you get when you look up
+  the SS value for the drugs factor in the ANOVA table that I presented
+  earlier, in Figure~\ref{fig-fig14-3}. We can repeat the same kind of
+  calculation for the effect of therapy. Again there are \(N = 3\)
+  people in each group, but since there are \(R = 3\) different drugs,
+  this time around we note that there are \(3 \times 3 = 9\) people who
+  received CBT and an additional 9 people who received the placebo. So
+  our calculation in this case gives us a value of \(0.47\) for the sum
+  of squares associated with the main effect of therapy. Once again, we
+  are not surprised to see that our calculations are identical to the
+  ANOVA output in Figure~\ref{fig-fig14-3}. So that's how you calculate
+  the SS values for the two main effects. These SS values are analogous
+  to the between-group sum of squares values that we calculated when
+  doing one-way ANOVA in
   Chapter~\ref{sec-Comparing-several-means-one-way-ANOVA}. However, it's
   not a good idea to think of them as between-groups SS values anymore,
   just because we have two different grouping variables and it's easy to
@@ -22159,26 +22172,25 @@ ANOVA.
   attributed to Factor A (\(SS_A\)) and how much of it can be attributed
   to Factor B (\(SS_B\)). The residual sum of squares is thus defined to
   be the variability in \(Y\) that can't be attributed to either of our
-  two factors. In other words \[SS_R=SS_T-(SS_A+SS_B)\] Of course, there
-  is a formula that you can use to calculate the residual SS directly,
-  but I think that it makes more conceptual sense to think of it like
-  this. The whole point of calling it a residual is that it's the
-  leftover variation, and the formula above makes that clear. I should
-  also note that, in keeping with the terminology used in the regression
-  chapter, it is commonplace to refer to \(SS_A + SS_B\) as the variance
-  attributable to the ``ANOVA model'', denoted SSM, and so we often say
-  that the total sum of squares is equal to the model sum of squares
-  plus the residual sum of squares. Later on in this chapter we'll see
-  that this isn't just a surface similarity: ANOVA and regression are
-  actually the same thing under the hood. In any case, it's probably
-  worth taking a moment to check that we can calculate \(SS_R\) using
-  this formula and verify that we do obtain the same answer that jamovi
-  produces in its ANOVA table. The calculations are pretty
-  straightforward when done in a spreadsheet (see the
-  clinicaltrial\_factorialanova.xls file). We can calculate the total SS
-  using the formulas above (getting an answer of total \(SS = 4.85\))
-  and then the residual SS ( = 0.92). Yet again, we get the same answer.
-  --- \(^a\)English translation: ``least tedious''.}{]}
+  two factors (or their interaction if you also calculate the
+  interaction effect, which is the default in jamovi). In other words
+  \[SS_R=SS_T-(SS_A+SS_B)\] Of course, there is a formula that you can
+  use to calculate the residual SS directly, but I think that it makes
+  more conceptual sense to think of it like this. The whole point of
+  calling it a residual is that it's the leftover variation, and the
+  formula above makes that clear. I should also note that, in keeping
+  with the terminology used in the regression chapter, it is commonplace
+  to refer to \(SS_A + SS_B\) as the variance attributable to the
+  ``ANOVA model'', denoted SSM, and so we often say that the total sum
+  of squares is equal to the model sum of squares plus the residual sum
+  of squares. Later on in this chapter we'll see that this isn't just a
+  surface similarity: ANOVA and regression are actually the same thing
+  under the hood. In any case, it's probably worth taking a moment to
+  check that we can calculate \(SS_R\) using this formula and verify
+  that we do obtain the same answer that jamovi produces in its ANOVA
+  table. The calculations are pretty straightforward when done in a
+  spreadsheet (see the clinicaltrial\_factorialanova.xls file). ---
+  \(^a\)English translation: ``least tedious''.}{]}
 
 \hypertarget{what-are-our-degrees-of-freedom}{%
 \subsection{What are our degrees of
@@ -22196,13 +22208,7 @@ moment we can use the simple definition of degrees of freedom, namely
 that the degrees of freedom equals the number of quantities that are
 observed, minus the number of constraints. So, for the drugs factor, we
 observe 3 separate group means, but these are constrained by 1 grand
-mean, and therefore the degrees of freedom is 2. For the residuals, the
-logic is similar, but not quite the same. The total number of
-observations in our experiment is 18. The constraints correspond to 1
-grand mean, the 2 additional group means that the drug factor
-introduces, and the 1 additional group mean that the the therapy factor
-introduces, and so our degrees of freedom is 14. As a formula, this is
-\(N - 1 - (R - 1) - (C - 1)\), which simplifies to \(N - R - C + 1\).
+mean, and therefore the degrees of freedom is 2.
 
 \hypertarget{factorial-anova-versus-one-way-anovas}{%
 \subsection{Factorial ANOVA versus one-way
@@ -22260,9 +22266,9 @@ matters, (b) only Factor B matters, (c) both A and B matter, and (d)
 neither A nor B matters. An example of each of these four possibilities
 is plotted in Figure~\ref{fig-fig14-4}.
 
-\hypertarget{factorial-anova-2-balanced-designs-interactions-allowed}{%
-\section{Factorial ANOVA 2: balanced designs, interactions
-allowed}\label{factorial-anova-2-balanced-designs-interactions-allowed}}
+\hypertarget{factorial-anova-2-balanced-designs-interpreting-interactions}{%
+\section{Factorial ANOVA 2: balanced designs, interpreting
+interactions}\label{factorial-anova-2-balanced-designs-interpreting-interactions}}
 
 The four patterns of data shown in Figure~\ref{fig-fig14-4} are all
 quite realistic. There are a great many data sets that produce exactly
@@ -22299,7 +22305,7 @@ we'll fix this problem.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./14-Factorial-ANOVA_files/figure-pdf/fig-fig14-4-1.pdf} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{14-Factorial-ANOVA_files/figure-pdf/fig-fig14-4-1.pdf} \hfill{}
 
 \caption{\label{fig-fig14-4}The four different outcomes for a
 \(2 \times 2\) ANOVA when no interactions are present. In panel (a) we
@@ -22312,7 +22318,7 @@ effect of either factor}
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./14-Factorial-ANOVA_files/figure-pdf/fig-fig14-5-1.pdf} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{14-Factorial-ANOVA_files/figure-pdf/fig-fig14-5-1.pdf} \hfill{}
 
 \caption{\label{fig-fig14-5}Qualitatively different interactions for a
 \(2 \times 2\) ANOVA}
@@ -22321,7 +22327,7 @@ effect of either factor}
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig14-6.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig14-6.png} \hfill{}
 
 \caption{\label{fig-fig14-6}jamovi screen showing how to generate a
 descriptive interaction plot in ANOVA using the clinical trial data}
@@ -22372,7 +22378,7 @@ can work with.
   be precise about what it means to say that there is no interaction
   effect. If there is no interaction at all, then these \(\alpha_r\) and
   \(\beta_c\) values will perfectly describe the group means
-  \(mu_{rc}\). Specifically, it means that
+  \(\mu_{rc}\). Specifically, it means that
   \[\mu_{rc}=\mu_{..}+\alpha_{r}+\beta_{c}\] That is, there's nothing
   special about the group means that you couldn't predict perfectly by
   knowing all the marginal means. And that's our null hypothesis, right
@@ -22405,8 +22411,8 @@ can work with.
   main effects, you'll notice that these effect terms are exactly the
   quantities that we were squaring and summing! So, what's the analog of
   this for interaction terms? The answer to this can be found by first
-  rearranging the formula for the group means µrc under the alternative
-  hypothesis, so that we get this
+  rearranging the formula for the group means \(\mu_{rc}\) under the
+  alternative hypothesis, so that we get this
   \[\begin{aligned} (\alpha \beta)_{rc} & = \mu_{rc} - \mu_{..} - \alpha_r - \beta_c \\ & = \mu_{rc} - \mu_{..} - (\mu_{r.}-\mu_{..})-(\mu_{.c}-\mu_{..}) \\ & = \mu_{rc} - \mu_{r.} - \mu_{.c} +\mu_{..} \end{aligned}\]
   So, once again if we substitute our sample statistics in place of the
   population means, we get the following as our estimate of the
@@ -22485,7 +22491,7 @@ the results shown in Figure~\ref{fig-fig14-7}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig14-7.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig14-7.png} \hfill{}
 
 \caption{\label{fig-fig14-7}Results for the full factorial model,
 including the interaction component drug \(\times\) therapy}
@@ -22574,13 +22580,13 @@ automatically assume that the main effect is interesting.
 \section{Effect size}\label{effect-size-3}}
 
 The effect size calculation for a factorial ANOVA is pretty similar to
-those used in one way ANOVA (see
-\protect\hyperlink{effect-size-3}{Effect size} section). Specifically,
-we can use \(\eta^2\) (eta-squared) as a simple way to measure how big
-the overall effect is for any particular term. As before, \(\eta^2\) is
-defined by dividing the sum of squares associated with that term by the
-total sum of squares. For instance, to determine the size of the main
-effect of Factor A, we would use the following formula:
+those used in one way ANOVA (see \protect\hyperlink{effect-size}{Effect
+size} section). Specifically, we can use \(\eta^2\) (eta-squared) as a
+simple way to measure how big the overall effect is for any particular
+term. As before, \(\eta^2\) is defined by dividing the sum of squares
+associated with that term by the total sum of squares. For instance, to
+determine the size of the main effect of Factor A, we would use the
+following formula:
 
 \[\eta_A^2=\frac{SS_A}{SS_T}\]
 
@@ -22643,8 +22649,8 @@ Figure~\ref{fig-fig14-3}.
   \providecommand{\huxbpad}[1]{\rule[-#1]{0pt}{#1}}
 
 \begin{table}[ht]
-\caption{\label{tbl-tab14-6}Effect sizes when the interaction term is not included in the ANOVA
-model }\tabularnewline
+\caption{\label{tbl-tab14-6}Effect sizes when the interaction term \textbf{is not} included in the
+ANOVA model }\tabularnewline
 
 \begin{centerbox}
 \begin{threeparttable}
@@ -22728,7 +22734,8 @@ interaction term, as in Figure~\ref{fig-fig14-7}. As you can see, the
   \providecommand{\huxbpad}[1]{\rule[-#1]{0pt}{#1}}
 
 \begin{table}[ht]
-\caption{\label{tbl-tab14-7}Effect sizes when the interaction term is included in the ANOVA model }\tabularnewline
+\caption{\label{tbl-tab14-7}Effect sizes when the interaction term \textbf{is} included in the ANOVA
+model }\tabularnewline
 
 \begin{centerbox}
 \begin{threeparttable}
@@ -22793,7 +22800,7 @@ for each group.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig14-8.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig14-8.png} \hfill{}
 
 \caption{\label{fig-fig14-8}jamovi screenshot showing the marginal means
 for the saturated model, i.e.~including the interaction component, with
@@ -22824,7 +22831,7 @@ Figure~\ref{fig-fig14-9}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig14-9.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig14-9.png} \hfill{}
 
 \caption{\label{fig-fig14-9}jamovi screenshot showing the marginal means
 for the unsaturated model, i.e.~without the interaction component, with
@@ -22885,7 +22892,7 @@ QQ plot. See Figure~\ref{fig-fig14-10}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig14-10.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig14-10.png} \hfill{}
 
 \caption{\label{fig-fig14-10}Checking assumptions in an ANOVA model}
 
@@ -22925,7 +22932,7 @@ no data'' (Everitt (1996), p.~68).
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig14-11.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig14-11.png} \hfill{}
 
 \caption{\label{fig-fig14-11}Plot of Statistics anxiety against age for
 two distinct groups}
@@ -22953,7 +22960,7 @@ options.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig14-12.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig14-12.png} \hfill{}
 
 \caption{\label{fig-fig14-12}The jamovi ANCOVA analysis window}
 
@@ -22971,7 +22978,7 @@ and interpreting the significant effects.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig14-13.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig14-13.png} \hfill{}
 
 \caption{\label{fig-fig14-13}jamovi ANCOVA output for happiness as a
 function of stress and commuting method, with age as a covariate}
@@ -22980,7 +22987,7 @@ function of stress and commuting method, with age as a covariate}
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig14-14.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig14-14.png} \hfill{}
 
 \caption{\label{fig-fig14-14}Table of mean happiness level as a function
 of stress and commuting method (adjusted for the covariate age) with
@@ -23011,7 +23018,7 @@ happier, on average, than those who drive to work.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig14-15.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig14-15.png} \hfill{}
 
 \caption{\label{fig-fig14-15}Plot of mean happiness level as a function
 of stress and commuting method}
@@ -23228,7 +23235,7 @@ matter a lot.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig14-16.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig14-16.png} \hfill{}
 
 \caption{\label{fig-fig14-16}jamovi descriptives for the rtfm data set}
 
@@ -23263,7 +23270,7 @@ what we get when we run the analysis in jamovi.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig14-17.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig14-17.png} \hfill{}
 
 \caption{\label{fig-fig14-17}ANOVA of the \emph{rtfm.csv} data set in
 jamovi, without the interaction term}
@@ -23435,7 +23442,7 @@ results shown in Figure~\ref{fig-fig14-18}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig14-18.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig14-18.png} \hfill{}
 
 \caption{\label{fig-fig14-18}Regression analysis of the \emph{rtfm.csv}
 data set in jamovi, without the interaction term}
@@ -23480,7 +23487,7 @@ Figure~\ref{fig-fig14-19}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig14-19.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig14-19.png} \hfill{}
 
 \caption{\label{fig-fig14-19}Omnibus ANOVA Test results from the jamovi
 regression analysis}
@@ -23608,7 +23615,7 @@ ANOVA, with results shown in Figure~\ref{fig-fig14-20}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig14-20.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig14-20.png} \hfill{}
 
 \caption{\label{fig-fig14-20}jamovi ANOVA results, without interaction
 component}
@@ -23622,7 +23629,7 @@ Figure~\ref{fig-fig14-21}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig14-21.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig14-21.png} \hfill{}
 
 \caption{\label{fig-fig14-21}jamovi regression results, with contrast
 variables druganxifree and drugjoyzepam}
@@ -23655,7 +23662,7 @@ drug-related variables, as in Figure~\ref{fig-fig14-22}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig14-22.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig14-22.png} \hfill{}
 
 \caption{\label{fig-fig14-22}Model comparison in jamovi regression, null
 model 1 vs.~contrasts model 2}
@@ -23684,7 +23691,7 @@ most sense.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig14-23.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig14-23.png} \hfill{}
 
 \caption{\label{fig-fig14-23}Regression analysis with factors and
 contrasts in jamovi, including omnibus ANOVA test results}
@@ -24328,7 +24335,7 @@ Figure~\ref{fig-fig14-24}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig14-24.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig14-24.png} \hfill{}
 
 \caption{\label{fig-fig14-24}Tukey HSD post hoc test in jamovi factorial
 ANOVA, without an interaction term}
@@ -24379,7 +24386,7 @@ to before, but with a lot more comparisons made.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig14-25.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig14-25.png} \hfill{}
 
 \caption{\label{fig-fig14-25}Tukey HSD post hoc test in jamovi factorial
 ANOVA with an interaction term}
@@ -24478,7 +24485,7 @@ Figure~\ref{fig-fig14-26}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig14-26.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig14-26.png} \hfill{}
 
 \caption{\label{fig-fig14-26}The \emph{coffee.csv} data set in jamovi,
 with descriptive information aggregated by factor levels}
@@ -24732,7 +24739,7 @@ Figure~\ref{fig-fig14-27}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig14-27.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig14-27.png} \hfill{}
 
 \caption{\label{fig-fig14-27}ANOVA results table using Type I sum of
 squares in jamovi}
@@ -24752,7 +24759,7 @@ Figure~\ref{fig-fig14-28}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig14-28.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig14-28.png} \hfill{}
 
 \caption{\label{fig-fig14-28}ANOVA results table using Type I sum of
 squares in jamovi, but with factors entered in a different order (milk
@@ -25065,7 +25072,7 @@ Type III sum of squares, see Figure~\ref{fig-fig14-29}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig14-29.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig14-29.png} \hfill{}
 
 \caption{\label{fig-fig14-29}ANOVA results table using Type III sum of
 squares in jamovi}
@@ -25092,14 +25099,6 @@ produce the same answers (ah, so this is what is happening in jamovi).
 Of particular importance is the fact that if the columns of our contrast
 matrix are all constrained to sum to zero, then the Type III analysis
 will always give the same answers.
-
-In Type II tests we'll see that Type II analyses avoid this
-arbitrariness entirely, but I think that's too strong a conclusion.
-Firstly, it's important to recognise that some choices of contrasts will
-always produce the same answers (ah, so this is what is happening in
-jamovi). Of particular importance is the fact that if the columns of our
-contrast matrix are all constrained to sum to zero, then the Type III
-analysis will always give the same answers.
 
 \hypertarget{type-ii-sum-of-squares}{%
 \subsection{Type II sum of squares}\label{type-ii-sum-of-squares}}
@@ -25334,7 +25333,7 @@ effect of sugar corresponds to an F-test comparing these two models
   \providecommand{\huxbpad}[1]{\rule[-#1]{0pt}{#1}}
 
 \begin{table}[ht]
-\caption{\label{tbl-tab14-26}Type II tests for the main effect of sugar in the coffee data }\tabularnewline
+\caption{\label{tbl-tab14-26}Type II tests for the main effect of sugar in the \emph{coffee} data }\tabularnewline
 
 \begin{centerbox}
 \begin{threeparttable}
@@ -25375,7 +25374,7 @@ The test for the main effect of milk is in Table~\ref{tbl-tab14-27}.
   \providecommand{\huxbpad}[1]{\rule[-#1]{0pt}{#1}}
 
 \begin{table}[ht]
-\caption{\label{tbl-tab14-27}Type II tests for the main effect of milk in the coffee data }\tabularnewline
+\caption{\label{tbl-tab14-27}Type II tests for the main effect of milk in the \emph{coffee} data }\tabularnewline
 
 \begin{centerbox}
 \begin{threeparttable}
@@ -25454,7 +25453,7 @@ This gives us the ANOVA table shown in Figure~\ref{fig-fig14-30}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig14-30.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig14-30.png} \hfill{}
 
 \caption{\label{fig-fig14-30}ANOVA results table using Type II sum of
 squares in jamovi}
@@ -25643,12 +25642,12 @@ interaction.
 \begin{itemize}
 \tightlist
 \item
-  \protect\hyperlink{factorial-anova-1-balanced-designs-no-interactions}{Factorial
-  ANOVA 1: balanced designs, no interactions} and with
-  \href{Factorial\%20ANOVA:\%20balanced\%20designs,\%20interactions\%20allowed}{interactions}
-  included
+  \protect\hyperlink{factorial-anova-1-balanced-designs-focus-on-main-effects}{Factorial
+  ANOVA 1: balanced designs, focus on main effects} and with
+  \href{Factorial\%20ANOVA:\%20balanced\%20designs,\%20interpreting\%20interactions}{interactions}
+  considered
 \item
-  \protect\hyperlink{effect-size-3}{Effect size}, estimated means, and
+  \protect\hyperlink{effect-size}{Effect size}, estimated means, and
   confidence intervals in a factorial ANOVA
 \item
   \protect\hyperlink{assumption-checking}{Assumption checking} in ANOVA
@@ -25732,7 +25731,7 @@ error term is the variance in the associated observed variable, \(V_i\)
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig15-1.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig15-1.png} \hfill{}
 
 \caption{\label{fig-fig15-1}Latent factor underlying the relationship
 between several observed variables}
@@ -25900,7 +25899,7 @@ variables are needed). To perform EFA in jamovi:
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig15-2.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig15-2.png} \hfill{}
 
 \caption{\label{fig-fig15-2}Twenty-five observed variable items
 organised by five putative personality factors in the dataset
@@ -25927,7 +25926,7 @@ bfi\_sample.csv}
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig15-3.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig15-3.png} \hfill{}
 
 \caption{\label{fig-fig15-3}The jamovi EFA analysis window}
 
@@ -25935,7 +25934,7 @@ bfi\_sample.csv}
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig15-4.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig15-4.png} \hfill{}
 
 \caption{\label{fig-fig15-4}jamovi EFA assumption checks for the
 personality questionnaire data}
@@ -25952,10 +25951,17 @@ The next thing to check is how many factors to use (or ``extract'' from
 the data). Three different approaches are available:
 
 \begin{itemize}
+\tightlist
 \item
   One convention is to choose all components with Eigen values greater
-  than 12 . This would give us four factors with our data (try it and
-  see).
+  than 1\footnote{An Eigen value indicates how much of the variance in
+    the observed variables a factor accounts for. A factor with an Eigen
+    value \textgreater{} 1 accounts for more variance than a single
+    observed variable.}. This would give us four factors with our data
+  (try it and see).
+\end{itemize}
+
+\begin{itemize}
 \item
   Examination of the scree plot, as in Figure~\ref{fig-fig15-5}, lets
   you identify the ``point of inflection''. This is the point at which
@@ -25973,7 +25979,7 @@ the data). Three different approaches are available:
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig15-5.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig15-5.png} \hfill{}
 
 \caption{\label{fig-fig15-5}Scree plot of the personality data in jamovi
 EFA, showing a noticeable inflection and levelling off after point 5
@@ -26012,7 +26018,7 @@ sensible\footnote{Oblique rotations provide two factor matrices, one
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig15-6.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig15-6.png} \hfill{}
 
 \caption{\label{fig-fig15-6}Factor summary statistics and correlations
 for a five factor solution in jamovi EFA}
@@ -26078,7 +26084,7 @@ Figure~\ref{fig-fig15-7}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig15-7.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig15-7.png} \hfill{}
 
 \caption{\label{fig-fig15-7}Factor loadings for a five factor solution
 in jamovi EFA}
@@ -26134,7 +26140,7 @@ this in jamovi in two steps:
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig15-8.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig15-8.png} \hfill{}
 
 \caption{\label{fig-fig15-8}Recode variable using the jamovi Transform
 command}
@@ -26143,7 +26149,7 @@ command}
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig15-9.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig15-9.png} \hfill{}
 
 \caption{\label{fig-fig15-9}Compute new scale score variable using the
 jamovi Computed variable command}
@@ -26159,7 +26165,7 @@ Figure~\ref{fig-fig15-11}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig15-10.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig15-10.png} \hfill{}
 
 \caption{\label{fig-fig15-10}jamovi option for factor scores for the
 five factor solution, using the `Bartlett' optimal weighting method}
@@ -26168,7 +26174,7 @@ five factor solution, using the `Bartlett' optimal weighting method}
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig15-11.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig15-11.png} \hfill{}
 
 \caption{\label{fig-fig15-11}Data sheet view showing the five newly
 created factor score variables}
@@ -26187,7 +26193,7 @@ significant difference (Mann-Whitney \(U = 5768\), \(p = .075\)).
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig15-12.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig15-12.png} \hfill{}
 
 \caption{\label{fig-fig15-12}Comparing differences in Agreeableness
 factor-based scores between males and females}
@@ -26328,7 +26334,7 @@ error}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig15-13.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig15-13.png} \hfill{}
 
 \caption{\label{fig-fig15-13}Initial pre-specification of latent factor
 structure for the five factor personality scales, for use in CFA}
@@ -26405,7 +26411,7 @@ this analysis). To perform CFA in jamovi:
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig15-14.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig15-14.png} \hfill{}
 
 \caption{\label{fig-fig15-14}The jamovi CFA analysis window}
 
@@ -26420,7 +26426,7 @@ correlations by default. Everything else is set to zero.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig15-15.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig15-15.png} \hfill{}
 
 \caption{\label{fig-fig15-15}The jamovi CFA Model Fit results for our
 CFA model}
@@ -26469,7 +26475,7 @@ scientific article.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig15-16.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig15-16.png} \hfill{}
 
 \caption{\label{fig-fig15-16}The jamovi CFA Factor Loadings table for
 our CFA model}
@@ -26478,7 +26484,7 @@ our CFA model}
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig15-17.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig15-17.png} \hfill{}
 
 \caption{\label{fig-fig15-17}The jamovi CFA Factor Covariances table for
 our CFA model}
@@ -26494,7 +26500,7 @@ tweaks to the model to improve the fit. One way of doing this is to use
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig15-18.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig15-18.png} \hfill{}
 
 \caption{\label{fig-fig15-18}The jamovi CFA Factor Loadings Modification
 Indices}
@@ -26537,7 +26543,7 @@ biggest MI in the re-calculated results.
 
 \begin{figure}
 
-\includegraphics[width=0.6\textwidth,height=\textheight]{./images/fig15-19.png} \hfill{}
+\includegraphics[width=0.6\textwidth,height=\textheight]{images/fig15-19.png} \hfill{}
 
 \caption{\label{fig-fig15-19}Residual Covariance Modification Indices
 produced by jamovi}
@@ -26643,7 +26649,7 @@ Figure~\ref{fig-fig15-20} for more details.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig15-20.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig15-20.png} \hfill{}
 
 \caption{\label{fig-fig15-20}The Attributional Style Questionnaire (ASQ)
 for negative events}
@@ -26682,7 +26688,7 @@ Figure~\ref{fig-fig15-27}, each measured by six observed variables.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig15-21.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig15-21.png} \hfill{}
 
 \caption{\label{fig-fig15-21}Six questions on the ASQ for each of the
 Internality, Stability and Globality dimensions}
@@ -26700,7 +26706,7 @@ error''.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig15-22.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig15-22.png} \hfill{}
 
 \caption{\label{fig-fig15-22}Initial pre-specification of latent factor
 structure for the ASQ}
@@ -26716,7 +26722,7 @@ these latent factors to co-vary, as shown in Figure~\ref{fig-fig15-23}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig15-23.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig15-23.png} \hfill{}
 
 \caption{\label{fig-fig15-23}Final pre-specification of latent factor
 structure for the ASQ, including latent factor correlations, and shared
@@ -26800,7 +26806,7 @@ To perform MTMM CFA in jamovi:
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig15-24.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig15-24.png} \hfill{}
 
 \caption{\label{fig-fig15-24}The jamovi CFA analysis window}
 
@@ -26818,7 +26824,7 @@ held at zero.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig15-25.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig15-25.png} \hfill{}
 
 \caption{\label{fig-fig15-25}The jamovi CFA Model Fit results for our
 CFA MTMM model}
@@ -26843,7 +26849,7 @@ incorporated into a written report or scientific article.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig15-26.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig15-26.png} \hfill{}
 
 \caption{\label{fig-fig15-26}The jamovi CFA Factor Loadings and
 Covariances tables for our CFA MTMM model}
@@ -26965,7 +26971,7 @@ perform reliability analysis in jamovi:
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig15-27.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig15-27.png} \hfill{}
 
 \caption{\label{fig-fig15-27}The jamovi Reliability Analysis window}
 
@@ -26980,7 +26986,7 @@ not much different from \(\alpha\).
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig15-28.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig15-28.png} \hfill{}
 
 \caption{\label{fig-fig15-28}The jamovi Reliability Analysis results for
 the Agreeableness factor}
@@ -27066,7 +27072,7 @@ to use frequentist methods. Because frequentist methods are ubiquitous
 in scientific papers, every student of statistics needs to understand
 those methods, otherwise they will be unable to make sense of what those
 papers are saying! Unfortunately, in my opinion at least, the current
-practice in psychology is often misguided and the reliance on
+practice in psychology is often misguided, and the reliance on
 frequentist methods is partly to blame. In this chapter I explain why I
 think this and provide an introduction to Bayesian statistics, an
 approach that I think is generally superior to the orthodox approach.
@@ -27083,26 +27089,27 @@ t-tests}.
 agents}\label{probabilistic-reasoning-by-rational-agents}}
 
 From a Bayesian perspective statistical inference is all about
-\emph{belief revision}. I start out with a set of candidate hypotheses h
-about the world. I don't know which of these hypotheses is true, but do
-I have some beliefs about which hypotheses are plausible and which are
-not. When I observe the data, d, I have to revise those beliefs. If the
-data are consistent with a hypothesis, my belief in that hypothesis is
-strengthened. If the data are inconsistent with the hypothesis, my
-belief in that hypothesis is weakened. That's it! At the end of this
-section I'll give a precise description of how Bayesian reasoning works,
-but first I want to work through a simple example in order to introduce
-the key ideas. Consider the following reasoning problem.
+\emph{belief revision}. I start out with a set of candidate hypotheses,
+\(h\), about the world. I don't know which of these hypotheses is true,
+but do I have some beliefs about which hypotheses are plausible and
+which are not. When I observe the data, \(d\), I have to revise those
+beliefs. If the data are consistent with a hypothesis, my belief in that
+hypothesis is strengthened. If the data are inconsistent with the
+hypothesis, my belief in that hypothesis is weakened. That's it! At the
+end of this section I'll give a precise description of how Bayesian
+reasoning works, but first I want to work through a simple example in
+order to introduce the key ideas. Consider the following reasoning
+problem.
 
 \begin{quote}
 \emph{I'm carrying an umbrella. Do you think it will rain?}
 \end{quote}
 
-In this problem I have presented you with a single piece of data (d =
-I'm carrying the umbrella), and I'm asking you to tell me your belief or
-hypothesis about whether it's raining. You have two alternatives, h:
-either it will rain today or it will not. How should you solve this
-problem?
+In this problem I have presented you with a single piece of data (\(d\)
+= I'm carrying the umbrella), and I'm asking you to tell me your belief
+or hypothesis about whether it's raining. You have two alternatives,
+\(h\): either it will rain today or it will not. How should you solve
+this problem?
 
 \hypertarget{priors-what-you-believed-before}{%
 \subsection{Priors: what you believed
@@ -27181,15 +27188,15 @@ knowledge of average January rainfall }\tabularnewline
 data}\label{likelihoods-theories-about-the-data}}
 
 To solve the reasoning problem you need a theory about my behaviour.
-When does Dan carry an umbrella? You might guess that I'm not a complete
-idiot,\footnote{It's a leap of faith, I know, but let's run with it
-  okay?} and I try to carry umbrellas only on rainy days. On the other
-hand, you also know that I have young kids, and you wouldn't be all that
-surprised to know that I'm pretty forgetful about this sort of thing.
-Let's suppose that on rainy days I remember my umbrella about 30\% of
-the time (I really am awful at this). But let's say that on dry days I'm
-only about 5\% likely to be carrying an umbrella. So you might write
-this out as in Table~\ref{tbl-tab16-2}.
+When does Danielle carry an umbrella? You might guess that I'm not a
+complete idiot,\footnote{It's a leap of faith, I know, but let's run
+  with it okay?} and I try to carry umbrellas only on rainy days. On the
+other hand, you also know that I have young kids, and you wouldn't be
+all that surprised to know that I'm pretty forgetful about this sort of
+thing. Let's suppose that on rainy days I remember my umbrella about
+30\% of the time (I really am awful at this). But let's say that on dry
+days I'm only about 5\% likely to be carrying an umbrella. So you might
+write this out as in Table~\ref{tbl-tab16-2}.
 
 \hypertarget{tbl-tab16-2}{}
  
@@ -27249,10 +27256,10 @@ this out as in Table~\ref{tbl-tab16-2}.
  
 
 It's important to remember that each cell in this table describes your
-beliefs about what data d will be observed, \emph{given} the truth of a
-particular hypothesis \(h\). This ``conditional probability'' is written
-\(P(d|h)\), which you can read as ``the probability of \(d\) given
-\(h\)''. In Bayesian statistics, this is referred to as the
+beliefs about what data \(d\) will be observed, \emph{given} the truth
+of a particular hypothesis \(h\). This ``conditional probability'' is
+written \(P(d|h)\), which you can read as ``the probability of \(d\)
+given \(h\)''. In Bayesian statistics, this is referred to as the
 \textbf{likelihood} of the data \(d\) given the hypothesis
 \(h\).\footnote{Um. I hate to bring this up, but some statisticians
   would object to me using the word ``likelihood'' here. The problem is
@@ -27279,19 +27286,19 @@ At this point all the elements are in place. Having written down the
 priors and the likelihood, you have all the information you need to do
 Bayesian reasoning. The question now becomes how do we use this
 information? As it turns out, there's a very simple equation that we can
-use here, but it's important that you understand why we use it so I'm
+use here, but it's important that you understand why we use it, so I'm
 going to try to build it up from more basic ideas.
 
 Let's start out with one of the rules of probability theory. I listed it
 way back in Table~\ref{tbl-tab7-1}, but I didn't make a big deal out of
-it at the time and you probably ignored it. The rule in question is the
+it at the time, and you probably ignored it. The rule in question is the
 one that talks about the probability that two things are true. In our
 example, you might want to calculate the probability that today is rainy
-(i.e., hypothesis h is true) and I'm carrying an umbrella (i.e., data
-\(d\) is observed). The \textbf{joint probability} of the hypothesis and
-the data is written \(P(d,h)\), and you can calculate it by multiplying
-the prior \(P(h)\) by the likelihood \(P(d|h)\). Mathematically, we say
-that
+(i.e., hypothesis \(h\) is true) and I'm carrying an umbrella (i.e.,
+data \(d\) is observed). The \textbf{joint probability} of the
+hypothesis and the data is written \(P(d,h)\), and you can calculate it
+by multiplying the prior \(P(h)\) by the likelihood \(P(d|h)\).
+Mathematically, we say that
 
 \[P(d,h)=P(d|h)P(h)\]
 
@@ -27299,7 +27306,7 @@ So, what is the probability that today is a rainy day \emph{and} I
 remember to carry an umbrella? As we discussed earlier, the prior tells
 us that the probability of a rainy day is 15\%, and the likelihood tells
 us that the probability of me remembering my umbrella on a rainy day is
-\(30\%\). So the probability that both of these things are true is
+30\%. So the probability that both of these things are true is
 calculated by multiplying the two
 
 \[
@@ -27537,7 +27544,7 @@ notation, the table looks like Table~\ref{tbl-tab16-6}.
 
 \begin{table}[ht]
 \caption{\label{tbl-tab16-6}Four possibilities combining rain (or not) and umbrella carrying (or
-not), expressed in hypothjetical terms as conditional probabilities }\tabularnewline
+not), expressed in hypothetical terms as conditional probabilities }\tabularnewline
 
 \begin{centerbox}
 \begin{threeparttable}
@@ -27773,14 +27780,14 @@ an equation: \footnote{You might notice that this equation is actually a
   probabilities are calculated. So I'm not actually introducing any
   ``new'' rules here, I'm just using the same rule in a different way.}
 
-\[P(h|d)=\frac{P(h|d)}{P(d)}\]
+\[P(h|d)=\frac{P(d,h)}{P(d)}\]
 
 However, remember what I said at the start of the last section, namely
-that the joint probability \(P(d, h)\) is calculated by multiplying the
-prior Pphq by the likelihood \(P(d|h)\). In real life, the things we
-actually know how to write down are the priors and the likelihood, so
-let's substitute those back into the equation. This gives us the
-following formula for the posterior probability:
+that the joint probability, \(P(d, h)\), is calculated by multiplying
+the prior, \(P(h)\), by the likelihood, \(P(d|h)\). In real life, the
+things we actually know how to write down are the priors and the
+likelihood, so let's substitute those back into the equation. This gives
+us the following formula for the posterior probability:
 
 \[P(h|d)=\frac{P(d|h)P(h)}{P(d)}\]
 
@@ -27799,30 +27806,30 @@ because null hypothesis testing is a very elaborate contraption that
 people find very hard to make sense of. In contrast, the Bayesian
 approach to hypothesis testing is incredibly simple. Let's pick a
 setting that is closely analogous to the orthodox scenario. There are
-two hypotheses that we want to compare, a null hypothesis \(h_0\) and an
-alternative hypothesis \(h_1\). Prior to running the experiment we have
-some beliefs \(P(h)\) about which hypotheses are true. We run an
-experiment and obtain data d.~Unlike frequentist statistics, Bayesian
-statistics does allow us to talk about the probability that the null
-hypothesis is true. Better yet, it allows us to calculate the
+two hypotheses that we want to compare, a null hypothesis, \(h_0\), and
+an alternative hypothesis, \(h_1\). Prior to running the experiment we
+have some beliefs, \(P(h)\), about which hypotheses are true. We run an
+experiment and obtain data, \(d\). Unlike frequentist statistics,
+Bayesian statistics does allow us to talk about the probability that the
+null hypothesis is true. Better yet, it allows us to calculate the
 \textbf{posterior probability of the null hypothesis}, using Bayes'
 rule:
 
 \[P(h_0|d)=\frac{P(d|h_0)P(h_0)}{P(d)}\]
 
 This formula tells us exactly how much belief we should have in the null
-hypothesis after having observed the data d.~Similarly, we can work out
-how much belief to place in the alternative hypothesis using essentially
-the same equation. All we do is change the subscript
+hypothesis after having observed the data, \(d\). Similarly, we can work
+out how much belief to place in the alternative hypothesis using
+essentially the same equation. All we do is change the subscript
 
 \[P(h_1|d)=\frac{P(d|h_1)P(h_1)}{P(d)}\]
 
 It's all so simple that I feel like an idiot even bothering to write
 these equations down, since all I'm doing is copying Bayes rule from the
 previous section.\footnote{Obviously, this is a highly simplified story.
-  All the complexity of real life Bayesian hypothesis testing comes down
-  to how you calculate the likelihood \(P(d\|h)\) when the hypothesis h
-  is a complex and vague thing. I'm not going to talk about those
+  All the complexity of real-life Bayesian hypothesis testing comes down
+  to how you calculate the likelihood, \(P(d|h)\), when the hypothesis
+  \(h\) is a complex and vague thing. I'm not going to talk about those
   complexities in this book, but I do want to highlight that although
   this simple story is true as far as it goes, real life is messier than
   I'm able to cover in an introductory stats textbook.}
@@ -27844,7 +27851,7 @@ posterior odds is divide one posterior probability by the other
 
 Or, to write the same thing in terms of the equations above
 
-\[\frac{P(h_1|d)}{P(h_0|d)}=\frac{d|h_1}{d|h_0} \times \frac{h_1}{h_0}\]
+\[\frac{P(h_1|d)}{P(h_0|d)}=\frac{P(d|h_1)}{P(d|h_0)} \times \frac{P(h_1)}{P(h_0)}\]
 
 Actually, this equation is worth expanding on. There are three different
 terms here that you should know. On the left hand side, we have the
@@ -28087,7 +28094,7 @@ true or it is not, and no probabilistic statements are allowed, no
 matter how much you might want to make them. There's a reason why, back
 in Section 9.5, I repeatedly warned you not to interpret the p-value as
 the probability that the null hypothesis is true. There's a reason why
-almost every textbook on statstics is forced to repeat that warning.
+almost every textbook on statistics is forced to repeat that warning.
 It's because people desperately want that to be the correct
 interpretation. Frequentist dogma notwithstanding, a lifetime of
 experience of teaching undergraduates and of doing data analysis on a
@@ -28153,9 +28160,9 @@ smaller values of \(p\) indicate a real discrepancy.\\
 Consider the quote above by Sir Ronald Fisher, one of the founders of
 what has become the orthodox approach to statistics. If anyone has ever
 been entitled to express an opinion about the intended function of
-p-values, it's Fisher. In this passage, taken from his classic guide
-Statistical Methods for Research Workers, he's pretty clear about what
-it means to reject a null hypothesis at p \textless{} .05. In his
+p-values, it's Fisher. In this passage, taken from his classic guide,
+\emph{Statistical Methods for Research Workers}, he's pretty clear about
+what it means to reject a null hypothesis at p \textless{} .05. In his
 opinion, if we take p \textless{} .05 to mean there is ``a real
 effect'', then ``we shall not often be astray''. This view is hardly
 unusual. In my experience, most practitioners express views very similar
@@ -28176,12 +28183,12 @@ null hypothesis is true about half the time (i.e., the prior probability
 of \(H_0\) is 0.5), and we use those numbers to work out the posterior
 probability of the null hypothesis given that it has been rejected at p
 \textless{} .05. Using the data from Johnson (2013), we see that if you
-reject the null at p ă .05, you'll be correct about 80\% of the time. I
-don't know about you but, in my opinion, an evidential standard that
-ensures you'll be wrong on 20\% of your decisions isn't good enough. The
-fact remains that, quite contrary to Fisher's claim, if you reject at p
-\textless{} .05 you shall quite often go astray. It's not a very
-stringent evidential threshold at all.
+reject the null at p \textless{} .05, you'll be correct about 80\% of
+the time. I don't know about you but, in my opinion, an evidential
+standard that ensures you'll be wrong on 20\% of your decisions isn't
+good enough. The fact remains that, quite contrary to Fisher's claim, if
+you reject at p \textless{} .05 you shall quite often go astray. It's
+not a very stringent evidential threshold at all.
 
 \hypertarget{the-p-value-is-a-lie.}{%
 \subsection{The p-value is a lie.}\label{the-p-value-is-a-lie.}}
@@ -28242,7 +28249,7 @@ as stories I've heard from others, here's what will happen in each case:
   Let's start with option 1. If you try to publish it as a null result,
   the paper will struggle to be published. Some reviewers will think
   that p = .072 is not really a null result. They'll argue it's
-  borderline significant. Other reviewers will agree it's a null result
+  borderline significant. Other reviewers will agree it's a null result,
   but will claim that even though some null results are publishable,
   yours isn't. One or two reviewers might even be on your side, but
   you'll be fighting an uphill battle to get it through.
@@ -28259,7 +28266,7 @@ as stories I've heard from others, here's what will happen in each case:
   else. But that's a recipe for career suicide. If you give up and try a
   new project every time you find yourself faced with ambiguity, your
   work will never be published. And if you're in academia without a
-  publication record you can lose your job. So that option is out.
+  publication record, you can lose your job. So that option is out.
 \item
   It looks like you're stuck with option 4. You don't have conclusive
   results, so you decide to collect some more data and re-run the
@@ -28272,7 +28279,7 @@ as stories I've heard from others, here's what will happen in each case:
 \end{itemize}
 
 Wait, what? How can that last part be true? I mean, it sounds like a
-perfectly reasonable strategy doesn't it? You collected some data, the
+perfectly reasonable strategy, doesn't it? You collected some data, the
 results weren't conclusive, so now what you want to do is collect more
 data until the the results are conclusive. What's wrong with that?
 
@@ -28306,7 +28313,7 @@ decisions are shown in Table~\ref{tbl-tab16-11}.
   \providecommand{\huxbpad}[1]{\rule[-#1]{0pt}{#1}}
 
 \begin{table}[ht]
-\caption{\label{tbl-tab16-11}Conventional Null hypothesis signicance testing (NHST) with p
+\caption{\label{tbl-tab16-11}Conventional null hypothesis signicance testing (NHST) with p
 \textless{} .05) }\tabularnewline
 
 \begin{centerbox}
@@ -28421,25 +28428,25 @@ Worse yet, they're a lie in a dangerous way, because they're all
 consider the following (worst case) scenario. Imagine you're a really
 super-enthusiastic researcher on a tight budget who didn't pay any
 attention to my warnings above. You design a study comparing two groups.
-You desperately want to see a significant result at the \(p < .05\)
-level, but you really don't want to collect any more data than you have
-to (because it's expensive). In order to cut costs you start collecting
-data but every time a set of observations arrive you run a t-test on
-your data. If the t-test says \(p < .05\) then you stop the experiment
-and report a significant result. If not, you keep collecting data. You
-keep doing this until you reach your pre-defined spending limit for this
-experiment. Let's say that limit kicks in at \(N = 1000\) observations.
-As it turns out, the truth of the matter is that there is no real effect
-to be found: the null hypothesis is true. So, what's the chance that
-you'll make it to the end of the experiment and (correctly) conclude
-that there is no effect? In an ideal world, the answer here should be
-95\%. After all, the whole point of the \(p < .05\) criterion is to
-control the Type I error rate at 5\%, so what we'd hope is that there's
-only a 5\% chance of falsely rejecting the null hypothesis in this
-situation. However, there's no guarantee that will be true. You're
-breaking the rules. Because you're running tests repeatedly, ``peeking''
-at your data to see if you've gotten a significant result, all bets are
-off.
+You desperately want to see a significant result at the p \textless{}
+.05 level, but you really don't want to collect any more data than you
+have to (because it's expensive). In order to cut costs you start
+collecting data but every time a set of observations arrive you run a
+t-test on your data. If the t-test says p \textless{} .05, then you stop
+the experiment and report a significant result. If not, you keep
+collecting data. You keep doing this until you reach your pre-defined
+spending limit for this experiment. Let's say that limit kicks in at
+\(N = 1000\) observations. As it turns out, the truth of the matter is
+that there is no real effect to be found: the null hypothesis is true.
+So, what's the chance that you'll make it to the end of the experiment
+and (correctly) conclude that there is no effect? In an ideal world, the
+answer here should be 95\%. After all, the whole point of the p
+\textless{} .05 criterion is to control the Type I error rate at 5\%, so
+what we'd hope is that there's only a 5\% chance of falsely rejecting
+the null hypothesis in this situation. However, there's no guarantee
+that will be true. You're breaking the rules. Because you're running
+tests repeatedly, ``peeking'' at your data to see if you've gotten a
+significant result, all bets are off.
 
 So how bad is it? The answer from a simulation study is shown as the
 solid line in Figure~\ref{fig-fig16-1}, and it's astoundingly bad. If
@@ -28447,18 +28454,18 @@ you peek at your data after every single observation, there is a 53\%
 chance that you will make a Type I error. That's, um, quite a bit bigger
 than the 5\% that it's supposed to be. And it doesn't improve much with
 less frequent peeking: if you only peek every 10, or every 50
-observations. then the Type I error rates are still way too high: 38\%
-and 29\% respectively. By way of comparison, imagine that you had used
+observations, then the Type I error rates are still way too high: 38\%
+and 29\%, respectively. By way of comparison, imagine that you had used
 the following strategy. Start collecting data. Every single time an
 observation arrives, run \protect\hyperlink{bayesian-t-tests}{Bayesian
 t-tests} and look at the Bayes factor. I'll assume that Johnson (2013)
 is right, and I'll treat a Bayes factor of 3:1 as roughly equivalent to
 a p-value of .05.\footnote{Some readers might wonder why I picked 3:1
-  rather than 5:1, given that Johnson (2013) suggests that \(p = .05\)
-  lies somewhere in that range. I did so in order to be charitable to
-  the p-value. If I'd chosen a 5:1 Bayes factor instead, the results
-  would look even better for the Bayesian approach.} This time around,
-our trigger happy researcher uses the following procedure. If the Bayes
+  rather than 5:1, given that Johnson (2013) suggests that p = .05 lies
+  somewhere in that range. I did so in order to be charitable to the
+  p-value. If I'd chosen a 5:1 Bayes factor instead, the results would
+  look even better for the Bayesian approach.} This time around, our
+trigger-happy researcher uses the following procedure. If the Bayes
 factor is 3:1 or more in favour of the null, stop the experiment and
 retain the null. If it is 3:1 or more in favour of the alternative, stop
 the experiment and reject the null. Otherwise continue testing. Now,
@@ -28468,19 +28475,13 @@ the results are shown as the dashed line in Figure~\ref{fig-fig16-1}. It
 turns out that the Type I error rate for peeking every time a new
 observation arrives is 24\%, much much lower than the 53\% rate that we
 were getting by using the orthodox t-test. And for peeking every 10 or
-50 observations the rates are 11\% and 8\%, respectively.
+50 observations, the rates are 11\% and 8\%, respectively.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./16-Bayesian-statistics_files/figure-pdf/fig-fig16-1-1.pdf} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{16-Bayesian-statistics_files/figure-pdf/fig-fig16-1-1.pdf} \hfill{}
 
-\caption{\label{fig-fig16-1}Probability of Type I error in an experiment
-with target N of 1000 per group and \textbf{peeking} at different
-intervals:- things can go badly wrong if you \textbf{peek} at your data
-and re-run your tests as new data arrives. If you are a frequentist,
-this is \emph{very wrong} (blue circles and solid line). If you are a
-bayesian it's not so bad (green triangles and dashed line). The alpha
-level was set at 0.05 (red dotted line) in this simulation.}
+\caption{\label{fig-fig16-1}\textbf{?(caption)}}
 
 \end{figure}
 
@@ -28500,13 +28501,13 @@ situation. In real life, people don't run hypothesis tests every time a
 new observation arrives. So it's not fair to say that the p \textless{}
 .05 threshold ``really'' corresponds to a 53\% Type I error rate (i.e.,
 p = 0.53). But the fact remains that if you want your p-values to be
-honest then you either have to switch to a completely different way of
+honest, then you either have to switch to a completely different way of
 doing hypothesis tests or enforce a strict rule of no peeking. You are
 not allowed to use the data to decide when to terminate the experiment.
 You are not allowed to look at a ``borderline'' p-value and decide to
 collect more data. You aren't even allowed to change your data analyis
 strategy after looking at data. You are strictly required to follow
-these rules, otherwise the p-values you calculate will be nonsense.
+these rules. Otherwise the p-values you calculate will be nonsense.
 
 And yes, these rules are surprisingly strict. As a class exercise a
 couple of years back, I asked students to think about this scenario.
@@ -28519,28 +28520,28 @@ you'd keep running the study out to a sample size of \(N = 80\), but it
 seems sort of pointless now, right? The result is significant with a
 sample size of \(N = 50\), so wouldn't it be wasteful and inefficient to
 keep collecting data? Aren't you tempted to stop? Just a little? Well,
-keep in mind that if you do, your Type I error rate at \(p < .05\) just
-ballooned out to 8\%. When you report \(p < .05\) in your paper, what
-you're really saying is \(p < .08\). That's how bad the consequences of
-``just one peek'' can be.
+keep in mind that if you do, your Type I error rate at p \textless{} .05
+just ballooned out to 8\%. When you report p \textless{} .05 in your
+paper, what you're really saying is p \textless{} .08. That's how bad
+the consequences of ``just one peek'' can be.
 
 Now consider this. The scientific literature is filled with t-tests,
 ANOVAs, regressions and chi-square tests. When I wrote this book I
 didn't pick these tests arbitrarily. The reason why these four tools
-appear in most introductory statistics texts is that these are the bread
-and butter tools of science. None of these tools include a correction to
-deal with ``data peeking'': they all assume that you're not doing it.
-But how realistic is that assumption? In real life, how many people do
-you think have ``peeked'' at their data before the experiment was
-finished and adapted their subsequent behaviour after seeing what the
-data looked like? Except when the sampling procedure is fixed by an
-external constraint, I'm guessing the answer is ``most people have done
-it''. If that has happened, you can infer that the reported p-values are
-wrong. Worse yet, because we don't know what decision process they
-actually followed, we have no way to know what the p-values should have
-been. You can't compute a p-value when you don't know the decision
-making procedure that the researcher used. And so the reported p-value
-remains a lie.
+appear in most introductory statistics texts is that these are the
+bread-and-butter tools of science. None of these tools include a
+correction to deal with ``data peeking'': they all assume that you're
+not doing it. But how realistic is that assumption? In real life, how
+many people do you think have ``peeked'' at their data before the
+experiment was finished and adapted their subsequent behaviour after
+seeing what the data looked like? Except when the sampling procedure is
+fixed by an external constraint, I'm guessing the answer is ``most
+people have done it''. If that has happened, you can infer that the
+reported p-values are wrong. Worse yet, because we don't know what
+decision process they actually followed, we have no way to know what the
+p-values should have been. You can't compute a p-value when you don't
+know the decision-making procedure that the researcher used. And so the
+reported p-value remains a lie.
 
 Given all of the above, what is the take home message? It's not that
 Bayesian methods are foolproof. If a researcher is determined to cheat,
@@ -28570,10 +28571,10 @@ system for statistical inference should still work even when it is used
 by actual humans. Orthodox null hypothesis testing does not.\footnote{Okay,
   I just know that some knowledgeable frequentists will read this and
   start complaining about this section. Look, I'm not dumb. I absolutely
-  know that if you adopt a sequential analysis perspective you can avoid
-  these errors within the orthodox framework. I also know that you can
-  explictly design studies with interim analyses in mind. So yes, in one
-  sense I'm attacking a ``straw man'' version of orthodox methods.
+  know that if you adopt a sequential analysis perspective, you can
+  avoid these errors within the orthodox framework. I also know that you
+  can explictly design studies with interim analyses in mind. So yes, in
+  one sense I'm attacking a ``straw man'' version of orthodox methods.
   However, the straw man that I'm attacking is the one that \emph{has
   been used by most practitioners}. If it ever reaches the point where
   sequential methods become the norm among experimental psychologists
@@ -28612,9 +28613,9 @@ than 0.05, we reject the null hypothesis.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig11-12.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig11-12.png} \hfill{}
 
-\caption{\label{fig-fig16-2}Independent Samples t-test result in jamovi}
+\caption{\label{fig-fig16-2}Independent samples t-test result in jamovi}
 
 \end{figure}
 
@@ -28638,10 +28639,10 @@ rejecting the null.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig16-3.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig16-3.png} \hfill{}
 
-\caption{\label{fig-fig16-3}Bayes factors analysis alongside Independent
-Samples t-Test}
+\caption{\label{fig-fig16-3}Bayes factors analysis alongside independent
+samples t-test}
 
 \end{figure}
 
@@ -28660,9 +28661,9 @@ alternative. We could probably reject the null with some confidence!
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{./images/fig16-4.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig16-4.png} \hfill{}
 
-\caption{\label{fig-fig16-4}Paired samples T-Test and Bayes Factor
+\caption{\label{fig-fig16-4}Paired samples t-test and Bayes factor
 result in jamovi}
 
 \end{figure}
@@ -28682,9 +28683,9 @@ are worth using}.
 Then I gave a practical example, with
 \protect\hyperlink{bayesian-t-tests}{Bayesian t-tests}. If you're
 interested in learning more about the Bayesian approach, there are many
-good books you could look into. John Kruschke's book \emph{Doing
-Bayesian Data Analysis} is a pretty good place to start (Kruschke, 2011)
-and is a nice mix of theory and practice. His approach is a little
+good books you could look into. John Kruschke's book, \emph{Doing
+Bayesian Data Analysis}, is a pretty good place to start (Kruschke,
+2011) and is a nice mix of theory and practice. His approach is a little
 different to the ``Bayes factor'' approach that I've discussed here, so
 you won't be covering the same ground. If you're a cognitive
 psychologist, you might want to check out Lee \& Wagenmakers (2014). I

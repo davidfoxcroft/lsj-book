@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.335">
+<meta name="generator" content="quarto-1.3.353">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -17,14 +17,15 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
 }
-.hanging div.csl-entry {
+.hanging-indent div.csl-entry {
   margin-left:2em;
   text-indent:-2em;
 }
@@ -38,8 +39,7 @@ div.csl-right-inline {
 }
 div.csl-indent {
   margin-left: 2em;
-}
-</style>
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -92,23 +92,32 @@ div.csl-indent {
 </script>
     
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="styles.css">
 <meta property="og:title" content="learning statistics with jamovi - 11&nbsp; Comparing two means">
-<meta property="og:description" content="In sec-Categorical-data-analysis we covered the situation when your outcome variable is nominal scale and your predictor variable is also nominal scale.">
+<meta property="og:description" content="">
+<meta property="og:image" content="https://davidfoxcroft.github.io/lsj-book/11-Comparing-two-means_files/figure-html/fig-fig11-1-1.png">
 <meta property="og:site-name" content="learning statistics with jamovi">
+<meta property="og:image:height" content="960">
+<meta property="og:image:width" content="960">
 </head>
 
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Comparing two means</span></h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./10-Categorical-data-analysis.html">Statistical tools</a></li><li class="breadcrumb-item"><a href="./11-Comparing-two-means.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Comparing two means</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav>
@@ -116,36 +125,38 @@ div.csl-indent {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">learning statistics with jamovi</a> 
         <div class="sidebar-tools-main tools-wide">
-    <a href="https://github.com/davidfoxcroft/lsj-book/" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
-    <a href="./learning-statistics-with-jamovi.pdf" title="Download PDF" class="sidebar-tool px-1"><i class="bi bi-file-pdf"></i></a>
-    <a href="" title="Share" id="sidebar-tool-dropdown-0" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-share"></i></a>
-    <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-0">
-        <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
-            <i class="bi bi-bi-twitter pe-1"></i>
-          Twitter
-          </a>
-        </li>
-        <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
-            <i class="bi bi-bi-facebook pe-1"></i>
-          Facebook
-          </a>
-        </li>
-        <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
-            <i class="bi bi-bi-linkedin pe-1"></i>
-          LinkedIn
-          </a>
-        </li>
-    </ul>
-  <a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
-  <a href="" class="quarto-reader-toggle sidebar-tool" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+    <a href="https://github.com/davidfoxcroft/lsj-book/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="./learning-statistics-with-jamovi.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+    <div class="dropdown">
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
+              <i class="bi bi-bi-twitter pe-1"></i>
+            Twitter
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
+              <i class="bi bi-bi-facebook pe-1"></i>
+            Facebook
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
+              <i class="bi bi-bi-linkedin pe-1"></i>
+            LinkedIn
+            </a>
+          </li>
+      </ul>
+    </div>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
   <i class="bi"></i>
   </div>
@@ -153,243 +164,271 @@ div.csl-indent {
 </div>
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">&nbsp;</a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">&nbsp;</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Preface.html" class="sidebar-item-text sidebar-link">Preface</a>
+  <a href="./Preface.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">Beginnings</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+ <span class="menu-text">Beginnings</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01-Why-do-we-learn-statistics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Why do we learn statistics</span></a>
+  <a href="./01-Why-do-we-learn-statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Why do we learn statistics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./02-A-brief-introduction-to-research-design.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">A brief introduction to research design</span></a>
+  <a href="./02-A-brief-introduction-to-research-design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">A brief introduction to research design</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">An introduction to jamovi</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+ <span class="menu-text">An introduction to jamovi</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./03-Getting-started-with-jamovi.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Getting started with jamovi</span></a>
+  <a href="./03-Getting-started-with-jamovi.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Getting started with jamovi</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">Working with data</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+ <span class="menu-text">Working with data</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04-Descriptive-statistics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Descriptive statistics</span></a>
+  <a href="./04-Descriptive-statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Descriptive statistics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./05-Drawing-graphs.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Drawing graphs</span></a>
+  <a href="./05-Drawing-graphs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Drawing graphs</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./06-Pragmatic-matters.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Pragmatic matters</span></a>
+  <a href="./06-Pragmatic-matters.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Pragmatic matters</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">Statistical theory</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+ <span class="menu-text">Statistical theory</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Prelude-Part-IV.html" class="sidebar-item-text sidebar-link">Prelude</a>
+  <a href="./Prelude-Part-IV.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Prelude</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./07-Introduction-to-probability.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Introduction to probability</span></a>
+  <a href="./07-Introduction-to-probability.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Introduction to probability</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./08-Estimating-unknown-quantities-from-a-sample.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Estimating unknown quantities from a sample</span></a>
+  <a href="./08-Estimating-unknown-quantities-from-a-sample.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Estimating unknown quantities from a sample</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./09-Hypothesis-testing.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Hypothesis testing</span></a>
+  <a href="./09-Hypothesis-testing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Hypothesis testing</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">Statistical tools</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text">Statistical tools</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./10-Categorical-data-analysis.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Categorical data analysis</span></a>
+  <a href="./10-Categorical-data-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Categorical data analysis</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./11-Comparing-two-means.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Comparing two means</span></a>
+  <a href="./11-Comparing-two-means.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Comparing two means</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./12-Correlation-and-linear-regression.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Correlation and linear regression</span></a>
+  <a href="./12-Correlation-and-linear-regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Correlation and linear regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./13-Comparing-several-means-one-way-ANOVA.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Comparing several means (one-way ANOVA)</span></a>
+  <a href="./13-Comparing-several-means-one-way-ANOVA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Comparing several means (one-way ANOVA)</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./14-Factorial-ANOVA.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Factorial ANOVA</span></a>
+  <a href="./14-Factorial-ANOVA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Factorial ANOVA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./15-Factor-Analysis.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Factor Analysis</span></a>
+  <a href="./15-Factor-Analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Factor Analysis</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">Endings, alternatives and prospects</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">
+ <span class="menu-text">Endings, alternatives and prospects</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./16-Bayesian-statistics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Bayesian statistics</span></a>
+  <a href="./16-Bayesian-statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Bayesian statistics</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Epilogue.html" class="sidebar-item-text sidebar-link">Epilogue</a>
+  <a href="./Epilogue.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Epilogue</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./References.html" class="sidebar-item-text sidebar-link">References</a>
+  <a href="./References.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#the-one-sample-z-test" id="toc-the-one-sample-z-test" class="nav-link active" data-scroll-target="#the-one-sample-z-test"><span class="toc-section-number">11.1</span>  The one-sample z-test</a>
+  <li><a href="#the-one-sample-z-test" id="toc-the-one-sample-z-test" class="nav-link active" data-scroll-target="#the-one-sample-z-test"><span class="header-section-number">11.1</span> The one-sample z-test</a>
   <ul class="collapse">
-  <li><a href="#the-inference-problem-that-the-test-addresses" id="toc-the-inference-problem-that-the-test-addresses" class="nav-link" data-scroll-target="#the-inference-problem-that-the-test-addresses"><span class="toc-section-number">11.1.1</span>  The inference problem that the test addresses</a></li>
-  <li><a href="#constructing-the-hypothesis-test" id="toc-constructing-the-hypothesis-test" class="nav-link" data-scroll-target="#constructing-the-hypothesis-test"><span class="toc-section-number">11.1.2</span>  Constructing the hypothesis test</a></li>
-  <li><a href="#a-worked-example-by-hand" id="toc-a-worked-example-by-hand" class="nav-link" data-scroll-target="#a-worked-example-by-hand"><span class="toc-section-number">11.1.3</span>  A worked example, by hand</a></li>
-  <li><a href="#assumptions-of-the-z-test" id="toc-assumptions-of-the-z-test" class="nav-link" data-scroll-target="#assumptions-of-the-z-test"><span class="toc-section-number">11.1.4</span>  Assumptions of the z-test</a></li>
+  <li><a href="#the-inference-problem-that-the-test-addresses" id="toc-the-inference-problem-that-the-test-addresses" class="nav-link" data-scroll-target="#the-inference-problem-that-the-test-addresses"><span class="header-section-number">11.1.1</span> The inference problem that the test addresses</a></li>
+  <li><a href="#constructing-the-hypothesis-test" id="toc-constructing-the-hypothesis-test" class="nav-link" data-scroll-target="#constructing-the-hypothesis-test"><span class="header-section-number">11.1.2</span> Constructing the hypothesis test</a></li>
+  <li><a href="#a-worked-example-by-hand" id="toc-a-worked-example-by-hand" class="nav-link" data-scroll-target="#a-worked-example-by-hand"><span class="header-section-number">11.1.3</span> A worked example, by hand</a></li>
+  <li><a href="#assumptions-of-the-z-test" id="toc-assumptions-of-the-z-test" class="nav-link" data-scroll-target="#assumptions-of-the-z-test"><span class="header-section-number">11.1.4</span> Assumptions of the z-test</a></li>
   </ul></li>
-  <li><a href="#sec-The-one-sample-t-test" id="toc-sec-The-one-sample-t-test" class="nav-link" data-scroll-target="#sec-The-one-sample-t-test"><span class="toc-section-number">11.2</span>  The one-sample t-test</a>
+  <li><a href="#sec-The-one-sample-t-test" id="toc-sec-The-one-sample-t-test" class="nav-link" data-scroll-target="#sec-The-one-sample-t-test"><span class="header-section-number">11.2</span> The one-sample t-test</a>
   <ul class="collapse">
-  <li><a href="#introducing-the-t-test" id="toc-introducing-the-t-test" class="nav-link" data-scroll-target="#introducing-the-t-test"><span class="toc-section-number">11.2.1</span>  Introducing the t-test</a></li>
-  <li><a href="#doing-the-test-in-jamovi" id="toc-doing-the-test-in-jamovi" class="nav-link" data-scroll-target="#doing-the-test-in-jamovi"><span class="toc-section-number">11.2.2</span>  Doing the test in jamovi</a></li>
-  <li><a href="#assumptions-of-the-one-sample-t-test" id="toc-assumptions-of-the-one-sample-t-test" class="nav-link" data-scroll-target="#assumptions-of-the-one-sample-t-test"><span class="toc-section-number">11.2.3</span>  Assumptions of the one sample t-test</a></li>
+  <li><a href="#introducing-the-t-test" id="toc-introducing-the-t-test" class="nav-link" data-scroll-target="#introducing-the-t-test"><span class="header-section-number">11.2.1</span> Introducing the t-test</a></li>
+  <li><a href="#doing-the-test-in-jamovi" id="toc-doing-the-test-in-jamovi" class="nav-link" data-scroll-target="#doing-the-test-in-jamovi"><span class="header-section-number">11.2.2</span> Doing the test in jamovi</a></li>
+  <li><a href="#assumptions-of-the-one-sample-t-test" id="toc-assumptions-of-the-one-sample-t-test" class="nav-link" data-scroll-target="#assumptions-of-the-one-sample-t-test"><span class="header-section-number">11.2.3</span> Assumptions of the one sample t-test</a></li>
   </ul></li>
-  <li><a href="#sec-the-independent-samples-t-test-student-test" id="toc-sec-the-independent-samples-t-test-student-test" class="nav-link" data-scroll-target="#sec-the-independent-samples-t-test-student-test"><span class="toc-section-number">11.3</span>  The independent samples t-test (Student test)</a>
+  <li><a href="#sec-the-independent-samples-t-test-student-test" id="toc-sec-the-independent-samples-t-test-student-test" class="nav-link" data-scroll-target="#sec-the-independent-samples-t-test-student-test"><span class="header-section-number">11.3</span> The independent samples t-test (Student test)</a>
   <ul class="collapse">
-  <li><a href="#the-data" id="toc-the-data" class="nav-link" data-scroll-target="#the-data"><span class="toc-section-number">11.3.1</span>  The data</a></li>
-  <li><a href="#introducing-the-test" id="toc-introducing-the-test" class="nav-link" data-scroll-target="#introducing-the-test"><span class="toc-section-number">11.3.2</span>  Introducing the test</a></li>
-  <li><a href="#a-pooled-estimate-of-the-standard-deviation" id="toc-a-pooled-estimate-of-the-standard-deviation" class="nav-link" data-scroll-target="#a-pooled-estimate-of-the-standard-deviation"><span class="toc-section-number">11.3.3</span>  A “pooled estimate” of the standard deviation</a></li>
+  <li><a href="#the-data" id="toc-the-data" class="nav-link" data-scroll-target="#the-data"><span class="header-section-number">11.3.1</span> The data</a></li>
+  <li><a href="#introducing-the-test" id="toc-introducing-the-test" class="nav-link" data-scroll-target="#introducing-the-test"><span class="header-section-number">11.3.2</span> Introducing the test</a></li>
+  <li><a href="#a-pooled-estimate-of-the-standard-deviation" id="toc-a-pooled-estimate-of-the-standard-deviation" class="nav-link" data-scroll-target="#a-pooled-estimate-of-the-standard-deviation"><span class="header-section-number">11.3.3</span> A “pooled estimate” of the standard deviation</a></li>
   </ul></li>
-  <li><a href="#completing-the-test" id="toc-completing-the-test" class="nav-link" data-scroll-target="#completing-the-test"><span class="toc-section-number">11.4</span>  Completing the test</a>
+  <li><a href="#completing-the-test" id="toc-completing-the-test" class="nav-link" data-scroll-target="#completing-the-test"><span class="header-section-number">11.4</span> Completing the test</a>
   <ul class="collapse">
-  <li><a href="#doing-the-test-in-jamovi-1" id="toc-doing-the-test-in-jamovi-1" class="nav-link" data-scroll-target="#doing-the-test-in-jamovi-1"><span class="toc-section-number">11.4.1</span>  Doing the test in jamovi</a></li>
-  <li><a href="#positive-and-negative-t-values" id="toc-positive-and-negative-t-values" class="nav-link" data-scroll-target="#positive-and-negative-t-values"><span class="toc-section-number">11.4.2</span>  Positive and negative t values</a></li>
-  <li><a href="#assumptions-of-the-test" id="toc-assumptions-of-the-test" class="nav-link" data-scroll-target="#assumptions-of-the-test"><span class="toc-section-number">11.4.3</span>  Assumptions of the test</a></li>
+  <li><a href="#doing-the-test-in-jamovi-1" id="toc-doing-the-test-in-jamovi-1" class="nav-link" data-scroll-target="#doing-the-test-in-jamovi-1"><span class="header-section-number">11.4.1</span> Doing the test in jamovi</a></li>
+  <li><a href="#positive-and-negative-t-values" id="toc-positive-and-negative-t-values" class="nav-link" data-scroll-target="#positive-and-negative-t-values"><span class="header-section-number">11.4.2</span> Positive and negative t values</a></li>
+  <li><a href="#assumptions-of-the-test" id="toc-assumptions-of-the-test" class="nav-link" data-scroll-target="#assumptions-of-the-test"><span class="header-section-number">11.4.3</span> Assumptions of the test</a></li>
   </ul></li>
-  <li><a href="#sec-the-independent-samples-t-test-welch-test" id="toc-sec-the-independent-samples-t-test-welch-test" class="nav-link" data-scroll-target="#sec-the-independent-samples-t-test-welch-test"><span class="toc-section-number">11.5</span>  The independent samples t-test (Welch test)</a>
+  <li><a href="#sec-the-independent-samples-t-test-welch-test" id="toc-sec-the-independent-samples-t-test-welch-test" class="nav-link" data-scroll-target="#sec-the-independent-samples-t-test-welch-test"><span class="header-section-number">11.5</span> The independent samples t-test (Welch test)</a>
   <ul class="collapse">
-  <li><a href="#doing-the-welch-test-in-jamovi" id="toc-doing-the-welch-test-in-jamovi" class="nav-link" data-scroll-target="#doing-the-welch-test-in-jamovi"><span class="toc-section-number">11.5.1</span>  Doing the Welch test in jamovi</a></li>
-  <li><a href="#assumptions-of-the-test-1" id="toc-assumptions-of-the-test-1" class="nav-link" data-scroll-target="#assumptions-of-the-test-1"><span class="toc-section-number">11.5.2</span>  Assumptions of the test</a></li>
+  <li><a href="#doing-the-welch-test-in-jamovi" id="toc-doing-the-welch-test-in-jamovi" class="nav-link" data-scroll-target="#doing-the-welch-test-in-jamovi"><span class="header-section-number">11.5.1</span> Doing the Welch test in jamovi</a></li>
+  <li><a href="#assumptions-of-the-test-1" id="toc-assumptions-of-the-test-1" class="nav-link" data-scroll-target="#assumptions-of-the-test-1"><span class="header-section-number">11.5.2</span> Assumptions of the test</a></li>
   </ul></li>
-  <li><a href="#the-paired-samples-t-test" id="toc-the-paired-samples-t-test" class="nav-link" data-scroll-target="#the-paired-samples-t-test"><span class="toc-section-number">11.6</span>  The paired-samples t-test</a>
+  <li><a href="#the-paired-samples-t-test" id="toc-the-paired-samples-t-test" class="nav-link" data-scroll-target="#the-paired-samples-t-test"><span class="header-section-number">11.6</span> The paired-samples t-test</a>
   <ul class="collapse">
-  <li><a href="#the-data-1" id="toc-the-data-1" class="nav-link" data-scroll-target="#the-data-1"><span class="toc-section-number">11.6.1</span>  The data</a></li>
-  <li><a href="#what-is-the-paired-samples-t-test" id="toc-what-is-the-paired-samples-t-test" class="nav-link" data-scroll-target="#what-is-the-paired-samples-t-test"><span class="toc-section-number">11.6.2</span>  What is the paired samples t-test?</a></li>
-  <li><a href="#doing-the-test-in-jamovi-2" id="toc-doing-the-test-in-jamovi-2" class="nav-link" data-scroll-target="#doing-the-test-in-jamovi-2"><span class="toc-section-number">11.6.3</span>  Doing the test in jamovi</a></li>
+  <li><a href="#the-data-1" id="toc-the-data-1" class="nav-link" data-scroll-target="#the-data-1"><span class="header-section-number">11.6.1</span> The data</a></li>
+  <li><a href="#what-is-the-paired-samples-t-test" id="toc-what-is-the-paired-samples-t-test" class="nav-link" data-scroll-target="#what-is-the-paired-samples-t-test"><span class="header-section-number">11.6.2</span> What is the paired samples t-test?</a></li>
+  <li><a href="#doing-the-test-in-jamovi-2" id="toc-doing-the-test-in-jamovi-2" class="nav-link" data-scroll-target="#doing-the-test-in-jamovi-2"><span class="header-section-number">11.6.3</span> Doing the test in jamovi</a></li>
   </ul></li>
-  <li><a href="#one-sided-tests" id="toc-one-sided-tests" class="nav-link" data-scroll-target="#one-sided-tests"><span class="toc-section-number">11.7</span>  One-sided tests</a></li>
-  <li><a href="#effect-size" id="toc-effect-size" class="nav-link" data-scroll-target="#effect-size"><span class="toc-section-number">11.8</span>  Effect size</a>
+  <li><a href="#one-sided-tests" id="toc-one-sided-tests" class="nav-link" data-scroll-target="#one-sided-tests"><span class="header-section-number">11.7</span> One-sided tests</a></li>
+  <li><a href="#effect-size" id="toc-effect-size" class="nav-link" data-scroll-target="#effect-size"><span class="header-section-number">11.8</span> Effect size</a>
   <ul class="collapse">
-  <li><a href="#cohens-d-from-one-sample" id="toc-cohens-d-from-one-sample" class="nav-link" data-scroll-target="#cohens-d-from-one-sample"><span class="toc-section-number">11.8.1</span>  Cohen’s d from one sample</a></li>
-  <li><a href="#cohens-d-from-a-students-t-test" id="toc-cohens-d-from-a-students-t-test" class="nav-link" data-scroll-target="#cohens-d-from-a-students-t-test"><span class="toc-section-number">11.8.2</span>  Cohen’s d from a Student’s t test</a></li>
-  <li><a href="#cohens-d-from-a-paired-samples-test" id="toc-cohens-d-from-a-paired-samples-test" class="nav-link" data-scroll-target="#cohens-d-from-a-paired-samples-test"><span class="toc-section-number">11.8.3</span>  Cohen’s d from a paired-samples test</a></li>
+  <li><a href="#cohens-d-from-one-sample" id="toc-cohens-d-from-one-sample" class="nav-link" data-scroll-target="#cohens-d-from-one-sample"><span class="header-section-number">11.8.1</span> Cohen’s d from one sample</a></li>
+  <li><a href="#cohens-d-from-a-students-t-test" id="toc-cohens-d-from-a-students-t-test" class="nav-link" data-scroll-target="#cohens-d-from-a-students-t-test"><span class="header-section-number">11.8.2</span> Cohen’s d from a Student’s t test</a></li>
+  <li><a href="#cohens-d-from-a-paired-samples-test" id="toc-cohens-d-from-a-paired-samples-test" class="nav-link" data-scroll-target="#cohens-d-from-a-paired-samples-test"><span class="header-section-number">11.8.3</span> Cohen’s d from a paired-samples test</a></li>
   </ul></li>
-  <li><a href="#sec-Checking-the-normality-of-a-sample" id="toc-sec-Checking-the-normality-of-a-sample" class="nav-link" data-scroll-target="#sec-Checking-the-normality-of-a-sample"><span class="toc-section-number">11.9</span>  Checking the normality of a sample</a>
+  <li><a href="#sec-Checking-the-normality-of-a-sample" id="toc-sec-Checking-the-normality-of-a-sample" class="nav-link" data-scroll-target="#sec-Checking-the-normality-of-a-sample"><span class="header-section-number">11.9</span> Checking the normality of a sample</a>
   <ul class="collapse">
-  <li><a href="#qq-plots" id="toc-qq-plots" class="nav-link" data-scroll-target="#qq-plots"><span class="toc-section-number">11.9.1</span>  QQ plots</a></li>
-  <li><a href="#qq-plots-for-independent-and-paired-t-tests" id="toc-qq-plots-for-independent-and-paired-t-tests" class="nav-link" data-scroll-target="#qq-plots-for-independent-and-paired-t-tests"><span class="toc-section-number">11.9.2</span>  QQ plots for independent and paired t tests</a></li>
-  <li><a href="#shapiro-wilk-tests" id="toc-shapiro-wilk-tests" class="nav-link" data-scroll-target="#shapiro-wilk-tests"><span class="toc-section-number">11.9.3</span>  Shapiro-Wilk tests</a></li>
-  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example"><span class="toc-section-number">11.9.4</span>  Example</a></li>
+  <li><a href="#qq-plots" id="toc-qq-plots" class="nav-link" data-scroll-target="#qq-plots"><span class="header-section-number">11.9.1</span> QQ plots</a></li>
+  <li><a href="#qq-plots-for-independent-and-paired-t-tests" id="toc-qq-plots-for-independent-and-paired-t-tests" class="nav-link" data-scroll-target="#qq-plots-for-independent-and-paired-t-tests"><span class="header-section-number">11.9.2</span> QQ plots for independent and paired t tests</a></li>
+  <li><a href="#shapiro-wilk-tests" id="toc-shapiro-wilk-tests" class="nav-link" data-scroll-target="#shapiro-wilk-tests"><span class="header-section-number">11.9.3</span> Shapiro-Wilk tests</a></li>
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example"><span class="header-section-number">11.9.4</span> Example</a></li>
   </ul></li>
-  <li><a href="#testing-non-normal-data" id="toc-testing-non-normal-data" class="nav-link" data-scroll-target="#testing-non-normal-data"><span class="toc-section-number">11.10</span>  Testing non-normal data</a>
+  <li><a href="#testing-non-normal-data" id="toc-testing-non-normal-data" class="nav-link" data-scroll-target="#testing-non-normal-data"><span class="header-section-number">11.10</span> Testing non-normal data</a>
   <ul class="collapse">
-  <li><a href="#two-sample-mann-whitney-u-test" id="toc-two-sample-mann-whitney-u-test" class="nav-link" data-scroll-target="#two-sample-mann-whitney-u-test"><span class="toc-section-number">11.10.1</span>  Two sample Mann-Whitney U test</a></li>
-  <li><a href="#one-sample-wilcoxon-test" id="toc-one-sample-wilcoxon-test" class="nav-link" data-scroll-target="#one-sample-wilcoxon-test"><span class="toc-section-number">11.10.2</span>  One sample Wilcoxon test</a></li>
+  <li><a href="#two-sample-mann-whitney-u-test" id="toc-two-sample-mann-whitney-u-test" class="nav-link" data-scroll-target="#two-sample-mann-whitney-u-test"><span class="header-section-number">11.10.1</span> Two sample Mann-Whitney U test</a></li>
+  <li><a href="#one-sample-wilcoxon-test" id="toc-one-sample-wilcoxon-test" class="nav-link" data-scroll-target="#one-sample-wilcoxon-test"><span class="header-section-number">11.10.2</span> One sample Wilcoxon test</a></li>
   </ul></li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="toc-section-number">11.11</span>  Summary</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">11.11</span> Summary</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/davidfoxcroft/lsj-book/edit/main/11-Comparing-two-means.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/davidfoxcroft/lsj-book/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -397,7 +436,7 @@ div.csl-indent {
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header">
-<h1 class="title display-7"><span id="sec-Comparing-two-means" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Comparing two means</span></span></h1>
+<h1 class="title display-7"><span id="sec-Comparing-two-means" class="quarto-section-identifier"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Comparing two means</span></span></h1>
 
 </header>
 
@@ -418,7 +457,7 @@ div.csl-indent {
 <div id="fig-fig11-1" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="11-Comparing-two-means_files/figure-html/fig-fig11-1-1.png" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;11.1: The theoretical distribution (solid line) from which the psychology student grades (bars) are supposed to have been generated</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;11.1: The theoretical distribution (solid line) from which the psychology student grades (bars) are supposed to have been generated</figcaption>
 </figure>
 </div>
 </div>
@@ -439,7 +478,7 @@ div.csl-indent {
 <div id="fig-fig11-2" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="11-Comparing-two-means_files/figure-html/fig-fig11-2-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;11.2: Graphical illustration of the null and alternate hypotheses assumed by the one sample <span class="math inline">\(z\)</span>-test (the two sided version, that is). The null and alternate hypotheses both assume that the population distribution is normal, and additionally assumes that the population standard deviation is known (fixed at some value <span class="math inline">\(\$sigma_0\)</span>). The null hypothesis (left) is that the population mean <span class="math inline">\(\mu\)</span> is equal to some specified value <span class="math inline">\(\mu_0\)</span>. The alternative hypothesis (right) is that the population mean differs from this value, <span class="math inline">\(\mu \neq \mu_0\)</span></figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;11.2: Graphical illustration of the null and alternate hypotheses assumed by the one sample <span class="math inline">\(z\)</span>-test (the two sided version, that is). The null and alternate hypotheses both assume that the population distribution is normal, and additionally assumes that the population standard deviation is known (fixed at some value <span class="math inline">\(\$sigma_0\)</span>). The null hypothesis (left) is that the population mean <span class="math inline">\(\mu\)</span> is equal to some specified value <span class="math inline">\(\mu_0\)</span>. The alternative hypothesis (right) is that the population mean differs from this value, <span class="math inline">\(\mu \neq \mu_0\)</span></figcaption>
 </figure>
 </div>
 </div>
@@ -459,7 +498,7 @@ div.csl-indent {
 <div class="cell-output-display">
 <div id="tbl-tab11-1" class="anchored">
 
-<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab11-1"><caption>Table&nbsp;11.1:  Critical values for different alpha levels </caption>
+<table class="huxtable" data-quarto-disable-processing="true" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab11-1"><caption>Table&nbsp;11.1:  <p>Critical values for different alpha levels</p> </caption>
 <colgroup><col><col><col></colgroup><tbody><tr>
 <th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 0pt; font-weight: bold;"></th><th colspan="2" style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">critical z value</th></tr>
 <tr>
@@ -486,7 +525,7 @@ div.csl-indent {
 <div id="fig-fig11-3" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="11-Comparing-two-means_files/figure-html/fig-fig11-3-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;11.3: Rejection regions for the two-sided z-test (panel (a)) and the one-sided z-test (panel (b))</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;11.3: Rejection regions for the two-sided z-test (panel (a)) and the one-sided z-test (panel (b))</figcaption>
 </figure>
 </div>
 </div>
@@ -532,7 +571,7 @@ z.score &amp; = \frac{sample.mean - mu.null}{sem.true} \\\\
 <div id="fig-fig11-4" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="11-Comparing-two-means_files/figure-html/fig-fig11-4-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;11.4: Graphical illustration of the null and alternative hypotheses assumed by the (two sided) one sample t-test. Note the similarity to the z-test (<a href="#fig-fig11-2">Figure&nbsp;<span>11.2</span></a>). The null hypothesis is that the population mean <span class="math inline">\(\mu\)</span> is equal to some specified value <span class="math inline">\(\mu_0\)</span>, and the alternative hypothesis is that it is not. Like the z-test, we assume that the data are normally distributed, but we do not assume that the population standard deviation <span class="math inline">\(\sigma\)</span> is known in advance</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;11.4: Graphical illustration of the null and alternative hypotheses assumed by the (two sided) one sample t-test. Note the similarity to the z-test (<a href="#fig-fig11-2">Figure&nbsp;<span>11.2</span></a>). The null hypothesis is that the population mean <span class="math inline">\(\mu\)</span> is equal to some specified value <span class="math inline">\(\mu_0\)</span>, and the alternative hypothesis is that it is not. Like the z-test, we assume that the data are normally distributed, but we do not assume that the population standard deviation <span class="math inline">\(\sigma\)</span> is known in advance</figcaption>
 </figure>
 </div>
 </div>
@@ -548,7 +587,7 @@ t=\frac{\bar{X}-\mu}{\frac{\hat{\sigma}}{\sqrt{N}}}
 <div id="fig-fig11-5" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="11-Comparing-two-means_files/figure-html/fig-fig11-5-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;11.5: The t distribution with 2 degrees of freedom (left) and 10 degrees of freedom (right), with a standard normal distribution (i.e., mean 0 and std dev 1) plotted as dotted lines for comparison purposes. Notice that the t distribution has heavier tails (leptokurtic, higher kurtosis) than the normal distribution; this effect is quite exaggerated when the degrees of freedom are very small, but negligible for larger values. In other words, for large <span class="math inline">\(df\)</span> the t distribution is essentially identical to a normal distribution</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;11.5: The t distribution with 2 degrees of freedom (left) and 10 degrees of freedom (right), with a standard normal distribution (i.e., mean 0 and std dev 1) plotted as dotted lines for comparison purposes. Notice that the t distribution has heavier tails (leptokurtic, higher kurtosis) than the normal distribution; this effect is quite exaggerated when the degrees of freedom are very small, but negligible for larger values. In other words, for large <span class="math inline">\(df\)</span> the t distribution is essentially identical to a normal distribution</figcaption>
 </figure>
 </div>
 </div>
@@ -563,7 +602,7 @@ t=\frac{\bar{X}-\mu}{\frac{\hat{\sigma}}{\sqrt{N}}}
 <div id="fig-fig11-6" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="images/fig11-6.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;11.6: jamovi does the one-sample t-test</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;11.6: jamovi does the one-sample t-test</figcaption>
 </figure>
 </div>
 </div>
@@ -596,7 +635,7 @@ t=\frac{\bar{X}-\mu}{\frac{\hat{\sigma}}{\sqrt{N}}}
 <div class="cell-output-display">
 <div id="tbl-tab11-2" class="anchored">
 
-<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab11-2"><caption>Table&nbsp;11.2:  Descriptives summary table </caption>
+<table class="huxtable" data-quarto-disable-processing="true" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab11-2"><caption>Table&nbsp;11.2:  <p>Descriptives summary table</p> </caption>
 <colgroup><col><col><col><col></colgroup><tbody><tr>
 <th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 0pt; font-weight: bold;"></th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">mean</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">std dev</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 0pt 2pt 12pt; font-weight: bold;">N</th></tr>
 <tr>
@@ -618,7 +657,7 @@ t=\frac{\bar{X}-\mu}{\frac{\hat{\sigma}}{\sqrt{N}}}
 <div id="fig-fig11-7" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="images/fig11-7.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;11.7: Box and violin plots showing the distribution of grades for students in Anastasia’s and Bernadette’s classes. Visually, these suggest that students in Anastasia’s class may be getting slightly better grades on average, though they also seem a bit more variable</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;11.7: Box and violin plots showing the distribution of grades for students in Anastasia’s and Bernadette’s classes. Visually, these suggest that students in Anastasia’s class may be getting slightly better grades on average, though they also seem a bit more variable</figcaption>
 </figure>
 </div>
 </div>
@@ -629,7 +668,7 @@ t=\frac{\bar{X}-\mu}{\frac{\hat{\sigma}}{\sqrt{N}}}
 <div id="fig-fig11-8" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="11-Comparing-two-means_files/figure-html/fig-fig11-8-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;11.8: Graphical illustration of the null and alternative hypotheses assumed by the Student t-test. The null hypothesis assumes that both groups have the same mean <span class="math inline">\(\mu\)</span>, whereas the alternative assumes that they have different means <span class="math inline">\(\mu_1\)</span> and <span class="math inline">\(\mu_2\)</span>. Notice that it is assumed that the population distributions are normal, and that, although the alternative hypothesis allows the group to have different means, it assumes they have the same standard deviation</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;11.8: Graphical illustration of the null and alternative hypotheses assumed by the Student t-test. The null hypothesis assumes that both groups have the same mean <span class="math inline">\(\mu\)</span>, whereas the alternative assumes that they have different means <span class="math inline">\(\mu_1\)</span> and <span class="math inline">\(\mu_2\)</span>. Notice that it is assumed that the population distributions are normal, and that, although the alternative hypothesis allows the group to have different means, it assumes they have the same standard deviation</figcaption>
 </figure>
 </div>
 </div>
@@ -657,7 +696,7 @@ t=\frac{\bar{X}-\mu}{\frac{\hat{\sigma}}{\sqrt{N}}}
 <div id="fig-fig11-9" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="images/fig11-9.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;11.9: Independent t-test in jamovi, with options checked for useful results</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;11.9: Independent t-test in jamovi, with options checked for useful results</figcaption>
 </figure>
 </div>
 </div>
@@ -699,7 +738,7 @@ t=\frac{\bar{X}-\mu}{\frac{\hat{\sigma}}{\sqrt{N}}}
 <div id="fig-fig11-10" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="11-Comparing-two-means_files/figure-html/fig-fig11-10-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;11.10: Graphical illustration of the null and alternative hypotheses assumed by the Welch t-test. Like the Student test (<a href="#fig-fig11-9">Figure&nbsp;<span>11.9</span></a>) we assume that both samples are drawn from a normal population; but the alternative hypothesis no longer requires the two populations to have equal variance</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;11.10: Graphical illustration of the null and alternative hypotheses assumed by the Welch t-test. Like the Student test (<a href="#fig-fig11-9">Figure&nbsp;<span>11.9</span></a>) we assume that both samples are drawn from a normal population; but the alternative hypothesis no longer requires the two populations to have equal variance</figcaption>
 </figure>
 </div>
 </div>
@@ -717,7 +756,7 @@ t=\frac{\bar{X}-\mu}{\frac{\hat{\sigma}}{\sqrt{N}}}
 <div id="fig-fig11-11" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="images/fig11-11.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;11.11: Results showing the Welch test alongside the default Student’s t-test in jamovi</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;11.11: Results showing the Welch test alongside the default Student’s t-test in jamovi</figcaption>
 </figure>
 </div>
 </div>
@@ -727,7 +766,7 @@ t=\frac{\bar{X}-\mu}{\frac{\hat{\sigma}}{\sqrt{N}}}
 </section>
 <section id="assumptions-of-the-test-1" class="level3" data-number="11.5.2">
 <h3 data-number="11.5.2" class="anchored" data-anchor-id="assumptions-of-the-test-1"><span class="header-section-number">11.5.2</span> Assumptions of the test</h3>
-<p>The assumptions of the Welch test are very similar to those made by the Student t-test (see <a href="#assumptions-of-the-test-1">Assumptions of the test</a>, except that the Welch test does not assume homogeneity of variance. This leaves only the assumption of normality and the assumption of independence. The specifics of these assumptions are the same for the Welch test as for the Student test.</p>
+<p>The assumptions of the Welch test are very similar to those made by the Student t-test (see <a href="#assumptions-of-the-test">Assumptions of the test</a>, except that the Welch test does not assume homogeneity of variance. This leaves only the assumption of normality and the assumption of independence. The specifics of these assumptions are the same for the Welch test as for the Student test.</p>
 </section>
 </section>
 <section id="the-paired-samples-t-test" class="level2" data-number="11.6">
@@ -743,7 +782,7 @@ t=\frac{\bar{X}-\mu}{\frac{\hat{\sigma}}{\sqrt{N}}}
 <div id="fig-fig11-12" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="images/fig11-12.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;11.12: Descriptives for the two grade test variables in the <em>chico</em> data set</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;11.12: Descriptives for the two grade test variables in the <em>chico</em> data set</figcaption>
 </figure>
 </div>
 </div>
@@ -756,7 +795,7 @@ t=\frac{\bar{X}-\mu}{\frac{\hat{\sigma}}{\sqrt{N}}}
 <div id="fig-fig11-13a" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="images/fig11-13a.png" class="img-fluid figure-img" data-ref-parent="fig-fig11-13"></p>
-<p></p><figcaption class="figure-caption">(a)</figcaption><p></p>
+<figcaption class="figure-caption">(a)</figcaption>
 </figure>
 </div>
 </div>
@@ -764,7 +803,7 @@ t=\frac{\bar{X}-\mu}{\frac{\hat{\sigma}}{\sqrt{N}}}
 <div id="fig-fig11-13b" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="images/fig11-13b.png" class="img-fluid figure-img" data-ref-parent="fig-fig11-13"></p>
-<p></p><figcaption class="figure-caption">(b)</figcaption><p></p>
+<figcaption class="figure-caption">(b)</figcaption>
 </figure>
 </div>
 </div>
@@ -776,7 +815,7 @@ t=\frac{\bar{X}-\mu}{\frac{\hat{\sigma}}{\sqrt{N}}}
 <div id="fig-fig11-14" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="images/fig11-14.png" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;11.14: Histogram showing the improvement made by each student in Dr Chico’s class. Notice that almost the entire distribution is above zero - the vast majority of students did improve their performance from the first test to the second one</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;11.14: Histogram showing the improvement made by each student in Dr Chico’s class. Notice that almost the entire distribution is above zero - the vast majority of students did improve their performance from the first test to the second one</figcaption>
 </figure>
 </div>
 </section>
@@ -799,7 +838,7 @@ t=\frac{\bar{X}-\mu}{\frac{\hat{\sigma}}{\sqrt{N}}}
 <div id="fig-fig11-15" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="images/fig11-15.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;11.15: Results showing a one sample t-test on paired difference scores</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;11.15: Results showing a one sample t-test on paired difference scores</figcaption>
 </figure>
 </div>
 </div>
@@ -811,7 +850,7 @@ t=\frac{\bar{X}-\mu}{\frac{\hat{\sigma}}{\sqrt{N}}}
 <div id="fig-fig11-16" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="images/fig11-16.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;11.16: Results showing a paired sample t-test. Compare with <a href="#fig-fig11-15">Figure&nbsp;<span>11.15</span></a></figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;11.16: Results showing a paired sample t-test. Compare with <a href="#fig-fig11-15">Figure&nbsp;<span>11.15</span></a></figcaption>
 </figure>
 </div>
 </div>
@@ -827,7 +866,7 @@ t=\frac{\bar{X}-\mu}{\frac{\hat{\sigma}}{\sqrt{N}}}
 <div id="fig-fig11-17" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="images/fig11-17.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;11.17: jamovi results showing a ‘One Sample T-Test’ where the actual hypothesis is one sided, i.e.&nbsp;that the true mean is greater than <span class="math inline">\(67.5\%\)</span></figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;11.17: jamovi results showing a ‘One Sample T-Test’ where the actual hypothesis is one sided, i.e.&nbsp;that the true mean is greater than <span class="math inline">\(67.5\%\)</span></figcaption>
 </figure>
 </div>
 </div>
@@ -839,7 +878,7 @@ t=\frac{\bar{X}-\mu}{\frac{\hat{\sigma}}{\sqrt{N}}}
 <div id="fig-fig11-18" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="images/fig11-18.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;11.18: jamovi results showing an ‘Independent Samples t-Test’ where the actual hypothesis is one sided, i.e.&nbsp;that Anastasia’s students had higher grades than Bernadette’s</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;11.18: jamovi results showing an ‘Independent Samples t-Test’ where the actual hypothesis is one sided, i.e.&nbsp;that Anastasia’s students had higher grades than Bernadette’s</figcaption>
 </figure>
 </div>
 </div>
@@ -851,7 +890,7 @@ t=\frac{\bar{X}-\mu}{\frac{\hat{\sigma}}{\sqrt{N}}}
 <div id="fig-fig11-19" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="images/fig11-19.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;11.19: jamovi results showing a ‘Paired Samples T-Test’ where the actual hypothesis is one sided, i.e.&nbsp;that grade test2 (‘Measure 1’) <span class="math inline">\(&gt;\)</span> grade test1 (‘Measure 2’)</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;11.19: jamovi results showing a ‘Paired Samples T-Test’ where the actual hypothesis is one sided, i.e.&nbsp;that grade test2 (‘Measure 1’) <span class="math inline">\(&gt;\)</span> grade test1 (‘Measure 2’)</figcaption>
 </figure>
 </div>
 </div>
@@ -867,7 +906,14 @@ t=\frac{\bar{X}-\mu}{\frac{\hat{\sigma}}{\sqrt{N}}}
 <div class="cell-output-display">
 <div id="tbl-tab11-3" class="anchored">
 
-<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 80%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab11-3"><caption>Table&nbsp;11.3:  A (very) rough guide to interpreting Cohen’s d. My personal recommendation is to not use these blindly. The d statistic has a natural interpretation in and of itself. It re-describes the difference in means as the number of standard deviations that separates those means. So it’s generally a good idea to think about what that means in practical terms. In some contexts a ‘small’ effect could be of big practical importance. In other situations a ‘large’ effect may not be all that interesting </caption>
+<table class="huxtable" data-quarto-disable-processing="true" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 80%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab11-3"><caption>Table&nbsp;11.3:  <p>A (very) rough guide to interpreting Cohen’s d. My personal
+recommendation is to not use these blindly. The d statistic has a
+natural interpretation in and of itself. It re-describes the difference
+in means as the number of standard deviations that separates those
+means. So it’s generally a good idea to think about what that means in
+practical terms. In some contexts a ‘small’ effect could be of big
+practical importance. In other situations a ‘large’ effect may not be
+all that interesting</p> </caption>
 <colgroup><col><col></colgroup><tbody><tr>
 <th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 0pt; font-weight: bold;">d-value</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 0pt 2pt 12pt; font-weight: bold;">rough interpretation</th></tr>
 <tr>
@@ -918,7 +964,7 @@ t=\frac{\bar{X}-\mu}{\frac{\hat{\sigma}}{\sqrt{N}}}
 <div id="fig-fig11-20" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="11-Comparing-two-means_files/figure-html/fig-fig11-20-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;11.20: Histogram (panel (a)) and normal QQ plot (panel (b)) of normal.data, a normally distributed sample with <span class="math inline">\(100\)</span> observations. The Shapiro-Wilk statistic associated with these data is <span class="math inline">\(W = .99\)</span>, indicating that no significant departures from normality were detected (<span class="math inline">\(p = .54)\)</span></figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;11.20: Histogram (panel (a)) and normal QQ plot (panel (b)) of normal.data, a normally distributed sample with <span class="math inline">\(100\)</span> observations. The Shapiro-Wilk statistic associated with these data is <span class="math inline">\(W = .99\)</span>, indicating that no significant departures from normality were detected (<span class="math inline">\(p = .54)\)</span></figcaption>
 </figure>
 </div>
 </div>
@@ -929,7 +975,7 @@ t=\frac{\bar{X}-\mu}{\frac{\hat{\sigma}}{\sqrt{N}}}
 <div id="fig-fig11-21" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="11-Comparing-two-means_files/figure-html/fig-fig11-21-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;11.21: In the top row, a histogram and a normal QQ plot of the <span class="math inline">\(100\)</span> observations in a skewed.data set. The skewness of the data here is <span class="math inline">\(1.88\)</span>, and is reflected in a QQ plot that curves upwards. As a consequence, the Shapiro-Wilk statistic is <span class="math inline">\(W = .80\)</span>, reflecting a significant departure from normality (<span class="math inline">\(p&lt; .001\)</span>). The bottom row shows the same plots for a heavy tailed data set, again consisting of 100 observations. In this case the heavy tails in the data produce a high kurtosis (<span class="math inline">\(6.57\)</span>), and cause the QQ plot to flatten in the middle, and curve away sharply on either side. The resulting Shapiro-Wilk statistic is <span class="math inline">\(W = .75\)</span>, again reflecting significant non-normality (<span class="math inline">\(p&lt;.001)\)</span></figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;11.21: In the top row, a histogram and a normal QQ plot of the <span class="math inline">\(100\)</span> observations in a skewed.data set. The skewness of the data here is <span class="math inline">\(1.88\)</span>, and is reflected in a QQ plot that curves upwards. As a consequence, the Shapiro-Wilk statistic is <span class="math inline">\(W = .80\)</span>, reflecting a significant departure from normality (<span class="math inline">\(p&lt; .001\)</span>). The bottom row shows the same plots for a heavy tailed data set, again consisting of 100 observations. In this case the heavy tails in the data produce a high kurtosis (<span class="math inline">\(6.57\)</span>), and cause the QQ plot to flatten in the middle, and curve away sharply on either side. The resulting Shapiro-Wilk statistic is <span class="math inline">\(W = .75\)</span>, again reflecting significant non-normality (<span class="math inline">\(p&lt;.001)\)</span></figcaption>
 </figure>
 </div>
 </div>
@@ -943,7 +989,7 @@ t=\frac{\bar{X}-\mu}{\frac{\hat{\sigma}}{\sqrt{N}}}
 <div id="fig-fig11-22" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="images/fig11-22.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;11.22: QQ plot for the independent t test analysis shown in <a href="#fig-fig11-10">Figure&nbsp;<span>11.10</span></a></figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;11.22: QQ plot for the independent t test analysis shown in <a href="#fig-fig11-10">Figure&nbsp;<span>11.10</span></a></figcaption>
 </figure>
 </div>
 </div>
@@ -953,7 +999,7 @@ t=\frac{\bar{X}-\mu}{\frac{\hat{\sigma}}{\sqrt{N}}}
 <div id="fig-fig11-23" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="images/fig11-23.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;11.23: QQ plot for the paired samples t test analysis shown in <a href="#fig-fig11-16">Figure&nbsp;<span>11.16</span></a></figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;11.23: QQ plot for the paired samples t test analysis shown in <a href="#fig-fig11-16">Figure&nbsp;<span>11.16</span></a></figcaption>
 </figure>
 </div>
 </div>
@@ -968,7 +1014,7 @@ t=\frac{\bar{X}-\mu}{\frac{\hat{\sigma}}{\sqrt{N}}}
 <div id="fig-fig11-24" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="11-Comparing-two-means_files/figure-html/fig-fig11-24-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;11.24: Sampling distribution of the Shapiro-Wilk <span class="math inline">\(W\)</span> statistic, under the null hypothesis that the data are normally distributed, for samples of size 10, 20 and 50. Note that small values of <span class="math inline">\(W\)</span> indicate departure from normality</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;11.24: Sampling distribution of the Shapiro-Wilk <span class="math inline">\(W\)</span> statistic, under the null hypothesis that the data are normally distributed, for samples of size 10, 20 and 50. Note that small values of <span class="math inline">\(W\)</span> indicate departure from normality</figcaption>
 </figure>
 </div>
 </div>
@@ -983,7 +1029,7 @@ t=\frac{\bar{X}-\mu}{\frac{\hat{\sigma}}{\sqrt{N}}}
 <div id="fig-fig11-25" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="images/fig11-25.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;11.25: QQ plot showing non-normality from the AFL winning margins data</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;11.25: QQ plot showing non-normality from the AFL winning margins data</figcaption>
 </figure>
 </div>
 </div>
@@ -1003,7 +1049,8 @@ t=\frac{\bar{X}-\mu}{\frac{\hat{\sigma}}{\sqrt{N}}}
 <div class="cell-output-display">
 <div id="tbl-tab11-4" class="anchored">
 
-<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab11-4"><caption>Table&nbsp;11.4:  Comparing observations by group for a two-sample Mann-Whitney U test </caption>
+<table class="huxtable" data-quarto-disable-processing="true" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab11-4"><caption>Table&nbsp;11.4:  <p>Comparing observations by group for a two-sample Mann-Whitney U
+test</p> </caption>
 <colgroup><col><col><col><col><col><col><col></colgroup><tbody><tr>
 <th rowspan="2" colspan="2" style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 2pt 12pt 2pt 0pt; font-weight: bold;"></th><th colspan="5" style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">group B</th></tr>
 <tr>
@@ -1030,7 +1077,7 @@ t=\frac{\bar{X}-\mu}{\frac{\hat{\sigma}}{\sqrt{N}}}
 <div id="fig-fig11-26" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="images/fig11-26.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;11.26: jamovi screen showing results for the Mann-Whitney <span class="math inline">\(U\)</span> test</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;11.26: jamovi screen showing results for the Mann-Whitney <span class="math inline">\(U\)</span> test</figcaption>
 </figure>
 </div>
 </div>
@@ -1043,7 +1090,7 @@ t=\frac{\bar{X}-\mu}{\frac{\hat{\sigma}}{\sqrt{N}}}
 <div class="cell-output-display">
 <div id="tbl-tab11-5" class="anchored">
 
-<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab11-5"><caption>Table&nbsp;11.5:  Comparing observations by group for a one-sample Wilcoxon U test </caption>
+<table class="huxtable" data-quarto-disable-processing="true" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 90%; margin-left: auto; margin-right: auto;  " id="tab:tbl-tab11-5"><caption>Table&nbsp;11.5:  <p>Comparing observations by group for a one-sample Wilcoxon U test</p> </caption>
 <colgroup><col><col><col><col><col><col><col><col><col><col><col><col><col></colgroup><tbody><tr>
 <th rowspan="2" colspan="2" style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 2pt 12pt 2pt 0pt; font-weight: bold;"></th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;"></th><th colspan="10" style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 2pt 12pt 2pt 12pt; font-weight: bold;">all differences</th></tr>
 <tr>
@@ -1065,7 +1112,7 @@ t=\frac{\bar{X}-\mu}{\frac{\hat{\sigma}}{\sqrt{N}}}
 <div id="fig-fig11-27" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
 <p><img src="images/fig11-27.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;11.27: jamovi screen showing results for one sample and paired sample Wilcoxon nonparametric tests</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;11.27: jamovi screen showing results for one sample and paired sample Wilcoxon nonparametric tests</figcaption>
 </figure>
 </div>
 </div>
@@ -1085,29 +1132,29 @@ t=\frac{\bar{X}-\mu}{\frac{\hat{\sigma}}{\sqrt{N}}}
 </ul>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="doc-bibliography" style="display: none">
-<div id="ref-Box1987" class="csl-entry" role="doc-biblioentry">
+<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-Box1987" class="csl-entry" role="listitem">
 Box, J. F. (1987). Guinness, gosset, fisher, and small samples. <em>Statistical Science</em>, <em>2</em>, 45–52.
 </div>
-<div id="ref-Cohen1988" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Cohen1988" class="csl-entry" role="listitem">
 Cohen, J. (1988). <em>Statistical power analysis for the behavioral sciences</em> (2nd ed.). Lawrence Erlbaum.
 </div>
-<div id="ref-Hedges1981" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Hedges1981" class="csl-entry" role="listitem">
 Hedges, L. V. (1981). Distribution theory for glass’s estimator of effect size and related estimators. <em>Journal of Educational Statistics</em>, <em>6</em>, 107–128.
 </div>
-<div id="ref-Hedges1985" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Hedges1985" class="csl-entry" role="listitem">
 Hedges, L. V., &amp; Olkin, I. (1985). <em>Statistical methods for meta-analysis</em>. Academic Press.
 </div>
-<div id="ref-McGrath2006" class="csl-entry" role="doc-biblioentry">
+<div id="ref-McGrath2006" class="csl-entry" role="listitem">
 McGrath, R. E., &amp; Meyer, G. J. (2006). When effect sizes disagree: The case of <span class="math inline">\(r\)</span> and <span class="math inline">\(d\)</span>. <em>Psychological Methods</em>, <em>11</em>, 386–401.
 </div>
-<div id="ref-Shapiro1965" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Shapiro1965" class="csl-entry" role="listitem">
 Shapiro, S. S., &amp; Wilk, M. B. (1965). An analysis of variance test for normality (complete samples). <em>Biometrika</em>, <em>52</em>, 591–611.
 </div>
-<div id="ref-Student1908" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Student1908" class="csl-entry" role="listitem">
 Student, A. (1908). The probable error of a mean. <em>Biometrika</em>, <em>6</em>, 1–2.
 </div>
-<div id="ref-Welch1947" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Welch1947" class="csl-entry" role="listitem">
 Welch, B. L. (1947). The generalization of <span>“<span>S</span>tudent’s”</span> problem when several different population variances are involved. <em>Biometrika</em>, <em>34</em>, 28–35.
 </div>
 </div>
@@ -1285,9 +1332,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -1352,6 +1413,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
@@ -1390,12 +1537,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-      var filterRegex = new RegExp(/https:\/\/davidfoxcroft\.github\.io\/lsj-book\//);
+      var filterRegex = new RegExp("https:\/\/davidfoxcroft\.github\.io\/lsj-book\/");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
-    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
@@ -1421,6 +1568,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left"><a href="https://learnstatswithjamovi.com">learning statistics with jamovi</a></div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
     <div class="nav-footer-right">This book was built with <a href="https://quarto.org/">Quarto</a></div>
   </div>
 </footer>
