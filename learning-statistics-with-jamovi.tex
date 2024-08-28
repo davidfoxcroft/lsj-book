@@ -215,7 +215,7 @@
 \mainmatter
 %\pagestyle{plain}
 
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[borderline west={3pt}{0pt}{shadecolor}, boxrule=0pt, sharp corners, breakable, enhanced, frame hidden, interior hidden]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[frame hidden, borderline west={3pt}{0pt}{shadecolor}, interior hidden, breakable, boxrule=0pt, sharp corners, enhanced]}{\end{tcolorbox}}\fi
 
 \renewcommand*\contentsname{Table of contents}
 {
@@ -3686,9 +3686,10 @@ then click on the ``Open'' button.
 
 \caption{\label{fig-fig3-5}A dialog box on a Mac asking you to select
 the csv file jamovi should try to import. Mac users will recognise this
-immediately, it's the usual way in which a Mac asks you to find a file.
-Windows users won't see this, instead they'll see the usual explorer
-window that Windows always gives you when it wants you to select a file}
+immediately, it is the usual way in which a Mac asks you to find a file.
+Windows users will not see this, instead they will see the usual
+explorer window that Windows always gives you when it wants you to
+select a file}
 
 \end{figure}
 
@@ -4255,11 +4256,11 @@ income at the table the median would be a better choice here.
 
 {\centering 
 
-\raisebox{-\height}{
-
-\includegraphics{images/fig4-4a.png}
-
-}
+\includegraphics{images/fig4-4a.png}\{fig-alt=``A bar chart resembling a
+stair-step pattern with decreasing heights from left to right is shown.
+The text reads,''The mean is the `centre of mass' of the data.'' Below
+the chart, there is a horizontal line labeled ``balancing point'' with a
+triangular fulcrum symbolizing balance.'' \}
 
 }
 
@@ -4269,11 +4270,11 @@ income at the table the median would be a better choice here.
 
 {\centering 
 
-\raisebox{-\height}{
-
-\includegraphics{images/fig4-4b.png}
-
-}
+\includegraphics{images/fig4-4b.png}\{fig-alt=``A bar chart showing 48
+observations divided into two equal groups of 24. The left group is
+shaded light gray, and the right group is shaded dark gray. An arrow
+points to the 24th observation with the text''The median is the `middle
+observation' in the data set.''\}
 
 }
 
@@ -7785,13 +7786,13 @@ probability of heads.
 
 \caption{\label{fig-fig7-1}An illustration of how frequentist
 probability works. If you flip a fair coin over and over again the
-proportion of heads that you've seen eventually settles down and
+proportion of heads that you have seen eventually settles down and
 converges to the true probability of \(0.5\). Each panel shows four
 different simulated experiments. In each case we pretend we flipped a
 coin \(1000\) times and kept track of the proportion of flips that were
 heads as we went along. Although none of these sequences actually ended
-up with an exact value of \(.5\), if we'd extended the experiment for an
-infinite number of coin flips they would have}
+up with an exact value of \(.5\), if we had extended the experiment for
+an infinite number of coin flips they would have}
 
 \end{figure}
 
@@ -8367,7 +8368,7 @@ likely we are to observe that value. However, notice that the y-axis is
 labelled \emph{Probability Density} and not \emph{Probability}. There is
 a subtle and somewhat frustrating characteristic of continuous
 distributions that makes the \(y\) axis behave a bit oddly - the height
-of the curve here isn't actually the probability of observing a
+of the curve here is not actually the probability of observing a
 particular x value. On the other hand, it is true that the heights of
 the curve tells you which \(x\) values are more likely (the higher
 ones!). (see \protect\hyperlink{probability-density}{Probability
@@ -8563,8 +8564,8 @@ Figure~\ref{fig-fig7-12}.
 \includegraphics[width=1\textwidth,height=\textheight]{07-Introduction-to-probability_files/figure-pdf/fig-fig7-10-1.pdf} \hfill{}
 
 \caption{\label{fig-fig7-10}A \(t\) distribution with 3 degrees of
-freedom (solid line). It looks similar to a normal distribution, but
-it's not quite the same. For comparison purposes I've plotted a standard
+freedom (solid line). It looks similar to a normal distribution, but it
+is not quite the same. For comparison purposes I have plotted a standard
 normal distribution as the dashed line}
 
 \end{figure}
@@ -8586,7 +8587,7 @@ features of a chi-square distribution}
 
 \caption{\label{fig-fig7-12}An \(F\) distribution with 3 and 5 degrees
 of freedom. Qualitatively speaking, it looks pretty similar to a
-chi-square distribution, but they're not quite the same in general}
+chi-square distribution, but they are not quite the same in general}
 
 \end{figure}
 
@@ -9468,9 +9469,9 @@ statistics, it's called the \textbf{sampling distribution of the mean}.
 
 \caption{\label{fig-fig8-6}The sampling distribution of the mean for the
 `five IQ scores experiment'. If you sample 5 people at random and
-calculate their average IQ you'll almost certainly get a number between
-80 and 120, even though there are quite a lot of individuals who have
-IQs above 120 or below 80. For comparison, the black line plots the
+calculate their average IQ you will almost certainly get a number
+between 80 and 120, even though there are quite a lot of individuals who
+have IQs above 120 or below 80. For comparison, the black line plots the
 population distribution of IQ scores}
 
 \end{figure}
@@ -9510,7 +9511,7 @@ whose IQ is measured in the 100 to 140 range.
 
 \caption{\label{fig-fig8-7}The sampling distribution of the maximum for
 the `five IQ scores experiment'. If you sample 5 people at random and
-select the one with the highest IQ score you'll probably see someone
+select the one with the highest IQ score you will probably see someone
 with an IQ between 100 and 140}
 
 \end{figure}
@@ -9527,15 +9528,15 @@ distribution of these means (i.e., the sampling distribution of the
 mean). Each individual IQ score was drawn from a normal distribution
 with mean 100 and standard deviation 15, which is shown as the solid
 black line. In panel (a), each data set contained only a single
-observation, so the mean of each sample is just one person's IQ score.
-As a consequence, the sampling distribution of the mean is of course
-identical to the population distribution of IQ scores. However, when we
-raise the sample size to 2 the mean of any one sample tends to be closer
-to the population mean than any one person's IQ score, and so the
-histogram (i.e., the sampling distribution) is a bit narrower than the
-population distribution. By the time we raise the sample size to 10
-(panel (c)), we can see that the distribution of sample means tend to be
-fairly tightly clustered around the true population mean}
+observation, so the mean of each sample is the IQ score of just one
+person. As a consequence, the sampling distribution of the mean is of
+course identical to the population distribution of IQ scores. However,
+when we raise the sample size to 2 the mean of any one sample tends to
+be closer to the population mean than the IQ score of any one person,
+and so the histogram (i.e., the sampling distribution) is a bit narrower
+than the population distribution. By the time we raise the sample size
+to 10 (panel (c)), we can see that the distribution of sample means tend
+to be fairly tightly clustered around the true population mean}
 
 \end{figure}
 
@@ -11763,7 +11764,7 @@ of the sample size \(N\). In this case, the true value of \(\theta\) is
 0.7 but the null hypothesis is that \(\theta = 0.5\). Overall, larger
 \(N\) means greater power. (The small zig-zags in this function occur
 because of some odd interactions between \(\theta\), \(\alpha\) and the
-fact that the binomial distribution is discrete, it doesn't matter for
+fact that the binomial distribution is discrete, it does not matter for
 any serious purpose)}
 
 \end{figure}
@@ -14878,10 +14879,10 @@ performance on some outcome measure, then an independent samples t-test
 \includegraphics[width=1\textwidth,height=\textheight]{images/fig11-7.png} \hfill{}
 
 \caption{\label{fig-fig11-7}Box and violin plots showing the
-distribution of grades for students in Anastasia's and Bernadette's
-classes. Visually, these suggest that students in Anastasia's class may
-be getting slightly better grades on average, though they also seem a
-bit more variable}
+distribution of grades for students in the classes of Anastasia and
+Bernadette. Visually, these suggest that students in the class of
+Anastasia may be getting slightly better grades on average, though they
+also seem a bit more variable}
 
 \end{figure}
 
@@ -15321,7 +15322,7 @@ above, then this is what it gives you (Figure~\ref{fig-fig11-11}).
 \includegraphics[width=1\textwidth,height=\textheight]{images/fig11-11.png} \hfill{}
 
 \caption{\label{fig-fig11-11}Results showing the Welch test alongside
-the default Student's t-test in jamovi}
+the default Students t-test in jamovi}
 
 \end{figure}
 
@@ -17221,7 +17222,7 @@ information is the same.
 \includegraphics[width=1\textwidth,height=\textheight]{images/fig12-9.png} \hfill{}
 
 \caption{\label{fig-fig12-9}Scatterplot via the `scatr' add-on module in
-- jamovi}
+jamovi}
 
 \end{figure}
 
@@ -18217,8 +18218,8 @@ then it strongly suggests that you need to make some changes.
 
 \caption{\label{fig-fig12-17}jamovi plot of the predicted values against
 the observed values of the outcome variable. A straight(-ish) line is
-what we're hoping to see here. This looks pretty good, suggesting that
-there's nothing grossly wrong}
+what we are hoping to see here. This looks pretty good, suggesting that
+there is nothing grossly wrong}
 
 \end{figure}
 
@@ -18547,7 +18548,7 @@ results as shown in Figure~\ref{fig-fig12-27}.
 \includegraphics[width=1\textwidth,height=\textheight]{images/fig12-27.png} \hfill{}
 
 \caption{\label{fig-fig12-27}jamovi output showing the table for the
-Cook's distance statistics}
+Cooks distance statistics}
 
 \end{figure}
 
@@ -20697,7 +20698,7 @@ Figure~\ref{fig-fig13-6}.
 
 \includegraphics[width=1\textwidth,height=\textheight]{images/fig13-6.png} \hfill{}
 
-\caption{\label{fig-fig13-6}Welch's test as part of the One Way ANOVA
+\caption{\label{fig-fig13-6}Welch test as part of the One Way ANOVA
 analysis in jamovi}
 
 \end{figure}
@@ -21150,7 +21151,7 @@ be assumed.).
 \includegraphics[width=1\textwidth,height=\textheight]{images/fig13-10.png} \hfill{}
 
 \caption{\label{fig-fig13-10}One-way repeated measures ANOVA output -
-Mauchly's Test of Sphericity}
+Mauchly Test of Sphericity}
 
 \end{figure}
 
@@ -28481,7 +28482,13 @@ were getting by using the orthodox t-test. And for peeking every 10 or
 
 \includegraphics[width=1\textwidth,height=\textheight]{16-Bayesian-statistics_files/figure-pdf/fig-fig16-1-1.pdf} \hfill{}
 
-\caption{\label{fig-fig16-1}\textbf{?(caption)}}
+\caption{\label{fig-fig16-1}Probability of Type I error in an experiment
+with target N of 1000 per group and \textbf{peeking} at different
+intervals:- things can go badly wrong if you \textbf{peek} at your data
+and re-run your tests as new data arrives. If you are a frequentist,
+this is \emph{very wrong} (blue circles and solid line). If you are a
+bayesian, it is not so bad (green triangles and dashed line). The alpha
+level was set at 0.05 (red dotted line) in this simulation.}
 
 \end{figure}
 

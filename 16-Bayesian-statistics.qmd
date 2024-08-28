@@ -307,8 +307,8 @@ So how bad is it? The answer from a simulation study is shown as the solid line 
 
 ```{r}
 #| label: fig-fig16-1
-   #| fig-cap: Probability of Type I error in an experiment with target N of 1000 per group and **peeking** at different intervals: things can go badly wrong if you **peek** at your data and re-run your tests as new data arrives. If you are a frequentist, this is *very wrong* (blue circles and solid line). If you are a bayesian, it's not so bad (green triangles and dashed line). The alpha level was set at 0.05 (red dotted line) in this simulation.
-#| 
+#| fig-cap: Probability of Type I error in an experiment with target N of 1000 per group and **peeking** at different intervals:- things can go badly wrong if you **peek** at your data and re-run your tests as new data arrives. If you are a frequentist, this is *very wrong* (blue circles and solid line). If you are a bayesian, it is not so bad (green triangles and dashed line). The alpha level was set at 0.05 (red dotted line) in this simulation.
+#| fig-alt: A scatter plot graph showing the probability of Type I error versus the 'Peeking' interval with new data points. Blue circles represent p<0.05 and green triangles represent BF>3. A red dashed line at alpha = 0.05 denotes the null hypothesis rejection threshold.
  
 p_bf <- subset(p_bf, p_bf$peek <= 200)# leave out less plausible peeking frequency - better plot 
 
@@ -372,6 +372,7 @@ The most common type of t-test is the independent samples t-test, and it arises 
 #| label: fig-fig16-2
 #| classes: .enlarge-image
 #| fig-cap: Independent samples t-test result in jamovi
+#| fig-alt: A jamovi screenshot displaying a dataset with student grades and a descriptive statistics summary. The dataset table lists student IDs and their grades for two tests. The results panel shows descriptive statistics including N, mean, median, standard deviation, minimum, and maximum values.
 knitr::include_graphics("images/fig11-12.png")
 ```
 
@@ -383,6 +384,7 @@ Before moving on, it's worth highlighting the difference between the orthodox te
 #| label: fig-fig16-3
 #| classes: .enlarge-image
 #| fig-cap: Bayes factors analysis alongside independent samples t-test
+#| fig-alt: A jamovi table titled "Independent Samples T-test" shows statistical comparison data for three methods:- Student’s t, Bayes factor, and Welch’s t. Columns include "Statistic," "±%"), "df," "p," "Mean difference," "SE difference," and "Effect Size".
 knitr::include_graphics("images/fig16-3.png")
 ```
 
@@ -394,6 +396,7 @@ Back in Section 11.5 I discussed the *chico.csv* data set in which student grade
 #| label: fig-fig16-4
 #| classes: .enlarge-image
 #| fig-cap: Paired samples t-test and Bayes factor result in jamovi
+#| fig-alt: A jamovi table showing results of a Paired Samples T-Test. It includes the test names, statistics (6.48 for Students t, 5993.58 for Bayes factor), degrees of freedom (19), p-value (&lt;0.0001), mean difference (1.40), standard error difference (0.22), confidence interval (0.95 to 1.86), and effect size (1.45).
 knitr::include_graphics("images/fig16-4.png")
 ```
 

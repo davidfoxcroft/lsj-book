@@ -46,6 +46,7 @@ In jamovi, the 'Frequency tables' check box will only produce a table for single
 #| label: fig-fig6-1
 #| classes: .enlarge-image
 #| fig-cap: Contingency table for the speaker and utterances variables
+#| fig-alt: A jamovi screenshot displaying a contingency table analysis. The left panel shows options to select rows, columns, counts, and layers with "speaker" and "utterance" selected. The right panel displays the resulting contingency table and test results.
 knitr::include_graphics("images/fig6-1.png")
 ```
 
@@ -59,6 +60,7 @@ The contingency table shown in @fig-fig6-1 shows a table of raw frequencies. Tha
 #| label: fig-fig6-2
 #| classes: .enlarge-image
 #| fig-cap: Contingency table for the speaker and utterances variables, with row percentages
+#| fig-alt: A jamovi contingency table shows the relationship between speakers (makka-pakka, tombliboo, and upsy-daisy) and utterances (ee, onk, oo, pip). Each cell lists the observed frequency and percentage within the row. Totals for rows and columns are also provided.
 knitr::include_graphics("images/fig6-2.png")
 ```
 
@@ -68,6 +70,7 @@ What we're looking at here is the percentage of utterances made by each characte
 #| label: fig-fig6-3
 #| classes: .enlarge-image
 #| fig-cap: Contingency table for the speaker and utterances variables, with column percentages
+#| fig-alt: A jamovi contingency table displays the utterances ('ee', 'onk', 'oo', 'pip') of three speakers ('makka-pakka', 'tombliboo', 'upsy-daisy'). Observed values for each utterance by speaker, percentages within columns, and totals are included.
 knitr::include_graphics("images/fig6-3.png")
 ```
 
@@ -184,6 +187,7 @@ Now let's load and look at the data. The data file *likert.omv* contains a singl
 #| label: fig-fig6-4
 #| classes: .enlarge-image
 #| fig-cap: Creating a new computed variable in jamovi
+#| fig-alt: A jamovi screenshot showing a computed variable setup. The main formula shown is "= likert.raw - 4". The interface includes menu options like Variables, Data, Analyses, Edit, and a table displaying dataset values with labels "likert.raw" and "likert.cent".
 knitr::include_graphics("images/fig6-4.png")
 ```
 
@@ -195,6 +199,7 @@ One reason why it might be useful to have the data in this format is that there 
 #| label: fig-fig6-5
 #| classes: .enlarge-image
 #| fig-cap: Using the $f_x$ button to select functions and variables
+#| fig-alt: A jamovi screenshot is shown. The "Edit" tab is active. A variable labeled "opinion_strength" with the formula "ABS(likert.centred)" is being computed, referencing "likert.centred" from the variables list. A table of data is below the formula panel.
 knitr::include_graphics("images/fig6-5.png")
 ```
 
@@ -226,6 +231,7 @@ Note that there are three left parentheses used during the nesting, so the whole
 #| label: fig-fig6-6
 #| classes: .enlarge-image
 #| fig-cap: Collapsing a variable into a smaller number of discrete levels using the jamovi ‘IF’ function
+#| fig-alt: A jamovi screenshot is shown. The "COMPUTED VARIABLE" section shows variable creation for "AgeCats" with custom age groupings. Below, a table with two columns labeled "Age" and "AgeCats" shows age data grouped into new categories.
 knitr::include_graphics("images/fig6-6.png")
 ```
 
@@ -245,6 +251,7 @@ You can also create a transformation with the second example we looked at, the a
 #| label: fig-fig6-7
 #| classes: .enlarge-image
 #| fig-cap: Creating a new variable transformation using the jamovi 'Transform' command
+#| fig-alt: A jamovi screenshot is shown. The "Data" tab is selected, displaying options like Paste, Clipboard, Setup, and Compute. The "Transform Variable" menu is open, showing configuration for the variable "opinion.strength" with source and using transform fields.
 knitr::include_graphics("images/fig6-7.png")
 ```
 
@@ -252,6 +259,7 @@ knitr::include_graphics("images/fig6-7.png")
 #| label: fig-fig6-8
 #| classes: .enlarge-image
 #| fig-cap: Specifying a transformation in jamovi, to be saved as the imaginatively named 'Transform 1'
+#| fig-alt: A jamovi screenshot showing a transformation window. The "Transform" tab is open, and a box prompting "Add recode condition" with math functions such as "ABS" and "LOG10." A variables list with "opinion.strength" is on the right.
 knitr::include_graphics("images/fig6-8.png")
 ```
 
@@ -259,6 +267,7 @@ knitr::include_graphics("images/fig6-8.png")
 #| label: fig-fig6-9
 #| classes: .enlarge-image
 #| fig-cap: jamovi transformation into three age categories, using the 'Add condition' button
+#| fig-alt: A jamovi screenshot is showing the "TRANSFORM VARIABLE" dialog box. The variable "Agegroupings" is being edited with recode conditions:- if source <= 20, use "young"; if source <= 40, use "adult"; else, use "older" A red arrow points to "Add recode condition".
 knitr::include_graphics("images/fig6-9.png")
 ```
 
@@ -307,6 +316,7 @@ speaker == 'makka-pakka'
 #| label: fig-fig6-10
 #| classes: .enlarge-image
 #| fig-cap: Creating a subset of the nightgarden data using the jamovi 'Filters' option
+#| fig-alt: A jamovi screenshot showing the "Row Filters" section. The filter is set to display rows where "speaker" matches "makka_paka". Below, a table reflects filtered data and a "Results" pane on the right presents descriptive statistics for the "speaker" column.
 knitr::include_graphics("images/fig6-10.png")
 ```
 

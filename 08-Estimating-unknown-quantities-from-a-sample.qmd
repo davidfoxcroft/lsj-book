@@ -44,6 +44,7 @@ To keep things simple, let's imagine that we have a bag containing 10 chips. Eac
 ```{r}
 #| label: fig-fig8-1
 #| fig-cap: Simple random sampling without replacement from a finite population
+#| fig-alt: A diagram shows a population consisting of 10 circles labeled a to j. Arrows point from this population to three groups of circles, demonstrating simple random samples without replacement. The groups are labeled 'a, c, j, b,' 'i, e, a, f,' and 'g, c, f, d.'.
 knitr::include_graphics("images/fig8-1.png")
 ```
 
@@ -54,6 +55,7 @@ To help make sure you understand the importance of the sampling procedure, consi
 ```{r}
 #| label: fig-fig8-2
 #| fig-cap: Biased sampling without replacement from a finite population
+#| fig-alt: A diagram shows biased sampling (without replacement) from a population of 10 items labeled a to j. Three sample sets of four items each are drawn:- {a, b, g, h}, {g, b, h, a}, and {a, h, b, g}. Black circles denote selected items; white circles denote unselected items.
 knitr::include_graphics("images/fig8-2.png")
 ```
 
@@ -62,6 +64,7 @@ A third procedure is worth mentioning. This time around we close our eyes, shake
 ```{r}
 #| label: fig-fig8-3
 #| fig-cap: Simple random sampling *with* replacement from a finite population
+#| fig-alt: A diagram illustrating simple random sampling with replacement. The population, represented by 10 black-and-white circles labeled 'a' to 'j', is shown on the left. Three samples, each containing four circles, are shown on the right with arrows pointing from the population.
 knitr::include_graphics("images/fig8-3.png")
 ```
 
@@ -96,6 +99,7 @@ The idea is quite simple. Let's say we're talking about IQ scores. To a psycholo
 #| fig-width: 9
 #| fig-height: 3
 #| fig-cap: The population distribution of IQ scores (panel (a)) and two samples drawn randomly from it. In panel (b) we have a sample of 100 observations, and panel (c) we have a sample of 10,000 observations
+#| fig-alt: The image contains three graphs of IQ scores. The left graph is a probability density curve, the middle graph is a histogram with frequencies, and the right graph is another histogram with higher frequencies. All charts show IQ scores on the x-axis.
 
 plota <- ggplot(data = data.frame(x = seq(60, 140, 1)), aes(x)) +
   stat_function(fun = dnorm, n = 1000, args = list(mean = 100, sd = 15), col=blueshade, linewidth=1) +
@@ -136,6 +140,7 @@ In the previous section I showed you the results of one fictitious IQ experiment
 #| label: fig-fig8-5
 #| classes: .enlarge-image
 #| fig-cap: A random sample drawn from a normal distribution using jamovi
+#| fig-alt: A jamovi screenshot is shown. It includes menus for variable manipulation and data analysis. A computed variable "IQsim" is displayed with a formula. A table lists numeric IQsim values, and a histogram with descriptive statistics is shown on the right.
 knitr::include_graphics("images/fig8-5.png")
 ```
 
@@ -183,7 +188,8 @@ What if I continued like this for 10,000 replications, and then drew a histogram
 
 ```{r}
 #| label: fig-fig8-6
-#| fig-cap: The sampling distribution of the mean for the 'five IQ scores experiment'. If you sample 5 people at random and calculate their average IQ you'll almost certainly get a number between 80 and 120, even though there are quite a lot of individuals who have IQs above 120 or below 80. For comparison, the black line plots the population distribution of IQ scores
+#| fig-cap: The sampling distribution of the mean for the 'five IQ scores experiment'. If you sample 5 people at random and calculate their average IQ you will almost certainly get a number between 80 and 120, even though there are quite a lot of individuals who have IQs above 120 or below 80. For comparison, the black line plots the population distribution of IQ scores
+#| fig-alt: A histogram of IQ scores with a superimposed normal distribution curve. The x-axis ranges from 60 to 140, with a peak around 100. The y-axis shows frequency. The histogram bars are blue, and the normal distribution curve is black.
 
 sdm_data <- lapply(1:10000, function (x) {
   rnorm(5, 100, 15)
@@ -217,7 +223,8 @@ Doing this over and over again would give me a very different sampling distribut
 
 ```{r}
 #| label: fig-fig8-7
-#| fig-cap: The sampling distribution of the maximum for the 'five IQ scores experiment'. If you sample 5 people at random and select the one with the highest IQ score you'll probably see someone with an IQ between 100 and 140
+#| fig-cap: The sampling distribution of the maximum for the 'five IQ scores experiment'. If you sample 5 people at random and select the one with the highest IQ score you will probably see someone with an IQ between 100 and 140
+#| fig-alt: A histogram of IQ scores is displayed with blue bars indicating the frequency of each score range. A black bell curve overlay represents the normal distribution, with scores ranging from 60 to 140 on the x-axis.
 
 sdm_data <- lapply(1:10000, function (x) {
   rnorm(5, 100, 15)
@@ -244,7 +251,8 @@ ggplot(data = sdm_data_max, aes(x = sample_max )) +
 #| fig-width: 9
 #| fig-height: 3
 #| out.width: 100%
-#| fig-cap: An illustration of the how sampling distribution of the mean depends on sample size. In each panel I generated 10,000 samples of IQ data and calculated the mean IQ observed within each of these data sets. The histograms in these plots show the distribution of these means (i.e., the sampling distribution of the mean). Each individual IQ score was drawn from a normal distribution with mean 100 and standard deviation 15, which is shown as the solid black line. In panel (a), each data set contained only a single observation, so the mean of each sample is just one person's IQ score. As a consequence, the sampling distribution of the mean is of course identical to the population distribution of IQ scores. However, when we raise the sample size to 2 the mean of any one sample tends to be closer to the population mean than any one person's IQ score, and so the histogram (i.e., the sampling distribution) is a bit narrower than the population distribution. By the time we raise the sample size to 10 (panel (c)), we can see that the distribution of sample means tend to be fairly tightly clustered around the true population mean
+#| fig-cap: An illustration of the how sampling distribution of the mean depends on sample size. In each panel I generated 10,000 samples of IQ data and calculated the mean IQ observed within each of these data sets. The histograms in these plots show the distribution of these means (i.e., the sampling distribution of the mean). Each individual IQ score was drawn from a normal distribution with mean 100 and standard deviation 15, which is shown as the solid black line. In panel (a), each data set contained only a single observation, so the mean of each sample is the IQ score of just one person. As a consequence, the sampling distribution of the mean is of course identical to the population distribution of IQ scores. However, when we raise the sample size to 2 the mean of any one sample tends to be closer to the population mean than the IQ score of any one person, and so the histogram (i.e., the sampling distribution) is a bit narrower than the population distribution. By the time we raise the sample size to 10 (panel (c)), we can see that the distribution of sample means tend to be fairly tightly clustered around the true population mean
+#| fig-alt: Three histograms show the distribution of IQ scores with varying sample sizes. (a) Sample size of 1:- broad distribution. (b) Sample size of 2:- narrower distribution. (c) Sample size of 10:- most narrow distribution. All have normal distribution curves overlaid.
 
 sampling_plots_df <- data.frame(n = c(1,2,10),
                                 lab = c("(a)",
@@ -289,6 +297,7 @@ Okay, so that's one part of the story. However, there's something I've been glos
 #| fig-width: 12
 #| fig-height: 12
 #| fig-cap: A demonstration of the central limit theorem. In panel (a), we have a non-normal population distribution, and panels (b)-(d) show the sampling distribution of the mean for samples of size 2,4 and 8 for data drawn from the distribution in panel (a). As you can see, even though the original population distribution is non-normal the sampling distribution of the mean becomes pretty close to normal by the time you have a sample of even 4 observations
+#| fig-alt: Four histograms displaying sample means with increasing sample sizes:- (a) 1, (b) 2, (c) 4, and (d) 8. Each has a superimposed curve transitioning from a right-skewed to a normal distribution shape as sample size increases. All x-axes are labeled "Sample Mean".
 
 # parameters of the beta
 a <- 2
@@ -397,6 +406,8 @@ This intuition feels right, but it would be nice to demonstrate this somehow. Th
 #| fig-width: 8
 #| fig-height: 8
 #| fig-cap: The sampling distribution of the sample standard deviation for a 'two IQ scores' experiment. The true population standard deviation is 15 (dashed line), but as you can see from the histogram the vast majority of experiments will produce a much smaller sample standard deviation than this. On average, this experiment would produce an estimated standard deviation of only 8.4, well below the true value! In other words, the sample standard deviation is a biased estimate of the population standard deviation
+#| fig-alt: A histogram with a right-skewed distribution shows the sample standard deviation on the x-axis ranging from 0 to 60, and frequency on the y-axis. A vertical dashed line labeled "Population Standard deviation" is positioned around the value of 16 on the x-axis.
+
 n <- 2
 N <- 10000
 IQ.m <- matrix(rnorm(n*N, 100,15),N,n)
@@ -427,6 +438,7 @@ Now let's extend the simulation. Instead of restricting ourselves to the situati
 #| fig-width: 8
 #| fig-height: 4
 #| fig-cap: An illustration of the fact that the sample mean is an unbiased estimator of the population mean (panel a), but the sample standard deviation is a biased estimator of the population standard deviation (panel b). For the figure I generated $10,000$ simulated data sets with 1 observation each, $10,000$ more with 2 observations, and so on up to a sample size of 10. Each data set consisted of fake IQ data, that is the data were normally distributed with a true population mean of 100 and standard deviation 15. On average, the sample means turn out to be 100, regardless of sample size (panel a). However, the sample standard deviations turn out to be systematically too small (panel b), especially for small sample sizes
+#| fig-alt: Two line charts. Chart (a) shows the Average Sample Mean vs. Sample Size with values around 102-104. Chart (b) shows the Average Sample Standard Deviation vs. Sample Size, increasing steeply initially and leveling off near 15 around sample size 8.
 
 N <- 10000
 sd.demo <- sapply(1:10, function (n) {
@@ -518,6 +530,7 @@ The hardest thing about confidence intervals is understanding what they mean. Wh
 #| fig-width: 7
 #| fig-height: 7
 #| fig-cap: 95% confidence intervals. The top panel (a) shows 50 simulated replications of an experiment in which we measure the IQs of 10 people. The dot marks the location of the sample mean and the line shows the 95% confidence interval. Most of the 50 confidence intervals do contain the true mean (i.e., 100), but a few - in blue and marked with asterisks - do not. The lower graph (panel b) shows a similar simulation, but this time we simulate replications of an experiment that measures the IQs of 25 people
+#| fig-alt: Two bar graphs are shown vertically. The top graph (a) has "Sample Size = 10" and the bottom graph (b) has "Sample Size = 25." Both graphs have replication numbers on the x-axis and IQ mean values with error bars on the y-axis. Blue data points are marked with asterisks.
 
 
 N <- 50

@@ -106,6 +106,7 @@ Since the null hypothesis states that $\theta = 0.5$ and our experiment has $N =
 ```{r}
 #| label: fig-fig9-1
 #| fig-cap: The sampling distribution for our test statistic $X$ when the null hypothesis is true. For our ESP scenario this is a binomial distribution. Not surprisingly, since the null hypothesis says that the probability of a correct response is $\theta = .5$, the sampling distribution says that the most likely value is 50 (out of 100) correct responses. Most of the probability mass lies between 40 and 60
+#| fig-alt: A bar graph titled "Sampling Distribution for X if the Null is True" shows the probability (y-axis) versus the number of correct responses (X) (x-axis). The distribution is bell-shaped, peaking around 50 correct responses.
 
 binom1 <- data.frame(success = 0:100, pmf = dbinom(x = 0:100, size = 100, prob = .5))
 ggplot(data=binom1, aes(x = factor(success), y = pmf+.001)) +
@@ -140,6 +141,7 @@ As it turns out those three things uniquely solve the problem. Our critical regi
 ```{r}
 #| label: fig-fig9-2
 #| fig-cap: The critical region associated with the hypothesis test for the ESP study, for a hypothesis test with a significance level of $\alpha = .05$. The plot shows the sampling distribution of $X$ under the null hypothesis (i.e., same as @fig-fig9-1) . The grey bars correspond to those values of $X$ for which we would retain the null hypothesis. The blue (darker shaded) bars show the critical region, those values of $X$ for which we would reject the null. Because the alternative hypothesis is two sided (i.e., allows both $\theta < .5$ and $\theta > .5$, the critical region covers both tails of the distribution. To ensure an $\alpha$ level of $.05$, we need to ensure that each of the two regions encompasses $2.5\%$ of the sampling distribution
+#| fig-alt: A graph depicting the critical regions for a two-sided test. The x-axis represents the number of correct responses (X) ranging from 0 to 100. The lower critical region (2.5% of the distribution) and upper critical region (2.5% of the distribution) are highlighted in blue.
 
 binom1 <- data.frame(success = 0:100, pmf = dbinom(x = 0:100, size = 100, prob = .5))
 binom1$plotcol <- with(binom1, ifelse(success<=40 | success >= 60, blueshade, "lightgrey"))
@@ -195,6 +197,7 @@ When this happens, we have what's called a **one-sided test** and the critical r
 ```{r}
 #| label: fig-fig9-3
 #| fig-cap: The critical region for a one sided test. In this case, the alternative hypothesis is that $\theta \geq .5$ so we would only reject the null hypothesis for large values of $X$. As a consequence, the critical region only covers the upper tail of the sampling distribution, specifically the upper $5\%$ of the distribution. Contrast this to the two-sided version in @fig-fig9-2
+#| fig-alt: A histogram displaying a normal distribution of the number of correct responses (X) with a highlighted critical region on the right side, representing 5% of the distribution. The x-axis ranges from 0 to 100 correct responses. Text reads "critical region (5% of the distribution)".
 
 binom1 <- data.frame(success = 0:100, pmf = dbinom(x = 0:100, size = 100, prob = .5))
 binom1$plotcol <- with(binom1, ifelse(success>= 58, blueshade, "lightgrey"))
@@ -289,6 +292,7 @@ At this point some of you might be wondering if this is a "real" hypothesis test
 #| label: fig-fig9-4
 #| classes: .enlarge-image
 #| fig-cap: Binomial test analysis and results in jamovi
+#| fig-alt: A jamovi screenshot of a proportion test with two outcomes. The interface includes sections for selecting variables, adjusting hypotheses, viewing results, and displaying references. The results section shows tabulated proportions and confidence intervals.
 knitr::include_graphics("images/fig9-4.png")
 ```
 
@@ -303,6 +307,7 @@ In previous sections I've emphasised the fact that the major design principle be
 ```{r}
 #| label: fig-fig9-5
 #| fig-cap: Sampling distribution under the alternative hypothesis for a population parameter value of $\theta = 0.55$. A reasonable proportion of the distribution lies in the rejection region
+#| fig-alt: A histogram titled "Sampling Distribution for X if $\theta = 0.55$" shows the number of correct responses (X) on the x-axis (ranging from 0 to 100). The lower and upper critical regions (2.5% each) are shaded in blue, with labels indicating their positions.
 
 binom1 <- data.frame(success = 0:100, pmf = dbinom(x = 0:100, size = 100, prob = .55))
 binom1$plotcol <- with(binom1, ifelse(success<=40 | success >= 60, blueshade, "lightgrey"))
@@ -335,6 +340,7 @@ Let's take a moment to think about what a Type II error actually is. A Type II e
 ```{r}
 #| label: fig-fig9-6
 #| fig-cap: Sampling distribution under the *alternative* hypothesis for a population parameter value of $\theta = 0.70$. Almost all of the distribution lies in the rejection region.
+#| fig-alt: A bar graph titled "Sampling Distribution for X if $\theta = 0.70$" showing a distribution of the number of correct responses (X) from 0 to 100. The lower and upper critical regions, each 2.5% of the distribution, are highlighted on the left and right tails respectively.
 
 binom1 <- data.frame(success = 0:100, pmf = dbinom(x = 0:100, size = 100, prob = .7))
 binom1$plotcol <- with(binom1, ifelse(success<=40 | success >= 60, blueshade, "lightgrey"))
@@ -367,6 +373,7 @@ What all this means is that the power of a test (i.e., $1 - \beta$) depends on t
 ```{r}
 #| label: fig-fig9-7
 #| fig-cap: The probability that we will reject the null hypothesis, plotted as a function of the true value of $\theta$. Obviously, the test is more powerful (greater chance of correct rejection) if the true value of $\theta$ is very different from the value that the null hypothesis specifies (i.e., $\theta = .5$ ). Notice that when $\theta$ actually is equal to $.5$ (plotted as a black dot), the null hypothesis is in fact true and rejecting the null hypothesis in this instance would be a Type I error
+#| fig-alt: A graph titled "Power function for the Test (N=100)" showing the probability of rejecting the null hypothesis (y-axis) plotted against the true value of $\theta$ (x-axis). The curve dips sharply to a minimum at $\theta$=0.5, marked by a black dot, and rises symmetrically on either side to a maximum at both ends.
 
 theta <- seq(.01,.99,.01)
 pow <- vector("numeric",length(theta))
@@ -416,7 +423,8 @@ Unfortunately, it's often the case that even with the best of experimental desig
 
 ```{r}
 #| label: fig-fig9-8
-#| fig-cap: The power of our test plotted as a function of the sample size $N$. In this case, the true value of $\theta$ is 0.7 but the null hypothesis is that $\theta = 0.5$. Overall, larger $N$ means greater power. (The small zig-zags in this function occur because of some odd interactions between $\theta$,  $\alpha$ and the fact that the binomial distribution is discrete, it doesn't matter for any serious purpose)
+#| fig-cap: The power of our test plotted as a function of the sample size $N$. In this case, the true value of $\theta$ is 0.7 but the null hypothesis is that $\theta = 0.5$. Overall, larger $N$ means greater power. (The small zig-zags in this function occur because of some odd interactions between $\theta$,  $\alpha$ and the fact that the binomial distribution is discrete, it does not matter for any serious purpose)
+#| fig-alt: A line graph showing the probability of rejecting the null hypothesis as a function of sample size (N). The x-axis represents the sample size ranging from 0 to 100, and the y-axis shows the probability from 0 to 1. The line increases and fluctuates upwards.
 
 N <- 1:100
 pow <- vector("numeric",length(N))

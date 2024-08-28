@@ -10,6 +10,7 @@ Any time that you get a new data set to look at one of the first tasks that you 
 ```{r}
 #| label: fig-fig4-1
 #| fig-cap: A screenshot of jamovi showing the variables stored in the aflsmall_margins.csv file
+#| fig-alt: A jamovi screenshot shows a data analysis interface with a column of numerical data labeled "afl.margins." The navigation bar includes options like Exploration, T-Tests, ANOVA, Regression, Frequencies, and Factor under the Analyses tab.
 knitr::include_graphics("images/fig4-1.png")
 ```
 
@@ -22,6 +23,7 @@ This output doesn't make it easy to get a sense of what the data are actually sa
 ```{r}
 #| label: fig-fig4-2
 #| fig-cap: A histogram of the AFL 2010 winning margin data (the *afl.margins* variable). As you might expect, the larger the winning margin the less frequently you tend to see it
+#| fig-alt: Histogram depicting the distribution of 'afl.margins' against density. The horizontal axis (x-axis) ranges from 0 to 120, and the vertical axis (y-axis) shows density. Bars are varying in height, indicating the frequency of data within specific margin intervals.
 knitr::include_graphics("images/fig4-2.png")
 ```
 
@@ -58,6 +60,7 @@ Okay, that's the maths. So how do we get the magic computing box to do the work 
 #| label: fig-fig4-3
 #| classes: .enlarge-image
 #| fig-cap: Default descriptives for the AFL 2010 winning margin data (the *afl.margins* variable)
+#| fig-alt: A screenshot from jamovi displaying descriptive analysis results. The interface includes sections for selecting variables and splitting data. The results section shows descriptive statistics for "afl.margins" with N, Missing, Mean, Median, Standard deviation, Minimum, and Maximum values.
 knitr::include_graphics("images/fig4-3.png")
 ```
 
@@ -86,9 +89,9 @@ Knowing how to calculate means and medians is only a part of the story. You also
 Let's expand on that last part a little. One consequence is that there are systematic differences between the mean and the median when the histogram is asymmetric ([Skew and kurtosis]). This is illustrated in @fig-fig4-4. Notice that the median (right hand side) is located closer to the "body" of the histogram, whereas the mean (left hand side) gets dragged towards the "tail" (where the extreme values are). To give a concrete example, suppose Bob (income \$50,000), Kate (income \$60,000) and Jane (income \$65,000) are sitting at a table. The average income at the table is \$58,333 and the median income is \$60,000. Then Bill sits down with them (income \$100,000,000). The average income has now jumped to \$25,043,750 but the median rises only to \$62,500. If you're interested in looking at the overall income at the table the mean might be the right answer. But if you're interested in what counts as a typical income at the table the median would be a better choice here.
 
 ::: {#fig-fig4-4 layout="[[93,100]]"}
-![](images/fig4-4a.png)
+![](images/fig4-4a.png){fig-alt="A bar chart resembling a stair-step pattern with decreasing heights from left to right is shown. The text reads, "The mean is the 'centre of mass' of the data." Below the chart, there is a horizontal line labeled "balancing point" with a triangular fulcrum symbolizing balance." }
 
-![](images/fig4-4b.png)
+![](images/fig4-4b.png){fig-alt="A bar chart showing 48 observations divided into two equal groups of 24. The left group is shaded light gray, and the right group is shaded dark gray. An arrow points to the 24th observation with the text "The median is the 'middle observation' in the data set."}
 
 An illustration of the difference between how the mean and the median should be interpreted. The mean is basically the 'centre of gravity' of the data set. If you imagine that the histogram of the data is a solid object, then the point on which you could balance it (as if on a see-saw) is the mean. In contrast, the median is the middle observation, with half of the observations smaller and half of the observations larger
 :::
@@ -130,6 +133,7 @@ Now that we have our frequency table we can just look at it and see that, over t
 ```{r}
 #| label: fig-fig4-5
 #| fig-cap: A screenshot of jamovi showing the variables stored in the aflsmall finalists.csv file
+#| fig-alt: A jamovi screenshot of a spreadsheet labeled "AFL Finalists" with 18 rows. The first column lists various Australian Football League teams, including Hawthorn, Melbourne, and Carlton. The jamovi spreadsheet menu shows options like Variables, Data, and Analyses.
 knitr::include_graphics("images/fig4-5.png")
 ```
 
@@ -137,6 +141,7 @@ knitr::include_graphics("images/fig4-5.png")
 #| label: fig-fig4-6
 #| classes: .enlarge-image
 #| fig.cap: A screenshot of jamovi showing the frequency table for the *afl.finalists* variable
+#| fig-alt: A jamovi screenshot focusing on analyzing AFL finalists. The left panel includes options to select variables and split data. The right panel displays results -  Descriptives and Frequencies for AFL finalists by region, including percentages.
 knitr::include_graphics("images/fig4-6.png")
 ```
 
@@ -146,6 +151,7 @@ One last point to make regarding the mode. Whilst the mode is most often calcula
 #| label: fig-fig4-7
 #| classes: .enlarge-image
 #| fig-cap: A screenshot of jamovi showing the modal value for the *afl.margins* variable
+#| fig-alt: A jamovi screenshot showing the analysis of "afl.margins." The main sections include Descriptives, Variables, and Results. Descriptive statistics like mean, median, and standard deviation are displayed on the right.
 knitr::include_graphics("images/fig4-7.png")
 ```
 
@@ -170,6 +176,7 @@ And not surprisingly, in @fig-fig4-8 the 50th percentile is the same as the medi
 ```{r}
 #| label: fig-fig4-8
 #| fig-cap: A screenshot of jamovi showing the Quartiles for the *afl.margins* variable
+#| fig-alt: A jamovi screenshot of a table titled "Descriptives" showing statistical data for "afl.margins" with N=176, Missing=0, Mean=35.30, Median=30.50, Mode=3.00, Standard deviation=26.07, Minimum=0.00, Maximum=116.00, 25th percentile=12.75, 50th percentile=30.50, and 75th percentile=50.50.
 knitr::include_graphics("images/fig4-8.png")
 ```
 
@@ -221,6 +228,7 @@ That last column contains all of our squared deviations, so all we have to do is
 #| label: fig-fig4-9
 #| classes: .enlarge-image
 #| fig-cap: A screenshot of jamovi showing the Variance for the first 5 values of the afl.margins variable
+#| fig-alt: A jamovi screenshot displaying descriptive statistics. The interface is divided into sections for selecting variables, splitting data, viewing results, and references. A data table shows the variance and other descriptive statistics like mean, median, standard deviation, etc.
 knitr::include_graphics("images/fig4-9.png")
 ```
 
@@ -267,6 +275,7 @@ In short, the IQR and the standard deviation are easily the two most common meas
 ```{r}
 #| label: fig-fig4-10
 #| fig-cap: An illustration of the standard deviation from the AFL winning margins data. The shaded bars in the histogram show how much of the data fall within one standard deviation of the mean. In this case, 65.3% of the data set lies within this range, which is pretty consistent with the 'approximately 68% rule' discussed in the main text
+#| fig-alt: A bar graph depicting the standard deviation from the AFL winning margins data. Bars one standard deviation to the left and right of the mean are blue, other bars are white. Horizontal axis labels include "Mean - s.d.," "Mean," and "Mean + s.d.
 
 load("data_and_tables/aflsmall.Rdata")
 afl.margins <- tidyr::as_tibble(afl.margins)
@@ -297,6 +306,7 @@ There are two more descriptive statistics that you will sometimes see reported i
 ```{r}
 #| label: fig-fig4-11
 #| fig-cap: An illustration of skewness. On the left we have a negatively skewed data set, in the middle we have a data set with no skew, and on the right we have a positively skewed data set
+#| fig-alt: Three bar charts demonstrate negative skew, no skew, and positive skew, respectively. The chart on the left shows a longer tail on the left, the middle chart is symmetrical, and the chart on the right shows a longer tail on the right.
 
 x1 <- tidyr::as_tibble(rbeta(n = 100000, shape1= 10, shape2 = 2))
 x2 <- tidyr::as_tibble(rbeta(n = 100000, shape1= 10, shape2 = 10))
@@ -335,6 +345,7 @@ The final measure that is sometimes referred to, though very rarely in practice,
 ```{r}
 #| label: fig-fig4-12
 #| fig-cap: An illustration of kurtosis. On the left, we have a 'platykurtic' distribution (kurtosis = -.95) meaning that the distribution has 'thin' or flat tails. In the middle we have a 'mesokurtic' distribution (kurtosis is almost exactly 0) which means that the tails are neither thin or fat. Finally, on the right, we have a 'leptokurtic' distribution (kurtosis = 2.12) indicating that the distribution has 'fat' tails. Note that kurtosis is measured with respect to a normal curve (black line)
+#| fig-alt: A comparison of three types of distribution curves:- Platykuric (thin tails) on the left, Mesokurtic in the center, and Leptokurtic (fat tails) on the right, each with corresponding bar graphs in blue and overlaid black curves. 
 
 x3 <- tidyr::as_tibble(c(rnorm(n = 50000, mean =0, sd = 1), (runif(n = 50000)-.5)+rnorm(50000,0,.1) )*1.6)
 x2 <- tidyr::as_tibble(rnorm(n = 100000, mean = 0, sd = 1)*1.2)
@@ -388,6 +399,7 @@ We can also go ahead and look at some other descriptive statistics, and this tim
 ```{r}
 #| label: fig-fig4-13
 #| fig-cap: A screenshot of jamovi showing the variables stored in the *clinicaltrial.csv*  file
+#| fig-alt: A jamovi screenshot with columns for ID, drug, therapy, and mood gain, with data for each field. The top menu bar includes options such as Variables, Data, Analyses, and Edit, with sub-options like Exploration, T-Tests, ANOVA, and Regression.
 knitr::include_graphics("images/fig4-13.png")
 ```
 
@@ -399,6 +411,7 @@ What if you have multiple grouping variables? Suppose you want to look at the av
 #| label: fig-fig4-14
 #| classes: .enlarge-image
 #| fig-cap: A screenshot of jamovi showing Descriptives split by therapy type
+#| fig-alt: A jamovi screenshot displaying a clinical trial study. The interface includes sections for variables, descriptives, and analyses, focusing on mood gain, therapy type, central tendency measures, and a descriptive statistics table on the right.
 knitr::include_graphics("images/fig4-14.png")
 ```
 

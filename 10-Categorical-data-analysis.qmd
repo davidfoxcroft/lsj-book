@@ -131,6 +131,7 @@ There's one last detail to talk about, namely the degrees of freedom. If you rem
 ```{r}
 #| label: fig-fig10-1
 #| fig-cap: $\chi^2$ (chi-square) distributions with different values for the 'degrees of freedom'
+#| fig-alt: Three chi-squared distribution curves are plotted with different degrees of freedom (df):- solid line (df = 3), dashed line (df = 4), and dotted line (df = 5). The x-axis shows observed values from 0 to 12, and the y-axis indicates the probability density.
 
 ggplot(data = data.frame(x = seq(0, 12, 1)), aes(x)) +
   stat_function(aes(linetype = 'df = 3'), fun = dchisq, n = 1000, args = list(df = 3), col=blueshade, linewidth=1) +
@@ -170,6 +171,7 @@ The final step in the process of constructing our hypothesis test is to figure o
 ```{r}
 #| label: fig-fig10-2
 #| fig-cap: Illustration of how the hypothesis testing works for the $\chi^2$ (chi-square) goodness of-fit test
+#| fig-alt: A chi-square distribution graph shows a right-skewed curve. An arrow points to 7.82 on the x-axis, labeled "The critical value is 7.82." Another arrow points to 8.44 with the label "The observed GOF value is 8.44", highlighting an area under the curve beyond the critical value.
 
 
 ggplot(data = data.frame(x = seq(0, 12, 0.01)), aes(x)) +
@@ -204,6 +206,7 @@ Ah but, I hear you ask, how do I find the critical value of a chi-square distrib
 ```{r}
 #| label: fig-fig10-3
 #| fig-cap: Table of critical values for the chi-square distribution
+#| fig-alt: A statistical table displays critical values of the chi-square distribution. The table is segmented by "Degrees of Freedom" ranging from 1 to 10 and "Probability" values at 0.95, 0.90, 0.70, 0.50, 0.10, 0.05, 0.01, 0.001 thresholds, indicating significance.
 knitr::include_graphics("images/fig10-3.png")
 ```
 
@@ -217,6 +220,7 @@ Not surprisingly, jamovi provides an analysis that will do these calculations fo
 #| label: fig-fig10-4
 #| classes: .enlarge-image
 #| fig-cap: A $\chi^2$ One Sample Proportion Test in jamovi, with table showing both observed and expected frequencies and proportions
+#| fig-alt: A jamovi screenshot showing a Proportion Test (N Outcomes) analysis. The "Variable" selected is "choice_1" with observed and expected counts for clubs, diamonds, hearts, spades. The chi-squared test results are at the bottom with a p-value.
 knitr::include_graphics("images/fig10-4.png")
 ```
 
@@ -227,6 +231,7 @@ At this point you might be wondering what to do if you want to run a goodness-of
 ```{r}
 #| label: fig-fig10-5
 #| fig-cap: Changing the expected proportions in the $\\chi^2$ One Sample Proportion Test in jamovi
+#| fig-alt: A jamovi screenshot of a table titled "Expected Proportions" displaying values for different card suits. The columns are labeled Level, Ratio, and Proportion. The ratios for clubs, diamonds, hearts, and spades are 1, 1.5, 1.5, and 1 respectively, with proportions of 0.200, 0.300, 0.300, and 0.200.
 knitr::include_graphics("images/fig10-5.png")
 ```
 
@@ -363,6 +368,7 @@ That was easy, wasn't it! You can also ask jamovi to show you the expected count
 #| label: fig-fig10-6
 #| classes: .enlarge-image
 #| fig-cap: Independent samples $\chi^2$ test in jamovi using the *Chapek 9* data
+#| fig-alt: A jamovi screenshot showing Contingency Tables. The interface includes options to select rows, columns, and layers for the tables, as well as displaying statistics, cells, and plots. A table of observed and expected values is shown on the right.
 knitr::include_graphics("images/fig10-6.png")
 ```
 
@@ -442,6 +448,7 @@ You can specify this test in jamovi from a check box in the 'Statistics' options
 #| label: fig-fig10-7
 #| out.width: 60%
 #| fig-cap: Fisher exact test analysis in jamovi
+#| fig-alt: An image of statistical output showing a contingency table and χ² tests. The table has variables "happy" (FALSE/TRUE) and "on.fire" (FALSE/TRUE). Summary:- χ² value 6.15, degrees of freedom 1, p-value 0.01311, Fisher's exact test 0.03571, with a sample size of 16.
 knitr::include_graphics("images/fig10-7.png")
 ```
 
@@ -479,6 +486,7 @@ Now that you know what the McNemar test is all about, lets actually run one. The
 #| label: fig-fig10-8
 #| classes: .enlarge-image
 #| fig-cap: McNemar test output in jamovi
+#| fig-alt: A jamovi screenshot displaying the "Paired Samples Contingency Tables" analysis. The interface shows options to select rows, columns, and counts, with results including contingency tables and McNemar test statistics on the right panel.
 knitr::include_graphics("images/fig10-8.png")
 ```
 
@@ -504,6 +512,7 @@ The different statistics produced by these different analyses are shown in @fig-
 #| label: fig-fig10-9
 #| out.width: 60%
 #| fig-cap: Independent vs. Paired (McNemar) with the *Randomness.omv* (cards) data
+#| fig-alt: The image shows two sections of contingency tables. The first section has a table showing the distribution of choices (clubs, diamonds, hearts, spades) with a chi-squared test result and p-value. The second section has a paired samples contingency table with McNemar test results.
 knitr::include_graphics("images/fig10-9.png")
 ```
 

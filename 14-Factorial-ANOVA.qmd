@@ -18,6 +18,7 @@ If we cross-tabulate drug by therapy, using the 'Frequencies' - 'Contingency Tab
 ```{r}
 #| label: fig-fig14-1
 #| fig-cap: jamovi contingency table of drug by therapy
+#| fig-alt: A jamovi results table titled "Contingency Tables" with data on 'drug' types (anxifree, joyzepam, placebo) and 'therapy' types (CBT, no. therapy, Total). Each drug type has equal counts for both therapy types:- 3 CBT, 3 no therapy, totaling to 6 for each drug. Total counts are 9 for CBT, 9 for no therapy, and 18 overall.
 knitr::include_graphics("images/fig14-1.png")
 ```
 
@@ -87,6 +88,7 @@ If the data you're trying to analyse correspond to a balanced factorial design t
 #| label: fig-fig14-2
 #| classes: .enlarge-image
 #| fig-cap: jamovi one way anova of mood.gain by drug
+#| fig-alt: A jamovi results table showing ANOVA results for mood gain with columns for Sum of Squares, df (degrees of freedom), Mean Square, F, p-value, and η² (eta squared). For "drug," Sum of Squares is 3.45, df is 2, Mean Square is 1.73, F is 18.61, p is 0.00009, and η² is 0.71. Residuals have a Sum of Squares of 1.39, df of 15, and Mean Square of 0.09.
 knitr::include_graphics("images/fig14-2.png")
 ```
 
@@ -96,6 +98,7 @@ Now, suppose I'm also curious to find out if therapy has a relationship to mood.
 #| label: fig-fig14-3
 #| classes: .enlarge-image
 #| fig-cap: jamovi two way anova of mood.gain by drug and therapy
+#| fig-alt: A jamovi results table showing ANOVA test results for mood gain with factors "drug," "therapy," and their interaction. Includes Sum of Squares, df, Mean Square, F, p-values, η², η²p, and ω². Key results indicate significant effects for "drug" and "therapy," but not their interaction.
 knitr::include_graphics("images/fig14-3.png")
 ```
 
@@ -158,6 +161,7 @@ The four patterns of data shown in @fig-fig14-4 are all quite realistic. There a
 ```{r}
 #| label: fig-fig14-4
 #| fig-cap: The four different outcomes for a $2 \times 2$ ANOVA when no interactions are present. In panel (a) we see a main effect of Factor A and no effect of Factor B. Panel (b) shows a main effect of Factor B but no effect of Factor A. Panel (c) shows main effects of both Factor A and Factor B. Finally, panel (d) shows no effect of either factor
+#| fig-alt: Four graphs showing the interaction of two factors (A and B) on group means. Graph (a):- Factor A has an effect, B does not. Graph (b):- Factor B has an effect, A does not. Graph (c):- Both A and B have an effect. Graph (d):- Neither A nor B have an effect.
 
 mn=c(1.0, 2.0, 1.0, 2.0)
 FactA = factor(c('level 1', 'level 2', 'level 1', 'level 2'))
@@ -256,6 +260,7 @@ gridExtra::grid.arrange(p1,p2,p3,p4,ncol=2)
 ```{r}
 #| label: fig-fig14-5
 #| fig-cap: Qualitatively different interactions for a $2 \times 2$ ANOVA
+#| fig-alt: Four line graphs (a-d) depict interactions between two factors (A and B) at two levels (1 and 2). The y-axis in each graph is labeled "Group mean" and the x-axis "Factor B." Graph (a) shows a crossover interaction. Graphs (b), (c), and (d) highlight different effects for one level of Factor A or B, or one differing cell.
 
 mn=c(1.0, 1.0, 2.0, 2.0)
 FactA = factor(c('level 1', 'level 2', 'level 1', 'level 2'))
@@ -355,6 +360,7 @@ gridExtra::grid.arrange(p1,p2,p3,p4,ncol=2)
 #| label: fig-fig14-6
 #| classes: .enlarge-image
 #| fig-cap: jamovi screen showing how to generate a descriptive interaction plot in ANOVA using the clinical trial data
+#| fig-alt: A jamovi screenshot of the interface for analyzing clinical trial data is shown. The screen features ANOVA outputs, with a graph displaying estimated marginal means of mood gain across different drug therapies. Therapy options are CBT and no therapy, with axes for mood gain and types of drugs.
 knitr::include_graphics("images/fig14-6.png")
 ```
 
@@ -393,6 +399,7 @@ Adding interaction terms to the ANOVA model in jamovi is straightforward. In fac
 #| label: fig-fig14-7
 #| classes: .enlarge-image
 #| fig-cap: Results for the full factorial model, including the interaction component drug $\times$ therapy
+#| fig-alt: A jamovi table summarizing the results of an ANOVA test on mood gain. It shows Sum of Squares, degrees of freedom (df), Mean Square, F value, p value, η², η²p, and ω² for drug, therapy, their interaction, and residuals.
 knitr::include_graphics("images/fig14-7.png")
 ```
 
@@ -454,6 +461,7 @@ In many situations you will find yourself wanting to report estimates of all the
 #| label: fig-fig14-8
 #| classes: .enlarge-image
 #| fig-cap: jamovi screenshot showing the marginal means for the saturated model, i.e. including the interaction component, with the clinical trial data set
+#| fig-alt: A jamovi screenshot of a clinical trial analysis software interface displaying an ANOVA analysis. The screen shows sections for Assumptions Checks, Estimates, and Estimated Marginal Means. Data tables illustrate the ANOVA results and Estimated Marginal Means for drug therapy.
 knitr::include_graphics("images/fig14-8.png")
 ```
 
@@ -465,6 +473,7 @@ When the model doesn't contain the interaction term, then the estimated group me
 #| label: fig-fig14-9
 #| classes: .enlarge-image
 #| fig-cap: jamovi screenshot showing the marginal means for the unsaturated model, i.e. without the interaction component, with the clinical trial data set
+#| fig-alt: ANOVA table and Estimated Marginal Means table for mood gain analysis. The ANOVA table shows a significant drug effect with F(3,14) = 7.08, p = 0.01866. The Estimated Marginal Means table lists means and confidence intervals for interactions between therapy and drug.
 knitr::include_graphics("images/fig14-9.png")
 ```
 
@@ -484,6 +493,7 @@ As with one-way ANOVA we can test for the normality of residuals in a straightfo
 #| label: fig-fig14-10
 #| classes: .enlarge-image
 #| fig-cap: Checking assumptions in an ANOVA model
+#| fig-alt: An image shows assumption checks for statistical analysis. It includes results for the Levene test (F = 0.22, df1 = 5, df2 = 12, p = 0.94731) and Shapiro-Wilk test (Statistic = 0.96, p = 0.53290). Below is a Q-Q plot of standardized residuals versus theoretical quantiles.
 knitr::include_graphics("images/fig14-10.png")
 ```
 
@@ -498,6 +508,7 @@ Despite this advantage, ANCOVA runs the risk of undoing real differences between
 ```{r}
 #| label: fig-fig14-11
 #| fig-cap: Plot of Statistics anxiety against age for two distinct groups
+#| fig-alt: A scatter plot shows 'Statistics anxiety' on the Y-axis versus 'Age' on the X-axis. Data points for 'Scientists' cluster lower on the Y-axis and at younger ages on the X-axis, while 'Artists' cluster higher on the Y-axis and at older ages on the X-axis.
 knitr::include_graphics("images/fig14-11.png")
 ```
 
@@ -511,6 +522,7 @@ A health psychologist was interested in the effect of routine cycling and stress
 #| label: fig-fig14-12
 #| classes: .enlarge-image
 #| fig-cap: The jamovi ANCOVA analysis window
+#| fig-alt: A jamovi screenshot showing an ANCOVA setup. The window has options for adding dependent variables, fixed factors, and covariates. "Happiness" is selected as the dependent variable, with "stress" and "commute" as fixed factors, and "age" as a covariate.
 knitr::include_graphics("images/fig14-12.png")
 ```
 
@@ -520,6 +532,7 @@ An ANCOVA table showing Tests of Between-Subjects Effects is produced in the jam
 #| label: fig-fig14-13
 #| classes: .enlarge-image
 #| fig-cap: jamovi ANCOVA output for happiness as a function of stress and commuting method, with age as a covariate
+#| fig-alt: An ANCOVA table titled 'happiness' displays statistical results including Sum of Squares, degrees of freedom (df), Mean Square, F-ratio (F), p-values (p), eta squared (η²), partial eta squared (ηp²), and omega squared (ω²) for various factors like stress, commute, age, and interactions.
 knitr::include_graphics("images/fig14-13.png")
 ```
 
@@ -527,6 +540,7 @@ knitr::include_graphics("images/fig14-13.png")
 #| label: fig-fig14-14
 #| classes: .enlarge-image
 #| fig-cap: Table of mean happiness level as a function of stress and commuting method (adjusted for the covariate age) with 95% confidence intervals
+#| fig-alt: A jamovi results table titled "Estimated Marginal Means - stress × commute" showing mean stress levels with standard errors (SE) and 95% Confidence Intervals for different commuting methods (drive, cycle) and stress levels (high, low).
 knitr::include_graphics("images/fig14-14.png")
 ```
 
@@ -537,6 +551,7 @@ In @fig-fig14-15 we can see the adjusted, marginal, mean happiness scores when a
 ```{r}
 #| label: fig-fig14-15
 #| fig-cap: Plot of mean happiness level as a function of stress and commuting method
+#| fig-alt: A line graph compares happiness levels based on stress levels (high and low) and commute type (drive or cycle). The "cycle" line shows a steeper increase in happiness from high to low stress compared to the "drive" line. Error bars are present.
 knitr::include_graphics("images/fig14-15.png")
 ```
 
@@ -574,6 +589,7 @@ This isn't anything particularly special, of course. It's exactly the format in 
 #| label: fig-fig14-16
 #| classes: .enlarge-image
 #| fig-cap: jamovi descriptives for the rtfm data set
+#| fig-alt: A jamovi screenshot showing various tabs at the top, including Variables, Data, Analyses, and Edit. The current screen displays options for descriptives analysis with variables such as "grade." The "Results" section includes a table of descriptive statistics like mean and standard deviation. The "References" section at the bottom cites software and packages used.
 knitr::include_graphics("images/fig14-16.png")
 ```
 
@@ -589,6 +605,7 @@ This is, of course, the exact same equation that I used earlier to describe a tw
 #| label: fig-fig14-17
 #| classes: .enlarge-image
 #| fig-cap: ANOVA of the *rtfm.csv* data set in jamovi, without the interaction term
+#| fig-alt: ANOVA table presenting the results for "grade" with variables "attend" and "reading." It includes columns for Sum of Squares, df, Mean Square, F, p, η², η²p, and ω². Notable values include "attend" with an F of 21.60, p of 0.00559, and "reading" with an F of 52.27, p of 0.00079.
 knitr::include_graphics("images/fig14-17.png")
 ```
 
@@ -644,6 +661,7 @@ Okay, now that we're really starting to see why ANOVA and regression are basical
 #| label: fig-fig14-18
 #| classes: .enlarge-image
 #| fig-cap: Regression analysis of the *rtfm.csv* data set in jamovi, without the interaction term
+#| fig-alt: A jamovi results table titled "Model Coefficients - grade" displays the estimate, standard error (SE), t-value, and p-value for three predictors:- Intercept, attend, and reading. The Intercept values are 43.50, 3.35, 12.97, 0.00005. Attend:- 18.00, 3.87, 4.65, 0.00559. Reading:- 28.00, 3.87, 7.23, 0.00079.
 knitr::include_graphics("images/fig14-18.png")
 ```
 
@@ -657,6 +675,7 @@ Finally, one last thing you should know. Because jamovi understands the fact tha
 #| label: fig-fig14-19
 #| classes: .enlarge-image
 #| fig-cap: Omnibus ANOVA Test results from the jamovi regression analysis
+#| fig-alt: A jamovi results table titled "Omnibus ANOVA Test" showing values for Sum of Squares, df, Mean Square, F, and p across three rows:- attend, reading, and Residuals. Note indicates "Type 3 sum of squares".
 knitr::include_graphics("images/fig14-19.png")
 ```
 
@@ -686,6 +705,7 @@ Now we have two different versions of the same data set. Our original data in wh
 #| label: fig-fig14-20
 #| classes: .enlarge-image
 #| fig-cap:  jamovi ANOVA results, without interaction component
+#| fig-alt: ANOVA table displaying the sum of squares, degrees of freedom (df), mean square, F-value, p-value, eta squared (η²), partial eta squared (η²p), and omega squared (ω²) for factors 'drug' and 'therapy' in relation to the residuals for mood gain.
 knitr::include_graphics("images/fig14-20.png")
 ```
 
@@ -695,6 +715,7 @@ Obviously, there are no surprises here. That's the exact same ANOVA that we ran 
 #| label: fig-fig14-21
 #| classes: .enlarge-image
 #| fig-cap: jamovi regression results, with contrast variables druganxifree and drugjoyzepam
+#| fig-alt: A jamovi results table displays the model coefficients for mood.gain. Predictors include Intercept, druganxifree, drugjoyzepam, and CBTherapy, with respective estimates, standard errors, t-values, and p-values. Notably, drugjoyzepam has a highly significant p-value (<.00001).
 knitr::include_graphics("images/fig14-21.png")
 ```
 
@@ -704,6 +725,7 @@ Hmm. This isn't the same output that we got last time. Not surprisingly, the reg
 #| label: fig-fig14-22
 #| classes: .enlarge-image
 #| fig-cap:  Model comparison in jamovi regression, null model 1 vs. contrasts model 2
+#| fig-alt: An image displaying jamovi results from a linear regression analysis for a clinical trial. The screen shows model measures, comparisons, and specific results, with variables including 'drug' and 'CBTherapy'.
 knitr::include_graphics("images/fig14-22.png")
 ```
 
@@ -715,6 +737,7 @@ Although we went through all the faff of computing new variables in jamovi for t
 #| label: fig-fig14-23
 #| classes: .enlarge-image
 #| fig-cap: Regression analysis with factors and contrasts in jamovi, including omnibus ANOVA test results
+#| fig-alt: A jamovi screenshot displaying linear regression analysis within a software interface. The interface shows data inputs and settings on the left, while the right side displays output results including ANOVA and model coefficients. Sections for data, analyses, edit, and more are visible.
 knitr::include_graphics("images/fig14-23.png")
 ```
 
@@ -814,6 +837,7 @@ The TukeyHSD function in jamovi is pretty easy to use. You simply specify the AN
 #| label: fig-fig14-24
 #| classes: .enlarge-image
 #| fig-cap: Tukey HSD post hoc test in jamovi factorial ANOVA, without an interaction term
+#| fig-alt: A jamovi screenshot showing ANOVA results. The interface has sections for setting variables and analyzing data, with specific fields selected for "drug" and "therapy." A window on the right shows detailed ANOVA test results and post hoc comparisons.
 knitr::include_graphics("images/fig14-24.png")
 ```
 
@@ -831,6 +855,7 @@ There are quite a lot of these comparisons that you need to consider. So, when w
 #| label: fig-fig14-25
 #| classes: .enlarge-image
 #| fig-cap: Tukey HSD post hoc test in jamovi factorial ANOVA with an interaction term
+#| fig-alt: A jamovi table showing post hoc test results for drug and therapy comparisons. The table includes columns for drug, therapy, comparison, mean difference, SE, df, t-value, and p-value, with values provided for each comparison.
 knitr::include_graphics("images/fig14-25.png")
 ```
 
@@ -854,6 +879,7 @@ As usual, it will help us to work with some data. The *coffee.csv* file contains
 #| label: fig-fig14-26
 #| classes: .enlarge-image
 #| fig-cap: The *coffee.csv* data set in jamovi, with descriptive information aggregated by factor levels
+#| fig-alt: A jamovi screenshot with the left side showing raw data in a table format with columns like 'milk,' 'sugar,' and 'bubble.' The right side shows the analysis results, including descriptive statistics like the mean and standard deviation.
 knitr::include_graphics("images/fig14-26.png")
 ```
 
@@ -904,6 +930,7 @@ Type III sum of squares is the default hypothesis testing method used by jamovi 
 #| label: fig-fig14-27
 #| classes: .enlarge-image
 #| fig-cap: ANOVA results table using Type I sum of squares in jamovi
+#| fig-alt: ANOVA table showing data for the effects of sugar and milk on a dependent variable. Columns include Sum of Squares, df, Mean Square, F, and p-values for sugar, milk, their interaction (sugar * milk), and residuals with respective values.
 knitr::include_graphics("images/fig14-27.png")
 ```
 
@@ -913,6 +940,7 @@ The big problem with using Type I sum of squares is the fact that it really does
 #| label: fig-fig14-28
 #| classes: .enlarge-image
 #| fig-cap: ANOVA results table using Type I sum of squares in jamovi, but with factors entered in a different order (milk first)
+#| fig-alt: A jamovi table displaying ANOVA results with columns labeled Sum of Squares, df (degrees of freedom), Mean Square, F, and p. Rows correspond to milk, sugar, milk × sugar interaction, and residuals. Values are provided for each entry.
 knitr::include_graphics("images/fig14-28.png")
 ```
 
@@ -968,6 +996,7 @@ Later on, we'll see that Type III tests can be redeemed in some contexts, but fi
 #| label: fig-fig14-29
 #| classes: .enlarge-image
 #| fig-cap: ANOVA results table using Type III sum of squares in jamovi
+#| fig-alt: A jamovi table titled "ANOVA - babble" shows statistical data with columns:- Sum of Squares, df, Mean Square, F, and p. Rows include milk, sugar, milk ✻ sugar, and Residuals. Notable values include F = 11.28 for milk ✻ sugar, and p = 0.00175 for the same interaction.
 knitr::include_graphics("images/fig14-29.png")
 ```
 
@@ -1037,6 +1066,7 @@ Running the tests are again straightforward. Just select 'Type 2' in the 'Sum of
 #| label: fig-fig14-30
 #| classes: .enlarge-image
 #| fig-cap: ANOVA results table using Type II sum of squares in jamovi
+#| fig-alt: Table displaying ANOVA results for an interaction between milk and sugar. Columns include Sum of Squares, df, Mean Square, F, p, η², η²p, and ω² for milk, sugar, milk * sugar, and residuals. The interaction shows significant results.
 knitr::include_graphics("images/fig14-30.png")
 ```
 

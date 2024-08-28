@@ -83,7 +83,8 @@ Notice that at the start of the sequence the *proportion* of heads fluctuates wi
 
 ```{r}
 #| label: fig-fig7-1
-#| fig-cap: An illustration of how frequentist probability works. If you flip a fair coin over and over again the proportion of heads that you've seen eventually settles down and converges to the true probability of $0.5$. Each panel shows four different simulated experiments. In each case we pretend we flipped a coin $1000$ times and kept track of the proportion of flips that were heads as we went along. Although none of these sequences actually ended up with an exact value of $.5$, if we'd extended the experiment for an infinite number of coin flips they would have
+#| fig-cap: An illustration of how frequentist probability works. If you flip a fair coin over and over again the proportion of heads that you have seen eventually settles down and converges to the true probability of $0.5$. Each panel shows four different simulated experiments. In each case we pretend we flipped a coin $1000$ times and kept track of the proportion of flips that were heads as we went along. Although none of these sequences actually ended up with an exact value of $.5$, if we had extended the experiment for an infinite number of coin flips they would have
+#| fig-alt: Four line plots each showing the proportion of heads versus the number of coin flips, ranging from 0 to 1000 flips. All plots demonstrate convergence towards 0.5 as the number of flips increases, with initial fluctuations stabilizing over time.
 
 coinflips <- list()
 coinflips <- lapply(1:4, function(i) {
@@ -147,6 +148,7 @@ Each of the events has a probability that lies between 0 and 1, and if we add up
 ```{r}
 #| label: fig-fig7-2
 #| fig-cap: A visual depiction of the 'trousers' probability distribution. There are five 'elementary events', corresponding to the five pairs of trousers that I own. Each event has some probability of occurring - this probability is a number between 0 to 1. The sum of these probabilities is 1
+#| fig-alt: Bar chart showing the probability of different events. Blue jeans have the highest probability at 0.5, followed by grey jeans around 0.3. Black jeans and blue track have the same probability near 0.1, while the black suit has a probability of 0.
 
 pantsdat <- tibble(probabilities = c( .5, .3, .1, 0, .1),
                     eventNames = c( "Blue jeans", "Grey jeans", "Black jeans",  "Black suit", "Blue track" ))
@@ -195,6 +197,7 @@ To that end, @fig-fig7-3 plots the binomial probabilities for all possible value
 ```{r}
 #| label: fig-fig7-3
 #| fig-cap: The binomial distribution with size parameter of $N = 20$ and an underlying success probability of $\theta = \frac{1}{6}$. Each vertical bar depicts the probability of one specific outcome (i.e., one possible value of X). Because this is a probability distribution, each of the probabilities must be a number between 0 and 1, and the heights of the bars must sum to 1 as well
+#| fig-alt: A bar graph titled "Number of skulls observed" on the x-axis and "Probability" on the y-axis. The graph has bars with heights decreasing from left to right, peaking around 4-5 skulls, illustrating the probability distribution of observed skulls.
 
 binom1 <- data.frame(heads = 0:20, pmf = dbinom(x = 0:20, size = 20, prob = 1/6)+0.0001)
 
@@ -214,6 +217,7 @@ To give you a feel for how the binomial distribution changes when we alter the v
 #| fig-width: 5
 #| fig-height: 7
 #| fig-cap: Two binomial distributions, involving a scenario in which I flip a fair coin so the underlying success probability is $\theta = \frac{1}{2}$. In panel (a), I flipped the coin $N = 20$ times. In panel (b) the coin was flipped $N = 100$ times
+#| fig-alt: Two bar graphs show the probability distribution of the number of skulls observed. Graph (a) ranges from 0 to 20 on the x-axis, with peaks around 9-11 skulls. Graph (b) ranges from 0 to 100, with a prominent peak around 50 skulls. Both graphs have "Probability" on the y-axis.
 
 binom2 <- data.frame(heads = 0:20, pmf = dbinom(x = 0:20, size = 20, prob = 1/2)+0.0001)
 bd1 <- ggplot(data=binom2, aes(x = factor(heads), y = pmf)) +
@@ -256,7 +260,8 @@ Let's try to get a sense for what it means for a variable to be normally distrib
 
 ```{r}
 #| label: fig-fig7-5
-#| fig-cap: The normal distribution with mean $\mu = 0$ and standard deviation $\sigma = 1$. The x-axis corresponds to the value of some variable, and the y-axis tells us something about how likely we are to observe that value. However, notice that the y-axis is labelled *Probability Density* and not *Probability*. There is a subtle and somewhat frustrating characteristic of continuous distributions that makes the $y$ axis behave a bit oddly - the height of the curve here isn't actually the probability of observing a particular x value. On the other hand, it is true that the heights of the curve tells you which $x$ values are more likely (the higher ones!). (see [Probability density] section for all the annoying details)
+#| fig-cap: The normal distribution with mean $\mu = 0$ and standard deviation $\sigma = 1$. The x-axis corresponds to the value of some variable, and the y-axis tells us something about how likely we are to observe that value. However, notice that the y-axis is labelled *Probability Density* and not *Probability*. There is a subtle and somewhat frustrating characteristic of continuous distributions that makes the $y$ axis behave a bit oddly - the height of the curve here is not actually the probability of observing a particular x value. On the other hand, it is true that the heights of the curve tells you which $x$ values are more likely (the higher ones!). (see [Probability density] section for all the annoying details)
+#| fig-alt: A line graph displaying a bell-shaped curve, representing a normal distribution. The x-axis is labeled "Observed Value," ranging from -3 to 3, and the y-axis is labeled "Probability Density," ranging from 0.0 to 0.4. The peak of the curve is at 0.
 
 ggplot(data = data.frame(x = seq(-3, 3, 1)), aes(x)) +
   stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col=blueshade, linewidth=1) +
@@ -272,6 +277,7 @@ With this in mind, let's see if we can't get an intuition for how the normal dis
 ```{r}
 #| label: fig-fig7-6
 #| fig-cap: An illustration of what happens when you change the mean of a normal distribution. The solid line depicts a normal distribution with a mean of $\mu = 4$. The dashed line shows a normal distribution with a mean of $\mu = 7$. In both cases, the standard deviation is $\sigma = 1$. Not surprisingly, the two distributions have the same shape, but the dashed line is shifted to the right
+#| fig-alt: Line graph showing two overlapping probability density curves. The solid line curve peaks at an observed value of 3, and the dashed line curve peaks at an observed value of 6. The x-axis is labeled "Observed Value" and the y-axis is labeled "Probability Density.
 
 ggplot(data = data.frame(x = seq(0, 10, 1)), aes(x)) +
   stat_function(fun = dnorm, n = 1000, args = list(mean = 4, sd = 1), col=blueshade, linewidth=1) +
@@ -286,6 +292,7 @@ ggplot(data = data.frame(x = seq(0, 10, 1)), aes(x)) +
 ```{r}
 #| label: fig-fig7-7
 #| fig-cap: An illustration of what happens when you change the the standard deviation of a normal distribution. Both distributions plotted in this figure have a mean of $\mu = 5$, but they have different standard deviations. The solid line plots a distribution with standard deviation $\sigma = 1$, and the dashed line shows a distribution with standard deviation $\sigma = 2$. As a consequence, both distributions are 'centred' on the same spot, but the dashed line is wider than the solid one
+#| fig-alt: A probability density plot showing two curves. The solid line represents a normal distribution centered at 5 with higher peak, while the dashed line represents a broader distribution also centered at 5. The x-axis is labeled "Observed Value" and the y-axis is labeled "Probability Density.
 
 ggplot(data = data.frame(x = seq(0, 10, 1)), aes(x)) +
   stat_function(fun = dnorm, n = 1000, args = list(mean = 5, sd = 1), col=blueshade, linewidth=1) +
@@ -302,6 +309,7 @@ ggplot(data = data.frame(x = seq(0, 10, 1)), aes(x)) +
 #| fig-width: 8
 #| fig-height: 4
 #| fig-cap: The area under the curve tells you the probability that an observation falls within a particular range. The solid lines plot normal distributions with mean $\mu = 0$ and standard deviation $\sigma = 1$. The shaded areas illustrate 'areas under the curve' for two important cases. In panel (a), we can see that there is a 68.3% chance that an observation will fall within one standard deviation of the mean. In panel (b), we see that there is a 95.4% chance that an observation will fall within two standard deviations of the mean
+#| fig-alt: Two normal distribution curves are shown. The left graph is labeled "(a)" with a shaded area of 68.3% under the curve, while the right graph is labeled "(b)" with a shaded area of 95.4% under the curve. The shaded areas are centered around the mean.
 
 p1 <- ggplot(data = data.frame(x = seq(-4, 4, 1)), aes(x)) +
   stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col="grey", geom = "area",
@@ -341,6 +349,7 @@ gridExtra::grid.arrange(p1,p2, ncol=2)
 #| fig-width: 8
 #| fig-height: 4
 #| fig-cap: Two more examples of the 'area under the curve idea'. There is a 15.9% chance that an observation is one standard deviation below the mean or smaller (panel (a)), and a 34.1% chance that the observation is somewhere between one standard deviation below the mean and the mean (panel (b)). Notice that if you add these two numbers together you get 15.9% + 34.1% = 50%. For normally distributed data, there is a 50% chance that an observation falls below the mean. And of course that also implies that there is a 50% chance that it falls above the mean
+#| fig-alt: Two bell curve graphs:- "a" shows a normal distribution with a shaded area under the curve extending from negative infinity to approximately -1, marked as 15.9%. "b" shows a normal distribution with the shaded area extending from -1 to 1, marked as 34.1%.
 
 p3 <- ggplot(data = data.frame(x = seq(-4, 4, 1)), aes(x)) +
   stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col="grey", geom = "area",
@@ -397,7 +406,8 @@ The normal distribution is the distribution that statistics makes most use of (f
 
 ```{r}
 #| label: fig-fig7-10
-#| fig-cap: A $t$ distribution with 3 degrees of freedom (solid line). It looks similar to a normal distribution, but it's not quite the same. For comparison purposes I've plotted a standard normal distribution as the dashed line
+#| fig-cap: A $t$ distribution with 3 degrees of freedom (solid line). It looks similar to a normal distribution, but it is not quite the same. For comparison purposes I have plotted a standard normal distribution as the dashed line
+#| fig-alt: A plot showing two probability density functions. The solid blue line represents one distribution, while the dashed gray line shows another distribution with a wider spread. The x-axis is labeled "Observed Value" and the y-axis is labeled "Probability Density.
 
 ggplot(data = data.frame(x = seq(-4, 4, 1)), aes(x)) +
   stat_function(fun = dt, n = 1000, args = list(df = 3), col=blueshade, linewidth=1) +
@@ -413,6 +423,7 @@ ggplot(data = data.frame(x = seq(-4, 4, 1)), aes(x)) +
 ```{r}
 #| label: fig-fig7-11
 #| fig-cap: $\chi^2$ distribution with 3 degrees of freedom. Notice that the observed values must always be greater than zero, and that the distribution is pretty skewed. These are the key features of a chi-square  distribution
+#| fig-alt: A line graph displays a probability density function with "Observed Value" on the x-axis (0 to 10) and "Probability Density" on the y-axis (0 to 0.25). The curve peaks near "Observed Value" 1.5 and decreases asymptotically towards the x-axis on both sides.
 
 ggplot(data = data.frame(x = seq(0, 10, 1)), aes(x)) +
   stat_function(fun = dchisq, n = 1000, args = list(df = 3), col=blueshade, linewidth=1) +
@@ -425,7 +436,8 @@ ggplot(data = data.frame(x = seq(0, 10, 1)), aes(x)) +
 
 ```{r}
 #| label: fig-fig7-12
-#| fig-cap: An $F$ distribution with 3 and 5 degrees of freedom. Qualitatively speaking, it looks pretty similar to a chi-square distribution, but they're not quite the same in general
+#| fig-cap: An $F$ distribution with 3 and 5 degrees of freedom. Qualitatively speaking, it looks pretty similar to a chi-square distribution, but they are not quite the same in general
+#| fig-alt: A probability density function graph showing a curve that peaks sharply near the y-axis and then gradually decreases, approaching the x-axis as it moves to the right. The x-axis is labeled "Observed Value" and the y-axis is labeled "Probability Density".
 
 ggplot(data = data.frame(x = seq(0, 10, 1)), aes(x)) +
   stat_function(fun = df, n = 1000, args = list(df1 = 3, df2 = 5), col=blueshade, linewidth=1) +

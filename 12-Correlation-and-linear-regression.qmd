@@ -28,11 +28,11 @@ Next, I'll take a look at some basic descriptive statistics and, to give a graph
 [^12-correlation-and-linear-regression-2]: Actually, even that table is more than I'd bother with. In practice most people pick one measure of central tendency, and one measure of variability only.
 
 ::: {#fig-fig12-1 layout-ncol="3" layout-valign="bottom" width="90%"}
-![](images/fig12-1a.png){#fig-fig12-1a fig-align="left" width="30%"}
+![](images/fig12-1a.png){#fig-fig12-1a fig-align="left" fig-alt="A histogram displaying the density distribution of baby sleep durations. The bars range from about 3.5 to 12.5 hours of sleep. There is a higher concentration of data points between 7 and 10 hours. The y-axis is labeled 'density' and the x-axis is labeled 'baby.sleep'." width="30%"}
 
-![](images/fig12-1b.png){#fig-fig12-1b fig-align="left" width="30%"}
+![](images/fig12-1b.png){#fig-fig12-1b fig-align="left" fig-alt="A histogram with labelled axes 'density' on the y-axis and 'dan.sleep' on the x-axis. The histogram has bars of varying heights, peaking between the values 6 and 7 on the x-axis. The bars are shaded in light blue. The background is black." width="30%"}
 
-![](images/fig12-1c.png){#fig-fig12-1c fig-align="left" width="30%"}
+![](images/fig12-1c.png){#fig-fig12-1c fig-align="left" fig-alt="A histogram displays the density of data points for the variable 'dan.grump'. The x-axis ranges from 40 to 90, and the y-axis is labeled 'density'. The bars show a distribution peaking around 60 and tapering off towards the lower and higher ends." width="30%"}
 
 Histograms from jamovi for the three interesting variables in the *parenthood*data set
 :::
@@ -42,9 +42,9 @@ Histograms from jamovi for the three interesting variables in the *parenthood*da
 We can draw scatterplots to give us a general sense of how closely related two variables are. Ideally though, we might want to say a bit more about it than that. For instance, let's compare the relationship between baby.sleep and dani.grump (@fig-fig12-1a), left, with that between dani.sleep and dani.grump (@fig-fig12-1b), right. When looking at these two plots side by side, it's clear that the relationship is qualitatively the same in both cases: more sleep equals less grump! However, it's also pretty obvious that the relationship between dani.sleep and dani.grump is stronger than the relationship between baby.sleep and dani.grump. The plot on the right is "neater" than the one on the left. What it feels like is that if you want to predict what my mood is, it'd help you a little bit to know how many hours my son slept, but it'd be more helpful to know how many hours I slept.
 
 ::: {#fig-fig12-2 layout-ncol="2" layout-valign="bottom" width="90%"}
-![](images/fig12-2a.png){#fig-fig12-2a fig-align="left" width="45%"}
+![](images/fig12-2a.png){#fig-fig12-2a fig-align="left" fig-alt="Scatter plot showing the relationship between 'Baby sleep (hours)' on the x-axis and 'My grumpiness' on the y-axis. The trend indicates that as the baby sleeps more, grumpiness decreases." width="45%"}
 
-![](images/fig12-2b.png){#fig-fig12-2b fig-align="left" width="45%"}
+![](images/fig12-2b.png){#fig-fig12-2b fig-align="left" fig-alt="A scatter plot titled 'My grumpiness vs. My sleep (hours)'. The x-axis is labeled 'My sleep (hours)' ranging from 5 to 9, and the y-axis is labeled 'My grumpiness' ranging from 40 to 90. The data points show a negative correlation between sleep and grumpiness." width="45%"}
 
 Scatterplots from jamovi showing the relationship between baby.sleep and dani.grump (left) and the relationship between dani.sleep and dani.grump (right)
 :::
@@ -54,9 +54,9 @@ In contrast, let's consider the two scatterplots shown in @fig-fig12-3. If we co
 
 ::: {#fig-fig12-3 layout-ncol="2" layout-valign="bottom" width="90%"}
 
-![](images/fig12-2a.png){#fig-fig12-3a fig-align="left" width="45%"}
+![](images/fig12-2a.png){#fig-fig12-3a fig-align="left" fig-alt="Scatter plot showing the relationship between 'Baby sleep (hours)' on the x-axis and 'My grumpiness' on the y-axis. The trend indicates that as the baby sleeps more, grumpiness decreases." width="45%"}
 
-![](images/fig12-3b.png){#fig-fig12-3b fig-align="left" width="45%"}
+![](images/fig12-3b.png){#fig-fig12-3b fig-align="left" fig-alt="Scatter plot showing the relationship between 'Baby sleep (hours)' on the x-axis and 'My sleep (hours)' on the y-axis. Data points indicate that as the baby's sleep increases from 5 to 12.5 hours, the parent's sleep also tends to increase from 5 to 9 hours." width="45%"}
 
 Scatterplots from jamovi showing the relationship between baby.sleep and dani.grump (left), as compared to the relationship between baby.sleep and dani.sleep (right)
 :::
@@ -75,6 +75,7 @@ We can make these ideas a bit more explicit by introducing the idea of a **corre
 #| fig-width: 5
 #| fig-height: 8
 #| fig-cap: Illustration of the effect of varying the strength and direction of a correlation. In the left hand column, the correlations are $0, .33, .66$ and $1$. In the right hand column, the correlations are $0, -.33, -.66$ and $-1$
+#| fig-alt: Scatter plots are shown with varying degrees of positive and negative correlations. Positive correlations:- 0, 0.33, 0.66, and 1. Negative correlations:- 0, -0.33, -0.66, and -1. 0 shows no correlation, and 1, -1 show perfect correlations.
 
 onePlot <- function( r,n=100 ) {
 	sigma <- cbind( c(1,r), c(r,1))
@@ -131,6 +132,7 @@ Calculating correlations in jamovi can be done by clicking on the 'Regression' -
 #| label: fig-fig12-5
 #| classes: .enlarge-image
 #| fig-cap: A jamovi screenshot showing correlations between variables in the *parenthood.csv* file
+#| fig-alt: A jamovi screenshot showing data analysis tools. The main focus is on a Correlation Matrix section with variable labels such as "dan sleep," "baby sleep," and "dan grump." Options for Pearson correlation, significance reporting, and confidence intervals are visible.
 knitr::include_graphics("images/fig12-5.png")
 ```
 
@@ -155,10 +157,10 @@ You'd think that these four data sets would look pretty similar to one another. 
 
 ::: {#fig-fig12-6 layout-nrow=2 width=90%}
 
-![](images/fig12-6a.png){width="45%"}
-![](images/fig12-6b.png){width="45%"}
-![](images/fig12-6c.png){width="45%"}
-![](images/fig12-6d.png){width="45%"}
+![](images/fig12-6a.png){fig-alt="A scatter plot with points showing a positive correlation between X1 and Y1. The X-axis (X1) ranges from 4 to 12, and the Y-axis (Y1) ranges from 4 to 12. Points are mostly clustered in the middle to upper right regions of the graph." width="45%"}
+![](images/fig12-6b.png){fig-alt="A scatter plot with X2 on the X-axis (ranging from 4 to 14) and Y2 on the Y-axis (ranging from 2 to 9). The data points depict a parabolic distribution, peaking around X2 value of 10 and Y2 value of 8, and tapering off towards both ends of the X-axis." width="45%"}
+![](images/fig12-6c.png){fig-alt="A scatter plot showing a trend of increasing values. The x-axis is labeled 'X3' ranging from 5 to 13, and the y-axis is labeled 'Y3' ranging from 5 to 13. Points form a slightly curved upward trajectory." width="45%"}
+![](images/fig12-6d.png){fig-alt="A scatter plot showing points concentrated near the left side of the graph. The x-axis is labeled 'X4' and ranges from 7.5 to 17.5. The y-axis is labeled 'Y4' and ranges from 5 to 12. There is one outlier in the upper right corner at approximately (19, 11.5)." width="45%"}
 
 Anscombe's quartet scatterplots in jamovi. All four of these data sets have a Pearson correlation of r = .816, but they are qualitatively different from one another
 
@@ -175,6 +177,7 @@ To illustrate, consider the data plotted in @fig-fig12-7, showing the relationsh
 ```{r}
 #| label: fig-fig12-7
 #| fig-cap: The relationship between hours worked and grade received for a toy data set consisting of only 10 students (each dot corresponds to one student). The line through the middle shows the linear relationship between the two variables. This produces a strong Pearson correlation of $r = .91$. However, the interesting thing to note here is that there's actually a perfect monotonic relationship between the two variables. In this toy example, increasing the hours worked always increases the grade received, as illustrated by the solid line. This is reflected in a Spearman correlation of $\rho = 1$. With such a small data set, however, it's an open question as to which version better describes the actual relationship involved
+#| fig-alt: A scatter plot with a trend line. The x-axis is labeled "hours" and the y-axis is labeled "grade." Dots represent data points, showing a positive correlation between hours studied and grade achieved, with the trend line ascending from the bottom-left to top-right.
 
 knitr::include_graphics("images/fig12-7.png")
 ```
@@ -203,6 +206,7 @@ Suppose my goal is to draw a scatterplot displaying the relationship between the
 #| label: fig-fig12-8
 #| classes: .enlarge-image
 #| fig-cap: Scatterplot via the 'Correlation Matrix' command in jamovi
+#| fig-alt: A jamovi screenshot displaying a correlation matrix analysis. The analysis examines the variables "dan.sleep" and "dan.grump" with options for Pearson and Spearman correlations, covariance, and testing hypotheses. A scatter plot and density plots of the variables are shown.
 knitr::include_graphics("images/fig12-8.png")
 ```
 
@@ -210,7 +214,8 @@ The second way do to it is to use one of the jamovi add-on modules. This module 
 
 ```{r}
 #| label: fig-fig12-9
-#| fig-cap: Scatterplot via the 'scatr' add-on module in - jamovi
+#| fig-cap: Scatterplot via the 'scatr' add-on module in jamovi
+#| fig-alt: A scatter plot showing the relationship between 'dan.grump' and 'dan.sleep'. The x-axis represents 'dan.sleep' ranging from 5 to 9, and the y-axis represents 'dan.grump' ranging from 40 to 90. Data points trend downwards, indicating a negative correlation.
 knitr::include_graphics("images/fig12-9.png")
 ```
 
@@ -221,6 +226,7 @@ Often you will want to look at the relationships between several variables at on
 ```{r}
 #| label: fig-fig12-10
 #| fig-cap: A matrix of scatterplots produced using jamovi
+#| fig-alt: A series of scatter plots arranged in a matrix format showing correlations between variables:- dan.sleep, dan.grump, and baby.sleep. Each plot has points and trend lines with grey confidence intervals. The correlation coefficients are labeled on the plots.
 knitr::include_graphics("images/fig12-10.png")
 ```
 
@@ -233,6 +239,7 @@ Since the basic ideas in regression are closely tied to correlation, we'll retur
 ```{r}
 #| label: fig-fig12-11
 #| fig-cap: Panel (a) shows the sleep-grumpiness scatterplot from @fig-fig12-9 with the best fitting regression line drawn over the top. Not surprisingly, the line goes through the middle of the data. In contrast, panel (b) shows the same data, but with a very poor choice of regression line drawn over the top
+#| fig-alt: Two scatter plots compare the fitting of regression lines to the relationship between sleep hours and grumpiness. The left plot shows a strong negative correlation with a steep regression line; the right plot shows a weaker fit and a flatter regression line.
 
 load("data_and_tables/parenthood.Rdata")
 
@@ -287,6 +294,7 @@ Okay, now let's redraw our pictures but this time I'll add some lines to show th
 ```{r}
 #| label: fig-fig12-12
 #| fig-cap: A depiction of the residuals associated with the best fitting regression line (panel a), and the residuals associated with a poor regression line (panel b). The residuals are much smaller for the good regression line. Again, this is no surprise given that the good line is the one that goes right through the middle of the data
+#| fig-alt: Two scatter plots side by side, both displaying "Grumpiness vs. Sleep" with sleep hours (x-axis) ranging from 0 to 9 and grumpiness (y-axis) ranging from 0 to 100. Each plot has a blue regression line showing a negative correlation. The left plot is labeled "Close tc" and the right plot "Distant tc".
 
 
 load("data_and_tables/parenthood.Rdata")
@@ -342,6 +350,7 @@ $$\hat{Y}_i=125.96+(-8.94 X_i)$$
 #| label: fig-fig12-13
 #| classes: .enlarge-image
 #| fig-cap: A jamovi screenshot showing a simple linear regression analysis
+#| fig-alt: A jamovi screenshot showing the interface for conducting linear regression analysis. The interface includes sections for selecting variables, setting covariates and factors, and viewing results such as model fit measures and coefficients.
 knitr::include_graphics("images/fig12-13.png")
 ```
 
@@ -374,6 +383,7 @@ The coefficient associated with dani.sleep is quite large, suggesting that every
 ```{r}
 #| label: fig-fig12-14
 #| fig-cap: A 3D visualisation of a multiple regression model. There are two predictors in the model, dani.sleep and baby.sleep and the outcome variable is dani.grump. Together, these three variables form a 3D space. Each observation (dot) is a point in this space. In much the same way that a simple linear regression model forms a line in 2D space, this multiple regression model forms a plane in 3D space. When we estimate the regression coefficients what we're trying to do is find a plane that is as close to all the blue dots as possible
+#| fig-alt: A 3D scatter plot shows a correlation between 'baby.sleep' (x-axis), 'dan.sleep' (y-axis), and 'dan.grump' (z-axis) with multiple data points marked by blue dots. A grid plane intersects the data points, visualizing the relationship among the variables.
 
 load("data_and_tables/parenthood.Rdata")
 z <- parenthood$dan.grump
@@ -491,6 +501,7 @@ To compute all of the statistics that we have talked about so far, all you need 
 #| label: fig-fig12-15
 #| classes: .enlarge-image
 #| fig-cap: A jamovi screenshot showing a multiple linear regression analysis, with some useful options checked
+#| fig-alt: A jamovi screenshot showing Linear Regression analysis results. The interface includes options for configuring the model, viewing the model’s fit measures such as Adjusted R² and AIC, and examining model coefficients such as "state_reg" and "murders".
 knitr::include_graphics("images/fig12-15.png")
 ```
 
@@ -532,6 +543,7 @@ To make things even simpler, jamovi has an option that computes the $\beta$ coef
 #| label: fig-fig12-16
 #| classes: .enlarge-image
 #| fig-cap: Standardised coefficients, with 95% confidence intervals, for multiple linear regression
+#| fig-alt: A jamovi screenshot showing a Linear Regression analysis. The interface includes sections for variables, model fit measures, model coefficients, omnibus test, and references. There are also options for ANOVA, Frequencies, and Factor analysis.
 knitr::include_graphics("images/fig12-16.png")
 ```
 
@@ -583,7 +595,8 @@ We should check for the linearity of the relationships between the predictors an
 
 ```{r}
 #| label: fig-fig12-17
-#| fig-cap: jamovi plot of the predicted values against the observed values of the outcome variable. A straight(-ish) line is what we're hoping to see here. This looks pretty good, suggesting that there's nothing grossly wrong
+#| fig-cap: jamovi plot of the predicted values against the observed values of the outcome variable. A straight(-ish) line is what we are hoping to see here. This looks pretty good, suggesting that there is nothing grossly wrong
+#| fig-alt: A scatter plot with the x-axis labeled "My grumpiness" and the y-axis labeled "Predicted values." The plot has numerous scattered data points, mostly clustered between 40-90 on the x-axis and 40-80 on the y-axis. A trend line shows a positive correlation.
 knitr::include_graphics("images/fig12-17.png")
 ```
 
@@ -592,6 +605,7 @@ In any case, in order to get a more detailed picture it's often more informative
 ```{r}
 #| label: fig-fig12-18
 #| fig-cap: jamovi plot of the predicted values against the residuals, with a line showing the relationship between the two. If this is horizontal and straight(-ish), then we can feel reasonably confident that the "average residual" for all "predicted values" is more or less the same.
+#| fig-alt: A scatter plot shows residuals versus predicted values with a non-linear trend. Residuals range from -10 to 10, and predicted values range from 45 to 85. Data points are scattered around a fitted curve that starts flat, dips slightly, and rises towards the end.
 knitr::include_graphics("images/fig12-18.png")
 ```
 
@@ -604,6 +618,7 @@ Like many of the statistical tools we've discussed in this book, regression mode
 ```{r}
 #| label: fig-fig12-19
 #| fig-cap: Plot of the theoretical quantiles according to the model, against the quantiles of the standardised residuals, produced in jamovi
+#| fig-alt: Q-Q plot titled "Assumption Checks" showing standardized residuals along the y-axis and theoretical quantiles along the x-axis. Points closely follow the 45-degree reference line, indicating that the residuals follow a normal distribution.
 knitr::include_graphics("images/fig12-19.png")
 ```
 
@@ -612,10 +627,10 @@ Another thing we should check is the relationship between the predicted (fitted)
 
 ::: {#fig-fig12-20 layout-nrow=2 width=90%}
 
-![](images/fig12-20a.png){width="45%"}
-![](images/fig12-20b.png){width="45%"}
-![](images/fig12-20c.png){width="45%"}
-![](images/fig12-20d.png){width="45%"}
+![](images/fig12-20a.png){fig-alt="Scatter plot showing residuals versus fitted values. The x-axis is labeled 'Fitted' and the y-axis is labeled 'Residuals'. Data points are scattered across the plot, with residuals ranging from approximately -10 to 10 and fitted values between 50 and 80." width="45%"}
+![](images/fig12-20b.png){fig-alt="A scatter plot titled 'My grumpiness' on the x-axis and 'Residuals' on the y-axis. Data points are dispersed, showing a positive correlation between grumpiness (ranging from 40 to 90) and residuals (ranging from -10 to 10)." width="45%"}
+![](images/fig12-20c.png){fig-alt="A scatter plot shows residuals on the vertical axis ranging from -10 to 10 and baby's sleep (hours) on the horizontal axis ranging from 4 to 12 hours. Numerous data points are dispersed across the plot, displaying no clear pattern or trend." width="45%"}
+![](images/fig12-20d.png){fig-alt="A scatter plot titled 'My sleep (hours) vs Residuals' showing data points representing residual values against the number of hours slept, ranging from 5 to 9 hours. Residuals vary roughly between -10 and 10, with no clear pattern or trend visible." width="45%"}
 
 Residuals plots produced in jamovi
 
@@ -634,6 +649,7 @@ The regression models that we've talked about all make am equality (i.e.homogene
 ```{r}
 #| label: fig-fig12-21
 #| fig-cap: jamovi plot of the predicted values (model predictions) against the square root of the absolute standardised residuals. This plot is used to diagnose violations of homogeneity of variance. If the variance is really constant, then the line through the middle should be horizontal and flat(-ish).
+#| fig-alt: Scatter plot showing the relationship between predicted values (x-axis) and SQR residuals (y-axis). The plot includes scattered data points and a smoothed trend line indicating the general pattern of the data. Predicted values range from 45 to 85, SQR Residuals from 0.5 to 3.5.
 knitr::include_graphics("images/fig12-21.png")
 ```
 
@@ -655,6 +671,7 @@ To give a sense of how we could end up with a model that has bigger collinearity
 #| label: fig-fig12-22
 #| classes: .enlarge-image
 #| fig-cap: Correlation matrix in jamovi for all four variables
+#| fig-alt: A correlation matrix table showing the relationships between variables:- "My grumpiness," "Baby's sleep (hours)," "My sleep (hours)," and "day." Notable correlations include -0.57 between "My grumpiness" and "Baby's sleep" and 0.63 between "My sleep" and "Baby's sleep.
 knitr::include_graphics("images/fig12-22.png")
 ```
 
@@ -664,6 +681,7 @@ We have some fairly large correlations between some of our predictor variables! 
 #| label: fig-fig12-23
 #| classes: .enlarge-image
 #| fig-cap: Collinearity statistics for multiple regression, produced in jamovi
+#| fig-alt: A jamovi screenshot displaying a linear regression analysis. The analysis includes model fit measures, coefficients, and assumption checks. Options to select variables, covariates, and factors are visible on the left sidebar.
 knitr::include_graphics("images/fig12-23.png")
 ```
 
@@ -677,6 +695,7 @@ The first kind of unusual observation is an **outlier**. The definition of an ou
 ```{r}
 #| label: fig-fig12-24
 #| fig-cap: An illustration of outliers. The solid line shows the regression line with the anomalous outlier observation included. The dashed line plots the regression line estimated without the anomalous outlier observation included. The vertical line from the outlier point to the dashed regression line illustrates the large residual error for the outlier. The outlier has an unusual value on the outcome (y axis location) but not the predictor (x axis location), and lies a long way from the regression line
+#| fig-alt: A scatter plot with blue dots representing data points, an outlier marked near the top-left region. A solid line shows the regression line, while a dashed line shows the ideal line. The X-axis is labeled 'Predictor' and the Y-axis is labeled 'Outcome'. A vertical line from an outlier point to the dashed regression line illustrates the large residual error for the outlier. 
 
 dat <- data.frame(x=c(2,   2.1, 3.3, 3.7, 4.2,  4.3, 4.5, 4.7, 4.9, 5.1, 5.2, 5.4, 5.8, 6.6),
                   y=c(2.2, 1.7, 3.9, 3.8, 3.95, 11,  3.5, 3.7, 5.1, 5.2, 3.9, 4,   6,  6.4))
@@ -710,6 +729,7 @@ The second way in which an observation can be unusual is if it has high **levera
 ```{r}
 #| label: fig-fig12-25
 #| fig-cap: An illustration of high leverage points. The anomalous observation in this case is unusual both in terms of the predictor (x axis) and the outcome (y axis), but this unusualness is highly consistent with the pattern of correlations that exists among the other observations. The observation falls very close to the regression line and does not distort it by very much
+#| fig-alt: A scatter plot with blue dots showing the relationship between a predictor and an outcome. A solid black regression line trends upwards, with one point labeled "High leverage" noticeably distant from the other points. A dashed line represents an alternate linear fit.
 
 
 dat <- data.frame(x=c(2,   2.1, 3.3, 3.7, 4.2,  4.5, 4.7, 4.9, 5.1, 5.2, 5.4, 5.8, 6.6, 10),
@@ -745,6 +765,7 @@ This brings us to our third measure of unusualness, the **influence** of an obse
 ```{r}
 #| label: fig-fig12-26
 #| fig-cap: An illustration of high influence points. In this case, the anomalous observation is highly unusual on the predictor variable (x axis), and falls a long way from the regression line. As a consequence, the regression line is highly distorted, even though (in this case) the anomalous observation is entirely typical in terms of the outcome variable (y axis)
+#| fig-alt: Scatter plot showing a linear relationship between Predictor (x-axis) and Outcome (y-axis). Points are scattered around a solid black regression line. One outlier, labeled "High influence," has a vertical distance to the regression line connected by a dashed line.
 
 
 dat <- data.frame(x=c(2,   2.1, 3.3, 3.7, 4.2,  4.5, 4.7, 4.9, 5.1, 5.2, 5.4, 5.8, 6.6, 10),
@@ -777,7 +798,8 @@ In jamovi, information about Cook's distance can be calculated by clicking on th
 
 ```{r}
 #| label: fig-fig12-27
-#| fig-cap: jamovi output showing the table for the Cook's distance statistics
+#| fig-cap: jamovi output showing the table for the Cooks distance statistics
+#| fig-alt: A data summary table is shown with Cooks Distance values. The columns listed are Mean (0.01), Median (0.00), SD (Standard Deviation) (0.02), Min (0.00), and Max (0.11).
 knitr::include_graphics("images/fig12-27.png")
 ```
 
@@ -842,6 +864,7 @@ We can also use this 'Model Comparison' option to display a table that shows the
 #| label: fig-fig12-28
 #| classes: .enlarge-image
 #| fig-cap: Model comparison in jamovi using the 'Model Builder' option
+#| fig-alt: A jamovi screenshot displaying a linear regression analysis. The screen shows options for dependent variables, factors, and weights on the left, while the right side presents the model fit measures, comparisons, and specific results, including coefficients and standard errors.
 knitr::include_graphics("images/fig12-28.png")
 ```
 
