@@ -1,10 +1,25 @@
 \usepackage{makeidx}
-\usepackage{titling}
-\usepackage{atbegshi}% http://ctan.org/pkg/atbegshi
 \usepackage{pdfpages}
+
+%reduce vertical spacing in toc
+\usepackage{etoolbox}
+\makeatletter
+\pretocmd{\chapter}{\addtocontents{toc}{\protect\addvspace{-1\p@}}}{}{}
+\pretocmd{\section}{\addtocontents{toc}{\protect\addvspace{-5\p@}}}{}{}
+\pretocmd{\subsection}{\addtocontents{toc}{\protect\addvspace{-5\p@}}}{}{}
+\makeatother
+
+\usepackage{enotez}
+\DeclareInstance{enotez-list}{section}{paragraph}{heading=\chapter}
+\setenotez{split=chapter,backref=true,list-name=Chapter notes,totoc=chapter}
+
+\usepackage{titling}
 \let\oldmaketitle\maketitle
+
+\usepackage{atbegshi}% http://ctan.org/pkg/atbegshi
 \AtBeginDocument{\let\maketitle\relax}
 \AtBeginDocument{\AtBeginShipoutNext{\AtBeginShipoutDiscard}} % Discard next blank page
+
 
 
 

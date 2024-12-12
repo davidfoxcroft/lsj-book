@@ -30,38 +30,38 @@ book:
 
   chapters: 
     - index.qmd
-    - part: Beginnings
-      chapters:
-         - 01-Why-do-we-learn-statistics.qmd
-         - 02-A-brief-introduction-to-research-design.qmd
-    - part: An introduction to jamovi
-      chapters:
-         - 03-Getting-started-with-jamovi.qmd
-    - part: Working with data
-      chapters:
-         - 04-Descriptive-statistics.qmd
-         - 05-Drawing-graphs.qmd
-         - 06-Pragmatic-matters.qmd
-    - part: Statistical theory
-      chapters:
-         - Prelude-Part-IV.qmd
-         - 07-Introduction-to-probability.qmd
-         - 08-Estimating-unknown-quantities-from-a-sample.qmd
-         - 09-Hypothesis-testing.qmd
-    - part: Statistical tools
-      chapters:
-         - 10-Categorical-data-analysis.qmd
-         - 11-Comparing-two-means.qmd
-         - 12-Correlation-and-linear-regression.qmd
-    #      - 13-Comparing-several-means-one-way-ANOVA.qmd
-    #      - 14-Factorial-ANOVA.qmd
+    # - part: Beginnings
+    #   chapters:
+    #      - 01-Why-do-we-learn-statistics.qmd
+    #      - 02-A-brief-introduction-to-research-design.qmd
+    # - part: An introduction to jamovi
+    #   chapters:
+    #      - 03-Getting-started-with-jamovi.qmd
+    # - part: Working with data
+    #   chapters:
+    #      - 04-Descriptive-statistics.qmd
+    #      - 05-Drawing-graphs.qmd
+    #      - 06-Pragmatic-matters.qmd
+    # - part: Statistical theory
+    #   chapters:
+    #      - Prelude-Part-IV.qmd
+    #      - 07-Introduction-to-probability.qmd
+    #      - 08-Estimating-unknown-quantities-from-a-sample.qmd
+    #      - 09-Hypothesis-testing.qmd
+    # - part: Statistical tools
+    #   chapters:
+    #      - 10-Categorical-data-analysis.qmd
+    #      - 11-Comparing-two-means.qmd
+    - 12-Correlation-and-linear-regression.qmd
+    - 13-Comparing-several-means-one-way-ANOVA.qmd
+    - 14-Factorial-ANOVA.qmd
     #      - 15-Factor-Analysis.qmd
     # - part: Endings, alternatives and prospects
     #   chapters:
     #      - 16-Bayesian-statistics.qmd
-    # - Epilogue.qmd
-    # - References.qmd
-  
+    - Epilogue.qmd
+    - References.qmd
+
 bibliography: refs.bib
 csl: apa.csl
 
@@ -102,7 +102,7 @@ format:
     #subtitle: A Tutorial for Beginners in Statistical Analysis
     #author: "Danielle Navarro & David Foxcroft"
     documentclass: book
-    papersize: A4
+    papersize: a4
     geometry:
       - paperwidth=8.0000000000000in
       - paperheight=10.000000000000in
@@ -111,11 +111,15 @@ format:
       - top=1.00in
       - textheight=8.25in
       #- showframe
-    include-in-header: preamble.tex
+    params:
+        endnotes: true
+    include-in-header: 
+      - preamble.tex
     include-before-body: 
       - first.tex
       - before-body.tex
-    include-after-body: backcover.tex
+    include-after-body:
+      - backcover.tex
     toc: true
     colorlinks: true
     fig-width: 5

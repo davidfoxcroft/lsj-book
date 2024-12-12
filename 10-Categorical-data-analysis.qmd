@@ -5,7 +5,7 @@
 source("header.R")
 ```
 
-Now that we've covered the basic theory behind hypothesis testing it's time to start looking at specific tests that are commonly used in psychology. So where should we start? Not every textbook agrees on where to start, but I'm going to start with $\chi^2$ tests (this chapter, pronounced "chi-square"[^10-categorical-data-analysis-1] and *t*-tests in @sec-Comparing-two-means). Both of these tools are very frequently used in scientific practice, and whilst they're not as powerful as "regression" and "analysis of variance" which we cover in later chapters, they're much easier to understand.
+Now that we've covered the basic theory behind hypothesis testing it's time to start looking at specific tests that are commonly used in psychology. So where should we start? Not every textbook agrees on where to start, but I'm going to start with $\chi^2$ tests (this chapter, pronounced "chi-square"[^10-categorical-data-analysis-1] and $t$-tests in @sec-Comparing-two-means). Both of these tools are very frequently used in scientific practice, and whilst they're not as powerful as "regression" and "analysis of variance" which we cover in later chapters, they're much easier to understand.
 
 [^10-categorical-data-analysis-1]: Also sometimes referred to as "chi-squared".
 
@@ -214,13 +214,13 @@ So, if our calculated $\chi^2$ statistic is bigger than the critical value of $7
 
 ### Doing the test in jamovi
 
-Not surprisingly, jamovi provides an analysis that will do these calculations for you. Let's use the *Randomness.omv* file. From the main 'Analyses' toolbar select 'Frequencies' - 'One Sample Proportion Tests' - '$N$ Outcomes'. Then in the analysis window that appears move the variable you want to analyse (choice 1 across into the 'Variable' box. Also, click on the 'Expected counts' check box so that these are shown on the results table. When you have done all this, you should see the analysis results in jamovi as in @fig-fig10-4. No surprise then that jamovi provides the same expected counts and statistics that we calculated by hand above, with a $\chi^2$ value of $(8.44$ with $3$ df and $p=0.038$. Note that we don't need to look up a critical *p*-value threshold value any more, as jamovi gives us the actual *p*-value of the calculated $\chi^2$ for $3$ df
+Not surprisingly, jamovi provides an analysis that will do these calculations for you. Let's use the *Randomness.omv* file. From the main 'Analyses' toolbar select 'Frequencies' - 'One Sample Proportion Tests' - '$N$ Outcomes'. Then in the analysis window that appears move the variable you want to analyse (choice 1 across into the 'Variable' box. Also, click on the 'Expected counts' check box so that these are shown on the results table. When you have done all this, you should see the analysis results in jamovi as in @fig-fig10-4. No surprise then that jamovi provides the same expected counts and statistics that we calculated by hand above, with a $\chi^2$ value of $(8.44$ with $3$ df and $p=0.038$. Note that we don't need to look up a critical $p$-value threshold value any more, as jamovi gives us the actual $p$-value of the calculated $\chi^2$ for $3$ df
 
 ```{r}
 #| label: fig-fig10-4
 #| classes: .enlarge-image
 #| fig-cap: A $\chi^2$ One Sample Proportion Test in jamovi, with table showing both observed and expected frequencies and proportions
-#| fig-alt: A jamovi screenshot showing a Proportion Test (N Outcomes) analysis. The "Variable" selected is "choice_1" with observed and expected counts for clubs, diamonds, hearts, spades. The chi-squared test results are at the bottom with a *p*-value.
+#| fig-alt: A jamovi screenshot showing a Proportion Test (N Outcomes) analysis. The "Variable" selected is "choice_1" with observed and expected counts for clubs, diamonds, hearts, spades. The chi-squared test results are at the bottom with a $p$-value.
 knitr::include_graphics("images/fig10-4.png")
 ```
 
@@ -243,7 +243,7 @@ The expected counts are now shown in @tbl-tab10-6.
 huxtabs[[10]][[6]]
 ```
 
-You can see that the $\chi^2$ statistic is 4.74, 3 df, $p = 0.192$. Now, the results of our updated hypotheses and the expected frequencies are different from what they were last time. As a consequence our $\chi^2$ test statistic is different, and our *p*-value is different too. Annoyingly, the *p*-value is $.192$, so we can't reject the null hypothesis (look back at @sec-The-p-value-of-a-test to remind yourself why). Sadly, despite the fact that the null hypothesis corresponds to a very silly theory, these data don't provide enough evidence against it.
+You can see that the $\chi^2$ statistic is 4.74, 3 df, $p = 0.192$. Now, the results of our updated hypotheses and the expected frequencies are different from what they were last time. As a consequence our $\chi^2$ test statistic is different, and our $p$-value is different too. Annoyingly, the $p$-value is $.192$, so we can't reject the null hypothesis (look back at @sec-The-p-value-of-a-test to remind yourself why). Sadly, despite the fact that the null hypothesis corresponds to a very silly theory, these data don't provide enough evidence against it.
 
 ### How to report the results of the test {#sec-How-to-report-the-results-of-a-test}
 
@@ -361,7 +361,7 @@ $$ Amazing.
 
 ### Doing the test in jamovi
 
-Okay, now that we know how the test works let's have a look at how it's done in jamovi. As tempting as it is to lead you through the tedious calculations so that you're forced to learn it the long way, I figure there's no point. I already showed you how to do it the long way for the goodness-of-fit test in the last section, and since the test of independence isn't conceptually any different, you won't learn anything new by doing it the long way. So instead I'll go straight to showing you the easy way. After you have run the test in jamovi ('Frequencies' - 'Contingency Tables' - 'Independent Samples'), all you have to do is look underneath the contingency table in the jamovi results window and there is the $\chi^2$ statistic for you. This shows a $\chi^2$ statistic value of 10.72, with 2 df and *p*-value = 0.005.
+Okay, now that we know how the test works let's have a look at how it's done in jamovi. As tempting as it is to lead you through the tedious calculations so that you're forced to learn it the long way, I figure there's no point. I already showed you how to do it the long way for the goodness-of-fit test in the last section, and since the test of independence isn't conceptually any different, you won't learn anything new by doing it the long way. So instead I'll go straight to showing you the easy way. After you have run the test in jamovi ('Frequencies' - 'Contingency Tables' - 'Independent Samples'), all you have to do is look underneath the contingency table in the jamovi results window and there is the $\chi^2$ statistic for you. This shows a $\chi^2$ statistic value of 10.72, with 2 df and $p$-value = 0.005.
 
 That was easy, wasn't it! You can also ask jamovi to show you the expected counts - just click on the check box for 'Counts' - 'Expected' in the 'Cells' options and the expected counts will appear in the contingency table. And whilst you are doing that, an effect size measure would be helpful. We'll choose Cramér's $V$, and you can specify this from a check box in the 'Statistics' options, and it gives a value for Cramér's $V$ of $0.24$. See @fig-fig10-6. We will talk about this some more in just a moment.
 
@@ -386,7 +386,7 @@ This could be classified as a rather extreme example of a reactivity effect, I s
 
 ## The continuity correction
 
-Okay, time for a little bit of a digression. I've been lying to you a little bit so far. There's a tiny change that you need to make to your calculations whenever you only have 1 degree of freedom. It's called the "continuity correction", or sometimes the **Yates correction**. Remember what I pointed out earlier: the $\chi^2$ test is based on an approximation, specifically on the assumption that the binomial distribution starts to look like a normal distribution for large $N$. One problem with this is that it often doesn't quite work, especially when you've only got 1 degree of freedom (e.g., when you're doing a test of independence on a $2 \times 2$ contingency table). The main reason for this is that the true sampling distribution for the $X^{2}$ statistic is actually discrete (because you're dealing with categorical data!) but the $\chi^2$ distribution is continuous. This can introduce systematic problems. Specifically, when $N$ is small and when $df = 1$, the goodness-of-fit statistic tends to be "too big", meaning that you actually have a bigger α value than you think (or, equivalently, the p values are a bit too small).
+Okay, time for a little bit of a digression. I've been lying to you a little bit so far. There's a tiny change that you need to make to your calculations whenever you only have 1 degree of freedom. It's called the "continuity correction", or sometimes the **Yates correction**. Remember what I pointed out earlier: the $\chi^2$ test is based on an approximation, specifically on the assumption that the binomial distribution starts to look like a normal distribution for large $N$. One problem with this is that it often doesn't quite work, especially when you've only got 1 degree of freedom (e.g., when you're doing a test of independence on a $2 \times 2$ contingency table). The main reason for this is that the true sampling distribution for the $X^{2}$ statistic is actually discrete (because you're dealing with categorical data!) but the $\chi^2$ distribution is continuous. This can introduce systematic problems. Specifically, when $N$ is small and when $df = 1$, the goodness-of-fit statistic tends to be "too big", meaning that you actually have a bigger α value than you think (or, equivalently, the $p$-values are a bit too small).
 
 As far as I can tell from reading Yates' paper[^10-categorical-data-analysis-14], the correction is basically a hack. It's not derived from any principled theory. Rather, it's based on an examination of the behaviour of the test, and observing that the corrected version seems to work better. You can specify this correction in jamovi from a check box in the 'Statistics' options, where it is called '$\chi^2$ continuity correction'.
 
@@ -429,7 +429,7 @@ huxtabs[[10]][[9]]
 
 Looking at this data, you'd be hard pressed not to suspect that people not on fire are more likely to be happy than people on fire. However, the chi-square test makes this very hard to test because of the small sample size. So, speaking as someone who doesn't want to be set on fire, I'd *really* like to be able to get a better answer than this. This is where **Fisher's exact test** [@Fisher1922a] comes in very handy.
 
-The Fisher exact test works somewhat differently to the chi-square test (or in fact any of the other hypothesis tests that I talk about in this book) insofar as it doesn't have a test statistic, but it calculates the *p*-value "directly". I'll explain the basics of how the test works for a $2 \times 2$ contingency table. As before, let's have some notation (@tbl-tab10-10).
+The Fisher exact test works somewhat differently to the chi-square test (or in fact any of the other hypothesis tests that I talk about in this book) insofar as it doesn't have a test statistic, but it calculates the $p$-value "directly". I'll explain the basics of how the test works for a $2 \times 2$ contingency table. As before, let's have some notation (@tbl-tab10-10).
 
 ```{r}
 #| label: tbl-tab10-10
@@ -439,17 +439,17 @@ huxtabs[[10]][[10]]
 
 In order to construct the test Fisher treats both the row and column totals $(R_1, R_2, C_1 \text{ and } C_2)$ as known, fixed quantities and then calculates the probability that we would have obtained the observed frequencies that we did $(O_{11}, O_{12}, O_{21} \text{ and } O_{22})$ given those totals. In the notation that we developed in @sec-Introduction-to-probability this is written:
 
-$$P(O_{11}, O_{12}, O_{21}, O_{22}  \text{ | } R_1, R_2, C_1, C_2)$$ and as you might imagine, it's a slightly tricky exercise to figure out what this probability is. But it turns out that this probability is described by a distribution known as the hypergeometric distribution. What we have to do to calculate our *p*-value is calculate the probability of observing this particular table or a table that is *"more extreme"*. [^10-categorical-data-analysis-17] Back in the 1920s, computing this sum was daunting even in the simplest of situations, but these days it's pretty easy as long as the tables aren't too big and the sample size isn't too large. The conceptually tricky issue is to figure out what it means to say that one contingency table is more "extreme" than another. The easiest solution is to say that the table with the lowest probability is the most extreme. This then gives us the *p*-value.
+$$P(O_{11}, O_{12}, O_{21}, O_{22}  \text{ | } R_1, R_2, C_1, C_2)$$ and as you might imagine, it's a slightly tricky exercise to figure out what this probability is. But it turns out that this probability is described by a distribution known as the hypergeometric distribution. What we have to do to calculate our $p$-value is calculate the probability of observing this particular table or a table that is *"more extreme"*. [^10-categorical-data-analysis-17] Back in the 1920s, computing this sum was daunting even in the simplest of situations, but these days it's pretty easy as long as the tables aren't too big and the sample size isn't too large. The conceptually tricky issue is to figure out what it means to say that one contingency table is more "extreme" than another. The easiest solution is to say that the table with the lowest probability is the most extreme. This then gives us the $p$-value.
 
-[^10-categorical-data-analysis-17]: Not surprisingly, the Fisher exact test is motivated by Fisher's interpretation of a *p*-value, not Neyman's! See @sec-The-p-value-of-a-test.
+[^10-categorical-data-analysis-17]: Not surprisingly, the Fisher exact test is motivated by Fisher's interpretation of a $p$-value, not Neyman's! See @sec-The-p-value-of-a-test.
 
-You can specify this test in jamovi from a check box in the 'Statistics' options of the 'Contingency Tables' analysis. When you do this with the data from the *salem.csv* file, the Fisher exact test statistic is shown in the results. The main thing we're interested in here is the *p*-value, which in this case is small enough (p = .036) to justify rejecting the null hypothesis that people on fire are just as happy as people not on fire. See @fig-fig10-7.
+You can specify this test in jamovi from a check box in the 'Statistics' options of the 'Contingency Tables' analysis. When you do this with the data from the *salem.csv* file, the Fisher exact test statistic is shown in the results. The main thing we're interested in here is the $p$-value, which in this case is small enough (p = .036) to justify rejecting the null hypothesis that people on fire are just as happy as people not on fire. See @fig-fig10-7.
 
 ```{r}
 #| label: fig-fig10-7
 #| out.width: 60%
 #| fig-cap: Fisher exact test analysis in jamovi
-#| fig-alt: An image of statistical output showing a contingency table and χ² tests. The table has variables "happy" (FALSE/TRUE) and "on.fire" (FALSE/TRUE). Summary:- χ² value 6.15, degrees of freedom 1, *p*-value 0.01311, Fisher's exact test 0.03571, with a sample size of 16.
+#| fig-alt: An image of statistical output showing a contingency table and χ² tests. The table has variables "happy" (FALSE/TRUE) and "on.fire" (FALSE/TRUE). Summary:- χ² value 6.15, degrees of freedom 1, $p$-value 0.01311, Fisher's exact test 0.03571, with a sample size of 16.
 knitr::include_graphics("images/fig10-7.png")
 ```
 
@@ -513,7 +513,7 @@ The different statistics produced by these different analyses are shown in @fig-
 #| label: fig-fig10-9
 #| out.width: 60%
 #| fig-cap: Independent vs. Paired (McNemar) with the *Randomness.omv* (cards) data
-#| fig-alt: The image shows two sections of contingency tables. The first section has a table showing the distribution of choices (clubs, diamonds, hearts, spades) with a chi-squared test result and *p*-value. The second section has a paired samples contingency table with McNemar test results.
+#| fig-alt: The image shows two sections of contingency tables. The first section has a table showing the distribution of choices (clubs, diamonds, hearts, spades) with a chi-squared test result and $p$-value. The second section has a paired samples contingency table with McNemar test results.
 knitr::include_graphics("images/fig10-9.png")
 ```
 
