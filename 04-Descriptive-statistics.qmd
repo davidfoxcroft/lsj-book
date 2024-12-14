@@ -35,9 +35,7 @@ Drawing pictures of the data, as I did in @fig-fig4-2, is an excellent way to co
 
 The **mean** of a set of observations is just a normal, old-fashioned average. Add all of the values up, and then divide by the total number of values. The first five AFL winning margins were 56, 31, 56, 8 and 32, so the mean of these observations is just:
 
-$$
-\frac{56 + 31 + 56 + 8 + 32}{5} = \frac{183}{5} = 36.60
-$$
+$$\frac{56 + 31 + 56 + 8 + 32}{5} = \frac{183}{5} = 36.60$$
 Of course, this definition of the mean isn't news to anyone. Averages (i.e., means) are used so often in everyday life that this is pretty familiar stuff. However, since the concept of a mean is something that everyone already understands, I'll use this as an excuse to start introducing some of the mathematical notation that statisticians use to describe this calculation, and talk about how the calculations would be done in jamovi.
 
 The first piece of notation to introduce is $N$, which we'll use to refer to the number of observations that we're averaging (in this case $N = 5$). Next, we need to attach a label to the observations themselves. It's traditional to use X for this, and to use subscripts to indicate which observation we're actually talking about. That is, we'll use $X_1$ to refer to the first observation, $X_2$ to refer to the second observation, and so on all the way up to $X_N$ for the last one. Or, to say the same thing in a slightly more abstract way, we use $X_i$ to refer to the i-th observation. Just to make sure we're clear on the notation, @tbl-tab4-1 lists the 5 observations in the *afl.margins* variable, along with the mathematical symbol used to refer to it and the actual value that the observation corresponds to.
@@ -128,7 +126,7 @@ Now that we have our frequency table we can just look at it and see that, over t
 
 ```{r}
 #| label: fig-fig4-5
-#| fig-cap: A screenshot of jamovi showing the variables stored in the aflsmall finalists.csv file
+#| fig-cap: A screenshot of jamovi showing the variables stored in the aflsmall_finalists.csv file
 #| fig-alt: A jamovi screenshot of a spreadsheet labeled "AFL Finalists" with 18 rows. The first column lists various Australian Football League teams, including Hawthorn, Melbourne, and Carlton. The jamovi spreadsheet menu shows options like Variables, Data, and Analyses.
 knitr::include_graphics("images/fig4-5.png")
 ```
@@ -190,9 +188,7 @@ huxtabs[[4]][[2]]
 
 Now that we have calculated the absolute deviation score for every observation in the data set, all that we have to do to calculate the mean of these scores. Let's do that:
 
-$$
-\frac{19.4 + 5.6 + 19.4 + 28.6 + 4.6}{5} = 15.52
-$$
+$$\frac{19.4 + 5.6 + 19.4 + 28.6 + 4.6}{5} = 15.52$$
 
 And we're done. The mean absolute deviation for these five scores is 15.52.
 
@@ -204,7 +200,7 @@ And we're done. The mean absolute deviation for these five scores is 15.52.
 
 Although the average absolute deviation measure has its uses, it's not the best measure of variability to use. From a purely mathematical perspective there are some solid reasons to prefer squared deviations rather than absolute deviations. If we do that we obtain a measure called the **variance**, which has a lot of really nice statistical properties that I'm going to ignore,[^04-descriptive-statistics-5] and one massive psychological flaw that I'm going to make a big deal out of in a moment. The variance of a data set $X$ is sometimes written as Var( $X$ ), but it's more commonly denoted $s^2$ (the reason for this will become clearer shortly).
 
-[^04-descriptive-statistics-5]: Well, I will very briefly mention the one that I think is coolest, for a very particular definition of "cool", that is. Variances are additive. Here's what that means. Suppose I have two variables $X$ and $Y$ , whose variances are $Var(X)$ and $Var(Y)$ respectively. Now imagine I want to define a new variable Z that is the sum of the two, $Z = X + Y$ . As it turns out, the variance of $Z$ is equal to $Var(X) + Var(Y)$. This is a very useful property, but it's not true of the other measures that I talk about in this section.
+[^04-descriptive-statistics-5]: Well, I will very briefly mention the one that I think is coolest, for a very particular definition of "cool", that is. Variances are additive. Here's what that means. Suppose I have two variables $X$ and $Y$ , whose variances are $Var(X)$ and $Var(Y)$ respectively. Now imagine I want to define a new variable $Z$ that is the sum of the two, $Z = X + Y$ . As it turns out, the variance of $Z$ is equal to $Var(X) + Var(Y)$. This is a very useful property, but it's not true of the other measures that I talk about in this section.
 
 [Additional technical detail[^04-descriptive-statistics-6]]
 
@@ -292,8 +288,6 @@ ggplot(afl.margins, aes(x=margin)) +
                      labels=c("Mean - s.d.", "Mean", "Mean + s.d."))
 
 ```
-
-
 
 ## Skew and kurtosis
 
@@ -386,7 +380,7 @@ More to the point, jamovi has a check box for kurtosis just below the check box 
 
 ## Descriptive statistics separately for each group
 
-It is very commonly the case that you find yourself needing to look at descriptive statistics broken down by some grouping variable. This is pretty easy to do in jamovi. For instance, let's say I want to look at the descriptive statistics for some clinical trial data, broken down separately by therapy type. This is a new data set, one that you've never seen before. The data is stored in the *clinicaltrial.csv*  file and we'll use it a lot later on in @sec-Comparing-several-means-one-way-ANOVA (you can find a complete description of the data at the start of that chapter). Let's load it and see what we've got (@fig-fig4-13):
+It is very commonly the case that you find yourself needing to look at descriptive statistics broken down by some grouping variable. This is pretty easy to do in jamovi. For instance, let's say I want to look at the descriptive statistics for some clinical trial data, broken down separately by therapy type. This is a new data set, one that you've never seen before. The data is stored in the *clinicaltrial.csv*  file and we'll use it a lot later on in @sec-Comparing-several-means-one-way-ANOVA (you can find a complete description of the data at the start of that chapter). Let's load it and see what we've got (@fig-fig4-13).
 
 Evidently there were three drugs: a placebo, something called "anxifree" and something called "joyzepam", and there were 6 people administered each drug. There were 9 people treated using cognitive behavioural therapy (CBT) and 9 people who received no psychological treatment. And we can see from looking at the 'Descriptives' of the mood.gain variable that most people did show a mood gain ($mean = 0.88$), though without knowing what the scale is here it's hard to say much more than that. Still, that's not too bad. Overall I feel that I learned something from that.
 
@@ -419,17 +413,17 @@ A simpler way around this is to describe my grumpiness by comparing me to other 
 
 However, all is not lost. A different approach is to convert my grumpiness score into a **standard score**, also referred to as a *z*-score. The standard score is defined as the number of standard deviations above the mean that my grumpiness score lies. To phrase it in "pseudomaths" the standard score is calculated like this:
 
-$$
-\text{standard score} = \frac{\text{raw score} - mean}{\text{standard deviation}}
-$$
+$$\text{standard score} = \frac{\text{raw score} - mean}{\text{standard deviation}}$$
 
 [Additional technical detail[^04-descriptive-statistics-14]]
 
-[^04-descriptive-statistics-14]: In actual maths, the equation for the *z*-score is $$z_i =\frac{X_i - \bar{X}}{\hat{\sigma}}$$
+[^04-descriptive-statistics-14]: In actual maths, the equation for the *z*-score is: $$z_i =\frac{X_i - \bar{X}}{\hat{\sigma}}$$
 
-So, going back to the grumpiness data, we can now transform Dani's raw grumpiness into a standardised grumpiness score.
+So, going back to the grumpiness data, we can now transform Dani's raw grumpiness into a standardised grumpiness score:
 
-$$ z =\frac{35 - 17}{5} = 3.6 $$ To interpret this value, recall the rough heuristic that I provided in @sec-Standard-deviation in which I noted that 99.7% of values are expected to lie within 3 standard deviations of the mean. So the fact that my grumpiness corresponds to a *z*-score of 3.6 indicates that I'm very grumpy indeed. In fact this suggests that I'm grumpier than 99.98% of people. Sounds about right.
+$$z =\frac{35 - 17}{5} = 3.6$$ 
+
+To interpret this value, recall the rough heuristic that I provided in @sec-Standard-deviation in which I noted that 99.7% of values are expected to lie within 3 standard deviations of the mean. So the fact that my grumpiness corresponds to a *z*-score of 3.6 indicates that I'm very grumpy indeed. In fact this suggests that I'm grumpier than 99.98% of people. Sounds about right.
 
 In addition to allowing you to interpret a raw score in relation to a larger population (and thereby allowing you to make sense of variables that lie on arbitrary scales), standard scores serve a second useful function. Standard scores can be compared to one another in situations where the raw scores can't. Suppose, for instance, my friend also had another questionnaire that measured extraversion using a $24$ item questionnaire. The overall mean for this measure turns out to be 13 with standard deviation $4$, and I scored a $2$. As you can imagine, it doesn't make a lot of sense to try to compare my raw score of $2$ on the extraversion questionnaire to my raw score of 35 on the grumpiness questionnaire. The raw scores for the two variables are "about" fundamentally different things, so this would be like comparing apples to oranges.
 
@@ -447,4 +441,4 @@ Calculating some basic descriptive statistics is one of the very first things yo
 -   [Descriptive statistics separately for each group]. Since this book focuses on doing data analysis in jamovi, we spent a bit of time talking about how descriptive statistics are computed for different subgroups.
 -   [Standard scores]. The *z*-score is a slightly unusual beast. It's not quite a descriptive statistic, and not quite an inference. Make sure you understand this section. It'll come up again later.
 
-In the next chapter we'll move on to a discussion of how to draw pictures! Everyone loves a pretty picture, right? But before we do, I want to end on an important point. A traditional first course in statistics spends only a small proportion of the class on descriptive statistics, maybe one or two lectures at most. The vast majority of the lecturer's time is spent on inferential statistics because that's where all the hard stuff is. That makes sense, but it hides the practical everyday importance of choosing good descriptives. With that in mind...
+In the next chapter we'll move on to a discussion of how to draw pictures! Everyone loves a pretty picture, right? But before we do, I want to end on an important point. A traditional first course in statistics spends only a small proportion of the class on descriptive statistics, maybe one or two lectures at most. The vast majority of the lecturer's time is spent on inferential statistics because that's where all the hard stuff is. That makes sense, but it hides the practical everyday importance of choosing good descriptives. 

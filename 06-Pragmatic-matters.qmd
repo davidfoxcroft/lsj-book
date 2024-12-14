@@ -80,13 +80,13 @@ A key concept that a lot of data transformations in jamovi rely on is the idea o
 
 ### Assessing mathematical truths
 
-In George Orwell's classic book *1984* one of the slogans used by the totalitarian Party was "two plus two equals five". The idea being that the political domination of human freedom becomes complete when it is possible to subvert even the most basic of truths. It's a terrifying thought, especially when the protagonist Winston Smith finally breaks down under torture and agrees to the proposition. "Man is infinitely malleable", the book says. I'm pretty sure that this isn't true of humans[^pragmatic-matters-2] and it's definitely not true of jamovi. jamovi is not infinitely malleable, it has rather firm opinions on the topic of what is and isn't true, at least as regards basic mathematics. If I ask it to calculate $2 + 2$,[^pragmatic-matters-3] it always gives the same answer, and it's not bloody 5!
+In George Orwell's classic book *1984* one of the slogans used by the totalitarian Party was "two plus two equals five". The idea being that the political domination of human freedom becomes complete when it is possible to subvert even the most basic of truths. It's a terrifying thought, especially when the protagonist Winston Smith finally breaks down under torture and agrees to the proposition. "Man is infinitely malleable", the book says. I'm pretty sure that this isn't true of humans[^pragmatic-matters-2] and it's definitely not true of jamovi. jamovi is not infinitely malleable, it has rather firm opinions on the topic of what is and isn't true, at least as regards basic mathematics. If I ask it to calculate $2 + 2$,[^pragmatic-matters-3] it always gives the same answer, and it's not 5!
 
 [^pragmatic-matters-2]: I offer up my teenage attempts to be "cool" as evidence that some things just can't be done.
 
 [^pragmatic-matters-3]: You can do this in the 'Compute new variable' screen, though just calculating 2 + 2 for every cell of a new variable is not very useful!
 
-Of course, so far jamovi is just doing the calculations. I haven't asked it to explicitly assert that $2 + 2 = 4$ is a true statement. If I want jamovi to make an explicit judgement, I can use a command like this: $2 + 2 == 4$
+Of course, so far jamovi is just doing the calculations. I haven't asked it to explicitly assert that $2 + 2 = 4$ is a true statement. If I want jamovi to make an explicit judgement, I can use a command like this: $2 + 2 == 4$.
 
 What I've done here is use the **equality operator**, $==$, to force jamovi to make a "true or false" judgement.[^pragmatic-matters-4] Okay, let's see what jamovi thinks of the Party slogan, so type this into the compute new variable 'formula' box:
 
@@ -181,7 +181,7 @@ The first trick to discuss is the idea of **transforming** a variable. Taken lit
 Suppose I've run a short study in which I ask 10 people a single question:<br />
 On a scale of 1 (strongly disagree) to 7 (strongly agree), to what extent do you agree with the proposition that "Dinosaurs are awesome"?
 
-Now let's load and look at the data. The data file *likert.omv* contains a single variable that contains raw Likert-scale responses for these 10 people. However, if you think about it, this isn't the best way to represent these responses. Because of the fairly symmetric way that we set up the response scale, there's a sense in which the midpoint of the scale should have been coded as 0 (no opinion), and the two endpoints should be "3 (strongly agree)" and "3 (strongly disagree)". By recoding the data in this way it's a bit more reflective of how we really think about the responses. The recoding here is pretty straightforward, we just subtract 4 from the raw scores. In jamovi you can do this by computing a new variable: click on the 'Data' - 'Compute' button and you will see that a new variable has been added to the spreadsheet. Let's call this new variable 'likert.centred' (go ahead and type that in) and then add the following in the formula box, like in @fig-fig6-4: 'likert.raw - 4'
+Now let's load and look at the data. The data file *likert.omv* contains a single variable that contains raw Likert-scale responses for these 10 people. However, if you think about it, this isn't the best way to represent these responses. Because of the fairly symmetric way that we set up the response scale, there's a sense in which the midpoint of the scale should have been coded as 0 (no opinion), and the two endpoints should be "3 (strongly agree)" and "3 (strongly disagree)". By recoding the data in this way it's a bit more reflective of how we really think about the responses. The recoding here is pretty straightforward, we just subtract 4 from the raw scores. In jamovi you can do this by computing a new variable: click on the 'Data' - 'Compute' button and you will see that a new variable has been added to the spreadsheet. Let's call this new variable 'likert.centred' (go ahead and type that in) and then add the following in the formula box, like in @fig-fig6-4: 'likert.raw - 4'.
 
 ```{r}
 #| label: fig-fig6-4
@@ -205,7 +205,9 @@ knitr::include_graphics("images/fig6-5.png")
 
 Second, to compute a variable that contains only the direction of the opinion and ignores the strength, we want to calculate the 'sign' of the variable. In jamovi we can use the IF function to do this. Create another new variable using the 'Compute' button, name this one opinion.sign, and then type the following into the function box:
 
-IF(likert.centred $==$ 0, 0, likert.centred / opinion.strength) When done, you'll see that all negative numbers from the likert.centred variable are converted to -1, all positive numbers are converted to 1 and zero stays as 0, like so:
+> IF(likert.centred $==$ 0, 0, likert.centred / opinion.strength) 
+
+When done, you'll see that all negative numbers from the likert.centred variable are converted to -1, all positive numbers are converted to 1 and zero stays as 0, like so:
 
 > -1 1 -1 0 0 0 -1 1 1 1
 

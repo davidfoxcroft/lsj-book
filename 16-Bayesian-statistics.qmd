@@ -6,14 +6,14 @@ source("header.R")
 ```
 
 > *"In our reasonings concerning matter of fact, there are all imaginable degrees of assurance, from the highest certainty to the lowest species of moral evidence. A wise man, therefore, proportions his belief to the evidence."*\
-> -- David Hume [^bayesian-statistics-1]
+> -- David Hume[^bayesian-statistics-1]
 
 [^bayesian-statistics-1]: <a href="http://en.wikiquote.org/wiki/David%20Hume"
     target="_blank"><http://en.wikiquote.org/wiki/David_Hume>.</a>
 
 The ideas I've presented to you in this book describe inferential statistics from the frequentist perspective. I'm not alone in doing this. In fact, almost every textbook given to undergraduate psychology students presents the opinions of the frequentist statistician as *the* theory of inferential statistics, the one true way to do things. I have taught this way for practical reasons. The frequentist view of statistics dominated the academic field of statistics for most of the 20th century, and this dominance is even more extreme among applied scientists. It was and is current practice among psychologists to use frequentist methods. Because frequentist methods are ubiquitous in scientific papers, every student of statistics needs to understand those methods, otherwise they will be unable to make sense of what those papers are saying! Unfortunately, in my opinion at least, the current practice in psychology is often misguided, and the reliance on frequentist methods is partly to blame. In this chapter I explain why I think this and provide an introduction to Bayesian statistics, an approach that I think is generally superior to the orthodox approach.
 
-This chapter comes in two parts. In the first three sections I talk about what Bayesian statistics are all about, covering the basic mathematical rules for how it works as well as an explanation for why I think the Bayesian approach is so useful. Afterwards, I provide a brief overview of how you can do [Bayesian $t$-tests].
+This chapter comes in two parts. In the first three sections I talk about what Bayesian statistics are all about, covering the basic mathematical rules for how it works as well as an explanation for why I think the Bayesian approach is so useful. Afterwards, I provide a brief overview of how you can do[Bayesian t-tests].
 
 ## Probabilistic reasoning by rational agents
 
@@ -205,10 +205,9 @@ Up to this point I've focused exclusively on the logic underpinning Bayesian sta
 ### Statistics that mean what you think they mean
 
 > *You keep using that word. I do not think it means what you think it means*\
-> -- Inigo Montoya, The Princess Bride [^bayesian-statistics-9]
+> -- Inigo Montoya, The Princess Bride[^bayesian-statistics-9]
 
-[^bayesian-statistics-9]: <a href="http://www.imdb.com/title/tt0093779/quotes"
-    target="_blank">http://www.imdb.com/title/tt0093779/quotes</a> . I should note in passing that I'm not the first person to use this quote to complain about frequentist methods. Rich Morey and colleagues had the idea first. I'm shamelessly stealing it because it's such an awesome pull quote to use in this context and I refuse to miss any opportunity to quote *The Princess Bride*.
+[^bayesian-statistics-9]: <a href="http://www.imdb.com/title/tt0093779/quotes" target="_blank">http://www.imdb.com/title/tt0093779/quotes</a> . I should note in passing that I'm not the first person to use this quote to complain about frequentist methods. Rich Morey and colleagues had the idea first. I'm shamelessly stealing it because it's such an awesome pull quote to use in this context and I refuse to miss any opportunity to quote *The Princess Bride*.
 
 To me, one of the biggest advantages to the Bayesian approach is that it answers the right questions. Within the Bayesian framework, it is perfectly sensible and allowable to refer to "the probability that a hypothesis is true". You can even try to calculate this probability. Ultimately, isn't that what you want your statistical tests to tell you? To an actual human being, this would seem to be the whole point of doing statistics, i.e., to determine what is true and what isn't. Any time that you aren't exactly sure about what the truth is, you should use the language of probability theory to say things like "there is an 80% chance that Theory A is true, but a 20% chance that Theory B is true instead".
 
@@ -309,7 +308,7 @@ So how bad is it? The answer from a simulation study is shown as the solid line 
 #| label: fig-fig16-1
 #| fig-cap: Probability of Type I error in an experiment with target $N$ of 1000 per group and **peeking** at different intervals:- things can go badly wrong if you **peek** at your data and re-run your tests as new data arrives. If you are a frequentist, this is *very wrong* (blue circles and solid line). If you are a bayesian, it is not so bad (green triangles and dashed line). The alpha level was set at 0.05 (red dotted line) in this simulation.
 #| fig-alt: A scatter plot graph showing the probability of Type I error versus the 'Peeking' interval with new data points. Blue circles represent $p<0.05$ and green triangles represent $BF>3$. A red dashed line at $alpha = 0.05$ denotes the null hypothesis rejection threshold.
- 
+
 p_bf <- subset(p_bf, p_bf$peek <= 200)# leave out less plausible peeking frequency - better plot 
 
 p <- ggplot(p_bf) +
@@ -318,11 +317,11 @@ p <- ggplot(p_bf) +
   geom_point(aes(x=peek, y=bf_peek/1000, shape="p2", colour="p2"), size = 2) +
   geom_line(aes(x=peek, y=bf_peek/1000, colour="p2", linetype="p2"), stat="smooth", method = "loess", alpha=0.7) +
   geom_hline(yintercept=.05, col = 'red', linewidth = 0.4, linetype = 'dotted') +
-  scale_colour_manual(name="Null Hypothesis Rejection Threshold",
+  scale_colour_manual(name="Null hypothesis rejection threshold",
       values=c(p1=blueshade, p2="#009E73"), labels=c("p < 0.05  ", "BF > 3"), guide = guide_legend(title.position = "top", nrow = 1)) +
-  scale_shape_manual(name="Null Hypothesis Rejection Threshold",
+  scale_shape_manual(name="Null hypothesis rejection threshold",
       values=c(p1=1, p2=2), labels=c("p < 0.05  ", "BF > 3"), guide = guide_legend(title.position = "top", nrow = 1)) +
-  scale_linetype_manual(name="Null Hypothesis Rejection Threshold",
+  scale_linetype_manual(name="Null hypothesis rejection threshold",
       values=c(p1="solid", p2="dashed"), labels=c("p < 0.05  ", "BF > 3"), guide = guide_legend(title.position = "top", nrow = 1)) +
   theme_classic() +
   theme(
@@ -330,7 +329,7 @@ p <- ggplot(p_bf) +
     legend.direction = 'horizontal',
     legend.key.width = unit (1, 'cm')) +
   ylim(0,0.6) +
-  ylab("Probability of Type I Error\n") +
+  ylab("Probability of type I error\n") +
   xlab("\n'Peeking' interval with new data") +
   annotate(geom="text",label="alpha = .05", col = "red", size=2.5, x=10, y=0.035)
 
@@ -338,7 +337,7 @@ p
 
 ```
 
-In some ways, this is remarkable. The entire *point* of orthodox null hypothesis testing is to control the Type I error rate. Bayesian methods aren't actually designed to do this at all. Yet, as it turns out, when faced with a "trigger happy" researcher who keeps running hypothesis tests as the data come in, the Bayesian approach is much more effective. Even the 3:1 standard, which most Bayesians would consider unacceptably lax, is much safer than the p < .05 rule.
+In some ways, this is remarkable. The entire *point* of orthodox null hypothesis testing is to control the type I error rate. Bayesian methods aren't actually designed to do this at all. Yet, as it turns out, when faced with a "trigger happy" researcher who keeps running hypothesis tests as the data come in, the Bayesian approach is much more effective. Even the 3:1 standard, which most Bayesians would consider unacceptably lax, is much safer than the p < .05 rule.
 
 ### Is it really this bad?
 

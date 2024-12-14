@@ -45,6 +45,8 @@ lsj_chapter_tables[[16]] <- read_html("data_and_tables/16. Bayesian statistics.h
 
 #lsj_chapter_tables      
 saveRDS(lsj_chapter_tables, "data_and_tables/lsj_chapter_tables.rds")
+
+
 ##### huxtable defaults and function ----
 
 # create huxtable
