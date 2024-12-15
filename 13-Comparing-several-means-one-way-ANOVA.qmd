@@ -1,3 +1,7 @@
+\placetextbox{0.26}{0.06}{\scriptsize{©2025 D. Foxcroft and D. Navarro,}}
+\placetextbox{0.20}{0.05}{\scriptsize{CC BY-NC 4.0}}
+\placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333/13}}}
+
 # Comparing several means (one-way ANOVA) {#sec-Comparing-several-means-one-way-ANOVA}
 
 ```{r}
@@ -274,7 +278,7 @@ I'm pretty sure I know what you're thinking after reading the last section, espe
 
 ### Using jamovi to specify your ANOVA
 
-To make life easier for you, jamovi can do ANOVA...hurrah! Go to the 'ANOVA' - 'ANOVA' analysis, and move the mood.gain variable across so it is in the 'Dependent Variable' box, and then move the drug variable across so it is in the 'Fixed Factors' box. This should give the results as shown in @fig-fig13-3.[^13-comparing-several-means-one-way-anova-9] Note I have also checked the $\eta^2$ checkbox, pronounced "eta" squared, under the 'Effect Size' option and this is also shown on the results table. We will come back to effect sizes a bit later.
+To make life easier for you, jamovi can do ANOVA...hurrah! Go to the 'ANOVA' -- 'ANOVA' analysis, and move the mood.gain variable across so it is in the 'Dependent Variable' box, and then move the drug variable across so it is in the 'Fixed Factors' box. This should give the results as shown in @fig-fig13-3.[^13-comparing-several-means-one-way-anova-9] Note I have also checked the $\eta^2$ checkbox, pronounced "eta" squared, under the 'Effect Size' option and this is also shown on the results table. We will come back to effect sizes a bit later.
 
 ```{r}
 #| label: fig-fig13-3
@@ -484,7 +488,7 @@ And so jamovi uses a tie-correction factor to calculate the tie-corrected Kruska
 
 ### How to run the Kruskal-Wallis test in jamovi
 
-Despite the horror that we've gone through in trying to understand what the Kruskal-Wallis test actually does, it turns out that running the test is pretty painless, since jamovi has an analysis as part of the ANOVA analysis set called 'Non-Parametric' - 'one-way ANOVA (Kruskal-Wallis)' Most of the time you'll have data like the *clinicaltrial.csv*  data set, in which you have your outcome variable mood.gain and a grouping variable drug. If so, you can just go ahead and run the analysis in jamovi. What this gives us is a Kruskal-Wallis $\chi^2 =12.076, df = 2, p = 0.00239$, as in @fig-fig13-8.
+Despite the horror that we've gone through in trying to understand what the Kruskal-Wallis test actually does, it turns out that running the test is pretty painless, since jamovi has an analysis as part of the ANOVA analysis set called 'Non-Parametric' -- 'one-way ANOVA (Kruskal-Wallis)' Most of the time you'll have data like the *clinicaltrial.csv*  data set, in which you have your outcome variable mood.gain and a grouping variable drug. If so, you can just go ahead and run the analysis in jamovi. What this gives us is a Kruskal-Wallis $\chi^2 =12.076, df = 2, p = 0.00239$, as in @fig-fig13-8.
 
 ```{r}
 #| label: fig-fig13-8
@@ -570,7 +574,7 @@ Post hoc tests can also be specified in jamovi for repeated measures ANOVA in th
 #| label: fig-fig13-12
 #| classes: .enlarge-image
 #| fig-cap: Post hoc tests in repeated measures ANOVA in jamovi
-#| fig-alt: A jamovi results table titled "Post Hoc Comparisons - Task" with columns for Comparison, Mean Difference, $SE$, $df$, $t$, and $P_{tukey}$. The tasks compared are Speech vs. Conceptual, Speech vs. Syntax, and Conceptual vs. Syntax. Values for each comparison are provided.
+#| fig-alt: A jamovi results table titled 'Post Hoc Comparisons -- Task' with columns for Comparison, Mean Difference, $SE$, $df$, $t$, and $P_{tukey}$. The tasks compared are Speech vs. Conceptual, Speech vs. Syntax, and Conceptual vs. Syntax. Values for each comparison are provided.
 knitr::include_graphics("images/fig13-12.png")
 ```
 
@@ -580,7 +584,7 @@ Descriptive statistics (marginal means) can be reviewed to help interpret the re
 #| label: fig-fig13-13
 #| classes: .enlarge-image
 #| fig-cap: One-way repeated measures ANOVA output -- Descriptive Statistics
-#| fig-alt: A jamovi results table titled "Estimated Marginal Means - Task" shows the mean, standard error, and 95% confidence intervals for three tasks:- Speech (Mean:- 7.17, SE:- 0.60, CI:- 5.62-8.71), Conceptual (Mean:- 6.17, SE:- 0.60, CI:- 4.62-7.71), and Syntax (Mean:- 4.33, SE:- 0.67, CI:- 2.62-6.05).
+#| fig-alt: A jamovi results table titled 'Estimated Marginal Means - Task' shows the mean, standard error, and 95% confidence intervals for three tasks:- Speech (Mean:- 7.17, SE:- 0.60, CI:- 5.62-8.71), Conceptual (Mean:- 6.17, SE:- 0.60, CI:- 4.62-7.71), and Syntax (Mean:- 4.33, SE:- 0.67, CI:- 2.62-6.05).
 knitr::include_graphics("images/fig13-13.png")
 ```
 

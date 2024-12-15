@@ -1,3 +1,7 @@
+\placetextbox{0.26}{0.06}{\scriptsize{©2025 D. Foxcroft and D. Navarro,}}
+\placetextbox{0.20}{0.05}{\scriptsize{CC BY-NC 4.0}}
+\placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333/11}}}
+
 # Comparing two means {#sec-Comparing-two-means}
 
 ```{r}
@@ -17,7 +21,7 @@ In this section I'll describe one of the most useless tests in all of statistics
 
 ### The inference problem that the test addresses
 
-To introduce the idea behind the *z*-test, let's use a simple example. A friend of mine, Dr Zeppo, grades his introductory statistics class on a curve. Let's suppose that the average grade in his class is $67.5$, and the standard deviation is $9.5$. Of his many hundreds of students, it turns out that 20 of them also take psychology classes. Out of curiosity, I find myself wondering if the psychology students tend to get the same grades as everyone else (i.e., mean $67.5$) or do they tend to score higher or lower? He emails me the *zeppo.csv* file, which I use to look at the grades of those students, in the jamovi spreadsheet view,and then calculate the mean in 'Exploration' - 'Descriptives' [^11-comparing-two-means-2]. The mean value is $72.3$.
+To introduce the idea behind the *z*-test, let's use a simple example. A friend of mine, Dr Zeppo, grades his introductory statistics class on a curve. Let's suppose that the average grade in his class is $67.5$, and the standard deviation is $9.5$. Of his many hundreds of students, it turns out that 20 of them also take psychology classes. Out of curiosity, I find myself wondering if the psychology students tend to get the same grades as everyone else (i.e., mean $67.5$) or do they tend to score higher or lower? He emails me the *zeppo.csv* file, which I use to look at the grades of those students, in the jamovi spreadsheet view,and then calculate the mean in 'Exploration' -- 'Descriptives' [^11-comparing-two-means-2]. The mean value is $72.3$.
 
 [^11-comparing-two-means-2]: In order to do this I had to change the measurement level for $X$ to 'Continuous', as during the opening / import of the csv file jamovi made this a nominal level variable, which isn't right for my analysis.
 
@@ -341,7 +345,7 @@ The only thing that has changed in the equation is that instead of using the kno
 
 ### Doing the test in jamovi
 
-As you might expect, the mechanics of the $t$-test are almost identical to the mechanics of the *z*-test. So there's not much point in going through the tedious exercise of showing you how to do the calculations using low level commands. It's pretty much identical to the calculations that we did earlier, except that we use the estimated standard deviation and then we test our hypothesis using the $t$-distribution rather than the normal distribution. And so instead of going through the calculations in tedious detail for a second time, I'll jump straight to showing you how $t$-tests are actually done. jamovi comes with a dedicated analysis for $t$-tests that is very flexible (it can run lots of different kinds of $t$-tests). It's pretty straightforward to use; all you need to do is specify 'Analyses' - 'T-Tests' - 'One Sample T-Test', move the variable you are interested in ($X$) across into the 'Variables' box, and type in the mean value for the null hypothesis ('67.5') in the 'Hypothesis' - 'Test value' box. Easy enough. See @fig-fig11-6, which, amongst other things that we will get to in a moment, gives you a $t$-test statistic = 2.25, with 19 degrees of freedom and an associated $p$-value of $0.036$.
+As you might expect, the mechanics of the $t$-test are almost identical to the mechanics of the *z*-test. So there's not much point in going through the tedious exercise of showing you how to do the calculations using low level commands. It's pretty much identical to the calculations that we did earlier, except that we use the estimated standard deviation and then we test our hypothesis using the $t$-distribution rather than the normal distribution. And so instead of going through the calculations in tedious detail for a second time, I'll jump straight to showing you how $t$-tests are actually done. jamovi comes with a dedicated analysis for $t$-tests that is very flexible (it can run lots of different kinds of $t$-tests). It's pretty straightforward to use; all you need to do is specify 'Analyses' -- 'T-Tests' -- 'One Sample T-Test', move the variable you are interested in ($X$) across into the 'Variables' box, and type in the mean value for the null hypothesis ('67.5') in the 'Hypothesis' -- 'Test value' box. Easy enough. See @fig-fig11-6, which, amongst other things that we will get to in a moment, gives you a $t$-test statistic = 2.25, with 19 degrees of freedom and an associated $p$-value of $0.036$.
 
 ```{r}
 #| label: fig-fig11-6
@@ -382,7 +386,7 @@ Although the one sample $t$-test has its uses, it's not the most typical example
 
 Suppose we have 33 students taking Dr Harpo's statistics lectures, and Dr Harpo doesn't grade to a curve. Actually, Dr Harpo's grading is a bit of a mystery, so we don't really know anything about what the average grade is for the class as a whole. There are two tutors for the class, Anastasia and Bernadette. There are $N_1 = 15$ students in Anastasia's tutorials, and $N_2 = 18$ in Bernadette's tutorials. The research question I'm interested in is whether Anastasia or Bernadette is a better tutor, or if it doesn't make much of a difference. Dr Harpo emails me the course grades, in the *harpo.csv* file. As usual, I'll load the file into jamovi and have a look at what variables it contains - there are three variables, ID, grade and tutor. The grade variable contains each student's grade, but it is not imported into jamovi with the correct measurement level attribute, so I need to change this so it is regarded as a continuous variable (see @sec-Changing-data-from-one-level-to-another). The tutor variable is a factor that indicates who each student's tutor was - either Anastasia or Bernadette.
 
-We can calculate means and standard deviations, using the 'Exploration' - 'descriptives' analysis, and here's a nice little summary table (@tbl-tab11-2).
+We can calculate means and standard deviations, using the 'Exploration' -- 'descriptives' analysis, and here's a nice little summary table (@tbl-tab11-2).
 
 ```{r}
 #| label: tbl-tab11-2
@@ -478,7 +482,7 @@ Just as we saw with our one-sample test, the sampling distribution of this $t$-s
 
 ### Doing the test in jamovi
 
-Not surprisingly, you can run an independent samples $t$-test easily in jamovi. The outcome variable for our test is the student grade, and the groups are defined in terms of the tutor for each class. So you probably won't be too surprised that all you have to do in jamovi is go to the relevant analysis ('Analyses' - 'T-Tests' - 'Independent Samples T-Test') and move the grade variable across to the 'Dependent Variables' box, and the tutor variable across into the 'Grouping Variable' box, as shown in @fig-fig11-9.
+Not surprisingly, you can run an independent samples $t$-test easily in jamovi. The outcome variable for our test is the student grade, and the groups are defined in terms of the tutor for each class. So you probably won't be too surprised that all you have to do in jamovi is go to the relevant analysis ('Analyses' -- 'T-Tests' -- 'Independent Samples T-Test') and move the grade variable across to the 'Dependent Variables' box, and the tutor variable across into the 'Grouping Variable' box, as shown in @fig-fig11-9.
 
 ```{r}
 #| label: fig-fig11-9

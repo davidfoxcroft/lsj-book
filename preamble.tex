@@ -1,23 +1,19 @@
 \usepackage{makeidx}
 \usepackage{pdfpages}
 
-%reduce vertical spacing in toc
-\usepackage{etoolbox}
-\makeatletter
-  \pretocmd{\chapter}{\addtocontents{toc}{\protect\addvspace{-1\p@}}}{}{}
-  \pretocmd{\section}{\addtocontents{toc}{\protect\addvspace{-5\p@}}}{}{}
-\pretocmd{\subsection}{\addtocontents{toc}{\protect\addvspace{-5\p@}}}{}{}
-\makeatother
+%reduce vertical spacing in toc - not needed once tocloft added below
+%\usepackage{etoolbox}
+%\makeatletter
+%  \pretocmd{\chapter}{\addtocontents{toc}{\protect\addvspace{-1\p@}}}{}{}
+%  \pretocmd{\section}{\addtocontents{toc}{\protect\addvspace{-5\p@}}}{}{}
+%\pretocmd{\subsection}{\addtocontents{toc}{\protect\addvspace{-5\p@}}}{}{}
+%\makeatother
 
-\makeatletter
-  \providecommand*\setfloatlocations[2]{\@namedef{fps@#1}{#2}}
-\makeatother
-\setfloatlocations{figure}{htbp}
-\setfloatlocations{table}{htbp}
-
-\usepackage{enotez}
-\DeclareInstance{enotez-list}{section}{paragraph}{heading=\chapter}
-\setenotez{split=chapter,backref=true,list-name=Chapter notes,totoc=chapter}
+%\makeatletter
+%  \providecommand*\setfloatlocations[2]{\@namedef{fps@#1}{#2}}
+%\makeatother
+%\setfloatlocations{figure}{htbp}
+%\setfloatlocations{table}{htbp}
 
 \usepackage{titling}
 \let\oldmaketitle\maketitle
@@ -26,8 +22,18 @@
 \AtBeginDocument{\let\maketitle\relax}
 \AtBeginDocument{\AtBeginShipoutNext{\AtBeginShipoutDiscard}} % Discard next blank page
 
+\usepackage{tocloft}
+\cftsetindents{section}{2em}{2.5em}
+\cftsetindents{subsection}{5em}{3em}
 
+\usepackage{enotez}
+\DeclareInstance{enotez-list}{section}{paragraph}{heading=\chapter}
+\setenotez{split=chapter,backref=true,list-name=Chapter notes,totoc=chapter}
 
-
-
-
+%define command for adding footnote textbox to first page of each chapter
+\newcommand{\placetextbox}[3]{% \placetextbox{<horizontal pos>}{<vertical pos>}{<stuff>}
+  \setbox0=\hbox{#3}% Put <stuff> in a box
+  \AddToShipoutPictureFG*{% Add <stuff> to current page foreground
+    \put(\LenToUnit{#1\paperwidth},\LenToUnit{#2\paperheight}){\vtop{{\null}\makebox[0pt][c]{#3}}}%
+  }%
+}%

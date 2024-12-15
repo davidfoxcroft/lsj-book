@@ -1,3 +1,7 @@
+\placetextbox{0.26}{0.06}{\scriptsize{©2025 D. Foxcroft and D. Navarro,}}
+\placetextbox{0.20}{0.05}{\scriptsize{CC BY-NC 4.0}}
+\placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333/12}}}
+
 # Correlation and linear regression {#sec-Correlation-and-linear-regression}
 
 ```{r}
@@ -125,7 +129,7 @@ By standardising the covariance, not only do we keep all of the nice properties 
 
 ### Calculating correlations in jamovi
 
-Calculating correlations in jamovi can be done by clicking on the 'Regression' - 'Correlation Matrix' button. Transfer all four continuous variables across into the box on the right to get the output in @fig-fig12-5.
+Calculating correlations in jamovi can be done by clicking on the 'Regression' -- 'Correlation Matrix' button. Transfer all four continuous variables across into the box on the right to get the output in @fig-fig12-5.
 
 ```{r}
 #| label: fig-fig12-5
@@ -199,7 +203,7 @@ What we've just re-invented is **Spearman's rank order correlation**, usually de
 
 **Scatterplots** are a simple but effective tool for visualising the relationship between two variables, like we saw with the figures in the section on [Correlations]. It's this latter application that we usually have in mind when we use the term "scatterplot". In this kind of plot each observation corresponds to one dot. The horizontal location of the dot plots the value of the observation on one variable, and the vertical location displays its value on the other variable. In many situations you don't really have a clear opinion about what the causal relationship is (e.g., does A cause B, or does B cause A, or does some other variable C control both A and B). If that's the case, it doesn't really matter which variable you plot on the x-axis and which one you plot on the y-axis. However, in many situations you do have a pretty strong idea which variable you think is most likely to be causal, or at least you have some suspicions in that direction. If so, then it's conventional to plot the cause variable on the x-axis, and the effect variable on the y-axis. With that in mind, let's look at how to draw scatterplots in jamovi, using the same *parenthood*data set (i.e. *parenthood.csv*) that I used when introducing correlations.
 
-Suppose my goal is to draw a scatterplot displaying the relationship between the amount of sleep that I get (dani.sleep) and how grumpy I am the next day (dani.grump). There are two different ways in which we can use jamovi to get the plot that we're after. The first way is to use the 'Plot' option under the 'Regression' - 'Correlation Matrix' button, giving us the output shown in @fig-fig12-8. Note that jamovi draws a line through the points, we'll come onto this a bit later in the section on [What is a linear regression model?]. Plotting a scatterplot in this way also allows you to specify 'Densities for variables' and this option adds a density curve showing how the data in each variable is distributed.
+Suppose my goal is to draw a scatterplot displaying the relationship between the amount of sleep that I get (dani.sleep) and how grumpy I am the next day (dani.grump). There are two different ways in which we can use jamovi to get the plot that we're after. The first way is to use the 'Plot' option under the 'Regression' -- 'Correlation Matrix' button, giving us the output shown in @fig-fig12-8. Note that jamovi draws a line through the points, we'll come onto this a bit later in the section on [What is a linear regression model?]. Plotting a scatterplot in this way also allows you to specify 'Densities for variables' and this option adds a density curve showing how the data in each variable is distributed.
 
 ```{r}
 #| label: fig-fig12-8
@@ -220,7 +224,7 @@ knitr::include_graphics("images/fig12-9.png")
 
 ### More elaborate options
 
-Often you will want to look at the relationships between several variables at once, using a **scatterplot matrix** (in jamovi via the 'Correlation Matrix' - 'Plot' command). Just add another variable, for example baby.sleep to the list of variables to be correlated, and jamovi will create a scatterplot matrix for you, just like the one in @fig-fig12-10.
+Often you will want to look at the relationships between several variables at once, using a **scatterplot matrix** (in jamovi via the 'Correlation Matrix' -- 'Plot' command). Just add another variable, for example baby.sleep to the list of variables to be correlated, and jamovi will create a scatterplot matrix for you, just like the one in @fig-fig12-10.
 
 ```{r}
 #| label: fig-fig12-10
@@ -341,7 +345,7 @@ At this point, we now have a concrete definition for what counts as our "best" c
 
 ### Linear regression in jamovi
 
-To run my linear regression, open up the 'Regression' - 'Linear Regression' analysis in jamovi, using the *parenthood.csv* data file. Then specify dani.grump as the 'Dependent Variable' and dani.sleep as the variable entered in the 'Covariates' box. This gives the results shown in @fig-fig12-13, showing an intercept $\hat{b}_0 = 125.96$ and the slope $\hat{b}_1 = -8.94$. In other words, the best fitting regression line that I plotted in @fig-fig12-11 has this formula:
+To run my linear regression, open up the 'Regression' -- 'Linear Regression' analysis in jamovi, using the *parenthood.csv* data file. Then specify dani.grump as the 'Dependent Variable' and dani.sleep as the variable entered in the 'Covariates' box. This gives the results shown in @fig-fig12-13, showing an intercept $\hat{b}_0 = 125.96$ and the slope $\hat{b}_1 = -8.94$. In other words, the best fitting regression line that I plotted in @fig-fig12-11 has this formula:
 
 $$\hat{Y}_i=125.96+(-8.94 X_i)$$
 
@@ -542,7 +546,7 @@ To make things even simpler, jamovi has an option that computes the $\beta$ coef
 #| label: fig-fig12-16
 #| classes: .enlarge-image
 #| fig-cap: Standardised coefficients, with 95% confidence intervals, for multiple linear regression
-#| fig-alt: A jamovi screenshot showing a Linear Regression analysis. The interface includes sections for variables, model fit measures, model coefficients, omnibus test, and references. There are also options for ANOVA, Frequencies, and Factor analysis.
+#| fig-alt: A jamovi screenshot showing a Linear Regression analysis. The interface includes sections for variables, model fit measures, model coefficients, omnibus test, and references. There are also options for ANOVA, Frequencies, and Factor Analysis.
 knitr::include_graphics("images/fig12-16.png")
 ```
 
@@ -612,7 +616,7 @@ Somewhat more advanced versions of the same plot is produced by checking 'Residu
 
 ### Checking the normality of the residuals {#sec-Checking-the-normality-of-the-residuals}
 
-Like many of the statistical tools we've discussed in this book, regression models rely on a normality assumption. In this case, we assume that the residuals are normally distributed. The first thing we can do is draw a QQ-plot via the 'Assumption Checks' - 'Assumption Checks' - 'Q-Q plot of residuals' option. The output is shown in @fig-fig12-19, showing the standardised residuals plotted as a function of their theoretical quantiles according to the regression model.
+Like many of the statistical tools we've discussed in this book, regression models rely on a normality assumption. In this case, we assume that the residuals are normally distributed. The first thing we can do is draw a QQ-plot via the 'Assumption Checks' -- 'Assumption Checks' -- 'Q-Q plot of residuals' option. The output is shown in @fig-fig12-19, showing the standardised residuals plotted as a function of their theoretical quantiles according to the regression model.
 
 ```{r}
 #| label: fig-fig12-19
@@ -662,7 +666,7 @@ Another regression diagnostic is provided by **variance inflation factors** (VIF
 
 [^12-correlation-and-linear-regression-24]: The formula for the $k$-th VIF is: $VIF_k=\frac{1}{1-R^2_{(-k)}}$ where $R^2_{(-k)}$ refers to R-squared value you would get if you ran a regression using $X_k$ as the outcome variable, and all the other $X$ variables as the predictors. The idea here is that $R^2_{(-k)}$ is a very good measure of the extent to which $X_k$ is correlated with all the other variables in the model. Better yet, the square root of the VIF is pretty interpretable: it tells you how much wider the confidence interval for the corresponding coefficient $b_k$ is, relative to what you would have expected if the predictors are all nice and uncorrelated with one another.
 
-If you've only got two predictors, the VIF values are always going to be the same, as we can see if we click on the 'Collinearity' checkbox in the 'Regression' - 'Assumptions' options in jamovi. For both dani.sleep and baby.sleep the VIF is $1.65$. And since the square root of $1.65$ is $1.28$, we see that the correlation between our two predictors isn't causing much of a problem.
+If you've only got two predictors, the VIF values are always going to be the same, as we can see if we click on the 'Collinearity' checkbox in the 'Regression' -- 'Assumptions' options in jamovi. For both dani.sleep and baby.sleep the VIF is $1.65$. And since the square root of $1.65$ is $1.28$, we see that the correlation between our two predictors isn't causing much of a problem.
 
 To give a sense of how we could end up with a model that has bigger collinearity problems, suppose I were to run a much less interesting regression model, in which I tried to predict the day on which the data were collected, as a function of all the other variables in the data set. To see why this would be a bit of a problem, let's have a look at the correlation matrix for all four variables (@fig-fig12-22).
 
@@ -687,7 +691,7 @@ knitr::include_graphics("images/fig12-23.png")
 
 ### Outliers and anomalous data
 
-One danger that you can run into with linear regression models is that your analysis might be disproportionately sensitive to a smallish number of "unusual" or "anomalous" observations. I discussed this idea previously in @sec-Using-box-plots-to-detect-outliers in the context of discussing the outliers that get automatically identified by the boxplot option under 'Exploration' - 'Descriptives', but this time we need to be much more precise. In the context of linear regression, there are three conceptually distinct ways in which an observation might be called "anomalous". All three are interesting, but they have rather different implications for your analysis.
+One danger that you can run into with linear regression models is that your analysis might be disproportionately sensitive to a smallish number of "unusual" or "anomalous" observations. I discussed this idea previously in @sec-Using-box-plots-to-detect-outliers in the context of discussing the outliers that get automatically identified by the boxplot option under 'Exploration' -- 'Descriptives', but this time we need to be much more precise. In the context of linear regression, there are three conceptually distinct ways in which an observation might be called "anomalous". All three are interesting, but they have rather different implications for your analysis.
 
 The first kind of unusual observation is an **outlier**. The definition of an outlier (in this context) is an observation that is very different from what the regression model predicts. An example is shown in @fig-fig12-24. In practice, we operationalise this concept by saying that an outlier is an observation that has a very large residual, $\epsilon_i^*$. Outliers are interesting: a big outlier might correspond to junk data, e.g., the variables might have been recorded incorrectly in the data set, or some other defect may be detectable. Note that you shouldn't throw an observation away just because it's an outlier. But the fact that it's an outlier is often a cue to look more closely at that case and try to find out why it's so different.
 
@@ -793,7 +797,7 @@ ggplot(dat, aes(x=x, y=y)) +
 
 In order to have a large Cook's distance an observation must be a fairly substantial outlier and have high leverage. As a rough guide, Cook's distance greater than 1 is often considered large (that's what I typically use as a quick and dirty rule).
 
-In jamovi, information about Cook's distance can be calculated by clicking on the 'Cook's Distance' checkbox in the 'Assumption Checks' - 'Data Summary' options. When you do this, for the multiple regression model we have been using as an example in this chapter, you get the results as shown in @fig-fig12-27.
+In jamovi, information about Cook's distance can be calculated by clicking on the 'Cook's Distance' checkbox in the 'Assumption Checks' -- 'Data Summary' options. When you do this, for the multiple regression model we have been using as an example in this chapter, you get the results as shown in @fig-fig12-27.
 
 ```{r}
 #| label: fig-fig12-27

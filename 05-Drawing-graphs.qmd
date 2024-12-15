@@ -1,3 +1,7 @@
+\placetextbox{0.26}{0.06}{\scriptsize{©2025 D. Foxcroft and D. Navarro,}}
+\placetextbox{0.20}{0.05}{\scriptsize{CC BY-NC 4.0}}
+\placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333/05}}}
+
 # Drawing graphs {#sec-Drawing-graphs}
 
 ```{r}
@@ -66,7 +70,7 @@ ggplot() +
 
 ## Histograms {#sec-Histograms}
 
-Let's begin with the humble **histogram**. Histograms are one of the simplest and most useful ways of visualising data. They make most sense when you have an interval or ratio scale variable (e.g., the *afl.margins* data from @sec-Descriptive-statistics) and you want to get an overall impression of the variable. Most of you probably know how histograms work, since they're so widely used, but for the sake of completeness I'll describe them. All you do is divide up the possible values into **bins** and then count the number of observations that fall within each bin. This count is referred to as the frequency or density of the bin and is displayed as a vertical bar. In the AFL winning margins data there are 33 games in which the winning margin was less than 10 points and it is this fact that is represented by the height of the leftmost bar that we showed earlier in @sec-Descriptive-statistics, @fig-fig4-2. With these earlier graphs we used an advanced plotting package in R which, for now, is beyond the capability of jamovi. But jamovi gets us close, and drawing this histogram in jamovi is pretty straightforward. Open up the 'plots' options under 'Exploration' - 'Descriptives' and click the 'histogram' check box, as in @fig-fig5-1. jamovi defaults to labelling the y-axis as 'density' and the x-axis with the variable name. The **bins** are selected automatically, and there is no scale, or count, information on the y-axis unlike the previous @fig-fig4-2. But this does not matter too much because after all what we are really interested in is our impression of the shape of the distribution: is it normally distributed or is there a skew or kurtosis? Our first impressions of these characteristics come from drawing a **histogram**.
+Let's begin with the humble **histogram**. Histograms are one of the simplest and most useful ways of visualising data. They make most sense when you have an interval or ratio scale variable (e.g., the *afl.margins* data from @sec-Descriptive-statistics) and you want to get an overall impression of the variable. Most of you probably know how histograms work, since they're so widely used, but for the sake of completeness I'll describe them. All you do is divide up the possible values into **bins** and then count the number of observations that fall within each bin. This count is referred to as the frequency or density of the bin and is displayed as a vertical bar. In the AFL winning margins data there are 33 games in which the winning margin was less than 10 points and it is this fact that is represented by the height of the leftmost bar that we showed earlier in @sec-Descriptive-statistics, @fig-fig4-2. With these earlier graphs we used an advanced plotting package in R which, for now, is beyond the capability of jamovi. But jamovi gets us close, and drawing this histogram in jamovi is pretty straightforward. Open up the 'plots' options under 'Exploration' -- 'Descriptives' and click the 'histogram' check box, as in @fig-fig5-1. jamovi defaults to labelling the y-axis as 'density' and the x-axis with the variable name. The **bins** are selected automatically, and there is no scale, or count, information on the y-axis unlike the previous @fig-fig4-2. But this does not matter too much because after all what we are really interested in is our impression of the shape of the distribution: is it normally distributed or is there a skew or kurtosis? Our first impressions of these characteristics come from drawing a **histogram**.
 
 ```{r}
 #| label: fig-fig5-2
@@ -146,7 +150,7 @@ Because the boxplot automatically separates out those observations that lie outs
 knitr::include_graphics("images/fig5-8.png")
 ```
 
-This filter creates a new column in the spreadsheet view where only those observations that pass the filter are included. One neat way to quickly identify which observations these are is to tell jamovi to produce a 'Frequency table' (in the 'Exploration' - 'Descriptives' window) for the ID variable (which must be a nominal variable otherwise the Frequency table is not produced). In @fig-fig5-10 you can see that the ID values for the observations where the margin was over 300 are 176 and 202. These are suspicious cases, or observations, where you should go back to the original data source to find out what is going on.
+This filter creates a new column in the spreadsheet view where only those observations that pass the filter are included. One neat way to quickly identify which observations these are is to tell jamovi to produce a 'Frequency table' (in the 'Exploration' -- 'Descriptives' window) for the ID variable (which must be a nominal variable otherwise the Frequency table is not produced). In @fig-fig5-10 you can see that the ID values for the observations where the margin was over 300 are 176 and 202. These are suspicious cases, or observations, where you should go back to the original data source to find out what is going on.
 
 ```{r}
 #| label: fig-fig5-9
@@ -175,7 +179,7 @@ Another form of graph that you often want to plot is the **bar graph**. Let's us
 
 [^drawing-graphs-2]: jamovi uses the symbol "$==$" here to mean "matches".
 
-When you have done this you will see, in the 'Data' view, that jamovi has filtered out all values apart from those we have specified. Next, open up the 'Exploration' - 'Descriptives' window and click on the 'Bar plot' check box (remember to move the 'afl.finalists' variable across into the 'Variables' box so that jamovi knows which variable to use). You should then get a bar graph, something like that shown in @fig-fig5-11.
+When you have done this you will see, in the 'Data' view, that jamovi has filtered out all values apart from those we have specified. Next, open up the 'Exploration' -- 'Descriptives' window and click on the 'Bar plot' check box (remember to move the 'afl.finalists' variable across into the 'Variables' box so that jamovi knows which variable to use). You should then get a bar graph, something like that shown in @fig-fig5-11.
 
 ```{r}
 #| label: fig-fig5-11

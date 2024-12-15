@@ -1,3 +1,7 @@
+\placetextbox{0.26}{0.06}{\scriptsize{©2025 D. Foxcroft and D. Navarro,}}
+\placetextbox{0.20}{0.05}{\scriptsize{CC BY-NC 4.0}}
+\placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333/16}}}
+
 # Bayesian statistics {#sec-Bayesian-statistics}
 
 ```{r}
@@ -13,11 +17,11 @@ source("header.R")
 
 The ideas I've presented to you in this book describe inferential statistics from the frequentist perspective. I'm not alone in doing this. In fact, almost every textbook given to undergraduate psychology students presents the opinions of the frequentist statistician as *the* theory of inferential statistics, the one true way to do things. I have taught this way for practical reasons. The frequentist view of statistics dominated the academic field of statistics for most of the 20th century, and this dominance is even more extreme among applied scientists. It was and is current practice among psychologists to use frequentist methods. Because frequentist methods are ubiquitous in scientific papers, every student of statistics needs to understand those methods, otherwise they will be unable to make sense of what those papers are saying! Unfortunately, in my opinion at least, the current practice in psychology is often misguided, and the reliance on frequentist methods is partly to blame. In this chapter I explain why I think this and provide an introduction to Bayesian statistics, an approach that I think is generally superior to the orthodox approach.
 
-This chapter comes in two parts. In the first three sections I talk about what Bayesian statistics are all about, covering the basic mathematical rules for how it works as well as an explanation for why I think the Bayesian approach is so useful. Afterwards, I provide a brief overview of how you can do[Bayesian t-tests].
+This chapter comes in two parts. In the first three sections I talk about what Bayesian statistics are all about, covering the basic mathematical rules for how it works as well as an explanation for why I think the Bayesian approach is so useful. Afterwards, I provide a brief overview of how you can do[Bayesian $t$-tests].
 
 ## Probabilistic reasoning by rational agents
 
-From a Bayesian perspective statistical inference is all about *belief revision*. I start out with a set of candidate hypotheses, $h$, about the world. I don't know which of these hypotheses is true, but do I have some beliefs about which hypotheses are plausible and which are not. When I observe the data, $d$, I have to revise those beliefs. If the data are consistent with a hypothesis, my belief in that hypothesis is strengthened. If the data are inconsistent with the hypothesis, my belief in that hypothesis is weakened. That's it! At the end of this section I'll give a precise description of how Bayesian reasoning works, but first I want to work through a simple example in order to introduce the key ideas. Consider the following reasoning problem.
+From a Bayesian perspective statistical inference is all about *belief revision*. I start out with a set of candidate hypotheses, $h$, about the world. I don't know which of these hypotheses is true, but do I have some beliefs about which hypotheses are plausible and which are not. When I observe the data, $d$, I have to revise those beliefs. If the data are consistent with a hypothesis, my belief in that hypothesis is strengthened. If the data are inconsistent with the hypothesis, my belief in that hypothesis is weakened. That's it! At the end of this section I'll give a precise description of how Bayesian reasoning works, but first I want to work through a simple example in order to introduce the key ideas. Consider the following reasoning problem:
 
 > *I'm carrying an umbrella. Do you think it will rain?*
 
@@ -32,7 +36,7 @@ The first thing you need to do is ignore what I told you about the umbrella, and
 
 ```{r}
 #| label: tbl-tab16-1
-#| tbl-cap: How likely is it to rain in Adelaide - pre-existing beliefs based on knowledge of average January rainfall
+#| tbl-cap: How likely is it to rain in Adelaide -- pre-existing beliefs based on knowledge of average January rainfall
 huxtabs[[16]][[1]]
 ```
 
@@ -60,7 +64,7 @@ Let's start out with one of the rules of probability theory. I listed it way bac
 
 $$P(d,h)=P(d|h)P(h)$$
 
-So, what is the probability that today is a rainy day *and* I remember to carry an umbrella? As we discussed earlier, the prior tells us that the probability of a rainy day is 15%, and the likelihood tells us that the probability of me remembering my umbrella on a rainy day is 30%. So the probability that both of these things are true is calculated by multiplying the two
+So, what is the probability that today is a rainy day *and* I remember to carry an umbrella? As we discussed earlier, the prior tells us that the probability of a rainy day is 15%, and the likelihood tells us that the probability of me remembering my umbrella on a rainy day is 30%. So the probability that both of these things are true is calculated by multiplying the two:
 
 $$
 \begin{split}
@@ -128,9 +132,9 @@ What two numbers should we put in the empty cells? Again, let's not worry about 
 huxtabs[[16]][[8]]
 ```
 
-What this table is telling you is that, after being told that I'm carrying an umbrella, you believe that there's a 51.4%) chance that today will be a rainy day, and a 48.6% chance that it won't. That's the answer to our problem! The **posterior probability** of rain $P(h\|d)$ given that I am carrying an umbrella is 51.4%
+What this table is telling you is that, after being told that I'm carrying an umbrella, you believe that there's a 51.4% chance that today will be a rainy day, and a 48.6% chance that it won't. That's the answer to our problem! The **posterior probability** of rain $P(h\|d)$ given that I am carrying an umbrella is 51.4%.
 
-How did I calculate these numbers? You can probably guess. To work out that there was a $0.514$ probability of "rain", all I did was take the $0.045$ probability of "rain and umbrella" and divide it by the $0.0875$ chance of "umbrella". This produces a table that satisfies our need to have everything sum to 1, and our need not to interfere with the relative plausibility of the two events that are actually consistent with the data. To say the same thing using fancy statistical jargon, what I've done here is divide the joint probability of the hypothesis and the data $P(d, h)$ by the **marginal probability** of the data $P(d)$, and this is what gives us the posterior probability of the hypothesis given the data that have been observed. To write this as an equation: [^bayesian-statistics-7]
+How did I calculate these numbers? You can probably guess. To work out that there was a $0.514$ probability of "rain", all I did was take the $0.045$ probability of "rain and umbrella" and divide it by the $0.0875$ chance of "umbrella". This produces a table that satisfies our need to have everything sum to 1, and our need not to interfere with the relative plausibility of the two events that are actually consistent with the data. To say the same thing using fancy statistical jargon, what I've done here is divide the joint probability of the hypothesis and the data $P(d, h)$ by the **marginal probability** of the data $P(d)$, and this is what gives us the posterior probability of the hypothesis given the data that have been observed. To write this as an equation:[^bayesian-statistics-7]
 
 [^bayesian-statistics-7]: You might notice that this equation is actually a restatement of the same basic rule I listed at the start of the last section. If you multiply both sides of the equation by $P(d)$, then you get $P(d)P(h|d) = P(d, h)$, which is the rule for how joint probabilities are calculated. So I'm not actually introducing any "new" rules here, I'm just using the same rule in a different way.
 
@@ -152,21 +156,21 @@ This formula tells us exactly how much belief we should have in the null hypothe
 
 $$P(h_1|d)=\frac{P(d|h_1)P(h_1)}{P(d)}$$
 
-It's all so simple that I feel like an idiot even bothering to write these equations down, since all I'm doing is copying Bayes rule from the previous section.[^bayesian-statistics-8]
+It's all so simple that I feel like an idiot even bothering to write these equations down, since all I'm doing is copying Bayes' rule from the previous section.[^bayesian-statistics-8]
 
 [^bayesian-statistics-8]: Obviously, this is a highly simplified story. All the complexity of real-life Bayesian hypothesis testing comes down to how you calculate the likelihood, $P(d|h)$, when the hypothesis $h$ is a complex and vague thing. I'm not going to talk about those complexities in this book, but I do want to highlight that although this simple story is true as far as it goes, real life is messier than I'm able to cover in an introductory stats textbook.
 
 ### The Bayes factor
 
-In practice, most Bayesian data analysts tend not to talk in terms of the raw posterior probabilities $P(h_0|d)$ and $P(h_1|d)$. Instead, we tend to talk in terms of the **posterior odds** ratio. Think of it like betting. Suppose, for instance, the posterior probability of the null hypothesis is 25%, and the posterior probability of the alternative is 75%. The alternative hypothesis is three times as probable as the null, so we say that the odds are 3:1 in favour of the alternative. Mathematically, all we have to do to calculate the posterior odds is divide one posterior probability by the other
+In practice, most Bayesian data analysts tend not to talk in terms of the raw posterior probabilities $P(h_0|d)$ and $P(h_1|d)$. Instead, we tend to talk in terms of the **posterior odds** ratio. Think of it like betting. Suppose, for instance, the posterior probability of the null hypothesis is 25%, and the posterior probability of the alternative is 75%. The alternative hypothesis is three times as probable as the null, so we say that the odds are 3:1 in favour of the alternative. Mathematically, all we have to do to calculate the posterior odds is divide one posterior probability by the other:
 
 $$\frac{P(h_1|d)}{P(h_0|d)}=\frac{0.75}{0.25}=3$$
 
-Or, to write the same thing in terms of the equations above
+Or, to write the same thing in terms of the equations above:
 
 $$\frac{P(h_1|d)}{P(h_0|d)}=\frac{P(d|h_1)}{P(d|h_0)} \times \frac{P(h_1)}{P(h_0)}$$
 
-Actually, this equation is worth expanding on. There are three different terms here that you should know. On the left hand side, we have the posterior odds, which tells you what you believe about the relative plausibilty of the null hypothesis and the alternative hypothesis after seeing the data. On the right hand side, we have the **prior odds**, which indicates what you thought before seeing the data. In the middle, we have the **Bayes factor**, which describes the amount of evidence provided by the data. (@tbl-tab16-9).
+Actually, this equation is worth expanding on. There are three different terms here that you should know. On the left-hand side, we have the posterior odds, which tells you what you believe about the relative plausibilty of the null hypothesis and the alternative hypothesis after seeing the data. On the right-hand side, we have the **prior odds**, which indicates what you thought before seeing the data. In the middle, we have the **Bayes factor**, which describes the amount of evidence provided by the data (@tbl-tab16-9).
 
 ```{r}
 #| label: tbl-tab16-9
@@ -174,7 +178,7 @@ Actually, this equation is worth expanding on. There are three different terms h
 huxtabs[[16]][[9]]
 ```
 
-The Bayes factor (sometimes abbreviated as BF) has a special place in Bayesian hypothesis testing, because it serves a similar role to the $p$-value in orthodox hypothesis testing. The Bayes factor quantifies the strength of evidence provided by the data, and as such it is the Bayes factor that people tend to report when running a Bayesian hypothesis test. The reason for reporting Bayes factors rather than posterior odds is that different researchers will have different priors. Some people might have a strong bias to believe the null hypothesis is true, others might have a strong bias to believe it is false. Because of this, the polite thing for an applied researcher to do is report the Bayes factor. That way, anyone reading the paper can multiply the Bayes factor by their own personal prior odds, and they can work out for themselves what the posterior odds would be. In any case, by convention we like to pretend that we give equal consideration to both the null hypothesis and the alternative, in which case the prior odds equals 1, and the posterior odds becomes the same as the Bayes factor
+The Bayes factor (sometimes abbreviated as BF) has a special place in Bayesian hypothesis testing, because it serves a similar role to the $p$-value in orthodox hypothesis testing. The Bayes factor quantifies the strength of evidence provided by the data, and as such it is the Bayes factor that people tend to report when running a Bayesian hypothesis test. The reason for reporting Bayes factors rather than posterior odds is that different researchers will have different priors. Some people might have a strong bias to believe the null hypothesis is true, others might have a strong bias to believe it is false. Because of this, the polite thing for an applied researcher to do is report the Bayes factor. That way, anyone reading the paper can multiply the Bayes factor by their own personal prior odds, and they can work out for themselves what the posterior odds would be. In any case, by convention we like to pretend that we give equal consideration to both the null hypothesis and the alternative, in which case the prior odds equals 1, and the posterior odds becomes the same as the Bayes factor.
 
 ### Interpreting Bayes factors
 
@@ -188,11 +192,11 @@ huxtabs[[16]][[10]]
 
 And to be perfectly honest, I think that even the @Kass1995 standards are being a bit charitable. If it were up to me, I'd have called the "positive evidence" category "weak evidence". To me, anything in the range 3:1 to 20:1 is "weak" or "modest" evidence at best. But there are no hard and fast rules here. What counts as strong or weak evidence depends entirely on how conservative you are and upon the standards that your community insists upon before it is willing to label a finding as "true".
 
-In any case, note that all the numbers listed above make sense if the Bayes factor is greater than 1 (i.e., the evidence favours the alternative hypothesis). However, one big practical advantage of the Bayesian approach relative to the orthodox approach is that it also allows you to quantify evidence for the null. When that happens, the Bayes factor will be less than 1. You can choose to report a Bayes factor less than 1, but to be honest I find it confusing. For example, suppose that the likelihood of the data under the null hypothesis $P(d|h_0)$ is equal to 0.2, and the corresponding likelihood $P(d|h_1)$ under the alternative hypothesis is 0.1. Using the equations given above, Bayes factor here would be
+In any case, note that all the numbers listed above make sense if the Bayes factor is greater than 1 (i.e., the evidence favours the alternative hypothesis). However, one big practical advantage of the Bayesian approach relative to the orthodox approach is that it also allows you to quantify evidence for the null. When that happens, the Bayes factor will be less than 1. You can choose to report a Bayes factor less than 1, but to be honest I find it confusing. For example, suppose that the likelihood of the data under the null hypothesis $P(d|h_0)$ is equal to 0.2, and the corresponding likelihood $P(d|h_1)$ under the alternative hypothesis is 0.1. Using the equations given above, Bayes factor here would be:
 
 $$BF=\frac{P(d|h_1)}{P(d|h_0)}=\frac{0.1}{0.2}=0.5$$
 
-Read literally, this result tells is that the evidence in favour of the alternative is 0.5 to 1. I find this hard to understand. To me, it makes a lot more sense to turn the equation "upside down", and report the amount op evidence in favour of the null. In other words, what we calculate is this
+Read literally, this result tells is that the evidence in favour of the alternative is 0.5 to 1. I find this hard to understand. To me, it makes a lot more sense to turn the equation "upside down", and report the amount op evidence in favour of the null. In other words, what we calculate is this:
 
 $$BF^{'}=\frac{P(d|h_0)}{P(d|h_1)}=\frac{0.2}{0.1}=2$$
 
@@ -204,8 +208,8 @@ Up to this point I've focused exclusively on the logic underpinning Bayesian sta
 
 ### Statistics that mean what you think they mean
 
-> *You keep using that word. I do not think it means what you think it means*\
-> -- Inigo Montoya, The Princess Bride[^bayesian-statistics-9]
+> "*You keep using that word. I do not think it means what you think it means*"\
+> -- Inigo Montoya, *The Princess Bride*[^bayesian-statistics-9]
 
 [^bayesian-statistics-9]: <a href="http://www.imdb.com/title/tt0093779/quotes" target="_blank">http://www.imdb.com/title/tt0093779/quotes</a> . I should note in passing that I'm not the first person to use this quote to complain about frequentist methods. Rich Morey and colleagues had the idea first. I'm shamelessly stealing it because it's such an awesome pull quote to use in this context and I refuse to miss any opportunity to quote *The Princess Bride*.
 
@@ -215,7 +219,7 @@ This seems so obvious to a human, yet it is explicitly forbidden within the orth
 
 [^bayesian-statistics-10]: <a href="http://about.abc.net.au/reports-publications/appreciation-survey-summary-report-2013/%0A" target="_blank">http://about.abc.net.au/reports-publications/appreciation-survey-summary-report-2013/</a>
 
-> *Throughout the report, where relevant, statistically significant changes have been noted. All significance tests have been based on the 95 percent level of confidence. **This means that if a change is noted as being statistically significant, there is a 95 percent probability that a real change has occurred**, and is not simply due to chance variation. (emphasis added)*
+> "*Throughout the report, where relevant, statistically significant changes have been noted. All significance tests have been based on the 95 percent level of confidence. **This means that if a change is noted as being statistically significant, there is a 95 percent probability that a real change has occurred**, and is not simply due to chance variation."* (emphasis added)
 
 Nope! That's not what p < .05 means. That's not what 95% confidence means to a frequentist statistician. The bolded section is just plain wrong. Orthodox methods cannot tell you that "there is a 95% chance that a real change has occurred", because this is not the kind of event to which frequentist probabilities may be assigned. To an ideological frequentist, this sentence should be meaningless. Even if you're a more pragmatic frequentist, it's still the wrong definition of a $p$-value. It is simply not an allowed or correct thing to say if you want to rely on orthodox statistical tools.
 
@@ -225,54 +229,54 @@ Speaking for myself, I found this to be the most liberating thing about switchin
 
 ### Evidentiary standards you can believe
 
-> *If* $p$ is below .02 it is strongly indicated that the $null$ hypothesis fails to account for the whole of the facts. We shall not often be astray if we draw a conventional line at .05 and consider that smaller values of $p$ indicate a real discrepancy.\
-> -- Sir Ronald Fisher [@Fisher1925]
+> *"**If** $p$ is below .02 it is strongly indicated that the $null$ hypothesis fails to account for the whole of the facts. We shall not often be astray if we draw a conventional line at .05 and consider that smaller values of $p$ indicate a real discrepancy."*\
+> -- Sir Ronald Fisher [@Fisher1925, p. 79]
 
-Consider the quote above by Sir Ronald Fisher, one of the founders of what has become the orthodox approach to statistics. If anyone has ever been entitled to express an opinion about the intended function of $p$-values, it's Fisher. In this passage, taken from his classic guide, *Statistical Methods for Research Workers*, he's pretty clear about what it means to reject a null hypothesis at p < .05. In his opinion, if we take p < .05 to mean there is "a real effect", then "we shall not often be astray". This view is hardly unusual. In my experience, most practitioners express views very similar to Fisher's. In essence, the p < .05 convention is assumed to represent a fairly stringent evidential standard.
+Consider the quote above by Sir Ronald Fisher, one of the founders of what has become the orthodox approach to statistics. If anyone has ever been entitled to express an opinion about the intended function of $p$-values, it's Fisher. In this passage, taken from his classic guide, *Statistical Methods for Research Workers*, he's pretty clear about what it means to reject a null hypothesis at $p < .05$. In his opinion, if we take $p < .05$ to mean there is "a real effect", then "we shall not often be astray". This view is hardly unusual. In my experience, most practitioners express views very similar to Fisher's. In essence, the $p < .05$ convention is assumed to represent a fairly stringent evidential standard.
 
-Well, how true is that? One way to approach this question is to try to convert $p$-values to Bayes factors, and see how the two compare. It's not an easy thing to do because a $p$-value is a fundamentally different kind of calculation to a Bayes factor, and they don't measure the same thing. However, there have been some attempts to work out the relationship between the two, and it's somewhat surprising. For example, @Johnson2013 presents a pretty compelling case that (for $t$-tests at least) the p < .05 threshold corresponds roughly to a Bayes factor of somewhere between 3:1 and 5:1 in favour of the alternative. If that's right, then Fisher's claim is a bit of a stretch. Let's suppose that the null hypothesis is true about half the time (i.e., the prior probability of $H_0$ is 0.5), and we use those numbers to work out the posterior probability of the null hypothesis given that it has been rejected at p < .05. Using the data from @Johnson2013, we see that if you reject the null at p < .05, you'll be correct about 80% of the time. I don't know about you but, in my opinion, an evidential standard that ensures you'll be wrong on 20% of your decisions isn't good enough. The fact remains that, quite contrary to Fisher's claim, if you reject at p < .05 you shall quite often go astray. It's not a very stringent evidential threshold at all.
+Well, how true is that? One way to approach this question is to try to convert $p$-values to Bayes factors, and see how the two compare. It's not an easy thing to do because a $p$-value is a fundamentally different kind of calculation to a Bayes factor, and they don't measure the same thing. However, there have been some attempts to work out the relationship between the two, and it's somewhat surprising. For example, @Johnson2013 presents a pretty compelling case that (for $t$-tests at least) the $p < .05$ threshold corresponds roughly to a Bayes factor of somewhere between 3:1 and 5:1 in favour of the alternative. If that's right, then Fisher's claim is a bit of a stretch. Let's suppose that the null hypothesis is true about half the time (i.e., the prior probability of $H_0$ is 0.5), and we use those numbers to work out the posterior probability of the null hypothesis given that it has been rejected at $p < .05$. Using the data from @Johnson2013, we see that if you reject the null at $p < .05$, you'll be correct about 80% of the time. I don't know about you but, in my opinion, an evidential standard that ensures you'll be wrong on 20% of your decisions isn't good enough. The fact remains that, quite contrary to Fisher's claim, if you reject at $p < .05$ you shall quite often go astray. It's not a very stringent evidential threshold at all.
 
 ### The $p$-value is a lie.
 
+> "*The cake is a lie.*\
 > *The cake is a lie.*\
 > *The cake is a lie.*\
-> *The cake is a lie.*\
-> *The cake is a lie.*\
+> *The cake is a lie.*\"
 > -- Portal[^bayesian-statistics-11]
 
 [^bayesian-statistics-11]: <a href="http://knowyourmeme.com/memes/the-cake-is-a-lie"
-    target="_blank">http://knowyourmeme.com/memes/the-cake-is-a-lie</a> .
+    target="_blank">http://knowyourmeme.com/memes/the-cake-is-a-lie</a>.
 
-Okay, at this point you might be thinking that the real problem is not with orthodox statistics, just the p < .05 standard. In one sense, that's true. The recommendation that @Johnson2013 gives is not that "everyone must be a Bayesian now". Instead, the suggestion is that it would be wiser to shift the conventional standard to something like a p < .01 level. That's not an unreasonable view to take, but in my view the problem is a little more severe than that. In my opinion, there's a fairly big problem built into the way most (but not all) orthodox hypothesis tests are constructed. They are grossly naive about how humans actually do research, and because of this most $p$-values are wrong.
+Okay, at this point you might be thinking that the real problem is not with orthodox statistics, just the $p < .05$ standard. In one sense, that's true. The recommendation that @Johnson2013 gives is not that "everyone must be a Bayesian now". Instead, the suggestion is that it would be wiser to shift the conventional standard to something like a $p < .01$ level. That's not an unreasonable view to take, but in my view the problem is a little more severe than that. In my opinion, there's a fairly big problem built into the way most (but not all) orthodox hypothesis tests are constructed. They are grossly naive about how humans actually do research, and because of this most $p$-values are wrong.
 
 Sounds like an absurd claim, right? Well, consider the following scenario. You've come up with a really exciting research hypothesis and you design a study to test it. You're very diligent, so you run a power analysis to work out what your sample size should be, and you run the study. You run your hypothesis test and out pops a $p$-value of 0.072. Really bloody annoying, right?
 
 What should you do? Here are some possibilities:
 
 1.  You conclude that there is no effect and try to publish it as a null result
-2.  You guess that there might be an effect and try to publish it as a "borderline significant" result
-3.  You give up and try a new study
-4.  You collect some more data to see if the $p$-value goes up or (preferably!) drops below the "magic" criterion of p < .05
+2.  You guess that there might be an effect and try to publish it as a "borderline significant" result.
+3.  You give up and try a new study.
+4.  You collect some more data to see if the $p$-value goes up or (preferably!) drops below the "magic" criterion of $p < .05$.
 
 Which would you choose? Before reading any further, I urge you to take some time to think about it. Be honest with yourself. But don't stress about it too much, because you're screwed no matter what you choose. Based on my own experiences as an author, reviewer and editor, as well as stories I've heard from others, here's what will happen in each case:
 
--   Let's start with option 1. If you try to publish it as a null result, the paper will struggle to be published. Some reviewers will think that p = .072 is not really a null result. They'll argue it's borderline significant. Other reviewers will agree it's a null result, but will claim that even though some null results are publishable, yours isn't. One or two reviewers might even be on your side, but you'll be fighting an uphill battle to get it through.
+-   Let's start with option 1. If you try to publish it as a null result, the paper will struggle to be published. Some reviewers will think that $p = .072$ is not really a null result. They'll argue it's borderline significant. Other reviewers will agree it's a null result, but will claim that even though some null results are publishable, yours isn't. One or two reviewers might even be on your side, but you'll be fighting an uphill battle to get it through.
 
 -   Okay, let's think about option number 2. Suppose you try to publish it as a borderline significant result. Some reviewers will claim that it's a null result and should not be published. Others will claim that the evidence is ambiguous, and that you should collect more data until you get a clear significant result. Again, the publication process does not favour you.
 
--   Given the difficulties in publishing an "ambiguous" result like p = .072, option number 3 might seem tempting: give up and do something else. But that's a recipe for career suicide. If you give up and try a new project every time you find yourself faced with ambiguity, your work will never be published. And if you're in academia without a publication record, you can lose your job. So that option is out.
+-   Given the difficulties in publishing an "ambiguous" result like $p = .072$, option number 3 might seem tempting: give up and do something else. But that's a recipe for career suicide. If you give up and try a new project every time you find yourself faced with ambiguity, your work will never be published. And if you're in academia without a publication record, you can lose your job. So that option is out.
 
 -   It looks like you're stuck with option 4. You don't have conclusive results, so you decide to collect some more data and re-run the analysis. Seems sensible, but unfortunately for you, if you do this all of your $p$-values are now incorrect. All of them. Not just the $p$-values that you calculated for this study. All of them. All the $p$-values you calculated in the past and all the $p$-values you will calculate in the future. Fortunately, no-one will notice. You'll get published, and you'll have lied.
 
 Wait, what? How can that last part be true? I mean, it sounds like a perfectly reasonable strategy, doesn't it? You collected some data, the results weren't conclusive, so now what you want to do is collect more data until the the results are conclusive. What's wrong with that?
 
-Honestly, there's nothing wrong with it. It's a reasonable, sensible and rational thing to do. In real life, this is exactly what every researcher does. Unfortunately, the theory of null hypothesis testing as I described it in @sec-Hypothesis-testing forbids you from doing this.[^bayesian-statistics-12] The reason is that the theory assumes that the experiment is finished and all the data are in. And because it assumes the experiment is over, it only considers two possible decisions. If you're using the conventional p < .05 threshold, those decisions are shown in @tbl-tab16-11.
+Honestly, there's nothing wrong with it. It's a reasonable, sensible and rational thing to do. In real life, this is exactly what every researcher does. Unfortunately, the theory of null hypothesis testing as I described it in @sec-Hypothesis-testing forbids you from doing this.[^bayesian-statistics-12] The reason is that the theory assumes that the experiment is finished and all the data are in. And because it assumes the experiment is over, it only considers two possible decisions. If you're using the conventional $p < .05$ threshold, those decisions are shown in @tbl-tab16-11.
 
 [^bayesian-statistics-12]: In the interests of being completely honest, I should acknowledge that not all orthodox statistical tests rely on this silly assumption. There are a number of sequential analysis tools that are sometimes used in clinical trials and the like. These methods are built on the assumption that data are analysed as they arrive, and these tests aren't horribly broken in the way I'm complaining about here. However, sequential analysis methods are constructed in a very different fashion to the "standard" version of null hypothesis testing. They don't make it into any introductory textbooks, and they're not very widely used in the psychological literature. The concern I'm raising here is valid for every single orthodox test I've presented so far and for almost every test I've seen reported in the papers I read.
 
 ```{r}
 #| label: tbl-tab16-11
-#| tbl-cap: Conventional null hypothesis signicance testing (NHST) with p < .05)
+#| tbl-cap: Conventional null hypothesis signicance testing (NHST) with $p < .05$)
 huxtabs[[16]][[11]]
 ```
 
@@ -287,9 +291,9 @@ huxtabs[[16]][[12]]
 The "basic" theory of null hypothesis testing isn't built to handle this sort of thing, not in the form I described in @sec-Hypothesis-testing. If you're the kind of person who would choose to "collect more data" in real life, it implies that you are not making decisions in accordance with the rules of null hypothesis testing. Even if you happen to arrive at the same decision as the hypothesis test, you aren't following the decision process it implies, and it's this failure to follow the process that is causing the problem.[^bayesian-statistics-13] Your $p$-values are a lie.
 
 [^bayesian-statistics-13]: A related problem: <a href="http://xkcd.com/1478/"
-    target="_blank">http://xkcd.com/1478/</a> .
+    target="_blank">http://xkcd.com/1478/</a>.
 
-Worse yet, they're a lie in a dangerous way, because they're all *too small*. To give you a sense of just how bad it can be, consider the following (worst case) scenario. Imagine you're a really super-enthusiastic researcher on a tight budget who didn't pay any attention to my warnings above. You design a study comparing two groups. You desperately want to see a significant result at the p < .05 level, but you really don't want to collect any more data than you have to (because it's expensive). In order to cut costs you start collecting data but every time a set of observations arrive you run a $t$-test on your data. If the $t$-test says p < .05, then you stop the experiment and report a significant result. If not, you keep collecting data. You keep doing this until you reach your pre-defined spending limit for this experiment. Let's say that limit kicks in at $N = 1000$ observations. As it turns out, the truth of the matter is that there is no real effect to be found: the null hypothesis is true. So, what's the chance that you'll make it to the end of the experiment and (correctly) conclude that there is no effect? In an ideal world, the answer here should be 95%. After all, the whole point of the p < .05 criterion is to control the Type I error rate at 5%, so what we'd hope is that there's only a 5% chance of falsely rejecting the null hypothesis in this situation. However, there's no guarantee that will be true. You're breaking the rules. Because you're running tests repeatedly, "peeking" at your data to see if you've gotten a significant result, all bets are off.
+Worse yet, they're a lie in a dangerous way, because they're all *too small*. To give you a sense of just how bad it can be, consider the following (worst case) scenario. Imagine you're a really super-enthusiastic researcher on a tight budget who didn't pay any attention to my warnings above. You design a study comparing two groups. You desperately want to see a significant result at the $p < .05$ level, but you really don't want to collect any more data than you have to (because it's expensive). In order to cut costs you start collecting data but every time a set of observations arrive you run a $t$-test on your data. If the $t$-test says $p < .05$, then you stop the experiment and report a significant result. If not, you keep collecting data. You keep doing this until you reach your pre-defined spending limit for this experiment. Let's say that limit kicks in at $N = 1000$ observations. As it turns out, the truth of the matter is that there is no real effect to be found: the null hypothesis is true. So, what's the chance that you'll make it to the end of the experiment and (correctly) conclude that there is no effect? In an ideal world, the answer here should be 95%. After all, the whole point of the $p < .05$ criterion is to control the type I error rate at 5%, so what we'd hope is that there's only a 5% chance of falsely rejecting the null hypothesis in this situation. However, there's no guarantee that will be true. You're breaking the rules. Because you're running tests repeatedly, "peeking" at your data to see if you've gotten a significant result, all bets are off.
 
 ```{r}
 ## this include takes a long time to run
@@ -300,14 +304,14 @@ p_bf <- readRDS("data_and_tables/p_bf.rds")
 library(scales)
 ```
 
-So how bad is it? The answer from a simulation study is shown as the solid line in @fig-fig16-1, and it's astoundingly bad. If you peek at your data after every single observation, there is a `r percent(p_bf$p_peek[p_bf$peek =='1']/1000)` chance that you will make a Type I error. That's, um, quite a bit bigger than the 5% that it's supposed to be. And it doesn't improve much with less frequent peeking: if you only peek every 10, or every 50 observations, then the Type I error rates are still way too high: `r percent(p_bf$p_peek[p_bf$peek =='10']/1000)` and `r percent(p_bf$p_peek[p_bf$peek =='50']/1000)`, respectively. By way of comparison, imagine that you had used the following strategy. Start collecting data. Every single time an observation arrives, run [Bayesian $t$-tests] and look at the Bayes factor. I'll assume that @Johnson2013 is right, and I'll treat a Bayes factor of 3:1 as roughly equivalent to a $p$-value of .05.[^bayesian-statistics-14] This time around, our trigger-happy researcher uses the following procedure. If the Bayes factor is 3:1 or more in favour of the null, stop the experiment and retain the null. If it is 3:1 or more in favour of the alternative, stop the experiment and reject the null. Otherwise continue testing. Now, just like last time, let's assume that the null hypothesis is true. What happens? As it happens, I ran the simulations for this scenario too, and the results are shown as the dashed line in @fig-fig16-1. It turns out that the Type I error rate for peeking every time a new observation arrives is `r percent(p_bf$bf_peek[p_bf$peek =='1']/1000)`, much much lower than the `r percent(p_bf$p_peek[p_bf$peek =='1']/1000)` rate that we were getting by using the orthodox $t$-test. And for peeking every 10 or 50 observations, the rates are `r percent(p_bf$bf_peek[p_bf$peek =='10']/1000)` and `r percent(p_bf$bf_peek[p_bf$peek =='50']/1000)`, respectively.
+So how bad is it? The answer from a simulation study is shown as the solid line in @fig-fig16-1, and it's astoundingly bad. If you peek at your data after every single observation, there is a `r percent(p_bf$p_peek[p_bf$peek =='1']/1000)` chance that you will make a type I error. That's, um, quite a bit bigger than the 5% that it's supposed to be. And it doesn't improve much with less frequent peeking: if you only peek every 10, or every 50 observations, then the type I error rates are still way too high: `r percent(p_bf$p_peek[p_bf$peek =='10']/1000)` and `r percent(p_bf$p_peek[p_bf$peek =='50']/1000)`, respectively. By way of comparison, imagine that you had used the following strategy. Start collecting data. Every single time an observation arrives, run [Bayesian $t$-tests] and look at the Bayes factor. I'll assume that @Johnson2013 is right, and I'll treat a Bayes factor of 3:1 as roughly equivalent to a $p$-value of .05.[^bayesian-statistics-14] This time around, our trigger-happy researcher uses the following procedure. If the Bayes factor is 3:1 or more in favour of the null, stop the experiment and retain the null. If it is 3:1 or more in favour of the alternative, stop the experiment and reject the null. Otherwise continue testing. Now, just like last time, let's assume that the null hypothesis is true. What happens? As it happens, I ran the simulations for this scenario too, and the results are shown as the dashed line in @fig-fig16-1. It turns out that the type I error rate for peeking every time a new observation arrives is `r percent(p_bf$bf_peek[p_bf$peek =='1']/1000)`, much much lower than the `r percent(p_bf$p_peek[p_bf$peek =='1']/1000)` rate that we were getting by using the orthodox $t$-test. And for peeking every 10 or 50 observations, the rates are `r percent(p_bf$bf_peek[p_bf$peek =='10']/1000)` and `r percent(p_bf$bf_peek[p_bf$peek =='50']/1000)`, respectively.
 
-[^bayesian-statistics-14]: Some readers might wonder why I picked 3:1 rather than 5:1, given that @Johnson2013 suggests that p = .05 lies somewhere in that range. I did so in order to be charitable to the $p$-value. If I'd chosen a 5:1 Bayes factor instead, the results would look even better for the Bayesian approach.
+[^bayesian-statistics-14]: Some readers might wonder why I picked 3:1 rather than 5:1, given that @Johnson2013 suggests that $p = .05$ lies somewhere in that range. I did so in order to be charitable to the $p$-value. If I'd chosen a 5:1 Bayes factor instead, the results would look even better for the Bayesian approach.
 
 ```{r}
 #| label: fig-fig16-1
-#| fig-cap: Probability of Type I error in an experiment with target $N$ of 1000 per group and **peeking** at different intervals:- things can go badly wrong if you **peek** at your data and re-run your tests as new data arrives. If you are a frequentist, this is *very wrong* (blue circles and solid line). If you are a bayesian, it is not so bad (green triangles and dashed line). The alpha level was set at 0.05 (red dotted line) in this simulation.
-#| fig-alt: A scatter plot graph showing the probability of Type I error versus the 'Peeking' interval with new data points. Blue circles represent $p<0.05$ and green triangles represent $BF>3$. A red dashed line at $alpha = 0.05$ denotes the null hypothesis rejection threshold.
+#| fig-cap: Probability of type I error in an experiment with target $N$ of 1000 per group and **peeking** at different intervals:- things can go badly wrong if you **peek** at your data and re-run your tests as new data arrives. If you are a frequentist, this is *very wrong* (blue circles and solid line). If you are a bayesian, it is not so bad (green triangles and dashed line). The alpha level was set at $0.05$ (red dotted line) in this simulation.
+#| fig-alt: A scatter plot graph showing the probability of type I error versus the 'Peeking' interval with new data points. Blue circles represent $p<0.05$ and green triangles represent $BF>3$. A red dashed line at $alpha = 0.05$ denotes the null hypothesis rejection threshold.
 
 p_bf <- subset(p_bf, p_bf$peek <= 200)# leave out less plausible peeking frequency - better plot 
 
@@ -330,30 +334,30 @@ p <- ggplot(p_bf) +
     legend.key.width = unit (1, 'cm')) +
   ylim(0,0.6) +
   ylab("Probability of type I error\n") +
-  xlab("\n'Peeking' interval with new data") +
+  xlab('\n"Peeking" interval with new data') +
   annotate(geom="text",label="alpha = .05", col = "red", size=2.5, x=10, y=0.035)
 
 p
 
 ```
 
-In some ways, this is remarkable. The entire *point* of orthodox null hypothesis testing is to control the type I error rate. Bayesian methods aren't actually designed to do this at all. Yet, as it turns out, when faced with a "trigger happy" researcher who keeps running hypothesis tests as the data come in, the Bayesian approach is much more effective. Even the 3:1 standard, which most Bayesians would consider unacceptably lax, is much safer than the p < .05 rule.
+In some ways, this is remarkable. The entire *point* of orthodox null hypothesis testing is to control the type I error rate. Bayesian methods aren't actually designed to do this at all. Yet, as it turns out, when faced with a "trigger happy" researcher who keeps running hypothesis tests as the data come in, the Bayesian approach is much more effective. Even the 3:1 standard, which most Bayesians would consider unacceptably lax, is much safer than the $p < .05$ rule.
 
 ### Is it really this bad?
 
-The example I gave in the previous section is a pretty extreme situation. In real life, people don't run hypothesis tests every time a new observation arrives. So it's not fair to say that the p < .05 threshold "really" corresponds to a `r percent(p_bf$p_peek[p_bf$peek =='1']/1000)` Type I error rate (i.e., p = `r round(p_bf$p_peek[p_bf$peek =='1']/1000, digits = 2)`). But the fact remains that if you want your $p$-values to be honest, then you either have to switch to a completely different way of doing hypothesis tests or enforce a strict rule of no peeking. You are not allowed to use the data to decide when to terminate the experiment. You are not allowed to look at a "borderline" $p$-value and decide to collect more data. You aren't even allowed to change your data analyis strategy after looking at data. You are strictly required to follow these rules. Otherwise the $p$-values you calculate will be nonsense.
+The example I gave in the previous section is a pretty extreme situation. In real life, people don't run hypothesis tests every time a new observation arrives. So it's not fair to say that the $p < .05$ threshold "really" corresponds to a `r percent(p_bf$p_peek[p_bf$peek =='1']/1000)` type I error rate (i.e., $p = `r round(p_bf$p_peek[p_bf$peek =='1']/1000, digits = 2)`$). But the fact remains that if you want your $p$-values to be honest, then you either have to switch to a completely different way of doing hypothesis tests or enforce a strict rule of no peeking. You are not allowed to use the data to decide when to terminate the experiment. You are not allowed to look at a "borderline" $p$-value and decide to collect more data. You aren't even allowed to change your data analyis strategy after looking at data. You are strictly required to follow these rules. Otherwise the $p$-values you calculate will be nonsense.
 
-And yes, these rules are surprisingly strict. As a class exercise a couple of years back, I asked students to think about this scenario. Suppose you started running your study with the intention of collecting $N = 80$ people. When the study starts out you follow the rules, refusing to look at the data or run any tests. But when you reach $N = 50$ your willpower gives in... and you take a peek. Guess what? You've got a significant result! Now, sure, you know you said that you'd keep running the study out to a sample size of $N = 80$, but it seems sort of pointless now, right? The result is significant with a sample size of $N = 50$, so wouldn't it be wasteful and inefficient to keep collecting data? Aren't you tempted to stop? Just a little? Well, keep in mind that if you do, your Type I error rate at p < .05 just ballooned out to 8%. When you report p < .05 in your paper, what you're really saying is p < .08. That's how bad the consequences of "just one peek" can be.
+And yes, these rules are surprisingly strict. As a class exercise a couple of years back, I asked students to think about this scenario. Suppose you started running your study with the intention of collecting $N = 80$ people. When the study starts out you follow the rules, refusing to look at the data or run any tests. But when you reach $N = 50$ your willpower gives in... and you take a peek. Guess what? You've got a significant result! Now, sure, you know you said that you'd keep running the study out to a sample size of $N = 80$, but it seems sort of pointless now, right? The result is significant with a sample size of $N = 50$, so wouldn't it be wasteful and inefficient to keep collecting data? Aren't you tempted to stop? Just a little? Well, keep in mind that if you do, your type I error rate at $p < .05$ just ballooned out to 8%. When you report $p < .05$ in your paper, what you're really saying is $p < .08$. That's how bad the consequences of "just one peek" can be.
 
 Now consider this. The scientific literature is filled with $t$-tests, ANOVAs, regressions and chi-square tests. When I wrote this book I didn't pick these tests arbitrarily. The reason why these four tools appear in most introductory statistics texts is that these are the bread-and-butter tools of science. None of these tools include a correction to deal with "data peeking": they all assume that you're not doing it. But how realistic is that assumption? In real life, how many people do you think have "peeked" at their data before the experiment was finished and adapted their subsequent behaviour after seeing what the data looked like? Except when the sampling procedure is fixed by an external constraint, I'm guessing the answer is "most people have done it". If that has happened, you can infer that the reported $p$-values are wrong. Worse yet, because we don't know what decision process they actually followed, we have no way to know what the $p$-values should have been. You can't compute a $p$-value when you don't know the decision-making procedure that the researcher used. And so the reported $p$-value remains a lie.
 
 Given all of the above, what is the take home message? It's not that Bayesian methods are foolproof. If a researcher is determined to cheat, they can always do so. Bayes' rule cannot stop people from lying, nor can it stop them from rigging an experiment. That's not my point here. My point is the same one I made at the very beginning of the book in Section 1.1: the reason why we run statistical tests is to protect us from ourselves. And the reason why "data peeking" is such a concern is that it's so tempting, even for honest researchers. A theory for statistical inference has to acknowledge this. Yes, you might try to defend $p$-values by saying that it's the fault of the researcher for not using them properly, but to my mind that misses the point. A theory of statistical inference that is so completely naive about humans that it doesn't even consider the possibility that the researcher might look at their own data isn't a theory worth having. In essence, my point is this:
 
-> *Good laws have their origins in bad morals.*\
-> -- Ambrosius Macrobius [^bayesian-statistics-15]
+> *"Good laws have their origins in bad morals.*"\
+> -- Ambrosius Macrobius[^bayesian-statistics-15]
 
 [^bayesian-statistics-15]: <a href="http://www.quotationspage.com/quotes/Ambrosius%20Macrobius/"
-    target="_blank"><http://www.quotationspage.com/quotes/Ambrosius> Macrobius/</a>
+    target="_blank"><http://www.quotationspage.com/quotes/Ambrosius Macrobius/></a>.
 
 Good rules for statistical testing have to acknowledge human frailty. None of us are without sin. None of us are beyond temptation. A good system for statistical inference should still work even when it is used by actual humans. Orthodox null hypothesis testing does not.[^bayesian-statistics-16]
 
@@ -365,7 +369,7 @@ An important type of statistical inference problem discussed in this book is com
 
 ### Independent samples $t$-test
 
-The most common type of $t$-test is the independent samples $t$-test, and it arises when you have data as in the *harpo.csv* data set that we used in @sec-Comparing-two-means on $t$-tests. In this data set, we have two groups of students, those who received lessons from Anastasia and those who took their classes with Bernadette. The question we want to answer is whether there's any difference in the grades received by these two groups of students. Back in @sec-Comparing-two-means I suggested you could analyse this kind of data using the Independent Samples $t$-test in jamovi, which gave us the results in @fig-fig16-2. As we obtain a $p$-value less than 0.05, we reject the null hypothesis.
+The most common type of $t$-test is the independent samples $t$-test, and it arises when you have data as in the *harpo.csv* data set that we used in @sec-Comparing-two-means on $t$-tests. In this data set, we have two groups of students, those who received lessons from Anastasia and those who took their classes with Bernadette. The question we want to answer is whether there's any difference in the grades received by these two groups of students. Back in @sec-Comparing-two-means I suggested you could analyse this kind of data using the Independent Samples $t$-test in jamovi, which gave us the results in @fig-fig16-2. As we obtain a $p$-value less than $0.05$, we reject the null hypothesis.
 
 ```{r}
 #| label: fig-fig16-2
@@ -377,7 +381,7 @@ knitr::include_graphics("images/fig11-12.png")
 
 What does the Bayesian version of the $t$-test look like? We can get the Bayes factor analysis by selecting the 'Bayes factor' checkbox under the 'Tests' option, and accepting the suggested default value for the 'Prior'. This gives the results shown in the table in @fig-fig16-3. What we get in this table is a Bayes factor statistic of 1.75, meaning that the evidence provided by these data are about 1.8:1 in favour of the alternative hypothesis.
 
-Before moving on, it's worth highlighting the difference between the orthodox test results and the Bayesian one. According to the orthodox test, we obtained a significant result, though only barely. Nevertheless, many people would happily accept p = .043 as reasonably strong evidence for an effect. In contrast, notice that the Bayesian test doesn't even reach 2:1 odds in favour of an effect, and would be considered very weak evidence at best. In my experience that's a pretty typical outcome. Bayesian methods usually require more evidence before rejecting the null.
+Before moving on, it's worth highlighting the difference between the orthodox test results and the Bayesian one. According to the orthodox test, we obtained a significant result, though only barely. Nevertheless, many people would happily accept $p = .043$ as reasonably strong evidence for an effect. In contrast, notice that the Bayesian test doesn't even reach 2:1 odds in favour of an effect, and would be considered very weak evidence at best. In my experience that's a pretty typical outcome. Bayesian methods usually require more evidence before rejecting the null.
 
 ```{r}
 #| label: fig-fig16-3
