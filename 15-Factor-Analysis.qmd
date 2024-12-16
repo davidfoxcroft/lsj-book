@@ -9,9 +9,9 @@
 source("header.R")
 ```
 
-Previous chapters have covered statistical tests for differences between two or more groups. However, sometimes when conducting research, we may wish to examine how multiple variables *co-vary*. That is, how they are related to each other and whether the patterns of relatedness suggest anything interesting and meaningful. For example, we are often interested in exploring whether there are any underlying unobserved latent factors that are represented by the observed, directly measured, variables in our dataset. In statistics, latent factors are initially hidden variables that are not directly observed but are rather inferred (through statistical analysis) from other variables that are observed (directly measured).
+Previous chapters have covered statistical tests for differences between two or more groups. However, sometimes when conducting research, we may wish to examine how multiple variables *co-vary*. That is, how they are related to each other and whether the patterns of relatedness suggest anything interesting and meaningful. For example, we are often interested in exploring whether there are any underlying unobserved latent factors that are represented by the observed, directly measured, variables in our dataset. In statistics, latent factors are initially hidden variables that are not directly observed but are rather inferred (through statistical analysis) from other variables that are observed (directly measured). For a more technical and useful geometric explanation of the essentials of Factor Analysis take a look at @Child1990. @Kline1994 also provides a helpful introduction to the basic theory of Factor Analysis.  
 
-In this chapter we will consider a number of different Factor Analysis and related techniques, starting with [Exploratory Factor Analysis] (EFA). EFA is a statistical technique for identifying underlying latent factors in a data set. Then we will cover [Principal Component Analysis] (PCA) which is a data reduction technique which, strictly speaking, does not identify underlying latent factors. Instead, PCA simply produces a linear combination of observed variables. Following this, the section on [Confirmatory Factor Analysis] (CFA) shows that, unlike EFA, with CFA you start with an idea - a model - of how the variables in your data are related to each other. You then test your model against the observed data and assess how good a fit the model is. A more sophisticated version of CFA is the so-called [Multi-Trait Multi-Method CFA] approach in which both latent factor and method variance are included in the model. This is useful when there are different methodological approaches used for measurement and therefore method variance is an important consideration. Finally, we will cover a related analysis: [Internal consistency reliability analysis] tests how consistently a scale measures a psychological construct.
+In this chapter we will cover how to undertake a number of different Factor Analysis and related techniques, starting with [Exploratory Factor Analysis] (EFA). EFA is a statistical technique for identifying underlying latent factors in a data set. Then we will cover [Principal Component Analysis] (PCA) which is a data reduction technique which, strictly speaking, does not identify underlying latent factors. Instead, PCA simply produces a linear combination of observed variables. Following this, the section on [Confirmatory Factor Analysis] (CFA) shows that, unlike EFA, with CFA you start with an idea - a model - of how the variables in your data are related to each other. You then test your model against the observed data and assess how good a fit the model is. A more sophisticated version of CFA is the so-called [Multi-Trait Multi-Method CFA] approach in which both latent factor and method variance are included in the model. This is useful when there are different methodological approaches used for measurement and therefore method variance is an important consideration. Finally, we will cover a related analysis: [Internal consistency reliability analysis] tests how consistently a scale measures a psychological construct.
 
 ## Exploratory Factor Analysis
 
@@ -55,8 +55,7 @@ A more advanced statistical technique, one which is beyond the scope of this boo
 
 ### EFA in jamovi
 
-First, we need some data. Twenty-five personality self-report items (see @fig-fig15-2) taken from the <a href="http://ipip.ori.org" target="_blank">International Personality Item Pool</a> were included as part of the Synthetic Aperture Personality Assessment (SAPA) web-based personality assessment (SAPA: <a href="http://sapa-project.org"
-target="_blank">http://sapa-project.org</a>) project. The 25 items are organized by five putative factors: Agreeableness, Conscientiousness, Extraversion, Neuroticism, and Openness.
+First, we need some data. Twenty-five personality self-report items (see @fig-fig15-2) taken from the International Personality Item Pool ([http://ipip.ori.org](http://ipip.ori.org)) were included as part of the Synthetic Aperture Personality Assessment (SAPA) web-based personality assessment ([http://sapa-project.org](http://sapa-project.org)) project. The 25 items are organized by five putative factors: Agreeableness, Conscientiousness, Extraversion, Neuroticism, and Openness.
 
 The item data were collected using a 6-point response scale:
 
@@ -532,7 +531,7 @@ Can $\alpha$ be too high? Probably: if you are getting an $\alpha$ coefficient a
 
 We have a third sample of personality data to use to undertake reliability analysis: in the bfi_sample3.csv file. Once again, check that the 25 personality item variables are coded as continuous. To perform reliability analysis in jamovi:
 
--   Select 'Factor - Reliability Analysis' from the main jamovi button bar to open the reliability analysis window (@fig-fig15-27).
+-   Select 'Factor -- Reliability Analysis' from the main jamovi button bar to open the reliability analysis window (@fig-fig15-27).
 
 -   Select the 5 A variables and transfer them into the 'Items' box.
 
@@ -544,7 +543,7 @@ We have a third sample of personality data to use to undertake reliability analy
 #| label: fig-fig15-27
 #| classes: .enlarge-image
 #| fig-cap: The jamovi Reliability Analysis window
-#| fig-alt: A jamovi screenshot of the interface for reliability analysis is displayed. The interface shows options for choosing and analyzing items with various statistics, including Cronbach's α, McDonald's ω, mean, and standard deviation. There are settings for normal and reverse-scaled items.
+#| fig-alt: A jamovi screenshot of the interface for reliability analysis is displayed. The interface shows options for choosing and analyzing items with various statistics, including Cronbach's $\alpha$, McDonald's ω, mean, and standard deviation. There are settings for normal and reverse-scaled items.
 knitr::include_graphics("images/fig15-27.png")
 ```
 
@@ -554,7 +553,7 @@ Once done, look across at the jamovi results window. You should see something li
 #| label: fig-fig15-28
 #| classes: .enlarge-image
 #| fig-cap: The jamovi Reliability Analysis results for the Agreeableness factor
-#| fig-alt: A jamovi table showing the results of a reliability analysis. The first section shows overall scale reliability statistics with mean, SD, Cronbach's α, and McDonald's ω values. The second section presents item reliability statistics for five items, including their individual reliability if dropped.
+#| fig-alt: A jamovi table showing the results of a reliability analysis. The first section shows overall scale reliability statistics with mean, SD, Cronbach's $\alpha$, and McDonald's ω values. The second section presents item reliability statistics for five items, including their individual reliability if dropped.
 knitr::include_graphics("images/fig15-28.png")
 ```
 

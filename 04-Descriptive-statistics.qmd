@@ -38,7 +38,6 @@ Drawing pictures of the data, as I did in @fig-fig4-2, is an excellent way to co
 ### The mean
 
 The **mean** of a set of observations is just a normal, old-fashioned average. Add all of the values up, and then divide by the total number of values. The first five AFL winning margins were 56, 31, 56, 8 and 32, so the mean of these observations is just:
-
 $$\frac{56 + 31 + 56 + 8 + 32}{5} = \frac{183}{5} = 36.60$$
 Of course, this definition of the mean isn't news to anyone. Averages (i.e., means) are used so often in everyday life that this is pretty familiar stuff. However, since the concept of a mean is something that everyone already understands, I'll use this as an excuse to start introducing some of the mathematical notation that statisticians use to describe this calculation, and talk about how the calculations would be done in jamovi.
 
@@ -173,6 +172,7 @@ And not surprisingly, in @fig-fig4-8 the 50th percentile is the same as the medi
 
 ```{r}
 #| label: fig-fig4-8
+#| fig-width: 5
 #| fig-cap: A screenshot of jamovi showing the Quartiles for the *afl.margins* variable
 #| fig-alt: A jamovi screenshot of a table titled "Descriptives" showing statistical data for "afl.margins" with N=176, Missing=0, Mean=35.30, Median=30.50, Mode=3.00, Standard deviation=26.07, Minimum=0.00, Maximum=116.00, 25th percentile=12.75, 50th percentile=30.50, and 75th percentile=50.50.
 knitr::include_graphics("images/fig4-8.png")
@@ -191,7 +191,6 @@ huxtabs[[4]][[2]]
 ```
 
 Now that we have calculated the absolute deviation score for every observation in the data set, all that we have to do to calculate the mean of these scores. Let's do that:
-
 $$\frac{19.4 + 5.6 + 19.4 + 28.6 + 4.6}{5} = 15.52$$
 
 And we're done. The mean absolute deviation for these five scores is 15.52.
@@ -254,7 +253,7 @@ However, as you might have guessed from our discussion of the variance, what jam
 
 [^04-descriptive-statistics-10]: For reasons that will make sense when we return to this topic in @sec-Estimating-unknown-quantities-from-a-sample I'll refer to this new quantity as $\hat{\sigma}$ (read as: "sigma hat"), and the formula for this is: $$\hat{\sigma}=\sqrt{\frac{1}{N-1} \sum_{i=1}^{N} ( X_i - \bar{X} )^2}$$
 
-Interpreting standard deviations is slightly more complex. Because the standard deviation is derived from the variance, and the variance is a quantity that has little to no meaning that makes sense to us humans, the standard deviation doesn't have a simple interpretation. As a consequence, most of us just rely on a simple rule of thumb. In general, you should expect 68% of the data to fall within 1 standard deviation of the mean, 95% of the data to fall within 2 standard deviation of the mean, and 99.7% of the data to fall within 3 standard deviations of the mean. This rule tends to work pretty well most of the time, but it's not exact. It's actually calculated based on an assumption that the histogram is symmetric and "bell shaped". As you can tell from looking at the AFL winning margins histogram in @fig-fig4-2, this isn't exactly true of our data! Even so, the rule is approximately correct. As it turns out, 65.3% of the afl.margins data fall within one standard deviation of the mean. This is shown visually in @fig-fig4-10.
+Interpreting standard deviations is slightly more complex. Because the standard deviation is derived from the variance, and the variance is a quantity that has little to no meaning that makes sense to us humans, the standard deviation doesn't have a simple interpretation. As a consequence, most of us just rely on a simple rule of thumb. In general, you should expect 68% of the data to fall within 1 standard deviation of the mean, 95% of the data to fall within 2 standard deviation of the mean, and 99.7% of the data to fall within 3 standard deviations of the mean. This rule tends to work pretty well most of the time, but it's not exact. It's actually calculated based on an assumption that the histogram is symmetric and "bell shaped". As you can tell from looking at the AFL winning margins histogram in @fig-fig4-2, this isn't exactly true of our data! Even so, the rule is approximately correct. As it turns out, 65.3% of the *afl.margins* data fall within one standard deviation of the mean. This is shown visually in @fig-fig4-10.
 
 ### Which measure to use?
 
@@ -330,7 +329,7 @@ Since it's the more interesting of the two, let's start by talking about the **s
 
 [Additional technical detail[^04-descriptive-statistics-11]]
 
-[^04-descriptive-statistics-11]: One formula for the skewness of a data set is as follows $$skewness(X)=\frac{1}{N \hat{\sigma}^3} \sum_{i=1}^{N} ( X_i - \bar{X})^3$$ where $N$ is the number of observations, $\bar{X}$ is the sample mean, and $\hat{\sigma}$ is the standard deviation (the "divide by $N - 1$" version, that is).
+[^04-descriptive-statistics-11]: One formula for the skewness of a data set is: $$skewness(X)=\frac{1}{N \hat{\sigma}^3} \sum_{i=1}^{N} ( X_i - \bar{X})^3$$ where $N$ is the number of observations, $\bar{X}$ is the sample mean, and $\hat{\sigma}$ is the standard deviation (the "divide by $N - 1$" version, that is).
 
 Perhaps more helpfully, you can use jamovi to calculate skewness: it's a check box in the 'Statistics' options under 'Exploration' -- 'Descriptives'. For the *afl.margins* variable, the skewness figure is $0.780$. If you divide the skewness estimate by the Std. error for skewness you have an indication of how skewed the data is. Especially in small samples (N $<$ 50), one rule of thumb suggests that a value of 2 or less can mean that the data is not very skewed, and a value of over 2 that there is sufficient skew in the data to possibly limit its use in some statistical analyses. Though there is no clear agreement on this interpretation. That said, this does indicate that the AFL winning margins data is somewhat skewed ($\frac{0.780}{0.183} = 4.262$).
 
@@ -378,7 +377,7 @@ huxtabs[[4]][[4]]
 
 [Additional technical detail[^04-descriptive-statistics-12]]
 
-[^04-descriptive-statistics-12]: The equation for kurtosis is pretty similar in spirit to the formulas we've seen already for the variance and the skewness. Except that where the variance involved squared deviations and the skewness involved cubed deviations, the kurtosis involves raising the deviations to the fourth power:$^b$ $$kurtosis(X)=\frac{1}{N \hat{\sigma}^4} \sum_{i=1}^{N} ( X_i - \bar{X} )^4 - 3$$ I know, it's not terribly interesting to me either. <br />---<br /> $^b$ The "-3" part is something that statisticians tack on to ensure that the normal curve has kurtosis zero. It looks a bit stupid, just sticking a "-3" at the end of the formula, but there are good mathematical reasons for doing this.
+[^04-descriptive-statistics-12]: The equation for kurtosis is pretty similar in spirit to the formulas we've seen already for the variance and the skewness. Except that where the variance involved squared deviations and the skewness involved cubed deviations, the kurtosis involves raising the deviations to the fourth power:$^a$ $$kurtosis(X)=\frac{1}{N \hat{\sigma}^4} \sum_{i=1}^{N} ( X_i - \bar{X} )^4 - 3$$ I know, it's not terribly interesting to me either. <br />---<br /> $^a$ The "-3" part is something that statisticians tack on to ensure that the normal curve has kurtosis zero. It looks a bit stupid, just sticking a "-3" at the end of the formula, but there are good mathematical reasons for doing this.
 
 More to the point, jamovi has a check box for kurtosis just below the check box for skewness, and this gives a value for kurtosis of $0.101$ with a standard error of $0.364$. This means that the AFL winning margins data has only a small kurtosis, which is ok.
 
@@ -397,7 +396,7 @@ We can also go ahead and look at some other descriptive statistics, and this tim
 knitr::include_graphics("images/fig4-13.png")
 ```
 
-What if you have multiple grouping variables? Suppose you want to look at the average mood gain separately for all possible combinations of drug and therapy. It is possible to do this by adding another variable, drug, into the 'Split by' box. Easy peasy, though sometimes if you split too much there isn't enough data in each breakdown combination to make meaningful calculations. In this case jamovi tells you this by stating something like NaN or Inf.[^04-descriptive-statistics-13]
+What if you have multiple grouping variables? Suppose you want to look at the average mood gain separately for all possible combinations of drug and therapy. It is possible to do this by adding another variable, drug, into the 'Split by' box. Easy peasy, though sometimes if you split too much there isn't enough data in each breakdown combination to make meaningful calculations. In this case jamovi tells you this by stating something like 'NaN' or 'Inf'.[^04-descriptive-statistics-13]
 
 [^04-descriptive-statistics-13]: Sometimes jamovi will also present numbers in an unusual way. If a number is very small, or very large, then jamovi switches to an exponential form for numbers. For example 6.51e-4 is the same as saying that the decimal point is moved 4 places to the left, so the actual number is 0.000651. If there is a plus sign (i.e. 6.51e+4 then the decimal point is moved to the right, i.e. 65,100.00. Usually only very small or very large numbers are expressed in this way, for example 6.51e-16, which would be quite unwieldy to write out in the normal way.
 
@@ -416,7 +415,6 @@ Suppose my friend is putting together a new questionnaire intended to measure "g
 A simpler way around this is to describe my grumpiness by comparing me to other people. Shockingly, out of my friend's sample of $1,000,000$ people, only $159$ people were as grumpy as me (that's not at all unrealistic, frankly) suggesting that I'm in the top 0.016% of people for grumpiness. This makes much more sense than trying to interpret the raw data. This idea, that we should describe my grumpiness in terms of the overall distribution of the grumpiness of humans, is the qualitative idea that standardisation attempts to get at. One way to do this is to do exactly what I just did and describe everything in terms of percentiles. However, the problem with doing this is that "it's lonely at the top". Suppose that my friend had only collected a sample of $1000$ people (still a pretty big sample for the purposes of testing a new questionnaire, I'd like to add), and this time had gotten, let's say, a mean of $16$ out of $50$ with a standard deviation of $5$. The problem is that almost certainly not a single person in that sample would be as grumpy as me.
 
 However, all is not lost. A different approach is to convert my grumpiness score into a **standard score**, also referred to as a *z*-score. The standard score is defined as the number of standard deviations above the mean that my grumpiness score lies. To phrase it in "pseudomaths" the standard score is calculated like this:
-
 $$\text{standard score} = \frac{\text{raw score} - mean}{\text{standard deviation}}$$
 
 [Additional technical detail[^04-descriptive-statistics-14]]
@@ -424,7 +422,6 @@ $$\text{standard score} = \frac{\text{raw score} - mean}{\text{standard deviatio
 [^04-descriptive-statistics-14]: In actual maths, the equation for the *z*-score is: $$z_i =\frac{X_i - \bar{X}}{\hat{\sigma}}$$
 
 So, going back to the grumpiness data, we can now transform Dani's raw grumpiness into a standardised grumpiness score:
-
 $$z =\frac{35 - 17}{5} = 3.6$$ 
 
 To interpret this value, recall the rough heuristic that I provided in @sec-Standard-deviation in which I noted that 99.7% of values are expected to lie within 3 standard deviations of the mean. So the fact that my grumpiness corresponds to a *z*-score of 3.6 indicates that I'm very grumpy indeed. In fact this suggests that I'm grumpier than 99.98% of people. Sounds about right.

@@ -11,15 +11,15 @@ source("header.R")
 
 $$ $$ <!---- bug...need this here otherwise tables don't render latex in html output  --->
 
-> *"Thou shalt not answer questionnaires*\
+> *Thou shalt not answer questionnaires*\
 > *Or quizzes upon World Affairs,*\
 > *Nor with compliance*\
 > *Take any test. Thou shalt not sit*\
 > *With statisticians nor commit*\
-> *A social science"*\
+> *A social science*\
 > -- W.H. Auden[^why-do-we-learn-statistics-1]
 
-[^why-do-we-learn-statistics-1]: The quote comes from Auden's 1946 poem *Under Which Lyre: A Reactionary Tract for the Times*, delivered as part of a commencement address at Harvard University. The history of the poem is kind of interesting, see Adam Kirsch's analysis in the *[Harvard Magazine](https://www.harvardmagazine.com/2007/11/a-poets-warning.html)*
+[^why-do-we-learn-statistics-1]: The quote comes from Auden's 1946 poem *Under Which Lyre: A Reactionary Tract for the Times*, delivered as part of a commencement address at Harvard University. The history of the poem is kind of interesting, see Adam Kirsch's analysis in the *Harvard Magazine*, [https://www.harvardmagazine.com/2007/11/a-poets-warning.html](https://www.harvardmagazine.com/2007/11/a-poets-warning.html)
 
 ## On the psychology of statistics
 
@@ -27,13 +27,13 @@ To the surprise of many students, statistics is a fairly significant part of a p
 
 A big part of this issue at hand relates to the very idea of statistics. What is it? What's it there for? And why are scientists so bloody obsessed with it? These are all good questions, when you think about it. So let's start with the last one. As a group, scientists seem to be bizarrely fixated on running statistical tests on everything. In fact, we use statistics so often that we sometimes forget to explain to people why we do. It's a kind of article of faith among scientists -- and especially social scientists -- that your findings can't be trusted until you've done some stats. Undergraduate students might be forgiven for thinking that we're all completely mad, because no-one takes the time to answer one very simple question:
 
-*Why do you do statistics? Why don't scientists just use* <u>common sense?</u>
+> *Why do you do statistics? Why don't scientists just use* **common sense**?
 
 It's a naive question in some ways, but most good questions are. There's a lot of good answers to it,[^why-do-we-learn-statistics-2] but for my money, the best answer is a really simple one: we don't trust ourselves enough. We worry that we're human, and susceptible to all of the biases, temptations and frailties that humans suffer from. Much of statistics is basically a safeguard. Using "common sense" to evaluate evidence means trusting gut instincts, relying on verbal arguments and on using the raw power of human reason to come up with the right answer. Most scientists don't think this approach is likely to work.
 
 [^why-do-we-learn-statistics-2]: Including the suggestion that common sense is in short supply among scientists.
 
-In fact, come to think of it, this sounds a lot like a psychological question to me, and since I do work in a psychology department, it seems like a good idea to dig a little deeper here. Is it really plausible to think that this "common sense" approach is very trustworthy? Verbal arguments have to be constructed in language, and all languages have biases -- some things are harder to say than others, and not necessarily because they're false (e.g., quantum electrodynamics is a good theory, but hard to explain in words). The instincts of our "gut" aren't designed to solve scientific problems, they're designed to handle day to day inferences -- and given that biological evolution is slower than cultural change, we should say that they're designed to solve the day-to-day problems for a *different world* than the one we live in. Most fundamentally, reasoning sensibly requires people to engage in "induction", making wise guesses and going beyond the immediate evidence of the senses to make generalisations about the world. If you think that you can do that without being influenced by various distractors, well, I have a bridge in London I'd like to sell you. Heck, as the next section shows, we can't even solve "deductive" problems (ones where no guessing is required) without being influenced by our pre-existing biases.
+In fact, come to think of it, this sounds a lot like a psychological question to me, and since I do work in a psychology department, it seems like a good idea to dig a little deeper here. Is it really plausible to think that this "common sense" approach is very trustworthy? Verbal arguments have to be constructed in language, and all languages have biases -- some things are harder to say than others, and not necessarily because they're false (e.g., quantum electrodynamics is a good theory, but hard to explain in words). The instincts of our "gut" aren't designed to solve scientific problems, they're designed to handle day-to-day inferences -- and given that biological evolution is slower than cultural change, we should say that they're designed to solve the day-to-day problems for a *different world* than the one we live in. Most fundamentally, reasoning sensibly requires people to engage in "induction", making wise guesses and going beyond the immediate evidence of the senses to make generalisations about the world. If you think that you can do that without being influenced by various distractors, well, I have a bridge in London I'd like to sell you. Heck, as the next section shows, we can't even solve "deductive" problems (ones where no guessing is required) without being influenced by our pre-existing biases.
 
 ### The curse of belief bias
 
@@ -84,7 +84,7 @@ huxtabs[[1]][[2]] |> set_contents(1, 1, "") |>
   set_bold(, 1, TRUE)
 ```
 
-Not perfect, but that's pretty good. But look what happens when our intuitive feelings about the truth of the conclusion run against the logical structure of the argument (@tbl-tab1-3):
+Not perfect, but that's pretty good. But look what happens when our intuitive feelings about the truth of the conclusion run against the logical structure of the argument, see (@tbl-tab1-3).
 
 ```{r}
 #| label: tbl-tab1-3
@@ -157,13 +157,13 @@ In short there are a lot of critical questions that you can't answer with statis
 
 I hope that the discussion above helped explain why science in general is so focused on statistics. But I'm guessing that you have a lot more questions about what role statistics plays in psychology, and specifically why psychology classes always devote so many lectures to stats. So here's my attempt to answer a few of them...
 
-**Why does psychology have so much statistics?**
+> **Why does psychology have so much statistics?**
 
 To be perfectly honest, there's a few different reasons, some of which are better than others. The most important reason is that psychology is a statistical science. What I mean by that is that the "things" that we study are *people*. Real, complicated, gloriously messy, infuriatingly perverse people. The "things" of physics include objects like electrons, and while there are all sorts of complexities that arise in physics, electrons don't have minds of their own. They don't have opinions, they don't differ from each other in weird and arbitrary ways, they don't get bored in the middle of an experiment, and they don't get angry at the experimenter and then deliberately try to sabotage the data set (not that I've ever done that!). At a fundamental level psychology is harder than physics.[^why-do-we-learn-statistics-5] Basically, we teach statistics to you as psychologists because you need to be better at stats than physicists. There's actually a saying used sometimes in physics, to the effect that "if your experiment needs statistics, you should have done a better experiment". They have the luxury of being able to say that because their objects of study are pathetically simple in comparison to the vast mess that confronts social scientists. And it's not just psychology. Most social sciences are desperately reliant on statistics. Not because we're bad experimenters, but because we've picked a harder problem to solve. We teach you stats because you really, really need it.
 
 [^why-do-we-learn-statistics-5]: Which might explain why physics is just a teensy bit further advanced as a science than we are.
 
-**Can't someone else do the statistics?**
+> **Can't someone else do the statistics?**
 
 To some extent, but not completely. It's true that you don't need to become a fully trained statistician just to do psychology, but you do need to reach a certain level of statistical competence. In my view, there's three reasons that every psychological researcher ought to be able to do basic statistics:
 
@@ -173,14 +173,14 @@ To some extent, but not completely. It's true that you don't need to become a fu
 
 Note that a lot of these reasons generalise beyond researchers. If you want to be a practicing psychologist and stay on top of the field, it helps to be able to read the scientific literature, which relies pretty heavily on statistics.
 
-**I don't care about jobs, research or clinical work. Do I need statistics?**
+> **I don't care about jobs, research or clinical work. Do I need statistics?**
 
 Okay, now you're just messing with me. Still, I think it should matter to you too. Statistics should matter to you in the same way that statistics should matter to *everyone*. We live in the 21st century, and data are *everywhere*. Frankly, given the world in which we live these days, a basic knowledge of statistics is pretty damn close to a survival tool! Which is the topic of the next section.
 
 ## Statistics in everyday life
 
-> *"We are drowning in information,*\
-> *but we are starved for knowledge"*\
+> *We are drowning in information,*\
+> *but we are starved for knowledge*\
 > - Various authors, original probably John Naisbitt
 
 When I started writing up my lecture notes I took the 20 most recent news articles posted to the ABC News website. Of those 20 articles, it turned out that 8 of them involved a discussion of something that I would call a statistical topic and 6 of those made a mistake. The most common error, if you're curious, was failing to report baseline data (e.g., the article mentions that 5% of people in situation X have some characteristic Y, but doesn't say how common the characteristic is for everyone else!). The point I'm trying to make here isn't that journalists are bad at statistics (though they almost always are), it's that a basic knowledge of statistics is very helpful for trying to figure out when someone else is either making a mistake or even lying to you. In fact, one of the biggest things that a knowledge of statistics does to you is cause you to get angry at the newspaper or the internet on a far more frequent basis. You can find a good example of this in @sec-A-real-life-example in @sec-Descriptive-statistics. In later versions of this book I'll try to include more anecdotes along those lines.

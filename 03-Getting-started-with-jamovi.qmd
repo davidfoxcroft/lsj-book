@@ -9,10 +9,10 @@
 source("header.R")
 ```
 
-> "*Robots are nice to work with.*"\
+> *Robots are nice to work with.*\
 > -- Roger Zelazny[^getting-started-with-jamovi-1]
 
-[^getting-started-with-jamovi-1]: Source: "Dismal Light" (1968).
+[^getting-started-with-jamovi-1]: Source: *Dismal Light* (1968).
 
 In this chapter I'll discuss how to get started in jamovi. I'll briefly talk about how to download and install jamovi, but most of the chapter will be focused on getting you started with finding your way around the jamovi graphical user interface (GUI). Our goal in this chapter is not to learn any statistical concepts: we're just trying to learn the basics of how jamovi works and get comfortable interacting with the system. To do this we'll spend a bit of time looking at datasets and variables. In doing so, you'll get something of a feel for what it's like to work in jamovi.
 
@@ -29,9 +29,9 @@ Those are the main reasons I use jamovi. It's not without its flaws, though. It'
 
 ## Installing jamovi
 
-Okay, enough with the sales pitch. Let's get started. Just as with any piece of software, jamovi needs to be installed on a "computer", which is a magical box that does cool things and delivers free ponies. Or something along those lines; I may be confusing computers with the iPad marketing campaigns. Anyway, jamovi is freely distributed online and you can download it from the jamovi homepage, which is: <https://www.jamovi.org/>
+Okay, enough with the sales pitch. Let's get started. Just as with any piece of software, jamovi needs to be installed on a "computer", which is a magical box that does cool things and delivers free ponies. Or something along those lines; I may be confusing computers with the iPad marketing campaigns. Anyway, jamovi is freely distributed online and you can download it from the jamovi homepage, which is [https://www.jamovi.org/](https://www.jamovi.org/).
 
-At the top of the page under the heading "Download", you'll see separate links for Windows users, Mac users, and Linux users. If you follow the relevant link you'll see that the online instructions are pretty self-explanatory. At the time of writing, the current version of jamovi is 2.3, but they usually issue updates every few months, so you'll probably have a newer version.[^getting-started-with-jamovi-3]
+At the top of the page under the heading "Download", you'll see separate links for Windows users, Mac users and Linux users. If you follow the relevant link you'll see that the online instructions are pretty self-explanatory. At the time of writing, the current version of jamovi is 2.3, but they usually issue updates every few months, so you'll probably have a newer version.[^getting-started-with-jamovi-3]
 
 [^getting-started-with-jamovi-3]: Although jamovi is updated frequently it doesn't usually make much of a difference for the sort of work we'll do in this book. In fact, during the writing of the book I upgraded several times and it didn't make much difference at all to what is in this book.
 
@@ -125,9 +125,11 @@ jamovi produces nice American Psychological Association (APA) formatted tables a
 
 ### Syntax mode
 
-jamovi also provides an 'R Syntax mode'. In this mode jamovi produces equivalent R code for each analysis. To change to syntax mode, select the 'Application' menu to the top right of jamovi (a button with three vertical dots) and click the 'Syntax mode' checkbox there. You can turn off syntax mode by clicking this a second time.
+jamovi also provides an 'R Syntax mode'.[^getting-started-with-jamovi-0a] In this mode jamovi produces equivalent $R$ code for each analysis. To change to syntax mode, select the 'Application' menu to the top right of jamovi (a button with three vertical dots) and click the 'Syntax mode' checkbox there. You can turn off syntax mode by clicking this a second time.
 
-In syntax mode analyses continue to operate as before but now they produce R syntax, and "ascii output" like an R session. Like all results objects in jamovi, you can right click on these items (including the R syntax) and copy and paste them, for example into an R session. At present, the provided R syntax does not include the data import step and so this must be performed manually in R. There are many resources explaining how to import data into R and if you are interested we recommend you take a look at these; just search on the interweb.
+[^getting-started-with-jamovi-0a]: $R$ is a powerful statistical programming language. In fact, jamovi is just a user-friendly interface that sits on top of the $R$ engine.
+
+In syntax mode analyses continue to operate as before but now they produce $R$ syntax, and "ascii output" like an $R$ session. Like all results objects in jamovi, you can right click on these items (including the $R$ syntax) and copy and paste them, for example into an $R$ session. At present, the provided $R$ syntax does not include the data import step and so this must be performed manually in $R$. There are many resources explaining how to import data into $R$ and if you are interested we recommend you take a look at these; just search on the interweb.
 
 ## Loading data in jamovi
 
@@ -197,7 +199,7 @@ A different problem is posed by Excel files. Despite years of yelling at people 
 
 ## Changing data from one level to another {#sec-Changing-data-from-one-level-to-another}
 
-Sometimes you want to change the variable level. This can happen for all sorts of reasons. Sometimes when you import data from files, it can come to you in the wrong format. Numbers sometimes get imported as nominal, text values. Dates may get imported as text. ParticipantID values can sometimes be read as continuous: nominal values can sometimes be read as ordinal or even continuous. There's a good chance that sometimes you'll want to convert a variable from one measurement level into another one. Or, to use the correct term, you want to **coerce** the variable from one class into another.
+Sometimes you want to change the variable level. This can happen for all sorts of reasons. Sometimes when you import data from files, it can come to you in the wrong format. Numbers sometimes get imported as nominal, text values. Dates may get imported as text. Participant ID values can sometimes be read as continuous: nominal values can sometimes be read as ordinal or even continuous. There's a good chance that sometimes you'll want to convert a variable from one measurement level into another one. Or, to use the correct term, you want to **coerce** the variable from one class into another.
 
 Earlier we saw how to specify different variable levels, and if you want to change a variable's measurement level then you can do this in the jamovi data view for that variable. Just click the check box for the measurement level you want -- continuous, ordinal, or nominal.
 
