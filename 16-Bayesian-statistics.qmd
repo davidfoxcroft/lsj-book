@@ -1,5 +1,5 @@
 \placetextbox{0.26}{0.06}{\scriptsize{©2025 D. Foxcroft and D. Navarro,}}
-\placetextbox{0.20}{0.05}{\scriptsize{CC BY-NC 4.0}}
+\placetextbox{0.20}{0.05}{\scriptsize{CC BY-SA 4.0}}
 \placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333/16}}}
 
 # Bayesian statistics {#sec-Bayesian-statistics}
@@ -12,7 +12,7 @@ source("header.R")
 > *In our reasonings concerning matter of fact, there are all imaginable degrees of assurance, from the highest certainty to the lowest species of moral evidence. A wise man, therefore, proportions his belief to the evidence.*\
 > -- David Hume[^bayesian-statistics-1]
 
-[^bayesian-statistics-1]: [http://en.wikiquote.org/wiki/David%20Hume](<http://en.wikiquote.org/wiki/David_Hume>).
+[^bayesian-statistics-1]: [https://en.wikiquote.org/wiki/David%20Hume](<https://en.wikiquote.org/wiki/David_Hume>)
 
 The ideas I've presented to you in this book describe inferential statistics from the frequentist perspective. I'm not alone in doing this. In fact, almost every textbook given to undergraduate psychology students presents the opinions of the frequentist statistician as *the* theory of inferential statistics, the one true way to do things. I have taught this way for practical reasons. The frequentist view of statistics dominated the academic field of statistics for most of the 20th century, and this dominance is even more extreme among applied scientists. It was and is current practice among psychologists to use frequentist methods. Because frequentist methods are ubiquitous in scientific papers, every student of statistics needs to understand those methods, otherwise they will be unable to make sense of what those papers are saying! Unfortunately, in my opinion at least, the current practice in psychology is often misguided, and the reliance on frequentist methods is partly to blame. In this chapter I explain why I think this and provide an introduction to Bayesian statistics, an approach that I think is generally superior to the orthodox approach.
 
@@ -30,7 +30,7 @@ In this problem I have presented you with a single piece of data ($d$ = I'm carr
 
 The first thing you need to do is ignore what I told you about the umbrella, and write down your pre-existing beliefs about rain. This is important. If you want to be honest about how your beliefs have been revised in the light of new evidence (data) then you must say something about what you believed before those data appeared! So, what might you believe about whether it will rain today? You probably know that I live in Australia and that much of Australia is hot and dry. The city of Adelaide where I live has a Mediterranean climate, very similar to southern California, southern Europe or northern Africa. I'm writing this in January and so you can assume it's the middle of summer. In fact, you might have decided to take a quick look on Wikipedia[^bayesian-statistics-2] and discovered that Adelaide gets an average of 4.4 days of rain across the 31 days of January. Without knowing anything else, you might conclude that the probability of January rain in Adelaide is about 15%, and the probability of a dry day is 85% (see @tbl-tab16-1). If this is really what you believe about Adelaide rainfall (and now that I've told it to you I'm betting that this really is what you believe) then what I have written here is your **prior distribution**, written $P(h)$.
 
-[^bayesian-statistics-2]: [http://en.wikipedia.org/wiki/Climate_of_Adelaide](http://en.wikipedia.org/wiki/Climate_of_Adelaide)
+[^bayesian-statistics-2]: [https://en.wikipedia.org/wiki/Climate_of_Adelaide](https://en.wikipedia.org/wiki/Climate_of_Adelaide)
 
 ```{r}
 #| label: tbl-tab16-1
@@ -196,13 +196,13 @@ Up to this point I've focused exclusively on the logic underpinning Bayesian sta
 > *You keep using that word. I do not think it means what you think it means*\
 > -- Inigo Montoya, *The Princess Bride*[^bayesian-statistics-9]
 
-[^bayesian-statistics-9]: [http://www.imdb.com/title/tt0093779/quotes] (http://www.imdb.com/title/tt0093779/quotes). I should note in passing that I'm not the first person to use this quote to complain about frequentist methods. Rich Morey and colleagues had the idea first. I'm shamelessly stealing it because it's such an awesome pull quote to use in this context and I refuse to miss any opportunity to quote *The Princess Bride*.
+[^bayesian-statistics-9]: [https://www.imdb.com/title/tt0093779/quotes](https://www.imdb.com/title/tt0093779/quotes) I should note in passing that I'm not the first person to use this quote to complain about frequentist methods. Rich Morey and colleagues had the idea first. I'm shamelessly stealing it because it's such an awesome pull quote to use in this context and I refuse to miss any opportunity to quote *The Princess Bride*.
 
 To me, one of the biggest advantages to the Bayesian approach is that it answers the right questions. Within the Bayesian framework, it is perfectly sensible and allowable to refer to "the probability that a hypothesis is true". You can even try to calculate this probability. Ultimately, isn't that what you want your statistical tests to tell you? To an actual human being, this would seem to be the whole point of doing statistics, i.e., to determine what is true and what isn't. Any time that you aren't exactly sure about what the truth is, you should use the language of probability theory to say things like "there is an 80% chance that Theory A is true, but a 20% chance that Theory B is true instead".
 
 This seems so obvious to a human, yet it is explicitly forbidden within the orthodox framework. To a frequentist, such statements are a nonsense because "the theory is true" is not a repeatable event. A theory is true or it is not, and no probabilistic statements are allowed, no matter how much you might want to make them. There's a reason why, back in Section 9.5, I repeatedly warned you not to interpret the $p$-value as the probability that the null hypothesis is true. There's a reason why almost every textbook on statistics is forced to repeat that warning. It's because people desperately want that to be the correct interpretation. Frequentist dogma notwithstanding, a lifetime of experience of teaching undergraduates and of doing data analysis on a daily basis suggests to me that most actual humans think that "the probability that the hypothesis is true" is not only meaningful, it's the thing we care most about. It's such an appealing idea that even trained statisticians fall prey to the mistake of trying to interpret a $p$-value this way. For example, here is a quote from an official Newspoll report in 2013, explaining how to interpret their (frequentist) data analysis:[^bayesian-statistics-10]
 
-[^bayesian-statistics-10]: [http://about.abc.net.au/reports-publications/appreciation-survey-summary-report-2013/](http://about.abc.net.au/reports-publications/appreciation-survey-summary-report-2013/).
+[^bayesian-statistics-10]: [https://about.abc.net.au/reports-publications/appreciation-survey-summary-report-2013/](https://about.abc.net.au/reports-publications/appreciation-survey-summary-report-2013/)
 
 > *Throughout the report, where relevant, statistically significant changes have been noted. All significance tests have been based on the 95 percent level of confidence. **This means that if a change is noted as being statistically significant, there is a 95 percent probability that a real change has occurred**, and is not simply due to chance variation.* (emphasis added)
 
@@ -229,7 +229,7 @@ Well, how true is that? One way to approach this question is to try to convert $
 > *The cake is a lie.*\
 > -- Portal[^bayesian-statistics-11]
 
-[^bayesian-statistics-11]: [http://knowyourmeme.com/memes/the-cake-is-a-lie](http://knowyourmeme.com/memes/the-cake-is-a-lie).
+[^bayesian-statistics-11]: [https://knowyourmeme.com/memes/the-cake-is-a-lie](https://knowyourmeme.com/memes/the-cake-is-a-lie)
 
 Okay, at this point you might be thinking that the real problem is not with orthodox statistics, just the $p < .05$ standard. In one sense, that's true. The recommendation that @Johnson2013 gives is not that "everyone must be a Bayesian now". Instead, the suggestion is that it would be wiser to shift the conventional standard to something like a $p < .01$ level. That's not an unreasonable view to take, but in my view the problem is a little more severe than that. In my opinion, there's a fairly big problem built into the way most (but not all) orthodox hypothesis tests are constructed. They are grossly naive about how humans actually do research, and because of this most $p$-values are wrong.
 
@@ -274,7 +274,7 @@ huxtabs[[16]][[12]]
 
 The "basic" theory of null hypothesis testing isn't built to handle this sort of thing, not in the form I described in @sec-Hypothesis-testing. If you're the kind of person who would choose to "collect more data" in real life, it implies that you are not making decisions in accordance with the rules of null hypothesis testing. Even if you happen to arrive at the same decision as the hypothesis test, you aren't following the decision process it implies, and it's this failure to follow the process that is causing the problem.[^bayesian-statistics-13] Your $p$-values are a lie.
 
-[^bayesian-statistics-13]: A related problem: [http://xkcd.com/1478/](http://xkcd.com/1478/).
+[^bayesian-statistics-13]: A related problem: [https://xkcd.com/1478/](https://xkcd.com/1478/)
 
 Worse yet, they're a lie in a dangerous way, because they're all *too small*. To give you a sense of just how bad it can be, consider the following (worst case) scenario. Imagine you're a really super-enthusiastic researcher on a tight budget who didn't pay any attention to my warnings above. You design a study comparing two groups. You desperately want to see a significant result at the $p < .05$ level, but you really don't want to collect any more data than you have to (because it's expensive). In order to cut costs you start collecting data but every time a set of observations arrive you run a $t$-test on your data. If the $t$-test says $p < .05$, then you stop the experiment and report a significant result. If not, you keep collecting data. You keep doing this until you reach your pre-defined spending limit for this experiment. Let's say that limit kicks in at $N = 1000$ observations. As it turns out, the truth of the matter is that there is no real effect to be found: the null hypothesis is true. So, what's the chance that you'll make it to the end of the experiment and (correctly) conclude that there is no effect? In an ideal world, the answer here should be 95%. After all, the whole point of the $p < .05$ criterion is to control the type I error rate at 5%, so what we'd hope is that there's only a 5% chance of falsely rejecting the null hypothesis in this situation. However, there's no guarantee that will be true. You're breaking the rules. Because you're running tests repeatedly, "peeking" at your data to see if you've gotten a significant result, all bets are off.
 
@@ -339,7 +339,7 @@ Given all of the above, what is the take home message? It's not that Bayesian me
 > *Good laws have their origins in bad morals.*\
 > -- Ambrosius Macrobius[^bayesian-statistics-15]
 
-[^bayesian-statistics-15]: [http://www.quotationspage.com/quotes/Ambrosius%20Macrobius/](http://www.quotationspage.com/quotes/Ambrosius Macrobius/).
+[^bayesian-statistics-15]: [https://www.quotationspage.com/quotes/Ambrosius%20Macrobius/](https://www.quotationspage.com/quotes/Ambrosius Macrobius/)
 
 Good rules for statistical testing have to acknowledge human frailty. None of us are without sin. None of us are beyond temptation. A good system for statistical inference should still work even when it is used by actual humans. Orthodox null hypothesis testing does not.[^bayesian-statistics-16]
 
@@ -387,6 +387,6 @@ knitr::include_graphics("images/fig16-4.png")
 
 ## Summary
 
-The first half of this chapter was focused primarily on the theoretical underpinnings of Bayesian statistics. I introduced the mathematics for how Bayesian inference works in the section on [Probabilistic reasoning by rational agents], and gave a very basic overview of Bayesian hypothesis tests]. Finally, I devoted some space to talking about why I think [Bayesian methods are worth using](Why be a Bayesian?).
+The first half of this chapter was focused primarily on the theoretical underpinnings of Bayesian statistics. I introduced the mathematics for how Bayesian inference works in the section on [Probabilistic reasoning by rational agents], and gave a very basic overview of [Bayesian hypothesis tests]. Finally, I devoted some space to talking about why I think [Bayesian methods are worth using](Why be a Bayesian?).
 
 Then I gave a practical example, with [Bayesian $t$-tests]. If you're interested in learning more about the Bayesian approach, there are many good books you could look into. John Kruschke's book, *Doing Bayesian Data Analysis*, is a pretty good place to start [@Kruschke2011] and is a nice mix of theory and practice. His approach is a little different to the "Bayes factor" approach that I've discussed here, so you won't be covering the same ground. If you're a cognitive psychologist, you might want to check out @Lee2014. I picked these two because I think they're especially useful for people in my discipline, but there's a lot of good books out there, so look around!

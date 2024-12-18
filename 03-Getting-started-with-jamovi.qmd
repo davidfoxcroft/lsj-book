@@ -1,5 +1,5 @@
 \placetextbox{0.26}{0.06}{\scriptsize{©2025 D. Foxcroft and D. Navarro,}}
-\placetextbox{0.20}{0.05}{\scriptsize{CC BY-NC 4.0}}
+\placetextbox{0.20}{0.05}{\scriptsize{CC BY-SA 4.0}}
 \placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333/03}}}
 
 # Getting started with jamovi
@@ -145,21 +145,21 @@ There are also several other kinds of data file that you might want to import in
 
 One quite commonly used data format is the humble "comma separated value" file, also called a csv file, and usually bearing the file extension .csv. csv files are just plain old-fashioned text files and what they store is basically just a table of data. This is illustrated in @fig-fig3-4, which shows a file called *booksales.csv* that I've created. As you can see, each row represents the book sales data for one month. The first row doesn't contain actual data though, it has the names of the variables.
 
-```{r}
+```{r out.width="80%"}
 #| label: fig-fig3-4
 #| classes: .enlarge-image
-#| fig-cap: The *booksales.csv* data file. On the left I have opened the file using a spreadsheet program (OpenOffice), which shows that the file is basically a table. On the right the same file is open in a standard text editor (the TextEdit program on a Mac), which shows how the file is formatted. The entries in the table are wrapped in quote marks and separated by commas
-#| fig-alt: A screenshot shows an OpenOffice Calc spreadsheet and a CSV file displayed in a text editor. The spreadsheet contains columns for Month, Days, Sales, and Stock Levels, while the CSV file lists the same data in a comma-separated format.
+#| fig-cap: The *booksales.csv* data file. On the left I have opened the file using a spreadsheet program, which shows that the file is basically a table. On the right the same file is open in a standard text editor (the TextEdit program on a Mac), which shows how the file is formatted. The entries in the table are separated by commas
+#| fig-alt: A screenshot shows a csv file in a spreadsheet and a text editor. The spreadsheet contains columns for Month, Days, Sales, and Stock Levels, while the CSV file lists the same data in a comma-separated format.
 knitr::include_graphics("images/fig3-4.png")
 ```
 
 It's easy to open csv files in jamovi. From the top left menu (the button with three parallel lines) choose 'Open' and browse to where you have stored the csv file on your computer. If you're on a Mac, it'll look like the usual Finder window that you use to choose a file; on Windows it looks like an Explorer window. An example of what it looks like on a Mac is shown in @fig-fig3-5. I'm assuming that you're familiar with your own computer, so you should have no problem finding the csv file that you want to import! Find the one you want, then click on the 'Open' button.
 
-```{r}
+```{r out.width="80%"}
 #| label: fig-fig3-5
 #| classes: .enlarge-image
 #| fig-cap: A dialog box on a Mac asking you to select the csv file jamovi should try to import. Mac users will recognise this immediately, as it is the usual way in which a Mac asks you to find a file. Windows users will not see this, instead they will see the usual explorer window that Windows always gives you when it wants you to select a file
-#| fig-alt: A computer screen displaying a file explorer window with the path 'dan/data'. The highlighted file is 'booksales.csv', and its details are shown on the right, including size (294 bytes), date created (19/08/2011), and date modified (19/08/2011). An 'Open' button is at the bottom right.
+#| fig-alt: A computer screen displaying a file explorer window. The highlighted file is 'booksales.csv', and its details are shown on the right, including size, date created, and date modified. 
 knitr::include_graphics("images/fig3-5.png")
 ```
 
@@ -187,7 +187,7 @@ The first thing I should point out is that if your data are saved as a text file
 
 ### Loading data from SPSS (and other statistics packages)
 
-The commands listed above are the main ones we'll need for data files in this book. But in real life we have many more possibilities. For example, you might want to read data files in from other statistics programs. Since SPSS is probably the most widely used statistics package in psychology, it's worth mentioning that jamovi can also import SPSS data files (file extension .sav). Just follow the instructions above for how to open a csv file, but this time navigate to the .sav file you want to import. For SPSS files, jamovi will regard all values as missing if they are regarded as "system missing" files in SPSS. The 'Default missings' value does not seem to work as expected when importing SPSS files, so be aware of this - you might need another step: import the SPSS file into jamovi, then export as a csv file before re-opening in jamovi.[^getting-started-with-jamovi-5]
+The commands listed above are the main ones we'll need for data files in this book. But in real life we have many more possibilities. For example, you might want to read data files in from other statistics programs. Since SPSS is probably the most widely used statistics package in psychology, it's worth mentioning that jamovi can also import SPSS data files (file extension .sav). Just follow the instructions above for how to open a csv file, but this time navigate to the .sav file you want to import. For SPSS files, jamovi will regard all values as missing if they are regarded as "system missing" files in SPSS. The 'Default missings' value does not seem to work as expected when importing SPSS files, so be aware of this -- you might need another step: import the SPSS file into jamovi, then export as a csv file before re-opening in jamovi.[^getting-started-with-jamovi-5]
 
 [^getting-started-with-jamovi-5]: I know this is a bit of a fudge, but it does work and hopefully this will be fixed in a later version of jamovi.
 

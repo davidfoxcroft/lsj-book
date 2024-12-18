@@ -1,5 +1,5 @@
 \placetextbox{0.26}{0.06}{\scriptsize{©2025 D. Foxcroft and D. Navarro,}}
-\placetextbox{0.20}{0.05}{\scriptsize{CC BY-NC 4.0}}
+\placetextbox{0.20}{0.05}{\scriptsize{CC BY-SA 4.0}}
 \placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333/12}}}
 
 # Correlation and linear regression {#sec-Correlation-and-linear-regression}
@@ -19,7 +19,7 @@ In this section we'll talk about how to describe the relationships between varia
 
 ```{r}
 #| label: tbl-tab12-1
-#| tbl-cap: Data for correlation analysis - descriptive statistics for the *parenthood* data
+#| tbl-cap: Data for correlation analysis -- descriptive statistics for the *parenthood* data
 huxtabs[[12]][[1]]
 ```
 
@@ -160,10 +160,10 @@ You'd think that these four data sets would look pretty similar to one another. 
 
 ::: {#fig-fig12-6 layout-nrow=2 width=90%}
 
-![](images/fig12-6a.png){fig-alt="A scatter plot with points showing a positive correlation between X1 and Y1. The X-axis (X1) ranges from 4 to 12, and the Y-axis (Y1) ranges from 4 to 12. Points are mostly clustered in the middle to upper right regions of the graph." width="45%"}
-![](images/fig12-6b.png){fig-alt="A scatter plot with X2 on the X-axis (ranging from 4 to 14) and Y2 on the Y-axis (ranging from 2 to 9). The data points depict a parabolic distribution, peaking around X2 value of 10 and Y2 value of 8, and tapering off towards both ends of the X-axis." width="45%"}
-![](images/fig12-6c.png){fig-alt="A scatter plot showing a trend of increasing values. The x-axis is labeled 'X3' ranging from 5 to 13, and the y-axis is labeled 'Y3' ranging from 5 to 13. Points form a slightly curved upward trajectory." width="45%"}
-![](images/fig12-6d.png){fig-alt="A scatter plot showing points concentrated near the left side of the graph. The x-axis is labeled 'X4' and ranges from 7.5 to 17.5. The y-axis is labeled 'Y4' and ranges from 5 to 12. There is one outlier in the upper right corner at approximately (19, 11.5)." width="45%"}
+![](images/fig12-6a.png){fig-alt="A scatter plot with points showing a positive correlation between X1 and Y1. The X-axis (X1) ranges from 4 to 12, and the Y-axis (Y1) ranges from 4 to 12. Points are mostly clustered in the middle to upper right regions of the graph." width="47%"}
+![](images/fig12-6b.png){fig-alt="A scatter plot with X2 on the X-axis (ranging from 4 to 14) and Y2 on the Y-axis (ranging from 2 to 9). The data points depict a parabolic distribution, peaking around X2 value of 10 and Y2 value of 8, and tapering off towards both ends of the X-axis." width="47%"}
+![](images/fig12-6c.png){fig-alt="A scatter plot showing a trend of increasing values. The x-axis is labeled 'X3' ranging from 5 to 13, and the y-axis is labeled 'Y3' ranging from 5 to 13. Points form a slightly curved upward trajectory." width="47%"}
+![](images/fig12-6d.png){fig-alt="A scatter plot showing points concentrated near the left side of the graph. The x-axis is labeled 'X4' and ranges from 7.5 to 17.5. The y-axis is labeled 'Y4' and ranges from 5 to 12. There is one outlier in the upper right corner at approximately (19, 11.5)." width="47%"}
 
 Anscombe's quartet scatterplots in jamovi. All four of these data sets have a Pearson correlation of $r$ = .816, but they are qualitatively different from one another
 
@@ -177,7 +177,7 @@ One very common situation where the Pearson correlation isn't quite the right th
 
 To illustrate, consider the data plotted in @fig-fig12-7, showing the relationship between hours worked and grade received for 10 students taking some class. The curious thing about this (highly fictitious) data set is that increasing your effort always increases your grade. It might be by a lot or it might be by a little, but increasing effort will never decrease your grade. If we run a standard Pearson correlation, it shows a strong relationship between hours worked and grade received, with a correlation coefficient of $0.91$. However, this doesn't actually capture the observation that increasing hours worked always increases the grade. There's a sense here in which we want to be able to say that the correlation is perfect but for a somewhat different notion of what a "relationship" is. What we're looking for is something that captures the fact that there is a perfect **ordinal relationship** here. That is, if student 1 works more hours than student 2, then we can guarantee that student 1 will get the better grade. That's not what a correlation of $r = .91$ says at all.
 
-```{r}
+```{r out.width="80%"}
 #| label: fig-fig12-7
 #| fig-cap: The relationship between hours worked and grade received for a toy data set consisting of only 10 students (each dot corresponds to one student). The line through the middle shows the linear relationship between the two variables. This produces a strong Pearson correlation of $r = .91$. However, the interesting thing to note here is that there's actually a perfect monotonic relationship between the two variables. In this toy example, increasing the hours worked always increases the grade received, as illustrated by the solid line. This is reflected in a Spearman correlation of $\rho = 1$. With such a small data set, however, it's an open question as to which version better describes the actual relationship involved
 #| fig-alt: A scatter plot with a trend line. The x-axis is labeled "hours" and the y-axis is labeled "grade." Dots represent data points, showing a positive correlation between hours studied and grade achieved, with the trend line ascending from the bottom-left to top-right.
@@ -215,7 +215,7 @@ knitr::include_graphics("images/fig12-8.png")
 
 The second way do to it is to use one of the jamovi add-on modules. This module is called 'scatr' and you can install it by clicking on the large '$+$' icon in the top right of the jamovi screen, opening the jamovi library, scrolling down until you find 'scatr' and clicking 'install'. When you have done this, you will find a new 'Scatterplot' command available under the 'Exploration' button. This plot is a bit different than the first way, see @fig-fig12-9, but the important information is the same.
 
-```{r}
+```{r out.width="80%"}
 #| label: fig-fig12-9
 #| fig-cap: Scatterplot via the 'scatr' add-on module in jamovi
 #| fig-alt: A scatter plot showing the relationship between 'dan.grump' and 'dan.sleep'. The x-axis represents 'dan.sleep' ranging from 5 to 9, and the y-axis represents 'dan.grump' ranging from 40 to 90. Data points trend downwards, indicating a negative correlation.
@@ -226,7 +226,7 @@ knitr::include_graphics("images/fig12-9.png")
 
 Often you will want to look at the relationships between several variables at once, using a **scatterplot matrix** (in jamovi via the 'Correlation Matrix' -- 'Plot' command). Just add another variable, for example baby.sleep to the list of variables to be correlated, and jamovi will create a scatterplot matrix for you, just like the one in @fig-fig12-10.
 
-```{r}
+```{r out.width="80%"}
 #| label: fig-fig12-10
 #| fig-cap: A matrix of scatterplots produced using jamovi
 #| fig-alt: A series of scatter plots arranged in a matrix format showing correlations between variables:- dan.sleep, dan.grump, and baby.sleep. Each plot has points and trend lines with grey confidence intervals. The correlation coefficients are labeled on the plots.
@@ -375,7 +375,7 @@ huxtabs[[12]][[4]]
 
 The coefficient associated with dani.sleep is quite large, suggesting that every hour of sleep I lose makes me a lot grumpier. However, the coefficient for baby.sleep is very small, suggesting that it doesn't really matter how much sleep my son gets. What matters as far as my grumpiness goes is how much sleep I get. To get a sense of what this multiple regression model looks like, @fig-fig12-14 shows a 3D plot that plots all three variables, along with the regression model itself.
 
-```{r}
+```{r out.width="100%"}
 #| label: fig-fig12-14
 #| fig-cap: A 3D visualisation of a multiple regression model. There are two predictors in the model, dani.sleep and baby.sleep and the outcome variable is dani.grump. Together, these three variables form a 3D space. Each observation (dot) is a point in this space. In much the same way that a simple linear regression model forms a line in 2D space, this multiple regression model forms a plane in 3D space. When we estimate the regression coefficients what we're trying to do is find a plane that is as close to all the blue dots as possible
 #| fig-alt: A 3D scatter plot shows a correlation between 'baby.sleep' (x-axis), 'dan.sleep' (y-axis), and 'dan.grump' (z-axis) with multiple data points marked by blue dots. A grid plane intersects the data points, visualizing the relationship among the variables.
@@ -424,13 +424,13 @@ $$SS_{tot}=\sum_i(Y_i-\bar{Y})^2$$
 
 While we're here, let's calculate these values ourselves, not by hand though. Let's use something like Excel or another standard spreadsheet programme. I have done this by opening up the *parenthood.csv* file in Excel and saving it as parenthood rsquared.xls so that I can work on it. The first thing to do is calculate the $\hat{Y}$ values, and for the simple model that uses only a single predictor we would do the following:
 
-1.  create a new column called 'Y.pred' using the formula '= 125.97 + (-8.94 $\times$ dani.sleep)'.
-2.  calculate the SS(resid) by creating a new column called '(Y-Y.pred)\^2' using the formula ' = (dani.grump - Y.pred)\^2 '.
-3.  Then, at the bottom of this column calculate the sum of these values, i.e. ' sum( ( Y-Y.pred)\^2 ).
-4.  At the bottom of the dani.grump column, calculate the mean value for dani.grump (NB Excel uses the word ' AVERAGE ' rather than 'mean' in its function).
-5.  Then create a new column, called ' (Y - mean(Y))\^2 )' using the formula ' = (dani.grump - AVERAGE(dani.grump))\^2 '.
+1.  Create a new column called ' Y.pred ' using the formula ' = 125.97 + (-8.94 $\times$ dani.sleep) '.
+2.  Calculate the $SS_{resid}$ by creating a new column called ' (Y-Y.pred)\^2 ' using the formula ' = (dani.grump - Y.pred)\^2 '.
+3.  Then, at the bottom of this column calculate the sum of these values, i.e. ' sum( ( Y-Y.pred)\^2 ) '.
+4.  At the bottom of the dani.grump column, calculate the mean value for dani.grump (NB Excel uses the word ' AVERAGE ' rather than ' mean ' in its function).
+5.  Then create a new column, called ' (Y - mean(Y))\^2 ) ' using the formula ' = (dani.grump - AVERAGE(dani.grump))\^2 '.
 6.  Then, at the bottom of this column calculate the sum of these values, i.e. 'sum( (Y - mean(Y))\^2 )'.
-7.  Calculate R.squared by typing into a blank cell the following: '= 1 - (SS(resid) / SS(tot) )'.
+7.  Calculate $R^2$ by typing into a blank cell the following: '= 1 - (SS(resid) / SS(tot) )'.
 
 This gives a value for $R^2$ of '0.8161018'. The $R^2$ value, sometimes called the **coefficient of determination**[^12-correlation-and-linear-regression-8] has a simple interpretation: it is the proportion of the variance in the outcome variable that can be accounted for by the predictor. So, in this case the fact that we have obtained $R^2 = .816$ means that the predictor (my.sleep) explains $81.6\%$ of the variance in the outcome (my.grump).
 
@@ -583,7 +583,7 @@ Before moving on, I should point out that you don't often need to obtain these r
 
 We should check for the linearity of the relationships between the predictors and the outcomes. There's a few different things that you might want to do in order to check this. Firstly, it never hurts to just plot the relationship between the predicted values $\hat{Y}_i$ and the observed values $Y_i$ for the outcome variable, as illustrated in @fig-fig12-17. To draw this in jamovi we saved the predicted values to the dataset, and then drew a scatterplot of the observed against the predicted (fitted) values. This gives you a kind of "big picture view" -- if this plot looks approximately linear, then we're probably not doing too badly (though that's not to say that there aren't problems). However, if you can see big departures from linearity here, then it strongly suggests that you need to make some changes.
 
-```{r}
+```{r out.width="80%"}
 #| label: fig-fig12-17
 #| fig-cap: jamovi plot of the predicted values against the observed values of the outcome variable. A straight(-ish) line is what we are hoping to see here. This looks pretty good, suggesting that there is nothing grossly wrong
 #| fig-alt: A scatter plot with the x-axis labeled "My grumpiness" and the y-axis labeled "Predicted values." The plot has numerous scattered data points, mostly clustered between 40-90 on the x-axis and 40-80 on the y-axis. A trend line shows a positive correlation.
@@ -636,7 +636,7 @@ You can calculate it using the BOXCOX function in the 'Compute' variables screen
 
 The regression models that we've talked about all make an equality (i.e.homogeneity) of variance assumption: the variance of the residuals is assumed to be constant. To plot this in jamovi first we need to calculate the square root of the (absolute) size of the residual[^Correlation-and-regression-22] and then plot this against the predicted values, as in @fig-fig12-21. Note that this plot actually uses the standardised residuals rather than the raw ones, but it's immaterial from our point of view. What we're looking to see here is a straight, horizontal line running through the middle of the plot.[^Correlation-and-linear-regression-23]
 
-```{r}
+```{r out.width="80%"}
 #| label: fig-fig12-21
 #| fig-cap: jamovi plot of the predicted values (model predictions) against the square root of the absolute standardised residuals. This plot is used to diagnose violations of homogeneity of variance. If the variance is really constant, then the line through the middle should be horizontal and flat(-ish).
 #| fig-alt: Scatter plot showing the relationship between predicted values (x-axis) and SQR residuals (y-axis). The plot includes scattered data points and a smoothed trend line indicating the general pattern of the data. Predicted values range from 45 to 85, SQR Residuals from 0.5 to 3.5.
@@ -682,7 +682,7 @@ One danger that you can run into with linear regression models is that your anal
 
 The first kind of unusual observation is an **outlier**. The definition of an outlier (in this context) is an observation that is very different from what the regression model predicts. An example is shown in @fig-fig12-24. In practice, we operationalise this concept by saying that an outlier is an observation that has a very large residual, $\epsilon_i^*$. Outliers are interesting: a big outlier might correspond to junk data, e.g., the variables might have been recorded incorrectly in the data set, or some other defect may be detectable. Note that you shouldn't throw an observation away just because it's an outlier. But the fact that it's an outlier is often a cue to look more closely at that case and try to find out why it's so different.
 
-```{r}
+```{r out.width="80%"}
 #| label: fig-fig12-24
 #| fig-cap: An illustration of outliers. The solid line shows the regression line with the anomalous outlier observation included. The dashed line plots the regression line estimated without the anomalous outlier observation included. The vertical line from the outlier point to the dashed regression line illustrates the large residual error for the outlier. The outlier has an unusual value on the outcome (y-axis location) but not the predictor (x-axis location), and lies a long way from the regression line
 #| fig-alt: A scatter plot with blue dots representing data points, an outlier marked near the top-left region. A solid line shows the regression line, while a dashed line shows the ideal line. The X-axis is labeled 'Predictor' and the Y-axis is labeled 'Outcome'. A vertical line from an outlier point to the dashed regression line illustrates the large residual error for the outlier. 
@@ -716,7 +716,7 @@ The second way in which an observation can be unusual is if it has high **levera
 
 [^12-correlation-and-linear-regression-25]: Again, for the linear algebra fanatics: the "hat matrix" is defined to be that matrix $H$ that converts the vector of observed values $y$ into a vector of predicted values $\hat{y}$, such that $\hat{y} = Hy$. The name comes from the fact that this is the matrix that "puts a hat on y". The hat value of the i-th observation is the i-th diagonal element of this matrix (so technically I should be writing it as $h_{ii}$ rather than $h_i$). And here's how it's calculated: $H = X(X^{'}X)^{1}X^{'}$.
 
-```{r}
+```{r out.width="80%"}
 #| label: fig-fig12-25
 #| fig-cap: An illustration of high leverage points. The anomalous observation in this case is unusual both in terms of the predictor (x-axis) and the outcome (y-axis), but this unusualness is highly consistent with the pattern of correlations that exists among the other observations. The observation falls very close to the regression line and does not distort it by very much
 #| fig-alt: A scatter plot with blue dots showing the relationship between a predictor and an outcome. A solid black regression line trends upwards, with one point labeled "High leverage" noticeably distant from the other points. A dashed line represents an alternate linear fit.
@@ -752,7 +752,7 @@ This brings us to our third measure of unusualness, the **influence** of an obse
 
 [^12-correlation-and-linear-regression-26]: $D_i=\frac{{\epsilon_i^*}^2}{K+1} \times \frac{h_i}{1-h_i}$ Notice that this is a multiplication of something that measures the outlier-ness of the observation (the bit on the left), and something that measures the leverage of the observation (the bit on the right).
 
-```{r}
+```{r out.width="80%"}
 #| label: fig-fig12-26
 #| fig-cap: An illustration of high influence points. In this case, the anomalous observation is highly unusual on the predictor variable (x-axis), and falls a long way from the regression line. As a consequence, the regression line is highly distorted, even though (in this case) the anomalous observation is entirely typical in terms of the outcome variable (y-axis)
 #| fig-alt: Scatter plot showing a linear relationship between Predictor (x-axis) and Outcome (y-axis). Points are scattered around a solid black regression line. One outlier, labeled "High influence," has a vertical distance to the regression line connected by a dashed line.
@@ -786,7 +786,7 @@ In order to have a large Cook's distance an observation must be a fairly substan
 
 In jamovi, information about Cook's distance can be calculated by clicking on the 'Cook's Distance' checkbox in the 'Assumption Checks' -- 'Data Summary' options. When you do this, for the multiple regression model we have been using as an example in this chapter, you get the results as shown in @fig-fig12-27.
 
-```{r}
+```{r out.width="80%"}
 #| label: fig-fig12-27
 #| fig-cap: jamovi output showing the table for the Cooks distance statistics
 #| fig-alt: A data summary table is shown with Cooks Distance values. The columns listed are Mean (0.01), Median (0.00), SD (Standard Deviation) (0.02), Min (0.00), and Max (0.11).
@@ -810,7 +810,7 @@ One fairly major problem that remains is the problem of "model selection". That 
 
 This latter principle is often referred to as **Ockham's razor** and is often summarised in terms of the following pithy saying: do not multiply entities beyond necessity. In this context, it means don't chuck in a bunch of largely irrelevant predictors just to boost your $R^2$. Hmm. Yeah, the original was better.
 
-In any case, what we need is an actual mathematical criterion that will implement the qualitative principle behind Ockham's razor in the context of selecting a regression model. As it turns out there are several possibilities. The one that I'll talk about is the **Akaike information criterion** (AIC) [@Akaike1974] simply because it's available as an option in jamovi. [^12-correlation-and-linear-regression-28]
+In any case, what we need is an actual mathematical criterion that will implement the qualitative principle behind Ockham's razor in the context of selecting a regression model. As it turns out there are several possibilities. The one that I'll talk about is the **Akaike information criterion** (AIC) [@Akaike1974] simply because it's available as an option in jamovi.[^12-correlation-and-linear-regression-28]
 
 [^12-correlation-and-linear-regression-28]: In the context of a linear regression model (and ignoring terms that don't depend on the model in any way!), the AIC for a model that has $K$ predictor variables plus an intercept is $AIC=\frac{SS_{res}}{\hat{\sigma}^2}+2K$.
 

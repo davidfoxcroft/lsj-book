@@ -1,5 +1,5 @@
 \placetextbox{0.26}{0.06}{\scriptsize{©2025 D. Foxcroft and D. Navarro,}}
-\placetextbox{0.20}{0.05}{\scriptsize{CC BY-NC 4.0}}
+\placetextbox{0.20}{0.05}{\scriptsize{CC BY-SA 4.0}}
 \placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333/08}}}
 
 # Estimating unknown quantities from a sample {#sec-Estimating-unknown-quantities-from-a-sample}
@@ -72,7 +72,7 @@ A third procedure is worth mentioning. This time around we close our eyes, shake
 knitr::include_graphics("images/fig8-3.png")
 ```
 
-In my experience, most psychology experiments tend to be sampling without replacement, because the same person is not allowed to participate in the experiment twice. However, most statistical theory is based on the assumption that the data arise from a simple random sample **with replacement**. In real life this very rarely matters. If the population of interest is large (e.g., has more than 10 entities!) the difference between sampling with - and without-replacement is too small to be concerned with. The difference between simple random samples and biased samples, on the other hand, is not such an easy thing to dismiss.
+In my experience, most psychology experiments tend to be sampling without replacement, because the same person is not allowed to participate in the experiment twice. However, most statistical theory is based on the assumption that the data arise from a simple random sample **with replacement**. In real life this very rarely matters. If the population of interest is large (e.g., has more than 10 entities!) the difference between sampling with and without replacement is too small to be concerned with. The difference between simple random samples and biased samples, on the other hand, is not such an easy thing to dismiss.
 
 ### Most samples are not simple random samples
 
@@ -190,7 +190,7 @@ Now suppose that I decided to keep going in this fashion, replicating this "five
 
 What if I continued like this for 10,000 replications, and then drew a histogram. Well that's exactly what I did, and you can see the results in @fig-fig8-6. As this picture illustrates, the average of 5 IQ scores is usually between 90 and 110. But more importantly, what it highlights is that if we replicate an experiment over and over again, what we end up with is a distribution of sample means! (@tbl-tab8-1). This distribution has a special name in statistics, it's called the **sampling distribution of the mean**.
 
-```{r}
+```{r out.width="80%"}
 #| label: fig-fig8-6
 #| fig-cap: The sampling distribution of the mean for the "five IQ scores experiment". If you sample 5 people at random and calculate their average IQ you will almost certainly get a number between 80 and 120, even though there are quite a lot of individuals who have IQs above 120 or below 80. For comparison, the black line plots the population distribution of IQ scores
 #| fig-alt: A histogram of IQ scores with a superimposed normal distribution curve. The x-axis ranges from 60 to 140, with a peak around 100. The y-axis shows frequency. The histogram bars are blue, and the normal distribution curve is black.
@@ -225,7 +225,7 @@ One thing to keep in mind when thinking about sampling distributions is that any
 
 Doing this over and over again would give me a very different sampling distribution, namely the sampling distribution of the maximum. The sampling distribution of the maximum of 5 IQ scores is shown in @fig-fig8-7. Not surprisingly, if you pick 5 people at random and then find the person with the highest IQ score, they're going to have an above average IQ. Most of the time you'll end up with someone whose IQ is measured in the 100 to 140 range.
 
-```{r}
+```{r out.width="80%"}
 #| label: fig-fig8-7
 #| fig-cap: The sampling distribution of the maximum for the "five IQ scores experiment". If you sample 5 people at random and select the one with the highest IQ score you will probably see someone with an IQ between 100 and 140
 #| fig-alt: A histogram of IQ scores is displayed with blue bars indicating the frequency of each score range. A black bell curve overlay represents the normal distribution, with scores ranging from 60 to 140 on the x-axis.
@@ -504,7 +504,7 @@ huxtabs[[8]][[4]]
 ## Estimating a confidence interval {#sec-Estimating-a-confidence-interval}
 
 > *Statistics means never having to say you're certain*\
-> -- Unknown origin [^08-estimating-unknown-quantities-from-a-sample-8]
+> -- Unknown origin[^08-estimating-unknown-quantities-from-a-sample-8]
 
 [^08-estimating-unknown-quantities-from-a-sample-8]: This quote appears on a great many t-shirts and websites, and even gets a mention in a few academic papers (e.g., [https://jse.amstat.org/v10n3/friedman.html](https://jse.amstat.org/v10n3/friedman.html), but I've never found the original source.
 

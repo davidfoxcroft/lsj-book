@@ -1,5 +1,5 @@
 \placetextbox{0.26}{0.06}{\scriptsize{©2025 D. Foxcroft and D. Navarro,}}
-\placetextbox{0.20}{0.05}{\scriptsize{CC BY-NC 4.0}}
+\placetextbox{0.20}{0.05}{\scriptsize{CC BY-SA 4.0}}
 \placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333/07}}}
 
 # Introduction to probability {#sec-Introduction-to-probability}
@@ -150,7 +150,7 @@ Each of the events has a probability that lies between 0 and 1, and if we add up
 $$P(E)=P(X_1)+P(X_2)+P(X_3)$$ 
 At this point you might be thinking that this is all terribly obvious and simple and you'd be right. All we've really done is wrap some basic mathematics around a few common sense intuitions. However, from these simple beginnings it's possible to construct some extremely powerful mathematical tools. I'm definitely not going to go into the details in this book, but what I will do is list, in @tbl-tab7-3, some of the other rules that probabilities satisfy. These rules can be derived from the simple assumptions that I've outlined above, but since we don't actually use these rules for anything in this book I won't do so here.
 
-```{r}
+```{r out.width="70%"}
 #| label: fig-fig7-2
 #| fig-cap: A visual depiction of the "trousers" probability distribution. There are five "elementary events", corresponding to the five pairs of trousers that I own. Each event has some probability of occurring -- this probability is a number between 0 to 1. The sum of these probabilities is 1
 #| fig-alt: Bar chart showing the probability of different events. Blue jeans have the highest probability at 0.5, followed by grey jeans around 0.3. Black jeans and blue track have the same probability near 0.1, while the black suit has a probability of 0.
@@ -197,7 +197,7 @@ Yeah, yeah. I know what you're thinking: notation, notation, notation. Really, w
 
 To that end, @fig-fig7-3 plots the binomial probabilities for all possible values of $X$ for our dice rolling experiment, from $X = 0$ (no skulls) all the way up to $X = 20$ (all skulls). Note that this is basically a bar chart, and is no different to the "trousers probability" plot I drew in @fig-fig7-2. On the horizontal axis we have all the possible events, and on the vertical axis we can read off the probability of each of those events. So, the probability of rolling $4$ skulls out of $20$ is about $0.20$ (the actual answer is $0.2022036$, as we'll see in a moment). In other words, you'd expect that to happen about 20% of the times you repeated this experiment.
 
-```{r}
+```{r out.width="80%"}
 #| label: fig-fig7-3
 #| fig-cap: The binomial distribution with size parameter of $N = 20$ and an underlying success probability of $\theta = \frac{1}{6}$. Each vertical bar depicts the probability of one specific outcome (i.e., one possible value of $X$). Because this is a probability distribution, each of the probabilities must be a number between 0 and 1, and the heights of the bars must sum to 1 as well
 #| fig-alt: A bar graph titled "Number of skulls observed" on the x-axis and "Probability" on the y-axis. The graph has bars with heights decreasing from left to right, peaking around 4-5 skulls, illustrating the probability distribution of observed skulls.
@@ -215,7 +215,7 @@ ggplot(data=binom1, aes(x = factor(heads), y = pmf)) +
 
 To give you a feel for how the binomial distribution changes when we alter the values of $\theta$ and $N$, let's suppose that instead of rolling dice I'm actually flipping coins. This time around, my experiment involves flipping a fair coin repeatedly and the outcome that I'm interested in is the number of heads that I observe. In this scenario, the success probability is now $\theta = \frac{1}{2}$. Suppose I were to flip the coin $N = 20$ times. In this example, I've changed the success probability but kept the size of the experiment the same. What does this do to our binomial distribution? Well, as @fig-fig7-4 shows, the main effect of this is to shift the whole distribution, as you'd expect. Okay, what if we flipped a coin $N = 100$ times? Well, in that case we get @fig-fig7-4 (b). The distribution stays roughly in the middle but there's a bit more variability in the possible outcomes.
 
-```{r}
+```{r out.width="80%"}
 #| label: fig-fig7-4
 #| fig-width: 5
 #| fig-height: 7
@@ -260,7 +260,7 @@ Let's try to get a sense for what it means for a variable to be normally distrib
 
 [^07-introduction-to-probability-5]: In practice, the normal distribution is so handy that people tend to use it even when the variable isn't actually continuous. As long as there are enough categories (e.g., Likert-scale responses to a questionnaire), it's pretty standard practice to use the normal distribution as an approximation. This works out much better in practice than you'd think.
 
-```{r}
+```{r out.width="80%"}
 #| label: fig-fig7-5
 #| fig-cap: The normal distribution with mean $\mu = 0$ and standard deviation $\sigma = 1$. The x-axis corresponds to the value of some variable, and the y-axis tells us something about how likely we are to observe that value. However, notice that the y-axis is labelled *Probability Density* and not *Probability*. There is a subtle and somewhat frustrating characteristic of continuous distributions that makes the y-axis behave a bit oddly - the height of the curve here is not actually the probability of observing a particular $x$ value. On the other hand, it is true that the heights of the curve tells you which $x$ values are more likely (the higher ones!). (see [Probability density] section for all the annoying details)
 #| fig-alt: A line graph displaying a bell-shaped curve, representing a normal distribution. The x-axis is labeled "Observed Value," ranging from -3 to 3, and the y-axis is labeled "Probability Density," ranging from 0.0 to 0.4. The peak of the curve is at 0.
@@ -276,7 +276,7 @@ ggplot(data = data.frame(x = seq(-3, 3, 1)), aes(x)) +
 
 With this in mind, let's see if we can't get an intuition for how the normal distribution works. First, let's have a look at what happens when we play around with the parameters of the distribution. To that end, @fig-fig7-6 plots normal distributions that have different means but have the same standard deviation. As you might expect, all of these distributions have the same "width". The only difference between them is that they've been shifted to the left or to the right. In every other respect they're identical. In contrast, if we increase the standard deviation while keeping the mean constant, the peak of the distribution stays in the same place but the distribution gets wider, as you can see in @fig-fig7-7. Notice, though, that when we widen the distribution the height of the peak shrinks. This has to happen, in the same way that the heights of the bars that we used to draw a discrete binomial distribution have to sum to 1, the total area under the curve for the normal distribution must equal 1. Before moving on, I want to point out one important characteristic of the normal distribution. Irrespective of what the actual mean and standard deviation are, $68.3\%$ of the area falls within 1 standard deviation of the mean. Similarly, $95.4\%$ of the distribution falls within 2 standard deviations of the mean, and $(99.7\%)$ of the distribution is within 3 standard deviations. This idea is illustrated in @fig-fig7-8; see also @fig-fig7-9.
 
-```{r}
+```{r out.width="80%"}
 #| label: fig-fig7-6
 #| fig-cap: An illustration of what happens when you change the mean of a normal distribution. The solid line depicts a normal distribution with a mean of $\mu = 4$. The dashed line shows a normal distribution with a mean of $\mu = 7$. In both cases, the standard deviation is $\sigma = 1$. Not surprisingly, the two distributions have the same shape, but the dashed line is shifted to the right
 #| fig-alt: Line graph showing two overlapping probability density curves. The solid line curve peaks at an observed value of 3, and the dashed line curve peaks at an observed value of 6. The x-axis is labeled "Observed Value" and the y-axis is labeled "Probability Density.
@@ -291,7 +291,7 @@ ggplot(data = data.frame(x = seq(0, 10, 1)), aes(x)) +
 
 ```
 
-```{r}
+```{r out.width="80%"}
 #| label: fig-fig7-7
 #| fig-cap: An illustration of what happens when you change the the standard deviation of a normal distribution. Both distributions plotted in this figure have a mean of $\mu = 5$, but they have different standard deviations. The solid line plots a distribution with standard deviation $\sigma = 1$, and the dashed line shows a distribution with standard deviation $\sigma = 2$. As a consequence, both distributions are "centred" on the same spot, but the dashed line is wider than the solid one
 #| fig-alt: A probability density plot showing two curves. The solid line represents a normal distribution centered at 5 with higher peak, while the dashed line represents a broader distribution also centered at 5. The x-axis is labeled "Observed Value" and the y-axis is labeled "Probability Density.
@@ -406,7 +406,7 @@ Okay, so that explains part of the story. I've explained a little bit about how 
 
 The normal distribution is the distribution that statistics makes most use of (for reasons to be discussed shortly), and the binomial distribution is a very useful one for lots of purposes. But the world of statistics is filled with probability distributions, some of which we'll run into in passing. In particular, the three that will appear in this book are the $t$-distribution, the $\chi^2$ distribution and the $F$-distribution. I won't give formulas for any of these, or talk about them in too much detail, but I will show you some pictures: @fig-fig7-10, @fig-fig7-11 and @fig-fig7-12.
 
-```{r}
+```{r out.width="80%"}
 #| label: fig-fig7-10
 #| fig-cap: A $t$-distribution with 3 degrees of freedom (solid line). It looks similar to a normal distribution, but it is not quite the same. For comparison purposes I have plotted a standard normal distribution as the dashed line
 #| fig-alt: A plot showing two probability density functions. The solid blue line represents one distribution, while the dashed gray line shows another distribution with a wider spread. The x-axis is labeled "Observed Value" and the y-axis is labeled "Probability Density.
@@ -422,7 +422,7 @@ ggplot(data = data.frame(x = seq(-4, 4, 1)), aes(x)) +
 ```
 
 
-```{r}
+```{r out.width="80%"}
 #| label: fig-fig7-11
 #| fig-cap: $\chi^2$ distribution with 3 degrees of freedom. Notice that the observed values must always be greater than zero, and that the distribution is pretty skewed. These are the key features of a chi-square  distribution
 #| fig-alt: A line graph displays a probability density function with "Observed Value" on the x-axis (0 to 10) and "Probability Density" on the y-axis (0 to 0.25). The curve peaks near "Observed Value" 1.5 and decreases asymptotically towards the x-axis on both sides.
@@ -436,7 +436,7 @@ ggplot(data = data.frame(x = seq(0, 10, 1)), aes(x)) +
 
 ```
 
-```{r}
+```{r out.width="80%"}
 #| label: fig-fig7-12
 #| fig-cap: An $F$-distribution with 3 and 5 degrees of freedom. Qualitatively speaking, it looks pretty similar to a chi-square distribution, but they are not quite the same in general
 #| fig-alt: A probability density function graph showing a curve that peaks sharply near the y-axis and then gradually decreases, approaching the x-axis as it moves to the right. The x-axis is labeled "Observed Value" and the y-axis is labeled "Probability Density".

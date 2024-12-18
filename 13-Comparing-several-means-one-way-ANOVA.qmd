@@ -1,5 +1,5 @@
 \placetextbox{0.26}{0.06}{\scriptsize{©2025 D. Foxcroft and D. Navarro,}}
-\placetextbox{0.20}{0.05}{\scriptsize{CC BY-NC 4.0}}
+\placetextbox{0.20}{0.05}{\scriptsize{CC BY-SA 4.0}}
 \placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333/13}}}
 
 # Comparing several means (one-way ANOVA) {#sec-Comparing-several-means-one-way-ANOVA}
@@ -19,7 +19,7 @@ The remainder of the chapter discusses a range of important topics that inevitab
 
 Suppose you've become involved in a clinical trial in which you are testing a new antidepressant drug called *Joyzepam*. In order to construct a fair test of the drug's effectiveness, the study involves three separate drugs to be administered. One is a placebo, and the other is an existing antidepressant / anti-anxiety drug called *Anxifree*. A collection of 18 participants with moderate to severe depression are recruited for your initial testing. Because the drugs are sometimes administered in conjunction with psychological therapy, your study includes 9 people undergoing cognitive behavioural therapy (CBT) and 9 who are not. Participants are randomly assigned (doubly blinded, of course) a treatment, such that there are 3 CBT people and 3 no-therapy people assigned to each of the 3 drugs. A psychologist assesses the mood of each person after a 3-month run with each drug, and the overall improvement in each person's mood is assessed on a scale ranging from $-5$ to $+5$. With that as the study design, let's now load up the data file in *clinicaltrial.csv* . We can see that this data set contains the three variables drug, therapy and mood.gain.
 
-For the purposes of this chapter, what we're really interested in is the effect of drug on mood.gain. The first thing to do is calculate some descriptive statistics and draw some graphs. In the @sec-Descriptive-statistics chapter we showed you how to do this, and some of the descriptive statistics we can calculate in jamovi are shown in @fig-fig13-1.
+For the purposes of this chapter, what we're really interested in is the effect of drug on mood.gain. The first thing to do is calculate some descriptive statistics and draw some graphs. In the @sec-Descriptive-statistics chapter we showed you how to do this, and some of the descriptive statistics we can calculate in jamovi are shown in @fig-fig13-1. As the plot makes clear, there is a larger improvement in mood for participants in the Joyzepam group than for either the Anxifree group or the placebo group. The Anxifree group shows a larger mood gain than the control group, but the difference isn't as large. The question that we want to answer is are these difference "real", or are they just due to chance?
 
 ```{r}
 #| label: fig-fig13-1
@@ -29,7 +29,6 @@ For the purposes of this chapter, what we're really interested in is the effect 
 knitr::include_graphics("images/fig13-1.png")
 ```
 
-As the plot makes clear, there is a larger improvement in mood for participants in the Joyzepam group than for either the Anxifree group or the placebo group. The Anxifree group shows a larger mood gain than the control group, but the difference isn't as large. The question that we want to answer is are these difference "real", or are they just due to chance?
 
 ## How ANOVA works {#sec-How-ANOVA-works}
 
@@ -297,8 +296,8 @@ The interpretation of $\eta^2$ is equally straightforward. It refers to the prop
 
 Any time you run an ANOVA with more than two groups and you end up with a significant effect, the first thing you'll probably want to ask is which groups are actually different from one another. In our drugs example, our null hypothesis was that all three drugs (placebo, Anxifree and Joyzepam) have the exact same effect on mood. But if you think about it, the null hypothesis is actually claiming three different things all at once here. Specifically, it claims that:
 
-- Your competitor's drug (Anxifree) is no better than a placebo (i.e., $\mu_A = \mu_P$ )
-- Your drug (Joyzepam) is no better than a placebo (i.e., $\mu_J = \mu_P$ )
+- Your competitor's drug (Anxifree) is no better than a placebo (i.e., $\mu_A = \mu_P$)
+- Your drug (Joyzepam) is no better than a placebo (i.e., $\mu_J = \mu_P$)
 - Anxifree and Joyzepam are equally effective (i.e., $\mu_J = \mu_A$)
 
 If any one of those three claims is false, then the null hypothesis is also false. So, now that we've rejected our null hypothesis, we're thinking that at least one of those things isn't true. But which ones? All three of these propositions are of interest. Since you certainly want to know if your new drug Joyzepam is better than a placebo, it would be nice to know how well it stacks up against an existing commercial alternative (i.e., Anxifree). It would even be useful to check the performance of Anxifree against the placebo. Even if Anxifree has already been extensively tested against placebos by other researchers, it can still be very useful to check that your study is producing similar results to earlier work.
@@ -343,7 +342,7 @@ The simplest of these adjustments is called the **Bonferroni correction** [@Dunn
 $$p_j^{'}=m \times p$$
 And therefore, if you're using the Bonferroni correction, you would reject the null hypothesis if $p_j^{'} < \alpha$. The logic behind this correction is very straightforward. We're doing m different tests, so if we arrange it so that each test has a type I error rate of at most $\frac{\alpha}{m}$, then the *total* type I error rate across these tests cannot be larger than $\alpha$. That's pretty simple, so much so that in the original paper, the author writes:
 
->"*The method given here is so simple and so general that I am sure it must have been used before this. I do not find it, however, so can only conclude that perhaps its very simplicity has kept statisticians from realizing that it is a very good method in some situations*" (@Dunn1961, pp. 52-53).
+>*The method given here is so simple and so general that I am sure it must have been used before this. I do not find it, however, so can only conclude that perhaps its very simplicity has kept statisticians from realizing that it is a very good method in some situations* (@Dunn1961, pp. 52-53).
 
 To use the Bonferroni correction in jamovi, just click on the 'Bonferroni' checkbox in the 'Correction' options, and you will see another column added to the ANOVA results table showing the adjusted $p$-values for the Bonferroni correction (@tbl-tab13-8). If we compare these three $p$-values to those for the uncorrected, pairwise $t$-tests, it is clear that the only thing that jamovi has done is multiply them by $3$.
 
@@ -406,7 +405,7 @@ Regardless of whether you're doing the standard Levene test or the Brown-Forsyth
 
 Okay, so how do we run the Levene test? Simple really -- under the ANOVA 'Assumption Checks' option, just click on the 'Homogeneity tests' checkbox. If we look at the output, shown in @fig-fig13-5, we see that the test is non-significant ($F_{2,15} = 1.45, p = .266$), so it looks like the homogeneity of variance assumption is fine. However, looks can be deceptive! If your sample size is pretty big, then the Levene test could show up a significant effect (i.e. p < .05) even when the homogeneity of variance assumption is not violated to an extent which troubles the robustness of ANOVA. This was the point George Box was making in the quote above. Similarly, if your sample size is quite small, then the homogeneity of variance assumption might not be satisfied and yet a Levene test could be non-significant (i.e. p > .05). What this means is that, alongside any statistical test of the assumption being met, you should always plot the standard deviation around the means for each group / category in the analysis...just to see if they look fairly similar (i.e. homogeneity of variance) or not.
 
-```{r}
+```{r out.width="70%"}
 #| label: fig-fig13-5
 #| fig-cap: Levene test output for one-way ANOVA in jamovi
 #| fig-alt: A table from jamovi showing an assumption check for Homogeneity of Variances Test (Levene). The table includes columns labeled F, df1, df2, and p. The values are 1.45, 2, 15, and 0.26569 respectively.
@@ -431,7 +430,7 @@ Okay, so originally our ANOVA gave us the result $F(2, 15) = 18.6$, whereas the 
 
 Testing the normality assumption is relatively straightforward. We covered most of what you need to know in @sec-Checking-the-normality-of-a-sample. The only thing we really need to do is draw a QQ plot and, in addition if it is available, run the Shapiro-Wilk test. The QQ plot is shown in @fig-fig13-7 and it looks pretty normal to me. If the Shapiro-Wilk test is not significant (i.e. $p > .05$) then this indicates that the assumption of normality is not violated. However, as with Levene's test, if the sample size is large then a significant Shapiro-Wilk test may in fact be a false positive, where the assumption of normality is not violated in any substantive problematic sense for the analysis. And, similarly, a very small sample can produce false negatives. That's why a visual inspection of the QQ plot is important.
 
-```{r}
+```{r out.width="80%"}
 #| label: fig-fig13-7
 #| fig-cap: QQ plot in the one-way ANOVA analysis in jamovi
 #| fig-alt: A Q-Q plot comparing standardized residuals to theoretical quantiles, showing dots near a 45-degree reference line, indicating the data points follow a normal distribution closely. The axes are labeled "Standardized Residuals" and "Theoretical Quantiles".
@@ -537,10 +536,10 @@ knitr::include_graphics("images/fig13-10.png")
 
 If, on the other hand, Mauchly's test had been significant ($p$ < .05) then we would conclude that there are significant differences between the variance of the differences, and the requirement of sphericity has not been met. In this case, we should apply a correction to the $F$-value obtained in the one-way related ANOVA analysis:
 
--   If the Greenhouse-Geisser value in the "Tests of Sphericity" table is > .75 then you should use the Huynh-Feldt correction
+-   If the Greenhouse-Geisser value in the 'Tests of Sphericity' table is > .75 then you should use the Huynh-Feldt correction
 -   But if the Greenhouse-Geisser value is < .75, then you should use the Greenhouse-Geisser correction.
 
-Both these corrected $F$-values can be specified in the 'Sphericity Corrections' check boxes under the 'Assumption Checks' options, and the corrected $F$-values are then shown in the results table, as in Figure **13.11**.
+Both these corrected $F$-values can be specified in the 'Sphericity Corrections' check boxes under the 'Assumption Checks' options, and the corrected $F$-values are then shown in the results table, as in @fig-fig13-11.
 
 ```{r}
 #| label: fig-fig13-11
@@ -596,7 +595,7 @@ There's one last thing I want to point out before finishing. It's something that
 
 ##  Summary
 
-There's a fair bit covered in this chapter, but there's still a lot missing[^13-summary-1]. Most obviously, I haven't discussed how to run an ANOVA when you are interested in more than one grouping variable, but that will be discussed in a lot of detail in @sec-Factorial-ANOVA. In terms of what we have discussed, the key topics were:
+There's a fair bit covered in this chapter, but there's still a lot missing.[^13-summary-1] Most obviously, I haven't discussed how to run an ANOVA when you are interested in more than one grouping variable, but that will be discussed in a lot of detail in @sec-Factorial-ANOVA. In terms of what we have discussed, the key topics were:
 
 - The basic logic behind [How ANOVA works] and [Running an ANOVA in jamovi].
 - How to compute an [Effect size] for an ANOVA.

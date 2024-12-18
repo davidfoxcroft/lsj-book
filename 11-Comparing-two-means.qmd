@@ -1,5 +1,5 @@
 \placetextbox{0.26}{0.06}{\scriptsize{©2025 D. Foxcroft and D. Navarro,}}
-\placetextbox{0.20}{0.05}{\scriptsize{CC BY-NC 4.0}}
+\placetextbox{0.20}{0.05}{\scriptsize{CC BY-SA 4.0}}
 \placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333/11}}}
 
 # Comparing two means {#sec-Comparing-two-means}
@@ -21,7 +21,7 @@ In this section I'll describe one of the most useless tests in all of statistics
 
 ### The inference problem that the test addresses
 
-To introduce the idea behind the *z*-test, let's use a simple example. A friend of mine, Dr Zeppo, grades his introductory statistics class on a curve. Let's suppose that the average grade in his class is $67.5$, and the standard deviation is $9.5$. Of his many hundreds of students, it turns out that 20 of them also take psychology classes. Out of curiosity, I find myself wondering if the psychology students tend to get the same grades as everyone else (i.e., mean $67.5$) or do they tend to score higher or lower? He emails me the *zeppo.csv* file, which I use to look at the grades of those students, in the jamovi spreadsheet view,and then calculate the mean in 'Exploration' -- 'Descriptives' [^11-comparing-two-means-2]. The mean value is $72.3$.
+To introduce the idea behind the *z*-test, let's use a simple example. A friend of mine, Dr Zeppo, grades his introductory statistics class on a curve. Let's suppose that the average grade in his class is $67.5$, and the standard deviation is $9.5$. Of his many hundreds of students, it turns out that 20 of them also take psychology classes. Out of curiosity, I find myself wondering if the psychology students tend to get the same grades as everyone else (i.e., mean $67.5$) or do they tend to score higher or lower? He emails me the *zeppo.csv* file, which I use to look at the grades of those students, in the jamovi spreadsheet view,and then calculate the mean in 'Exploration' -- 'Descriptives'.[^11-comparing-two-means-2] The mean value is $72.3$.
 
 [^11-comparing-two-means-2]: In order to do this I had to change the measurement level for $X$ to 'Continuous', as during the opening / import of the csv file jamovi made this a nominal level variable, which isn't right for my analysis.
 
@@ -31,7 +31,7 @@ Hmm. It might be that the psychology students are scoring a bit higher than norm
 
 To answer the question, it helps to be able to write down what it is that I think I know. Firstly, I know that the sample mean is $\bar{X} = 72.3$. If I'm willing to assume that the psychology students have the same standard deviation as the rest of the class then I can say that the population standard deviation is $\sigma = 9.5$. I'll also assume that since Dr Zeppo is grading to a curve, the psychology student grades are normally distributed.
 
-Next, it helps to be clear about what I want to learn from the data. In this case my research hypothesis relates to the population mean $\mu$ for the psychology student grades, which is unknown. Specifically, I want to know if $\mu = 67.5$ or not. Given that this is what I know, can we devise a hypothesis test to solve our problem? The data, along with the hypothesised distribution from which they are thought to arise, are shown in @fig-fig11-1 . Not entirely obvious what the right answer is, is it? For this, we are going to need some statistics.
+Next, it helps to be clear about what I want to learn from the data. In this case my research hypothesis relates to the population mean $\mu$ for the psychology student grades, which is unknown. Specifically, I want to know if $\mu = 67.5$ or not. Given that this is what I know, can we devise a hypothesis test to solve our problem? The data, along with the hypothesised distribution from which they are thought to arise, are shown in @fig-fig11-1. Not entirely obvious what the right answer is, is it? For this, we are going to need some statistics.
 
 ```{r}
 #| label: fig-fig11-1
@@ -512,9 +512,9 @@ Because I'm talking about one group having "lower" scores this time around, it i
 
 One last thing: please note that you can't do this for other types of test statistics. It works for $t$-tests, but it wouldn't be meaningful for chi-square tests, $F$-tests or indeed for most of the tests I talk about in this book. So don't over-generalise this advice! I'm really just talking about $t$-tests here and nothing else!
 
-### Assumptions of the test
+### Assumptions of the Student $t$-test
 
-As always, our hypothesis test relies on some assumptions. So what are they? For the Student $t$-test there are three assumptions, some of which we saw previously in the context of the one sample $t$-test (see [Assumptions of the one sample t-test]):
+As always, our hypothesis test relies on some assumptions. So what are they? For the Student $t$-test there are three assumptions, some of which we saw previously in the context of the one sample $t$-test (see [Assumptions of the one sample $t$-test]):
 
 - *Normality.* Like the one-sample $t$-test, it is assumed that the data are normally distributed. Specifically, we assume that both groups are normally distributed.[^11-comparing-two-means-14a] In the section on [Checking the normality of a sample] we'll discuss how to test for normality, and in [Testing non-normal data] we'll discuss possible solutions.
 - *Independence.* Once again, it is assumed that the observations are independently sampled. In the context of the Student test this has two aspects to it. Firstly, we assume that the observations within each sample are independent of one another (exactly the same as for the one-sample test). However, we also assume that there are no cross-sample dependencies. If, for instance, it turns out that you included some participants in both experimental conditions of your study (e.g., by accidentally allowing the same person to sign up to different conditions), then there are some cross sample dependencies that you'd need to take into account.
@@ -600,9 +600,9 @@ The interpretation of this output should be fairly obvious. You read the output 
 
 Except, except...our result isn't significant anymore. When we ran the Student test we did get a significant effect, but the Welch test on the same data set is not $(t(23.02) = 2.03, p = .054)$. What does this mean? Should we panic? Is the sky burning? Probably not. The fact that one test is significant and the other isn't doesn't itself mean very much, especially since I kind of rigged the data so that this would happen. As a general rule, it's not a good idea to go out of your way to try to interpret or explain the difference between a $p$-value of $.049$ and a $p$-value of $.051$. If this sort of thing happens in real life, the *difference* in these $p$-values is almost certainly due to chance. What does matter is that you take a little bit of care in thinking about what test you use. The Student test and the Welch test have different strengths and weaknesses. If the two populations really do have equal variances, then the Student test is slightly more powerful (lower type II error rate) than the Welch test. However, if they *don't* have the same variances, then the assumptions of the Student test are violated and you may not be able to trust it; you might end up with a higher type I error rate. So it's a trade off. However, in real life I tend to prefer the Welch test, because almost no-one actually believes that the population variances are identical.
 
-### Assumptions of the test
+### Assumptions of the Welch test
 
-The assumptions of the Welch test are very similar to those made by the Student $t$-test (see [Assumptions of the test], except that the Welch test does not assume homogeneity of variance. This leaves only the assumption of normality and the assumption of independence. The specifics of these assumptions are the same for the Welch test as for the Student test.
+The assumptions of the Welch test are very similar to those made by the Student $t$-test (see [Assumptions of the Student $t$-test], except that the Welch test does not assume homogeneity of variance. This leaves only the assumption of normality and the assumption of independence. The specifics of these assumptions are the same for the Welch test as for the Student test.
 
 ## The paired-samples $t$-test
 
@@ -886,14 +886,14 @@ gridExtra::grid.arrange(p1,p2,p3,p4, nrow=2, ncol=2)
 
 In our previous analyses we showed how to conduct in jamovi an independent $t$-test (@fig-fig11-10) and a paired samples $t$-test (@fig-fig11-16). And for these analyses jamovi provides an option to show a QQ plot for the difference scores (which jamovi calls the 'residuals'), which is a better way of checking the normality assumption. When we select this option for these analyses, we get the QQ plots shown in @fig-fig11-22 and @fig-fig11-23, respectively. My interpretation is that these plots both show that the difference scores are reasonably normally distributed, so we are good to go!
 
-```{r}
+```{r out.width="70%"}
 #| label: fig-fig11-22
 #| fig-cap: QQ plot for the independent $t$-test analysis shown in @fig-fig11-10
 #| fig-alt: A Q-Q plot showing standardized residuals versus theoretical quantiles. Data points are scattered along the line y = x, indicating that the residuals follow a normal distribution. The x-axis ranges from -2 to 2, and the y-axis ranges from -2 to 2.
 knitr::include_graphics("images/fig11-22.png")
 ```
 
-```{r}
+```{r out.width="70%"}
 #| label: fig-fig11-23
 #| fig-cap: QQ plot for the paired samples $t$-test analysis shown in @fig-fig11-16
 #| fig-alt: A Q-Q plot displays standardized residuals versus theoretical quantiles to assess the normality of a data set. The points mostly follow the diagonal line from bottom left to top right, indicating that the residuals are approximately normally distributed.
@@ -910,7 +910,7 @@ QQ plots provide a nice way to informally check the normality of your data, but 
 
 [^11-comparing-two-means-22]: The test statistic that it calculates is conventionally denoted as $W$, and it's calculated as follows. First, we sort the observations in order of increasing size, and let $\bar{X_1}$ be the smallest value in the sample, $X_2$ be the second smallest and so on. Then the value of $W$ is given by: $$W=\frac{(\sum_{i=1}^N a_iX_i)^2}{\sum_{i=1}^N(X_i-\bar{X})^2}$$ where $\bar{X}$ is the mean of the observations, and the $a_i$ values are ...mumble, mumble... something complicated that is a bit beyond the scope of an introductory text.
 
-```{r}
+```{r out.width="70%"}
 #| label: fig-fig11-24
 #| fig-width: 5
 #| fig-height: 5
@@ -961,7 +961,7 @@ To get the Shapiro-Wilk statistic in jamovi $t$-tests, check the option for 'Nor
 
 In the meantime, it's probably worth showing you an example of what happens to the QQ plot and the Shapiro-Wilk test when the data turn out to be non-normal. For that, let's look at the distribution of our AFL winning margins data, which if you remember back to @sec-Descriptive-statistics it didn't look like they came from a normal distribution at all. Here's what happens to the QQ plot (@fig-fig11-25).
 
-```{r}
+```{r out.width="70%"}
 #| label: fig-fig11-25
 #| fig-cap: QQ plot showing non-normality from the AFL winning margins data
 #| fig-alt: A Q-Q plot shows standardized residuals against theoretical quantiles. Data points largely follow a diagonal reference line, indicating normality. Points deviate at the upper and lower ends, suggesting potential departures from a normal distribution at extremes.

@@ -1,5 +1,5 @@
 \placetextbox{0.26}{0.06}{\scriptsize{©2025 D. Foxcroft and D. Navarro,}}
-\placetextbox{0.20}{0.05}{\scriptsize{CC BY-NC 4.0}}
+\placetextbox{0.20}{0.05}{\scriptsize{CC BY-SA 4.0}}
 \placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333/06}}}
 
 # Pragmatic matters {#sec-Pragmatic-matters}
@@ -122,18 +122,16 @@ huxtabs[[6]][[3]]
 
 Next on the list of logical operators is the **not equal to** operator $!=$ which, as with all the others, does what it says it does. It returns a value of TRUE when things on either side are not identical to each other. Therefore, since $2 + 2$ isn't equal to $5$, we would get "true" as the value for our newly computed variable. Try it and see:
 $$2 + 2 \text{ != } 5$$
-We're not quite done yet. There are three more logical operations that are worth knowing about, listed in @tbl-tab6-3. These are the **not** operator $!$, the **and** operator $and$, and the **or** operator $or$. Like the other logical operators, their behaviour is more or less exactly what you'd expect given their names. For instance, if I ask you to assess the claim that "either $2 + 2 = 4$ or $2 + 2 = 5$" you'd say that it's true. Since it's an "either-or" statement, all we need is for one of the two parts to be true. That's what the or operator does.[^pragmatic-matters-5]
+We're not quite done yet. There are three more logical operations that are worth knowing about, listed in @tbl-tab6-3. These are the **not** operator $!$, the **and** operator $and$, and the **or** operator $or$. Like the other logical operators, their behaviour is more or less exactly what you'd expect given their names. For instance, if I ask you to assess the claim that "either $2 + 2 = 4$ or $2 + 2 = 5$" you'd say that it's true. Since it's an "either-or" statement, all we need is for one of the two parts to be true. That's what the $or$ operator does.[^pragmatic-matters-5]
 
-[^pragmatic-matters-5]: Now, here's a quirk in jamovi. When you have simple logical expressions like the ones we have already met, e.g., $2 + 2 == 5$ then jamovi neatly states 'false' (or 'true') in the corresponding spreadsheet column. Underneath the hood, jamovi stores 'false' as $0$ and 'true' as $1$. When we have more complex logical expressions, such as $(2+2 == 4)$ or $(2+2 == 5)$, then jamovi just displays either $0$ or $1$, depending whether the logical expression is evaluated as false, or true:
-$$(2+2 == 4) \text{ or } (2+2 == 5)$$
 On the other hand, if I ask you to assess the claim that "both $2 + 2 = 4$ and $2 + 2 = 5$" you'd say that it's false. Since this is an **and** statement we need both parts to be true. And that's what the $and$ operator does:
 $$(2+2 == 4) \text{ and } (2+2 == 5)$$
 Finally, there's the **not** operator, which is simple but annoying to describe in English. If I ask you to assess my claim that "it is not true that $2 + 2 = 5$" then you would say that my claim is true, because actually my claim is that "$2 + 2 = 5$ is false". And I'm right. If we write this in jamovi we use this:
 $$NOT(2+2 == 5)$$
-In other words, since $2+2 == 5$ is a FALSE statement, it must be the case that $NOT(2+2 == 5)$ is a TRUE one. Essentially, what we've really done is claim that "not false" is the same thing as "true". Obviously, this isn't really quite right in real life. But jamovi lives in a much more black or white world. For jamovi everything is either true or false. No shades of grey are allowed.
-
-Of course, in our $2 + 2 = 5$ example, we didn't really need to use the "not" operator $NOT$ and the "equals to" operator $==$ as two separate operators. We could have just used the "not equals to" operator $!=$ like this:
+In other words, since $2+2 == 5$ is a FALSE statement, it must be the case that $NOT(2+2 == 5)$ is a TRUE one. Essentially, what we've really done is claim that "not false" is the same thing as "true". Obviously, this isn't really quite right in real life. But jamovi lives in a much more black or white world. For jamovi everything is either true or false. No shades of grey are allowed. Of course, in our $2 + 2 = 5$ example, we didn't really need to use the "not" operator $NOT$ and the "equals to" operator $==$ as two separate operators. We could have just used the "not equals to" operator $!=$ like this:
 $$2+2 \text{ != } 5$$
+
+[^pragmatic-matters-5]: Now, here's a quirk in jamovi. When you have simple logical expressions like the ones we have already met, e.g., $2 + 2 == 5$ then jamovi neatly states 'false' (or 'true') in the corresponding spreadsheet column. Underneath the hood, jamovi stores 'false' as $0$ and 'true' as $1$. When we have more complex logical expressions, such as $(2+2 == 4)$ or $(2+2 == 5)$, then jamovi just displays either $0$ or $1$, depending whether the logical expression is evaluated as false, or true.
 
 ### Applying logical operation to text
 

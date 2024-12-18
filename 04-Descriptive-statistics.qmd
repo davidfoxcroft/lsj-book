@@ -1,5 +1,5 @@
 \placetextbox{0.26}{0.06}{\scriptsize{©2025 D. Foxcroft and D. Navarro,}}
-\placetextbox{0.20}{0.05}{\scriptsize{CC BY-NC 4.0}}
+\placetextbox{0.20}{0.05}{\scriptsize{CC BY-SA 4.0}}
 \placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333/04}}}
 
 # Descriptive statistics {#sec-Descriptive-statistics}
@@ -9,27 +9,27 @@
 source("header.R")
 ```
 
-Any time that you get a new data set to look at one of the first tasks that you have to do is find ways of summarising the data in a compact, easily understood fashion. This is what **descriptive statistics** (as opposed to inferential statistics) is all about. In fact, to many people the term "statistics" is synonymous with descriptive statistics. It is this topic that we'll consider in this chapter, but before going into any details, let's take a moment to get a sense of why we need descriptive statistics. To do this, let's open the *aflsmall_margins* file and see what variables are stored in the file, see @fig-fig4-1.
+Any time that you get a new data set to look at one of the first tasks that you have to do is find ways of summarising the data in a compact, easily understood fashion. This is what **descriptive statistics** (as opposed to inferential statistics) is all about. In fact, to many people the term "statistics" is synonymous with descriptive statistics. It is this topic that we'll consider in this chapter, but before going into any details, let's take a moment to get a sense of why we need descriptive statistics. To do this, let's open the *aflsmall_margins.csv* file and see what variables are stored in the file, see @fig-fig4-1.
 
-```{r}
+```{r out.width="80%"}
 #| label: fig-fig4-1
-#| fig-cap: A screenshot of jamovi showing the variables stored in the aflsmall_margins.csv file
+#| fig-cap: A screenshot of jamovi showing the variables stored in the *aflsmall_margins.csv* file
 #| fig-alt: A jamovi screenshot shows a data analysis interface with a column of numerical data labeled "afl.margins." The navigation bar includes options like Exploration, T-Tests, ANOVA, Regression, Frequencies, and Factor under the Analyses tab.
 knitr::include_graphics("images/fig4-1.png")
 ```
 
 In fact, there is just one variable here, *afl.margins*. We'll focus a bit on this variable in this chapter, so I'd better tell you what it is. Unlike most of the data sets in this book, this is actually real data, relating to the Australian Football League (AFL).[^04-descriptive-statistics-1] The *afl.margins* variable contains the winning margin (number of points) for all 176 home and away games played during the 2010 season.
 
-[^04-descriptive-statistics-1]: Note for non-Australians: the AFL is an Australian rules football competition. You don't need to know anything about Australian rules in order to follow this section.
-
 This output doesn't make it easy to get a sense of what the data are actually saying. Just "looking at the data" isn't a terribly effective way of understanding data. In order to get some idea about what the data are actually saying we need to calculate some descriptive statistics (this chapter) and draw some nice pictures (@sec-Drawing-graphs). Since the descriptive statistics are the easier of the two topics I'll start with those, but nevertheless I'll show you a histogram of the *afl.margins* data since it should help you get a sense of what the data we're trying to describe actually look like, see @fig-fig4-2. We'll talk a lot more about how to draw histograms in @sec-Histograms in the next chapter. For now, it's enough to look at the histogram and note that it provides a fairly interpretable representation of the *afl.margins* data.
 
-```{r}
+```{r out.width="80%"}
 #| label: fig-fig4-2
 #| fig-cap: A histogram of the AFL 2010 winning margin data (the *afl.margins* variable). As you might expect, the larger the winning margin the less frequently you tend to see it
 #| fig-alt: Histogram depicting the distribution of 'afl.margins' against density. The horizontal axis (x-axis) ranges from 0 to 120, and the vertical axis (y-axis) shows density. Bars are varying in height, indicating the frequency of data within specific margin intervals.
 knitr::include_graphics("images/fig4-2.png")
 ```
+
+[^04-descriptive-statistics-1]: Note for non-Australians: the AFL is an Australian rules football competition. You don't need to know anything about Australian rules in order to follow this section.
 
 ## Measures of central tendency
 
@@ -46,7 +46,8 @@ The first piece of notation to introduce is $N$, which we'll use to refer to the
 ```{r}
 #| label: tbl-tab4-1
 #| tbl-cap: Observations in the *afl.margins* variable
-huxtabs[[4]][[1]]
+huxtabs[[4]][[1]] %>%
+  set_col_width(c(.4,.2,.4))
 ```
 
 [Additional technical detail[^04-descriptive-statistics-2]]
@@ -127,7 +128,7 @@ What we could do is read through all 400 entries and count the number of occasio
 
 Now that we have our frequency table we can just look at it and see that, over the 24 years for which we have data, Geelong has played in more finals than any other team. Thus, the mode of the *afl.finalists* data is "Geelong". We can see that Geelong (39 finals) played in more finals than any other team during the 1987-2010 period. It's also worth noting that in the 'Descriptives' Table no results are calculated for mean, median, minimum or maximum. This is because the *afl.finalists* variable is a nominal text variable so it makes no sense to calculate these values.
 
-```{r}
+```{r out.width="80%"}
 #| label: fig-fig4-5
 #| fig-cap: A screenshot of jamovi showing the variables stored in the aflsmall_finalists.csv file
 #| fig-alt: A jamovi screenshot of a spreadsheet labeled "AFL Finalists" with 18 rows. The first column lists various Australian Football League teams, including Hawthorn, Melbourne, and Carlton. The jamovi spreadsheet menu shows options like Variables, Data, and Analyses.
@@ -144,7 +145,7 @@ knitr::include_graphics("images/fig4-6.png")
 
 One last point to make regarding the mode. Whilst the mode is most often calculated when you have nominal data, because means and medians are useless for those sorts of variables, there are some situations in which you really do want to know the mode of an ordinal, interval or ratio scale variable. For instance, let's go back to our *afl.margins* variable. This variable is clearly ratio scale (if it's not clear to you, it may help to re-read @sec-Scales-of-measurement), and so in most situations the mean or the median is the measure of central tendency that you want. But consider this scenario: a friend of yours is offering a bet and they pick a football game at random. Without knowing who is playing you have to guess the exact winning margin. If you guess correctly you win \$50. If you don't you lose \$1. There are no consolation prizes for "almost" getting the right answer. You have to guess exactly the right margin. For this bet, the mean and the median are completely useless to you. It is the mode that you should bet on. To calculate the mode for the *afl.margins* variable in jamovi, go back to that data set and on the 'Exploration' -- 'Descriptives' screen you will see you can expand the section marked 'Statistics'. Click on the checkbox marked 'Mode' and you will see the modal value presented in the 'Descriptives' Table, as in @fig-fig4-7. So the 2010 data suggest you should bet on a 3 point margin.
 
-```{r}
+```{r out.width="80%"}
 #| label: fig-fig4-7
 #| classes: .enlarge-image
 #| fig-cap: A screenshot of jamovi showing the modal value for the *afl.margins* variable
@@ -170,7 +171,7 @@ The **interquartile range** (IQR) is like the range, but instead of the differen
 
 And not surprisingly, in @fig-fig4-8 the 50th percentile is the same as the median value. And, by noting that $50.50 - 12.75 = 37.75$, we can see that the interquartile range for the 2010 AFL winning margins data is 37.75. While it's obvious how to interpret the range it's a little less obvious how to interpret the IQR. The simplest way to think about it is like this: the interquartile range is the range spanned by the "middle half" of the data. That is, one quarter of the data falls below the 25th percentile and one quarter of the data is above the 75th percentile, leaving the "middle half" of the data lying in between the two. And the IQR is the range covered by that middle half.
 
-```{r}
+```{r out.height="70%"}
 #| label: fig-fig4-8
 #| fig-width: 5
 #| fig-cap: A screenshot of jamovi showing the Quartiles for the *afl.margins* variable
@@ -267,7 +268,7 @@ We've discussed quite a few measures of spread: range, IQR, mean absolute deviat
 
 In short, the IQR and the standard deviation are easily the two most common measures used to report the variability of the data. But there are situations in which the others are used. I've described all of them in this book because there's a fair chance you'll run into most of these somewhere.
 
-```{r}
+```{r out.width="70%"}
 #| label: fig-fig4-10
 #| fig-cap: An illustration of the standard deviation from the AFL winning margins data. The shaded bars in the histogram show how much of the data fall within one standard deviation of the mean. In this case, 65.3% of the data set lies within this range, which is pretty consistent with the "approximately 68% rule" discussed in the main text
 #| fig-alt: A bar graph depicting the standard deviation from the AFL winning margins data. Bars one standard deviation to the left and right of the mean are blue, other bars are white. Horizontal axis labels include 'Mean - s.d.', 'Mean' and 'Mean + s.d.'

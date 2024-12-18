@@ -1,5 +1,5 @@
 \placetextbox{0.26}{0.06}{\scriptsize{©2025 D. Foxcroft and D. Navarro,}}
-\placetextbox{0.20}{0.05}{\scriptsize{CC BY-NC 4.0}}
+\placetextbox{0.20}{0.05}{\scriptsize{CC BY-SA 4.0}}
 \placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333/14}}}
 
 # Factorial ANOVA {#sec-Factorial-ANOVA}
@@ -19,7 +19,7 @@ When we discussed analysis of variance in @sec-Comparing-several-means-one-way-A
 
 If we cross-tabulate drug by therapy, using the 'Frequencies' -- 'Contingency Tables' analysis in jamovi (see @sec-Tabulating-and-cross-tabulating-data), we get the table shown in @fig-fig14-1.
 
-```{r}
+```{r out.width="80%"}
 #| label: fig-fig14-1
 #| fig-cap: jamovi contingency table of drug by therapy
 #| fig-alt: A jamovi results table titled "Contingency Tables" with data on 'drug' types (anxifree, joyzepam, placebo) and 'therapy' types (CBT, no. therapy, Total). Each drug type has equal counts for both therapy types:- 3 CBT, 3 no therapy, totaling to 6 for each drug. Total counts are 9 for CBT, 9 for no therapy, and 18 overall.
@@ -501,7 +501,7 @@ In ANCOVA the values of the dependent variable are "adjusted" for the influence 
 
 Despite this advantage, ANCOVA runs the risk of undoing real differences between groups, and this should be avoided. Look at @fig-fig14-11, for example, which shows a plot of Statistics anxiety against age and shows two distinct groups -- students who have either an Arts or Science background or preference. ANCOVA with age as a covariate might lead to the conclusion that statistics anxiety does not differ in the two groups. Would this conclusion be reasonable -- probably not because the ages of the two groups do not overlap and analysis of variance has essentially "extrapolated into a region with no data" (@Everitt1996, p. 68).
 
-```{r}
+```{r out.width="80%"}
 #| label: fig-fig14-11
 #| fig-cap: Plot of Statistics anxiety against age for two distinct groups
 #| fig-alt: A scatter plot shows 'Statistics anxiety' on the Y-axis versus 'Age' on the X-axis. Data points for 'Scientists' cluster lower on the Y-axis and at younger ages on the X-axis, while 'Artists' cluster higher on the Y-axis and at older ages on the X-axis.
@@ -647,7 +647,7 @@ As you can see, the intercept term $b_0$ acts like a kind of "baseline" grade th
 
 Okay, now that we're really starting to see why ANOVA and regression are basically the same thing, let's actually run our regression using the rtfm data and the jamovi regression analysis to convince ourselves that this is really true. Running the regression in the usual way gives the results shown in @fig-fig14-18.
 
-```{r}
+```{r out.width="80%"}
 #| label: fig-fig14-18
 #| classes: .enlarge-image
 #| fig-cap: Regression analysis of the *rtfm.csv* data set in jamovi, without the interaction term
@@ -721,7 +721,7 @@ Obviously, there are no surprises here. That's the exact same ANOVA that we ran 
 knitr::include_graphics("images/fig14-21.png")
 ```
 
-Hmm. This isn't the same output that we got last time. Not surprisingly, the regression output prints out the results for each of the three predictors separately, just like it did every other time we conducted a regression analysis. On the one hand we can see that the $p$-value for the CBTtherapy variable is exactly the same as the one for the therapy factor in our original ANOVA, so we can be reassured that the regression model is doing the same thing as the ANOVA did. On the other hand, this regression model is testing the druganxifree contrast and the drugjoyzepam contrast *separately*, as if they were two completely unrelated variables. It's not surprising of course, because the poor regression analysis has no way of knowing that drugjoyzepam and druganxifree are actually the two different contrasts that we used to encode our three-level drug factor. As far as it knows, drugjoyzepam and druganxifree are no more related to one another than drugjoyzepam and therapyCBT. However, you and I know better. At this stage we're not at all interested in determining whether these two contrasts are individually significant. We just want to know if there's an "overall" effect of drug. That is, what we want jamovi to do is to run some kind of "model comparison" test, one in which the two "drug related" contrasts are lumped together for the purpose of the test. Sound familiar? All we need to do is specify our null model, which in this case would include the CBTtherapy predictor, and omit both of the drug-related variables, as in @fig-fig14-22.
+Hmm. This isn't the same output that we got last time. Not surprisingly, the regression output prints out the results for each of the three predictors separately, just like it did every other time we conducted a regression analysis. On the one hand we can see that the $p$-value for the CBTtherapy variable is exactly the same as the one for the therapy factor in our original ANOVA, so we can be reassured that the regression model is doing the same thing as the ANOVA did. On the other hand, this regression model is testing the druganxifree contrast and the drugjoyzepam contrast *separately*, as if they were two completely unrelated variables. It's not surprising of course, because the poor regression analysis has no way of knowing that drugjoyzepam and druganxifree are actually the two different contrasts that we used to encode our three-level drug factor. As far as it knows, drugjoyzepam and druganxifree are no more related to one another than drugjoyzepam and CBTtherapy. However, you and I know better. At this stage we're not at all interested in determining whether these two contrasts are individually significant. We just want to know if there's an "overall" effect of drug. That is, what we want jamovi to do is to run some kind of "model comparison" test, one in which the two "drug related" contrasts are lumped together for the purpose of the test. Sound familiar? All we need to do is specify our null model, which in this case would include the CBTtherapy predictor, and omit both of the drug-related variables, as in @fig-fig14-22.
 
 ```{r}
 #| label: fig-fig14-22
@@ -747,7 +747,7 @@ If you also click on the 'ANOVA' test checkbox under the 'Model Coefficients' --
 
 ### Degrees of freedom as parameter counting!
 
-At long last, I can finally give a definition of degrees of freedom that I am happy with. Degrees of freedom are defined in terms of the number of parameters that have to be estimated in a model. For a regression model or an ANOVA, the number of parameters corresponds to the number of regression coefficients (i.e. $b$-values), including the intercept. Keeping in mind that any $F$-test is always a comparison between two models and the first df is the difference in the number of parameters. For example, in the model comparison above, the null model (mood.gain \~ therapyCBT) has two parameters: there's one regression coefficient for the therapyCBT variable, and a second one for the intercept. The alternative model (mood.gain \~ druganxifree + drugjoyzepam + therapyCBT) has four parameters: one regression coefficient for each of the three contrasts, and one more for the intercept. So the degrees of freedom associated with the difference between these two models is $df_1 = 4 - 2 = 2$.
+At long last, I can finally give a definition of degrees of freedom that I am happy with. Degrees of freedom are defined in terms of the number of parameters that have to be estimated in a model. For a regression model or an ANOVA, the number of parameters corresponds to the number of regression coefficients (i.e. $b$-values), including the intercept. Keeping in mind that any $F$-test is always a comparison between two models and the first df is the difference in the number of parameters. For example, in the model comparison above, the null model (mood.gain \~ CBTtherapy) has two parameters: there's one regression coefficient for the CBTtherapy variable, and a second one for the intercept. The alternative model (mood.gain \~ druganxifree + drugjoyzepam + CBTtherapy) has four parameters: one regression coefficient for each of the three contrasts, and one more for the intercept. So the degrees of freedom associated with the difference between these two models is $df_1 = 4 - 2 = 2$.
 
 What about the case when there doesn't seem to be a null model? For instance, you might be thinking of the $F$-test that shows up when you select 'F Test' under the 'Linear Regression' -- 'Model Fit' options. I originally described that as a test of the regression model as a whole. However, that is still a comparison between two models. The null model is the trivial model that only includes 1 regression coefficient, for the intercept term. The alternative model contains $K + 1$ regression coefficients, one for each of the $K$ predictor variables and one more for the intercept. So the $df$ value that you see in this $F$-test is equal to $df_1 = K + 1 - 1 = K$.
 
