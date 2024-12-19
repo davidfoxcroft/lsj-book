@@ -1,12 +1,12 @@
 \placetextbox{0.26}{0.06}{\scriptsize{©2025 D. Foxcroft and D. Navarro,}}
-\placetextbox{0.20}{0.05}{\scriptsize{CC BY-SA 4.0}}
+\placetextbox{0.205}{0.05}{\scriptsize{CC BY-SA 4.0}}
 \placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333/13}}}
 
 # Comparing several means (one-way ANOVA) {#sec-Comparing-several-means-one-way-ANOVA}
 
 ```{r}
 #| include: FALSE
-source("header.R")
+source("chapter_header.R")
 ```
 
 This chapter introduces one of the most widely used tools in psychological statistics, known as "the analysis of variance", but usually referred to as ANOVA. The basic technique was developed by Sir Ronald Fisher in the early 20th century and it is to him that we owe the rather unfortunate terminology. The term ANOVA is a little misleading, in two respects. Firstly, although the name of the technique refers to variances, ANOVA is concerned with investigating differences in means. Secondly, there are several different things out there that are all referred to as ANOVAs, some of which have only a very tenuous connection to one another. Later on in the book we'll encounter a range of different ANOVA methods that apply in quite different situations, but for the purposes of this chapter we'll only consider the simplest form of ANOVA, in which we have several different groups of observations, and we're interested in finding out whether those groups differ in terms of some outcome variable of interest. This is the question that is addressed by a one-way ANOVA.
@@ -53,14 +53,12 @@ p1 <- ggplot(data = data.frame(x = seq(-5, 5, 1)), aes(x)) +
   stat_function(fun = dnorm, n = 1000, args = list(mean = -2, sd = 1), col="darkgrey", linewidth=1) +
   stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col="darkgrey", linewidth=1) +
   stat_function(fun = dnorm, n = 1000, args = list(mean = 2, sd = 1), col="darkgrey", linewidth=1) +
-  geom_segment(x=-2, xend=0, y=0.33, yend=0.33, arrow=arrow(ends='both', length=unit(0.30,"cm"))) +
-  geom_segment(x=0, xend=2, y=0.28, yend=0.28, arrow=arrow(ends='both', length=unit(0.30,"cm"))) +
-  geom_segment(x=-2, xend=2, y=0.23, yend=0.23, arrow=arrow(ends='both', length=unit(0.30,"cm"))) +
-  scale_x_continuous(breaks = seq(-5, 5, 1)) +
+  geom_segment(x=-2, xend=0, y=0.33, yend=0.33, arrow=arrow(ends='both', length=unit(0.30,"cm")), stat = "unique") +
+  geom_segment(x=0, xend=2, y=0.28, yend=0.28, arrow=arrow(ends='both', length=unit(0.30,"cm")), stat = "unique") +
+  geom_segment(x=-2, xend=2, y=0.23, yend=0.23, arrow=arrow(ends='both', length=unit(0.30,"cm")), stat = "unique") +
   ggtitle("Between-group variation\n(i.e. differences amongst group means)") +
   xlab("\n(a)") +
   scale_x_continuous(breaks=c(-2,0,2), labels=c("group 1", "group 2", "group 3")) +
-  theme_classic() +
   theme(
     axis.text.y = element_blank(),
     axis.title.y = element_blank(),
@@ -72,14 +70,12 @@ p2 <- ggplot(data = data.frame(x = seq(-5, 5, 1)), aes(x)) +
   stat_function(fun = dnorm, n = 1000, args = list(mean = -2, sd = 1), col="darkgrey", linewidth=1) +
   stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col="darkgrey", linewidth=1) +
   stat_function(fun = dnorm, n = 1000, args = list(mean = 2, sd = 1), col="darkgrey", linewidth=1) +
-  geom_segment(x=-2.8, xend=-1.2, y=0.28, yend=0.28, arrow=arrow(ends='both', length=unit(0.30,"cm"))) +
-  geom_segment(x=-0.8, xend=0.8, y=0.28, yend=0.28, arrow=arrow(ends='both', length=unit(0.30,"cm"))) +
-  geom_segment(x=1.2, xend=2.8, y=0.28, yend=0.28, arrow=arrow(ends='both', length=unit(0.30,"cm"))) +
-  scale_x_continuous(breaks = seq(-5, 5, 1)) +
+  geom_segment(x=-2.8, xend=-1.2, y=0.28, yend=0.28, arrow=arrow(ends='both', length=unit(0.30,"cm")), stat = "unique") +
+  geom_segment(x=-0.8, xend=0.8, y=0.28, yend=0.28, arrow=arrow(ends='both', length=unit(0.30,"cm")), stat = "unique") +
+  geom_segment(x=1.2, xend=2.8, y=0.28, yend=0.28, arrow=arrow(ends='both', length=unit(0.30,"cm")), stat = "unique") +
   ggtitle("Within-group variation\n(i.e. deviations from group means)") +
   xlab("\n(b)") +
   scale_x_continuous(breaks=c(-2,0,2), labels=c("group 1", "group 2", "group 3")) +
-  theme_classic() +
   theme(
     axis.text.y = element_blank(),
     axis.title.y = element_blank(),

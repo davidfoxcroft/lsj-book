@@ -1,13 +1,13 @@
 \placetextbox{0.26}{0.06}{\scriptsize{©2025 D. Foxcroft and D. Navarro,}}
-\placetextbox{0.20}{0.05}{\scriptsize{CC BY-SA 4.0}}
+\placetextbox{0.205}{0.05}{\scriptsize{CC BY-SA 4.0}}
 \placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333/11}}}
-
-# Comparing two means {#sec-Comparing-two-means}
 
 ```{r}
 #| include: FALSE
-source("header.R")
+source("chapter_header.R")
 ```
+
+# Comparing two means {#sec-Comparing-two-means}
 
 In @sec-Categorical-data-analysis we covered the situation when your outcome variable is nominal scale and your predictor variable is also nominal scale. Lots of real-world situations have that character, and so you'll find that chi-square tests in particular are quite widely used. However, you're much more likely to find yourself in a situation where your outcome variable is interval scale or higher, and what you're interested in is whether the average value of the outcome variable is higher in one group or another. For instance, a psychologist might want to know if anxiety levels are higher among parents than non-parents, or if working memory capacity is reduced by listening to music (relative to not listening to music). In a medical context we might want to know if a new drug increases or decreases blood pressure. An agricultural scientist might want to know whether adding phosphorus to Australian native plants will kill them.[^11-comparing-two-means-1] In all these situations our outcome variable is a fairly continuous, interval or ratio scale variable, and our predictor is a binary "grouping" variable. In other words, we want to compare the means of the two groups.
 
@@ -33,9 +33,8 @@ To answer the question, it helps to be able to write down what it is that I thin
 
 Next, it helps to be clear about what I want to learn from the data. In this case my research hypothesis relates to the population mean $\mu$ for the psychology student grades, which is unknown. Specifically, I want to know if $\mu = 67.5$ or not. Given that this is what I know, can we devise a hypothesis test to solve our problem? The data, along with the hypothesised distribution from which they are thought to arise, are shown in @fig-fig11-1. Not entirely obvious what the right answer is, is it? For this, we are going to need some statistics.
 
-```{r}
+```{r out.width="80%"}
 #| label: fig-fig11-1
-#| out.width: 60%
 #| fig-cap: The theoretical distribution (solid line) from which the psychology student grades (bars) are supposed to have been generated
 #| fig-alt: A bar histogram displays the distribution of grades with a curve overlay. The x-axis is labeled "Grades" ranging from 50 to 90, and the y-axis is unlabeled. Bars show peaks near grades 70 and 80, with the curve indicating a normal distribution.
 
@@ -44,7 +43,6 @@ ggplot(as.data.frame(grades), aes(x=grades)) +
   geom_histogram(aes(y =after_stat(density)), binwidth=5, col=blueshade, fill=blueshade, alpha=0.4) +
   stat_function(fun = dnorm, args = list(mean = 67.7, sd = sd(grades)), col="black", linewidth=1) +
   xlab("\nGrades") +
-  theme_classic() +
   theme(
     axis.line.y = element_blank(),
     axis.text.y = element_blank(),
@@ -76,13 +74,12 @@ p1 <- ggplot(data = data.frame(x = seq(-4, 4, 1)), aes(x)) +
   stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col="black", linewidth=1) +
   geom_segment(x = 0, y = 0.25, xend = -1, yend = 0.25) +
   geom_segment(x = 0, y = 0, xend = 0, yend = dnorm(0)) +
-  geom_text(x=-2.2, y=.25, label=expression(~sigma~" = "~sigma[0]), size=5) +
-  geom_text(x= 0, y=.42, label=expression(~mu~" = "~mu[0]), size=5) +
+  geom_text(x=-2.2, y=.25, label=expression(~sigma~" = "~sigma[0]), size=5, check_overlap = TRUE) +
+  geom_text(x= 0, y=.42, label=expression(~mu~" = "~mu[0]), size=5, check_overlap = TRUE) +
   scale_x_continuous(breaks = seq(-4, 4, 2)) +
   ylim(0,0.5) +
   ggtitle("null hypothesis") +
   xlab("\nValue of X") +
-  theme_classic() +
   theme(
     axis.title.y = element_blank(),
     axis.text.y = element_blank(),
@@ -95,13 +92,12 @@ p2 <- ggplot(data = data.frame(x = seq(-4, 4, 1)), aes(x)) +
   stat_function(fun = dnorm, n = 1000, args = list(mean = -.75, sd = 1), col="black", linewidth=1) +
   geom_segment(x = -.75, y = 0.25, xend = -1.75, yend = 0.25) +
   geom_segment(x = 0, y = 0, xend = 0, yend = dnorm(0)) +
-  geom_text(x=-3, y=.25, label=expression(~sigma~" = " ~sigma[0]), size=5) +
-  geom_text(x= 0, y=.42, label=expression(~mu~" \U2260 "~mu[0]), size=5) +
+  geom_text(x=-3, y=.25, label=expression(~sigma~" = " ~sigma[0]), size=5, check_overlap = TRUE) +
+  geom_text(x= 0, y=.42, label=expression(~mu~" \U2260 "~mu[0]), size=5, check_overlap = TRUE) +
   scale_x_continuous(breaks = seq(-4, 4, 2)) +
   ylim(0,0.5) +
   ggtitle("alternative hypothesis") +
   xlab("\nValue of X") +
-  theme_classic() +
   theme(
     axis.title.y = element_blank(),
     axis.text.y = element_blank(),
@@ -166,7 +162,6 @@ p1 <- ggplot(data = data.frame(x = seq(-3, 3, 0.1)), aes(x)) +
   labs(x=expression(paste("\nValue of ",italic("t"," statistic")))) +
   ggtitle("(a) Two-sided Test") +
   scale_x_continuous(breaks=c(-1.96, 0, 1.96), labels=c("-1.96", "0", "1.96")) +
-  theme_classic() +
   theme(
     axis.text.x = element_text(size=12),
     axis.title.y = element_blank(),
@@ -182,7 +177,6 @@ p2 <- ggplot(data = data.frame(x = seq(-3, 3, 0.1)), aes(x)) +
   labs(x=expression(paste("\nValue of ",italic("z"," statistic")))) +
   ggtitle("(b) One-sided Test") +
   scale_x_continuous(breaks=c(0, 1.64), labels=c("0", "1.64")) +
-  theme_classic() +
   theme(
     axis.text.x = element_text(size=12),
     axis.title.y = element_blank(),
@@ -247,13 +241,12 @@ p1 <- ggplot(data = data.frame(x = seq(-4, 4, 1)), aes(x)) +
   stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col="black", linewidth=1) +
   geom_segment(x = 0, y = 0.25, xend = -1, yend = 0.25) +
   geom_segment(x = 0, y = 0, xend = 0, yend = dnorm(0)) +
-  geom_text(x=-2.2, y=.25, label=expression(~sigma~" = ??"), size=5) +
-  geom_text(x= 0, y=.42, label=expression(~mu~" = "~mu[0]), size=5) +
+  geom_text(x=-2.2, y=.25, label=expression(~sigma~" = ??"), size=5, check_overlap = TRUE) +
+  geom_text(x= 0, y=.42, label=expression(~mu~" = "~mu[0]), size=5, check_overlap = TRUE) +
   scale_x_continuous(breaks = seq(-4, 4, 2)) +
   ylim(0,0.5) +
   ggtitle("null hypothesis") +
   xlab("\nValue of X") +
-  theme_classic() +
   theme(
     axis.title.y = element_blank(),
     axis.text.y = element_blank(),
@@ -266,13 +259,12 @@ p2 <- ggplot(data = data.frame(x = seq(-4, 4, 1)), aes(x)) +
   stat_function(fun = dnorm, n = 1000, args = list(mean = -.75, sd = 1), col="black", linewidth=1) +
   geom_segment(x = -.75, y = 0.25, xend = -1.75, yend = 0.25) +
   geom_segment(x = 0, y = 0, xend = 0, yend = dnorm(0)) +
-  geom_text(x=-3, y=.25, label=expression(~sigma~" = ??"), size=5) +
-  geom_text(x= 0, y=.42, label=expression(~mu~" \U2260 "~mu[0]), size=5) +
+  geom_text(x=-3, y=.25, label=expression(~sigma~" = ??"), size=5, check_overlap = TRUE) +
+  geom_text(x= 0, y=.42, label=expression(~mu~" \U2260 "~mu[0]), size=5, check_overlap = TRUE) +
   scale_x_continuous(breaks = seq(-4, 4, 2)) +
   ylim(0,0.5) +
   ggtitle("alternative hypothesis") +
   xlab("\nValue of X") +
-  theme_classic() +
   theme(
     axis.title.y = element_blank(),
     axis.text.x = element_blank(),
@@ -292,6 +284,8 @@ $$t=\frac{\bar{X}-\mu}{\frac{\hat{\sigma}}{\sqrt{N}}}$$
 
 [^11-comparing-two-means-7]: Well, sort of. As I understand the history, Gosset only provided a partial solution; the general solution to the problem was provided by Sir Ronald Fisher.
 
+The only thing that has changed in the equation is that instead of using the known true value $\sigma$, we use the estimate $\hat{\sigma}$. And if this estimate has been constructed from $N$ observations, then the sampling distribution turns into a $t$-distribution with $N-1$ **degrees of freedom** ($df$). The $t$-distribution is very similar to the normal distribution, but has "heavier" tails, as discussed earlier in @sec-Other-useful-distributions and illustrated in @fig-fig11-5. Notice, though, that as $df$ gets larger, the $t$-distribution starts to look identical to the standard normal distribution. This is as it should be: if you have a sample size of $N = 70,000,000$ then your "estimate" of the standard deviation would be pretty much perfect, right? So, you should expect that for large $N$, the $t$-test would behave exactly the same way as a *z*-test. And that's exactly what happens!
+
 ```{r}
 #| label: fig-fig11-5
 #| fig-width:  10
@@ -305,7 +299,6 @@ p1 <- ggplot(data = data.frame(x = seq(-4, 4, 1)), aes(x)) +
   scale_x_continuous(breaks = seq(-4, 4, 2)) +
   ggtitle("df = 2") +
   labs(x=expression(paste("\nValue of ",italic("t"," statistic")))) +
-  theme_classic() +
   theme(
     axis.title.y = element_blank(),
     axis.text.y = element_blank(),
@@ -320,7 +313,6 @@ p2 <- ggplot(data = data.frame(x = seq(-4, 4, 1)), aes(x)) +
   scale_x_continuous(breaks = seq(-4, 4, 2)) +
   ggtitle("df = 10") +
   labs(x=expression(paste("\nValue of ",italic("t"," statistic")))) +
-  theme_classic() +
   theme(
     axis.title.y = element_blank(),
     axis.text.y = element_blank(),
@@ -331,8 +323,6 @@ p2 <- ggplot(data = data.frame(x = seq(-4, 4, 1)), aes(x)) +
 gridExtra::grid.arrange(p1,p2, ncol=2)
 
 ```
-
-The only thing that has changed in the equation is that instead of using the known true value $\sigma$, we use the estimate $\hat{\sigma}$. And if this estimate has been constructed from $N$ observations, then the sampling distribution turns into a $t$-distribution with $N-1$ **degrees of freedom** ($df$). The $t$-distribution is very similar to the normal distribution, but has "heavier" tails, as discussed earlier in @sec-Other-useful-distributions and illustrated in @fig-fig11-5. Notice, though, that as $df$ gets larger, the $t$-distribution starts to look identical to the standard normal distribution. This is as it should be: if you have a sample size of $N = 70,000,000$ then your "estimate" of the standard deviation would be pretty much perfect, right? So, you should expect that for large $N$, the $t$-test would behave exactly the same way as a *z*-test. And that's exactly what happens!
 
 ### Doing the test in jamovi
 
@@ -416,11 +406,10 @@ $$t=\frac{\bar{X_1}-\bar{X_2}}{SE}$$
 p1 <- ggplot(data = data.frame(x = seq(30, 110, 10)), aes(x)) +
   stat_function(fun = dnorm, n = 1000, args = list(mean = 70, sd = 9), col="black", linewidth=1) +
   scale_x_continuous(breaks = seq(40, 100, 20)) +
-  geom_text(x=70, y=.047, label=expression(~mu), size=5) +
+  geom_text(x=70, y=.047, label=expression(~mu), size=5, check_overlap = TRUE) +
   ylim(0,0.05) +
   ggtitle("null hypothesis") +
   xlab("\nValue of X") +
-  theme_classic() +
   theme(
     axis.title.y = element_blank(),
     axis.text.y = element_blank(),
@@ -433,12 +422,11 @@ p2 <- ggplot(data = data.frame(x = seq(30, 110, 10)), aes(x)) +
   stat_function(fun = dnorm, n = 1000, args = list(mean = 60, sd = 9), col="black", linewidth=1) +
   stat_function(fun = dnorm, n = 1000, args = list(mean = 75, sd = 9), col="black", linewidth=1) +
   scale_x_continuous(breaks = seq(40, 100, 20)) +
-  geom_text(x=60, y=.047, label=expression(~mu[1]), size=5) +
-  geom_text(x=75, y=.047, label=expression(~mu[2]), size=5) +
+  geom_text(x=60, y=.047, label=expression(~mu[1]), size=5, check_overlap = TRUE) +
+  geom_text(x=75, y=.047, label=expression(~mu[2]), size=5, check_overlap = TRUE) +
   ylim(0,0.05) +
   ggtitle("alternative hypothesis") +
   xlab("\nValue of X") +
-  theme_classic() +
   theme(
     axis.title.y = element_blank(),
     axis.text.x = element_blank(),
@@ -536,11 +524,10 @@ The biggest problem with using the Student test in practice is the third assumpt
 p1 <- ggplot(data = data.frame(x = seq(30, 110, 10)), aes(x)) +
   stat_function(fun = dnorm, n = 1000, args = list(mean = 70, sd = 6.5), col="black", linewidth=1) +
   scale_x_continuous(breaks = seq(40, 100, 20)) +
-  geom_text(x=70, y=.066, label=expression(~mu), size=5) +
+  geom_text(x=70, y=.066, label=expression(~mu), size=5, check_overlap = TRUE) +
   ylim(0,0.07) +
   ggtitle("null hypothesis") +
   xlab("\nValue of X") +
-  theme_classic() +
   theme(
     axis.title.y = element_blank(),
     axis.text.y = element_blank(),
@@ -553,12 +540,11 @@ p2 <- ggplot(data = data.frame(x = seq(30, 110, 10)), aes(x)) +
   stat_function(fun = dnorm, n = 1000, args = list(mean = 60, sd = 6.5), col="black", linewidth=1) +
   stat_function(fun = dnorm, n = 1000, args = list(mean = 75, sd = 7.95), col="black", linewidth=1) +
   scale_x_continuous(breaks = seq(40, 100, 20)) +
-  geom_text(x=60, y=.066, label=expression(~mu[1]), size=5) +
-  geom_text(x=75, y=.055, label=expression(~mu[2]), size=5) +
+  geom_text(x=60, y=.066, label=expression(~mu[1]), size=5, check_overlap = TRUE) +
+  geom_text(x=75, y=.055, label=expression(~mu[2]), size=5, check_overlap = TRUE) +
   ylim(0,0.07) +
   ggtitle("alternative hypothesis") +
   xlab("\nValue of X") +
-  theme_classic() +
   theme(
     axis.title.y = element_blank(),
     axis.text.x = element_blank(),
@@ -802,7 +788,6 @@ p1 <- ggplot(df, aes(x=y)) +
   xlab("\nValue") +
   ylab("Frequency\n") +
   ggtitle("Normally Distributed Data") +
-  theme_classic() +
   theme(
     plot.title = element_text(hjust = 0.5))
 
@@ -812,7 +797,6 @@ p2 <- ggplot(df, aes(sample=y)) +
   xlab("\nSample Quantiles") +
   ylab("Standardized Residuals\n") +
   ggtitle("Normal Q-Q Plot") +
-  theme_classic() +
   theme(
     plot.title = element_text(hjust = 0.5))
 
@@ -844,7 +828,6 @@ p1 <- ggplot(df1, aes(x=y)) +
   xlab("\nValue") +
   ylab("Frequency\n") +
   ggtitle("Skewed Distributed Data") +
-  theme_classic() +
   theme(
     plot.title = element_text(hjust = 0.5))
 
@@ -854,7 +837,6 @@ p2 <- ggplot(df1, aes(sample=y)) +
   xlab("\nSample Quantiles") +
   ylab("Standardized Residuals\n") +
   ggtitle("Normal Q-Q Plot") +
-  theme_classic() +
   theme(
     plot.title = element_text(hjust = 0.5))
 
@@ -864,7 +846,6 @@ p3 <- ggplot(df2, aes(x=y)) +
   xlab("\nValue") +
   ylab("Frequency\n") +
   ggtitle("Heavy-Tailed Distributed Data") +
-  theme_classic() +
   theme(
     plot.title = element_text(hjust = 0.5))
 
@@ -874,7 +855,6 @@ p4 <- ggplot(df2, aes(sample=y)) +
   xlab("\nSample Quantiles") +
   ylab("Standardized Residuals\n") +
   ggtitle("Normal Q-Q Plot") +
-  theme_classic() +
   theme(
     plot.title = element_text(hjust = 0.5))
 
@@ -941,7 +921,6 @@ ggplot(W_sampdist) +
   xlab("\nValue of W") +
   ggtitle("Sampling distribution of W\n(for normally distributed data)") +
   scale_x_continuous(limits=c(.75,1)) +
-  theme_classic() +
   theme(
     axis.title.y = element_blank(),
     axis.line.y = element_blank(),

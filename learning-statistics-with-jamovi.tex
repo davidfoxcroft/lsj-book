@@ -21,6 +21,7 @@
 \usepackage{lmodern}
 \ifPDFTeX\else  
     % xetex/luatex font selection
+  \setmainfont[]{TeX Gyre Pagella}
 \fi
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
@@ -310,7 +311,7 @@ Citation: Danielle Navarro and David Foxcroft, \textit{Learning statistics with 
 \vfill
 \hspace{0pt}
 
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[breakable, interior hidden, borderline west={3pt}{0pt}{shadecolor}, frame hidden, sharp corners, boxrule=0pt, enhanced]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[boxrule=0pt, interior hidden, breakable, borderline west={3pt}{0pt}{shadecolor}, frame hidden, sharp corners, enhanced]}{\end{tcolorbox}}\fi
 
 \renewcommand*\contentsname{Table of contents}
 {
@@ -360,7 +361,7 @@ January 1st, 2025}
 \chapter{Why do we learn statistics}\label{why-do-we-learn-statistics}}
 
 \placetextbox{0.26}{0.06}{\scriptsize{©2025 D. Foxcroft and D. Navarro,}}
-\placetextbox{0.20}{0.05}{\scriptsize{CC BY-SA 4.0}}
+\placetextbox{0.205}{0.05}{\scriptsize{CC BY-SA 4.0}}
 \placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333/01}}}
 
 \[ \]
@@ -1151,7 +1152,7 @@ show up in an introductory stats and research methods class.
 design}\label{sec-A-brief-introduction-to-research-design}}
 
 \placetextbox{0.26}{0.06}{\scriptsize{©2025 D. Foxcroft and D. Navarro,}}
-\placetextbox{0.20}{0.05}{\scriptsize{CC BY-SA 4.0}}
+\placetextbox{0.205}{0.05}{\scriptsize{CC BY-SA 4.0}}
 \placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333/02}}}
 
 \begin{quote}
@@ -3118,7 +3119,7 @@ with your favourite search engine and you'll find dozens.
 jamovi}\label{getting-started-with-jamovi}}
 
 \placetextbox{0.26}{0.06}{\scriptsize{©2025 D. Foxcroft and D. Navarro,}}
-\placetextbox{0.20}{0.05}{\scriptsize{CC BY-SA 4.0}}
+\placetextbox{0.205}{0.05}{\scriptsize{CC BY-SA 4.0}}
 \placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333/03}}}
 
 \begin{quote}
@@ -3468,14 +3469,14 @@ contain actual data though, it has the names of the variables.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{images/fig3-4.png} \hfill{}
+\includegraphics[width=0.8\textwidth,height=\textheight]{images/fig3-4.png} \hfill{}
 
 \caption{\label{fig-fig3-4}The \emph{booksales.csv} data file. On the
 left I have opened the file using a spreadsheet program, which shows
 that the file is basically a table. On the right the same file is open
 in a standard text editor (the TextEdit program on a Mac), which shows
-how the file is formatted. The entries in the table are wrapped in quote
-marks and separated by commas}
+how the file is formatted. The entries in the table are separated by
+commas}
 
 \end{figure}
 
@@ -3491,7 +3492,7 @@ then click on the `Open' button.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{images/fig3-5.png} \hfill{}
+\includegraphics[width=0.8\textwidth,height=\textheight]{images/fig3-5.png} \hfill{}
 
 \caption{\label{fig-fig3-5}A dialog box on a Mac asking you to select
 the csv file jamovi should try to import. Mac users will recognise this
@@ -3657,7 +3658,8 @@ through the various add-on modules that are available. Choose the one(s)
 you want, and then install them, as in Figure~\ref{fig-fig3-6}. It's
 that easy. The newly installed modules can then be accessed from the
 ``Analyses'' button bar. Try it\ldots useful add-on modules to install
-include ``scatr'' (added under ``Descriptives'') and \(R_j\).
+include ``scatr'' (added under ``Descriptives''), \(R_j\) and \textbf{of
+course} the data files for this book: ``lsj-data''.
 
 \begin{figure}
 
@@ -3741,7 +3743,7 @@ the next chapter will get us a bit closer!
 \chapter{Descriptive statistics}\label{sec-Descriptive-statistics}}
 
 \placetextbox{0.26}{0.06}{\scriptsize{©2025 D. Foxcroft and D. Navarro,}}
-\placetextbox{0.20}{0.05}{\scriptsize{CC BY-SA 4.0}}
+\placetextbox{0.205}{0.05}{\scriptsize{CC BY-SA 4.0}}
 \placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333/04}}}
 
 Any time that you get a new data set to look at one of the first tasks
@@ -4255,7 +4257,7 @@ data suggest you should bet on a 3 point margin.
 
 \begin{figure}
 
-\includegraphics[width=0.8\textwidth,height=\textheight]{images/fig4-7.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig4-7.png} \hfill{}
 
 \caption{\label{fig-fig4-7}A screenshot of jamovi showing the modal
 value for the \emph{afl.margins} variable}
@@ -4321,7 +4323,7 @@ that middle half.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=0.7\textheight]{images/fig4-8.png} \hfill{}
+\includegraphics[width=0.5\textwidth,height=\textheight]{images/fig4-8.png} \hfill{}
 
 \caption{\label{fig-fig4-8}A screenshot of jamovi showing the Quartiles
 for the \emph{afl.margins} variable}
@@ -4804,7 +4806,7 @@ somewhere.
 
 \begin{figure}
 
-\includegraphics[width=0.7\textwidth,height=\textheight]{04-Descriptive-statistics_files/figure-pdf/fig-fig4-10-1.pdf} \hfill{}
+\includegraphics[width=0.8\textwidth,height=\textheight]{04-Descriptive-statistics_files/figure-pdf/fig-fig4-10-1.pdf} \hfill{}
 
 \caption{\label{fig-fig4-10}An illustration of the standard deviation
 from the AFL winning margins data. The shaded bars in the histogram show
@@ -5178,7 +5180,7 @@ everyday importance of choosing good descriptives.
 \chapter{Drawing graphs}\label{sec-Drawing-graphs}}
 
 \placetextbox{0.26}{0.06}{\scriptsize{©2025 D. Foxcroft and D. Navarro,}}
-\placetextbox{0.20}{0.05}{\scriptsize{CC BY-SA 4.0}}
+\placetextbox{0.205}{0.05}{\scriptsize{CC BY-SA 4.0}}
 \placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333/05}}}
 
 \begin{quote}
@@ -5603,7 +5605,7 @@ a much more powerful and cleaner system.
 \chapter{Pragmatic matters}\label{sec-Pragmatic-matters}}
 
 \placetextbox{0.26}{0.06}{\scriptsize{©2025 D. Foxcroft and D. Navarro,}}
-\placetextbox{0.20}{0.05}{\scriptsize{CC BY-SA 4.0}}
+\placetextbox{0.205}{0.05}{\scriptsize{CC BY-SA 4.0}}
 \placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333/06}}}
 
 \begin{quote}
@@ -6572,6 +6574,15 @@ create the transformation. In our example this is likert.raw. Next click
 the `Transform' button in the jamovi `Data' ribbon, and you'll see
 something like Figure~\ref{fig-fig6-7}.
 
+\begin{figure}
+
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig6-7.png} \hfill{}
+
+\caption{\label{fig-fig6-7}Creating a new variable transformation using
+the jamovi `Transform' command}
+
+\end{figure}
+
 Give your new variable a name, let's call it `opinion.strength', and
 then click on the `using transform' selection box and select `Create New
 Transform\ldots{}'. This is where you will create, and name, the
@@ -6588,6 +6599,15 @@ variables as we like -- jamovi requires you to use `\$source' to refer
 to the source variable you are transforming. Your transformation has
 also been saved and can be re-used any time you like (providing you save
 the dataset as an `.omv' file, otherwise you'll lose it!).
+
+\begin{figure}
+
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig6-8.png} \hfill{}
+
+\caption{\label{fig-fig6-8}Specifying a transformation in jamovi, to be
+saved as the imaginatively named `Transform 1'}
+
+\end{figure}
 
 You can also create a transformation with the second example we looked
 at, the age distribution of people at a social gathering. Go on, you
@@ -6615,30 +6635,31 @@ variable that you want to recode.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{images/fig6-7.png} \hfill{}
-
-\caption{\label{fig-fig6-7}Creating a new variable transformation using
-the jamovi `Transform' command}
-
-\end{figure}
-
-\begin{figure}
-
-\includegraphics[width=1\textwidth,height=\textheight]{images/fig6-8.png} \hfill{}
-
-\caption{\label{fig-fig6-8}Specifying a transformation in jamovi, to be
-saved as the imaginatively named `Transform 1'}
-
-\end{figure}
-
-\begin{figure}
-
 \includegraphics[width=1\textwidth,height=\textheight]{images/fig6-9.png} \hfill{}
 
 \caption{\label{fig-fig6-9}jamovi transformation into three age
 categories, using the `Add condition' button}
 
 \end{figure}
+
+\hypertarget{a-few-more-mathematical-functions-and-operations}{%
+\section{A few more mathematical functions and
+operations}\label{a-few-more-mathematical-functions-and-operations}}
+
+In the section on
+\protect\hyperlink{sec-Transforming-and-recoding-a-variable}{Transforming
+and recoding a variable} I discussed the ideas behind variable
+transformations and showed that a lot of the transformations that you
+might want to apply to your data are based on fairly simple mathematical
+functions and operations. In this section I want to return to that
+discussion and mention several other mathematical functions and
+arithmetic operations that are actually quite useful for a lot of real
+world data analysis. Table~\ref{tbl-tab6-5} gives a brief overview of
+the various mathematical functions I want to talk about here, or
+later.\footnote{We'll leave the box-cox function until later on.}
+Obviously this doesn't even come close to cataloguing the range of
+possibilities available, but it does cover a range of functions that are
+used regularly in data analysis and that are available in jamovi.
 
 \hypertarget{tbl-tab6-5}{}
  
@@ -6727,25 +6748,6 @@ categories, using the `Add condition' button}
 
 \end{table}
  
-
-\hypertarget{a-few-more-mathematical-functions-and-operations}{%
-\section{A few more mathematical functions and
-operations}\label{a-few-more-mathematical-functions-and-operations}}
-
-In the section on
-\protect\hyperlink{sec-Transforming-and-recoding-a-variable}{Transforming
-and recoding a variable} I discussed the ideas behind variable
-transformations and showed that a lot of the transformations that you
-might want to apply to your data are based on fairly simple mathematical
-functions and operations. In this section I want to return to that
-discussion and mention several other mathematical functions and
-arithmetic operations that are actually quite useful for a lot of real
-world data analysis. Table~\ref{tbl-tab6-5} gives a brief overview of
-the various mathematical functions I want to talk about here, or
-later.\footnote{We'll leave the box-cox function until later on.}
-Obviously this doesn't even come close to cataloguing the range of
-possibilities available, but it does cover a range of functions that are
-used regularly in data analysis and that are available in jamovi.
 
 \hypertarget{logarithms-and-exponentials}{%
 \subsection{Logarithms and
@@ -6837,10 +6839,7 @@ that were made by Makka-Pakka. To that end, we need to specify a filter
 in jamovi. First open up a filter window by clicking on `Filters' on the
 main jamovi `Data' toolbar. Then, in the `Filter 1' text box, next to
 the `=' sign, type the following, including the single quote marks:
-
-\begin{quote}
-speaker == `makka-pakka'
-\end{quote}
+\textgreater{} speaker == `makka-pakka'
 
 \begin{figure}
 
@@ -6864,11 +6863,8 @@ Following on from this simple example, you can also build up more
 complex filters using logical expressions in jamovi. For instance,
 suppose I wanted to keep only those cases when the utterance is either
 ``pip'' or ``oo''. In this case in the `Filter 1' text box, next to the
-`=' sign, you would type the following:
-
-\begin{quote}
-utterance == `pip' or utterance == `oo'
-\end{quote}
+`=' sign, you would type the following: \textgreater{} utterance ==
+`pip' or utterance == `oo'
 
 \hypertarget{summary-4}{%
 \section{Summary}\label{summary-4}}
@@ -7168,7 +7164,7 @@ assumptions are sensible.
 probability}\label{sec-Introduction-to-probability}}
 
 \placetextbox{0.26}{0.06}{\scriptsize{©2025 D. Foxcroft and D. Navarro,}}
-\placetextbox{0.20}{0.05}{\scriptsize{CC BY-SA 4.0}}
+\placetextbox{0.205}{0.05}{\scriptsize{CC BY-SA 4.0}}
 \placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333/07}}}
 
 \begin{quote}
@@ -7937,7 +7933,7 @@ so here.
 
 \begin{figure}
 
-\includegraphics[width=0.7\textwidth,height=\textheight]{07-Introduction-to-probability_files/figure-pdf/fig-fig7-2-1.pdf} \hfill{}
+\includegraphics[width=0.8\textwidth,height=\textheight]{07-Introduction-to-probability_files/figure-pdf/fig-fig7-2-1.pdf} \hfill{}
 
 \caption{\label{fig-fig7-2}A visual depiction of the ``trousers''
 probability distribution. There are five ``elementary events'',
@@ -8546,7 +8542,7 @@ what a \(t\)-distribution actually looks like. You get the idea, I hope.
 sample}\label{sec-Estimating-unknown-quantities-from-a-sample}}
 
 \placetextbox{0.26}{0.06}{\scriptsize{©2025 D. Foxcroft and D. Navarro,}}
-\placetextbox{0.20}{0.05}{\scriptsize{CC BY-SA 4.0}}
+\placetextbox{0.205}{0.05}{\scriptsize{CC BY-SA 4.0}}
 \placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333/08}}}
 
 At the start of the last chapter I highlighted the critical distinction
@@ -10179,7 +10175,7 @@ book.
 \chapter{Hypothesis testing}\label{sec-Hypothesis-testing}}
 
 \placetextbox{0.26}{0.06}{\scriptsize{©2025 D. Foxcroft and D. Navarro,}}
-\placetextbox{0.20}{0.05}{\scriptsize{CC BY-SA 4.0}}
+\placetextbox{0.205}{0.05}{\scriptsize{CC BY-SA 4.0}}
 \placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333/09}}}
 
 \begin{quote}
@@ -10412,8 +10408,8 @@ In my ESP example these might be as shown in Table~\ref{tbl-tab9-1}.
 \hhline{>{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}-}
 \arrayrulecolor{black}
 
-\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}p{0.45\textwidth}!{\huxvb{0, 0, 0}{0}}}{\hspace{0pt}\parbox[b]{0.45\textwidth-0pt-12pt}{\huxtpad{2pt + 1em}\centering \textbf{Dani's research hypothesis:}\huxbpad{2pt}}} &
-\multicolumn{1}{p{0.45\textwidth}!{\huxvb{0, 0, 0}{0}}}{\hspace{12pt}\parbox[b]{0.45\textwidth-12pt-0pt}{\huxtpad{2pt + 1em}\centering \textbf{\(\text{``}\)ESP exists\(\text{''}\)}\huxbpad{2pt}}} \tabularnewline[-0.5pt]
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}p{0.45\textwidth}!{\huxvb{0, 0, 0}{0}}}{\hspace{0pt}\parbox[b]{0.45\textwidth-0pt-12pt}{\huxtpad{2pt + 1em}\centering Dani's research hypothesis:\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.45\textwidth}!{\huxvb{0, 0, 0}{0}}}{\hspace{12pt}\parbox[b]{0.45\textwidth-12pt-0pt}{\huxtpad{2pt + 1em}\centering \(\text{``}\)ESP exists\(\text{''}\)\huxbpad{2pt}}} \tabularnewline[-0.5pt]
 
 
 \hhline{>{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}-}
@@ -11873,7 +11869,7 @@ specific data analysis tools.
 analysis}\label{sec-Categorical-data-analysis}}
 
 \placetextbox{0.26}{0.06}{\scriptsize{©2025 D. Foxcroft and D. Navarro,}}
-\placetextbox{0.20}{0.05}{\scriptsize{CC BY-SA 4.0}}
+\placetextbox{0.205}{0.05}{\scriptsize{CC BY-SA 4.0}}
 \placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333/10}}}
 
 Now that we've covered the basic theory behind hypothesis testing it's
@@ -12080,13 +12076,11 @@ observations that fall within the i-th category (where i could be 1, 2,
 3 or 4). Finally, if we want to refer to the set of all observed
 frequencies, statisticians group all observed values into a
 vector,\footnote{A vector is a sequence of data elements of the same
-  basic type: \[O = (O_1, O_2, O_3, O_4)\]} which I'll refer to as
-\(O\).
-
-Again, this is nothing new or interesting. It's just notation. If I say
-that \(O = (35, 51, 64, 50)\) all I'm doing is describing the table of
-observed frequencies (i.e., observed), but I'm referring to it using
-mathematical notation.
+  basic type: \[O = (O_1, O_2, O_3, O_4)\] Again, this is nothing new or
+  interesting. It's just notation. If I say that
+  \(O = (35, 51, 64, 50)\) all I'm doing is describing the table of
+  observed frequencies (i.e., observed), but I'm referring to it using
+  mathematical notation.} which I'll refer to as \(O\).
 
 \hypertarget{the-null-hypothesis-and-the-alternative-hypothesis}{%
 \subsection{The null hypothesis and the alternative
@@ -12100,13 +12094,12 @@ describe to you is \textbf{Pearson's} \(\chi^2\) (chi-square)
 goodness-of-fit test, and as is so often the case we have to begin by
 carefully constructing our null hypothesis. In this case, it's pretty
 easy. First, let's state the null hypothesis in words:
-\[H_0: \text{ All four suits are chosen with equal probability}\]
-
-Now, because this is statistics, we have to be able to say the same
-thing in a mathematical way. To do this, let's use the notation \(P_j\)
-to refer to the true probability that the j-th suit is chosen. If the
-null hypothesis is true, then each of the four suits has a 25\% chance
-of being selected. In other words, our null hypothesis claims that
+\[H_0: \text{ All four suits are chosen with equal probability}\] Now,
+because this is statistics, we have to be able to say the same thing in
+a mathematical way. To do this, let's use the notation \(P_j\) to refer
+to the true probability that the j-th suit is chosen. If the null
+hypothesis is true, then each of the four suits has a 25\% chance of
+being selected. In other words, our null hypothesis claims that
 \(P_1 = .25\), \(P_2 = .25\), \(P_3 = .25\) and finally that
 \(P_4 = .25\) . However, in the same way that we can group our observed
 frequencies into a vector O that summarises the entire data set, we can
@@ -12134,7 +12127,6 @@ a consequence, the ``human friendly'' versions of our hypotheses look
 like this:
 \[H_0: \text{ All four suits are chosen with equal probability}\]
 \[H_1: \text{ At least one of the suit-choice probabilities isn’t 0.25}\]
-
 \ldots and the ``mathematician friendly'' version is:
 \[H_0: P= (.25, .25, .25, .25)\] \[H_1: P \neq (.25, .25, .25, .25)\]
 
@@ -12157,12 +12149,11 @@ to see? Or, to use the correct terminology, what are the
 heart is \(P_3 = .25\), so I guess we're expecting
 \(200 \times .25 = 50\) hearts, right? Or, more specifically, if we let
 \(E_i\) refer to ``the number of category \(i\) responses that we're
-expecting if the null is true'', then: \[E_i=N \times P_i\]
-
-This is pretty easy to calculate. If there are 200 observations that can
-fall into four categories, and we think that all four categories are
-equally likely, then on average we'd expect to see 50 observations in
-each category, right?
+expecting if the null is true'', then: \[E_i=N \times P_i\] This is
+pretty easy to calculate. If there are 200 observations that can fall
+into four categories, and we think that all four categories are equally
+likely, then on average we'd expect to see 50 observations in each
+category, right?
 
 Now, how do we translate this into a test statistic? Clearly, what we
 want to do is compare the expected number of observations in each
@@ -12171,8 +12162,8 @@ category (\(O_i\)). And on the basis of this comparison we ought to be
 able to come up with a good test statistic. To start with, let's
 calculate the difference between what the null hypothesis expected us to
 find and what we actually did find. That is, we calculate the ``observed
-minus expected'' difference score, \(O_i - E_i\) . This is illustrated
-in Table~\ref{tbl-tab10-3}.
+minus expected'' difference score, \(O_i - E_i\). This is illustrated in
+Table~\ref{tbl-tab10-3}.
 
 \hypertarget{tbl-tab10-3}{}
  
@@ -12406,10 +12397,8 @@ Section~\ref{sec-The-binomial-distribution} in
 Chapter~\ref{sec-Introduction-to-probability}. In other words, if the
 null hypothesis is true, then it follows that our observed frequencies
 were generated by sampling from a binomial distribution:
-\[O_i \sim Binomial(P_i,N) \]
-
-Now, if you remember from our discussion of
-Section~\ref{sec-The-central-limit-theorem} the binomial distribution
+\[O_i \sim Binomial(P_i,N) \] Now, if you remember from our discussion
+of Section~\ref{sec-The-central-limit-theorem} the binomial distribution
 starts to look pretty much identical to the normal distribution,
 especially when \(N\) is large and when \(P_i\) isn't too close to 0 or
 1. In other words as long as \(N^P_i\) is large enough. Or, to put it
@@ -14148,7 +14137,7 @@ wise to jump straight from this book to that one.
 \chapter{Comparing two means}\label{sec-Comparing-two-means}}
 
 \placetextbox{0.26}{0.06}{\scriptsize{©2025 D. Foxcroft and D. Navarro,}}
-\placetextbox{0.20}{0.05}{\scriptsize{CC BY-SA 4.0}}
+\placetextbox{0.205}{0.05}{\scriptsize{CC BY-SA 4.0}}
 \placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333/11}}}
 
 In Chapter~\ref{sec-Categorical-data-analysis} we covered the situation
@@ -14245,7 +14234,7 @@ right answer is, is it? For this, we are going to need some statistics.
 
 \begin{figure}
 
-\includegraphics[width=0.6\textwidth,height=\textheight]{11-Comparing-two-means_files/figure-pdf/fig-fig11-1-1.pdf} \hfill{}
+\includegraphics[width=0.8\textwidth,height=\textheight]{11-Comparing-two-means_files/figure-pdf/fig-fig11-1-1.pdf} \hfill{}
 
 \caption{\label{fig-fig11-1}The theoretical distribution (solid line)
 from which the psychology student grades (bars) are supposed to have
@@ -14635,21 +14624,6 @@ population standard deviation is \(\hat{\sigma}\), then our
 \(t\)-statistic is:
 \[t=\frac{\bar{X}-\mu}{\frac{\hat{\sigma}}{\sqrt{N}}}\]
 
-\begin{figure}
-
-\includegraphics[width=1\textwidth,height=\textheight]{11-Comparing-two-means_files/figure-pdf/fig-fig11-5-1.pdf} \hfill{}
-
-\caption{\label{fig-fig11-5}The \(t\)-distribution with 2 degrees of
-freedom (left) and 10 degrees of freedom (right), with a standard normal
-distribution (i.e., mean 0 and std dev 1) plotted as dotted lines for
-comparison purposes. Notice that the \(t\)-distribution has heavier
-tails (leptokurtic, higher kurtosis) than the normal distribution; this
-effect is quite exaggerated when the degrees of freedom are very small,
-but negligible for larger values. In other words, for large \(df\) the
-\(t\)-distribution is essentially identical to a normal distribution}
-
-\end{figure}
-
 The only thing that has changed in the equation is that instead of using
 the known true value \(\sigma\), we use the estimate \(\hat{\sigma}\).
 And if this estimate has been constructed from \(N\) observations, then
@@ -14664,6 +14638,21 @@ sample size of \(N = 70,000,000\) then your ``estimate'' of the standard
 deviation would be pretty much perfect, right? So, you should expect
 that for large \(N\), the \(t\)-test would behave exactly the same way
 as a \emph{z}-test. And that's exactly what happens!
+
+\begin{figure}
+
+\includegraphics[width=1\textwidth,height=\textheight]{11-Comparing-two-means_files/figure-pdf/fig-fig11-5-1.pdf} \hfill{}
+
+\caption{\label{fig-fig11-5}The \(t\)-distribution with 2 degrees of
+freedom (left) and 10 degrees of freedom (right), with a standard normal
+distribution (i.e., mean 0 and std dev 1) plotted as dotted lines for
+comparison purposes. Notice that the \(t\)-distribution has heavier
+tails (leptokurtic, higher kurtosis) than the normal distribution; this
+effect is quite exaggerated when the degrees of freedom are very small,
+but negligible for larger values. In other words, for large \(df\) the
+\(t\)-distribution is essentially identical to a normal distribution}
+
+\end{figure}
 
 \hypertarget{doing-the-test-in-jamovi-2}{%
 \subsection{Doing the test in jamovi}\label{doing-the-test-in-jamovi-2}}
@@ -16453,7 +16442,7 @@ one-sample and paired sample Wilcoxon nonparametric tests}
 regression}\label{sec-Correlation-and-linear-regression}}
 
 \placetextbox{0.26}{0.06}{\scriptsize{©2025 D. Foxcroft and D. Navarro,}}
-\placetextbox{0.20}{0.05}{\scriptsize{CC BY-SA 4.0}}
+\placetextbox{0.205}{0.05}{\scriptsize{CC BY-SA 4.0}}
 \placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333/12}}}
 
 The goal in this chapter is to introduce \textbf{correlation} and
@@ -16962,10 +16951,10 @@ graph your raw data'' (see Chapter~\ref{sec-Drawing-graphs}).
 
 {\centering 
 
-\includegraphics[width=0.5\textwidth,height=\textheight]{images/fig12-6a.png}
-\includegraphics[width=0.5\textwidth,height=\textheight]{images/fig12-6b.png}
-\includegraphics[width=0.5\textwidth,height=\textheight]{images/fig12-6c.png}
-\includegraphics[width=0.5\textwidth,height=\textheight]{images/fig12-6d.png}
+\includegraphics[width=0.47\textwidth,height=\textheight]{images/fig12-6a.png}
+\includegraphics[width=0.47\textwidth,height=\textheight]{images/fig12-6b.png}
+\includegraphics[width=0.47\textwidth,height=\textheight]{images/fig12-6c.png}
+\includegraphics[width=0.47\textwidth,height=\textheight]{images/fig12-6d.png}
 
 }
 
@@ -17570,7 +17559,7 @@ itself.
 
 \begin{figure}
 
-\includegraphics[width=1.2\textwidth,height=\textheight]{12-Correlation-and-linear-regression_files/figure-pdf/fig-fig12-14-1.pdf} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{12-Correlation-and-linear-regression_files/figure-pdf/fig-fig12-14-1.pdf} \hfill{}
 
 \caption{\label{fig-fig12-14}A 3D visualisation of a multiple regression
 model. There are two predictors in the model, dani.sleep and baby.sleep
@@ -18235,7 +18224,7 @@ reasonably straight or flat line. This is a matter of judgement.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{images/fig12-18.png} \hfill{}
+\includegraphics[width=0.8\textwidth,height=\textheight]{images/fig12-18.png} \hfill{}
 
 \caption{\label{fig-fig12-18}jamovi plot of the predicted values against
 the residuals, with a line showing the relationship between the two. If
@@ -18480,6 +18469,17 @@ formula for the hat value is rather complicated\footnote{Again, for the
   \(H = X(X^{'}X)^{1}X^{'}\).} but its interpretation is not: \(h_i\) is
 a measure of the extent to which the i-th observation is ``in control''
 of where the regression line ends up going.
+
+\begin{verbatim}
+List of 2
+ $ axis.text.x: list()
+  ..- attr(*, "class")= chr [1:2] "element_blank" "element"
+ $ axis.text.y: list()
+  ..- attr(*, "class")= chr [1:2] "element_blank" "element"
+ - attr(*, "class")= chr [1:2] "theme" "gg"
+ - attr(*, "complete")= logi FALSE
+ - attr(*, "validate")= logi TRUE
+\end{verbatim}
 
 \begin{figure}
 
@@ -18867,7 +18867,7 @@ Builder' option}
 ANOVA)}\label{sec-Comparing-several-means-one-way-ANOVA}}
 
 \placetextbox{0.26}{0.06}{\scriptsize{©2025 D. Foxcroft and D. Navarro,}}
-\placetextbox{0.20}{0.05}{\scriptsize{CC BY-SA 4.0}}
+\placetextbox{0.205}{0.05}{\scriptsize{CC BY-SA 4.0}}
 \placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333/13}}}
 
 This chapter introduces one of the most widely used tools in
@@ -21329,7 +21329,7 @@ the key topics were:
 \chapter{Factorial ANOVA}\label{sec-Factorial-ANOVA}}
 
 \placetextbox{0.26}{0.06}{\scriptsize{©2025 D. Foxcroft and D. Navarro,}}
-\placetextbox{0.20}{0.05}{\scriptsize{CC BY-SA 4.0}}
+\placetextbox{0.205}{0.05}{\scriptsize{CC BY-SA 4.0}}
 \placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333/14}}}
 
 Over the course of the last few chapters we have done quite a lot. We
@@ -25666,7 +25666,7 @@ interaction.
 \chapter{Factor Analysis}\label{factor-analysis}}
 
 \placetextbox{0.26}{0.06}{\scriptsize{©2025 D. Foxcroft and D. Navarro,}}
-\placetextbox{0.20}{0.05}{\scriptsize{CC BY-SA 4.0}}
+\placetextbox{0.205}{0.05}{\scriptsize{CC BY-SA 4.0}}
 \placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333/15}}}
 
 Previous chapters have covered statistical tests for differences between
@@ -26203,7 +26203,7 @@ the data). Three different approaches are available:
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{images/fig15-4.png} \hfill{}
+\includegraphics[width=0.8\textwidth,height=\textheight]{images/fig15-4.png} \hfill{}
 
 \caption{\label{fig-fig15-4}Scree plot of the personality data in jamovi
 EFA, showing a noticeable inflection and levelling off after point 5
@@ -27349,7 +27349,7 @@ of relationships in a data set. Specifically, we have covered:
 \chapter{Bayesian statistics}\label{sec-Bayesian-statistics}}
 
 \placetextbox{0.26}{0.06}{\scriptsize{©2025 D. Foxcroft and D. Navarro,}}
-\placetextbox{0.20}{0.05}{\scriptsize{CC BY-SA 4.0}}
+\placetextbox{0.205}{0.05}{\scriptsize{CC BY-SA 4.0}}
 \placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333/16}}}
 
 \begin{quote}
@@ -28138,8 +28138,9 @@ alternative is 75\%. The alternative hypothesis is three times as
 probable as the null, so we say that the odds are 3:1 in favour of the
 alternative. Mathematically, all we have to do to calculate the
 posterior odds is divide one posterior probability by the other:
-\[\frac{P(h_1|d)}{P(h_0|d)}=\frac{0.75}{0.25}=3\] Or, to write the same
-thing in terms of the equations above:
+\[\frac{P(h_1|d)}{P(h_0|d)}=\frac{0.75}{0.25}=3\]
+
+Or, to write the same thing in terms of the equations above:
 \[\frac{P(h_1|d)}{P(h_0|d)}=\frac{P(d|h_1)}{P(d|h_0)} \times \frac{P(h_1)}{P(h_0)}\]
 
 Actually, this equation is worth expanding on. There are three different
@@ -28997,7 +28998,7 @@ around!
 \markboth{Epilogue}{Epilogue}
 
 \placetextbox{0.26}{0.06}{\scriptsize{©2025 D. Foxcroft and D. Navarro,}}
-\placetextbox{0.20}{0.05}{\scriptsize{CC BY-SA 4.0}}
+\placetextbox{0.205}{0.05}{\scriptsize{CC BY-SA 4.0}}
 \placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333/17}}}
 
 \begin{quote}

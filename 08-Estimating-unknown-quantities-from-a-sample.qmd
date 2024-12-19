@@ -1,12 +1,12 @@
 \placetextbox{0.26}{0.06}{\scriptsize{©2025 D. Foxcroft and D. Navarro,}}
-\placetextbox{0.20}{0.05}{\scriptsize{CC BY-SA 4.0}}
+\placetextbox{0.205}{0.05}{\scriptsize{CC BY-SA 4.0}}
 \placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333/08}}}
 
 # Estimating unknown quantities from a sample {#sec-Estimating-unknown-quantities-from-a-sample}
 
 ```{r}
 #| include: FALSE
-source("header.R")
+source("chapter_header.R")
 ```
 
 At the start of the last chapter I highlighted the critical distinction between descriptive statistics and *inferential statistics*. As discussed in @sec-Descriptive-statistics, the role of descriptive statistics is to concisely summarise what we *do* know. In contrast, the purpose of inferential statistics is to "learn what we do not know from what we do". Now that we have a foundation in probability theory we are in a good position to think about the problem of statistical inference. What kinds of things would we like to learn about? And how do we learn them? These are the questions that lie at the heart of inferential statistics, and they are traditionally divided into two "big ideas": estimation and hypothesis testing. The goal in this chapter is to introduce the first of these big ideas, estimation theory, but I'm going to witter on about sampling theory first because estimation theory doesn't make sense until you understand sampling. As a consequence, this chapter divides naturally into two parts, the first three sections are focused on sampling theory, and the last two sections make use of sampling theory to discuss how statisticians think about estimation.
@@ -109,22 +109,19 @@ plota <- ggplot(data = data.frame(x = seq(60, 140, 1)), aes(x)) +
   stat_function(fun = dnorm, n = 1000, args = list(mean = 100, sd = 15), col=blueshade, linewidth=1) +
   scale_x_continuous(breaks = seq(60, 140, 20)) +
   ylab("Probability Density\n") +
-  xlab("\nIQ score") +
-  theme_classic()
+  xlab("\nIQ score") 
 
 plotb <- ggplot(data = data.frame(x = rnorm(100, 100, 15)), aes(x)) +
   geom_histogram(binwidth=6, col=blueshade, fill=blueshade, alpha=0.6) +
   scale_x_continuous(breaks = seq(60, 140, 20)) +
   ylab("Frequency\n") +
-  xlab("\nIQ score") +
-  theme_classic()
+  xlab("\nIQ score") 
 
 plotc <- ggplot(data = data.frame(x = rnorm(10000, 100, 15)), aes(x)) +
   geom_histogram(binwidth=6, col=blueshade, fill=blueshade, alpha=0.6) +
   scale_x_continuous(breaks = seq(60, 140, 20)) +
   ylab("Frequency\n") +
-  xlab("\nIQ score") +
-  theme_classic()
+  xlab("\nIQ score") 
 
 gridExtra::grid.arrange(plota, plotb, plotc, ncol = 3)
 
@@ -205,7 +202,6 @@ ggplot(data = sdm_data_means, aes(x = sample_means )) +
   stat_function(fun = dnorm, args = list(mean = 100, sd = 15), col="black", linewidth=1) +
   scale_x_continuous(limits=c(60,140), breaks = seq(60, 140, 20)) +
   xlab("\nIQ score") +
-  theme_classic() +
   theme(
     axis.title.y = element_blank(),
     axis.line.y = element_blank(),
@@ -240,7 +236,6 @@ ggplot(data = sdm_data_max, aes(x = sample_max )) +
   stat_function(fun = dnorm, args = list(mean = 100, sd = 15), col="black", size=1) +
   scale_x_continuous(limits=c(60,140), breaks = seq(60, 140, 20)) +
   xlab("\nIQ score") +
-  theme_classic() +
   theme(
     axis.title.y = element_blank(),
     axis.line.y = element_blank(),
@@ -274,7 +269,6 @@ sampling_plots <- lapply(sampling_plots_df$n, function(i) {
   scale_x_continuous(limits=c(60,140), breaks = seq(60, 140, 20)) +
   xlab(paste0("IQ Score \n\n", sampling_plots_df$lab[sampling_plots_df$n == i])) +
   ggtitle(paste0("Sample size = ", i)) +
-  theme_classic() +
   theme(
     axis.title.y = element_blank(),
     axis.line.y = element_blank(),
@@ -328,7 +322,7 @@ sampling_plots <- lapply(sampling_plots_df$n, function(i) {
   scale_y_continuous(limits=c(0,5)) +
   xlab("Sample Mean") +
   ggtitle(paste0(sampling_plots_df$lab[sampling_plots_df$n == i]," Sample size = ", i)) +
-  theme_classic() +
+  theme_classic() +  
   theme(
     axis.title.y = element_blank(),
     axis.title.x=element_text(size=12),
@@ -418,7 +412,7 @@ sdsd <- data.frame(sd=apply(IQ.m,1,sd2_r))
 
 ggplot(data = sdsd, aes(x = sd )) +
   geom_histogram(binwidth=2.5, col=blueshade, fill=blueshade, alpha=0.6) +
-  geom_segment(aes(x = 15, y = 0, xend = 15, yend = 1900), colour = "black", linetype=2, size=1) +
+  geom_segment(aes(x = 15, y = 0, xend = 15, yend = 1900), colour = "black", stat = "unique", linetype=2, size=1) +
   annotate("text", x = 15, y = 2000, label = "Population Standard deviation") +
   scale_x_continuous(limits=c(0,60), breaks = seq(0, 60, 10)) +
   xlab("Sample standard deviation") +
@@ -461,8 +455,7 @@ ps1 <- ggplot(data=sd.demo, aes(x=sample_size, y=mean)) +
   xlab("\nSample Size\n\n(a)") +
   ylab("Average Sample Mean\n") +
   scale_y_continuous(limits=c(96,106)) +
-  scale_x_continuous(breaks=seq(0,10,2)) +
-  theme_classic()
+  scale_x_continuous(breaks=seq(0,10,2)) 
 
 ps2 <- ggplot(data=sd.demo, aes(x=sample_size, y=sd)) +
   geom_point(col=blueshade, alpha=0.8) +
@@ -471,8 +464,7 @@ ps2 <- ggplot(data=sd.demo, aes(x=sample_size, y=sd)) +
   xlab("\nSample Size\n\n(b)") +
   ylab("Average Sample Standard Deviation\n") +
   scale_y_continuous(limits=c(0,16)) +
-  scale_x_continuous(breaks=seq(0,10,2)) +
-  theme_classic()
+  scale_x_continuous(breaks=seq(0,10,2)) 
 
 gridExtra::grid.arrange(grob=ps1,ps2, ncol=2)
 
@@ -553,8 +545,7 @@ p.ci1  <- ggplot(data=ci.demo.10, aes(x=Replication, y=ci_m)) +
   ylab("Mean IQ\n") +
   ggtitle("(a) Sample Size = 10") +
   scale_fill_identity() +
-  scale_y_continuous(limits=c(80,120)) +
-  theme_classic()
+  scale_y_continuous(limits=c(80,120)) 
 
 N <- 50
 n <- 25
@@ -578,8 +569,7 @@ p.ci2  <- ggplot(data=ci.demo.25, aes(x=Replication, y=ci_m)) +
   ylab("Mean IQ\n") +
   ggtitle("(b) Sample Size = 25") +
   scale_fill_identity() +
-  scale_y_continuous(limits=c(80,120)) +
-  theme_classic()
+  scale_y_continuous(limits=c(80,120)) 
 
 
 gridExtra::grid.arrange(grob=p.ci1,p.ci2, nrow=2)

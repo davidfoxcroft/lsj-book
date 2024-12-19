@@ -1,12 +1,12 @@
 \placetextbox{0.26}{0.06}{\scriptsize{©2025 D. Foxcroft and D. Navarro,}}
-\placetextbox{0.20}{0.05}{\scriptsize{CC BY-SA 4.0}}
+\placetextbox{0.205}{0.05}{\scriptsize{CC BY-SA 4.0}}
 \placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333/16}}}
 
 # Bayesian statistics {#sec-Bayesian-statistics}
 
 ```{r}
 #| include: FALSE
-source("header.R")
+source("chapter_header.R")
 ```
 
 > *In our reasonings concerning matter of fact, there are all imaginable degrees of assurance, from the highest certainty to the lowest species of moral evidence. A wise man, therefore, proportions his belief to the evidence.*\
@@ -156,6 +156,7 @@ It's all so simple that I feel like an idiot even bothering to write these equat
 
 In practice, most Bayesian data analysts tend not to talk in terms of the raw posterior probabilities $P(h_0|d)$ and $P(h_1|d)$. Instead, we tend to talk in terms of the **posterior odds** ratio. Think of it like betting. Suppose, for instance, the posterior probability of the null hypothesis is 25%, and the posterior probability of the alternative is 75%. The alternative hypothesis is three times as probable as the null, so we say that the odds are 3:1 in favour of the alternative. Mathematically, all we have to do to calculate the posterior odds is divide one posterior probability by the other:
 $$\frac{P(h_1|d)}{P(h_0|d)}=\frac{0.75}{0.25}=3$$
+
 Or, to write the same thing in terms of the equations above:
 $$\frac{P(h_1|d)}{P(h_0|d)}=\frac{P(d|h_1)}{P(d|h_0)} \times \frac{P(h_1)}{P(h_0)}$$
 
@@ -310,7 +311,6 @@ p <- ggplot(p_bf) +
       values=c(p1=1, p2=2), labels=c("p < 0.05  ", "BF > 3"), guide = guide_legend(title.position = "top", nrow = 1)) +
   scale_linetype_manual(name="Null hypothesis rejection threshold",
       values=c(p1="solid", p2="dashed"), labels=c("p < 0.05  ", "BF > 3"), guide = guide_legend(title.position = "top", nrow = 1)) +
-  theme_classic() +
   theme(
     legend.position = c(.6, .8),
     legend.direction = 'horizontal',

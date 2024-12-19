@@ -1,12 +1,12 @@
 \placetextbox{0.26}{0.06}{\scriptsize{©2025 D. Foxcroft and D. Navarro,}}
-\placetextbox{0.20}{0.05}{\scriptsize{CC BY-SA 4.0}}
+\placetextbox{0.205}{0.05}{\scriptsize{CC BY-SA 4.0}}
 \placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333/07}}}
 
 # Introduction to probability {#sec-Introduction-to-probability}
 
 ```{r}
 #| include: FALSE
-source("header.R")
+source("chapter_header.R")
 ```
 
 > *[God] has afforded us only the twilight ... of Probability.*\
@@ -74,12 +74,7 @@ In this case 11 of these 20 coin flips (55%) came up heads. Now suppose that I'd
 ```{r}
 #| label: tbl-tab7-1
 #| tbl-cap: Coin flips and proportion of heads
-huxthattibble(tibble(`number of flips` = c(1 , 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9 , 10, 11 , 12 , 13 , 14 , 15 , 16 , 17 , 18 , 19 , 20),
-                    `number of heads` = c( 0 , 1 , 2 , 3 , 4 , 4 , 4 , 5 , 6 , 7,  8  ,  8 ,  9 , 10 , 10 , 10 , 10 , 10 , 10 , 11 ),
-                    `proportion` = c( 0.00 , .50 , .67 , .75 , .80 , .67 , .57 , .63 , .67 , .70, .73 , .67 , .69 , .71 , .67 ,  .63 , .59 , .56 , .53 , .55))) |>
-  set_number_format(,3,"%.2f") |>
-  set_top_padding(3:21, everywhere, value=0 ) |>
-   set_bottom_padding(2:20, everywhere, value=0 )
+huxtabs[[7]][[1]]
 ```
 
 Notice that at the start of the sequence the *proportion* of heads fluctuates wildly, starting at $.00$ and rising as high as $.80$. Later on, one gets the impression that it dampens out a bit, with more and more of the values actually being pretty close to the "right" answer of $.50$. This is the frequentist definition of probability in a nutshell. Flip a fair coin over and over again, and as $N$ grows large (approaches infinity, denoted $N \rightarrow \infty$ ) the proportion of heads will converge to 50%. There are some subtle technicalities that the mathematicians care about, but qualitatively speaking that's how the frequentists define probability. Unfortunately, I don't have an infinite number of coins or the infinite patience required to flip a coin an infinite number of times. However, I do have a computer and computers excel at mindless repetitive tasks. So I asked my computer to simulate flipping a coin 1000 times and then drew a picture of what happens to the proportion $\frac{N_H}{N}$ as $N$ increases. Actually, I did it four times just to make sure it wasn't a fluke. The results are shown in @fig-fig7-1. As you can see, the proportion of observed heads eventually stops fluctuating and settles down. When it does, the number at which it finally settles is the true probability of heads.
@@ -98,8 +93,7 @@ coinflips <- lapply(1:4, function(i) {
     xlim(0, 1000) +
     geom_hline(yintercept=0.5, color="grey") +
     xlab("Number of flips") +
-    ylab("Proportion of heads") +
-    theme_classic()
+    ylab("Proportion of heads") 
 })
 gridExtra::grid.arrange(grobs = coinflips)
 ```
@@ -150,7 +144,7 @@ Each of the events has a probability that lies between 0 and 1, and if we add up
 $$P(E)=P(X_1)+P(X_2)+P(X_3)$$ 
 At this point you might be thinking that this is all terribly obvious and simple and you'd be right. All we've really done is wrap some basic mathematics around a few common sense intuitions. However, from these simple beginnings it's possible to construct some extremely powerful mathematical tools. I'm definitely not going to go into the details in this book, but what I will do is list, in @tbl-tab7-3, some of the other rules that probabilities satisfy. These rules can be derived from the simple assumptions that I've outlined above, but since we don't actually use these rules for anything in this book I won't do so here.
 
-```{r out.width="70%"}
+```{r out.width="80%"}
 #| label: fig-fig7-2
 #| fig-cap: A visual depiction of the "trousers" probability distribution. There are five "elementary events", corresponding to the five pairs of trousers that I own. Each event has some probability of occurring -- this probability is a number between 0 to 1. The sum of these probabilities is 1
 #| fig-alt: Bar chart showing the probability of different events. Blue jeans have the highest probability at 0.5, followed by grey jeans around 0.3. Black jeans and blue track have the same probability near 0.1, while the black suit has a probability of 0.
@@ -161,7 +155,6 @@ pantsdat$eventNames = factor(pantsdat$eventNames, levels = c( "Blue jeans", "Gre
 
 ggplot(data=pantsdat, aes(x=eventNames, y=probabilities)) +
   geom_bar(stat='identity', col="black", fill=blueshade, alpha=0.6) +
-  theme_classic() +
   ylab("Probability of event") +
   xlab("Event")
 
@@ -208,8 +201,7 @@ ggplot(data=binom1, aes(x = factor(heads), y = pmf)) +
   geom_col(col=blueshade, fill=blueshade, alpha=0.6, width=.1) +
   labs(x = "\nNumber of skulls observed",
        y = "Probability\n") +
-  scale_x_discrete(breaks=seq(0,20,5)) +
-  theme_classic()
+  scale_x_discrete(breaks=seq(0,20,5)) 
 
 ```
 
@@ -229,8 +221,7 @@ bd1 <- ggplot(data=binom2, aes(x = factor(heads), y = pmf)) +
        y = "Probability") +
   scale_x_discrete(breaks=seq(0,20,5)) +
   labs(tag = "(a)") +
-  theme(plot.tag.position = c(0.3, 0.70)) +
-  theme_classic()
+  theme(plot.tag.position = c(0.3, 0.70)) 
 
 binom3 <- data.frame(heads = 0:100, pmf = dbinom(x = 0:100, size = 100, prob = 1/2)+0.0001)
 bd2 <- ggplot(data=binom3, aes(x = factor(heads), y = pmf)) +
@@ -239,8 +230,7 @@ bd2 <- ggplot(data=binom3, aes(x = factor(heads), y = pmf)) +
        y = "Probability\n") +
   scale_x_discrete(breaks=seq(0,100,5)) +
   labs(tag = "(b)") +
-  theme(plot.tag.position = c(0.3, 0.70)) +
-  theme_classic()
+  theme(plot.tag.position = c(0.3, 0.70)) 
 
 gridExtra::grid.arrange(bd1,bd2,nrow=2)
 
@@ -269,8 +259,7 @@ ggplot(data = data.frame(x = seq(-3, 3, 1)), aes(x)) +
   stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col=blueshade, linewidth=1) +
   scale_x_continuous(breaks = seq(-3, 3, 1)) +
   ylab("Probability Density\n") +
-  xlab("\nObserved Value") +
-  theme_classic()
+  xlab("\nObserved Value") 
 
 ```
 
@@ -286,8 +275,7 @@ ggplot(data = data.frame(x = seq(0, 10, 1)), aes(x)) +
   stat_function(fun = dnorm, n = 1000, args = list(mean = 7, sd = 1), col=blueshade, linetype=2, linewidth=1) +
   scale_x_continuous(breaks = seq(0, 10, 2)) +
   ylab("Probability Density\n") +
-  xlab("\nObserved Value") +
-  theme_classic()
+  xlab("\nObserved Value") 
 
 ```
 
@@ -301,8 +289,7 @@ ggplot(data = data.frame(x = seq(0, 10, 1)), aes(x)) +
   stat_function(fun = dnorm, n = 1000, args = list(mean = 5, sd = 2), col=blueshade, linetype=2, linewidth=1) +
   scale_x_continuous(breaks = seq(0, 10, 2)) +
   ylab("Probability Density\n") +
-  xlab("\nObserved Value") +
-  theme_classic()
+  xlab("\nObserved Value") 
 
 ```
 
@@ -320,7 +307,6 @@ p1 <- ggplot(data = data.frame(x = seq(-4, 4, 1)), aes(x)) +
   scale_x_continuous(breaks = seq(-4, 4, 1)) +
   ggtitle("Shaded area = 68.3%") +
   xlab("\n(a)") +
-  theme_classic() +
   theme(
     axis.text.y = element_blank(),
     axis.title.y = element_blank(),
@@ -335,7 +321,6 @@ p2 <- ggplot(data = data.frame(x = seq(-4, 4, 1)), aes(x)) +
   scale_x_continuous(breaks = seq(-4, 4, 1)) +
   ggtitle("Shaded area = 95.4%") +
   xlab("\n(b)") +
-  theme_classic() +
   theme(
     axis.text.y = element_blank(),
     axis.title.y = element_blank(),
@@ -360,7 +345,6 @@ p3 <- ggplot(data = data.frame(x = seq(-4, 4, 1)), aes(x)) +
   scale_x_continuous(breaks = seq(-4, 4, 1)) +
   ggtitle("Shaded area = 15.9%") +
   xlab("\n(a)") +
-  theme_classic() +
   theme(
     axis.text.y = element_blank(),
     axis.title.y = element_blank(),
@@ -375,7 +359,6 @@ p4 <- ggplot(data = data.frame(x = seq(-4, 4, 1)), aes(x)) +
   scale_x_continuous(breaks = seq(-4, 4, 1)) +
   ggtitle("Shaded area = 34.1%") +
   xlab("\n(b)") +
-  theme_classic() +
   theme(
     axis.text.y = element_blank(),
     axis.title.y = element_blank(),
@@ -431,8 +414,7 @@ ggplot(data = data.frame(x = seq(0, 10, 1)), aes(x)) +
   stat_function(fun = dchisq, n = 1000, args = list(df = 3), col=blueshade, linewidth=1) +
   scale_x_continuous(breaks = seq(0, 10, 2)) +
   ylab("Probability Density\n") +
-  xlab("\nObserved Value") +
-  theme_classic()
+  xlab("\nObserved Value") 
 
 ```
 
@@ -445,8 +427,7 @@ ggplot(data = data.frame(x = seq(0, 10, 1)), aes(x)) +
   stat_function(fun = df, n = 1000, args = list(df1 = 3, df2 = 5), col=blueshade, linewidth=1) +
   scale_x_continuous(breaks = seq(0, 10, 2)) +
   ylab("Probability Density\n") +
-  xlab("\nObserved Value") +
-  theme_classic()
+  xlab("\nObserved Value") 
 
 ```
 

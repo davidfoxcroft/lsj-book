@@ -1,12 +1,12 @@
 \placetextbox{0.26}{0.06}{\scriptsize{©2025 D. Foxcroft and D. Navarro,}}
-\placetextbox{0.20}{0.05}{\scriptsize{CC BY-SA 4.0}}
+\placetextbox{0.205}{0.05}{\scriptsize{CC BY-SA 4.0}}
 \placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333/09}}}
 
 # Hypothesis testing {#sec-Hypothesis-testing}
 
 ```{r}
 #| include: FALSE
-source("header.R")
+source("chapter_header.R")
 ```
 
 > *The process of induction is the process of assuming the simplest law that can be made to harmonize with our experience. This process, however, has no logical foundation but only a psychological one. It is clear that there are no grounds for believing that the simplest course of events will really happen. It is an hypothesis that the sun will rise tomorrow: and this means that we do not know whether it will rise.*\
@@ -54,7 +54,8 @@ What this discussion makes clear, I hope, is that when attempting to construct a
 ```{r}
 #| label: tbl-tab9-1
 #| tbl-cap: Research and statistical hypotheses
-huxtabs[[9]][[1]]
+huxtabs[[9]][[1]] |> 
+  style_headers(bold = FALSE)
 ```
 
 And a key thing to recognise is this. A statistical hypothesis test is a test of the statistical hypothesis, not the research hypothesis. If your study is badly designed then the link between your research hypothesis and your statistical hypothesis is broken. To give a silly example, suppose that my ESP study was conducted in a situation where the participant can actually see the card reflected in a window. If that happens I would be able to find very strong evidence that $\theta \neq 0.5$, but this would tell us nothing about whether "ESP exists".
@@ -112,13 +113,13 @@ Since the null hypothesis states that $\theta = 0.5$ and our experiment has $N =
 #| fig-alt: A bar graph titled "Sampling Distribution for X if the Null is True" shows the probability (y-axis) versus the number of correct responses (X) (x-axis). The distribution is bell-shaped, peaking around 50 correct responses.
 
 binom1 <- data.frame(success = 0:100, pmf = dbinom(x = 0:100, size = 100, prob = .5))
+
 ggplot(data=binom1, aes(x = factor(success), y = pmf+.001)) +
   geom_col(col=blueshade, fill=blueshade, alpha=0.6, width=.3) +
   ggtitle("Sampling Distribution for X if the Null is True") +
   labs(x = "\nNumber of correct responses (X)",
        y = "Probability\n") +
   scale_x_discrete(breaks=seq(0,100,20)) +
-  theme_classic() +
   theme(plot.title = element_text(hjust = 0.5))
 
 ```
@@ -153,16 +154,15 @@ ggplot(data=binom1, aes(x = factor(success), y = pmf+.001)) +
   geom_bar(aes(colour=plotcol, fill=plotcol), width=.3, stat = "identity") +
   ggtitle("Critical Regions for a Two-sided Test") +
   labs(x = "\nNumber of correct responses (X)") +
-  geom_text(x=27, y=.035, label="lower critical region\n(2.5% of the distribution)", size=5) +
+  geom_text(x=22, y=.035, label="lower critical region\n(2.5% of the distribution)", size=3, check_overlap = TRUE) +
   geom_segment(x = 40, y = .025, xend = 15, yend = .025,
-               arrow = arrow(length = unit(0.03, "npc"))) +
-  geom_text(x=75, y=.035, label="upper critical region\n(2.5% of the distribution)", size=5) +
-  geom_segment(x = 61, y = .025, xend = 85, yend = .025,
-               arrow = arrow(length = unit(0.03, "npc"))) +
+               arrow = arrow(length = unit(0.03, "npc")), stat = "unique") +
+  geom_text(x=80, y=.035, label="upper critical region\n(2.5% of the distribution", size=3, check_overlap = TRUE) +
+  geom_segment(x = 61, y = .025, xend = 85, yend = .025, 
+               arrow = arrow(length = unit(0.03, "npc")), stat = "unique") +
   scale_x_discrete(breaks=seq(0,100,20)) +
   scale_colour_identity() +
   scale_fill_identity() +
-  theme_classic() +
   theme(
     axis.title.y = element_blank(),
     axis.line.y = element_blank(),
@@ -211,13 +211,12 @@ ggplot(data=binom1, aes(x = factor(success), y = pmf+.001)) +
   geom_bar(aes(colour=plotcol, fill=plotcol), width=.3, stat = "identity") +
   ggtitle("Critical Region for a One-sided Test") +
   labs(x = "\nNumber of correct responses (X)") +
-  geom_text(x=73, y=.04, label="critical region\n(5% of the distribution)", size=5) +
+  geom_text(x=78, y=.04, label="critical region\n(5% of the distribution)", size=3, check_overlap = TRUE) +
   geom_segment(x = 59, y = .028, xend = 85, yend = .028,
-               arrow = arrow(length = unit(0.03, "npc"))) +
+               arrow = arrow(length = unit(0.03, "npc")), stat = "unique") +
   scale_x_discrete(breaks=seq(0,100,20)) +
   scale_colour_identity() +
   scale_fill_identity() +
-  theme_classic() +
   theme(
     axis.title.y = element_blank(),
     axis.line.y = element_blank(),
@@ -321,16 +320,15 @@ ggplot(data=binom1, aes(x = factor(success), y = pmf+.001)) +
   geom_bar(aes(colour=plotcol, fill=plotcol), width=.3, stat = "identity") +
   ggtitle(expression("Sampling Distribution for X if" ~ theta ~"=.55")) +
   labs(x = "\nNumber of correct responses (X)") +
-  geom_text(x=27, y=.07, label="lower critical region\n(2.5% of the distribution)", size=5) +
+  geom_text(x=27, y=.07, label="lower critical region\n(2.5% of the distribution)", size=3, check_overlap = TRUE) +
   geom_segment(x = 40, y = .06, xend = 10, yend = .06,
-               arrow = arrow(length = unit(0.03, "npc"))) +
-  geom_text(x=78, y=.07, label="upper critical region\n(2.5% of the distribution)", size=5) +
-  geom_segment(x = 61, y = .06, xend = 90, yend = .06,
-               arrow = arrow(length = unit(0.03, "npc"))) +
+               arrow = arrow(length = unit(0.03, "npc")), stat = "unique") +
+  geom_text(x=78, y=.07, label="upper critical region\n(2.5% of the distribution)", size=3, check_overlap = TRUE) +
+  geom_segment(x = 65, y = .06, xend = 90, yend = .06,
+               arrow = arrow(length = unit(0.03, "npc")), stat = "unique") +
   scale_x_discrete(breaks=seq(0,100,20)) +
   scale_colour_identity() +
   scale_fill_identity() +
-  theme_classic() +
   theme(
     axis.title.y = element_blank(),
     axis.line.y = element_blank(),
@@ -354,16 +352,15 @@ ggplot(data=binom1, aes(x = factor(success), y = pmf+.001)) +
   geom_bar(aes(colour=plotcol, fill=plotcol), width=.3, stat = "identity") +
   ggtitle(expression("Sampling Distribution for X if" ~ theta ~"=.70")) +
   labs(x = "\nNumber of correct responses (X)") +
-  geom_text(x=27, y=.07, label="lower critical region\n(2.5% of the distribution)", size=5) +
+  geom_text(x=27, y=.07, label="lower critical region\n(2.5% of the distribution)", size=3, check_overlap = TRUE) +
   geom_segment(x = 40, y = .06, xend = 10, yend = .06,
-               arrow = arrow(length = unit(0.03, "npc"))) +
-  geom_label(aes(x=75, y=.07, label="upper critical region\n(2.5% of the distribution)"), size=5, label.size=NA, fill="white", alpha=0.025) +
+               arrow = arrow(length = unit(0.03, "npc")), stat = "unique") +
+  geom_label(aes(x=75, y=.07, label="upper critical region\n(2.5% of the distribution)"), size=3, , stat = "unique", label.size=NA, fill="white", alpha=0.9) +
   geom_segment(x = 61, y = .06, xend = 90, yend = .06,
-               arrow = arrow(length = unit(0.03, "npc"))) +
+               arrow = arrow(length = unit(0.03, "npc")), stat = "unique") +
   scale_x_discrete(breaks=seq(0,100,20)) +
   scale_colour_identity() +
   scale_fill_identity() +
-  theme_classic() +
   theme(
     axis.title.y = element_blank(),
     axis.line.y = element_blank(),
@@ -393,7 +390,6 @@ ggplot(dat=dpower, aes(x=theta, y=pow)) +
   annotate("point", x = .5, y = min(pow), colour = "black", size=4) +
   labs(x=expression("\nTrue value of " ~theta), y="Probability of Rejecting the Null\n") +
   ggtitle("Power function for the Test (N=100)") +
-  theme_classic() +
   theme(
     plot.title = element_text(hjust = 0.5))
 
@@ -445,7 +441,6 @@ testpow <- data.frame(N,pow)
 ggplot(dat=testpow, aes(x=N, y=pow)) +
   geom_line(col=blueshade, linewidth=1) +
   labs(x=expression("\nSample size, N"), y="Probability of Rejecting the Null\n") +
-  theme_classic() +
   theme(
     plot.title = element_text(hjust = 0.5))
 

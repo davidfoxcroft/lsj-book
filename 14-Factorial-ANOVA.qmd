@@ -1,12 +1,12 @@
 \placetextbox{0.26}{0.06}{\scriptsize{©2025 D. Foxcroft and D. Navarro,}}
-\placetextbox{0.20}{0.05}{\scriptsize{CC BY-SA 4.0}}
+\placetextbox{0.205}{0.05}{\scriptsize{CC BY-SA 4.0}}
 \placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333/14}}}
 
 # Factorial ANOVA {#sec-Factorial-ANOVA}
 
 ```{r}
 #| include: FALSE
-source("header.R")
+source("chapter_header.R")
 ```
 
 Over the course of the last few chapters we have done quite a lot. We have looked at statistical tests you can use when you have one nominal predictor variable with two groups (e.g., the $t$-test in @sec-Comparing-two-means) or with three or more groups (@sec-Comparing-several-means-one-way-ANOVA). @sec-Correlation-and-linear-regression introduced a powerful new idea, that is building statistical models with multiple continuous predictor variables used to explain a single outcome variable. For instance, a regression model could be used to predict the number of errors a student makes in a reading comprehension test based on the number of hours they studied for the test and their score on a standardised IQ test.
@@ -178,7 +178,6 @@ p1 <- ggplot(dat, aes(x= FactA, y=mn, group=FactB)) +
   ggtitle("Only Factor A has an effect") +
   ylim(0.5,2.5) +
   labs(x = "Factor A\n\n(a)", y = "Group mean", group = "Factor B") +
-  theme_classic() +
   theme(
     plot.title = element_text(size=10, hjust=0),
     legend.key.width = unit(0.7,"cm"),
@@ -200,7 +199,6 @@ p2 <- ggplot(dat, aes(x= FactA, y=mn, group=FactB)) +
   ggtitle("Only Factor B has an effect") +
   ylim(0.5,2.5) +
   labs(x = "Factor A\n\n(b)", y = "Group mean", group = "Factor B") +
-  theme_classic() +
   theme(
     plot.title = element_text(size=10, hjust=0),
     legend.key.width = unit(0.7,"cm"),
@@ -222,7 +220,6 @@ p3 <- ggplot(dat, aes(x= FactA, y=mn, group=FactB)) +
   ggtitle("A and B both have an effect") +
   ylim(0.5,2.5) +
   labs(x = "Factor A\n\n(c)", y = "Group mean", group = "Factor B") +
-  theme_classic() +
   theme(
     plot.title = element_text(size=10, hjust=0),
     legend.key.width = unit(0.7,"cm"),
@@ -244,7 +241,6 @@ p4 <- ggplot(dat, aes(x= FactA, y=mn, group=FactB)) +
   ggtitle("Neither A or B has an effect") +
   ylim(0.5,2.5) +
   labs(x = "Factor A\n\n(d)", y = "Group mean", group = "Factor B") +
-  theme_classic() +
   theme(
     plot.title = element_text(size=10, hjust=0),
     legend.key.width = unit(0.7,"cm"),
@@ -277,7 +273,6 @@ p1 <- ggplot(dat, aes(x= FactA, y=mn, group=FactB)) +
   ggtitle("Crossover interaction") +
   ylim(0.5,2.5) +
   labs(x = "Factor A\n\n(a)", y = "Group mean", group = "Factor B") +
-  theme_classic() +
   theme(
     plot.title = element_text(size=10, hjust=0),
     legend.key.width = unit(0.7,"cm"),
@@ -299,7 +294,6 @@ p2 <- ggplot(dat, aes(x= FactA, y=mn, group=FactB)) +
   ggtitle("Effect for one level of Factor A") +
   ylim(0.5,2.5) +
   labs(x = "Factor A\n\n(b)", y = "Group mean", group = "Factor B") +
-  theme_classic() +
   theme(
     plot.title = element_text(size=10, hjust=0),
     legend.key.width = unit(0.7,"cm"),
@@ -321,7 +315,6 @@ p3 <- ggplot(dat, aes(x= FactA, y=mn, group=FactB)) +
   ggtitle("One cell is different") +
   ylim(0.5,2.5) +
   labs(x = "Factor A\n\n(c)", y = "Group mean", group = "Factor B") +
-  theme_classic() +
   theme(
     plot.title = element_text(size=10, hjust=0),
     legend.key.width = unit(0.7,"cm"),
@@ -343,7 +336,6 @@ p4 <- ggplot(dat, aes(x= FactA, y=mn, group=FactB)) +
   ggtitle("Effect for one level of Factor B") +
   ylim(0.5,2.5) +
   labs(x = "Factor A\n\n(d)", y = "Group mean", group = "Factor B") +
-  theme_classic() +
   theme(
     plot.title = element_text(size=10, hjust=0),
     legend.key.width = unit(0.7,"cm"),

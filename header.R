@@ -86,6 +86,57 @@ dfrapply <- function(object, f, ...) {
 
 #lsj_chapter_tables <- readRDS("lsj_chapter_tables.rds")
 huxtabs <- dfrapply(lsj_chapter_tables, huxthattibble)
+
+# additional created tables
+
+# table 7.1
+newhux1 <- list(huxthattibble(tibble(`number of flips` = c(1 , 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9 , 10, 11 , 12 , 13 , 14 , 15 , 16 , 17 , 18 , 19 , 20),
+                     `number of heads` = c( 0 , 1 , 2 , 3 , 4 , 4 , 4 , 5 , 6 , 7,  8  ,  8 ,  9 , 10 , 10 , 10 , 10 , 10 , 10 , 11 ),
+                     `proportion` = c( 0.00 , .50 , .67 , .75 , .80 , .67 , .57 , .63 , .67 , .70, .73 , .67 , .69 , .71 , .67 ,  .63 , .59 , .56 , .53 , .55))) |>
+  set_number_format(,3,"%.2f") |>
+  set_top_padding(3:21, everywhere, value=0 ) |>
+  set_bottom_padding(2:20, everywhere, value=0 )
+)
+huxtabs[[7]] <- append(huxtabs[[7]], newhux1, 0)
+
+
+# table 10.5
+# Set p-values
+p <- c(.05, 0.10, 0.30, 0.50, 0.90, 0.95, 0.99, 0.999)
+# Set degrees of freedom
+df <- seq(1,10)
+# Calculate a matrix of chisq statistics
+m <- outer(p, df, function(x,y) qchisq(x,y))
+# Transpose for a better view
+m <- as.data.frame(t(m))
+m <- tibble::add_column(m, df, .before = 1) 
+# Set column names
+colnames(m) <- c("Degrees of freedom", 1 - p)
+newhux2 <- list(
+  hux(m) %>%
+    set_top_border(2, 1:9, value = 0.4) %>%
+    set_number_format(2:11, 2:9, "%5.3f") %>% 
+    insert_row(c("","Probability", 3:9)) %>%
+    insert_row(c("","Non-significant", 3:6, "Significant", 8:9), after=12) %>%
+    merge_cells(1, 2:9) %>%
+    merge_cells(13, 2:6) %>%
+    merge_cells(13, 7:9) %>%
+    set_font_size(1:13, 1:9, 10) %>%
+    set_bold(c(1:2, 13), 1:9, value = TRUE) %>%
+    set_left_border(1:13, c(2,7), value = 0.4) %>%
+    set_top_border(13, 1:9, value = 0.4) %>%
+    set_col_width(c(.2,.1,.1,.1,.1,.1,.1,.1,.1)) %>%
+    set_bottom_border(13, 1:9, value = 0.4) %>%
+    set_align(everywhere, everywhere, "center") %>% 
+    set_top_padding(everywhere, everywhere, 2 ) %>%
+    set_bottom_padding(everywhere, everywhere, 2 ) %>%
+    #set_left_padding(everywhere, everywhere, 12 ) %>%
+    #set_right_padding(everywhere, everywhere, 12 ) %>%
+    set_width(0.9) %>% 
+    set_caption_pos("bottomleft") 
+)
+huxtabs[[10]] <- append(huxtabs[[10]], newhux2, 5)
+
 saveRDS(huxtabs, "data_and_tables/lsj_chapter_huxtabs.rds")
 #huxtabs <- readRDS("data_and_tables/lsj_chapter_huxtabs.rds")
 

@@ -1,12 +1,12 @@
 \placetextbox{0.26}{0.06}{\scriptsize{©2025 D. Foxcroft and D. Navarro,}}
-\placetextbox{0.20}{0.05}{\scriptsize{CC BY-SA 4.0}}
+\placetextbox{0.205}{0.05}{\scriptsize{CC BY-SA 4.0}}
 \placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333/12}}}
 
 # Correlation and linear regression {#sec-Correlation-and-linear-regression}
 
 ```{r}
 #| include: FALSE
-source("header.R")
+source("chapter_header.R")
 ```
 
 The goal in this chapter is to introduce **correlation** and **linear regression**. These are the standard tools that statisticians rely on when analysing the relationship between continuous predictors and continuous outcomes.
@@ -592,7 +592,7 @@ knitr::include_graphics("images/fig12-17.png")
 
 In any case, in order to get a more detailed picture it's often more informative to look at the relationship between the predicted values and the residuals themselves. Again, in jamovi you can save the residuals to the dataset and then draw a scatterplot of the predicted values against the residual values, as in @fig-fig12-18. As you can see, not only does it draw the scatterplot showing the predicted value against the residuals, you can also plot a line through the data that shows the relationship between the two. Ideally, this should be a straight, perfectly horizontal line. In practice, we're looking for a reasonably straight or flat line. This is a matter of judgement.
 
-```{r}
+```{r out.width="80%"}
 #| label: fig-fig12-18
 #| fig-cap: jamovi plot of the predicted values against the residuals, with a line showing the relationship between the two. If this is horizontal and straight(-ish), then we can feel reasonably confident that the "average residual" for all "predicted values" is more or less the same.
 #| fig-alt: A scatter plot shows residuals versus predicted values with a non-linear trend. Residuals range from -10 to 10, and predicted values range from 45 to 85. Data points are scattered around a fitted curve that starts flat, dips slightly, and rises towards the end.
@@ -705,7 +705,6 @@ ggplot(dat, aes(x=x, y=y)) +
   ylim(1,12) +
   xlab("\nPredictor") +
   ylab("Outcome\n") +
-  theme_classic() +
   theme(
     axis.text.y = element_blank(),
     axis.text.x = element_blank())
@@ -738,8 +737,7 @@ ggplot(dat, aes(x=x, y=y)) +
   xlim(1,12) +
   ylim(1,12) +
   xlab("\nPredictor") +
-  ylab("Outcome\n") +
-  theme_classic() +
+  ylab("Outcome\n") 
   theme(
     axis.text.y = element_blank(),
     axis.text.x = element_blank())
@@ -775,7 +773,6 @@ ggplot(dat, aes(x=x, y=y)) +
   ylim(1,12) +
   xlab("\nPredictor") +
   ylab("Outcome\n") +
-  theme_classic() +
   theme(
     axis.text.y = element_blank(),
     axis.text.x = element_blank())
