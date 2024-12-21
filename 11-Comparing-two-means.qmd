@@ -33,7 +33,7 @@ To answer the question, it helps to be able to write down what it is that I thin
 
 Next, it helps to be clear about what I want to learn from the data. In this case my research hypothesis relates to the population mean $\mu$ for the psychology student grades, which is unknown. Specifically, I want to know if $\mu = 67.5$ or not. Given that this is what I know, can we devise a hypothesis test to solve our problem? The data, along with the hypothesised distribution from which they are thought to arise, are shown in @fig-fig11-1. Not entirely obvious what the right answer is, is it? For this, we are going to need some statistics.
 
-```{r out.width="80%"}
+```{r out.width="70%"}
 #| label: fig-fig11-1
 #| fig-cap: The theoretical distribution (solid line) from which the psychology student grades (bars) are supposed to have been generated
 #| fig-alt: A bar histogram displays the distribution of grades with a curve overlay. The x-axis is labeled "Grades" ranging from 50 to 90, and the y-axis is unlabeled. Bars show peaks near grades 70 and 80, with the curve indicating a normal distribution.
@@ -48,7 +48,6 @@ ggplot(as.data.frame(grades), aes(x=grades)) +
     axis.text.y = element_blank(),
     axis.ticks.y = element_blank(),
     axis.title.y = element_blank())
-
 ```
 
 ### Constructing the hypothesis test
@@ -382,10 +381,11 @@ To give you a more detailed sense of what's going on here, I've plotted box and 
 
 The **independent samples $t$-test** comes in two different forms, Student's and Welch's. The original Student $t$-test, which is the one I'll describe in this section, is the simpler of the two but relies on much more restrictive assumptions than the Welch $t$-test. Assuming for the moment that you want to run a two-sided test, the goal is to determine whether two "independent samples" of data are drawn from populations with the same mean (the null hypothesis) or different means (the alternative hypothesis). When we say "independent" samples, what we really mean here is that there's no special relationship between observations in the two samples. This probably doesn't make a lot of sense right now, but it will be clearer when we come to talk about the paired samples $t$-test later on. For now, let's just point out that if we have an experimental design where participants are randomly allocated to one of two groups, and we want to compare the two groups' mean performance on some outcome measure, then an independent samples $t$-test (rather than a paired samples $t$-test) is what we're after.
 
-```{r}
+```{r out.width="80%"}
 #| label: fig-fig11-7
 #| fig-cap: Box and violin plots showing the distribution of grades for students in the classes of Anastasia and Bernadette. Visually, these suggest that students in the class of Anastasia may be getting slightly better grades on average, though they also seem a bit more variable
 #| fig-alt: Violin plot comparing grades of students tutored by Anastasia and Bernadette. Both plots show distributions with similar means around 75-80 and few outliers. Anastasia's students have a wider grade distribution compared to Bernadette's students.
+#| fig-pos: "h!"
 knitr::include_graphics("images/fig11-7.png")
 ```
 

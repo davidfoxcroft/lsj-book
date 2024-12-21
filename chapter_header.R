@@ -25,7 +25,7 @@ options(knitr.table.format = function() {
 })
 
 font_add(family = "TeX Gyre Pagella",   
-         regular = "texgyrepagella-regular.otf") # Name you want to use to call the font
+          regular = "texgyrepagella-regular.otf") # Name you want to use to call the font
 showtext_auto()
 
 huxtabs <- readRDS("data_and_tables/lsj_chapter_huxtabs.rds")

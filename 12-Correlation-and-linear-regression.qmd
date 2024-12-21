@@ -226,7 +226,7 @@ knitr::include_graphics("images/fig12-9.png")
 
 Often you will want to look at the relationships between several variables at once, using a **scatterplot matrix** (in jamovi via the 'Correlation Matrix' -- 'Plot' command). Just add another variable, for example baby.sleep to the list of variables to be correlated, and jamovi will create a scatterplot matrix for you, just like the one in @fig-fig12-10.
 
-```{r out.width="80%"}
+```{r }
 #| label: fig-fig12-10
 #| fig-cap: A matrix of scatterplots produced using jamovi
 #| fig-alt: A series of scatter plots arranged in a matrix format showing correlations between variables:- dan.sleep, dan.grump, and baby.sleep. Each plot has points and trend lines with grey confidence intervals. The correlation coefficients are labeled on the plots.
@@ -583,7 +583,7 @@ Before moving on, I should point out that you don't often need to obtain these r
 
 We should check for the linearity of the relationships between the predictors and the outcomes. There's a few different things that you might want to do in order to check this. Firstly, it never hurts to just plot the relationship between the predicted values $\hat{Y}_i$ and the observed values $Y_i$ for the outcome variable, as illustrated in @fig-fig12-17. To draw this in jamovi we saved the predicted values to the dataset, and then drew a scatterplot of the observed against the predicted (fitted) values. This gives you a kind of "big picture view" -- if this plot looks approximately linear, then we're probably not doing too badly (though that's not to say that there aren't problems). However, if you can see big departures from linearity here, then it strongly suggests that you need to make some changes.
 
-```{r out.width="80%"}
+```{r out.width="60%"}
 #| label: fig-fig12-17
 #| fig-cap: jamovi plot of the predicted values against the observed values of the outcome variable. A straight(-ish) line is what we are hoping to see here. This looks pretty good, suggesting that there is nothing grossly wrong
 #| fig-alt: A scatter plot with the x-axis labeled "My grumpiness" and the y-axis labeled "Predicted values." The plot has numerous scattered data points, mostly clustered between 40-90 on the x-axis and 40-80 on the y-axis. A trend line shows a positive correlation.
@@ -592,7 +592,7 @@ knitr::include_graphics("images/fig12-17.png")
 
 In any case, in order to get a more detailed picture it's often more informative to look at the relationship between the predicted values and the residuals themselves. Again, in jamovi you can save the residuals to the dataset and then draw a scatterplot of the predicted values against the residual values, as in @fig-fig12-18. As you can see, not only does it draw the scatterplot showing the predicted value against the residuals, you can also plot a line through the data that shows the relationship between the two. Ideally, this should be a straight, perfectly horizontal line. In practice, we're looking for a reasonably straight or flat line. This is a matter of judgement.
 
-```{r out.width="80%"}
+```{r out.width="60%"}
 #| label: fig-fig12-18
 #| fig-cap: jamovi plot of the predicted values against the residuals, with a line showing the relationship between the two. If this is horizontal and straight(-ish), then we can feel reasonably confident that the "average residual" for all "predicted values" is more or less the same.
 #| fig-alt: A scatter plot shows residuals versus predicted values with a non-linear trend. Residuals range from -10 to 10, and predicted values range from 45 to 85. Data points are scattered around a fitted curve that starts flat, dips slightly, and rises towards the end.
@@ -636,7 +636,7 @@ You can calculate it using the BOXCOX function in the 'Compute' variables screen
 
 The regression models that we've talked about all make an equality (i.e.homogeneity) of variance assumption: the variance of the residuals is assumed to be constant. To plot this in jamovi first we need to calculate the square root of the (absolute) size of the residual[^Correlation-and-regression-22] and then plot this against the predicted values, as in @fig-fig12-21. Note that this plot actually uses the standardised residuals rather than the raw ones, but it's immaterial from our point of view. What we're looking to see here is a straight, horizontal line running through the middle of the plot.[^Correlation-and-linear-regression-23]
 
-```{r out.width="80%"}
+```{r out.width="60%"}
 #| label: fig-fig12-21
 #| fig-cap: jamovi plot of the predicted values (model predictions) against the square root of the absolute standardised residuals. This plot is used to diagnose violations of homogeneity of variance. If the variance is really constant, then the line through the middle should be horizontal and flat(-ish).
 #| fig-alt: Scatter plot showing the relationship between predicted values (x-axis) and SQR residuals (y-axis). The plot includes scattered data points and a smoothed trend line indicating the general pattern of the data. Predicted values range from 45 to 85, SQR Residuals from 0.5 to 3.5.
@@ -708,7 +708,6 @@ ggplot(dat, aes(x=x, y=y)) +
   theme(
     axis.text.y = element_blank(),
     axis.text.x = element_blank())
-
 ```
 
 The second way in which an observation can be unusual is if it has high **leverage**, which happens when the observation is very different from all the other observations. This doesn't necessarily have to correspond to a large residual. If the observation happens to be unusual on all variables in precisely the same way, it can actually lie very close to the regression line. An example of this is shown in @fig-fig12-24. The leverage of an observation is operationalised in terms of its hat value, usually written $h_i$. The formula for the hat value is rather complicated[^12-correlation-and-linear-regression-25] but its interpretation is not: $h_i$ is a measure of the extent to which the i-th observation is "in control" of where the regression line ends up going.
@@ -737,7 +736,7 @@ ggplot(dat, aes(x=x, y=y)) +
   xlim(1,12) +
   ylim(1,12) +
   xlab("\nPredictor") +
-  ylab("Outcome\n") 
+  ylab("Outcome\n") +
   theme(
     axis.text.y = element_blank(),
     axis.text.x = element_blank())
