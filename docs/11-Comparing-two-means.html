@@ -453,7 +453,7 @@ div.csl-indent {
 <div class="cell-output-display">
 <div id="fig-fig11-1" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
-<p><img src="11-Comparing-two-means_files/figure-html/fig-fig11-1-1.png" class="img-fluid figure-img" style="width:70.0%" alt="A bar histogram displays the distribution of grades with a curve overlay. The x-axis is labeled &quot;Grades&quot; ranging from 50 to 90, and the y-axis is unlabeled. Bars show peaks near grades 70 and 80, with the curve indicating a normal distribution."></p>
+<p><img src="11-Comparing-two-means_files/figure-html/fig-fig11-1-1.png" class="img-fluid figure-img" style="width:60.0%" alt="A bar histogram displays the distribution of grades with a curve overlay. The x-axis is labeled &quot;Grades&quot; ranging from 50 to 90, and the y-axis is unlabeled. Bars show peaks near grades 70 and 80, with the curve indicating a normal distribution."></p>
 <figcaption class="figure-caption">Figure&nbsp;11.1: The theoretical distribution (solid line) from which the psychology student grades (bars) are supposed to have been generated</figcaption>
 </figure>
 </div>
@@ -984,27 +984,17 @@ not be all that interesting</p> </caption>
 <h3 data-number="11.9.3" class="anchored" data-anchor-id="shapiro-wilk-tests"><span class="header-section-number">11.9.3</span> Shapiro-Wilk tests</h3>
 <p>QQ plots provide a nice way to informally check the normality of your data, but sometimes you’ll want to do something a bit more formal and the <strong>Shapiro-Wilk test</strong> <span class="citation" data-cites="Shapiro1965">(<a href="References.html#ref-Shapiro1965" role="doc-biblioref">Shapiro &amp; Wilk, 1965</a>)</span> is probably what you’re looking for.<a href="#fn22" class="footnote-ref" id="fnref22" role="doc-noteref"><sup>22</sup></a> As you’d expect, the null hypothesis being tested is that a set of <span class="math inline">\(N\)</span> observations is normally distributed.</p>
 <p>[Additional technical detail<a href="#fn23" class="footnote-ref" id="fnref23" role="doc-noteref"><sup>23</sup></a>]</p>
-<div class="cell" data-layout-align="left">
-<div class="cell-output-display">
-<div id="fig-fig11-24" class="quarto-figure quarto-figure-left anchored">
-<figure class="figure">
-<p><img src="11-Comparing-two-means_files/figure-html/fig-fig11-24-1.png" class="img-fluid figure-img" style="width:70.0%" alt="Graph depicting the sampling distribution of W for normally distributed data, showing lines for sample sizes N=10 (solid line), N=20 (dashed line), and N=50 (dotted line). The x-axis is labeled &quot;Value of W&quot; and ranges from 0.75 to 1.00."></p>
-<figcaption class="figure-caption">Figure&nbsp;11.24: Sampling distribution of the Shapiro-Wilk <span class="math inline">\(W\)</span> statistic, under the null hypothesis that the data are normally distributed, for samples of size 10, 20 and 50. Note that small values of <span class="math inline">\(W\)</span> indicate departure from normality</figcaption>
-</figure>
-</div>
-</div>
-</div>
 <p>To get the Shapiro-Wilk statistic in jamovi <span class="math inline">\(t\)</span>-tests, check the option for ‘Normality’ listed under ‘Assumptions’. In the randomly sampled data (<span class="math inline">\(N = 100\)</span>) we used for the QQ plot, the value for the Shapiro-Wilk normality test statistic was <span class="math inline">\(W = 0.99\)</span> with a <span class="math inline">\(p\)</span>-value of <span class="math inline">\(0.54\)</span>. So, not surprisingly, we have no evidence that these data depart from normality. When reporting the results for a Shapiro-Wilk test, you should (as usual) make sure to include the test statistic <span class="math inline">\(W\)</span> and the <span class="math inline">\(p\)</span>-value, though given that the sampling distribution depends so heavily on <span class="math inline">\(N\)</span> it would probably be a politeness to include <span class="math inline">\(N\)</span> as well.</p>
 </section>
 <section id="example" class="level3" data-number="11.9.4">
 <h3 data-number="11.9.4" class="anchored" data-anchor-id="example"><span class="header-section-number">11.9.4</span> Example</h3>
-<p>In the meantime, it’s probably worth showing you an example of what happens to the QQ plot and the Shapiro-Wilk test when the data turn out to be non-normal. For that, let’s look at the distribution of our AFL winning margins data, which if you remember back to <a href="04-Descriptive-statistics.html"><span>Chapter&nbsp;4</span></a> it didn’t look like they came from a normal distribution at all. Here’s what happens to the QQ plot (<a href="#fig-fig11-25">Figure&nbsp;<span>11.25</span></a>).</p>
+<p>In the meantime, it’s probably worth showing you an example of what happens to the QQ plot and the Shapiro-Wilk test when the data turn out to be non-normal. For that, let’s look at the distribution of our AFL winning margins data, which if you remember back to <a href="04-Descriptive-statistics.html"><span>Chapter&nbsp;4</span></a> it didn’t look like they came from a normal distribution at all. Here’s what happens to the QQ plot (<a href="#fig-fig11-24">Figure&nbsp;<span>11.24</span></a>).</p>
 <div class="cell" data-layout-align="left">
 <div class="cell-output-display">
-<div id="fig-fig11-25" class="quarto-figure quarto-figure-left anchored">
+<div id="fig-fig11-24" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
-<p><img src="images/fig11-25.png" class="img-fluid figure-img" style="width:70.0%" alt="A Q-Q plot shows standardized residuals against theoretical quantiles. Data points largely follow a diagonal reference line, indicating normality. Points deviate at the upper and lower ends, suggesting potential departures from a normal distribution at extremes."></p>
-<figcaption class="figure-caption">Figure&nbsp;11.25: QQ plot showing non-normality from the AFL winning margins data</figcaption>
+<p><img src="images/fig11-24.png" class="img-fluid figure-img" style="width:70.0%" alt="A Q-Q plot shows standardized residuals against theoretical quantiles. Data points largely follow a diagonal reference line, indicating normality. Points deviate at the upper and lower ends, suggesting potential departures from a normal distribution at extremes."></p>
+<figcaption class="figure-caption">Figure&nbsp;11.24: QQ plot showing non-normality from the AFL winning margins data</figcaption>
 </figure>
 </div>
 </div>
@@ -1046,13 +1036,13 @@ test</p> </caption>
 </div>
 </div>
 <p>We then count up the number of checkmarks. This is our test statistic, <span class="math inline">\(W\)</span>.<a href="#fn24" class="footnote-ref" id="fnref24" role="doc-noteref"><sup>24</sup></a> The actual sampling distribution for <span class="math inline">\(W\)</span> is somewhat complicated, and I’ll skip the details. For our purposes, it’s sufficient to note that the interpretation of <span class="math inline">\(W\)</span> is qualitatively the same as the interpretation of <span class="math inline">\(t\)</span> or <span class="math inline">\(z\)</span>. That is, if we want a two-sided test then we reject the null hypothesis when <span class="math inline">\(W\)</span> is very large or very small, but if we have a directional (i.e., one-sided) hypothesis then we only use one or the other.</p>
-<p>In jamovi, if we run an ‘Independent Samples T-Test’ with scores as the dependent variable. and group as the grouping variable, and then under the options for ‘tests’ check the option for ‘Mann-Whitney U’, we will get results showing that <span class="math inline">\(U = 3\)</span> (i.e., the same number of checkmarks as shown above), and a <span class="math inline">\(p\)</span>-value = <span class="math inline">\(0.05556\)</span>. See <a href="#fig-fig11-26">Figure&nbsp;<span>11.26</span></a>.</p>
+<p>In jamovi, if we run an ‘Independent Samples T-Test’ with scores as the dependent variable. and group as the grouping variable, and then under the options for ‘tests’ check the option for ‘Mann-Whitney U’, we will get results showing that <span class="math inline">\(U = 3\)</span> (i.e., the same number of checkmarks as shown above), and a <span class="math inline">\(p\)</span>-value = <span class="math inline">\(0.05556\)</span>. See <a href="#fig-fig11-25">Figure&nbsp;<span>11.25</span></a>.</p>
 <div class="cell enlarge-image" data-layout-align="left">
 <div class="cell-output-display">
-<div id="fig-fig11-26" class="quarto-figure quarto-figure-left anchored">
+<div id="fig-fig11-25" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
-<p><img src="images/fig11-26.png" class="img-fluid figure-img" style="width:80.0%" alt="A jamovi screenshot showing a Mann-Whitney $U$ test setup on the left and results on the right. The setup includes dependent and grouping variables, while the results section displays statistical values and references."></p>
-<figcaption class="figure-caption">Figure&nbsp;11.26: jamovi screen showing results for the Mann-Whitney <span class="math inline">\(U\)</span> test</figcaption>
+<p><img src="images/fig11-25.png" class="img-fluid figure-img" style="width:80.0%" alt="A jamovi screenshot showing a Mann-Whitney $U$ test setup on the left and results on the right. The setup includes dependent and grouping variables, while the results section displays statistical values and references."></p>
+<figcaption class="figure-caption">Figure&nbsp;11.25: jamovi screen showing results for the Mann-Whitney <span class="math inline">\(U\)</span> test</figcaption>
 </figure>
 </div>
 </div>
@@ -1081,13 +1071,13 @@ test</p> </caption>
 </div>
 </div>
 </div>
-<p>Counting up the tick marks this time we get a test statistic of <span class="math inline">\(W = 7\)</span>. As before, if our test is two-sided, then we reject the null hypothesis when W is very large or very small. As far as running it in jamovi goes, it’s pretty much what you’d expect. For the one sample version, you specify the ‘Wilcoxon rank’ option under ‘Tests’ in the ‘One Sample T-Test’ analysis window. This gives you Wilcoxon <span class="math inline">\(W = 7\)</span>, <span class="math inline">\(p\)</span>-value = <span class="math inline">\(0.03711\)</span>. As this shows, we have a significant effect. Evidently, taking a statistics class does have an effect on your happiness. Switching to a paired samples version of the test won’t give us a different answer, of course; see <a href="#fig-fig11-27">Figure&nbsp;<span>11.27</span></a>.</p>
+<p>Counting up the tick marks this time we get a test statistic of <span class="math inline">\(W = 7\)</span>. As before, if our test is two-sided, then we reject the null hypothesis when W is very large or very small. As far as running it in jamovi goes, it’s pretty much what you’d expect. For the one sample version, you specify the ‘Wilcoxon rank’ option under ‘Tests’ in the ‘One Sample T-Test’ analysis window. This gives you Wilcoxon <span class="math inline">\(W = 7\)</span>, <span class="math inline">\(p\)</span>-value = <span class="math inline">\(0.03711\)</span>. As this shows, we have a significant effect. Evidently, taking a statistics class does have an effect on your happiness. Switching to a paired samples version of the test won’t give us a different answer, of course; see <a href="#fig-fig11-26">Figure&nbsp;<span>11.26</span></a>.</p>
 <div class="cell enlarge-image" data-layout-align="left">
 <div class="cell-output-display">
-<div id="fig-fig11-27" class="quarto-figure quarto-figure-left anchored">
+<div id="fig-fig11-26" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
-<p><img src="images/fig11-27.png" class="img-fluid figure-img" style="width:80.0%" alt="A jamovi screenshot displaying statistical analysis for Wilcoxon nonparametric tests. The variables listed include &quot;before&quot; and &quot;after.&quot; The results section shows outcomes for one sample and paired samples $t$-tests, including Wilcoxon $W$ and $p$-values."></p>
-<figcaption class="figure-caption">Figure&nbsp;11.27: jamovi screen showing results for one-sample and paired sample Wilcoxon nonparametric tests</figcaption>
+<p><img src="images/fig11-26.png" class="img-fluid figure-img" style="width:80.0%" alt="A jamovi screenshot displaying statistical analysis for Wilcoxon nonparametric tests. The variables listed include &quot;before&quot; and &quot;after.&quot; The results section shows outcomes for one sample and paired samples $t$-tests, including Wilcoxon $W$ and $p$-values."></p>
+<figcaption class="figure-caption">Figure&nbsp;11.26: jamovi screen showing results for one-sample and paired sample Wilcoxon nonparametric tests</figcaption>
 </figure>
 </div>
 </div>

@@ -144,17 +144,18 @@ Each of the events has a probability that lies between 0 and 1, and if we add up
 $$P(E)=P(X_1)+P(X_2)+P(X_3)$$ 
 At this point you might be thinking that this is all terribly obvious and simple and you'd be right. All we've really done is wrap some basic mathematics around a few common sense intuitions. However, from these simple beginnings it's possible to construct some extremely powerful mathematical tools. I'm definitely not going to go into the details in this book, but what I will do is list, in @tbl-tab7-3, some of the other rules that probabilities satisfy. These rules can be derived from the simple assumptions that I've outlined above, but since we don't actually use these rules for anything in this book I won't do so here.
 
-```{r out.width="80%"}
+```{r out.width="70%"}
 #| label: fig-fig7-2
 #| fig-cap: A visual depiction of the "trousers" probability distribution. There are five "elementary events", corresponding to the five pairs of trousers that I own. Each event has some probability of occurring -- this probability is a number between 0 to 1. The sum of these probabilities is 1
 #| fig-alt: Bar chart showing the probability of different events. Blue jeans have the highest probability at 0.5, followed by grey jeans around 0.3. Black jeans and blue track have the same probability near 0.1, while the black suit has a probability of 0.
+#| fig-pos: 'h!'
 
 pantsdat <- tibble(probabilities = c( .5, .3, .1, 0, .1),
                     eventNames = c( "Blue jeans", "Grey jeans", "Black jeans",  "Black suit", "Blue track" ))
 pantsdat$eventNames = factor(pantsdat$eventNames, levels = c( "Blue jeans", "Grey jeans", "Black jeans",  "Black suit", "Blue track" ))
 
 ggplot(data=pantsdat, aes(x=eventNames, y=probabilities)) +
-  geom_bar(stat='identity', col="black", fill=blueshade, alpha=0.6) +
+  geom_bar(stat='identity', col="black", fill=blueshade, alpha=0.6, width=0.4) +
   ylab("Probability of event") +
   xlab("Event")
 
@@ -198,7 +199,7 @@ To that end, @fig-fig7-3 plots the binomial probabilities for all possible value
 binom1 <- data.frame(heads = 0:20, pmf = dbinom(x = 0:20, size = 20, prob = 1/6)+0.0001)
 
 ggplot(data=binom1, aes(x = factor(heads), y = pmf)) +
-  geom_col(col=blueshade, fill=blueshade, alpha=0.6, width=.1) +
+  geom_col(col=blueshade, fill=blueshade, alpha=0.6, width=.4) +
   labs(x = "\nNumber of skulls observed",
        y = "Probability\n") +
   scale_x_discrete(breaks=seq(0,20,5)) 
@@ -209,14 +210,14 @@ To give you a feel for how the binomial distribution changes when we alter the v
 
 ```{r out.width="80%"}
 #| label: fig-fig7-4
-#| fig-width: 5
 #| fig-height: 7
+#| fig.width: 6
 #| fig-cap: Two binomial distributions, involving a scenario in which I flip a fair coin so the underlying success probability is $\theta = \frac{1}{2}$. In panel (a), I flipped the coin $N = 20$ times. In panel (b) the coin was flipped $N = 100$ times
 #| fig-alt: Two bar graphs show the probability distribution of the number of skulls observed. Graph (a) ranges from 0 to 20 on the x-axis, with peaks around 9-11 skulls. Graph (b) ranges from 0 to 100, with a prominent peak around 50 skulls. Both graphs have "Probability" on the y-axis.
 
 binom2 <- data.frame(heads = 0:20, pmf = dbinom(x = 0:20, size = 20, prob = 1/2)+0.0001)
 bd1 <- ggplot(data=binom2, aes(x = factor(heads), y = pmf)) +
-  geom_col(col=blueshade, fill=blueshade, alpha=0.6, width=.1) +
+  geom_col(col=blueshade, fill=blueshade, alpha=0.6, width=.4) +
   labs(x = "Number of skulls observed",
        y = "Probability") +
   scale_x_discrete(breaks=seq(0,20,5)) +
@@ -225,7 +226,7 @@ bd1 <- ggplot(data=binom2, aes(x = factor(heads), y = pmf)) +
 
 binom3 <- data.frame(heads = 0:100, pmf = dbinom(x = 0:100, size = 100, prob = 1/2)+0.0001)
 bd2 <- ggplot(data=binom3, aes(x = factor(heads), y = pmf)) +
-  geom_col(col=blueshade, fill=blueshade, alpha=0.6, width=.1) +
+  geom_col(col=blueshade, fill=blueshade, alpha=0.6, width=.4) +
   labs(x = "\nNumber of skulls observed",
        y = "Probability\n") +
   scale_x_discrete(breaks=seq(0,100,5)) +

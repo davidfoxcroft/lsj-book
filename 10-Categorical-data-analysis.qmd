@@ -121,7 +121,9 @@ There's one last detail to talk about, namely the degrees of freedom. If you rem
 ```{r}
 #| label: fig-fig10-1
 #| fig-cap: $\chi^2$ (chi-square) distributions with different values for the "degrees of freedom"
-#| fig-alt: Three chi-squared distribution curves are plotted with different degrees of freedom (df):- solid line (df = 3), dashed line (df = 4), and dotted line (df = 5). The x-axis shows observed values from 0 to 12, and the y-axis indicates the probability density.
+#| fig-alt: Three chi-squared distribution curves are plotted with different degrees of freedom (df):- solid line (df = 3), dashed line (df = 4), and dotted line (df = 5). The x-axis shows observed values from 0 to 12, and the y-axis indicates the probability density
+#| fig-width: 7
+#| fig-height: 4
 
 ggplot(data = data.frame(x = seq(0, 12, 1)), aes(x)) +
   stat_function(aes(linetype = 'df = 3'), fun = dchisq, n = 1000, args = list(df = 3), col=blueshade, linewidth=1) +
@@ -166,7 +168,7 @@ The final step in the process of constructing our hypothesis test is to figure o
 #| fig-height: 4
 
 ggplot(data = data.frame(x = seq(0, 12, 0.01)), aes(x)) +
-  stat_function(fun = dchisq, n = 1000, args = list(df = 3), linetype = "solid", col="black", linewidth=1) +
+  stat_function(fun = dchisq, n = 1000, args = list(df = 3), linetype = "solid", col="black", linewidth=0.7) +
   stat_function(fun = dchisq, n = 1000, args = list(df = 3), geom = "area",
                 fill = blueshade, alpha=0.8, xlim = c(7.82, 12)) +
   scale_x_continuous(breaks = seq(0, 12, 2)) +
@@ -482,19 +484,18 @@ Let's go all the way back to the beginning of the chapter and look at the cards 
 huxtabs[[10]][[14]]
 ```
 
-Suppose I wanted to know whether the choice you make the second time is dependent on the choice you made the first time. This is where a test of independence is useful, and what we're trying to do is see if there's some relationship between the rows and columns of this table.
-
-Alternatively, suppose I wanted to know if on average, the frequencies of suit choices were different the second time than the first time. In that situation, what I'm really trying to see is if the row totals are different from the column totals. That's when you use the McNemar test.
-
-The different statistics produced by these different analyses are shown in @fig-fig10-8. Notice that the results are different! These aren't the same test.
+Suppose I wanted to know whether the choice you make the second time is dependent on the choice you made the first time. This is where a test of independence is useful, and what we're trying to do is see if there's some relationship between the rows and columns of this table. Alternatively, suppose I wanted to know if on average, the frequencies of suit choices were different the second time than the first time. In that situation, what I'm really trying to see is if the row totals are different from the column totals. That's when you use the McNemar test.
 
 ```{r}
 #| label: fig-fig10-8
 #| out.width: 80%
 #| fig-cap: Independent vs. Paired (McNemar) with the *Randomness.omv* (cards) data
 #| fig-alt: The image shows two sections of contingency tables. The first section has a table showing the distribution of choices (clubs, diamonds, hearts, spades) with a chi-squared test result and $p$-value. The second section has a paired samples contingency table with McNemar test results.
+#| fig-pos: 'h!'
 knitr::include_graphics("images/fig10-8.png")
 ```
+
+The different statistics produced by these different analyses are shown in @fig-fig10-8. Notice that the results are different! These aren't the same test.
 
 ## Summary
 

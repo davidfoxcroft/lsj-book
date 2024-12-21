@@ -144,6 +144,10 @@
   }%
 }%
 
+\makeatletter
+\@beginparpenalty=10000
+\makeatother
+
 \raggedbottom
 
 \usepackage{array}
@@ -310,7 +314,7 @@ Citation: Danielle Navarro and David Foxcroft, \textit{Learning statistics with 
 \vfill
 \hspace{0pt}
 
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[frame hidden, borderline west={3pt}{0pt}{shadecolor}, interior hidden, sharp corners, enhanced, breakable, boxrule=0pt]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[breakable, interior hidden, borderline west={3pt}{0pt}{shadecolor}, boxrule=0pt, sharp corners, enhanced, frame hidden]}{\end{tcolorbox}}\fi
 
 \renewcommand*\contentsname{Table of contents}
 {
@@ -4800,9 +4804,9 @@ are situations in which the others are used. I've described all of them
 in this book because there's a fair chance you'll run into most of these
 somewhere.
 
-\begin{figure}
+\begin{figure}[h!]
 
-\includegraphics[width=0.8\textwidth,height=\textheight]{04-Descriptive-statistics_files/figure-pdf/fig-fig4-10-1.pdf} \hfill{}
+\includegraphics[width=0.7\textwidth,height=\textheight]{04-Descriptive-statistics_files/figure-pdf/fig-fig4-10-1.pdf} \hfill{}
 
 \caption{\label{fig-fig4-10}An illustration of the standard deviation
 from the AFL winning margins data. The shaded bars in the histogram show
@@ -5294,7 +5298,7 @@ histogram would. However, with density plots, this isn't an issue.
 
 \begin{figure}
 
-\includegraphics[width=0.8\textwidth,height=\textheight]{images/fig5-3.png} \hfill{}
+\includegraphics[width=0.7\textwidth,height=\textheight]{images/fig5-3.png} \hfill{}
 
 \caption{\label{fig-fig5-3}A density plot of the \emph{afl.margins}
 variable plotted in jamovi}
@@ -5327,7 +5331,7 @@ using the \emph{afl.margins} data as our example.
 
 \begin{figure}
 
-\includegraphics[width=0.6\textwidth,height=\textheight]{images/fig5-4.png} \hfill{}
+\includegraphics[width=0.7\textwidth,height=\textheight]{images/fig5-4.png} \hfill{}
 
 \caption{\label{fig-fig5-4}A box plot of the \emph{afl.margins} variable
 plotted in jamovi}
@@ -5356,15 +5360,6 @@ than this, 108 and 116, so these are the dots).
 \hypertarget{violin-plots}{%
 \subsection{Violin plots}\label{violin-plots}}
 
-\begin{figure}
-
-\includegraphics[width=0.6\textwidth,height=\textheight]{images/fig5-5.png} \hfill{}
-
-\caption{\label{fig-fig5-5}A violin plot of the \emph{afl.margins}
-variable plotted in jamovi, also showing a box plot and data points}
-
-\end{figure}
-
 A variation to the traditional box plot is the violin plot. Violin plots
 are similar to box plots except that they also show the kernel
 probability density of the data at different values. Typically, violin
@@ -5376,6 +5371,15 @@ has the `Data' check box turned on to show the actual data points on the
 plot. This does tend to make the graph a bit too busy though, in my
 opinion. Clarity is simplicity, so in practice it might be better to
 just use a simple box plot.
+
+\begin{figure}[h!]
+
+\includegraphics[width=0.7\textwidth,height=\textheight]{images/fig5-5.png} \hfill{}
+
+\caption{\label{fig-fig5-5}A violin plot of the \emph{afl.margins}
+variable plotted in jamovi, also showing a box plot and data points}
+
+\end{figure}
 
 \hypertarget{drawing-multiple-boxplots}{%
 \subsection{Drawing multiple boxplots}\label{drawing-multiple-boxplots}}
@@ -5394,7 +5398,7 @@ Figure~\ref{fig-fig5-6}.
 
 \begin{figure}
 
-\includegraphics[width=0.7\textwidth,height=\textheight]{images/fig5-6.png} \hfill{}
+\includegraphics[width=0.8\textwidth,height=\textheight]{images/fig5-6.png} \hfill{}
 
 \caption{\label{fig-fig5-6}jamovi screen shot showing the `Split by'
 window}
@@ -5451,7 +5455,7 @@ Figure~\ref{fig-fig5-9}.
 
 \begin{figure}
 
-\includegraphics[width=0.8\textwidth,height=\textheight]{images/fig5-8.png} \hfill{}
+\includegraphics[width=0.7\textwidth,height=\textheight]{images/fig5-8.png} \hfill{}
 
 \caption{\label{fig-fig5-8}A boxplot showing two very suspicious
 outliers!}
@@ -5479,7 +5483,7 @@ going on.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{images/fig5-10.png} \hfill{}
+\includegraphics[width=0.8\textwidth,height=\textheight]{images/fig5-10.png} \hfill{}
 
 \caption{\label{fig-fig5-10}Frequency table for ID showing the ID
 numbers for the two suspicious outliers, 176 and 202}
@@ -5537,7 +5541,7 @@ Figure~\ref{fig-fig5-11}.
 
 \begin{figure}
 
-\includegraphics[width=0.9\textwidth,height=\textheight]{images/fig5-11.png} \hfill{}
+\includegraphics[width=0.8\textwidth,height=\textheight]{images/fig5-11.png} \hfill{}
 
 \caption{\label{fig-fig5-11}Filtering to include just four AFL teams,
 and drawing a bar plot in jamovi}
@@ -7927,9 +7931,9 @@ derived from the simple assumptions that I've outlined above, but since
 we don't actually use these rules for anything in this book I won't do
 so here.
 
-\begin{figure}
+\begin{figure}[h!]
 
-\includegraphics[width=0.8\textwidth,height=\textheight]{07-Introduction-to-probability_files/figure-pdf/fig-fig7-2-1.pdf} \hfill{}
+\includegraphics[width=0.7\textwidth,height=\textheight]{07-Introduction-to-probability_files/figure-pdf/fig-fig7-2-1.pdf} \hfill{}
 
 \caption{\label{fig-fig7-2}A visual depiction of the ``trousers''
 probability distribution. There are five ``elementary events'',
@@ -9298,9 +9302,18 @@ what we end up with is a distribution of sample means!
 (Table~\ref{tbl-tab8-1}). This distribution has a special name in
 statistics, it's called the \textbf{sampling distribution of the mean}.
 
+Sampling distributions are another important theoretical idea in
+statistics, and they're crucial for understanding the behaviour of small
+samples. For instance, when I ran the very first ``five IQ scores''
+experiment, the sample mean turned out to be 95. What the sampling
+distribution in Figure~\ref{fig-fig8-6} tells us, though, is that the
+``five IQ scores'' experiment is not very accurate. If I repeat the
+experiment, the sampling distribution tells me that I can expect to see
+a sample mean anywhere between 80 and 120.
+
 \begin{figure}
 
-\includegraphics[width=0.8\textwidth,height=\textheight]{08-Estimating-unknown-quantities-from-a-sample_files/figure-pdf/fig-fig8-6-1.pdf} \hfill{}
+\includegraphics[width=0.7\textwidth,height=\textheight]{08-Estimating-unknown-quantities-from-a-sample_files/figure-pdf/fig-fig8-6-1.pdf} \hfill{}
 
 \caption{\label{fig-fig8-6}The sampling distribution of the mean for the
 ``five IQ scores experiment''. If you sample 5 people at random and
@@ -9311,14 +9324,16 @@ population distribution of IQ scores}
 
 \end{figure}
 
-Sampling distributions are another important theoretical idea in
-statistics, and they're crucial for understanding the behaviour of small
-samples. For instance, when I ran the very first ``five IQ scores''
-experiment, the sample mean turned out to be 95. What the sampling
-distribution in Figure~\ref{fig-fig8-6} tells us, though, is that the
-``five IQ scores'' experiment is not very accurate. If I repeat the
-experiment, the sampling distribution tells me that I can expect to see
-a sample mean anywhere between 80 and 120.
+\begin{figure}
+
+\includegraphics[width=0.7\textwidth,height=\textheight]{08-Estimating-unknown-quantities-from-a-sample_files/figure-pdf/fig-fig8-7-1.pdf} \hfill{}
+
+\caption{\label{fig-fig8-7}The sampling distribution of the maximum for
+the ``five IQ scores experiment''. If you sample 5 people at random and
+select the one with the highest IQ score you will probably see someone
+with an IQ between 100 and 140}
+
+\end{figure}
 
 \hypertarget{sampling-distributions-exist-for-any-sample-statistic}{%
 \subsection{Sampling distributions exist for any sample
@@ -9341,41 +9356,6 @@ Figure~\ref{fig-fig8-7}. Not surprisingly, if you pick 5 people at
 random and then find the person with the highest IQ score, they're going
 to have an above average IQ. Most of the time you'll end up with someone
 whose IQ is measured in the 100 to 140 range.
-
-\begin{figure}
-
-\includegraphics[width=0.8\textwidth,height=\textheight]{08-Estimating-unknown-quantities-from-a-sample_files/figure-pdf/fig-fig8-7-1.pdf} \hfill{}
-
-\caption{\label{fig-fig8-7}The sampling distribution of the maximum for
-the ``five IQ scores experiment''. If you sample 5 people at random and
-select the one with the highest IQ score you will probably see someone
-with an IQ between 100 and 140}
-
-\end{figure}
-
-\begin{figure}
-
-\includegraphics[width=1\textwidth,height=\textheight]{08-Estimating-unknown-quantities-from-a-sample_files/figure-pdf/fig-fig8-8-1.pdf} \hfill{}
-
-\caption{\label{fig-fig8-8}An illustration of the how sampling
-distribution of the mean depends on sample size. In each panel I
-generated 10,000 samples of IQ data and calculated the mean IQ observed
-within each of these data sets. The histograms in these plots show the
-distribution of these means (i.e., the sampling distribution of the
-mean). Each individual IQ score was drawn from a normal distribution
-with mean 100 and standard deviation 15, which is shown as the solid
-black line. In panel (a), each data set contained only a single
-observation, so the mean of each sample is the IQ score of just one
-person. As a consequence, the sampling distribution of the mean is of
-course identical to the population distribution of IQ scores. However,
-when we raise the sample size to 2 the mean of any one sample tends to
-be closer to the population mean than the IQ score of any one person,
-and so the histogram (i.e., the sampling distribution) is a bit narrower
-than the population distribution. By the time we raise the sample size
-to 10 (panel (c)), we can see that the distribution of sample means tend
-to be fairly tightly clustered around the true population mean}
-
-\end{figure}
 
 \hypertarget{sec-The-central-limit-theorem}{%
 \subsection{The central limit
@@ -9400,6 +9380,30 @@ statistic is often denoted SE, and since we're usually interested in the
 standard error of the sample mean, we often use the acronym SEM. As you
 can see just by looking at the picture, as the sample size \(N\)
 increases, the SEM decreases.
+
+\begin{figure}
+
+\includegraphics[width=1\textwidth,height=\textheight]{08-Estimating-unknown-quantities-from-a-sample_files/figure-pdf/fig-fig8-8-1.pdf} \hfill{}
+
+\caption{\label{fig-fig8-8}An illustration of the how sampling
+distribution of the mean depends on sample size. In each panel I
+generated 10,000 samples of IQ data and calculated the mean IQ observed
+within each of these data sets. The histograms in these plots show the
+distribution of these means (i.e., the sampling distribution of the
+mean). Each individual IQ score was drawn from a normal distribution
+with mean 100 and standard deviation 15, which is shown as the solid
+black line. In panel (a), each data set contained only a single
+observation, so the mean of each sample is the IQ score of just one
+person. As a consequence, the sampling distribution of the mean is of
+course identical to the population distribution of IQ scores. However,
+when we raise the sample size to 2 the mean of any one sample tends to
+be closer to the population mean than the IQ score of any one person,
+and so the histogram (i.e., the sampling distribution) is a bit narrower
+than the population distribution. By the time we raise the sample size
+to 10 (panel (c)), we can see that the distribution of sample means tend
+to be fairly tightly clustered around the true population mean}
+
+\end{figure}
 
 Okay, so that's one part of the story. However, there's something I've
 been glossing over so far. All my examples up to this point have been
@@ -14067,17 +14071,12 @@ Suppose I wanted to know whether the choice you make the second time is
 dependent on the choice you made the first time. This is where a test of
 independence is useful, and what we're trying to do is see if there's
 some relationship between the rows and columns of this table.
-
 Alternatively, suppose I wanted to know if on average, the frequencies
 of suit choices were different the second time than the first time. In
 that situation, what I'm really trying to see is if the row totals are
 different from the column totals. That's when you use the McNemar test.
 
-The different statistics produced by these different analyses are shown
-in Figure~\ref{fig-fig10-8}. Notice that the results are different!
-These aren't the same test.
-
-\begin{figure}
+\begin{figure}[h!]
 
 \includegraphics[width=0.8\textwidth,height=\textheight]{images/fig10-8.png} \hfill{}
 
@@ -14085,6 +14084,10 @@ These aren't the same test.
 \emph{Randomness.omv} (cards) data}
 
 \end{figure}
+
+The different statistics produced by these different analyses are shown
+in Figure~\ref{fig-fig10-8}. Notice that the results are different!
+These aren't the same test.
 
 \hypertarget{summary-8}{%
 \section{Summary}\label{summary-8}}
@@ -14227,9 +14230,9 @@ with the hypothesised distribution from which they are thought to arise,
 are shown in Figure~\ref{fig-fig11-1}. Not entirely obvious what the
 right answer is, is it? For this, we are going to need some statistics.
 
-\begin{figure}
+\begin{figure}[h!]
 
-\includegraphics[width=0.7\textwidth,height=\textheight]{11-Comparing-two-means_files/figure-pdf/fig-fig11-1-1.pdf} \hfill{}
+\includegraphics[width=0.6\textwidth,height=\textheight]{11-Comparing-two-means_files/figure-pdf/fig-fig11-1-1.pdf} \hfill{}
 
 \caption{\label{fig-fig11-1}The theoretical distribution (solid line)
 from which the psychology student grades (bars) are supposed to have
@@ -16033,17 +16036,6 @@ a set of \(N\) observations is normally distributed.
   values are \ldots mumble, mumble\ldots{} something complicated that is
   a bit beyond the scope of an introductory text.}{]}
 
-\begin{figure}
-
-\includegraphics[width=0.7\textwidth,height=\textheight]{11-Comparing-two-means_files/figure-pdf/fig-fig11-24-1.pdf} \hfill{}
-
-\caption{\label{fig-fig11-24}Sampling distribution of the Shapiro-Wilk
-\(W\) statistic, under the null hypothesis that the data are normally
-distributed, for samples of size 10, 20 and 50. Note that small values
-of \(W\) indicate departure from normality}
-
-\end{figure}
-
 To get the Shapiro-Wilk statistic in jamovi \(t\)-tests, check the
 option for `Normality' listed under `Assumptions'. In the randomly
 sampled data (\(N = 100\)) we used for the QQ plot, the value for the
@@ -16064,13 +16056,13 @@ to be non-normal. For that, let's look at the distribution of our AFL
 winning margins data, which if you remember back to
 Chapter~\ref{sec-Descriptive-statistics} it didn't look like they came
 from a normal distribution at all. Here's what happens to the QQ plot
-(Figure~\ref{fig-fig11-25}).
+(Figure~\ref{fig-fig11-24}).
 
 \begin{figure}
 
-\includegraphics[width=0.7\textwidth,height=\textheight]{images/fig11-25.png} \hfill{}
+\includegraphics[width=0.7\textwidth,height=\textheight]{images/fig11-24.png} \hfill{}
 
-\caption{\label{fig-fig11-25}QQ plot showing non-normality from the AFL
+\caption{\label{fig-fig11-24}QQ plot showing non-normality from the AFL
 winning margins data}
 
 \end{figure}
@@ -16241,13 +16233,13 @@ dependent variable. and group as the grouping variable, and then under
 the options for `tests' check the option for `Mann-Whitney U', we will
 get results showing that \(U = 3\) (i.e., the same number of checkmarks
 as shown above), and a \(p\)-value = \(0.05556\). See
-Figure~\ref{fig-fig11-26}.
+Figure~\ref{fig-fig11-25}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{images/fig11-26.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig11-25.png} \hfill{}
 
-\caption{\label{fig-fig11-26}jamovi screen showing results for the
+\caption{\label{fig-fig11-25}jamovi screen showing results for the
 Mann-Whitney \(U\) test}
 
 \end{figure}
@@ -16380,13 +16372,13 @@ version, you specify the `Wilcoxon rank' option under `Tests' in the
 \(p\)-value = \(0.03711\). As this shows, we have a significant effect.
 Evidently, taking a statistics class does have an effect on your
 happiness. Switching to a paired samples version of the test won't give
-us a different answer, of course; see Figure~\ref{fig-fig11-27}.
+us a different answer, of course; see Figure~\ref{fig-fig11-26}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{images/fig11-27.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig11-26.png} \hfill{}
 
-\caption{\label{fig-fig11-27}jamovi screen showing results for
+\caption{\label{fig-fig11-26}jamovi screen showing results for
 one-sample and paired sample Wilcoxon nonparametric tests}
 
 \end{figure}
@@ -18197,7 +18189,7 @@ then it strongly suggests that you need to make some changes.
 
 \begin{figure}
 
-\includegraphics[width=0.6\textwidth,height=\textheight]{images/fig12-17.png} \hfill{}
+\includegraphics[width=0.7\textwidth,height=\textheight]{images/fig12-17.png} \hfill{}
 
 \caption{\label{fig-fig12-17}jamovi plot of the predicted values against
 the observed values of the outcome variable. A straight(-ish) line is
@@ -18219,7 +18211,7 @@ reasonably straight or flat line. This is a matter of judgement.
 
 \begin{figure}
 
-\includegraphics[width=0.6\textwidth,height=\textheight]{images/fig12-18.png} \hfill{}
+\includegraphics[width=0.7\textwidth,height=\textheight]{images/fig12-18.png} \hfill{}
 
 \caption{\label{fig-fig12-18}jamovi plot of the predicted values against
 the residuals, with a line showing the relationship between the two. If
@@ -18253,7 +18245,7 @@ model.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{images/fig12-19.png} \hfill{}
+\includegraphics[width=0.7\textwidth,height=\textheight]{images/fig12-19.png} \hfill{}
 
 \caption{\label{fig-fig12-19}Plot of the theoretical quantiles according
 to the model, against the quantiles of the standardised residuals,
@@ -18333,7 +18325,7 @@ plot.\footnote{It's a bit beyond the scope of this chapter to talk about
 
 \begin{figure}
 
-\includegraphics[width=0.6\textwidth,height=\textheight]{images/fig12-21.png} \hfill{}
+\includegraphics[width=0.7\textwidth,height=\textheight]{images/fig12-21.png} \hfill{}
 
 \caption{\label{fig-fig12-21}jamovi plot of the predicted values (model
 predictions) against the square root of the absolute standardised
@@ -18797,7 +18789,7 @@ shows the AIC and BIC for each model, making it easy to compare and
 identify which model has the lowest value, as in
 Figure~\ref{fig-fig12-28}.
 
-\begin{figure}
+\begin{figure}[h!]
 
 \includegraphics[width=1\textwidth,height=\textheight]{images/fig12-28.png} \hfill{}
 
@@ -22926,7 +22918,7 @@ options.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{images/fig14-12.png} \hfill{}
+\includegraphics[width=0.8\textwidth,height=\textheight]{images/fig14-12.png} \hfill{}
 
 \caption{\label{fig-fig14-12}The jamovi ANCOVA analysis window}
 
@@ -22984,7 +22976,7 @@ who cycle are happier, on average, than those who drive to work.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{images/fig14-15.png} \hfill{}
+\includegraphics[width=0.8\textwidth,height=\textheight]{images/fig14-15.png} \hfill{}
 
 \caption{\label{fig-fig14-15}Plot of mean happiness level as a function
 of stress and commuting method}
@@ -23604,7 +23596,7 @@ Figure~\ref{fig-fig14-21}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{images/fig14-21.png} \hfill{}
+\includegraphics[width=0.8\textwidth,height=\textheight]{images/fig14-21.png} \hfill{}
 
 \caption{\label{fig-fig14-21}jamovi regression results, with contrast
 variables druganxifree and drugjoyzepam}

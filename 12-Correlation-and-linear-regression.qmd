@@ -251,16 +251,16 @@ p1 <- ggplot(parenthood, aes(dan.sleep, dan.grump)) +
   geom_smooth(method='lm', se = F, col=blueshade, linewidth=1) +
   ggtitle("The Best Fitting\nRegression Line") +
   xlab("My sleep (hours)\n\n(a)") +
-  ylab("My grumpiness (0-100)") +
-  theme_classic()
+  ylab("My grumpiness (0-100)")  +
+  theme(plot.title = element_text(size = 11)) 
 
 p2 <- ggplot(parenthood, aes(dan.sleep, dan.grump)) +
   geom_point(col="darkgrey") +
   geom_abline(intercept = 80, slope = -3, col=blueshade, linewidth=1) +
   ggtitle("Not The Best Fitting\nRegression Line!") +
   xlab("My sleep (hours)\n\n(b)") +
-  ylab("My grumpiness (0-100)") +
-  theme_classic()
+  ylab("My grumpiness (0-100)")  +
+  theme(plot.title = element_text(size = 11)) 
 
 gridExtra::grid.arrange(p1,p2, ncol=2)
 
@@ -308,8 +308,8 @@ p1 <- ggplot(mydat, aes(x = x, y = dan.grump)) +
   ggtitle("Regression Line\nClose to the Data") +
   xlab("My sleep (hours)\n\n(a)") +
   ylab("My grumpiness (0-100)") +
-  guides(fill = "none")  +
-  theme_classic()
+  guides(fill = "none") +
+  theme(plot.title = element_text(size = 11)) 
 
 
 parenthood$predicted <- with(parenthood, predicted <- 80 + -3*dan.sleep)
@@ -324,8 +324,8 @@ p2 <- ggplot(mydat, aes(x = x, y = dan.grump)) +
   ggtitle("Regression Line\nDistant from the Data") +
   xlab("My sleep (hours)\n\n(a)") +
   ylab("My grumpiness (0-100)") +
-  guides(fill = "none") +
-  theme_classic()
+  guides(fill = "none")  +
+  theme(plot.title = element_text(size = 11)) 
 
 gridExtra::grid.arrange(p1,p2, ncol=2)
 
@@ -583,7 +583,7 @@ Before moving on, I should point out that you don't often need to obtain these r
 
 We should check for the linearity of the relationships between the predictors and the outcomes. There's a few different things that you might want to do in order to check this. Firstly, it never hurts to just plot the relationship between the predicted values $\hat{Y}_i$ and the observed values $Y_i$ for the outcome variable, as illustrated in @fig-fig12-17. To draw this in jamovi we saved the predicted values to the dataset, and then drew a scatterplot of the observed against the predicted (fitted) values. This gives you a kind of "big picture view" -- if this plot looks approximately linear, then we're probably not doing too badly (though that's not to say that there aren't problems). However, if you can see big departures from linearity here, then it strongly suggests that you need to make some changes.
 
-```{r out.width="60%"}
+```{r out.width="70%"}
 #| label: fig-fig12-17
 #| fig-cap: jamovi plot of the predicted values against the observed values of the outcome variable. A straight(-ish) line is what we are hoping to see here. This looks pretty good, suggesting that there is nothing grossly wrong
 #| fig-alt: A scatter plot with the x-axis labeled "My grumpiness" and the y-axis labeled "Predicted values." The plot has numerous scattered data points, mostly clustered between 40-90 on the x-axis and 40-80 on the y-axis. A trend line shows a positive correlation.
@@ -592,7 +592,7 @@ knitr::include_graphics("images/fig12-17.png")
 
 In any case, in order to get a more detailed picture it's often more informative to look at the relationship between the predicted values and the residuals themselves. Again, in jamovi you can save the residuals to the dataset and then draw a scatterplot of the predicted values against the residual values, as in @fig-fig12-18. As you can see, not only does it draw the scatterplot showing the predicted value against the residuals, you can also plot a line through the data that shows the relationship between the two. Ideally, this should be a straight, perfectly horizontal line. In practice, we're looking for a reasonably straight or flat line. This is a matter of judgement.
 
-```{r out.width="60%"}
+```{r out.width="70%"}
 #| label: fig-fig12-18
 #| fig-cap: jamovi plot of the predicted values against the residuals, with a line showing the relationship between the two. If this is horizontal and straight(-ish), then we can feel reasonably confident that the "average residual" for all "predicted values" is more or less the same.
 #| fig-alt: A scatter plot shows residuals versus predicted values with a non-linear trend. Residuals range from -10 to 10, and predicted values range from 45 to 85. Data points are scattered around a fitted curve that starts flat, dips slightly, and rises towards the end.
@@ -605,7 +605,7 @@ Somewhat more advanced versions of the same plot is produced by checking 'Residu
 
 Like many of the statistical tools we've discussed in this book, regression models rely on a normality assumption. In this case, we assume that the residuals are normally distributed. The first thing we can do is draw a QQ-plot via the 'Assumption Checks' -- 'Assumption Checks' -- 'Q-Q plot of residuals' option. The output is shown in @fig-fig12-19, showing the standardised residuals plotted as a function of their theoretical quantiles according to the regression model.
 
-```{r}
+```{r out.width="70%"}
 #| label: fig-fig12-19
 #| fig-cap: Plot of the theoretical quantiles according to the model, against the quantiles of the standardised residuals, produced in jamovi
 #| fig-alt: Q-Q plot titled "Assumption Checks" showing standardized residuals along the y-axis and theoretical quantiles along the x-axis. Points closely follow the 45-degree reference line, indicating that the residuals follow a normal distribution.
@@ -636,7 +636,7 @@ You can calculate it using the BOXCOX function in the 'Compute' variables screen
 
 The regression models that we've talked about all make an equality (i.e.homogeneity) of variance assumption: the variance of the residuals is assumed to be constant. To plot this in jamovi first we need to calculate the square root of the (absolute) size of the residual[^Correlation-and-regression-22] and then plot this against the predicted values, as in @fig-fig12-21. Note that this plot actually uses the standardised residuals rather than the raw ones, but it's immaterial from our point of view. What we're looking to see here is a straight, horizontal line running through the middle of the plot.[^Correlation-and-linear-regression-23]
 
-```{r out.width="60%"}
+```{r out.width="70%"}
 #| label: fig-fig12-21
 #| fig-cap: jamovi plot of the predicted values (model predictions) against the square root of the absolute standardised residuals. This plot is used to diagnose violations of homogeneity of variance. If the variance is really constant, then the line through the middle should be horizontal and flat(-ish).
 #| fig-alt: Scatter plot showing the relationship between predicted values (x-axis) and SQR residuals (y-axis). The plot includes scattered data points and a smoothed trend line indicating the general pattern of the data. Predicted values range from 45 to 85, SQR Residuals from 0.5 to 3.5.
@@ -700,7 +700,7 @@ ggplot(dat, aes(x=x, y=y)) +
   geom_smooth(method=lm, se=F, fullrange=T, col="black", linewidth=0.8) +
   geom_smooth(data=dat2, method=lm, se=F, fullrange=T, linetype = 'dashed', col="black", linewidth=0.4) +
   geom_segment(x=4.3, y=10.85, xend=4.3, yend=yendpoint, col="darkgrey", linewidth = 0.4) +
-  annotate(geom="text", label="Outlier", x=3.7, y=11) +
+  annotate(geom="text", label="Outlier", x=4, y=12, size=4) +
   xlim(1,12) +
   ylim(1,12) +
   xlab("\nPredictor") +
@@ -732,7 +732,7 @@ ggplot(dat, aes(x=x, y=y)) +
   geom_smooth(method=lm, se=F, fullrange=T, col="black", linewidth=0.8) +
   geom_smooth(data=dat2, fullrange=T, method=lm, se=F, linetype = 'dashed', col="black", linewidth=0.4) +
   geom_segment(x=10, y=9.65, xend=10, yend=yendpoint, col="darkgrey", linewidth = 0.4) +
-  annotate(geom="text", label="High leverage", x=9.3, y=10.6) +
+  annotate(geom="text", label="High leverage", x=9.3, y=10.6, size=4) +
   xlim(1,12) +
   ylim(1,12) +
   xlab("\nPredictor") +
@@ -767,7 +767,7 @@ ggplot(dat, aes(x=x, y=y)) +
   geom_smooth(method=lm, se=F, fullrange=T, col="black", linewidth=0.8) +
   geom_smooth(data=dat2, fullrange=T, method=lm, se=F, linetype = 'dashed', col="black", linewidth=0.4) +
   geom_segment(x=10, y=4.1, xend=10, yend=yendpoint, col="darkgrey", linewidth = 0.4) +
-  annotate(geom="text", label="High influence", x=10.3, y=3.4) +
+  annotate(geom="text", label="High influence", x=10.3, y=3.4, size=4) +
   xlim(1,12) +
   ylim(1,12) +
   xlab("\nPredictor") +
@@ -851,6 +851,7 @@ We can also use this 'Model Comparison' option to display a table that shows the
 #| classes: .enlarge-image
 #| fig-cap: Model comparison in jamovi using the 'Model Builder' option
 #| fig-alt: A jamovi screenshot displaying a linear regression analysis. The screen shows options for dependent variables, factors, and weights on the left, while the right side presents the model fit measures, comparisons, and specific results, including coefficients and standard errors.
+#| fig-pos: 'h!'
 knitr::include_graphics("images/fig12-28.png")
 ```
 

@@ -82,7 +82,7 @@ knitr::include_graphics("images/fig5-2.png")
 
 One additional feature that jamovi provides is the ability to plot a 'Density' curve. You can do this by clicking the 'Density' check box under the 'Plots' options (and unchecking 'Histogram'), and this gives us the plot shown in @fig-fig5-3. A density plot visualises the distribution of data over a continuous interval or time period. This chart is a variation of a histogram that uses **kernel smoothing** to plot values, allowing for smoother distributions by smoothing out the noise. The peaks of a density plot help display where values are concentrated over the interval. An advantage density plots have over histograms is that they are better at determining the distribution shape because they're not affected by the number of bins used (each bar used in a typical histogram). A histogram comprising of only 4 bins wouldn't produce a distinguishable enough shape of distribution as a 20-bin histogram would. However, with density plots, this isn't an issue.
 
-```{r  out.width="80%"}
+```{r  out.width="70%"}
 #| label: fig-fig5-3
 #| fig-cap: A density plot of the *afl.margins* variable plotted in jamovi
 #| fig-alt: A density plot with a shaded area in light blue, depicting the distribution of AFL margins. The x-axis is labeled "afl.margins" and ranges from 0 to 120. The y-axis is labeled "density" and shows frequency. The peak of the graph peak is near the lower values of afl.margins.
@@ -95,7 +95,7 @@ Although this image would need a lot of cleaning up in order to make a good pres
 
 Another alternative to histograms is a **boxplot**, sometimes called a "box and whiskers" plot. Like histograms they're most suited to interval or ratio scale data. The idea behind a boxplot is to provide a simple visual depiction of the median, the interquartile range, and the range of the data. And because they do so in a fairly compact way boxplots have become a very popular statistical graphic, especially during the exploratory stage of data analysis when you're trying to understand the data yourself. Let's have a look at how they work, again using the *afl.margins* data as our example.
 
-```{r out.width="60%"}
+```{r out.width="70%"}
 #| label: fig-fig5-4
 #| fig-cap: A box plot of the *afl.margins* variable plotted in jamovi
 #| fig-alt: A box plot representing "afl.margins." The box ranges from approximately 20 to 40, with a median at 30. The whiskers extend from around 0 to 90. Two outliers are labeled at values 46 and 163.
@@ -106,20 +106,22 @@ The easiest way to describe what a boxplot looks like is just to draw one. Click
 
 ### Violin plots
 
-```{r out.width="60%"}
+A variation to the traditional box plot is the violin plot. Violin plots are similar to box plots except that they also show the kernel probability density of the data at different values. Typically, violin plots will include a marker for the median of the data and a box indicating the interquartile range, as in standard box plots. In jamovi you can achieve this sort of functionality by checking both the 'Violin' and the 'Box plot' check boxes. See @fig-fig5-5, which also has the 'Data' check box turned on to show the actual data points on the plot. This does tend to make the graph a bit too busy though, in my opinion. Clarity is simplicity, so in practice it might be better to just use a simple box plot.
+
+```{r out.width="70%"}
 #| label: fig-fig5-5
 #| fig-cap: A violin plot of the *afl.margins* variable plotted in jamovi, also showing a box plot and data points
-#| fig-alt: A violin plot depicting the distribution of AFL margins. The plot includes a box plot within it, showing median, quartiles, and outliers as points. The y-axis ranges from 0 to 120, indicating the margin values.
+#| fig-alt: A violin plot depicting the distribution of AFL margins. The plot includes a box plot within it, showing median, quartiles, and outliers as points. The y-axis ranges from 0 to 120, indicating the margin values
+#| fig-pos: 'h!'
 knitr::include_graphics("images/fig5-5.png")
 ```
 
-A variation to the traditional box plot is the violin plot. Violin plots are similar to box plots except that they also show the kernel probability density of the data at different values. Typically, violin plots will include a marker for the median of the data and a box indicating the interquartile range, as in standard box plots. In jamovi you can achieve this sort of functionality by checking both the 'Violin' and the 'Box plot' check boxes. See @fig-fig5-5, which also has the 'Data' check box turned on to show the actual data points on the plot. This does tend to make the graph a bit too busy though, in my opinion. Clarity is simplicity, so in practice it might be better to just use a simple box plot.
 
 ### Drawing multiple boxplots
 
 One last thing. What if you want to draw multiple boxplots at once? Suppose, for instance, I wanted separate boxplots showing the *afl.margins* not just for 2010 but for every year between 1987 and 2010. To do that the first thing we'll have to do is find the data. These are stored in the **aflmarginbyyear.csv** file. So let's load it into jamovi and see what is in it. You will see that it is a pretty big data set. It contains 4296 games and the variables that we're interested in. What we want to do is have jamovi draw boxplots for the margin variable, but plotted separately for each year. The way to do this is to move the year variable across into the 'Split by' box, as in @fig-fig5-6.
 
-```{r out.width="70%"}
+```{r out.width="80%"}
 #| label: fig-fig5-6
 #| fig-cap: jamovi screen shot showing the ‘Split by’ window
 #| fig-alt: A jamovi screenshot displaying a statistical analysis interface titled "AFL Margins By Year." The interface shows options for Descriptives, with a margin variable and a year split. The menu includes tabs for Variables, Data, Analyses, and Edit, with various statistical tests.
@@ -143,7 +145,7 @@ Because the boxplot automatically separates out those observations that lie outs
 
 [^drawing-graphs-1a]: This altered version of the AFL Margins By Year dataset isn't available to open / load into jamovi. I simply changed a couple of the values of margin in the dataset so that they were over 300. You can do this yourself if you want.
 
-```{r out.width="80%"}
+```{r out.width="70%"}
 #| label: fig-fig5-8
 #| fig-cap: A boxplot showing two very suspicious outliers!
 #| fig-alt: Box plot of a numerical distribution displaying a median between 50 and 100, with a lower quartile around 25, and an upper quartile around 75. There are several outliers above 100, specifically labeled at 176 and 202. The y-axis is labeled "margin".
@@ -159,7 +161,7 @@ This filter creates a new column in the spreadsheet view where only those observ
 knitr::include_graphics("images/fig5-9.png")
 ```
 
-```{r}
+```{r out.width="80%"}
 #| label: fig-fig5-10
 #| classes: .enlarge-image
 #| fig-cap: Frequency table for ID showing the ID numbers for the two suspicious outliers, 176 and 202
@@ -181,7 +183,7 @@ Another form of graph that you often want to plot is the **bar graph**. Let's us
 
 When you have done this you will see, in the 'Data' view, that jamovi has filtered out all values apart from those we have specified. Next, open up the 'Exploration' -- 'Descriptives' window and click on the 'Bar plot' check box (remember to move the 'afl.finalists' variable across into the 'Variables' box so that jamovi knows which variable to use). You should then get a bar graph, something like that shown in @fig-fig5-11.
 
-```{r out.width="90%"}
+```{r out.width="80%"}
 #| label: fig-fig5-11
 #| classes: .enlarge-image
 #| fig-cap: Filtering to include just four AFL teams, and drawing a bar plot in jamovi

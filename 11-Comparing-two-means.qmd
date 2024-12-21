@@ -33,10 +33,11 @@ To answer the question, it helps to be able to write down what it is that I thin
 
 Next, it helps to be clear about what I want to learn from the data. In this case my research hypothesis relates to the population mean $\mu$ for the psychology student grades, which is unknown. Specifically, I want to know if $\mu = 67.5$ or not. Given that this is what I know, can we devise a hypothesis test to solve our problem? The data, along with the hypothesised distribution from which they are thought to arise, are shown in @fig-fig11-1. Not entirely obvious what the right answer is, is it? For this, we are going to need some statistics.
 
-```{r out.width="70%"}
+```{r out.width="60%"}
 #| label: fig-fig11-1
 #| fig-cap: The theoretical distribution (solid line) from which the psychology student grades (bars) are supposed to have been generated
 #| fig-alt: A bar histogram displays the distribution of grades with a curve overlay. The x-axis is labeled "Grades" ranging from 50 to 90, and the y-axis is unlabeled. Bars show peaks near grades 70 and 80, with the curve indicating a normal distribution.
+#| fig-pos: 'h!'
 
 load("data_and_tables/zeppo.Rdata") #grades
 ggplot(as.data.frame(grades), aes(x=grades)) +
@@ -890,61 +891,17 @@ QQ plots provide a nice way to informally check the normality of your data, but 
 
 [^11-comparing-two-means-22]: The test statistic that it calculates is conventionally denoted as $W$, and it's calculated as follows. First, we sort the observations in order of increasing size, and let $\bar{X_1}$ be the smallest value in the sample, $X_2$ be the second smallest and so on. Then the value of $W$ is given by: $$W=\frac{(\sum_{i=1}^N a_iX_i)^2}{\sum_{i=1}^N(X_i-\bar{X})^2}$$ where $\bar{X}$ is the mean of the observations, and the $a_i$ values are ...mumble, mumble... something complicated that is a bit beyond the scope of an introductory text.
 
-```{r out.width="70%"}
-#| label: fig-fig11-24
-#| fig-width: 5
-#| fig-height: 5
-#| fig-cap: Sampling distribution of the Shapiro-Wilk $W$ statistic, under the null hypothesis that the data are normally distributed, for samples of size 10, 20 and 50. Note that small values of $W$ indicate departure from normality
-#| fig-alt: Graph depicting the sampling distribution of W for normally distributed data, showing lines for sample sizes N=10 (solid line), N=20 (dashed line), and N=50 (dotted line). The x-axis is labeled "Value of W" and ranges from 0.75 to 1.00.
-
-
-
-W_sampdist <- lapply(c(10,20,50), function(i) {
-  sapply(1:10000, function (x) {
-    shapiro.test(rnorm(i, 0, 1))$statistic
-  })
-})
-W_sampdist <- tibble(W_10=W_sampdist[[1]], W_20=W_sampdist[[2]], W_50=W_sampdist[[3]])
-
-ggplot(W_sampdist) +
-  geom_density(aes(x=W_10), adjust=3, col = blueshade, linetype = "solid", show.legend=FALSE) +
-  stat_density(aes(x=W_10, linetype = "N = 10"), alpha = 0,
-                  geom="line", position="identity") +
-  geom_density(aes(x=W_20), adjust=3, col = blueshade, linetype = "dashed", show.legend=FALSE) +
-  stat_density(aes(x=W_20, linetype = "N = 20"), alpha = 0,
-                  geom="line", position="identity") +
-  geom_density(aes(x=W_50), adjust=3, col = blueshade, linetype = "dotted", show.legend=FALSE)+
-  stat_density(aes(x=W_50, linetype = "N = 50"), alpha = 0,
-                  geom="line", position="identity") +
-  scale_linetype_manual(values = c('solid', 'dashed', 'dotted')) +
-  guides(linetype = guide_legend(override.aes = list(col = blueshade, alpha = 1) ) ) +
-  xlab("\nValue of W") +
-  ggtitle("Sampling distribution of W\n(for normally distributed data)") +
-  scale_x_continuous(limits=c(.75,1)) +
-  theme(
-    axis.title.y = element_blank(),
-    axis.line.y = element_blank(),
-    axis.ticks.y = element_blank(),
-    axis.text.y = element_blank(),
-    plot.title = element_text(hjust = 0.5),
-    legend.position = c(0.4,0.8),
-    legend.title = element_blank(),
-    legend.key.width =  unit(1.8, 'cm'),
-    legend.text = element_text(size=12))
-
-```
-
 To get the Shapiro-Wilk statistic in jamovi $t$-tests, check the option for 'Normality' listed under 'Assumptions'. In the randomly sampled data ($N = 100$) we used for the QQ plot, the value for the Shapiro-Wilk normality test statistic was $W = 0.99$ with a $p$-value of $0.54$. So, not surprisingly, we have no evidence that these data depart from normality. When reporting the results for a Shapiro-Wilk test, you should (as usual) make sure to include the test statistic $W$ and the $p$-value, though given that the sampling distribution depends so heavily on $N$ it would probably be a politeness to include $N$ as well.
 
 ### Example
 
-In the meantime, it's probably worth showing you an example of what happens to the QQ plot and the Shapiro-Wilk test when the data turn out to be non-normal. For that, let's look at the distribution of our AFL winning margins data, which if you remember back to @sec-Descriptive-statistics it didn't look like they came from a normal distribution at all. Here's what happens to the QQ plot (@fig-fig11-25).
+In the meantime, it's probably worth showing you an example of what happens to the QQ plot and the Shapiro-Wilk test when the data turn out to be non-normal. For that, let's look at the distribution of our AFL winning margins data, which if you remember back to @sec-Descriptive-statistics it didn't look like they came from a normal distribution at all. Here's what happens to the QQ plot (@fig-fig11-24).
 
 ```{r out.width="70%"}
-#| label: fig-fig11-25
+#| label: fig-fig11-24
 #| fig-cap: QQ plot showing non-normality from the AFL winning margins data
 #| fig-alt: A Q-Q plot shows standardized residuals against theoretical quantiles. Data points largely follow a diagonal reference line, indicating normality. Points deviate at the upper and lower ends, suggesting potential departures from a normal distribution at extremes.
-knitr::include_graphics("images/fig11-25.png")
+knitr::include_graphics("images/fig11-24.png")
 ```
 
 And when we run the Shapiro-Wilk test on the *afl.margins* data, we get a value for the Shapiro-Wilk normality test statistic of $W = 0.94$, and $p-value = 9.481x10^{-07}$. Clearly a significant effect!
@@ -976,14 +933,14 @@ We then count up the number of checkmarks. This is our test statistic, $W$.[^11-
 
 [^11-comparing-two-means-23]: Actually, there are two different versions of the test statistic that differ from each other by a constant value. The version that I've described is the one that jamovi calculates.
 
-In jamovi, if we run an 'Independent Samples T-Test' with scores as the dependent variable. and group as the grouping variable, and then under the options for 'tests' check the option for 'Mann-Whitney U', we will get results showing that $U = 3$ (i.e., the same number of checkmarks as shown above), and a $p$-value = $0.05556$. See @fig-fig11-26.
+In jamovi, if we run an 'Independent Samples T-Test' with scores as the dependent variable. and group as the grouping variable, and then under the options for 'tests' check the option for 'Mann-Whitney U', we will get results showing that $U = 3$ (i.e., the same number of checkmarks as shown above), and a $p$-value = $0.05556$. See @fig-fig11-25.
 
 ```{r}
-#| label: fig-fig11-26
+#| label: fig-fig11-25
 #| classes: .enlarge-image
 #| fig-cap: jamovi screen showing results for the Mann-Whitney $U$ test
 #| fig-alt: A jamovi screenshot showing a Mann-Whitney $U$ test setup on the left and results on the right. The setup includes dependent and grouping variables, while the results section displays statistical values and references.
-knitr::include_graphics("images/fig11-26.png")
+knitr::include_graphics("images/fig11-25.png")
 ```
 
 ### One sample Wilcoxon test
@@ -1001,14 +958,14 @@ huxtabs[[11]][[5]]  |>
   set_right_border(3:5, 1:2)
 ```
 
-Counting up the tick marks this time we get a test statistic of $W = 7$. As before, if our test is two-sided, then we reject the null hypothesis when W is very large or very small. As far as running it in jamovi goes, it's pretty much what you'd expect. For the one sample version, you specify the 'Wilcoxon rank' option under 'Tests' in the 'One Sample T-Test' analysis window. This gives you Wilcoxon $W = 7$, $p$-value = $0.03711$. As this shows, we have a significant effect. Evidently, taking a statistics class does have an effect on your happiness. Switching to a paired samples version of the test won't give us a different answer, of course; see @fig-fig11-27.
+Counting up the tick marks this time we get a test statistic of $W = 7$. As before, if our test is two-sided, then we reject the null hypothesis when W is very large or very small. As far as running it in jamovi goes, it's pretty much what you'd expect. For the one sample version, you specify the 'Wilcoxon rank' option under 'Tests' in the 'One Sample T-Test' analysis window. This gives you Wilcoxon $W = 7$, $p$-value = $0.03711$. As this shows, we have a significant effect. Evidently, taking a statistics class does have an effect on your happiness. Switching to a paired samples version of the test won't give us a different answer, of course; see @fig-fig11-26.
 
 ```{r}
-#| label: fig-fig11-27
+#| label: fig-fig11-26
 #| classes: .enlarge-image
 #| fig-cap: jamovi screen showing results for one-sample and paired sample Wilcoxon nonparametric tests
 #| fig-alt: A jamovi screenshot displaying statistical analysis for Wilcoxon nonparametric tests. The variables listed include "before" and "after." The results section shows outcomes for one sample and paired samples $t$-tests, including Wilcoxon $W$ and $p$-values.
-knitr::include_graphics("images/fig11-27.png")
+knitr::include_graphics("images/fig11-26.png")
 ```
 
 ## Summary

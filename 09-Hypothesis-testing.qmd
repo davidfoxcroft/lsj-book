@@ -107,7 +107,7 @@ $$X \sim Binomial(\theta,N)$$
 
 Since the null hypothesis states that $\theta = 0.5$ and our experiment has $N = 100$ people, we have the sampling distribution we need. This sampling distribution is plotted in @fig-fig9-1. No surprises really, the null hypothesis says that $X = 50$ is the most likely outcome, and it says that we're almost certain to see somewhere between $40$ and $60$ correct responses.
 
-```{r}
+```{r width="80%"}
 #| label: fig-fig9-1
 #| fig-cap: The sampling distribution for our test statistic $X$ when the null hypothesis is true. For our ESP scenario this is a binomial distribution. Not surprisingly, since the null hypothesis says that the probability of a correct response is $\theta = .5$, the sampling distribution says that the most likely value is 50 (out of 100) correct responses. Most of the probability mass lies between 40 and 60
 #| fig-alt: A bar graph titled "Sampling Distribution for X if the Null is True" shows the probability (y-axis) versus the number of correct responses (X) (x-axis). The distribution is bell-shaped, peaking around 50 correct responses.
@@ -115,7 +115,7 @@ Since the null hypothesis states that $\theta = 0.5$ and our experiment has $N =
 binom1 <- data.frame(success = 0:100, pmf = dbinom(x = 0:100, size = 100, prob = .5))
 
 ggplot(data=binom1, aes(x = factor(success), y = pmf+.001)) +
-  geom_col(col=blueshade, fill=blueshade, alpha=0.6, width=.3) +
+  geom_col(col=blueshade, fill=blueshade, alpha=0.6, width=.5) +
   ggtitle("Sampling Distribution for X if the Null is True") +
   labs(x = "\nNumber of correct responses (X)",
        y = "Probability\n") +
@@ -142,7 +142,7 @@ As it turns out those three things uniquely solve the problem. Our critical regi
 
 [^09-hypothesis-testing-6]: Strictly speaking, the test I just constructed has $\alpha = .057$, which is a bit too generous. However, if I'd chosen 39 and 61 to be the boundaries for the critical region then the critical region only covers $3.5\%$ of the distribution. I figured that it makes more sense to use $40$ and $60$ as my critical values, and be willing to tolerate a $5.7\%$ type I error rate, since that's as close as I can get to a value of $\alpha = .05$.
 
-```{r}
+```{r  width="80%"}
 #| label: fig-fig9-2
 #| fig-cap: The critical region associated with the hypothesis test for the ESP study, for a hypothesis test with a significance level of $\alpha = .05$. The plot shows the sampling distribution of $X$ under the null hypothesis (i.e., same as @fig-fig9-1) . The grey bars correspond to those values of $X$ for which we would retain the null hypothesis. The blue (darker shaded) bars show the critical region, those values of $X$ for which we would reject the null. Because the alternative hypothesis is two-sided (i.e., allows both $\theta < .5$ and $\theta > .5$), the critical region covers both tails of the distribution. To ensure an $\alpha$ level of $.05$, we need to ensure that each of the two regions encompasses $2.5\%$ of the sampling distribution
 #| fig-alt: A graph depicting the critical regions for a two-sided test. The x-axis represents the number of correct responses (X) ranging from 0 to 100. The lower critical region (2.5% of the distribution) and upper critical region (2.5% of the distribution) are highlighted in blue.
@@ -151,13 +151,13 @@ binom1 <- data.frame(success = 0:100, pmf = dbinom(x = 0:100, size = 100, prob =
 binom1$plotcol <- with(binom1, ifelse(success<=40 | success >= 60, blueshade, "lightgrey"))
 
 ggplot(data=binom1, aes(x = factor(success), y = pmf+.001)) +
-  geom_bar(aes(colour=plotcol, fill=plotcol), width=.3, stat = "identity") +
+  geom_bar(aes(colour=plotcol, fill=plotcol), width=.5, stat = "identity") +
   ggtitle("Critical Regions for a Two-sided Test") +
   labs(x = "\nNumber of correct responses (X)") +
-  geom_text(x=22, y=.035, label="lower critical region\n(2.5% of the distribution)", size=3, check_overlap = TRUE) +
+  geom_text(x=22, y=.035, label="lower critical region\n(2.5% of the distribution)", size=5, check_overlap = TRUE) +
   geom_segment(x = 40, y = .025, xend = 15, yend = .025,
                arrow = arrow(length = unit(0.03, "npc")), stat = "unique") +
-  geom_text(x=80, y=.035, label="upper critical region\n(2.5% of the distribution", size=3, check_overlap = TRUE) +
+  geom_text(x=80, y=.035, label="upper critical region\n(2.5% of the distribution", size=5, check_overlap = TRUE) +
   geom_segment(x = 61, y = .025, xend = 85, yend = .025, 
                arrow = arrow(length = unit(0.03, "npc")), stat = "unique") +
   scale_x_discrete(breaks=seq(0,100,20)) +
@@ -199,7 +199,7 @@ $$H_0: \theta \leq 0.5$$
 $$H_1: \theta > 0.5$$
 When this happens, we have what's called a **one-sided test** and the critical region only covers one tail of the sampling distribution. This is illustrated in @fig-fig9-3.
 
-```{r}
+```{r width="80%"}
 #| label: fig-fig9-3
 #| fig-cap: The critical region for a one-sided test. In this case, the alternative hypothesis is that $\theta \geq .5$ so we would only reject the null hypothesis for large values of $X$. As a consequence, the critical region only covers the upper tail of the sampling distribution, specifically the upper $5\%$ of the distribution. Contrast this to the two-sided version in @fig-fig9-2
 #| fig-alt: A histogram displaying a normal distribution of the number of correct responses (X) with a highlighted critical region on the right side, representing 5% of the distribution. The x-axis ranges from 0 to 100 correct responses. Text reads "critical region (5% of the distribution)".
@@ -208,10 +208,10 @@ binom1 <- data.frame(success = 0:100, pmf = dbinom(x = 0:100, size = 100, prob =
 binom1$plotcol <- with(binom1, ifelse(success>= 58, blueshade, "lightgrey"))
 
 ggplot(data=binom1, aes(x = factor(success), y = pmf+.001)) +
-  geom_bar(aes(colour=plotcol, fill=plotcol), width=.3, stat = "identity") +
+  geom_bar(aes(colour=plotcol, fill=plotcol), width=.5, stat = "identity") +
   ggtitle("Critical Region for a One-sided Test") +
   labs(x = "\nNumber of correct responses (X)") +
-  geom_text(x=78, y=.04, label="critical region\n(5% of the distribution)", size=3, check_overlap = TRUE) +
+  geom_text(x=78, y=.04, label="critical region\n(5% of the distribution)", size=5, check_overlap = TRUE) +
   geom_segment(x = 59, y = .028, xend = 85, yend = .028,
                arrow = arrow(length = unit(0.03, "npc")), stat = "unique") +
   scale_x_discrete(breaks=seq(0,100,20)) +
@@ -308,7 +308,7 @@ In previous sections I've emphasised the fact that the major design principle be
 
 ### The power function
 
-```{r}
+```{r width="80%"}
 #| label: fig-fig9-5
 #| fig-cap: Sampling distribution under the alternative hypothesis for a population parameter value of $\theta = 0.55$. A reasonable proportion of the distribution lies in the rejection region
 #| fig-alt: A histogram titled "Sampling Distribution for $X$ if $\theta = 0.55$" shows the number of correct responses ($X$) on the x-axis (ranging from 0 to 100). The lower and upper critical regions (2.5% each) are shaded in blue, with labels indicating their positions.
@@ -317,13 +317,13 @@ binom1 <- data.frame(success = 0:100, pmf = dbinom(x = 0:100, size = 100, prob =
 binom1$plotcol <- with(binom1, ifelse(success<=40 | success >= 60, blueshade, "lightgrey"))
 
 ggplot(data=binom1, aes(x = factor(success), y = pmf+.001)) +
-  geom_bar(aes(colour=plotcol, fill=plotcol), width=.3, stat = "identity") +
+  geom_bar(aes(colour=plotcol, fill=plotcol), width=.5, stat = "identity") +
   ggtitle(expression("Sampling Distribution for X if" ~ theta ~"=.55")) +
   labs(x = "\nNumber of correct responses (X)") +
-  geom_text(x=27, y=.07, label="lower critical region\n(2.5% of the distribution)", size=3, check_overlap = TRUE) +
+  geom_text(x=27, y=.07, label="lower critical region\n(2.5% of the distribution)", size=5, check_overlap = TRUE) +
   geom_segment(x = 40, y = .06, xend = 10, yend = .06,
                arrow = arrow(length = unit(0.03, "npc")), stat = "unique") +
-  geom_text(x=78, y=.07, label="upper critical region\n(2.5% of the distribution)", size=3, check_overlap = TRUE) +
+  geom_text(x=80, y=.07, label="upper critical region\n(2.5% of the distribution)", size=5, check_overlap = TRUE) +
   geom_segment(x = 65, y = .06, xend = 90, yend = .06,
                arrow = arrow(length = unit(0.03, "npc")), stat = "unique") +
   scale_x_discrete(breaks=seq(0,100,20)) +
@@ -340,7 +340,7 @@ ggplot(data=binom1, aes(x = factor(success), y = pmf+.001)) +
 
 Let's take a moment to think about what a type II error actually is. A type II error occurs when the alternative hypothesis is true, but we are nevertheless unable to reject the null hypothesis. Ideally, we'd be able to calculate a single number $\beta$ that tells us the type II error rate, in the same way that we can set $\alpha = .05$ for the type I error rate. Unfortunately, this is a lot trickier to do. To see this, notice that in my ESP study the alternative hypothesis actually corresponds to lots of possible values of $\theta$. In fact, the alternative hypothesis corresponds to every value of $\theta$ except 0.5. Let's suppose that the true probability of someone choosing the correct response is 55% (i.e., $\theta = .55$). If so, then the true sampling distribution for $X$ is not the same one that the null hypothesis predicts, as the most likely value for $X$ is now $55$ out of 100. Not only that, the whole sampling distribution has now shifted, as shown in @fig-fig9-5. The critical regions, of course, do not change. By definition the critical regions are based on what the null hypothesis predicts. What we're seeing in this figure is the fact that when the null hypothesis is wrong, a much larger proportion of the sampling distribution distribution falls in the critical region. And of course that's what should happen. The probability of rejecting the null hypothesis is larger when the null hypothesis is actually false! However $\theta = .55$ is not the only possibility consistent with the alternative hypothesis. Let's instead suppose that the true value of $\theta$ is actually $0.7$. What happens to the sampling distribution when this occurs? The answer, shown in @fig-fig9-6, is that almost the entirety of the sampling distribution has now moved into the critical region. Therefore, if $\theta = 0.7$, the probability of us correctly rejecting the null hypothesis (i.e., the power of the test) is much larger than if $\theta = 0.55$. In short, while $\theta = .55$ and $\theta = .70$ are both part of the alternative hypothesis, the type II error rate is different.
 
-```{r}
+```{r width="80%"}
 #| label: fig-fig9-6
 #| fig-cap: Sampling distribution under the *alternative* hypothesis for a population parameter value of $\theta = 0.70$. Almost all of the distribution lies in the rejection region
 #| fig-alt: A bar graph titled "Sampling Distribution for X if $\theta = 0.70$" showing a distribution of the number of correct responses (X) from 0 to 100. The lower and upper critical regions, each 2.5% of the distribution, are highlighted on the left and right tails respectively
@@ -349,13 +349,13 @@ binom1 <- data.frame(success = 0:100, pmf = dbinom(x = 0:100, size = 100, prob =
 binom1$plotcol <- with(binom1, ifelse(success<=40 | success >= 60, blueshade, "lightgrey"))
 
 ggplot(data=binom1, aes(x = factor(success), y = pmf+.001)) +
-  geom_bar(aes(colour=plotcol, fill=plotcol), width=.3, stat = "identity") +
+  geom_bar(aes(colour=plotcol, fill=plotcol), width=.5, stat = "identity") +
   ggtitle(expression("Sampling Distribution for X if" ~ theta ~"=.70")) +
   labs(x = "\nNumber of correct responses (X)") +
-  geom_text(x=27, y=.07, label="lower critical region\n(2.5% of the distribution)", size=3, check_overlap = TRUE) +
+  geom_text(x=27, y=.07, label="lower critical region\n(2.5% of the distribution)", size=5, check_overlap = TRUE) +
   geom_segment(x = 40, y = .06, xend = 10, yend = .06,
                arrow = arrow(length = unit(0.03, "npc")), stat = "unique") +
-  geom_label(aes(x=75, y=.07, label="upper critical region\n(2.5% of the distribution)"), size=3, , stat = "unique", label.size=NA, fill="white", alpha=0.9) +
+  geom_label(aes(x=75, y=.07, label="upper critical region\n(2.5% of the distribution)"), size=5, , stat = "unique", label.size=NA, fill="white", alpha=0.9) +
   geom_segment(x = 61, y = .06, xend = 90, yend = .06,
                arrow = arrow(length = unit(0.03, "npc")), stat = "unique") +
   scale_x_discrete(breaks=seq(0,100,20)) +
@@ -372,7 +372,7 @@ ggplot(data=binom1, aes(x = factor(success), y = pmf+.001)) +
 
 What all this means is that the power of a test (i.e., $1 - \beta$) depends on the true value of $\theta$. To illustrate this, I've calculated the expected probability of rejecting the null hypothesis for all values of $\theta$, and plotted it in @fig-fig9-7. This plot describes what is usually called the power function of the test. It's a nice summary of how good the test is, because it actually tells you the power $(1 - \beta$) for all possible values of $\theta$. As you can see, when the true value of $\theta$ is very close to $0.5$, the power of the test drops very sharply, but when it is further away, the power is large.
 
-```{r}
+```{r width="80%"}
 #| label: fig-fig9-7
 #| fig-cap: The probability that we will reject the null hypothesis, plotted as a function of the true value of $\theta$. Obviously, the test is more powerful (greater chance of correct rejection) if the true value of $\theta$ is very different from the value that the null hypothesis specifies (i.e., $\theta = .5$ ). Notice that when $\theta$ actually is equal to $.5$ (plotted as a black dot), the null hypothesis is in fact true and rejecting the null hypothesis in this instance would be a type I error
 #| fig-alt: A graph titled "Power function for the Test (N=100)" showing the probability of rejecting the null hypothesis (y-axis) plotted against the true value of $\theta$ (x-axis). The curve dips sharply to a minimum at $\theta$=0.5, marked by a black dot, and rises symmetrically on either side to a maximum at both ends
@@ -422,7 +422,7 @@ Not surprisingly, scientists are fairly obsessed with maximising the power of th
 
 Unfortunately, it's often the case that even with the best of experimental designs you may have only a small effect. Perhaps, for example, ESP really does exist but even under the best of conditions it's very very weak. Under those circumstances your best bet for increasing power is to increase the sample size. In general, the more observations that you have available, the more likely it is that you can discriminate between two hypotheses. If I ran my ESP experiment with 10 participants and 7 of them correctly guessed the colour of the hidden card you wouldn't be terribly impressed. But if I ran it with 10,000 participants, and 7,000 of them got the answer right, you would be much more likely to think I had discovered something. In other words, power increases with the sample size. This is illustrated in @fig-fig9-8, which shows the power of the test for a true parameter of $\theta = 0.7$ for all sample sizes $N$ from $1$ to $100$, where I'm assuming that the null hypothesis predicts that $\theta_0 = 0.5$.
 
-```{r}
+```{r width="80%"}
 #| label: fig-fig9-8
 #| fig-cap: The power of our test plotted as a function of the sample size $N$. In this case, the true value of $\theta$ is 0.7 but the null hypothesis is that $\theta = 0.5$. Overall, larger $N$ means greater power. (The small zig-zags in this function occur because of some odd interactions between $\theta$,  $\alpha$ and the fact that the binomial distribution is discrete, it does not matter for any serious purpose)
 #| fig-alt: A line graph showing the probability of rejecting the null hypothesis as a function of sample size (N). The x-axis represents the sample size ranging from 0 to 100, and the y-axis shows the probability from 0 to 1. The line increases and fluctuates upwards.
