@@ -144,8 +144,7 @@
   }%
 }%
 
-%\usepackage{float}
-%\floatplacement{table}{h!}
+\raggedbottom
 
 \usepackage{array}
 \usepackage{caption}
@@ -311,7 +310,7 @@ Citation: Danielle Navarro and David Foxcroft, \textit{Learning statistics with 
 \vfill
 \hspace{0pt}
 
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[breakable, enhanced, frame hidden, borderline west={3pt}{0pt}{shadecolor}, interior hidden, sharp corners, boxrule=0pt]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[frame hidden, borderline west={3pt}{0pt}{shadecolor}, interior hidden, sharp corners, enhanced, breakable, boxrule=0pt]}{\end{tcolorbox}}\fi
 
 \renewcommand*\contentsname{Table of contents}
 {
@@ -1089,13 +1088,12 @@ life}\label{statistics-in-everyday-life}}
 \end{quote}
 
 When I started writing up my lecture notes I took the 20 most recent
-news articles posted to the ABC News website. Of those 20 articles, it
-turned out that 8 of them involved a discussion of something that I
-would call a statistical topic and 6 of those made a mistake. The most
-common error, if you're curious, was failing to report baseline data
-(e.g., the article mentions that 5\% of people in situation X have some
-characteristic Y, but doesn't say how common the characteristic is for
-everyone else!). The point I'm trying to make here isn't that
+news articles posted to the ABC News website. Of those articles, eight
+of them included a discussion of a statistical topic and six of those
+made a mistake. The most common error was failing to report baseline
+data (e.g., the article mentions that 5\% of people in situation X have
+some characteristic Y, but doesn't say how common the characteristic is
+for everyone else!). The point I'm trying to make here isn't that
 journalists are bad at statistics (though they almost always are), it's
 that a basic knowledge of statistics is very helpful for trying to
 figure out when someone else is either making a mistake or even lying to
@@ -1111,41 +1109,39 @@ I'll try to include more anecdotes along those lines.
 statistics}\label{theres-more-to-research-methods-than-statistics}}
 
 So far, most of what I've talked about is statistics, and so you'd be
-forgiven for thinking that statistics is all I care about in life. To be
-fair, you wouldn't be far wrong, but research methodology is a broader
-concept than statistics. So most research methods courses will cover a
-lot of topics that relate much more to the pragmatics of research
-design, and in particular the issues that you encounter when trying to
-do research with humans. However, about 99\% of student fears relate to
-the statistics part of the course, so I've focused on the stats in this
-discussion, and hopefully I've convinced you that statistics matters,
-and more importantly, that it's not to be feared. That being said, it's
-pretty typical for introductory research methods classes to be very
-stats-heavy. This is not (usually) because the lecturers are evil
-people. Quite the contrary, in fact. Introductory classes focus a lot on
-the statistics because you almost always find yourself needing
-statistics before you need the other research methods training. Why?
-Because almost all of your assignments in other classes will rely on
-statistical training, to a much greater extent than they rely on other
-methodological tools. It's not common for undergraduate assignments to
-require you to design your own study from the ground up (in which case
-you would need to know a lot about research design), but it \emph{is}
-common for assignments to ask you to analyse and interpret data that
-were collected in a study that someone else designed (in which case you
-need statistics). In that sense, from the perspective of allowing you to
-do well in all your other classes, the statistics is more urgent.
+forgiven for thinking that statistics is all I care about. To be fair,
+you wouldn't be far wrong, but research methodology is a broader concept
+than statistics. So most research methods courses will cover topics that
+relate much more to the pragmatics of research design, and in particular
+the issues that you encounter when trying to do research with humans.
+However, about 99\% of student fears relate to the statistics part of
+the course, so I've focused on the stats in this discussion, and
+hopefully I've convinced you that statistics matter, and more
+importantly, should not to be feared. That said, it's typical for
+introductory research methods classes to be very stats heavy. This is
+not (usually) because the lecturers are evil people. Quite the contrary,
+in fact. Introductory classes focus a lot on the statistics because you
+almost always find yourself needing statistics before you need other
+research methods training. Why? Because almost all your assignments in
+other classes will rely on statistical training, to a greater extent
+than they rely on other methodological tools. It's not common for
+undergraduate assignments to require you to design your own study from
+the ground up (in which case you would need to know a lot about research
+design), but it \emph{is} common for assignments to ask you to analyse
+and interpret data that were collected in a study that someone else
+designed (in which case you need statistics). In that sense, from the
+perspective of enabling you to do well in all your other classes,
+statistics is more urgent.
 
 But note that ``urgent'' is different from ``important'' -- they both
 matter. I really do want to stress that research design is just as
-important as data analysis, and this book does spend a fair amount of
-time on it. However, while statistics has a kind of universality, and
-provides a set of core tools that are useful for most types of
-psychological research, the research methods side isn't quite so
-universal. There are some general principles that everyone should think
-about, but a lot of research design is very idiosyncratic, and is
-specific to the area of research that you want to engage in. To the
-extent that it's the details that matter, those details don't usually
-show up in an introductory stats and research methods class.
+important as data analysis, and this book does spend some time on it.
+However, while statistics has a kind of universality, and provides a set
+of core tools that are useful for most types of psychological and social
+research, the research methods side isn't quite so universal. There are
+some general principles that everyone should think about, but a lot of
+research design is idiosyncratic and is specific to the area of research
+that you want to engage in.
 
 \hypertarget{sec-A-brief-introduction-to-research-design}{%
 \chapter{A brief introduction to research
@@ -1483,7 +1479,7 @@ chosen to display the data like in Table~\ref{tbl-tab2-2}.
   \providecommand{\huxtpad}[1]{\rule{0pt}{#1}}
   \providecommand{\huxbpad}[1]{\rule[-#1]{0pt}{#1}}
 
-\begin{table}[ht]
+\begin{table}[h!]
 \caption{\label{tbl-tab2-2}How did 100 people get to work today, a different view }\tabularnewline
 
 \begin{centerbox}
@@ -5541,7 +5537,7 @@ Figure~\ref{fig-fig5-11}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{images/fig5-11.png} \hfill{}
+\includegraphics[width=0.9\textwidth,height=\textheight]{images/fig5-11.png} \hfill{}
 
 \caption{\label{fig-fig5-11}Filtering to include just four AFL teams,
 and drawing a bar plot in jamovi}
@@ -13071,7 +13067,6 @@ GUARDBOT 2: Which of the following would you most prefer? A: A puppy, B:
 A pretty flower from your sweetie, or C: A large properly-formatted data
 file?\\
 GUARDBOT 1: Choose!}\\
-
 -- Futurama, \emph{Fear of a Bot Planet}
 \end{quote}
 
@@ -14234,7 +14229,7 @@ right answer is, is it? For this, we are going to need some statistics.
 
 \begin{figure}
 
-\includegraphics[width=0.8\textwidth,height=\textheight]{11-Comparing-two-means_files/figure-pdf/fig-fig11-1-1.pdf} \hfill{}
+\includegraphics[width=0.7\textwidth,height=\textheight]{11-Comparing-two-means_files/figure-pdf/fig-fig11-1-1.pdf} \hfill{}
 
 \caption{\label{fig-fig11-1}The theoretical distribution (solid line)
 from which the psychology student grades (bars) are supposed to have
@@ -14883,9 +14878,9 @@ mean performance on some outcome measure, then an independent samples
 \(t\)-test (rather than a paired samples \(t\)-test) is what we're
 after.
 
-\begin{figure}
+\begin{figure}[h!]
 
-\includegraphics[width=1\textwidth,height=\textheight]{images/fig11-7.png} \hfill{}
+\includegraphics[width=0.8\textwidth,height=\textheight]{images/fig11-7.png} \hfill{}
 
 \caption{\label{fig-fig11-7}Box and violin plots showing the
 distribution of grades for students in the classes of Anastasia and
@@ -17247,7 +17242,7 @@ Figure~\ref{fig-fig12-10}.
 
 \begin{figure}
 
-\includegraphics[width=0.8\textwidth,height=\textheight]{images/fig12-10.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig12-10.png} \hfill{}
 
 \caption{\label{fig-fig12-10}A matrix of scatterplots produced using
 jamovi}
@@ -18202,7 +18197,7 @@ then it strongly suggests that you need to make some changes.
 
 \begin{figure}
 
-\includegraphics[width=0.8\textwidth,height=\textheight]{images/fig12-17.png} \hfill{}
+\includegraphics[width=0.6\textwidth,height=\textheight]{images/fig12-17.png} \hfill{}
 
 \caption{\label{fig-fig12-17}jamovi plot of the predicted values against
 the observed values of the outcome variable. A straight(-ish) line is
@@ -18224,7 +18219,7 @@ reasonably straight or flat line. This is a matter of judgement.
 
 \begin{figure}
 
-\includegraphics[width=0.8\textwidth,height=\textheight]{images/fig12-18.png} \hfill{}
+\includegraphics[width=0.6\textwidth,height=\textheight]{images/fig12-18.png} \hfill{}
 
 \caption{\label{fig-fig12-18}jamovi plot of the predicted values against
 the residuals, with a line showing the relationship between the two. If
@@ -18338,7 +18333,7 @@ plot.\footnote{It's a bit beyond the scope of this chapter to talk about
 
 \begin{figure}
 
-\includegraphics[width=0.8\textwidth,height=\textheight]{images/fig12-21.png} \hfill{}
+\includegraphics[width=0.6\textwidth,height=\textheight]{images/fig12-21.png} \hfill{}
 
 \caption{\label{fig-fig12-21}jamovi plot of the predicted values (model
 predictions) against the square root of the absolute standardised
@@ -18469,17 +18464,6 @@ formula for the hat value is rather complicated\footnote{Again, for the
   \(H = X(X^{'}X)^{1}X^{'}\).} but its interpretation is not: \(h_i\) is
 a measure of the extent to which the i-th observation is ``in control''
 of where the regression line ends up going.
-
-\begin{verbatim}
-List of 2
- $ axis.text.x: list()
-  ..- attr(*, "class")= chr [1:2] "element_blank" "element"
- $ axis.text.y: list()
-  ..- attr(*, "class")= chr [1:2] "element_blank" "element"
- - attr(*, "class")= chr [1:2] "theme" "gg"
- - attr(*, "complete")= logi FALSE
- - attr(*, "validate")= logi TRUE
-\end{verbatim}
 
 \begin{figure}
 
@@ -21274,7 +21258,7 @@ statistic? Having run a \(t\)-test instead of an ANOVA, we get a
 somewhat different answer, namely \(t(16) = -1.3068\). However, there is
 a fairly straightforward relationship here. If we square the
 \(t\)-statistic then we get the \(F\)-statistic from before:
-\$-1.3068\^{}\{2\} = 1.7077\$4.
+\(-1.3068^2 = 1.7077\).
 
 \hypertarget{summary-11}{%
 \section{Summary}\label{summary-11}}
@@ -26558,7 +26542,7 @@ error}.
 
 \begin{figure}
 
-\includegraphics[width=1\textwidth,height=\textheight]{images/fig15-12.png} \hfill{}
+\includegraphics[width=1\textwidth,height=0.9\textheight]{images/fig15-12.png} \hfill{}
 
 \caption{\label{fig-fig15-12}Initial pre-specification of latent factor
 structure for the five factor personality scales, for use in CFA}
