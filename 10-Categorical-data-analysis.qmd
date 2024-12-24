@@ -69,7 +69,7 @@ At this point, we have our observed frequencies O and a collection of probabilit
 $$E_i=N \times P_i$$
 This is pretty easy to calculate. If there are 200 observations that can fall into four categories, and we think that all four categories are equally likely, then on average we'd expect to see 50 observations in each category, right?
 
-Now, how do we translate this into a test statistic? Clearly, what we want to do is compare the expected number of observations in each category ($E_i$) with the observed number of observations in that category ($O_i$). And on the basis of this comparison we ought to be able to come up with a good test statistic. To start with, let's calculate the difference between what the null hypothesis expected us to find and what we actually did find. That is, we calculate the "observed minus expected" difference score, $O_i - E_i$. This is illustrated in @tbl-tab10-3.
+Now, how do we translate this into a test statistic? Clearly, what we want to do is compare the expected number of observations in each category ($E_i$) with the observed number of observations in that category ($O_i$). And on the basis of this comparison we ought to be able to come up with a good test statistic. To start with, let's calculate the difference between what the null hypothesis expected us to find and what we actually did find. That is, we calculate the "observed minus expected" difference score, $O_i - E_i$. This is illustrated in @tbl-tab10-3.\
 
 ```{r}
 #| label: tbl-tab10-3
@@ -122,8 +122,9 @@ There's one last detail to talk about, namely the degrees of freedom. If you rem
 #| label: fig-fig10-1
 #| fig-cap: $\chi^2$ (chi-square) distributions with different values for the "degrees of freedom"
 #| fig-alt: Three chi-squared distribution curves are plotted with different degrees of freedom (df):- solid line (df = 3), dashed line (df = 4), and dotted line (df = 5). The x-axis shows observed values from 0 to 12, and the y-axis indicates the probability density
-#| fig-width: 7
+#| fig-width: 8
 #| fig-height: 4
+#| fig-pos: 'H'
 
 ggplot(data = data.frame(x = seq(0, 12, 1)), aes(x)) +
   stat_function(aes(linetype = 'df = 3'), fun = dchisq, n = 1000, args = list(df = 3), col=blueshade, linewidth=1) +
@@ -199,20 +200,22 @@ Ah but, I hear you ask, how do I find the critical value of a chi-square distrib
 ```{r}
 #| label: tbl-tab10-6
 #| tbl-cap: Table of critical values for the chi-square distribution
-huxtabs[[10]][[6]]
+huxtabs[[10]][[6]] |>
+  set_latex_float('H')
 ```
 
 So, if our calculated $\chi^2$ statistic is bigger than the critical value of $7.815$, then we can reject the null hypothesis (remember that the null hypothesis, $H_0$, is that all four suits are chosen with equal probability). Since we actually already calculated that before (i.e., $\chi^2$ = 8.44) we can reject the null hypothesis. And that's it, basically. You now know "Pearson's $\chi^2$ test for the goodness-of-fit". Lucky you.
 
 ### Doing the test in jamovi
 
-Not surprisingly, jamovi provides an analysis that will do these calculations for you. Let's use the *Randomness.omv* file. From the main 'Analyses' toolbar select 'Frequencies' -- 'One Sample Proportion Tests' -- '$N$ Outcomes'. Then in the analysis window that appears move the variable you want to analyse (choice 1 across into the 'Variable' box. Also, click on the 'Expected counts' check box so that these are shown on the results table. When you have done all this, you should see the analysis results in jamovi as in @fig-fig10-3. No surprise then that jamovi provides the same expected counts and statistics that we calculated by hand above, with a $\chi^2$ value of $(8.44$ with $3$ df and $p=0.038$. Note that we don't need to look up a critical $p$-value threshold value any more, as jamovi gives us the actual $p$-value of the calculated $\chi^2$ for $3 df$.
+Not surprisingly, jamovi provides an analysis that will do these calculations for you. Let's use the *Randomness.omv* file. From the main 'Analyses' toolbar select 'Frequencies' -- 'One Sample Proportion Tests' -- '$N$ Outcomes'. Then in the analysis window that appears move the variable you want to analyse (choice 1 across into the 'Variable' box. Also, click on the 'Expected counts' check box so that these are shown on the results table. When you have done all this, you should see the analysis results in jamovi as in @fig-fig10-3. No surprise then that jamovi provides the same expected counts and statistics that we calculated by hand above, with a $\chi^2$ value of $(8.44$ with $3$ df and $p=0.038$. Note that we don't need to look up a critical $p$-value threshold value any more, as jamovi gives us the actual $p$-value of the calculated $\chi^2$ for 3 $df$.
 
 ```{r}
 #| label: fig-fig10-3
 #| classes: .enlarge-image
 #| fig-cap: A $\chi^2$ One Sample Proportion Test in jamovi, with table showing both observed and expected frequencies and proportions
-#| fig-alt: A jamovi screenshot showing a Proportion Test (N Outcomes) analysis. The "Variable" selected is "choice_1" with observed and expected counts for clubs, diamonds, hearts, spades. The chi-squared test results are at the bottom with a $p$-value.
+#| fig-alt: A jamovi screenshot showing a Proportion Test (N Outcomes) analysis. The "Variable" selected is "choice_1" with observed and expected counts for clubs, diamonds, hearts, spades. The chi-squared test results are at the bottom with a $p$-value
+#| fig-pos: 'H'
 knitr::include_graphics("images/fig10-3.png")
 ```
 
@@ -232,7 +235,8 @@ The expected counts are now shown in @tbl-tab10-7.
 ```{r}
 #| label: tbl-tab10-7
 #| tbl-cap: Expected counts for a different null hypothesis
-huxtabs[[10]][[7]]
+huxtabs[[10]][[7]] |>
+  set_latex_float('H')
 ```
 
 You can see that the $\chi^2$ statistic is 4.74, 3 df, $p = 0.192$. Now, the results of our updated hypotheses and the expected frequencies are different from what they were last time. As a consequence our $\chi^2$ test statistic is different, and our $p$-value is different too. Annoyingly, the $p$-value is $.192$, so we can't reject the null hypothesis (look back at @sec-The-p-value-of-a-test to remind yourself why). Sadly, despite the fact that the null hypothesis corresponds to a very silly theory, these data don't provide enough evidence against it.
@@ -296,7 +300,8 @@ In this notation we say that $O_{ij}$ is a count (observed frequency) of the num
 
 [^10-categorical-data-analysis-10]: A technical note. The way I've described the test pretends that the column totals are fixed (i.e., the researcher intended to survey 87 robots and 93 humans) and the row totals are random (i.e., it just turned out that 28 people chose the puppy). To use the terminology from my mathematical statistics textbook [@Hogg2005] I should technically refer to this situation as a chi-square test of homogeneity and reserve the term chi-square test of independence for the situation where both the row and column totals are random outcomes of the experiment. In the initial drafts of this book that's exactly what I did. However, it turns out that these two tests are identical, and so I've collapsed them together.
 
-So now let's think about what the null hypothesis says. If robots and humans are responding in the same way to the question, it means that the probability that "a robot says puppy" is the same as the probability that "a human says puppy", and so on for the other two possibilities. So, if we use $P_{ij}$ to denote "the probability that a member of species j gives response i" then our null hypothesis is that:
+So now let's think about what the null hypothesis says. If robots and humans are responding in the same way to the question, it means that the probability that "a robot says puppy" is the same as the probability that "a human says puppy", and so on for the other two possibilities. So, if we use $P_{ij}$ to denote "the probability that a member of species $j$ gives response $i$" then our null hypothesis is that:
+
 $$
 \begin{aligned}
 H_0 &: \text{All of the following are true:} \\
@@ -306,35 +311,43 @@ H_0 &: \text{All of the following are true:} \\
 \end{aligned}
 $$
 
-And actually, since the null hypothesis is claiming that the true choice probabilities don't depend on the species of the person making the choice, we can let Pi refer to this probability, e.g., P1 is the true probability of choosing the puppy.
+And actually, since the null hypothesis is claiming that the true choice probabilities don't depend on the species of the person making the choice, we can let Pi refer to this probability, e.g., $P_1$ is the true probability of choosing the puppy.
 
-Next, in much the same way that we did with the goodness-of-fit test, what we need to do is calculate the expected frequencies. That is, for each of the observed counts $O_{ij}$ , we need to figure out what the null hypothesis would tell us to expect. Let's denote this expected frequency by $E_{ij}$. This time, it's a little bit trickier. If there are a total of $C_j$ people that belong to species $j$, and the true probability of anyone (regardless of species) choosing option $i$ is $P_i$ , then the expected frequency is just:
+Next, in much the same way that we did with the goodness-of-fit test, what we need to do is calculate the expected frequencies. That is, for each of the observed counts $O_{ij}$ we need to figure out what the null hypothesis would tell us to expect. Let's denote this expected frequency by $E_{ij}$. This time, it's a little bit trickier. If there are a total of $C_j$ people that belong to species $j$, and the true probability of anyone (regardless of species) choosing option $i$ is $P_i$, then the expected frequency is just:
+
 $$E_{ij}=C_j \times P_i$$
+
 Now, this is all very well and good, but we have a problem. Unlike the situation we had with the goodness-of-fit test, the null hypothesis doesn't actually specify a particular value for Pi .
 
-It's something we have to estimate (see @sec-Estimating-unknown-quantities-from-a-sample) from the data! Fortunately, this is pretty easy to do. If 28 out of 180 people selected the flowers, then a natural estimate for the probability of choosing flowers is $\frac{28}{180}$, which is approximately $.16$. If we phrase this in mathematical terms, what we're saying is that our estimate for the probability of choosing option i is just the row total divided by the total sample size:
+It's something we have to estimate (see @sec-Estimating-unknown-quantities-from-a-sample) from the data! Fortunately, this is pretty easy to do. If 28 out of 180 people selected the flowers, then a natural estimate for the probability of choosing flowers is $\frac{28}{180}$, which is approximately $.16$. If we phrase this in mathematical terms, what we're saying is that our estimate for the probability of choosing option $i$ is just the row total divided by the total sample size:
+
 $$\hat{P}_{i}= \frac{R_i}{N}$$
-Therefore, our expected frequency can be written as the product (i.e. multiplication) of the row total and the column total, divided by the total number of observations:[^10-categorical-data-analysis-11]
-$$\hat{E}_{ij}= \frac{R_i \times C_j}{N}$$
-[^10-categorical-data-analysis-11]: Technically, $E_{ij}$ here is an estimate, so I should probably write it $\hat{E_{ij}}$. But since no-one else does, I won't either.
 
-[Additional technical detail [^10-categorical-data-analysis-12]]
+Therefore, our expected frequency can be written as the product (i.e. multiplication) of the row total and the column total, divided by the total number of observations:
 
-[^10-categorical-data-analysis-12]: Now that we've figured out how to calculate the expected frequencies, it's straightforward to define a test statistic, following the exact same strategy that we used in the goodness-of-fit test. In fact, it's pretty much the same statistic. For a contingency table with r rows and c columns, the equation that defines our $X^2$ statistic is: $$X^2=\sum_{i=1}^{r}\sum_{j=1}^{c} \frac{(E_{ij}-O_{ij})^2}{E_{ij}}$$ The only difference is that I have to include two summation signs (i.e., $\sum$ ) to indicate that we're summing over both rows and columns.
+$${E}_{ij}= \frac{R_i \times C_j}{N}$$
+[Additional technical detail[^10-categorical-data-analysis-12]]
+
+[^10-categorical-data-analysis-12]: Technically, $E_{ij}$ here is an estimate, so I should probably write it $\hat{E_{ij}}$, but since no-one else does, I won't either. Now that we've figured out how to calculate the expected frequencies, it's straightforward to define a test statistic, following the exact same strategy that we used in the goodness-of-fit test. In fact, it's pretty much the same statistic. For a contingency table with r rows and c columns, the equation that defines our $X^2$ statistic is: $$X^2=\sum_{i=1}^{r}\sum_{j=1}^{c} \frac{(E_{ij}-O_{ij})^2}{E_{ij}}$$ The only difference is that I have to include two summation signs (i.e., $\sum$ ) to indicate that we're summing over both rows and columns.
 
 As before, large values of $X^2$ indicate that the null hypothesis provides a poor description of the data, whereas small values of $X^2$ suggest that it does a good job of accounting for the data. Therefore, just like last time, we want to reject the null hypothesis if $X^2$ is too large.
-
+        
 Not surprisingly, this statistic is $\chi^2$ distributed. All we need to do is figure out how many degrees of freedom are involved, which actually isn't too hard. As I mentioned before, you can (usually) think of the degrees of freedom as being equal to the number of data points that you're analysing, minus the number of constraints. A contingency table with r rows and c columns contains a total of $r^{c}$ observed frequencies, so that's the total number of observations. What about the constraints? Here, it's slightly trickier. The answer is always the same:
+
+
 $$df=(r-1)(c-1)$$
 but the explanation for why the degrees of freedom takes this value is different depending on the experimental design. For the sake of argument, let's suppose that we had honestly intended to survey exactly 87 robots and 93 humans (column totals fixed by the experimenter), but left the row totals free to vary (row totals are random variables). Let's think about the constraints that apply here. Well, since we deliberately fixed the column totals by Act of Experimenter, we have $c$ constraints right there. But, there's actually more to it than that. Remember how our null hypothesis had some free parameters (i.e., we had to estimate the Pi values)? Those matter too. I won't explain why in this book, but every free parameter in the null hypothesis is rather like an additional constraint. So, how many of those are there? Well, since these probabilities have to sum to 1, there's only $r - 1$ of these. So our total degrees of freedom is:
+
 $$ \begin{split} df & = \text{(number of
 observations) - (number of constraints)} \\\\ & = (r \times c) - (c +
 (r - 1)) \\\\ & = rc - c - r + 1 \\\\ & = (r - 1)(c - 1) \end{split}$$
 
 Alternatively, suppose that the only thing that the experimenter fixed was the total sample size N. That is, we quizzed the first 180 people that we saw and it just turned out that 87 were robots and 93 were humans. This time around our reasoning would be slightly different, but would still lead us to the same answer. Our null hypothesis still has $r - 1$ free parameters corresponding to the choice probabilities, but it now also has $c - 1$ free parameters corresponding to the species probabilities, because we'd also have to estimate the probability that a randomly sampled person turns out to be a robot.[^10-categorical-data-analysis-13] Finally, since we did actually fix the total number of observations N, that's one more constraint. So, now we have $rc$ observations, and $(c-1)+(r-1)+1$ constraints. And that gives:
+
 $$\begin{split} df & = \text{(number of
 observations) - (number of constraints)} \\\\ & = (r \times c) -
 ((c-1) + (r - 1)+1) \\\\ & = (r - 1)(c - 1) \end{split}$$ 
+
 Amazing.
 
 [^10-categorical-data-analysis-13]: A problem many of us worry about in real life.
@@ -419,7 +432,9 @@ huxtabs[[10]][[11]]
 ```
 
 In order to construct the test Fisher treats both the row and column totals $(R_1, R_2, C_1 \text{ and } C_2)$ as known, fixed quantities and then calculates the probability that we would have obtained the observed frequencies that we did $(O_{11}, O_{12}, O_{21} \text{ and } O_{22})$ given those totals. In the notation that we developed in @sec-Introduction-to-probability this is written:
+
 $$P(O_{11}, O_{12}, O_{21}, O_{22}  \text{ | } R_1, R_2, C_1, C_2)$$ 
+
 and as you might imagine, it's a slightly tricky exercise to figure out what this probability is. But it turns out that this probability is described by a distribution known as the hypergeometric distribution. What we have to do to calculate our $p$-value is calculate the probability of observing this particular table or a table that is *"more extreme"*.[^10-categorical-data-analysis-17] Back in the 1920s, computing this sum was daunting even in the simplest of situations, but these days it's pretty easy as long as the tables aren't too big and the sample size isn't too large. The conceptually tricky issue is to figure out what it means to say that one contingency table is more "extreme" than another. The easiest solution is to say that the table with the lowest probability is the most extreme. This then gives us the $p$-value.
 
 [^10-categorical-data-analysis-17]: Not surprisingly, the Fisher exact test is motivated by Fisher's interpretation of a $p$-value, not Neyman's! See @sec-The-p-value-of-a-test.
@@ -444,7 +459,7 @@ Suppose you've been hired to work for the *Australian Generic Political Party* (
 huxtabs[[10]][[12]]
 ```
 
-At first pass, you might think that this situation lends itself to the Pearson $\chi^2$ test of independence (as per [The $\chi^2$ test of independence (or association)]). However, a little bit of thought reveals that we've got a problem. We have 100 participants but 200 observations. This is because each person has provided us with an answer in both the before column and the after column. What this means is that the 200 observations aren't independent of each other. If voter A says "yes" the first time and voter B says "no", then you'd expect that voter A is more likely to say "yes" the second time than voter B! The consequence of this is that the usual $\chi^2$ test won't give trustworthy answers due to the violation of the independence assumption. Now, if this were a really uncommon situation, I wouldn't be bothering to waste your time talking about it. But it's not uncommon at all. This is a standard repeated measures design, and none of the tests we've considered so far can handle it. Eek.
+At first pass, you might think that this situation lends itself to the Pearson $\chi^2$ test of independence (as per [The $\chi^2$ test of independence (or association)]). However, a little bit of thought reveals that we've got a problem. We have 100 participants but 200 observations. This is because each person has provided us with an answer in both the before column and the after column. What this means is that the 200 observations aren't independent of each other. If voter A says "yes" the first time and voter B says "no", then you'd expect that voter A is more likely to say "yes" the second time than voter B! The consequence of this is that the usual $\chi^2$ test won't give trustworthy answers due to the violation of the independence assumption. Now, if this were a really uncommon situation, I wouldn't be bothering to waste your time talking about it. But it's not uncommon at all. This is a standard repeated measures design, and none of the tests we've considered so far can handle it. 
 
 The solution to the problem was published by McNemar (1947). The trick is to start by tabulating your data in a slightly different way (@tbl-tab10-13).
 
@@ -454,23 +469,29 @@ The solution to the problem was published by McNemar (1947). The trick is to sta
 huxtabs[[10]][[13]]
 ```
 
-Next, let's think about what our null hypothesis is: it's that the "before" test and the "after" test have the same proportion of people saying "Yes, I will vote for AGPP". Because of the way that we have rewritten the data, it means that we're now testing the hypothesis that the row totals and column totals come from the same distribution. Thus, the null hypothesis in McNemar's test is that we have "marginal homogeneity". That is, the row totals and column totals have the same distribution: $P_a + P_b = P_a + P_c$ and similarly that $P_c + P_d = P_b + P_d$. Notice that this means that the null hypothesis actually simplifies to $Pb = Pc$. In other words, as far as the McNemar test is concerned, it's only the off-diagonal entries in this table (i.e., $b$ and $c$) that matter! After noticing this, the **McNemar test of marginal homogeneity** is no different to a usual $\chi^2$ test. After applying the Yates correction, our test statistic becomes:
-$$\chi^2=\frac{(|b-c|-0.5)^2}{b+c}$$ 
+Next, let's think about what our null hypothesis is: it's that the "before" test and the "after" test have the same proportion of people saying "Yes, I will vote for AGPP". Because of the way that we have rewritten the data, it means that we're now testing the hypothesis that the row totals and column totals come from the same distribution. Thus, the null hypothesis in McNemar's test is that we have "marginal homogeneity". That is, the row totals and column totals have the same distribution: $P_a + P_b = P_a + P_c$ and similarly that $P_c + P_d = P_b + P_d$. Notice that this means that the null hypothesis actually simplifies to $Pb = Pc$. In other words, as far as the McNemar test is concerned, it's only the off-diagonal entries in this table (i.e., $b$ and $c$) that matter! After noticing this, the **McNemar test of marginal homogeneity** is no different to a usual $\chi^2$ test. \
+
+After applying the Yates correction, our test statistic becomes: $$\chi^2=\frac{(|b-c|-0.5)^2}{b+c}$$ 
+
 or, to revert to the notation that we used earlier in this chapter:
+
 $$\chi^2=\frac{(|O_{12}-O_{21}|-0.5)^2}{O_{12}+O_{21}}$$ 
+
 and this statistic has a $\chi^2$ distribution (approximately) with $df = 1$. However, remember that just like the other $\chi^2$ tests it's only an approximation, so you need to have reasonably large expected cell counts for it to work.
 
 ### Doing the McNemar test in jamovi
-
-Now that you know what the McNemar test is all about, lets actually run one. The *agpp.csv* file contains the raw data that I discussed previously. The *agpp* data set contains three variables, an id variable that labels each participant in the data set (we'll see why that's useful in a moment), a **response_before** variable that records the person's answer when they were asked the question the first time, and a response_after variable that shows the answer that they gave when asked the same question a second time. Notice that each participant appears only once in this data set. Go to the 'Analyses' -- 'Frequencies' -- 'Contingency Tables' -- 'Paired Samples' analysis in jamovi, and move **response_before** into the 'Rows' box, and **response_after** into the 'Columns' box. You will then get a contingency table in the results window, with the statistic for the McNemar test just below it, see @fig-fig10-7.
 
 ```{r}
 #| label: fig-fig10-7
 #| classes: .enlarge-image
 #| fig-cap: McNemar test output in jamovi
-#| fig-alt: A jamovi screenshot displaying the "Paired Samples Contingency Tables" analysis. The interface shows options to select rows, columns, and counts, with results including contingency tables and McNemar test statistics on the right panel.
+#| fig-alt: A jamovi screenshot displaying the "Paired Samples Contingency Tables" analysis. The interface shows options to select rows, columns, and counts, with results including contingency tables and McNemar test statistics on the right panel
+#| fig-width: 8
+#| fig-height: 7
 knitr::include_graphics("images/fig10-7.png")
 ```
+
+Now that you know what the McNemar test is all about, lets actually run one. The *agpp.csv* file contains the raw data that I discussed previously. The *agpp* data set contains three variables, an id variable that labels each participant in the data set (we'll see why that's useful in a moment), a **response_before** variable that records the person's answer when they were asked the question the first time, and a response_after variable that shows the answer that they gave when asked the same question a second time. Notice that each participant appears only once in this data set. Go to the 'Analyses' -- 'Frequencies' -- 'Contingency Tables' -- 'Paired Samples' analysis in jamovi, and move **response_before** into the 'Rows' box, and **response_after** into the 'Columns' box. You will then get a contingency table in the results window, with the statistic for the McNemar test just below it, see @fig-fig10-7.
 
 And we're done. We've just run a McNemar's test to determine if people were just as likely to vote AGPP after the ads as they were beforehand. The test was significant ($\chi^2(1)= 12.03, p< .001)$, suggesting that they were not. And, in fact it looks like the ads had a negative effect: people were less likely to vote AGPP after seeing the ads. Which makes a lot of sense when you consider the quality of a typical political advertisement.
 
@@ -486,16 +507,18 @@ huxtabs[[10]][[14]]
 
 Suppose I wanted to know whether the choice you make the second time is dependent on the choice you made the first time. This is where a test of independence is useful, and what we're trying to do is see if there's some relationship between the rows and columns of this table. Alternatively, suppose I wanted to know if on average, the frequencies of suit choices were different the second time than the first time. In that situation, what I'm really trying to see is if the row totals are different from the column totals. That's when you use the McNemar test.
 
+The different statistics produced by these different analyses are shown in @fig-fig10-8. Notice that the results are different! These aren't the same test.
+
 ```{r}
 #| label: fig-fig10-8
 #| out.width: 80%
 #| fig-cap: Independent vs. Paired (McNemar) with the *Randomness.omv* (cards) data
 #| fig-alt: The image shows two sections of contingency tables. The first section has a table showing the distribution of choices (clubs, diamonds, hearts, spades) with a chi-squared test result and $p$-value. The second section has a paired samples contingency table with McNemar test results.
-#| fig-pos: 'h!'
+#| fig-pos: 'H'
 knitr::include_graphics("images/fig10-8.png")
 ```
 
-The different statistics produced by these different analyses are shown in @fig-fig10-8. Notice that the results are different! These aren't the same test.
+
 
 ## Summary
 

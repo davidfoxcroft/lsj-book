@@ -110,18 +110,20 @@ In contrast, the **less than or equal to** operator $<=$ will do exactly what it
 ```{r}
 #| label: tbl-tab6-2
 #| tbl-cap: Some logical operators
-huxtabs[[6]][[2]]
-```
-
-```{r}
-#| label: tbl-tab6-3
-#| tbl-cap: Some more logical operators
-huxtabs[[6]][[3]]
+huxtabs[[6]][[2]] |>
+  set_latex_float('H')
 ```
 
 Next on the list of logical operators is the **not equal to** operator $!=$ which, as with all the others, does what it says it does. It returns a value of TRUE when things on either side are not identical to each other. Therefore, since $2 + 2$ isn't equal to $5$, we would get "true" as the value for our newly computed variable. Try it and see:
 $$2 + 2 \text{ != } 5$$
 We're not quite done yet. There are three more logical operations that are worth knowing about, listed in @tbl-tab6-3. These are the **not** operator $!$, the **and** operator $and$, and the **or** operator $or$. Like the other logical operators, their behaviour is more or less exactly what you'd expect given their names. For instance, if I ask you to assess the claim that "either $2 + 2 = 4$ or $2 + 2 = 5$" you'd say that it's true. Since it's an "either-or" statement, all we need is for one of the two parts to be true. That's what the $or$ operator does.[^pragmatic-matters-5]
+
+```{r}
+#| label: tbl-tab6-3
+#| tbl-cap: Some more logical operators
+#| tbl-pos: 'h!'
+huxtabs[[6]][[3]]
+```
 
 On the other hand, if I ask you to assess the claim that "both $2 + 2 = 4$ and $2 + 2 = 5$" you'd say that it's false. Since this is an **and** statement we need both parts to be true. And that's what the $and$ operator does:
 $$(2+2 == 4) \text{ and } (2+2 == 5)$$
@@ -187,7 +189,7 @@ Now let's load and look at the data. The data file *likert.omv* contains a singl
 #| label: fig-fig6-4
 #| classes: .enlarge-image
 #| fig-cap: Creating a new computed variable in jamovi
-#| fig-alt: A jamovi screenshot showing a computed variable setup. The main formula shown is "= likert.raw - 4". The interface includes menu options like Variables, Data, Analyses, Edit, and a table displaying dataset values with labels "likert.raw" and "likert.cent".
+#| fig-alt: A jamovi screenshot showing a computed variable setup. The main formula shown is "= likert.raw - 4". The interface includes menu options like Variables, Data, Analyses, Edit, and a table displaying data set values with labels "likert.raw" and "likert.cent".
 knitr::include_graphics("images/fig6-4.png")
 ```
 
@@ -229,15 +231,16 @@ In some situations it can be quite helpful to group these into a smallish number
 
 Note that there are three left parentheses used during the nesting, so the whole statement has to end with three right parentheses otherwise you will get an error message. The jamovi screenshot for this data manipulation, along with an accompanying frequency table, is shown in @fig-fig6-6.
 
+It's important to take the time to figure out whether or not the resulting categories make any sense at all in terms of your research project. If they don't make any sense to you as meaningful categories, then any data analysis that uses those categories is likely to be just as meaningless. More generally, in practice I've noticed that people have a very strong desire to carve their (continuous and messy) data into a few (discrete and simple) categories, and then run analyses using the categorised data instead of the original data.[^pragmatic-matters-8] I wouldn't go so far as to say that this is an inherently bad idea, but it does have some fairly serious drawbacks at times, so I would advise some caution if you are thinking about doing it.
+
 ```{r}
 #| label: fig-fig6-6
 #| classes: .enlarge-image
 #| fig-cap: Collapsing a variable into a smaller number of discrete levels using the jamovi ‘IF’ function
-#| fig-alt: A jamovi screenshot is shown. The "COMPUTED VARIABLE" section shows variable creation for "AgeCats" with custom age groupings. Below, a table with two columns labeled "Age" and "AgeCats" shows age data grouped into new categories.
+#| fig-alt: A jamovi screenshot is shown. The "COMPUTED VARIABLE" section shows variable creation for "AgeCats" with custom age groupings. Below, a table with two columns labeled "Age" and "AgeCats" shows age data grouped into new categories
+#| fig-pos: 'H'
 knitr::include_graphics("images/fig6-6.png")
 ```
-
-It's important to take the time to figure out whether or not the resulting categories make any sense at all in terms of your research project. If they don't make any sense to you as meaningful categories, then any data analysis that uses those categories is likely to be just as meaningless. More generally, in practice I've noticed that people have a very strong desire to carve their (continuous and messy) data into a few (discrete and simple) categories, and then run analyses using the categorised data instead of the original data.[^pragmatic-matters-8] I wouldn't go so far as to say that this is an inherently bad idea, but it does have some fairly serious drawbacks at times, so I would advise some caution if you are thinking about doing it.
 
 [^pragmatic-matters-8]: If you've read further into the book, and are re-reading this section, then a good example of this would be someone choosing to do an ANOVA using 'AgeCats' as the grouping variable, instead of running a regression using Age as a predictor. There are sometimes good reasons for doing this. For instance, if the relationship between Age and your outcome variable is highly non-linear and you aren't comfortable with trying to run non-linear regression! However, unless you really do have a good rationale for doing this, it's best not to. It tends to introduce all sorts of other problems (e.g., the data will probably violate the normality assumption) and you can lose a lot of statistical power.
 
@@ -249,29 +252,32 @@ Sometimes you want to apply the same transformation to more than one variable, f
 #| label: fig-fig6-7
 #| classes: .enlarge-image
 #| fig-cap: Creating a new variable transformation using the jamovi 'Transform' command
-#| fig-alt: A jamovi screenshot is shown. The "Data" tab is selected, displaying options like Paste, Clipboard, Setup, and Compute. The "Transform Variable" menu is open, showing configuration for the variable "opinion.strength" with source and using transform fields.
+#| fig-alt: A jamovi screenshot is shown. The "Data" tab is selected, displaying options like Paste, Clipboard, Setup, and Compute. The "Transform Variable" menu is open, showing configuration for the variable "opinion.strength" with source and using transform fields
+#| fig-pos: 'H'
 knitr::include_graphics("images/fig6-7.png")
 ```
-
-Give your new variable a name, let's call it 'opinion.strength', and then click on the 'using transform' selection box and select 'Create New Transform...'. This is where you will create, and name, the transformation that can be re-applied to as many variables as you like. The transformation is automatically named for us as 'Transform 1' (imaginative, huh. You can change this if you like). Then type the expression "ABS(\$source - 4)" into the function text box, as in @fig-fig6-8, press Enter or Return on your keyboard and, hey presto, you have created a new transformation and applied it to the likert.raw variable! Good, eh. Note that instead of using the variable label in the expression, we have instead used '\$source'. This is so that we can then use the same transformation with as many different variables as we like -- jamovi requires you to use '\$source' to refer to the source variable you are transforming. Your transformation has also been saved and can be re-used any time you like (providing you save the dataset as an '.omv' file, otherwise you'll lose it!).
 
 ```{r}
 #| label: fig-fig6-8
 #| classes: .enlarge-image
 #| fig-cap: Specifying a transformation in jamovi, to be saved as the imaginatively named 'Transform 1'
-#| fig-alt: A jamovi screenshot showing a transformation window. The "Transform" tab is open, and a box prompting "Add recode condition" with math functions such as "ABS" and "LOG10." A variables list with "opinion.strength" is on the right.
+#| fig-alt: A jamovi screenshot showing a transformation window. The "Transform" tab is open, and a box prompting "Add recode condition" with math functions such as "ABS" and "LOG10." A variables list with "opinion.strength" is on the right
+#| fig-pos: 'h!'
 knitr::include_graphics("images/fig6-8.png")
 ```
 
-You can also create a transformation with the second example we looked at, the age distribution of people at a social gathering. Go on, you know you want to! Remember that we collapsed this variable into three groups: younger, adult and older. This time we will achieve the same thing, but using the jamovi 'Transform' -- 'Add condition' button. With this data set (go back to it or create it again if you didn't save it) set up a new variable transformation. Call the transformed variable 'AgeCats' and the transformation you will create 'Agegroupings'. Then click on the big "$+$" sign next to the function box. This is the 'Add condition' button and I've stuck a big red arrow onto @fig-fig6-9 so you can see exactly where this is. Re-create the transformation shown in @fig-fig6-9 and when you are done, you will see the new values appear in the spreadsheet window. What's more, the age groupings transformation has been saved and can be re-applied any time you like. Ok, so I know that it's unlikely you will have more than one 'Age' variable, but you get the idea now of how to set up transformations in jamovi, so you can follow this idea with other sorts of variables. A typical scenario for this is when you have a questionnaire scale with, say, 20 items (variables) and each item was originally scored from 1 to 6 but, for some reason or quirk of the data you decide to recode all the items as 1 to 3. You can easily do this in jamovi by creating and then re-applying your transformation for each variable that you want to recode.
+Give your new variable a name, let's call it 'opinion.strength', and then click on the 'using transform' selection box and select 'Create New Transform...'. This is where you will create, and name, the transformation that can be re-applied to as many variables as you like. The transformation is automatically named for us as 'Transform 1' (imaginative, huh. You can change this if you like). Then type the expression "ABS(\$source - 4)" into the function text box, as in @fig-fig6-8, press Enter or Return on your keyboard and, hey presto, you have created a new transformation and applied it to the likert.raw variable! Good, eh. Note that instead of using the variable label in the expression, we have instead used '\$source'. This is so that we can then use the same transformation with as many different variables as we like -- jamovi requires you to use '\$source' to refer to the source variable you are transforming. Your transformation has also been saved and can be re-used any time you like (providing you save the data set as an '.omv' file, otherwise you'll lose it!).
 
 ```{r}
 #| label: fig-fig6-9
 #| classes: .enlarge-image
 #| fig-cap: jamovi transformation into three age categories, using the 'Add condition' button
-#| fig-alt: A jamovi screenshot is showing the "TRANSFORM VARIABLE" dialog box. The variable "Agegroupings" is being edited with recode conditions:- if source <= 20, use "young"; if source <= 40, use "adult"; else, use "older" A red arrow points to "Add recode condition".
+#| fig-alt: A jamovi screenshot is showing the "TRANSFORM VARIABLE" dialog box. The variable "Agegroupings" is being edited with recode conditions:- if source <= 20, use "young"; if source <= 40, use "adult"; else, use "older" A red arrow points to "Add recode condition"
+#| fig-pos: 'h!'
 knitr::include_graphics("images/fig6-9.png")
 ```
+
+You can also create a transformation with the second example we looked at, the age distribution of people at a social gathering. Go on, you know you want to! Remember that we collapsed this variable into three groups: younger, adult and older. This time we will achieve the same thing, but using the jamovi 'Transform' -- 'Add condition' button. With this data set (go back to it or create it again if you didn't save it) set up a new variable transformation. Call the transformed variable 'AgeCats' and the transformation you will create 'Agegroupings'. Then click on the big "$+$" sign next to the function box. This is the 'Add condition' button and I've stuck a big red arrow onto @fig-fig6-9 so you can see exactly where this is. Re-create the transformation shown in @fig-fig6-9 and when you are done, you will see the new values appear in the spreadsheet window. What's more, the age groupings transformation has been saved and can be re-applied any time you like. Ok, so I know that it's unlikely you will have more than one 'Age' variable, but you get the idea now of how to set up transformations in jamovi, so you can follow this idea with other sorts of variables. A typical scenario for this is when you have a questionnaire scale with, say, 20 items (variables) and each item was originally scored from 1 to 6 but, for some reason or quirk of the data you decide to recode all the items as 1 to 3. You can easily do this in jamovi by creating and then re-applying your transformation for each variable that you want to recode.
 
 ## A few more mathematical functions and operations
 
@@ -280,8 +286,11 @@ In the section on [Transforming and recoding a variable] I discussed the ideas b
 ```{r}
 #| label: tbl-tab6-5
 #| tbl-cap: Some mathematical operators
+#| tbl-pos: 'h!'
 huxtabs[[6]][[5]] |>
-  set_contents(1, 1, "")
+  set_contents(1, 1, "") |>
+  set_latex_float('H')
+
 ```
 
 [^pragmatic-matters-9]: We'll leave the box-cox function until later on.
@@ -308,6 +317,7 @@ And with that, I think we've had quite enough exponentials and logarithms for th
 One very important kind of data handling is being able to extract a particular subset of the data. For instance, you might be interested only in analysing the data from one experimental condition, or you may want to look closely at the data from people over 50 years in age. To do this, the first step is getting jamovi to filter the subset of the data corresponding to the observations that you're interested in.
 
 This section returns to the *nightgarden.csv* data set. If you're reading this whole chapter in one sitting, then you should already have this data set loaded into a jamovi window. For this section, let's focus on the two variables speaker and utterance (see [Tabulating and cross-tabulating data] if you've forgotten what those variables look like). Suppose that what I want to do is pull out only those utterances that were made by Makka-Pakka. To that end, we need to specify a filter in jamovi. First open up a filter window by clicking on 'Filters' on the main jamovi 'Data' toolbar. Then, in the 'Filter 1' text box, next to the '=' sign, type the following, including the single quote marks:
+
 > speaker == 'makka-pakka'
 
 ```{r}
@@ -321,6 +331,7 @@ knitr::include_graphics("images/fig6-10.png")
 When you have done this, you will see that a new column has been added to the spreadsheet window (see @fig-fig6-10), labelled 'Filter 1', with the cases where speaker is <u>not</u> 'makka-pakka' greyed-out (i.e., filtered out) and, conversely, the cases where speaker <u>is</u> 'makka-pakka' have a green check mark indicating they are filtered in. You can test this by running 'Exploration' -- 'Descriptives' -- 'Frequency tables' for the speaker variable and seeing what that shows. Go on, try it!
 
 Following on from this simple example, you can also build up more complex filters using logical expressions in jamovi. For instance, suppose I wanted to keep only those cases when the utterance is either "pip" or "oo". In this case in the 'Filter 1' text box, next to the '=' sign, you would type the following:
+
 > utterance == 'pip' or utterance == 'oo'
 
 ## Summary

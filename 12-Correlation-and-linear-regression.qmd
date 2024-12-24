@@ -396,13 +396,25 @@ z.pred <- matrix(predict(fit, newdata = xy),
                  nrow = grid.lines, ncol = grid.lines)
 # predicted (fitted) points for droplines to surface
 fitpoints <- predict(fit)
+
+# Save the current graphical parameters
+op <- par(no.readonly = TRUE)
+
+# Set the font globally
+par(family = "TeX Gyre Pagella") # Specify the name of the font
+
 # scatter plot with regression plane
 library(plot3D)
 scatter3D(x, y, z, pch = 20, cex = 1.2, col = blueshade, colkey = F, colvar = NULL,
     theta = -130, phi = 20, ticktype = "detailed",
     xlab = "\n\nbaby.sleep", ylab = "\n\ndan.sleep", zlab = "\n\ndan.grump",
     surf = list(x = x.pred, y = y.pred, z = z.pred, col="grey",
-    facets = NA, fit = fitpoints), main = "")
+    facets = NA, fit = fitpoints), main = "") 
+
+
+.# Restore the graphical parameters
+on.exit(par(op))
+# dev.off()
 
 ```
 
@@ -581,7 +593,7 @@ Before moving on, I should point out that you don't often need to obtain these r
 
 ### Checking the linearity of the relationship
 
-We should check for the linearity of the relationships between the predictors and the outcomes. There's a few different things that you might want to do in order to check this. Firstly, it never hurts to just plot the relationship between the predicted values $\hat{Y}_i$ and the observed values $Y_i$ for the outcome variable, as illustrated in @fig-fig12-17. To draw this in jamovi we saved the predicted values to the dataset, and then drew a scatterplot of the observed against the predicted (fitted) values. This gives you a kind of "big picture view" -- if this plot looks approximately linear, then we're probably not doing too badly (though that's not to say that there aren't problems). However, if you can see big departures from linearity here, then it strongly suggests that you need to make some changes.
+We should check for the linearity of the relationships between the predictors and the outcomes. There's a few different things that you might want to do in order to check this. Firstly, it never hurts to just plot the relationship between the predicted values $\hat{Y}_i$ and the observed values $Y_i$ for the outcome variable, as illustrated in @fig-fig12-17. To draw this in jamovi we saved the predicted values to the data set, and then drew a scatterplot of the observed against the predicted (fitted) values. This gives you a kind of "big picture view" -- if this plot looks approximately linear, then we're probably not doing too badly (though that's not to say that there aren't problems). However, if you can see big departures from linearity here, then it strongly suggests that you need to make some changes.
 
 ```{r out.width="70%"}
 #| label: fig-fig12-17
@@ -590,7 +602,7 @@ We should check for the linearity of the relationships between the predictors an
 knitr::include_graphics("images/fig12-17.png")
 ```
 
-In any case, in order to get a more detailed picture it's often more informative to look at the relationship between the predicted values and the residuals themselves. Again, in jamovi you can save the residuals to the dataset and then draw a scatterplot of the predicted values against the residual values, as in @fig-fig12-18. As you can see, not only does it draw the scatterplot showing the predicted value against the residuals, you can also plot a line through the data that shows the relationship between the two. Ideally, this should be a straight, perfectly horizontal line. In practice, we're looking for a reasonably straight or flat line. This is a matter of judgement.
+In any case, in order to get a more detailed picture it's often more informative to look at the relationship between the predicted values and the residuals themselves. Again, in jamovi you can save the residuals to the data set and then draw a scatterplot of the predicted values against the residual values, as in @fig-fig12-18. As you can see, not only does it draw the scatterplot showing the predicted value against the residuals, you can also plot a line through the data that shows the relationship between the two. Ideally, this should be a straight, perfectly horizontal line. In practice, we're looking for a reasonably straight or flat line. This is a matter of judgement.
 
 ```{r out.width="70%"}
 #| label: fig-fig12-18
@@ -793,7 +805,7 @@ You can see that, in this example, the mean Cook's distance value is $0.01$, and
 
 An obvious question to ask next is, if you do have large values of Cook's distance what should you do? As always, there's no hard and fast rule. Probably the first thing to do is to try running the regression with the outlier with the greatest Cook's distance[^12-correlation-and-linear-regression-27] excluded and see what happens to the model performance and to the regression coefficients. If they really are substantially different, it's time to start digging into your data set and your notes that you no doubt were scribbling as your ran your study. Try to figure out why the point is so different. If you start to become convinced that this one data point is badly distorting your results then you might consider excluding it, but that's less than ideal unless you have a solid explanation for why this particular case is qualitatively different from the others and therefore deserves to be handled separately.
 
-[^12-correlation-and-linear-regression-27]: In jamovi you can save the Cook's distance values to the dataset, then draw a boxplot of the Cook's distance values to identify the specific outliers. Or you could use a more powerful regression program such as the "car" package in R which has more options for advanced regression diagnostic analysis.
+[^12-correlation-and-linear-regression-27]: In jamovi you can save the Cook's distance values to the data set, then draw a boxplot of the Cook's distance values to identify the specific outliers. Or you could use a more powerful regression program such as the "car" package in R which has more options for advanced regression diagnostic analysis.
 
 
 ## Model selection

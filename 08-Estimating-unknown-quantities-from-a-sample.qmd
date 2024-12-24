@@ -29,10 +29,9 @@ Sometimes it's easy to state the population of interest. For instance, in the "p
 - Australians of similar ages to my sample?
 - Anyone currently alive?
 - Any human being, past, present or future?
-- Any biological organism with a sufficient degree of intelligence operating in a terrestrial environment?
 - Any intelligent being?
 
-Each of these defines a real group of mind-possessing entities, all of which might be of interest to me as a cognitive scientist, and it's not at all clear which one ought to be the true population of interest. As another example, consider the Wellesley-Croker game that we discussed in the Prelude to part IV. The sample here is a specific sequence of 12 wins and 0 losses for Wellesley. What is the population? Again, it's not obvious what the population is.
+Each of these defines a real group of mind-possessing entities, all of which might be of interest to me as a cognitive scientist, and it's not at all clear which one ought to be the true population of interest. As another example, consider the Wellesley-Croker game that we discussed in the Prelude to Part IV. The sample here is a specific sequence of 12 wins and 0 losses for Wellesley. What is the population? Again, it's not obvious what the population is.
 
 - All outcomes until Wellesley and Croker arrived at their destination?
 - All outcomes if Wellesley and Croker had played the game for the rest of their lives?
@@ -43,34 +42,36 @@ Each of these defines a real group of mind-possessing entities, all of which mig
 
 Irrespective of how I define the population, the critical point is that the sample is a subset of the population and our goal is to use our knowledge of the sample to draw inferences about the properties of the population. The relationship between the two depends on the procedure by which the sample was selected. This procedure is referred to as a **sampling method** and it is important to understand why it matters.
 
-To keep things simple, let's imagine that we have a bag containing 10 chips. Each chip has a unique letter printed on it so we can distinguish between the 10 chips. The chips come in two colours, black and white. This set of chips is the population of interest and it is depicted graphically on the left of @fig-fig8-1. As you can see from looking at the picture there are 4 black chips and 6 white chips, but of course in real life we wouldn't know that unless we looked in the bag. Now imagine you run the following "experiment": you shake up the bag, close your eyes, and pull out 4 chips without putting any of them back into the bag. First out comes the a chip (black), then the c chip (white), then j (white) and then finally b (black). If you wanted you could then put all the chips back in the bag and repeat the experiment, as depicted on the right-hand side of @fig-fig8-1. Each time you get different results but the procedure is identical in each case. The fact that the same procedure can lead to different results each time is what we refer to as a *random process*.[^08-estimating-unknown-quantities-from-a-sample-1] However, because we shook the bag before pulling any chips out, it seems reasonable to think that every chip has the same chance of being selected. A procedure in which every member of the population has the same chance of being selected is called a **simple random sample**. The fact that we did not put the chips back in the bag after pulling them out means that you can't observe the same thing twice, and in such cases the observations are said to have been sampled **without replacement**.
-
-```{r}
-#| label: fig-fig8-1
-#| fig-cap: Simple random sampling without replacement from a finite population
-#| fig-alt: A diagram shows a population consisting of 10 circles labeled a to j. Arrows point from this population to three groups of circles, demonstrating simple random samples without replacement. The groups are labeled 'a, c, j, b,' 'i, e, a, f,' and 'g, c, f, d.'.
-knitr::include_graphics("images/fig8-1.png")
-```
+To keep things simple, let's imagine that we have a bag containing 10 chips. Each chip has a unique letter printed on it so we can distinguish between the 10 chips. The chips come in two colours, black and white. This set of chips is the population of interest and it is depicted graphically on the left of @fig-fig8-1. As you can see from looking at the picture there are 4 black chips and 6 white chips, but of course in real life we wouldn't know that unless we looked in the bag. Now imagine you run the following "experiment": you shake up the bag, close your eyes, and pull out 4 chips without putting any of them back into the bag. First out comes the $a$ chip (black), then the $c$ chip (white), then $j$ (white) and then finally $b$ (black). If you wanted you could then put all the chips back in the bag and repeat the experiment, as depicted on the right-hand side of @fig-fig8-1. Each time you get different results but the procedure is identical in each case. The fact that the same procedure can lead to different results each time is what we refer to as a *random process*.[^08-estimating-unknown-quantities-from-a-sample-1] However, because we shook the bag before pulling any chips out, it seems reasonable to think that every chip has the same chance of being selected. A procedure in which every member of the population has the same chance of being selected is called a **simple random sample**. The fact that we did not put the chips back in the bag after pulling them out means that you can't observe the same thing twice, and in such cases the observations are said to have been sampled **without replacement**.
 
 [^08-estimating-unknown-quantities-from-a-sample-1]: The proper mathematical definition of randomness is extraordinarily technical, and way beyond the scope of this book. We'll be non-technical here and say that a process has an element of randomness to it whenever it is possible to repeat the process and get different answers each time.
 
-To help make sure you understand the importance of the sampling procedure, consider an alternative way in which the experiment could have been run. Suppose that my five-year old son had opened the bag and decided to pull out four black chips without putting any of them back in the bag. This biased sampling scheme is depicted in @fig-fig8-2. Now consider the evidential value of seeing 4 black chips and 0 white chips. Clearly it depends on the sampling scheme, does it not? If you know that the sampling scheme is biased to select only black chips then a sample that consists of only black chips doesn't tell you very much about the population! For this reason statisticians really like it when a data set can be considered a simple random sample, because it makes the data analysis *much* easier.
+```{r out.width="90%"}
+#| label: fig-fig8-1
+#| fig-cap: Simple random sampling without replacement from a finite population
+#| fig-alt: A diagram shows a population consisting of 10 circles labeled a to j. Arrows point from this population to three groups of circles, demonstrating simple random samples without replacement. The groups are labeled 'a, c, j, b,' 'i, e, a, f,' and 'g, c, f, d.'
+#| fig-height: 5
+knitr::include_graphics("images/fig8-1.png")
+```
 
-```{r}
+```{r out.width="90%"}
 #| label: fig-fig8-2
 #| fig-cap: Biased sampling without replacement from a finite population
-#| fig-alt: A diagram shows biased sampling (without replacement) from a population of 10 items labeled a to j. Three sample sets of four items each are drawn:- {a, b, g, h}, {g, b, h, a}, and {a, h, b, g}. Black circles denote selected items; white circles denote unselected items.
+#| fig-alt: A diagram shows biased sampling (without replacement) from a population of 10 items labeled a to j. Three sample sets of four items each are drawn:- {a, b, g, h}, {g, b, h, a}, and {a, h, b, g}. Black circles denote selected items; white circles denote unselected items
+#| fig-height: 5
+#| fig-pos: 'H'
 knitr::include_graphics("images/fig8-2.png")
 ```
 
-A third procedure is worth mentioning. This time around we close our eyes, shake the bag, and pull out a chip. This time, however, we record the observation and then put the chip back in the bag. Again we close our eyes, shake the bag, and pull out a chip. We then repeat this procedure until we have 4 chips. Data sets generated in this way are still simple random samples, but because we put the chips back in the bag immediately after drawing them it is referred to as a sample **with replacement**. The difference between this situation and the first one is that it is possible to observe the same population member multiple times, as illustrated in @fig-fig8-3.
-
-```{r}
+```{r out.width="90%"}
 #| label: fig-fig8-3
 #| fig-cap: Simple random sampling *with* replacement from a finite population
-#| fig-alt: A diagram illustrating simple random sampling with replacement. The population, represented by 10 black-and-white circles labeled 'a' to 'j', is shown on the left. Three samples, each containing four circles, are shown on the right with arrows pointing from the population.
+#| fig-alt: A diagram illustrating simple random sampling with replacement. The population, represented by 10 black-and-white circles labeled 'a' to 'j', is shown on the left. Three samples, each containing four circles, are shown on the right with arrows pointing from the population
+#| fig-pos: 'H'
 knitr::include_graphics("images/fig8-3.png")
 ```
+
+To help make sure you understand the importance of the sampling procedure, consider an alternative way in which the experiment could have been run. Suppose that my five-year old son had opened the bag and decided to pull out four black chips without putting any of them back in the bag. This biased sampling scheme is depicted in @fig-fig8-2. Now consider the evidential value of seeing 4 black chips and 0 white chips. Clearly it depends on the sampling scheme, does it not? If you know that the sampling scheme is biased to select only black chips then a sample that consists of only black chips doesn't tell you very much about the population! For this reason statisticians really like it when a data set can be considered a simple random sample, because it makes the data analysis *much* easier. A third procedure is worth mentioning. This time around we close our eyes, shake the bag, and pull out a chip. This time, however, we record the observation and then put the chip back in the bag. Again we close our eyes, shake the bag, and pull out a chip. We then repeat this procedure until we have 4 chips. Data sets generated in this way are still simple random samples, but because we put the chips back in the bag immediately after drawing them it is referred to as a sample **with replacement**. The difference between this situation and the first one is that it is possible to observe the same population member multiple times, as illustrated in @fig-fig8-3.
 
 In my experience, most psychology experiments tend to be sampling without replacement, because the same person is not allowed to participate in the experiment twice. However, most statistical theory is based on the assumption that the data arise from a simple random sample **with replacement**. In real life this very rarely matters. If the population of interest is large (e.g., has more than 10 entities!) the difference between sampling with and without replacement is too small to be concerned with. The difference between simple random samples and biased samples, on the other hand, is not such an easy thing to dismiss.
 
@@ -100,8 +101,8 @@ The idea is quite simple. Let's say we're talking about IQ scores. To a psycholo
 
 ```{r}
 #| label: fig-fig8-4
-#| fig-width: 9
-#| fig-height: 3
+#| fig-width: 8
+#| fig-height: 4
 #| fig-cap: The population distribution of IQ scores (panel (a)) and two samples drawn randomly from it. In panel (b) we have a sample of 100 observations, and panel (c) we have a sample of 10,000 observations
 #| fig-alt: The image contains three graphs of IQ scores. The left graph is a probability density curve, the middle graph is a histogram with frequencies, and the right graph is another histogram with higher frequencies. All charts show IQ scores on the x-axis.
 
@@ -135,17 +136,20 @@ Each of these IQ scores is sampled from a normal distribution with mean 100 and 
 
 ## The law of large numbers
 
-In the previous section I showed you the results of one fictitious IQ experiment with a sample size of $N = 100$. The results were somewhat encouraging as the true population mean is 100 and the sample mean of 98.5 is a pretty reasonable approximation to it. In many scientific studies that level of precision is perfectly acceptable, but in other situations you need to be a lot more precise. If we want our sample statistics to be much closer to the population parameters, what can we do about it? The obvious answer is to collect more data. Suppose that we ran a much larger experiment, this time measuring the IQs of 10,000 people. We can simulate the results of this experiment using jamovi. The *IQsim.omv* file is a jamovi data file. In this file I have generated 10,000 random numbers sampled from a normal distribution for a population with $mean = 100$ and $sd = 15$. This was done by computing a new variable using the '= NORM(100,15)' function. A histogram and density plot shows that this larger sample is a much better approximation to the true population distribution than the smaller one. This is reflected in the sample statistics. The mean IQ for the larger sample turns out to be 99.68 and the standard deviation is 14.90. These values are now very close to the true population. See @fig-fig8-5.
+In the previous section I showed you the results of one fictitious IQ experiment with a sample size of $N = 100$. The results were somewhat encouraging as the true population mean is 100 and the sample mean of 98.5 is a pretty reasonable approximation to it. In many scientific studies that level of precision is perfectly acceptable, but in other situations you need to be a lot more precise. If we want our sample statistics to be much closer to the population parameters, what can we do about it? The obvious answer is to collect more data. Suppose that we ran a much larger experiment, this time measuring the IQs of 10,000 people. We can simulate the results of this experiment using jamovi. The *IQsim.omv* file is a jamovi data file. In this file I have generated 10,000 random numbers sampled from a normal distribution for a population with $mean = 100$ and $sd = 15$. This was done by computing a new variable using the '= NORM(100,15)' function. In @fig-fig8-5 a histogram and density plot shows that this larger sample is a better approximation to the true population distribution than the smaller one. This is reflected in the sample statistics. The mean IQ for the larger sample is 99.68 and the standard deviation is 14.90. These values are now very close to the true population. 
 
 ```{r}
 #| label: fig-fig8-5
 #| classes: .enlarge-image
 #| fig-cap: A random sample drawn from a normal distribution using jamovi
-#| fig-alt: A jamovi screenshot is shown. It includes menus for variable manipulation and data analysis. A computed variable "IQsim" is displayed with a formula. A table lists numeric IQsim values, and a histogram with descriptive statistics is shown on the right.
+#| fig-alt: A jamovi screenshot is shown. It includes menus for variable manipulation and data analysis. A computed variable "IQsim" is displayed with a formula. A table lists numeric IQsim values, and a histogram with descriptive statistics is shown on the right
+#| fig-height: 4
+#| fig-width: 8
+#| fig-pos: 'h!'
 knitr::include_graphics("images/fig8-5.png")
 ```
 
-I feel a bit silly saying this, but the thing I want you to take away from this is that large samples generally give you better information. I feel silly saying it because it's so bloody obvious that it shouldn't need to be said. In fact, it's such an obvious point that when Jacob Bernoulli, one of the founders of probability theory, formalised this idea back in 1713 he was kind of a jerk about it. Here's how he described the fact that we all share this intuition:
+I feel a bit silly saying this, but the thing I want you to take away from this is that large samples generally give you better information. I feel silly saying it because it's so obvious that it shouldn't need to be said. In fact, it's such an obvious point that when Jacob Bernoulli, one of the founders of probability theory, formalised this idea back in 1713 he was kind of a jerk about it. Here's how he described the fact that we all share this intuition:
 
 > *For even the most stupid of men, by some instinct of nature, by himself and without any instruction (which is a remarkable thing), is convinced that the more observations have been made, the less danger there is of wandering from one's goal* [@Stigler1986, p. 65].
 
@@ -173,13 +177,15 @@ The mean IQ in this sample turns out to be exactly 95. Not surprisingly, this is
 
 > 78 88 111 111 117
 
-This time around, the mean IQ in my sample is 101. If I repeat the experiment 10 times I obtain the results shown in @tbl-tab8-1, and as you can see the sample mean varies from one replication to the next.
+This time around, the mean IQ in my sample is 101. If I repeat the experiment 10 times I obtain the results shown in @tbl-tab8-1, and as you can see the sample mean varies from one replication to the next.\
 
 ```{r}
 #| label: tbl-tab8-1
 #| tbl-cap: Ten replications of the IQ experiment, each with a sample size of $( N = 5 )$
 huxtabs[[8]][[1]]
 ```
+
+\
 
 Now suppose that I decided to keep going in this fashion, replicating this "five IQ scores" experiment over and over again. Every time I replicate the experiment I write down the sample mean. Over time, I'd be amassing a new data set, in which every experiment generates a single data point. The first 10 observations from my data set are the sample means listed in @tbl-tab8-1, so my data set starts out like this:
 
@@ -189,10 +195,13 @@ What if I continued like this for 10,000 replications, and then drew a histogram
 
 Sampling distributions are another important theoretical idea in statistics, and they're crucial for understanding the behaviour of small samples. For instance, when I ran the very first "five IQ scores" experiment, the sample mean turned out to be 95. What the sampling distribution in @fig-fig8-6 tells us, though, is that the "five IQ scores" experiment is not very accurate. If I repeat the experiment, the sampling distribution tells me that I can expect to see a sample mean anywhere between 80 and 120.
 
-```{r out.width="70%"}
+```{r out.width="80%"}
 #| label: fig-fig8-6
 #| fig-cap: The sampling distribution of the mean for the "five IQ scores experiment". If you sample 5 people at random and calculate their average IQ you will almost certainly get a number between 80 and 120, even though there are quite a lot of individuals who have IQs above 120 or below 80. For comparison, the black line plots the population distribution of IQ scores
-#| fig-alt: A histogram of IQ scores with a superimposed normal distribution curve. The x-axis ranges from 60 to 140, with a peak around 100. The y-axis shows frequency. The histogram bars are blue, and the normal distribution curve is black.
+#| fig-alt: A histogram of IQ scores with a superimposed normal distribution curve. The x-axis ranges from 60 to 140, with a peak around 100. The y-axis shows frequency. The histogram bars are blue, and the normal distribution curve is black
+#| fig-width: 6
+#| fig-height: 4
+#| fig-pos: 'h!'
 
 sdm_data <- lapply(1:10000, function (x) {
   rnorm(5, 100, 15)
@@ -200,28 +209,6 @@ sdm_data <- lapply(1:10000, function (x) {
 sdm_data_means <- data.frame(sample_means = unlist(lapply(sdm_data,mean)))
 
 ggplot(data = sdm_data_means, aes(x = sample_means )) +
-  geom_histogram(aes(y =after_stat(density)), binwidth=4, col=blueshade, fill=blueshade, alpha=0.7) +
-  stat_function(fun = dnorm, args = list(mean = 100, sd = 15), col="black", linewidth=1) +
-  scale_x_continuous(limits=c(60,140), breaks = seq(60, 140, 20)) +
-  xlab("\nIQ score") +
-  theme(
-    axis.title.y = element_blank(),
-    axis.line.y = element_blank(),
-    axis.ticks.y = element_blank(),
-    axis.text.y = element_blank())
-```
-
-```{r out.width="70%"}
-#| label: fig-fig8-7
-#| fig-cap: The sampling distribution of the maximum for the "five IQ scores experiment". If you sample 5 people at random and select the one with the highest IQ score you will probably see someone with an IQ between 100 and 140
-#| fig-alt: A histogram of IQ scores is displayed with blue bars indicating the frequency of each score range. A black bell curve overlay represents the normal distribution, with scores ranging from 60 to 140 on the x-axis.
-
-sdm_data <- lapply(1:10000, function (x) {
-  rnorm(5, 100, 15)
-})
-sdm_data_max <- data.frame(sample_max = unlist(lapply(sdm_data,max)))
-
-ggplot(data = sdm_data_max, aes(x = sample_max )) +
   geom_histogram(aes(y =after_stat(density)), binwidth=4, col=blueshade, fill=blueshade, alpha=0.7) +
   stat_function(fun = dnorm, args = list(mean = 100, sd = 15), col="black", linewidth=1) +
   scale_x_continuous(limits=c(60,140), breaks = seq(60, 140, 20)) +
@@ -241,16 +228,41 @@ One thing to keep in mind when thinking about sampling distributions is that any
 
 Doing this over and over again would give me a very different sampling distribution, namely the sampling distribution of the maximum. The sampling distribution of the maximum of 5 IQ scores is shown in @fig-fig8-7. Not surprisingly, if you pick 5 people at random and then find the person with the highest IQ score, they're going to have an above average IQ. Most of the time you'll end up with someone whose IQ is measured in the 100 to 140 range.
 
+```{r out.width="80%"}
+#| label: fig-fig8-7
+#| fig-cap: The sampling distribution of the maximum for the "five IQ scores experiment". If you sample 5 people at random and select the one with the highest IQ score you will probably see someone with an IQ between 100 and 140
+#| fig-alt: A histogram of IQ scores is displayed with blue bars indicating the frequency of each score range. A black bell curve overlay represents the normal distribution, with scores ranging from 60 to 140 on the x-axis
+#| fig-width: 6
+#| fig-height: 4
+#| fig-pos: 'H'
+
+sdm_data <- lapply(1:10000, function (x) {
+  rnorm(5, 100, 15)
+})
+sdm_data_max <- data.frame(sample_max = unlist(lapply(sdm_data,max)))
+
+ggplot(data = sdm_data_max, aes(x = sample_max )) +
+  geom_histogram(aes(y =after_stat(density)), binwidth=4, col=blueshade, fill=blueshade, alpha=0.7) +
+  stat_function(fun = dnorm, args = list(mean = 100, sd = 15), col="black", linewidth=1) +
+  scale_x_continuous(limits=c(60,140), breaks = seq(60, 140, 20)) +
+  xlab("\nIQ score") +
+  theme(
+    axis.title.y = element_blank(),
+    axis.line.y = element_blank(),
+    axis.ticks.y = element_blank(),
+    axis.text.y = element_blank())
+```
+
 ### The central limit theorem {#sec-The-central-limit-theorem}
 
-At this point I hope you have a pretty good sense of what sampling distributions are, and in particular what the sampling distribution of the mean is. In this section I want to talk about how the sampling distribution of the mean changes as a function of sample size. Intuitively, you already know part of the answer. If you only have a few observations, the sample mean is likely to be quite inaccurate. If you replicate a small experiment and recalculate the mean you'll get a very different answer. In other words, the sampling distribution is quite wide. If you replicate a large experiment and recalculate the sample mean you'll probably get the same answer you got last time, so the sampling distribution will be very narrow. You can see this visually in @fig-fig8-8, showing that the bigger the sample size, the narrower the sampling distribution gets. We can quantify this effect by calculating the standard deviation of the sampling distribution, which is referred to as the **standard error**. The standard error of a statistic is often denoted SE, and since we're usually interested in the standard error of the sample mean, we often use the acronym SEM. As you can see just by looking at the picture, as the sample size $N$ increases, the SEM decreases.
+At this point I hope you have a pretty good sense of what sampling distributions are, and in particular what the sampling distribution of the mean is. In this section I want to talk about how the sampling distribution of the mean changes as a function of sample size. Intuitively, you already know part of the answer. If you only have a few observations, the sample mean is likely to be quite inaccurate. If you replicate a small experiment and recalculate the mean you'll get a very different answer. In other words, the sampling distribution is quite wide. If you replicate a large experiment and recalculate the sample mean you'll probably get the same answer you got last time, so the sampling distribution will be very narrow. You can see this visually in @fig-fig8-8, showing that the bigger the sample size, the narrower the sampling distribution gets: in panel (a), each data set contained only a single observation, so the mean of each sample is the IQ score of just one person. As a consequence, the sampling distribution of the mean is of course identical to the population distribution of IQ scores. However, when we raise the sample size to 2 the mean of any one sample tends to be closer to the population mean than the IQ score of any one person, and so the histogram (i.e., the sampling distribution) is a bit narrower than the population distribution. By the time we raise the sample size to 10 (panel (c)), we can see that the distribution of sample means tend to be fairly tightly clustered around the true population mean. We can quantify this effect by calculating the standard deviation of the sampling distribution, which is referred to as the **standard error**. The standard error of a statistic is often denoted SE, and since we're usually interested in the standard error of the sample mean, we often use the acronym SEM. As you can see just by looking at the picture, as the sample size $N$ increases, the SEM decreases.
 
 ```{r}
 #| label: fig-fig8-8
-#| fig-width: 9
-#| fig-height: 3
+#| fig-width: 8
+#| fig-height: 4
 #| out.width: 100%
-#| fig-cap: An illustration of the how sampling distribution of the mean depends on sample size. In each panel I generated 10,000 samples of IQ data and calculated the mean IQ observed within each of these data sets. The histograms in these plots show the distribution of these means (i.e., the sampling distribution of the mean). Each individual IQ score was drawn from a normal distribution with mean 100 and standard deviation 15, which is shown as the solid black line. In panel (a), each data set contained only a single observation, so the mean of each sample is the IQ score of just one person. As a consequence, the sampling distribution of the mean is of course identical to the population distribution of IQ scores. However, when we raise the sample size to 2 the mean of any one sample tends to be closer to the population mean than the IQ score of any one person, and so the histogram (i.e., the sampling distribution) is a bit narrower than the population distribution. By the time we raise the sample size to 10 (panel (c)), we can see that the distribution of sample means tend to be fairly tightly clustered around the true population mean
+#| fig-cap: An illustration of the how sampling distribution of the mean depends on sample size. In each panel I generated 10,000 samples of IQ data and calculated the mean IQ observed within each of these data sets. The histograms in these plots show the distribution of these means (i.e., the sampling distribution of the mean). Each individual IQ score was drawn from a normal distribution with mean 100 and standard deviation 15, which is shown as the solid black line.
 #| fig-alt: Three histograms show the distribution of IQ scores with varying sample sizes. (a) Sample size of 1:- broad distribution. (b) Sample size of 2:- narrower distribution. (c) Sample size of 10:- most narrow distribution. All have normal distribution curves overlaid.
 
 sampling_plots_df <- data.frame(n = c(1,2,10),
@@ -286,12 +298,28 @@ gridExtra::grid.arrange(grob = sampling_plots[[1]],
 
 Okay, so that's one part of the story. However, there's something I've been glossing over so far. All my examples up to this point have been based on the "IQ scores" experiments, and because IQ scores are roughly normally distributed I've assumed that the population distribution is normal. What if it isn't normal? What happens to the sampling distribution of the mean? The remarkable thing is this, no matter what shape your population distribution is, as $N$ increases the sampling distribution of the mean starts to look more like a normal distribution. To give you a sense of this I ran some simulations. To do this, I started with the "ramped" distribution shown in the histogram in @fig-fig8-9. As you can see by comparing the triangular shaped histogram to the bell curve plotted by the black line, the population distribution doesn't look very much like a normal distribution at all. Next, I simulated the results of a large number of experiments. In each experiment I took $N = 2$ samples from this distribution, and then calculated the sample mean. @fig-fig8-9 (b) plots the histogram of these sample means (i.e., the sampling distribution of the mean for $N = 2$). This time, the histogram produces a $\chi^2$-shaped distribution. It's still not normal, but it's a lot closer to the black line than the population distribution in @fig-fig8-9 (a). When I increase the sample size to $N = 4$, the sampling distribution of the mean is very close to normal (@fig-fig8-9 (c)), and by the time we reach a sample size of $N = 8$ it's almost perfectly normal. In other words, as long as your sample size isn't tiny, the sampling distribution of the mean will be approximately normal no matter what your population distribution looks like!
 
+On the basis of these figures, it seems like we have evidence for all of the following claims about the sampling distribution of the mean.
+
+- The mean of the sampling distribution is the same as the mean of the population.
+- The standard deviation of the sampling distribution (i.e., the standard error) gets smaller as the sample size increases.
+- The shape of the sampling distribution becomes normal as the sample size increases.
+
+As it happens, not only are all of these statements true, there is a very famous theorem in statistics that proves all three of them, known as the **central limit theorem**. Among other things, the central limit theorem tells us that if the population distribution has mean $\mu$ and standard deviation $\sigma$, then the sampling distribution of the mean also has mean $\mu$ and the standard error of the mean is:
+$$SEM=\frac{\sigma}{\sqrt{N}}$$
+
+Because we divide the population standard deviation $\sigma$ by the square root of the sample size $N$, the SEM gets smaller as the sample size increases. It also tells us that the shape of the sampling distribution becomes normal.[^08-estimating-unknown-quantities-from-a-sample-4]
+
+[^08-estimating-unknown-quantities-from-a-sample-4]: As usual, I'm being a bit sloppy here. The central limit theorem is a bit more general than this section implies. Like most introductory stats texts I've discussed one situation where the central limit theorem holds: when you're taking an average across lots of independent events drawn from the same distribution. However, the central limit theorem is much broader than this. There's a whole class of things called "U-statistics" for instance, all of which satisfy the central limit theorem and therefore become normally distributed for large sample sizes. The mean is one such statistic, but it's not the only one.
+
+This result is useful for all sorts of things. It tells us why large experiments are more reliable than small ones, and because it gives us an explicit formula for the standard error it tells us how much more reliable a large experiment is. It tells us why the normal distribution is, well, normal. In real experiments, many of the things that we want to measure are actually averages of lots of different quantities (e.g., arguably, "general" intelligence as measured by IQ is an average of a large number of "specific" skills and abilities), and when that happens, the averaged quantity should follow a normal distribution. Because of this mathematical law, the normal distribution pops up over and over again in real data.
+
 ```{r}
 #| label: fig-fig8-9
-#| fig-width: 12
-#| fig-height: 12
+#| fig-width: 16
+#| fig-height: 16
 #| fig-cap: A demonstration of the central limit theorem. In panel (a), we have a non-normal population distribution, and panels (b)-(d) show the sampling distribution of the mean for samples of size 2,4 and 8 for data drawn from the distribution in panel (a). As you can see, even though the original population distribution is non-normal the sampling distribution of the mean becomes pretty close to normal by the time you have a sample of even four observations
-#| fig-alt: Four histograms displaying sample means with increasing sample sizes:- (a) 1, (b) 2, (c) 4, and (d) 8. Each has a superimposed curve transitioning from a right-skewed to a normal distribution shape as sample size increases. All x-axes are labeled "Sample Mean".
+#| fig-alt: Four histograms displaying sample means with increasing sample sizes:- (a) 1, (b) 2, (c) 4, and (d) 8. Each has a superimposed curve transitioning from a right-skewed to a normal distribution shape as sample size increases. All x-axes are labeled "Sample Mean"
+#| fig-pos: 'H'
 
 # parameters of the beta
 a <- 2
@@ -320,11 +348,11 @@ sampling_plots <- lapply(sampling_plots_df$n, function(i) {
   ggtitle(paste0(sampling_plots_df$lab[sampling_plots_df$n == i]," Sample size = ", i)) +
   theme(
     axis.title.y = element_blank(),
-    axis.title.x=element_text(size=12),
+    axis.title.x=element_text(size=20),
     axis.line.y = element_blank(),
     axis.ticks.y = element_blank(),
     axis.text.y = element_blank(),
-    plot.title = element_text(hjust = 0.5, size=16))
+    plot.title = element_text(hjust = 0.5, size=20))
 })
 
 gridExtra::grid.arrange(grob = sampling_plots[[1]],
@@ -334,21 +362,6 @@ gridExtra::grid.arrange(grob = sampling_plots[[1]],
                         nrow = 2,
                         ncol = 2)
 ```
-
-On the basis of these figures, it seems like we have evidence for all of the following claims about the sampling distribution of the mean.
-
-- The mean of the sampling distribution is the same as the mean of the population.
-- The standard deviation of the sampling distribution (i.e., the standard error) gets smaller as the sample size increases.
-- The shape of the sampling distribution becomes normal as the sample size increases.
-
-As it happens, not only are all of these statements true, there is a very famous theorem in statistics that proves all three of them, known as the **central limit theorem**. Among other things, the central limit theorem tells us that if the population distribution has mean $\mu$ and standard deviation $\sigma$, then the sampling distribution of the mean also has mean $\mu$ and the standard error of the mean is:
-$$SEM=\frac{\sigma}{\sqrt{N}}$$
-
-Because we divide the population standard deviation $\sigma$ by the square root of the sample size $N$, the SEM gets smaller as the sample size increases. It also tells us that the shape of the sampling distribution becomes normal.[^08-estimating-unknown-quantities-from-a-sample-4]
-
-[^08-estimating-unknown-quantities-from-a-sample-4]: As usual, I'm being a bit sloppy here. The central limit theorem is a bit more general than this section implies. Like most introductory stats texts I've discussed one situation where the central limit theorem holds: when you're taking an average across lots of independent events drawn from the same distribution. However, the central limit theorem is much broader than this. There's a whole class of things called "U-statistics" for instance, all of which satisfy the central limit theorem and therefore become normally distributed for large sample sizes. The mean is one such statistic, but it's not the only one.
-
-This result is useful for all sorts of things. It tells us why large experiments are more reliable than small ones, and because it gives us an explicit formula for the standard error it tells us how much more reliable a large experiment is. It tells us why the normal distribution is, well, normal. In real experiments, many of the things that we want to measure are actually averages of lots of different quantities (e.g., arguably, "general" intelligence as measured by IQ is an average of a large number of "specific" skills and abilities), and when that happens, the averaged quantity should follow a normal distribution. Because of this mathematical law, the normal distribution pops up over and over again in real data.
 
 ## Estimating population parameters
 
@@ -362,12 +375,13 @@ This is very handy, but of course almost every research project of interest invo
 
 Suppose we go to Port Pirie and 100 of the locals are kind enough to sit through an IQ test. The average IQ score among these people turns out to be $\bar{X}=98.5$. So what is the true mean IQ for the entire population of Port Pirie? Obviously, we don't know the answer to that question. It could be 97.2, but it could also be 103.5. Our sampling isn't exhaustive so we cannot give a definitive answer. Nevertheless, if I was forced at gunpoint to give a "best guess" I'd have to say 98.5. That's the essence of statistical estimation: giving a best guess.
 
-In this example estimating the unknown population parameter is straightforward. I calculate the sample mean and I use that as my **estimate of the population mean**. It's pretty simple, and in the next section I'll explain the statistical justification for this intuitive answer. However, for the moment what I want to do is make sure you recognise that the sample statistic and the estimate of the population parameter are conceptually different things. A sample statistic is a description of your data, whereas the estimate is a guess about the population. With that in mind, statisticians often use different notation to refer to them. For instance, if the true population mean is denoted $\mu$, then we would use $\hat{\mu}$ to refer to our estimate of the population mean. In contrast, the sample mean is denoted $\bar{X}$ or sometimes m. However, in simple random samples the estimate of the population mean is identical to the sample mean. If I observe a sample mean of $\bar{X}=98.5$ then my estimate of the population mean is also $\hat{\mu}=98.5$. To help keep the notation clear, here's a handy table (@tbl-tab8-2):
+In this example estimating the unknown population parameter is straightforward. I calculate the sample mean and I use that as my **estimate of the population mean**. It's pretty simple, and in the next section I'll explain the statistical justification for this intuitive answer. However, for the moment what I want to do is make sure you recognise that the sample statistic and the estimate of the population parameter are conceptually different things. A sample statistic is a description of your data, whereas the estimate is a guess about the population. With that in mind, statisticians often use different notation to refer to them. For instance, if the true population mean is denoted $\mu$, then we would use $\hat{\mu}$ to refer to our estimate of the population mean. In contrast, the sample mean is denoted $\bar{X}$ or sometimes m. However, in simple random samples the estimate of the population mean is identical to the sample mean. If I observe a sample mean of $\bar{X}=98.5$ then my estimate of the population mean is also $\hat{\mu}=98.5$. To help keep the notation clear, here's a handy table (@tbl-tab8-2).
 
 ```{r}
 #| label: tbl-tab8-2
 #| tbl-cap: Notation for the mean
-huxtabs[[8]][[2]]
+huxtabs[[8]][[2]] |>
+  set_latex_float('H')
 ```
 
 ### Estimating the population standard deviation
@@ -381,18 +395,23 @@ This is a perfectly legitimate sample, even if it does have a sample size of $N 
 
 Notice that you *don't* have the same intuition when it comes to the sample mean and the population mean. If forced to make a best guess about the population mean it doesn't feel completely insane to guess that the population mean is $20$. Sure, you probably wouldn't feel very confident in that guess because you have only the one observation to work with, but it's still the best guess you can make.
 
-Let's extend this example a little. Suppose I now make a second observation. My data set now has $N = 2$ observations of the cromulence of shoes, and the complete sample now looks like this:
+Let's extend this example a little. My data set now has $N = 2$ observations of the cromulence of shoes, and the complete sample now looks like this:
 $$20, 22$$
 
 This time around, our sample is just large enough for us to be able to observe some variability: two observations is the bare minimum number needed for any variability to be observed! For our new data set, the sample mean is $\bar{X} = 21$, and the sample standard deviation is $s = 1$. What intuitions do we have about the population? Again, as far as the population mean goes, the best guess we can possibly make is the sample mean. If forced to guess we'd probably guess that the population mean cromulence is $21$. What about the standard deviation? This is a little more complicated. The sample standard deviation is only based on two observations, and if you're at all like me you probably have the intuition that, with only two observations we haven't given the population "enough of a chance" to reveal its true variability to us. It's not just that we suspect that the estimate is wrong, after all with only two observations we expect it to be wrong to some degree. The worry is that the error is systematic. Specifically, we suspect that the sample standard deviation is likely to be smaller than the population standard deviation.
 
-This intuition feels right, but it would be nice to demonstrate this somehow. There are in fact mathematical proofs that confirm this intuition, but unless you have the right mathematical background they don't help very much. Instead, what I'll do is simulate the results of some experiments. With that in mind, let's return to our IQ studies. Suppose the true population mean IQ is $100$ and the standard deviation is $15$. First I'll conduct an experiment in which I measure $N = 2$ IQ scores and I'll calculate the sample standard deviation. If I do this over and over again, and plot a histogram of these sample standard deviations, what I have is the sampling distribution of the standard deviation. I've plotted this distribution in @fig-fig8-10. Even though the true population standard deviation is 15 the average of the sample standard deviations is only 8.5. Notice that this is a very different result to what we found in @fig-fig8-8 (b) when we plotted the sampling distribution of the mean, where the population mean is $100$ and the average of the sample means is also $100$.
+This intuition feels right, but it would be nice to demonstrate this somehow. There are in fact mathematical proofs that confirm this intuition, but unless you have the right mathematical background they don't help very much. Instead, what I'll do is simulate the results of some experiments. With that in mind, let's return to our IQ studies. Suppose the true population mean IQ is $100$ and the standard deviation is $15$. First I'll conduct an experiment in which I measure $N = 2$ IQ scores and I'll calculate the sample standard deviation. If I do this over and over again, and plot a histogram of these sample standard deviations, what I have is the sampling distribution of the standard deviation. I've plotted this distribution in @fig-fig8-10. Even though the true population standard deviation is 15 this experiment would, on average, produce an estimated standard deviation of only 8.4 -- well below the true value! In other words, the sample standard deviation is a biased estimate of the population standard deviation Notice that this is a very different result to what we found in @fig-fig8-8 (b) when we plotted the sampling distribution of the mean, where the population mean is $100$ and the average of the sample means is also $100$.
 
+Now let's extend the simulation. Instead of restricting ourselves to the situation where $N=2$, let's repeat the exercise for sample sizes from 1 to 10. If we plot the average sample mean and average sample standard deviation as a function of sample size, you get the results shown in @fig-fig8-11. For the figure I generated $10,000$ simulated data sets with 1 observation each, $10,000$ more with 2 observations, and so on up to a sample size of 10. Each data set consisted of fake IQ data, that is the data were normally distributed with a true population mean of 100 and standard deviation 15. On average, the sample means turn out to be 100, regardless of sample size (panel a), and is equal to the population mean. It is an **unbiased estimator**, which is essentially the reason why your best estimate for the population mean is the sample mean.[^08-estimating-unknown-quantities-from-a-sample-6] The plot on the right (panel b) is quite different: on average, the sample standard deviation $s$ is smaller than the population standard deviation $\sigma$, especially for small sample sizes. It is a **biased estimator**. In other words, if we want to make a "best guess" $\hat{\sigma}$ about the value of the population standard deviation $\hat{\sigma}$ we should make sure our guess is a little bit larger than the sample standard deviation $s$.
 
 ```{r}
 #| label: fig-fig8-10
-#| fig-cap: The sampling distribution of the sample standard deviation for a "two IQ scores" experiment. The true population standard deviation is 15 (dashed line), but as you can see from the histogram the vast majority of experiments will produce a much smaller sample standard deviation than this. On average, this experiment would produce an estimated standard deviation of only 8.4, well below the true value! In other words, the sample standard deviation is a biased estimate of the population standard deviation
-#| fig-alt: A histogram with a right-skewed distribution shows the sample standard deviation on the x-axis ranging from 0 to 60, and frequency on the y-axis. A vertical dashed line labeled "Population Standard deviation" is positioned around the value of 16 on the x-axis.
+#| fig-cap: The sampling distribution of the sample standard deviation for a "two IQ scores" experiment. The true population standard deviation is 15 (dashed line), but as you can see from the histogram the vast majority of experiments will produce a much smaller sample standard deviation than this
+#| fig-alt: A histogram with a right-skewed distribution shows the sample standard deviation on the x-axis ranging from 0 to 60, and frequency on the y-axis. A vertical dashed line labeled "Population Standard deviation" is positioned around the value of 16 on the x-axis
+#| fig-width: 8
+#| fig-height: 4
+#| fig-pos: 'H'
+
 
 n <- 2
 N <- 10000
@@ -406,7 +425,6 @@ ggplot(data = sdsd, aes(x = sd )) +
   annotate("text", x = 15, y = 2000, label = "Population Standard deviation", size=4) +
   scale_x_continuous(limits=c(0,60), breaks = seq(0, 60, 10)) +
   xlab("Sample standard deviation") +
-  theme_classic() +
   theme(
     axis.title.y = element_blank(),
     axis.line.y = element_blank(),
@@ -414,16 +432,15 @@ ggplot(data = sdsd, aes(x = sd )) +
     axis.text.y = element_blank())
 ```
 
-Now let's extend the simulation. Instead of restricting ourselves to the situation where $N=2$, let's repeat the exercise for sample sizes from 1 to 10. If we plot the average sample mean and average sample standard deviation as a function of sample size, you get the results shown in @fig-fig8-11. On the left-hand side (panel (a)) I've plotted the average sample mean and on the right-hand side (panel (b)) I've plotted the average standard deviation. The two plots are quite different: on average, the average sample mean is equal to the population mean. It is an **unbiased estimator**, which is essentially the reason why your best estimate for the population mean is the sample mean.[^08-estimating-unknown-quantities-from-a-sample-6] The plot on the right is quite different: on average, the sample standard deviation $s$ is smaller than the population standard deviation $\sigma$. It is a **biased estimator**. In other words, if we want to make a "best guess" $\hat{\sigma}$ about the value of the population standard deviation $\hat{\sigma}$ we should make sure our guess is a little bit larger than the sample standard deviation $s$.
-
 [^08-estimating-unknown-quantities-from-a-sample-6]: I should note that I'm hiding something here. Unbiasedness is a desirable characteristic for an estimator, but there are other things that matter besides bias. However, it's beyond the scope of this book to discuss this in any detail. I just want to draw your attention to the fact that there's some hidden complexity here.
 
 ```{r}
 #| label: fig-fig8-11
+#| fig-cap: An illustration of the fact that the sample mean is an unbiased estimator of the population mean (panel a), but the sample standard deviation is a biased estimator of the population standard deviation (panel b)
+#| fig-alt: Two line charts. Chart (a) shows the Average Sample Mean vs. Sample Size with values around 102-104. Chart (b) shows the Average Sample Standard Deviation vs. Sample Size, increasing steeply initially and leveling off near 15 around sample size 8
 #| fig-width: 8
-#| fig-height: 4
-#| fig-cap: An illustration of the fact that the sample mean is an unbiased estimator of the population mean (panel a), but the sample standard deviation is a biased estimator of the population standard deviation (panel b). For the figure I generated $10,000$ simulated data sets with 1 observation each, $10,000$ more with 2 observations, and so on up to a sample size of 10. Each data set consisted of fake IQ data, that is the data were normally distributed with a true population mean of 100 and standard deviation 15. On average, the sample means turn out to be 100, regardless of sample size (panel a). However, the sample standard deviations turn out to be systematically too small (panel b), especially for small sample sizes
-#| fig-alt: Two line charts. Chart (a) shows the Average Sample Mean vs. Sample Size with values around 102-104. Chart (b) shows the Average Sample Standard Deviation vs. Sample Size, increasing steeply initially and leveling off near 15 around sample size 8.
+#| fig-height: 5
+#| fig-pos: 'H'
 
 N <- 10000
 sd.demo <- sapply(1:10, function (n) {
@@ -508,10 +525,11 @@ The hardest thing about confidence intervals is understanding what they mean. Wh
 
 ```{r}
 #| label: fig-fig8-12
-#| fig-width: 7
-#| fig-height: 7
+#| fig-width: 8
+#| fig-height: 10
 #| fig-cap: 95% confidence intervals. The top panel (a) shows 50 simulated replications of an experiment in which we measure the IQs of 10 people. The dot marks the location of the sample mean and the line shows the 95% confidence interval. Most of the 50 confidence intervals do contain the true mean (i.e., 100), but a few -- in blue and marked with asterisks -- do not. The lower graph (panel b) shows a similar simulation, but this time we simulate replications of an experiment that measures the IQs of 25 people
-#| fig-alt: Two bar graphs are shown vertically. The top graph (a) has "Sample Size = 10" and the bottom graph (b) has "Sample Size = 25." Both graphs have replication numbers on the x-axis and IQ mean values with error bars on the y-axis. Blue data points are marked with asterisks.
+#| fig-alt: Two bar graphs are shown vertically. The top graph (a) has "Sample Size = 10" and the bottom graph (b) has "Sample Size = 25." Both graphs have replication numbers on the x-axis and IQ mean values with error bars on the y-axis. Blue data points are marked with asterisks
+#| fig-pos: 'H'
 
 
 N <- 50
@@ -535,7 +553,10 @@ p.ci1  <- ggplot(data=ci.demo.10, aes(x=Replication, y=ci_m)) +
   ylab("Mean IQ\n") +
   ggtitle("(a) Sample Size = 10") +
   scale_fill_identity() +
-  scale_y_continuous(limits=c(80,120)) 
+  scale_y_continuous(limits=c(80,120)) +
+  theme(
+    plot.title = element_text(size=11)
+  )
 
 N <- 50
 n <- 25
@@ -559,8 +580,10 @@ p.ci2  <- ggplot(data=ci.demo.25, aes(x=Replication, y=ci_m)) +
   ylab("Mean IQ\n") +
   ggtitle("(b) Sample Size = 25") +
   scale_fill_identity() +
-  scale_y_continuous(limits=c(80,120)) 
-
+  scale_y_continuous(limits=c(80,120))  +
+  theme(
+    plot.title = element_text(size=11)
+  )
 
 gridExtra::grid.arrange(grob=p.ci1,p.ci2, nrow=2)
 

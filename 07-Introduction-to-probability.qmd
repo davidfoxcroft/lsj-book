@@ -128,11 +128,11 @@ Ideological arguments between Bayesians and frequentists notwithstanding, it tur
 
 ### Introducing probability distributions
 
-One of the disturbing truths about my life is that I only own five pairs of trousers. Three pairs of jeans, the bottom half of a suit, and a pair of tracksuit pants. Even sadder, I've given them names: I call them $X_1$, $X_2$, $X_3$, $X_4$ and $X_5$. I really have, that's why they call me Mrs Imaginative. Now, on any given day, I pick out exactly one pair of trousers to wear. Not even I'm so stupid as to try to wear two pairs of trousers, and thanks to years of training I never go outside without wearing trousers anymore. If I were to describe this situation using the language of probability theory, I would refer to each pair of trousers (i.e., each $X$) as an elementary event. The key characteristic of **elementary events** is that every time we make an observation (e.g., every time I put on a pair of trousers) then the outcome will be one and only one of these events. Like I said, these days I always wear exactly one pair of trousers so my trousers satisfy this constraint. Similarly, the set of all possible events is called a **sample space**. Granted, some people would call it a "wardrobe", but that's because they're refusing to think about my trousers in probabilistic terms. 
+One of the disturbing truths about my life is that I only own five pairs of trousers. Even sadder, I've given them names: I call them $X_1$, $X_2$, $X_3$, $X_4$ and $X_5$. Now, on any given day, I pick out exactly one pair of trousers to wear. If I were to describe this situation using the language of probability theory, I would refer to each pair of trousers (i.e., each $X$) as an elementary event. The key characteristic of **elementary events** is that every time we make an observation (e.g., every time I put on a pair of trousers) then the outcome will be one and only one of these events. I always wear exactly one pair of trousers so my trousers satisfy this constraint. Similarly, the set of all possible events is called a **sample space**. Granted, some people would call it a "wardrobe", but that's because they're refusing to think about my trousers in probabilistic terms. 
 
 Okay, now that we have a sample space (a wardrobe), which is built from lots of possible elementary events (trousers), what we want to do is assign a **probability** of one of these elementary events. For an event $X$, the probability of that event $P(X)$ is a number that lies between 0 and 1. The bigger the value of $P(X)$, the more likely the event is to occur. So, for example, if $P(X) = 0$ it means the event $X$ is impossible (i.e., I never wear those trousers). On the other hand, if $P(X) = 1$ it means that event $X$ is certain to occur (i.e., I always wear those trousers). For probability values in the middle it means that I sometimes wear those trousers. For instance, if $P(X) = 0.5$ it means that I wear those trousers half of the time.
 
-At this point, we're almost done. The last thing we need to recognise is that "something always happens". Every time I put on trousers, I really do end up wearing trousers (crazy, right?). What this somewhat trite statement means, in probabilistic terms, is that the probabilities of the elementary events need to add up to 1. This is known as the **law of total probability**, not that any of us really care. More importantly, if these requirements are satisfied then what we have is a **probability distribution**. For example, @tbl-tab7-2 shows an example of a probability distribution.
+At this point, we're almost done. The last thing we need to recognise is that "something always happens". Every time I put on trousers, I really do end up wearing trousers. What this somewhat trite statement means, in probabilistic terms, is that the probabilities of the elementary events need to add up to 1. This is known as the **law of total probability**. More importantly, if these requirements are satisfied then what we have is a **probability distribution**. For example, @tbl-tab7-2 shows an example of a probability distribution. Each of the events has a probability that lies between 0 and 1, and if we add up the probability of all events they sum to 1. Awesome. We can even draw a nice bar graph (see @sec-Bar-graphs) to visualise this distribution, as shown in @fig-fig7-2. 
 
 ```{r}
 #| label: tbl-tab7-2
@@ -140,15 +140,13 @@ At this point, we're almost done. The last thing we need to recognise is that "s
 huxtabs[[7]][[2]]
 ```
 
-Each of the events has a probability that lies between 0 and 1, and if we add up the probability of all events they sum to 1. Awesome. We can even draw a nice bar graph (see @sec-Bar-graphs) to visualise this distribution, as shown in @fig-fig7-2. And, at this point, we've all achieved something. You've learned what a probability distribution is, and I've finally managed to find a way to create a graph that focuses entirely on my trousers. Everyone wins! The only other thing that I need to point out is that probability theory allows you to talk about **non elementary events** as well as elementary ones. The easiest way to illustrate the concept is with an example. In the trousers example it's perfectly legitimate to refer to the probability that I wear jeans. In this scenario, the "Dani wears jeans" event is said to have happened as long as the elementary event that actually did occur is one of the appropriate ones. In this case "blue jeans", "black jeans" or "grey jeans". In mathematical terms we defined the "jeans" event $E$ to correspond to the set of elementary events $(X1, X2, X3)$. If any of these elementary events occurs then $E$ is also said to have occurred. Having decided to write down the definition of the E this way, it's pretty straightforward to state what the probability P(E) and, since the probabilities of blue, grey and black jeans respectively are $.5$, $.3$ and $.1$, the probability that I wear jeans is equal to $.9$. is: we just add everything up. In this particular case:
-$$P(E)=P(X_1)+P(X_2)+P(X_3)$$ 
-At this point you might be thinking that this is all terribly obvious and simple and you'd be right. All we've really done is wrap some basic mathematics around a few common sense intuitions. However, from these simple beginnings it's possible to construct some extremely powerful mathematical tools. I'm definitely not going to go into the details in this book, but what I will do is list, in @tbl-tab7-3, some of the other rules that probabilities satisfy. These rules can be derived from the simple assumptions that I've outlined above, but since we don't actually use these rules for anything in this book I won't do so here.
-
-```{r out.width="70%"}
+```{r out.width="80%"}
 #| label: fig-fig7-2
 #| fig-cap: A visual depiction of the "trousers" probability distribution. There are five "elementary events", corresponding to the five pairs of trousers that I own. Each event has some probability of occurring -- this probability is a number between 0 to 1. The sum of these probabilities is 1
 #| fig-alt: Bar chart showing the probability of different events. Blue jeans have the highest probability at 0.5, followed by grey jeans around 0.3. Black jeans and blue track have the same probability near 0.1, while the black suit has a probability of 0.
-#| fig-pos: 'h!'
+#| fig-pos: 'H'
+#| fig-height: 5
+#| fig-width: 6
 
 pantsdat <- tibble(probabilities = c( .5, .3, .1, 0, .1),
                     eventNames = c( "Blue jeans", "Grey jeans", "Black jeans",  "Black suit", "Blue track" ))
@@ -156,10 +154,15 @@ pantsdat$eventNames = factor(pantsdat$eventNames, levels = c( "Blue jeans", "Gre
 
 ggplot(data=pantsdat, aes(x=eventNames, y=probabilities)) +
   geom_bar(stat='identity', col="black", fill=blueshade, alpha=0.6, width=0.4) +
-  ylab("Probability of event") +
-  xlab("Event")
+  ylab("Probability of event\n") +
+  xlab("\nEvent")
 
 ```
+
+And, at this point, we've all achieved something. You've learned what a probability distribution is, and I've finally managed to find a way to create a graph that focuses entirely on my trousers. Everyone wins! The only other thing that I need to point out is that probability theory allows you to talk about **non elementary events** as well as elementary ones. The easiest way to illustrate the concept is with an example. In the trousers example it's perfectly legitimate to refer to the probability that I wear jeans. In this scenario, the "Dani wears jeans" event is said to have happened as long as the elementary event that actually did occur is one of the appropriate ones. In this case "blue jeans", "black jeans" or "grey jeans". In mathematical terms we defined the "jeans" event $E$ to correspond to the set of elementary events $(X1, X2, X3)$. If any of these elementary events occurs then $E$ is also said to have occurred. Having decided to write down the definition of the E this way, it's pretty straightforward to state what the probability P(E) and, since the probabilities of blue, grey and black jeans respectively are $.5$, $.3$ and $.1$, the probability that I wear jeans is equal to $.9$. is: we just add everything up. In this particular case:
+$$P(E)=P(X_1)+P(X_2)+P(X_3)$$ 
+
+You might be thinking that this is all terribly obvious and simple and you'd be right. All we've really done is wrap some basic mathematics around a few common sense intuitions. However, from these simple beginnings it's possible to construct some extremely powerful mathematical tools. I'm definitely not going to go into the details in this book, but what I will do is list, in @tbl-tab7-3, some of the other rules that probabilities satisfy. These rules can be derived from the simple assumptions that I've outlined above, but since we don't actually use these rules for anything in this book I won't do so here.
 
 ```{r}
 #| label: tbl-tab7-3
@@ -169,7 +172,7 @@ huxtabs[[7]][[3]]
 
 ## The binomial distribution {#sec-The-binomial-distribution}
 
-As you might imagine, probability distributions vary enormously and there's an enormous range of distributions out there. However, they aren't all equally important. In fact, the vast majority of the content in this book relies on one of five distributions: the binomial distribution, the normal distribution, the $t$-distribution, the $\chi^2$ ("chi-square") distribution and the $F$-distribution. Given this, what I'll do over the next few sections is provide a brief introduction to all five of these, paying special attention to the binomial and the normal. I'll start with the binomial distribution since it's the simplest of the five.
+As you might imagine, probability distributions vary enormously. However, they aren't all equally important. In fact, the vast majority of the content in this book relies on just five distributions: the binomial distribution, the normal distribution, the $t$-distribution, the $\chi^2$ ("chi-square") distribution and the $F$-distribution. Given this, what I'll do over the next few sections is provide a brief introduction to all five of these, paying special attention to the binomial and the normal. I'll start with the binomial distribution since it's the simplest of the five.
 
 ### Introducing the binomial
 
@@ -177,6 +180,7 @@ The theory of probability originated in the attempt to describe how games of cha
 
 As usual, we'll want to introduce some names and some notation. We'll let $N$ denote the number of dice rolls in our experiment, which is often referred to as the **size parameter** of our binomial distribution. We'll also use $\theta$ to refer to the the probability that a single die comes up skulls, a quantity that is usually called the **success probability** of the binomial.[^07-introduction-to-probability-2] Finally, we'll use $X$ to refer to the results of our experiment, namely the number of skulls I get when I roll the dice. Since the actual value of $X$ is due to chance we refer to it as a **random variable**. In any case, now that we have all this terminology and notation we can use it to state the problem a little more precisely. The quantity that we want to calculate is the probability that $X = 4$ given that we know that $\theta = .167$ and $N = 20$. The general "form" of the thing I'm interested in calculating could be written as:
 $$P(X|\theta,N)$$
+
 [^07-introduction-to-probability-2]: Note that the term "success" is pretty arbitrary and doesn't actually imply that the outcome is something to be desired. If $\theta$ referred to the probability that any one passenger gets injured in a bus crash I'd still call it the success probability, but that doesn't mean I want people to get hurt in bus crashes!
 
 and we're interested in the special case where $X = 4, \theta = .167$ and $N = 20$.
@@ -194,12 +198,14 @@ To that end, @fig-fig7-3 plots the binomial probabilities for all possible value
 ```{r out.width="80%"}
 #| label: fig-fig7-3
 #| fig-cap: The binomial distribution with size parameter of $N = 20$ and an underlying success probability of $\theta = \frac{1}{6}$. Each vertical bar depicts the probability of one specific outcome (i.e., one possible value of $X$). Because this is a probability distribution, each of the probabilities must be a number between 0 and 1, and the heights of the bars must sum to 1 as well
-#| fig-alt: A bar graph titled "Number of skulls observed" on the x-axis and "Probability" on the y-axis. The graph has bars with heights decreasing from left to right, peaking around 4-5 skulls, illustrating the probability distribution of observed skulls.
+#| fig-alt: A bar graph titled "Number of skulls observed" on the x-axis and "Probability" on the y-axis. The graph has bars with heights decreasing from left to right, peaking around 4-5 skulls, illustrating the probability distribution of observed skulls
+#| fig-height: 5
+#| fig.width: 6
 
 binom1 <- data.frame(heads = 0:20, pmf = dbinom(x = 0:20, size = 20, prob = 1/6)+0.0001)
 
 ggplot(data=binom1, aes(x = factor(heads), y = pmf)) +
-  geom_col(col=blueshade, fill=blueshade, alpha=0.6, width=.4) +
+  geom_col(col=blueshade, fill=blueshade, alpha=0.6, width=.6) +
   labs(x = "\nNumber of skulls observed",
        y = "Probability\n") +
   scale_x_discrete(breaks=seq(0,20,5)) 
@@ -210,14 +216,14 @@ To give you a feel for how the binomial distribution changes when we alter the v
 
 ```{r out.width="80%"}
 #| label: fig-fig7-4
-#| fig-height: 7
+#| fig-height: 8
 #| fig.width: 6
 #| fig-cap: Two binomial distributions, involving a scenario in which I flip a fair coin so the underlying success probability is $\theta = \frac{1}{2}$. In panel (a), I flipped the coin $N = 20$ times. In panel (b) the coin was flipped $N = 100$ times
 #| fig-alt: Two bar graphs show the probability distribution of the number of skulls observed. Graph (a) ranges from 0 to 20 on the x-axis, with peaks around 9-11 skulls. Graph (b) ranges from 0 to 100, with a prominent peak around 50 skulls. Both graphs have "Probability" on the y-axis.
 
 binom2 <- data.frame(heads = 0:20, pmf = dbinom(x = 0:20, size = 20, prob = 1/2)+0.0001)
 bd1 <- ggplot(data=binom2, aes(x = factor(heads), y = pmf)) +
-  geom_col(col=blueshade, fill=blueshade, alpha=0.6, width=.4) +
+  geom_col(col=blueshade, fill=blueshade, alpha=0.6, width=.6) +
   labs(x = "Number of skulls observed",
        y = "Probability") +
   scale_x_discrete(breaks=seq(0,20,5)) +
@@ -226,7 +232,7 @@ bd1 <- ggplot(data=binom2, aes(x = factor(heads), y = pmf)) +
 
 binom3 <- data.frame(heads = 0:100, pmf = dbinom(x = 0:100, size = 100, prob = 1/2)+0.0001)
 bd2 <- ggplot(data=binom3, aes(x = factor(heads), y = pmf)) +
-  geom_col(col=blueshade, fill=blueshade, alpha=0.6, width=.4) +
+  geom_col(col=blueshade, fill=blueshade, alpha=0.6, width=.6) +
   labs(x = "\nNumber of skulls observed",
        y = "Probability\n") +
   scale_x_discrete(breaks=seq(0,100,5)) +
@@ -247,14 +253,18 @@ $$X \sim Normal(\mu,\sigma)$$
 
 [^07-introduction-to-probability-4]: As was the case with the binomial distribution, I have included the formula for the normal distribution in this book, because I think it's important enough that everyone who learns statistics should at least look at it, but since this is an introductory text I don't want to focus on it, so I've tucked it away in this footnote: $$p(X|\mu, \sigma) = \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(X-\mu)^2}{2\sigma^2}}$$
 
-Let's try to get a sense for what it means for a variable to be normally distributed. To that end, have a look at @fig-fig7-5 which plots a normal distribution with mean $\mu = 0$ and standard deviation $\sigma = 1$. You can see where the name "bell curve" comes from; it looks a bit like a bell. Notice that, unlike the plots that I drew to illustrate the binomial distribution, the picture of the normal distribution in @fig-fig7-5 shows a smooth curve instead of "histogram-like" bars. This isn't an arbitrary choice, the normal distribution is continuous whereas the binomial is discrete. For instance, in the die rolling example from the last section it was possible to get 3 skulls or 4 skulls, but impossible to get 3.9 skulls. The figures that I drew in the previous section reflected this fact. In @fig-fig7-3, for instance, there's a bar located at $X = 3$ and another one at $X = 4$ but there's nothing in between. Continuous quantities don't have this constraint. For instance, suppose we're talking about the weather. The temperature on a pleasant Spring day could be 23 degrees, 24 degrees, 23.9 degrees, or anything in between since temperature is a continuous variable. And so a normal distribution might be quite appropriate for describing Spring temperatures.[^07-introduction-to-probability-5]
+Let's try to get a sense for what it means for a variable to be normally distributed. To that end, have a look at @fig-fig7-5 which plots a normal distribution with mean $\mu = 0$ and standard deviation $\sigma = 1$. You can see where the name "bell curve" comes from; it looks a bit like a bell. Notice that, unlike the plots that I drew to illustrate the binomial distribution, the picture of the normal distribution in @fig-fig7-5 shows a smooth curve instead of "histogram-like" bars. This isn't an arbitrary choice, the normal distribution is continuous whereas the binomial is discrete.[^07-introduction-to-probability-4a] For instance, in the die rolling example from the last section it was possible to get 3 skulls or 4 skulls, but impossible to get 3.9 skulls. The figures that I drew in the previous section reflected this fact. In @fig-fig7-3, for instance, there's a bar located at $X = 3$ and another one at $X = 4$ but there's nothing in between. Continuous quantities don't have this constraint. For instance, suppose we're talking about the weather. The temperature on a pleasant Spring day could be 23 degrees, 24 degrees, 23.9 degrees, or anything in between since temperature is a continuous variable. And so a normal distribution might be quite appropriate for describing Spring temperatures.[^07-introduction-to-probability-5]
+
+[^07-introduction-to-probability-4a]: There is a subtle and somewhat frustrating characteristic of continuous distributions that makes the y-axis behave a bit oddly - the height of the curve here is not actually the probability of observing a particular $x$ value. On the other hand, it is true that the heights of the curve tells you which $x$ values are more likely (the higher ones!). (see [Probability density] section for all the annoying details)
 
 [^07-introduction-to-probability-5]: In practice, the normal distribution is so handy that people tend to use it even when the variable isn't actually continuous. As long as there are enough categories (e.g., Likert-scale responses to a questionnaire), it's pretty standard practice to use the normal distribution as an approximation. This works out much better in practice than you'd think.
 
 ```{r out.width="80%"}
 #| label: fig-fig7-5
-#| fig-cap: The normal distribution with mean $\mu = 0$ and standard deviation $\sigma = 1$. The x-axis corresponds to the value of some variable, and the y-axis tells us something about how likely we are to observe that value. However, notice that the y-axis is labelled *Probability Density* and not *Probability*. There is a subtle and somewhat frustrating characteristic of continuous distributions that makes the y-axis behave a bit oddly - the height of the curve here is not actually the probability of observing a particular $x$ value. On the other hand, it is true that the heights of the curve tells you which $x$ values are more likely (the higher ones!). (see [Probability density] section for all the annoying details)
-#| fig-alt: A line graph displaying a bell-shaped curve, representing a normal distribution. The x-axis is labeled "Observed Value," ranging from -3 to 3, and the y-axis is labeled "Probability Density," ranging from 0.0 to 0.4. The peak of the curve is at 0.
+#| fig-cap: The normal distribution with mean $\mu = 0$ and standard deviation $\sigma = 1$. The x-axis corresponds to the value of some variable, and the y-axis tells us something about how likely we are to observe that value. However, notice that the y-axis is labelled *Probability Density* and not *Probability*
+#| fig-alt: A line graph displaying a bell-shaped curve, representing a normal distribution. The x-axis is labeled "Observed Value," ranging from -3 to 3, and the y-axis is labeled "Probability Density," ranging from 0.0 to 0.4. The peak of the curve is at 0
+#| fig-height: 4
+#| fig.width: 6
 
 ggplot(data = data.frame(x = seq(-3, 3, 1)), aes(x)) +
   stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col=blueshade, linewidth=1) +
@@ -269,7 +279,9 @@ With this in mind, let's see if we can't get an intuition for how the normal dis
 ```{r out.width="80%"}
 #| label: fig-fig7-6
 #| fig-cap: An illustration of what happens when you change the mean of a normal distribution. The solid line depicts a normal distribution with a mean of $\mu = 4$. The dashed line shows a normal distribution with a mean of $\mu = 7$. In both cases, the standard deviation is $\sigma = 1$. Not surprisingly, the two distributions have the same shape, but the dashed line is shifted to the right
-#| fig-alt: Line graph showing two overlapping probability density curves. The solid line curve peaks at an observed value of 3, and the dashed line curve peaks at an observed value of 6. The x-axis is labeled "Observed Value" and the y-axis is labeled "Probability Density.
+#| fig-alt: Line graph showing two overlapping probability density curves. The solid line curve peaks at an observed value of 3, and the dashed line curve peaks at an observed value of 6. The x-axis is labeled "Observed Value" and the y-axis is labeled "Probability Density
+#| fig-height: 4
+#| fig.width: 6
 
 ggplot(data = data.frame(x = seq(0, 10, 1)), aes(x)) +
   stat_function(fun = dnorm, n = 1000, args = list(mean = 4, sd = 1), col=blueshade, linewidth=1) +
@@ -283,7 +295,9 @@ ggplot(data = data.frame(x = seq(0, 10, 1)), aes(x)) +
 ```{r out.width="80%"}
 #| label: fig-fig7-7
 #| fig-cap: An illustration of what happens when you change the the standard deviation of a normal distribution. Both distributions plotted in this figure have a mean of $\mu = 5$, but they have different standard deviations. The solid line plots a distribution with standard deviation $\sigma = 1$, and the dashed line shows a distribution with standard deviation $\sigma = 2$. As a consequence, both distributions are "centred" on the same spot, but the dashed line is wider than the solid one
-#| fig-alt: A probability density plot showing two curves. The solid line represents a normal distribution centered at 5 with higher peak, while the dashed line represents a broader distribution also centered at 5. The x-axis is labeled "Observed Value" and the y-axis is labeled "Probability Density.
+#| fig-alt: A probability density plot showing two curves. The solid line represents a normal distribution centered at 5 with higher peak, while the dashed line represents a broader distribution also centered at 5. The x-axis is labeled "Observed Value" and the y-axis is labeled "Probability Density
+#| fig-height: 4
+#| fig.width: 6
 
 ggplot(data = data.frame(x = seq(0, 10, 1)), aes(x)) +
   stat_function(fun = dnorm, n = 1000, args = list(mean = 5, sd = 1), col=blueshade, linewidth=1) +
@@ -337,7 +351,8 @@ gridExtra::grid.arrange(p1,p2, ncol=2)
 #| fig-width: 8
 #| fig-height: 4
 #| fig-cap: Two more examples of the "area under the curve idea". There is a 15.9% chance that an observation is one standard deviation below the mean or smaller (panel (a)), and a 34.1% chance that the observation is somewhere between one standard deviation below the mean and the mean (panel (b)). Notice that if you add these two numbers together you get 15.9% + 34.1% = 50%. For normally distributed data, there is a 50% chance that an observation falls below the mean. And of course that also implies that there is a 50% chance that it falls above the mean
-#| fig-alt: Two bell curve graphs:- "a" shows a normal distribution with a shaded area under the curve extending from negative infinity to approximately -1, marked as 15.9%. "b" shows a normal distribution with the shaded area extending from -1 to 1, marked as 34.1%.
+#| fig-alt: Two bell curve graphs:- "a" shows a normal distribution with a shaded area under the curve extending from negative infinity to approximately -1, marked as 15.9%. "b" shows a normal distribution with the shaded area extending from -1 to 1, marked as 34.1%
+#| fig-pos: 'H'
 
 p3 <- ggplot(data = data.frame(x = seq(-4, 4, 1)), aes(x)) +
   stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col="grey", geom = "area",
@@ -393,48 +408,55 @@ The normal distribution is the distribution that statistics makes most use of (f
 ```{r out.width="80%"}
 #| label: fig-fig7-10
 #| fig-cap: A $t$-distribution with 3 degrees of freedom (solid line). It looks similar to a normal distribution, but it is not quite the same. For comparison purposes I have plotted a standard normal distribution as the dashed line
-#| fig-alt: A plot showing two probability density functions. The solid blue line represents one distribution, while the dashed gray line shows another distribution with a wider spread. The x-axis is labeled "Observed Value" and the y-axis is labeled "Probability Density.
+#| fig-alt: A plot showing two probability density functions. The solid blue line represents one distribution, while the dashed gray line shows another distribution with a wider spread. The x-axis is labeled "Observed Value" and the y-axis is labeled "Probability Density
+#| fig-height: 4
+#| fig.width: 6
+#| fig-pos: 'H'
 
 ggplot(data = data.frame(x = seq(-4, 4, 1)), aes(x)) +
   stat_function(fun = dt, n = 1000, args = list(df = 3), col=blueshade, linewidth=1) +
   stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col="grey", linetype=5, linewidth=1) +
   scale_x_continuous(breaks = seq(-4, 4, 2)) +
   ylab("Probability Density\n") +
-  xlab("\nObserved Value") +
-  theme_classic()
-
+  xlab("\nObserved Value") 
 ```
 
 
 ```{r out.width="80%"}
 #| label: fig-fig7-11
 #| fig-cap: $\chi^2$ distribution with 3 degrees of freedom. Notice that the observed values must always be greater than zero, and that the distribution is pretty skewed. These are the key features of a chi-square  distribution
-#| fig-alt: A line graph displays a probability density function with "Observed Value" on the x-axis (0 to 10) and "Probability Density" on the y-axis (0 to 0.25). The curve peaks near "Observed Value" 1.5 and decreases asymptotically towards the x-axis on both sides.
+#| fig-alt: A line graph displays a probability density function with "Observed Value" on the x-axis (0 to 10) and "Probability Density" on the y-axis (0 to 0.25). The curve peaks near "Observed Value" 1.5 and decreases asymptotically towards the x-axis on both sides
+#| fig-height: 4
+#| fig.width: 6
+#| fig-pos: 'H'
 
 ggplot(data = data.frame(x = seq(0, 10, 1)), aes(x)) +
   stat_function(fun = dchisq, n = 1000, args = list(df = 3), col=blueshade, linewidth=1) +
   scale_x_continuous(breaks = seq(0, 10, 2)) +
   ylab("Probability Density\n") +
   xlab("\nObserved Value") 
-
 ```
 
 ```{r out.width="80%"}
 #| label: fig-fig7-12
 #| fig-cap: An $F$-distribution with 3 and 5 degrees of freedom. Qualitatively speaking, it looks pretty similar to a chi-square distribution, but they are not quite the same in general
-#| fig-alt: A probability density function graph showing a curve that peaks sharply near the y-axis and then gradually decreases, approaching the x-axis as it moves to the right. The x-axis is labeled "Observed Value" and the y-axis is labeled "Probability Density".
+#| fig-alt: A probability density function graph showing a curve that peaks sharply near the y-axis and then gradually decreases, approaching the x-axis as it moves to the right. The x-axis is labeled "Observed Value" and the y-axis is labeled "Probability Density"
+#| fig-height: 4
+#| fig.width: 6
+#| fig-pos: 'H'
 
 ggplot(data = data.frame(x = seq(0, 10, 1)), aes(x)) +
   stat_function(fun = df, n = 1000, args = list(df1 = 3, df2 = 5), col=blueshade, linewidth=1) +
   scale_x_continuous(breaks = seq(0, 10, 2)) +
   ylab("Probability Density\n") +
   xlab("\nObserved Value") 
-
 ```
 
--   The $t$-distribution is a continuous distribution that looks very similar to a normal distribution, see @fig-fig7-10. Note that the "tails" of the $t$-distribution are "heavier" (i.e., extend further outwards) than the tails of the normal distribution). That's the important difference between the two. This distribution tends to arise in situations where you think that the data actually follow a normal distribution, but you don't know the mean or standard deviation. We'll run into this distribution again in @sec-Comparing-two-means.
--   The $\chi^2$ distribution is another distribution that turns up in lots of different places. The situation in which we'll see it is when doing categorical data analysis in @sec-Categorical-data-analysis, but it's one of those things that actually pops up all over the place. When you dig into the maths (and who doesn't love doing that?), it turns out that the main reason why the $\chi^2$ distribution turns up all over the place is that if you have a bunch of variables that are normally distributed, square their values and then add them up (a procedure referred to as taking a "sum of squares"), this sum has a $\chi^2$ distribution. You'd be amazed how often this fact turns out to be useful. Anyway, here's what a $\chi^2$ distribution looks like: @fig-fig7-11.
--   The $F$-distribution looks a bit like a $\chi^2$ distribution, and it arises whenever you need to compare two $\chi^2$ distributions to one another. Admittedly, this doesn't exactly sound like something that any sane person would want to do, but it turns out to be very important in real-world data analysis. Remember when I said that $\chi^2$ turns out to be the key distribution when we're taking a "sum of squares"? Well, what that means is if you want to compare two different "sums of squares", you're probably talking about something that has an $F$-distribution. Of course, as of yet I still haven't given you an example of anything that involves a sum of squares, but I will in @sec-Comparing-several-means-one-way-ANOVA. And that's where we'll run into the $F$-distribution. Oh, and there's a picture in @fig-fig7-12.
+The $t$-distribution is a continuous distribution that looks very similar to a normal distribution, see @fig-fig7-10. Note that the "tails" of the $t$-distribution are "heavier" (i.e., extend further outwards) than the tails of the normal distribution). That's the important difference between the two. This distribution tends to arise in situations where you think that the data actually follow a normal distribution, but you don't know the mean or standard deviation. We'll run into this distribution again in @sec-Comparing-two-means.
+
+The $\chi^2$ distribution is another distribution that turns up in lots of different places. The situation in which we'll see it is when doing categorical data analysis in @sec-Categorical-data-analysis, but it's one of those things that actually pops up all over the place. When you dig into the maths (and who doesn't love doing that?), it turns out that the main reason why the $\chi^2$ distribution turns up all over the place is that if you have a bunch of variables that are normally distributed, square their values and then add them up (a procedure referred to as taking a "sum of squares"), this sum has a $\chi^2$ distribution. You'd be amazed how often this fact turns out to be useful. Anyway, here's what a $\chi^2$ distribution looks like: @fig-fig7-11.
+
+The $F$-distribution looks a bit like a $\chi^2$ distribution, and it arises whenever you need to compare two $\chi^2$ distributions to one another. Admittedly, this doesn't exactly sound like something that any sane person would want to do, but it turns out to be very important in real-world data analysis. Remember when I said that $\chi^2$ turns out to be the key distribution when we're taking a "sum of squares"? Well, what that means is if you want to compare two different "sums of squares", you're probably talking about something that has an $F$-distribution. Of course, as of yet I still haven't given you an example of anything that involves a sum of squares, but I will in @sec-Comparing-several-means-one-way-ANOVA. And that's where we'll run into the $F$-distribution. Oh, and there's a picture in @fig-fig7-12.
 
 Okay, time to wrap this section up. We've seen three new distributions: $\chi^2$, $t$ and $F$. They're all continuous distributions, and they're all closely related to the normal distribution. The main thing for our purposes is that you grasp the basic idea that these distributions are all deeply related to one another, and to the normal distribution. Later on in this book we're going to run into data that are normally distributed, or at least assumed to be normally distributed. What I want you to understand right now is that, if you make the assumption that your data are normally distributed, you shouldn't be surprised to see $\chi^2$, $t$ and $F$-distributions popping up all over the place when you start trying to do your data analysis.
 

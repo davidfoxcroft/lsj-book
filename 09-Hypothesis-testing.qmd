@@ -55,7 +55,10 @@ What this discussion makes clear, I hope, is that when attempting to construct a
 #| label: tbl-tab9-1
 #| tbl-cap: Research and statistical hypotheses
 huxtabs[[9]][[1]] |> 
-  style_headers(bold = FALSE)
+  style_headers(bold = FALSE) |>
+  set_all_borders(0) |>
+  set_top_border(1,everywhere, 0.4) |>
+  set_bottom_border(2,everywhere, 0.4)
 ```
 
 And a key thing to recognise is this. A statistical hypothesis test is a test of the statistical hypothesis, not the research hypothesis. If your study is badly designed then the link between your research hypothesis and your statistical hypothesis is broken. To give a silly example, suppose that my ESP study was conducted in a situation where the participant can actually see the card reflected in a window. If that happens I would be able to find very strong evidence that $\theta \neq 0.5$, but this would tell us nothing about whether "ESP exists".
@@ -107,15 +110,22 @@ $$X \sim Binomial(\theta,N)$$
 
 Since the null hypothesis states that $\theta = 0.5$ and our experiment has $N = 100$ people, we have the sampling distribution we need. This sampling distribution is plotted in @fig-fig9-1. No surprises really, the null hypothesis says that $X = 50$ is the most likely outcome, and it says that we're almost certain to see somewhere between $40$ and $60$ correct responses.
 
+## Making decisions
+
+Okay, we're very close to being finished. We've constructed a test statistic $(X)$ and we chose this test statistic in such a way that we're pretty confident that if $X$ is close to $\frac{N}{2}$ then we should retain the null, and if not we should reject it. The question that remains is this. Exactly which values of the test statistic should we associate with the null hypothesis, and exactly which values go with the alternative hypothesis? In my ESP study, for example, I've observed a value of $X = 62$. What decision should I make? Should I choose to believe the null hypothesis or the alternative hypothesis?
+
 ```{r width="80%"}
 #| label: fig-fig9-1
 #| fig-cap: The sampling distribution for our test statistic $X$ when the null hypothesis is true. For our ESP scenario this is a binomial distribution. Not surprisingly, since the null hypothesis says that the probability of a correct response is $\theta = .5$, the sampling distribution says that the most likely value is 50 (out of 100) correct responses. Most of the probability mass lies between 40 and 60
-#| fig-alt: A bar graph titled "Sampling Distribution for X if the Null is True" shows the probability (y-axis) versus the number of correct responses (X) (x-axis). The distribution is bell-shaped, peaking around 50 correct responses.
+#| fig-alt: A bar graph titled "Sampling Distribution for X if the Null is True" shows the probability (y-axis) versus the number of correct responses (X) (x-axis). The distribution is bell-shaped, peaking around 50 correct responses
+#| fig-width: 8
+#| fig-height: 5
+#| fig-pos: 'H'
 
 binom1 <- data.frame(success = 0:100, pmf = dbinom(x = 0:100, size = 100, prob = .5))
 
 ggplot(data=binom1, aes(x = factor(success), y = pmf+.001)) +
-  geom_col(col=blueshade, fill=blueshade, alpha=0.6, width=.5) +
+  geom_col(col=blueshade, fill=blueshade, width=.4) +
   ggtitle("Sampling Distribution for X if the Null is True") +
   labs(x = "\nNumber of correct responses (X)",
        y = "Probability\n") +
@@ -123,10 +133,6 @@ ggplot(data=binom1, aes(x = factor(success), y = pmf+.001)) +
   theme(plot.title = element_text(hjust = 0.5))
 
 ```
-
-## Making decisions
-
-Okay, we're very close to being finished. We've constructed a test statistic $(X)$ and we chose this test statistic in such a way that we're pretty confident that if $X$ is close to $\frac{N}{2}$ then we should retain the null, and if not we should reject it. The question that remains is this. Exactly which values of the test statistic should we associate with the null hypothesis, and exactly which values go with the alternative hypothesis? In my ESP study, for example, I've observed a value of $X = 62$. What decision should I make? Should I choose to believe the null hypothesis or the alternative hypothesis?
 
 ### Critical regions and critical values
 
@@ -140,18 +146,19 @@ It's important to make sure you understand this last point. The critical region 
 
 As it turns out those three things uniquely solve the problem. Our critical region consists of the most extreme values, known as the **tails** of the distribution. This is illustrated in @fig-fig9-2. If we want $\alpha = .05$ then our critical regions correspond to $X \leq 40$ and $X \geq 60$.[^09-hypothesis-testing-6] That is, if the number of people saying "true" is between 41 and 59, then we should retain the null hypothesis. If the number is between $0$ to $40$, or between $60$ to $100$, then we should reject the null hypothesis. The numbers $40$ and $60$ are often referred to as the **critical values** since they define the edges of the critical region.
 
-[^09-hypothesis-testing-6]: Strictly speaking, the test I just constructed has $\alpha = .057$, which is a bit too generous. However, if I'd chosen 39 and 61 to be the boundaries for the critical region then the critical region only covers $3.5\%$ of the distribution. I figured that it makes more sense to use $40$ and $60$ as my critical values, and be willing to tolerate a $5.7\%$ type I error rate, since that's as close as I can get to a value of $\alpha = .05$.
-
 ```{r  width="80%"}
 #| label: fig-fig9-2
 #| fig-cap: The critical region associated with the hypothesis test for the ESP study, for a hypothesis test with a significance level of $\alpha = .05$. The plot shows the sampling distribution of $X$ under the null hypothesis (i.e., same as @fig-fig9-1) . The grey bars correspond to those values of $X$ for which we would retain the null hypothesis. The blue (darker shaded) bars show the critical region, those values of $X$ for which we would reject the null. Because the alternative hypothesis is two-sided (i.e., allows both $\theta < .5$ and $\theta > .5$), the critical region covers both tails of the distribution. To ensure an $\alpha$ level of $.05$, we need to ensure that each of the two regions encompasses $2.5\%$ of the sampling distribution
-#| fig-alt: A graph depicting the critical regions for a two-sided test. The x-axis represents the number of correct responses (X) ranging from 0 to 100. The lower critical region (2.5% of the distribution) and upper critical region (2.5% of the distribution) are highlighted in blue.
+#| fig-alt: A graph depicting the critical regions for a two-sided test. The x-axis represents the number of correct responses (X) ranging from 0 to 100. The lower critical region (2.5% of the distribution) and upper critical region (2.5% of the distribution) are highlighted in blue
+#| fig-width: 8
+#| fig-height: 5
+#| fig-pos: 'h!'
 
 binom1 <- data.frame(success = 0:100, pmf = dbinom(x = 0:100, size = 100, prob = .5))
 binom1$plotcol <- with(binom1, ifelse(success<=40 | success >= 60, blueshade, "lightgrey"))
 
 ggplot(data=binom1, aes(x = factor(success), y = pmf+.001)) +
-  geom_bar(aes(colour=plotcol, fill=plotcol), width=.5, stat = "identity") +
+  geom_bar(aes(colour=plotcol, fill=plotcol), width=.4, stat = "identity") +
   ggtitle("Critical Regions for a Two-sided Test") +
   labs(x = "\nNumber of correct responses (X)") +
   geom_text(x=22, y=.035, label="lower critical region\n(2.5% of the distribution)", size=5, check_overlap = TRUE) +
@@ -171,6 +178,8 @@ ggplot(data=binom1, aes(x = factor(success), y = pmf+.001)) +
     plot.title = element_text(hjust = 0.5))
 
 ```
+
+[^09-hypothesis-testing-6]: Strictly speaking, the test I just constructed has $\alpha = .057$, which is a bit too generous. However, if I'd chosen 39 and 61 to be the boundaries for the critical region then the critical region only covers $3.5\%$ of the distribution. I figured that it makes more sense to use $40$ and $60$ as my critical values, and be willing to tolerate a $5.7\%$ type I error rate, since that's as close as I can get to a value of $\alpha = .05$.
 
 At this point, our hypothesis test is essentially complete:
 
@@ -202,17 +211,20 @@ When this happens, we have what's called a **one-sided test** and the critical r
 ```{r width="80%"}
 #| label: fig-fig9-3
 #| fig-cap: The critical region for a one-sided test. In this case, the alternative hypothesis is that $\theta \geq .5$ so we would only reject the null hypothesis for large values of $X$. As a consequence, the critical region only covers the upper tail of the sampling distribution, specifically the upper $5\%$ of the distribution. Contrast this to the two-sided version in @fig-fig9-2
-#| fig-alt: A histogram displaying a normal distribution of the number of correct responses (X) with a highlighted critical region on the right side, representing 5% of the distribution. The x-axis ranges from 0 to 100 correct responses. Text reads "critical region (5% of the distribution)".
+#| fig-alt: A histogram displaying a normal distribution of the number of correct responses (X) with a highlighted critical region on the right side, representing 5% of the distribution. The x-axis ranges from 0 to 100 correct responses. Text reads "critical region (5% of the distribution)"
+#| fig-width: 8
+#| fig-height: 5
+#| fig-pos: 'h!'
 
 binom1 <- data.frame(success = 0:100, pmf = dbinom(x = 0:100, size = 100, prob = .5))
 binom1$plotcol <- with(binom1, ifelse(success>= 58, blueshade, "lightgrey"))
 
 ggplot(data=binom1, aes(x = factor(success), y = pmf+.001)) +
-  geom_bar(aes(colour=plotcol, fill=plotcol), width=.5, stat = "identity") +
+  geom_bar(aes(colour=plotcol, fill=plotcol), width=.4, stat = "identity") +
   ggtitle("Critical Region for a One-sided Test") +
   labs(x = "\nNumber of correct responses (X)") +
   geom_text(x=78, y=.04, label="critical region\n(5% of the distribution)", size=5, check_overlap = TRUE) +
-  geom_segment(x = 59, y = .028, xend = 85, yend = .028,
+  geom_segment(x = 59, y = .028, xend = 92, yend = .028,
                arrow = arrow(length = unit(0.03, "npc")), stat = "unique") +
   scale_x_discrete(breaks=seq(0,100,20)) +
   scale_colour_identity() +
@@ -270,7 +282,7 @@ To see why this is an issue, the key thing to recognise is that $p$-values are t
 
 This flexibility is both the advantage and the disadvantage to the $p$-value. The reason why a lot of people don't like the idea of reporting an exact $p$-value is that it gives the researcher a bit too much freedom. In particular, it lets you change your mind about what error tolerance you're willing to put up with after you look at the data. For instance, consider my ESP experiment. Suppose I ran my test and ended up with a $p$-value of $.09$. Should I accept or reject? Now, to be honest, I haven't yet bothered to think about what level of type I error I'm "really" willing to accept. I don't have an opinion on that topic. But I *do* have an opinion about whether or not ESP exists, and I *definitely* have an opinion about whether my research should be published in a reputable scientific journal. And amazingly, now that I've looked at the data I'm starting to think that a $9\%$ error rate isn't so bad, especially when compared to how annoying it would be to have to admit to the world that my experiment has failed. So, to avoid looking like I just made it up after the fact, I now say that my $\alpha$ is .1, with the argument that a $10\%$ type I error rate isn't too bad and at that level my test is significant! I win.
 
-In other words, the worry here is that I might have the best of intentions, and be the most honest of people, but the temptation to just "shade" things a little bit here and there is really, really strong. As anyone who has ever run an experiment can attest, it's a long and difficult process and you often get very attached to your hypotheses. It's hard to let go and admit the experiment didn't find what you wanted it to find. And that's the danger here. If we use the "raw" $p$-value, people will start interpreting the data in terms of what they want to believe, not what the data are actually saying and, if we allow that, why are we even bothering to do science at all? Why not let everyone believe whatever they like about anything, regardless of what the facts are? Okay, that's a bit extreme, but that's where the worry comes from. According to this view, you really must specify your $\alpha$ value in advance and then only report whether the test was significant or not. It's the only way to keep ourselves honest
+In other words, the worry here is that I might have the best of intentions, and be the most honest of people, but the temptation to just "shade" things a little bit here and there is really, really strong. As anyone who has ever run an experiment can attest, it's a long and difficult process and you often get very attached to your hypotheses. It's hard to let go and admit the experiment didn't find what you wanted it to find. And that's the danger here. If we use the "raw" $p$-value, people will start interpreting the data in terms of what they want to believe, not what the data are actually saying and, if we allow that, why are we even bothering to do science at all? Why not let everyone believe whatever they like about anything, regardless of what the facts are? Okay, that's a bit extreme, but that's where the worry comes from. According to this view, you really must specify your $\alpha$ value in advance and then only report whether the test was significant or not. It's the only way to keep ourselves honest.
 
 ```{r}
 #| label: tbl-tab9-5
@@ -311,20 +323,22 @@ In previous sections I've emphasised the fact that the major design principle be
 ```{r width="80%"}
 #| label: fig-fig9-5
 #| fig-cap: Sampling distribution under the alternative hypothesis for a population parameter value of $\theta = 0.55$. A reasonable proportion of the distribution lies in the rejection region
-#| fig-alt: A histogram titled "Sampling Distribution for $X$ if $\theta = 0.55$" shows the number of correct responses ($X$) on the x-axis (ranging from 0 to 100). The lower and upper critical regions (2.5% each) are shaded in blue, with labels indicating their positions.
+#| fig-alt: A histogram titled "Sampling Distribution for $X$ if $\theta = 0.55$" shows the number of correct responses ($X$) on the x-axis (ranging from 0 to 100). The lower and upper critical regions (2.5% each) are shaded in blue, with labels indicating their positions
+#| fig-width: 8
+#| fig-height: 5
 
 binom1 <- data.frame(success = 0:100, pmf = dbinom(x = 0:100, size = 100, prob = .55))
 binom1$plotcol <- with(binom1, ifelse(success<=40 | success >= 60, blueshade, "lightgrey"))
 
 ggplot(data=binom1, aes(x = factor(success), y = pmf+.001)) +
-  geom_bar(aes(colour=plotcol, fill=plotcol), width=.5, stat = "identity") +
+  geom_bar(aes(colour=plotcol, fill=plotcol), width=.4, stat = "identity") +
   ggtitle(expression("Sampling Distribution for X if" ~ theta ~"=.55")) +
   labs(x = "\nNumber of correct responses (X)") +
   geom_text(x=27, y=.07, label="lower critical region\n(2.5% of the distribution)", size=5, check_overlap = TRUE) +
   geom_segment(x = 40, y = .06, xend = 10, yend = .06,
                arrow = arrow(length = unit(0.03, "npc")), stat = "unique") +
   geom_text(x=80, y=.07, label="upper critical region\n(2.5% of the distribution)", size=5, check_overlap = TRUE) +
-  geom_segment(x = 65, y = .06, xend = 90, yend = .06,
+  geom_segment(x = 62, y = .06, xend = 92, yend = .06,
                arrow = arrow(length = unit(0.03, "npc")), stat = "unique") +
   scale_x_discrete(breaks=seq(0,100,20)) +
   scale_colour_identity() +
@@ -338,25 +352,27 @@ ggplot(data=binom1, aes(x = factor(success), y = pmf+.001)) +
 
 ```
 
-Let's take a moment to think about what a type II error actually is. A type II error occurs when the alternative hypothesis is true, but we are nevertheless unable to reject the null hypothesis. Ideally, we'd be able to calculate a single number $\beta$ that tells us the type II error rate, in the same way that we can set $\alpha = .05$ for the type I error rate. Unfortunately, this is a lot trickier to do. To see this, notice that in my ESP study the alternative hypothesis actually corresponds to lots of possible values of $\theta$. In fact, the alternative hypothesis corresponds to every value of $\theta$ except 0.5. Let's suppose that the true probability of someone choosing the correct response is 55% (i.e., $\theta = .55$). If so, then the true sampling distribution for $X$ is not the same one that the null hypothesis predicts, as the most likely value for $X$ is now $55$ out of 100. Not only that, the whole sampling distribution has now shifted, as shown in @fig-fig9-5. The critical regions, of course, do not change. By definition the critical regions are based on what the null hypothesis predicts. What we're seeing in this figure is the fact that when the null hypothesis is wrong, a much larger proportion of the sampling distribution distribution falls in the critical region. And of course that's what should happen. The probability of rejecting the null hypothesis is larger when the null hypothesis is actually false! However $\theta = .55$ is not the only possibility consistent with the alternative hypothesis. Let's instead suppose that the true value of $\theta$ is actually $0.7$. What happens to the sampling distribution when this occurs? The answer, shown in @fig-fig9-6, is that almost the entirety of the sampling distribution has now moved into the critical region. Therefore, if $\theta = 0.7$, the probability of us correctly rejecting the null hypothesis (i.e., the power of the test) is much larger than if $\theta = 0.55$. In short, while $\theta = .55$ and $\theta = .70$ are both part of the alternative hypothesis, the type II error rate is different.
+Let's take a moment to think about what a type II error actually is. A type II error occurs when the alternative hypothesis is true, but we are nevertheless unable to reject the null hypothesis. Ideally, we'd be able to calculate a single number $\beta$ that tells us the type II error rate, in the same way that we can set $\alpha = .05$ for the type I error rate. Unfortunately, this is a lot trickier to do. To see this, notice that in my ESP study the alternative hypothesis actually corresponds to lots of possible values of $\theta$. In fact, the alternative hypothesis corresponds to every value of $\theta$ except 0.5. Let's suppose that the true probability of someone choosing the correct response is 55% (i.e., $\theta = .55$). If so, then the true sampling distribution for $X$ is not the same one that the null hypothesis predicts, as the most likely value for $X$ is now $55$ out of 100. Not only that, the whole sampling distribution has now shifted, as shown in @fig-fig9-5. The critical regions, of course, do not change. By definition the critical regions are based on what the null hypothesis predicts, but when the null hypothesis is wrong, a much larger proportion of the sampling distribution distribution falls in the critical region. The probability of rejecting the null hypothesis is larger when the null hypothesis is actually false! However $\theta = .55$ is not the only possibility consistent with the alternative hypothesis. Let's instead suppose that the true value of $\theta$ is actually $0.7$. What happens to the sampling distribution when this occurs? The answer, shown in @fig-fig9-6, is that almost the entirety of the sampling distribution has now moved into the critical region. Therefore, if $\theta = 0.7$, the probability of us correctly rejecting the null hypothesis (i.e., the power of the test) is much larger than if $\theta = 0.55$. In short, while $\theta = .55$ and $\theta = .70$ are both part of the alternative hypothesis, the type II error rate is different.
 
 ```{r width="80%"}
 #| label: fig-fig9-6
 #| fig-cap: Sampling distribution under the *alternative* hypothesis for a population parameter value of $\theta = 0.70$. Almost all of the distribution lies in the rejection region
 #| fig-alt: A bar graph titled "Sampling Distribution for X if $\theta = 0.70$" showing a distribution of the number of correct responses (X) from 0 to 100. The lower and upper critical regions, each 2.5% of the distribution, are highlighted on the left and right tails respectively
+#| fig-width: 8
+#| fig-height: 4.5
 
 binom1 <- data.frame(success = 0:100, pmf = dbinom(x = 0:100, size = 100, prob = .7))
 binom1$plotcol <- with(binom1, ifelse(success<=40 | success >= 60, blueshade, "lightgrey"))
 
 ggplot(data=binom1, aes(x = factor(success), y = pmf+.001)) +
-  geom_bar(aes(colour=plotcol, fill=plotcol), width=.5, stat = "identity") +
+  geom_bar(aes(colour=plotcol, fill=plotcol), width=.4, stat = "identity") +
   ggtitle(expression("Sampling Distribution for X if" ~ theta ~"=.70")) +
   labs(x = "\nNumber of correct responses (X)") +
-  geom_text(x=27, y=.07, label="lower critical region\n(2.5% of the distribution)", size=5, check_overlap = TRUE) +
+  geom_text(x=27, y=.07, label="lower critical region\n(2.5% of the distribution",  family = "TeX Gyre Pagella", size=5, check_overlap = TRUE) +
   geom_segment(x = 40, y = .06, xend = 10, yend = .06,
                arrow = arrow(length = unit(0.03, "npc")), stat = "unique") +
-  geom_label(aes(x=75, y=.07, label="upper critical region\n(2.5% of the distribution)"), size=5, , stat = "unique", label.size=NA, fill="white", alpha=0.9) +
-  geom_segment(x = 61, y = .06, xend = 90, yend = .06,
+  geom_label(aes(x=75, y=.07, label="upper critical region\n(2.5% of the distribution)", family = "TeX Gyre Pagella"), size=5, stat = "unique", label.size=NA, fill="white", alpha=0.95) +
+  geom_segment(x = 60, y = .06, xend = 95, yend = .06,
                arrow = arrow(length = unit(0.03, "npc")), stat = "unique") +
   scale_x_discrete(breaks=seq(0,100,20)) +
   scale_colour_identity() +
@@ -370,12 +386,13 @@ ggplot(data=binom1, aes(x = factor(success), y = pmf+.001)) +
 
 ```
 
-What all this means is that the power of a test (i.e., $1 - \beta$) depends on the true value of $\theta$. To illustrate this, I've calculated the expected probability of rejecting the null hypothesis for all values of $\theta$, and plotted it in @fig-fig9-7. This plot describes what is usually called the power function of the test. It's a nice summary of how good the test is, because it actually tells you the power $(1 - \beta$) for all possible values of $\theta$. As you can see, when the true value of $\theta$ is very close to $0.5$, the power of the test drops very sharply, but when it is further away, the power is large.
-
 ```{r width="80%"}
 #| label: fig-fig9-7
 #| fig-cap: The probability that we will reject the null hypothesis, plotted as a function of the true value of $\theta$. Obviously, the test is more powerful (greater chance of correct rejection) if the true value of $\theta$ is very different from the value that the null hypothesis specifies (i.e., $\theta = .5$ ). Notice that when $\theta$ actually is equal to $.5$ (plotted as a black dot), the null hypothesis is in fact true and rejecting the null hypothesis in this instance would be a type I error
 #| fig-alt: A graph titled "Power function for the Test (N=100)" showing the probability of rejecting the null hypothesis (y-axis) plotted against the true value of $\theta$ (x-axis). The curve dips sharply to a minimum at $\theta$=0.5, marked by a black dot, and rises symmetrically on either side to a maximum at both ends
+#| fig-width: 8
+#| fig-height: 4.5
+#| fig-pos: 'H'
 
 theta <- seq(.01,.99,.01)
 pow <- vector("numeric",length(theta))
@@ -395,16 +412,18 @@ ggplot(dat=dpower, aes(x=theta, y=pow)) +
 
 ```
 
+What all this means is that the power of a test (i.e., $1 - \beta$) depends on the true value of $\theta$. To illustrate this, I've calculated the expected probability of rejecting the null hypothesis for all values of $\theta$, and plotted it in @fig-fig9-7. This plot describes what is usually called the power function of the test. It's a nice summary of how good the test is, because it actually tells you the power $(1 - \beta$) for all possible values of $\theta$. As you can see, when the true value of $\theta$ is very close to $0.5$, the power of the test drops very sharply, but when it is further away, the power is large.
+
 ### The power function
 
 > *Since all models are wrong the scientist must be alert to what is importantly wrong. It is inappropriate to be concerned with mice when there are tigers abroad.*\
-> - George Box (Box 1976, p. 792).
+> -- George Box [@Box1976, p. 792].
 
 The plot shown in @fig-fig9-7 captures a fairly basic point about hypothesis testing. If the true state of the world is very different from what the null hypothesis predicts then your power will be very high, but if the true state of the world is similar to the null (but not identical) then the power of the test is going to be very low. Therefore, it's useful to be able to have some way of quantifying how "similar" the true state of the world is to the null hypothesis. A statistic that does this is called a measure of **effect size** (e.g., @Cohen1988; @Ellis2010). Effect size is defined slightly differently in different contexts (and so this section just talks in general terms) but the qualitative idea that it tries to capture is always the same (see e.g. @tbl-tab9-6). How big is the difference between the *true* population parameters and the parameter values that are assumed by the null hypothesis? In our ESP example, if we let $\theta_0 = 0.5$ denote the value assumed by the null hypothesis and let $\theta$ denote the true value, then a simple measure of effect size could be something like the difference between the true value and null (i.e., $\theta - \theta_0$), or possibly just the magnitude of this difference, $abs(\theta - \theta_0)$.
 
 ```{r}
 #| label: tbl-tab9-6
-#| tbl-cap: A crude guide to understanding the relationship between statistical significance and effect sizes. Basically, if you don't have a significant result then the effect size is pretty meaningless because you don't have any evidence that it's even real. On the other hand, if you do have a significant effect but your effect size is small then there's a pretty good chance that your result (although real) isn't all that interesting. However, this guide is very crude. It depends a lot on what exactly you're studying. Small effects can be of massive practical importance in some situations. So don't take this table too seriously. It's a rough guide at best
+#| tbl-cap: A crude guide to understanding the relationship between statistical significance and effect sizes. Basically, if you don't have a significant result then the effect size is pretty meaningless because you don't have any evidence that it's even real. On the other hand, if you do have a significant effect but your effect size is small then there's a pretty good chance that your result (although real) isn't all that interesting. It does depend a lot on what exactly you're studying; small effects can be of massive practical importance in some situations. So don't take this table too seriously -- it's a rough guide at best
 huxtabs[[9]][[6]]
 ```
 
@@ -416,16 +435,19 @@ about.
 
 ### Increasing the power of your study
 
-Not surprisingly, scientists are fairly obsessed with maximising the power of their experiments. We want our experiments to work and so we want to maximise the chance of rejecting the null hypothesis if it is false (and of course we usually want to believe that it is false!). As we've seen, one factor that influences power is the effect size. So the first thing you can do to increase your power is to increase the effect size. In practice, what this means is that you want to design your study in such a way that the effect size gets magnified. For instance, in my ESP study I might believe that psychic powers work best in a quiet, darkened room with fewer distractions to cloud the mind. Therefore I would try to conduct my experiments in just such an environment. If I can strengthen people's ESP abilities somehow then the true value of $\theta$ will go up[^09-hypothesis-testing-11] and therefore my effect size will be larger. In short, clever experimental design is one way to boost power, because it can alter the effect size.
+Not surprisingly, scientists are fairly obsessed with maximising the power of their experiments. We want our experiments to work and so we want to maximise the chance of rejecting the null hypothesis if it is false. As we've seen, one factor that influences power is the effect size. So the first thing you can do to increase your power is to increase the effect size. In practice, what this means is that you want to design your study in such a way that the effect size gets magnified. For instance, in my ESP study I might believe that psychic powers work best in a quiet, darkened room with fewer distractions to cloud the mind. Therefore I would try to conduct my experiments in just such an environment. If I can strengthen people's ESP abilities somehow then the true value of $\theta$ will go up[^09-hypothesis-testing-11] and therefore my effect size will be larger. In short, clever experimental design is one way to boost power, because it can alter the effect size.
 
 [^09-hypothesis-testing-11]: Notice that the true population parameter $\theta$ doesn't necessarily correspond to an immutable fact of nature. In this context $\theta$ is just the true probability that people would correctly guess the colour of the card in the other room. As such the population parameter can be influenced by all sorts of things. Of course, this is all on the assumption that ESP actually exists!
 
-Unfortunately, it's often the case that even with the best of experimental designs you may have only a small effect. Perhaps, for example, ESP really does exist but even under the best of conditions it's very very weak. Under those circumstances your best bet for increasing power is to increase the sample size. In general, the more observations that you have available, the more likely it is that you can discriminate between two hypotheses. If I ran my ESP experiment with 10 participants and 7 of them correctly guessed the colour of the hidden card you wouldn't be terribly impressed. But if I ran it with 10,000 participants, and 7,000 of them got the answer right, you would be much more likely to think I had discovered something. In other words, power increases with the sample size. This is illustrated in @fig-fig9-8, which shows the power of the test for a true parameter of $\theta = 0.7$ for all sample sizes $N$ from $1$ to $100$, where I'm assuming that the null hypothesis predicts that $\theta_0 = 0.5$.
+Unfortunately, it's often the case that even with the best of experimental designs you may have only a small effect. Perhaps, for example, ESP really does exist but even under the best of conditions it's very, very weak. Under those circumstances your best bet for increasing power is to increase the sample size. In general, the more observations that you have, the more likely it is that you can discriminate between two hypotheses. If I ran my ESP experiment with 10 participants and 7 of them correctly guessed the colour of the hidden card you wouldn't be terribly impressed. But if I ran it with 10,000 participants, and 7,000 of them got the answer right, you would be much more likely to think I had discovered something. In other words, power increases with the sample size. This is illustrated in @fig-fig9-8, which shows the power of the test for a true parameter of $\theta = 0.7$ for all sample sizes $N$ from $1$ to $100$, where I'm assuming that the null hypothesis predicts that $\theta_0 = 0.5$.
 
 ```{r width="80%"}
 #| label: fig-fig9-8
 #| fig-cap: The power of our test plotted as a function of the sample size $N$. In this case, the true value of $\theta$ is 0.7 but the null hypothesis is that $\theta = 0.5$. Overall, larger $N$ means greater power. (The small zig-zags in this function occur because of some odd interactions between $\theta$,  $\alpha$ and the fact that the binomial distribution is discrete, it does not matter for any serious purpose)
-#| fig-alt: A line graph showing the probability of rejecting the null hypothesis as a function of sample size (N). The x-axis represents the sample size ranging from 0 to 100, and the y-axis shows the probability from 0 to 1. The line increases and fluctuates upwards.
+#| fig-alt: A line graph showing the probability of rejecting the null hypothesis as a function of sample size (N). The x-axis represents the sample size ranging from 0 to 100, and the y-axis shows the probability from 0 to 1. The line increases and fluctuates upwards
+#| fig-width: 8
+#| fig-height: 5
+#| fig-pos: 'h!'
 
 N <- 1:100
 pow <- vector("numeric",length(N))

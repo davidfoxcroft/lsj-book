@@ -9,7 +9,7 @@
 source("chapter_header.R")
 ```
 
-Previous chapters have covered statistical tests for differences between two or more groups. However, sometimes when conducting research, we may wish to examine how multiple variables *co-vary*. That is, how they are related to each other and whether the patterns of relatedness suggest anything interesting and meaningful. For example, we are often interested in exploring whether there are any underlying unobserved latent factors that are represented by the observed, directly measured, variables in our dataset. In statistics, latent factors are initially hidden variables that are not directly observed but are rather inferred (through statistical analysis) from other variables that are observed (directly measured). For a more technical and useful geometric explanation of the essentials of Factor Analysis take a look at @Child1990. @Kline1994 also provides a helpful introduction to the basic theory of Factor Analysis.  
+Previous chapters have covered statistical tests for differences between two or more groups. However, sometimes when conducting research, we may wish to examine how multiple variables *co-vary*. That is, how they are related to each other and whether the patterns of relatedness suggest anything interesting and meaningful. For example, we are often interested in exploring whether there are any underlying unobserved latent factors that are represented by the observed, directly measured, variables in our data set. In statistics, latent factors are initially hidden variables that are not directly observed but are rather inferred (through statistical analysis) from other variables that are observed (directly measured). For a more technical and useful geometric explanation of the essentials of Factor Analysis take a look at @Child1990. @Kline1994 also provides a helpful introduction to the basic theory of Factor Analysis.  
 
 In this chapter we will cover how to undertake a number of different Factor Analysis and related techniques, starting with [Exploratory Factor Analysis] (EFA). EFA is a statistical technique for identifying underlying latent factors in a data set. Then we will cover [Principal Component Analysis] (PCA) which is a data reduction technique which, strictly speaking, does not identify underlying latent factors. Instead, PCA simply produces a linear combination of observed variables. Following this, the section on [Confirmatory Factor Analysis] (CFA) shows that, unlike EFA, with CFA you start with an idea -- a model -- of how the variables in your data are related to each other. You then test your model against the observed data and assess how good a fit the model is. A more sophisticated version of CFA is the so-called [Multi-Trait Multi-Method CFA] approach in which both latent factor and method variance are included in the model. This is useful when there are different methodological approaches used for measurement and therefore method variance is an important consideration. Finally, we will cover a related analysis: [Internal consistency reliability analysis] tests how consistently a scale measures a psychological construct.
 
@@ -36,7 +36,7 @@ In Exploratory Factor Analysis (EFA), we are essentially exploring the correlati
 
 ### Checking assumptions
 
-There are a couple of assumptions that need to be checked as part of the analysis. The first assumption is **sphericity**, which essentially checks that the variables in your dataset are correlated with each other to the extent that they can potentially be summarised with a smaller set of factors. Bartlett's test for sphericity checks whether the observed correlation matrix diverges significantly from a zero (or null) correlation matrix. So, if Bartlett's test is significant ($p < .05$), this indicates that the observed correlation matrix is significantly divergent from the null, and is therefore suitable for EFA.
+There are a couple of assumptions that need to be checked as part of the analysis. The first assumption is **sphericity**, which essentially checks that the variables in your data set are correlated with each other to the extent that they can potentially be summarised with a smaller set of factors. Bartlett's test for sphericity checks whether the observed correlation matrix diverges significantly from a zero (or null) correlation matrix. So, if Bartlett's test is significant ($p < .05$), this indicates that the observed correlation matrix is significantly divergent from the null, and is therefore suitable for EFA.
 
 The second assumption is **sampling adequacy** and is checked using the Kaiser-Meyer-Olkin (KMO) Measure of Sampling Adequacy (MSA). The KMO index is a measure of the proportion of variance among observed variables that might be common variance. Using partial correlations, it checks for factors that load just two items. We seldom, if ever, want EFA producing a lot of factors loading just two items each. KMO is about sampling adequacy because partial correlations are typically seen with inadequate samples. If the KMO index is high ($\approx 1$), the EFA is efficient whereas if KMO is low ($\approx 0$), the EFA is not relevant. KMO values smaller than $0.5$ indicates that EFA is not suitable and a KMO value of $0.6$ should be present before EFA is considered suitable. Values between $0.5$ and $0.7$ are considered adequate, values between $0.7$ and $0.9$ are good and values between $0.9$ and $1.0$ are excellent.
 
@@ -59,7 +59,7 @@ First, we need some data. Twenty-five personality self-report items (see @tbl-ta
 
 ```{r}
 #| label: tbl-tab15-1
-#| tbl-cap: Twenty-five observed variable items organised by five putative personality factors in the dataset *bfi_sample.csv*
+#| tbl-cap: Twenty-five observed variable items organised by five putative personality factors in the data set *bfi_sample.csv*
 #| tbl-pos: ht!
 huxtabs[[15]][[1]]  %>%
   set_col_width(c(.2, .6, .2))  %>%
@@ -77,7 +77,7 @@ The item data were collected using a 6-point response scale:
 5.  Moderately Accurate
 6.  Very Accurate
 
-A sample of $N=250$ responses is contained in the dataset *bfi_sample.csv*. As researchers, we are interested in exploring the data to see whether there are some underlying latent factors that are measured reasonably well by the $25$ observed variables in the *bfi_sample.csv*  data file. Open up the dataset and check that the $25$ variables are coded as continuous variables (technically they are ordinal though for EFA in jamovi it mostly doesn't matter, except if you decide to calculate weighted factor scores in which case continuous variables are needed). To perform EFA in jamovi:
+A sample of $N=250$ responses is contained in the data set *bfi_sample.csv*. As researchers, we are interested in exploring the data to see whether there are some underlying latent factors that are measured reasonably well by the $25$ observed variables in the *bfi_sample.csv*  data file. Open up the data set and check that the $25$ variables are coded as continuous variables (technically they are ordinal though for EFA in jamovi it mostly doesn't matter, except if you decide to calculate weighted factor scores in which case continuous variables are needed). To perform EFA in jamovi:
 
 -   Select 'Factor' -- 'Exploratory Factor Analysis' from the main jamovi button bar to open the EFA analysis window (@fig-fig15-2).
 
@@ -160,7 +160,7 @@ We can also see in @fig-fig15-6 the 'uniqueness' of each variable. Uniqueness is
 
 To be honest, it's unusual to get such a neat solution in EFA. It's typically quite a bit more messy than this, and often interpreting the meaning of the factors is more challenging. It's not often that you have such a clearly delineated item pool. More often you will have a whole heap of observed variables that you think may be indicators of a few underlying latent factors, but you don't have such a strong sense of which variables are going to go where!
 
-So, we seem to have a pretty good five factor solution, albeit accounting for a relatively low overall proportion of the observed variance. Let's assume we are happy with this solution and want to use our factors in further analysis. The straightforward option is to calculate an overall (average) score for each factor by adding together the score for each variable that loads substantively onto the factor and then dividing by the number of variables (in other words create a "mean score" for each person across the items for each scale). For each person in our dataset that entails, for example for the Agreeableness factor, adding together $A1 + A2 + A3 + A4 + A5$, and then dividing by 5.[^factor-analysis-4] In essence, the factor score we have calculated is based on equally weighted scores from each of the included variables/items. We can do this in jamovi in two steps:
+So, we seem to have a pretty good five factor solution, albeit accounting for a relatively low overall proportion of the observed variance. Let's assume we are happy with this solution and want to use our factors in further analysis. The straightforward option is to calculate an overall (average) score for each factor by adding together the score for each variable that loads substantively onto the factor and then dividing by the number of variables (in other words create a "mean score" for each person across the items for each scale). For each person in our data set that entails, for example for the Agreeableness factor, adding together $A1 + A2 + A3 + A4 + A5$, and then dividing by 5.[^factor-analysis-4] In essence, the factor score we have calculated is based on equally weighted scores from each of the included variables/items. We can do this in jamovi in two steps:
 
 [^factor-analysis-4]: Remembering to first reverse score some variables if necessary.
 
@@ -172,7 +172,7 @@ So, we seem to have a pretty good five factor solution, albeit accounting for a 
 #| label: fig-fig15-7
 #| classes: .enlarge-image
 #| fig-cap: Recode variable using the jamovi Transform command
-#| fig-alt: A jamovi screenshot that shows toolbar options, a transformation setup for variable recoding, and a dataset table with several columns labeled A1R, A1, A2, A3, A4, and more, containing numerical data.
+#| fig-alt: A jamovi screenshot that shows toolbar options, a transformation setup for variable recoding, and a data set table with several columns labeled A1R, A1, A2, A3, A4, and more, containing numerical data.
 knitr::include_graphics("images/fig15-7.png")
 ```
 
