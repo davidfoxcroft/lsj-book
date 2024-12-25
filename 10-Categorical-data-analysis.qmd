@@ -45,28 +45,36 @@ Hopefully that's pretty clear. It's also worth noting that mathematicians prefer
 
 [^10-categorical-data-analysis-2]: A vector is a sequence of data elements of the same basic type:
 $$O = (O_1, O_2, O_3, O_4)$$
-Again, this is nothing new or interesting. It's just notation. If I say that $O = (35, 51, 64, 50)$ all I'm doing is describing the table of observed frequencies (i.e., observed), but I'm referring to it using mathematical notation.
+Again, this is nothing new or interesting. It's just notation. If I say that $O = (35, 51, 64, 50)$ all I'm doing is describing the table of observed frequencies (i.e., observed), but I'm referring to it using mathematical notation.\
 
 ### The null hypothesis and the alternative hypothesis
 
 As the last section indicated, our research hypothesis is that "people don't choose cards randomly". What we're going to want to do now is translate this into some statistical hypotheses and then construct a statistical test of those hypotheses. The test that I'm going to describe to you is **Pearson's** $\chi^2$ (chi-square) goodness-of-fit test, and as is so often the case we have to begin by carefully constructing our null hypothesis. In this case, it's pretty easy. First, let's state the null hypothesis in words:
 $$H_0: \text{ All four suits are chosen with equal probability}$$
-Now, because this is statistics, we have to be able to say the same thing in a mathematical way. To do this, let's use the notation $P_j$ to refer to the true probability that the j-th suit is chosen. If the null hypothesis is true, then each of the four suits has a 25% chance of being selected. In other words, our null hypothesis claims that $P_1 = .25$, $P_2 = .25$, $P_3 = .25$ and finally that $P_4 = .25$ . However, in the same way that we can group our observed frequencies into a vector O that summarises the entire data set, we can use P to refer to the probabilities that correspond to our null hypothesis. So if I let the vector $P = (P_1, P_2, P_3, P_4)$ refer to the collection of probabilities that describe our null hypothesis, then we have:
+Now, let's say this in a mathematical way. To do this, let's use the notation $P_j$ to refer to the true probability that the j-th suit is chosen. If the null hypothesis is true, then each of the four suits has a 25% chance of being selected. In other words, our null hypothesis claims that $P_1 = .25$, $P_2 = .25$, $P_3 = .25$ and finally that $P_4 = .25$ . However, in the same way that we can group our observed frequencies into a vector O that summarises the entire data set, we can use P to refer to the probabilities that correspond to our null hypothesis. So if I let the vector $P = (P_1, P_2, P_3, P_4)$ refer to the collection of probabilities that describe our null hypothesis, then we have:
+
 $$H_0: P =(.25, .25, .25, .25)$$
 
 In this particular instance, our null hypothesis corresponds to a vector of probabilities P in which all of the probabilities are equal to one another. But this doesn't have to be the case. For instance, if the experimental task was for people to imagine they were drawing from a deck that had twice as many clubs as any other suit, then the null hypothesis would correspond to something like $P = (.4, .2, .2, .2)$. As long as the probabilities are all positive numbers, and they all sum to 1, then it's a perfectly legitimate choice for the null hypothesis. However, the most common use of the goodness-of-fit test is to test a null hypothesis that all of the categories are equally likely, so we'll stick to that for our example.
 
 What about our alternative hypothesis, $H_1$? All we're really interested in is demonstrating that the probabilities involved aren't all identical (that is, people's choices weren't completely random). As a consequence, the "human friendly" versions of our hypotheses look like this:
+
 $$H_0: \text{ All four suits are chosen with equal probability}$$
+
 $$H_1: \text{ At least one of the suit-choice probabilities isn’t 0.25}$$
+
 ...and the "mathematician friendly" version is:
+
 $$H_0: P= (.25, .25, .25, .25)$$
+
 $$H_1: P \neq (.25, .25, .25, .25)$$
 
 ### The "goodness-of-fit" test statistic
 
 At this point, we have our observed frequencies O and a collection of probabilities P corresponding to the null hypothesis that we want to test. What we now want to do is construct a test of the null hypothesis. As always, if we want to test $H_0$ against $H_1$, we're going to need a test statistic. The basic trick that a goodness-of-fit test uses is to construct a test statistic that measures how "close" the data are to the null hypothesis. If the data don't resemble what you'd "expect" to see if the null hypothesis were true, then it probably isn't true. Okay, if the null hypothesis were true, what would we expect to see? Or, to use the correct terminology, what are the **expected frequencies**. There are $N = 200$ observations, and (if the null is true) the probability of any one of them choosing a heart is $P_3 = .25$, so I guess we're expecting $200 \times .25 = 50$ hearts, right? Or, more specifically, if we let $E_i$ refer to "the number of category $i$ responses that we're expecting if the null is true", then:
+
 $$E_i=N \times P_i$$
+
 This is pretty easy to calculate. If there are 200 observations that can fall into four categories, and we think that all four categories are equally likely, then on average we'd expect to see 50 observations in each category, right?
 
 Now, how do we translate this into a test statistic? Clearly, what we want to do is compare the expected number of observations in each category ($E_i$) with the observed number of observations in that category ($O_i$). And on the basis of this comparison we ought to be able to come up with a good test statistic. To start with, let's calculate the difference between what the null hypothesis expected us to find and what we actually did find. That is, we calculate the "observed minus expected" difference score, $O_i - E_i$. This is illustrated in @tbl-tab10-3.\
@@ -93,7 +101,8 @@ Now we're making progress. What we've got now is a collection of numbers that ar
 huxtabs[[10]][[5]]
 ```
 
-In effect, what we've got here are four different "error" scores, each one telling us how big a "mistake" the null hypothesis made when we tried to use it to predict our observed frequencies. So, in order to convert this into a useful test statistic, one thing we could do is just add these numbers up. The result is called the **goodness-of-fit** statistic, conventionally referred to either as $\chi^2$ (chi-square) or GOF. We can calculate it as in @tbl-tab10-6:
+In effect, what we've got here are four different "error" scores, each one telling us how big a "mistake" the null hypothesis made when we tried to use it to predict our observed frequencies. So, in order to convert this into a useful test statistic, one thing we could do is just add these numbers up. The result is called the **goodness-of-fit** statistic, conventionally referred to either as $\chi^2$ (chi-square) or GOF. We can calculate it as:
+
 $$\sum( (observed - expected)^2 / expected )$$
 
 This gives us a value of 8.44.
@@ -109,7 +118,9 @@ As we've seen from our calculations, in our cards data set we've got a value of 
 To determine whether or not a particular value of $\chi^2$ is large enough to justify rejecting the null hypothesis, we're going to need to figure out what the sampling distribution for $\chi^2$ would be if the null hypothesis were true. So that's what I'm going to do in this section. I'll show you in a fair amount of detail how this sampling distribution is constructed, and then, in the next section, use it to build up a hypothesis test. If you want to cut to the chase and are willing to take it on faith that the sampling distribution is a $\chi^2$ (chi-square) distribution with $k - 1$ degrees of freedom, you can skip the rest of this section. However, if you want to understand *why* the goodness-of-fit test works the way it does, read on.
 
 Okay, let's suppose that the null hypothesis is actually true. If so, then the true probability that an observation falls in the $i$-th category is $P_i$ . After all, that's pretty much the definition of our null hypothesis. Let's think about what this actually means. This is kind of like saying that "nature" makes the decision about whether or not the observation ends up in category $i$ by flipping a weighted coin (i.e., one where the probability of getting a head is $P_j$). And therefore we can think of our observed frequency $O_i$ by imagining that nature flipped $N$ of these coins (one for each observation in the data set), and exactly $O_i$ of them came up heads. Obviously, this is a pretty weird way to think about the experiment. But what it does (I hope) is remind you that we've actually seen this scenario before. It's exactly the same set up that gave rise to @sec-The-binomial-distribution in @sec-Introduction-to-probability. In other words, if the null hypothesis is true, then it follows that our observed frequencies were generated by sampling from a binomial distribution:
+
 $$O_i \sim Binomial(P_i,N) $$
+
 Now, if you remember from our discussion of @sec-The-central-limit-theorem the binomial distribution starts to look pretty much identical to the normal distribution, especially when $N$ is large and when $P_i$ isn't too close to 0 or 1. In other words as long as $N^P_i$ is large enough. Or, to put it another way, when the expected frequency $E_i$ is large enough then the theoretical distribution of $O_i$ is approximately normal. Better yet, if $O_i$ is normally distributed, then so is $(O_i-E_i)/\sqrt{(E_i)}$ . Since $E_i$ is a fixed value, subtracting off $E_i$ and dividing by $\sqrt{(E_i)}$ changes the mean and standard deviation of the normal distribution but that's all it does. Okay, so now let's have a look at what our goodness-of-fit statistic actually is. What we're doing is taking a bunch of things that are normally-distributed, squaring them, and adding them up. Wait. We've seen that before too! As we discussed in the section on @sec-Other-useful-distributions, when you take a bunch of things that have a standard normal distribution (i.e., mean 0 and standard deviation 1), square them and then add them up, the resulting quantity has a chi-square distribution. So now we know that the null hypothesis predicts that the sampling distribution of the goodness-of-fit statistic is a chi-square distribution. Cool.
 
 There's one last detail to talk about, namely the degrees of freedom. If you remember back to @sec-Other-useful-distributions, I said that if the number of things you're adding up is $k$, then the degrees of freedom for the resulting chi-square distribution is $k$. Yet, what I said at the start of this section is that the actual degrees of freedom for the chi-square goodness-of-fit test is $k - 1$. What's up with that? The answer here is that what we're supposed to be looking at is the number of genuinely independent things that are getting added together. And, as I'll go on to talk about in the next section, even though there are $k$ things that we're adding only $k - 1$ of them are truly independent, and so the degrees of freedom is actually only $k - 1$. That's the topic of the next section.[^10-categorical-data-analysis-4]
@@ -326,31 +337,37 @@ $$\hat{P}_{i}= \frac{R_i}{N}$$
 Therefore, our expected frequency can be written as the product (i.e. multiplication) of the row total and the column total, divided by the total number of observations:
 
 $${E}_{ij}= \frac{R_i \times C_j}{N}$$
-[Additional technical detail[^10-categorical-data-analysis-12]]
+[Additional technical detail[^10-categorical-data-analysis-11]]
 
-[^10-categorical-data-analysis-12]: Technically, $E_{ij}$ here is an estimate, so I should probably write it $\hat{E_{ij}}$, but since no-one else does, I won't either. Now that we've figured out how to calculate the expected frequencies, it's straightforward to define a test statistic, following the exact same strategy that we used in the goodness-of-fit test. In fact, it's pretty much the same statistic. For a contingency table with r rows and c columns, the equation that defines our $X^2$ statistic is: $$X^2=\sum_{i=1}^{r}\sum_{j=1}^{c} \frac{(E_{ij}-O_{ij})^2}{E_{ij}}$$ The only difference is that I have to include two summation signs (i.e., $\sum$ ) to indicate that we're summing over both rows and columns.
+[^10-categorical-data-analysis-11]: Technically, $E_{ij}$ here is an estimate, so I should probably write it $\hat{E_{ij}}$, but since no-one else does, I won't either. Now that we've figured out how to calculate the expected frequencies, it's straightforward to define a test statistic, following the exact same strategy that we used in the goodness-of-fit test. In fact, it's pretty much the same statistic. For a contingency table with r rows and c columns, the equation that defines our $X^2$ statistic is: $$X^2=\sum_{i=1}^{r}\sum_{j=1}^{c} \frac{(E_{ij}-O_{ij})^2}{E_{ij}}$$ The only difference is that I have to include two summation signs (i.e., $\sum$ ) to indicate that we're summing over both rows and columns.
 
 As before, large values of $X^2$ indicate that the null hypothesis provides a poor description of the data, whereas small values of $X^2$ suggest that it does a good job of accounting for the data. Therefore, just like last time, we want to reject the null hypothesis if $X^2$ is too large.
         
 Not surprisingly, this statistic is $\chi^2$ distributed. All we need to do is figure out how many degrees of freedom are involved, which actually isn't too hard. As I mentioned before, you can (usually) think of the degrees of freedom as being equal to the number of data points that you're analysing, minus the number of constraints. A contingency table with r rows and c columns contains a total of $r^{c}$ observed frequencies, so that's the total number of observations. What about the constraints? Here, it's slightly trickier. The answer is always the same:
 
-
 $$df=(r-1)(c-1)$$
+
 but the explanation for why the degrees of freedom takes this value is different depending on the experimental design. For the sake of argument, let's suppose that we had honestly intended to survey exactly 87 robots and 93 humans (column totals fixed by the experimenter), but left the row totals free to vary (row totals are random variables). Let's think about the constraints that apply here. Well, since we deliberately fixed the column totals by Act of Experimenter, we have $c$ constraints right there. But, there's actually more to it than that. Remember how our null hypothesis had some free parameters (i.e., we had to estimate the Pi values)? Those matter too. I won't explain why in this book, but every free parameter in the null hypothesis is rather like an additional constraint. So, how many of those are there? Well, since these probabilities have to sum to 1, there's only $r - 1$ of these. So our total degrees of freedom is:
 
-$$ \begin{split} df & = \text{(number of
-observations) - (number of constraints)} \\\\ & = (r \times c) - (c +
-(r - 1)) \\\\ & = rc - c - r + 1 \\\\ & = (r - 1)(c - 1) \end{split}$$
+$$ 
+\begin{split} 
+df & = \text{(number of observations) - (number of constraints)} \\\\ 
+& = (r \times c) - (c + (r - 1)) \\\\ 
+& = rc - c - r + 1 \\\\ & = (r - 1)(c - 1) 
+\end{split}
+$$
 
-Alternatively, suppose that the only thing that the experimenter fixed was the total sample size N. That is, we quizzed the first 180 people that we saw and it just turned out that 87 were robots and 93 were humans. This time around our reasoning would be slightly different, but would still lead us to the same answer. Our null hypothesis still has $r - 1$ free parameters corresponding to the choice probabilities, but it now also has $c - 1$ free parameters corresponding to the species probabilities, because we'd also have to estimate the probability that a randomly sampled person turns out to be a robot.[^10-categorical-data-analysis-13] Finally, since we did actually fix the total number of observations N, that's one more constraint. So, now we have $rc$ observations, and $(c-1)+(r-1)+1$ constraints. And that gives:
+Alternatively, suppose that the only thing that the experimenter fixed was the total sample size N. That is, we quizzed the first 180 people that we saw and it just turned out that 87 were robots and 93 were humans. This time around our reasoning would be slightly different, but would still lead us to the same answer. Our null hypothesis still has $r - 1$ free parameters corresponding to the choice probabilities, but it now also has $c - 1$ free parameters corresponding to the species probabilities, because we'd also have to estimate the probability that a randomly sampled person turns out to be a robot.[^10-categorical-data-analysis-12] Finally, since we did actually fix the total number of observations N, that's one more constraint. So, now we have $rc$ observations, and $(c-1)+(r-1)+1$ constraints. And that gives:
 
-$$\begin{split} df & = \text{(number of
+$$
+\begin{split} df & = \text{(number of
 observations) - (number of constraints)} \\\\ & = (r \times c) -
-((c-1) + (r - 1)+1) \\\\ & = (r - 1)(c - 1) \end{split}$$ 
+((c-1) + (r - 1)+1) \\\\ & = (r - 1)(c - 1) \end{split}
+$$ 
 
 Amazing.
 
-[^10-categorical-data-analysis-13]: A problem many of us worry about in real life.
+[^10-categorical-data-analysis-12]: A problem many of us worry about in real life.
 
 
 ### Doing the test in jamovi
@@ -382,9 +399,9 @@ This could be classified as a rather extreme example of a reactivity effect, I s
 
 Okay, time for a little bit of a digression. I've been lying to you a little bit so far. There's a tiny change that you need to make to your calculations whenever you only have 1 degree of freedom. It's called the "continuity correction", or sometimes the **Yates correction**. Remember what I pointed out earlier: the $\chi^2$ test is based on an approximation, specifically on the assumption that the binomial distribution starts to look like a normal distribution for large $N$. One problem with this is that it often doesn't quite work, especially when you've only got 1 degree of freedom (e.g., when you're doing a test of independence on a $2 \times 2$ contingency table). The main reason for this is that the true sampling distribution for the $X^{2}$ statistic is actually discrete (because you're dealing with categorical data!) but the $\chi^2$ distribution is continuous. This can introduce systematic problems. Specifically, when $N$ is small and when $df = 1$, the goodness-of-fit statistic tends to be "too big", meaning that you actually have a bigger $\alpha$ value than you think (or, equivalently, the $p$-values are a bit too small).
 
-As far as I can tell from reading Yates' paper,[^10-categorical-data-analysis-14] the correction is basically a hack. It's not derived from any principled theory. Rather, it's based on an examination of the behaviour of the test, and observing that the corrected version seems to work better. You can specify this correction in jamovi from a check box in the 'Statistics' options, where it is called '$\chi^2$ continuity correction'.
+As far as I can tell from reading Yates' paper,[^10-categorical-data-analysis-13] the correction is basically a hack. It's not derived from any principled theory. Rather, it's based on an examination of the behaviour of the test, and observing that the corrected version seems to work better. You can specify this correction in jamovi from a check box in the 'Statistics' options, where it is called '$\chi^2$ continuity correction'.
 
-[^10-categorical-data-analysis-14]: @Yates1934 suggested a simple fix, in which you redefine the goodness-of-fit statistic as: $$\chi^{2}=\sum_{i}\frac{(|E_i-O_i|-0.5)^2}{E_i}$$ Basically, he just subtracts off 0.5 everywhere.
+[^10-categorical-data-analysis-13]: @Yates1934 suggested a simple fix, in which you redefine the goodness-of-fit statistic as: $$\chi^{2}=\sum_{i}\frac{(|E_i-O_i|-0.5)^2}{E_i}$$ Basically, he just subtracts off 0.5 everywhere.
 
 ## Effect size
 
@@ -394,9 +411,9 @@ There are several different measures that you can choose to report, and several 
 
 By default, the two measures that people tend to report most frequently are the $\phi$ statistic and the somewhat superior version, known as Cramér's $V$.
 
-[Additional technical detail[^10-categorical-data-analysis-15]]
+[Additional technical detail[^10-categorical-data-analysis-14]]
 
-[^10-categorical-data-analysis-15]: Mathematically, they're very simple. To calculate the $\phi$ statistic, you just divide your $X^2$ value by the sample size, and take the square root: $$\phi=\sqrt{\frac{X^2}{N}}$$ The idea here is that the $\phi$ statistic is supposed to range between 0 (no association at all) and 1 (perfect association), but it doesn't always do this when your contingency table is bigger than $2 \times 2$ , which is a total pain. For bigger tables it's actually possible to obtain $\phi > 1$, which is pretty unsatisfactory. So, to correct for this, people usually prefer to report the $V$ statistic proposed by @Cramer1946. It's a pretty simple adjustment to $\phi$. If you've got a contingency table with r rows and c columns, then define $k = min(r, c)$ to be the smaller of the two values. If so, then Cramér's $V$ statistic is: $$V=\sqrt{\frac{X^2}{N(k-1)}}$$
+[^10-categorical-data-analysis-14]: Mathematically, they're very simple. To calculate the $\phi$ statistic, you just divide your $X^2$ value by the sample size, and take the square root: $$\phi=\sqrt{\frac{X^2}{N}}$$ The idea here is that the $\phi$ statistic is supposed to range between 0 (no association at all) and 1 (perfect association), but it doesn't always do this when your contingency table is bigger than $2 \times 2$ , which is a total pain. For bigger tables it's actually possible to obtain $\phi > 1$, which is pretty unsatisfactory. So, to correct for this, people usually prefer to report the $V$ statistic proposed by @Cramer1946. It's a pretty simple adjustment to $\phi$. If you've got a contingency table with r rows and c columns, then define $k = min(r, c)$ to be the smaller of the two values. If so, then Cramér's $V$ statistic is: $$V=\sqrt{\frac{X^2}{N(k-1)}}$$
 
 And you're done. This seems to be a fairly popular measure, presumably because it's easy to calculate, and it gives answers that aren't completely silly. With Cramér's $V$, you know that the value really does range from 0 (no association at all) to 1 (perfect association).
 
@@ -411,9 +428,9 @@ If you happen to find yourself in a situation where independence is violated, it
 
 ## The Fisher exact test
 
-What should you do if your cell counts are too small, but you'd still like to test the null hypothesis that the two variables are independent? One answer would be "collect more data", but that's far too glib There are a lot of situations in which it would be either infeasible or unethical do that. If so, statisticians have a kind of moral obligation to provide scientists with better tests. In this instance, @Fisher1922a kindly provided the right answer to the question. To illustrate the basic idea let's suppose that we're analysing data from a field experiment looking at the emotional status of people who have been accused of Witchcraft, some of whom are currently being burned at the stake.[^10-categorical-data-analysis-16] Unfortunately for the scientist (but rather fortunately for the general populace), it's actually quite hard to find people in the process of being set on fire, so the cell counts are awfully small in some cases. A contingency table of the *salem.csv* data illustrates the point (@tbl-tab10-10).
+What should you do if your cell counts are too small, but you'd still like to test the null hypothesis that the two variables are independent? One answer would be "collect more data", but that's far too glib There are a lot of situations in which it would be either infeasible or unethical do that. If so, statisticians have a kind of moral obligation to provide scientists with better tests. In this instance, @Fisher1922a kindly provided the right answer to the question. To illustrate the basic idea let's suppose that we're analysing data from a field experiment looking at the emotional status of people who have been accused of Witchcraft, some of whom are currently being burned at the stake.[^10-categorical-data-analysis-15] Unfortunately for the scientist (but rather fortunately for the general populace), it's actually quite hard to find people in the process of being set on fire, so the cell counts are awfully small in some cases. A contingency table of the *salem.csv* data illustrates the point (@tbl-tab10-10).
 
-[^10-categorical-data-analysis-16]: This example is based on a joke article published in the *Journal of Irreproducible Results*
+[^10-categorical-data-analysis-15]: This example is based on a joke article published in the *Journal of Irreproducible Results*
 
 ```{r}
 #| label: tbl-tab10-10
@@ -435,9 +452,9 @@ In order to construct the test Fisher treats both the row and column totals $(R_
 
 $$P(O_{11}, O_{12}, O_{21}, O_{22}  \text{ | } R_1, R_2, C_1, C_2)$$ 
 
-and as you might imagine, it's a slightly tricky exercise to figure out what this probability is. But it turns out that this probability is described by a distribution known as the hypergeometric distribution. What we have to do to calculate our $p$-value is calculate the probability of observing this particular table or a table that is *"more extreme"*.[^10-categorical-data-analysis-17] Back in the 1920s, computing this sum was daunting even in the simplest of situations, but these days it's pretty easy as long as the tables aren't too big and the sample size isn't too large. The conceptually tricky issue is to figure out what it means to say that one contingency table is more "extreme" than another. The easiest solution is to say that the table with the lowest probability is the most extreme. This then gives us the $p$-value.
+and as you might imagine, it's a slightly tricky exercise to figure out what this probability is. But it turns out that this probability is described by a distribution known as the hypergeometric distribution. What we have to do to calculate our $p$-value is calculate the probability of observing this particular table or a table that is *"more extreme"*.[^10-categorical-data-analysis-16] Back in the 1920s, computing this sum was daunting even in the simplest of situations, but these days it's pretty easy as long as the tables aren't too big and the sample size isn't too large. The conceptually tricky issue is to figure out what it means to say that one contingency table is more "extreme" than another. The easiest solution is to say that the table with the lowest probability is the most extreme. This then gives us the $p$-value.
 
-[^10-categorical-data-analysis-17]: Not surprisingly, the Fisher exact test is motivated by Fisher's interpretation of a $p$-value, not Neyman's! See @sec-The-p-value-of-a-test.
+[^10-categorical-data-analysis-16]: Not surprisingly, the Fisher exact test is motivated by Fisher's interpretation of a $p$-value, not Neyman's! See @sec-The-p-value-of-a-test.
 
 You can specify this test in jamovi from a check box in the 'Statistics' options of the 'Contingency Tables' analysis. When you do this with the data from the *salem.csv* file, the Fisher exact test statistic is shown in the results. The main thing we're interested in here is the $p$-value, which in this case is small enough (p = .036) to justify rejecting the null hypothesis that people on fire are just as happy as people not on fire. See @fig-fig10-6.
 
@@ -471,7 +488,9 @@ huxtabs[[10]][[13]]
 
 Next, let's think about what our null hypothesis is: it's that the "before" test and the "after" test have the same proportion of people saying "Yes, I will vote for AGPP". Because of the way that we have rewritten the data, it means that we're now testing the hypothesis that the row totals and column totals come from the same distribution. Thus, the null hypothesis in McNemar's test is that we have "marginal homogeneity". That is, the row totals and column totals have the same distribution: $P_a + P_b = P_a + P_c$ and similarly that $P_c + P_d = P_b + P_d$. Notice that this means that the null hypothesis actually simplifies to $Pb = Pc$. In other words, as far as the McNemar test is concerned, it's only the off-diagonal entries in this table (i.e., $b$ and $c$) that matter! After noticing this, the **McNemar test of marginal homogeneity** is no different to a usual $\chi^2$ test. \
 
-After applying the Yates correction, our test statistic becomes: $$\chi^2=\frac{(|b-c|-0.5)^2}{b+c}$$ 
+After applying the Yates correction, our test statistic becomes: 
+
+$$\chi^2=\frac{(|b-c|-0.5)^2}{b+c}$$ 
 
 or, to revert to the notation that we used earlier in this chapter:
 

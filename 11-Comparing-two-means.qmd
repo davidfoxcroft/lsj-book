@@ -31,13 +31,13 @@ Hmm. It might be that the psychology students are scoring a bit higher than norm
 
 To answer the question, it helps to be able to write down what it is that I think I know. Firstly, I know that the sample mean is $\bar{X} = 72.3$. If I'm willing to assume that the psychology students have the same standard deviation as the rest of the class then I can say that the population standard deviation is $\sigma = 9.5$. I'll also assume that since Dr Zeppo is grading to a curve, the psychology student grades are normally distributed.
 
-Next, it helps to be clear about what I want to learn from the data. In this case my research hypothesis relates to the population mean $\mu$ for the psychology student grades, which is unknown. Specifically, I want to know if $\mu = 67.5$ or not. Given that this is what I know, can we devise a hypothesis test to solve our problem? The data, along with the hypothesised distribution from which they are thought to arise, are shown in @fig-fig11-1. Not entirely obvious what the right answer is, is it? For this, we are going to need some statistics.
-
-```{r out.width="60%"}
+```{r out.width="80%"}
 #| label: fig-fig11-1
 #| fig-cap: The theoretical distribution (solid line) from which the psychology student grades (bars) are supposed to have been generated
 #| fig-alt: A bar histogram displays the distribution of grades with a curve overlay. The x-axis is labeled "Grades" ranging from 50 to 90, and the y-axis is unlabeled. Bars show peaks near grades 70 and 80, with the curve indicating a normal distribution.
-#| fig-pos: 'h!'
+#| fig-width: 8
+#| fig-height: 4
+#| fig-pos: 'H'
 
 load("data_and_tables/zeppo.Rdata") #grades
 ggplot(as.data.frame(grades), aes(x=grades)) +
@@ -51,9 +51,12 @@ ggplot(as.data.frame(grades), aes(x=grades)) +
     axis.title.y = element_blank())
 ```
 
+Next, it helps to be clear about what I want to learn from the data. In this case my research hypothesis relates to the population mean $\mu$ for the psychology student grades, which is unknown. Specifically, I want to know if $\mu = 67.5$ or not. Given that this is what I know, can we devise a hypothesis test to solve our problem? The data, along with the hypothesised distribution from which they are thought to arise, are shown in @fig-fig11-1. Not entirely obvious what the right answer is, is it? For this, we are going to need some statistics.
+
 ### Constructing the hypothesis test
 
 The first step in constructing a hypothesis test is to be clear about what the null and alternative hypotheses are. This isn't too hard to do. Our null hypothesis, $H_0$, is that the true population mean $\mu$ for psychology student grades is $67.5\%$, and our alternative hypothesis is that the population mean isn't $67.5\%$. If we write this in mathematical notation, these hypotheses become:
+
 $$ H_0:\mu= 67.5 $$ $$ H_1:\mu \neq 67.5 $$
 
 though to be honest this notation doesn't add much to our understanding of the problem, it's just a compact way of writing down what we're trying to learn from the data. The null hypotheses $H_0$ and the alternative hypothesis $H_1$ for our test are both illustrated in @fig-fig11-2. In addition to providing us with these hypotheses, the scenario outlined above provides us with a fair amount of background knowledge that might be useful. Specifically, there are two special pieces of information that we can add:
@@ -67,8 +70,8 @@ For the moment, we'll act as if these are absolutely trustworthy facts. In real 
 #| label: fig-fig11-2
 #| fig-width: 10
 #| fig-height: 5
-#| fig-cap: Graphical illustration of the null and alternate hypotheses assumed by the one sample $z$-test (the two-sided version, that is). The null and alternate hypotheses both assume that the population distribution is normal, and additionally assumes that the population standard deviation is known (fixed at some value $\$sigma_0$). The null hypothesis (left) is that the population mean $\mu$ is equal to some specified value $\mu_0$. The alternative hypothesis (right) is that the population mean differs from this value, $\mu \neq \mu_0$
-#| fig-alt: Two side-by-side bell curve graphs comparing the null hypothesis and alternative hypothesis. The left graph shows the null hypothesis with $\mu$ = $\mu$₀ and σ = σ₀. The right graph shows the alternative hypothesis with $\mu$ ≠ $\mu$₀ and σ = σ₀. The x-axis is labeled "Value of X".
+#| fig-cap: Graphical illustration of the null and alternate hypotheses assumed by the one sample $z$-test (the two-sided version, that is). The null and alternate hypotheses both assume that the population distribution is normal, and additionally assumes that the population standard deviation is known (fixed at some value $\sigma_0$). The null hypothesis (left) is that the population mean $\mu$ is equal to some specified value $\mu_0$. The alternative hypothesis (right) is that the population mean differs from this value, $\mu \neq \mu_0$
+#| fig-alt: Two side-by-side bell curve graphs comparing the null hypothesis and alternative hypothesis. The left graph shows the null hypothesis with $\mu = \mu_0$ and $\sigma = \sigma_0$. The right graph shows the alternative hypothesis with $\mu \neq \mu_0$ and $\sigma = \sigma_0$. The x-axis is labeled "Value of X".
 
 p1 <- ggplot(data = data.frame(x = seq(-4, 4, 1)), aes(x)) +
   stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col="black", linewidth=1) +
@@ -111,6 +114,7 @@ gridExtra::grid.arrange(p1,p2, ncol=2)
 ```
 
 The next step is to figure out what would be a good choice for a diagnostic test statistic, something that would help us discriminate between $H_0$ and $H_1$. Given that the hypotheses all refer to the population mean $\mu$, you'd feel pretty confident that the sample mean $\bar{X}$ would be a pretty useful place to start. What we could do is look at the difference between the sample mean $\bar{X}$ and the value that the null hypothesis predicts for the population mean. In our example that would mean we calculate $\bar{X} - 67.5$. More generally, if we let $\mu_0$ refer to the value that the null hypothesis claims is our population mean, then we'd want to calculate:
+
 $$\bar{X}-\mu_0$$
 
 If this quantity equals or is very close to 0, things are looking good for the null hypothesis. If this quantity is a long way away from 0, then it's looking less likely that the null hypothesis is worth retaining. But how far away from zero should it be for us to reject $H_0$?
@@ -119,39 +123,33 @@ To figure that out we need to be a bit more sneaky, and we'll need to rely on th
 
 [^11-comparing-two-means-3]: Adopting the notation from @sec-The-normal-distribution, a statistician might write this as: $$X \sim Normal(\mu_0,\sigma^2)$$
 
-Okay, if that's true, then what can we say about the distribution of $\bar{X}$? Well, as we discussed earlier (see @sec-The-central-limit-theorem), the sampling distribution of the mean $\bar{X}$ is also normal, and has mean $\mu$. But the standard deviation of this sampling distribution $\\{se(\bar{X})\\}$, which is called the standard error of the mean, is:[^11-comparing-two-means-4]
+Okay, if that's true, then what can we say about the distribution of $\bar{X}$? Well, as we discussed earlier (see @sec-The-central-limit-theorem), the sampling distribution of the mean $\bar{X}$ is also normal, and has mean $\mu$. But the standard deviation of this sampling distribution $se{\bar{X}}$, which is called the standard error of the mean, is:[^11-comparing-two-means-4]
 
-[^11-comparing-two-means-4]: In other words, if the null hypothesis is true then the sampling distribution of the mean can be written as follows: $$\bar{X} \sim Normal(\mu_0,SE(\bar{X})) $$
 $$se(\bar{X}=\frac{\sigma}{\sqrt{N}})$$
 
-Now comes the trick. What we can do is convert the sample mean $\bar{X}$ into a standard score (see @sec-Standard-scores). This is conventionally written as $z$, but for now I'm going to refer to it as $z_{\bar{X}}$. The reason for using this expanded notation is to help you remember that we're calculating a standardised version of a sample mean, not a standardised version of a single observation, which is what a *z*-score usually refers to). When we do so the *z*-score for our sample mean is:
+[^11-comparing-two-means-4]: In other words, if the null hypothesis is true then the sampling distribution of the mean can be written as follows: $$\bar{X} \sim Normal(\mu_0,SE(\bar{X})) $$
+
+Now comes the trick. What we can do is convert the sample mean $\bar{X}$ into a standard score (see @sec-Standard-scores). This is conventionally written as $z$, but for now I'm going to refer to it as $z_{\bar{X}}$. The reason for using this expanded notation is to help you remember that we're calculating a standardised version of a sample mean, not a standardised version of a single observation, which is what a *z*-score usually refers to. When we do so the *z*-score for our sample mean is:
+
 $$z_{\bar{X}}=\frac{\bar{X}-\mu_0}{SE(\bar{X})}$$ 
+
 or, equivalently: 
+
 $$z_{\bar{X}}=\frac{\bar{X}-\mu_0}{\frac{\sigma}{\sqrt{N}}}$$
 
 This *z*-score is our test statistic. The nice thing about using this as our test statistic is that like all *z*-scores, it has a standard normal distribution:[^11-comparing-two-means-5]
 
 [^11-comparing-two-means-5]: Again, see @sec-Standard-scores if you've forgotten why this is true.
 
-In other words, regardless of what scale the original data are on, the $z$-statistic itself always has the same interpretation: it's equal to the number of standard errors that separate the observed sample mean $\bar{X}$ from the population mean $\mu_0$ predicted by the null hypothesis. Better yet, regardless of what the population parameters for the raw scores actually are, the 5% critical regions for the *z*-test are always the same, as illustrated in @fig-fig11-3. And what this meant, way back in the days where people did all their statistics by hand, is that someone could publish a table like @tbl-tab11-1. This, in turn, meant that researchers could calculate their z-statistic by hand and then look up the critical value in a textbook.
-
-```{r}
-#| label: tbl-tab11-1
-#| tbl-cap: Critical values for different alpha levels
-huxtabs[[11]][[1]] |>
-  merge_cells(1, 2:3)
-```
-
-### A worked example, by hand
-
-Now, as I mentioned earlier, the *z*-test is almost never used in practice. It's so rarely used in real life that the basic installation of jamovi doesn't have a built in function for it. However, the test is so incredibly simple that it's really easy to do one manually. Let's go back to the data from Dr Zeppo's class. Having loaded the grades data, the first thing I need to do is calculate the sample mean, which I've already done ($72.3$). We already have the known population standard deviation ($\sigma = 9.5$), and the value of the population mean that the null hypothesis specifies ($\mu_0 = 67.5$), and we know the sample size ($N=20$).
+In other words, regardless of what scale the original data are on, the $z$-statistic itself always has the same interpretation: it's equal to the number of standard errors that separate the observed sample mean $\bar{X}$ from the population mean $\mu_0$ predicted by the null hypothesis. Better yet, regardless of what the population parameters for the raw scores actually are, the 5% critical regions for the *z*-test are always the same, as illustrated in @fig-fig11-3. And what this meant, way back in the days where people did all their statistics by hand, is that someone could publish a table like @tbl-tab11-1. This, in turn, meant that researchers could calculate their z-statistic by hand and then look up the critical value in a textbook.\
 
 ```{r}
 #| label: fig-fig11-3
 #| fig-width: 10
 #| fig-height: 5
-#| fig-cap: Rejection regions for the two-sided *z*-test (panel (a)) and the one-sided *z*-test (panel (b))
+#| fig-cap: Rejection regions for the two-sided *z*-test (a) and the one-sided *z*-test (b)
 #| fig-alt: Two bell curves comparing statistical tests:- (a) Two-Sided Test with shaded tails beyond -1.96 and 1.96 z-values, and (b) One-Sided Test with a shaded tail beyond 1.64 z-value. Both graphs show standard normal distributions with z-statistic values on the x-axis.
+#| fig-pos: 'H'
 
 p1 <- ggplot(data = data.frame(x = seq(-3, 3, 0.1)), aes(x)) +
   stat_function(fun = dnorm, n = 1000, args = list(mean=0, sd=1), geom = "area",
@@ -189,7 +187,21 @@ gridExtra::grid.arrange(p1,p2,ncol=2)
 
 ```
 
+\
+
+```{r}
+#| label: tbl-tab11-1
+#| tbl-cap: Critical values for different alpha levels
+huxtabs[[11]][[1]] |>
+  merge_cells(1, 2:3)
+```
+
+### A worked example, by hand
+
+Now, as I mentioned earlier, the *z*-test is almost never used in practice. It's so rarely used in real life that the basic installation of jamovi doesn't have a built in function for it. However, the test is so incredibly simple that it's really easy to do one manually. Let's go back to the data from Dr Zeppo's class. Having loaded the grades data, the first thing I need to do is calculate the sample mean, which I've already done ($72.3$). We already have the known population standard deviation ($\sigma = 9.5$), and the value of the population mean that the null hypothesis specifies ($\mu_0 = 67.5$), and we know the sample size ($N=20$).
+
 Next, let's calculate the (true) standard error of the mean (easily done with a calculator):
+
 $$
 \begin{split}
 sem.true & = \frac{sd.true}{\sqrt{N}} \\\\
@@ -199,6 +211,7 @@ sem.true & = \frac{sd.true}{\sqrt{N}} \\\\
 $$
 
 And finally, we calculate our *z*-score:
+
 $$
 \begin{split}
 z.score & = \frac{sample.mean - mu.null}{sem.true} \\\\
@@ -225,7 +238,7 @@ In view of the stupidity of assuming that $\alpha$ is known, let's see if we can
 
 ## The one-sample $t$-test {#sec-The-one-sample-t-test}
 
-After some thought, I decided that it might not be safe to assume that the psychology student grades necessarily have the same standard deviation as the other students in Dr Zeppo's class. After all, if I'm entertaining the hypothesis that they don't have the same mean, then why should I believe that they absolutely have the same standard deviation? In view of this, I should really stop assuming that I know the true value of $\sigma$. This violates the assumptions of my *z*-test, so in one sense I'm back to square one. However, it's not like I'm completely bereft of options. After all, I've still got my raw data, and those raw data give me an estimate of the population standard deviation, which is 9.52. In other words, while I can't say that I know that $\sigma = 9.5$, I can say that $\hat{\sigma}$ = 9.52.
+After some thought, I decided that it might not be safe to assume that the psychology student grades necessarily have the same standard deviation as the other students in Dr Zeppo's class (@fig-fig11-4). After all, if I'm entertaining the hypothesis that they don't have the same mean, then why should I believe that they absolutely have the same standard deviation? In view of this, I should really stop assuming that I know the true value of $\sigma$. This violates the assumptions of my *z*-test, so in one sense I'm back to square one. However, it's not like I'm completely bereft of options. After all, I've still got my raw data, and those raw data give me an estimate of the population standard deviation, which is 9.52. In other words, while I can't say that I know that $\sigma = 9.5$, I can say that $\hat{\sigma}$ = 9.52.
 
 Okay, cool. The obvious thing that you might think to do is run a *z*-test, but using the estimated standard deviation of $9.52$ instead of relying on my assumption that the true standard deviation is $9.5$. And you probably wouldn't be surprised to hear that this would still give us a significant result. This approach is close, but it's not quite correct. Because we are now relying on an estimate of the population standard deviation we need to make some adjustment for the fact that we have some uncertainty about what the true population standard deviation actually is. Maybe our data are just a fluke... maybe the true population standard deviation is $11$, for instance. But if that were actually true, and we ran the *z*-test assuming $\sigma=11$, then the result would end up being non-significant. That's a problem, and it's one we're going to have to address.
 
@@ -280,6 +293,7 @@ gridExtra::grid.arrange(p1,p2, ncol=2)
 ### Introducing the $t$-test
 
 This ambiguity is annoying, and it was resolved in 1908 by a guy called William Sealy Gosset [@Student1908], who was working as a chemist for the Guinness brewery at the time (see @Box1987). Because Guinness took a dim view of its employees publishing statistical analysis (apparently they felt it was a trade secret), he published the work under the pseudonym "A Student" and, to this day, the full name of the $t$-test is actually **Student's $t$-test**. The key thing that Gosset figured out is how we should accommodate the fact that we aren't completely sure what the true standard deviation is.[^11-comparing-two-means-7] The answer is that it subtly changes the sampling distribution. In the $t$-test our test statistic, now called a $t$-statistic, is calculated in exactly the same way I mentioned above. If our null hypothesis is that the true mean is $\mu$, but our sample has mean $\bar{X}$ and our estimate of the population standard deviation is $\hat{\sigma}$, then our $t$-statistic is:
+
 $$t=\frac{\bar{X}-\mu}{\frac{\hat{\sigma}}{\sqrt{N}}}$$
 
 [^11-comparing-two-means-7]: Well, sort of. As I understand the history, Gosset only provided a partial solution; the general solution to the problem was provided by Sir Ronald Fisher.
@@ -349,7 +363,7 @@ With that much jargon crammed into half a line, you know it must be really smart
 
 ### Assumptions of the one sample $t$-test
 
-Okay, so what assumptions does the one-sample $t$-test make? Well, since the $t$-test is basically a *z*-test with the assumption of known standard deviation removed, you shouldn't be surprised to see that it makes the same assumptions as the *z*-test, minus the one about the known standard deviation. That is
+Okay, so what assumptions does the one-sample $t$-test make? Well, since the $t$-test is basically a *z*-test with the assumption of known standard deviation removed, you shouldn't be surprised to see that it makes the same assumptions as the *z*-test, minus the one about the known standard deviation. That is:
 
 - Normality. We're still assuming that the population distribution is normal,[^11-comparing-two-means-9] and as noted earlier, there are standard tools that you can use to check to see if this assumption is met ([Checking the normality of a sample]), and other tests you can do in its place if this assumption is violated ([Testing non-normal data]).
 - Independence. Once again, we have to assume that the observations in our sample are generated independently of one another. See the earlier discussion about the *z*-test for specifics ([Assumptions of the *z*-test]).
@@ -378,23 +392,26 @@ huxtabs[[11]][[2]]
 
 To give you a more detailed sense of what's going on here, I've plotted box and violin plots in jamovi, with mean scores added to the plot with a small solid square. These plots show the distribution of grades for both tutors (@fig-fig11-7),
 
-### Introducing the test
-
-The **independent samples $t$-test** comes in two different forms, Student's and Welch's. The original Student $t$-test, which is the one I'll describe in this section, is the simpler of the two but relies on much more restrictive assumptions than the Welch $t$-test. Assuming for the moment that you want to run a two-sided test, the goal is to determine whether two "independent samples" of data are drawn from populations with the same mean (the null hypothesis) or different means (the alternative hypothesis). When we say "independent" samples, what we really mean here is that there's no special relationship between observations in the two samples. This probably doesn't make a lot of sense right now, but it will be clearer when we come to talk about the paired samples $t$-test later on. For now, let's just point out that if we have an experimental design where participants are randomly allocated to one of two groups, and we want to compare the two groups' mean performance on some outcome measure, then an independent samples $t$-test (rather than a paired samples $t$-test) is what we're after.
-
 ```{r out.width="80%"}
 #| label: fig-fig11-7
-#| fig-cap: Box and violin plots showing the distribution of grades for students in the classes of Anastasia and Bernadette. Visually, these suggest that students in the class of Anastasia may be getting slightly better grades on average, though they also seem a bit more variable
+#| fig-cap: Box and violin plots from jamovi showing the distribution of grades for students in the classes of Anastasia and Bernadette. Visually, these suggest that students in the class of Anastasia may be getting slightly better grades on average, though they also seem a bit more variable
 #| fig-alt: Violin plot comparing grades of students tutored by Anastasia and Bernadette. Both plots show distributions with similar means around 75-80 and few outliers. Anastasia's students have a wider grade distribution compared to Bernadette's students.
 #| fig-pos: "h!"
 knitr::include_graphics("images/fig11-7.png")
 ```
 
+### Introducing the test
+
+The **independent samples $t$-test** comes in two different forms, Student's and Welch's. The original Student $t$-test, which is the one I'll describe in this section, is the simpler of the two but relies on much more restrictive assumptions than the Welch $t$-test. Assuming for the moment that you want to run a two-sided test, the goal is to determine whether two "independent samples" of data are drawn from populations with the same mean (the null hypothesis) or different means (the alternative hypothesis). When we say "independent" samples, what we really mean here is that there's no special relationship between observations in the two samples. This probably doesn't make a lot of sense right now, but it will be clearer when we come to talk about the paired samples $t$-test later on. For now, let's just point out that if we have an experimental design where participants are randomly allocated to one of two groups, and we want to compare the two groups' mean performance on some outcome measure, then an independent samples $t$-test (rather than a paired samples $t$-test) is what we're after.
+
 Okay, so let's let $\mu_1$ denote the true population mean for group 1 (e.g., Anastasia's students), and $\mu_2$ will be the true population mean for group 2 (e.g., Bernadette's students),[^11-comparing-two-means-11] and as usual we'll let $\bar{X_1}$ and $\bar{X_2}$ denote the observed sample means for both of these groups. Our null hypothesis states that the two population means are identical ($\mu_1 = \mu_2$) and the alternative to this is that they are not ($\mu_1 \neq \mu_2$) (@fig-fig11-8). Written in mathematical-ese, this is:
+
 $$H_0: \mu_1=\mu_2 $$ 
+
 $$H_0: \mu_1 \neq \mu_2 $$ 
 
 To construct a hypothesis test that handles this scenario we start by noting that if the null hypothesis is true, then the difference between the population means is *exactly* zero, $\mu_1-\mu_2 = 0$. As a consequence, a diagnostic test statistic will be based on the difference between the two sample means. Because if the null hypothesis is true, then we'd expect $\bar{X}_1 - \bar{X}_2$ to be pretty close to zero. However, just like we saw with our one-sample tests (i.e., the one-sample *z*-test and the one-sample $t$-test) we have to be precise about exactly how close to zero this difference should be. And the solution to the problem is more or less the same one. We calculate a standard error estimate (SE), just like last time, and then divide the difference between means by this estimate. So our **t-statistic** will be of the form: 
+
 $$t=\frac{\bar{X_1}-\bar{X_2}}{SE}$$
 
 ```{r}
@@ -487,6 +504,7 @@ Notice that I've included the confidence interval and the effect size in the sta
 ### Positive and negative $t$-values
 
 Before moving on to talk about the assumptions of the $t$-test, there's one additional point I want to make about the use of $t$-tests in practice. The first one relates to the sign of the $t$-statistic (that is, whether it is a positive number or a negative one). One very common worry that students have when they start running their first $t$-test is that they often end up with negative values for the $t$-statistic and don't know how to interpret it. In fact, it's not at all uncommon for two people working independently to end up with results that are almost identical, except that one person has a negative $t$-values and the other one has a positive $t$ value. Assuming that you're running a two-sided test then the $p$-values will be identical. On closer inspection, the students will notice that the confidence intervals also have the opposite signs. This is perfectly okay. Whenever this happens, what you'll find is that the two versions of the results arise from slightly different ways of running the $t$-test. What's happening here is very simple. The $t$-statistic that we calculate here is always of the form:
+
 $$t=\frac{\text{mean 1-mean 2}}{SE}$$
 
 If "mean 1" is larger than "mean 2" the $t$-statistic will be positive, whereas if "mean 2" is larger then the $t$-statistic will be negative. Similarly, the confidence interval that jamovi reports is the confidence interval for the difference "(mean 1) minus (mean 2)", which will be the reverse of what you'd get if you were calculating the confidence interval for the difference "(mean 2) minus (mean 1)".
@@ -559,6 +577,7 @@ gridExtra::grid.arrange(p1,p2, ncol=2)
 ```
 
 The Welch test is very similar to the Student test. For example, the $t$-statistic that we use in the Welch test is calculated in much the same way as it is for the Student test. That is, we take the difference between the sample means and then divide it by some estimate of the standard error of that difference:
+
 $$t=\frac{\bar{X}_1-\bar{X}_2}{SE(\bar{X}_1-\bar{X}_2)}$$
 
 The main difference is that the standard error calculations are different. If the two populations have different standard deviations, then it's complete nonsense to try to calculate a pooled standard deviation estimate, because you're averaging apples and oranges.[^11-comparing-two-means-14]
@@ -628,20 +647,25 @@ Mean grade for test 1 and test 2, with associated 95\% confidence intervals (a).
 
 Once we have computed this new improvement variable we can draw a histogram showing the distribution of these improvement scores, shown in @fig-fig11-14. When we look at the histogram, it's very clear that there is a real improvement here. The vast majority of the students scored higher on test 2 than on test 1, reflected in the fact that almost the entire histogram is above zero.
 
-![Histogram showing the improvement made by each student in Dr Chico's class. Notice that almost the entire distribution is above zero -- the vast majority of students did improve their performance from the first test to the second one](images/fig11-14.png){#fig-fig11-14 fig-align="left" fig-alt="A histogram with the x-axis labeled 'improvement' and the y-axis labeled 'density'. The bars represent the frequency of improvements, with the highest peak at approximately 1.5 on the x-axis and frequencies ranging from 0 to 4. The bars are light blue." width=60%}
+![Histogram from jamovi showing the improvement made by each student in Dr Chico's class. Notice that almost the entire distribution is above zero -- the vast majority of students did improve their performance from the first test to the second one](images/fig11-14.png){#fig-fig11-14 fig-align="left" fig-alt="A histogram with the x-axis labeled 'improvement' and the y-axis labeled 'density'. The bars represent the frequency of improvements, with the highest peak at approximately 1.5 on the x-axis and frequencies ranging from 0 to 4. The bars are light blue." width=60%}
 
 ### What is the paired samples $t$-test?
 
 In light of the previous exploration, let's think about how to construct an appropriate $t$-test. One possibility would be to try to run an independent samples $t$-test using grade_test1 and grade_test2 as the variables of interest. However, this is clearly the wrong thing to do as the independent samples $t$-test assumes that there is no particular relationship between the two samples. Yet clearly that's not true in this case because of the repeated measures structure in the data. To use the language that I introduced in the last section, if we were to try to do an independent samples $t$-test, we would be conflating the **within subject** differences (which is what we're interested in testing) with the **between subject** variability (which we are not).
 
 The solution to the problem is obvious, I hope, since we already did all the hard work in the previous section. Instead of running an independent samples $t$-test on grade_test1 and grade_test2, we run a one-sample $t$-test on the within-subject difference variable, improvement. To formalise this slightly, if $X_{i1}$ is the score that the i-th participant obtained on the first variable, and $X_{i2}$ is the score that the same person obtained on the second one, then the difference score is:
+
 $$D_i=X_{i1}-X_{i2}$$
+
 Notice that the difference scores is variable 1 minus variable 2 and not the other way around, so if we want improvement to correspond to a positive valued difference, we actually want "test 2" to be our "variable 1". Equally, we would say that $\mu_D = \mu_1 - \mu_2$ is the population mean for this difference variable. So, to convert this to a hypothesis test, our null hypothesis is that this mean difference is zero and the alternative hypothesis is that it is not:
+
 $$H_0:\mu_D=0$$ $$H_1:\mu_D \neq 0$$
+
 This is assuming we're talking about a two-sided test here. This is more or less identical to the way we described the hypotheses for the one-sample $t$-test. The only difference is that the specific value that the null hypothesis predicts is 0. And so our $t$-statistic is defined in more or less the same way too. If we let $\bar{D}$ denote the mean of the difference scores, then:
 $$t=\frac{\bar{D}}{SE(\bar{D})}$$ 
 
 which is:
+
 $$t=\frac{\bar{D}}{\frac{\hat{\sigma}_D}{\sqrt{N}}}$$
 
 where $\hat{\sigma}_D$ is the standard deviation of the difference scores. Since this is just an ordinary, one-sample $t$-test, with nothing special about it, the degrees of freedom are still $N - 1$. And that's it. The paired samples $t$-test really isn't a new test at all. It's a one-sample $t$-test, but applied to the difference between two variables. It's actually very simple. The only reason it merits a discussion as long as the one we've just gone through is that you need to be able to recognise *when* a paired samples test is appropriate, and to understand *why* it's better than an independent samples $t$-test.
@@ -688,15 +712,16 @@ Notice that there are a few changes from the output that we saw last time. Most 
 
 So that's how to do a one-sided one sample $t$-test. However, all versions of the $t$-test can be one-sided. For an independent samples $t$-test, you could have a one-sided test if you're only interested in testing to see if group A has higher scores than group B, but have no interest in finding out if group B has higher scores than group A. Let's suppose that, for Dr Harpo's class, you wanted to see if Anastasia's students had higher grades than Bernadette's. For this analysis, in the 'Hypothesis' options, specify that 'Group 1 \> Group2'. You should get the results shown in @fig-fig11-18.
 
+Again, the output changes in a predictable way. The definition of the alternative hypothesis has changed, the $p$-value has changed, and it now reports a one-sided confidence interval rather than a two-sided one.
+
 ```{r}
 #| label: fig-fig11-18
 #| classes: .enlarge-image
 #| fig-cap: jamovi results showing an 'Independent Samples T-Test' where the actual hypothesis is one-sided, i.e. that Anastasia's students had higher grades than Bernadette's
-#| fig-alt: A table showing the results of an Independent Samples T-Test for 'grade.' The table includes Student's t and Welch's t statistics, degrees of freedom, $p$-values, mean difference, standard error difference, and Cohen's d effect sizes. There's a note at the bottom.
+#| fig-alt: A table showing the results of an Independent Samples T-Test for 'grade.' The table includes Student's t and Welch's t statistics, degrees of freedom, $p$-values, mean difference, standard error difference, and Cohen's d effect sizes. There's a note at the bottom
+#| fig-pos: 'H'
 knitr::include_graphics("images/fig11-18.png")
 ```
-
-Again, the output changes in a predictable way. The definition of the alternative hypothesis has changed, the $p$-value has changed, and it now reports a one-sided confidence interval rather than a two-sided one.
 
 What about the paired samples $t$-test? Suppose we wanted to test the hypothesis that grades go up from test 1 to test 2 in Dr Zeppo's class, and are not prepared to consider the idea that the grades go down. In jamovi you would do this by specifying, under the 'Hypotheses' option, that grade_test2 ('Measure 1' in jamovi, because we copied this first into the paired variables box) \> grade_test1 ('Measure 2' in jamovi). You should get the results shown in @fig-fig11-19.
 
@@ -733,6 +758,7 @@ My suspicion is that the only time that you would want Cohen's $d$ is when you'r
 ### Cohen's $d$ from one sample
 
 The simplest situation to consider is the one corresponding to a one-sample $t$-test. In this case, this is the one sample mean $\bar{X}$ and one (hypothesised) population mean $\mu_0$ to compare it to. Not only that, there's really only one sensible way to estimate the population standard deviation. We just use our usual estimate $\hat{\sigma}$. Therefore, we end up with the following as the only way to calculate $d$:
+
 $$d=\frac{\bar{X}-\mu_0}{\hat{\sigma}}$$
 
 When we look back at the results in @fig-fig11-6, the effect size value is Cohen's $d = 0.50$. Overall, then, the psychology students in Dr Zeppo's class are achieving grades ($mean = 72.3\%$) that are about .5 standard deviations higher than the level that you'd expect ($67.5\%$) if they were performing at the same level as other students. Judged against Cohen's rough guide, this is a moderate effect size.
@@ -740,9 +766,11 @@ When we look back at the results in @fig-fig11-6, the effect size value is Cohen
 ### Cohen's $d$ from a Student's $t$-test
 
 The majority of discussions of Cohen's $d$ focus on a situation that is analogous to Student's independent samples $t$-test, and it's in this context that the story becomes messier, since there are several different versions of $d$ that you might want to use in this situation. To understand why there are multiple versions of $d$, it helps to take the time to write down a formula that corresponds to the true population effect size $\delta$. It's pretty straightforward:
+
 $$\delta=\frac{\mu_1-\mu_2}{\sigma}$$
 
 where, as usual, $\mu_1$ and $\mu_2$ are the population means corresponding to group 1 and group 2 respectively, and $\sigma$ is the standard deviation (the same for both populations). The obvious way to estimate $\delta$ is to do exactly the same thing that we did in the $t$-test itself, i.e., use the sample means as the top line and a pooled standard deviation estimate for the bottom line:
+
 $$d=\frac{\bar{X}_1-\bar{X}_2}{\hat{\sigma}_p}$$
 
 where $\hat{\sigma}_p$ is the exact same pooled standard deviation measure that appears in the $t$-test. This is the most commonly used version of Cohen's $d$ when applied to the outcome of a Student $t$-test, and is the one provided in jamovi. It is sometimes referred to as Hedges' $g$ statistic [@Hedges1981].
@@ -756,6 +784,7 @@ In any case, ignoring all those variations that you could make use of if you wan
 ### Cohen's $d$ from a paired-samples test
 
 Finally, what should we do for a paired samples $t$-test? In this case, the answer depends on what it is you're trying to do. jamovi assumes that you want to measure your effect sizes relative to the distribution of difference scores, and the measure of $d$ that you calculate is:
+
 $$d=\frac{\bar{D}}{\hat{\sigma}_D}$$
 
 where $\hat{\sigma}_D$ is the estimate of the standard deviation of the differences. In @fig-fig11-16 Cohen's $d = 1.45$, indicating that the time 2 grade scores are, on average, $1.45$ standard deviations higher than the time 1 grade scores.
@@ -869,14 +898,14 @@ In our previous analyses we showed how to conduct in jamovi an independent $t$-t
 
 ```{r out.width="70%"}
 #| label: fig-fig11-22
-#| fig-cap: QQ plot for the independent $t$-test analysis shown in @fig-fig11-10
+#| fig-cap: jamovi QQ plot for the independent $t$-test analysis shown in @fig-fig11-10
 #| fig-alt: A Q-Q plot showing standardized residuals versus theoretical quantiles. Data points are scattered along the line y = x, indicating that the residuals follow a normal distribution. The x-axis ranges from -2 to 2, and the y-axis ranges from -2 to 2.
 knitr::include_graphics("images/fig11-22.png")
 ```
 
 ```{r out.width="70%"}
 #| label: fig-fig11-23
-#| fig-cap: QQ plot for the paired samples $t$-test analysis shown in @fig-fig11-16
+#| fig-cap: jamovi QQ plot for the paired samples $t$-test analysis shown in @fig-fig11-16
 #| fig-alt: A Q-Q plot displays standardized residuals versus theoretical quantiles to assess the normality of a data set. The points mostly follow the diagonal line from bottom left to top right, indicating that the residuals are approximately normally distributed.
 knitr::include_graphics("images/fig11-23.png")
 ```
@@ -899,7 +928,7 @@ In the meantime, it's probably worth showing you an example of what happens to t
 
 ```{r out.width="70%"}
 #| label: fig-fig11-24
-#| fig-cap: QQ plot showing non-normality from the AFL winning margins data
+#| fig-cap: jamovi QQ plot showing non-normality from the AFL winning margins data
 #| fig-alt: A Q-Q plot shows standardized residuals against theoretical quantiles. Data points largely follow a diagonal reference line, indicating normality. Points deviate at the upper and lower ends, suggesting potential departures from a normal distribution at extremes.
 knitr::include_graphics("images/fig11-24.png")
 ```
