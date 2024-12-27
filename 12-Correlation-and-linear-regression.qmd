@@ -87,7 +87,6 @@ onePlot <- function( r,n=100 ) {
 	ggplot(data.frame(X), aes(x=X[,1], y=X[,2])) +
 	  geom_point(col=blueshade, size=.5) +
 	  ylab(r) +
-	  theme_classic() +
 	  theme(
 	    axis.text.y = element_blank(),
 	    axis.title.y = element_text(vjust=0.5, size=12, angle = 0),
@@ -104,9 +103,9 @@ onePlot_out <- lapply(c(0, .33, -.33, .66, -.66, 1, -1), function(r)  {
 	onePlot(r)
 })
 
-tgrob <- ggpubr::text_grob("Positive Correlations", hjust=0.7, vjust=0.7)
+tgrob <- ggpubr::text_grob("Positive Correlations", family="TeX Gyre Pagella", hjust=0.7, vjust=0.7)
 plot_01 <- ggpubr::as_ggplot(tgrob)
-tgrob <- ggpubr::text_grob("Negative Correlations", hjust=0.7, vjust=0.7)
+tgrob <- ggpubr::text_grob("Negative Correlations", family="TeX Gyre Pagella", hjust=0.7, vjust=0.7)
 plot_02 <- ggpubr::as_ggplot(tgrob)
 
 
@@ -207,7 +206,7 @@ To illustrate, consider the data plotted in @fig-fig12-7, showing the relationsh
 
 ```{r out.width="80%"}
 #| label: fig-fig12-7
-#| fig-cap: The relationship between hours worked and grade received for a toy data set consisting of only 10 students (each dot corresponds to one student). The line through the middle shows the linear relationship between the two variables. This produces a strong Pearson correlation of $r = .91$. However, the interesting thing to note here is that there's actually a perfect monotonic relationship between the two variables. In this toy example, increasing the hours worked always increases the grade received, as illustrated by the solid line. This is reflected in a Spearman correlation of $\rho = 1$. With such a small data set, however, it's an open question as to which version better describes the actual relationship involved
+#| fig-cap: jamovi plot showing the relationship between hours worked and grade received for a toy data set consisting of only 10 students (each dot corresponds to one student). The line through the middle shows the linear relationship between the two variables. This produces a strong Pearson correlation of $r = .91$. However, the interesting thing to note here is that there's actually a perfect monotonic relationship between the two variables. In this toy example, increasing the hours worked always increases the grade received, as illustrated by the solid line. This is reflected in a Spearman correlation of $\rho = 1$. With such a small data set, however, it's an open question as to which version better describes the actual relationship involved
 #| fig-alt: A scatter plot with a trend line. The x-axis is labeled "hours" and the y-axis is labeled "grade." Dots represent data points, showing a positive correlation between hours studied and grade achieved, with the trend line ascending from the bottom-left to top-right
 #| fig-width: 8
 #| fig-height: 5

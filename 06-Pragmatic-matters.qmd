@@ -189,7 +189,7 @@ Now let's load and look at the data. The data file *likert.omv* contains a singl
 #| label: fig-fig6-4
 #| classes: .enlarge-image
 #| fig-cap: Creating a new computed variable in jamovi
-#| fig-alt: A jamovi screenshot showing a computed variable setup. The main formula shown is "= likert.raw - 4". The interface includes menu options like Variables, Data, Analyses, Edit, and a table displaying data set values with labels "likert.raw" and "likert.cent".
+#| fig-alt: A jamovi screenshot showing a computed variable setup. The main formula shown is "= likert.raw - 4". The interface includes menu options like Variables, Data, Analyses, Edit, and a table displaying data set values with labels "likert.raw" and "likert.cent"
 knitr::include_graphics("images/fig6-4.png")
 ```
 
@@ -209,6 +209,7 @@ Second, to compute a variable that contains only the direction of the opinion an
 
 > IF(likert.centred $==$ 0, 0, likert.centred / opinion.strength) 
 
+\
 When done, you'll see that all negative numbers from the 'likert.centred' variable are converted to -1, all positive numbers are converted to 1 and zero stays as 0, like so:
 
 > -1 1 -1 0 0 0 -1 1 1 1

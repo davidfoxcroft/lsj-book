@@ -90,7 +90,7 @@ This is a very useful table, so it's worth taking a moment to think about what a
 
 [^bayesian-statistics-5]: Just to be clear, "prior" information is pre-existing knowledge or beliefs, before we collect or use any data to improve that information.
 
-Now, because this table is so useful, I want to make sure you understand what all the elements correspond to and how they written (@tbl-tab16-5):
+Now, because this table is so useful, I want to make sure you understand what all the elements correspond to and how they written (@tbl-tab16-5).
 
 ```{r}
 #| label: tbl-tab16-5
@@ -168,7 +168,9 @@ Actually, this equation is worth expanding on. There are three different terms h
 huxtabs[[16]][[9]]
 ```
 
-The Bayes factor (sometimes abbreviated as BF) has a special place in Bayesian hypothesis testing, because it serves a similar role to the $p$-value in orthodox hypothesis testing. The Bayes factor quantifies the strength of evidence provided by the data, and as such it is the Bayes factor that people tend to report when running a Bayesian hypothesis test. The reason for reporting Bayes factors rather than posterior odds is that different researchers will have different priors. Some people might have a strong bias to believe the null hypothesis is true, others might have a strong bias to believe it is false. Because of this, the polite thing for an applied researcher to do is report the Bayes factor. That way, anyone reading the paper can multiply the Bayes factor by their own personal prior odds, and they can work out for themselves what the posterior odds would be. In any case, by convention we like to pretend that we give equal consideration to both the null hypothesis and the alternative, in which case the prior odds equals 1, and the posterior odds becomes the same as the Bayes factor.
+The Bayes factor (sometimes abbreviated as BF) has a special place in Bayesian hypothesis testing, because it serves a similar role to the $p$-value in orthodox hypothesis testing. The Bayes factor quantifies the strength of evidence provided by the data, and as such it is the Bayes factor that people tend to report when running a Bayesian hypothesis test. 
+
+The reason for reporting Bayes factors rather than posterior odds is that different researchers will have different priors. Some people might have a strong bias to believe the null hypothesis is true, others might have a strong bias to believe it is false. Because of this, the polite thing for an applied researcher to do is report the Bayes factor. That way, anyone reading the paper can multiply the Bayes factor by their own personal prior odds, and they can work out for themselves what the posterior odds would be. In any case, by convention we like to pretend that we give equal consideration to both the null hypothesis and the alternative, in which case the prior odds equals 1, and the posterior odds becomes the same as the Bayes factor.
 
 ### Interpreting Bayes factors
 
@@ -288,14 +290,13 @@ p_bf <- readRDS("data_and_tables/p_bf.rds")
 library(scales)
 ```
 
-So how bad is it? The answer from a simulation study is shown as the solid line in @fig-fig16-1, and it's astoundingly bad. If you peek at your data after every single observation, there is a `r percent(p_bf$p_peek[p_bf$peek =='1']/1000)` chance that you will make a type I error. That's, um, quite a bit bigger than the 5% that it's supposed to be. And it doesn't improve much with less frequent peeking: if you only peek every 10, or every 50 observations, then the type I error rates are still way too high: `r percent(p_bf$p_peek[p_bf$peek =='10']/1000)` and `r percent(p_bf$p_peek[p_bf$peek =='50']/1000)`, respectively. By way of comparison, imagine that you had used the following strategy. Start collecting data. Every single time an observation arrives, run [Bayesian $t$-tests] and look at the Bayes factor. I'll assume that @Johnson2013 is right, and I'll treat a Bayes factor of 3:1 as roughly equivalent to a $p$-value of .05.[^bayesian-statistics-14] This time around, our trigger-happy researcher uses the following procedure. If the Bayes factor is 3:1 or more in favour of the null, stop the experiment and retain the null. If it is 3:1 or more in favour of the alternative, stop the experiment and reject the null. Otherwise continue testing. Now, just like last time, let's assume that the null hypothesis is true. What happens? As it happens, I ran the simulations for this scenario too, and the results are shown as the dashed line in @fig-fig16-1. It turns out that the type I error rate for peeking every time a new observation arrives is `r percent(p_bf$bf_peek[p_bf$peek =='1']/1000)`, much much lower than the `r percent(p_bf$p_peek[p_bf$peek =='1']/1000)` rate that we were getting by using the orthodox $t$-test. And for peeking every 10 or 50 observations, the rates are `r percent(p_bf$bf_peek[p_bf$peek =='10']/1000)` and `r percent(p_bf$bf_peek[p_bf$peek =='50']/1000)`, respectively.
+So how bad is it? The answer from a simulation study is shown as the solid line in @fig-fig16-1, and it's astoundingly bad. 
 
-[^bayesian-statistics-14]: Some readers might wonder why I picked 3:1 rather than 5:1, given that @Johnson2013 suggests that $p = .05$ lies somewhere in that range. I did so in order to be charitable to the $p$-value. If I'd chosen a 5:1 Bayes factor instead, the results would look even better for the Bayesian approach.
-
-```{r}
+```{r out.width="90%"}
 #| label: fig-fig16-1
 #| fig-cap: Probability of type I error in an experiment with target $N$ of 1000 per group and **peeking** at different intervals:- things can go badly wrong if you **peek** at your data and re-run your tests as new data arrives. If you are a frequentist, this is *very wrong* (blue circles and solid line). If you are a bayesian, it is not so bad (green triangles and dashed line). The alpha level was set at $0.05$ (red dotted line) in this simulation.
-#| fig-alt: A scatter plot graph showing the probability of type I error versus the 'Peeking' interval with new data points. Blue circles represent $p<0.05$ and green triangles represent $BF>3$. A red dashed line at $alpha = 0.05$ denotes the null hypothesis rejection threshold.
+#| fig-alt: A scatter plot graph showing the probability of type I error versus the 'Peeking' interval with new data points. Blue circles represent $p<0.05$ and green triangles represent $BF>3$. A red dashed line at $alpha = 0.05$ denotes the null hypothesis rejection threshold
+#| fig-pos: 'h!'
 
 p_bf <- subset(p_bf, p_bf$peek <= 200)# leave out less plausible peeking frequency - better plot 
 
@@ -324,6 +325,9 @@ p
 
 ```
 
+If you peek at your data after every single observation, there is a `r percent(p_bf$p_peek[p_bf$peek =='1']/1000)` chance that you will make a type I error. That's, um, quite a bit bigger than the 5% that it's supposed to be. And it doesn't improve much with less frequent peeking: if you only peek every 10, or every 50 observations, then the type I error rates are still way too high: `r percent(p_bf$p_peek[p_bf$peek =='10']/1000)` and `r percent(p_bf$p_peek[p_bf$peek =='50']/1000)`, respectively. By way of comparison, imagine that you had used the following strategy. Start collecting data. Every single time an observation arrives, run [Bayesian $t$-tests] and look at the Bayes factor. I'll assume that @Johnson2013 is right, and I'll treat a Bayes factor of 3:1 as roughly equivalent to a $p$-value of .05.[^bayesian-statistics-14] This time around, our trigger-happy researcher uses the following procedure. If the Bayes factor is 3:1 or more in favour of the null, stop the experiment and retain the null. If it is 3:1 or more in favour of the alternative, stop the experiment and reject the null. Otherwise continue testing. Now, just like last time, let's assume that the null hypothesis is true. What happens? As it happens, I ran the simulations for this scenario too, and the results are shown as the dashed line in @fig-fig16-1. It turns out that the type I error rate for peeking every time a new observation arrives is `r percent(p_bf$bf_peek[p_bf$peek =='1']/1000)`, much much lower than the `r percent(p_bf$p_peek[p_bf$peek =='1']/1000)` rate that we were getting by using the orthodox $t$-test. And for peeking every 10 or 50 observations, the rates are `r percent(p_bf$bf_peek[p_bf$peek =='10']/1000)` and `r percent(p_bf$bf_peek[p_bf$peek =='50']/1000)`, respectively.
+
+[^bayesian-statistics-14]: Some readers might wonder why I picked 3:1 rather than 5:1, given that @Johnson2013 suggests that $p = .05$ lies somewhere in that range. I did so in order to be charitable to the $p$-value. If I'd chosen a 5:1 Bayes factor instead, the results would look even better for the Bayesian approach.
 In some ways, this is remarkable. The entire *point* of orthodox null hypothesis testing is to control the type I error rate. Bayesian methods aren't actually designed to do this at all. Yet, as it turns out, when faced with a "trigger happy" researcher who keeps running hypothesis tests as the data come in, the Bayesian approach is much more effective. Even the 3:1 standard, which most Bayesians would consider unacceptably lax, is much safer than the $p < .05$ rule.
 
 ### Is it really this bad?
@@ -339,7 +343,7 @@ Given all of the above, what is the take home message? It's not that Bayesian me
 > *Good laws have their origins in bad morals.*\
 > -- Ambrosius Macrobius[^bayesian-statistics-15]
 
-[^bayesian-statistics-15]: [https://www.quotationspage.com/quotes/Ambrosius%20Macrobius/](https://www.quotationspage.com/quotes/Ambrosius Macrobius/)
+[^bayesian-statistics-15]: [https://www.quotationspage.com/quotes/Ambrosius_Macrobius/](http://www.quotationspage.com/quotes/Ambrosius_Macrobius/)
 
 Good rules for statistical testing have to acknowledge human frailty. None of us are without sin. None of us are beyond temptation. A good system for statistical inference should still work even when it is used by actual humans. Orthodox null hypothesis testing does not.[^bayesian-statistics-16]
 
@@ -353,25 +357,26 @@ An important type of statistical inference problem discussed in this book is com
 
 The most common type of $t$-test is the independent samples $t$-test, and it arises when you have data as in the *harpo.csv* data set that we used in @sec-Comparing-two-means on $t$-tests. In this data set, we have two groups of students, those who received lessons from Anastasia and those who took their classes with Bernadette. The question we want to answer is whether there's any difference in the grades received by these two groups of students. Back in @sec-Comparing-two-means I suggested you could analyse this kind of data using the Independent Samples $t$-test in jamovi, which gave us the results in @fig-fig16-2. As we obtain a $p$-value less than $0.05$, we reject the null hypothesis.
 
-```{r}
+What does the Bayesian version of the $t$-test look like? We can get the Bayes factor analysis by selecting the 'Bayes factor' checkbox under the 'Tests' option, and accepting the suggested default value for the 'Prior'. This gives the results shown in the table in @fig-fig16-3. What we get in this table is a Bayes factor statistic of 1.75, meaning that the evidence provided by these data are about 1.8:1 in favour of the alternative hypothesis.
+
+```{r out.width="80%"}
 #| label: fig-fig16-2
 #| classes: .enlarge-image
 #| fig-cap: Independent samples $t$-test result in jamovi
-#| fig-alt: A jamovi screenshot displaying a data set with student grades and a descriptive statistics summary. The data set table lists student IDs and their grades for two tests. The results panel shows descriptive statistics including N, mean, median, standard deviation, minimum, and maximum values.
+#| fig-alt: A jamovi screenshot displaying a data set with student grades and a descriptive statistics summary. The data set table lists student IDs and their grades for two tests. The results panel shows descriptive statistics including N, mean, median, standard deviation, minimum, and maximum values
+#| fig-pos: 'H'
 knitr::include_graphics("images/fig11-12.png")
 ```
-
-What does the Bayesian version of the $t$-test look like? We can get the Bayes factor analysis by selecting the 'Bayes factor' checkbox under the 'Tests' option, and accepting the suggested default value for the 'Prior'. This gives the results shown in the table in @fig-fig16-3. What we get in this table is a Bayes factor statistic of 1.75, meaning that the evidence provided by these data are about 1.8:1 in favour of the alternative hypothesis.
-
-Before moving on, it's worth highlighting the difference between the orthodox test results and the Bayesian one. According to the orthodox test, we obtained a significant result, though only barely. Nevertheless, many people would happily accept $p = .043$ as reasonably strong evidence for an effect. In contrast, notice that the Bayesian test doesn't even reach 2:1 odds in favour of an effect, and would be considered very weak evidence at best. In my experience that's a pretty typical outcome. Bayesian methods usually require more evidence before rejecting the null.
 
 ```{r}
 #| label: fig-fig16-3
 #| classes: .enlarge-image
-#| fig-cap: Bayes factors analysis alongside independent samples $t$-test
+#| fig-cap: Bayes factor analysis alongside independent samples $t$-test
 #| fig-alt: A jamovi table titled "Independent Samples T-test" shows statistical comparison data for three methods:- Student’s t, Bayes factor, and Welch’s t. Columns include "Statistic," "±%"), "df," "p," "Mean difference," "SE difference," and "Effect Size".
 knitr::include_graphics("images/fig16-3.png")
 ```
+
+Before moving on, it's worth highlighting the difference between the orthodox test results and the Bayesian one. According to the orthodox test, we obtained a significant result, though only barely. Nevertheless, many people would happily accept $p = .043$ as reasonably strong evidence for an effect. In contrast, notice that the Bayesian test doesn't even reach 2:1 odds in favour of an effect, and would be considered very weak evidence at best. In my experience that's a pretty typical outcome. Bayesian methods usually require more evidence before rejecting the null.
 
 ### Paired samples $t$-test
 

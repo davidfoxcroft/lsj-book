@@ -32,15 +32,17 @@ knitr::include_graphics("images/fig13-1.png")
 
 ## How ANOVA works {#sec-How-ANOVA-works}
 
-In order to answer the question posed by our clinical trial data we're going to run a one-way ANOVA. I'm going to start by showing you how to do it the hard way, building the statistical tool from the ground up and showing you how you could do it if you didn't have access to any of the cool built-in ANOVA functions in jamovi. And I hope you'll read it carefully, try to do it the long way once or twice to make sure you really understand how ANOVA works, and then once you've grasped the concept never ever do it this way again.
+In order to answer the question posed by our clinical trial data we're going to run a one-way ANOVA. I'm going to start by showing you how to do it the hard way, building the statistical tool from the ground up and showing you how you could do it if you didn't have access to any of the cool built-in ANOVA functions in jamovi. And I hope you'll read it carefully, try to do it the long way once or twice to make sure you really understand how ANOVA works.
 
 The experimental design that I described in the previous section strongly suggests that we're interested in comparing the average mood change for the three different drugs. In that sense, we're talking about an analysis similar to the $t$-test (see @sec-Comparing-two-means) but involving more than two groups. If we let $\mu_P$ denote the population mean for the mood change induced by the placebo, and let $\mu_A$ and $\mu_J$ denote the corresponding means for our two drugs, Anxifree and Joyzepam, then the (somewhat pessimistic) null hypothesis that we want to test is that all three population means are identical. That is, neither of the two drugs is any more effective than a placebo. We can write out this null hypothesis as:
-$$H_0: \text{ it is true that } \mu_P=\mu_A=\mu_J$$
-As a consequence, our alternative hypothesis is that at least one of the three different treatments is different from the others. It's a bit tricky to write this mathematically, because (as we'll discuss) there are quite a few different ways in which the null hypothesis can be false. So for now we'll just write the alternative hypothesis like this:
-$$H_1: \text{ it } \underline{ is \text{ } not } \text{ true that }
-\mu_P=\mu_A=\mu_J$$
 
-This null hypothesis is a lot trickier to test than any of the ones we've seen previously. How shall we do it? A sensible guess would be to "do an ANOVA", since that's the title of the chapter, but it's not particularly clear why an "analysis of variances" will help us learn anything useful about the means. In fact, this is one of the biggest conceptual difficulties that people have when first encountering ANOVA. To see how this works, I find it most helpful to start by talking about variances, specifically between group variability and within-group variability (@fig-fig13-2).
+$$H_0: \text{ it is true that } \mu_P=\mu_A=\mu_J$$
+
+As a consequence, our alternative hypothesis is that at least one of the three different treatments is different from the others. It's a bit tricky to write this mathematically, because (as we'll discuss) there are quite a few different ways in which the null hypothesis can be false. So for now we'll just write the alternative hypothesis like this:
+
+$$H_1: \text{ it } \underline{ is \text{ } not } \text{ true that } \mu_P=\mu_A=\mu_J$$
+
+This null hypothesis is a lot trickier to test than any of the ones we've seen previously. Given the title of this chapter, a sensible guess for how to test this would be to "do an ANOVA", but it's not particularly clear why "analysis of variances" will help us learn anything useful about the means. In fact, this is one of the biggest conceptual difficulties that people have when first encountering ANOVA. To see how this works, let's start by talking about variances, specifically between group variability and within-group variability (@fig-fig13-2).
 
 ```{r}
 #| label: fig-fig13-2
@@ -64,7 +66,8 @@ p1 <- ggplot(data = data.frame(x = seq(-5, 5, 1)), aes(x)) +
     axis.title.y = element_blank(),
     axis.line.y = element_blank(),
     axis.ticks.y = element_blank(),
-    plot.title = element_text(hjust = 0.5))
+    plot.title = element_text(hjust = 0.5, size=10)
+    )
 
 p2 <- ggplot(data = data.frame(x = seq(-5, 5, 1)), aes(x)) +
   stat_function(fun = dnorm, n = 1000, args = list(mean = -2, sd = 1), col="darkgrey", linewidth=1) +
@@ -81,7 +84,8 @@ p2 <- ggplot(data = data.frame(x = seq(-5, 5, 1)), aes(x)) +
     axis.title.y = element_blank(),
     axis.line.y = element_blank(),
     axis.ticks.y = element_blank(),
-    plot.title = element_text(hjust = 0.5))
+    plot.title = element_text(hjust = 0.5, size=10)
+    )
 
 gridExtra::grid.arrange(p1,p2,ncol=2)
 
@@ -97,15 +101,20 @@ Now that we've got our notation sorted out we can start writing down formulas. T
 
 A concrete example might be useful here. Let's consider @tbl-tab13-1, in which we have a total of $N = 5$ people sorted into $G = 2$ groups. Arbitrarily, let's say that the "cool" people are group 1 and the "uncool" people are group 2. It turns out that we have three cool people ($N_1 = 3$) and two uncool people ($N_2 = 2$).
 
+Notice that I've constructed two different labelling schemes here. We have a "person" variable $p$ so it would be perfectly sensible to refer to $Y_p$ as the grumpiness of the $p$-th person in the sample. For instance, the table shows that Tim is the fourth so we'd say $p = 4$. So, when talking about the grumpiness $Y$ of this "Tim" person, whoever he might be, we could refer to his grumpiness by saying that $Y_p = 91$, for person $p = 4$. 
+
 ```{r}
 #| label: tbl-tab13-1
 #| tbl-cap: Grumpiness for people in cool and uncool groups
-huxtabs[[13]][[1]]
+huxtabs[[13]][[1]] |>
+  set_latex_float('H')
 ```
 
-Notice that I've constructed two different labelling schemes here. We have a "person" variable $p$ so it would be perfectly sensible to refer to $Y_p$ as the grumpiness of the $p$-th person in the sample. For instance, the table shows that Tim is the fourth so we'd say $p = 4$. So, when talking about the grumpiness $Y$ of this "Tim" person, whoever he might be, we could refer to his grumpiness by saying that $Y_p = 91$, for person $p = 4$ that is. However, that's not the only way we could refer to Tim. As an alternative we could note that Tim belongs to the "uncool" group ($k = 2$), and is in fact the first person listed in the uncool group ($i = 1$). So it's equally valid to refer to Tim's grumpiness by saying that $Y_{ik} = 91$, where $k = 2$ and $i = 1$.
+However, that's not the only way we could refer to Tim. As an alternative we could note that Tim belongs to the "uncool" group ($k = 2$), and is in fact the first person listed in the uncool group ($i = 1$). So it's equally valid to refer to Tim's grumpiness by saying that $Y_{ik} = 91$, where $k = 2$ and $i = 1$. In other words, each person $p$ corresponds to a unique $ik$ combination, and so the formula that I gave above is actually identical to our original formula for the variance, which would be: 
 
-In other words, each person $p$ corresponds to a unique $ik$ combination, and so the formula that I gave above is actually identical to our original formula for the variance, which would be: $$Var(Y)=\frac{1}{N}\sum_{p=1}^{N}(Y_p-\bar{Y})^2$$ In both formulas, all we're doing is summing over all of the observations in the sample. Most of the time we would just use the simpler $Y_p$ notation; the equation using $Y_p$ is clearly the simpler of the two. However, when doing an ANOVA it's important to keep track of which participants belong in which groups, and we need to use the $Y_{ik}$ notation to do this.
+$$Var(Y)=\frac{1}{N}\sum_{p=1}^{N}(Y_p-\bar{Y})^2$$ 
+
+In both formulas, all we're doing is summing over all of the observations in the sample. Most of the time we would just use the simpler $Y_p$ notation; the equation using $Y_p$ is clearly the simpler of the two. However, when doing an ANOVA it's important to keep track of which participants belong in which groups, and we need to use the $Y_{ik}$ notation to do this.
 
 ### From variances to sums of squares
 
@@ -122,6 +131,7 @@ Next, we can define a third notion of variation which captures only the differen
 [^13-comparing-several-means-one-way-anova-4]: In order to quantify the extent of this variation, what we do is calculate the between-group sum of squares: $$\begin{aligned} SS_{b} &= \sum_{k=1}^{G} \sum_{i=1}^{N_k} ( \bar{Y}_{k} - \bar{Y} )^2 \\ &= \sum_{k=1}^{G} N_k ( \bar{Y}_{k} - \bar{Y} )^2 \end{aligned}$$
 
 It's not too difficult to show that the total variation among people in the experiment $SS_{tot}$ is actually the sum of the differences between the groups $SS_b$ and the variation inside the groups $SS_w$. That is:
+
 $$SS_w+SS_b=SS_{tot}$$ 
 
 Okay, so what have we found out? We've discovered that the total variability associated with the outcome variable ($SS_{tot}$) can be mathematically carved up into the sum of "the variation due to the differences in the sample means for the different groups" ($SS_b$) plus "all the rest of the variation" ($SS_w$).[^13-comparing-several-means-one-way-anova-5]
@@ -135,16 +145,22 @@ How does that help me find out whether the groups have different population mean
 As we saw in the last section, the qualitative idea behind ANOVA is to compare the two sums of squares values $SS_b$ and $SS_w$ to each other. If the between-group variation $SS_b$ is large relative to the within-group variation $SS_w$ then we have reason to suspect that the population means for the different groups aren't identical to each other. In order to convert this into a workable hypothesis test, there's a little bit of "fiddling around" needed. What I'll do is first show you what we do to calculate our test statistic, the **$F$-ratio**, and then try to give you a feel for why we do it this way.
 
 In order to convert our $SS$ values into an $F$-ratio the first thing we need to calculate is the **degrees of freedom** associated with the $SS_b$ and $SS_w$ values. As usual, the degrees of freedom corresponds to the number of unique "data points" that contribute to a particular calculation, minus the number of "constraints" that they need to satisfy. For the within groups variability what we're calculating is the variation of the individual observations ($N$ data points) around the group means ($G$ constraints). In contrast, for the between groups variability we're interested in the variation of the group means ($G$ data points) around the grand mean (1 constraint). Therefore, the degrees of freedom here are:
+
 $$df_b=G-1$$ $$df_w=N-G$$
+
 Okay, that seems simple enough. What we do next is convert our summed squares value into a "mean squares" value, which we do by dividing by the degrees of freedom:
+
 $$MS_b=\frac{SS_b}{df_b}$$ $$MS_w=\frac{SS_w}{df_w}$$
 
 Finally, we calculate the $F$-ratio by dividing the between groups $MS$ by the within groups $MS$:
+
 $$F=\frac{MS_b}{MS_w}$$
 
 At a very general level, the intuition behind the $F$-statistic is straightforward. Bigger values of $F$ means that the between groups variation is large relative to the within groups variation. As a consequence, the larger the value of $F$ the more evidence we have against the null hypothesis. But how large does $F$ have to be in order to actually reject $H_0$? In order to understand this, you need a slightly deeper understanding of what ANOVA is and what the mean squares values actually are.
 
 The next section discusses that in a bit of detail, but for readers that aren't interested in the details of what the test is actually measuring I'll cut to the chase. In order to complete our hypothesis test we need to know the sampling distribution for $F$ if the null hypothesis is true. Not surprisingly, the sampling distribution for the $F$-statistic under the null hypothesis is an $F$-distribution. If you recall our discussion of the $F$-distribution in @sec-Introduction-to-probability, the $F$-distribution has two parameters, corresponding to the two degrees of freedom involved. The first one $df_1$ is the between groups degrees of freedom $df_b$, and the second one $df_2$ is the within groups degrees of freedom $df_w$.
+
+A summary of all the key quantities involved in a one-way ANOVA, including the formulas showing how they are calculated, is shown in @tbl-tab13-2.
 
 ```{r}
 #| label: tbl-tab13-2
@@ -152,23 +168,22 @@ The next section discusses that in a bit of detail, but for readers that aren't 
 huxtabs[[13]][[2]]
 ```
 
-A summary of all the key quantities involved in a one-way ANOVA, including the formulas showing how they are calculated, is shown in @tbl-tab13-2.
-
 [Additional technical detail[^13-comparing-several-means-one-way-anova-6]]
 
 [^13-comparing-several-means-one-way-anova-6]: At a fundamental level ANOVA is a competition between two different statistical models, $H_0$ and $H_1$. When I described the null and alternative hypotheses at the start of the section, I was a little imprecise about what these models actually are. I'll remedy that now, though you probably won't like me for doing so. If you recall, our null hypothesis was that all of the group means are identical to one another. If so, then a natural way to think about the outcome variable $Y_{ik}$ is to describe individual scores in terms of a single population mean $\mu$, plus the deviation from that population mean. This deviation is usually denoted $\epsilon_{ik}$ and is traditionally called the error or residual associated with that observation. Be careful though. Just like we saw with the word "significant", the word "error" has a technical meaning in statistics that isn't quite the same as its everyday English definition. In everyday language, "error" implies a mistake of some kind, but in statistics it doesn't (or at least, not necessarily). With that in mind, the word "residual" is a better term than the word "error". In statistics both words mean "leftover variability", that is "stuff" that the model can't explain.
-    In any case, here's what the null hypothesis looks like when we write it as a statistical model: $$Y_{ik}=\mu+\epsilon_{ik}$$ where we make the assumption (discussed later) that the residual values $\epsilon_{ik}$ are normally distributed, with mean $0$ and a standard deviation $\sigma$ that is the same for all groups. To use the notation that we introduced in the [Introduction to probability] we would write this assumption like this: $$\epsilon_{ik} \sim Normal(0,\sigma^2)$$ What about the alternative hypothesis, $H_1$? The only difference between the null hypothesis and the alternative hypothesis is that we allow each group to have a different population mean. So, if we let $\mu_k$ denote the population mean for the k-th group in our experiment, then the statistical model corresponding to $H_1$ is: $$Y_{ik}=\mu_k+\epsilon_{ik}$$ where, once again, we assume that the error terms are normally distributed with mean 0 and standard deviation $\sigma$. That is, the alternative hypothesis also assumes that $\epsilon \sim Normal(0,\sigma^2)$ Okay, now that we've described the statistical models underpinning $H_0$ and $H_1$ in more detail, it's now pretty straightforward to say what the mean square values are measuring, and what this means for the interpretation of $F$. I won't bore you with the proof of this but it turns out that the within-groups mean square, $MS_w$, can be viewed as an estimator of the error variance $\sigma^2$ . The between-groups mean square $MS_b$ is also an estimator, but what it estimates is the error variance plus a quantity that depends on the true differences among the group means. If we call this quantity $Q$, then we can see that the $F$ statistic is basically:$^a$ $$F=\frac{\hat{Q}+\hat{\sigma}^2}{\hat{\sigma}^2}$$ where the true value $Q = 0$ if the null hypothesis is true, and $Q < 0$ if the alternative hypothesis is true (e.g., @Hays1994, ch. 10). Therefore, at a bare minimum the $F$ *value must be larger than* 1 to have any chance of rejecting the null hypothesis. Note that this doesn't mean that it's impossible to get an $F$-value less than 1. What it means is that if the null hypothesis is true the sampling distribution of the $F$-ratio has a mean of 1,$^b$ and so we need to see $F$-values larger than 1 in order to safely reject the null. To be a bit more precise about the sampling distribution, notice that if the null hypothesis is true, both $MS$b and $MSw$ are estimators of the variance of the residuals $\epsilon_{ik}$. If those residuals are normally distributed, then you might suspect that the estimate of the variance of $\epsilon_{ik}$ is chi-square distributed, because (as discussed in the @sec-Other-useful-distributions) that's what a chi-square distribution is: it's what you get when you square a bunch of normally-distributed things and add them up. And since the $F$ distribution is (again, by definition) what you get when you take the ratio between two things that are $\chi^2$ distributed, we have our sampling distribution. Obviously, I'm glossing over a whole lot of stuff when I say this, but in broad terms, this really is where our sampling distribution comes from. <br /> --- <br />  $^a$If you read ahead to @sec-Factorial-ANOVA and look at how the "treatment effect" at level $k$ of a factor is defined in terms of the $\alpha_k$ values (see [Factorial ANOVA 2: balanced designs, interactions allowed]), it turns out that $Q$ refers to a weighted mean of the squared treatment effects, $Q = \frac{(\sum_{k=1}^{G}N_k \alpha_k^2)}{(G-1)}$. <br /> --- <br /> $^b$Or, if we want to be sticklers for accuracy, $1+ \frac{2}{df_2-2}$.
+    In any case, here's what the null hypothesis looks like when we write it as a statistical model: $$Y_{ik}=\mu+\epsilon_{ik}$$ where we make the assumption (discussed later) that the residual values $\epsilon_{ik}$ are normally distributed, with mean $0$ and a standard deviation $\sigma$ that is the same for all groups. To use the notation that we introduced in the [Introduction to probability] we would write this assumption like this: $$\epsilon_{ik} \sim Normal(0,\sigma^2)$$ What about the alternative hypothesis, $H_1$? The only difference between the null hypothesis and the alternative hypothesis is that we allow each group to have a different population mean. So, if we let $\mu_k$ denote the population mean for the k-th group in our experiment, then the statistical model corresponding to $H_1$ is: $$Y_{ik}=\mu_k+\epsilon_{ik}$$ where, once again, we assume that the error terms are normally distributed with mean 0 and standard deviation $\sigma$. That is, the alternative hypothesis also assumes that $\epsilon \sim Normal(0,\sigma^2)$ Okay, now that we've described the statistical models underpinning $H_0$ and $H_1$ in more detail, it's now pretty straightforward to say what the mean square values are measuring, and what this means for the interpretation of $F$. I won't bore you with the proof of this but it turns out that the within-groups mean square, $MS_w$, can be viewed as an estimator of the error variance $\sigma^2$ . The between-groups mean square $MS_b$ is also an estimator, but what it estimates is the error variance plus a quantity that depends on the true differences among the group means. If we call this quantity $Q$, then we can see that the $F$ statistic is basically:$^a$ $$F=\frac{\hat{Q}+\hat{\sigma}^2}{\hat{\sigma}^2}$$ where the true value $Q = 0$ if the null hypothesis is true, and $Q < 0$ if the alternative hypothesis is true (e.g., @Hays1994, ch. 10). Therefore, at a bare minimum the $F$ *value must be larger than* 1 to have any chance of rejecting the null hypothesis. Note that this doesn't mean that it's impossible to get an $F$-value less than 1. What it means is that if the null hypothesis is true the sampling distribution of the $F$-ratio has a mean of 1,$^b$ and so we need to see $F$-values larger than 1 in order to safely reject the null. To be a bit more precise about the sampling distribution, notice that if the null hypothesis is true, both $MS_b$ and $MS_w$ are estimators of the variance of the residuals $\epsilon_{ik}$. If those residuals are normally distributed, then you might suspect that the estimate of the variance of $\epsilon_{ik}$ is chi-square distributed, because (as discussed in the @sec-Other-useful-distributions) that's what a chi-square distribution is: it's what you get when you square a bunch of normally-distributed things and add them up. And since the $F$ distribution is (again, by definition) what you get when you take the ratio between two things that are $\chi^2$ distributed, we have our sampling distribution. Obviously, I'm glossing over a whole lot of stuff when I say this, but in broad terms, this really is where our sampling distribution comes from. <br /> --- <br />  $^a$If you read ahead to @sec-Factorial-ANOVA and look at how the "treatment effect" at level $k$ of a factor is defined in terms of the $\alpha_k$ values (see [Factorial ANOVA 2: balanced designs, interactions allowed]), it turns out that $Q$ refers to a weighted mean of the squared treatment effects, $Q = \frac{(\sum_{k=1}^{G}N_k \alpha_k^2)}{(G-1)}$. <br /> --- <br /> $^b$Or, if we want to be sticklers for accuracy, $1+ \frac{2}{df_2-2}$.
 
 ### A worked example
 
-The previous discussion was fairly abstract and a little on the technical side, so I think that at this point it might be useful to see a worked example. For that, let's go back to the clinical trial data that I introduced at the start of the chapter. The descriptive statistics that we calculated at the beginning tell us our group means: an average mood gain of $0.45$ for the placebo, $0.72$ for Anxifree, and $1.48$ for Joyzepam. With that in mind, let's party like it's 1899[^13-comparing-several-means-one-way-anova-7] and start doing some pencil and paper calculations. I'll only do this for the first $5$ observations because it's not bloody $1899$ and I'm very lazy. Let's start by calculating $SS_w$, the within-group sums of squares. First, let's draw up a nice table to help us with our calculations (@tbl-tab13-3)
+The previous discussion was fairly abstract and a little on the technical side, so I think that at this point it might be useful to see a worked example. For that, let's go back to the clinical trial data that I introduced at the start of the chapter. The descriptive statistics that we calculated at the beginning tell us our group means: an average mood gain of $0.45$ for the placebo, $0.72$ for Anxifree, and $1.48$ for Joyzepam. With that in mind, let's party like it's 1899[^13-comparing-several-means-one-way-anova-7] and start doing some pencil and paper calculations. I'll only do this for the first $5$ observations because it's not bloody $1899$ and I'm very lazy. Let's start by calculating $SS_w$, the within-group sums of squares. First, let's draw up a nice table to help us with our calculations (@tbl-tab13-3).
 
 [^13-comparing-several-means-one-way-anova-7]: Or, to be precise, party like "it's 1899 and we've got no friends and nothing better to do with our time than do some calculations that wouldn't have made any sense in 1899 because ANOVA didn't exist until about the 1920s".
 
 ```{r}
 #| label: tbl-tab13-3
 #| tbl-cap: A worked example...1
-huxtabs[[13]][[3]]
+huxtabs[[13]][[3]] |>
+  set_latex_float('H')
 ```
 
 At this stage, the only thing I've included in the table is the raw data itself. That is, the grouping variable (i.e., drug) and outcome variable (i.e. mood.gain) for each person. Note that the outcome variable here corresponds to the $\bar{Y}_{ik}$ value in our equation previously. The next step in the calculation is to write down, for each person in the study, the corresponding group mean, $\bar{Y}_k$. This is slightly repetitive but not particularly difficult since we already calculated those group means when doing our descriptive statistics, see @tbl-tab13-4.
@@ -187,7 +202,10 @@ Now that we've written those down, we need to calculate, again for every person,
 huxtabs[[13]][[5]]
 ```
 
+\
+
 The last step is equally straightforward. In order to calculate the within-group sum of squares we just add up the squared deviations across all observations:
+
 $$
 \begin{split}
 SS_w & = 0.0025 + 0.0225 + 0.1225 + 0.0136 + 0.1003 \\
@@ -214,19 +232,22 @@ huxtabs[[13]][[7]]
 ```
 
 And so now our between group sum of squares is obtained by summing these "weighted squared deviations" over all three groups in the study:
+
 $$\begin{aligned} SS_b & = 1.14 + 0.18 + 2.16 \\ &= 3.48 \end{aligned}$$
 
 As you can see, the between group calculations are a lot shorter.[^13-comparing-several-means-one-way-anova-8] Now that we've calculated our sums of squares values, $SS_b$ and $SS_w$, the rest of the ANOVA is pretty painless. The next step is to calculate the degrees of freedom. Since we have $G = 3$ groups and $N = 18$ observations in total our degrees of freedom can be calculated by simple subtraction:
+
 $$
 \begin{split}
 df_b & = G-1 = 2 \\
 df_w & = N-G = 15
 \end{split}
 $$
+
 [^13-comparing-several-means-one-way-anova-8]: In the Excel *clinicaltrial-anova.xls*  the value for $SS_b$ worked out to be very slightly different, $3.45$, than that shown in the text above (rounding errors!).
 
-
 Next, since we've now calculated the values for the sums of squares and the degrees of freedom, for both the within groups variability and the between groups variability, we can obtain the mean square values by dividing one by the other:
+
 $$
 \begin{split}
 MS_b & = \frac{SS_b}{df_b} = \frac{3.48}{2} = 1.74 \\
@@ -235,13 +256,15 @@ MS_w & = \frac{SS_w}{df_w} = \frac{1.39}{15} = 0.09
 $$
 
 We're almost done. The mean square values can be used to calculate the $F$-value, which is the test statistic that we're interested in. We do this by dividing the between groups $MS$ value by the within groups $MS$ value:
+
 $$
 \begin{split}
 F & = \frac{MS_b}{MS_w}  = \frac{1.74}{0.09} \\
 & = 19.3
 \end{split}
 $$
-Woohooo! This is terribly exciting, yes? Now that we have our test statistic, the last step is to find out whether the test itself gives us a significant result. As discussed in @sec-Hypothesis-testing back in the "old days" what we'd do is open up a statistics textbook or flick to the back section which would actually have a huge lookup table and we would find the threshold $F$-value corresponding to a particular value of alpha (the null hypothesis rejection region), e.g. $0.05$, $0.01$ or $0.001$, for 2 and 15 degrees of freedom. Doing it this way would give us a threshold $F$-value for an alpha of $0.001$ of $11.34$. As this is less than our calculated $F$-value we say that $p < 0.001$. But those were the old days, and nowadays fancy stats software calculates the exact $p$-value for you. In fact, the exact $p$-value is $0.000071$. So, unless we're being *extremely* conservative about our type I error rate, we're pretty much guaranteed to reject the null hypothesis.
+
+Woohooo! Now that we have our test statistic, the last step is to find out whether the test itself gives us a significant result. As discussed in @sec-Hypothesis-testing what we'd do in the old days is open up a statistics textbook and in a huge lookup table we would find the threshold $F$-value corresponding to a particular value of alpha (the null hypothesis rejection region), e.g. $0.05$, $0.01$ or $0.001$, for 2 and 15 degrees of freedom. Doing it this way would give us a threshold $F$-value for an alpha of $0.001$ of $11.34$. As this is less than our calculated $F$-value we say that $p < 0.001$. But nowadays fancy stats software calculates the exact $p$-value for you, which is $0.000071$. So, unless we're being *extremely* conservative about our type I error rate, we're pretty much guaranteed to reject the null hypothesis.
 
 At this point, we're basically done. Having completed our calculations, it's traditional to organise all these numbers into an ANOVA table like the one in Table 13.1. For our clinical trial data, the ANOVA table would look like @tbl-tab13-8.
 
@@ -254,6 +277,7 @@ huxtabs[[13]][[8]]
 These days, you'll probably never have much reason to want to construct one of these tables yourself, but you will find that almost all statistical software (jamovi included) tends to organise the output of an ANOVA into a table like this, so it's a good idea to get used to reading them. However, although the software will output a full ANOVA table, there's almost never a good reason to include the whole table in your write up. A pretty standard way of reporting the stats block for this result would be to write something like this:
 
 > One-way ANOVA showed a significant effect of drug on mood gain ($F(2,15) = 19.3, p < .001$).
+
 Sigh. So much work for one short sentence.
 
 ## Running an ANOVA in jamovi
@@ -264,24 +288,29 @@ I'm pretty sure I know what you're thinking after reading the last section, espe
 
 To make life easier for you, jamovi can do ANOVA...hurrah! Go to the 'ANOVA' -- 'ANOVA' analysis, and move the mood.gain variable across so it is in the 'Dependent Variable' box, and then move the drug variable across so it is in the 'Fixed Factors' box. This should give the results as shown in @fig-fig13-3.[^13-comparing-several-means-one-way-anova-9] Note I have also checked the $\eta^2$ checkbox, pronounced "eta" squared, under the 'Effect Size' option and this is also shown on the results table. We will come back to effect sizes a bit later.
 
+[^13-comparing-several-means-one-way-anova-9]: The jamovi results are more accurate than the ones in the text above, due to rounding errors.
+
+The jamovi results table shows you the sums of squares values, the degrees of freedom, and a couple of other quantities that we're not really interested in right now. Notice, however, that jamovi doesn't use the names "between group" and "within group". Instead, it tries to assign more meaningful names. In our particular example, the between groups variance corresponds to the effect that the drug has on the outcome variable, and the within groups variance corresponds to the "leftover" variability so it calls that the residuals. 
+
 ```{r}
 #| label: fig-fig13-3
 #| classes: .enlarge-image
 #| fig-cap: jamovi results table for ANOVA of mood gain by drug administered
-#| fig-alt: A table from jamovi titled "ANOVA - mood.gain" displays results for an ANOVA test with the columns:- "Sum of Squares," "df," "Mean Square," "F," "p," and "η²." The rows present data for "drug" with values (3.45, 2, 1.73, 18.61, 0.00009, 0.71) and "Residuals" with values (1.39, 15, 0.09).
+#| fig-alt: A table from jamovi titled "ANOVA - mood.gain" displays results for an ANOVA test with the columns:- "Sum of Squares," "df," "Mean Square," "F," "p," and "η²." The rows present data for "drug" with values (3.45, 2, 1.73, 18.61, 0.00009, 0.71) and "Residuals" with values (1.39, 15, 0.09)
+#| fig-pos: 'H'
 knitr::include_graphics("images/fig13-3.png")
 ```
 
-[^13-comparing-several-means-one-way-anova-9]: The jamovi results are more accurate than the ones in the text above, due to rounding errors.
-
-The jamovi results table shows you the sums of squares values, the degrees of freedom, and a couple of other quantities that we're not really interested in right now. Notice, however, that jamovi doesn't use the names "between group" and "within group". Instead, it tries to assign more meaningful names. In our particular example, the between groups variance corresponds to the effect that the drug has on the outcome variable, and the within groups variance corresponds to the "leftover" variability so it calls that the residuals. If we compare these numbers to the numbers that I calculated by hand in [A worked example], you can see that they're more or less the same, apart from rounding errors. The between groups sums of squares is $SS_b = 3.45$, the within groups sums of squares is $SS_w = 1.39$, and the degrees of freedom are $2$ and $15$ respectively. We also get the $F$-value and the $p$-value and, again, these are more or less the same, give or take rounding errors, to the numbers that we calculated ourselves when doing it the long and tedious way.
+If we compare these numbers to the numbers that I calculated by hand in [A worked example], you can see that they're more or less the same, apart from rounding errors. The between groups sums of squares is $SS_b = 3.45$, the within groups sums of squares is $SS_w = 1.39$, and the degrees of freedom are $2$ and $15$ respectively. We also get the $F$-value and the $p$-value and, again, these are more or less the same, give or take rounding errors, to the numbers that we calculated ourselves when doing it the long and tedious way.
 
 ## Effect size
 
 There's a few different ways you could measure the effect size in an ANOVA, but the most commonly used measures are $\eta^2$ (eta squared) and partial $\eta^2$. For a one-way analysis of variance they're identical to each other, so for the moment I'll just explain $\eta^2$. The definition of $\eta^2$ is actually really simple:
+
 $$\eta^2=\frac{SS_b}{SS_{tot}}$$
 
 That's all it is. So when I look at the ANOVA table in @fig-fig13-3, I see that $SS_b = 3.45$ and $SS_tot = 3.45 + 1.39 = 4.84$. Thus we get an $\eta^2$ value of:
+
 $$\eta^2=\frac{3.45}{4.84}=0.71$$
 
 The interpretation of $\eta^2$ is equally straightforward. It refers to the proportion of the variability in the outcome variable (mood.gain) that can be explained in terms of the predictor (drug). A value of $\eta^2=0$ means that there is no relationship at all between the two, whereas a value of $\eta^2=1$ means that the relationship is perfect. Better yet, the $\eta^2$ value is very closely related to $R^2$, as discussed previously in @sec-The-R2-value, and has an equivalent interpretation. Although many statistics textbooks suggest $\eta^2$ as the default effect size measure in ANOVA, there's an interesting blog post[^13-comparing-several-means-one-way-anova-9a] by Daniel Lakens suggesting that eta-squared is perhaps not the best measure of effect size in real-world data analysis, because it can be a biased estimator. Usefully, there is also an option in jamovi to specify omega-squared ($\omega^2$), which is less biased, alongside eta-squared.
@@ -334,8 +363,10 @@ The usual solution to this problem is to introduce an adjustment to the $p$-valu
 
 The simplest of these adjustments is called the **Bonferroni correction** [@Dunn1961], and it's very very simple indeed. Suppose that my post hoc analysis consists of $m$ separate tests, and I want to ensure that the total probability of making *any* type I errors at all is at most $\alpha$.[^13-comparing-several-means-one-way-anova-11] If so, then the Bonferroni correction just says "multiply all your raw $p$-values by $m$". If we let $p$ denote the original $p$-value, and let $p_j^{'}$ be the corrected value, then the Bonferroni correction tells that:
 
-[^13-comparing-several-means-one-way-anova-11]: It's worth noting in passing that not all adjustment methods try to do this. What I've described here is an approach for controlling "family wise type I error rate". However, there are other post hoc tests that seek to control the "false discovery rate", which is a somewhat different thing:
 $$p_j^{'}=m \times p$$
+
+[^13-comparing-several-means-one-way-anova-11]: It's worth noting in passing that not all adjustment methods try to do this. What I've described here is an approach for controlling "family wise type I error rate". However, there are other post hoc tests that seek to control the "false discovery rate", which is a somewhat different thing.
+
 And therefore, if you're using the Bonferroni correction, you would reject the null hypothesis if $p_j^{'} < \alpha$. The logic behind this correction is very straightforward. We're doing m different tests, so if we arrange it so that each test has a type I error rate of at most $\frac{\alpha}{m}$, then the *total* type I error rate across these tests cannot be larger than $\alpha$. That's pretty simple, so much so that in the original paper, the author writes:
 
 >*The method given here is so simple and so general that I am sure it must have been used before this. I do not find it, however, so can only conclude that perhaps its very simplicity has kept statisticians from realizing that it is a very good method in some situations* (@Dunn1961, pp. 52-53).
@@ -345,12 +376,20 @@ To use the Bonferroni correction in jamovi, just click on the 'Bonferroni' check
 ### Holm corrections
 
 Although the Bonferroni correction is the simplest adjustment out there, it's not usually the best one to use. One method that is often used instead is the **Holm correction** [@Holm1979]. The idea behind the Holm correction is to pretend that you're doing the tests sequentially, starting with the smallest (raw) $p$-value and moving onto the largest one. For the $j$-th largest of the $p$-values, the adjustment is *either*:
+
 $$p_j^{'}=j \times p_j$$
 
-(i.e., the biggest $p$-value remains unchanged, the second biggest $p$-value is doubled, the third biggest $p$-value is tripled, and so on), or:
+\
+
+(i.e., the biggest $p$-value remains unchanged, the second biggest $p$-value is doubled, the third biggest $p$-value is tripled, and so on), *or*:
+
 $$p_j^{'}=p_{j+1}^{'}$$
 
 whichever one is larger. This might sound a little confusing, so let's go through it a little more slowly. Here's what the Holm correction does. First, you sort all of your $p$-values in order, from smallest to largest. For the smallest $p$-value all you do is multiply it by $m$, and you're done. However, for all the other ones it's a two-stage process. For instance, when you move to the second smallest $p$-value, you first multiply it by $m - 1$. If this produces a number that is bigger than the adjusted $p$-value that you got last time, then you keep it. But if it's smaller than the last one, then you copy the last $p$-value. To illustrate how this works, consider @tbl-tab13-10 which shows the calculations of a Holm correction for a collection of five $p$-values.
+
+Hopefully that makes things clear.
+
+Although it's a little harder to calculate, the Holm correction has some very nice properties. It's more powerful than Bonferroni (i.e., it has a lower type II error rate) but, counter-intuitive as it might seem, it has the same type I error rate. As a consequence, in practice there's never any reason to use the simpler Bonferroni correction since it is always outperformed by the slightly more elaborate Holm correction. Because of this, the Holm correction should be your *go to* multiple comparison correction. 
 
 ```{r}
 #| label: tbl-tab13-10
@@ -358,9 +397,7 @@ whichever one is larger. This might sound a little confusing, so let's go throug
 huxtabs[[13]][[10]]
 ```
 
-Hopefully that makes things clear.
-
-Although it's a little harder to calculate, the Holm correction has some very nice properties. It's more powerful than Bonferroni (i.e., it has a lower type II error rate) but, counter-intuitive as it might seem, it has the same type I error rate. As a consequence, in practice there's never any reason to use the simpler Bonferroni correction since it is always outperformed by the slightly more elaborate Holm correction. Because of this, the Holm correction should be your *go to* multiple comparison correction. @fig-fig13-4 also shows the Holm corrected $p$-values and, as you can see, the biggest $p$-value (corresponding to the comparison between Anxifree and the placebo) is unaltered. At a value of .15, it is exactly the same as the value we got originally when we applied no correction at all. In contrast, the smallest $p$-value (Joyzepam versus placebo) has been multiplied by three.
+@fig-fig13-4 also shows the Holm corrected $p$-values and, as you can see, the biggest $p$-value (corresponding to the comparison between Anxifree and the placebo) is unaltered. At a value of .15, it is exactly the same as the value we got originally when we applied no correction at all. In contrast, the smallest $p$-value (Joyzepam versus placebo) has been multiplied by three.
 
 ### Writing up the post hoc test
 
@@ -424,14 +461,19 @@ Okay, so originally our ANOVA gave us the result $F(2, 15) = 18.6$, whereas the 
 
 ### Checking the normality assumption {#sec-Checking-the-normality-assumption}
 
-Testing the normality assumption is relatively straightforward. We covered most of what you need to know in @sec-Checking-the-normality-of-a-sample. The only thing we really need to do is draw a QQ plot and, in addition if it is available, run the Shapiro-Wilk test. The QQ plot is shown in @fig-fig13-7 and it looks pretty normal to me. If the Shapiro-Wilk test is not significant (i.e. $p > .05$) then this indicates that the assumption of normality is not violated. However, as with Levene's test, if the sample size is large then a significant Shapiro-Wilk test may in fact be a false positive, where the assumption of normality is not violated in any substantive problematic sense for the analysis. And, similarly, a very small sample can produce false negatives. That's why a visual inspection of the QQ plot is important.
+Testing the normality assumption is relatively straightforward. We covered most of what you need to know in @sec-Checking-the-normality-of-a-sample. The only thing we really need to do is draw a QQ plot and, in addition if it is available, run the Shapiro-Wilk test. The QQ plot is shown in @fig-fig13-7 and it looks pretty normal to me. 
 
 ```{r out.width="80%"}
 #| label: fig-fig13-7
 #| fig-cap: QQ plot in the one-way ANOVA analysis in jamovi
-#| fig-alt: A Q-Q plot comparing standardized residuals to theoretical quantiles, showing dots near a 45-degree reference line, indicating the data points follow a normal distribution closely. The axes are labeled "Standardized Residuals" and "Theoretical Quantiles".
+#| fig-alt: A Q-Q plot comparing standardized residuals to theoretical quantiles, showing dots near a 45-degree reference line, indicating the data points follow a normal distribution closely. The axes are labeled "Standardized Residuals" and "Theoretical Quantiles"
+#| fig-width: 8
+#| fig-height: 5
+#| fig-pos: 'H'
 knitr::include_graphics("images/fig13-7.png")
 ```
+
+If the Shapiro-Wilk test is not significant (i.e. $p > .05$) then this indicates that the assumption of normality is not violated. However, as with Levene's test, if the sample size is large then a significant Shapiro-Wilk test may in fact be a false positive, where the assumption of normality is not violated in any substantive problematic sense for the analysis. And, similarly, a very small sample can produce false negatives. That's why a visual inspection of the QQ plot is important.
 
 Alongside inspecting the QQ plot for any deviations from normality, the Shapiro-Wilk test for our data does show a non-significant effect, with $p$ = 0.6053 (see @fig-fig13-6). This therefore supports the QQ plot assessment; both checks find no indication that normality is violated.
 
@@ -479,14 +521,20 @@ knitr::include_graphics("images/fig13-8.png")
 
 ## Repeated measures one-way ANOVA
 
-The one-way repeated measures ANOVA test is a statistical method of testing for significant differences between three or more groups where the same participants are used in each group (or each participant is closely matched with participants in other experimental groups). For this reason, there should always be an equal number of scores (data points) in each experimental group. This type of design and analysis can also be called a "related ANOVA" or a "within subjects ANOVA".
+The one-way repeated measures ANOVA is a statistical test for significant differences between three or more groups where the same participants are in each group (or each participant is closely matched with participants in other experimental groups). For this reason, there should always be an equal number of scores (data points) in each experimental group. This type of design and analysis can also be called a "related ANOVA" or a "within subjects ANOVA". 
 
-The logic behind a repeated measures ANOVA is very similar to that of an independent ANOVA (sometimes called a "between subjects" ANOVA). You'll remember that earlier we showed that in a between subjects ANOVA total variability is partitioned into between groups variability ($SS_b$) and within groups variability ($SS_w$), and after each is divided by the respective degrees of freedom to give $MS_b$ and $MS_w$ (see Table 13.1) the $F$-ratio is calculated as:
+The logic behind a repeated measures ANOVA is very similar to that of an independent ANOVA (sometimes called a "between subjects" ANOVA). You'll remember that earlier we showed that in a between subjects ANOVA total variability is partitioned into between groups variability ($SS_b$) and within groups variability ($SS_w$), then divided by the respective degrees of freedom to give $MS_b$ and $MS_w$ (see Table 13.1), whereupon the $F$-ratio is calculated as:
+
 $$F=\frac{MS_b}{MS_w}$$
 
-In a repeated measures ANOVA, the $F$-ratio is calculated in a similar way, but whereas in an independent ANOVA the within-group variability ($SS_w$) is used as the basis for the $MS_w$ denominator, in a repeated measures ANOVA the $SS_w$ is partioned into two parts. As we are using the same subjects in each group, we can remove the variability due to the individual differences between subjects (referred to as $SS_{subjects}$) from the within groups variability. We won't go into too much technical detail about how this is done, but essentially each subject becomes a level of a factor called subjects. The variability in this within subjects factor is then calculated in the same way as any between subjects factor. And then we can subtract $SS_{subjects}$) from $SS_w$ to provide a smaller $SS_{error}$) term:
+In a repeated measures ANOVA, the $F$-ratio is calculated in a similar way, but whereas in an independent ANOVA the within-group variability ($SS_w$) is used as the basis for the $MS_w$ denominator, in a repeated measures ANOVA the $SS_w$ is partioned into two parts. As we are using the same subjects in each group, we can remove the variability due to the individual differences between subjects (referred to as $SS_{subjects}$) from the within groups variability. 
+
+We won't go into too much technical detail about how this is done, but essentially each subject becomes a level of a factor called subjects. The variability in this within subjects factor is then calculated in the same way as any between subjects factor. And then we can subtract 
+$SS_{subjects}$ from $SS_w$ to provide a smaller $SS_{error}$ term:
+
 $$\text{Independent ANOVA: } SS_{error} = SS_w$$ 
 $$\text{Repeated Measures ANOVA: } SS_{error} = SS_w - SS_{subjects}$$
+
 This change in $SS_{error}$ term often leads to a more powerful statistical test, but this does depend on whether the reduction in the $SS_{error}$ more than compensates for the reduction in degrees of freedom for the error term (as degrees of freedom go from $(n - k)$[^13-comparing-several-means-one-way-anova-17] to $(n - 1)(k - 1)$ (remembering that there are more subjects in the independent ANOVA design).
 
 [^13-comparing-several-means-one-way-anova-17]: $(n - k)$: (number of subjects - number of groups)
@@ -503,13 +551,14 @@ huxtabs[[13]][[12]]
 
 The patients were required to complete three word recognition tasks. On the first (speech production) task, patients were required to repeat single words read out aloud by the researcher. On the second (conceptual) task, designed to test word comprehension, patients were required to match a series of pictures with their correct name. On the third (syntax) task, designed to test knowledge of correct word order, patients were asked to reorder syntactically incorrect sentences. Each patient completed all three tasks. The order in which patients attempted the tasks was counterbalanced between participants. Each task consisted of a series of 10 attempts. The number of attempts successfully completed by each patient are shown in @tbl-tab13-11. Enter these data into jamovi ready for analysis (or take a short-cut and load up the *broca.csv* file).
 
-To perform a one-way related ANOVA in jamovi, open the one-way repeated measures ANOVA dialogue box, as in @fig-fig13-9, via ANOVA - Repeated Measures ANOVA.
+To perform a one-way related ANOVA in jamovi, open the one-way repeated measures ANOVA dialogue box, as in @fig-fig13-9, via 'ANOVA - Repeated Measures ANOVA'.
 
 ```{r out.width="80%"}
 #| label: fig-fig13-9
 #| fig-align: center
 #| fig-cap: Repeated measures ANOVA dialogue box in jamovi
-#| fig-alt: A jamovi screenshot showing the setup for a Repeated Measures ANOVA analysis. The interface includes fields for participants, speech, conceptual, and syntax variables, along with options to define repeated measures factors and cells, between subject factors, and covariates.
+#| fig-alt: A jamovi screenshot showing the setup for a Repeated Measures ANOVA analysis. The interface includes fields for participants, speech, conceptual, and syntax variables, along with options to define repeated measures factors and cells, between subject factors, and covariates
+#| fig-pos: 'H'
 knitr::include_graphics("images/fig13-9.png")
 ```
 
@@ -537,15 +586,17 @@ If, on the other hand, Mauchly's test had been significant ($p$ < .05) then we w
 
 Both these corrected $F$-values can be specified in the 'Sphericity Corrections' check boxes under the 'Assumption Checks' options, and the corrected $F$-values are then shown in the results table, as in @fig-fig13-11.
 
+In our analysis, we saw that the significance of Mauchly's Test of Sphericity was $p = .720$ (i.e., $p > 0.05)$. So, this means we can assume that the requirement of sphericity has been met so no correction to the $F$-value is needed. Therefore, we can use the 'None' Sphericity Correction output values for the repeated measure 'Task': $F = 6.93$, $df = 2$, $p = .013$, and we can conclude that the number of tests successfully completed on each language task did vary significantly depending on whether the task was speech, comprehension or syntax based ($F(2, 10) = 6.93$, $p = .013$).
+
 ```{r}
 #| label: fig-fig13-11
 #| classes: .enlarge-image
 #| fig-cap: One-way repeated measures ANOVA output -- Tests of Within Subjects Effects
-#| fig-alt: A jamovi results table displaying repeated measures ANOVA results. The columns include Sphericity Correction (None, Greenhouse-Geisser, Huynh-Feldt), Sum of Squares, degrees of freedom ($df$), Mean Square, $F$-values, and $p$-values for Task and Residual effects. Note:- Type 3 Sums of Squares.
+#| fig-alt: A jamovi results table displaying repeated measures ANOVA results. The columns include Sphericity Correction (None, Greenhouse-Geisser, Huynh-Feldt), Sum of Squares, degrees of freedom ($df$), Mean Square, $F$-values, and $p$-values for Task and Residual effects. Note:- Type 3 Sums of Squares
+#| fig-pos: 'H'
+
 knitr::include_graphics("images/fig13-11.png")
 ```
-
-In our analysis, we saw that the significance of Mauchly's Test of Sphericity was $p = .720$ (i.e., $p > 0.05)$. So, this means we can assume that the requirement of sphericity has been met so no correction to the $F$-value is needed. Therefore, we can use the 'None' Sphericity Correction output values for the repeated measure 'Task': $F = 6.93$, $df = 2$, $p = .013$, and we can conclude that the number of tests successfully completed on each language task did vary significantly depending on whether the task was speech, comprehension or syntax based ($F(2, 10) = 6.93$, $p = .013$).
 
 Post hoc tests can also be specified in jamovi for repeated measures ANOVA in the same way as for independent ANOVA. The results are shown in @fig-fig13-12. These indicate that there is a significant difference between Speech and Syntax, but not between other levels.
 
@@ -559,11 +610,12 @@ knitr::include_graphics("images/fig13-12.png")
 
 Descriptive statistics (marginal means) can be reviewed to help interpret the results, produced in the jamovi output as in @fig-fig13-13. Comparison of the mean number of trials successfully completed by participants shows that Broca's Aphasics perform reasonably well on speech production (mean = 7.17) and language comprehension (mean = 6.17) tasks. However, their performance was considerably worse on the syntax task (mean = 4.33), with a significant difference in post hoc tests between Speech and Syntax task performance.
 
-```{r}
+```{r out.width="70%"}
 #| label: fig-fig13-13
 #| classes: .enlarge-image
 #| fig-cap: One-way repeated measures ANOVA output -- Descriptive Statistics
-#| fig-alt: A jamovi results table titled 'Estimated Marginal Means - Task' shows the mean, standard error, and 95% confidence intervals for three tasks:- Speech (Mean:- 7.17, SE:- 0.60, CI:- 5.62-8.71), Conceptual (Mean:- 6.17, SE:- 0.60, CI:- 4.62-7.71), and Syntax (Mean:- 4.33, SE:- 0.67, CI:- 2.62-6.05).
+#| fig-alt: A jamovi results table titled 'Estimated Marginal Means - Task' shows the mean, standard error, and 95% confidence intervals for three tasks:- Speech (Mean:- 7.17, SE:- 0.60, CI:- 5.62-8.71), Conceptual (Mean:- 6.17, SE:- 0.60, CI:- 4.62-7.71), and Syntax (Mean:- 4.33, SE:- 0.67, CI:- 2.62-6.05)
+#| fig-pos: 'H'
 knitr::include_graphics("images/fig13-13.png")
 ```
 

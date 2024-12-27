@@ -79,10 +79,17 @@ huxtabs[[7]][[1]]
 
 Notice that at the start of the sequence the *proportion* of heads fluctuates wildly, starting at $.00$ and rising as high as $.80$. Later on, one gets the impression that it dampens out a bit, with more and more of the values actually being pretty close to the "right" answer of $.50$. This is the frequentist definition of probability in a nutshell. Flip a fair coin over and over again, and as $N$ grows large (approaches infinity, denoted $N \rightarrow \infty$ ) the proportion of heads will converge to 50%. There are some subtle technicalities that the mathematicians care about, but qualitatively speaking that's how the frequentists define probability. Unfortunately, I don't have an infinite number of coins or the infinite patience required to flip a coin an infinite number of times. However, I do have a computer and computers excel at mindless repetitive tasks. So I asked my computer to simulate flipping a coin 1000 times and then drew a picture of what happens to the proportion $\frac{N_H}{N}$ as $N$ increases. Actually, I did it four times just to make sure it wasn't a fluke. The results are shown in @fig-fig7-1. As you can see, the proportion of observed heads eventually stops fluctuating and settles down. When it does, the number at which it finally settles is the true probability of heads.
 
-```{r}
+The frequentist definition of probability has some desirable characteristics. First, it is objective. The probability of an event is *necessarily* grounded in the world. The only way that probability statements can make sense is if they refer to (a sequence of) events that occur in the physical universe.[^07-introduction-to-probability-1] Secondly, it is unambiguous. Any two people watching the same sequence of events unfold, trying to calculate the probability of an event, must inevitably come up with the same answer.
+
+[^07-introduction-to-probability-1]: This doesn't mean that frequentists can't make hypothetical statements, of course. It's just that if you want to make a statement about probability then it must be possible to redescribe that statement in terms of a sequence of potentially observable events, together with the relative frequencies of different outcomes that appear within that sequence.
+
+However, it also has undesirable characteristics. Infinite sequences don't really exist in the physical world. Suppose you picked up a coin from your pocket and started to flip it. Every time it lands it impacts on the ground and each impact wears the coin down a bit. Eventually the coin will be destroyed. So, one might ask whether it really makes sense to pretend that an "infinite" sequence of coin flips is even a meaningful concept, or an objective one. We can't say that an "infinite sequence" of events is a real thing in the physical universe, because the physical universe doesn't allow infinite anything. More seriously, the frequentist definition has a narrow scope. There are lots of things out there that human beings are happy to assign probability to in everyday language, but cannot (even in theory) be mapped onto a hypothetical sequence of events. For instance, if a meteorologist comes on TV and says "the probability of rain in Adelaide on 2 November 2048 is 60%" we humans are happy to accept this. But it's not clear how to define this in frequentist terms. There's only one city of Adelaide, and only one 2 November 2048. There's no infinite sequence of events here, just a one-off thing. 
+
+```{r out.width="90%"}
 #| label: fig-fig7-1
 #| fig-cap: An illustration of how frequentist probability works. If you flip a fair coin over and over again the proportion of heads that you have seen eventually settles down and converges to the true probability of $0.5$. Each panel shows four different simulated experiments. In each case we pretend we flipped a coin $1000$ times and kept track of the proportion of flips that were heads as we went along. Although none of these sequences actually ended up with an exact value of $.5$, if we had extended the experiment for an infinite number of coin flips they would have
-#| fig-alt: Four line plots each showing the proportion of heads versus the number of coin flips, ranging from 0 to 1000 flips. All plots demonstrate convergence towards 0.5 as the number of flips increases, with initial fluctuations stabilizing over time.
+#| fig-alt: Four line plots each showing the proportion of heads versus the number of coin flips, ranging from 0 to 1000 flips. All plots demonstrate convergence towards 0.5 as the number of flips increases, with initial fluctuations stabilizing over time
+#| fig-pos: 'H'
 
 coinflips <- list()
 coinflips <- lapply(1:4, function(i) {
@@ -98,11 +105,7 @@ coinflips <- lapply(1:4, function(i) {
 gridExtra::grid.arrange(grobs = coinflips)
 ```
 
-The frequentist definition of probability has some desirable characteristics. First, it is objective. The probability of an event is *necessarily* grounded in the world. The only way that probability statements can make sense is if they refer to (a sequence of) events that occur in the physical universe.[^07-introduction-to-probability-1] Secondly, it is unambiguous. Any two people watching the same sequence of events unfold, trying to calculate the probability of an event, must inevitably come up with the same answer.
-
-[^07-introduction-to-probability-1]: This doesn't mean that frequentists can't make hypothetical statements, of course. It's just that if you want to make a statement about probability then it must be possible to redescribe that statement in terms of a sequence of potentially observable events, together with the relative frequencies of different outcomes that appear within that sequence.
-
-However, it also has undesirable characteristics. First, infinite sequences don't exist in the physical world. Suppose you picked up a coin from your pocket and started to flip it. Every time it lands it impacts on the ground. Each impact wears the coin down a bit. Eventually the coin will be destroyed. So, one might ask whether it really makes sense to pretend that an "infinite" sequence of coin flips is even a meaningful concept, or an objective one. We can't say that an "infinite sequence" of events is a real thing in the physical universe, because the physical universe doesn't allow infinite anything. More seriously, the frequentist definition has a narrow scope. There are lots of things out there that human beings are happy to assign probability to in everyday language, but cannot (even in theory) be mapped onto a hypothetical sequence of events. For instance, if a meteorologist comes on TV and says "the probability of rain in Adelaide on 2 November 2048 is 60%" we humans are happy to accept this. But it's not clear how to define this in frequentist terms. There's only one city of Adelaide, and only one 2 November 2048. There's no infinite sequence of events here, just a one-off thing. Frequentist probability genuinely *forbids* us from making probability statements about a single event. From the frequentist perspective it will either rain tomorrow or it will not. There is no "probability" that attaches to a single non-repeatable event. Now, it should be said that there are some very clever tricks that frequentists can use to get around this. One possibility is that what the meteorologist means is something like "There is a category of days for which I predict a 60% chance of rain, and if we look only across those days for which I make this prediction, then on 60% of those days it will actually rain". It's very weird and counter-intuitive to think of it this way, but you do see frequentists do this sometimes. And it will come up later in this book (e.g. in @sec-Estimating-a-confidence-interval).
+Frequentist probability genuinely *forbids* us from making probability statements about a single event. From the frequentist perspective it will either rain tomorrow or it will not. There is no "probability" that attaches to a single non-repeatable event. Now, it should be said that there are some very clever tricks that frequentists can use to get around this. One possibility is that what the meteorologist means is something like "There is a category of days for which I predict a 60% chance of rain, and if we look only across those days for which I make this prediction, then on 60% of those days it will actually rain". It's very weird and counter-intuitive to think of it this way, but you do see frequentists do this sometimes. And it will come up later in this book (e.g. in @sec-Estimating-a-confidence-interval).
 
 ### The Bayesian view
 
@@ -144,7 +147,7 @@ huxtabs[[7]][[2]]
 #| label: fig-fig7-2
 #| fig-cap: A visual depiction of the "trousers" probability distribution. There are five "elementary events", corresponding to the five pairs of trousers that I own. Each event has some probability of occurring -- this probability is a number between 0 to 1. The sum of these probabilities is 1
 #| fig-alt: Bar chart showing the probability of different events. Blue jeans have the highest probability at 0.5, followed by grey jeans around 0.3. Black jeans and blue track have the same probability near 0.1, while the black suit has a probability of 0.
-#| fig-pos: 'H'
+#| fig-pos: 'h!'
 #| fig-height: 5
 #| fig-width: 6
 
@@ -214,7 +217,7 @@ ggplot(data=binom1, aes(x = factor(heads), y = pmf)) +
 
 To give you a feel for how the binomial distribution changes when we alter the values of $\theta$ and $N$, let's suppose that instead of rolling dice I'm actually flipping coins. This time around, my experiment involves flipping a fair coin repeatedly and the outcome that I'm interested in is the number of heads that I observe. In this scenario, the success probability is now $\theta = \frac{1}{2}$. Suppose I were to flip the coin $N = 20$ times. In this example, I've changed the success probability but kept the size of the experiment the same. What does this do to our binomial distribution? Well, as @fig-fig7-4 shows, the main effect of this is to shift the whole distribution, as you'd expect. Okay, what if we flipped a coin $N = 100$ times? Well, in that case we get @fig-fig7-4 (b). The distribution stays roughly in the middle but there's a bit more variability in the possible outcomes.
 
-```{r out.width="80%"}
+```{r out.width="75%"}
 #| label: fig-fig7-4
 #| fig-height: 8
 #| fig.width: 6
@@ -253,13 +256,9 @@ $$X \sim Normal(\mu,\sigma)$$
 
 [^07-introduction-to-probability-4]: As was the case with the binomial distribution, I have included the formula for the normal distribution in this book, because I think it's important enough that everyone who learns statistics should at least look at it, but since this is an introductory text I don't want to focus on it, so I've tucked it away in this footnote: $$p(X|\mu, \sigma) = \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(X-\mu)^2}{2\sigma^2}}$$
 
-Let's try to get a sense for what it means for a variable to be normally distributed. To that end, have a look at @fig-fig7-5 which plots a normal distribution with mean $\mu = 0$ and standard deviation $\sigma = 1$. You can see where the name "bell curve" comes from; it looks a bit like a bell. Notice that, unlike the plots that I drew to illustrate the binomial distribution, the picture of the normal distribution in @fig-fig7-5 shows a smooth curve instead of "histogram-like" bars. This isn't an arbitrary choice, the normal distribution is continuous whereas the binomial is discrete.[^07-introduction-to-probability-4a] For instance, in the die rolling example from the last section it was possible to get 3 skulls or 4 skulls, but impossible to get 3.9 skulls. The figures that I drew in the previous section reflected this fact. In @fig-fig7-3, for instance, there's a bar located at $X = 3$ and another one at $X = 4$ but there's nothing in between. Continuous quantities don't have this constraint. For instance, suppose we're talking about the weather. The temperature on a pleasant Spring day could be 23 degrees, 24 degrees, 23.9 degrees, or anything in between since temperature is a continuous variable. And so a normal distribution might be quite appropriate for describing Spring temperatures.[^07-introduction-to-probability-5]
+Let's try to get a sense for what it means for a variable to be normally distributed. To that end, have a look at @fig-fig7-5 which plots a normal distribution with mean $\mu = 0$ and standard deviation $\sigma = 1$. 
 
-[^07-introduction-to-probability-4a]: There is a subtle and somewhat frustrating characteristic of continuous distributions that makes the y-axis behave a bit oddly - the height of the curve here is not actually the probability of observing a particular $x$ value. On the other hand, it is true that the heights of the curve tells you which $x$ values are more likely (the higher ones!). (see [Probability density] section for all the annoying details)
-
-[^07-introduction-to-probability-5]: In practice, the normal distribution is so handy that people tend to use it even when the variable isn't actually continuous. As long as there are enough categories (e.g., Likert-scale responses to a questionnaire), it's pretty standard practice to use the normal distribution as an approximation. This works out much better in practice than you'd think.
-
-```{r out.width="80%"}
+```{r out.width="70%"}
 #| label: fig-fig7-5
 #| fig-cap: The normal distribution with mean $\mu = 0$ and standard deviation $\sigma = 1$. The x-axis corresponds to the value of some variable, and the y-axis tells us something about how likely we are to observe that value. However, notice that the y-axis is labelled *Probability Density* and not *Probability*
 #| fig-alt: A line graph displaying a bell-shaped curve, representing a normal distribution. The x-axis is labeled "Observed Value," ranging from -3 to 3, and the y-axis is labeled "Probability Density," ranging from 0.0 to 0.4. The peak of the curve is at 0
@@ -274,7 +273,13 @@ ggplot(data = data.frame(x = seq(-3, 3, 1)), aes(x)) +
 
 ```
 
-With this in mind, let's see if we can't get an intuition for how the normal distribution works. First, let's have a look at what happens when we play around with the parameters of the distribution. To that end, @fig-fig7-6 plots normal distributions that have different means but have the same standard deviation. As you might expect, all of these distributions have the same "width". The only difference between them is that they've been shifted to the left or to the right. In every other respect they're identical. In contrast, if we increase the standard deviation while keeping the mean constant, the peak of the distribution stays in the same place but the distribution gets wider, as you can see in @fig-fig7-7. Notice, though, that when we widen the distribution the height of the peak shrinks. This has to happen, in the same way that the heights of the bars that we used to draw a discrete binomial distribution have to sum to 1, the total area under the curve for the normal distribution must equal 1. Before moving on, I want to point out one important characteristic of the normal distribution. Irrespective of what the actual mean and standard deviation are, $68.3\%$ of the area falls within 1 standard deviation of the mean. Similarly, $95.4\%$ of the distribution falls within 2 standard deviations of the mean, and $(99.7\%)$ of the distribution is within 3 standard deviations. This idea is illustrated in @fig-fig7-8; see also @fig-fig7-9.
+You can see where the name "bell curve" comes from; it looks a bit like a bell. Notice that, unlike the plots that I drew to illustrate the binomial distribution, the picture of the normal distribution in @fig-fig7-5 shows a smooth curve instead of "histogram-like" bars. This isn't an arbitrary choice, the normal distribution is continuous whereas the binomial is discrete.[^07-introduction-to-probability-4a] For instance, in the die rolling example from the last section it was possible to get 3 skulls or 4 skulls, but impossible to get 3.9 skulls. The figures that I drew in the previous section reflected this fact. In @fig-fig7-3, for instance, there's a bar located at $X = 3$ and another one at $X = 4$ but there's nothing in between. Continuous quantities don't have this constraint. For instance, suppose we're talking about the weather. The temperature on a pleasant Spring day could be 23 degrees, 24 degrees, 23.9 degrees, or anything in between since temperature is a continuous variable. And so a normal distribution might be quite appropriate for describing Spring temperatures.[^07-introduction-to-probability-5]
+
+[^07-introduction-to-probability-4a]: There is a subtle and somewhat frustrating characteristic of continuous distributions that makes the y-axis behave a bit oddly - the height of the curve here is not actually the probability of observing a particular $x$ value. On the other hand, it is true that the heights of the curve tells you which $x$ values are more likely (the higher ones!). (see [Probability density] section for all the annoying details)
+
+[^07-introduction-to-probability-5]: In practice, the normal distribution is so handy that people tend to use it even when the variable isn't actually continuous. As long as there are enough categories (e.g., Likert-scale responses to a questionnaire), it's pretty standard practice to use the normal distribution as an approximation. This works out much better in practice than you'd think.
+
+With this in mind, let's see if we can't get an intuition for how the normal distribution works. First, let's have a look at what happens when we play around with the parameters of the distribution. To that end, @fig-fig7-6 plots normal distributions that have different means but have the same standard deviation. As you might expect, all of these distributions have the same "width". The only difference between them is that they've been shifted to the left or to the right. In every other respect they're identical. In contrast, if we increase the standard deviation while keeping the mean constant, the peak of the distribution stays in the same place but the distribution gets wider, as you can see in @fig-fig7-7. Notice, though, that when we widen the distribution the height of the peak shrinks. This has to happen, in the same way that the heights of the bars that we used to draw a discrete binomial distribution have to sum to 1, the total area under the curve for the normal distribution must equal 1. 
 
 ```{r out.width="80%"}
 #| label: fig-fig7-6
@@ -385,6 +390,8 @@ p4 <- ggplot(data = data.frame(x = seq(-4, 4, 1)), aes(x)) +
 gridExtra::grid.arrange(p3,p4, ncol=2)
 ```
 
+Before moving on, I want to point out one important characteristic of the normal distribution. Irrespective of what the actual mean and standard deviation are, $68.3\%$ of the area falls within 1 standard deviation of the mean. Similarly, $95.4\%$ of the distribution falls within 2 standard deviations of the mean, and $(99.7\%)$ of the distribution is within 3 standard deviations. This idea is illustrated in @fig-fig7-8; see also @fig-fig7-9.
+
 ### Probability density
 
 There's something I've been trying to hide throughout my discussion of the normal distribution, something that some introductory textbooks omit completely. They might be right to do so. This "thing" that I'm hiding is weird and counter-intuitive even by the admittedly distorted standards that apply in statistics. Fortunately, it's not something that you need to understand at a deep level in order to do basic statistics. Rather, it's something that starts to become important later on when you move beyond the basics. So, if it doesn't make complete sense, don't worry too much, but try to make sure that you follow the gist of it.
@@ -422,7 +429,7 @@ ggplot(data = data.frame(x = seq(-4, 4, 1)), aes(x)) +
 ```
 
 
-```{r out.width="80%"}
+```{r out.width="85%"}
 #| label: fig-fig7-11
 #| fig-cap: $\chi^2$ distribution with 3 degrees of freedom. Notice that the observed values must always be greater than zero, and that the distribution is pretty skewed. These are the key features of a chi-square  distribution
 #| fig-alt: A line graph displays a probability density function with "Observed Value" on the x-axis (0 to 10) and "Probability Density" on the y-axis (0 to 0.25). The curve peaks near "Observed Value" 1.5 and decreases asymptotically towards the x-axis on both sides
@@ -437,7 +444,7 @@ ggplot(data = data.frame(x = seq(0, 10, 1)), aes(x)) +
   xlab("\nObserved Value") 
 ```
 
-```{r out.width="80%"}
+```{r out.width="85%"}
 #| label: fig-fig7-12
 #| fig-cap: An $F$-distribution with 3 and 5 degrees of freedom. Qualitatively speaking, it looks pretty similar to a chi-square distribution, but they are not quite the same in general
 #| fig-alt: A probability density function graph showing a curve that peaks sharply near the y-axis and then gradually decreases, approaching the x-axis as it moves to the right. The x-axis is labeled "Observed Value" and the y-axis is labeled "Probability Density"

@@ -123,24 +123,29 @@ My, my.
 
 ### Mode {#sec-Mode}
 
-The mode of a sample is very simple. It is the value that occurs most frequently. We can illustrate the mode using a different AFL variable: who has played in the most finals? Open the aflsmall finalists file and take a look at the *afl.finalists* variable, see @fig-fig4-5. This variable contains the names of all 400 teams that played in all 200 finals matches played during the period 1987 to 2010.
+The mode of a sample is very simple. It is the value that occurs most frequently. We can illustrate the mode using a different AFL variable: who has played in the most finals? Open the aflsmall finalists file and take a look at the *afl.finalists* variable, see @fig-fig4-5. 
 
-```{r}
+```{r out}
 #| label: fig-fig4-5
 #| fig-cap: A screenshot of jamovi showing the variables stored in the aflsmall_finalists.csv file
 #| fig-alt: A jamovi screenshot of a spreadsheet labeled "AFL Finalists" with 18 rows. The first column lists various Australian Football League teams, including Hawthorn, Melbourne, and Carlton. The jamovi spreadsheet menu shows options like Variables, Data, and Analyses.
 knitr::include_graphics("images/fig4-5.png")
 ```
 
-What we could do is read through all 400 entries and count the number of occasions on which each team name appears in our list of finalists, thereby producing a **frequency table**. However, that would be mindless and boring: exactly the sort of task that computers are great at. So let's use jamovi to do this for us. Under 'Exploration' -- 'Descriptives' click the small check box labelled 'Frequency tables' and you should get something like @fig-fig4-6.
-
 ```{r}
 #| label: fig-fig4-6
 #| classes: .enlarge-image
 #| fig.cap: A screenshot of jamovi showing the frequency table for the *afl.finalists* variable
-#| fig-alt: A jamovi screenshot focusing on analyzing AFL finalists. The left panel includes options to select variables and split data. The right panel displays results -  Descriptives and Frequencies for AFL finalists by region, including percentages.
+#| fig-alt: A jamovi screenshot focusing on analyzing AFL finalists. The left panel includes options to select variables and split data. The right panel displays results -  Descriptives and Frequencies for AFL finalists by region, including percentages
+#| fig-pos: 'H'
 knitr::include_graphics("images/fig4-6.png")
 ```
+
+This variable contains the names of all 400 teams that played in all 200 finals matches played during the period 1987 to 2010. What we could do is read through all 400 entries and count the number of occasions on which each team name appears in our list of finalists, thereby producing a **frequency table**. However, that would be mindless and boring: exactly the sort of task that computers are great at. So let's use jamovi to do this for us. Under 'Exploration' -- 'Descriptives' click the small check box labelled 'Frequency tables' and you should get something like @fig-fig4-6.
+
+Now that we have our frequency table we can just look at it and see that, over the 24 years for which we have data, Geelong has played in more finals than any other team. Thus, the mode of the *afl.finalists* data is "Geelong". We can see that Geelong (39 finals) played in more finals than any other team during the 1987-2010 period. It's also worth noting that in the 'Descriptives' Table no results are calculated for mean, median, minimum or maximum. This is because the *afl.finalists* variable is a nominal text variable so it makes no sense to calculate these values. 
+
+One last point to make regarding the mode. Whilst the mode is most often calculated when you have nominal data, because means and medians are useless for those sorts of variables, there are some situations in which you really do want to know the mode of an ordinal, interval or ratio scale variable. For instance, let's go back to our *afl.margins* variable. This variable is clearly ratio scale (if it's not clear to you, it may help to re-read @sec-Scales-of-measurement), and so in most situations the mean or the median is the measure of central tendency that you want. But consider this scenario: a friend of yours is offering a bet and they pick a football game at random. Without knowing who is playing you have to guess the exact winning margin. If you guess correctly you win \$50. If you don't you lose \$1. There are no consolation prizes for "almost" getting the right answer. You have to guess exactly the right margin. For this bet, the mean and the median are completely useless to you. It is the mode that you should bet on. To calculate the mode for the *afl.margins* variable in jamovi, go back to that data set and on the 'Exploration' -- 'Descriptives' screen you will see you can expand the section marked 'Statistics'. Click on the checkbox marked 'Mode' and you will see the modal value presented in the 'Descriptives' Table, as in @fig-fig4-7. So the 2010 data suggest you should bet on a 3 point margin.
 
 ```{r }
 #| label: fig-fig4-7
@@ -150,10 +155,6 @@ knitr::include_graphics("images/fig4-6.png")
 #| fig-pos: 'h!'
 knitr::include_graphics("images/fig4-7.png")
 ```
-
-Now that we have our frequency table we can just look at it and see that, over the 24 years for which we have data, Geelong has played in more finals than any other team. Thus, the mode of the *afl.finalists* data is "Geelong". We can see that Geelong (39 finals) played in more finals than any other team during the 1987-2010 period. It's also worth noting that in the 'Descriptives' Table no results are calculated for mean, median, minimum or maximum. This is because the *afl.finalists* variable is a nominal text variable so it makes no sense to calculate these values. 
-
-One last point to make regarding the mode. Whilst the mode is most often calculated when you have nominal data, because means and medians are useless for those sorts of variables, there are some situations in which you really do want to know the mode of an ordinal, interval or ratio scale variable. For instance, let's go back to our *afl.margins* variable. This variable is clearly ratio scale (if it's not clear to you, it may help to re-read @sec-Scales-of-measurement), and so in most situations the mean or the median is the measure of central tendency that you want. But consider this scenario: a friend of yours is offering a bet and they pick a football game at random. Without knowing who is playing you have to guess the exact winning margin. If you guess correctly you win \$50. If you don't you lose \$1. There are no consolation prizes for "almost" getting the right answer. You have to guess exactly the right margin. For this bet, the mean and the median are completely useless to you. It is the mode that you should bet on. To calculate the mode for the *afl.margins* variable in jamovi, go back to that data set and on the 'Exploration' -- 'Descriptives' screen you will see you can expand the section marked 'Statistics'. Click on the checkbox marked 'Mode' and you will see the modal value presented in the 'Descriptives' Table, as in @fig-fig4-7. So the 2010 data suggest you should bet on a 3 point margin.
 
 ## Measures of variability {#sec-Measures-of-variability}
 
@@ -173,7 +174,7 @@ The **interquartile range** (IQR) is like the range, but instead of the differen
 
 And not surprisingly, in @fig-fig4-8 the 50th percentile is the same as the median value. And, by noting that $50.50 - 12.75 = 37.75$, we can see that the interquartile range for the 2010 AFL winning margins data is 37.75. While it's obvious how to interpret the range it's a little less obvious how to interpret the IQR. The simplest way to think about it is like this: the interquartile range is the range spanned by the "middle half" of the data. That is, one quarter of the data falls below the 25th percentile and one quarter of the data is above the 75th percentile, leaving the "middle half" of the data lying in between the two. And the IQR is the range covered by that middle half.
 
-```{r out.width="50%"}
+```{r out.width="70%"}
 #| label: fig-fig4-8
 #| fig-width: 5
 #| fig-cap: A screenshot of jamovi showing the Quartiles for the *afl.margins* variable
@@ -228,7 +229,7 @@ That last column contains all of our squared deviations, so all we have to do is
 #| classes: .enlarge-image
 #| fig-cap: A screenshot of jamovi showing the Variance for the first 5 values of the afl.margins variable
 #| fig-alt: A jamovi screenshot displaying descriptive statistics. The interface is divided into sections for selecting variables, splitting data, viewing results, and references. A data table shows the variance and other descriptive statistics like mean, median, standard deviation, etc
-#| fig-pos: 'H'
+#| fig-pos: 'h!'
 knitr::include_graphics("images/fig4-9.png")
 ```
 
@@ -240,7 +241,9 @@ That's just weird -- is jamovi broken? As it happens, the answer is no.[^04-desc
 
 [^04-descriptive-statistics-8]: In other words, the formula that jamovi is using is this one: $$\frac{1}{N-1} \sum_{i=1}^{N} ( X_i - \bar{X} )^2$$
 
-So that's the *what*. The real question is why jamovi is dividing by $N - 1$ and not by $N$. After all, the variance is supposed to be the mean squared deviation, right? So shouldn't we be dividing by N, the actual number of observations in the sample? Well, yes, we should. However, as we'll discuss in @sec-Estimating-unknown-quantities-from-a-sample, there's a subtle distinction between "describing a sample" and "making guesses about the population from which the sample came". Up to this point, it's been a distinction without a difference. Regardless of whether you're describing a sample or drawing inferences about the population, the mean is calculated exactly the same way. Not so for the variance, or the standard deviation, or for many other measures besides. What I outlined to you initially (i.e., take the actual average, and thus divide by $N$) assumes that you literally intend to calculate the variance of the sample. Most of the time, however, you're not terribly interested in the sample in and of itself. Rather, the sample exists to tell you something about the world. If so, you're actually starting to move away from calculating a "sample statistic" and towards the idea of estimating a "population parameter". However, I'm getting ahead of myself. For now, let's just take it on faith that jamovi knows what it's doing, and we'll revisit the question later on when we talk about estimation in @sec-Estimating-unknown-quantities-from-a-sample.
+So that's the *what*. The real question is why jamovi is dividing by $N - 1$ and not by $N$. After all, the variance is supposed to be the mean squared deviation, right? So shouldn't we be dividing by N, the actual number of observations in the sample? Well, yes, we should. However, as we'll discuss in @sec-Estimating-unknown-quantities-from-a-sample, there's a subtle distinction between "describing a sample" and "making guesses about the population from which the sample came". Up to this point, it's been a distinction without a difference. Regardless of whether you're describing a sample or drawing inferences about the population, the mean is calculated exactly the same way. Not so for the variance, or the standard deviation, or for many other measures.
+
+What I outlined to you initially (i.e., take the actual average, and thus divide by $N$) assumes that you literally intend to calculate the variance of the sample. Most of the time, however, you're not terribly interested in the sample in and of itself. Rather, the sample exists to tell you something about the world. If so, you're actually starting to move away from calculating a "sample statistic" and towards the idea of estimating a "population parameter". However, I'm getting ahead of myself. For now, let's just take it on faith that jamovi knows what it's doing, and we'll revisit the question later on when we talk about estimation in @sec-Estimating-unknown-quantities-from-a-sample.
 
 Okay, one last thing. This section so far has read a bit like a mystery novel. I've shown you how to calculate the variance, described the weird "$N - 1$" thing that jamovi does and hinted at the reason why it's there, but I haven't mentioned the single most important thing. How do you interpret the variance? Descriptive statistics are supposed to describe things, after all, and right now the variance is really just a gibberish number. Unfortunately, the reason why I haven't given you the human-friendly interpretation of the variance is that there really isn't one. This is the most serious problem with the variance. Although it has some elegant mathematical properties that suggest that it really is a fundamental quantity for expressing variation, it's completely useless if you want to communicate with an actual human. Variances are completely uninterpretable in terms of the original variable! All the numbers have been squared and they don't mean anything anymore. This is a huge issue. For instance, according to @tbl-tab4-3, the margin in game 1 was "376.36 points-squared higher than the average margin". This is *exactly* as stupid as it sounds, and so when we calculate a variance of $324.64$ we're in the same situation. I've watched a lot of footy games, and at no time has anyone ever referred to "points squared". It's not a real unit of measurement, and since the variance is expressed in terms of this gibberish unit, it is totally meaningless to a human.
 
