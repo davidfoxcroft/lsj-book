@@ -1,13 +1,34 @@
-\usepackage{makeidx}
-\makeindex
-\usepackage{titling}
+%\usepackage{makeidx}
 \usepackage{pdfpages}
-\usepackage{atbegshi}% http://ctan.org/pkg/atbegshi
+
+\usepackage{titling}
 \let\oldmaketitle\maketitle
+
+\usepackage{atbegshi}% http://ctan.org/pkg/atbegshi
 \AtBeginDocument{\let\maketitle\relax}
 \AtBeginDocument{\AtBeginShipoutNext{\AtBeginShipoutDiscard}} % Discard next blank page
 
+\usepackage{tocloft}
+\cftsetindents{section}{2em}{2.5em}
+\cftsetindents{subsection}{5em}{3em}
 
+\usepackage{enotez}
+\DeclareInstance{enotez-list}{section}{paragraph}{heading=\chapter}
+\setenotez{split=chapter,backref=true,list-name=Chapter notes,totoc=chapter}
 
+%define command for adding footnote textbox to first page of each chapter
+\newcommand{\placetextbox}[3]{% \placetextbox{<horizontal pos>}{<vertical pos>}{<stuff>}
+  \setbox0=\hbox{#3}% Put <stuff> in a box
+  \AddToShipoutPictureFG*{% Add <stuff> to current page foreground
+    \put(\LenToUnit{#1\paperwidth},\LenToUnit{#2\paperheight}){\vtop{{\null}\makebox[0pt][c]{#3}}}%
+  }%
+}%
 
+\makeatletter
+\@beginparpenalty=10000
+\makeatother
+
+\usepackage[labelfont=bf]{caption}
+
+\raggedbottom
 

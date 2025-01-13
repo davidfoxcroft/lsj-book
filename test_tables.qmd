@@ -5,11 +5,81 @@
 
 ```{r tab1-1, results='asis'}
 library(knitr)
+library(xml2)
+library(tinytex)
 library(huxtable)
-testhux <- read_html("html_tables/test_tables.html") %>% 
-  html_table() 
-huxtable::hux(testhux)  %>% 
-  huxtable::set_escape_contents(FALSE)
+library(dplyr)
+library(janitor)
+library(rvest)
+library(magrittr)
+library(tidyr)
+library(ggplot2)
+library(knitr)
+library(gt)
+
+
+lsj_chapter_tables <- readRDS("data_and_tables/lsj_chapter_tables.rds")
+x <- as.data.frame(lsj_chapter_tables[[1]][[1]])
+str(x)
+
+
+x |>
+  rename("T1" = 1 ) |> 
+  gt() |>
+  cols_label(T1 = "")
+
+
+rownames(x) <- x[,1]
+str(x)
+
+##### gt defaults and function ----
+
+# create gt table
+gtthattibble <- function(x) {
+  { if (names(x[1]) == "X1") 
+    ( gt(x) %>% 
+          row_to_names(1) %>%
+          set_header_rows(1, TRUE))
+    else ( gt(x) %>% 
+             set_contents(1, value = names(x)) ) 
+   } %>%
+  { if (knitr::is_latex_output()) 
+    (set_escape_contents(., everywhere, value = FALSE)) 
+    else (set_escape_contents(., everywhere, value = TRUE))
+  } %>% 
+  set_align(everywhere, everywhere, "center") %>% 
+  set_top_padding(everywhere, everywhere, 2 ) %>%
+  set_bottom_padding(everywhere, everywhere, 2 ) %>%
+  set_left_padding(everywhere, everywhere, 12 ) %>%
+  set_right_padding(everywhere, everywhere, 12 ) %>%
+  set_width(0.9) %>% 
+  set_caption_pos("bottomleft") %>% 
+  theme_article() #%>% 
+  #set_background_color(odds, everywhere, "grey95")
+}
+
+# Recursively apply function to all data frames in a nested list
+dfrapply <- function(object, f, ...) {
+  if (inherits(object, "data.frame")) {
+    return(f(object, ...))
+  }
+  if (inherits(object, "list")) {
+    return(lapply(object, function(x) dfrapply(x, f, ...)))
+  }
+  stop("List element must be either a data frame or another list")
+}
+
+#lsj_chapter_tables <- readRDS("lsj_chapter_tables.rds")
+huxtabs <- dfrapply(lsj_chapter_tables, huxthattibble)
+saveRDS(huxtabs, "data_and_tables/lsj_chapter_huxtabs.rds")
+#huxtabs <- readRDS("data_and_tables/lsj_chapter_huxtabs.rds")
+
+
+
+
+
+
+
 ```
 
 

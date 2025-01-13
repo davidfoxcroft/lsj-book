@@ -1,8 +1,12 @@
+\placetextbox{0.26}{0.06}{\scriptsize{©2025 D.R. Foxcroft and D.J. Navarro,}}
+\placetextbox{0.195}{0.05}{\scriptsize{CC BY-SA 4.0}}
+\placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333.05}}}
+
 # Drawing graphs {#sec-Drawing-graphs}
 
 ```{r}
 #| include: FALSE
-source("header.R")
+source("chapter_header.R")
 ```
 
 > *Above all else show the data.*\
@@ -10,17 +14,17 @@ source("header.R")
 
 [^drawing-graphs-1]: The origin of this quote is Tufte's lovely book *The Visual Display of Quantitative Information.*
 
-Visualising data is one of the most important tasks facing the data analyst. It's important for two distinct but closely related reasons. Firstly, there's the matter of drawing "presentation graphics", displaying your data in a clean, visually appealing fashion makes it easier for your reader to understand what you're trying to tell them. Equally important, perhaps even more important, is the fact that drawing graphs helps you to understand the data. To that end, it's important to draw "exploratory graphics" that help you learn about the data as you go about analysing it. These points might seem pretty obvious but I cannot count the number of times I've seen people forget them.
+Visualising data is one of the most important tasks facing the data analyst. It's important for two reasons. First, for drawing "presentation graphics" -- displaying data in a clean, visually appealing way makes it easier for readers to understand what you're trying to tell them. Second, and perhaps more important, is that drawing graphs helps you to understand the data. To that end it's important that "exploratory graphics" help you learn about the data as part of your analysis. 
 
-To give a sense of the importance of this chapter, I want to start with a classic illustration of just how powerful a good graph can be. To that end, @fig-fig5-1 shows a redrawing of one of the most famous data visualisations of all time. This is John Snow's 1854 map of cholera deaths. The map is elegant in its simplicity. In the background we have a street map which helps orient the viewer. Over the top we see a large number of small dots, each one representing the location of a cholera case. The larger symbols show the location of water pumps, labelled by name. Even the most casual inspection of the graph makes it very clear that the source of the outbreak is almost certainly the Broad Street pump. Upon viewing this graph Dr Snow arranged to have the handle removed from the pump and ended the outbreak that had killed over 500 people. Such is the power of a good data visualisation.
+To give a sense of the importance of this chapter, I'll start with a classic illustration of just how powerful a good graph can be. @fig-fig5-1 is a redrawing of one of the most famous data visualisations of all time -- John Snow's 1854 map of cholera deaths. The map is elegant in its simplicity. A street map helps orient the viewer, overlayed with a large number of small squares, each one representing the location of a cholera case. The larger dots show the location of water pumps, labelled by name. Even the most casual inspection of the graph makes it clear that the source of the outbreak is almost certainly the Broad Street pump. Upon viewing this graph Dr Snow arranged to have the handle removed from the pump, thus ending the outbreak that had killed over 500 people. Such is the power of a good data visualisation.
 
-The goals in this chapter are twofold. First, to discuss several fairly standard graphs that we use a lot when analysing and presenting data, and second to show you how to create these graphs in jamovi. The graphs themselves tend to be pretty straightforward, so in one respect this chapter is pretty simple. Where people usually struggle is learning how to produce graphs, and especially learning how to produce good graphs. Fortunately, learning how to draw graphs in jamovi is reasonably simple as long as you're not too picky about what your graph looks like. What I mean when I say this is that jamovi has a lot of very good default graphs, or plots, that most of the time produce a clean, high-quality graphic. However, on those occasions when you do want to do something non-standard, or if you need to make highly specific changes to the figure, then the graphics functionality in jamovi is not yet capable of supporting advanced work or detail editing.
+There are two goals in this chapter. First, to discuss several fairly standard graphs that we use a lot when analysing and presenting data, and second to show you how to create these graphs in jamovi. The graphs themselves tend to be pretty straightforward, so in one respect this chapter is pretty simple. Where people usually struggle is learning how to produce graphs, and especially learning how to produce good graphs. Fortunately, learning how to draw graphs in jamovi is reasonably simple as long as you're not too picky about what your graph looks like. What I mean when I say this is that jamovi has a lot of very good default graphs, or plots, that most of the time produce a clean, high-quality graphic. However, on those occasions when you do want to do something non-standard, or if you need to make highly specific changes to the figure, then the graphics functionality in jamovi is not yet capable of supporting advanced work or detail editing.
 
 ```{r}
 #| label: fig-fig5-1
 #| fig.dim:  c(12, 9)
 #| out.width: 100%
-#| fig-cap: A stylised redrawing of John Snow’s original cholera map. Each small orange square represents the location of a cholera death and each blue circle shows the location of a water pump. As the plot makes clear, the cholera outbreak is centred very closely on the Broad St pump
+#| fig-cap: A stylised redrawing of John Snow’s original cholera map of London. Each small orange square represents the location of a cholera death and each blue circle shows the location of a water pump. As the plot makes clear, the cholera outbreak is centred very closely on the Broad St pump
 #| fig-alt: A map titled "Snow's cholera map of London" shows orange squares indicating cholera cases clustered around Broad St. Blue dots denote locations of water pumps, including Castle St, Oxford St, Gt Marlborough, Crown Chapel, and others.
 
 library(HistData)
@@ -48,7 +52,7 @@ themeval = theme(panel.border = element_blank(),
 ggplot() +
   geom_path(data=streets,aes(x=x, y=y, group = street), color="grey") +
   geom_pointdensity(data=deaths,aes(x=x, y=y), color="orange", shape=15, size=2, adjust=0.1) +
-  geom_pointdensity(data=pumps, aes(x=x, y=y), color=blueshade, shape=16, size=3, adjust=0.1) +
+  geom_pointdensity(data=pumps, aes(x=x, y=y), color=blueshade, shape=16, size=4, adjust=0.1) +
   geom_text(data=pumps, aes(x=x, y=y, label=label), size=3, nudge_x = -0.5, nudge_y = 0.5, check_overlap = F) +
   geom_segment(aes(x = 3.5, y = 20.5, xend = 7.5, yend = 20.5), color="grey50") +
   geom_segment(aes(x = 3.5, y = 20.3, xend = 3.5, yend = 20.7), color="grey50") +
@@ -57,16 +61,14 @@ ggplot() +
   geom_segment(aes(x = 6.5, y = 20.3, xend = 6.5, yend = 20.7), color="grey50") +
   geom_segment(aes(x = 7.5, y = 20.3, xend = 7.5, yend = 20.7), color="grey50") +
   annotate(geom="text", x=9.9, y=20.5, label="100 metres", color="grey50") +
-  ggtitle("Snow's cholera map of London") +
-  theme(plot.title = element_text(hjust = 0.5)) +
+   theme(plot.title = element_text(hjust = 0.5)) +
   coord_fixed() +
-  theme_bw() +
   themeval
 ```
 
 ## Histograms {#sec-Histograms}
 
-Let's begin with the humble **histogram**. Histograms are one of the simplest and most useful ways of visualising data. They make most sense when you have an interval or ratio scale variable (e.g., the *afl.margins* data from @sec-Descriptive-statistics and what you want to do is get an overall impression of the variable. Most of you probably know how histograms work, since they're so widely used, but for the sake of completeness I'll describe them. All you do is divide up the possible values into **bins** and then count the number of observations that fall within each bin. This count is referred to as the frequency or density of the bin and is displayed as a vertical bar. Ihe AFL winning margins data there are 33 games in which the winning margin was less than 10 points and it is this fact that is represented by the height of the leftmost bar that we showed earlier in @sec-Descriptive-statistics, @fig-fig4-2. With these earlier graphs we used an advanced plotting package in R which, for now, is beyond the capability of jamovi. But jamovi gets us close, and drawing this histogram in jamovi is pretty straightforward. Open up the 'plots' options under 'Exploration' - 'Descriptives' and click the 'histogram' check box, as in @fig-fig5-1. jamovi defaults to labelling the y-axis as 'density' and the x-axis with the variable name. The **bins** are selected automatically, and there is no scale, or count, information on the y-axis unlike the previous @fig-fig4-2. But this does not matter too much because after all what we are really interested in is our impression of the shape of the distribution: is it normally distributed or is there a skew or kurtosis? Our first impressions of these characteristics come from drawing a **histogram**.
+Let's begin with the humble **histogram**. Histograms are one of the simplest and most useful ways of visualising data. They make most sense when you have an interval or ratio scale variable (e.g., the *afl.margins* data from @sec-Descriptive-statistics) and you want to get an overall impression of the variable. Most of you probably know how histograms work, since they're so widely used, but for the sake of completeness I'll describe them. All you do is divide up the possible values into **bins** and then count the number of observations that fall within each bin. This count is referred to as the frequency or density of the bin and is displayed as a vertical bar. In the AFL winning margins data there are 33 games in which the winning margin was less than 10 points and it is this fact that is represented by the height of the leftmost bar that we showed earlier in @sec-Descriptive-statistics, @fig-fig4-2. With these earlier graphs we used an advanced plotting package in R which, for now, is beyond the capability of jamovi. But jamovi gets us close, and drawing this histogram in jamovi is pretty straightforward. Open up the 'plots' options under 'Exploration' -- 'Descriptives' and click the 'histogram' check box, as in @fig-fig5-2. jamovi defaults to labelling the y-axis as 'density' and the x-axis with the variable name. The **bins** are selected automatically, and there is no scale, or count, information on the y-axis unlike the previous @fig-fig4-2. But this does not matter too much because after all what we are really interested in is our impression of the shape of the distribution: is it normally distributed or is there a skew or kurtosis? Our first impressions of these characteristics come from drawing a **histogram**.
 
 ```{r}
 #| label: fig-fig5-2
@@ -78,11 +80,13 @@ knitr::include_graphics("images/fig5-2.png")
 
 One additional feature that jamovi provides is the ability to plot a 'Density' curve. You can do this by clicking the 'Density' check box under the 'Plots' options (and unchecking 'Histogram'), and this gives us the plot shown in @fig-fig5-3. A density plot visualises the distribution of data over a continuous interval or time period. This chart is a variation of a histogram that uses **kernel smoothing** to plot values, allowing for smoother distributions by smoothing out the noise. The peaks of a density plot help display where values are concentrated over the interval. An advantage density plots have over histograms is that they are better at determining the distribution shape because they're not affected by the number of bins used (each bar used in a typical histogram). A histogram comprising of only 4 bins wouldn't produce a distinguishable enough shape of distribution as a 20-bin histogram would. However, with density plots, this isn't an issue.
 
-```{r}
+```{r  out.width="70%"}
 #| label: fig-fig5-3
 #| fig-cap: A density plot of the *afl.margins* variable plotted in jamovi
-#| fig-alt: A density plot with a shaded area in light blue, depicting the distribution of AFL margins. The x-axis is labeled "afl.margins" and ranges from 0 to 120. The y-axis is labeled "density" and shows frequency. The peak of the graph peak is near the lower values of afl.margins.
+#| fig-alt: A density plot with a shaded area in light blue, depicting the distribution of AFL margins. The x-axis is labeled "afl.margins" and ranges from 0 to 120. The y-axis is labeled "density" and shows frequency. The peak of the graph peak is near the lower values of afl.margins
+#| fig-pos: 'H'
 knitr::include_graphics("images/fig5-3.png")
+
 ```
 
 Although this image would need a lot of cleaning up in order to make a good presentation graphic (i.e., one you'd include in a report), it nevertheless does a pretty good job of describing the data. In fact, the big strength of a histogram or density plot is that (properly used) it does show the entire spread of the data, so you can get a pretty good sense about what it looks like. The downside to histograms is that they aren't very compact. Unlike some of the other plots I'll talk about it's hard to cram 20-30 histograms into a single image without overwhelming the viewer. And of course, if your data are nominal scale then histograms are useless.
@@ -91,36 +95,42 @@ Although this image would need a lot of cleaning up in order to make a good pres
 
 Another alternative to histograms is a **boxplot**, sometimes called a "box and whiskers" plot. Like histograms they're most suited to interval or ratio scale data. The idea behind a boxplot is to provide a simple visual depiction of the median, the interquartile range, and the range of the data. And because they do so in a fairly compact way boxplots have become a very popular statistical graphic, especially during the exploratory stage of data analysis when you're trying to understand the data yourself. Let's have a look at how they work, again using the *afl.margins* data as our example.
 
-```{r}
+The easiest way to describe what a boxplot looks like is just to draw one. Click on the 'Box plot' check box and you will get the plot shown in @fig-fig5-4. jamovi has drawn the most basic boxplot possible. 
+
+```{r out.width="70%"}
 #| label: fig-fig5-4
 #| fig-cap: A box plot of the *afl.margins* variable plotted in jamovi
-#| fig-alt: A box plot representing "afl.margins." The box ranges from approximately 20 to 40, with a median at 30. The whiskers extend from around 0 to 90. Two outliers are labeled at values 46 and 163.
+#| fig-alt: A box plot representing "afl.margins." The box ranges from approximately 20 to 40, with a median at 30. The whiskers extend from around 0 to 90. Two outliers are labeled at values 46 and 163
+#| fig-pos: 'H'
 knitr::include_graphics("images/fig5-4.png")
 ```
 
-The easiest way to describe what a boxplot looks like is just to draw one. Click on the 'Box plot' check box and you will get the plot shown on the lower right of @fig-fig5-4. jamovi has drawn the most basic boxplot possible. When you look at this plot this is how you should interpret it: the thick line in the middle of the box is the median; the box itself spans the range from the 25th percentile to the 75th percentile; and the "whiskers" go out to the most extreme data point that doesn't exceed a certain bound. By default, this value is 1.5 times the interquartile range (IQR), calculated as 25th percentile - (1.5\*IQR) for the lower boundary, and 75th percentile + (1.5\*IQR) for the upper boundary. Any observation whose value falls outside this range is plotted as a circle or dot instead of being covered by the whiskers, and is commonly referred to as an **outlier**. For our *AFL margins* data there are two observations that fall outside this range, and these observations are plotted as dots (the upper boundary is 107, and looking over the data column in the spreadsheet there are two observations with values higher than this, 108 and 116, so these are the dots).
+When you look at this plot this is how you should interpret it: the thick line in the middle of the box is the median; the box itself spans the range from the 25th percentile to the 75th percentile; and the "whiskers" go out to the most extreme data point that doesn't exceed a certain bound. By default, this value is 1.5 times the interquartile range (IQR), calculated as 25th percentile $- (1.5 \times IQR)$ for the lower boundary, and 75th percentile $+ (1.5 \times IQR)$ for the upper boundary. Any observation whose value falls outside this range is plotted as a circle or dot instead of being covered by the whiskers, and is commonly referred to as an **outlier**. For our *afl.margins* data there are two observations that fall outside this range, and these observations are plotted as dots (the upper boundary is 107, and looking over the data column in the spreadsheet there are two observations with values higher than this, 46 and 163, so these are the dots).
 
 ### Violin plots
 
-```{r}
+A variation to the traditional box plot is the violin plot. Violin plots are similar to box plots except that they also show the kernel probability density of the data at different values. Typically, violin plots will include a marker for the median of the data and a box indicating the interquartile range, as in standard box plots. In jamovi you can achieve this sort of functionality by checking both the 'Violin' and the 'Box plot' check boxes. See @fig-fig5-5, which also has the 'Data' check box turned on to show the actual data points on the plot. This does tend to make the graph a bit too busy though, in my opinion. Clarity is simplicity, so in practice it might be better to just use a simple box plot.
+
+```{r out.width="70%"}
 #| label: fig-fig5-5
 #| fig-cap: A violin plot of the *afl.margins* variable plotted in jamovi, also showing a box plot and data points
-#| fig-alt: A violin plot depicting the distribution of AFL margins. The plot includes a box plot within it, showing median, quartiles, and outliers as points. The y-axis ranges from 0 to 120, indicating the margin values.
+#| fig-alt: A violin plot depicting the distribution of AFL margins. The plot includes a box plot within it, showing median, quartiles, and outliers as points. The y-axis ranges from 0 to 120, indicating the margin values
+#| fig-pos: 'h!'
 knitr::include_graphics("images/fig5-5.png")
 ```
 
-A variation to the traditional box plot is the violin plot. Violin plots are similar to box plots except that they also show the kernel probability density of the data at different values. Typically, violin plots will include a marker for the median of the data and a box indicating the interquartile range, as in standard box plots. In jamovi you can achieve this sort of functionality by checking both the 'Violin' and the 'Box plot' check boxes. See @fig-fig5-5, which also has the 'Data' check box turned on to show the actual data points on the plot. This does tend to make the graph a bit too busy though, in my opinion. Clarity is simplicity, so in practice it might be better to just use a simple box plot.
+\
 
-### Drawing multiple boxplots
-
-One last thing. What if you want to draw multiple boxplots at once? Suppose, for instance, I wanted separate boxplots showing the *AFL margins* not just for 2010 but for every year between 1987 and 2010. To do that the first thing we'll have to do is find the data. These are stored in the **aflmarginbyyear.csv** file. So let's load it into jamovi and see what is in it. You will see that it is a pretty big data set. It contains 4296 games and the variables that we're interested in. What we want to do is have jamovi draw boxplots for the margin variable, but plotted separately for each year. The way to do this is to move the year variable across into the 'Split by' box, as in @fig-fig5-6.
-
-```{r}
+```{r out.width="80%"}
 #| label: fig-fig5-6
 #| fig-cap: jamovi screen shot showing the ‘Split by’ window
 #| fig-alt: A jamovi screenshot displaying a statistical analysis interface titled "AFL Margins By Year." The interface shows options for Descriptives, with a margin variable and a year split. The menu includes tabs for Variables, Data, Analyses, and Edit, with various statistical tests.
 knitr::include_graphics("images/fig5-6.png")
 ```
+
+### Drawing multiple boxplots
+
+One last thing. What if you want to draw multiple boxplots at once? Suppose, for instance, I wanted separate boxplots showing the *afl.margins* not just for 2010 but for every year between 1987 and 2010. To do that the first thing we'll have to do is find the data. These are stored in the **aflmarginbyyear.csv** file. So let's load it into jamovi and see what is in it. You will see that it is a pretty big data set. It contains 4296 games and the variables that we're interested in. What we want to do is have jamovi draw boxplots for the margin variable, but plotted separately for each year. The way to do this is to move the year variable across into the 'Split by' box, as in @fig-fig5-6.
 
 The result is shown in @fig-fig5-7. This version of the box plot, split by year, gives a sense of why it's sometimes useful to choose box plots instead of histograms. It's possible to get a good sense of what the data look like from year to year without getting overwhelmed with too much detail. Now imagine what would have happened if I'd tried to cram 24 histograms into this space: no chance at all that the reader is going to learn anything useful.
 
@@ -135,31 +145,34 @@ knitr::include_graphics("images/fig5-7.png")
 
 ### Using box plots to detect outliers {#sec-Using-box-plots-to-detect-outliers}
 
-Because the boxplot automatically separates out those observations that lie outside a certain range, depicting them with a dot in jamovi, people often use them as an informal method for detecting **outliers**: observations that are "suspiciously" distant from the rest of the data. Here's an example. Suppose that I'd drawn the boxplot for the *AFL margins* data and it came up looking like @fig-fig5-8. It's pretty clear that something funny is going on with two of the observations. Apparently, there were two games in which the margin was over 300 points![^drawing-graphs-1a] That doesn't sound right to me. Now that I've become suspicious it's time to look a bit more closely at the data. In jamovi you can quickly find out which of these observations are suspicious and then you can go back to the raw data to see if there has been a mistake in data entry. One way to do this is to tell jamovi to label the outliers, by checking the box next to the Box plot check box. This adds a row number label next to the outlier in the boxplot, so you can go look at that row and find the extreme value. Another, more flexible way, is to set up a filter so that only those observations with values over a certain threshold are included. In our example, the threshold is over 300, so that is the filter we will create. First, click on the 'Filters' button at the top of the jamovi window, and then type 'margin \> 300' into the filter field, as in @fig-fig5-9.
+As the boxplot automatically separates out observations that lie outside a certain range, depicting them with a dot in jamovi, people often use them as an informal method for detecting **outliers**: observations that are "suspiciously" distant from the rest of the data. Here's an example. Suppose that I'd drawn the boxplot for the *afl.margins* data and it came up looking like @fig-fig5-8. It's pretty clear that something funny is going on with two of the observations. Apparently, there were two games in which the margin was over 300 points![^drawing-graphs-1a] That doesn't sound right to me. Now that I've become suspicious it's time to look a bit more closely at the data. In jamovi you can quickly find out which of these observations are suspicious and then you can go back to the raw data to see if there has been a mistake in data entry. One way to do this is to tell jamovi to label the outliers, by checking the box next to the 'Box plot' check box. This adds a row number label next to the outlier in the boxplot, so you can go look at that row and find the extreme value. Another, more flexible way, is to set up a filter so that only those observations with values over a certain threshold are included. In our example, the threshold is over 300, so that is the filter we will create. First, click on the 'Filters' button at the top of the jamovi window, and then type 'margin \> 300' into the filter field, as in @fig-fig5-9.
 
-[^drawing-graphs-1a]: This altered version of the AFL Margins By Year dataset isn't available to open / load into jamovi. I simply changed a couple of the values of margin in the dataset so that they were over 300. You can do this yourself if you want.
-
-```{r}
+```{r out.width="70%"}
 #| label: fig-fig5-8
 #| fig-cap: A boxplot showing two very suspicious outliers!
-#| fig-alt: Box plot of a numerical distribution displaying a median between 50 and 100, with a lower quartile around 25, and an upper quartile around 75. There are several outliers above 100, specifically labeled at 176 and 202. The y-axis is labeled "margin".
+#| fig-alt: Box plot of a numerical distribution displaying a median between 50 and 100, with a lower quartile around 25, and an upper quartile around 75. There are several outliers above 100, specifically labeled at 176 and 202. The y-axis is labeled "margin"
+#| fig-pos: 'h!'
 knitr::include_graphics("images/fig5-8.png")
 ```
 
-This filter creates a new column in the spreadsheet view where only those observations that pass the filter are included. One neat way to quickly identify which observations these are is to tell jamovi to produce a 'Frequency table' (in the 'Exploration' - 'Descriptives' window) for the ID variable (which must be a nominal variable otherwise the Frequency table is not produced). In @fig-fig5-10 you can see that the ID values for the observations where the margin was over 300 are 176 and 202. These are suspicious cases, or observations, where you should go back to the original data source to find out what is going on.
-
-```{r}
+```{r out.width="80%"}
 #| label: fig-fig5-9
 #| fig-cap: The jamovi filter screen
-#| fig-alt: A jamovi screenshot showing a filter setup. The filter is labeled "Filter 1" and the condition is "margin > 300". The window displays options such as Variables, Data, Analyses, and Edit, with icons for actions like Add, Delete, and Compute.
+#| fig-alt: A jamovi screenshot showing a filter setup. The filter is labeled "Filter 1" and the condition is "margin > 300". The window displays options such as Variables, Data, Analyses, and Edit, with icons for actions like Add, Delete, and Compute
+#| fig-pos: 'H'
 knitr::include_graphics("images/fig5-9.png")
 ```
 
-```{r}
+[^drawing-graphs-1a]: This altered version of the AFL Margins By Year data set isn't available to open / load into jamovi. I simply changed a couple of the values of margin in the data set so that they were over 300. You can do this yourself if you want.
+
+This filter creates a new column in the spreadsheet view where only those observations that pass the filter are included. One neat way to quickly identify which observations these are is to tell jamovi to produce a 'Frequency table' (in the 'Exploration' -- 'Descriptives' window) for the ID variable (which must be a nominal variable otherwise the Frequency table is not produced). In @fig-fig5-10 you can see that the ID values for the observations where the margin was over 300 are 176 and 202. These are suspicious cases, or observations, where you should go back to the original data source to find out what is going on.
+
+```{r }
 #| label: fig-fig5-10
 #| classes: .enlarge-image
 #| fig-cap: Frequency table for ID showing the ID numbers for the two suspicious outliers, 176 and 202
 #| fig-alt: A jamovi screenshot displaying descriptive statistics and frequency tables. The left pane shows selected variables with options for splitting data. The right pane displays "Descriptives" and "Frequencies" output for the selected variable "ID", specifically the two suspicious outliers, 176 and 202
+#| fig-pos: 'h!'
 knitr::include_graphics("images/fig5-10.png")
 ```
 
@@ -169,19 +182,20 @@ For less extreme values, even if they are flagged in a a boxplot as outliers, th
 
 ## Bar graphs {#sec-Bar-graphs}
 
-Another form of graph that you often want to plot is the **bar graph**. Let's use the *afl.finalists* data set with the *afl.finalists* variable that I introduced in @sec-Mode. What I want to do is draw a bar graph that displays the number of finals that each team has played in over the time spanned by the *afl.finalists* data set. There are lots of teams, but I am particularly interested in just four: Brisbane, Carlton, Fremantle and Richmond. So the first step is to set up a filter so just those four teams are included in the bar graph. This is straightforward in jamovi and you can do it by using the 'Filters' function that we used previously. Open up the 'Filters' screen and type in the following:
+Another form of graph that you often want to plot is the **bar graph**. Let's use the *afl.finalists* data set with the *afl.finalists* variable that I introduced in @sec-Mode. What I want to do is draw a bar graph that displays the number of finals that each team has played in over the time spanned by the *afl.finalists* data set. There are lots of teams, but I am particularly interested in just four: Brisbane, Carlton, Fremantle and Richmond. So the first step is to set up a filter so just those four teams are included in the bar graph. This is straightforward in jamovi and you can do it by using the 'Filters' function that we used previously. Open up the 'Filters' screen and type in the following exactly as written -- including the single quote marks:
 
-afl.finalists $==$ 'Brisbane' or afl.finalists $==$ 'Carlton' or afl.finalists $==$ 'Fremantle' or afl.finalists $==$ 'Richmond' [^drawing-graphs-2]
+> afl.finalists $==$ 'Brisbane' or afl.finalists $==$ 'Carlton' or afl.finalists $==$ 'Fremantle' or afl.finalists $==$ 'Richmond' [^drawing-graphs-2]
 
 [^drawing-graphs-2]: jamovi uses the symbol "$==$" here to mean "matches".
 
-When you have done this you will see, in the 'Data' view, that jamovi has filtered out all values apart from those we have specified. Next, open up the 'Exploration' - 'Descriptives' window and click on the 'Bar plot' check box (remember to move the 'afl.finalists' variable across into the 'Variables' box so that jamovi knows which variable to use). You should then get a bar graph, something like that shown in @fig-fig5-11.
+When you have done this you will see, in the 'Data' view, that jamovi has filtered out all values apart from those we have specified. Next, open up the 'Exploration' -- 'Descriptives' window and click on the 'Bar plot' check box (remember to move the 'afl.finalists' variable across into the 'Variables' box so that jamovi knows which variable to use). You should then get a bar graph, something like that shown in @fig-fig5-11.
 
-```{r}
+```{r out.width="80%"}
 #| label: fig-fig5-11
 #| classes: .enlarge-image
 #| fig-cap: Filtering to include just four AFL teams, and drawing a bar plot in jamovi
-#| fig-alt: A jamovi screenshot displaying a summary of variables. The main window shows a bar plot titled "afl.finalists" with counts for Brisbane, Carlton, and FremantleRichmond. Descriptive statistics are also listed, including mean, median, and standard deviation. A bar plot is also shown.
+#| fig-alt: A jamovi screenshot displaying a summary of variables. The main window shows a bar plot titled "afl.finalists" with counts for Brisbane, Carlton, and FremantleRichmond. Descriptive statistics are also listed, including mean, median, and standard deviation. A bar plot is also shown
+#| fig-pos: 'h!'
 knitr::include_graphics("images/fig5-11.png")
 ```
 
@@ -191,10 +205,9 @@ Hold on, you might be thinking. What's the good of being able to draw pretty pic
 
 ## Summary
 
-Perhaps I'm a simple minded person, but I love pictures. Every time I write a new scientific paper one of the first things I do is sit down and think about what the pictures will be. In my head an article is really just a sequence of pictures linked together by a story. All the rest of it is just window dressing. What I'm really trying to say here is that the human visual system is a very powerful data analysis tool. Give it the right kind of information and it will supply a human reader with a massive amount of knowledge very quickly. Not for nothing do we have the saying "a picture is worth a thousand words". With that in mind, I think that this is one of the most important chapters in the book. The topics covered were:
+Perhaps I'm a simple-minded person, but I love pictures. Every time I write a new scientific paper one of the first things I do is sit down and think about what the pictures will be. In my head an article is really just a sequence of pictures linked together by a story. All the rest of it is just window dressing. What I'm really trying to say here is that the human visual system is a very powerful data analysis tool. Give it the right kind of information and it will supply a human reader with a massive amount of knowledge very quickly. Not for nothing do we have the saying "a picture is worth a thousand words". With that in mind, I think that this is one of the most important chapters in the book. The topics covered were:
 
--   *Common plots*. Much of the chapter was focused on standard graphs that statisticians like to produce: [Histograms], [Boxplots] and [Bar graphs]
+-   *Common plots*. Much of the chapter was focused on standard graphs that statisticians like to produce: [Histograms], [Boxplots] and [Bar graphs].
 -   [Saving image files using jamovi]. Importantly, we also covered how to export your pictures.
 
-One final thing to point out. Whilst jamovi produces some really neat default graphics, editing the plots is currently not possible. For more advanced graphics and plotting capability the packages available in R are much more powerful. One of the most popular graphics systems is provided by the ggplot2 package (see <a href="https://ggplot2.tidyverse.org/"
-target="_blank">https://ggplot2.tidyverse.org/</a>), which is loosely based on "The grammar of graphics" [@Wilkinson2006]. It's not for novices. You need to have a pretty good grasp of R before you can start using it, and even then it takes a while to really get the hang of it. But when you're ready it's worth taking the time to teach yourself, because it's a much more powerful and cleaner system.
+One final thing to point out. Whilst jamovi produces some really neat default graphics, editing the plots is currently not possible. For more advanced graphics and plotting capability the packages available in R are much more powerful. One of the most popular graphics systems is provided by the ggplot2 package (see [https://ggplot2.tidyverse.org/](https://ggplot2.tidyverse.org/)), which is loosely based on *The grammar of graphics* [@Wilkinson2006]. It's not for novices. You need to have a pretty good grasp of R before you can start using it, and even then it takes a while to really get the hang of it. But when you're ready it's worth taking the time to teach yourself, because it's a much more powerful and cleaner system.

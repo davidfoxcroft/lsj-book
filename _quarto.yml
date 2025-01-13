@@ -5,17 +5,24 @@ execute:
   echo: false
   warning: false
 book: 
-  title: learning statistics with jamovi 
-  author: "Danielle J. Navarro & David R. Foxcroft"
+  title: LEARNING STATISTICS WITH JAMOVI
+  #subtitle: A Tutorial for Beginners in Statistical Analysis
+  #author: "Danielle Navarro & David Foxcroft"
   #date: last-modified
   date-format: "D MMMM YYYY"
-  doi: 10.24384/hgc3-7p15
-  cover-image: images/bookcover_scaled.png
-  downloads: pdf
+  #doi: 10.11647/OBP.0333
+  cover-image: images/obp.0333.jpg
+  #downloads: pdf
   reader-mode: true
   sidebar:
     align: left
     collapse-level: 1
+    pinned: true
+    tools:
+          - icon: save
+            menu:
+              - text: Book format pdf and hard copy
+                url:  "https://www.openbookpublishers.com/books/10.11647/obp.0333"
   page-footer:
     left: |
       <a href="https://learnstatswithjamovi.com">learning statistics with jamovi</a>
@@ -24,16 +31,14 @@ book:
   site-url: "https://davidfoxcroft.github.io/lsj-book/"
   repo-url: "https://github.com/davidfoxcroft/lsj-book/"
   repo-actions: [edit,issue]
-  sharing: [twitter, facebook, linkedin]
   open-graph: true
 
   chapters: 
     - index.qmd
-    - Preface.qmd
     - part: Beginnings
       chapters:
-         - 01-Why-do-we-learn-statistics.qmd
-         - 02-A-brief-introduction-to-research-design.qmd
+        - 01-Why-do-we-learn-statistics.qmd
+        - 02-A-brief-introduction-to-research-design.qmd
     - part: An introduction to jamovi
       chapters:
          - 03-Getting-started-with-jamovi.qmd
@@ -61,12 +66,14 @@ book:
          - 16-Bayesian-statistics.qmd
     - Epilogue.qmd
     - References.qmd
-  
+    - obp-team.qmd
+
 bibliography: refs.bib
 csl: apa.csl
 
 format:
   html:
+    mainfont: "TeX Gyre Pagella"
     title-block-style: none
     toc: true
     collapse: true
@@ -82,9 +89,11 @@ format:
         #- custom.scss
     number-sections: true
     link-external-newwindow: true
-    fig-width: 5
-    fig-height: 5
-    fig-align: left
+    fig-dpi: 300
+    fig-width: 6
+    fig-height: 6
+    fig-align: 'left'
+    fig-pos: 'h!'
     #reference-location: margin
   # epub: 
   #  # footnotes not rendering math in popup but ok in mainview (issue with calibre viewer)
@@ -98,23 +107,37 @@ format:
   #   include-in-header: header-includes.html
   #   epub-cover-image: images/bookcover_html.png
   pdf:
-    title: "learning statistics with jamovi (version 0.75)"
+    title: LEARNING STATISTICS WITH JAMOVI
+    mainfont: "TeX Gyre Pagella"
+    #subtitle: A Tutorial for Beginners in Statistical Analysis
+    #author: "Danielle Navarro & David Foxcroft"
     documentclass: book
+    papersize: a4
     geometry:
-      - paperwidth=8.00in
-      - paperheight=10.00in
+      - paperwidth=8.0000000000000in
+      - paperheight=10.000000000000in
       - left=1.25in
       - textwidth= 5.25in
       - top=1.00in
       - textheight=8.25in
       #- showframe
-    include-in-header: preamble.tex
-    include-before-body: first.tex
-    include-after-body: backcover.tex
+    params:
+        endnotes: true
+    include-in-header: 
+      - preamble.tex
+    include-before-body: 
+      - first.tex
+      - before-body.tex
+    # include-after-body: 
+    #    text: \printendnotes
     toc: true
     colorlinks: true
-    fig-width: 5
-    fig-height: 5
+    fig-dpi: 300
+    fig-width: 6
+    fig-height: 6
     fig-align: left
+    fig-pos: 'h!'
     keep-tex: true
 
+crossref:
+  title-delim: "."
