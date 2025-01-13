@@ -43,7 +43,6 @@ div.csl-indent {
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="site_libs/quarto-search/fuse.min.js"></script>
@@ -131,31 +130,17 @@ div.csl-indent {
     <div class="sidebar-title mb-0 py-0">
       <a href="./">LEARNING STATISTICS WITH JAMOVI</a> 
         <div class="sidebar-tools-main tools-wide">
-    <a href="https://github.com/davidfoxcroft/lsj-book/" rel="" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
-    <a href="./LEARNING-STATISTICS-WITH-JAMOVI.pdf" rel="" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
     <div class="dropdown">
-      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
+      <a href="" title="" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label=""><i class="bi bi-save"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
           <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
-              <i class="bi bi-bi-twitter pe-1"></i>
-            Twitter
-            </a>
-          </li>
-          <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
-              <i class="bi bi-bi-facebook pe-1"></i>
-            Facebook
-            </a>
-          </li>
-          <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
-              <i class="bi bi-bi-linkedin pe-1"></i>
-            LinkedIn
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.openbookpublishers.com/books/10.11647/obp.0333">
+            Book format pdf and hard copy
             </a>
           </li>
       </ul>
     </div>
+    <a href="https://github.com/davidfoxcroft/lsj-book/" rel="" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
@@ -576,7 +561,7 @@ div.csl-indent {
 <div class="cell-output-display">
 <div id="fig-fig14-3" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
-<p><img src="images/fig14-3.png" class="img-fluid figure-img" style="width:80.0%" alt="A jamovi results table showing ANOVA test results for mood gain with factors &quot;drug,&quot; &quot;therapy,&quot; and their interaction. Includes Sum of Squares, df, Mean Square, F, $p$-values, η², η²p, and ω². Key results indicate significant effects for &quot;drug&quot; and &quot;therapy,&quot; but not their interaction."></p>
+<p><img src="images/fig14-3.png" class="img-fluid figure-img" style="width:80.0%" alt="A jamovi results table showing ANOVA test results for mood gain with factors &quot;drug,&quot; &quot;therapy,&quot; and their interaction. Includes Sum of Squares, df, Mean Square, F, $p$-values, η², η²p, and ω². Key results indicate significant effects for &quot;drug&quot; and &quot;therapy,&quot; but not their interaction"></p>
 <figcaption class="figure-caption">Figure&nbsp;14.3. jamovi two-way anova of mood.gain by drug and therapy</figcaption>
 </figure>
 </div>
@@ -631,6 +616,12 @@ div.csl-indent {
 <section id="what-kinds-of-outcomes-does-this-analysis-capture" class="level3" data-number="14.1.6">
 <h3 data-number="14.1.6" class="anchored" data-anchor-id="what-kinds-of-outcomes-does-this-analysis-capture"><span class="header-section-number">14.1.6</span> What kinds of outcomes does this analysis capture?</h3>
 <p>The ANOVA model that we’ve been talking about so far covers a range of different patterns that we might observe in our data. For instance, in a two-way ANOVA design there are four possibilities: (a) only Factor A matters, (b) only Factor B matters, (c) both A and B matter, and (d) neither A nor B matters. An example of each of these four possibilities is plotted in <a href="#fig-fig14-4">Figure&nbsp;<span>14.4</span></a>.</p>
+</section>
+</section>
+<section id="factorial-anova-2-balanced-designs-interpreting-interactions" class="level2" data-number="14.2">
+<h2 data-number="14.2" class="anchored" data-anchor-id="factorial-anova-2-balanced-designs-interpreting-interactions"><span class="header-section-number">14.2</span> Factorial ANOVA 2: balanced designs, interpreting interactions</h2>
+<p>The four patterns of data shown in <a href="#fig-fig14-4">Figure&nbsp;<span>14.4</span></a> are all quite realistic. There are many data sets that produce exactly those patterns. However, they are not the whole story and the ANOVA model that we have been talking about up to this point is not sufficient to fully account for a table of group means. Why not? Well, so far we have the ability to talk about the idea that drugs can influence mood, and therapy can influence mood, but no way of talking about the possibility of an <strong>interaction</strong> between the two.</p>
+<p>An interaction between A and B is said to occur whenever the effect of Factor <span class="math inline">\(A\)</span> is <em>different</em>, depending on which level of Factor <span class="math inline">\(B\)</span> we’re talking about. Several examples of an interaction effect with the context of a <span class="math inline">\(2 \times 2\)</span> ANOVA are shown in <a href="#fig-fig14-5">Figure&nbsp;<span>14.5</span></a>.</p>
 <div class="cell" data-layout-align="left">
 <div class="cell-output-display">
 <div id="fig-fig14-4" class="quarto-figure quarto-figure-left anchored">
@@ -641,22 +632,20 @@ div.csl-indent {
 </div>
 </div>
 </div>
-</section>
-</section>
-<section id="factorial-anova-2-balanced-designs-interpreting-interactions" class="level2" data-number="14.2">
-<h2 data-number="14.2" class="anchored" data-anchor-id="factorial-anova-2-balanced-designs-interpreting-interactions"><span class="header-section-number">14.2</span> Factorial ANOVA 2: balanced designs, interpreting interactions</h2>
-<p>The four patterns of data shown in <a href="#fig-fig14-4">Figure&nbsp;<span>14.4</span></a> are all quite realistic. There are many data sets that produce exactly those patterns. However, they are not the whole story and the ANOVA model that we have been talking about up to this point is not sufficient to fully account for a table of group means. Why not? Well, so far we have the ability to talk about the idea that drugs can influence mood, and therapy can influence mood, but no way of talking about the possibility of an <strong>interaction</strong> between the two.</p>
+<p>To give a more concrete example, suppose that the operation of Anxifree and Joyzepam is governed by quite different physiological mechanisms. One consequence of this is that while Joyzepam has more or less the same effect on mood regardless of whether one is in therapy, Anxifree is actually much more effective when administered in conjunction with CBT. The ANOVA that we developed in the previous section does not capture this idea. To get some idea of whether an interaction is actually happening it helps to plot the various group means. In jamovi this is done via the ANOVA ‘Estimated Marginal Means’ option – just move drug and therapy across into the ‘Marginal Means’ box under ‘Term 1’. This should look something like <a href="#fig-fig14-6">Figure&nbsp;<span>14.6</span></a>.</p>
 <div class="cell" data-layout-align="left">
 <div class="cell-output-display">
 <div id="fig-fig14-5" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
-<p><img src="14-Factorial-ANOVA_files/figure-html/fig-fig14-5-1.png" class="img-fluid figure-img" style="width:80.0%" alt="Four line graphs (a-d) depict interactions between two factors (A and B) at two levels (1 and 2). The y-axis in each graph is labeled &quot;Group mean&quot; and the x-axis &quot;Factor B.&quot; Graph (a) shows a crossover interaction. Graphs (b), (c), and (d) highlight different effects for one level of Factor A or B, or one differing cell."></p>
+<p><img src="14-Factorial-ANOVA_files/figure-html/fig-fig14-5-1.png" class="img-fluid figure-img" style="width:80.0%" alt="Four line graphs (a-d) depict interactions between two factors (A and B) at two levels (1 and 2). The y-axis in each graph is labeled &quot;Group mean&quot; and the x-axis &quot;Factor B.&quot; Graph (a) shows a crossover interaction. Graphs (b), (c), and (d) highlight different effects for one level of Factor A or B, or one differing cell"></p>
 <figcaption class="figure-caption">Figure&nbsp;14.5. Qualitatively different interactions for a <span class="math inline">\(2 \times 2\)</span> ANOVA</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>An interaction between A and B is said to occur whenever the effect of Factor <span class="math inline">\(A\)</span> is <em>different</em>, depending on which level of Factor <span class="math inline">\(B\)</span> we’re talking about. Several examples of an interaction effect with the context of a <span class="math inline">\(2 \times 2\)</span> ANOVA are shown in <a href="#fig-fig14-5">Figure&nbsp;<span>14.5</span></a>. To give a more concrete example, suppose that the operation of Anxifree and Joyzepam is governed by quite different physiological mechanisms. One consequence of this is that while Joyzepam has more or less the same effect on mood regardless of whether one is in therapy, Anxifree is actually much more effective when administered in conjunction with CBT. The ANOVA that we developed in the previous section does not capture this idea. To get some idea of whether an interaction is actually happening it helps to plot the various group means. In jamovi this is done via the ANOVA ‘Estimated Marginal Means’ option – just move drug and therapy across into the ‘Marginal Means’ box under ‘Term 1’. This should look something like <a href="#fig-fig14-6">Figure&nbsp;<span>14.6</span></a>.</p>
+<p><br>
+</p>
+<p>Our main concern relates to the fact that the two lines aren’t parallel. The effect of CBT (difference between solid line and dotted line) when the drug is Joyzepam (right side) appears to be near zero, even smaller than the effect of CBT when a placebo is used (left side). However, when Anxifree is administered, the effect of CBT is larger than the placebo (middle). Is this effect real, or is this just random variation due to chance? Our original ANOVA cannot answer this question, because we make no allowances for the idea that interactions even exist! In this section, we’ll fix this problem.</p>
 <div class="cell enlarge-image" data-layout-align="left">
 <div class="cell-output-display">
 <div id="fig-fig14-6" class="quarto-figure quarto-figure-left anchored">
@@ -667,7 +656,6 @@ div.csl-indent {
 </div>
 </div>
 </div>
-<p>Our main concern relates to the fact that the two lines aren’t parallel. The effect of CBT (difference between solid line and dotted line) when the drug is Joyzepam (right side) appears to be near zero, even smaller than the effect of CBT when a placebo is used (left side). However, when Anxifree is administered, the effect of CBT is larger than the placebo (middle). Is this effect real, or is this just random variation due to chance? Our original ANOVA cannot answer this question, because we make no allowances for the idea that interactions even exist! In this section, we’ll fix this problem.</p>
 <section id="what-exactly-is-an-interaction-effect" class="level3" data-number="14.2.1">
 <h3 data-number="14.2.1" class="anchored" data-anchor-id="what-exactly-is-an-interaction-effect"><span class="header-section-number">14.2.1</span> What exactly is an interaction effect?</h3>
 <p>The key idea that we’re going to introduce in this section is that of an interaction effect. In the ANOVA model we have looked at so far there are only two factors involved in our model (i.e., drug and therapy). But when we add an interaction we add a new component to the model: the combination of drug and therapy. Intuitively, the idea behind an interaction effect is fairly simple. It just means that the effect of Factor A is different, depending on which level of Factor B we’re talking about. But what does that actually mean in terms of our data? The plot in <a href="#fig-fig14-5">Figure&nbsp;<span>14.5</span></a> depicts several different patterns that, although quite different to each other, would all count as an interaction effect. So it’s not entirely straightforward to translate this qualitative idea into something mathematical that a statistician can work with.</p>
@@ -771,12 +759,13 @@ in the ANOVA model</p> </caption>
 </div>
 </div>
 <p>In the output we see that the estimated mean mood gain for the placebo group with no therapy was <span class="math inline">\(0.300\)</span>, with a <span class="math inline">\(95\%\)</span> confidence interval from <span class="math inline">\(0.006\)</span> to <span class="math inline">\(0.594\)</span>. Note that these are not the same confidence intervals that you would get if you calculated them separately for each group, because of the fact that the ANOVA model assumes homogeneity of variance and therefore uses a pooled estimate of the standard deviation.</p>
-<p>When the model doesn’t contain the interaction term then the estimated group means will differ from the sample means. Instead of reporting the sample mean, jamovi calculates the value of the group means that would be expected on the basis of the marginal means (i.e., assuming no interaction). Using the notation we developed earlier, the estimate for <span class="math inline">\(\mu_{rc}\)</span>, the mean for level <span class="math inline">\(r\)</span> on the (row) Factor A and level <span class="math inline">\(c\)</span> on the (column) Factor B would be <span class="math inline">\(\mu_{..} + \alpha_r + \beta_c\)</span>. If there are genuinely no interactions between the two factors, this is actually a better estimate of the population mean than the raw sample mean. Removing the interaction term from the model, via the ‘Model’ options in the jamovi ANOVA analysis, provides the marginal means for the analysis shown in <a href="#fig-fig14-9">Figure&nbsp;<span>14.9</span></a>.</p>
+<p>When the model doesn’t contain the interaction term then the estimated group means will differ from the sample means. Instead of reporting the sample mean, jamovi calculates the value of the group means that would be expected on the basis of the marginal means (i.e., assuming no interaction).</p>
+<p>Using the notation we developed earlier, the estimate for <span class="math inline">\(\mu_{rc}\)</span>, the mean for level <span class="math inline">\(r\)</span> on the (row) Factor A and level <span class="math inline">\(c\)</span> on the (column) Factor B would be <span class="math inline">\(\mu_{..} + \alpha_r + \beta_c\)</span>. If there are genuinely no interactions between the two factors, this is actually a better estimate of the population mean than the raw sample mean. Removing the interaction term from the model, via the ‘Model’ options in the jamovi ANOVA analysis, provides the marginal means for the analysis shown in <a href="#fig-fig14-9">Figure&nbsp;<span>14.9</span></a>.</p>
 <div class="cell enlarge-image" data-layout-align="left">
 <div class="cell-output-display">
 <div id="fig-fig14-9" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
-<p><img src="images/fig14-9.png" class="img-fluid figure-img" style="width:80.0%" alt="ANOVA table and Estimated Marginal Means table for mood gain analysis. The ANOVA table shows a significant drug effect with F(3,14) = 7.08, p = 0.01866. The Estimated Marginal Means table lists means and confidence intervals for interactions between therapy and drug."></p>
+<p><img src="images/fig14-9.png" class="img-fluid figure-img" style="width:80.0%" alt="ANOVA table and Estimated Marginal Means table for mood gain analysis. The ANOVA table shows a significant drug effect with F(3,14) = 7.08, p = 0.01866. The Estimated Marginal Means table lists means and confidence intervals for interactions between therapy and drug"></p>
 <figcaption class="figure-caption">Figure&nbsp;14.9. jamovi screenshot showing the marginal means for the unsaturated model, i.e.&nbsp;without the interaction component, with the clinical trial data set</figcaption>
 </figure>
 </div>
@@ -794,16 +783,6 @@ in the ANOVA model</p> </caption>
 <section id="normality-of-residuals" class="level3" data-number="14.4.2">
 <h3 data-number="14.4.2" class="anchored" data-anchor-id="normality-of-residuals"><span class="header-section-number">14.4.2</span> Normality of residuals</h3>
 <p>As with one-way ANOVA we can test for the normality of residuals is straightforward (see <a href="13-Comparing-several-means-one-way-ANOVA.html#sec-Checking-the-normality-assumption"><span>Section&nbsp;13.6.4</span></a>). Primarily it’s a good idea to examine the residuals graphically using a QQ plot. See <a href="#fig-fig14-10">Figure&nbsp;<span>14.10</span></a>.</p>
-<div class="cell enlarge-image" data-layout-align="left">
-<div class="cell-output-display">
-<div id="fig-fig14-10" class="quarto-figure quarto-figure-left anchored">
-<figure class="figure">
-<p><img src="images/fig14-10.png" class="img-fluid figure-img" style="width:80.0%" alt="An image shows assumption checks for statistical analysis. It includes results for the Levene test (F = 0.22, df1 = 5, df2 = 12, p = 0.94731) and Shapiro-Wilk test (Statistic = 0.96, p = 0.53290). Below is a Q-Q plot of standardized residuals versus theoretical quantiles."></p>
-<figcaption class="figure-caption">Figure&nbsp;14.10. Checking assumptions in an ANOVA model</figcaption>
-</figure>
-</div>
-</div>
-</div>
 </section>
 </section>
 <section id="sec-analysis-of-covariance-ancova" class="level2" data-number="14.5">
@@ -815,11 +794,21 @@ in the ANOVA model</p> </caption>
 <br>
 <br>
 </p>
+<div class="cell enlarge-image" data-layout-align="left">
+<div class="cell-output-display">
+<div id="fig-fig14-10" class="quarto-figure quarto-figure-left anchored">
+<figure class="figure">
+<p><img src="images/fig14-10.png" class="img-fluid figure-img" style="width:80.0%" alt="An image shows assumption checks for statistical analysis. It includes results for the Levene test (F = 0.22, df1 = 5, df2 = 12, p = 0.94731) and Shapiro-Wilk test (Statistic = 0.96, p = 0.53290). Below is a Q-Q plot of standardized residuals versus theoretical quantiles."></p>
+<figcaption class="figure-caption">Figure&nbsp;14.10. Checking assumptions in an ANOVA model</figcaption>
+</figure>
+</div>
+</div>
+</div>
 <div class="cell" data-layout-align="left">
 <div class="cell-output-display">
 <div id="fig-fig14-11" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
-<p><img src="images/fig14-11.png" class="img-fluid figure-img" style="width:80.0%" alt="A scatter plot shows 'Statistics anxiety' on the Y-axis versus 'Age' on the X-axis. Data points for 'Scientists' cluster lower on the Y-axis and at younger ages on the X-axis, while 'Artists' cluster higher on the Y-axis and at older ages on the X-axis"></p>
+<p><img src="images/fig14-11.png" class="img-fluid figure-img" style="width:90.0%" alt="A scatter plot shows 'Statistics anxiety' on the Y-axis versus 'Age' on the X-axis. Data points for 'Scientists' cluster lower on the Y-axis and at younger ages on the X-axis, while 'Artists' cluster higher on the Y-axis and at older ages on the X-axis"></p>
 <figcaption class="figure-caption">Figure&nbsp;14.11. Plot of Statistics anxiety against age for two distinct groups</figcaption>
 </figure>
 </div>
@@ -827,11 +816,11 @@ in the ANOVA model</p> </caption>
 </div>
 <p><br>
 <br>
+<br>
 </p>
 <section id="running-ancova-in-jamovi" class="level3" data-number="14.5.1">
 <h3 data-number="14.5.1" class="anchored" data-anchor-id="running-ancova-in-jamovi"><span class="header-section-number">14.5.1</span> Running ANCOVA in jamovi</h3>
 <p>A health psychologist was interested in the effect of routine cycling and stress on happiness levels, with age as a covariate. You can find the data set in the file <em>ancova.csv</em>. Open this file in jamovi and then, to undertake an ANCOVA, select Analyses - ANOVA - ANCOVA to open the ANCOVA analysis window (<a href="#fig-fig14-12">Figure&nbsp;<span>14.12</span></a>). Highlight the dependent variable ‘happiness’ and transfer it into the ‘Dependent Variable’ text box. Highlight the independent variables ‘stress’ and ‘commute’ and transfer them into the ‘Fixed Factors’ text box. Highlight the covariate ‘age’ and transfer it into the ‘Covariates’ text box. Then click on Estimated Marginal Means to bring up the plots and tables options.</p>
-<p>An ANCOVA table showing ‘Tests of Between Subjects Effects’ is produced in the jamovi results window (<a href="#fig-fig14-13">Figure&nbsp;<span>14.13</span></a>). The <span class="math inline">\(F\)</span>-value for the covariate ‘age’ is significant at <span class="math inline">\(p = .023\)</span>, suggesting that age is an important predictor of the dependent variable, happiness. When we look at the estimated marginal mean scores (<a href="#fig-fig14-14">Figure&nbsp;<span>14.14</span></a>), adjustments have been made (compared to an analysis without the covariate) because of the inclusion of the covariate ‘age’ in this ANCOVA. A plot (<a href="#fig-fig14-15">Figure&nbsp;<span>14.15</span></a>) is a good way of visualising and interpreting the significant effects.</p>
 <div class="cell enlarge-image" data-layout-align="left">
 <div class="cell-output-display">
 <div id="fig-fig14-12" class="quarto-figure quarto-figure-left anchored">
@@ -842,6 +831,7 @@ in the ANOVA model</p> </caption>
 </div>
 </div>
 </div>
+<p>An ANCOVA table showing ‘Tests of Between Subjects Effects’ is produced in the jamovi results window (<a href="#fig-fig14-13">Figure&nbsp;<span>14.13</span></a>). The <span class="math inline">\(F\)</span>-value for the covariate ‘age’ is significant at <span class="math inline">\(p = .023\)</span>, suggesting that age is an important predictor of the dependent variable, happiness. When we look at the estimated marginal mean scores (<a href="#fig-fig14-14">Figure&nbsp;<span>14.14</span></a>), adjustments have been made (compared to an analysis without the covariate) because of the inclusion of the covariate ‘age’ in this ANCOVA. A plot (<a href="#fig-fig14-15">Figure&nbsp;<span>14.15</span></a>) is a good way of visualising and interpreting the significant effects.</p>
 <div class="cell enlarge-image" data-layout-align="left">
 <div class="cell-output-display">
 <div id="fig-fig14-13" class="quarto-figure quarto-figure-left anchored">
@@ -968,7 +958,8 @@ in the ANOVA model</p> </caption>
 &amp; = b_0 + b_1
 \end{split}
 \]</span></p>
-<p>Because this student attended class, the predicted grade is equal to the intercept term b0 plus the coefficient associated with the attend variable, <span class="math inline">\(b_1\)</span>. So, if <span class="math inline">\(b_1\)</span> is greater than zero, we’re expecting that the students who turn up to lectures will get higher grades than those students who don’t. If this coefficient is negative we’re expecting the opposite: students who turn up at class end up performing much worse. In fact, we can push this a little bit further. What about student number 1, who turned up to class (<span class="math inline">\(X_{1,1} = 1\)</span>) and read the textbook (<span class="math inline">\(X_{2,1} = 1\)</span>)? If we plug these numbers into the regression we get:</p>
+<p>Because this student attended class, the predicted grade is equal to the intercept term b0 plus the coefficient associated with the attend variable, <span class="math inline">\(b_1\)</span>. So, if <span class="math inline">\(b_1\)</span> is greater than zero, we’re expecting that the students who turn up to lectures will get higher grades than those students who don’t. If this coefficient is negative we’re expecting the opposite: students who turn up at class end up performing much worse.</p>
+<p>In fact, we can push this a little bit further. What about student number 1, who turned up to class (<span class="math inline">\(X_{1,1} = 1\)</span>) and read the textbook (<span class="math inline">\(X_{2,1} = 1\)</span>)? If we plug these numbers into the regression we get:</p>
 <p><span class="math display">\[
 \begin{split}
 \hat{Y}_1 &amp; = b_0 + b_1 X_{1,1} + b_2 X_{2,1} \\
@@ -998,17 +989,17 @@ in the ANOVA model</p> </caption>
 </div>
 <p>As you can see, the intercept term <span class="math inline">\(b_0\)</span> acts like a kind of “baseline” grade that you would expect from those students who don’t take the time to attend class or read the textbook. Similarly, <span class="math inline">\(b_1\)</span> represents the boost that you’re expected to get if you come to class, and <span class="math inline">\(b_2\)</span> represents the boost that comes from reading the textbook. In fact, if this were an ANOVA you might very well want to characterise <span class="math inline">\(b_1\)</span> as the main effect of attendance, and <span class="math inline">\(b_2\)</span> as the main effect of reading! In fact, for a simple <span class="math inline">\(2 \times 2\)</span> ANOVA that’s exactly how it plays out.</p>
 <p>Okay, now that we’re really starting to see why ANOVA and regression are basically the same thing, let’s actually run our regression using the rtfm data and the jamovi regression analysis to convince ourselves that this is really true. Running the regression in the usual way gives the results shown in <a href="#fig-fig14-18">Figure&nbsp;<span>14.18</span></a>.</p>
+<p>There’s a few interesting things to note here. First, notice that the intercept term is 43.5 which is close to the “group” mean of 42.5 observed for those two students who didn’t read the text or attend class. Second, notice that we have the regression coefficient of <span class="math inline">\(b_1 = 18.0\)</span> for the attendance variable, suggesting that those students that attended class scored 18% higher than those who didn’t. So our expectation would be that those students who turned up to class but didn’t read the textbook would obtain a grade of <span class="math inline">\(b_0 + b_1\)</span>, which is equal to <span class="math inline">\(43.5 + 18.0 = 61.5\)</span>. You can verify for yourself that the same thing happens when we look at the students that read the textbook.</p>
 <div class="cell enlarge-image" data-layout-align="left">
 <div class="cell-output-display">
 <div id="fig-fig14-18" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
-<p><img src="images/fig14-18.png" class="img-fluid figure-img" style="width:70.0%" alt="A jamovi results table titled &quot;Model Coefficients - grade&quot; displays the estimate, standard error (SE), t-value, and $p$-value for three predictors:- Intercept, attend, and reading. The Intercept values are 43.50, 3.35, 12.97, 0.00005. Attend:- 18.00, 3.87, 4.65, 0.00559. Reading:- 28.00, 3.87, 7.23, 0.00079."></p>
+<p><img src="images/fig14-18.png" class="img-fluid figure-img" style="width:70.0%" alt="A jamovi results table titled &quot;Model Coefficients - grade&quot; displays the estimate, standard error (SE), t-value, and $p$-value for three predictors:- Intercept, attend, and reading. The Intercept values are 43.50, 3.35, 12.97, 0.00005. Attend:- 18.00, 3.87, 4.65, 0.00559. Reading:- 28.00, 3.87, 7.23, 0.00079"></p>
 <figcaption class="figure-caption">Figure&nbsp;14.18. Regression analysis of the <em>rtfm.csv</em> data set in jamovi, without the interaction term</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>There’s a few interesting things to note here. First, notice that the intercept term is 43.5 which is close to the “group” mean of 42.5 observed for those two students who didn’t read the text or attend class. Second, notice that we have the regression coefficient of <span class="math inline">\(b_1 = 18.0\)</span> for the attendance variable, suggesting that those students that attended class scored 18% higher than those who didn’t. So our expectation would be that those students who turned up to class but didn’t read the textbook would obtain a grade of <span class="math inline">\(b_0 + b_1\)</span>, which is equal to <span class="math inline">\(43.5 + 18.0 = 61.5\)</span>. You can verify for yourself that the same thing happens when we look at the students that read the textbook.</p>
 <p>Actually, we can push a little further in establishing the equivalence of our ANOVA and our regression. Look at the <span class="math inline">\(p\)</span>-values associated with the attend variable and the reading variable in the regression output. They’re identical to the ones we encountered earlier when running the ANOVA. This might seem a little surprising, since the test used when running our regression model calculates a <span class="math inline">\(t\)</span>-statistic and the ANOVA calculates an <span class="math inline">\(F\)</span>-statistic. However, if you can remember all the way back to <a href="07-Introduction-to-probability.html"><span>Chapter&nbsp;7</span></a>, I mentioned that there’s a relationship between the <span class="math inline">\(t\)</span>-distribution and the <span class="math inline">\(F\)</span>-distribution. If you have some quantity that is distributed according to a <span class="math inline">\(t\)</span>-distribution with <span class="math inline">\(k\)</span> degrees of freedom and you square it, then this new squared quantity follows an <span class="math inline">\(F\)</span>-distribution whose degrees of freedom are 1 and <span class="math inline">\(k\)</span>. We can check this with respect to the <span class="math inline">\(t\)</span>-statistics in our regression model. For the attend variable we get a <span class="math inline">\(t\)</span>-value of 4.65. If we square this number we end up with 21.6, which matches the corresponding <span class="math inline">\(F\)</span>-statistic in our ANOVA.</p>
 <p>Finally, one last thing you should know. Because jamovi understands the fact that ANOVA and regression are both examples of linear models, it lets you extract the classic ANOVA table from your regression model using the ‘Linear Regression’ – ‘Model Coefficients’ – ‘Omnibus Test’ – ‘ANOVA Test’, and this will give you the table shown in <a href="#fig-fig14-19">Figure&nbsp;<span>14.19</span></a>.</p>
 <div class="cell enlarge-image" data-layout-align="left">
@@ -1101,7 +1092,7 @@ in the ANOVA model</p> </caption>
 <div class="cell-output-display">
 <div id="fig-fig14-23" class="quarto-figure quarto-figure-left anchored">
 <figure class="figure">
-<p><img src="images/fig14-23.png" class="img-fluid figure-img" style="width:80.0%" alt="A jamovi screenshot displaying linear regression analysis within a software interface. The interface shows data inputs and settings on the left, while the right side displays output results including ANOVA and model coefficients. Sections for data, analyses, edit, and more are visible."></p>
+<p><img src="images/fig14-23.png" class="img-fluid figure-img" style="width:80.0%" alt="A jamovi screenshot displaying linear regression analysis within a software interface. The interface shows data inputs and settings on the left, while the right side displays output results including ANOVA and model coefficients. Sections for data, analyses, edit, and more are visible"></p>
 <figcaption class="figure-caption">Figure&nbsp;14.23. Regression analysis with factors and contrasts in jamovi, including omnibus ANOVA test results</figcaption>
 </figure>
 </div>

@@ -1,6 +1,6 @@
-\placetextbox{0.26}{0.06}{\scriptsize{©2025 D. Foxcroft and D. Navarro,}}
-\placetextbox{0.205}{0.05}{\scriptsize{CC BY-SA 4.0}}
-\placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333/13}}}
+\placetextbox{0.26}{0.06}{\scriptsize{©2025 D.R. Foxcroft and D.J. Navarro,}}
+\placetextbox{0.195}{0.05}{\scriptsize{CC BY-SA 4.0}}
+\placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333.13}}}
 
 # Comparing several means (one-way ANOVA) {#sec-Comparing-several-means-one-way-ANOVA}
 
@@ -529,8 +529,11 @@ $$F=\frac{MS_b}{MS_w}$$
 
 In a repeated measures ANOVA, the $F$-ratio is calculated in a similar way, but whereas in an independent ANOVA the within-group variability ($SS_w$) is used as the basis for the $MS_w$ denominator, in a repeated measures ANOVA the $SS_w$ is partioned into two parts. As we are using the same subjects in each group, we can remove the variability due to the individual differences between subjects (referred to as $SS_{subjects}$) from the within groups variability. 
 
-We won't go into too much technical detail about how this is done, but essentially each subject becomes a level of a factor called subjects. The variability in this within subjects factor is then calculated in the same way as any between subjects factor. And then we can subtract 
-$SS_{subjects}$ from $SS_w$ to provide a smaller $SS_{error}$ term:
+We won't go into too much technical detail about how this is done, but essentially each subject becomes a level of a factor called subjects. The variability in this within subjects factor is then calculated in the same way as any between subjects factor. 
+
+\
+
+And then we can subtract $SS_{subjects}$ from $SS_w$ to provide a smaller $SS_{error}$ term:
 
 $$\text{Independent ANOVA: } SS_{error} = SS_w$$ 
 $$\text{Repeated Measures ANOVA: } SS_{error} = SS_w - SS_{subjects}$$

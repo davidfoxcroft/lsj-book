@@ -1,6 +1,6 @@
-\placetextbox{0.26}{0.06}{\scriptsize{©2025 D. Foxcroft and D. Navarro,}}
-\placetextbox{0.205}{0.05}{\scriptsize{CC BY-SA 4.0}}
-\placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333/11}}}
+\placetextbox{0.26}{0.06}{\scriptsize{©2025 D.R. Foxcroft and D.J. Navarro,}}
+\placetextbox{0.195}{0.05}{\scriptsize{CC BY-SA 4.0}}
+\placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333.11}}}
 
 ```{r}
 #| include: FALSE
@@ -837,11 +837,11 @@ gridExtra::grid.arrange(p1,p2,ncol=2)
 
 As you can see, these data form a pretty straight line; which is no surprise given that we sampled them from a normal distribution! In contrast, have a look at the two data sets shown in @fig-fig11-21. The top panels show the histogram and a QQ plot for a data set that is highly skewed: the QQ plot curves upwards. The lower panels show the same plots for a heavy tailed (i.e., high kurtosis) data set: in this case the QQ plot flattens in the middle and curves sharply at either end.
 
-```{r}
+```{r out.width="95%"}
 #| label: fig-fig11-21
 #| fig-width: 10
 #| fig-height: 10
-#| fig-cap: In the top row, a histogram and a normal QQ plot of the $100$ observations in a skewed.data set. The skewness of the data here is $1.88$, and is reflected in a QQ plot that curves upwards. As a consequence, the Shapiro-Wilk statistic is $W = .80$, reflecting a significant departure from normality ($p< .001$). The bottom row shows the same plots for a heavy tailed data set, again consisting of 100 observations. In this case the heavy tails in the data produce a high kurtosis ($6.57$), and cause the QQ plot to flatten in the middle, and curve away sharply on either side. The resulting Shapiro-Wilk statistic is $W = .75$, again reflecting significant non-normality ($p<.001)$
+#| fig-cap: In the top row, a histogram and a normal QQ plot of the $100$ observations in a skewed data set. The skewness of the data here is $1.88$, and is reflected in a QQ plot that curves upwards. As a consequence, the Shapiro-Wilk statistic is $W = .80$, reflecting a significant departure from normality ($p< .001$). The bottom row shows the same plots for a heavy tailed data set, again consisting of 100 observations. In this case the heavy tails in the data produce a high kurtosis ($6.57$), and cause the QQ plot to flatten in the middle, and curve away sharply on either side. The resulting Shapiro-Wilk statistic is $W = .75$, again reflecting significant non-normality ($p<.001)$
 #| fig-alt: Two sets of graphs show differently distributed data. The left column displays histograms for skewed distribution (top) and heavy-tailed distribution (bottom). The right column contains Normal Q-Q plots for each data set, indicating deviations from normality.
 
 
@@ -896,19 +896,7 @@ gridExtra::grid.arrange(p1,p2,p3,p4, nrow=2, ncol=2)
 
 In our previous analyses we showed how to conduct in jamovi an independent $t$-test (@fig-fig11-10) and a paired samples $t$-test (@fig-fig11-16). And for these analyses jamovi provides an option to show a QQ plot for the difference scores (which jamovi calls the 'residuals'), which is a better way of checking the normality assumption. When we select this option for these analyses, we get the QQ plots shown in @fig-fig11-22 and @fig-fig11-23, respectively. My interpretation is that these plots both show that the difference scores are reasonably normally distributed, so we are good to go!
 
-```{r out.width="70%"}
-#| label: fig-fig11-22
-#| fig-cap: jamovi QQ plot for the independent $t$-test analysis shown in @fig-fig11-10
-#| fig-alt: A Q-Q plot showing standardized residuals versus theoretical quantiles. Data points are scattered along the line y = x, indicating that the residuals follow a normal distribution. The x-axis ranges from -2 to 2, and the y-axis ranges from -2 to 2.
-knitr::include_graphics("images/fig11-22.png")
-```
 
-```{r out.width="70%"}
-#| label: fig-fig11-23
-#| fig-cap: jamovi QQ plot for the paired samples $t$-test analysis shown in @fig-fig11-16
-#| fig-alt: A Q-Q plot displays standardized residuals versus theoretical quantiles to assess the normality of a data set. The points mostly follow the diagonal line from bottom left to top right, indicating that the residuals are approximately normally distributed.
-knitr::include_graphics("images/fig11-23.png")
-```
 
 ### Shapiro-Wilk tests
 
@@ -922,14 +910,30 @@ QQ plots provide a nice way to informally check the normality of your data, but 
 
 To get the Shapiro-Wilk statistic in jamovi $t$-tests, check the option for 'Normality' listed under 'Assumptions'. In the randomly sampled data ($N = 100$) we used for the QQ plot, the value for the Shapiro-Wilk normality test statistic was $W = 0.99$ with a $p$-value of $0.54$. So, not surprisingly, we have no evidence that these data depart from normality. When reporting the results for a Shapiro-Wilk test, you should (as usual) make sure to include the test statistic $W$ and the $p$-value, though given that the sampling distribution depends so heavily on $N$ it would probably be a politeness to include $N$ as well.
 
+```{r out.width="80%"}
+#| label: fig-fig11-22
+#| fig-cap: jamovi QQ plot for the independent $t$-test analysis shown in @fig-fig11-10
+#| fig-alt: A Q-Q plot showing standardized residuals versus theoretical quantiles. Data points are scattered along the line y = x, indicating that the residuals follow a normal distribution. The x-axis ranges from -2 to 2, and the y-axis ranges from -2 to 2.
+knitr::include_graphics("images/fig11-22.png")
+```
+
+```{r out.width="80%"}
+#| label: fig-fig11-23
+#| fig-cap: jamovi QQ plot for the paired samples $t$-test analysis shown in @fig-fig11-16
+#| fig-alt: A Q-Q plot displays standardized residuals versus theoretical quantiles to assess the normality of a data set. The points mostly follow the diagonal line from bottom left to top right, indicating that the residuals are approximately normally distributed
+#| fig-pos: 'H'
+knitr::include_graphics("images/fig11-23.png")
+```
+
 ### Example
 
 In the meantime, it's probably worth showing you an example of what happens to the QQ plot and the Shapiro-Wilk test when the data turn out to be non-normal. For that, let's look at the distribution of our AFL winning margins data, which if you remember back to @sec-Descriptive-statistics it didn't look like they came from a normal distribution at all. Here's what happens to the QQ plot (@fig-fig11-24).
 
-```{r out.width="70%"}
+```{r out.width="80%"}
 #| label: fig-fig11-24
 #| fig-cap: jamovi QQ plot showing non-normality from the AFL winning margins data
-#| fig-alt: A Q-Q plot shows standardized residuals against theoretical quantiles. Data points largely follow a diagonal reference line, indicating normality. Points deviate at the upper and lower ends, suggesting potential departures from a normal distribution at extremes.
+#| fig-alt: A Q-Q plot shows standardized residuals against theoretical quantiles. Data points largely follow a diagonal reference line, indicating normality. Points deviate at the upper and lower ends, suggesting potential departures from a normal distribution at extremes
+#| fig-pos: 'h'
 knitr::include_graphics("images/fig11-24.png")
 ```
 
@@ -962,19 +966,20 @@ We then count up the number of checkmarks. This is our test statistic, $W$.[^11-
 
 [^11-comparing-two-means-23]: Actually, there are two different versions of the test statistic that differ from each other by a constant value. The version that I've described is the one that jamovi calculates.
 
-In jamovi, if we run an 'Independent Samples T-Test' with scores as the dependent variable. and group as the grouping variable, and then under the options for 'tests' check the option for 'Mann-Whitney U', we will get results showing that $U = 3$ (i.e., the same number of checkmarks as shown above), and a $p$-value = $0.05556$. See @fig-fig11-25.
+In jamovi, if we run an 'Independent Samples T-Test' with scores as the dependent variable. and group as the grouping variable, and then under the options for 'tests' check the option for 'Mann-Whitney U', we will get results showing that $U = 3$ (i.e., the same number of checkmarks as shown above), and a $p$-value = $0.05556$. See @fig-fig11-25. Counting up the tick marks this time we get a test statistic of $W = 7$. As before, if our test is two-sided, then we reject the null hypothesis when W is very large or very small. 
 
-```{r}
+```{r }
 #| label: fig-fig11-25
 #| classes: .enlarge-image
 #| fig-cap: jamovi screen showing results for the Mann-Whitney $U$ test
-#| fig-alt: A jamovi screenshot showing a Mann-Whitney $U$ test setup on the left and results on the right. The setup includes dependent and grouping variables, while the results section displays statistical values and references.
+#| fig-alt: A jamovi screenshot showing a Mann-Whitney $U$ test setup on the left and results on the right. The setup includes dependent and grouping variables, while the results section displays statistical values and references
+#| fig-pos: 'H'
 knitr::include_graphics("images/fig11-25.png")
 ```
 
 ### One sample Wilcoxon test
 
-What about the **one sample Wilcoxon test** (or equivalently, the paired samples Wilcoxon test)? Suppose I'm interested in finding out whether taking a statistics class has any effect on the happiness of students. My data is in the *happiness.csv* file. What I've measured here is the happiness of each student before taking the class and after taking the class, and the change score is the difference between the two. Just like we saw with the $t$-test, there's no fundamental difference between doing a paired-samples test using before and after, versus doing a one-sample test using the change scores. As before, the simplest way to think about the test is to construct a tabulation. The way to do it this time is to take those change scores that are positive differences, and tabulate them against all the complete sample. What you end up with is a table that looks like @tbl-tab11-5.
+What about the **one sample Wilcoxon test** (or equivalently, the paired samples Wilcoxon test)? Suppose I'm interested in finding out whether taking a statistics class has any effect on the happiness of students. My data is in the *happiness.csv* file. What I've measured here is the happiness of each student before taking the class and after taking the class, and the change score is the difference between the two. Just like we saw with the $t$-test, there's no fundamental difference between doing a paired-samples test using before and after, versus doing a one-sample test using the change scores. As before, the simplest way to think about the test is to construct a tabulation. The way to do it this time is to take those change scores that are positive differences, and tabulate them against all the complete sample. What you end up with is a table that looks like @tbl-tab11-5. 
 
 ```{r}
 #| label: tbl-tab11-5
@@ -987,9 +992,9 @@ huxtabs[[11]][[5]]  |>
   set_right_border(3:5, 1:2)
 ```
 
-Counting up the tick marks this time we get a test statistic of $W = 7$. As before, if our test is two-sided, then we reject the null hypothesis when W is very large or very small. As far as running it in jamovi goes, it's pretty much what you'd expect. For the one sample version, you specify the 'Wilcoxon rank' option under 'Tests' in the 'One Sample T-Test' analysis window. This gives you Wilcoxon $W = 7$, $p$-value = $0.03711$. As this shows, we have a significant effect. Evidently, taking a statistics class does have an effect on your happiness. Switching to a paired samples version of the test won't give us a different answer, of course; see @fig-fig11-26.
+As far as running it in jamovi goes, it's pretty much what you'd expect. For the one sample version, you specify the 'Wilcoxon rank' option under 'Tests' in the 'One Sample T-Test' analysis window. This gives you Wilcoxon $W = 7$, $p$-value = $0.03711$. As this shows, we have a significant effect. Evidently, taking a statistics class does have an effect on your happiness. Switching to a paired samples version of the test won't give us a different answer, of course; see @fig-fig11-26.
 
-```{r}
+```{r out.width="90%"}
 #| label: fig-fig11-26
 #| classes: .enlarge-image
 #| fig-cap: jamovi screen showing results for one-sample and paired sample Wilcoxon nonparametric tests

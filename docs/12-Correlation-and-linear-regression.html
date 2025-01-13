@@ -43,7 +43,6 @@ div.csl-indent {
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="site_libs/quarto-search/fuse.min.js"></script>
@@ -131,31 +130,17 @@ div.csl-indent {
     <div class="sidebar-title mb-0 py-0">
       <a href="./">LEARNING STATISTICS WITH JAMOVI</a> 
         <div class="sidebar-tools-main tools-wide">
-    <a href="https://github.com/davidfoxcroft/lsj-book/" rel="" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
-    <a href="./LEARNING-STATISTICS-WITH-JAMOVI.pdf" rel="" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
     <div class="dropdown">
-      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
+      <a href="" title="" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label=""><i class="bi bi-save"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
           <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
-              <i class="bi bi-bi-twitter pe-1"></i>
-            Twitter
-            </a>
-          </li>
-          <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
-              <i class="bi bi-bi-facebook pe-1"></i>
-            Facebook
-            </a>
-          </li>
-          <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
-              <i class="bi bi-bi-linkedin pe-1"></i>
-            LinkedIn
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.openbookpublishers.com/books/10.11647/obp.0333">
+            Book format pdf and hard copy
             </a>
           </li>
       </ul>
     </div>
+    <a href="https://github.com/davidfoxcroft/lsj-book/" rel="" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
@@ -752,6 +737,7 @@ div.csl-indent {
 <blockquote class="blockquote">
 <p>The estimated regression coefficients, <span class="math inline">\(\hat{b}_0\)</span> and <span class="math inline">\(\hat{b}_1\)</span>, are those that minimise the sum of the squared residuals, which we could either write as <span class="math inline">\(\sum_i (Y_i - \hat{Y}_i)^2\)</span> or as <span class="math inline">\(\sum_i \epsilon_i^2\)</span>.</p>
 </blockquote>
+<p>Yes, yes that sounds even better. And since I’ve indented it like that, it probably means that this is the right answer. And since this is the right answer, it’s probably worth making a note of the fact that our regression coefficients are estimates (we’re trying to guess the parameters that describe a population!), which is why I’ve added the little hats, so that we get <span class="math inline">\(\hat{b}_0\)</span> and <span class="math inline">\(\hat{b}_1\)</span> rather than <span class="math inline">\(b_0\)</span> and <span class="math inline">\(b_1\)</span>. Finally, I should also note that, since there’s actually more than one way to estimate a regression model, the more technical name for this estimation process is <strong>ordinary least squares (OLS) regression</strong>.</p>
 <div class="cell" data-layout-align="left">
 <div class="cell-output-display">
 <div id="fig-fig12-12" class="quarto-figure quarto-figure-left anchored">
@@ -762,7 +748,6 @@ div.csl-indent {
 </div>
 </div>
 </div>
-<p>Yes, yes that sounds even better. And since I’ve indented it like that, it probably means that this is the right answer. And since this is the right answer, it’s probably worth making a note of the fact that our regression coefficients are estimates (we’re trying to guess the parameters that describe a population!), which is why I’ve added the little hats, so that we get <span class="math inline">\(\hat{b}_0\)</span> and <span class="math inline">\(\hat{b}_1\)</span> rather than <span class="math inline">\(b_0\)</span> and <span class="math inline">\(b_1\)</span>. Finally, I should also note that, since there’s actually more than one way to estimate a regression model, the more technical name for this estimation process is <strong>ordinary least squares (OLS) regression</strong>.</p>
 <p>At this point, we now have a concrete definition for what counts as our “best” choice of regression coefficients, <span class="math inline">\(\hat{b}_0\)</span> and <span class="math inline">\(\hat{b}_1\)</span>. The natural question to ask next is, if our optimal regression coefficients are those that minimise the sum squared residuals, how do we find these wonderful numbers? The actual answer to this question is complicated and doesn’t help you understand the logic of regression.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> This time I’m going to let you off the hook. Instead of showing you the long and tedious way first and then “revealing” the wonderful shortcut that jamovi provides, let’s cut straight to the chase and just use jamovi to do all the heavy lifting.</p>
 <section id="linear-regression-in-jamovi" class="level3" data-number="12.4.1">
 <h3 data-number="12.4.1" class="anchored" data-anchor-id="linear-regression-in-jamovi"><span class="header-section-number">12.4.1</span> Linear regression in jamovi</h3>
@@ -1053,7 +1038,7 @@ div.csl-indent {
 <section id="outliers-and-anomalous-data" class="level3" data-number="12.10.6">
 <h3 data-number="12.10.6" class="anchored" data-anchor-id="outliers-and-anomalous-data"><span class="header-section-number">12.10.6</span> Outliers and anomalous data</h3>
 <p>One danger that you can run into with linear regression models is that your analysis might be disproportionately sensitive to a smallish number of “unusual” or “anomalous” observations. I discussed this idea previously in <a href="05-Drawing-graphs.html#sec-Using-box-plots-to-detect-outliers"><span>Section&nbsp;5.2.3</span></a> in the context of discussing the outliers that get automatically identified by the boxplot option under ‘Exploration’ – ‘Descriptives’, but this time we need to be much more precise. In the context of linear regression, there are three conceptually distinct ways in which an observation might be called “anomalous”. All three are interesting, but they have rather different implications for your analysis.</p>
-<p>The first kind of unusual observation is an <strong>outlier</strong>. The definition of an outlier (in this context) is an observation that is very different from what the regression model predicts. An example is shown in <a href="#fig-fig12-24">Figure&nbsp;<span>12.24</span></a>, the outlier has an unusual value on the outcome (y-axis location), but not the predictor (x-axis location) and lies a long way from the regression line. In practice, we operationalise this concept by saying that an outlier is an observation that has a very large residual, <span class="math inline">\(\epsilon_i^*\)</span>.</p>
+<p>The first kind of unusual observation is an <strong>outlier</strong>. The definition of an outlier (in this context) is an observation that is very different from what the regression model predicts. An example is shown in <a href="#fig-fig12-24">Figure&nbsp;<span>12.24</span></a>, the outlier has an unusual value on the outcome (y-axis location), but not the predictor (x-axis location) and lies a long way from the regression line. In practice, we operationalise this concept by saying that an outlier is an observation that has a very large residual, <span class="math inline">\(\epsilon_i^*\)</span>. Also see the lower left plot of Anscombe’s quartet, <a href="#fig-fig12-6">Figure&nbsp;<span>12.6</span></a>.</p>
 <p>Outliers are interesting: a big outlier might correspond to junk data, e.g., the variables might have been recorded incorrectly in the data set, or some other defect may be detectable. Note that you shouldn’t throw an observation away just because it’s an outlier. But the fact that it’s an outlier is often a cue to look more closely at that case and try to find out why it’s so different.</p>
 <div class="cell" data-layout-align="left" data-fig-plot="4">
 <div class="cell-output-display">

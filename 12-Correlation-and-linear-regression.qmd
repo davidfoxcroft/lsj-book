@@ -1,6 +1,6 @@
-\placetextbox{0.26}{0.06}{\scriptsize{©2025 D. Foxcroft and D. Navarro,}}
-\placetextbox{0.205}{0.05}{\scriptsize{CC BY-SA 4.0}}
-\placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333/12}}}
+\placetextbox{0.26}{0.06}{\scriptsize{©2025 D.R. Foxcroft and D.J. Navarro,}}
+\placetextbox{0.195}{0.05}{\scriptsize{CC BY-SA 4.0}}
+\placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333.12}}}
 
 # Correlation and linear regression {#sec-Correlation-and-linear-regression}
 
@@ -289,7 +289,9 @@ p1 <- ggplot(parenthood, aes(dan.sleep, dan.grump)) +
   ylab("My grumpiness (0-100)\n")  +
   theme(plot.title = element_text(size = 8),
         axis.title = element_text(size = 7),
-        axis.text = element_text(size = 6)
+        axis.text = element_text(size = 6),
+        axis.line = element_line(size=0.2),
+        axis.ticks = element_line(size=0.2)
   )
 
 p2 <- ggplot(parenthood, aes(dan.sleep, dan.grump)) +
@@ -300,7 +302,9 @@ p2 <- ggplot(parenthood, aes(dan.sleep, dan.grump)) +
   ylab("My grumpiness (0-100)\n")  +
   theme(plot.title = element_text(size = 8),
         axis.title = element_text(size = 7),
-        axis.text = element_text(size = 6)
+        axis.text = element_text(size = 6),
+        axis.line = element_line(size=0.2),
+        axis.ticks = element_line(size=0.2)
   )
 
 gridExtra::grid.arrange(p1,p2, ncol=2)
@@ -326,13 +330,15 @@ Okay, now let's redraw our pictures but this time I'll add some lines to show th
 
 > The estimated regression coefficients, $\hat{b}_0$ and $\hat{b}_1$, are those that minimise the sum of the squared residuals, which we could either write as $\sum_i (Y_i - \hat{Y}_i)^2$ or as $\sum_i \epsilon_i^2$.
 
+Yes, yes that sounds even better. And since I've indented it like that, it probably means that this is the right answer. And since this is the right answer, it's probably worth making a note of the fact that our regression coefficients are estimates (we're trying to guess the parameters that describe a population!), which is why I've added the little hats, so that we get $\hat{b}_0$ and $\hat{b}_1$ rather than $b_0$ and $b_1$. Finally, I should also note that, since there's actually more than one way to estimate a regression model, the more technical name for this estimation process is **ordinary least squares (OLS) regression**.
+
 ```{r}
 #| label: fig-fig12-12
 #| fig-cap: A depiction of the residuals associated with the best fitting regression line (panel a), and the residuals associated with a poor regression line (panel b). The residuals are much smaller for the good regression line. Again, this is no surprise given that the good line is the one that goes right through the middle of the data
 #| fig-alt: Two scatter plots side by side, both displaying "Grumpiness vs. Sleep" with sleep hours (x-axis) ranging from 0 to 9 and grumpiness (y-axis) ranging from 0 to 100. Each plot has a blue regression line showing a negative correlation. The left plot is labeled "Close tc" and the right plot "Distant tc"
 #| fig-width: 4
 #| fig-height: 4
-#| fig-pos: 'h!'
+#| fig-pos: 'H'
 
 
 load("data_and_tables/parenthood.Rdata")
@@ -352,7 +358,9 @@ p1 <- ggplot(mydat, aes(x = x, y = dan.grump)) +
   guides(fill = "none") +
   theme(plot.title = element_text(size = 8),
         axis.title = element_text(size = 7),
-        axis.text = element_text(size = 6)
+        axis.text = element_text(size = 6),
+        axis.line = element_line(size=0.2),
+        axis.ticks = element_line(size=0.2)
   )
 
 parenthood$predicted <- with(parenthood, predicted <- 80 + -3*dan.sleep)
@@ -370,14 +378,14 @@ p2 <- ggplot(mydat, aes(x = x, y = dan.grump)) +
   guides(fill = "none")  +
   theme(plot.title = element_text(size = 8),
         axis.title = element_text(size = 7),
-        axis.text = element_text(size = 6)
+        axis.text = element_text(size = 6),
+        axis.line = element_line(size=0.2),
+        axis.ticks = element_line(size=0.2)
   )
 
 gridExtra::grid.arrange(p1,p2, ncol=2)
 
 ```
-
-Yes, yes that sounds even better. And since I've indented it like that, it probably means that this is the right answer. And since this is the right answer, it's probably worth making a note of the fact that our regression coefficients are estimates (we're trying to guess the parameters that describe a population!), which is why I've added the little hats, so that we get $\hat{b}_0$ and $\hat{b}_1$ rather than $b_0$ and $b_1$. Finally, I should also note that, since there's actually more than one way to estimate a regression model, the more technical name for this estimation process is **ordinary least squares (OLS) regression**.
 
 At this point, we now have a concrete definition for what counts as our "best" choice of regression coefficients, $\hat{b}_0$ and $\hat{b}_1$. The natural question to ask next is, if our optimal regression coefficients are those that minimise the sum squared residuals, how do we find these wonderful numbers? The actual answer to this question is complicated and doesn't help you understand the logic of regression.[^12-correlation-and-linear-regression-6] This time I'm going to let you off the hook. Instead of showing you the long and tedious way first and then "revealing" the wonderful shortcut that jamovi provides, let's cut straight to the chase and just use jamovi to do all the heavy lifting.
 
@@ -773,7 +781,7 @@ ggplot(dat, aes(x=x, y=y)) +
 
 One danger that you can run into with linear regression models is that your analysis might be disproportionately sensitive to a smallish number of "unusual" or "anomalous" observations. I discussed this idea previously in @sec-Using-box-plots-to-detect-outliers in the context of discussing the outliers that get automatically identified by the boxplot option under 'Exploration' -- 'Descriptives', but this time we need to be much more precise. In the context of linear regression, there are three conceptually distinct ways in which an observation might be called "anomalous". All three are interesting, but they have rather different implications for your analysis.
 
-The first kind of unusual observation is an **outlier**. The definition of an outlier (in this context) is an observation that is very different from what the regression model predicts. An example is shown in @fig-fig12-24, the outlier has an unusual value on the outcome (y-axis location), but not the predictor (x-axis location) and lies a long way from the regression line. In practice, we operationalise this concept by saying that an outlier is an observation that has a very large residual, $\epsilon_i^*$. 
+The first kind of unusual observation is an **outlier**. The definition of an outlier (in this context) is an observation that is very different from what the regression model predicts. An example is shown in @fig-fig12-24, the outlier has an unusual value on the outcome (y-axis location), but not the predictor (x-axis location) and lies a long way from the regression line. In practice, we operationalise this concept by saying that an outlier is an observation that has a very large residual, $\epsilon_i^*$. Also see the lower left plot of Anscombe's quartet,  @fig-fig12-6.
 
 Outliers are interesting: a big outlier might correspond to junk data, e.g., the variables might have been recorded incorrectly in the data set, or some other defect may be detectable. Note that you shouldn't throw an observation away just because it's an outlier. But the fact that it's an outlier is often a cue to look more closely at that case and try to find out why it's so different.
 
@@ -809,7 +817,7 @@ ggplot(dat, aes(x=x, y=y)) +
 
 ```
 
-The second way in which an observation can be unusual is if it has high **leverage**, which happens when the observation is very different from all the other observations. This doesn't necessarily have to correspond to a large residual. If the observation happens to be unusual on all variables in precisely the same way, it can actually lie very close to the regression line. An example of this is shown in @fig-fig12-25. The leverage of an observation is operationalised in terms of its hat value, usually written $h_i$. The formula for the hat value is rather complicated[^12-correlation-and-linear-regression-25] but its interpretation is not: $h_i$ is a measure of the extent to which the i-th observation is "in control" of where the regression line ends up going.
+The second way in which an observation can be unusual is if it has high **leverage**, which happens when the observation is very different from all the other observations. This doesn't necessarily have to correspond to a large residual. If the observation happens to be unusual on all variables in precisely the same way, it can actually lie very close to the regression line. An example of this is shown in @fig-fig12-25. The leverage of an observation is operationalised in terms of its hat value, usually written $h_i$. The formula for the hat value is rather complicated[^12-correlation-and-linear-regression-25] but its interpretation is not: $h_i$ is a measure of the extent to which the i-th observation is "in control" of where the regression line ends up going. 
 
 [^12-correlation-and-linear-regression-25]: Again, for the linear algebra fanatics: the "hat matrix" is defined to be that matrix $H$ that converts the vector of observed values $y$ into a vector of predicted values $\hat{y}$, such that $\hat{y} = Hy$. The name comes from the fact that this is the matrix that "puts a hat on y". The hat value of the i-th observation is the i-th diagonal element of this matrix (so technically I should be writing it as $h_{ii}$ rather than $h_i$). And here's how it's calculated: $H = X(X^{'}X)^{1}X^{'}$.
 

@@ -1,6 +1,6 @@
-\placetextbox{0.26}{0.06}{\scriptsize{©2025 D. Foxcroft and D. Navarro,}}
-\placetextbox{0.205}{0.05}{\scriptsize{CC BY-SA 4.0}}
-\placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333/14}}}
+\placetextbox{0.26}{0.06}{\scriptsize{©2025 D.R. Foxcroft and D.J. Navarro,}}
+\placetextbox{0.195}{0.05}{\scriptsize{CC BY-SA 4.0}}
+\placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333.14}}}
 
 # Factorial ANOVA {#sec-Factorial-ANOVA}
 
@@ -101,7 +101,8 @@ Now, suppose I'm also curious to find out if therapy has a relationship to mood.
 #| label: fig-fig14-3
 #| classes: .enlarge-image
 #| fig-cap: jamovi two-way anova of mood.gain by drug and therapy
-#| fig-alt: A jamovi results table showing ANOVA test results for mood gain with factors "drug," "therapy," and their interaction. Includes Sum of Squares, df, Mean Square, F, $p$-values, η², η²p, and ω². Key results indicate significant effects for "drug" and "therapy," but not their interaction.
+#| fig-alt: A jamovi results table showing ANOVA test results for mood gain with factors "drug," "therapy," and their interaction. Includes Sum of Squares, df, Mean Square, F, $p$-values, η², η²p, and ω². Key results indicate significant effects for "drug" and "therapy," but not their interaction
+#| fig-pos: 'H'
 knitr::include_graphics("images/fig14-3.png")
 ```
 
@@ -157,6 +158,12 @@ Why does that happen? The answer lies in understanding how the residuals are cal
 
 The ANOVA model that we've been talking about so far covers a range of different patterns that we might observe in our data. For instance, in a two-way ANOVA design there are four possibilities: (a) only Factor A matters, (b) only Factor B matters, (c) both A and B matter, and (d) neither A nor B matters. An example of each of these four possibilities is plotted in @fig-fig14-4.
 
+## Factorial ANOVA 2: balanced designs, interpreting interactions
+
+The four patterns of data shown in @fig-fig14-4 are all quite realistic. There are many data sets that produce exactly those patterns. However, they are not the whole story and the ANOVA model that we have been talking about up to this point is not sufficient to fully account for a table of group means. Why not? Well, so far we have the ability to talk about the idea that drugs can influence mood, and therapy can influence mood, but no way of talking about the possibility of an **interaction** between the two. 
+
+An interaction between A and B is said to occur whenever the effect of Factor $A$ is *different*, depending on which level of Factor $B$ we're talking about. Several examples of an interaction effect with the context of a $2 \times 2$ ANOVA are shown in @fig-fig14-5. 
+
 ```{r}
 #| label: fig-fig14-4
 #| fig-cap: The four different outcomes for a $2 \times 2$ ANOVA when no interactions are present. In panel (a) we see a main effect of Factor A and no effect of Factor B. Panel (b) shows a main effect of Factor B but no effect of Factor A. Panel (c) shows main effects of both Factor A and Factor B. Finally, panel (d) shows no effect of either factor
@@ -174,7 +181,7 @@ p1 <- ggplot(dat, aes(x= FactA, y=mn, group=FactB)) +
              stat="identity", col= blueshade) +
   scale_shape_manual("Factor B", values=c(16,1), labels=c('Factor B, level 1', 'Factor B, level 2')) +
   scale_linetype_manual("Factor B", values=c("solid", "dotted"),  labels=c('Factor B, level 1', 'Factor B, level 2')) +
-  ggtitle("Only Factor A has an effect") +
+  ggtitle("Only Factor A has an effect\n") +
   ylim(0.5,2.5) +
   labs(x = "Factor A\n\n(a)", y = "Group mean", group = "Factor B") +
   theme(
@@ -197,7 +204,7 @@ p2 <- ggplot(dat, aes(x= FactA, y=mn, group=FactB)) +
              stat="identity", col= blueshade) +
   scale_shape_manual("Factor B", values=c(16,1), labels=c('Factor B, level 1', 'Factor B, level 2')) +
   scale_linetype_manual("Factor B", values=c("solid", "dotted"),  labels=c('Factor B, level 1', 'Factor B, level 2')) +
-  ggtitle("Only Factor B has an effect") +
+  ggtitle("Only Factor B has an effect\n") +
   ylim(0.5,2.5) +
   labs(x = "Factor A\n\n(b)", y = "Group mean", group = "Factor B") +
   theme(
@@ -220,7 +227,7 @@ p3 <- ggplot(dat, aes(x= FactA, y=mn, group=FactB)) +
              stat="identity", col= blueshade) +
   scale_shape_manual("Factor B", values=c(16,1), labels=c('Factor B, level 1', 'Factor B, level 2')) +
   scale_linetype_manual("Factor B", values=c("solid", "dotted"),  labels=c('Factor B, level 1', 'Factor B, level 2')) +
-  ggtitle("A and B both have an effect") +
+  ggtitle("A and B both have an effect\n") +
   ylim(0.5,2.5) +
   labs(x = "Factor A\n\n(c)", y = "Group mean", group = "Factor B") +
   theme(
@@ -243,7 +250,7 @@ p4 <- ggplot(dat, aes(x= FactA, y=mn, group=FactB)) +
              stat="identity", col= blueshade) +
   scale_shape_manual("Factor B", values=c(16,1), labels=c('Factor B, level 1', 'Factor B, level 2')) +
   scale_linetype_manual("Factor B", values=c("solid", "dotted"),  labels=c('Factor B, level 1', 'Factor B, level 2')) +
-  ggtitle("Neither A or B has an effect") +
+  ggtitle("Neither A or B has an effect\n") +
   ylim(0.5,2.5) +
   labs(x = "Factor A\n\n(d)", y = "Group mean", group = "Factor B") +
   theme(
@@ -260,14 +267,13 @@ gridExtra::grid.arrange(p1,p2,p3,p4,ncol=2)
 
 ```
 
-## Factorial ANOVA 2: balanced designs, interpreting interactions
-
-The four patterns of data shown in @fig-fig14-4 are all quite realistic. There are many data sets that produce exactly those patterns. However, they are not the whole story and the ANOVA model that we have been talking about up to this point is not sufficient to fully account for a table of group means. Why not? Well, so far we have the ability to talk about the idea that drugs can influence mood, and therapy can influence mood, but no way of talking about the possibility of an **interaction** between the two. 
+To give a more concrete example, suppose that the operation of Anxifree and Joyzepam is governed by quite different physiological mechanisms. One consequence of this is that while Joyzepam has more or less the same effect on mood regardless of whether one is in therapy, Anxifree is actually much more effective when administered in conjunction with CBT. The ANOVA that we developed in the previous section does not capture this idea. To get some idea of whether an interaction is actually happening it helps to plot the various group means. In jamovi this is done via the ANOVA 'Estimated Marginal Means' option -- just move drug and therapy across into the 'Marginal Means' box under 'Term 1'. This should look something like @fig-fig14-6. 
 
 ```{r}
 #| label: fig-fig14-5
 #| fig-cap: Qualitatively different interactions for a $2 \times 2$ ANOVA
-#| fig-alt: Four line graphs (a-d) depict interactions between two factors (A and B) at two levels (1 and 2). The y-axis in each graph is labeled "Group mean" and the x-axis "Factor B." Graph (a) shows a crossover interaction. Graphs (b), (c), and (d) highlight different effects for one level of Factor A or B, or one differing cell.
+#| fig-alt: Four line graphs (a-d) depict interactions between two factors (A and B) at two levels (1 and 2). The y-axis in each graph is labeled "Group mean" and the x-axis "Factor B." Graph (a) shows a crossover interaction. Graphs (b), (c), and (d) highlight different effects for one level of Factor A or B, or one differing cell
+#| fig-pos: 'h!'
 
 mn=c(1.0, 1.0, 2.0, 2.0)
 FactA = factor(c('level 1', 'level 2', 'level 1', 'level 2'))
@@ -281,7 +287,7 @@ p1 <- ggplot(dat, aes(x= FactA, y=mn, group=FactB)) +
              stat="identity", col= blueshade) +
   scale_shape_manual("Factor B", values=c(16,1), labels=c('Factor B, level 1', 'Factor B, level 2')) +
   scale_linetype_manual("Factor B", values=c("solid", "dotted"),  labels=c('Factor B, level 1', 'Factor B, level 2')) +
-  ggtitle("Crossover interaction") +
+  ggtitle("Crossover interaction\n") +
   ylim(0.5,2.5) +
   labs(x = "Factor A\n\n(a)", y = "Group mean", group = "Factor B") +
   theme(
@@ -304,7 +310,7 @@ p2 <- ggplot(dat, aes(x= FactA, y=mn, group=FactB)) +
              stat="identity", col= blueshade) +
   scale_shape_manual("Factor B", values=c(16,1), labels=c('Factor B, level 1', 'Factor B, level 2')) +
   scale_linetype_manual("Factor B", values=c("solid", "dotted"),  labels=c('Factor B, level 1', 'Factor B, level 2')) +
-  ggtitle("Effect for one level of Factor A") +
+  ggtitle("Effect for one level of Factor A\n") +
   ylim(0.5,2.5) +
   labs(x = "Factor A\n\n(b)", y = "Group mean", group = "Factor B") +
   theme(
@@ -327,7 +333,7 @@ p3 <- ggplot(dat, aes(x= FactA, y=mn, group=FactB)) +
              stat="identity", col= blueshade) +
   scale_shape_manual("Factor B", values=c(16,1), labels=c('Factor B, level 1', 'Factor B, level 2')) +
   scale_linetype_manual("Factor B", values=c("solid", "dotted"),  labels=c('Factor B, level 1', 'Factor B, level 2')) +
-  ggtitle("One cell is different") +
+  ggtitle("One cell is different\n") +
   ylim(0.5,2.5) +
   labs(x = "Factor A\n\n(c)", y = "Group mean", group = "Factor B") +
   theme(
@@ -350,7 +356,7 @@ p4 <- ggplot(dat, aes(x= FactA, y=mn, group=FactB)) +
              stat="identity", col= blueshade) +
   scale_shape_manual("Factor B", values=c(16,1), labels=c('Factor B, level 1', 'Factor B, level 2')) +
   scale_linetype_manual("Factor B", values=c("solid", "dotted"),  labels=c('Factor B, level 1', 'Factor B, level 2')) +
-  ggtitle("Effect for one level of Factor B") +
+  ggtitle("Effect for one level of Factor B\n") +
   ylim(0.5,2.5) +
   labs(x = "Factor A\n\n(d)", y = "Group mean", group = "Factor B") +
   theme(
@@ -367,7 +373,9 @@ gridExtra::grid.arrange(p1,p2,p3,p4,ncol=2)
 
 ```
 
-An interaction between A and B is said to occur whenever the effect of Factor $A$ is *different*, depending on which level of Factor $B$ we're talking about. Several examples of an interaction effect with the context of a $2 \times 2$ ANOVA are shown in @fig-fig14-5. To give a more concrete example, suppose that the operation of Anxifree and Joyzepam is governed by quite different physiological mechanisms. One consequence of this is that while Joyzepam has more or less the same effect on mood regardless of whether one is in therapy, Anxifree is actually much more effective when administered in conjunction with CBT. The ANOVA that we developed in the previous section does not capture this idea. To get some idea of whether an interaction is actually happening it helps to plot the various group means. In jamovi this is done via the ANOVA 'Estimated Marginal Means' option -- just move drug and therapy across into the 'Marginal Means' box under 'Term 1'. This should look something like @fig-fig14-6. 
+\
+
+Our main concern relates to the fact that the two lines aren't parallel. The effect of CBT (difference between solid line and dotted line) when the drug is Joyzepam (right side) appears to be near zero, even smaller than the effect of CBT when a placebo is used (left side). However, when Anxifree is administered, the effect of CBT is larger than the placebo (middle). Is this effect real, or is this just random variation due to chance? Our original ANOVA cannot answer this question, because we make no allowances for the idea that interactions even exist! In this section, we'll fix this problem.
 
 ```{r}
 #| label: fig-fig14-6
@@ -377,8 +385,6 @@ An interaction between A and B is said to occur whenever the effect of Factor $A
 #| fig-pos: 'H'
 knitr::include_graphics("images/fig14-6.png")
 ```
-
-Our main concern relates to the fact that the two lines aren't parallel. The effect of CBT (difference between solid line and dotted line) when the drug is Joyzepam (right side) appears to be near zero, even smaller than the effect of CBT when a placebo is used (left side). However, when Anxifree is administered, the effect of CBT is larger than the placebo (middle). Is this effect real, or is this just random variation due to chance? Our original ANOVA cannot answer this question, because we make no allowances for the idea that interactions even exist! In this section, we'll fix this problem.
 
 ### What exactly is an interaction effect?
 
@@ -482,13 +488,16 @@ knitr::include_graphics("images/fig14-8.png")
 
 In the output we see that the estimated mean mood gain for the placebo group with no therapy was $0.300$, with a $95\%$ confidence interval from $0.006$ to $0.594$. Note that these are not the same confidence intervals that you would get if you calculated them separately for each group, because of the fact that the ANOVA model assumes homogeneity of variance and therefore uses a pooled estimate of the standard deviation.
 
-When the model doesn't contain the interaction term then the estimated group means will differ from the sample means. Instead of reporting the sample mean, jamovi calculates the value of the group means that would be expected on the basis of the marginal means (i.e., assuming no interaction). Using the notation we developed earlier, the estimate for $\mu_{rc}$, the mean for level $r$ on the (row) Factor A and level $c$ on the (column) Factor B would be $\mu_{..} + \alpha_r + \beta_c$. If there are genuinely no interactions between the two factors, this is actually a better estimate of the population mean than the raw sample mean. Removing the interaction term from the model, via the 'Model' options in the jamovi ANOVA analysis, provides the marginal means for the analysis shown in @fig-fig14-9.
+When the model doesn't contain the interaction term then the estimated group means will differ from the sample means. Instead of reporting the sample mean, jamovi calculates the value of the group means that would be expected on the basis of the marginal means (i.e., assuming no interaction). 
+
+Using the notation we developed earlier, the estimate for $\mu_{rc}$, the mean for level $r$ on the (row) Factor A and level $c$ on the (column) Factor B would be $\mu_{..} + \alpha_r + \beta_c$. If there are genuinely no interactions between the two factors, this is actually a better estimate of the population mean than the raw sample mean. Removing the interaction term from the model, via the 'Model' options in the jamovi ANOVA analysis, provides the marginal means for the analysis shown in @fig-fig14-9.
 
 ```{r}
 #| label: fig-fig14-9
 #| classes: .enlarge-image
 #| fig-cap: jamovi screenshot showing the marginal means for the unsaturated model, i.e. without the interaction component, with the clinical trial data set
-#| fig-alt: ANOVA table and Estimated Marginal Means table for mood gain analysis. The ANOVA table shows a significant drug effect with F(3,14) = 7.08, p = 0.01866. The Estimated Marginal Means table lists means and confidence intervals for interactions between therapy and drug.
+#| fig-alt: ANOVA table and Estimated Marginal Means table for mood gain analysis. The ANOVA table shows a significant drug effect with F(3,14) = 7.08, p = 0.01866. The Estimated Marginal Means table lists means and confidence intervals for interactions between therapy and drug
+#| fig-pos: 'H'
 knitr::include_graphics("images/fig14-9.png")
 ```
 
@@ -504,14 +513,6 @@ As mentioned in @sec-Checking-the-homogeneity-of-variance-assumption in the last
 
 As with one-way ANOVA we can test for the normality of residuals is straightforward (see @sec-Checking-the-normality-assumption). Primarily it's a good idea to examine the residuals graphically using a QQ plot. See @fig-fig14-10.
 
-```{r}
-#| label: fig-fig14-10
-#| classes: .enlarge-image
-#| fig-cap: Checking assumptions in an ANOVA model
-#| fig-alt: An image shows assumption checks for statistical analysis. It includes results for the Levene test (F = 0.22, df1 = 5, df2 = 12, p = 0.94731) and Shapiro-Wilk test (Statistic = 0.96, p = 0.53290). Below is a Q-Q plot of standardized residuals versus theoretical quantiles.
-knitr::include_graphics("images/fig14-10.png")
-```
-
 ## Analysis of covariance (ANCOVA) {#sec-analysis-of-covariance-ancova}
 
 A variation in ANOVA is when you have an additional continuous variable that you think might be related to the dependent variable. This additional variable can be added to the analysis as a covariate, in the aptly named analysis of covariance (ANCOVA).
@@ -524,22 +525,29 @@ Despite this advantage, ANCOVA runs the risk of undoing real differences between
 \
 \
 
-```{r out.width="80%"}
+```{r}
+#| label: fig-fig14-10
+#| classes: .enlarge-image
+#| fig-cap: Checking assumptions in an ANOVA model
+#| fig-alt: An image shows assumption checks for statistical analysis. It includes results for the Levene test (F = 0.22, df1 = 5, df2 = 12, p = 0.94731) and Shapiro-Wilk test (Statistic = 0.96, p = 0.53290). Below is a Q-Q plot of standardized residuals versus theoretical quantiles.
+knitr::include_graphics("images/fig14-10.png")
+```
+
+```{r out.width="90%"}
 #| label: fig-fig14-11
 #| fig-cap: Plot of Statistics anxiety against age for two distinct groups
 #| fig-alt: A scatter plot shows 'Statistics anxiety' on the Y-axis versus 'Age' on the X-axis. Data points for 'Scientists' cluster lower on the Y-axis and at younger ages on the X-axis, while 'Artists' cluster higher on the Y-axis and at older ages on the X-axis
-#| fig-pos: ''
+#| fig-pos: 'h!'
 knitr::include_graphics("images/fig14-11.png")
 ```
 
+\
 \
 \
 
 ### Running ANCOVA in jamovi
 
 A health psychologist was interested in the effect of routine cycling and stress on happiness levels, with age as a covariate. You can find the data set in the file *ancova.csv*. Open this file in jamovi and then, to undertake an ANCOVA, select Analyses - ANOVA - ANCOVA to open the ANCOVA analysis window (@fig-fig14-12). Highlight the dependent variable 'happiness' and transfer it into the 'Dependent Variable' text box. Highlight the independent variables 'stress' and 'commute' and transfer them into the 'Fixed Factors' text box. Highlight the covariate 'age' and transfer it into the 'Covariates' text box. Then click on Estimated Marginal Means to bring up the plots and tables options.
-
-An ANCOVA table showing 'Tests of Between Subjects Effects' is produced in the jamovi results window (@fig-fig14-13). The $F$-value for the covariate 'age' is significant at $p = .023$, suggesting that age is an important predictor of the dependent variable, happiness. When we look at the estimated marginal mean scores (@fig-fig14-14), adjustments have been made (compared to an analysis without the covariate) because of the inclusion of the covariate 'age' in this ANCOVA. A plot (@fig-fig14-15) is a good way of visualising and interpreting the significant effects.
 
 ```{r out.width="75%"}
 #| label: fig-fig14-12
@@ -548,9 +556,11 @@ An ANCOVA table showing 'Tests of Between Subjects Effects' is produced in the j
 #| fig-alt: A jamovi screenshot showing an ANCOVA setup. The window has options for adding dependent variables, fixed factors, and covariates. "Happiness" is selected as the dependent variable, with "stress" and "commute" as fixed factors, and "age" as a covariate
 #| fig-height: 4
 #| fig-width: 6
-#| fig-pos: 'H'
+#| fig-pos: 'h!'
 knitr::include_graphics("images/fig14-12.png")
 ```
+
+An ANCOVA table showing 'Tests of Between Subjects Effects' is produced in the jamovi results window (@fig-fig14-13). The $F$-value for the covariate 'age' is significant at $p = .023$, suggesting that age is an important predictor of the dependent variable, happiness. When we look at the estimated marginal mean scores (@fig-fig14-14), adjustments have been made (compared to an analysis without the covariate) because of the inclusion of the covariate 'age' in this ANCOVA. A plot (@fig-fig14-15) is a good way of visualising and interpreting the significant effects.
 
 ```{r}
 #| label: fig-fig14-13
@@ -667,7 +677,9 @@ $$
 \end{split}
 $$
 
-Because this student attended class, the predicted grade is equal to the intercept term b0 plus the coefficient associated with the attend variable, $b_1$. So, if $b_1$ is greater than zero, we're expecting that the students who turn up to lectures will get higher grades than those students who don't. If this coefficient is negative we're expecting the opposite: students who turn up at class end up performing much worse. In fact, we can push this a little bit further. What about student number 1, who turned up to class ($X_{1,1} = 1$) and read the textbook ($X_{2,1} = 1$)? If we plug these numbers into the regression we get:
+Because this student attended class, the predicted grade is equal to the intercept term b0 plus the coefficient associated with the attend variable, $b_1$. So, if $b_1$ is greater than zero, we're expecting that the students who turn up to lectures will get higher grades than those students who don't. If this coefficient is negative we're expecting the opposite: students who turn up at class end up performing much worse. 
+
+In fact, we can push this a little bit further. What about student number 1, who turned up to class ($X_{1,1} = 1$) and read the textbook ($X_{2,1} = 1$)? If we plug these numbers into the regression we get:
 
 $$
 \begin{split}
@@ -691,15 +703,16 @@ As you can see, the intercept term $b_0$ acts like a kind of "baseline" grade th
 
 Okay, now that we're really starting to see why ANOVA and regression are basically the same thing, let's actually run our regression using the rtfm data and the jamovi regression analysis to convince ourselves that this is really true. Running the regression in the usual way gives the results shown in @fig-fig14-18.
 
+There's a few interesting things to note here. First, notice that the intercept term is 43.5 which is close to the "group" mean of 42.5 observed for those two students who didn't read the text or attend class. Second, notice that we have the regression coefficient of $b_1 = 18.0$ for the attendance variable, suggesting that those students that attended class scored 18% higher than those who didn't. So our expectation would be that those students who turned up to class but didn't read the textbook would obtain a grade of $b_0 + b_1$, which is equal to $43.5 + 18.0 = 61.5$. You can verify for yourself that the same thing happens when we look at the students that read the textbook.
+
 ```{r out.width="70%"}
 #| label: fig-fig14-18
 #| classes: .enlarge-image
 #| fig-cap: Regression analysis of the *rtfm.csv* data set in jamovi, without the interaction term
-#| fig-alt: A jamovi results table titled "Model Coefficients - grade" displays the estimate, standard error (SE), t-value, and $p$-value for three predictors:- Intercept, attend, and reading. The Intercept values are 43.50, 3.35, 12.97, 0.00005. Attend:- 18.00, 3.87, 4.65, 0.00559. Reading:- 28.00, 3.87, 7.23, 0.00079.
+#| fig-alt: A jamovi results table titled "Model Coefficients - grade" displays the estimate, standard error (SE), t-value, and $p$-value for three predictors:- Intercept, attend, and reading. The Intercept values are 43.50, 3.35, 12.97, 0.00005. Attend:- 18.00, 3.87, 4.65, 0.00559. Reading:- 28.00, 3.87, 7.23, 0.00079
+#| fig-pos: 'H'
 knitr::include_graphics("images/fig14-18.png")
 ```
-
-There's a few interesting things to note here. First, notice that the intercept term is 43.5 which is close to the "group" mean of 42.5 observed for those two students who didn't read the text or attend class. Second, notice that we have the regression coefficient of $b_1 = 18.0$ for the attendance variable, suggesting that those students that attended class scored 18% higher than those who didn't. So our expectation would be that those students who turned up to class but didn't read the textbook would obtain a grade of $b_0 + b_1$, which is equal to $43.5 + 18.0 = 61.5$. You can verify for yourself that the same thing happens when we look at the students that read the textbook.
 
 Actually, we can push a little further in establishing the equivalence of our ANOVA and our regression. Look at the $p$-values associated with the attend variable and the reading variable in the regression output. They're identical to the ones we encountered earlier when running the ANOVA. This might seem a little surprising, since the test used when running our regression model calculates a $t$-statistic and the ANOVA calculates an $F$-statistic. However, if you can remember all the way back to @sec-Introduction-to-probability, I mentioned that there's a relationship between the $t$-distribution and the $F$-distribution. If you have some quantity that is distributed according to a $t$-distribution with $k$ degrees of freedom and you square it, then this new squared quantity follows an $F$-distribution whose degrees of freedom are 1 and $k$. We can check this with respect to the $t$-statistics in our regression model. For the attend variable we get a $t$-value of 4.65. If we square this number we end up with 21.6, which matches the corresponding $F$-statistic in our ANOVA.
 
@@ -783,7 +796,8 @@ Although we went through all the faff of computing new variables in jamovi for t
 #| label: fig-fig14-23
 #| classes: .enlarge-image
 #| fig-cap: Regression analysis with factors and contrasts in jamovi, including omnibus ANOVA test results
-#| fig-alt: A jamovi screenshot displaying linear regression analysis within a software interface. The interface shows data inputs and settings on the left, while the right side displays output results including ANOVA and model coefficients. Sections for data, analyses, edit, and more are visible.
+#| fig-alt: A jamovi screenshot displaying linear regression analysis within a software interface. The interface shows data inputs and settings on the left, while the right side displays output results including ANOVA and model coefficients. Sections for data, analyses, edit, and more are visible
+#| fig-pos: 'H'
 knitr::include_graphics("images/fig14-23.png")
 ```
 

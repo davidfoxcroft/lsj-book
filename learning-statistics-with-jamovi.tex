@@ -153,6 +153,22 @@
 \usepackage{adjustbox}
 \usepackage{hyperref}
 \makeatletter
+\@ifpackageloaded{tcolorbox}{}{\usepackage[skins,breakable]{tcolorbox}}
+\@ifpackageloaded{fontawesome5}{}{\usepackage{fontawesome5}}
+\definecolor{quarto-callout-color}{HTML}{909090}
+\definecolor{quarto-callout-note-color}{HTML}{0758E5}
+\definecolor{quarto-callout-important-color}{HTML}{CC1914}
+\definecolor{quarto-callout-warning-color}{HTML}{EB9113}
+\definecolor{quarto-callout-tip-color}{HTML}{00A047}
+\definecolor{quarto-callout-caution-color}{HTML}{FC5300}
+\definecolor{quarto-callout-color-frame}{HTML}{acacac}
+\definecolor{quarto-callout-note-color-frame}{HTML}{4582ec}
+\definecolor{quarto-callout-important-color-frame}{HTML}{d9534f}
+\definecolor{quarto-callout-warning-color-frame}{HTML}{f0ad4e}
+\definecolor{quarto-callout-tip-color-frame}{HTML}{02b875}
+\definecolor{quarto-callout-caution-color-frame}{HTML}{fd7e14}
+\makeatother
+\makeatletter
 \makeatother
 \makeatletter
 \@ifpackageloaded{bookmark}{}{\usepackage{bookmark}}
@@ -252,7 +268,7 @@
 
 \Large{A Tutorial for Beginners in Statistical Analysis}\\*[20pt]
 
-\normalsize{Danielle Navarro and David Foxcroft}
+\normalsize{Danielle J. Navarro and David R. Foxcroft}
 
 \vfill
 \end{center}
@@ -262,13 +278,13 @@
 \hspace{0pt}
 \vfill
 
-\copyright 2025 David Foxcroft and Danielle Navarro
+\copyright 2025 David R. Foxcroft and Danielle J. Navarro
 
 This work is licensed under an Attribution-ShareAlike 4.0 International (CC BY-SA 4.0).
 
 This license allows you to copy and redistribute, transform, and build upon the material for any purpose, even commercially. providing attribution is made to the authors (but not in any way that suggests that they endorse you or your use of the work). Attribution should include the following information:
 
-Danielle Navarro and David Foxcroft, \textit{Learning statistics with jamovi: A tutorial for beginners in statistical analysis}. Cambridge, UK: Open Book Publishers, 2025, \url{https://doi.org/10.11647/OBP.0333}
+Danielle J. Navarro and David R. Foxcroft, \textit{Learning statistics with jamovi: A tutorial for beginners in statistical analysis}. Cambridge, UK: Open Book Publishers, 2025, \url{https://doi.org/10.11647/OBP.0333}
 
 Further details about CC BY-SA licenses are available at \\ \url{https://creativecommons.org/licenses/by-sa/4.0/}
 
@@ -289,22 +305,8 @@ DOI: 10.11647/OBP.0333
 \hspace{0pt}
 \pagebreak
 
-\hspace{0pt}
-\vfill
 
-This textbook covers the contents of an introductory statistics class, as typically taught to undergraduate psychology, health or social science students. The book covers how to get started in jamovi as well as giving an introduction to data manipulation. From a statistical perspective, the book discusses descriptive statistics and graphing first, followed by chapters on probability theory, sampling and estimation, and null hypothesis testing. After introducing the theory, the book covers the analysis of contingency tables, correlation, \textit{t}-tests, regression, ANOVA and factor analysis. Bayesian statistics are touched on at the end of the book.
-
-Data sets used in the book are freely available for use in jamovi. All the data files you need can be accessed within jamovi via an add-on module in the jamovi library. Or you can download the files from \url{https://www.learnstatswithjamovi.com}.
-
-
-Citation: Danielle Navarro and David Foxcroft, \textit{Learning statistics with jamovi: A tutorial for beginners in statistical analysis}. Cambridge, UK: Open Book Publishers, 2025, \url{https://doi.org/10.11647/OBP.0333}
-
-\vfill
-\hspace{0pt}
-\pagebreak
-
-
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[breakable, frame hidden, borderline west={3pt}{0pt}{shadecolor}, boxrule=0pt, sharp corners, interior hidden, enhanced]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[boxrule=0pt, frame hidden, sharp corners, interior hidden, borderline west={3pt}{0pt}{shadecolor}, breakable, enhanced]}{\end{tcolorbox}}\fi
 
 \renewcommand*\contentsname{Table of contents}
 {
@@ -321,6 +323,17 @@ Citation: Danielle Navarro and David Foxcroft, \textit{Learning statistics with 
 
 \markboth{Preface}{Preface}
 
+In this textbook we cover the contents of an introductory statistics
+class, as typically taught to undergraduate psychology, health or social
+science students. The book covers how to get started in jamovi as well
+as giving an introduction to data manipulation. From a statistical
+perspective, the book discusses descriptive statistics and graphing
+first, followed by chapters on probability theory, sampling and
+estimation, and null hypothesis testing. After introducing the theory,
+the book covers the analysis of contingency tables, correlation,
+t-tests, regression, ANOVA and factor analysis. Bayesian statistics are
+touched on at the end of the book.
+
 This book is an adaptation of DJ Navarro (2018). Learning statistics
 with R: A tutorial for psychology students and other beginners. (Version
 0.6). \url{https://learningstatisticswithr.com/}.
@@ -332,14 +345,23 @@ the book can be found in the preface to version 0.75:
 \url{https://github.com/user-attachments/files/18124061/learning-statistics-with-jamovi-0.75.pdf}.
 In that time, many people have contacted us asking for a hard copy
 version of the book. To achieve this, and to preserve the open source
-attributes of the book and materials, we have worked with
-\href{https://www.openbookpublishers.com/books/10.11647/obp.0333}{Open
-Book Publishers} in Cambridge, UK, to release this updated version. Open
-Book Publishers are the leading independent open access publisher of
-academic research in the Humanities and Social Sciences in the UK. They
-are award-winning, not-for-profit, run by scholars, and committed to
-making high-quality research freely available to readers around the
-world.
+attributes of the book and materials, we have worked with Open Book
+Publishers in Cambridge, UK, to release this updated version. Open Book
+Publishers are the leading independent open access publisher of academic
+research in the Humanities and Social Sciences in the UK. They are
+award-winning, not-for-profit, run by scholars, and committed to making
+high-quality research freely available to readers around the world.
+
+\begin{tcolorbox}[enhanced jigsaw, rightrule=.15mm, arc=.35mm, opacitybacktitle=0.6, left=2mm, breakable, colframe=quarto-callout-note-color-frame, coltitle=black, bottomtitle=1mm, toptitle=1mm, opacityback=0, bottomrule=.15mm, leftrule=.75mm, colbacktitle=quarto-callout-note-color!10!white, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, toprule=.15mm, titlerule=0mm, colback=white]
+
+A pdf version of the book is available for free download from Open Book
+Publishers
+(\url{https://www.openbookpublishers.com/books/10.11647/obp.0333}). All
+the data files you need can be accessed for free within jamovi via an
+add-on module in the jamovi library. Or you can download the files from
+\url{https://www.learnstatswithjamovi.com}.
+
+\end{tcolorbox}
 
 If you spot any mistakes, or have any suggestions, please do let us know
 by raising an issue at
@@ -353,9 +375,9 @@ January 1st, 2025}
 \hypertarget{why-do-we-learn-statistics}{%
 \chapter{Why do we learn statistics}\label{why-do-we-learn-statistics}}
 
-\placetextbox{0.26}{0.06}{\scriptsize{©2025 D. Foxcroft and D. Navarro,}}
-\placetextbox{0.205}{0.05}{\scriptsize{CC BY-SA 4.0}}
-\placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333/01}}}
+\placetextbox{0.26}{0.06}{\scriptsize{©2025 D.R. Foxcroft and D.J. Navarro,}}
+\placetextbox{0.195}{0.05}{\scriptsize{CC BY-SA 4.0}}
+\placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333.01}}}
 
 \[ \]
 
@@ -561,7 +583,10 @@ where this is going.
 In a classic study, J. St. B. T. Evans et al. (1983) ran an experiment
 looking at exactly this. What they found is that when pre-existing
 biases (i.e., beliefs) were in agreement with the structure of the data,
-everything went the way you'd hope (Table~\ref{tbl-tab1-2}).
+everything went the way you'd hope (Table~\ref{tbl-tab1-2}). Not
+perfect, but that's pretty good. But look what happens when our
+intuitive feelings about the truth of the conclusion run against the
+logical structure of the argument, see (Table~\ref{tbl-tab1-3}).
 
 \hypertarget{tbl-tab1-2}{}
  
@@ -611,10 +636,6 @@ everything went the way you'd hope (Table~\ref{tbl-tab1-2}).
 
 \end{table}
  
-
-Not perfect, but that's pretty good. But look what happens when our
-intuitive feelings about the truth of the conclusion run against the
-logical structure of the argument, see (Table~\ref{tbl-tab1-3}).
 
 Oh dear, that's not as good. Apparently, when people are presented with
 a strong argument that contradicts our pre-existing beliefs, we find it
@@ -887,10 +908,11 @@ females tended to apply to different departments. If we rank the
 departments in terms of the total number of male applicants, we get
 \textbf{A}\textgreater{}\textbf{B}\textgreater D\textgreater C\textgreater F\textgreater E
 (the ``easy'' departments are in bold). On the whole, males tended to
-apply to the departments that had high admission rates. Now compare this
-to how the female applicants distributed themselves. Ranking the
-departments in terms of the total number of female applicants produces a
-quite different ordering
+apply to the departments that had high admission rates.
+
+Now compare this to how the female applicants distributed themselves.
+Ranking the departments in terms of the total number of female
+applicants produces a quite different ordering
 C\textgreater E\textgreater D\textgreater F\textgreater{}\textbf{A}\textgreater{}\textbf{B}.
 In other words, what these data seem to be suggesting is that the female
 applicants tended to apply to ``harder'' departments. And in fact, if we
@@ -907,9 +929,9 @@ teach research methods. Because science is hard, and the truth is
 sometimes cunningly hidden in the nooks and crannies of complicated
 data.
 
-\begin{figure}[h!]
+\begin{figure}[H]
 
-\includegraphics[width=0.8\textwidth,height=\textheight]{01-Why-do-we-learn-statistics_files/figure-pdf/fig-fig1-1-1.pdf} \hfill{}
+\includegraphics[width=0.85\textwidth,height=\textheight]{01-Why-do-we-learn-statistics_files/figure-pdf/fig-fig1-1-1.pdf} \hfill{}
 
 \caption{\label{fig-fig1-1}The Berkeley 1973 college admissions data.
 This figure plots the admission rate for the 85 departments that had at
@@ -1141,9 +1163,9 @@ that you want to engage in.
 \chapter{A brief introduction to research
 design}\label{sec-A-brief-introduction-to-research-design}}
 
-\placetextbox{0.26}{0.06}{\scriptsize{©2025 D. Foxcroft and D. Navarro,}}
-\placetextbox{0.205}{0.05}{\scriptsize{CC BY-SA 4.0}}
-\placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333/02}}}
+\placetextbox{0.26}{0.06}{\scriptsize{©2025 D.R. Foxcroft and D.J. Navarro,}}
+\placetextbox{0.195}{0.05}{\scriptsize{CC BY-SA 4.0}}
+\placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333.02}}}
 
 \begin{quote}
 \emph{To consult the statistician after an experiment is finished is
@@ -3108,9 +3130,9 @@ with your favourite search engine and you'll find dozens.
 \chapter{Getting started with
 jamovi}\label{getting-started-with-jamovi}}
 
-\placetextbox{0.26}{0.06}{\scriptsize{©2025 D. Foxcroft and D. Navarro,}}
-\placetextbox{0.205}{0.05}{\scriptsize{CC BY-SA 4.0}}
-\placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333/03}}}
+\placetextbox{0.26}{0.06}{\scriptsize{©2025 D.R. Foxcroft and D.J. Navarro,}}
+\placetextbox{0.195}{0.05}{\scriptsize{CC BY-SA 4.0}}
+\placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333.03}}}
 
 \begin{quote}
 \emph{Robots are nice to work with.}\\
@@ -3732,9 +3754,9 @@ the next chapter will get us a bit closer!
 \hypertarget{sec-Descriptive-statistics}{%
 \chapter{Descriptive statistics}\label{sec-Descriptive-statistics}}
 
-\placetextbox{0.26}{0.06}{\scriptsize{©2025 D. Foxcroft and D. Navarro,}}
-\placetextbox{0.205}{0.05}{\scriptsize{CC BY-SA 4.0}}
-\placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333/04}}}
+\placetextbox{0.26}{0.06}{\scriptsize{©2025 D.R. Foxcroft and D.J. Navarro,}}
+\placetextbox{0.195}{0.05}{\scriptsize{CC BY-SA 4.0}}
+\placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333.04}}}
 
 Any time that you get a new data set to look at one of the first tasks
 that you have to do is find ways of summarising the data in a compact,
@@ -5140,9 +5162,9 @@ everyday importance of choosing good descriptives.
 \hypertarget{sec-Drawing-graphs}{%
 \chapter{Drawing graphs}\label{sec-Drawing-graphs}}
 
-\placetextbox{0.26}{0.06}{\scriptsize{©2025 D. Foxcroft and D. Navarro,}}
-\placetextbox{0.205}{0.05}{\scriptsize{CC BY-SA 4.0}}
-\placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333/05}}}
+\placetextbox{0.26}{0.06}{\scriptsize{©2025 D.R. Foxcroft and D.J. Navarro,}}
+\placetextbox{0.195}{0.05}{\scriptsize{CC BY-SA 4.0}}
+\placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333.05}}}
 
 \begin{quote}
 \emph{Above all else show the data.}\\
@@ -5566,9 +5588,9 @@ because it's a much more powerful and cleaner system.
 \hypertarget{sec-Pragmatic-matters}{%
 \chapter{Pragmatic matters}\label{sec-Pragmatic-matters}}
 
-\placetextbox{0.26}{0.06}{\scriptsize{©2025 D. Foxcroft and D. Navarro,}}
-\placetextbox{0.205}{0.05}{\scriptsize{CC BY-SA 4.0}}
-\placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333/06}}}
+\placetextbox{0.26}{0.06}{\scriptsize{©2025 D.R. Foxcroft and D.J. Navarro,}}
+\placetextbox{0.195}{0.05}{\scriptsize{CC BY-SA 4.0}}
+\placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333.06}}}
 
 \begin{quote}
 \emph{The garden of life never seems to confine itself to the plots
@@ -7132,9 +7154,9 @@ assumptions are sensible.
 \chapter{Introduction to
 probability}\label{sec-Introduction-to-probability}}
 
-\placetextbox{0.26}{0.06}{\scriptsize{©2025 D. Foxcroft and D. Navarro,}}
-\placetextbox{0.205}{0.05}{\scriptsize{CC BY-SA 4.0}}
-\placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333/07}}}
+\placetextbox{0.26}{0.06}{\scriptsize{©2025 D.R. Foxcroft and D.J. Navarro,}}
+\placetextbox{0.195}{0.05}{\scriptsize{CC BY-SA 4.0}}
+\placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333.07}}}
 
 \begin{quote}
 \emph{{[}God{]} has afforded us only the twilight \ldots{} of
@@ -8383,6 +8405,8 @@ chi-square distribution, but they are not quite the same in general}
 
 \end{figure}
 
+\hfill\break
+
 The \(t\)-distribution is a continuous distribution that looks very
 similar to a normal distribution, see Figure~\ref{fig-fig7-10}. Note
 that the ``tails'' of the \(t\)-distribution are ``heavier'' (i.e.,
@@ -8503,9 +8527,9 @@ what a \(t\)-distribution actually looks like. You get the idea, I hope.
 \chapter{Estimating unknown quantities from a
 sample}\label{sec-Estimating-unknown-quantities-from-a-sample}}
 
-\placetextbox{0.26}{0.06}{\scriptsize{©2025 D. Foxcroft and D. Navarro,}}
-\placetextbox{0.205}{0.05}{\scriptsize{CC BY-SA 4.0}}
-\placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333/08}}}
+\placetextbox{0.26}{0.06}{\scriptsize{©2025 D.R. Foxcroft and D.J. Navarro,}}
+\placetextbox{0.195}{0.05}{\scriptsize{CC BY-SA 4.0}}
+\placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333.08}}}
 
 At the start of the last chapter I highlighted the critical distinction
 between descriptive statistics and \emph{inferential statistics}. As
@@ -8898,7 +8922,7 @@ IQ is 100, the standard deviation of IQ scores is 15, and the
 distribution of IQ scores is normal. These values are referred to as the
 \textbf{population parameters} because they are characteristics of the
 entire population. That is, we say that the population mean \(\mu\) is
-100 and the population standard deviation \(\sigma\) is 15.
+100 and the population standard deviation \(\sigma\) is 15.\\
 
 \begin{figure}[h!]
 
@@ -9349,7 +9373,7 @@ deviation of the sampling distribution, which is referred to as the
 denoted SE, and since we're usually interested in the standard error of
 the sample mean, we often use the acronym SEM. As you can see just by
 looking at the picture, as the sample size \(N\) increases, the SEM
-decreases.
+decreases.\\
 
 \begin{figure}[h!]
 
@@ -10129,9 +10153,9 @@ book.
 \hypertarget{sec-Hypothesis-testing}{%
 \chapter{Hypothesis testing}\label{sec-Hypothesis-testing}}
 
-\placetextbox{0.26}{0.06}{\scriptsize{©2025 D. Foxcroft and D. Navarro,}}
-\placetextbox{0.205}{0.05}{\scriptsize{CC BY-SA 4.0}}
-\placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333/09}}}
+\placetextbox{0.26}{0.06}{\scriptsize{©2025 D.R. Foxcroft and D.J. Navarro,}}
+\placetextbox{0.195}{0.05}{\scriptsize{CC BY-SA 4.0}}
+\placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333.09}}}
 
 \begin{quote}
 \emph{The process of induction is the process of assuming the simplest
@@ -11820,9 +11844,9 @@ specific data analysis tools.
 \chapter{Categorical data
 analysis}\label{sec-Categorical-data-analysis}}
 
-\placetextbox{0.26}{0.06}{\scriptsize{©2025 D. Foxcroft and D. Navarro,}}
-\placetextbox{0.205}{0.05}{\scriptsize{CC BY-SA 4.0}}
-\placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333/10}}}
+\placetextbox{0.26}{0.06}{\scriptsize{©2025 D.R. Foxcroft and D.J. Navarro,}}
+\placetextbox{0.195}{0.05}{\scriptsize{CC BY-SA 4.0}}
+\placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333.10}}}
 
 Now that we've covered the basic theory behind hypothesis testing it's
 time to start looking at specific tests that are commonly used in
@@ -11871,20 +11895,21 @@ think in terms of patterns and structure and so, when asked to ``do
 something at random'', what people actually do is anything but random.
 As a consequence, the study of human randomness (or non-randomness, as
 the case may be) opens up a lot of deep psychological questions about
-how we think about the world. With this in mind, let's consider a very
-simple study. Suppose I asked people to imagine a shuffled deck of
-cards, and mentally pick one card from this imaginary deck ``at
-random''. After they've chosen one card I ask them to mentally select a
-second one. For both choices what we're going to look at is the suit
-(hearts, clubs, spades or diamonds) that people chose. After asking,
-say, \(N = 200\) people to do this, I'd like to look at the data and
-figure out whether or not the cards that people pretended to select were
-really random. The data are contained in the \emph{randomness.csv} file
-in which, when you open it up in jamovi and take a look at the
-spreadsheet view, you will see three variables. These are: an id
-variable that assigns a unique identifier to each participant, and the
-two variables choice\_1 and choice\_2 that indicate the card suits that
-people chose.
+how we think about the world.
+
+With this in mind, let's consider a very simple study. Suppose I asked
+people to imagine a shuffled deck of cards, and mentally pick one card
+from this imaginary deck ``at random''. After they've chosen one card I
+ask them to mentally select a second one. For both choices what we're
+going to look at is the suit (hearts, clubs, spades or diamonds) that
+people chose. After asking, say, \(N = 200\) people to do this, I'd like
+to look at the data and figure out whether or not the cards that people
+pretended to select were really random. The data are contained in the
+\emph{randomness.csv} file in which, when you open it up in jamovi and
+take a look at the spreadsheet view, you will see three variables. These
+are: an id variable that assigns a unique identifier to each
+participant, and the two variables choice\_1 and choice\_2 that indicate
+the card suits that people chose.
 
 For the moment, let's just focus on the first choice that people made.
 We'll use the Frequency tables option under `Exploration' --
@@ -12028,12 +12053,12 @@ observations that fall within the i-th category (where i could be 1, 2,
 3 or 4). Finally, if we want to refer to the set of all observed
 frequencies, statisticians group all observed values into a
 vector,\footnote{A vector is a sequence of data elements of the same
-  basic type: \[O = (O_1, O_2, O_3, O_4)\] Again, this is nothing new or
-  interesting. It's just notation. If I say that
-  \(O = (35, 51, 64, 50)\) all I'm doing is describing the table of
-  observed frequencies (i.e., observed), but I'm referring to it using
-  mathematical notation.\\
-} which I'll refer to as \(O\).
+  basic type:} which I'll refer to as \(O\).
+
+\[O = (O_1, O_2, O_3, O_4)\] Again, this is nothing new or interesting.
+It's just notation. If I say that \(O = (35, 51, 64, 50)\) all I'm doing
+is describing the table of observed frequencies (i.e., observed), but
+I'm referring to it using mathematical notation.\\
 
 \hypertarget{the-null-hypothesis-and-the-alternative-hypothesis}{%
 \subsection{The null hypothesis and the alternative
@@ -12062,17 +12087,16 @@ we have:
 
 \[H_0: P =(.25, .25, .25, .25)\]
 
-In this particular instance, our null hypothesis corresponds to a vector
-of probabilities P in which all of the probabilities are equal to one
-another. But this doesn't have to be the case. For instance, if the
-experimental task was for people to imagine they were drawing from a
-deck that had twice as many clubs as any other suit, then the null
-hypothesis would correspond to something like \(P = (.4, .2, .2, .2)\).
-As long as the probabilities are all positive numbers, and they all sum
-to 1, then it's a perfectly legitimate choice for the null hypothesis.
-However, the most common use of the goodness-of-fit test is to test a
-null hypothesis that all of the categories are equally likely, so we'll
-stick to that for our example.
+In this instance, our null hypothesis corresponds to a vector of
+probabilities \(P\) in which all of the probabilities are equal to one
+another. But this doesn't have to be the case: if the experimental task
+was for people to imagine they were drawing from a deck that had twice
+as many clubs as any other suit, then the null hypothesis would be
+\(P = (.4, .2, .2, .2)\). As long as the probabilities are all positive
+numbers, and they all sum to 1, then it's a perfectly legitimate choice
+for the null hypothesis. However, the typical use of the goodness-of-fit
+test is with a null hypothesis that all the categories are equally
+likely, so we'll stick to that for our example.
 
 What about our alternative hypothesis, \(H_1\)? All we're really
 interested in is demonstrating that the probabilities involved aren't
@@ -12081,14 +12105,11 @@ a consequence, the ``human friendly'' versions of our hypotheses look
 like this:
 
 \[H_0: \text{ All four suits are chosen with equal probability}\]
-
 \[H_1: \text{ At least one of the suit-choice probabilities isn’t 0.25}\]
 
 \ldots and the ``mathematician friendly'' version is:
 
-\[H_0: P= (.25, .25, .25, .25)\]
-
-\[H_1: P \neq (.25, .25, .25, .25)\]
+\[H_0: P= (.25, .25, .25, .25)\] \[H_1: P \neq (.25, .25, .25, .25)\]
 
 \hypertarget{the-goodness-of-fit-test-statistic}{%
 \subsection{The ``goodness-of-fit'' test
@@ -12126,7 +12147,19 @@ able to come up with a good test statistic. To start with, let's
 calculate the difference between what the null hypothesis expected us to
 find and what we actually did find. That is, we calculate the ``observed
 minus expected'' difference score, \(O_i - E_i\). This is illustrated in
-Table~\ref{tbl-tab10-3}.\\
+Table~\ref{tbl-tab10-3}.
+
+So, based on our calculations, it's clear that people chose more hearts
+and fewer clubs than the null hypothesis predicted. However, a moment's
+thought suggests that these raw differences aren't quite what we're
+looking for. Intuitively, it feels like it's just as bad when the null
+hypothesis predicts too few observations (which is what happened with
+hearts) as it is when it predicts too many (which is what happened with
+clubs). So it's a bit weird that we have a negative number for clubs and
+a positive number for hearts. One easy way to fix this is to square
+everything, so that we now calculate the squared differences,
+\((E_i - O_i)^2\) . As before, we can do this by hand
+(Table~\ref{tbl-tab10-4}).
 
 \hypertarget{tbl-tab10-3}{}
  
@@ -12192,18 +12225,6 @@ Table~\ref{tbl-tab10-3}.\\
 
 \end{table}
  
-
-So, based on our calculations, it's clear that people chose more hearts
-and fewer clubs than the null hypothesis predicted. However, a moment's
-thought suggests that these raw differences aren't quite what we're
-looking for. Intuitively, it feels like it's just as bad when the null
-hypothesis predicts too few observations (which is what happened with
-hearts) as it is when it predicts too many (which is what happened with
-clubs). So it's a bit weird that we have a negative number for clubs and
-a positive number for hearts. One easy way to fix this is to square
-everything, so that we now calculate the squared differences,
-\((E_i - O_i)^2\) . As before, we can do this by hand
-(Table~\ref{tbl-tab10-4}).
 
 \hypertarget{tbl-tab10-4}{}
  
@@ -12493,7 +12514,7 @@ If we want our test to have significance level of \(\alpha = .05\) (that
 is, we are willing to tolerate a type I error rate of \(5%
 \)), then we have to choose our critical value so that there is only a
 5\% chance that \(\chi^2\) could get to be that big if the null
-hypothesis is true. This is illustrated in Figure~\ref{fig-fig10-2}.
+hypothesis is true. This is illustrated in Figure~\ref{fig-fig10-2}.\\
 
 \begin{figure}[h!]
 
@@ -12504,6 +12525,7 @@ works for the \(\chi^2\) (chi-square) goodness of-fit test}
 
 \end{figure}
 
+\hfill\break
 Ah but, I hear you ask, how do I find the critical value of a chi-square
 distribution with \(k-1\) degrees of freedom? Many many years ago when I
 first took a psychology statistics class we used to look up these
@@ -12756,26 +12778,8 @@ case, the null hypothesis would be to expect \(30\%\) of the choices to
 be hearts, \(30\%\) to be diamonds, \(20\%\) to be spades and \(20\%\)
 to be clubs. In other words we would expect hearts and diamonds to
 appear 1.5 times more often than spades and clubs (the ratio \(30\%\) :
-\(20\%\) is the same as 1.5 : 1). This seems like a silly theory to me,
-and it's pretty easy to test this explicitly specified null hypothesis
-with the data in our jamovi analysis. In the analysis window (labelled
-`Proportion Test (N Outcomes)' in Figure~\ref{fig-fig10-3} you can
-expand the options for `Expected Proportions'. When you do this, there
-are options for entering different ratio values for the variable you
-have selected, in our case this is choice 1. Change the ratio to reflect
-the new null hypothesis, as in Figure~\ref{fig-fig10-4}, and check the
-results.
-
-\begin{figure}[h!]
-
-\includegraphics[width=0.8\textwidth,height=\textheight]{images/fig10-4.png} \hfill{}
-
-\caption{\label{fig-fig10-4}Changing the expected proportions in the
-\(\chi^2\) One Sample Proportion Test in jamovi}
-
-\end{figure}
-
-The expected counts are now shown in Table~\ref{tbl-tab10-7}.
+\(20\%\) is the same as 1.5 : 1). The expected counts are now shown in
+Table~\ref{tbl-tab10-7}.
 
 \hypertarget{tbl-tab10-7}{}
  
@@ -12821,6 +12825,24 @@ The expected counts are now shown in Table~\ref{tbl-tab10-7}.
 
 \end{table}
  
+
+This seems like a silly theory to me, and it's pretty easy to test this
+explicitly specified null hypothesis with the data in our jamovi
+analysis. In the analysis window (labelled `Proportion Test (N
+Outcomes)' in Figure~\ref{fig-fig10-3} you can expand the options for
+`Expected Proportions'. When you do this, there are options for entering
+different ratio values for the variable you have selected, in our case
+this is choice 1. Change the ratio to reflect the new null hypothesis,
+as in Figure~\ref{fig-fig10-4}, and check the results.
+
+\begin{figure}[h!]
+
+\includegraphics[width=0.8\textwidth,height=\textheight]{images/fig10-4.png} \hfill{}
+
+\caption{\label{fig-fig10-4}Changing the expected proportions in the
+\(\chi^2\) One Sample Proportion Test in jamovi}
+
+\end{figure}
 
 You can see that the \(\chi^2\) statistic is 4.74, 3 df, \(p = 0.192\).
 Now, the results of our updated hypotheses and the expected frequencies
@@ -13312,6 +13334,8 @@ detail\footnote{Technically, \(E_{ij}\) here is an estimate, so I should
   (i.e., \(\sum\) ) to indicate that we're summing over both rows and
   columns.}{]}
 
+\hfill\break
+
 As before, large values of \(X^2\) indicate that the null hypothesis
 provides a poor description of the data, whereas small values of \(X^2\)
 suggest that it does a good job of accounting for the data. Therefore,
@@ -13330,7 +13354,7 @@ same:
 
 \[df=(r-1)(c-1)\]
 
-but the explanation for why the degrees of freedom takes this value is
+But the explanation for why the degrees of freedom takes this value is
 different depending on the experimental design. For the sake of
 argument, let's suppose that we had honestly intended to survey exactly
 87 robots and 93 humans (column totals fixed by the experimenter), but
@@ -13338,12 +13362,18 @@ left the row totals free to vary (row totals are random variables).
 Let's think about the constraints that apply here. Well, since we
 deliberately fixed the column totals by Act of Experimenter, we have
 \(c\) constraints right there. But, there's actually more to it than
-that. Remember how our null hypothesis had some free parameters (i.e.,
-we had to estimate the Pi values)? Those matter too. I won't explain why
-in this book, but every free parameter in the null hypothesis is rather
+that.
+
+Remember how our null hypothesis had some free parameters (i.e., we had
+to estimate the Pi values)? Those matter too. I won't explain why in
+this book, but every free parameter in the null hypothesis is rather
 like an additional constraint. So, how many of those are there? Well,
 since these probabilities have to sum to 1, there's only \(r - 1\) of
-these. So our total degrees of freedom is:
+these.
+
+\hfill\break
+
+So our total degrees of freedom is:
 
 \[ 
 \begin{split} 
@@ -13362,10 +13392,11 @@ would still lead us to the same answer. Our null hypothesis still has
 it now also has \(c - 1\) free parameters corresponding to the species
 probabilities, because we'd also have to estimate the probability that a
 randomly sampled person turns out to be a robot.\footnote{A problem many
-  of us worry about in real life.} Finally, since we did actually fix
-the total number of observations N, that's one more constraint. So, now
-we have \(rc\) observations, and \((c-1)+(r-1)+1\) constraints. And that
-gives:
+  of us worry about in real life.}
+
+Finally, since we did actually fix the total number of observations N,
+that's one more constraint. So, now we have \(rc\) observations, and
+\((c-1)+(r-1)+1\) constraints. And that gives:
 
 \[
 \begin{split} df & = \text{(number of
@@ -13385,11 +13416,13 @@ there's no point. I already showed you how to do it the long way for the
 goodness-of-fit test in the last section, and since the test of
 independence isn't conceptually any different, you won't learn anything
 new by doing it the long way. So instead I'll go straight to showing you
-the easy way. After you have run the test in jamovi (`Frequencies' --
-`Contingency Tables' -- `Independent Samples'), all you have to do is
-look underneath the contingency table in the jamovi results window and
-there is the \(\chi^2\) statistic for you. This shows a \(\chi^2\)
-statistic value of 10.72, with 2 df and \(p\)-value = 0.005.
+the easy way.
+
+After you have run the test in jamovi (`Frequencies' -- `Contingency
+Tables' -- `Independent Samples'), all you have to do is look underneath
+the contingency table in the jamovi results window and there is the
+\(\chi^2\) statistic for you. This shows a \(\chi^2\) statistic value of
+10.72, with 2 df and \(p\)-value = 0.005.
 
 That was easy, wasn't it! You can also ask jamovi to show you the
 expected counts - just click on the check box for `Counts' -- `Expected'
@@ -13400,7 +13433,7 @@ from a check box in the `Statistics' options, and it gives a value for
 Cramér's \(V\) of \(0.24\). See Figure~\ref{fig-fig10-5}. We will talk
 about this some more in just a moment.
 
-\begin{figure}[h!]
+\begin{figure}[H]
 
 \includegraphics[width=1\textwidth,height=\textheight]{images/fig10-5.png} \hfill{}
 
@@ -13761,7 +13794,7 @@ people not on fire. See Figure~\ref{fig-fig10-6}.
 
 \begin{figure}[h!]
 
-\includegraphics[width=0.6\textwidth,height=\textheight]{images/fig10-6.png} \hfill{}
+\includegraphics[width=0.7\textwidth,height=\textheight]{images/fig10-6.png} \hfill{}
 
 \caption{\label{fig-fig10-6}Fisher exact test analysis in jamovi}
 
@@ -13939,6 +13972,7 @@ the McNemar test is concerned, it's only the off-diagonal entries in
 this table (i.e., \(b\) and \(c\)) that matter! After noticing this, the
 \textbf{McNemar test of marginal homogeneity} is no different to a usual
 \(\chi^2\) test.\\
+\strut \\
 
 After applying the Yates correction, our test statistic becomes:
 
@@ -14077,7 +14111,7 @@ These aren't the same test.
 
 \begin{figure}[H]
 
-\includegraphics[width=0.8\textwidth,height=\textheight]{images/fig10-8.png} \hfill{}
+\includegraphics[width=0.9\textwidth,height=\textheight]{images/fig10-8.png} \hfill{}
 
 \caption{\label{fig-fig10-8}Independent vs.~Paired (McNemar) with the
 \emph{Randomness.omv} (cards) data}
@@ -14129,9 +14163,9 @@ wise to jump straight from this book to that one.
 \hypertarget{sec-Comparing-two-means}{%
 \chapter{Comparing two means}\label{sec-Comparing-two-means}}
 
-\placetextbox{0.26}{0.06}{\scriptsize{©2025 D. Foxcroft and D. Navarro,}}
-\placetextbox{0.205}{0.05}{\scriptsize{CC BY-SA 4.0}}
-\placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333/11}}}
+\placetextbox{0.26}{0.06}{\scriptsize{©2025 D.R. Foxcroft and D.J. Navarro,}}
+\placetextbox{0.195}{0.05}{\scriptsize{CC BY-SA 4.0}}
+\placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333.11}}}
 
 In Chapter~\ref{sec-Categorical-data-analysis} we covered the situation
 when your outcome variable is nominal scale and your predictor variable
@@ -15996,10 +16030,10 @@ curves sharply at either end.
 
 \begin{figure}[h!]
 
-\includegraphics[width=1\textwidth,height=\textheight]{11-Comparing-two-means_files/figure-pdf/fig-fig11-21-1.pdf} \hfill{}
+\includegraphics[width=0.95\textwidth,height=\textheight]{11-Comparing-two-means_files/figure-pdf/fig-fig11-21-1.pdf} \hfill{}
 
 \caption{\label{fig-fig11-21}In the top row, a histogram and a normal QQ
-plot of the \(100\) observations in a skewed.data set. The skewness of
+plot of the \(100\) observations in a skewed data set. The skewness of
 the data here is \(1.88\), and is reflected in a QQ plot that curves
 upwards. As a consequence, the Shapiro-Wilk statistic is \(W = .80\),
 reflecting a significant departure from normality (\(p< .001\)). The
@@ -16026,24 +16060,6 @@ get the QQ plots shown in Figure~\ref{fig-fig11-22} and
 Figure~\ref{fig-fig11-23}, respectively. My interpretation is that these
 plots both show that the difference scores are reasonably normally
 distributed, so we are good to go!
-
-\begin{figure}[h!]
-
-\includegraphics[width=0.7\textwidth,height=\textheight]{images/fig11-22.png} \hfill{}
-
-\caption{\label{fig-fig11-22}jamovi QQ plot for the independent
-\(t\)-test analysis shown in Figure~\ref{fig-fig11-10}}
-
-\end{figure}
-
-\begin{figure}[h!]
-
-\includegraphics[width=0.7\textwidth,height=\textheight]{images/fig11-23.png} \hfill{}
-
-\caption{\label{fig-fig11-23}jamovi QQ plot for the paired samples
-\(t\)-test analysis shown in Figure~\ref{fig-fig11-16}}
-
-\end{figure}
 
 \hypertarget{shapiro-wilk-tests}{%
 \subsection{Shapiro-Wilk tests}\label{shapiro-wilk-tests}}
@@ -16081,6 +16097,24 @@ statistic \(W\) and the \(p\)-value, though given that the sampling
 distribution depends so heavily on \(N\) it would probably be a
 politeness to include \(N\) as well.
 
+\begin{figure}[h!]
+
+\includegraphics[width=0.8\textwidth,height=\textheight]{images/fig11-22.png} \hfill{}
+
+\caption{\label{fig-fig11-22}jamovi QQ plot for the independent
+\(t\)-test analysis shown in Figure~\ref{fig-fig11-10}}
+
+\end{figure}
+
+\begin{figure}[H]
+
+\includegraphics[width=0.8\textwidth,height=\textheight]{images/fig11-23.png} \hfill{}
+
+\caption{\label{fig-fig11-23}jamovi QQ plot for the paired samples
+\(t\)-test analysis shown in Figure~\ref{fig-fig11-16}}
+
+\end{figure}
+
 \hypertarget{example}{%
 \subsection{Example}\label{example}}
 
@@ -16092,9 +16126,9 @@ Chapter~\ref{sec-Descriptive-statistics} it didn't look like they came
 from a normal distribution at all. Here's what happens to the QQ plot
 (Figure~\ref{fig-fig11-24}).
 
-\begin{figure}[h!]
+\begin{figure}[h]
 
-\includegraphics[width=0.7\textwidth,height=\textheight]{images/fig11-24.png} \hfill{}
+\includegraphics[width=0.8\textwidth,height=\textheight]{images/fig11-24.png} \hfill{}
 
 \caption{\label{fig-fig11-24}jamovi QQ plot showing non-normality from
 the AFL winning margins data}
@@ -16267,9 +16301,11 @@ dependent variable. and group as the grouping variable, and then under
 the options for `tests' check the option for `Mann-Whitney U', we will
 get results showing that \(U = 3\) (i.e., the same number of checkmarks
 as shown above), and a \(p\)-value = \(0.05556\). See
-Figure~\ref{fig-fig11-25}.
+Figure~\ref{fig-fig11-25}. Counting up the tick marks this time we get a
+test statistic of \(W = 7\). As before, if our test is two-sided, then
+we reject the null hypothesis when W is very large or very small.
 
-\begin{figure}[h!]
+\begin{figure}[H]
 
 \includegraphics[width=1\textwidth,height=\textheight]{images/fig11-25.png} \hfill{}
 
@@ -16397,20 +16433,18 @@ Table~\ref{tbl-tab11-5}.
 \end{table}
  
 
-Counting up the tick marks this time we get a test statistic of
-\(W = 7\). As before, if our test is two-sided, then we reject the null
-hypothesis when W is very large or very small. As far as running it in
-jamovi goes, it's pretty much what you'd expect. For the one sample
-version, you specify the `Wilcoxon rank' option under `Tests' in the
-`One Sample T-Test' analysis window. This gives you Wilcoxon \(W = 7\),
-\(p\)-value = \(0.03711\). As this shows, we have a significant effect.
-Evidently, taking a statistics class does have an effect on your
-happiness. Switching to a paired samples version of the test won't give
-us a different answer, of course; see Figure~\ref{fig-fig11-26}.
+As far as running it in jamovi goes, it's pretty much what you'd expect.
+For the one sample version, you specify the `Wilcoxon rank' option under
+`Tests' in the `One Sample T-Test' analysis window. This gives you
+Wilcoxon \(W = 7\), \(p\)-value = \(0.03711\). As this shows, we have a
+significant effect. Evidently, taking a statistics class does have an
+effect on your happiness. Switching to a paired samples version of the
+test won't give us a different answer, of course; see
+Figure~\ref{fig-fig11-26}.
 
 \begin{figure}[h!]
 
-\includegraphics[width=1\textwidth,height=\textheight]{images/fig11-26.png} \hfill{}
+\includegraphics[width=0.9\textwidth,height=\textheight]{images/fig11-26.png} \hfill{}
 
 \caption{\label{fig-fig11-26}jamovi screen showing results for
 one-sample and paired sample Wilcoxon nonparametric tests}
@@ -16462,9 +16496,9 @@ one-sample and paired sample Wilcoxon nonparametric tests}
 \chapter{Correlation and linear
 regression}\label{sec-Correlation-and-linear-regression}}
 
-\placetextbox{0.26}{0.06}{\scriptsize{©2025 D. Foxcroft and D. Navarro,}}
-\placetextbox{0.205}{0.05}{\scriptsize{CC BY-SA 4.0}}
-\placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333/12}}}
+\placetextbox{0.26}{0.06}{\scriptsize{©2025 D.R. Foxcroft and D.J. Navarro,}}
+\placetextbox{0.195}{0.05}{\scriptsize{CC BY-SA 4.0}}
+\placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333.12}}}
 
 The goal in this chapter is to introduce \textbf{correlation} and
 \textbf{linear regression}. These are the standard tools that
@@ -17384,7 +17418,18 @@ either write as \(\sum_i (Y_i - \hat{Y}_i)^2\) or as
 \(\sum_i \epsilon_i^2\).
 \end{quote}
 
-\begin{figure}[h!]
+Yes, yes that sounds even better. And since I've indented it like that,
+it probably means that this is the right answer. And since this is the
+right answer, it's probably worth making a note of the fact that our
+regression coefficients are estimates (we're trying to guess the
+parameters that describe a population!), which is why I've added the
+little hats, so that we get \(\hat{b}_0\) and \(\hat{b}_1\) rather than
+\(b_0\) and \(b_1\). Finally, I should also note that, since there's
+actually more than one way to estimate a regression model, the more
+technical name for this estimation process is \textbf{ordinary least
+squares (OLS) regression}.
+
+\begin{figure}[H]
 
 \includegraphics[width=1\textwidth,height=\textheight]{12-Correlation-and-linear-regression_files/figure-pdf/fig-fig12-12-1.pdf} \hfill{}
 
@@ -17396,17 +17441,6 @@ that the good line is the one that goes right through the middle of the
 data}
 
 \end{figure}
-
-Yes, yes that sounds even better. And since I've indented it like that,
-it probably means that this is the right answer. And since this is the
-right answer, it's probably worth making a note of the fact that our
-regression coefficients are estimates (we're trying to guess the
-parameters that describe a population!), which is why I've added the
-little hats, so that we get \(\hat{b}_0\) and \(\hat{b}_1\) rather than
-\(b_0\) and \(b_1\). Finally, I should also note that, since there's
-actually more than one way to estimate a regression model, the more
-technical name for this estimation process is \textbf{ordinary least
-squares (OLS) regression}.
 
 At this point, we now have a concrete definition for what counts as our
 ``best'' choice of regression coefficients, \(\hat{b}_0\) and
@@ -18461,7 +18495,8 @@ shown in Figure~\ref{fig-fig12-24}, the outlier has an unusual value on
 the outcome (y-axis location), but not the predictor (x-axis location)
 and lies a long way from the regression line. In practice, we
 operationalise this concept by saying that an outlier is an observation
-that has a very large residual, \(\epsilon_i^*\).
+that has a very large residual, \(\epsilon_i^*\). Also see the lower
+left plot of Anscombe's quartet, Figure~\ref{fig-fig12-6}.
 
 Outliers are interesting: a big outlier might correspond to junk data,
 e.g., the variables might have been recorded incorrectly in the data
@@ -18875,9 +18910,9 @@ Builder' option}
 \chapter{Comparing several means (one-way
 ANOVA)}\label{sec-Comparing-several-means-one-way-ANOVA}}
 
-\placetextbox{0.26}{0.06}{\scriptsize{©2025 D. Foxcroft and D. Navarro,}}
-\placetextbox{0.205}{0.05}{\scriptsize{CC BY-SA 4.0}}
-\placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333/13}}}
+\placetextbox{0.26}{0.06}{\scriptsize{©2025 D.R. Foxcroft and D.J. Navarro,}}
+\placetextbox{0.195}{0.05}{\scriptsize{CC BY-SA 4.0}}
+\placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333.13}}}
 
 This chapter introduces one of the most widely used tools in
 psychological statistics, known as ``the analysis of variance'', but
@@ -20995,9 +21030,12 @@ due to the individual differences between subjects (referred to as
 We won't go into too much technical detail about how this is done, but
 essentially each subject becomes a level of a factor called subjects.
 The variability in this within subjects factor is then calculated in the
-same way as any between subjects factor. And then we can subtract
-\(SS_{subjects}\) from \(SS_w\) to provide a smaller \(SS_{error}\)
-term:
+same way as any between subjects factor.
+
+\hfill\break
+
+And then we can subtract \(SS_{subjects}\) from \(SS_w\) to provide a
+smaller \(SS_{error}\) term:
 
 \[\text{Independent ANOVA: } SS_{error} = SS_w\]
 \[\text{Repeated Measures ANOVA: } SS_{error} = SS_w - SS_{subjects}\]
@@ -21379,9 +21417,9 @@ the key topics were:
 \hypertarget{sec-Factorial-ANOVA}{%
 \chapter{Factorial ANOVA}\label{sec-Factorial-ANOVA}}
 
-\placetextbox{0.26}{0.06}{\scriptsize{©2025 D. Foxcroft and D. Navarro,}}
-\placetextbox{0.205}{0.05}{\scriptsize{CC BY-SA 4.0}}
-\placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333/14}}}
+\placetextbox{0.26}{0.06}{\scriptsize{©2025 D.R. Foxcroft and D.J. Navarro,}}
+\placetextbox{0.195}{0.05}{\scriptsize{CC BY-SA 4.0}}
+\placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333.14}}}
 
 Over the course of the last few chapters we have done quite a lot. We
 have looked at statistical tests you can use when you have one nominal
@@ -21910,7 +21948,7 @@ Chapter~\ref{sec-Correlation-and-linear-regression}, you probably won't
 be surprised that all we have to do is add therapy as a second `Fixed
 Factor' in the analysis, see Figure~\ref{fig-fig14-3}.
 
-\begin{figure}[h!]
+\begin{figure}[H]
 
 \includegraphics[width=1\textwidth,height=\textheight]{images/fig14-3.png} \hfill{}
 
@@ -22307,19 +22345,6 @@ matters, (b) only Factor B matters, (c) both A and B matter, and (d)
 neither A nor B matters. An example of each of these four possibilities
 is plotted in Figure~\ref{fig-fig14-4}.
 
-\begin{figure}[h!]
-
-\includegraphics[width=1\textwidth,height=\textheight]{14-Factorial-ANOVA_files/figure-pdf/fig-fig14-4-1.pdf} \hfill{}
-
-\caption{\label{fig-fig14-4}The four different outcomes for a
-\(2 \times 2\) ANOVA when no interactions are present. In panel (a) we
-see a main effect of Factor A and no effect of Factor B. Panel (b) shows
-a main effect of Factor B but no effect of Factor A. Panel (c) shows
-main effects of both Factor A and Factor B. Finally, panel (d) shows no
-effect of either factor}
-
-\end{figure}
-
 \hypertarget{factorial-anova-2-balanced-designs-interpreting-interactions}{%
 \section{Factorial ANOVA 2: balanced designs, interpreting
 interactions}\label{factorial-anova-2-balanced-designs-interpreting-interactions}}
@@ -22333,6 +22358,37 @@ ability to talk about the idea that drugs can influence mood, and
 therapy can influence mood, but no way of talking about the possibility
 of an \textbf{interaction} between the two.
 
+An interaction between A and B is said to occur whenever the effect of
+Factor \(A\) is \emph{different}, depending on which level of Factor
+\(B\) we're talking about. Several examples of an interaction effect
+with the context of a \(2 \times 2\) ANOVA are shown in
+Figure~\ref{fig-fig14-5}.
+
+\begin{figure}[h!]
+
+\includegraphics[width=1\textwidth,height=\textheight]{14-Factorial-ANOVA_files/figure-pdf/fig-fig14-4-1.pdf} \hfill{}
+
+\caption{\label{fig-fig14-4}The four different outcomes for a
+\(2 \times 2\) ANOVA when no interactions are present. In panel (a) we
+see a main effect of Factor A and no effect of Factor B. Panel (b) shows
+a main effect of Factor B but no effect of Factor A. Panel (c) shows
+main effects of both Factor A and Factor B. Finally, panel (d) shows no
+effect of either factor}
+
+\end{figure}
+
+To give a more concrete example, suppose that the operation of Anxifree
+and Joyzepam is governed by quite different physiological mechanisms.
+One consequence of this is that while Joyzepam has more or less the same
+effect on mood regardless of whether one is in therapy, Anxifree is
+actually much more effective when administered in conjunction with CBT.
+The ANOVA that we developed in the previous section does not capture
+this idea. To get some idea of whether an interaction is actually
+happening it helps to plot the various group means. In jamovi this is
+done via the ANOVA `Estimated Marginal Means' option -- just move drug
+and therapy across into the `Marginal Means' box under `Term 1'. This
+should look something like Figure~\ref{fig-fig14-6}.
+
 \begin{figure}[h!]
 
 \includegraphics[width=1\textwidth,height=\textheight]{14-Factorial-ANOVA_files/figure-pdf/fig-fig14-5-1.pdf} \hfill{}
@@ -22342,31 +22398,7 @@ of an \textbf{interaction} between the two.
 
 \end{figure}
 
-An interaction between A and B is said to occur whenever the effect of
-Factor \(A\) is \emph{different}, depending on which level of Factor
-\(B\) we're talking about. Several examples of an interaction effect
-with the context of a \(2 \times 2\) ANOVA are shown in
-Figure~\ref{fig-fig14-5}. To give a more concrete example, suppose that
-the operation of Anxifree and Joyzepam is governed by quite different
-physiological mechanisms. One consequence of this is that while Joyzepam
-has more or less the same effect on mood regardless of whether one is in
-therapy, Anxifree is actually much more effective when administered in
-conjunction with CBT. The ANOVA that we developed in the previous
-section does not capture this idea. To get some idea of whether an
-interaction is actually happening it helps to plot the various group
-means. In jamovi this is done via the ANOVA `Estimated Marginal Means'
-option -- just move drug and therapy across into the `Marginal Means'
-box under `Term 1'. This should look something like
-Figure~\ref{fig-fig14-6}.
-
-\begin{figure}[H]
-
-\includegraphics[width=1\textwidth,height=\textheight]{images/fig14-6.png} \hfill{}
-
-\caption{\label{fig-fig14-6}jamovi screen showing how to generate a
-descriptive interaction plot in ANOVA using the clinical trial data}
-
-\end{figure}
+\hfill\break
 
 Our main concern relates to the fact that the two lines aren't parallel.
 The effect of CBT (difference between solid line and dotted line) when
@@ -22377,6 +22409,15 @@ Anxifree is administered, the effect of CBT is larger than the placebo
 chance? Our original ANOVA cannot answer this question, because we make
 no allowances for the idea that interactions even exist! In this
 section, we'll fix this problem.
+
+\begin{figure}[H]
+
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig14-6.png} \hfill{}
+
+\caption{\label{fig-fig14-6}jamovi screen showing how to generate a
+descriptive interaction plot in ANOVA using the clinical trial data}
+
+\end{figure}
 
 \hypertarget{what-exactly-is-an-interaction-effect}{%
 \subsection{What exactly is an interaction
@@ -22862,17 +22903,18 @@ When the model doesn't contain the interaction term then the estimated
 group means will differ from the sample means. Instead of reporting the
 sample mean, jamovi calculates the value of the group means that would
 be expected on the basis of the marginal means (i.e., assuming no
-interaction). Using the notation we developed earlier, the estimate for
-\(\mu_{rc}\), the mean for level \(r\) on the (row) Factor A and level
-\(c\) on the (column) Factor B would be
-\(\mu_{..} + \alpha_r + \beta_c\). If there are genuinely no
-interactions between the two factors, this is actually a better estimate
-of the population mean than the raw sample mean. Removing the
-interaction term from the model, via the `Model' options in the jamovi
-ANOVA analysis, provides the marginal means for the analysis shown in
-Figure~\ref{fig-fig14-9}.
+interaction).
 
-\begin{figure}[h!]
+Using the notation we developed earlier, the estimate for \(\mu_{rc}\),
+the mean for level \(r\) on the (row) Factor A and level \(c\) on the
+(column) Factor B would be \(\mu_{..} + \alpha_r + \beta_c\). If there
+are genuinely no interactions between the two factors, this is actually
+a better estimate of the population mean than the raw sample mean.
+Removing the interaction term from the model, via the `Model' options in
+the jamovi ANOVA analysis, provides the marginal means for the analysis
+shown in Figure~\ref{fig-fig14-9}.
+
+\begin{figure}[H]
 
 \includegraphics[width=1\textwidth,height=\textheight]{images/fig14-9.png} \hfill{}
 
@@ -22933,14 +22975,6 @@ Section~\ref{sec-Checking-the-normality-assumption}). Primarily it's a
 good idea to examine the residuals graphically using a QQ plot. See
 Figure~\ref{fig-fig14-10}.
 
-\begin{figure}[h!]
-
-\includegraphics[width=1\textwidth,height=\textheight]{images/fig14-10.png} \hfill{}
-
-\caption{\label{fig-fig14-10}Checking assumptions in an ANOVA model}
-
-\end{figure}
-
 \hypertarget{sec-analysis-of-covariance-ancova}{%
 \section{Analysis of covariance
 (ANCOVA)}\label{sec-analysis-of-covariance-ancova}}
@@ -22980,13 +23014,22 @@ one-way and factorial designs, as ANCOVA can be used with both.
 
 \begin{figure}[h!]
 
-\includegraphics[width=0.8\textwidth,height=\textheight]{images/fig14-11.png} \hfill{}
+\includegraphics[width=1\textwidth,height=\textheight]{images/fig14-10.png} \hfill{}
+
+\caption{\label{fig-fig14-10}Checking assumptions in an ANOVA model}
+
+\end{figure}
+
+\begin{figure}[h!]
+
+\includegraphics[width=0.9\textwidth,height=\textheight]{images/fig14-11.png} \hfill{}
 
 \caption{\label{fig-fig14-11}Plot of Statistics anxiety against age for
 two distinct groups}
 
 \end{figure}
 
+\hfill\break
 \hfill\break
 \hfill\break
 
@@ -23005,6 +23048,14 @@ the covariate `age' and transfer it into the `Covariates' text box. Then
 click on Estimated Marginal Means to bring up the plots and tables
 options.
 
+\begin{figure}[h!]
+
+\includegraphics[width=0.75\textwidth,height=\textheight]{images/fig14-12.png} \hfill{}
+
+\caption{\label{fig-fig14-12}The jamovi ANCOVA analysis window}
+
+\end{figure}
+
 An ANCOVA table showing `Tests of Between Subjects Effects' is produced
 in the jamovi results window (Figure~\ref{fig-fig14-13}). The
 \(F\)-value for the covariate `age' is significant at \(p = .023\),
@@ -23014,14 +23065,6 @@ happiness. When we look at the estimated marginal mean scores
 analysis without the covariate) because of the inclusion of the
 covariate `age' in this ANCOVA. A plot (Figure~\ref{fig-fig14-15}) is a
 good way of visualising and interpreting the significant effects.
-
-\begin{figure}[H]
-
-\includegraphics[width=0.75\textwidth,height=\textheight]{images/fig14-12.png} \hfill{}
-
-\caption{\label{fig-fig14-12}The jamovi ANCOVA analysis window}
-
-\end{figure}
 
 \begin{figure}[H]
 
@@ -23392,10 +23435,11 @@ variable, \(b_1\). So, if \(b_1\) is greater than zero, we're expecting
 that the students who turn up to lectures will get higher grades than
 those students who don't. If this coefficient is negative we're
 expecting the opposite: students who turn up at class end up performing
-much worse. In fact, we can push this a little bit further. What about
-student number 1, who turned up to class (\(X_{1,1} = 1\)) and read the
-textbook (\(X_{2,1} = 1\))? If we plug these numbers into the regression
-we get:
+much worse.
+
+In fact, we can push this a little bit further. What about student
+number 1, who turned up to class (\(X_{1,1} = 1\)) and read the textbook
+(\(X_{2,1} = 1\))? If we plug these numbers into the regression we get:
 
 \[
 \begin{split}
@@ -23494,15 +23538,6 @@ rtfm data and the jamovi regression analysis to convince ourselves that
 this is really true. Running the regression in the usual way gives the
 results shown in Figure~\ref{fig-fig14-18}.
 
-\begin{figure}[h!]
-
-\includegraphics[width=0.7\textwidth,height=\textheight]{images/fig14-18.png} \hfill{}
-
-\caption{\label{fig-fig14-18}Regression analysis of the \emph{rtfm.csv}
-data set in jamovi, without the interaction term}
-
-\end{figure}
-
 There's a few interesting things to note here. First, notice that the
 intercept term is 43.5 which is close to the ``group'' mean of 42.5
 observed for those two students who didn't read the text or attend
@@ -23514,6 +23549,15 @@ but didn't read the textbook would obtain a grade of \(b_0 + b_1\),
 which is equal to \(43.5 + 18.0 = 61.5\). You can verify for yourself
 that the same thing happens when we look at the students that read the
 textbook.
+
+\begin{figure}[H]
+
+\includegraphics[width=0.7\textwidth,height=\textheight]{images/fig14-18.png} \hfill{}
+
+\caption{\label{fig-fig14-18}Regression analysis of the \emph{rtfm.csv}
+data set in jamovi, without the interaction term}
+
+\end{figure}
 
 Actually, we can push a little further in establishing the equivalence
 of our ANOVA and our regression. Look at the \(p\)-values associated
@@ -23759,7 +23803,7 @@ as the reference level, via the `Reference Levels' option. We've changed
 this to `placebo' and `no.therapy', respectively, because this makes
 most sense.
 
-\begin{figure}[h!]
+\begin{figure}[H]
 
 \includegraphics[width=1\textwidth,height=\textheight]{images/fig14-23.png} \hfill{}
 
@@ -25743,9 +25787,9 @@ interaction.
 \hypertarget{factor-analysis}{%
 \chapter{Factor Analysis}\label{factor-analysis}}
 
-\placetextbox{0.26}{0.06}{\scriptsize{©2025 D. Foxcroft and D. Navarro,}}
-\placetextbox{0.205}{0.05}{\scriptsize{CC BY-SA 4.0}}
-\placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333/15}}}
+\placetextbox{0.26}{0.06}{\scriptsize{©2025 D.R. Foxcroft and D.J. Navarro,}}
+\placetextbox{0.195}{0.05}{\scriptsize{CC BY-SA 4.0}}
+\placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333.15}}}
 
 Previous chapters have covered statistical tests for differences between
 two or more groups. However, sometimes when conducting research, we may
@@ -26235,6 +26279,7 @@ that (1) Bartlett's test of sphericity is significant, so this
 assumption is satisfied; and (2) the KMO measure of sampling adequacy
 (MSA) is \(0.81\) overall, suggesting good sampling adequacy. No
 problems here then!\\
+\strut \\
 
 \begin{figure}[h!]
 
@@ -27437,9 +27482,9 @@ of relationships in a data set. Specifically, we have covered:
 \hypertarget{sec-Bayesian-statistics}{%
 \chapter{Bayesian statistics}\label{sec-Bayesian-statistics}}
 
-\placetextbox{0.26}{0.06}{\scriptsize{©2025 D. Foxcroft and D. Navarro,}}
-\placetextbox{0.205}{0.05}{\scriptsize{CC BY-SA 4.0}}
-\placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333/16}}}
+\placetextbox{0.26}{0.06}{\scriptsize{©2025 D.R. Foxcroft and D.J. Navarro,}}
+\placetextbox{0.195}{0.05}{\scriptsize{CC BY-SA 4.0}}
+\placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333.16}}}
 
 \begin{quote}
 \emph{In our reasonings concerning matter of fact, there are all
@@ -28945,7 +28990,7 @@ this:
 
 \begin{quote}
 \emph{Good laws have their origins in bad morals.}\\
--- Ambrosius Macrobius\footnote{\url{https://www.quotationspage.com/quotes/Ambrosius\%20Macrobius/}}
+-- Ambrosius Macrobius\footnote{\href{http://www.quotationspage.com/quotes/Ambrosius_Macrobius/}{https://www.quotationspage.com/quotes/Ambrosius\_Macrobius/}}
 \end{quote}
 
 Good rules for statistical testing have to acknowledge human frailty.
@@ -29088,9 +29133,9 @@ around!
 
 \markboth{Epilogue}{Epilogue}
 
-\placetextbox{0.26}{0.06}{\scriptsize{©2025 D. Foxcroft and D. Navarro,}}
-\placetextbox{0.205}{0.05}{\scriptsize{CC BY-SA 4.0}}
-\placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333/17}}}
+\placetextbox{0.26}{0.06}{\scriptsize{©2025 D.R. Foxcroft and D.J. Navarro,}}
+\placetextbox{0.195}{0.05}{\scriptsize{CC BY-SA 4.0}}
+\placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333.17}}}
 
 \begin{quote}
 \emph{``Begin at the beginning'', the King said, very gravely, ``and go

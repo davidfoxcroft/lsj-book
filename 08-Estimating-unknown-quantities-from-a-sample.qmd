@@ -1,6 +1,6 @@
-\placetextbox{0.26}{0.06}{\scriptsize{©2025 D. Foxcroft and D. Navarro,}}
-\placetextbox{0.205}{0.05}{\scriptsize{CC BY-SA 4.0}}
-\placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333/08}}}
+\placetextbox{0.26}{0.06}{\scriptsize{©2025 D.R. Foxcroft and D.J. Navarro,}}
+\placetextbox{0.195}{0.05}{\scriptsize{CC BY-SA 4.0}}
+\placetextbox{0.70}{0.06}{\scriptsize{\url{https://doi.org/10.11647/OBP.0333.08}}}
 
 # Estimating unknown quantities from a sample {#sec-Estimating-unknown-quantities-from-a-sample}
 
@@ -98,6 +98,7 @@ There are two points hidden in this discussion. First, when designing your own s
 Okay. Setting aside the thorny methodological issues associated with obtaining a random sample, let's consider a slightly different issue. Up to this point we have been talking about populations the way a scientist might. To a psychologist a population might be a group of people. To an ecologist a population might be a group of bears. In most cases the populations that scientists care about are concrete things that actually exist in the real world. Statisticians, however, are a funny lot. On the one hand, they are interested in real-world data and real science in the same way that scientists are. On the other hand, they also operate in the realm of pure abstraction in the way that mathematicians do. As a consequence, statistical theory tends to be a bit abstract in how a population is defined. In much the same way that psychological researchers operationalise our abstract theoretical ideas in terms of concrete measurements (@sec-Introduction-to-psychological-measurement), statisticians operationalise the concept of a "population" in terms of mathematical objects that they know how to work with. You've already come across these objects in @sec-Introduction-to-probability. They're called probability distributions.
 
 The idea is quite simple. Let's say we're talking about IQ scores. To a psychologist the population of interest is a group of actual humans who have IQ scores. A statistician "simplifies" this by operationally defining the population as the probability distribution depicted in @fig-fig8-4 (a). IQ tests are designed so that the average IQ is 100, the standard deviation of IQ scores is 15, and the distribution of IQ scores is normal. These values are referred to as the **population parameters** because they are characteristics of the entire population. That is, we say that the population mean $\mu$ is 100 and the population standard deviation $\sigma$ is 15.
+\
 
 ```{r}
 #| label: fig-fig8-4
@@ -256,6 +257,7 @@ ggplot(data = sdm_data_max, aes(x = sample_max )) +
 ### The central limit theorem {#sec-The-central-limit-theorem}
 
 At this point I hope you have a pretty good sense of what sampling distributions are, and in particular what the sampling distribution of the mean is. In this section I want to talk about how the sampling distribution of the mean changes as a function of sample size. Intuitively, you already know part of the answer. If you only have a few observations, the sample mean is likely to be quite inaccurate. If you replicate a small experiment and recalculate the mean you'll get a very different answer. In other words, the sampling distribution is quite wide. If you replicate a large experiment and recalculate the sample mean you'll probably get the same answer you got last time, so the sampling distribution will be very narrow. You can see this visually in @fig-fig8-8, showing that the bigger the sample size, the narrower the sampling distribution gets: in panel (a), each data set contained only a single observation, so the mean of each sample is the IQ score of just one person. As a consequence, the sampling distribution of the mean is of course identical to the population distribution of IQ scores. However, when we raise the sample size to 2 the mean of any one sample tends to be closer to the population mean than the IQ score of any one person, and so the histogram (i.e., the sampling distribution) is a bit narrower than the population distribution. By the time we raise the sample size to 10 (panel (c)), we can see that the distribution of sample means tend to be fairly tightly clustered around the true population mean. We can quantify this effect by calculating the standard deviation of the sampling distribution, which is referred to as the **standard error**. The standard error of a statistic is often denoted SE, and since we're usually interested in the standard error of the sample mean, we often use the acronym SEM. As you can see just by looking at the picture, as the sample size $N$ increases, the SEM decreases.
+\
 
 ```{r}
 #| label: fig-fig8-8
@@ -345,7 +347,7 @@ sampling_plots <- lapply(sampling_plots_df$n, function(i) {
   scale_x_continuous(limits=c(0,1.2), breaks = seq(0, 1.2, 0.2)) +
   scale_y_continuous(limits=c(0,5)) +
   xlab("Sample Mean") +
-  ggtitle(paste0(sampling_plots_df$lab[sampling_plots_df$n == i]," Sample size = ", i)) +
+  ggtitle(paste0("\n\n", sampling_plots_df$lab[sampling_plots_df$n == i]," Sample size = ", i)) +
   theme(
     axis.title.y = element_blank(),
     axis.title.x=element_text(size=20),

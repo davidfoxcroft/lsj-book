@@ -43,7 +43,6 @@ div.csl-indent {
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="site_libs/quarto-search/fuse.min.js"></script>
@@ -131,31 +130,17 @@ div.csl-indent {
     <div class="sidebar-title mb-0 py-0">
       <a href="./">LEARNING STATISTICS WITH JAMOVI</a> 
         <div class="sidebar-tools-main tools-wide">
-    <a href="https://github.com/davidfoxcroft/lsj-book/" rel="" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
-    <a href="./LEARNING-STATISTICS-WITH-JAMOVI.pdf" rel="" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
     <div class="dropdown">
-      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
+      <a href="" title="" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label=""><i class="bi bi-save"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
           <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
-              <i class="bi bi-bi-twitter pe-1"></i>
-            Twitter
-            </a>
-          </li>
-          <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
-              <i class="bi bi-bi-facebook pe-1"></i>
-            Facebook
-            </a>
-          </li>
-          <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
-              <i class="bi bi-bi-linkedin pe-1"></i>
-            LinkedIn
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.openbookpublishers.com/books/10.11647/obp.0333">
+            Book format pdf and hard copy
             </a>
           </li>
       </ul>
     </div>
+    <a href="https://github.com/davidfoxcroft/lsj-book/" rel="" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
@@ -966,7 +951,10 @@ data</p> </caption>
 <p>The logic behind a repeated measures ANOVA is very similar to that of an independent ANOVA (sometimes called a “between subjects” ANOVA). You’ll remember that earlier we showed that in a between subjects ANOVA total variability is partitioned into between groups variability (<span class="math inline">\(SS_b\)</span>) and within groups variability (<span class="math inline">\(SS_w\)</span>), then divided by the respective degrees of freedom to give <span class="math inline">\(MS_b\)</span> and <span class="math inline">\(MS_w\)</span> (see Table 13.1), whereupon the <span class="math inline">\(F\)</span>-ratio is calculated as:</p>
 <p><span class="math display">\[F=\frac{MS_b}{MS_w}\]</span></p>
 <p>In a repeated measures ANOVA, the <span class="math inline">\(F\)</span>-ratio is calculated in a similar way, but whereas in an independent ANOVA the within-group variability (<span class="math inline">\(SS_w\)</span>) is used as the basis for the <span class="math inline">\(MS_w\)</span> denominator, in a repeated measures ANOVA the <span class="math inline">\(SS_w\)</span> is partioned into two parts. As we are using the same subjects in each group, we can remove the variability due to the individual differences between subjects (referred to as <span class="math inline">\(SS_{subjects}\)</span>) from the within groups variability.</p>
-<p>We won’t go into too much technical detail about how this is done, but essentially each subject becomes a level of a factor called subjects. The variability in this within subjects factor is then calculated in the same way as any between subjects factor. And then we can subtract <span class="math inline">\(SS_{subjects}\)</span> from <span class="math inline">\(SS_w\)</span> to provide a smaller <span class="math inline">\(SS_{error}\)</span> term:</p>
+<p>We won’t go into too much technical detail about how this is done, but essentially each subject becomes a level of a factor called subjects. The variability in this within subjects factor is then calculated in the same way as any between subjects factor.</p>
+<p><br>
+</p>
+<p>And then we can subtract <span class="math inline">\(SS_{subjects}\)</span> from <span class="math inline">\(SS_w\)</span> to provide a smaller <span class="math inline">\(SS_{error}\)</span> term:</p>
 <p><span class="math display">\[\text{Independent ANOVA: } SS_{error} = SS_w\]</span> <span class="math display">\[\text{Repeated Measures ANOVA: } SS_{error} = SS_w - SS_{subjects}\]</span></p>
 <p>This change in <span class="math inline">\(SS_{error}\)</span> term often leads to a more powerful statistical test, but this does depend on whether the reduction in the <span class="math inline">\(SS_{error}\)</span> more than compensates for the reduction in degrees of freedom for the error term (as degrees of freedom go from <span class="math inline">\((n - k)\)</span><a href="#fn18" class="footnote-ref" id="fnref18" role="doc-noteref"><sup>18</sup></a> to <span class="math inline">\((n - 1)(k - 1)\)</span> (remembering that there are more subjects in the independent ANOVA design).</p>
 <section id="repeated-measures-anova-in-jamovi" class="level3" data-number="13.7.1">
