@@ -19,10 +19,9 @@ book:
     collapse-level: 1
     pinned: true
     tools:
-          - icon: book-fill
-            menu:
-              - text: Order hard copy
-                url:  "https://www.openbookpublishers.com/books/10.11647/obp.0333"
+          - icon: book 
+            url: "https://www.openbookpublishers.com/books/10.11647/obp.0333"
+            text: Order hard copy
   page-footer:
     left: |
       <a href="https://learnstatswithjamovi.com">learning statistics with jamovi</a>
@@ -79,6 +78,19 @@ format:
     collapse: true
     html-math-method: mathjax
     include-in-header: header-includes.html
+    include-after-body:
+    - text: |
+        <script type="text/javascript">
+        var elements = document.querySelectorAll('[aria-label]');
+
+        for (var i = 0; i < elements.length; i++) {
+          var ariaLabel = elements[i].getAttribute('aria-label');
+          elements[i].setAttribute('data-bs-title', ariaLabel);
+          elements[i].setAttribute('data-bs-toggle', 'tooltip');
+        }
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+        </script>
     css: styles.css
     theme:
       light: 
