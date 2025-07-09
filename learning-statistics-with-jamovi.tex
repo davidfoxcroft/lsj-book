@@ -306,7 +306,7 @@ DOI: 10.11647/OBP.0333
 \pagebreak
 
 
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[frame hidden, sharp corners, boxrule=0pt, interior hidden, borderline west={3pt}{0pt}{shadecolor}, breakable, enhanced]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[breakable, boxrule=0pt, borderline west={3pt}{0pt}{shadecolor}, interior hidden, enhanced, sharp corners, frame hidden]}{\end{tcolorbox}}\fi
 
 \renewcommand*\contentsname{Table of contents}
 {
@@ -352,7 +352,7 @@ research in the Humanities and Social Sciences in the UK. They are
 award-winning, not-for-profit, run by scholars, and committed to making
 high-quality research freely available to readers around the world.
 
-\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, toprule=.15mm, colbacktitle=quarto-callout-note-color!10!white, opacityback=0, bottomtitle=1mm, left=2mm, opacitybacktitle=0.6, rightrule=.15mm, colframe=quarto-callout-note-color-frame, titlerule=0mm, colback=white, breakable, coltitle=black, leftrule=.75mm, toptitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, bottomrule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, colframe=quarto-callout-note-color-frame, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, left=2mm, coltitle=black, breakable, leftrule=.75mm, rightrule=.15mm, colbacktitle=quarto-callout-note-color!10!white, opacitybacktitle=0.6, bottomtitle=1mm, toptitle=1mm, titlerule=0mm, arc=.35mm, bottomrule=.15mm, opacityback=0, colback=white]
 
 A pdf version of the book is available for free download from Open Book
 Publishers
@@ -17531,7 +17531,7 @@ terms to our regression equation. Let's suppose that we've got two
 variables that we're interested in; perhaps we want to use both
 dani.sleep and baby.sleep to predict the dani.grump variable. As before,
 we let \(Y_{i}\) refer to my grumpiness on the i-th day. But now we have
-two \$ X \$ variables: the first corresponding to the amount of sleep I
+two \(X\) variables: the first corresponding to the amount of sleep I
 got and the second corresponding to the amount of sleep my son got. So
 we'll let \(X_{i1}\) refer to the hours I slept on the i-th day and
 \(X_{i2}\) refers to the hours that the baby slept on that day. If so,
@@ -17810,9 +17810,9 @@ regression model predicts.
   \[MS_{res}=\frac{SS_{res}}{df_{res}}\] So, how many degrees of freedom
   do we have? As you might expect the df associated with the model is
   closely tied to the number of predictors that we've included. In fact,
-  it turns out that \(df_mod = K\). For the residuals the total degrees
-  of freedom is \(df_res = N - K - 1\). Now that we've got our mean
-  square values we can calculate an \(F\)-statistic like this:
+  it turns out that \(df_{mod} = K\). For the residuals the total
+  degrees of freedom is \(df_{res} = N - K - 1\). Now that we've got our
+  mean square values we can calculate an \(F\)-statistic like this:
   \[F=\frac{MS_{mod}}{MS_{res}}\] and the degrees of freedom associated
   with this are \(K\) and \(N - K - 1\).}{]}
 
@@ -19377,8 +19377,8 @@ hard to calculate without a computer) are shown }\tabularnewline
 \arrayrulecolor{black}
 
 \multicolumn{1}{!{\huxvb{0, 0, 0}{0}}p{0.3\textwidth}!{\huxvb{0, 0, 0}{0}}}{\hspace{0pt}\parbox[b]{0.3\textwidth-0pt-12pt}{\huxtpad{2pt + 1em}\centering sum of squares\huxbpad{2pt}}} &
-\multicolumn{1}{p{0.3\textwidth}!{\huxvb{0, 0, 0}{0}}}{\hspace{12pt}\parbox[b]{0.3\textwidth-12pt-12pt}{\huxtpad{2pt + 1em}\centering \(  SS_b=\sum_{k=1}^{G} N_k  (\bar{Y}_k-\bar{Y})^2  \)\huxbpad{2pt}}} &
-\multicolumn{1}{p{0.3\textwidth}!{\huxvb{0, 0, 0}{0}}}{\hspace{12pt}\parbox[b]{0.3\textwidth-12pt-0pt}{\huxtpad{2pt + 1em}\centering \(  SS_w=\sum_{k=1}^{G} \sum_{i=1}^{N_k}   (Y_{ik}-\bar{Y}_k)^2  \)\huxbpad{2pt}}} \tabularnewline[-0.5pt]
+\multicolumn{1}{p{0.3\textwidth}!{\huxvb{0, 0, 0}{0}}}{\hspace{12pt}\parbox[b]{0.3\textwidth-12pt-12pt}{\huxtpad{2pt + 1em}\centering \( \displaystyle  SS_b=\sum_{k=1}^{G} N_k  (\bar{Y}_k-\bar{Y})^2  \)\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.3\textwidth}!{\huxvb{0, 0, 0}{0}}}{\hspace{12pt}\parbox[b]{0.3\textwidth-12pt-0pt}{\huxtpad{2pt + 1em}\centering \( \displaystyle SS_w=\sum_{k=1}^{G} \sum_{i=1}^{N_k}   (Y_{ik}-\bar{Y}_k)^2  \)\huxbpad{2pt}}} \tabularnewline[-0.5pt]
 
 
 \hhline{}
@@ -19393,7 +19393,7 @@ hard to calculate without a computer) are shown }\tabularnewline
 \arrayrulecolor{black}
 
 \multicolumn{1}{!{\huxvb{0, 0, 0}{0}}p{0.3\textwidth}!{\huxvb{0, 0, 0}{0}}}{\hspace{0pt}\parbox[b]{0.3\textwidth-0pt-12pt}{\huxtpad{2pt + 1em}\centering \( F \)-statistic\huxbpad{2pt}}} &
-\multicolumn{1}{p{0.3\textwidth}!{\huxvb{0, 0, 0}{0}}}{\hspace{12pt}\parbox[b]{0.3\textwidth-12pt-12pt}{\huxtpad{2pt + 1em}\centering \(  F=\frac{MS_b}{df_b}  \)\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.3\textwidth}!{\huxvb{0, 0, 0}{0}}}{\hspace{12pt}\parbox[b]{0.3\textwidth-12pt-12pt}{\huxtpad{2pt + 1em}\centering \(  F=\frac{MS_b}{MS_w}  \)\huxbpad{2pt}}} &
 \multicolumn{1}{p{0.3\textwidth}!{\huxvb{0, 0, 0}{0}}}{\hspace{12pt}\parbox[b]{0.3\textwidth-12pt-0pt}{\huxtpad{2pt + 1em}\centering -\huxbpad{2pt}}} \tabularnewline[-0.5pt]
 
 
@@ -19438,15 +19438,14 @@ hard to calculate without a computer) are shown }\tabularnewline
   assumption (discussed later) that the residual values
   \(\epsilon_{ik}\) are normally distributed, with mean \(0\) and a
   standard deviation \(\sigma\) that is the same for all groups. To use
-  the notation that we introduced in the
-  \protect\hyperlink{sec-Introduction-to-probability}{Introduction to
-  probability} we would write this assumption like this:
-  \[\epsilon_{ik} \sim Normal(0,\sigma^2)\] What about the alternative
-  hypothesis, \(H_1\)? The only difference between the null hypothesis
-  and the alternative hypothesis is that we allow each group to have a
-  different population mean. So, if we let \(\mu_k\) denote the
-  population mean for the k-th group in our experiment, then the
-  statistical model corresponding to \(H_1\) is:
+  the notation that we introduced in
+  Chapter~\ref{sec-Introduction-to-probability} we would write this
+  assumption like this: \[\epsilon_{ik} \sim Normal(0,\sigma^2)\] What
+  about the alternative hypothesis, \(H_1\)? The only difference between
+  the null hypothesis and the alternative hypothesis is that we allow
+  each group to have a different population mean. So, if we let
+  \(\mu_k\) denote the population mean for the k-th group in our
+  experiment, then the statistical model corresponding to \(H_1\) is:
   \[Y_{ik}=\mu_k+\epsilon_{ik}\] where, once again, we assume that the
   error terms are normally distributed with mean 0 and standard
   deviation \(\sigma\). That is, the alternative hypothesis also assumes
@@ -19462,7 +19461,7 @@ hard to calculate without a computer) are shown }\tabularnewline
   true differences among the group means. If we call this quantity
   \(Q\), then we can see that the \(F\) statistic is basically:\(^a\)
   \[F=\frac{\hat{Q}+\hat{\sigma}^2}{\hat{\sigma}^2}\] where the true
-  value \(Q = 0\) if the null hypothesis is true, and \(Q < 0\) if the
+  value \(Q = 0\) if the null hypothesis is true, and \(Q > 0\) if the
   alternative hypothesis is true (e.g., Hays (1994), ch.~10). Therefore,
   at a bare minimum the \(F\) \emph{value must be larger than} 1 to have
   any chance of rejecting the null hypothesis. Note that this doesn't
@@ -19485,9 +19484,9 @@ hard to calculate without a computer) are shown }\tabularnewline
   terms, this really is where our sampling distribution comes from. ---
   \(^a\)If you read ahead to Chapter~\ref{sec-Factorial-ANOVA} and look
   at how the ``treatment effect'' at level \(k\) of a factor is defined
-  in terms of the \(\alpha_k\) values (see {[}Factorial ANOVA 2:
-  balanced designs, interactions allowed{]}), it turns out that \(Q\)
-  refers to a weighted mean of the squared treatment effects,
+  in terms of the \(\alpha_k\) values (see
+  Section~\ref{sec-Factorial-ANOVA-balanced-interactions}), it turns out
+  that \(Q\) refers to a weighted mean of the squared treatment effects,
   \(Q = \frac{(\sum_{k=1}^{G}N_k \alpha_k^2)}{(G-1)}\). --- \(^b\)Or, if
   we want to be sticklers for accuracy, \(1+ \frac{2}{df_2-2}\).}{]}
 
@@ -19778,7 +19777,7 @@ Okay. Now that we've calculated the within groups variation, \(SS_w\),
 it's time to turn our attention to the between-group sum of squares,
 \(SS_b\). The calculations for this case are very similar. The main
 difference is that instead of calculating the differences between an
-observation Yik and a group mean \(\bar{Y}_k\) for all of the
+observation \(Y_{ik}\) and a group mean \(\bar{Y}_k\) for all of the
 observations, we calculate the differences between the group means
 \(\bar{Y}_k\) and the grand mean \(\bar{Y}\) (in this case \(0.88\)) for
 all of the groups (Table~\ref{tbl-tab13-6}).
@@ -20126,7 +20125,7 @@ The definition of \(\eta^2\) is actually really simple:
 
 That's all it is. So when I look at the ANOVA table in
 Figure~\ref{fig-fig13-3}, I see that \(SS_b = 3.45\) and
-\(SS_tot = 3.45 + 1.39 = 4.84\). Thus we get an \(\eta^2\) value of:
+\(SS_{tot} = 3.45 + 1.39 = 4.84\). Thus we get an \(\eta^2\) value of:
 
 \[\eta^2=\frac{3.45}{4.84}=0.71\]
 
@@ -20458,17 +20457,6 @@ keep it. But if it's smaller than the last one, then you copy the last
 Table~\ref{tbl-tab13-10} which shows the calculations of a Holm
 correction for a collection of five \(p\)-values.
 
-Hopefully that makes things clear.
-
-Although it's a little harder to calculate, the Holm correction has some
-very nice properties. It's more powerful than Bonferroni (i.e., it has a
-lower type II error rate) but, counter-intuitive as it might seem, it
-has the same type I error rate. As a consequence, in practice there's
-never any reason to use the simpler Bonferroni correction since it is
-always outperformed by the slightly more elaborate Holm correction.
-Because of this, the Holm correction should be your \emph{go to}
-multiple comparison correction.
-
 \hypertarget{tbl-tab13-10}{}
  
   \providecommand{\huxb}[2]{\arrayrulecolor[RGB]{#1}\global\arrayrulewidth=#2pt}
@@ -20555,6 +20543,17 @@ exactly the same as the value we got originally when we applied no
 correction at all. In contrast, the smallest \(p\)-value (Joyzepam
 versus placebo) has been multiplied by three.
 
+Hopefully that makes things clear.
+
+Although it's a little harder to calculate, the Holm correction has some
+very nice properties. It's more powerful than Bonferroni (i.e., it has a
+lower type II error rate) but, counter-intuitive as it might seem, it
+has the same type I error rate. As a consequence, in practice there's
+never any reason to use the simpler Bonferroni correction since it is
+always outperformed by the slightly more elaborate Holm correction.
+Because of this, the Holm correction should be your \emph{go to}
+multiple comparison correction.
+
 \hypertarget{writing-up-the-post-hoc-test}{%
 \subsection{Writing up the post hoc
 test}\label{writing-up-the-post-hoc-test}}
@@ -20595,14 +20594,14 @@ variance and independence.
   \[H_0:Y_{ik}=\mu + \epsilon_{ik}\]
   \[H_1:Y_{ik}=\mu_k + \epsilon_{ik}\] In these equations \(\mu\) refers
   to a single grand population mean which is the same for all groups,
-  and \(\mu\)k is the population mean for the k-th group. Up to this
+  and \(\mu_k\) is the population mean for the k-th group. Up to this
   point we've been mostly interested in whether our data are best
   described in terms of a single grand mean (the null hypothesis) or in
   terms of different group-specific means (the alternative hypothesis).
   This makes sense, of course, as that's actually the important research
   question! However, all of our testing procedures have, implicitly,
   relied on a specific assumption about the residuals,
-  \(\epsilon\_{ik}\), namely that:
+  \(\epsilon_{ik}\), namely that:
   \[\epsilon_{ik} \sim Normal(0,\sigma^2)\] None of the maths works
   properly without this bit. Or, to be precise, you can still do all the
   calculations and you'll end up with an \(F\)-statistic, but you have
@@ -20679,24 +20678,25 @@ can go on to look at how to run the test in jamovi.
   simple. Suppose we have our outcome variable \(Y_{ik}\). All we do is
   define a new variable, which I'll call \(Z_{ik}\), corresponding to
   the absolute deviation from the group mean:
-  \[Z_{ik}=Y_{ik}-\bar{Y}_{k}\] Okay, what good does this do us? Well,
-  let's take a moment to think about what \(Z_{ik}\) actually is and
-  what we're trying to test. The value of \(Z_{ik}\) is a measure of how
-  the \(i\)-th observation in the \(k\)-th group deviates from its group
-  mean. And our null hypothesis is that all groups have the same
-  variance, i.e., the same overall deviations from the group means! So
-  the null hypothesis in a Levene test is that the population means of
-  \(Z\) are identical for all groups. Hmm. So what we need now is a
-  statistical test of the null hypothesis that all group means are
-  identical. Where have we seen that before? Oh right, that's what ANOVA
-  is, and so all that the Levene test does is run an ANOVA on the new
-  variable \(Z_{ik}\). What about the Brown-Forsythe test? Does that do
-  anything particularly different? Nope. The only change from the Levene
-  test is that it constructs the transformed variable \(Z\) in a
-  slightly different way, using deviations from the group medians rather
-  than deviations from the group means. That is, for the Brown-Forsythe
-  test: \[Z_{ik}=Y_{ik}-median_k(Y)\] where \(median_k(Y)\) is the
-  median for group \(k\).}{]}
+  \[Z_{ik}=\lvert Y_{ik}-\bar{Y}_{k}\rvert\] Okay, what good does this
+  do us? Well, let's take a moment to think about what \(Z_{ik}\)
+  actually is and what we're trying to test. The value of \(Z_{ik}\) is
+  a measure of how the \(i\)-th observation in the \(k\)-th group
+  deviates from its group mean. And our null hypothesis is that all
+  groups have the same variance, i.e., the same overall deviations from
+  the group means! So the null hypothesis in a Levene test is that the
+  population means of \(Z\) are identical for all groups. Hmm. So what
+  we need now is a statistical test of the null hypothesis that all
+  group means are identical. Where have we seen that before? Oh right,
+  that's what ANOVA is, and so all that the Levene test does is run an
+  ANOVA on the new variable \(Z_{ik}\). What about the Brown-Forsythe
+  test? Does that do anything particularly different? Nope. The only
+  change from the Levene test is that it constructs the transformed
+  variable \(Z\) in a slightly different way, using deviations from the
+  group medians rather than deviations from the group means. That is,
+  for the Brown-Forsythe test:
+  \[Z_{ik}=\lvert Y_{ik}-\text{median}_k(Y) \rvert\] where
+  \(\text{median}_k(Y)\) is the median for group \(k\).}{]}
 
 \hypertarget{running-the-levene-test-in-jamovi}{%
 \subsection{Running the Levene test in
@@ -20828,7 +20828,7 @@ The Kruskal-Wallis test is surprisingly similar to ANOVA, in some ways.
 In ANOVA we started with \(Y_{ik}\), the value of the outcome variable
 for the ith person in the kth group. For the Kruskal-Wallis test what
 we'll do is rank order all of these \(Y_{ik}\) values and conduct our
-analysis on the ranked data.\footnote{So let's let \(R\_{ik}\) refer to
+analysis on the ranked data.\footnote{So let's let \(R_{ik}\) refer to
   the ranking given to the \(i\)th member of the \(k\)th group. Now,
   let's calculate \(\bar{R}_k\), the average rank given to observations
   in the \(k\)th group: \[\bar{R}_k=\frac{1}{N_k}\sum_i R_{ik}\] and
@@ -20890,9 +20890,9 @@ most diligent reader has stopped caring (or at least formed the opinion
 that the tie-correction factor is something that doesn't require their
 immediate attention). So I'll very quickly tell you how it's calculated,
 and omit the tedious details about why it's done this way. Suppose we
-construct a frequency table for the raw data, and let fj be the number
-of observations that have the j-th unique value. This might sound a bit
-abstract, so here's a concrete example from the frequency table of
+construct a frequency table for the raw data, and let \(f_j\) be the
+number of observations that have the j-th unique value. This might sound
+a bit abstract, so here's a concrete example from the frequency table of
 mood.gain from the \emph{clinicaltrials.csv} data set
 (Table~\ref{tbl-tab13-11}).
 
@@ -21869,7 +21869,7 @@ things. First, does the choice of drug have any effect on mood? And
 second, does CBT have any effect on mood? These aren't the only
 hypotheses that we could formulate of course, and we'll see a really
 important example of a different kind of hypothesis in the section
-\protect\hyperlink{factorial-anova-2-balanced-designs-interpreting-interactions}{Factorial
+\protect\hyperlink{sec-Factorial-ANOVA-balanced-interactions}{Factorial
 ANOVA 2: balanced designs, interpreting interactions}, but these are the
 two simplest hypotheses to test, and so we'll start there. Consider the
 first test. If the drug has no effect then we would expect all of the
@@ -22350,9 +22350,9 @@ matters, (b) only Factor B matters, (c) both A and B matter, and (d)
 neither A nor B matters. An example of each of these four possibilities
 is plotted in Figure~\ref{fig-fig14-4}.
 
-\hypertarget{factorial-anova-2-balanced-designs-interpreting-interactions}{%
+\hypertarget{sec-Factorial-ANOVA-balanced-interactions}{%
 \section{Factorial ANOVA 2: balanced designs, interpreting
-interactions}\label{factorial-anova-2-balanced-designs-interpreting-interactions}}
+interactions}\label{sec-Factorial-ANOVA-balanced-interactions}}
 
 The four patterns of data shown in Figure~\ref{fig-fig14-4} are all
 quite realistic. There are many data sets that produce exactly those
