@@ -192,9 +192,14 @@ gridExtra::grid.arrange(p1,p2,ncol=2)
 ```{r}
 #| label: tbl-tab11-1
 #| tbl-cap: Critical values for different alpha levels
-huxtabs[[11]][[1]] |>
-  merge_cells(1, 2:3)
+# huxtabs[[11]][[1]] |>
+#   merge_cells(1, 2:3)
+
+
+mykbl(lsj_chapter_tables[[11]][[1]])
+
 ```
+
 
 ### A worked example, by hand
 
@@ -387,7 +392,9 @@ We can calculate means and standard deviations, using the 'Exploration' -- 'desc
 ```{r}
 #| label: tbl-tab11-2
 #| tbl-cap: Descriptives summary table
-huxtabs[[11]][[2]]
+
+mykbl(lsj_chapter_tables[[11]][[2]])
+
 ```
 
 To give you a more detailed sense of what's going on here, I've plotted box and violin plots in jamovi, with mean scores added to the plot with a small solid square. These plots show the distribution of grades for both tutors (@fig-fig11-7),
@@ -636,11 +643,11 @@ knitr::include_graphics("images/fig11-12.png")
 
 Nevertheless, this impression is wrong. To see why, take a look at the scatterplot of the grades for test 1 against the grades for test 2, shown in @fig-fig11-13b. In this plot each dot corresponds to the two grades for a given student. If their grade for test 1 (*x* co-ordinate) equals their grade for test 2 (*y* co-ordinate), then the dot falls on the line. Points falling above the line are the students that performed better on the second test. Critically, almost all of the data points fall above the diagonal line: almost all of the students do seem to have improved their grade, if only by a small amount. This suggests that we should be looking at the improvement made by each student from one test to the next and treating that as our raw data. To do this, we'll need to create a new variable for the improvement that each student makes, and add it to the *chico* data set. The easiest way to do this is to compute a new variable, with the expression grade_test2 - grade_test1.
 
-::: {#fig-fig11-13 layout-ncol=2 layout-valign="bottom" width=80%}
+::: {#fig-fig11-13 layout-ncol=2 layout-valign="bottom" width=90%}
 
-![](images/fig11-13a.png){#fig-fig11-13a fig-align="left" fig-alt="A graph comparing two variables, grade_test1 and grade_test2, shows mean and median values with their respective error bars representing 95% confidence intervals. The mean values are represented by circles, and the median values by squares." width=40%}
+![](images/fig11-13a.png){#fig-fig11-13a fig-align="left" fig-alt="A graph comparing two variables, grade_test1 and grade_test2, shows mean and median values with their respective error bars representing 95% confidence intervals. The mean values are represented by circles, and the median values by squares." }
 
-![](images/fig11-13b.png){#fig-fig11-13b fig-align="left" fig-alt="A scatter plot showing the relationship between scores on two tests, grade_test1 (x-axis) and grade_test2 (y-axis). Data points are clustered around a diagonal line, indicating a positive correlation between the two test scores." width=40%}
+![](images/fig11-13b.png){#fig-fig11-13b fig-align="left" fig-alt="A scatter plot showing the relationship between scores on two tests, grade_test1 (x-axis) and grade_test2 (y-axis). Data points are clustered around a diagonal line, indicating a positive correlation between the two test scores." }
 
 Mean grade for test 1 and test 2, with associated 95\% confidence intervals (a). Scatterplot showing the individual grades for test 1 and test 2 (b)
 :::
@@ -745,10 +752,14 @@ and he suggested a rough guide for interpreting $d$ in @tbl-tab11-3.
 ```{r}
 #| label: tbl-tab11-3
 #| tbl-cap: A (very) rough guide to interpreting Cohen's $d$. My personal recommendation is to not use these blindly. The $d$ statistic has a natural interpretation in and of itself. It re-describes the difference in means as the number of standard deviations that separates those means. So it's generally a good idea to think about what that means in practical terms. In some contexts a "small" effect could be of big practical importance. In other situations a "large" effect may not be all that interesting
-huxtabs[[11]][[3]] |>
-  set_width(0.8) |>
-  set_caption_width(1.2) |>
-  set_caption_pos(value = "bottomleft")
+# huxtabs[[11]][[3]] |>
+#   set_width(0.8) |>
+#   set_caption_width(1.2) |>
+#   set_caption_pos(value = "bottomleft")
+
+
+mykbl(lsj_chapter_tables[[11]][[3]])
+
 ```
 
 You'd think that this would be pretty unambiguous, but it's not. This is largely because Cohen wasn't too specific on what he thought should be used as the measure of the standard deviation (in his defence he was trying to make a broader point in his book, not nitpick about tiny details). As discussed by @McGrath2006, there are several different versions in common usage, and each author tends to adopt slightly different notation. For the sake of simplicity (as opposed to accuracy), I'll use $d$ to refer to any statistic that you calculate from the sample, and use $\delta$ to refer to a theoretical population effect. Obviously, that does mean that there are several different things all called $d$.
@@ -954,12 +965,12 @@ As long as there are no ties (i.e., people with the exact same awesomeness score
 ```{r}
 #| label: tbl-tab11-4
 #| tbl-cap: Comparing observations by group for a two-sample Mann-Whitney U test
-huxtabs[[11]][[4]] |>
-  merge_cells(1, 3:7) |>
-  merge_cells(3:7, 1) |>
-  set_bold(3:7, 1) |>
-  set_right_border(3:7, 1) |>
-  merge_cells(1:2, 1:2)
+
+mykbl(lsj_chapter_tables[[11]][[4]], NULL) |>
+  kableExtra::add_header_above(c(" " = 2, "Group B" = 5)) |>
+  kableExtra::group_rows("Group A", 1, 5, label_row_css = "text-align: left;")  |>
+  kableExtra::column_spec(2, border_right = TRUE)
+
 ```
 
 We then count up the number of checkmarks. This is our test statistic, $W$.[^11-comparing-two-means-23] The actual sampling distribution for $W$ is somewhat complicated, and I'll skip the details. For our purposes, it's sufficient to note that the interpretation of $W$ is qualitatively the same as the interpretation of $t$ or $z$. That is, if we want a two-sided test then we reject the null hypothesis when $W$ is very large or very small, but if we have a directional (i.e., one-sided) hypothesis then we only use one or the other.
@@ -984,12 +995,12 @@ What about the **one sample Wilcoxon test** (or equivalently, the paired samples
 ```{r}
 #| label: tbl-tab11-5
 #| tbl-cap: Comparing observations by group for a one-sample Wilcoxon $U$ test
-huxtabs[[11]][[5]]  |>
-  merge_cells(1:2, 1:2) |>
-  merge_cells(1, 4:13) |>
-  merge_cells(3:5, 1:2) |>
-  set_bold(3:5, 1:2) |>
-  set_right_border(3:5, 1:2)
+
+mykbl(lsj_chapter_tables[[11]][[5]][2:5,2:13], NULL) |>
+  kableExtra::add_header_above(c(" " = 1, "all differences" = 11)) |>
+  kableExtra::group_rows("positive\ndifferences", 1, 3, label_row_css = "text-align: left;") |>
+  kableExtra::column_spec(2, border_right = TRUE)
+
 ```
 
 As far as running it in jamovi goes, it's pretty much what you'd expect. For the one sample version, you specify the 'Wilcoxon rank' option under 'Tests' in the 'One Sample T-Test' analysis window. This gives you Wilcoxon $W = 7$, $p$-value = $0.03711$. As this shows, we have a significant effect. Evidently, taking a statistics class does have an effect on your happiness. Switching to a paired samples version of the test won't give us a different answer, of course; see @fig-fig11-26.

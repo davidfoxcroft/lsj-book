@@ -41,6 +41,8 @@ mykbl <- function(data, col_labs = NA) {
     )
 }
 
+lsj_chapter_tables <- readRDS("data_and_tables/lsj_chapter_tables.rds")
+
 
 font_add(family = "TeX Gyre Pagella",   
           regular = "texgyrepagella-regular.otf") # Name you want to use to call the font
