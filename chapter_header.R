@@ -1,6 +1,6 @@
 
 library(tinytex)
-library(huxtable)
+library(kableExtra)
 library(dplyr)
 library(janitor)
 library(rvest)
@@ -16,13 +16,31 @@ blueshade <- "#3d6da9" # match blue colour for plots to jamovi logo colour
 #### knitr options -----------
 knitr::opts_chunk$set(
           fig.align = "left",
-          out.width =  if (knitr::is_latex_output()) "100%" else "80%"
+          out.width =  if (knitr::is_latex_output()) "100%" else "90%"
           )
-if (knitr::is_html_output()) options(huxtable.knitr_output_format = 'html')
-options(knitr.table.format = function() {
-  if (knitr::is_latex_output()) 'latex'
-  if (knitr::is_html_output()) 'html' else pandoc
-})
+
+options(knitr.kable.NA = '')
+
+
+mykbl <- function(data, col_labs = NA) {
+  if (names(data[1]) == "X1") {
+    names(data) <- c(data[1,])
+    data <- data[-1,]
+  }
+  kbl(data,
+      linesep = '',
+      escape = FALSE,
+      col.names = col_labs,
+      booktabs = TRUE,
+      align = 'c'
+  ) |>
+    kable_styling(
+      bootstrap_options = c("hover", "responsive"),
+      full_width = FALSE,
+      latex_options = "scale_down"
+    )
+}
+
 
 font_add(family = "TeX Gyre Pagella",   
           regular = "texgyrepagella-regular.otf") # Name you want to use to call the font

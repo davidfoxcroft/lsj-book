@@ -39,7 +39,9 @@ Looking at this it becomes very clear what happened to my sanity! With these as 
 ```{r}
 #| label: tbl-tab6-1
 #| tbl-cap: Frequency table for the speaker variable
-huxtabs[[6]][[1]]
+
+mykbl(lsj_chapter_tables[[6]][[1]])
+
 ```
 
 The output here tells us on the first line that what we're looking at is a tabulation of the speaker variable. In the 'Levels' column it lists all the different speakers that exist in the data, and in the 'Counts' column it tells you how many times that speaker appears in the data. In other words, it's a frequency table.
@@ -110,8 +112,9 @@ In contrast, the **less than or equal to** operator $<=$ will do exactly what it
 ```{r}
 #| label: tbl-tab6-2
 #| tbl-cap: Some logical operators
-huxtabs[[6]][[2]] |>
-  set_latex_float('H')
+
+mykbl(lsj_chapter_tables[[6]][[2]])
+
 ```
 
 Next on the list of logical operators is the **not equal to** operator $!=$ which, as with all the others, does what it says it does. It returns a value of TRUE when things on either side are not identical to each other. Therefore, since $2 + 2$ isn't equal to $5$, we would get "true" as the value for our newly computed variable. Try it and see:
@@ -122,7 +125,9 @@ We're not quite done yet. There are three more logical operations that are worth
 #| label: tbl-tab6-3
 #| tbl-cap: Some more logical operators
 #| tbl-pos: 'h!'
-huxtabs[[6]][[3]]
+
+mykbl(lsj_chapter_tables[[6]][[3]])
+
 ```
 
 On the other hand, if I ask you to assess the claim that "both $2 + 2 = 4$ and $2 + 2 = 5$" you'd say that it's false. Since this is an **and** statement we need both parts to be true. And that's what the $and$ operator does:
@@ -167,9 +172,9 @@ This evaluates to 'false', and this may seem slightly counter-intuitive. With th
 ```{r}
 #| label: tbl-tab6-4
 #| tbl-cap: Text characters in the order that jamovi processes them
-huxtabs[[6]][[4]] |>
-  theme_article(header_rows=FALSE) |>
-  set_bold(1, 1:8, value = FALSE)
+
+mykbl(lsj_chapter_tables[[6]][[4]])
+
 ```
 
 ## Transforming and recoding a variable {#sec-Transforming-and-recoding-a-variable}
@@ -287,13 +292,10 @@ In the section on [Transforming and recoding a variable] I discussed the ideas b
 ```{r}
 #| label: tbl-tab6-5
 #| tbl-cap: Some mathematical operators
-#| tbl-pos: 'h!'
-huxtabs[[6]][[5]] |>
-  set_contents(1, 1, "") |>
-  set_latex_float('H')
+
+mykbl(lsj_chapter_tables[[6]][[5]])
 
 ```
-
 [^pragmatic-matters-9]: We'll leave the box-cox function until later on.
 
 ### Logarithms and exponentials
