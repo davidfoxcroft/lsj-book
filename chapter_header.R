@@ -16,7 +16,7 @@ blueshade <- "#3d6da9" # match blue colour for plots to jamovi logo colour
 #### knitr options -----------
 knitr::opts_chunk$set(
           fig.align = "left",
-          out.width =  if (knitr::is_latex_output()) "100%" else "90%"
+          out.width =  if (knitr::is_latex_output()) "100%" else "100%"
           )
 
 options(knitr.kable.NA = '')

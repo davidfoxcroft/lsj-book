@@ -388,7 +388,7 @@ research in the Humanities and Social Sciences in the UK. They are
 award-winning, not-for-profit, run by scholars, and committed to making
 high-quality research freely available to readers around the world.
 
-\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, opacityback=0, arc=.35mm, coltitle=black, bottomtitle=1mm, breakable, titlerule=0mm, colback=white, colbacktitle=quarto-callout-note-color!10!white, toprule=.15mm, colframe=quarto-callout-note-color-frame, leftrule=.75mm, rightrule=.15mm, bottomrule=.15mm, toptitle=1mm, opacitybacktitle=0.6, left=2mm]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, coltitle=black, opacityback=0, left=2mm, colbacktitle=quarto-callout-note-color!10!white, breakable, toprule=.15mm, colframe=quarto-callout-note-color-frame, bottomrule=.15mm, bottomtitle=1mm, toptitle=1mm, rightrule=.15mm, leftrule=.75mm, arc=.35mm, colback=white, titlerule=0mm, opacitybacktitle=0.6]
 
 A pdf version of the book is available for free download from Open Book
 Publishers
@@ -3859,7 +3859,7 @@ the critical value in a textbook.\\
 
 \centering
 \resizebox{\ifdim\width>\linewidth\linewidth\else\width\fi}{!}{
-\begin{tabular}[t]{ccc}
+\begin{tabular}[t]{>{\centering\arraybackslash}p{10em}cc}
 \toprule
  & critical \(z\)-value & \\
 \midrule
@@ -5097,19 +5097,20 @@ means by an estimate of the standard deviation. In other words, we're
 looking to calculate something along the lines of this:
 \[d=\frac{(\text{mean 1})-(\text{mean 2})}{\text{std dev}}\]
 
-and he suggested a rough guide for interpreting \(d\) in
+and he suggested a rough guide\footnote{My personal recommendation is to
+  not use these blindly. The \(d\) statistic has a natural
+  interpretation in and of itself. It re-describes the difference in
+  means as the number of standard deviations that separates those means.
+  So it is generally a good idea to think about what that means in
+  practical terms. In some contexts a ``small'' effect could be of big
+  practical importance. In other situations a ``large'' effect may not
+  be all that interesting.} for interpreting \(d\) in
 Table~\ref{tbl-tab11-3}.
 
 \begin{table}
 
 \caption{\label{tbl-tab11-3}A (very) rough guide to interpreting Cohen's
-\(d\). My personal recommendation is to not use these blindly. The \(d\)
-statistic has a natural interpretation in and of itself. It re-describes
-the difference in means as the number of standard deviations that
-separates those means. So it's generally a good idea to think about what
-that means in practical terms. In some contexts a ``small'' effect could
-be of big practical importance. In other situations a ``large'' effect
-may not be all that interesting}
+\(d\)}
 
 \centering
 \resizebox{\ifdim\width>\linewidth\linewidth\else\width\fi}{!}{
@@ -5387,7 +5388,7 @@ politeness to include \(N\) as well.
 
 \end{figure}%
 
-\begin{figure}[H]
+\begin{figure}[h!]
 
 \includegraphics[width=0.8\linewidth,height=\textheight,keepaspectratio]{images/fig11-23.png}
 
@@ -5406,7 +5407,7 @@ winning margins data, which if you remember back to
 a normal distribution at all. Here's what happens to the QQ plot
 (Figure~\ref{fig-fig11-24}).
 
-\begin{figure}[h]
+\begin{figure}[h!]
 
 \includegraphics[width=0.8\linewidth,height=\textheight,keepaspectratio]{images/fig11-24.png}
 
@@ -5473,7 +5474,7 @@ two-sample Mann-Whitney U test}
 \addlinespace[0.3em]
 \multicolumn{7}{l}{\textbf{Group A}}\\
 \hspace{1em} &  & 14.5 & 10.4 & 12.4 & 11.7 & 13.0\\
-\hspace{1em}group A & 6.4 & . & . & . & . & .\\
+\hspace{1em} & 6.4 & . & . & . & . & .\\
 \hspace{1em} & 10.7 & . & \( \checkmark \) & . & . & .\\
 \hspace{1em} & 11.9 & . & \( \checkmark \) & . & \( \checkmark \) & .\\
 \hspace{1em} & 7.3 & . & . & . & . & .\\
@@ -5504,7 +5505,7 @@ Figure~\ref{fig-fig11-25}. Counting up the tick marks this time we get a
 test statistic of \(W = 7\). As before, if our test is two-sided, then
 we reject the null hypothesis when W is very large or very small.
 
-\begin{figure}[H]
+\begin{figure}[h!]
 
 \includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{images/fig11-25.png}
 
@@ -5537,16 +5538,16 @@ one-sample Wilcoxon \(U\) test}
 
 \centering
 \resizebox{\ifdim\width>\linewidth\linewidth\else\width\fi}{!}{
-\begin{tabular}[t]{c>{}c|cccccccccc}
+\begin{tabular}[t]{>{\centering\arraybackslash}p{3em}c>{}c|cccccccccc}
 \toprule
-\multicolumn{1}{c}{ } & \multicolumn{11}{c}{all differences} \\
-\cmidrule(l{3pt}r{3pt}){2-12}
+\multicolumn{2}{c}{ } & \multicolumn{11}{c}{All differences} \\
+\cmidrule(l{3pt}r{3pt}){3-13}
 \addlinespace[0.3em]
-\multicolumn{12}{l}{\textbf{\makecell[l]{positive\\differences}}}\\
-\hspace{1em} &  & \(-24\) & \(-14\) & \(-10\) & 7 & \(-6\) & \(-38\) & 2 & \(-35\) & \(-30\) & 5\\
-\hspace{1em} & 7 & . & . & . & \( \checkmark \) & \( \checkmark \) & . & \( \checkmark \) & . & . & \( \checkmark \)\\
-\hspace{1em} & 2 & . & . & . & . & . & . & \( \checkmark \) & . & . & .\\
- & 5 & . & . & . & . & . & . & \( \checkmark \) & . & . & \( \checkmark \)\\
+\multicolumn{13}{l}{\textbf{\makecell[l]{Positive\\differences}}}\\
+\hspace{1em} &  &  & \(-24\) & \(-14\) & \(-10\) & 7 & \(-6\) & \(-38\) & 2 & \(-35\) & \(-30\) & 5\\
+\hspace{1em} &  & 7 & . & . & . & \( \checkmark \) & \( \checkmark \) & . & \( \checkmark \) & . & . & \( \checkmark \)\\
+\hspace{1em} &  & 2 & . & . & . & . & . & . & \( \checkmark \) & . & . & .\\
+\hspace{1em} &  & 5 & . & . & . & . & . & . & \( \checkmark \) & . & . & \( \checkmark \)\\
 \bottomrule
 \end{tabular}}
 
@@ -5563,7 +5564,7 @@ Figure~\ref{fig-fig11-26}.
 
 \begin{figure}[h!]
 
-\includegraphics[width=0.9\linewidth,height=\textheight,keepaspectratio]{images/fig11-26.png}
+\includegraphics[width=0.8\linewidth,height=\textheight,keepaspectratio]{images/fig11-26.png}
 
 \caption{\label{fig-fig11-26}jamovi screen showing results for
 one-sample and paired sample Wilcoxon nonparametric tests}

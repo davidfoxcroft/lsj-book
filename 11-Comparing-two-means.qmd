@@ -196,7 +196,8 @@ gridExtra::grid.arrange(p1,p2,ncol=2)
 #   merge_cells(1, 2:3)
 
 
-mykbl(lsj_chapter_tables[[11]][[1]])
+mykbl(lsj_chapter_tables[[11]][[1]]) |>
+  kableExtra::column_spec(1, width = "10em")
 
 ```
 
@@ -747,20 +748,22 @@ Yet again, the output changes in a predictable way. The hypothesis has changed, 
 The most commonly used measure of effect size for a $t$-test is *Cohen's d* [@Cohen1988]. It's a very simple measure in principle, with quite a few wrinkles when you start digging into the details. Cohen himself defined it primarily in the context of an independent samples $t$-test, specifically the Student test. In that context, a natural way of defining the effect size is to divide the difference between the means by an estimate of the standard deviation. In other words, we're looking to calculate something along the lines of this:
 $$d=\frac{(\text{mean 1})-(\text{mean 2})}{\text{std dev}}$$
 
-and he suggested a rough guide for interpreting $d$ in @tbl-tab11-3.
+and he suggested a rough guide[^11-comparing-two-means-17a] for interpreting $d$ in @tbl-tab11-3.
 
 ```{r}
 #| label: tbl-tab11-3
-#| tbl-cap: A (very) rough guide to interpreting Cohen's $d$. My personal recommendation is to not use these blindly. The $d$ statistic has a natural interpretation in and of itself. It re-describes the difference in means as the number of standard deviations that separates those means. So it's generally a good idea to think about what that means in practical terms. In some contexts a "small" effect could be of big practical importance. In other situations a "large" effect may not be all that interesting
+#| tbl-cap: A (very) rough guide to interpreting Cohen's $d$ 
 # huxtabs[[11]][[3]] |>
 #   set_width(0.8) |>
 #   set_caption_width(1.2) |>
 #   set_caption_pos(value = "bottomleft")
 
 
-mykbl(lsj_chapter_tables[[11]][[3]])
+mykbl(lsj_chapter_tables[[11]][[3]]) 
 
 ```
+
+[^11-comparing-two-means-17a]: My personal recommendation is to not use these blindly. The $d$ statistic has a natural interpretation in and of itself. It re-describes the difference in means as the number of standard deviations that separates those means. So it is generally a good idea to think about what that means in practical terms. In some contexts a "small" effect could be of big practical importance. In other situations a "large" effect may not be all that interesting.
 
 You'd think that this would be pretty unambiguous, but it's not. This is largely because Cohen wasn't too specific on what he thought should be used as the measure of the standard deviation (in his defence he was trying to make a broader point in his book, not nitpick about tiny details). As discussed by @McGrath2006, there are several different versions in common usage, and each author tends to adopt slightly different notation. For the sake of simplicity (as opposed to accuracy), I'll use $d$ to refer to any statistic that you calculate from the sample, and use $\delta$ to refer to a theoretical population effect. Obviously, that does mean that there are several different things all called $d$.
 
@@ -907,8 +910,6 @@ gridExtra::grid.arrange(p1,p2,p3,p4, nrow=2, ncol=2)
 
 In our previous analyses we showed how to conduct in jamovi an independent $t$-test (@fig-fig11-10) and a paired samples $t$-test (@fig-fig11-16). And for these analyses jamovi provides an option to show a QQ plot for the difference scores (which jamovi calls the 'residuals'), which is a better way of checking the normality assumption. When we select this option for these analyses, we get the QQ plots shown in @fig-fig11-22 and @fig-fig11-23, respectively. My interpretation is that these plots both show that the difference scores are reasonably normally distributed, so we are good to go!
 
-
-
 ### Shapiro-Wilk tests
 
 QQ plots provide a nice way to informally check the normality of your data, but sometimes you'll want to do something a bit more formal and the **Shapiro-Wilk test** [@Shapiro1965] is probably what you're looking for.[^11-comparing-two-means-21] As you'd expect, the null hypothesis being tested is that a set of $N$ observations is normally distributed.
@@ -932,7 +933,6 @@ knitr::include_graphics("images/fig11-22.png")
 #| label: fig-fig11-23
 #| fig-cap: jamovi QQ plot for the paired samples $t$-test analysis shown in @fig-fig11-16
 #| fig-alt: A Q-Q plot displays standardized residuals versus theoretical quantiles to assess the normality of a data set. The points mostly follow the diagonal line from bottom left to top right, indicating that the residuals are approximately normally distributed
-#| fig-pos: 'H'
 knitr::include_graphics("images/fig11-23.png")
 ```
 
@@ -944,7 +944,6 @@ In the meantime, it's probably worth showing you an example of what happens to t
 #| label: fig-fig11-24
 #| fig-cap: jamovi QQ plot showing non-normality from the AFL winning margins data
 #| fig-alt: A Q-Q plot shows standardized residuals against theoretical quantiles. Data points largely follow a diagonal reference line, indicating normality. Points deviate at the upper and lower ends, suggesting potential departures from a normal distribution at extremes
-#| fig-pos: 'h'
 knitr::include_graphics("images/fig11-24.png")
 ```
 
@@ -984,7 +983,6 @@ In jamovi, if we run an 'Independent Samples T-Test' with scores as the dependen
 #| classes: .enlarge-image
 #| fig-cap: jamovi screen showing results for the Mann-Whitney $U$ test
 #| fig-alt: A jamovi screenshot showing a Mann-Whitney $U$ test setup on the left and results on the right. The setup includes dependent and grouping variables, while the results section displays statistical values and references
-#| fig-pos: 'H'
 knitr::include_graphics("images/fig11-25.png")
 ```
 
@@ -996,16 +994,17 @@ What about the **one sample Wilcoxon test** (or equivalently, the paired samples
 #| label: tbl-tab11-5
 #| tbl-cap: Comparing observations by group for a one-sample Wilcoxon $U$ test
 
-mykbl(lsj_chapter_tables[[11]][[5]][2:5,2:13], NULL) |>
-  kableExtra::add_header_above(c(" " = 1, "all differences" = 11)) |>
-  kableExtra::group_rows("positive\ndifferences", 1, 3, label_row_css = "text-align: left;") |>
-  kableExtra::column_spec(2, border_right = TRUE)
+mykbl(lsj_chapter_tables[[11]][[5]], NULL) |>
+  kableExtra::add_header_above(c(" " = 2, "All differences" = 11)) |>
+  kableExtra::group_rows("Positive\ndifferences", 1, 4, label_row_css = "text-align: left;") |>
+   kableExtra::column_spec(3, border_right = TRUE) |>
+   kableExtra::column_spec(1, width = "3em")
 
 ```
 
 As far as running it in jamovi goes, it's pretty much what you'd expect. For the one sample version, you specify the 'Wilcoxon rank' option under 'Tests' in the 'One Sample T-Test' analysis window. This gives you Wilcoxon $W = 7$, $p$-value = $0.03711$. As this shows, we have a significant effect. Evidently, taking a statistics class does have an effect on your happiness. Switching to a paired samples version of the test won't give us a different answer, of course; see @fig-fig11-26.
 
-```{r out.width="90%"}
+```{r out.width="80%"}
 #| label: fig-fig11-26
 #| classes: .enlarge-image
 #| fig-cap: jamovi screen showing results for one-sample and paired sample Wilcoxon nonparametric tests

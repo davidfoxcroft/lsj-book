@@ -12,12 +12,6 @@ library(knitr)
 set.seed(1963)
 blueshade <- "#3d6da9" # match blue colour for plots to jamovi logo colour 
 
-#### knitr options -----------
-knitr::opts_chunk$set(
-          fig.align = "left",
-          out.width =  if (knitr::is_latex_output()) "100%" else "80%"
-          )
-
 ##### read tables from html files 
 lsj_chapter_tables <- list()
 lsj_chapter_tables[[1]] <- read_html("data_and_tables/1. Why do we learn statistics.html") %>% html_table() 
