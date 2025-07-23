@@ -74,7 +74,9 @@ In this case 11 of these 20 coin flips (55%) came up heads. Now suppose that I'd
 ```{r}
 #| label: tbl-tab7-1
 #| tbl-cap: Coin flips and proportion of heads
-huxtabs[[7]][[1]]
+
+mykbl(lsj_chapter_tables[[7]][[1]]) 
+
 ```
 
 Notice that at the start of the sequence the *proportion* of heads fluctuates wildly, starting at $.00$ and rising as high as $.80$. Later on, one gets the impression that it dampens out a bit, with more and more of the values actually being pretty close to the "right" answer of $.50$. This is the frequentist definition of probability in a nutshell. Flip a fair coin over and over again, and as $N$ grows large (approaches infinity, denoted $N \rightarrow \infty$ ) the proportion of heads will converge to 50%. There are some subtle technicalities that the mathematicians care about, but qualitatively speaking that's how the frequentists define probability. Unfortunately, I don't have an infinite number of coins or the infinite patience required to flip a coin an infinite number of times. However, I do have a computer and computers excel at mindless repetitive tasks. So I asked my computer to simulate flipping a coin 1000 times and then drew a picture of what happens to the proportion $\frac{N_H}{N}$ as $N$ increases. Actually, I did it four times just to make sure it wasn't a fluke. The results are shown in @fig-fig7-1. As you can see, the proportion of observed heads eventually stops fluctuating and settles down. When it does, the number at which it finally settles is the true probability of heads.
@@ -89,7 +91,6 @@ However, it also has undesirable characteristics. Infinite sequences don't reall
 #| label: fig-fig7-1
 #| fig-cap: An illustration of how frequentist probability works. If you flip a fair coin over and over again the proportion of heads that you have seen eventually settles down and converges to the true probability of $0.5$. Each panel shows four different simulated experiments. In each case we pretend we flipped a coin $1000$ times and kept track of the proportion of flips that were heads as we went along. Although none of these sequences actually ended up with an exact value of $.5$, if we had extended the experiment for an infinite number of coin flips they would have
 #| fig-alt: Four line plots each showing the proportion of heads versus the number of coin flips, ranging from 0 to 1000 flips. All plots demonstrate convergence towards 0.5 as the number of flips increases, with initial fluctuations stabilizing over time
-#| fig-pos: 'H'
 
 coinflips <- list()
 coinflips <- lapply(1:4, function(i) {
@@ -140,14 +141,15 @@ At this point, we're almost done. The last thing we need to recognise is that "s
 ```{r}
 #| label: tbl-tab7-2
 #| tbl-cap: A probability distribution for trouser wearing
-huxtabs[[7]][[2]]
+
+mykbl(lsj_chapter_tables[[7]][[2]]) 
+
 ```
 
 ```{r out.width="80%"}
 #| label: fig-fig7-2
 #| fig-cap: A visual depiction of the "trousers" probability distribution. There are five "elementary events", corresponding to the five pairs of trousers that I own. Each event has some probability of occurring -- this probability is a number between 0 to 1. The sum of these probabilities is 1
 #| fig-alt: Bar chart showing the probability of different events. Blue jeans have the highest probability at 0.5, followed by grey jeans around 0.3. Black jeans and blue track have the same probability near 0.1, while the black suit has a probability of 0.
-#| fig-pos: 'h!'
 #| fig-height: 5
 #| fig-width: 6
 
@@ -170,7 +172,9 @@ You might be thinking that this is all terribly obvious and simple and you'd be 
 ```{r}
 #| label: tbl-tab7-3
 #| tbl-cap: Some rules that probabilities satisfy
-huxtabs[[7]][[3]]
+
+mykbl(lsj_chapter_tables[[7]][[3]]) 
+
 ```
 
 ## The binomial distribution {#sec-The-binomial-distribution}
@@ -357,7 +361,6 @@ gridExtra::grid.arrange(p1,p2, ncol=2)
 #| fig-height: 4
 #| fig-cap: Two more examples of the "area under the curve idea". There is a 15.9% chance that an observation is one standard deviation below the mean or smaller (panel (a)), and a 34.1% chance that the observation is somewhere between one standard deviation below the mean and the mean (panel (b)). Notice that if you add these two numbers together you get 15.9% + 34.1% = 50%. For normally distributed data, there is a 50% chance that an observation falls below the mean. And of course that also implies that there is a 50% chance that it falls above the mean
 #| fig-alt: Two bell curve graphs:- "a" shows a normal distribution with a shaded area under the curve extending from negative infinity to approximately -1, marked as 15.9%. "b" shows a normal distribution with the shaded area extending from -1 to 1, marked as 34.1%
-#| fig-pos: 'H'
 
 p3 <- ggplot(data = data.frame(x = seq(-4, 4, 1)), aes(x)) +
   stat_function(fun = dnorm, n = 1000, args = list(mean = 0, sd = 1), col="grey", geom = "area",
@@ -418,7 +421,6 @@ The normal distribution is the distribution that statistics makes most use of (f
 #| fig-alt: A plot showing two probability density functions. The solid blue line represents one distribution, while the dashed gray line shows another distribution with a wider spread. The x-axis is labeled "Observed Value" and the y-axis is labeled "Probability Density
 #| fig-height: 4
 #| fig.width: 6
-#| fig-pos: 'H'
 
 ggplot(data = data.frame(x = seq(-4, 4, 1)), aes(x)) +
   stat_function(fun = dt, n = 1000, args = list(df = 3), col=blueshade, linewidth=1) +
@@ -435,7 +437,6 @@ ggplot(data = data.frame(x = seq(-4, 4, 1)), aes(x)) +
 #| fig-alt: A line graph displays a probability density function with "Observed Value" on the x-axis (0 to 10) and "Probability Density" on the y-axis (0 to 0.25). The curve peaks near "Observed Value" 1.5 and decreases asymptotically towards the x-axis on both sides
 #| fig-height: 4
 #| fig.width: 6
-#| fig-pos: 'H'
 
 ggplot(data = data.frame(x = seq(0, 10, 1)), aes(x)) +
   stat_function(fun = dchisq, n = 1000, args = list(df = 3), col=blueshade, linewidth=1) +
@@ -450,7 +451,6 @@ ggplot(data = data.frame(x = seq(0, 10, 1)), aes(x)) +
 #| fig-alt: A probability density function graph showing a curve that peaks sharply near the y-axis and then gradually decreases, approaching the x-axis as it moves to the right. The x-axis is labeled "Observed Value" and the y-axis is labeled "Probability Density"
 #| fig-height: 4
 #| fig.width: 6
-#| fig-pos: 'H'
 
 ggplot(data = data.frame(x = seq(0, 10, 1)), aes(x)) +
   stat_function(fun = df, n = 1000, args = list(df1 = 3, df2 = 5), col=blueshade, linewidth=1) +

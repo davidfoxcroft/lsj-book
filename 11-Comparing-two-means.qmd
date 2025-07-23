@@ -37,7 +37,6 @@ To answer the question, it helps to be able to write down what it is that I thin
 #| fig-alt: A bar histogram displays the distribution of grades with a curve overlay. The x-axis is labeled "Grades" ranging from 50 to 90, and the y-axis is unlabeled. Bars show peaks near grades 70 and 80, with the curve indicating a normal distribution.
 #| fig-width: 8
 #| fig-height: 4
-#| fig-pos: 'H'
 
 load("data_and_tables/zeppo.Rdata") #grades
 ggplot(as.data.frame(grades), aes(x=grades)) +
@@ -149,7 +148,6 @@ In other words, regardless of what scale the original data are on, the $z$-stati
 #| fig-height: 5
 #| fig-cap: Rejection regions for the two-sided *z*-test (a) and the one-sided *z*-test (b)
 #| fig-alt: Two bell curves comparing statistical tests:- (a) Two-Sided Test with shaded tails beyond -1.96 and 1.96 z-values, and (b) One-Sided Test with a shaded tail beyond 1.64 z-value. Both graphs show standard normal distributions with z-statistic values on the x-axis.
-#| fig-pos: 'H'
 
 p1 <- ggplot(data = data.frame(x = seq(-3, 3, 0.1)), aes(x)) +
   stat_function(fun = dnorm, n = 1000, args = list(mean=0, sd=1), geom = "area",
@@ -194,7 +192,6 @@ gridExtra::grid.arrange(p1,p2,ncol=2)
 #| tbl-cap: Critical values for different alpha levels
 # huxtabs[[11]][[1]] |>
 #   merge_cells(1, 2:3)
-
 
 mykbl(lsj_chapter_tables[[11]][[1]]) |>
   kableExtra::column_spec(1, width = "10em")
@@ -404,7 +401,6 @@ To give you a more detailed sense of what's going on here, I've plotted box and 
 #| label: fig-fig11-7
 #| fig-cap: Box and violin plots from jamovi showing the distribution of grades for students in the classes of Anastasia and Bernadette. Visually, these suggest that students in the class of Anastasia may be getting slightly better grades on average, though they also seem a bit more variable
 #| fig-alt: Violin plot comparing grades of students tutored by Anastasia and Bernadette. Both plots show distributions with similar means around 75-80 and few outliers. Anastasia's students have a wider grade distribution compared to Bernadette's students.
-#| fig-pos: "h!"
 knitr::include_graphics("images/fig11-7.png")
 ```
 
@@ -727,7 +723,6 @@ Again, the output changes in a predictable way. The definition of the alternativ
 #| classes: .enlarge-image
 #| fig-cap: jamovi results showing an 'Independent Samples T-Test' where the actual hypothesis is one-sided, i.e. that Anastasia's students had higher grades than Bernadette's
 #| fig-alt: A table showing the results of an Independent Samples T-Test for 'grade.' The table includes Student's t and Welch's t statistics, degrees of freedom, $p$-values, mean difference, standard error difference, and Cohen's d effect sizes. There's a note at the bottom
-#| fig-pos: 'H'
 knitr::include_graphics("images/fig11-18.png")
 ```
 

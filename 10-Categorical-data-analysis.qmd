@@ -30,7 +30,9 @@ For the moment, let's just focus on the first choice that people made. We'll use
 ```{r}
 #| label: tbl-tab10-1
 #| tbl-cap: Number of times each suit was chosen
-huxtabs[[10]][[1]]
+
+mykbl(lsj_chapter_tables[[10]][[1]]) 
+
 ```
 
 That little frequency table is quite helpful. Looking at it, there's a bit of a hint that people might be more likely to select hearts than clubs, but it's not completely obvious just from looking at it whether that's really true, or if this is just due to chance. So we'll probably have to do some kind of statistical analysis to find out, which is what I'm going to talk about in the next section.
@@ -40,7 +42,9 @@ Excellent. From this point on, we'll treat this table as the data that we're loo
 ```{r}
 #| label: tbl-tab10-2
 #| tbl-cap: Relationship between English descriptions and mathematical symbols
-huxtabs[[10]][[2]]
+
+mykbl(lsj_chapter_tables[[10]][[2]]) 
+
 ```
 
 Hopefully that's pretty clear. It's also worth noting that mathematicians prefer to talk about general rather than specific things, so you'll also see the notation $O_i$, which refers to the number of observations that fall within the i-th category (where i could be 1, 2, 3 or 4). Finally, if we want to refer to the set of all observed frequencies, statisticians group all observed values into a vector,[^10-categorical-data-analysis-2] which I'll refer to as $O$.
@@ -85,13 +89,17 @@ So, based on our calculations, it's clear that people chose more hearts and fewe
 ```{r}
 #| label: tbl-tab10-3
 #| tbl-cap: Expected and observed frequencies
-huxtabs[[10]][[3]]
+
+mykbl(lsj_chapter_tables[[10]][[3]]) 
+
 ```
 
 ```{r}
 #| label: tbl-tab10-4
 #| tbl-cap: Squaring the difference scores
-huxtabs[[10]][[4]]
+
+mykbl(lsj_chapter_tables[[10]][[4]]) 
+
 ```
 
 Now we're making progress. What we've got now is a collection of numbers that are big whenever the null hypothesis makes a bad prediction (clubs and hearts), but are small whenever it makes a good one (diamonds and spades). Next, for some technical reasons that I'll explain in a moment, let's also divide all these numbers by the expected frequency $E_i$, so we're actually calculating $\frac{(E_i-O_i)^2}{E_i}$ . Since $E_i = 50$ for all categories in our example, it's not a very interesting calculation, but let's do it anyway (@tbl-tab10-5).
@@ -99,7 +107,9 @@ Now we're making progress. What we've got now is a collection of numbers that ar
 ```{r}
 #| label: tbl-tab10-5
 #| tbl-cap: Dividing the squared difference scores by the expected frequency to provide an "error" score
-huxtabs[[10]][[5]]
+
+mykbl(lsj_chapter_tables[[10]][[5]]) 
+
 ```
 
 In effect, what we've got here are four different "error" scores, each one telling us how big a "mistake" the null hypothesis made when we tried to use it to predict our observed frequencies. So, in order to convert this into a useful test statistic, one thing we could do is just add these numbers up. The result is called the **goodness-of-fit** statistic, conventionally referred to either as $\chi^2$ (chi-square) or GOF. We can calculate it as:
@@ -136,7 +146,6 @@ There's one last detail to talk about, namely the degrees of freedom. If you rem
 #| fig-alt: Three chi-squared distribution curves are plotted with different degrees of freedom (df):- solid line (df = 3), dashed line (df = 4), and dotted line (df = 5). The x-axis shows observed values from 0 to 12, and the y-axis indicates the probability density
 #| fig-width: 8
 #| fig-height: 4
-#| fig-pos: 'H'
 
 ggplot(data = data.frame(x = seq(0, 12, 1)), aes(x)) +
   stat_function(aes(linetype = 'df = 3'), fun = dchisq, n = 1000, args = list(df = 3), col=blueshade, linewidth=1) +
@@ -214,8 +223,9 @@ Ah but, I hear you ask, how do I find the critical value of a chi-square distrib
 ```{r}
 #| label: tbl-tab10-6
 #| tbl-cap: Table of critical values for the chi-square distribution
-huxtabs[[10]][[6]] |>
-  set_latex_float('H')
+
+mykbl(lsj_chapter_tables[[10]][[6]]) 
+
 ```
 
 So, if our calculated $\chi^2$ statistic is bigger than the critical value of $7.815$, then we can reject the null hypothesis (remember that the null hypothesis, $H_0$, is that all four suits are chosen with equal probability). Since we actually already calculated that before (i.e., $\chi^2$ = 8.44) we can reject the null hypothesis. And that's it, basically. You now know "Pearson's $\chi^2$ test for the goodness-of-fit". Lucky you.
@@ -229,7 +239,6 @@ Not surprisingly, jamovi provides an analysis that will do these calculations fo
 #| classes: .enlarge-image
 #| fig-cap: A $\chi^2$ One Sample Proportion Test in jamovi, with table showing both observed and expected frequencies and proportions
 #| fig-alt: A jamovi screenshot showing a Proportion Test (N Outcomes) analysis. The "Variable" selected is "choice_1" with observed and expected counts for clubs, diamonds, hearts, spades. The chi-squared test results are at the bottom with a $p$-value
-#| fig-pos: 'H'
 knitr::include_graphics("images/fig10-3.png")
 ```
 
@@ -240,8 +249,9 @@ At this point you might be wondering what to do if you want to run a goodness-of
 ```{r}
 #| label: tbl-tab10-7
 #| tbl-cap: Expected counts for a different null hypothesis
-huxtabs[[10]][[7]] |>
-  set_latex_float('H')
+
+mykbl(lsj_chapter_tables[[10]][[7]]) 
+
 ```
 
 This seems like a silly theory to me, and it's pretty easy to test this explicitly specified null hypothesis with the data in our jamovi analysis. In the analysis window (labelled 'Proportion Test (N Outcomes)' in @fig-fig10-3 you can expand the options for 'Expected Proportions'. When you do this, there are options for entering different ratio values for the variable you have selected, in our case this is choice 1. Change the ratio to reflect the new null hypothesis, as in @fig-fig10-4, and check the results.
@@ -295,7 +305,9 @@ The other day I was watching an animated documentary examining the quaint custom
 ```{r}
 #| label: tbl-tab10-8
 #| tbl-cap: Cross-tabulating the data
-huxtabs[[10]][[8]]
+
+mykbl(lsj_chapter_tables[[10]][[8]]) 
+
 ```
 
 From this, it's quite clear that the vast majority of the humans chose the data file, whereas the robots tended to be a lot more even in their preferences. Leaving aside the question of why the humans might be more likely to choose the data file for the moment (which does seem quite odd, admittedly), our first order of business is to determine if the discrepancy between human choices and robot choices in the data set is statistically significant.
@@ -307,7 +319,9 @@ How do we analyse this data? Specifically, since my research hypothesis is that 
 ```{r}
 #| label: tbl-tab10-9
 #| tbl-cap: Notation to describe the data
-huxtabs[[10]][[9]]
+
+mykbl(lsj_chapter_tables[[10]][[9]]) 
+
 ```
 
 In this notation we say that $O_{ij}$ is a count (observed frequency) of the number of respondents that are of species $j$ (robots or human) who gave answer $i$ (puppy, flower or data) when asked to make a choice. The total number of observations is written $N$, as usual. Finally, I've used $R_i$ to denote the row totals (e.g., $R_1$ is the total number of people who chose the flower), and $C_j$ to denote the column totals (e.g., $C_1$ is the total number of robots).[^10-categorical-data-analysis-10]
@@ -396,7 +410,6 @@ That was easy, wasn't it! You can also ask jamovi to show you the expected count
 #| classes: .enlarge-image
 #| fig-cap: Independent samples $\chi^2$ test in jamovi using the *Chapek 9* data
 #| fig-alt: A jamovi screenshot showing Contingency Tables. The interface includes options to select rows, columns, and layers for the tables, as well as displaying statistics, cells, and plots. A table of observed and expected values is shown on the right
-#| fig-pos: 'H'
 knitr::include_graphics("images/fig10-5.png")
 ```
 
@@ -450,7 +463,9 @@ What should you do if your cell counts are too small, but you'd still like to te
 ```{r}
 #| label: tbl-tab10-10
 #| tbl-cap: Contingency table of the *salem.csv* data
-huxtabs[[10]][[10]]
+
+mykbl(lsj_chapter_tables[[10]][[10]]) 
+
 ```
 
 Looking at this data, you'd be hard pressed not to suspect that people not on fire are more likely to be happy than people on fire. However, the chi-square test makes this very hard to test because of the small sample size. So, speaking as someone who doesn't want to be set on fire, I'd *really* like to be able to get a better answer than this. This is where **Fisher's exact test** [@Fisher1922a] comes in very handy.
@@ -460,7 +475,9 @@ The Fisher exact test works somewhat differently to the chi-square test (or in f
 ```{r}
 #| label: tbl-tab10-11
 #| tbl-cap: Notation for the Fisher exact test
-huxtabs[[10]][[11]]
+
+mykbl(lsj_chapter_tables[[10]][[11]]) 
+
 ```
 
 In order to construct the test Fisher treats both the row and column totals $(R_1, R_2, C_1 \text{ and } C_2)$ as known, fixed quantities and then calculates the probability that we would have obtained the observed frequencies that we did $(O_{11}, O_{12}, O_{21} \text{ and } O_{22})$ given those totals. In the notation that we developed in @sec-Introduction-to-probability this is written:
@@ -487,7 +504,9 @@ Suppose you've been hired to work for the *Australian Generic Political Party* (
 ```{r}
 #| label: tbl-tab10-12
 #| tbl-cap: Contingency table with data on AGPP political advertisements
-huxtabs[[10]][[12]]
+
+mykbl(lsj_chapter_tables[[10]][[12]]) 
+
 ```
 
 At first pass, you might think that this situation lends itself to the Pearson $\chi^2$ test of independence (as per [The $\chi^2$ test of independence (or association)]). However, a little bit of thought reveals that we've got a problem. We have 100 participants but 200 observations. This is because each person has provided us with an answer in both the before column and the after column. What this means is that the 200 observations aren't independent of each other. If voter A says "yes" the first time and voter B says "no", then you'd expect that voter A is more likely to say "yes" the second time than voter B! The consequence of this is that the usual $\chi^2$ test won't give trustworthy answers due to the violation of the independence assumption. Now, if this were a really uncommon situation, I wouldn't be bothering to waste your time talking about it. But it's not uncommon at all. This is a standard repeated measures design, and none of the tests we've considered so far can handle it. 
@@ -497,12 +516,12 @@ The solution to the problem was published by McNemar (1947). The trick is to sta
 ```{r}
 #| label: tbl-tab10-13
 #| tbl-cap: Tabulate the data in a different way when you have repeated measures data
-huxtabs[[10]][[13]]
+
+mykbl(lsj_chapter_tables[[10]][[13]]) 
+
 ```
 
 Next, let's think about what our null hypothesis is: it's that the "before" test and the "after" test have the same proportion of people saying "Yes, I will vote for AGPP". Because of the way that we have rewritten the data, it means that we're now testing the hypothesis that the row totals and column totals come from the same distribution. Thus, the null hypothesis in McNemar's test is that we have "marginal homogeneity". That is, the row totals and column totals have the same distribution: $P_a + P_b = P_a + P_c$ and similarly that $P_c + P_d = P_b + P_d$. Notice that this means that the null hypothesis actually simplifies to $Pb = Pc$. In other words, as far as the McNemar test is concerned, it's only the off-diagonal entries in this table (i.e., $b$ and $c$) that matter! After noticing this, the **McNemar test of marginal homogeneity** is no different to a usual $\chi^2$ test. 
-\
-\
 
 After applying the Yates correction, our test statistic becomes: 
 
@@ -537,7 +556,9 @@ Let's go all the way back to the beginning of the chapter and look at the cards 
 ```{r}
 #| label: tbl-tab10-14
 #| tbl-cap: Cross-tabulating first against second choice with the *Randomness.omv* (cards) data
-huxtabs[[10]][[14]]
+
+mykbl(lsj_chapter_tables[[10]][[14]]) 
+
 ```
 
 Suppose I wanted to know whether the choice you make the second time is dependent on the choice you made the first time. This is where a test of independence is useful, and what we're trying to do is see if there's some relationship between the rows and columns of this table. Alternatively, suppose I wanted to know if on average, the frequencies of suit choices were different the second time than the first time. In that situation, what I'm really trying to see is if the row totals are different from the column totals. That's when you use the McNemar test.
@@ -549,7 +570,6 @@ The different statistics produced by these different analyses are shown in @fig-
 #| out.width: 90%
 #| fig-cap: Independent vs. Paired (McNemar) with the *Randomness.omv* (cards) data
 #| fig-alt: The image shows two sections of contingency tables. The first section has a table showing the distribution of choices (clubs, diamonds, hearts, spades) with a chi-squared test result and $p$-value. The second section has a paired samples contingency table with McNemar test results.
-#| fig-pos: 'H'
 knitr::include_graphics("images/fig10-8.png")
 ```
 

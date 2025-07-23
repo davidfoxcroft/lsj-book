@@ -59,7 +59,6 @@ knitr::include_graphics("images/fig8-1.png")
 #| fig-cap: Biased sampling without replacement from a finite population
 #| fig-alt: A diagram shows biased sampling (without replacement) from a population of 10 items labeled a to j. Three sample sets of four items each are drawn:- {a, b, g, h}, {g, b, h, a}, and {a, h, b, g}. Black circles denote selected items; white circles denote unselected items
 #| fig-height: 5
-#| fig-pos: 'H'
 knitr::include_graphics("images/fig8-2.png")
 ```
 
@@ -67,7 +66,6 @@ knitr::include_graphics("images/fig8-2.png")
 #| label: fig-fig8-3
 #| fig-cap: Simple random sampling *with* replacement from a finite population
 #| fig-alt: A diagram illustrating simple random sampling with replacement. The population, represented by 10 black-and-white circles labeled 'a' to 'j', is shown on the left. Three samples, each containing four circles, are shown on the right with arrows pointing from the population
-#| fig-pos: 'H'
 knitr::include_graphics("images/fig8-3.png")
 ```
 
@@ -146,7 +144,6 @@ In the previous section I showed you the results of one fictitious IQ experiment
 #| fig-alt: A jamovi screenshot is shown. It includes menus for variable manipulation and data analysis. A computed variable "IQsim" is displayed with a formula. A table lists numeric IQsim values, and a histogram with descriptive statistics is shown on the right
 #| fig-height: 4
 #| fig-width: 8
-#| fig-pos: 'h!'
 knitr::include_graphics("images/fig8-5.png")
 ```
 
@@ -183,10 +180,10 @@ This time around, the mean IQ in my sample is 101. If I repeat the experiment 10
 ```{r}
 #| label: tbl-tab8-1
 #| tbl-cap: Ten replications of the IQ experiment, each with a sample size of $( N = 5 )$
-huxtabs[[8]][[1]]
-```
 
-\
+mykbl(lsj_chapter_tables[[8]][[1]]) 
+
+```
 
 Now suppose that I decided to keep going in this fashion, replicating this "five IQ scores" experiment over and over again. Every time I replicate the experiment I write down the sample mean. Over time, I'd be amassing a new data set, in which every experiment generates a single data point. The first 10 observations from my data set are the sample means listed in @tbl-tab8-1, so my data set starts out like this:
 
@@ -202,7 +199,6 @@ Sampling distributions are another important theoretical idea in statistics, and
 #| fig-alt: A histogram of IQ scores with a superimposed normal distribution curve. The x-axis ranges from 60 to 140, with a peak around 100. The y-axis shows frequency. The histogram bars are blue, and the normal distribution curve is black
 #| fig-width: 6
 #| fig-height: 4
-#| fig-pos: 'h!'
 
 sdm_data <- lapply(1:10000, function (x) {
   rnorm(5, 100, 15)
@@ -235,7 +231,6 @@ Doing this over and over again would give me a very different sampling distribut
 #| fig-alt: A histogram of IQ scores is displayed with blue bars indicating the frequency of each score range. A black bell curve overlay represents the normal distribution, with scores ranging from 60 to 140 on the x-axis
 #| fig-width: 6
 #| fig-height: 4
-#| fig-pos: 'H'
 
 sdm_data <- lapply(1:10000, function (x) {
   rnorm(5, 100, 15)
@@ -321,7 +316,6 @@ This result is useful for all sorts of things. It tells us why large experiments
 #| fig-height: 16
 #| fig-cap: A demonstration of the central limit theorem. In panel (a), we have a non-normal population distribution, and panels (b)-(d) show the sampling distribution of the mean for samples of size 2,4 and 8 for data drawn from the distribution in panel (a). As you can see, even though the original population distribution is non-normal the sampling distribution of the mean becomes pretty close to normal by the time you have a sample of even four observations
 #| fig-alt: Four histograms displaying sample means with increasing sample sizes:- (a) 1, (b) 2, (c) 4, and (d) 8. Each has a superimposed curve transitioning from a right-skewed to a normal distribution shape as sample size increases. All x-axes are labeled "Sample Mean"
-#| fig-pos: 'H'
 
 # parameters of the beta
 a <- 2
@@ -381,9 +375,9 @@ In this example estimating the unknown population parameter is straightforward. 
 
 ```{r}
 #| label: tbl-tab8-2
-#| tbl-cap: Notation for the mean
-huxtabs[[8]][[2]] |>
-  set_latex_float('H')
+
+mykbl(lsj_chapter_tables[[8]][[2]]) 
+
 ```
 
 ### Estimating the population standard deviation
@@ -412,8 +406,6 @@ Now let's extend the simulation. Instead of restricting ourselves to the situati
 #| fig-alt: A histogram with a right-skewed distribution shows the sample standard deviation on the x-axis ranging from 0 to 60, and frequency on the y-axis. A vertical dashed line labeled "Population Standard deviation" is positioned around the value of 16 on the x-axis
 #| fig-width: 8
 #| fig-height: 4
-#| fig-pos: 'H'
-
 
 n <- 2
 N <- 10000
@@ -442,7 +434,6 @@ ggplot(data = sdsd, aes(x = sd )) +
 #| fig-alt: Two line charts. Chart (a) shows the Average Sample Mean vs. Sample Size with values around 102-104. Chart (b) shows the Average Sample Standard Deviation vs. Sample Size, increasing steeply initially and leveling off near 15 around sample size 8
 #| fig-width: 8
 #| fig-height: 5
-#| fig-pos: 'H'
 
 N <- 10000
 sd.demo <- sapply(1:10, function (n) {
@@ -493,13 +484,17 @@ To finish this section off, here's another couple of tables to help keep things 
 ```{r}
 #| label: tbl-tab8-3
 #| tbl-cap: Notation for standard deviation
-huxtabs[[8]][[3]]
+
+mykbl(lsj_chapter_tables[[8]][[3]]) 
+
 ```
 
 ```{r}
 #| label: tbl-tab8-4
 #| tbl-cap: Notation for variance
-huxtabs[[8]][[4]]
+
+mykbl(lsj_chapter_tables[[8]][[4]]) 
+
 ```
 
 ## Estimating a confidence interval {#sec-Estimating-a-confidence-interval}
@@ -531,8 +526,6 @@ The hardest thing about confidence intervals is understanding what they mean. Wh
 #| fig-height: 10
 #| fig-cap: 95% confidence intervals. The top panel (a) shows 50 simulated replications of an experiment in which we measure the IQs of 10 people. The dot marks the location of the sample mean and the line shows the 95% confidence interval. Most of the 50 confidence intervals do contain the true mean (i.e., 100), but a few -- in blue and marked with asterisks -- do not. The lower graph (panel b) shows a similar simulation, but this time we simulate replications of an experiment that measures the IQs of 25 people
 #| fig-alt: Two bar graphs are shown vertically. The top graph (a) has "Sample Size = 10" and the bottom graph (b) has "Sample Size = 25." Both graphs have replication numbers on the x-axis and IQ mean values with error bars on the y-axis. Blue data points are marked with asterisks
-#| fig-pos: 'H'
-
 
 N <- 50
 n <- 10

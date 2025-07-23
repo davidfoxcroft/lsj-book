@@ -46,10 +46,13 @@ The first piece of notation to introduce is $N$, which we'll use to refer to the
 ```{r}
 #| label: tbl-tab4-1
 #| tbl-cap: Observations in the *afl.margins* variable
-huxtabs[[4]][[1]] %>%
-  set_col_width(c(.4,.2,.4))
-```
+# huxtabs[[4]][[1]] %>%
+#   set_col_width(c(.4,.2,.4))
 
+mykbl(lsj_chapter_tables[[4]][[1]]) |>
+  kableExtra::column_spec(2, width = "5em")
+
+```
 [Additional technical detail[^04-descriptive-statistics-2]]
 
 [^04-descriptive-statistics-2]: Okay, now let's try to write a formula for the mean. By tradition, we use $\bar{X}$ as the notation for the mean. So the calculation for the mean could be expressed using the following formula: $$\bar{X}=\frac{X_1 + X_2 ... + X_{N-1} + X_{N}}{N}$$ This formula is entirely correct but it's terribly long, so we make use of the **summation symbol** $\sum$ to shorten it. If I want to add up the first five observations I could write out the sum the long way, $X_1 + X_2 + X_3 + X_4 + X_5$ or I could use the summation symbol to shorten it to this: $$\sum_{i=1}^{5} X_i$$ Taken literally, this could be read as "the sum, taken over all i values from 1 to 5, of the value $X_i$". But basically what it means is "add up the first five observations". In any case, we can use this notation to write out the formula for the mean, which looks like this: $$\bar{X}=\frac{1}{N}\sum_{i=1}^{N}X_i$$ In all honesty, I can't imagine that all this mathematical notation helps clarify the concept of the mean at all. In fact, it's really just a fancy way of writing out the same thing I said in words: add all the values up and then divide by the total number of items. However, that's not really the reason I went into all that detail. My goal was to try to make sure that everyone reading this book is clear on the notation that we'll be using throughout the book: $\bar{X}$ for the mean, $\sum$ for the idea of summation, $X_i$ for the ith observation, and $N$ for the total number of observations. We're going to be re-using these symbols a fair bit so it's important that you understand them well enough to be able to "read" the equations, and to be able to see that it's just saying "add up lots of things and then divide by another thing". *The choice to use* $\sum$ to denote summation isn't arbitrary. It's the Greek upper case letter sigma, which is the analogue of the letter $S$ in that alphabet. Similarly, there's an equivalent symbol used to denote the multiplication of lots of numbers, because multiplications are also called "products" we use the $\prod$ symbol for this (the Greek upper case pi, which is the analogue of the letter $P$.
@@ -91,7 +94,6 @@ Let's expand on that last part a little. One consequence is that there are syste
 #| classes: .enlarge-image
 #| fig-cap: An illustration of the difference between how the mean and the median should be interpreted. The mean is basically the 'centre of gravity' of the data set. If you imagine that the histogram of the data is a solid object, then the point on which you could balance it (as if on a see-saw) is the mean. In contrast, the median is the middle observation, with half of the observations smaller and half of the observations larger
 #| fig-alt: A bar chart on the left has 48 observations and resembles a stair-step pattern with decreasing heights from left to right is shown. The text reads, "The mean is the "centre of mass" of the data." Below the chart, there is a horizontal line labeled "balancing point" with a triangular fulcrum symbolizing balance. The same bar chart is shown on the right with the data split into two groups of 24 observations. The left group is shaded light gray, and the right group is shaded dark gray. An arrow points to the 24th observation with the text "The median is the "middle observation" in the data set
-#| fig-pos: 'H'
 knitr::include_graphics("images/fig4-4.png")
 ```
 
@@ -125,7 +127,7 @@ My, my.
 
 The mode of a sample is very simple. It is the value that occurs most frequently. We can illustrate the mode using a different AFL variable: who has played in the most finals? Open the aflsmall finalists file and take a look at the *afl.finalists* variable, see @fig-fig4-5. 
 
-```{r out}
+```{r}
 #| label: fig-fig4-5
 #| fig-cap: A screenshot of jamovi showing the variables stored in the aflsmall_finalists.csv file
 #| fig-alt: A jamovi screenshot of a spreadsheet labeled "AFL Finalists" with 18 rows. The first column lists various Australian Football League teams, including Hawthorn, Melbourne, and Carlton. The jamovi spreadsheet menu shows options like Variables, Data, and Analyses.
@@ -137,7 +139,6 @@ knitr::include_graphics("images/fig4-5.png")
 #| classes: .enlarge-image
 #| fig.cap: A screenshot of jamovi showing the frequency table for the *afl.finalists* variable
 #| fig-alt: A jamovi screenshot focusing on analyzing AFL finalists. The left panel includes options to select variables and split data. The right panel displays results -  Descriptives and Frequencies for AFL finalists by region, including percentages
-#| fig-pos: 'H'
 knitr::include_graphics("images/fig4-6.png")
 ```
 
@@ -152,7 +153,6 @@ One last point to make regarding the mode. Whilst the mode is most often calcula
 #| classes: .enlarge-image
 #| fig-cap: A screenshot of jamovi showing the modal value for the *afl.margins* variable
 #| fig-alt: A jamovi screenshot showing the analysis of "afl.margins." The main sections include Descriptives, Variables, and Results. Descriptive statistics like mean, median, and standard deviation are displayed on the right
-#| fig-pos: 'h!'
 knitr::include_graphics("images/fig4-7.png")
 ```
 
@@ -191,7 +191,9 @@ Since the previous paragraph might sound a little abstract, let's go through the
 ```{r}
 #| label: tbl-tab4-2
 #| tbl-cap: Measures of variability
-huxtabs[[4]][[2]]
+
+mykbl(lsj_chapter_tables[[4]][[2]]) 
+
 ```
 
 Now that we have calculated the absolute deviation score for every observation in the data set, all that we have to do to calculate the mean of these scores. Let's do that:
@@ -218,8 +220,9 @@ Now that we've got the basic idea, let's have a look at a concrete example. Once
 ```{r}
 #| label: tbl-tab4-3
 #| tbl-cap: Measures  of variability for the first five AFL games
-#| tbl-pos: 'H'
-huxtabs[[4]][[3]]
+
+mykbl(lsj_chapter_tables[[4]][[3]]) 
+
 ```
 
 That last column contains all of our squared deviations, so all we have to do is average them. If we do that by hand, using a calculator, we end up with a variance of $324.64$. For the moment, don't worry about what a variance of $324.64$ actually means. Instead let's talk a bit more about how to do the calculations in jamovi, because this will reveal something very weird. Start a new jamovi session by clicking on the main menu button (three horizontal lines in the top left corner and selecting 'New'. Now type in the first five values from the *afl.margins* data set in column A ($56$, $31$, $56$, $8$, $32$. Change the variable type to 'Continuous' and under 'Descriptives' click the 'Variance' check box, and you get the same values for variance as the one we calculated by hand ($324.64$). No, wait, you get a completely different answer ($405.80$) -- see @fig-fig4-9. 
@@ -229,7 +232,6 @@ That last column contains all of our squared deviations, so all we have to do is
 #| classes: .enlarge-image
 #| fig-cap: A screenshot of jamovi showing the Variance for the first 5 values of the afl.margins variable
 #| fig-alt: A jamovi screenshot displaying descriptive statistics. The interface is divided into sections for selecting variables, splitting data, viewing results, and references. A data table shows the variance and other descriptive statistics like mean, median, standard deviation, etc
-#| fig-pos: 'h!'
 knitr::include_graphics("images/fig4-9.png")
 ```
 
@@ -267,7 +269,6 @@ Interpreting standard deviations is slightly more complex. Because the standard 
 #| label: fig-fig4-10
 #| fig-cap: An illustration of the standard deviation from the AFL winning margins data. The shaded bars in the histogram show how much of the data fall within one standard deviation of the mean. In this case, 65.3% of the data set lies within this range, which is pretty consistent with the "approximately 68% rule" discussed in the main text
 #| fig-alt: A bar graph depicting the standard deviation from the AFL winning margins data. Bars one standard deviation to the left and right of the mean are blue, other bars are white. Horizontal axis labels include 'Mean - s.d.', 'Mean' and 'Mean + s.d.'
-#| fig-pos: 'h!'
 
 load("data_and_tables/aflsmall.Rdata")
 afl.margins <- tidyr::as_tibble(afl.margins)
@@ -383,7 +384,9 @@ The final measure that is sometimes referred to, though very rarely in practice,
 ```{r}
 #| label: tbl-tab4-4
 #| tbl-cap: Thin to fat tails to illustrate kurtosis
-huxtabs[[4]][[4]]
+
+mykbl(lsj_chapter_tables[[4]][[4]]) 
+
 ```
 
 [Additional technical detail[^04-descriptive-statistics-12]]
@@ -400,7 +403,6 @@ It is very commonly the case that you find yourself needing to look at descripti
 #| label: fig-fig4-13
 #| fig-cap: A screenshot of jamovi showing the variables stored in the *clinicaltrial.csv*  file
 #| fig-alt: A jamovi screenshot with columns for ID, drug, therapy, and mood gain, with data for each field. The top menu bar includes options such as Variables, Data, Analyses, and Edit, with sub-options like Exploration, T-Tests, ANOVA, and Regression
-#| fig-pos: 'H'
 #| fig-width: 4
 #| fig-height: 5
 knitr::include_graphics("images/fig4-13.png")

@@ -35,7 +35,9 @@ The first thing you need to do is ignore what I told you about the umbrella, and
 ```{r}
 #| label: tbl-tab16-1
 #| tbl-cap: How likely is it to rain in Adelaide -- pre-existing beliefs based on knowledge of average January rainfall
-huxtabs[[16]][[1]]
+
+mykbl(lsj_chapter_tables[[16]][[1]]) 
+
 ```
 
 ### Likelihoods: theories about the data
@@ -47,7 +49,9 @@ To solve the reasoning problem you need a theory about my behaviour. When does D
 ```{r}
 #| label: tbl-tab16-2
 #| tbl-cap: How likely am I to be carrying an umbrella on rainy and dry days
-huxtabs[[16]][[2]]
+
+mykbl(lsj_chapter_tables[[16]][[2]]) 
+
 ```
 
 It's important to remember that each cell in this table describes your beliefs about what data $d$ will be observed, *given* the truth of a particular hypothesis $h$. This "conditional probability" is written $P(d|h)$, which you can read as "the probability of $d$ given $h$". In Bayesian statistics, this is referred to as the **likelihood** of the data $d$ given the hypothesis $h$.[^bayesian-statistics-4]
@@ -75,7 +79,9 @@ In other words, before being told anything about what actually happened, you thi
 ```{r}
 #| label: tbl-tab16-3
 #| tbl-cap: Four possibilities combining rain (or not) and umbrella carrying (or not)
-huxtabs[[16]][[3]]
+
+mykbl(lsj_chapter_tables[[16]][[3]]) 
+
 ```
 
 This table captures all the information about which of the four possibilities are likely. To really get the full picture, though, it helps to add the row totals and column totals. That gives us @tbl-tab16-4.
@@ -83,7 +89,9 @@ This table captures all the information about which of the four possibilities ar
 ```{r}
 #| label: tbl-tab16-4
 #| tbl-cap: Four possibilities combining rain (or not) and umbrella carrying (or not), with row and column totals
-huxtabs[[16]][[4]]
+
+mykbl(lsj_chapter_tables[[16]][[4]]) 
+
 ```
 
 This is a very useful table, so it's worth taking a moment to think about what all these numbers are telling us. First, notice that the row sums aren't telling us anything new at all. For example, the first row tells us that if we ignore all this umbrella business, the chance that today will be a rainy day is 15%. That's not surprising, of course, as that's our prior.[^bayesian-statistics-5] The important thing isn't the number itself. Rather, the important thing is that it gives us some confidence that our calculations are sensible! Now take a look at the column sums and notice that they tell us something that we haven't explicitly stated yet. In the same way that the row sums tell us the probability of rain, the column sums tell us the probability of me carrying an umbrella. Specifically, the first column tells us that on average (i.e., ignoring whether it's a rainy day or not) the probability of me carrying an umbrella is 8.75%. Finally, notice that when we sum across all four logically-possible events, everything adds up to 1. In other words, what we have written down is a proper probability distribution defined over all possible combinations of data and hypothesis.
@@ -95,7 +103,9 @@ Now, because this table is so useful, I want to make sure you understand what al
 ```{r}
 #| label: tbl-tab16-5
 #| tbl-cap: Four possibilities combining rain (or not) and umbrella carrying (or not), expressed as conditional probabilities
-huxtabs[[16]][[5]]
+
+mykbl(lsj_chapter_tables[[16]][[5]]) 
+
 ```
 
 Finally, let's use "proper" statistical notation. In the rainy day problem, the data corresponds to the observation that I do or do not have an umbrella. So we'll let $d_1$ refer to the possibility that you observe me carrying an umbrella, and $d_2$ refers to you observing me not carrying one. Similarly, $h_1$ is your hypothesis that today is rainy, and $h_2$ is the hypothesis that it is not. Using this notation, the table looks like @tbl-tab16-6.
@@ -103,7 +113,9 @@ Finally, let's use "proper" statistical notation. In the rainy day problem, the 
 ```{r}
 #| label: tbl-tab16-6
 #| tbl-cap: Four possibilities combining rain (or not) and umbrella carrying (or not), expressed in hypothetical terms as conditional probabilities
-huxtabs[[16]][[6]]
+
+mykbl(lsj_chapter_tables[[16]][[6]]) 
+
 ```
 
 ### Updating beliefs using Bayes' rule
@@ -115,7 +127,9 @@ The table we laid out in the last section is a very powerful tool for solving th
 ```{r}
 #| label: tbl-tab16-7
 #| tbl-cap: Revising beliefs given new data about umbrella carrying
-huxtabs[[16]][[7]]
+
+mykbl(lsj_chapter_tables[[16]][[7]]) 
+
 ```
 
 In other words, the facts have eliminated any possibility of "no umbrella", so we have to put zeros into any cell in the table that implies that I'm not carrying an umbrella. Also, you know for a fact that I am carrying an umbrella, so the column sum on the left must be 1 to correctly describe the fact that $P(umbrella) = 1$.
@@ -125,7 +139,9 @@ What two numbers should we put in the empty cells? Again, let's not worry about 
 ```{r}
 #| label: tbl-tab16-8
 #| tbl-cap: Revising probabilities given new data about umbrella carrying
-huxtabs[[16]][[8]]
+
+mykbl(lsj_chapter_tables[[16]][[8]]) 
+
 ```
 
 What this table is telling you is that, after being told that I'm carrying an umbrella, you believe that there's a 51.4% chance that today will be a rainy day, and a 48.6% chance that it won't. That's the answer to our problem! The **posterior probability** of rain $P(h\|d)$ given that I am carrying an umbrella is 51.4%.
@@ -165,7 +181,9 @@ Actually, this equation is worth expanding on. There are three different terms h
 ```{r}
 #| label: tbl-tab16-9
 #| tbl-cap: Posterior odds given the Bsyes factor and prior odds
-huxtabs[[16]][[9]]
+
+mykbl(lsj_chapter_tables[[16]][[9]]) 
+
 ```
 
 The Bayes factor (sometimes abbreviated as BF) has a special place in Bayesian hypothesis testing, because it serves a similar role to the $p$-value in orthodox hypothesis testing. The Bayes factor quantifies the strength of evidence provided by the data, and as such it is the Bayes factor that people tend to report when running a Bayesian hypothesis test. 
@@ -179,7 +197,9 @@ One of the really nice things about the Bayes factor is the numbers are inherent
 ```{r}
 #| label: tbl-tab16-10
 #| tbl-cap: Bayes factors and strength of evidence
-huxtabs[[16]][[10]]
+
+mykbl(lsj_chapter_tables[[16]][[10]) 
+
 ```
 
 And to be perfectly honest, I think that even the @Kass1995 standards are being a bit charitable. If it were up to me, I'd have called the "positive evidence" category "weak evidence". To me, anything in the range 3:1 to 20:1 is "weak" or "modest" evidence at best. But there are no hard and fast rules here. What counts as strong or weak evidence depends entirely on how conservative you are and upon the standards that your community insists upon before it is willing to label a finding as "true".
@@ -264,7 +284,9 @@ Honestly, there's nothing wrong with it. It's a reasonable, sensible and rationa
 ```{r}
 #| label: tbl-tab16-11
 #| tbl-cap: Conventional null hypothesis signicance testing (NHST) with $p < .05$)
-huxtabs[[16]][[11]]
+
+mykbl(lsj_chapter_tables[[16]][[11]]) 
+
 ```
 
 What you're doing is adding a third possible action to the decision making problem. Specifically, what you're doing is using the $p$-value itself as a reason to justify continuing the experiment. And as a consequence you've transformed the decision-making procedure into one that looks more like @tbl-tab16-12.
@@ -272,7 +294,9 @@ What you're doing is adding a third possible action to the decision making probl
 ```{r}
 #| label: tbl-tab16-12
 #| tbl-cap: Carrying on data collecting based on $p$-values obtained in preliminary testing
-huxtabs[[16]][[12]]
+
+mykbl(lsj_chapter_tables[[16]][[12]]) 
+
 ```
 
 The "basic" theory of null hypothesis testing isn't built to handle this sort of thing, not in the form I described in @sec-Hypothesis-testing. If you're the kind of person who would choose to "collect more data" in real life, it implies that you are not making decisions in accordance with the rules of null hypothesis testing. Even if you happen to arrive at the same decision as the hypothesis test, you aren't following the decision process it implies, and it's this failure to follow the process that is causing the problem.[^bayesian-statistics-13] Your $p$-values are a lie.
@@ -296,7 +320,6 @@ So how bad is it? The answer from a simulation study is shown as the solid line 
 #| label: fig-fig16-1
 #| fig-cap: Probability of type I error in an experiment with target $N$ of 1000 per group and **peeking** at different intervals:- things can go badly wrong if you **peek** at your data and re-run your tests as new data arrives. If you are a frequentist, this is *very wrong* (blue circles and solid line). If you are a bayesian, it is not so bad (green triangles and dashed line). The alpha level was set at $0.05$ (red dotted line) in this simulation.
 #| fig-alt: A scatter plot graph showing the probability of type I error versus the 'Peeking' interval with new data points. Blue circles represent $p<0.05$ and green triangles represent $BF>3$. A red dashed line at $alpha = 0.05$ denotes the null hypothesis rejection threshold
-#| fig-pos: 'h!'
 
 p_bf <- subset(p_bf, p_bf$peek <= 200)# leave out less plausible peeking frequency - better plot 
 
@@ -364,7 +387,6 @@ What does the Bayesian version of the $t$-test look like? We can get the Bayes f
 #| classes: .enlarge-image
 #| fig-cap: Independent samples $t$-test result in jamovi
 #| fig-alt: A jamovi screenshot displaying a data set with student grades and a descriptive statistics summary. The data set table lists student IDs and their grades for two tests. The results panel shows descriptive statistics including N, mean, median, standard deviation, minimum, and maximum values
-#| fig-pos: 'H'
 knitr::include_graphics("images/fig11-12.png")
 ```
 

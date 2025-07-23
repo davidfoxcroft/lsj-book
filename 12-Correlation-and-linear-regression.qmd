@@ -20,8 +20,11 @@ In this section we'll talk about how to describe the relationships between varia
 ```{r}
 #| label: tbl-tab12-1
 #| tbl-cap: Data for correlation analysis -- descriptive statistics for the *parenthood* data
-huxtabs[[12]][[1]] |>
-  set_col_width(1, .2)
+# huxtabs[[12]][[1]] |>
+#   set_col_width(1, .2)
+
+mykbl(lsj_chapter_tables[[12]][[1]]) 
+
 ```
 
 Let's turn to a topic close to every parent's heart: sleep. The data set we'll use is fictitious, but based on real events. Suppose I'm curious to find out how much my infant son's sleeping habits affect my mood. Let's say that I can rate my grumpiness very precisely, on a scale from 0 (not at all grumpy) to $100$ (grumpy as a very, very grumpy old man or woman). And lets also assume that I've been measuring my grumpiness, my sleeping patterns and my son's sleeping patterns for quite some time now. Let's say, for $100$ days. And, being a nerd, I've saved the data as a file called *parenthood.csv*. If we load the data we can see that the file contains four variables dani.sleep, baby.sleep, dani.grump and day. Note that when you first load this data set jamovi may not have guessed the data type for each variable correctly, in which case you should fix it: dani.sleep, baby.sleep, dani.grump and day can be specified as continuous variables, and ID is a nominal(integer) variable.[^12-correlation-and-linear-regression-1]
@@ -32,12 +35,12 @@ Next, I'll take a look at some basic descriptive statistics and, to give a graph
 
 [^12-correlation-and-linear-regression-2]: Actually, even that table is more than I'd bother with. In practice most people pick one measure of central tendency, and one measure of variability only.
 
-::: {#fig-fig12-1 layout-ncol="3" layout-valign="bottom" width="100%"}
-![](images/fig12-1a.png){#fig-fig12-1a fig-align="left" fig-alt="A histogram displaying the density distribution of baby sleep durations. The bars range from about 3.5 to 12.5 hours of sleep. There is a higher concentration of data points between 7 and 10 hours. The y-axis is labeled 'density' and the x-axis is labeled 'baby.sleep'." width="30%"}
+::: {#fig-fig12-1 layout-ncol="3" layout-valign="bottom" width="95%"}
+![](images/fig12-1a.png){#fig-fig12-1a fig-align="left" fig-alt="A histogram displaying the density distribution of baby sleep durations. The bars range from about 3.5 to 12.5 hours of sleep. There is a higher concentration of data points between 7 and 10 hours. The y-axis is labeled 'density' and the x-axis is labeled 'baby.sleep'." }
 
-![](images/fig12-1b.png){#fig-fig12-1b fig-align="left" fig-alt="A histogram with labelled axes 'density' on the y-axis and 'dan.sleep' on the x-axis. The histogram has bars of varying heights, peaking between the values 6 and 7 on the x-axis. The bars are shaded in light blue. The background is black." width="30%"}
+![](images/fig12-1b.png){#fig-fig12-1b fig-align="left" fig-alt="A histogram with labelled axes 'density' on the y-axis and 'dan.sleep' on the x-axis. The histogram has bars of varying heights, peaking between the values 6 and 7 on the x-axis. The bars are shaded in light blue. The background is black." }
 
-![](images/fig12-1c.png){#fig-fig12-1c fig-align="left" fig-alt="A histogram displays the density of data points for the variable 'dan.grump'. The x-axis ranges from 40 to 90, and the y-axis is labeled 'density'. The bars show a distribution peaking around 60 and tapering off towards the lower and higher ends." width="30%"}
+![](images/fig12-1c.png){#fig-fig12-1c fig-align="left" fig-alt="A histogram displays the density of data points for the variable 'dan.grump'. The x-axis ranges from 40 to 90, and the y-axis is labeled 'density'. The bars show a distribution peaking around 60 and tapering off towards the lower and higher ends." }
 
 Histograms from jamovi for the three interesting variables in the *parenthood* data set
 :::
@@ -46,10 +49,10 @@ Histograms from jamovi for the three interesting variables in the *parenthood* d
 
 We can draw scatterplots to give us a general sense of how closely related two variables are. Ideally though, we might want to say a bit more about it than that. For instance, let's compare the relationship between baby.sleep and dani.grump (@fig-fig12-2a), left, with that between dani.sleep and dani.grump (@fig-fig12-2b), right. When looking at these two plots side by side, it's clear that the relationship is qualitatively the same in both cases: more sleep equals less grump! However, it's also pretty obvious that the relationship between dani.sleep and dani.grump is stronger than the relationship between baby.sleep and dani.grump. The plot on the right is "neater" than the one on the left. What it feels like is that if you want to predict what my mood is, it'd help you a little bit to know how many hours my son slept, but it'd be more helpful to know how many hours I slept.
 
-::: {#fig-fig12-2 layout-ncol="2" layout-valign="bottom" width="90%" fig-pos="H"}
-![](images/fig12-2a.png){#fig-fig12-2a fig-align="left" fig-alt="Scatter plot showing the relationship between 'Baby sleep (hours)' on the x-axis and 'My grumpiness' on the y-axis. The trend indicates that as the baby sleeps more, grumpiness decreases." width="45%"}
+::: {#fig-fig12-2 layout-ncol="2" layout-valign="bottom" width="95%" }
+![](images/fig12-2a.png){#fig-fig12-2a fig-align="left" fig-alt="Scatter plot showing the relationship between 'Baby sleep (hours)' on the x-axis and 'My grumpiness' on the y-axis. The trend indicates that as the baby sleeps more, grumpiness decreases." }
 
-![](images/fig12-2b.png){#fig-fig12-2b fig-align="left" fig-alt="A scatter plot titled 'My grumpiness vs. My sleep (hours)'. The x-axis is labeled 'My sleep (hours)' ranging from 5 to 9, and the y-axis is labeled 'My grumpiness' ranging from 40 to 90. The data points show a negative correlation between sleep and grumpiness." width="45%"}
+![](images/fig12-2b.png){#fig-fig12-2b fig-align="left" fig-alt="A scatter plot titled 'My grumpiness vs. My sleep (hours)'. The x-axis is labeled 'My sleep (hours)' ranging from 5 to 9, and the y-axis is labeled 'My grumpiness' ranging from 40 to 90. The data points show a negative correlation between sleep and grumpiness." }
 
 Scatterplots from jamovi showing the relationship between baby.sleep and dani.grump (left) and the relationship between dani.sleep and dani.grump (right)
 :::
@@ -57,11 +60,11 @@ Scatterplots from jamovi showing the relationship between baby.sleep and dani.gr
 In contrast, let's consider the two scatterplots shown in @fig-fig12-3. If we compare the scatterplot of "baby.sleep v dani.grump" (left) to the scatterplot of "baby.sleep v dani.sleep" (right), the overall strength of the relationship is the same, but the direction is different. That is, if my son sleeps more, I get more sleep (positive relationship, right-hand side), but if he sleeps more then I get less grumpy (negative relationship, left-hand side).
 
 
-::: {#fig-fig12-3 layout-ncol="2" layout-valign="bottom" width="90%" fig-pos='h!'}
+::: {#fig-fig12-3 layout-ncol="2" layout-valign="bottom" width="90%" }
 
-![](images/fig12-2a.png){#fig-fig12-3a fig-align="left" fig-alt="Scatter plot showing the relationship between 'Baby sleep (hours)' on the x-axis and 'My grumpiness' on the y-axis. The trend indicates that as the baby sleeps more, grumpiness decreases." width="45%"}
+![](images/fig12-2a.png){#fig-fig12-3a fig-align="left" fig-alt="Scatter plot showing the relationship between 'Baby sleep (hours)' on the x-axis and 'My grumpiness' on the y-axis. The trend indicates that as the baby sleeps more, grumpiness decreases." }
 
-![](images/fig12-3b.png){#fig-fig12-3b fig-align="left" fig-alt="Scatter plot showing the relationship between 'Baby sleep (hours)' on the x-axis and 'My sleep (hours)' on the y-axis. Data points indicate that as the baby's sleep increases from 5 to 12.5 hours, the parent's sleep also tends to increase from 5 to 9 hours." width="45%"}
+![](images/fig12-3b.png){#fig-fig12-3b fig-align="left" fig-alt="Scatter plot showing the relationship between 'Baby sleep (hours)' on the x-axis and 'My sleep (hours)' on the y-axis. Data points indicate that as the baby's sleep increases from 5 to 12.5 hours, the parent's sleep also tends to increase from 5 to 9 hours." }
 
 Scatterplots from jamovi showing the relationship between baby.sleep and dani.grump (left), as compared to the relationship between baby.sleep and dani.sleep (right)
 :::
@@ -148,13 +151,16 @@ Naturally, in real life you don't see many correlations of $1$. So how should yo
 ```{r}
 #| label: tbl-tab12-2
 #| tbl-cap: A rough guide to interpreting correlations
-huxtabs[[12]][[2]] |>
-  add_footnote(text = "Note that I say a rough guide. There aren't hard and fast rules for what counts as strong or weak relationships. It depends on the context") |>
-  set_number_format(value = 2) |>
-  set_font_size(value=10) |>
-  set_italic(row=12, TRUE) |>
-  set_font_size(row=12,,value=8) |>
-  set_latex_float('h!')
+# huxtabs[[12]][[2]] |>
+#   add_footnote(text = "Note that I say a rough guide. There aren't hard and fast rules for what counts as strong or weak relationships. It depends on the context") |>
+#   set_number_format(value = 2) |>
+#   set_font_size(value=10) |>
+#   set_italic(row=12, TRUE) |>
+#   set_font_size(row=12,,value=8) |>
+#   set_latex_float('h!')
+
+mykbl(lsj_chapter_tables[[12]][[2]]) |>
+  add_footnote("Note that I say a rough guide. There aren't hard and fast rules for what counts as strong or weak relationships. It depends on the context")
 
 ```
 
@@ -169,7 +175,6 @@ You'd think that these four data sets would look pretty similar to one another. 
 #| fig-alt: Four scatter plots with points showing the same positive correlation between x and y. The four plots show linear, non-linear, outlier, and leverage types of relationships.   
 #| fig-width: 8
 #| fig-height: 8
-
 
 library(quartets)
 
@@ -190,9 +195,6 @@ ggplot(anscombe_quartet, aes(x = x, y = y)) +
     axis.ticks.x = element_blank()
   ) +
   facet_wrap(~dataset, scales='free') 
-
-
-
 
 ```
 
@@ -221,7 +223,9 @@ Okay, so let's have a look at our students when we rank them from worst to best 
 ```{r}
 #| label: tbl-tab12-3
 #| tbl-cap: Students ranked in terms of effort and reward
-huxtabs[[12]][[3]]
+
+mykbl(lsj_chapter_tables[[12]][[3]]) 
+
 ```
 
 Hmm. These are identical. The student who put in the most effort got the best grade, the student with the least effort got the worst grade, etc. As the table above shows, these two rankings are identical, so if we now correlate them we get a perfect relationship, with a correlation of 1.0.
@@ -277,7 +281,6 @@ $$y=a+bx$$
 #| fig-alt: Two scatter plots compare the fitting of regression lines to the relationship between sleep hours and grumpiness. The left plot shows a strong negative correlation with a steep regression line; the right plot shows a weaker fit and a flatter regression line.
 #| fig-width: 4
 #| fig-height: 4
-#| fig-pos: 'H'
 
 load("data_and_tables/parenthood.Rdata")
 
@@ -344,8 +347,6 @@ Yes, yes that sounds even better. And since I've indented it like that, it proba
 #| fig-alt: Two scatter plots side by side, both displaying "Grumpiness vs. Sleep" with sleep hours (x-axis) ranging from 0 to 9 and grumpiness (y-axis) ranging from 0 to 100. Each plot has a blue regression line showing a negative correlation. The left plot is labeled "Close tc" and the right plot "Distant tc"
 #| fig-width: 4
 #| fig-height: 4
-#| fig-pos: 'H'
-
 
 load("data_and_tables/parenthood.Rdata")
 fit <- lm(data=parenthood, dan.grump ~ dan.sleep)
@@ -431,7 +432,9 @@ Multiple regression in jamovi is no different to simple regression. All we have 
 ```{r}
 #| label: tbl-tab12-4
 #| tbl-cap: Adding multiple variables as predictors in a regression
-huxtabs[[12]][[4]]
+
+mykbl(lsj_chapter_tables[[12]][[4]]) 
+
 ```
 
 The coefficient associated with dani.sleep is quite large, suggesting that every hour of sleep I lose makes me a lot grumpier. However, the coefficient for baby.sleep is very small, suggesting that it doesn't really matter how much sleep my son gets. What matters as far as my grumpiness goes is how much sleep I get. To get a sense of what this multiple regression model looks like, @fig-fig12-14 shows a 3D plot that plots all three variables, along with the regression model itself.
@@ -571,7 +574,6 @@ The 'Model Coefficients' at the bottom of the jamovi analysis results shown in @
 #| classes: .enlarge-image
 #| fig-cap: A jamovi screenshot showing a multiple linear regression analysis, with some useful options checked
 #| fig-alt: A jamovi screenshot showing Linear Regression analysis results. The interface includes options for configuring the model, viewing the model’s fit measures such as Adjusted R² and AIC, and examining model coefficients such as "state_reg" and "murders"
-#| fig-pos: 'H'
 knitr::include_graphics("images/fig12-15.png")
 ```
 
@@ -688,7 +690,6 @@ Another thing we should check is the relationship between the predicted (fitted)
 #| label: fig-fig12-19
 #| fig-cap: Plot of the theoretical quantiles according to the model, against the quantiles of the standardised residuals, produced in jamovi
 #| fig-alt: Q-Q plot titled "Assumption Checks" showing standardized residuals along the y-axis and theoretical quantiles along the x-axis. Points closely follow the 45-degree reference line, indicating that the residuals follow a normal distribution
-#| fig-pos: 'H'
 knitr::include_graphics("images/fig12-19.png")
 ```
 
@@ -797,8 +798,6 @@ Outliers are interesting: a big outlier might correspond to junk data, e.g., the
 #| fig-alt: A scatter plot with blue dots showing the relationship between a predictor and an outcome. A solid black regression line trends upwards, with one point labeled "High leverage" noticeably distant from the other points. A dashed line represents an alternate linear fit
 #| fig-width: 8
 #| fig-plot: 4
-#| fig-pos: 'h!'
-
 
 dat <- data.frame(x=c(2,   2.1, 3.3, 3.7, 4.2,  4.5, 4.7, 4.9, 5.1, 5.2, 5.4, 5.8, 6.6, 10),
                   y=c(2.2, 1.7, 3.9, 3.8, 3.95, 3.5, 3.7, 5.1, 5.2, 3.9, 4,   6,   6.4, 9.8))
@@ -840,7 +839,6 @@ This brings us to our third measure of unusualness, the **influence** of an obse
 #| fig-width: 8
 #| fig-plot: 4
 
-
 dat <- data.frame(x=c(2,   2.1, 3.3, 3.7, 4.2,  4.5, 4.7, 4.9, 5.1, 5.2, 5.4, 5.8, 6.6, 10),
                   y=c(2.2, 1.7, 3.9, 3.8, 3.95, 3.5, 3.7, 5.1, 5.2, 3.9, 4,   6,   6.4, 4))
 dat2 <- data.frame(x=c(2,   2.1, 3.3, 3.7, 4.2,  4.5, 4.7, 4.9, 5.1, 5.2, 5.4, 5.8, 6.6),
@@ -872,7 +870,6 @@ In jamovi, information about Cook's distance can be calculated by clicking on th
 #| label: fig-fig12-27
 #| fig-cap: jamovi output showing the table for the Cooks distance statistics
 #| fig-alt: A data summary table is shown with Cooks Distance values. The columns listed are Mean (0.01), Median (0.00), SD (Standard Deviation) (0.02), Min (0.00), and Max (0.11)
-#| fig-pos: 'H'
 knitr::include_graphics("images/fig12-27.png")
 ```
 
@@ -938,7 +935,6 @@ We can also use this 'Model Comparison' option to display a table that shows the
 #| classes: .enlarge-image
 #| fig-cap: Model comparison in jamovi using the 'Model Builder' option
 #| fig-alt: A jamovi screenshot displaying a linear regression analysis. The screen shows options for dependent variables, factors, and weights on the left, while the right side presents the model fit measures, comparisons, and specific results, including coefficients and standard errors.
-#| fig-pos: 'H'
 knitr::include_graphics("images/fig12-28.png")
 ```
 

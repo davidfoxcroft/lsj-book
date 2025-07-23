@@ -106,8 +106,9 @@ Notice that I've constructed two different labelling schemes here. We have a "pe
 ```{r}
 #| label: tbl-tab13-1
 #| tbl-cap: Grumpiness for people in cool and uncool groups
-huxtabs[[13]][[1]] |>
-  set_latex_float('H')
+
+mykbl(lsj_chapter_tables[[13]][[1]]) 
+
 ```
 
 However, that's not the only way we could refer to Tim. As an alternative we could note that Tim belongs to the "uncool" group ($k = 2$), and is in fact the first person listed in the uncool group ($i = 1$). So it's equally valid to refer to Tim's grumpiness by saying that $Y_{ik} = 91$, where $k = 2$ and $i = 1$. In other words, each person $p$ corresponds to a unique $ik$ combination, and so the formula that I gave above is actually identical to our original formula for the variance, which would be: 
@@ -165,7 +166,9 @@ A summary of all the key quantities involved in a one-way ANOVA, including the f
 ```{r}
 #| label: tbl-tab13-2
 #| tbl-cap: All of the key quantities involved in an ANOVA organised into a "standard" ANOVA table. The formulas for all quantities (except the $p$-value which has a very ugly formula and would be nightmarishly hard to calculate without a computer) are shown
-huxtabs[[13]][[2]]
+
+mykbl(lsj_chapter_tables[[13]][[2]]) 
+
 ```
 
 [Additional technical detail[^13-comparing-several-means-one-way-anova-6]]
@@ -182,8 +185,9 @@ The previous discussion was fairly abstract and a little on the technical side, 
 ```{r}
 #| label: tbl-tab13-3
 #| tbl-cap: A worked example...1
-huxtabs[[13]][[3]] |>
-  set_latex_float('H')
+
+mykbl(lsj_chapter_tables[[13]][[3]]) 
+
 ```
 
 At this stage, the only thing I've included in the table is the raw data itself. That is, the grouping variable (i.e., drug) and outcome variable (i.e. mood.gain) for each person. Note that the outcome variable here corresponds to the $\bar{Y}_{ik}$ value in our equation previously. The next step in the calculation is to write down, for each person in the study, the corresponding group mean, $\bar{Y}_k$. This is slightly repetitive but not particularly difficult since we already calculated those group means when doing our descriptive statistics, see @tbl-tab13-4.
@@ -191,7 +195,9 @@ At this stage, the only thing I've included in the table is the raw data itself.
 ```{r}
 #| label: tbl-tab13-4
 #| tbl-cap: A worked example...2
-huxtabs[[13]][[4]]
+
+mykbl(lsj_chapter_tables[[13]][[4]]) 
+
 ```
 
 Now that we've written those down, we need to calculate, again for every person, the deviation from the corresponding group mean. That is, we want to subtract $Y_{ik} - \bar{Y}_k$. After we've done that, we need to square everything. When we do that, here's what we get (@tbl-tab13-5).
@@ -199,10 +205,10 @@ Now that we've written those down, we need to calculate, again for every person,
 ```{r}
 #| label: tbl-tab13-5
 #| tbl-cap: A worked example...3
-huxtabs[[13]][[5]]
-```
 
-\
+mykbl(lsj_chapter_tables[[13]][[5]]) 
+
+```
 
 The last step is equally straightforward. In order to calculate the within-group sum of squares we just add up the squared deviations across all observations:
 
@@ -220,7 +226,9 @@ Okay. Now that we've calculated the within groups variation, $SS_w$, it's time t
 ```{r}
 #| label: tbl-tab13-6
 #| tbl-cap: A worked example...4
-huxtabs[[13]][[6]]
+
+mykbl(lsj_chapter_tables[[13]][[6]]) 
+
 ```
 
 However, for the between group calculations we need to multiply each of these squared deviations by $N_k$, the number of observations in the group. We do this because every observation in the group (all $N_k$ of them) is associated with a between group difference. So if there are six people in the placebo group and the placebo group mean differs from the grand mean by $0.19$, then the total between group variation associated with these six people is $6 \times 0.19 = 1.14$. So we have to extend our little table of calculations (@tbl-tab13-7).
@@ -228,7 +236,9 @@ However, for the between group calculations we need to multiply each of these sq
 ```{r}
 #| label: tbl-tab13-7
 #| tbl-cap: A worked example...5
-huxtabs[[13]][[7]]
+
+mykbl(lsj_chapter_tables[[13]][[7]]) 
+
 ```
 
 And so now our between group sum of squares is obtained by summing these "weighted squared deviations" over all three groups in the study:
@@ -271,7 +281,9 @@ At this point, we're basically done. Having completed our calculations, it's tra
 ```{r}
 #| label: tbl-tab13-8
 #| tbl-cap: The ANOVA results table
-huxtabs[[13]][[8]]
+
+mykbl(lsj_chapter_tables[[13]][[8]]) 
+
 ```
 
 These days, you'll probably never have much reason to want to construct one of these tables yourself, but you will find that almost all statistical software (jamovi included) tends to organise the output of an ANOVA into a table like this, so it's a good idea to get used to reading them. However, although the software will output a full ANOVA table, there's almost never a good reason to include the whole table in your write up. A pretty standard way of reporting the stats block for this result would be to write something like this:
@@ -297,7 +309,6 @@ The jamovi results table shows you the sums of squares values, the degrees of fr
 #| classes: .enlarge-image
 #| fig-cap: jamovi results table for ANOVA of mood gain by drug administered
 #| fig-alt: A table from jamovi titled "ANOVA - mood.gain" displays results for an ANOVA test with the columns:- "Sum of Squares," "df," "Mean Square," "F," "p," and "η²." The rows present data for "drug" with values (3.45, 2, 1.73, 18.61, 0.00009, 0.71) and "Residuals" with values (1.39, 15, 0.09)
-#| fig-pos: 'H'
 knitr::include_graphics("images/fig13-3.png")
 ```
 
@@ -332,7 +343,9 @@ When we characterise the null hypothesis in terms of these three distinct propos
 ```{r}
 #| label: tbl-tab13-9
 #| tbl-cap: The null hypothesis and eight possible "states of the world"
-huxtabs[[13]][[9]]
+
+mykbl(lsj_chapter_tables[[13]][[9]]) 
+
 ```
 
 By rejecting the null hypothesis, we've decided that we don't believe that #1 is the true state of the world. The next question to ask is, which of the other seven possibilities *do* we think is right? When faced with this situation, it's usually helps to look at the data. For instance, if we look at the plots in @fig-fig13-1, it's tempting to conclude that Joyzepam is better than the placebo and better than Anxifree, but there's no real difference between Anxifree and the placebo. However, if we want to get a clearer answer about this, it might help to run some tests.
@@ -390,7 +403,9 @@ whichever one is larger. This might sound a little confusing, so let's go throug
 ```{r}
 #| label: tbl-tab13-10
 #| tbl-cap: Holm corrected $p$-values
-huxtabs[[13]][[10]]
+
+mykbl(lsj_chapter_tables[[13]][[10]]) 
+
 ```
 
 @fig-fig13-4 also shows the Holm corrected $p$-values and, as you can see, the biggest $p$-value (corresponding to the comparison between Anxifree and the placebo) is unaltered. At a value of .15, it is exactly the same as the value we got originally when we applied no correction at all. In contrast, the smallest $p$-value (Joyzepam versus placebo) has been multiplied by three.
@@ -469,7 +484,6 @@ Testing the normality assumption is relatively straightforward. We covered most 
 #| fig-alt: A Q-Q plot comparing standardized residuals to theoretical quantiles, showing dots near a 45-degree reference line, indicating the data points follow a normal distribution closely. The axes are labeled "Standardized Residuals" and "Theoretical Quantiles"
 #| fig-width: 8
 #| fig-height: 5
-#| fig-pos: 'H'
 knitr::include_graphics("images/fig13-7.png")
 ```
 
@@ -498,7 +512,9 @@ But wait, there's more! Dear lord, why is there always more? The story I've told
 ```{r}
 #| label: tbl-tab13-11
 #| tbl-cap: Frequency table of mood gain from the *clinicaltrials.csv* data
-huxtabs[[13]][[11]]
+
+mykbl(lsj_chapter_tables[[13]][[11]]) 
+
 ```
 
 Looking at this table, notice that the third entry in the frequency table has a value of 2. Since this corresponds to a mood.gain of 0.3, this table is telling us that two people's mood increased by 0.3.[^13-comparing-several-means-one-way-anova-16]
@@ -549,7 +565,9 @@ First, we need some data. @Geschwind1972 has suggested that the exact nature of 
 ```{r}
 #| label: tbl-tab13-12
 #| tbl-cap: Word recognition task scores in stroke patients
-huxtabs[[13]][[12]]
+
+mykbl(lsj_chapter_tables[[13]][[12]]) 
+
 ```
 
 The patients were required to complete three word recognition tasks. On the first (speech production) task, patients were required to repeat single words read out aloud by the researcher. On the second (conceptual) task, designed to test word comprehension, patients were required to match a series of pictures with their correct name. On the third (syntax) task, designed to test knowledge of correct word order, patients were asked to reorder syntactically incorrect sentences. Each patient completed all three tasks. The order in which patients attempted the tasks was counterbalanced between participants. Each task consisted of a series of 10 attempts. The number of attempts successfully completed by each patient are shown in @tbl-tab13-11. Enter these data into jamovi ready for analysis (or take a short-cut and load up the *broca.csv* file).
@@ -561,7 +579,6 @@ To perform a one-way related ANOVA in jamovi, open the one-way repeated measures
 #| fig-align: center
 #| fig-cap: Repeated measures ANOVA dialogue box in jamovi
 #| fig-alt: A jamovi screenshot showing the setup for a Repeated Measures ANOVA analysis. The interface includes fields for participants, speech, conceptual, and syntax variables, along with options to define repeated measures factors and cells, between subject factors, and covariates
-#| fig-pos: 'H'
 knitr::include_graphics("images/fig13-9.png")
 ```
 
@@ -596,8 +613,6 @@ In our analysis, we saw that the significance of Mauchly's Test of Sphericity wa
 #| classes: .enlarge-image
 #| fig-cap: One-way repeated measures ANOVA output -- Tests of Within Subjects Effects
 #| fig-alt: A jamovi results table displaying repeated measures ANOVA results. The columns include Sphericity Correction (None, Greenhouse-Geisser, Huynh-Feldt), Sum of Squares, degrees of freedom ($df$), Mean Square, $F$-values, and $p$-values for Task and Residual effects. Note:- Type 3 Sums of Squares
-#| fig-pos: 'H'
-
 knitr::include_graphics("images/fig13-11.png")
 ```
 
@@ -618,7 +633,6 @@ Descriptive statistics (marginal means) can be reviewed to help interpret the re
 #| classes: .enlarge-image
 #| fig-cap: One-way repeated measures ANOVA output -- Descriptive Statistics
 #| fig-alt: A jamovi results table titled 'Estimated Marginal Means - Task' shows the mean, standard error, and 95% confidence intervals for three tasks:- Speech (Mean:- 7.17, SE:- 0.60, CI:- 5.62-8.71), Conceptual (Mean:- 6.17, SE:- 0.60, CI:- 4.62-7.71), and Syntax (Mean:- 4.33, SE:- 0.67, CI:- 2.62-6.05)
-#| fig-pos: 'H'
 knitr::include_graphics("images/fig13-13.png")
 ```
 

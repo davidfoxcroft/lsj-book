@@ -54,11 +54,14 @@ What this discussion makes clear, I hope, is that when attempting to construct a
 ```{r}
 #| label: tbl-tab9-1
 #| tbl-cap: Research and statistical hypotheses
-huxtabs[[9]][[1]] |> 
-  style_headers(bold = FALSE) |>
-  set_all_borders(0) |>
-  set_top_border(1,everywhere, 0.4) |>
-  set_bottom_border(2,everywhere, 0.4)
+# huxtabs[[9]][[1]] |> 
+#   style_headers(bold = FALSE) |>
+#   set_all_borders(0) |>
+#   set_top_border(1,everywhere, 0.4) |>
+#   set_bottom_border(2,everywhere, 0.4)
+
+mykbl(lsj_chapter_tables[[9]][[1]], NULL) 
+
 ```
 
 And a key thing to recognise is this. A statistical hypothesis test is a test of the statistical hypothesis, not the research hypothesis. If your study is badly designed then the link between your research hypothesis and your statistical hypothesis is broken. To give a silly example, suppose that my ESP study was conducted in a situation where the participant can actually see the card reflected in a window. If that happens I would be able to find very strong evidence that $\theta \neq 0.5$, but this would tell us nothing about whether "ESP exists".
@@ -82,7 +85,9 @@ At this point, we need to be a bit more precise about what we mean by "errors". 
 ```{r}
 #| label: tbl-tab9-2
 #| tbl-cap: Null hypothesis statistical testing (NHST)
-huxtabs[[9]][[2]]
+
+mykbl(lsj_chapter_tables[[9]][[2]]) 
+
 ```
 
 As a consequence there are actually two different types of error here. If we reject a null hypothesis that is actually true then we have made a **type I error**. On the other hand, if we retain the null hypothesis when it is in fact false then we have made a **type II error**.
@@ -94,7 +99,9 @@ So, what about the type II error rate? Well, we'd also like to keep those under 
 ```{r}
 #| label: tbl-tab9-3
 #| tbl-cap: Null hypothesis statistical testing (NHST) -- additional detail
-huxtabs[[9]][[3]]
+
+mykbl(lsj_chapter_tables[[9]][[3]]) 
+
 ```
 
 A "powerful" hypothesis test is one that has a small value of $\beta$, while still keeping $\alpha$ fixed at some (small) desired level. By convention, scientists make use of three different $\alpha$ levels: $.05$, $.01$ and $.001$. Notice the asymmetry here; the tests are designed to ensure that the $\alpha$ level is kept small but there's no corresponding guarantee regarding $\beta$. We'd certainly like the type II error rate to be small and we try to design tests that keep it small, but this is typically secondary to the overwhelming need to control the type I error rate. As Blackstone might have said if he were a statistician, it is "better to retain 10 false null hypotheses than to reject a single true one". To be honest, I don't know that I agree with this philosophy. There are situations where I think it makes sense, and situations where I think it doesn't, but that's neither here nor there. It's how the tests are built.
@@ -120,7 +127,6 @@ Okay, we're very close to being finished. We've constructed a test statistic $(X
 #| fig-alt: A bar graph titled "Sampling Distribution for X if the Null is True" shows the probability (y-axis) versus the number of correct responses (X) (x-axis). The distribution is bell-shaped, peaking around 50 correct responses
 #| fig-width: 8
 #| fig-height: 5
-#| fig-pos: 'H'
 
 binom1 <- data.frame(success = 0:100, pmf = dbinom(x = 0:100, size = 100, prob = .5))
 
@@ -152,7 +158,6 @@ As it turns out those three things uniquely solve the problem. Our critical regi
 #| fig-alt: A graph depicting the critical regions for a two-sided test. The x-axis represents the number of correct responses (X) ranging from 0 to 100. The lower critical region (2.5% of the distribution) and upper critical region (2.5% of the distribution) are highlighted in blue
 #| fig-width: 8
 #| fig-height: 5
-#| fig-pos: 'h!'
 
 binom1 <- data.frame(success = 0:100, pmf = dbinom(x = 0:100, size = 100, prob = .5))
 binom1$plotcol <- with(binom1, ifelse(success<=40 | success >= 60, blueshade, "lightgrey"))
@@ -214,7 +219,6 @@ When this happens, we have what's called a **one-sided test** and the critical r
 #| fig-alt: A histogram displaying a normal distribution of the number of correct responses (X) with a highlighted critical region on the right side, representing 5% of the distribution. The x-axis ranges from 0 to 100 correct responses. Text reads "critical region (5% of the distribution)"
 #| fig-width: 8
 #| fig-height: 5
-#| fig-pos: 'h!'
 
 binom1 <- data.frame(success = 0:100, pmf = dbinom(x = 0:100, size = 100, prob = .5))
 binom1$plotcol <- with(binom1, ifelse(success>= 58, blueshade, "lightgrey"))
@@ -251,7 +255,9 @@ This is where the $p$-value comes in handy. To understand how it works, let's su
 ```{r}
 #| label: tbl-tab9-4
 #| tbl-cap: Rejecting the null hypothesis at different levels of alpha
-huxtabs[[9]][[4]]
+
+mykbl(lsj_chapter_tables[[9]][[4]]) 
+
 ```
 
 When we test the ESP data ($X = 62$ successes out of $N = 100$ observations), using $\alpha$ levels of $.03$ and above, we'd always find ourselves rejecting the null hypothesis. For $\alpha$ levels of $.02$ and below we always end up retaining the null hypothesis. Therefore, somewhere between $.02$ and $.03$ there must be a smallest value of $\alpha$ that would allow us to reject the null hypothesis for this data. This is the $p$-value. As it turns out the ESP data has $p = .021$. In short, $p$ is defined to be the smallest type I error rate ($\alpha$) that you have to be willing to tolerate if you want to reject the null hypothesis.
@@ -287,7 +293,9 @@ In other words, the worry here is that I might have the best of intentions, and 
 ```{r}
 #| label: tbl-tab9-5
 #| tbl-cap: Typical translations of $p$-value levels
-huxtabs[[9]][[5]]
+
+mykbl(lsj_chapter_tables[[9]][[5]]) 
+
 ```
 
 ### Two proposed solutions
@@ -392,7 +400,6 @@ ggplot(data=binom1, aes(x = factor(success), y = pmf+.001)) +
 #| fig-alt: A graph titled "Power function for the Test (N=100)" showing the probability of rejecting the null hypothesis (y-axis) plotted against the true value of $\theta$ (x-axis). The curve dips sharply to a minimum at $\theta$=0.5, marked by a black dot, and rises symmetrically on either side to a maximum at both ends
 #| fig-width: 8
 #| fig-height: 4.5
-#| fig-pos: 'H'
 
 theta <- seq(.01,.99,.01)
 pow <- vector("numeric",length(theta))
@@ -424,7 +431,9 @@ The plot shown in @fig-fig9-7 captures a fairly basic point about hypothesis tes
 ```{r}
 #| label: tbl-tab9-6
 #| tbl-cap: A crude guide to understanding the relationship between statistical significance and effect sizes. Basically, if you don't have a significant result then the effect size is pretty meaningless because you don't have any evidence that it's even real. On the other hand, if you do have a significant effect but your effect size is small then there's a pretty good chance that your result (although real) isn't all that interesting. It does depend a lot on what exactly you're studying; small effects can be of massive practical importance in some situations. So don't take this table too seriously -- it's a rough guide at best
-huxtabs[[9]][[6]]
+
+mykbl(lsj_chapter_tables[[9]][[6]]) 
+
 ```
 
 Why calculate effect size? Let's assume that you've run your experiment, collected the data, and gotten a significant effect when you ran your hypothesis test. Isn't it enough just to say that you've gotten a significant effect? Surely that's the point of hypothesis testing? Well, sort of. Yes, the point of doing a hypothesis test is to try to demonstrate that the null hypothesis is wrong, but that's hardly the only thing we're interested in. If the null hypothesis claimed that $\theta = .5$ and we show that it's wrong, we've only really told half of the story. Rejecting the null hypothesis implies that we believe that $\theta \neq .5$, but there's a big difference between $\theta = .51$ and $\theta = .8$. If we find that $\theta = .8$, then not only have we found that the null hypothesis is wrong, it appears to be very wrong. On the other hand, suppose we've successfully rejected the null hypothesis, but it looks like the true value of $\theta$ is only .51 (this would only be possible with a very large study). Sure, the null hypothesis is wrong but it's not at all clear that we actually care because the effect size is so small. In the context of my ESP study we might still care since any demonstration of real psychic powers would actually be pretty cool,[^09-hypothesis-testing-10] but in other contexts a $1\%$ difference usually isn't very interesting, even if it is a real difference. For instance, suppose we're looking at differences in high school exam scores between males and females and it turns out that the female scores are $1\%$ higher on average than the males. If I've got data from thousands of students then this difference will almost certainly be statistically significant, but regardless of how small the $p$-value is it's just not very interesting. You'd hardly want to go around proclaiming a crisis in boys education on the basis of such a tiny difference would you? It's for this reason that it is becoming more standard (slowly, but surely) to report some kind of standard measure of effect size along with the the results of the hypothesis test. The hypothesis test itself tells you whether you should believe that the effect you have observed is real (i.e., not just due to chance), whereas the effect size tells you whether or not you should care.
@@ -447,7 +456,6 @@ Unfortunately, it's often the case that even with the best of experimental desig
 #| fig-alt: A line graph showing the probability of rejecting the null hypothesis as a function of sample size (N). The x-axis represents the sample size ranging from 0 to 100, and the y-axis shows the probability from 0 to 1. The line increases and fluctuates upwards
 #| fig-width: 8
 #| fig-height: 5
-#| fig-pos: 'h!'
 
 N <- 1:100
 pow <- vector("numeric",length(N))
