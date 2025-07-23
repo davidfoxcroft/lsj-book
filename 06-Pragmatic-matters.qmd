@@ -198,6 +198,8 @@ Now let's load and look at the data. The data file *likert.omv* contains a singl
 knitr::include_graphics("images/fig6-4.png")
 ```
 
+\
+
 One reason why it might be useful to have the data in this format is that there are a lot of situations where you might prefer to analyse the strength of the opinion separately from the direction of the opinion. We can do two different transformations on this likert.centred variable in order to distinguish between these two different concepts. First, to compute an opinion.strength variable, we want to take the absolute value of the centred data (using the 'ABS' function).[^pragmatic-matters-6] In jamovi, create another new variable using the 'Compute' button. Name the variable opinion.strength and this time click on the fx button next to the 'Formula' box. This shows the different 'Functions' and 'Variables' that you can add to the 'Formula' box, so double click on 'ABS' and then double click on "likert.centred' and you will see that the 'Formula' box is populated with 'ABS(likert.centred)' and a new variable has been created in the spreadsheet view, as in @fig-fig6-5.
 
 [^pragmatic-matters-6]: The absolute value of a number is its distance from zero, regardless of whether its sign is negative or positive.
@@ -214,7 +216,6 @@ Second, to compute a variable that contains only the direction of the opinion an
 
 > IF(likert.centred $==$ 0, 0, likert.centred / opinion.strength) 
 
-\
 When done, you'll see that all negative numbers from the 'likert.centred' variable are converted to -1, all positive numbers are converted to 1 and zero stays as 0, like so:
 
 > -1 1 -1 0 0 0 -1 1 1 1
@@ -237,8 +238,6 @@ In some situations it can be quite helpful to group these into a smallish number
 
 Note that there are three left parentheses used during the nesting, so the whole statement has to end with three right parentheses otherwise you will get an error message. The jamovi screenshot for this data manipulation, along with an accompanying frequency table, is shown in @fig-fig6-6.
 
-It's important to take the time to figure out whether or not the resulting categories make any sense at all in terms of your research project. If they don't make any sense to you as meaningful categories, then any data analysis that uses those categories is likely to be just as meaningless. More generally, in practice I've noticed that people have a very strong desire to carve their (continuous and messy) data into a few (discrete and simple) categories, and then run analyses using the categorised data instead of the original data.[^pragmatic-matters-8] I wouldn't go so far as to say that this is an inherently bad idea, but it does have some fairly serious drawbacks at times, so I would advise some caution if you are thinking about doing it.
-
 ```{r}
 #| label: fig-fig6-6
 #| classes: .enlarge-image
@@ -246,6 +245,8 @@ It's important to take the time to figure out whether or not the resulting categ
 #| fig-alt: A jamovi screenshot is shown. The "COMPUTED VARIABLE" section shows variable creation for "AgeCats" with custom age groupings. Below, a table with two columns labeled "Age" and "AgeCats" shows age data grouped into new categories
 knitr::include_graphics("images/fig6-6.png")
 ```
+
+It's important to take the time to figure out whether or not the resulting categories make any sense at all in terms of your research project. If they don't make any sense to you as meaningful categories, then any data analysis that uses those categories is likely to be just as meaningless. More generally, in practice I've noticed that people have a very strong desire to carve their (continuous and messy) data into a few (discrete and simple) categories, and then run analyses using the categorised data instead of the original data.[^pragmatic-matters-8] I wouldn't go so far as to say that this is an inherently bad idea, but it does have some fairly serious drawbacks at times, so I would advise some caution if you are thinking about doing it.
 
 [^pragmatic-matters-8]: If you've read further into the book, and are re-reading this section, then a good example of this would be someone choosing to do an ANOVA using 'AgeCats' as the grouping variable, instead of running a regression using Age as a predictor. There are sometimes good reasons for doing this. For instance, if the relationship between Age and your outcome variable is highly non-linear and you aren't comfortable with trying to run non-linear regression! However, unless you really do have a good rationale for doing this, it's best not to. It tends to introduce all sorts of other problems (e.g., the data will probably violate the normality assumption) and you can lose a lot of statistical power.
 
@@ -261,6 +262,8 @@ Sometimes you want to apply the same transformation to more than one variable, f
 knitr::include_graphics("images/fig6-7.png")
 ```
 
+\
+
 ```{r}
 #| label: fig-fig6-8
 #| classes: .enlarge-image
@@ -271,6 +274,8 @@ knitr::include_graphics("images/fig6-8.png")
 
 Give your new variable a name, let's call it 'opinion.strength', and then click on the 'using transform' selection box and select 'Create New Transform...'. This is where you will create, and name, the transformation that can be re-applied to as many variables as you like. The transformation is automatically named for us as 'Transform 1' (imaginative, huh. You can change this if you like). Then type the expression "ABS(\$source - 4)" into the function text box, as in @fig-fig6-8, press Enter or Return on your keyboard and, hey presto, you have created a new transformation and applied it to the likert.raw variable! Good, eh. Note that instead of using the variable label in the expression, we have instead used '\$source'. This is so that we can then use the same transformation with as many different variables as we like -- jamovi requires you to use '\$source' to refer to the source variable you are transforming. Your transformation has also been saved and can be re-used any time you like (providing you save the data set as an '.omv' file, otherwise you'll lose it!).
 
+You can also create a transformation with the second example we looked at, the age distribution of people at a social gathering. Go on, you know you want to! Remember that we collapsed this variable into three groups: younger, adult and older. This time we will achieve the same thing, but using the jamovi 'Transform' -- 'Add condition' button. With this data set (go back to it or create it again if you didn't save it) set up a new variable transformation. Call the transformed variable 'AgeCats' and the transformation you will create 'Agegroupings'. Then click on the big "$+$" sign next to the function box. This is the 'Add condition' button and I've stuck a big red arrow onto @fig-fig6-9 so you can see exactly where this is. 
+
 ```{r}
 #| label: fig-fig6-9
 #| classes: .enlarge-image
@@ -279,7 +284,7 @@ Give your new variable a name, let's call it 'opinion.strength', and then click 
 knitr::include_graphics("images/fig6-9.png")
 ```
 
-You can also create a transformation with the second example we looked at, the age distribution of people at a social gathering. Go on, you know you want to! Remember that we collapsed this variable into three groups: younger, adult and older. This time we will achieve the same thing, but using the jamovi 'Transform' -- 'Add condition' button. With this data set (go back to it or create it again if you didn't save it) set up a new variable transformation. Call the transformed variable 'AgeCats' and the transformation you will create 'Agegroupings'. Then click on the big "$+$" sign next to the function box. This is the 'Add condition' button and I've stuck a big red arrow onto @fig-fig6-9 so you can see exactly where this is. Re-create the transformation shown in @fig-fig6-9 and when you are done, you will see the new values appear in the spreadsheet window. What's more, the age groupings transformation has been saved and can be re-applied any time you like. Ok, so I know that it's unlikely you will have more than one 'Age' variable, but you get the idea now of how to set up transformations in jamovi, so you can follow this idea with other sorts of variables. A typical scenario for this is when you have a questionnaire scale with, say, 20 items (variables) and each item was originally scored from 1 to 6 but, for some reason or quirk of the data you decide to recode all the items as 1 to 3. You can easily do this in jamovi by creating and then re-applying your transformation for each variable that you want to recode.
+Re-create the transformation shown in @fig-fig6-9 and when you are done, you will see the new values appear in the spreadsheet window. What's more, the age groupings transformation has been saved and can be re-applied any time you like. Ok, so I know that it's unlikely you will have more than one 'Age' variable, but you get the idea now of how to set up transformations in jamovi, so you can follow this idea with other sorts of variables. A typical scenario for this is when you have a questionnaire scale with, say, 20 items (variables) and each item was originally scored from 1 to 6 but, for some reason or quirk of the data you decide to recode all the items as 1 to 3. You can easily do this in jamovi by creating and then re-applying your transformation for each variable that you want to recode.
 
 ## A few more mathematical functions and operations
 

@@ -1,6 +1,5 @@
 
 library(tinytex)
-library(huxtable)
 library(dplyr)
 library(janitor)
 library(rvest)

@@ -37,7 +37,6 @@ xmax = max(streets$x)
 ymin = min(streets$y)
 ymax = max(streets$y)
 
-
 themeval = theme(panel.border = element_blank(),
                  panel.grid.major = element_blank(),
                  panel.grid.minor = element_blank(),
@@ -116,7 +115,9 @@ A variation to the traditional box plot is the violin plot. Violin plots are sim
 knitr::include_graphics("images/fig5-5.png")
 ```
 
-\
+### Drawing multiple boxplots
+
+One last thing. What if you want to draw multiple boxplots at once? Suppose, for instance, I wanted separate boxplots showing the *afl.margins* not just for 2010 but for every year between 1987 and 2010. To do that the first thing we'll have to do is find the data. These are stored in the **aflmarginbyyear.csv** file. So let's load it into jamovi and see what is in it. You will see that it is a pretty big data set. It contains 4296 games and the variables that we're interested in. What we want to do is have jamovi draw boxplots for the margin variable, but plotted separately for each year. The way to do this is to move the year variable across into the 'Split by' box, as in @fig-fig5-6.
 
 ```{r out.width="80%"}
 #| label: fig-fig5-6
@@ -124,10 +125,6 @@ knitr::include_graphics("images/fig5-5.png")
 #| fig-alt: A jamovi screenshot displaying a statistical analysis interface titled "AFL Margins By Year." The interface shows options for Descriptives, with a margin variable and a year split. The menu includes tabs for Variables, Data, Analyses, and Edit, with various statistical tests.
 knitr::include_graphics("images/fig5-6.png")
 ```
-
-### Drawing multiple boxplots
-
-One last thing. What if you want to draw multiple boxplots at once? Suppose, for instance, I wanted separate boxplots showing the *afl.margins* not just for 2010 but for every year between 1987 and 2010. To do that the first thing we'll have to do is find the data. These are stored in the **aflmarginbyyear.csv** file. So let's load it into jamovi and see what is in it. You will see that it is a pretty big data set. It contains 4296 games and the variables that we're interested in. What we want to do is have jamovi draw boxplots for the margin variable, but plotted separately for each year. The way to do this is to move the year variable across into the 'Split by' box, as in @fig-fig5-6.
 
 The result is shown in @fig-fig5-7. This version of the box plot, split by year, gives a sense of why it's sometimes useful to choose box plots instead of histograms. It's possible to get a good sense of what the data look like from year to year without getting overwhelmed with too much detail. Now imagine what would have happened if I'd tried to cram 24 histograms into this space: no chance at all that the reader is going to learn anything useful.
 
@@ -142,14 +139,18 @@ knitr::include_graphics("images/fig5-7.png")
 
 ### Using box plots to detect outliers {#sec-Using-box-plots-to-detect-outliers}
 
-As the boxplot automatically separates out observations that lie outside a certain range, depicting them with a dot in jamovi, people often use them as an informal method for detecting **outliers**: observations that are "suspiciously" distant from the rest of the data. Here's an example. Suppose that I'd drawn the boxplot for the *afl.margins* data and it came up looking like @fig-fig5-8. It's pretty clear that something funny is going on with two of the observations. Apparently, there were two games in which the margin was over 300 points![^drawing-graphs-1a] That doesn't sound right to me. Now that I've become suspicious it's time to look a bit more closely at the data. In jamovi you can quickly find out which of these observations are suspicious and then you can go back to the raw data to see if there has been a mistake in data entry. One way to do this is to tell jamovi to label the outliers, by checking the box next to the 'Box plot' check box. This adds a row number label next to the outlier in the boxplot, so you can go look at that row and find the extreme value. Another, more flexible way, is to set up a filter so that only those observations with values over a certain threshold are included. In our example, the threshold is over 300, so that is the filter we will create. First, click on the 'Filters' button at the top of the jamovi window, and then type 'margin \> 300' into the filter field, as in @fig-fig5-9.
+As the boxplot automatically separates out observations that lie outside a certain range, depicting them with a dot in jamovi, people often use them as an informal method for detecting **outliers**: observations that are "suspiciously" distant from the rest of the data. Here's an example. Suppose that I'd drawn the boxplot for the *afl.margins* data and it came up looking like @fig-fig5-8. 
 
-```{r out.width="70%"}
+```{r out.width="80%"}
 #| label: fig-fig5-8
 #| fig-cap: A boxplot showing two very suspicious outliers!
 #| fig-alt: Box plot of a numerical distribution displaying a median between 50 and 100, with a lower quartile around 25, and an upper quartile around 75. There are several outliers above 100, specifically labeled at 176 and 202. The y-axis is labeled "margin"
 knitr::include_graphics("images/fig5-8.png")
 ```
+
+It's pretty clear that something funny is going on with two of the observations. Apparently, there were two games in which the margin was over 300 points![^drawing-graphs-1a] That doesn't sound right to me. Now that I've become suspicious it's time to look a bit more closely at the data. In jamovi you can quickly find out which of these observations are suspicious and then you can go back to the raw data to see if there has been a mistake in data entry. One way to do this is to tell jamovi to label the outliers, by checking the box next to the 'Box plot' check box. This adds a row number label next to the outlier in the boxplot, so you can go look at that row and find the extreme value. Another, more flexible way, is to set up a filter so that only those observations with values over a certain threshold are included. In our example, the threshold is over 300, so that is the filter we will create. First, click on the 'Filters' button at the top of the jamovi window, and then type 'margin \> 300' into the filter field, as in @fig-fig5-9.
+
+[^drawing-graphs-1a]: This altered version of the AFL Margins By Year data set isn't available to open / load into jamovi. I simply changed a couple of the values of margin in the data set so that they were over 300. You can do this yourself if you want.
 
 ```{r out.width="80%"}
 #| label: fig-fig5-9
@@ -157,8 +158,6 @@ knitr::include_graphics("images/fig5-8.png")
 #| fig-alt: A jamovi screenshot showing a filter setup. The filter is labeled "Filter 1" and the condition is "margin > 300". The window displays options such as Variables, Data, Analyses, and Edit, with icons for actions like Add, Delete, and Compute
 knitr::include_graphics("images/fig5-9.png")
 ```
-
-[^drawing-graphs-1a]: This altered version of the AFL Margins By Year data set isn't available to open / load into jamovi. I simply changed a couple of the values of margin in the data set so that they were over 300. You can do this yourself if you want.
 
 This filter creates a new column in the spreadsheet view where only those observations that pass the filter are included. One neat way to quickly identify which observations these are is to tell jamovi to produce a 'Frequency table' (in the 'Exploration' -- 'Descriptives' window) for the ID variable (which must be a nominal variable otherwise the Frequency table is not produced). In @fig-fig5-10 you can see that the ID values for the observations where the margin was over 300 are 176 and 202. These are suspicious cases, or observations, where you should go back to the original data source to find out what is going on.
 

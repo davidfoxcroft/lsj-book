@@ -144,7 +144,9 @@ knitr::include_graphics("images/fig4-6.png")
 
 This variable contains the names of all 400 teams that played in all 200 finals matches played during the period 1987 to 2010. What we could do is read through all 400 entries and count the number of occasions on which each team name appears in our list of finalists, thereby producing a **frequency table**. However, that would be mindless and boring: exactly the sort of task that computers are great at. So let's use jamovi to do this for us. Under 'Exploration' -- 'Descriptives' click the small check box labelled 'Frequency tables' and you should get something like @fig-fig4-6.
 
-Now that we have our frequency table we can just look at it and see that, over the 24 years for which we have data, Geelong has played in more finals than any other team. Thus, the mode of the *afl.finalists* data is "Geelong". We can see that Geelong (39 finals) played in more finals than any other team during the 1987-2010 period. It's also worth noting that in the 'Descriptives' Table no results are calculated for mean, median, minimum or maximum. This is because the *afl.finalists* variable is a nominal text variable so it makes no sense to calculate these values. 
+Now that we have our frequency table we can just look at it and see that, over the 24 years for which we have data, Geelong has played in more finals than any other team. Thus, the mode of the *afl.finalists* data is "Geelong". We can see that Geelong (39 finals) played in more finals than any other team during the 1987-2010 period. 
+
+It's also worth noting that in the 'Descriptives' Table no results are calculated for mean, median, minimum or maximum. This is because the *afl.finalists* variable is a nominal text variable so it makes no sense to calculate these values. 
 
 One last point to make regarding the mode. Whilst the mode is most often calculated when you have nominal data, because means and medians are useless for those sorts of variables, there are some situations in which you really do want to know the mode of an ordinal, interval or ratio scale variable. For instance, let's go back to our *afl.margins* variable. This variable is clearly ratio scale (if it's not clear to you, it may help to re-read @sec-Scales-of-measurement), and so in most situations the mean or the median is the measure of central tendency that you want. But consider this scenario: a friend of yours is offering a bet and they pick a football game at random. Without knowing who is playing you have to guess the exact winning margin. If you guess correctly you win \$50. If you don't you lose \$1. There are no consolation prizes for "almost" getting the right answer. You have to guess exactly the right margin. For this bet, the mean and the median are completely useless to you. It is the mode that you should bet on. To calculate the mode for the *afl.margins* variable in jamovi, go back to that data set and on the 'Exploration' -- 'Descriptives' screen you will see you can expand the section marked 'Statistics'. Click on the checkbox marked 'Mode' and you will see the modal value presented in the 'Descriptives' Table, as in @fig-fig4-7. So the 2010 data suggest you should bet on a 3 point margin.
 
@@ -265,10 +267,12 @@ However, as you might have guessed from our discussion of the variance, what jam
 
 Interpreting standard deviations is slightly more complex. Because the standard deviation is derived from the variance, and the variance is a quantity that has little to no meaning that makes sense to us humans, the standard deviation doesn't have a simple interpretation. As a consequence, most of us just rely on a simple rule of thumb. In general, you should expect 68% of the data to fall within 1 standard deviation of the mean, 95% of the data to fall within 2 standard deviation of the mean, and 99.7% of the data to fall within 3 standard deviations of the mean. This rule tends to work pretty well most of the time, but it's not exact. It's actually calculated based on an assumption that the histogram is symmetric and "bell shaped". As you can tell from looking at the AFL winning margins histogram in @fig-fig4-2, this isn't exactly true of our data! Even so, the rule is approximately correct. As it turns out, 65.3% of the *afl.margins* data fall within one standard deviation of the mean. This is shown visually in @fig-fig4-10.
 
-```{r out.width="60%"}
+```{r out.width="80%"}
 #| label: fig-fig4-10
 #| fig-cap: An illustration of the standard deviation from the AFL winning margins data. The shaded bars in the histogram show how much of the data fall within one standard deviation of the mean. In this case, 65.3% of the data set lies within this range, which is pretty consistent with the "approximately 68% rule" discussed in the main text
 #| fig-alt: A bar graph depicting the standard deviation from the AFL winning margins data. Bars one standard deviation to the left and right of the mean are blue, other bars are white. Horizontal axis labels include 'Mean - s.d.', 'Mean' and 'Mean + s.d.'
+#| fig-width: 6
+#| fig-height: 4
 
 load("data_and_tables/aflsmall.Rdata")
 afl.margins <- tidyr::as_tibble(afl.margins)
@@ -307,7 +311,15 @@ In short, the IQR and the standard deviation are easily the two most common meas
 
 There are two more descriptive statistics that you will sometimes see reported in the psychological literature: skew and kurtosis. In practice, neither one is used anywhere near as frequently as the measures of central tendency and variability that we've been talking about. Skew is pretty important, so you do see it mentioned a fair bit, but I've actually never seen kurtosis reported in a scientific article to date.
 
-```{r}
+Skewness is basically a measure of asymmetry and the easiest way to explain it is by drawing some pictures. As @fig-fig4-11 illustrates, if the data tend to have a lot of extreme small values (i.e., the lower tail is "longer" than the upper tail) and not so many extremely large values (left panel) then we say that the data are *negatively skewed*. On the other hand, if there are more extremely large values than extremely small ones (right panel) we say that the data are positively skewed. If there are relatively more values that are far greater than the mean, the distribution is positively skewed or right skewed, with a tail stretching to the right. Negative or left skew is the opposite. A symmetric distribution has a skewness of 0. The skewness value for a positively skewed distribution is positive, and a negative value for a negatively skewed distribution.
+
+[Additional technical detail[^04-descriptive-statistics-11]]
+
+[^04-descriptive-statistics-11]: One formula for the skewness of a data set is: $$skewness(X)=\frac{1}{N \hat{\sigma}^3} \sum_{i=1}^{N} ( X_i - \bar{X})^3$$ where $N$ is the number of observations, $\bar{X}$ is the sample mean, and $\hat{\sigma}$ is the standard deviation (the "divide by $N - 1$" version, that is).
+
+Perhaps more helpfully, you can use jamovi to calculate skewness: it's a check box in the 'Statistics' options under 'Exploration' -- 'Descriptives'. For the *afl.margins* variable, the skewness figure is $0.780$. If you divide the skewness estimate by the Std. error for skewness you have an indication of how skewed the data is. Especially in small samples (N $<$ 50), one rule of thumb suggests that a value of 2 or less can mean that the data is not very skewed, and a value of over 2 that there is sufficient skew in the data to possibly limit its use in some statistical analyses. Though there is no clear agreement on this interpretation. That said, this does indicate that the AFL winning margins data is somewhat skewed ($\frac{0.780}{0.183} = 4.262$).
+
+```{r out.width="80%"}
 #| label: fig-fig4-11
 #| fig-cap: An illustration of skewness. On the left we have a negatively skewed data set, in the middle we have a data set with no skew, and on the right we have a positively skewed data set
 #| fig-alt: Three bar charts demonstrate negative skew, no skew, and positive skew, respectively. The chart on the left shows a longer tail on the left, the middle chart is symmetrical, and the chart on the right shows a longer tail on the right
@@ -338,7 +350,9 @@ library(patchwork)
 skewplots[[1]] + skewplots[[2]] + skewplots[[3]]
 ```
 
-```{r}
+The final measure that is sometimes referred to, though very rarely in practice, is the kurtosis of a data set. Put simply, kurtosis is a measure of how thin or fat the tails of a distribution are, as illustrated in @fig-fig4-12. By convention, we say that the "normal curve" (black lines) has zero kurtosis, so the degree of kurtosis is assessed relative to this curve. In this Figure, the data on the left have a pretty flat distribution, with thin tails, so the kurtosis is negative and we call the data platykurtic. The data on the right have a distribution with fat tails, so the kurtosis is positive and we say that the data is leptokurtic. But the data in the middle have neither thin or fat tails, so we say that it is mesokurtic and has kurtosis zero. This is summarised in @tbl-tab4-4.
+
+```{r out.width="80%"}
 #| label: fig-fig4-12
 #| fig-cap: An illustration of kurtosis. On the left, we have a "platykurtic" distribution (kurtosis = -.95) meaning that the distribution has "thin" or flat tails. In the middle we have a "mesokurtic" distribution (kurtosis is almost exactly 0) which means that the tails are neither thin or fat. Finally, on the right, we have a "leptokurtic" distribution (kurtosis = 2.12) indicating that the distribution has "fat" tails. Note that kurtosis is measured with respect to a normal curve (black line)
 #| fig-alt: A comparison of three types of distribution curves:- Platykuric (thin tails) on the left, Mesokurtic in the center, and Leptokurtic (fat tails) on the right, each with corresponding bar graphs in blue and overlaid black curves
@@ -371,16 +385,6 @@ library(patchwork)
 kurtplots[[1]] + kurtplots[[2]] + kurtplots[[3]]
 ```
 
-Since it's the more interesting of the two, let's start by talking about the **skewness**. Skewness is basically a measure of asymmetry and the easiest way to explain it is by drawing some pictures. As @fig-fig4-11 illustrates, if the data tend to have a lot of extreme small values (i.e., the lower tail is "longer" than the upper tail) and not so many extremely large values (left panel) then we say that the data are *negatively skewed*. On the other hand, if there are more extremely large values than extremely small ones (right panel) we say that the data are positively skewed. That's the qualitative idea behind skewness. If there are relatively more values that are far greater than the mean, the distribution is positively skewed or right skewed, with a tail stretching to the right. Negative or left skew is the opposite. A symmetric distribution has a skewness of 0. The skewness value for a positively skewed distribution is positive, and a negative value for a negatively skewed distribution.
-
-[Additional technical detail[^04-descriptive-statistics-11]]
-
-[^04-descriptive-statistics-11]: One formula for the skewness of a data set is: $$skewness(X)=\frac{1}{N \hat{\sigma}^3} \sum_{i=1}^{N} ( X_i - \bar{X})^3$$ where $N$ is the number of observations, $\bar{X}$ is the sample mean, and $\hat{\sigma}$ is the standard deviation (the "divide by $N - 1$" version, that is).
-
-Perhaps more helpfully, you can use jamovi to calculate skewness: it's a check box in the 'Statistics' options under 'Exploration' -- 'Descriptives'. For the *afl.margins* variable, the skewness figure is $0.780$. If you divide the skewness estimate by the Std. error for skewness you have an indication of how skewed the data is. Especially in small samples (N $<$ 50), one rule of thumb suggests that a value of 2 or less can mean that the data is not very skewed, and a value of over 2 that there is sufficient skew in the data to possibly limit its use in some statistical analyses. Though there is no clear agreement on this interpretation. That said, this does indicate that the AFL winning margins data is somewhat skewed ($\frac{0.780}{0.183} = 4.262$).
-
-The final measure that is sometimes referred to, though very rarely in practice, is the kurtosis of a data set. Put simply, kurtosis is a measure of how thin or fat the tails of a distribution are, as illustrated in @fig-fig4-12. By convention, we say that the "normal curve" (black lines) has zero kurtosis, so the degree of kurtosis is assessed relative to this curve. In this Figure, the data on the left have a pretty flat distribution, with thin tails, so the kurtosis is negative and we call the data platykurtic. The data on the right have a distribution with fat tails, so the kurtosis is positive and we say that the data is leptokurtic. But the data in the middle have neither thin or fat tails, so we say that it is mesokurtic and has kurtosis zero. This is summarised in @tbl-tab4-4.
-
 ```{r}
 #| label: tbl-tab4-4
 #| tbl-cap: Thin to fat tails to illustrate kurtosis
@@ -399,7 +403,7 @@ More to the point, jamovi has a check box for kurtosis just below the check box 
 
 It is very commonly the case that you find yourself needing to look at descriptive statistics broken down by some grouping variable. This is pretty easy to do in jamovi. For instance, let's say I want to look at the descriptive statistics for some clinical trial data, broken down separately by therapy type. This is a new data set, one that you've never seen before. The data is stored in the *clinicaltrial.csv*  file and we'll use it a lot later on in @sec-Comparing-several-means-one-way-ANOVA (you can find a complete description of the data at the start of that chapter). Let's load it and see what we've got (@fig-fig4-13).
 
-```{r out.width="70%"}
+```{r out.width="60%"}
 #| label: fig-fig4-13
 #| fig-cap: A screenshot of jamovi showing the variables stored in the *clinicaltrial.csv*  file
 #| fig-alt: A jamovi screenshot with columns for ID, drug, therapy, and mood gain, with data for each field. The top menu bar includes options such as Variables, Data, Analyses, and Edit, with sub-options like Exploration, T-Tests, ANOVA, and Regression
