@@ -81,13 +81,7 @@ And there are two middle numbers, 31 and 32. The median is defined as the averag
 
 ### Mean or median? What's the difference?
 
-Knowing how to calculate means and medians is only a part of the story. You also need to understand what each one is saying about the data, and what that implies for when you should use each one. This is illustrated in @fig-fig4-4. The mean is kind of like the "centre of gravity" of the data set, whereas the median is the "middle value" in the data. What this implies, as far as which one you should use, depends a little on what type of data you've got and what you're trying to achieve. As a rough guide:
-
--   If your data are nominal scale you probably shouldn't be using either the mean or the median. Both the mean and the median rely on the idea that the numbers assigned to values are meaningful. If the numbering scheme is arbitrary then it's probably best to use the [Mode] instead.
--   If your data are ordinal scale you're more likely to want to use the median than the mean. The median only makes use of the order information in your data (i.e., which numbers are bigger) but doesn't depend on the precise numbers involved. That's exactly the situation that applies when your data are ordinal scale. The mean, on the other hand, makes use of the precise numeric values assigned to the observations, so it's not really appropriate for ordinal data.
--   For interval and ratio scale data either one is generally acceptable. Which one you pick depends a bit on what you're trying to achieve. The mean has the advantage that it uses all the information in the data (which is useful when you don't have a lot of data). But it's very sensitive to extreme, outlying values.
-
-Let's expand on that last part a little. One consequence is that there are systematic differences between the mean and the median when the histogram is asymmetric ([Skew and kurtosis]). This is illustrated in @fig-fig4-4. Notice that the median (right-hand side) is located closer to the "body" of the histogram, whereas the mean (left-hand side) gets dragged towards the "tail" (where the extreme values are). To give a concrete example, suppose Bob (income \$50,000), Kate (income \$60,000) and Jane (income \$65,000) are sitting at a table. The average income at the table is \$58,333 and the median income is \$60,000. Then Bill sits down with them (income \$100,000,000). The average income has now jumped to \$25,043,750 but the median rises only to \$62,500. If you're interested in looking at the overall income at the table the mean might be the right answer. But if you're interested in what counts as a typical income at the table the median would be a better choice here.
+Knowing how to calculate means and medians is only a part of the story. You also need to understand what each one is saying about the data, and what that implies for when you should use each one. This is illustrated in @fig-fig4-4. 
 
 ```{r out.width="100%"}
 #| label: fig-fig4-4
@@ -96,6 +90,14 @@ Let's expand on that last part a little. One consequence is that there are syste
 #| fig-alt: A bar chart on the left has 48 observations and resembles a stair-step pattern with decreasing heights from left to right is shown. The text reads, "The mean is the "centre of mass" of the data." Below the chart, there is a horizontal line labeled "balancing point" with a triangular fulcrum symbolizing balance. The same bar chart is shown on the right with the data split into two groups of 24 observations. The left group is shaded light gray, and the right group is shaded dark gray. An arrow points to the 24th observation with the text "The median is the "middle observation" in the data set
 knitr::include_graphics("images/fig4-4.png")
 ```
+
+The mean is kind of like the "centre of gravity" of the data set, whereas the median is the "middle value" in the data. What this implies, as far as which one you should use, depends a little on what type of data you've got and what you're trying to achieve. As a rough guide:
+
+-   If your data are nominal scale you probably shouldn't be using either the mean or the median. Both the mean and the median rely on the idea that the numbers assigned to values are meaningful. If the numbering scheme is arbitrary then it's probably best to use the [Mode] instead.
+-   If your data are ordinal scale you're more likely to want to use the median than the mean. The median only makes use of the order information in your data (i.e., which numbers are bigger) but doesn't depend on the precise numbers involved. That's exactly the situation that applies when your data are ordinal scale. The mean, on the other hand, makes use of the precise numeric values assigned to the observations, so it's not really appropriate for ordinal data.
+-   For interval and ratio scale data either one is generally acceptable. Which one you pick depends a bit on what you're trying to achieve. The mean has the advantage that it uses all the information in the data (which is useful when you don't have a lot of data). But it's very sensitive to extreme, outlying values.
+
+Let's expand on that last part a little. One consequence is that there are systematic differences between the mean and the median when the histogram is asymmetric ([Skew and kurtosis]). This is illustrated in @fig-fig4-4. Notice that the median (right-hand side) is located closer to the "body" of the histogram, whereas the mean (left-hand side) gets dragged towards the "tail" (where the extreme values are). To give a concrete example, suppose Bob (income \$50,000), Kate (income \$60,000) and Jane (income \$65,000) are sitting at a table. The average income at the table is \$58,333 and the median income is \$60,000. Then Bill sits down with them (income \$100,000,000). The average income has now jumped to \$25,043,750 but the median rises only to \$62,500. If you're interested in looking at the overall income at the table the mean might be the right answer. But if you're interested in what counts as a typical income at the table the median would be a better choice here.
 
 ### A real-life example {#sec-A-real-life-example}
 
@@ -117,11 +119,9 @@ That's, um, a rather serious discrepancy. One group of people say 9, another say
 
 > \[An\] obvious problem with the Commonwealth Bank's domestic price to income figures is they compare average incomes with median house prices (unlike the Demographia figures that compare median incomes to median prices). The median is the mid-point, effectively cutting out the highs and lows, and that means the average is generally higher when it comes to incomes and asset prices, because it includes the earnings of Australia's wealthiest people. To put it another way: the Commonwealth Bank's figures count Ralph Norris' multi-million dollar pay packet on the income side, but not his (no doubt) very expensive house in the property price figures, thus understating the house price to income ratio for middle-income Australians.
 
-Couldn't have put it better myself. The way that Demographia calculated the ratio is correct. The way that the Bank did it is incorrect. As for why an extremely quantitatively sophisticated organisation such as a major bank made such an elementary mistake, well... I can't say for sure since I have no special insight into their thinking. But the article itself does happen to mention the following facts, which may or may not be relevant:
+Couldn't have put it better myself. The way that Demographia calculated the ratio is correct. The way that the Bank did it is incorrect. As for why an extremely quantitatively sophisticated organisation such as a major bank made such an elementary mistake, well... I can't say for sure since I have no special insight into their thinking. But the article itself does happen to mention the following very interesting facts, which may or may not be relevant:
 
 > \[As\] Australia's largest home lender, the Commonwealth Bank has one of the biggest vested interests in house prices rising. It effectively owns a massive swathe of Australian housing as security for its home loans as well as many small business loans.
-
-My, my.
 
 ### Mode {#sec-Mode}
 
@@ -134,6 +134,8 @@ The mode of a sample is very simple. It is the value that occurs most frequently
 knitr::include_graphics("images/fig4-5.png")
 ```
 
+This variable contains the names of all 400 teams that played in all 200 finals matches played during the period 1987 to 2010. What we could do is read through all 400 entries and count the number of occasions on which each team name appears in our list of finalists, thereby producing a **frequency table**. However, that would be mindless and boring: exactly the sort of task that computers are great at. So let's use jamovi to do this for us. Under 'Exploration' -- 'Descriptives' click the small check box labelled 'Frequency tables' and you should get something like @fig-fig4-6.
+
 ```{r}
 #| label: fig-fig4-6
 #| classes: .enlarge-image
@@ -141,8 +143,6 @@ knitr::include_graphics("images/fig4-5.png")
 #| fig-alt: A jamovi screenshot focusing on analyzing AFL finalists. The left panel includes options to select variables and split data. The right panel displays results -  Descriptives and Frequencies for AFL finalists by region, including percentages
 knitr::include_graphics("images/fig4-6.png")
 ```
-
-This variable contains the names of all 400 teams that played in all 200 finals matches played during the period 1987 to 2010. What we could do is read through all 400 entries and count the number of occasions on which each team name appears in our list of finalists, thereby producing a **frequency table**. However, that would be mindless and boring: exactly the sort of task that computers are great at. So let's use jamovi to do this for us. Under 'Exploration' -- 'Descriptives' click the small check box labelled 'Frequency tables' and you should get something like @fig-fig4-6.
 
 Now that we have our frequency table we can just look at it and see that, over the 24 years for which we have data, Geelong has played in more finals than any other team. Thus, the mode of the *afl.finalists* data is "Geelong". We can see that Geelong (39 finals) played in more finals than any other team during the 1987-2010 period. 
 
@@ -176,7 +176,7 @@ The **interquartile range** (IQR) is like the range, but instead of the differen
 
 And not surprisingly, in @fig-fig4-8 the 50th percentile is the same as the median value. And, by noting that $50.50 - 12.75 = 37.75$, we can see that the interquartile range for the 2010 AFL winning margins data is 37.75. While it's obvious how to interpret the range it's a little less obvious how to interpret the IQR. The simplest way to think about it is like this: the interquartile range is the range spanned by the "middle half" of the data. That is, one quarter of the data falls below the 25th percentile and one quarter of the data is above the 75th percentile, leaving the "middle half" of the data lying in between the two. And the IQR is the range covered by that middle half.
 
-```{r out.width="70%"}
+```{r out.width="60%"}
 #| label: fig-fig4-8
 #| fig-width: 5
 #| fig-cap: A screenshot of jamovi showing the Quartiles for the *afl.margins* variable
@@ -205,7 +205,8 @@ And we're done. The mean absolute deviation for these five scores is 15.52.
 
 [Additional technical detail[^04-descriptive-statistics-4]]
 
-[^04-descriptive-statistics-4]: However, whilst our calculations for this little example are at an end, we do have a couple of things left to talk about. First, we should really try to write down a proper mathematical formula. But in order to do this I need some mathematical notation to refer to the mean absolute deviation. Irritatingly, "mean absolute deviation" and "median absolute deviation" have the same acronym (MAD), which leads to a certain amount of ambiguity so I'd better come up with something different for the mean absolute deviation. Sigh. What I'll do is use AAD instead, short for average absolute deviation. Now that we have some unambiguous notation, here's the formula that describes what we just calculated:$$AAD(X) =\frac{1}{N} \sum_{i=1}^{N} \mid X_i - \bar{X} \mid = 15.52$$
+[^04-descriptive-statistics-4]: However, whilst our calculations for this little example are at an end, we do have a couple of things left to talk about. First, we should really try to write down a proper mathematical formula. But in order to do this I need some mathematical notation to refer to the mean absolute deviation. Irritatingly, "mean absolute deviation" and "median absolute deviation" have the same acronym (MAD), which leads to a certain amount of ambiguity so I'd better come up with something different for the mean absolute deviation. Sigh. What I'll do is use AAD instead, short for average absolute deviation. Now that we have some unambiguous notation, here's the formula that describes what we just calculated:
+$$AAD(X) =\frac{1}{N} \sum_{i=1}^{N} \mid X_i - \bar{X} \mid = 15.52$$
 
 ### Variance
 
@@ -292,7 +293,6 @@ ggplot(afl.margins, aes(x=margin)) +
                               mean(afl.margins$margin)+sd(afl.margins$margin)),
                      labels=c("Mean - s.d.", "Mean", "Mean + s.d."))
 
-
 ```
 
 ### Which measure to use?
@@ -317,9 +317,7 @@ Skewness is basically a measure of asymmetry and the easiest way to explain it i
 
 [^04-descriptive-statistics-11]: One formula for the skewness of a data set is: $$skewness(X)=\frac{1}{N \hat{\sigma}^3} \sum_{i=1}^{N} ( X_i - \bar{X})^3$$ where $N$ is the number of observations, $\bar{X}$ is the sample mean, and $\hat{\sigma}$ is the standard deviation (the "divide by $N - 1$" version, that is).
 
-Perhaps more helpfully, you can use jamovi to calculate skewness: it's a check box in the 'Statistics' options under 'Exploration' -- 'Descriptives'. For the *afl.margins* variable, the skewness figure is $0.780$. If you divide the skewness estimate by the Std. error for skewness you have an indication of how skewed the data is. Especially in small samples (N $<$ 50), one rule of thumb suggests that a value of 2 or less can mean that the data is not very skewed, and a value of over 2 that there is sufficient skew in the data to possibly limit its use in some statistical analyses. Though there is no clear agreement on this interpretation. That said, this does indicate that the AFL winning margins data is somewhat skewed ($\frac{0.780}{0.183} = 4.262$).
-
-```{r out.width="80%"}
+```{r }
 #| label: fig-fig4-11
 #| fig-cap: An illustration of skewness. On the left we have a negatively skewed data set, in the middle we have a data set with no skew, and on the right we have a positively skewed data set
 #| fig-alt: Three bar charts demonstrate negative skew, no skew, and positive skew, respectively. The chart on the left shows a longer tail on the left, the middle chart is symmetrical, and the chart on the right shows a longer tail on the right
@@ -350,9 +348,11 @@ library(patchwork)
 skewplots[[1]] + skewplots[[2]] + skewplots[[3]]
 ```
 
-The final measure that is sometimes referred to, though very rarely in practice, is the kurtosis of a data set. Put simply, kurtosis is a measure of how thin or fat the tails of a distribution are, as illustrated in @fig-fig4-12. By convention, we say that the "normal curve" (black lines) has zero kurtosis, so the degree of kurtosis is assessed relative to this curve. In this Figure, the data on the left have a pretty flat distribution, with thin tails, so the kurtosis is negative and we call the data platykurtic. The data on the right have a distribution with fat tails, so the kurtosis is positive and we say that the data is leptokurtic. But the data in the middle have neither thin or fat tails, so we say that it is mesokurtic and has kurtosis zero. This is summarised in @tbl-tab4-4.
+Perhaps more helpfully, you can use jamovi to calculate skewness: it's a check box in the 'Statistics' options under 'Exploration' -- 'Descriptives'. For the *afl.margins* variable, the skewness figure is $0.780$. If you divide the skewness estimate by the Std. error for skewness you have an indication of how skewed the data is. Especially in small samples (N $<$ 50), one rule of thumb suggests that a value of 2 or less can mean that the data is not very skewed, and a value of over 2 that there is sufficient skew in the data to possibly limit its use in some statistical analyses. Though there is no clear agreement on this interpretation. That said, this does indicate that the AFL winning margins data is somewhat skewed ($\frac{0.780}{0.183} = 4.262$).
 
-```{r out.width="80%"}
+The final measure that is sometimes referred to, though very rarely in practice, is the kurtosis of a data set. Put simply, kurtosis is a measure of how thin or fat the tails of a distribution are, as illustrated in @fig-fig4-12. 
+
+```{r }
 #| label: fig-fig4-12
 #| fig-cap: An illustration of kurtosis. On the left, we have a "platykurtic" distribution (kurtosis = -.95) meaning that the distribution has "thin" or flat tails. In the middle we have a "mesokurtic" distribution (kurtosis is almost exactly 0) which means that the tails are neither thin or fat. Finally, on the right, we have a "leptokurtic" distribution (kurtosis = 2.12) indicating that the distribution has "fat" tails. Note that kurtosis is measured with respect to a normal curve (black line)
 #| fig-alt: A comparison of three types of distribution curves:- Platykuric (thin tails) on the left, Mesokurtic in the center, and Leptokurtic (fat tails) on the right, each with corresponding bar graphs in blue and overlaid black curves
@@ -384,6 +384,8 @@ kurtplots <- lapply(1:3, function(i) {
 library(patchwork)
 kurtplots[[1]] + kurtplots[[2]] + kurtplots[[3]]
 ```
+
+By convention, we say that the "normal curve" (black lines) has zero kurtosis, so the degree of kurtosis is assessed relative to this curve. In this Figure, the data on the left have a pretty flat distribution, with thin tails, so the kurtosis is negative and we call the data platykurtic. The data on the right have a distribution with fat tails, so the kurtosis is positive and we say that the data is leptokurtic. But the data in the middle have neither thin or fat tails, so we say that it is mesokurtic and has kurtosis zero. This is summarised in @tbl-tab4-4.
 
 ```{r}
 #| label: tbl-tab4-4

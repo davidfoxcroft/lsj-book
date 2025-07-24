@@ -198,8 +198,6 @@ Now let's load and look at the data. The data file *likert.omv* contains a singl
 knitr::include_graphics("images/fig6-4.png")
 ```
 
-\
-
 One reason why it might be useful to have the data in this format is that there are a lot of situations where you might prefer to analyse the strength of the opinion separately from the direction of the opinion. We can do two different transformations on this likert.centred variable in order to distinguish between these two different concepts. First, to compute an opinion.strength variable, we want to take the absolute value of the centred data (using the 'ABS' function).[^pragmatic-matters-6] In jamovi, create another new variable using the 'Compute' button. Name the variable opinion.strength and this time click on the fx button next to the 'Formula' box. This shows the different 'Functions' and 'Variables' that you can add to the 'Formula' box, so double click on 'ABS' and then double click on "likert.centred' and you will see that the 'Formula' box is populated with 'ABS(likert.centred)' and a new variable has been created in the spreadsheet view, as in @fig-fig6-5.
 
 [^pragmatic-matters-6]: The absolute value of a number is its distance from zero, regardless of whether its sign is negative or positive.
@@ -232,7 +230,9 @@ One pragmatic task that comes up quite often is the problem of collapsing a vari
 
 > 60,58,24,26,34,42,31,30,33,2,9
 
-In some situations it can be quite helpful to group these into a smallish number of categories. For example, we could group the data into three broad categories: young (0-20), adult (21-40) and older (41-60). This is a quite coarse-grained classification, and the labels that I've attached only make sense in the context of this data set (e.g., viewed more generally, a 42 year old wouldn't consider themselves as "older"). We can slice this variable up quite easily using the jamovi 'IF' function that we have already used. This time we have to specify nested 'IF' statements, meaning simply that IF the first logical expression is TRUE, insert a first value, but IF a second logical expression is TRUE, insert a second value, but IF a third logical expression is TRUE, then insert a third value. This can be written as:
+In some situations it can be quite helpful to group these into a smallish number of categories. For example, we could group the data into three broad categories: young (0-20), adult (21-40) and older (41-60). This is a quite coarse-grained classification, and the labels that I've attached only make sense in the context of this data set (e.g., viewed more generally, a 42 year old wouldn't consider themselves as "older"). 
+
+We can slice this variable up quite easily using the jamovi 'IF' function that we have already used. This time we have to specify nested 'IF' statements, meaning simply that IF the first logical expression is TRUE, insert a first value, but IF a second logical expression is TRUE, insert a second value, but IF a third logical expression is TRUE, then insert a third value. This can be written as:
 
 > IF(Age \>= 0 and Age \<= 20, 1, IF(Age \>= 21 and Age \<= 40, 2, IF(Age \>= 41 and Age \<= 60, 3 )))
 
@@ -246,13 +246,21 @@ Note that there are three left parentheses used during the nesting, so the whole
 knitr::include_graphics("images/fig6-6.png")
 ```
 
-It's important to take the time to figure out whether or not the resulting categories make any sense at all in terms of your research project. If they don't make any sense to you as meaningful categories, then any data analysis that uses those categories is likely to be just as meaningless. More generally, in practice I've noticed that people have a very strong desire to carve their (continuous and messy) data into a few (discrete and simple) categories, and then run analyses using the categorised data instead of the original data.[^pragmatic-matters-8] I wouldn't go so far as to say that this is an inherently bad idea, but it does have some fairly serious drawbacks at times, so I would advise some caution if you are thinking about doing it.
+It's important to take the time to figure out whether or not the resulting categories make any sense at all in terms of your research project. If they don't make any sense to you as meaningful categories, then any data analysis that uses those categories is likely to be just as meaningless. 
+
+More generally, in practice I've noticed that people have a very strong desire to carve their (continuous and messy) data into a few (discrete and simple) categories, and then run analyses using the categorised data instead of the original data.[^pragmatic-matters-8] I wouldn't go so far as to say that this is an inherently bad idea, but it does have some fairly serious drawbacks at times, so I would advise some caution if you are thinking about doing it.
 
 [^pragmatic-matters-8]: If you've read further into the book, and are re-reading this section, then a good example of this would be someone choosing to do an ANOVA using 'AgeCats' as the grouping variable, instead of running a regression using Age as a predictor. There are sometimes good reasons for doing this. For instance, if the relationship between Age and your outcome variable is highly non-linear and you aren't comfortable with trying to run non-linear regression! However, unless you really do have a good rationale for doing this, it's best not to. It tends to introduce all sorts of other problems (e.g., the data will probably violate the normality assumption) and you can lose a lot of statistical power.
 
 ### Creating a transformation that can be applied to multiple variables
 
-Sometimes you want to apply the same transformation to more than one variable, for example when you have multiple questionnaire items that all need to be recalculated or recoded in the same way. And one of the neat features in jamovi is that you can create a transformation, using the 'Data' -- 'Transform' button, that can then be saved and applied to multiple variables. Let's go back to the first example above, using the data file *likert.omv* that contains a single variable with raw Likert-scale responses for 10 people. To create a transformation that you can save and then apply across multiple variables (assuming you had more variables like this in your data file), first in the spreadsheet editor select (i.e., click) the variable you want to use to initially create the transformation. In our example this is likert.raw. Next click the 'Transform' button in the jamovi 'Data' ribbon, and you'll see something like @fig-fig6-7.
+Sometimes you want to apply the same transformation to more than one variable, for example when you have multiple questionnaire items that all need to be recalculated or recoded in the same way. And one of the neat features in jamovi is that you can create a transformation, using the 'Data' -- 'Transform' button, that can then be saved and applied to multiple variables. 
+
+Let's go back to the first example above, using the data file *likert.omv* that contains a single variable with raw Likert-scale responses for 10 people. To create a transformation that you can save and then apply across multiple variables (assuming you had more variables like this in your data file), first in the spreadsheet editor select (i.e., click) the variable you want to use to initially create the transformation. In our example this is likert.raw. Next click the 'Transform' button in the jamovi 'Data' ribbon, and you'll see something like @fig-fig6-7.
+
+Give your new variable a name, let's call it 'opinion.strength', and then click on the 'using transform' selection box and select 'Create New Transform...'. This is where you will create, and name, the transformation that can be re-applied to as many variables as you like. The transformation is automatically named for us as 'Transform 1' (imaginative, huh. You can change this if you like). Then type the expression "ABS(\$source - 4)" into the function text box, as in @fig-fig6-8, press Enter or Return on your keyboard and, hey presto, you have created a new transformation and applied it to the likert.raw variable! Good, eh. 
+
+Note that instead of using the variable label in the expression, we have instead used '\$source'. This is so that we can then use the same transformation with as many different variables as we like -- jamovi requires you to use '\$source' to refer to the source variable you are transforming. Your transformation has also been saved and can be re-used any time you like (providing you save the data set as an '.omv' file, otherwise you'll lose it!).
 
 ```{r}
 #| label: fig-fig6-7
@@ -262,17 +270,14 @@ Sometimes you want to apply the same transformation to more than one variable, f
 knitr::include_graphics("images/fig6-7.png")
 ```
 
-\
-
 ```{r}
 #| label: fig-fig6-8
 #| classes: .enlarge-image
 #| fig-cap: Specifying a transformation in jamovi, to be saved as the imaginatively named 'Transform 1'
 #| fig-alt: A jamovi screenshot showing a transformation window. The "Transform" tab is open, and a box prompting "Add recode condition" with math functions such as "ABS" and "LOG10." A variables list with "opinion.strength" is on the right
+#| fig-pos: 'H'
 knitr::include_graphics("images/fig6-8.png")
 ```
-
-Give your new variable a name, let's call it 'opinion.strength', and then click on the 'using transform' selection box and select 'Create New Transform...'. This is where you will create, and name, the transformation that can be re-applied to as many variables as you like. The transformation is automatically named for us as 'Transform 1' (imaginative, huh. You can change this if you like). Then type the expression "ABS(\$source - 4)" into the function text box, as in @fig-fig6-8, press Enter or Return on your keyboard and, hey presto, you have created a new transformation and applied it to the likert.raw variable! Good, eh. Note that instead of using the variable label in the expression, we have instead used '\$source'. This is so that we can then use the same transformation with as many different variables as we like -- jamovi requires you to use '\$source' to refer to the source variable you are transforming. Your transformation has also been saved and can be re-used any time you like (providing you save the data set as an '.omv' file, otherwise you'll lose it!).
 
 You can also create a transformation with the second example we looked at, the age distribution of people at a social gathering. Go on, you know you want to! Remember that we collapsed this variable into three groups: younger, adult and older. This time we will achieve the same thing, but using the jamovi 'Transform' -- 'Add condition' button. With this data set (go back to it or create it again if you didn't save it) set up a new variable transformation. Call the transformed variable 'AgeCats' and the transformation you will create 'Agegroupings'. Then click on the big "$+$" sign next to the function box. This is the 'Add condition' button and I've stuck a big red arrow onto @fig-fig6-9 so you can see exactly where this is. 
 
@@ -290,6 +295,8 @@ Re-create the transformation shown in @fig-fig6-9 and when you are done, you wil
 
 In the section on [Transforming and recoding a variable] I discussed the ideas behind variable transformations and showed that a lot of the transformations that you might want to apply to your data are based on fairly simple mathematical functions and operations. In this section I want to return to that discussion and mention several other mathematical functions and arithmetic operations that are actually quite useful for a lot of real world data analysis. @tbl-tab6-5 gives a brief overview of the various mathematical functions I want to talk about here, or later.[^pragmatic-matters-9] Obviously this doesn't even come close to cataloguing the range of possibilities available, but it does cover a range of functions that are used regularly in data analysis and that are available in jamovi.
 
+[^pragmatic-matters-9]: We'll leave the box-cox function until later on.
+
 ```{r}
 #| label: tbl-tab6-5
 #| tbl-cap: Some mathematical operators
@@ -297,7 +304,6 @@ In the section on [Transforming and recoding a variable] I discussed the ideas b
 mykbl(lsj_chapter_tables[[6]][[5]])
 
 ```
-[^pragmatic-matters-9]: We'll leave the box-cox function until later on.
 
 ### Logarithms and exponentials
 
@@ -324,6 +330,8 @@ This section returns to the *nightgarden.csv* data set. If you're reading this w
 
 > speaker == 'makka-pakka'
 
+When you have done this, you will see that a new column has been added to the spreadsheet window (see @fig-fig6-10), labelled 'Filter 1', with the cases where speaker is [not]{.underline} 'makka-pakka' greyed-out (i.e., filtered out) and, conversely, the cases where speaker [is]{.underline} 'makka-pakka' have a green check mark indicating they are filtered in. You can test this by running 'Exploration' -- 'Descriptives' -- 'Frequency tables' for the speaker variable and seeing what that shows. Go on, try it!
+
 ```{r}
 #| label: fig-fig6-10
 #| classes: .enlarge-image
@@ -331,8 +339,6 @@ This section returns to the *nightgarden.csv* data set. If you're reading this w
 #| fig-alt: A jamovi screenshot showing the "Row Filters" section. The filter is set to display rows where "speaker" matches "makka_paka". Below, a table reflects filtered data and a "Results" pane on the right presents descriptive statistics for the "speaker" column.
 knitr::include_graphics("images/fig6-10.png")
 ```
-
-When you have done this, you will see that a new column has been added to the spreadsheet window (see @fig-fig6-10), labelled 'Filter 1', with the cases where speaker is [not]{.underline} 'makka-pakka' greyed-out (i.e., filtered out) and, conversely, the cases where speaker [is]{.underline} 'makka-pakka' have a green check mark indicating they are filtered in. You can test this by running 'Exploration' -- 'Descriptives' -- 'Frequency tables' for the speaker variable and seeing what that shows. Go on, try it!
 
 Following on from this simple example, you can also build up more complex filters using logical expressions in jamovi. For instance, suppose I wanted to keep only those cases when the utterance is either "pip" or "oo". In this case in the 'Filter 1' text box, next to the '=' sign, you would type the following:
 
