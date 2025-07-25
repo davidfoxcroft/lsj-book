@@ -221,7 +221,9 @@ Up to this point I've focused exclusively on the logic underpinning Bayesian sta
 
 [^bayesian-statistics-9]: [https://www.imdb.com/title/tt0093779/quotes](https://www.imdb.com/title/tt0093779/quotes) I should note in passing that I'm not the first person to use this quote to complain about frequentist methods. Rich Morey and colleagues had the idea first. I'm shamelessly stealing it because it's such an awesome pull quote to use in this context and I refuse to miss any opportunity to quote *The Princess Bride*.
 
-To me, one of the biggest advantages to the Bayesian approach is that it answers the right questions. Within the Bayesian framework, it is perfectly sensible and allowable to refer to "the probability that a hypothesis is true". You can even try to calculate this probability. Ultimately, isn't that what you want your statistical tests to tell you? To an actual human being, this would seem to be the whole point of doing statistics, i.e., to determine what is true and what isn't. Any time that you aren't exactly sure about what the truth is, you should use the language of probability theory to say things like "there is an 80% chance that Theory A is true, but a 20% chance that Theory B is true instead".
+To me, one of the biggest advantages to the Bayesian approach is that it answers the right questions. Within the Bayesian framework, it is perfectly sensible and allowable to refer to "the probability that a hypothesis is true". You can even try to calculate this probability. 
+
+Ultimately, isn't that what you want your statistical tests to tell you? To an actual human being, this would seem to be the whole point of doing statistics, i.e., to determine what is true and what isn't. Any time that you aren't exactly sure about what the truth is, you should use the language of probability theory to say things like "there is an 80% chance that Theory A is true, but a 20% chance that Theory B is true instead".
 
 This seems so obvious to a human, yet it is explicitly forbidden within the orthodox framework. To a frequentist, such statements are a nonsense because "the theory is true" is not a repeatable event. A theory is true or it is not, and no probabilistic statements are allowed, no matter how much you might want to make them. There's a reason why, back in Section 9.5, I repeatedly warned you not to interpret the $p$-value as the probability that the null hypothesis is true. There's a reason why almost every textbook on statistics is forced to repeat that warning. It's because people desperately want that to be the correct interpretation. Frequentist dogma notwithstanding, a lifetime of experience of teaching undergraduates and of doing data analysis on a daily basis suggests to me that most actual humans think that "the probability that the hypothesis is true" is not only meaningful, it's the thing we care most about. It's such an appealing idea that even trained statisticians fall prey to the mistake of trying to interpret a $p$-value this way. For example, here is a quote from an official Newspoll report in 2013, explaining how to interpret their (frequentist) data analysis:[^bayesian-statistics-10]
 
@@ -380,15 +382,15 @@ An important type of statistical inference problem discussed in this book is com
 
 The most common type of $t$-test is the independent samples $t$-test, and it arises when you have data as in the *harpo.csv* data set that we used in @sec-Comparing-two-means on $t$-tests. In this data set, we have two groups of students, those who received lessons from Anastasia and those who took their classes with Bernadette. The question we want to answer is whether there's any difference in the grades received by these two groups of students. Back in @sec-Comparing-two-means I suggested you could analyse this kind of data using the Independent Samples $t$-test in jamovi, which gave us the results in @fig-fig16-2. As we obtain a $p$-value less than $0.05$, we reject the null hypothesis.
 
-What does the Bayesian version of the $t$-test look like? We can get the Bayes factor analysis by selecting the 'Bayes factor' checkbox under the 'Tests' option, and accepting the suggested default value for the 'Prior'. This gives the results shown in the table in @fig-fig16-3. What we get in this table is a Bayes factor statistic of 1.75, meaning that the evidence provided by these data are about 1.8:1 in favour of the alternative hypothesis.
-
-```{r out.width="80%"}
+```{r }
 #| label: fig-fig16-2
 #| classes: .enlarge-image
 #| fig-cap: Independent samples $t$-test result in jamovi
 #| fig-alt: A jamovi screenshot displaying a data set with student grades and a descriptive statistics summary. The data set table lists student IDs and their grades for two tests. The results panel shows descriptive statistics including N, mean, median, standard deviation, minimum, and maximum values
 knitr::include_graphics("images/fig11-12.png")
 ```
+
+What does the Bayesian version of the $t$-test look like? We can get the Bayes factor analysis by selecting the 'Bayes factor' checkbox under the 'Tests' option, and accepting the suggested default value for the 'Prior'. This gives the results shown in the table in @fig-fig16-3. What we get in this table is a Bayes factor statistic of 1.75, meaning that the evidence provided by these data are about 1.8:1 in favour of the alternative hypothesis.
 
 ```{r}
 #| label: fig-fig16-3

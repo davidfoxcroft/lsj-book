@@ -22,7 +22,7 @@ knitr::opts_chunk$set(
 options(knitr.kable.NA = '')
 
 
-mykbl <- function(data, col_labs = NA) {
+mykbl <- function(data, col_labs = NA, col_align = 'c') {
   if (names(data[1]) == "X1") {
     names(data) <- c(data[1,])
     data <- data[-1,]
@@ -32,7 +32,7 @@ mykbl <- function(data, col_labs = NA) {
       escape = FALSE,
       col.names = col_labs,
       booktabs = TRUE,
-      align = 'c'
+      align = col_align
   ) |>
     kable_styling(
       bootstrap_options = c("hover", "responsive"),
