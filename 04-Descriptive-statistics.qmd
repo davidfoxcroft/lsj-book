@@ -46,10 +46,13 @@ The first piece of notation to introduce is $N$, which we'll use to refer to the
 ```{r}
 #| label: tbl-tab4-1
 #| tbl-cap: Observations in the *afl.margins* variable
-huxtabs[[4]][[1]] %>%
-  set_col_width(c(.4,.2,.4))
-```
+# huxtabs[[4]][[1]] %>%
+#   set_col_width(c(.4,.2,.4))
 
+mykbl(lsj_chapter_tables[[4]][[1]]) |>
+  kableExtra::column_spec(2, width = "5em")
+
+```
 [Additional technical detail[^04-descriptive-statistics-2]]
 
 [^04-descriptive-statistics-2]: Okay, now let's try to write a formula for the mean. By tradition, we use $\bar{X}$ as the notation for the mean. So the calculation for the mean could be expressed using the following formula: $$\bar{X}=\frac{X_1 + X_2 ... + X_{N-1} + X_{N}}{N}$$ This formula is entirely correct but it's terribly long, so we make use of the **summation symbol** $\sum$ to shorten it. If I want to add up the first five observations I could write out the sum the long way, $X_1 + X_2 + X_3 + X_4 + X_5$ or I could use the summation symbol to shorten it to this: $$\sum_{i=1}^{5} X_i$$ Taken literally, this could be read as "the sum, taken over all i values from 1 to 5, of the value $X_i$". But basically what it means is "add up the first five observations". In any case, we can use this notation to write out the formula for the mean, which looks like this: $$\bar{X}=\frac{1}{N}\sum_{i=1}^{N}X_i$$ In all honesty, I can't imagine that all this mathematical notation helps clarify the concept of the mean at all. In fact, it's really just a fancy way of writing out the same thing I said in words: add all the values up and then divide by the total number of items. However, that's not really the reason I went into all that detail. My goal was to try to make sure that everyone reading this book is clear on the notation that we'll be using throughout the book: $\bar{X}$ for the mean, $\sum$ for the idea of summation, $X_i$ for the ith observation, and $N$ for the total number of observations. We're going to be re-using these symbols a fair bit so it's important that you understand them well enough to be able to "read" the equations, and to be able to see that it's just saying "add up lots of things and then divide by another thing". *The choice to use* $\sum$ to denote summation isn't arbitrary. It's the Greek upper case letter sigma, which is the analogue of the letter $S$ in that alphabet. Similarly, there's an equivalent symbol used to denote the multiplication of lots of numbers, because multiplications are also called "products" we use the $\prod$ symbol for this (the Greek upper case pi, which is the analogue of the letter $P$.
@@ -78,22 +81,23 @@ And there are two middle numbers, 31 and 32. The median is defined as the averag
 
 ### Mean or median? What's the difference?
 
-Knowing how to calculate means and medians is only a part of the story. You also need to understand what each one is saying about the data, and what that implies for when you should use each one. This is illustrated in @fig-fig4-4. The mean is kind of like the "centre of gravity" of the data set, whereas the median is the "middle value" in the data. What this implies, as far as which one you should use, depends a little on what type of data you've got and what you're trying to achieve. As a rough guide:
-
--   If your data are nominal scale you probably shouldn't be using either the mean or the median. Both the mean and the median rely on the idea that the numbers assigned to values are meaningful. If the numbering scheme is arbitrary then it's probably best to use the [Mode] instead.
--   If your data are ordinal scale you're more likely to want to use the median than the mean. The median only makes use of the order information in your data (i.e., which numbers are bigger) but doesn't depend on the precise numbers involved. That's exactly the situation that applies when your data are ordinal scale. The mean, on the other hand, makes use of the precise numeric values assigned to the observations, so it's not really appropriate for ordinal data.
--   For interval and ratio scale data either one is generally acceptable. Which one you pick depends a bit on what you're trying to achieve. The mean has the advantage that it uses all the information in the data (which is useful when you don't have a lot of data). But it's very sensitive to extreme, outlying values.
-
-Let's expand on that last part a little. One consequence is that there are systematic differences between the mean and the median when the histogram is asymmetric ([Skew and kurtosis]). This is illustrated in @fig-fig4-4. Notice that the median (right-hand side) is located closer to the "body" of the histogram, whereas the mean (left-hand side) gets dragged towards the "tail" (where the extreme values are). To give a concrete example, suppose Bob (income \$50,000), Kate (income \$60,000) and Jane (income \$65,000) are sitting at a table. The average income at the table is \$58,333 and the median income is \$60,000. Then Bill sits down with them (income \$100,000,000). The average income has now jumped to \$25,043,750 but the median rises only to \$62,500. If you're interested in looking at the overall income at the table the mean might be the right answer. But if you're interested in what counts as a typical income at the table the median would be a better choice here.
+Knowing how to calculate means and medians is only a part of the story. You also need to understand what each one is saying about the data, and what that implies for when you should use each one. This is illustrated in @fig-fig4-4. 
 
 ```{r out.width="100%"}
 #| label: fig-fig4-4
 #| classes: .enlarge-image
 #| fig-cap: An illustration of the difference between how the mean and the median should be interpreted. The mean is basically the 'centre of gravity' of the data set. If you imagine that the histogram of the data is a solid object, then the point on which you could balance it (as if on a see-saw) is the mean. In contrast, the median is the middle observation, with half of the observations smaller and half of the observations larger
 #| fig-alt: A bar chart on the left has 48 observations and resembles a stair-step pattern with decreasing heights from left to right is shown. The text reads, "The mean is the "centre of mass" of the data." Below the chart, there is a horizontal line labeled "balancing point" with a triangular fulcrum symbolizing balance. The same bar chart is shown on the right with the data split into two groups of 24 observations. The left group is shaded light gray, and the right group is shaded dark gray. An arrow points to the 24th observation with the text "The median is the "middle observation" in the data set
-#| fig-pos: 'H'
 knitr::include_graphics("images/fig4-4.png")
 ```
+
+The mean is kind of like the "centre of gravity" of the data set, whereas the median is the "middle value" in the data. What this implies, as far as which one you should use, depends a little on what type of data you've got and what you're trying to achieve. As a rough guide:
+
+-   If your data are nominal scale you probably shouldn't be using either the mean or the median. Both the mean and the median rely on the idea that the numbers assigned to values are meaningful. If the numbering scheme is arbitrary then it's probably best to use the [Mode] instead.
+-   If your data are ordinal scale you're more likely to want to use the median than the mean. The median only makes use of the order information in your data (i.e., which numbers are bigger) but doesn't depend on the precise numbers involved. That's exactly the situation that applies when your data are ordinal scale. The mean, on the other hand, makes use of the precise numeric values assigned to the observations, so it's not really appropriate for ordinal data.
+-   For interval and ratio scale data either one is generally acceptable. Which one you pick depends a bit on what you're trying to achieve. The mean has the advantage that it uses all the information in the data (which is useful when you don't have a lot of data). But it's very sensitive to extreme, outlying values.
+
+Let's expand on that last part a little. One consequence is that there are systematic differences between the mean and the median when the histogram is asymmetric ([Skew and kurtosis]). This is illustrated in @fig-fig4-4. Notice that the median (right-hand side) is located closer to the "body" of the histogram, whereas the mean (left-hand side) gets dragged towards the "tail" (where the extreme values are). To give a concrete example, suppose Bob (income \$50,000), Kate (income \$60,000) and Jane (income \$65,000) are sitting at a table. The average income at the table is \$58,333 and the median income is \$60,000. Then Bill sits down with them (income \$100,000,000). The average income has now jumped to \$25,043,750 but the median rises only to \$62,500. If you're interested in looking at the overall income at the table the mean might be the right answer. But if you're interested in what counts as a typical income at the table the median would be a better choice here.
 
 ### A real-life example {#sec-A-real-life-example}
 
@@ -115,35 +119,34 @@ That's, um, a rather serious discrepancy. One group of people say 9, another say
 
 > \[An\] obvious problem with the Commonwealth Bank's domestic price to income figures is they compare average incomes with median house prices (unlike the Demographia figures that compare median incomes to median prices). The median is the mid-point, effectively cutting out the highs and lows, and that means the average is generally higher when it comes to incomes and asset prices, because it includes the earnings of Australia's wealthiest people. To put it another way: the Commonwealth Bank's figures count Ralph Norris' multi-million dollar pay packet on the income side, but not his (no doubt) very expensive house in the property price figures, thus understating the house price to income ratio for middle-income Australians.
 
-Couldn't have put it better myself. The way that Demographia calculated the ratio is correct. The way that the Bank did it is incorrect. As for why an extremely quantitatively sophisticated organisation such as a major bank made such an elementary mistake, well... I can't say for sure since I have no special insight into their thinking. But the article itself does happen to mention the following facts, which may or may not be relevant:
+Couldn't have put it better myself. The way that Demographia calculated the ratio is correct. The way that the Bank did it is incorrect. As for why an extremely quantitatively sophisticated organisation such as a major bank made such an elementary mistake, well... I can't say for sure since I have no special insight into their thinking. But the article itself does happen to mention the following very interesting facts, which may or may not be relevant:
 
 > \[As\] Australia's largest home lender, the Commonwealth Bank has one of the biggest vested interests in house prices rising. It effectively owns a massive swathe of Australian housing as security for its home loans as well as many small business loans.
-
-My, my.
 
 ### Mode {#sec-Mode}
 
 The mode of a sample is very simple. It is the value that occurs most frequently. We can illustrate the mode using a different AFL variable: who has played in the most finals? Open the aflsmall finalists file and take a look at the *afl.finalists* variable, see @fig-fig4-5. 
 
-```{r out}
+```{r}
 #| label: fig-fig4-5
 #| fig-cap: A screenshot of jamovi showing the variables stored in the aflsmall_finalists.csv file
 #| fig-alt: A jamovi screenshot of a spreadsheet labeled "AFL Finalists" with 18 rows. The first column lists various Australian Football League teams, including Hawthorn, Melbourne, and Carlton. The jamovi spreadsheet menu shows options like Variables, Data, and Analyses.
 knitr::include_graphics("images/fig4-5.png")
 ```
 
+This variable contains the names of all 400 teams that played in all 200 finals matches played during the period 1987 to 2010. What we could do is read through all 400 entries and count the number of occasions on which each team name appears in our list of finalists, thereby producing a **frequency table**. However, that would be mindless and boring: exactly the sort of task that computers are great at. So let's use jamovi to do this for us. Under 'Exploration' -- 'Descriptives' click the small check box labelled 'Frequency tables' and you should get something like @fig-fig4-6.
+
 ```{r}
 #| label: fig-fig4-6
 #| classes: .enlarge-image
 #| fig.cap: A screenshot of jamovi showing the frequency table for the *afl.finalists* variable
 #| fig-alt: A jamovi screenshot focusing on analyzing AFL finalists. The left panel includes options to select variables and split data. The right panel displays results -  Descriptives and Frequencies for AFL finalists by region, including percentages
-#| fig-pos: 'H'
 knitr::include_graphics("images/fig4-6.png")
 ```
 
-This variable contains the names of all 400 teams that played in all 200 finals matches played during the period 1987 to 2010. What we could do is read through all 400 entries and count the number of occasions on which each team name appears in our list of finalists, thereby producing a **frequency table**. However, that would be mindless and boring: exactly the sort of task that computers are great at. So let's use jamovi to do this for us. Under 'Exploration' -- 'Descriptives' click the small check box labelled 'Frequency tables' and you should get something like @fig-fig4-6.
+Now that we have our frequency table we can just look at it and see that, over the 24 years for which we have data, Geelong has played in more finals than any other team. Thus, the mode of the *afl.finalists* data is "Geelong". We can see that Geelong (39 finals) played in more finals than any other team during the 1987-2010 period. 
 
-Now that we have our frequency table we can just look at it and see that, over the 24 years for which we have data, Geelong has played in more finals than any other team. Thus, the mode of the *afl.finalists* data is "Geelong". We can see that Geelong (39 finals) played in more finals than any other team during the 1987-2010 period. It's also worth noting that in the 'Descriptives' Table no results are calculated for mean, median, minimum or maximum. This is because the *afl.finalists* variable is a nominal text variable so it makes no sense to calculate these values. 
+It's also worth noting that in the 'Descriptives' Table no results are calculated for mean, median, minimum or maximum. This is because the *afl.finalists* variable is a nominal text variable so it makes no sense to calculate these values. 
 
 One last point to make regarding the mode. Whilst the mode is most often calculated when you have nominal data, because means and medians are useless for those sorts of variables, there are some situations in which you really do want to know the mode of an ordinal, interval or ratio scale variable. For instance, let's go back to our *afl.margins* variable. This variable is clearly ratio scale (if it's not clear to you, it may help to re-read @sec-Scales-of-measurement), and so in most situations the mean or the median is the measure of central tendency that you want. But consider this scenario: a friend of yours is offering a bet and they pick a football game at random. Without knowing who is playing you have to guess the exact winning margin. If you guess correctly you win \$50. If you don't you lose \$1. There are no consolation prizes for "almost" getting the right answer. You have to guess exactly the right margin. For this bet, the mean and the median are completely useless to you. It is the mode that you should bet on. To calculate the mode for the *afl.margins* variable in jamovi, go back to that data set and on the 'Exploration' -- 'Descriptives' screen you will see you can expand the section marked 'Statistics'. Click on the checkbox marked 'Mode' and you will see the modal value presented in the 'Descriptives' Table, as in @fig-fig4-7. So the 2010 data suggest you should bet on a 3 point margin.
 
@@ -152,7 +155,6 @@ One last point to make regarding the mode. Whilst the mode is most often calcula
 #| classes: .enlarge-image
 #| fig-cap: A screenshot of jamovi showing the modal value for the *afl.margins* variable
 #| fig-alt: A jamovi screenshot showing the analysis of "afl.margins." The main sections include Descriptives, Variables, and Results. Descriptive statistics like mean, median, and standard deviation are displayed on the right
-#| fig-pos: 'h!'
 knitr::include_graphics("images/fig4-7.png")
 ```
 
@@ -174,7 +176,7 @@ The **interquartile range** (IQR) is like the range, but instead of the differen
 
 And not surprisingly, in @fig-fig4-8 the 50th percentile is the same as the median value. And, by noting that $50.50 - 12.75 = 37.75$, we can see that the interquartile range for the 2010 AFL winning margins data is 37.75. While it's obvious how to interpret the range it's a little less obvious how to interpret the IQR. The simplest way to think about it is like this: the interquartile range is the range spanned by the "middle half" of the data. That is, one quarter of the data falls below the 25th percentile and one quarter of the data is above the 75th percentile, leaving the "middle half" of the data lying in between the two. And the IQR is the range covered by that middle half.
 
-```{r out.width="70%"}
+```{r out.width="60%"}
 #| label: fig-fig4-8
 #| fig-width: 5
 #| fig-cap: A screenshot of jamovi showing the Quartiles for the *afl.margins* variable
@@ -191,7 +193,9 @@ Since the previous paragraph might sound a little abstract, let's go through the
 ```{r}
 #| label: tbl-tab4-2
 #| tbl-cap: Measures of variability
-huxtabs[[4]][[2]]
+
+mykbl(lsj_chapter_tables[[4]][[2]]) 
+
 ```
 
 Now that we have calculated the absolute deviation score for every observation in the data set, all that we have to do to calculate the mean of these scores. Let's do that:
@@ -201,7 +205,8 @@ And we're done. The mean absolute deviation for these five scores is 15.52.
 
 [Additional technical detail[^04-descriptive-statistics-4]]
 
-[^04-descriptive-statistics-4]: However, whilst our calculations for this little example are at an end, we do have a couple of things left to talk about. First, we should really try to write down a proper mathematical formula. But in order to do this I need some mathematical notation to refer to the mean absolute deviation. Irritatingly, "mean absolute deviation" and "median absolute deviation" have the same acronym (MAD), which leads to a certain amount of ambiguity so I'd better come up with something different for the mean absolute deviation. Sigh. What I'll do is use AAD instead, short for average absolute deviation. Now that we have some unambiguous notation, here's the formula that describes what we just calculated:$$AAD(X) =\frac{1}{N} \sum_{i=1}^{N} \mid X_i - \bar{X} \mid = 15.52$$
+[^04-descriptive-statistics-4]: However, whilst our calculations for this little example are at an end, we do have a couple of things left to talk about. First, we should really try to write down a proper mathematical formula. But in order to do this I need some mathematical notation to refer to the mean absolute deviation. Irritatingly, "mean absolute deviation" and "median absolute deviation" have the same acronym (MAD), which leads to a certain amount of ambiguity so I'd better come up with something different for the mean absolute deviation. Sigh. What I'll do is use AAD instead, short for average absolute deviation. Now that we have some unambiguous notation, here's the formula that describes what we just calculated:
+$$AAD(X) =\frac{1}{N} \sum_{i=1}^{N} \mid X_i - \bar{X} \mid = 15.52$$
 
 ### Variance
 
@@ -218,8 +223,9 @@ Now that we've got the basic idea, let's have a look at a concrete example. Once
 ```{r}
 #| label: tbl-tab4-3
 #| tbl-cap: Measures  of variability for the first five AFL games
-#| tbl-pos: 'H'
-huxtabs[[4]][[3]]
+
+mykbl(lsj_chapter_tables[[4]][[3]]) 
+
 ```
 
 That last column contains all of our squared deviations, so all we have to do is average them. If we do that by hand, using a calculator, we end up with a variance of $324.64$. For the moment, don't worry about what a variance of $324.64$ actually means. Instead let's talk a bit more about how to do the calculations in jamovi, because this will reveal something very weird. Start a new jamovi session by clicking on the main menu button (three horizontal lines in the top left corner and selecting 'New'. Now type in the first five values from the *afl.margins* data set in column A ($56$, $31$, $56$, $8$, $32$. Change the variable type to 'Continuous' and under 'Descriptives' click the 'Variance' check box, and you get the same values for variance as the one we calculated by hand ($324.64$). No, wait, you get a completely different answer ($405.80$) -- see @fig-fig4-9. 
@@ -229,7 +235,6 @@ That last column contains all of our squared deviations, so all we have to do is
 #| classes: .enlarge-image
 #| fig-cap: A screenshot of jamovi showing the Variance for the first 5 values of the afl.margins variable
 #| fig-alt: A jamovi screenshot displaying descriptive statistics. The interface is divided into sections for selecting variables, splitting data, viewing results, and references. A data table shows the variance and other descriptive statistics like mean, median, standard deviation, etc
-#| fig-pos: 'h!'
 knitr::include_graphics("images/fig4-9.png")
 ```
 
@@ -263,11 +268,12 @@ However, as you might have guessed from our discussion of the variance, what jam
 
 Interpreting standard deviations is slightly more complex. Because the standard deviation is derived from the variance, and the variance is a quantity that has little to no meaning that makes sense to us humans, the standard deviation doesn't have a simple interpretation. As a consequence, most of us just rely on a simple rule of thumb. In general, you should expect 68% of the data to fall within 1 standard deviation of the mean, 95% of the data to fall within 2 standard deviation of the mean, and 99.7% of the data to fall within 3 standard deviations of the mean. This rule tends to work pretty well most of the time, but it's not exact. It's actually calculated based on an assumption that the histogram is symmetric and "bell shaped". As you can tell from looking at the AFL winning margins histogram in @fig-fig4-2, this isn't exactly true of our data! Even so, the rule is approximately correct. As it turns out, 65.3% of the *afl.margins* data fall within one standard deviation of the mean. This is shown visually in @fig-fig4-10.
 
-```{r out.width="60%"}
+```{r out.width="80%"}
 #| label: fig-fig4-10
 #| fig-cap: An illustration of the standard deviation from the AFL winning margins data. The shaded bars in the histogram show how much of the data fall within one standard deviation of the mean. In this case, 65.3% of the data set lies within this range, which is pretty consistent with the "approximately 68% rule" discussed in the main text
 #| fig-alt: A bar graph depicting the standard deviation from the AFL winning margins data. Bars one standard deviation to the left and right of the mean are blue, other bars are white. Horizontal axis labels include 'Mean - s.d.', 'Mean' and 'Mean + s.d.'
-#| fig-pos: 'h!'
+#| fig-width: 6
+#| fig-height: 4
 
 load("data_and_tables/aflsmall.Rdata")
 afl.margins <- tidyr::as_tibble(afl.margins)
@@ -287,7 +293,6 @@ ggplot(afl.margins, aes(x=margin)) +
                               mean(afl.margins$margin)+sd(afl.margins$margin)),
                      labels=c("Mean - s.d.", "Mean", "Mean + s.d."))
 
-
 ```
 
 ### Which measure to use?
@@ -306,7 +311,13 @@ In short, the IQR and the standard deviation are easily the two most common meas
 
 There are two more descriptive statistics that you will sometimes see reported in the psychological literature: skew and kurtosis. In practice, neither one is used anywhere near as frequently as the measures of central tendency and variability that we've been talking about. Skew is pretty important, so you do see it mentioned a fair bit, but I've actually never seen kurtosis reported in a scientific article to date.
 
-```{r}
+Skewness is basically a measure of asymmetry and the easiest way to explain it is by drawing some pictures. As @fig-fig4-11 illustrates, if the data tend to have a lot of extreme small values (i.e., the lower tail is "longer" than the upper tail) and not so many extremely large values (left panel) then we say that the data are *negatively skewed*. On the other hand, if there are more extremely large values than extremely small ones (right panel) we say that the data are positively skewed. If there are relatively more values that are far greater than the mean, the distribution is positively skewed or right skewed, with a tail stretching to the right. Negative or left skew is the opposite. A symmetric distribution has a skewness of 0. The skewness value for a positively skewed distribution is positive, and a negative value for a negatively skewed distribution.
+
+[Additional technical detail[^04-descriptive-statistics-11]]
+
+[^04-descriptive-statistics-11]: One formula for the skewness of a data set is: $$skewness(X)=\frac{1}{N \hat{\sigma}^3} \sum_{i=1}^{N} ( X_i - \bar{X})^3$$ where $N$ is the number of observations, $\bar{X}$ is the sample mean, and $\hat{\sigma}$ is the standard deviation (the "divide by $N - 1$" version, that is).
+
+```{r }
 #| label: fig-fig4-11
 #| fig-cap: An illustration of skewness. On the left we have a negatively skewed data set, in the middle we have a data set with no skew, and on the right we have a positively skewed data set
 #| fig-alt: Three bar charts demonstrate negative skew, no skew, and positive skew, respectively. The chart on the left shows a longer tail on the left, the middle chart is symmetrical, and the chart on the right shows a longer tail on the right
@@ -337,7 +348,11 @@ library(patchwork)
 skewplots[[1]] + skewplots[[2]] + skewplots[[3]]
 ```
 
-```{r}
+Perhaps more helpfully, you can use jamovi to calculate skewness: it's a check box in the 'Statistics' options under 'Exploration' -- 'Descriptives'. For the *afl.margins* variable, the skewness figure is $0.780$. If you divide the skewness estimate by the Std. error for skewness you have an indication of how skewed the data is. Especially in small samples (N $<$ 50), one rule of thumb suggests that a value of 2 or less can mean that the data is not very skewed, and a value of over 2 that there is sufficient skew in the data to possibly limit its use in some statistical analyses. Though there is no clear agreement on this interpretation. That said, this does indicate that the AFL winning margins data is somewhat skewed ($\frac{0.780}{0.183} = 4.262$).
+
+The final measure that is sometimes referred to, though very rarely in practice, is the kurtosis of a data set. Put simply, kurtosis is a measure of how thin or fat the tails of a distribution are, as illustrated in @fig-fig4-12. 
+
+```{r }
 #| label: fig-fig4-12
 #| fig-cap: An illustration of kurtosis. On the left, we have a "platykurtic" distribution (kurtosis = -.95) meaning that the distribution has "thin" or flat tails. In the middle we have a "mesokurtic" distribution (kurtosis is almost exactly 0) which means that the tails are neither thin or fat. Finally, on the right, we have a "leptokurtic" distribution (kurtosis = 2.12) indicating that the distribution has "fat" tails. Note that kurtosis is measured with respect to a normal curve (black line)
 #| fig-alt: A comparison of three types of distribution curves:- Platykuric (thin tails) on the left, Mesokurtic in the center, and Leptokurtic (fat tails) on the right, each with corresponding bar graphs in blue and overlaid black curves
@@ -370,20 +385,14 @@ library(patchwork)
 kurtplots[[1]] + kurtplots[[2]] + kurtplots[[3]]
 ```
 
-Since it's the more interesting of the two, let's start by talking about the **skewness**. Skewness is basically a measure of asymmetry and the easiest way to explain it is by drawing some pictures. As @fig-fig4-11 illustrates, if the data tend to have a lot of extreme small values (i.e., the lower tail is "longer" than the upper tail) and not so many extremely large values (left panel) then we say that the data are *negatively skewed*. On the other hand, if there are more extremely large values than extremely small ones (right panel) we say that the data are positively skewed. That's the qualitative idea behind skewness. If there are relatively more values that are far greater than the mean, the distribution is positively skewed or right skewed, with a tail stretching to the right. Negative or left skew is the opposite. A symmetric distribution has a skewness of 0. The skewness value for a positively skewed distribution is positive, and a negative value for a negatively skewed distribution.
-
-[Additional technical detail[^04-descriptive-statistics-11]]
-
-[^04-descriptive-statistics-11]: One formula for the skewness of a data set is: $$skewness(X)=\frac{1}{N \hat{\sigma}^3} \sum_{i=1}^{N} ( X_i - \bar{X})^3$$ where $N$ is the number of observations, $\bar{X}$ is the sample mean, and $\hat{\sigma}$ is the standard deviation (the "divide by $N - 1$" version, that is).
-
-Perhaps more helpfully, you can use jamovi to calculate skewness: it's a check box in the 'Statistics' options under 'Exploration' -- 'Descriptives'. For the *afl.margins* variable, the skewness figure is $0.780$. If you divide the skewness estimate by the Std. error for skewness you have an indication of how skewed the data is. Especially in small samples (N $<$ 50), one rule of thumb suggests that a value of 2 or less can mean that the data is not very skewed, and a value of over 2 that there is sufficient skew in the data to possibly limit its use in some statistical analyses. Though there is no clear agreement on this interpretation. That said, this does indicate that the AFL winning margins data is somewhat skewed ($\frac{0.780}{0.183} = 4.262$).
-
-The final measure that is sometimes referred to, though very rarely in practice, is the kurtosis of a data set. Put simply, kurtosis is a measure of how thin or fat the tails of a distribution are, as illustrated in @fig-fig4-12. By convention, we say that the "normal curve" (black lines) has zero kurtosis, so the degree of kurtosis is assessed relative to this curve. In this Figure, the data on the left have a pretty flat distribution, with thin tails, so the kurtosis is negative and we call the data platykurtic. The data on the right have a distribution with fat tails, so the kurtosis is positive and we say that the data is leptokurtic. But the data in the middle have neither thin or fat tails, so we say that it is mesokurtic and has kurtosis zero. This is summarised in @tbl-tab4-4.
+By convention, we say that the "normal curve" (black lines) has zero kurtosis, so the degree of kurtosis is assessed relative to this curve. In this Figure, the data on the left have a pretty flat distribution, with thin tails, so the kurtosis is negative and we call the data platykurtic. The data on the right have a distribution with fat tails, so the kurtosis is positive and we say that the data is leptokurtic. But the data in the middle have neither thin or fat tails, so we say that it is mesokurtic and has kurtosis zero. This is summarised in @tbl-tab4-4.
 
 ```{r}
 #| label: tbl-tab4-4
 #| tbl-cap: Thin to fat tails to illustrate kurtosis
-huxtabs[[4]][[4]]
+
+mykbl(lsj_chapter_tables[[4]][[4]]) 
+
 ```
 
 [Additional technical detail[^04-descriptive-statistics-12]]
@@ -396,11 +405,10 @@ More to the point, jamovi has a check box for kurtosis just below the check box 
 
 It is very commonly the case that you find yourself needing to look at descriptive statistics broken down by some grouping variable. This is pretty easy to do in jamovi. For instance, let's say I want to look at the descriptive statistics for some clinical trial data, broken down separately by therapy type. This is a new data set, one that you've never seen before. The data is stored in the *clinicaltrial.csv*  file and we'll use it a lot later on in @sec-Comparing-several-means-one-way-ANOVA (you can find a complete description of the data at the start of that chapter). Let's load it and see what we've got (@fig-fig4-13).
 
-```{r out.width="70%"}
+```{r out.width="60%"}
 #| label: fig-fig4-13
 #| fig-cap: A screenshot of jamovi showing the variables stored in the *clinicaltrial.csv*  file
 #| fig-alt: A jamovi screenshot with columns for ID, drug, therapy, and mood gain, with data for each field. The top menu bar includes options such as Variables, Data, Analyses, and Edit, with sub-options like Exploration, T-Tests, ANOVA, and Regression
-#| fig-pos: 'H'
 #| fig-width: 4
 #| fig-height: 5
 knitr::include_graphics("images/fig4-13.png")

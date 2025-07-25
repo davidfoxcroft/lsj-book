@@ -35,16 +35,20 @@ Like one-way ANOVA, factorial ANOVA is a tool for testing certain types of hypot
 ```{r}
 #| label: tbl-tab14-1
 #| tbl-cap: Group means for drug and therapy groups in the *clinicaltrial.csv*  data
-huxtabs[[14]][[1]] |>
-  set_number_format(value=2)
-```
+# huxtabs[[14]][[1]] |>
+#   set_number_format(value=2)
 
+mykbl(lsj_chapter_tables[[14]][[1]]) 
+
+```
 Now, the next Table (@tbl-tab14-2) shows a list of the group means for all possible combinations of the two factors (e.g., people who received the placebo and no therapy, people who received the placebo while getting CBT, etc.). It is helpful to organise all these numbers, plus the marginal and grand means, into a single table.
 
 ```{r}
 #| label: tbl-tab14-2
 #| tbl-cap: Group and total means for drug and therapy groups in the *clinicaltrial.csv* data
-huxtabs[[14]][[2]]
+
+mykbl(lsj_chapter_tables[[14]][[2]]) 
+
 ```
 
 Now, each of these different means is of course a sample statistic. It's a quantity that pertains to the specific observations that we've made during our study. What we want to make inferences about are the corresponding population parameters. That is, the true means as they exist within some broader population. Those population means can also be organised into a similar table, but we'll need a little mathematical notation to do so (@tbl-tab14-3). As usual, I'll use the symbol $\mu$ to denote a population mean. However, because there are lots of different means, I'll need to use subscripts to distinguish between them.
@@ -52,7 +56,9 @@ Now, each of these different means is of course a sample statistic. It's a quant
 ```{r}
 #| label: tbl-tab14-3
 #| tbl-cap: Notation for population means in a factorial table
-huxtabs[[14]][[3]]
+
+mykbl(lsj_chapter_tables[[14]][[3]]) 
+
 ```
 
 Here's how the notation works. Our table is defined in terms of two factors. Each row corresponds to a different level of Factor A (in this case drug), and each column corresponds to a different level of Factor B (in this case therapy). If we let $R$ denote the number of rows in the table, and $C$ denote the number of columns, we can refer to this as an $R \times C$ factorial ANOVA. In this case $R = 3$ and $C = 2$. We'll use lowercase letters to refer to specific rows and columns, so $\mu_{rc}$ refers to the population mean associated with the $r$-th level of Factor A (i.e. row number $r$) and the $c$-th level of Factor B (column number c).[^factorial-anova-1] 
@@ -66,18 +72,18 @@ Okay, what about the remaining entries? For instance, how should we describe the
 ```{r}
 #| label: tbl-tab14-4
 #| tbl-cap: Notation for population and total means in a factorial table
-huxtabs[[14]][[4]]
+
+mykbl(lsj_chapter_tables[[14]][[4]]) 
+
 ```
 
 Now that we have this notation, it is straightforward to formulate and express some hypotheses. Let's suppose that the goal is to find out two things. First, does the choice of drug have any effect on mood? And second, does CBT have any effect on mood? These aren't the only hypotheses that we could formulate of course, and we'll see a really important example of a different kind of hypothesis in the section [Factorial ANOVA 2: balanced designs, interpreting interactions], but these are the two simplest hypotheses to test, and so we'll start there. Consider the first test. If the drug has no effect then we would expect all of the row means to be identical, right? So that's our null hypothesis. On the other hand, if the drug does matter then we should expect these row means to be different. Formally, we write down our null and alternative hypotheses in terms of the equality of marginal means:
-
 $$\text{Null hypothesis, } H_0 \text{: row means are the same, i.e., } \mu_{1. } = \mu_{2. } = \mu_{3. }$$
 $$\text{Alternative hypothesis, } H_1 \text{: at least one row mean is different}$$
 
 It's worth noting that these are exactly the same statistical hypotheses that we formed when we ran a one-way ANOVA on these data in @sec-Comparing-several-means-one-way-ANOVA. Back then I used the notation $\mu \times {P}$ to refer to the mean mood gain for the placebo group, with $\mu{A}$ and $\mu \times {J}$ corresponding to the group means for the two drugs, and the null hypothesis was $\mu{P} = \mu{A} = \mu{J}$ . So we're actually talking about the same hypothesis, it's just that the more complicated ANOVA requires more careful notation due to the presence of multiple grouping variables, so we're now referring to this hypothesis as $\mu_{ 1.} = \mu_{ 2.} = \mu_{ 3.}$ . However, as we'll see shortly, although the hypothesis is identical the test of that hypothesis is subtly different due to the fact that we're now acknowledging the existence of the second grouping variable.
 
 Speaking of the other grouping variable, you won't be surprised to discover that our second hypothesis test is formulated the same way. However, since we're talking about the psychological therapy rather than drugs our null hypothesis now corresponds to the equality of the column means:
-
 $$\text{Null hypothesis, } H_0 \text{: column means are the same, i.e., } \mu_{ .1} = \mu_{ .2} $$
 $$\text{Alternative hypothesis, } H_1 \text{: column means are different, i.e., } \mu_{ .1} \neq \mu_{ .2}$$
 
@@ -102,20 +108,17 @@ Now, suppose I'm also curious to find out if therapy has a relationship to mood.
 #| classes: .enlarge-image
 #| fig-cap: jamovi two-way anova of mood.gain by drug and therapy
 #| fig-alt: A jamovi results table showing ANOVA test results for mood gain with factors "drug," "therapy," and their interaction. Includes Sum of Squares, df, Mean Square, F, $p$-values, η², η²p, and ω². Key results indicate significant effects for "drug" and "therapy," but not their interaction
-#| fig-pos: 'H'
 knitr::include_graphics("images/fig14-3.png")
 ```
 
 This output is pretty simple to read too. The first row of the table reports a between-group sum of squares ($SS$) value associated with the drug factor, along with a corresponding between-group $df$ value. It also calculates a mean square value ($MS$), an $F$-statistic and a $p$-value. There is also a row corresponding to the therapy factor, a row corresponding to the interaction between the drug factor and the therapy factor (which we won't cover just yet -- more on interactions later), and a row corresponding to the residuals (i.e., the within groups variation).
 
 Not only are all of the individual quantities pretty familiar, the relationships between these different quantities have remained unchanged, just like we saw with the original one-way ANOVA. Note that the mean square value is calculated by dividing $SS$ by the corresponding $df$. That is, it's still true that:
-
 $$MS=\frac{SS}{df}$$
 
 regardless of whether we're talking about drug, therapy or the residuals. To see this, let's not worry about how the sums of squares values are calculated. Instead, let's take it on faith that jamovi has calculated the $SS$ values correctly, and try to verify that all the rest of the numbers make sense. First, note that for the drug factor, we divide $3.45$ by $2$ and end up with a mean square value of $1.73$. For the therapy factor, there's only 1 degree of freedom, so our calculations are even simpler: dividing $0.47$ (the $SS$ value) by 1 gives us an answer of $0.47$ (the $MS$ value).
 
 Turning to the $F$-statistics and the $p$-values, notice that we have one corresponding to the drug factor and one corresponding to the therapy factor. Regardless of which one we're talking about, the $F$-statistic is calculated by dividing the mean square value associated with the factor by the mean square value associated with the residuals. If we use "A" as shorthand notation to refer to the first factor (Factor A; in this case drug) and "R" as shorthand notation to refer to the residuals, then the $F$-statistic associated with Factor A is denoted $F_A$, and is calculated as:
-
 $$F_A=\frac{MS_A}{MS_R}$$
 
 and an equivalent formula exists for Factor B (i.e., therapy). Note that this use of "R" to refer to residuals is a bit awkward, since we also used the letter R to refer to the number of rows in the table, but I'm only going to use "R" to mean residuals in the context of ${SS_R}$ and ${MS_R}$, so hopefully this shouldn't be confusing. Anyway, to apply this formula to the drugs factor we take the mean square of 1.73 and divide it by the residual mean square value of $0.05$, which gives us an $F$-statistic of 31.71.[^factorial-anova-2a] The corresponding calculation for the therapy variable would be to divide $0.47$ by $0.05$ which gives $8.58$ as the $F$-statistic. Not surprisingly, of course, these are the same values that jamovi has reported in the ANOVA table above.
@@ -135,7 +138,9 @@ Okay, let's start by looking at some of those details. The explanation that I ga
 ```{r}
 #| label: tbl-tab14-5
 #| tbl-cap: Notation for sample means for the clinical trial data
-huxtabs[[14]][[5]]
+
+mykbl(lsj_chapter_tables[[14]][[5]]) 
+
 ```
 
 And if we look at the sample means that I showed earlier, we have $\bar{Y}_{11} = 0.30$, $\bar{Y}_{12} = 0.60$ etc. In our clinical trial example, the drugs factor has 3 levels and the therapy factor has 2 levels, and so what we're trying to run is a $3 \times 2$ factorial ANOVA. However, we'll be a little more general and say that Factor A (the row factor) has $r$ levels and Factor B (the column factor) has $c$ levels, and so what we're running here is an $r \times c$ factorial ANOVA.
@@ -273,7 +278,6 @@ To give a more concrete example, suppose that the operation of Anxifree and Joyz
 #| label: fig-fig14-5
 #| fig-cap: Qualitatively different interactions for a $2 \times 2$ ANOVA
 #| fig-alt: Four line graphs (a-d) depict interactions between two factors (A and B) at two levels (1 and 2). The y-axis in each graph is labeled "Group mean" and the x-axis "Factor B." Graph (a) shows a crossover interaction. Graphs (b), (c), and (d) highlight different effects for one level of Factor A or B, or one differing cell
-#| fig-pos: 'h!'
 
 mn=c(1.0, 1.0, 2.0, 2.0)
 FactA = factor(c('level 1', 'level 2', 'level 1', 'level 2'))
@@ -373,8 +377,6 @@ gridExtra::grid.arrange(p1,p2,p3,p4,ncol=2)
 
 ```
 
-\
-
 Our main concern relates to the fact that the two lines aren't parallel. The effect of CBT (difference between solid line and dotted line) when the drug is Joyzepam (right side) appears to be near zero, even smaller than the effect of CBT when a placebo is used (left side). However, when Anxifree is administered, the effect of CBT is larger than the placebo (middle). Is this effect real, or is this just random variation due to chance? Our original ANOVA cannot answer this question, because we make no allowances for the idea that interactions even exist! In this section, we'll fix this problem.
 
 ```{r}
@@ -382,7 +384,6 @@ Our main concern relates to the fact that the two lines aren't parallel. The eff
 #| classes: .enlarge-image
 #| fig-cap: jamovi screen showing how to generate a descriptive interaction plot in ANOVA using the clinical trial data
 #| fig-alt: A jamovi screenshot of the interface for analyzing clinical trial data is shown. The screen features ANOVA outputs, with a graph displaying estimated marginal means of mood gain across different drug therapies. Therapy options are CBT and no therapy, with axes for mood gain and types of drugs
-#| fig-pos: 'H'
 knitr::include_graphics("images/fig14-6.png")
 ```
 
@@ -397,7 +398,6 @@ The key idea that we're going to introduce in this section is that of an interac
 ### Degrees of freedom for the interaction
 
 Calculating the degrees of freedom for the interaction is slightly trickier than the corresponding calculation for the main effects. Let's start by thinking about the ANOVA model as a whole. Once we include interaction effects in the model we're allowing every single group to have a unique mean, $mu_{rc}$. For an $R \times C$ factorial ANOVA, this means that there are $R \times C$ quantities of interest in the model and only the one constraint: all of the group means need to average out to the grand mean. So the model as a whole needs to have ($R \times C)-1$ degrees of freedom. But the main effect of Factor A has $R-1$ degrees of freedom, and the main effect of Factor B has $C-1$ degrees of freedom. Therefore the degrees of freedom for the interaction is:
-
 $$
 \begin{aligned}
 df_{A:B} & = (R \times C - 1) - (R - 1) - (C - 1) \\
@@ -439,7 +439,6 @@ This sort of thing happens a lot. The main effect are tests of marginal means, a
 ## Effect size
 
 The effect size calculation for a factorial ANOVA is pretty similar to those used in one-way ANOVA (see [Effect size] section). Specifically, we can use $\eta^2$ (eta-squared) as a simple way to measure how big the overall effect is for any particular term. As before, $\eta^2$ is defined by dividing the sum of squares associated with that term by the total sum of squares. For instance, to determine the size of the main effect of Factor A, we would use the following formula:
-
 $$\eta_A^2=\frac{SS_A}{SS_T}$$
 
 As before, this can be interpreted in much the same way as $R^2$ in regression.[^factorial-anova-6] It tells you the proportion of variance in the outcome variable that can be accounted for by the main effect of Factor A. It is therefore a number that ranges from 0 (no effect at all) to 1 (accounts for all of the variability in the outcome). Moreover, the sum of all the $\eta^2$ values, taken across all the terms in the model, will sum to the the total $R^2$ for the ANOVA model. If, for instance, the ANOVA model fits perfectly (i.e., there is no within groups variability at all!), the $\eta^2$ values will sum to 1. Of course, that rarely if ever happens in real life.
@@ -447,7 +446,6 @@ As before, this can be interpreted in much the same way as $R^2$ in regression.[
 [^factorial-anova-6]: This chapter seems to be setting a new record for the number of different things that the letter R can stand for. So far we have R referring to the software package, the number of rows in our table of means, the residuals in the model, and now the correlation coefficient in a regression. Sorry. We clearly don't have enough letters in the alphabet. However, I've tried pretty hard to be clear on which thing R is referring to in each case.
 
 However, when doing a factorial ANOVA, there is a second measure of effect size that people like to report, known as partial $\eta^2$. The idea behind partial $\eta^2$ (which is sometimes denoted $p^{\eta^2}$ or $\eta_p^2$) is that, when measuring the effect size for a particular term (say, the main effect of Factor A), you want to deliberately ignore the other effects in the model (e.g., the main effect of Factor B). That is, you would pretend that the effect of all these other terms is zero, and then calculate what the $\eta^2$ value would have been. This is actually pretty easy to calculate. All you have to do is remove the sum of squares associated with the other terms from the denominator. In other words, if you want the partial $\eta^2$ for the main effect of Factor A, the denominator is just the sum of the $SS$ values for Factor A and the residuals:
-
 $$\text{partial }\eta_A^2= \frac{SS_A}{SS_A+SS_R}$$
 
 This will always give you a larger number than $\eta^2$, which the cynic in me suspects accounts for the popularity of partial $\eta^2$. And once again you get a number between 0 and 1, where 0 represents no effect. However, it's slightly trickier to interpret what a large partial $\eta^2$ value means. In particular, you can't actually compare the partial $\eta^2$ values across terms! Suppose, for instance, there is no within groups variability at all: if so, $SS_R = 0$. What that means is that every term has a partial $\eta^2$ value of 1. But that doesn't mean that all terms in your model are equally important, or indeed that they are equally large. All it mean is that all terms in your model have effect sizes that are large relative to the residual variation. It is not comparable across terms.
@@ -457,7 +455,9 @@ To see what I mean by this, it's useful to see a concrete example. First, let's 
 ```{r}
 #| label: tbl-tab14-6
 #| tbl-cap: Effect sizes when the interaction term **is not** included in the ANOVA model
-huxtabs[[14]][[6]]
+
+mykbl(lsj_chapter_tables[[14]][[6]]) 
+
 ```
 
 Looking at the $\eta^2$ values first, we see that drug accounts for 71% of the variance (i.e. $\eta^2 = 0.71$) in mood.gain, whereas therapy only accounts for 10%. This leaves a total of 19% of the variation unaccounted for (i.e., the residuals constitute 19% of the variation in the outcome). Overall, this implies that we have a very large effect[^factorial-anova-7] of drug and a modest effect of therapy.
@@ -471,7 +471,9 @@ Speaking of interaction effects, @tbl-tab14-7 shows what we get when we calculat
 ```{r}
 #| label: tbl-tab14-7
 #| tbl-cap: Effect sizes when the interaction term **is** included in the ANOVA model
-huxtabs[[14]][[7]]
+
+mykbl(lsj_chapter_tables[[14]][[7]]) 
+
 ```
 
 ### Estimated group means
@@ -497,7 +499,6 @@ Using the notation we developed earlier, the estimate for $\mu_{rc}$, the mean f
 #| classes: .enlarge-image
 #| fig-cap: jamovi screenshot showing the marginal means for the unsaturated model, i.e. without the interaction component, with the clinical trial data set
 #| fig-alt: ANOVA table and Estimated Marginal Means table for mood gain analysis. The ANOVA table shows a significant drug effect with F(3,14) = 7.08, p = 0.01866. The Estimated Marginal Means table lists means and confidence intervals for interactions between therapy and drug
-#| fig-pos: 'H'
 knitr::include_graphics("images/fig14-9.png")
 ```
 
@@ -513,18 +514,6 @@ As mentioned in @sec-Checking-the-homogeneity-of-variance-assumption in the last
 
 As with one-way ANOVA we can test for the normality of residuals is straightforward (see @sec-Checking-the-normality-assumption). Primarily it's a good idea to examine the residuals graphically using a QQ plot. See @fig-fig14-10.
 
-## Analysis of covariance (ANCOVA) {#sec-analysis-of-covariance-ancova}
-
-A variation in ANOVA is when you have an additional continuous variable that you think might be related to the dependent variable. This additional variable can be added to the analysis as a covariate, in the aptly named analysis of covariance (ANCOVA).
-
-In ANCOVA the values of the dependent variable are "adjusted" for the influence of the covariate, and then the "adjusted" score means are tested between groups in the usual way. This technique can increase the precision of an experiment and provide a more "powerful" test of the equality of group means in the dependent variable. How does ANCOVA do this? Although the covariate itself is typically not of any experimental interest, adjustment for the covariate can decrease the estimate of experimental error. By reducing error variance precision is increased. This means that a false rejection of the null hypothesis (false negative or type II error) is less likely.
-
-Despite this advantage, ANCOVA runs the risk of undoing real differences between groups and this should be avoided. Look at @fig-fig14-11 for example, which shows a plot of Statistics anxiety against age and shows two distinct groups -- students who have either an Arts or Science background. ANCOVA with age as a covariate might lead to the conclusion that statistics anxiety does not differ in the two groups. Would this conclusion be reasonable -- probably not because the ages of the two groups do not overlap and analysis of variance has essentially "extrapolated into a region with no data" (@Everitt1996, p. 68). Clearly, careful thought needs to be given to an analysis of covariance with distinct groups. This applies to both one-way and factorial designs, as ANCOVA can be used with both.
-
-\
-\
-\
-
 ```{r}
 #| label: fig-fig14-10
 #| classes: .enlarge-image
@@ -533,17 +522,20 @@ Despite this advantage, ANCOVA runs the risk of undoing real differences between
 knitr::include_graphics("images/fig14-10.png")
 ```
 
+## Analysis of covariance (ANCOVA) {#sec-analysis-of-covariance-ancova}
+
+A variation in ANOVA is when you have an additional continuous variable that you think might be related to the dependent variable. This additional variable can be added to the analysis as a covariate, in the aptly named analysis of covariance (ANCOVA).
+
+In ANCOVA the values of the dependent variable are "adjusted" for the influence of the covariate, and then the "adjusted" score means are tested between groups in the usual way. This technique can increase the precision of an experiment and provide a more "powerful" test of the equality of group means in the dependent variable. How does ANCOVA do this? Although the covariate itself is typically not of any experimental interest, adjustment for the covariate can decrease the estimate of experimental error. By reducing error variance precision is increased. This means that a false rejection of the null hypothesis (false negative or type II error) is less likely.
+
+Despite this advantage, ANCOVA runs the risk of undoing real differences between groups and this should be avoided. Look at @fig-fig14-11 for example, which shows a plot of Statistics anxiety against age and shows two distinct groups -- students who have either an Arts or Science background. ANCOVA with age as a covariate might lead to the conclusion that statistics anxiety does not differ in the two groups. Would this conclusion be reasonable -- probably not because the ages of the two groups do not overlap and analysis of variance has essentially "extrapolated into a region with no data" (@Everitt1996, p. 68). Clearly, careful thought needs to be given to an analysis of covariance with distinct groups. This applies to both one-way and factorial designs, as ANCOVA can be used with both.
+
 ```{r out.width="90%"}
 #| label: fig-fig14-11
 #| fig-cap: Plot of Statistics anxiety against age for two distinct groups
 #| fig-alt: A scatter plot shows 'Statistics anxiety' on the Y-axis versus 'Age' on the X-axis. Data points for 'Scientists' cluster lower on the Y-axis and at younger ages on the X-axis, while 'Artists' cluster higher on the Y-axis and at older ages on the X-axis
-#| fig-pos: 'h!'
 knitr::include_graphics("images/fig14-11.png")
 ```
-
-\
-\
-\
 
 ### Running ANCOVA in jamovi
 
@@ -556,7 +548,6 @@ A health psychologist was interested in the effect of routine cycling and stress
 #| fig-alt: A jamovi screenshot showing an ANCOVA setup. The window has options for adding dependent variables, fixed factors, and covariates. "Happiness" is selected as the dependent variable, with "stress" and "commute" as fixed factors, and "age" as a covariate
 #| fig-height: 4
 #| fig-width: 6
-#| fig-pos: 'h!'
 knitr::include_graphics("images/fig14-12.png")
 ```
 
@@ -567,22 +558,20 @@ An ANCOVA table showing 'Tests of Between Subjects Effects' is produced in the j
 #| classes: .enlarge-image
 #| fig-cap: jamovi ANCOVA output for happiness as a function of stress and commuting method, with age as a covariate
 #| fig-alt: An ANCOVA table titled 'happiness' displays statistical results including Sum of Squares, degrees of freedom (df), Mean Square, $F$-ratio (F), $p$-values (p), eta squared (η²), partial eta squared (ηp²), and omega squared (ω²) for various factors like stress, commute, age, and interactions
-#| fig-pos: 'H'
 knitr::include_graphics("images/fig14-13.png")
 ```
 
-```{r out.width="75%"}
+```{r out.width="85%"}
 #| label: fig-fig14-14
 #| classes: .enlarge-image
 #| fig-cap: Table of mean happiness level as a function of stress and commuting method (adjusted for the covariate age) with 95% confidence intervals
 #| fig-alt: A jamovi results table titled "Estimated Marginal Means - stress × commute" showing mean stress levels with standard errors (SE) and 95% Confidence Intervals for different commuting methods (drive, cycle) and stress levels (high, low)
 #| fig-height: 4
 #| fig-width: 6
-#| fig-pos: 'H'
 knitr::include_graphics("images/fig14-14.png")
 ```
 
-```{r  out.width="80%"}
+```{r  out.width="90%"}
 #| label: fig-fig14-15
 #| fig-cap: Plot of mean happiness level as a function of stress and commuting method
 #| fig-alt: A line graph compares happiness levels based on stress levels (high and low) and commute type (drive or cycle). The "cycle" line shows a steeper increase in happiness from high to low stress compared to the "drive" line. Error bars are present.
@@ -595,19 +584,14 @@ In @fig-fig14-15 we can see the adjusted, marginal, mean happiness scores when a
 
 One thing to be aware of is that, if you are thinking of including a covariate in your ANOVA, there is an additional assumption: the relationship between the covariate and the dependent variable should be similar for all levels of the independent variable. This can be checked by adding an interaction term between the covariate and each independent variable in the jamovi 'Model - Model' terms option. If the interaction effect is not significant it can be removed. If it is significant then a different and more advanced statistical technique might be appropriate (which is beyond the scope of this book so you might want to consult a friendly statistician).
 
-\
-\
-
 ## ANOVA as a linear model {#sec-ANOVA-as-a-linear-model}
 
 One of the most important things to understand about ANOVA and regression is that they're basically the same thing. On the surface of it, you maybe wouldn't think this is true. After all, the way that I've described them so far suggests that ANOVA is primarily concerned with testing for group differences, and regression is primarily concerned with understanding the correlations between variables. And, as far as it goes that's perfectly true. But when you look under the hood, so to speak, the underlying mechanics of ANOVA and regression are awfully similar. In fact, if you think about it, you've already seen evidence of this. ANOVA and regression both rely heavily on sums of squares ($SS$), both make use of $F$-tests, and so on. Looking back, it's hard to escape the feeling that @sec-Correlation-and-linear-regression and @sec-Comparing-several-means-one-way-ANOVA were a bit repetitive.
 
 The reason for this is that ANOVA and regression are both kinds of **linear models**. In the case of regression, this is kind of obvious. The regression equation that we use to define the relationship between predictors and outcomes is the equation for a straight line, so it's quite obviously a linear model, with the equation:
-
 $$Y_p=b_0+b_1 X_{1p} +b_2 X_{2p} + \epsilon_p$$
 
 where $Y_p$ is the outcome value for the $p$-th observation (e.g., $p$-th person), $X_{1p}$ is the value of the first predictor for the $p$-th observation, $X_{2p}$ is the value of the second predictor for the $p$-th observation, the $b_0$, $b_1$, and $b_2$ terms are our regression coefficients, and $\epsilon_p$ is the $p$-th residual. If we ignore the residuals $\epsilon_p$ and just focus on the regression line itself, we get the following formula:
-
 $$\hat{Y}_p=b_0+b_1 X_{1p} +b_2 X_{2p}$$
 
 where $\hat{Y}_p$ is the value of Y that the regression line predicts for person p, as opposed to the actually-observed value $Y_p$. The thing that isn't immediately obvious is that we can write ANOVA as a linear model as well. However, it's actually pretty straightforward to do this. Let's start with a really simple example, rewriting a $2 \times 2$ factorial ANOVA as a linear model.
@@ -621,7 +605,9 @@ Okay, so far that's simple enough. The next thing we need to do is to wrap some 
 ```{r}
 #| label: tbl-tab14-8
 #| tbl-cap: Data for grade, attendance and reading the textbook
-huxtabs[[14]][[8]]
+
+mykbl(lsj_chapter_tables[[14]][[8]]) 
+
 ```
 
 This isn't anything particularly special, of course. It's exactly the format in which we expect to see our data! See the data file *rtfm.csv*. We can use the jamovi 'Descriptives' analysis to confirm that this data set corresponds to a balanced design, with 2 observations for each combination of attend and reading. In the same way we can also calculate the mean grade for each combination. This is shown in @fig-fig14-16. Looking at the mean scores, one gets the strong impression that reading the text and attending the class both matter a lot.
@@ -637,9 +623,7 @@ knitr::include_graphics("images/fig14-16.png")
 ### ANOVA with binary factors as a regression model
 
 Okay, let's get back to talking about the mathematics. We now have our data expressed in terms of three numeric variables: the continuous variable $Y$ and the two binary variables $X_1$ and $X_2$. What I want you to recognise is that our $2 \times 2$ factorial ANOVA is exactly equivalent to the regression model:
-
 $$Y_p=b_0+b_1 X_{1p} + b_2 X_{2p} + \epsilon_p$$
-\
 
 This is, of course, the exact same equation that I used earlier to describe a two-predictor regression model! The only difference is that $X_1$ and $X_2$ are now binary variables (i.e., values can only be 0 or 1), whereas in a regression analysis we expect that $X_1$ and $X_2$ will be continuous. There's a couple of ways I could try to convince you of this. One possibility would be to do a lengthy mathematical exercise proving that the two are identical. However, I'm going to go out on a limb and guess that most of the readership of this book will find that annoying rather than helpful. Instead, I'll explain the basic ideas and then rely on jamovi to show that ANOVA analyses and regression analyses aren't just similar, they're identical for all intents and purposes. Let's start by running this as an ANOVA. To do this, we'll use the rtfm data set, and @fig-fig14-17 shows what we get when we run the analysis in jamovi.
 
@@ -651,14 +635,11 @@ This is, of course, the exact same equation that I used earlier to describe a tw
 knitr::include_graphics("images/fig14-17.png")
 ```
 
-\
-
 So, by reading the key numbers off the ANOVA table and the mean scores that we presented earlier, we can see that the students obtained a higher grade if they attended class ($F_{1,5} = 21.6, p = .0056$) and if they read the textbook ($F_{1,5} = 52.3, p = .0008$). Let's make a note of those $p$-values and those $F$-statistics.
 
 Now let's think about the same analysis from a linear regression perspective. In the *rtfm.csv* data set, we have encoded attend and reading as if they were numeric predictors. In this case, this is perfectly acceptable. There really is a sense in which a student who turns up to class (i.e. attend = 1) has in fact done "more attendance" than a student who does not (i.e. attend = 0). So it's not at all unreasonable to include it as a predictor in a regression model. It's a little unusual, because the predictor only takes on two possible values, but it doesn't violate any of the assumptions of linear regression. And it's easy to interpret. If the regression coefficient for attend is greater than 0 it means that students that attend lectures get higher grades. If it's less than zero then students attending lectures get lower grades. The same is true for our reading variable.
 
 Wait a second though. Why is this true? It's something that is intuitively obvious to everyone who has taken a few stats classes and is comfortable with the maths, but it isn't clear to everyone else at first pass. To see why this is true, it helps to look closely at a few specific students. Let's start by considering the 6th and 7th students in our data set (i.e. $p = 6$ and $p = 7$). Neither one has read the textbook, so in both cases we can set reading = 0. Or, to say the same thing in our mathematical notation, we observe $X_{2,6} = 0$ and $X_{2,7} = 0$. However, student number 7 did turn up to lectures (i.e., attend = 1, $X_{1,7} = 1$) whereas student number 6 did not (i.e., attend = 0, $X_{1,6} = 0$). Now let's look at what happens when we insert these numbers into the general formula for our regression line. For student number 6, the regression predicts that:
-
 $$
 \begin{split}
 \hat{Y}_6 & = b_0 + b_1 X_{1,6} + b_2 X_{2,6} \\
@@ -668,7 +649,6 @@ $$
 $$
 
 So we're expecting that this student will obtain a grade corresponding to the value of the intercept term $b_0$. What about student 7? This time when we insert the numbers into the formula for the regression line, we obtain the following:
-
 $$
 \begin{split}
 \hat{Y}_7 & = b_0 + b_1 X_{1,7} + b_2 X_{2,7} \\
@@ -680,7 +660,6 @@ $$
 Because this student attended class, the predicted grade is equal to the intercept term b0 plus the coefficient associated with the attend variable, $b_1$. So, if $b_1$ is greater than zero, we're expecting that the students who turn up to lectures will get higher grades than those students who don't. If this coefficient is negative we're expecting the opposite: students who turn up at class end up performing much worse. 
 
 In fact, we can push this a little bit further. What about student number 1, who turned up to class ($X_{1,1} = 1$) and read the textbook ($X_{2,1} = 1$)? If we plug these numbers into the regression we get:
-
 $$
 \begin{split}
 \hat{Y}_1 & = b_0 + b_1 X_{1,1} + b_2 X_{2,1} \\
@@ -696,23 +675,24 @@ And at this point you won't be at all suprised to learn that the regression mode
 ```{r}
 #| label: tbl-tab14-9
 #| tbl-cap: Expected grades from the regression model
-huxtabs[[14]][[9]]
+
+mykbl(lsj_chapter_tables[[14]][[9]]) 
+
 ```
 
 As you can see, the intercept term $b_0$ acts like a kind of "baseline" grade that you would expect from those students who don't take the time to attend class or read the textbook. Similarly, $b_1$ represents the boost that you're expected to get if you come to class, and $b_2$ represents the boost that comes from reading the textbook. In fact, if this were an ANOVA you might very well want to characterise $b_1$ as the main effect of attendance, and $b_2$ as the main effect of reading! In fact, for a simple $2 \times 2$ ANOVA that's exactly how it plays out.
 
 Okay, now that we're really starting to see why ANOVA and regression are basically the same thing, let's actually run our regression using the rtfm data and the jamovi regression analysis to convince ourselves that this is really true. Running the regression in the usual way gives the results shown in @fig-fig14-18.
 
-There's a few interesting things to note here. First, notice that the intercept term is 43.5 which is close to the "group" mean of 42.5 observed for those two students who didn't read the text or attend class. Second, notice that we have the regression coefficient of $b_1 = 18.0$ for the attendance variable, suggesting that those students that attended class scored 18% higher than those who didn't. So our expectation would be that those students who turned up to class but didn't read the textbook would obtain a grade of $b_0 + b_1$, which is equal to $43.5 + 18.0 = 61.5$. You can verify for yourself that the same thing happens when we look at the students that read the textbook.
-
-```{r out.width="70%"}
+```{r out.width="80%"}
 #| label: fig-fig14-18
 #| classes: .enlarge-image
 #| fig-cap: Regression analysis of the *rtfm.csv* data set in jamovi, without the interaction term
 #| fig-alt: A jamovi results table titled "Model Coefficients - grade" displays the estimate, standard error (SE), t-value, and $p$-value for three predictors:- Intercept, attend, and reading. The Intercept values are 43.50, 3.35, 12.97, 0.00005. Attend:- 18.00, 3.87, 4.65, 0.00559. Reading:- 28.00, 3.87, 7.23, 0.00079
-#| fig-pos: 'H'
 knitr::include_graphics("images/fig14-18.png")
 ```
+
+There's a few interesting things to note here. First, notice that the intercept term is 43.5 which is close to the "group" mean of 42.5 observed for those two students who didn't read the text or attend class. Second, notice that we have the regression coefficient of $b_1 = 18.0$ for the attendance variable, suggesting that those students that attended class scored 18% higher than those who didn't. So our expectation would be that those students who turned up to class but didn't read the textbook would obtain a grade of $b_0 + b_1$, which is equal to $43.5 + 18.0 = 61.5$. You can verify for yourself that the same thing happens when we look at the students that read the textbook.
 
 Actually, we can push a little further in establishing the equivalence of our ANOVA and our regression. Look at the $p$-values associated with the attend variable and the reading variable in the regression output. They're identical to the ones we encountered earlier when running the ANOVA. This might seem a little surprising, since the test used when running our regression model calculates a $t$-statistic and the ANOVA calculates an $F$-statistic. However, if you can remember all the way back to @sec-Introduction-to-probability, I mentioned that there's a relationship between the $t$-distribution and the $F$-distribution. If you have some quantity that is distributed according to a $t$-distribution with $k$ degrees of freedom and you square it, then this new squared quantity follows an $F$-distribution whose degrees of freedom are 1 and $k$. We can check this with respect to the $t$-statistics in our regression model. For the attend variable we get a $t$-value of 4.65. If we square this number we end up with 21.6, which matches the corresponding $F$-statistic in our ANOVA.
 
@@ -735,7 +715,9 @@ The answer to this question is pretty simple, actually. All we have to do is rea
 ```{r}
 #| label: tbl-tab14-10
 #| tbl-cap: Binary contrasts to discriminate between all three possible drugs
-huxtabs[[14]][[10]]
+
+mykbl(lsj_chapter_tables[[14]][[10]]) 
+
 ```
 
 If the drug administered to a patient is a placebo then both of the two contrast variables will equal 0. If the drug is Anxifree then the druganxifree variable will equal 1, and drugjoyzepam will be 0. The reverse is true for Joyzepam: drugjoyzepam is 1 and druganxifree is 0.
@@ -778,7 +760,9 @@ Obviously, there are no surprises here. That's the exact same ANOVA that we ran 
 knitr::include_graphics("images/fig14-21.png")
 ```
 
-Hmm. This isn't the same output that we got last time. Not surprisingly, the regression output prints out the results for each of the three predictors separately, just like it did every other time we conducted a regression analysis. On the one hand we can see that the $p$-value for the CBTtherapy variable is exactly the same as the one for the therapy factor in our original ANOVA, so we can be reassured that the regression model is doing the same thing as the ANOVA did. On the other hand, this regression model is testing the druganxifree contrast and the drugjoyzepam contrast *separately*, as if they were two completely unrelated variables. It's not surprising of course, because the poor regression analysis has no way of knowing that drugjoyzepam and druganxifree are actually the two different contrasts that we used to encode our three-level drug factor. As far as it knows, drugjoyzepam and druganxifree are no more related to one another than drugjoyzepam and CBTtherapy. However, you and I know better. At this stage we're not at all interested in determining whether these two contrasts are individually significant. We just want to know if there's an "overall" effect of drug. That is, what we want jamovi to do is to run some kind of "model comparison" test, one in which the two "drug related" contrasts are lumped together for the purpose of the test. Sound familiar? All we need to do is specify our null model, which in this case would include the CBTtherapy predictor, and omit both of the drug-related variables, as in @fig-fig14-22.
+Hmm. This isn't the same output that we got last time. Not surprisingly, the regression output prints out the results for each of the three predictors separately, just like it did every other time we conducted a regression analysis. On the one hand we can see that the $p$-value for the CBTtherapy variable is exactly the same as the one for the therapy factor in our original ANOVA, so we can be reassured that the regression model is doing the same thing as the ANOVA did. On the other hand, this regression model is testing the druganxifree contrast and the drugjoyzepam contrast *separately*, as if they were two completely unrelated variables. 
+
+It's not surprising of course, because the poor regression analysis has no way of knowing that drugjoyzepam and druganxifree are actually the two different contrasts that we used to encode our three-level drug factor. As far as it knows, drugjoyzepam and druganxifree are no more related to one another than drugjoyzepam and CBTtherapy. However, you and I know better. At this stage we're not at all interested in determining whether these two contrasts are individually significant. We just want to know if there's an "overall" effect of drug. That is, what we want jamovi to do is to run some kind of "model comparison" test, one in which the two "drug related" contrasts are lumped together for the purpose of the test. Sound familiar? All we need to do is specify our null model, which in this case would include the CBTtherapy predictor, and omit both of the drug-related variables, as in @fig-fig14-22.
 
 ```{r}
 #| label: fig-fig14-22
@@ -797,7 +781,6 @@ Although we went through all the faff of computing new variables in jamovi for t
 #| classes: .enlarge-image
 #| fig-cap: Regression analysis with factors and contrasts in jamovi, including omnibus ANOVA test results
 #| fig-alt: A jamovi screenshot displaying linear regression analysis within a software interface. The interface shows data inputs and settings on the left, while the right side displays output results including ANOVA and model coefficients. Sections for data, analyses, edit, and more are visible
-#| fig-pos: 'H'
 knitr::include_graphics("images/fig14-23.png")
 ```
 
@@ -818,7 +801,9 @@ In the previous section, I showed you a method for converting a factor into a co
 ```{r}
 #| label: tbl-tab14-11
 #| tbl-cap: Binary contrasts to discriminate between all three possible drugs
-huxtabs[[14]][[11]]
+
+mykbl(lsj_chapter_tables[[14]][[11]]) 
+
 ```
 
 Each row in the table corresponds to one of the factor levels, and each column corresponds to one of the contrasts. This table, which always has one more row than columns, has a special name. It is called a contrast matrix. However, there are lots of different ways to specify a contrast matrix. In this section I discuss a few of the standard contrast matrices that statisticians use and how you can use them in jamovi. If you're planning to read the section on [Factorial ANOVA 3: unbalanced designs] later on, it's worth reading this section carefully. If not, you can get away with skimming it, because the choice of contrasts doesn't matter much for balanced designs.
@@ -834,7 +819,9 @@ The table shown above is a matrix of treatment contrasts for a factor that has 3
 ```{r}
 #| label: tbl-tab14-12
 #| tbl-cap: Matrix of treatment contrasts with 5 levels
-huxtabs[[14]][[12]]
+
+mykbl(lsj_chapter_tables[[14]][[12]]) 
+
 ```
 
 In this example, the first contrast is level 2 compared with level 1, the second contrast is level 3 compared with level 1, and so on. Notice that, by default, the *first* level of the factor is always treated as the baseline category (i.e., it's the one that has all zeros and doesn't have an explicit contrast associated with it). In jamovi you can change which category is the first level of the factor by manipulating the order of the levels of the variable shown in the 'Data Variable' window (double click on the name of the variable in the spreadsheet column to bring up the 'Data Variable' view.
@@ -846,9 +833,10 @@ Treatment contrasts are useful for a lot of situations. However, they make most 
 ```{r}
 #| label: tbl-tab14-13
 #| tbl-cap: Matrix of helmert contrasts with 5 levels
-huxtabs[[14]][[13]]
-```
 
+mykbl(lsj_chapter_tables[[14]][[13]], NULL) 
+
+```
 With Helmert contrasts every contrast sums to zero (i.e., all the columns sum to zero). This means that, when we interpret the ANOVA as a regression, the intercept term corresponds to the grand mean $\mu_{..}$ if we are using Helmert contrasts. Compare this to treatment contrasts, in which the intercept term corresponds to the group mean for the baseline category. It doesn't matter very much if you have a balanced design, which we've assumed so far, but it will turn out to be important later when we consider [Factorial ANOVA 3: unbalanced designs]. In fact, the main reason why I've included this section is that contrasts become important if you want to understand unbalanced ANOVA.
 
 ### Sum to zero contrasts
@@ -858,7 +846,9 @@ The third option that I should briefly mention are "sum to zero" contrasts, call
 ```{r}
 #| label: tbl-tab14-14
 #| tbl-cap: Matrix of "sum to" zero contrasts with 5 levels
-huxtabs[[14]][[14]]
+
+mykbl(lsj_chapter_tables[[14]][[14]], NULL) 
+
 ```
 
 Much like Helmert contrasts, we see that each column sums to zero, which means that the intercept term corresponds to the grand mean when ANOVA is treated as a regression model. When interpreting these contrasts, the thing to recognise is that each of these contrasts is a pairwise comparison between group 1 and one of the other four groups. Specifically, contrast 1 corresponds to a "group 2 minus group 1" comparison, contrast 2 corresponds to a "group 3 minus group 1" comparison, and so on.[^factorial-anova-8]
@@ -872,11 +862,10 @@ There are options in jamovi that can generate different kinds of contrasts in AN
 ```{r}
 #| label: tbl-tab14-15
 #| tbl-cap: Contrasts available in the jamovi ANOVA analysis
-huxtabs[[14]][[15]] |>
-  set_col_width(c(.25,.75)) |>   
-  set_align(everywhere, 2, "left") |>
-  set_valign(, 1, "top") |>  # broken in huxtable, ? fix by editing tex file 
-  set_latex_float("H")
+
+mykbl(lsj_chapter_tables[[14]][[15]], col_align = 'll') |>
+  kableExtra::column_spec(2, width = "20em")
+
 ```
 
 ## Post hoc tests {#sec-Post-hoc-tests}
@@ -905,7 +894,6 @@ So far, so good. What about the situation where your model includes interaction 
 #| classes: .enlarge-image
 #| fig-cap: Tukey HSD post hoc test in jamovi factorial ANOVA, without an interaction term
 #| fig-alt: A jamovi screenshot showing ANOVA results. The interface has sections for setting variables and analyzing data, with specific fields selected for "drug" and "therapy." A window on the right shows detailed ANOVA test results and post hoc comparisons
-#| fig-pos: 'H'
 knitr::include_graphics("images/fig14-24.png")
 ```
 
@@ -922,7 +910,6 @@ There are quite a lot of these comparisons that you need to consider. So, when w
 #| classes: .enlarge-image
 #| fig-cap: Tukey HSD post hoc test in jamovi factorial ANOVA with an interaction term
 #| fig-alt: A jamovi table showing post hoc test results for drug and therapy comparisons. The table includes columns for drug, therapy, comparison, mean difference, SE, df, t-value, and $p$-value, with values provided for each comparison
-#| fig-pos: 'H'
 knitr::include_graphics("images/fig14-25.png")
 ```
 
@@ -973,7 +960,8 @@ The simplest possible model for the data would be one in which neither milk nor 
 #| label: tbl-tab14-16
 #| tbl-cap: Null and alternative hypotheses with the outcome variable "babble"
 
-huxtabs[[14]][[16]]
+mykbl(lsj_chapter_tables[[14]][[16]], NULL) 
+
 ```
 
 This comparison forms our hypothesis test of the main effect of sugar. The next step in our model building exercise is to add the other main effect term, so the next model in our sequence is babble \~ sugar + milk. The second hypothesis test is then formed by comparing the following pair of models (@tbl-tab14-17).
@@ -982,7 +970,8 @@ This comparison forms our hypothesis test of the main effect of sugar. The next 
 #| label: tbl-tab14-17
 #| tbl-cap: Further null and alternative hypotheses with the outcome variable "babble"
 
-huxtabs[[14]][[17]]
+mykbl(lsj_chapter_tables[[14]][[17]], NULL) 
+
 ```
 
 This comparison forms our hypothesis test of the main effect of milk. In one sense, this approach is very elegant: the alternative hypothesis from the first test forms the null hypothesis for the second one. It is in this sense that the type I method is strictly sequential. Every test builds directly on the results of the last one. However, in another sense it's very inelegant, because there's a strong asymmetry between the two tests. The test of the main effect of sugar (the first test) completely ignores milk, whereas the test of the main effect of milk (the second test) does take sugar into account. In any case, the fourth model in our sequence is now the full model, babble \~ sugar + milk + sugar $\times$ milk, and the corresponding hypothesis test is shown in @tbl-tab14-18.
@@ -991,21 +980,21 @@ This comparison forms our hypothesis test of the main effect of milk. In one sen
 #| label: tbl-tab14-18
 #| tbl-cap: And more possible null and alternative hypotheses with the outcome variable "babble"
 
-huxtabs[[14]][[18]]
+mykbl(lsj_chapter_tables[[14]][[18]], NULL) 
+
 ```
 
 Type III sum of squares is the default hypothesis testing method used by jamovi ANOVA, so to run a type I sum of squares analysis we have to select 'Type 1' in the 'Sum of squares' selection box in the jamovi 'ANOVA' -- 'Model' options. This gives us the ANOVA table shown in @fig-fig14-27.
-
-The big problem with using type I sum of squares is the fact that it really does depend on the order in which you enter the variables. Yet, in many situations the researcher has no reason to prefer one ordering over another. This is presumably the case for our milk and sugar problem. Should we add milk first or sugar first? It feels exactly as arbitrary as a data analysis question as it does as a coffee-making question. There may in fact be some people with firm opinions about ordering, but it's hard to imagine a principled answer to the question. Yet, look what happens when we change the ordering, as in @fig-fig14-28.
 
 ```{r}
 #| label: fig-fig14-27
 #| classes: .enlarge-image
 #| fig-cap: ANOVA results table using type I sum of squares in jamovi
 #| fig-alt: ANOVA table showing data for the effects of sugar and milk on a dependent variable. Columns include Sum of Squares, df, Mean Square, F, and $p$-values for sugar, milk, their interaction (sugar * milk), and residuals with respective values
-#| fig-pos: 'H'
 knitr::include_graphics("images/fig14-27.png")
 ```
+
+The big problem with using type I sum of squares is the fact that it really does depend on the order in which you enter the variables. Yet, in many situations the researcher has no reason to prefer one ordering over another. This is presumably the case for our milk and sugar problem. Should we add milk first or sugar first? It feels exactly as arbitrary as a data analysis question as it does as a coffee-making question. There may in fact be some people with firm opinions about ordering, but it's hard to imagine a principled answer to the question. Yet, look what happens when we change the ordering, as in @fig-fig14-28.
 
 ```{r}
 #| label: fig-fig14-28
@@ -1029,7 +1018,8 @@ Having just finished talking about type I tests, you might think that the natura
 #| label: tbl-tab14-19
 #| tbl-cap: Null and alternative hypotheses with the outcome variable "babble", with type III sum of squares
 
-huxtabs[[14]][[19]]
+mykbl(lsj_chapter_tables[[14]][[19]], NULL) 
+
 ```
 
 Similarly the main effect of milk is evaluated by testing the full model against a null model that removes the milk term, like in @tbl-tab14-20.
@@ -1037,7 +1027,9 @@ Similarly the main effect of milk is evaluated by testing the full model against
 ```{r}
 #| label: tbl-tab14-20
 #| tbl-cap: Further null and alternative hypotheses with the outcome variable 'babble', with type III sum of squares
-huxtabs[[14]][[20]]
+
+mykbl(lsj_chapter_tables[[14]][[20]], NULL) 
+
 ```
 
 Finally, the interaction term sugar $\times$ milk is evaluated in exactly the same way. Once again, we test the full model against a null model that removes the sugar $\times$ milk interaction term, like in @tbl-tab14-21.
@@ -1045,7 +1037,9 @@ Finally, the interaction term sugar $\times$ milk is evaluated in exactly the sa
 ```{r}
 #| label: tbl-tab14-21
 #| tbl-cap: Removing the interaction term from hypotheses with the outcome variable 'babble', with type III sum of squares
-huxtabs[[14]][[21]]
+
+mykbl(lsj_chapter_tables[[14]][[21]], NULL) 
+
 ```
 
 The basic idea generalises to higher order ANOVAs. For instance, suppose that we were trying to run an ANOVA with three factors, A, B and C, and we wanted to consider all possible main effects and all possible interactions, including the three way interaction A $\times$ B $\times$ C. (@tbl-tab14-22) shows you what the Type III tests look like for this situation).
@@ -1053,12 +1047,16 @@ The basic idea generalises to higher order ANOVAs. For instance, suppose that we
 ```{r}
 #| label: tbl-tab14-22
 #| tbl-cap: Type III tests with three factors and all main effect and interaction term
-huxtabs[[14]][[22]]
+
+mykbl(lsj_chapter_tables[[14]][[22]]) 
+
 ```
 
 As ugly as that table looks, it's pretty simple. In all cases, the alternative hypothesis corresponds to the full model which contains three main effect terms (e.g., A), three two-way interactions (e.g., A\*B) and one three-way interaction (i.e., A\*B\*C). The null model always contains 6 of these 7 terms, and the missing one is the one whose significance we're trying to test.
 
-At first pass, type III tests seem like a nice idea. Firstly, we've removed the asymmetry that caused us to have problems when running type I tests. And because we're now treating all terms the same way, the results of the hypothesis tests do not depend on the order in which we specify them. This is definitely a good thing. However, there is a big problem when interpreting the results of the tests, especially for main effect terms. Consider the *coffee* data. Suppose it turns out that the main effect of milk is not significant according to the type III tests. What this is telling us is that babble \~ sugar + sugar\*milk is a better model for the data than the full model. But what does that even mean? If the interaction term sugar\*milk was also non significant, we'd be tempted to conclude that the data are telling us that the only thing that matters is sugar. But suppose we have a significant interaction term, but a non-significant main effect of milk. In this case, are we to assume that there really is an "effect of sugar", an "interaction between milk and sugar", but no "effect of milk"? That seems crazy. The right answer simply must be that it's meaningless[^factorial-anova-12] to talk about the main effect if the interaction is significant. In general, this seems to be what most statisticians advise us to do, and I think that's the right advice. But if it really is meaningless to talk about non-significant main effects in the presence of a significant interaction, then it's not at all obvious why type III tests should allow the null hypothesis to rely on a model that includes the interaction but omits one of the main effects that make it up. When characterised in this fashion, the null hypotheses really don't make much sense at all.
+At first pass, type III tests seem like a nice idea. Firstly, we've removed the asymmetry that caused us to have problems when running type I tests. And because we're now treating all terms the same way, the results of the hypothesis tests do not depend on the order in which we specify them. This is definitely a good thing. However, there is a big problem when interpreting the results of the tests, especially for main effect terms. Consider the *coffee* data. Suppose it turns out that the main effect of milk is not significant according to the type III tests. What this is telling us is that babble \~ sugar + sugar\*milk is a better model for the data than the full model. 
+
+But what does that even mean? If the interaction term sugar\*milk was also non significant, we'd be tempted to conclude that the data are telling us that the only thing that matters is sugar. But suppose we have a significant interaction term, but a non-significant main effect of milk. In this case, are we to assume that there really is an "effect of sugar", an "interaction between milk and sugar", but no "effect of milk"? That seems crazy. The right answer simply must be that it's meaningless[^factorial-anova-12] to talk about the main effect if the interaction is significant. In general, this seems to be what most statisticians advise us to do, and I think that's the right advice. But if it really is meaningless to talk about non-significant main effects in the presence of a significant interaction, then it's not at all obvious why type III tests should allow the null hypothesis to rely on a model that includes the interaction but omits one of the main effects that make it up. When characterised in this fashion, the null hypotheses really don't make much sense at all.
 
 [^factorial-anova-12]: Or, at the very least, rarely of interest.
 
@@ -1082,23 +1080,30 @@ Okay, so if the $p$-values that typically come out of type III analyses (but not
 
 Okay, so we've seen type I and III tests now, and both are pretty straightforward. Type I tests are performed by gradually adding terms one at a time, whereas type III tests are performed by taking the full model and looking to see what happens when you remove each term. However, both can have some limitations. Type I tests are dependent on the order in which you enter the terms, and type III tests are dependent on how you code up your contrasts. Type II tests are a little harder to describe, but they avoid both of these problems, and as a result they are a little easier to interpret.
 
-Type II tests are broadly similar to type III tests. Start with a "full" model, and test a particular term by deleting it from that model. However, type II tests are based on the marginality principle which states that you should not omit a lower order term from your model if there are any higher order ones that depend on it. So, for instance, if your model contains the two-way interaction A $\times$ B (a 2nd order term), then it really ought to contain the main effects A and B (1st order terms). Similarly, if it contains a three-way interaction term A $\times$ B $\times$ C, then the model must also include the main effects A, B and C as well as the simpler interactions A $\times$ B, A $\times$ C and B $\times$ C. Type III tests routinely violate the marginality principle. For instance, consider the test of the main effect of A in the context of a three-way ANOVA that includes all possible interaction terms. According to type III tests, our null and alternative models are in @tbl-tab14-23.
+Type II tests are broadly similar to type III tests. Start with a "full" model, and test a particular term by deleting it from that model. However, type II tests are based on the marginality principle which states that you should not omit a lower order term from your model if there are any higher order ones that depend on it. So, for instance, if your model contains the two-way interaction A $\times$ B (a 2nd order term), then it really ought to contain the main effects A and B (1st order terms). 
+
+Similarly, if it contains a three-way interaction term A $\times$ B $\times$ C, then the model must also include the main effects A, B and C as well as the simpler interactions A $\times$ B, A $\times$ C and B $\times$ C. Type III tests routinely violate the marginality principle. For instance, consider the test of the main effect of A in the context of a three-way ANOVA that includes all possible interaction terms. According to type III tests, our null and alternative models are in @tbl-tab14-23.
 
 ```{r}
 #| label: tbl-tab14-23
 #| tbl-cap: Type III tests for a main effect, A, in a three-way ANOVA with all possible interaction terms
-huxtabs[[14]][[23]] |>
-  set_latex_float('H')
+
+mykbl(lsj_chapter_tables[[14]][[23]], NULL) 
+
 ```
 
-Notice that the null hypothesis omits A, but includes A $\times$ B, A $\times$ C and A $\times$ B $\times$ C as part of the model. This, according to the type II tests, is not a good choice of null hypothesis. What we should do instead, if we want to test the null hypothesis that A is not relevant to our outcome, is to specify the null hypothesis that is the most complicated model that does not rely on A in any form, even as an interaction. The alternative hypothesis corresponds to this null model plus a main effect term of A. This is a lot closer to what most people would intuitively think of as a "main effect of A", and it yields the following as our type II test of the main effect of A (@tbl-tab14-24).[^factorial-anova-14]
+Notice that the null hypothesis omits A, but includes A $\times$ B, A $\times$ C and A $\times$ B $\times$ C as part of the model. This, according to the type II tests, is not a good choice of null hypothesis. What we should do instead, if we want to test the null hypothesis that A is not relevant to our outcome, is to specify the null hypothesis that is the most complicated model that does not rely on A in any form, even as an interaction. 
+
+The alternative hypothesis corresponds to this null model plus a main effect term of A. This is a lot closer to what most people would intuitively think of as a "main effect of A", and it yields the following as our type II test of the main effect of A (@tbl-tab14-24).[^factorial-anova-14]
 
 [^factorial-anova-14]: Note, of course, that this does depend on the model that the user specified. If the original ANOVA model doesn't contain an interaction term for $B \times C$, then obviously it won't appear in either the null or the alternative. But that's true for types I, II and III. They never include any terms that you didn't include, but they make different choices about how to construct tests for the ones that you did include.
 
 ```{r}
 #| label: tbl-tab14-24
 #| tbl-cap: Type II tests for a main effect, A, in a three-way ANOVA with all possible interaction terms
-huxtabs[[14]][[24]]
+
+mykbl(lsj_chapter_tables[[14]][[24]], NULL) 
+
 ```
 
 Anyway, just to give you a sense of how the type II tests play out, see the full table (@tbl-tab14-25) of tests that would be applied in a three-way factorial ANOVA.
@@ -1106,34 +1111,38 @@ Anyway, just to give you a sense of how the type II tests play out, see the full
 ```{r}
 #| label: tbl-tab14-25
 #| tbl-cap: Type II tests for a three-way factorial model
-huxtabs[[14]][[25]]
+
+mykbl(lsj_chapter_tables[[14]][[25]]) 
+
 ```
 
 In the context of the two way ANOVA that we've been using in the *coffee* data, the hypothesis tests are even simpler. The main effect of sugar corresponds to an $F$-test comparing these two models (@tbl-tab14-26). The test for the main effect of milk is in @tbl-tab14-27. Finally, the test for the interaction sugar $\times$ milk is in @tbl-tab14-28.
 
-\
-
-
 ```{r}
 #| label: tbl-tab14-26
 #| tbl-cap: Type II tests for the main effect of sugar in the *coffee* data
-huxtabs[[14]][[26]] |>
-  set_latex_float('h!')
+
+mykbl(lsj_chapter_tables[[14]][[26]], NULL) 
+
 ```
 
 ```{r}
 #| label: tbl-tab14-27
 #| tbl-cap: Type II tests for the main effect of milk in the *coffee* data
-huxtabs[[14]][[27]] |>
-  set_latex_float('H')
+
+mykbl(lsj_chapter_tables[[14]][[27]], NULL) 
+
 ```
 
 ```{r}
 #| label: tbl-tab14-28
 #| tbl-cap: Type II tests for the sugar $\times$  milk interaction term
-huxtabs[[14]][[28]] |>
-  set_latex_float('H')
+
+mykbl(lsj_chapter_tables[[14]][[28]], NULL) 
+
 ```
+
+\
 
 Running the tests are again straightforward. Just select 'Type 2' in the 'Sum of squares' selection box in the jamovi 'ANOVA' -- 'Model' options, This gives us the ANOVA table shown in @fig-fig14-30.
 
@@ -1145,7 +1154,9 @@ Running the tests are again straightforward. Just select 'Type 2' in the 'Sum of
 knitr::include_graphics("images/fig14-30.png")
 ```
 
-Type II tests have some clear advantages over type I and type III tests. They don't depend on the order in which you specify factors (unlike type I), and they don't depend on the contrasts that you use to specify your factors (unlike type III). And although opinions may differ on this last point, and it will definitely depend on what you're trying to do with your data, I do think that the hypothesis tests that they specify are more likely to correspond to something that you actually care about. As a consequence, I find that it's usually easier to interpret the results of a type II test than the results of a type I or type III test. For this reason my tentative advice is that, if you can't think of any obvious model comparisons that directly map onto your research questions but you still want to run an ANOVA in an unbalanced design, type II tests are probably a better choice than type I or type III.[^factorial-anova-15]
+Type II tests have some clear advantages over type I and type III tests. They don't depend on the order in which you specify factors (unlike type I), and they don't depend on the contrasts that you use to specify your factors (unlike type III). And although opinions may differ on this last point, and it will definitely depend on what you're trying to do with your data, I do think that the hypothesis tests that they specify are more likely to correspond to something that you actually care about. 
+
+As a consequence, I find that it's usually easier to interpret the results of a type II test than the results of a type I or type III test. For this reason my tentative advice is that, if you can't think of any obvious model comparisons that directly map onto your research questions but you still want to run an ANOVA in an unbalanced design, type II tests are probably a better choice than type I or type III.[^factorial-anova-15]
 
 [^factorial-anova-15]: I find it amusing to note that the default in $R$ is type I and the default in SPSS and jamovi is type III. Neither of these appeals to me all that much. Relatedly, I find it depressing that almost nobody in the psychological literature ever bothers to report which type is used either. The only way I can ever make any sense of what people typically report is to try to guess from auxiliary cues which software they were using, and to assume that they never changed the default settings. Please don't do this! Now that you know about these issues make sure you indicate what software you used, and if you're reporting ANOVA results for unbalanced data, then specify what Type of tests you ran, specify order information if you've done type I tests and specify contrasts if you've done type III tests. Or, even better, do hypotheses tests that correspond to things you really care about and then report those!
 
@@ -1153,7 +1164,9 @@ Type II tests have some clear advantages over type I and type III tests. They do
 
 jamovi also provides the effect sizes $\eta^2$ and partial $\eta^2$ when you select these options, as in @fig-fig14-30. However, when you've got an unbalanced design there's a bit of extra complexity involved.
 
-If you remember back to our very early discussions of ANOVA, one of the key ideas behind the sums of squares calculations is that if we add up all the $SS$ terms associated with the effects in the model, and add that to the residual $SS$, they're supposed to add up to the total sum of squares. And, on top of that, the whole idea behind $\eta^2$ is that, because you're dividing one of the $SS$ terms by the total $SS$ value, an $\eta^2$ value can be interpreted as the proportion of variance accounted for by a particular term. But this is not so straightforward in unbalanced designs because some of the variance goes "missing".
+If you remember back to our very early discussions of ANOVA, one of the key ideas behind the sums of squares calculations is that if we add up all the $SS$ terms associated with the effects in the model, and add that to the residual $SS$, they're supposed to add up to the total sum of squares. 
+
+And, on top of that, the whole idea behind $\eta^2$ is that, because you're dividing one of the $SS$ terms by the total $SS$ value, an $\eta^2$ value can be interpreted as the proportion of variance accounted for by a particular term. But this is not so straightforward in unbalanced designs because some of the variance goes "missing".
 
 This seems a bit odd at first, but here's why. When you have unbalanced designs your factors become correlated with one another, and it becomes difficult to tell the difference between the effect of Factor A and the effect of Factor B. In the extreme case, suppose that we'd run a $2 \times 2$ design in which the number of participants in each group had been as in @tbl-tab14-29.
 
@@ -1161,19 +1174,27 @@ This seems a bit odd at first, but here's why. When you have unbalanced designs 
 #| label: tbl-tab14-29
 #| tbl-cap: $N$ participants in a 2 x 2 very (very!) unbalanced factorial design
 
-huxtabs[[14]][[29]]
+mykbl(lsj_chapter_tables[[14]][[29]]) 
+
 ```
 
-Here we have a spectacularly unbalanced design: 100 people have milk and sugar, 100 people have no milk and no sugar, and that's all. There are 0 people with milk and no sugar, and 0 people with sugar but no milk. Now suppose that, when we collected the data, it turned out there is a large (and statistically significant) difference between the "milk and sugar" group and the "no-milk and no-sugar" group. Is this a main effect of sugar? A main effect of milk? Or an interaction? It's impossible to tell, because the presence of sugar has a perfect association with the presence of milk. Now suppose the design had been a little more balanced (@tbl-tab14-30).
+Here we have a spectacularly unbalanced design: 100 people have milk and sugar, 100 people have no milk and no sugar, and that's all. There are 0 people with milk and no sugar, and 0 people with sugar but no milk. 
+
+Now suppose that, when we collected the data, it turned out there is a large (and statistically significant) difference between the "milk and sugar" group and the "no-milk and no-sugar" group. Is this a main effect of sugar? A main effect of milk? Or an interaction? It's impossible to tell, because the presence of sugar has a perfect association with the presence of milk. Now suppose the design had been a little more balanced (@tbl-tab14-30).
 
 ```{r}
 #| label: tbl-tab14-30
 #| tbl-cap: $N$ participants in a 2 x 2 still very unbalanced factorial design
 
-huxtabs[[14]][[30]]
+mykbl(lsj_chapter_tables[[14]][[30]]) 
+
 ```
 
-This time around, it's technically possible to distinguish between the effect of milk and the effect of sugar, because we have a few people that have one but not the other. However, it will still be pretty difficult to do so, because the association between sugar and milk is still extremely strong, and there are so few observations in two of the groups. Again, we're very likely to be in the situation where we *know* that the predictor variables (milk and sugar) are related to the outcome (babbling), but we don't know if the nature of that relationship is a main effect of one or the other predictor, or the interaction.
+This time around, it's technically possible to distinguish between the effect of milk and the effect of sugar, because we have a few people that have one but not the other. 
+
+However, it will still be pretty difficult to do so, because the association between sugar and milk is still extremely strong, and there are so few observations in two of the groups. Again, we're very likely to be in the situation where we *know* that the predictor variables (milk and sugar) are related to the outcome (babbling), but we don't know if the nature of that relationship is a main effect of one or the other predictor, or the interaction.
+
+\
 
 ## Summary
 

@@ -68,8 +68,9 @@ Now, suppose that people really are perfectly able to set aside their pre-existi
 ```{r}
 #| label: tbl-tab1-1
 #| tbl-cap: Validity of arguments
-huxtabs[[1]][[1]] |> set_contents(1, 1, "") |>
-  set_bold(, 1, TRUE)
+
+mykbl(lsj_chapter_tables[[1]][[1]])
+
 ```
 
 If the psychological data looked like this (or even a good approximation to this), we might feel safe in just trusting our gut instincts. That is, it'd be perfectly okay just to let scientists evaluate data based on their common sense, and not bother with all this murky statistics stuff. However, you guys have taken psych classes, and by now you probably know where this is going.
@@ -79,8 +80,9 @@ In a classic study, @Evans1983 ran an experiment looking at exactly this. What t
 ```{r}
 #| label: tbl-tab1-2
 #| tbl-cap:  Pre-existing biases and argument validity
-huxtabs[[1]][[2]] |> set_contents(1, 1, "") |>
-  set_bold(, 1, TRUE)
+
+mykbl(lsj_chapter_tables[[1]][[2]])
+
 ```
 
 Oh dear, that's not as good. Apparently, when people are presented with a strong argument that contradicts our pre-existing beliefs, we find it pretty hard to even perceive it to be a strong argument (people only did so 46% of the time). Even worse, when people are presented with a weak argument that agrees with our pre-existing biases, almost no-one can see that the argument is weak (people got that one wrong 92% of the time!).[^why-do-we-learn-statistics-3]
@@ -88,9 +90,9 @@ Oh dear, that's not as good. Apparently, when people are presented with a strong
 ```{r}
 #| label: tbl-tab1-3
 #| tbl-cap:  Intuition and argument validity
-#| tbl-pos: 'h!'
-huxtabs[[1]][[3]] |> set_contents(1, 1, "") |>
-  set_bold(, 1, TRUE)
+
+mykbl(lsj_chapter_tables[[1]][[3]])
+
 ```
 
 [^why-do-we-learn-statistics-3]: In my more cynical moments I feel like this fact alone explains 95% of what I read on the internet.
@@ -104,7 +106,9 @@ The following is a true story (I think!). In 1973, the University of California,
 ```{r}
 #| label: tbl-tab1-4
 #| tbl-cap:  Berkeley students by gender
-huxtabs[[1]][[4]] |> set_contents(1, 1, "")
+
+mykbl(lsj_chapter_tables[[1]][[4]])
+
 ```
 
 Given this, they were worried about being sued![^why-do-we-learn-statistics-4] Given that there were nearly 13,000 applicants, a difference of 9% in admission rates between males and females is just way too big to be a coincidence. Pretty compelling data, right? And if I were to say to you that these data *actually* reflect a weak bias in favour of women (sort of!), you'd probably think that I was either crazy or sexist.
@@ -116,22 +120,21 @@ Oddly, it's actually sort of true. When people started looking more carefully at
 ```{r}
 #| label: tbl-tab1-5
 #| tbl-cap:  Berkeley students by gender for six largest departments
-huxtabs[[1]][[5]] |>
-  set_colspan(1, 2, 2) |>
-  set_colspan(1, 4, 2)
+
+mykbl(lsj_chapter_tables[[1]][[5]])
+
 ```
 
 Remarkably, most departments had a *higher* rate of admissions for females than for males! Yet the overall rate of admission across the university for females was lower than for males. How can this be? How can both of these statements be true at the same time?
 
 Here's what's going on. Firstly, notice that the departments are not equal to one another in terms of their admission percentages: some departments (e.g., A, B) tended to admit a high percentage of the qualified applicants, whereas others (e.g., F) tended to reject most of the candidates, even if they were high quality. So, among the six departments shown above, notice that department A is the most generous, followed by B, C, D, E and F in that order. Next, notice that males and females tended to apply to different departments. If we rank the departments in terms of the total number of male applicants, we get **A**\>**B**\>D\>C\>F\>E (the "easy" departments are in bold). On the whole, males tended to apply to the departments that had high admission rates. 
 
-Now compare this to how the female applicants distributed themselves. Ranking the departments in terms of the total number of female applicants produces a quite different ordering C\>E\>D\>F\>**A**\>**B**. In other words, what these data seem to be suggesting is that the female applicants tended to apply to "harder" departments. And in fact, if we look at @fig-fig1-1 we see that this trend is systematic, and quite striking. This effect is known as **Simpson's paradox**. It's not common, but it does happen in real life, and most people are very surprised by it when they first encounter it, and many people refuse to even believe that it's real. It is very real. And while there are lots of very subtle statistical lessons buried in there, I want to use it to make a much more important point: doing research is hard, and there are lots of subtle, counter-intuitive traps lying in wait for the unwary. That's reason #2 why scientists love statistics, and why we teach research methods. Because science is hard, and the truth is sometimes cunningly hidden in the nooks and crannies of complicated data.
+Now compare this to how the female applicants distributed themselves. Ranking the departments in terms of the total number of female applicants produces a quite different ordering C\>E\>D\>F\>**A**\>**B**. In other words, what these data seem to be suggesting is that the female applicants tended to apply to "harder" departments. And in fact, if we look at @fig-fig1-1 we see that this trend is systematic, and quite striking. 
 
 ```{r out.width="85%"}
 #| label: fig-fig1-1
 #| fig-cap: The Berkeley 1973 college admissions data. This figure plots the admission rate for the 85 departments that had at least one female applicant, as a function of the percentage of applicants that were female. The plot is a redrawing of Figure 1 from @Bickel1975. Circles plot departments with more than 40 applicants; the area of the circle is proportional to the total number of applicants. The crosses plot departments with fewer than 40 applicants
 #| fig-alt: A scatter plot shows the percentage of female applicants (x-axis) versus the admission rate for both genders (y-axis). Blue circles of varying sizes and grey plus signs represent data points. A downward trend line indicates a negative correlation between the variables.
-#| fig-pos: 'H'
 
 load("data_and_tables/berkeley.Rdata")
   
@@ -148,6 +151,8 @@ ggplot() +
   theme(axis.title.x = element_text(size = rel(0.7))) +
   theme(axis.title.y = element_text(size = rel(0.7)))
 ```
+
+This effect is known as **Simpson's paradox**. It's not common, but it does happen in real life, and most people are very surprised by it when they first encounter it, and many people refuse to even believe that it's real. It is very real. And while there are lots of very subtle statistical lessons buried in there, I want to use it to make a much more important point: doing research is hard, and there are lots of subtle, counter-intuitive traps lying in wait for the unwary. That's reason #2 why scientists love statistics, and why we teach research methods. Because science is hard, and the truth is sometimes cunningly hidden in the nooks and crannies of complicated data.
 
 Before leaving this topic entirely, I want to point out something else really critical that is often overlooked in a research methods class. Statistics only solves *part* of the problem. Remember that we started all this with the concern that Berkeley's admissions processes might be unfairly biased against female applicants. When we looked at the "aggregated" data, it did seem like the university was discriminating against women, but when we "disaggregate" and looked at the individual behaviour of all the departments, it turned out that the actual departments were, if anything, slightly biased in favour of women. The gender bias in total admissions was caused by the fact that women tended to self-select for harder departments. From a legal perspective, that would probably put the university in the clear. Postgraduate admissions are determined at the level of the individual department, and there are good reasons to do that. At the level of individual departments the decisions are more or less unbiased (the weak bias in favour of females at that level is small, and not consistent across departments). Since the university can't dictate which departments people choose to apply to, and the decision making takes place at the level of the department it can hardly be held accountable for any biases that those choices produce.
 

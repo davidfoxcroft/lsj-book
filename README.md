@@ -8,7 +8,7 @@ Navarro DJ and Foxcroft DR (2022). learning statistics with jamovi: a tutorial f
 
 Danielle Navarro and David Foxcroft (2025). Learning statistics with jamovi: A tutorial for beginners in statistical analysis}. Cambridge, UK: Open Book Publishers, 2025, https://doi.org/10.11647/OBP.0333
 
-In principle, this repository should include everything needed to reproduce the book from scratch. NB We have used the huxtable package to create the tables in the book. Unfortunately, recent releases of quarto (1.4+) have broken cross-referencing in huxtable, therefore use quarto version 1.3 to preserve cross-referencing. More details: [https://hughjonesd.github.io/huxtable/reference/huxtable-FAQ.html](https://hughjonesd.github.io/huxtable/reference/huxtable-FAQ.html)
+In principle, this repository should include everything needed to reproduce the book from scratch. 
 
 The book is released under a creative commons [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) licence. This means that this book can be reused, remixed, retained, revised and redistributed (including commercially) as long as appropriate credit is given to the authors. If you remix, or modify the original version of this open textbook, you must redistribute all versions of this open textbook under the same license - CC BY-SA.
 

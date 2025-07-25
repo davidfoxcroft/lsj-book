@@ -80,7 +80,9 @@ Let's take a slightly closer look at this. Suppose I was doing research on how p
 ```{r}
 #| label: tbl-tab2-1
 #| tbl-cap: How did 100 people get to work today
-huxtabs[[2]][[1]] 
+
+mykbl(lsj_chapter_tables[[2]][[1]])
+
 ```
 
 So, what's the average transportation type? Obviously, the answer here is that there isn't one. It's a silly question to ask. You can say that travel by car is the most popular method, and travel by train is the least popular method, but that's about all. Similarly, notice that the order in which I list the options isn't very interesting. I could have chosen to display the data like in @tbl-tab2-2.
@@ -88,8 +90,9 @@ So, what's the average transportation type? Obviously, the answer here is that t
 ```{r}
 #| label: tbl-tab2-2
 #| tbl-cap: How did 100 people get to work today, a different view
-huxtabs[[2]][[2]] |>
-  set_latex_float("h!")
+
+mykbl(lsj_chapter_tables[[2]][[2]])
+
 ```
 
 ...and nothing really changes.
@@ -119,7 +122,9 @@ So, let's suppose I asked 100 people these questions, and got the answers shown 
 ```{r}
 #| label: tbl-tab2-3
 #| tbl-cap: Attitudes to climate change
-huxtabs[[2]][[3]]
+
+mykbl(lsj_chapter_tables[[2]][[3]])
+
 ```
 
 When analysing these data it seems quite reasonable to try to group (1), (2) and (3) together, and say that 81 out of 100 people were willing to at *least partially* endorse the science. And it's also quite reasonable to group (2), (3) and (4) together and say that 49 out of 100 people registered *at least some disagreement* with the dominant scientific view. However, it would be entirely bizarre to try to group (1), (2) and (4) together and say that 90 out of 100 people said... what? There's nothing sensible that allows you to group those responses together at all.
@@ -147,14 +152,15 @@ There's a second kind of distinction that you need to be aware of, regarding wha
 -   A **continuous variable** is one in which, for any two values that you can think of, it's always logically possible to have another value in between.
 -   A **discrete variable** is, in effect, a variable that isn't continuous. For a discrete variable it's sometimes the case that there's nothing in the middle.
 
-These definitions probably seem a bit abstract, but they're pretty simple once you see some examples. For instance, response time is continuous. If Alan takes 3.1 seconds and Ben takes 2.3 seconds to respond to a question, then Cameron's response time will lie in between if he took 3.0 seconds. And of course it would also be possible for David to take 3.031 seconds to respond, meaning that his RT would lie in between Cameron's and Alan's. And while in practice it might be impossible to measure RT that precisely, it's certainly possible in principle. Because we can always find a new value for RT in between any two other ones we regard RT as a continuous measure.
-
 ```{r}
 #| label: tbl-tab2-4
 #| tbl-cap: The relationship between the scales of measurement and the discrete/continuity distinction. Cells with a tick mark correspond to things that are possible
-huxtabs[[2]][[4]] |>
-  set_latex_float("h!")
+
+mykbl(lsj_chapter_tables[[2]][[4]])
+
 ```
+
+These definitions probably seem a bit abstract, but they're pretty simple once you see some examples. For instance, response time is continuous. If Alan takes 3.1 seconds and Ben takes 2.3 seconds to respond to a question, then Cameron's response time will lie in between if he took 3.0 seconds. And of course it would also be possible for David to take 3.031 seconds to respond, meaning that his RT would lie in between Cameron's and Alan's. And while in practice it might be impossible to measure RT that precisely, it's certainly possible in principle. Because we can always find a new value for RT in between any two other ones we regard RT as a continuous measure.
 
 Discrete variables occur when this rule is violated. For example, nominal scale variables are always discrete. There isn't a type of transportation that falls "in between" trains and bicycles, not in the strict mathematical way that 2.3 falls in between 2 and 3. So transportation type is discrete. Similarly, ordinal scale variables are always discrete. Although "2nd place" does fall between "1st place" and "3rd place", there's nothing that can logically fall in between "1st place" and "2nd place". Interval scale and ratio scale variables can go either way. As we saw above, response time (a ratio scale variable) is continuous. Temperature in degrees celsius (an interval scale variable) is also continuous. However, the year you went to school (an interval scale variable) is discrete. There's no year in between 2002 and 2003. The number of questions you get right on a true-or-false test (a ratio scale variable) is also discrete. Since a true-or-false question doesn't allow you to be "partially correct", there's nothing in between 5/10 and 6/10. @tbl-tab2-4 summarises the relationship between the scales of measurement and the discrete/continuity distinction. Cells with a tick mark correspond to things that are possible. I'm trying to hammer this point home, because (a) some textbooks get this wrong, and (b) people very often say things like "discrete variable" when they mean "nominal scale variable". It's very unfortunate.
 
@@ -164,7 +170,7 @@ Okay, I know you're going to be shocked to hear this, but the real world is much
 
 So let's take a classic example, maybe *the* classic example, of a psychological measurement tool: the **Likert scale**. The humble Likert scale is the bread and butter tool of all survey design. You yourself have filled out hundreds, maybe thousands, of them and odds are you've even used one yourself. Suppose we have a survey question that looks like this:
 
-> Which of the following best describes your opinion of the statement that "all pirates are freaking awesome"?
+> *Which of the following best describes your opinion of the statement that "all pirates are freaking awesome"?*
 
 and then the options presented to the participant are these:
 
@@ -214,7 +220,9 @@ When we are doing an analysis we have different names for $X$ and $Y$, since the
 ```{r}
 #| label: tbl-tab2-5
 #| tbl-cap: Variable distinctions
-huxtabs[[2]][[5]] 
+
+mykbl(lsj_chapter_tables[[2]][[5]])
+
 ```
 
 ## Experimental and non-experimental research
