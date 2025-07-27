@@ -48,8 +48,6 @@ font_add(family = "TeX Gyre Pagella",
           regular = "texgyrepagella-regular.otf") # Name you want to use to call the font
 showtext_auto()
 
-huxtabs <- readRDS("data_and_tables/lsj_chapter_huxtabs.rds")
-
 theme_set(theme_classic(base_size=12, base_family="TeX Gyre Pagella"))
 update_geom_defaults(
    geom = "text",
