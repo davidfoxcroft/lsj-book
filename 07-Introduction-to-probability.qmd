@@ -204,7 +204,9 @@ Yeah, yeah. I know what you're thinking: notation, notation, notation. Really, w
 
 [^07-introduction-to-probability-3_1]: In the equation for the binomial, $X!$ is the factorial function (i.e., multiply all whole numbers from 1 to $X$): $$P(X | \theta, N) = \displaystyle\frac{N!}{X! (N-X)!} \theta^X (1-\theta)^{N-X}$$ If this equation doesn’t make a lot of sense to you, don’t worry too much about it.
 
-To that end, @fig-fig7-3 plots the binomial probabilities for all possible values of $X$ for our dice rolling experiment, from $X = 0$ (no skulls) all the way up to $X = 20$ (all skulls). Note that this is basically a bar chart, and is no different to the "trousers probability" plot I drew in @fig-fig7-2. On the horizontal axis we have all the possible events, and on the vertical axis we can read off the probability of each of those events. So, the probability of rolling $4$ skulls out of $20$ is about $0.20$ (the actual answer is $0.2022036$, as we'll see in a moment). In other words, you'd expect that to happen about 20% of the times you repeated this experiment.
+To that end, @fig-fig7-3 plots the binomial probabilities for all possible values of $X$ for our dice rolling experiment, from $X = 0$ (no skulls) all the way up to $X = 20$ (all skulls). Note that this is basically a bar chart, and is no different to the "trousers probability" plot I drew in @fig-fig7-2. On the horizontal axis we have all the possible events, and on the vertical axis we can read off the probability of each of those events. So, the probability of rolling $4$ skulls out of $20$ is about $0.20$ (the actual answer is $0.2022036$, [^07-introduction-to-probability-3_2]). In other words, you'd expect that to happen about 20% of the times you repeated this experiment.
+
+[^07-introduction-to-probability-3_2]: If you are keen to see how this is calculated, jamovi has a quick way of calculating the probability of events, using the add-on module "distrACTION". If you install this module and select "binomial distribution" from the "distrACTION" button on the Analyses pane in jamovi, then enter '20' for the Size, 1/6 or '0.66666667' for the Probability, and also x1= '4' in the Function box. Once you have done this you will see the actual probability of rolling $4$ skulls out of $20$ in the jamovi Results pane. 
 
 ```{r out.width="90%"}
 #| label: fig-fig7-3
@@ -230,12 +232,12 @@ To give you a feel for how the binomial distribution changes when we alter the v
 #| fig-height: 8
 #| fig.width: 6
 #| fig-cap: Two binomial distributions, involving a scenario in which I flip a fair coin so the underlying success probability is $\theta = \frac{1}{2}$. In panel (a), I flipped the coin $N = 20$ times. In panel (b) the coin was flipped $N = 100$ times
-#| fig-alt: Two bar graphs show the probability distribution of the number of skulls observed. Graph (a) ranges from 0 to 20 on the x-axis, with peaks around 9-11 skulls. Graph (b) ranges from 0 to 100, with a prominent peak around 50 skulls. Both graphs have "Probability" on the y-axis.
+#| fig-alt: Two bar graphs show the probability distribution of the number of heads observed. Graph (a) ranges from 0 to 20 on the x-axis, with peaks around 9-11 heads. Graph (b) ranges from 0 to 100, with a prominent peak around 50 heads. Both graphs have "Probability" on the y-axis.
 
 binom2 <- data.frame(heads = 0:20, pmf = dbinom(x = 0:20, size = 20, prob = 1/2)+0.0001)
 bd1 <- ggplot(data=binom2, aes(x = factor(heads), y = pmf)) +
   geom_col(col=blueshade, fill=blueshade, alpha=0.6, width=.6) +
-  labs(x = "Number of skulls observed",
+  labs(x = "Number of heads observed",
        y = "Probability") +
   scale_x_discrete(breaks=seq(0,20,5)) +
   labs(tag = "(a)") +
@@ -244,7 +246,7 @@ bd1 <- ggplot(data=binom2, aes(x = factor(heads), y = pmf)) +
 binom3 <- data.frame(heads = 0:100, pmf = dbinom(x = 0:100, size = 100, prob = 1/2)+0.0001)
 bd2 <- ggplot(data=binom3, aes(x = factor(heads), y = pmf)) +
   geom_col(col=blueshade, fill=blueshade, alpha=0.6, width=.6) +
-  labs(x = "\nNumber of skulls observed",
+  labs(x = "\nNumber of heads observed",
        y = "Probability\n") +
   scale_x_discrete(breaks=seq(0,100,5)) +
   labs(tag = "(b)") +
@@ -419,7 +421,7 @@ Now think about what this implies when we talk about probabilities. Suppose that
 
 The point of this discussion is to make clear that when we're talking about continuous distributions it's not meaningful to talk about the probability of a specific value. However, what we can talk about is the probability that the value lies within a particular range of values. To find out the probability associated with a particular range what you need to do is calculate the "area under the curve". We've seen this concept already, in @fig-fig7-8 the shaded areas shown depict genuine probabilities (e.g., in @fig-fig7-8) it shows the probability of observing a value that falls within 1 standard deviation of the mean).
 
-Okay, so that explains part of the story. I've explained a little bit about how continuous probability distributions should be interpreted (i.e., area under the curve is the key thing). But what does the formula for $p(x)$ that I described earlier actually mean? Obviously, $P(x)$ doesn't describe a probability, but what is it? The name for this quantity $P(x)$ is a **probability density**, and in terms of the plots we've been drawing it corresponds to the height of the curve. The densities themselves aren't meaningful in and of themselves, but they're "rigged" to ensure that the area under the curve is always interpretable as genuine probabilities. To be honest, that's about as much as you really need to know for now.[^07-introduction-to-probability-6]
+Okay, so that explains part of the story. I've explained a little bit about how continuous probability distributions should be interpreted (i.e., area under the curve is the key thing). But what does the formula for $p(x)$ that I described earlier actually mean? Obviously, $p(x)$ doesn't describe a probability, but what is it? The name for this quantity $p(x)$ is a **probability density**, and in terms of the plots we've been drawing it corresponds to the height of the curve. The densities themselves aren't meaningful in and of themselves, but they're "rigged" to ensure that the area under the curve is always interpretable as genuine probabilities. To be honest, that's about as much as you really need to know for now.[^07-introduction-to-probability-6]
 
 [^07-introduction-to-probability-6]: For those readers who know a little calculus, I'll give a slightly more precise explanation. In the same way that probabilities are non-negative numbers that must sum to 1, probability densities are non-negative numbers that must integrate to 1 (where the integral is taken across all possible values of $X$). To calculate the probability that $X$ falls between a and b we calculate the definite integral of the density function over the corresponding range, $\int\_{a}^{b} p(x) dx$. If you don't remember or never learned calculus, don't worry about this. It's not needed for this book.
 
